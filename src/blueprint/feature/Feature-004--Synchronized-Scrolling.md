@@ -41,7 +41,7 @@ Bibliotekskall verifiseres mot valgt dependency-versjon før implementering.
 | 3 | `ScrollCoordinator::onViewportChanged` | `AnchorMapper::map` | `src/application/scroll/AnchorMapper.cpp` | SourceAnchor + frame → mål | Exact/Approximate/Unavailable. | Planned |
 | 4 | `ScrollCoordinator::applyTarget` | `EditorWidget::setSourceAnchor` | `src/application/ui/EditorWidget.cpp` | Byteanker + programmatisk origin | Clamp og undertrykk ekko. | Planned |
 | 5 | `ScrollCoordinator::applyTarget` | `FoxRenderHost::setViewport` | `src/application/adapters/FoxRenderHost.cpp` | Geometri + programmatisk origin | Alternativ retning; clamp og undertrykk ekko. | Planned |
-| 5 | `FrameReady etter resize` | `ScrollCoordinator::restoreAnchor` | `src/application/scroll/ScrollCoordinator.cpp` | Bevart anker + ny generasjon | Gammel mapping brukes aldri. | Planned |
+| 6 | `FrameReady etter resize` | `ScrollCoordinator::restoreAnchor` | `src/application/scroll/ScrollCoordinator.cpp` | Bevart anker + ny generasjon | Gammel mapping brukes aldri. | Planned |
 
 ## 6. Gjenbruk og avhengigheter
 

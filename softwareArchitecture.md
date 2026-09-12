@@ -74,7 +74,7 @@ ligger ved tilhørende `.cpp`. Én hovedrolle per filpar.
 | `application/adapters/FoxTextMetrics.cpp` | Fontcache og tekstmåling via FOX; ingen Markdown-regler. |
 | `application/adapters/FoxScheduler.cpp` | Debounce/kansellering og levetid via FOX-event loop. |
 | `application/io/LocalFileStore.cpp`, `InputPolicy.cpp` | Lesing, formatmetadata, kontrollert erstatningslagring og inputgrenser. |
-| `interpreter/Md4cInterpreter.cpp`, `ModelBuilder.cpp`, `SourceMapBuilder.cpp` | MD4C-adapter, semantikk og dokumentert kildeposisjonsstrategi. |
+| `interpreter/CmarkInterpreter.cpp`, `ModelBuilder.cpp`, `SourceMapBuilder.cpp` | MD4C-adapter, semantikk og dokumentert kildeposisjonsstrategi. |
 | `renderer/MarkdownRenderer.cpp`, `BlockLayout.cpp`, `InlineLayout.cpp`, `HitTester.cpp` | Layoutorkestrering, block/inline-algoritmer og lenketreff. |
 | `contracts/DocumentTypes.h`, `SemanticDocument.h`, `RenderFrame.h`, `IInterpreter.h`, `IRenderer.h`, `ITextMetrics.h` | Delte verdier/porter uten global tilstand. |
 
@@ -219,3 +219,10 @@ MD4Cs [README](https://github.com/mity/md4c) beskriver UTF-8, tolerant input og
 callbacks. Encodingvalidering og semantisk modell er derfor xfmds ansvar. MD4C
 ble ikke funnet via lokal pkg-config. Dependency-versjoner låses i P0; lenker
 til `master` er undersøkelsesgrunnlag, ikke uforanderlig byggspesifikasjon.
+
+## 10. Godkjent implementering og P0-beslutning
+
+Brukeren har autorisert første leveranse. [P0](docs/evidence/P0.md) velger cmark
+0.31.1 i CmarkInterpreter og én parser-worker med bounded latest-job queue.
+FOX-måling/layout/paint forblir på GUI-tråden. Dette erstatter første single-threaded
+antakelse og MD4C som produksjonsadapter, uten å endre de tre lagene.
