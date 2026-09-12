@@ -8,6 +8,7 @@ struct InlineRun {
   SourceRange source;
   bool bold = false, italic = false, code = false;
   std::string link;
+  std::size_t linkId = 0; // Shared by style fragments of one link; distinct for adjacent links.
 };
 enum class BlockKind { Paragraph, Heading, Code, Rule, Html };
 struct SemanticBlock {

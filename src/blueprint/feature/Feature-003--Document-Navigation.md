@@ -27,6 +27,9 @@ Feature orkestreres av NavigationCoordinator. LocalFileStore, DocumentCoordinato
 
 ## 4. Atferd, tilstand og feil
 
+Native knappetrykk/-slipp går gjennom FOX-dispatch; host er enabled. Relative
+stier løses fra det åpne dokumentets mappe, ikke prosessens arbeidsmappe.
+
 Et aktivt lenketreff gir lokal filnavigasjon. Historikk committes etter vellykket åpning og lagrer kildeanker. Back/forward venter på korrekt frame før restore. Brutt lenke og dirty-cancel bevarer både buffer og cursor. Eksterne schemes/fragmenter er eksplisitt unsupported, ikke sideeffekter. Alle dokumentinnganger bruker samme policy.
 
 ## 5. Plumbing
@@ -54,6 +57,8 @@ Relevante akseptanse-ID-er: AT-001, AT-005, AT-009, AT-012, AT-015, AT-018, AT-0
 `NavigationTest` og `NavigationGuiTest` passerer, med dirty-cancel og tilbake/frem etter renderer-hit. Source-anchor/resize er også verifisert i P5.
 
 Evidence: [Fase P6](../../../docs/evidence/P6.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
+
+Ny regresjonskontroll: [Native lenker og markører](../../../docs/evidence/document-links.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 

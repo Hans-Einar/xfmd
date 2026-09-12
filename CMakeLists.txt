@@ -26,7 +26,7 @@ add_library(xfmd_interpreter
 target_link_libraries(xfmd_interpreter PUBLIC xfmd_contracts PRIVATE cmark::cmark)
 add_library(xfmd_renderer
   src/renderer/MarkdownRenderer.cpp src/renderer/BlockLayout.cpp
-  src/renderer/InlineLayout.cpp src/renderer/HitTester.cpp)
+  src/renderer/InlineLayout.cpp src/renderer/HitTester.cpp src/renderer/LinkMarker.cpp)
 target_link_libraries(xfmd_renderer PUBLIC xfmd_contracts)
 add_library(xfmd_document
   src/application/io/InputPolicy.cpp src/application/io/LocalFileStore.cpp

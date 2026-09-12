@@ -45,6 +45,8 @@ Markdown og `.txt` åpnes lokalt; `.txt` vises uformatert. Preview oppdateres et
 bevares. Ekstern filendring gir konflikt; hardlenker krever Lagre som.
 
 Lenker støtter lokale dokumentstier, inklusive relative stier og prosentkoding.
+Relative Markdown-lenker merkes med `#`, absolutte med `/#`, og nettlenker med
+en jordklode. Relative stier regnes fra mappen til den åpne filen.
 Nettverkslenker, fragment-/querylenker, skript og HTML-eksekvering støttes ikke.
 Bilder vises som alternativtekst. xfw-IPC, bilder og Markdown-utvidelser er senere
 scope. Preview har fontfallback; editorens glyphdekning avhenger av valgt systemfont.

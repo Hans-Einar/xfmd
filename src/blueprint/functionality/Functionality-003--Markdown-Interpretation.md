@@ -6,7 +6,7 @@ role: Service
 owner: interpreter
 status: Implemented
 scope: FirstRelease
-requirements: UR-002, SR-001, SR-003, SR-004, SR-005, SR-009, SR-011, SR-013
+requirements: UR-005, UR-002, SR-001, SR-003, SR-004, SR-005, SR-009, SR-011, SR-013
 uses: none
 ---
 
@@ -18,7 +18,7 @@ Konverter kildetekst til en stabil, eid semantisk modell. cmark er første adapt
 
 ## 2. Krav og akseptanse
 
-Krav: UR-002, SR-001, SR-003, SR-004, SR-005, SR-009, SR-011, SR-013. Definisjoner og normativ akseptanse finnes i
+Krav: UR-005, UR-002, SR-001, SR-003, SR-004, SR-005, SR-009, SR-011, SR-013. Definisjoner og normativ akseptanse finnes i
 [kravspesifikasjonen](../../../xfmd_requirements.md). Kapittel 7 konkretiserer beviset.
 
 ## 3. Kontrakter og eierskap
@@ -28,6 +28,10 @@ CmarkInterpreter implementerer IInterpreter::parse. ModelBuilder oversetter AST 
 ## 4. Atferd, tilstand og feil
 
 CommonMark 0.31.1 med CMARK_OPT_DEFAULT, ingen utvidelser. .txt er ren tekst. HTML vises inert, bilder som alt-plassholder. Blokker beholder egne ranges; transformerte entiteter/escapes merkes Approximate. BOM tas ut før parse og legges til offsets. Tabs merkes konservativt Approximate. Inndata begrenses; overdyp nesting avvises.
+
+InlineRun.linkId er kildeposisjon + 1 for lenkenoden. Stilfragmenter i samme
+lenke deler ID; tilstøtende lenker har hver sin ID, også ved lik URL. Interpreter
+leverer semantisk identitet, ikke synlige markører.
 
 ## 5. Plumbing
 
@@ -48,11 +52,13 @@ Preview er første konsument; headless inspeksjon/eksport kan senere bruke samme
 
 ## 7. Verifikasjon
 
-Relevante akseptanse-ID-er: AT-002, AT-011, AT-013, AT-014, AT-015, AT-019, AT-021, AT-023.
+Relevante akseptanse-ID-er: AT-005, AT-002, AT-011, AT-013, AT-014, AT-015, AT-019, AT-021, AT-023.
 
 `InterpreterTest` bekrefter Unicode/BOM/ranges, gjentatt tekst, nesting, entiteter, HTML/bilder, .txt, tom fil og ressursgrense.
 
 Evidence: [Fase P3](../../../docs/evidence/P3.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
+
+Ny regresjonskontroll: [Native lenker og markører](../../../docs/evidence/document-links.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 
