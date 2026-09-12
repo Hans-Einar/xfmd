@@ -13,7 +13,10 @@ namespace fs = std::filesystem;
 void run() {
   char pattern[] = "/tmp/xfmd-document-XXXXXX";
   fs::path dir = mkdtemp(pattern);
-  struct Cleanup { fs::path path; ~Cleanup() { fs::remove_all(path); } } cleanup{dir};
+  struct Cleanup {
+    fs::path path;
+    ~Cleanup() { fs::remove_all(path); }
+  } cleanup{dir};
   auto a = (dir / "æ space.md").string();
   auto b = (dir / "next.MD").string();
   const std::string original = "\xef\xbb\xbf# æøå\r\nrepeat\nrepeat\r\n";
@@ -26,7 +29,10 @@ void run() {
   DocumentCoordinator docs(session, files);
   EditController edits(session);
   int opens = 0, errors = 0;
-  docs.opened = [&] { ++opens; edits.reset(); };
+  docs.opened = [&] {
+    ++opens;
+    edits.reset();
+  };
   docs.error = [&](const std::string&) { ++errors; };
   CHECK(docs.requestOpen(a));
   CHECK(opens == 1 && !session.dirty());
@@ -36,16 +42,20 @@ void run() {
   edits.applyProjectedText("# Æøå\nrepeat\nrepeat\n");
   CHECK(session.dirty());
   CHECK(session.view().text == "\xef\xbb\xbf# Æøå\r\nrepeat\nrepeat\r\n");
-  edits.undo(); CHECK(!session.dirty() && session.view().text == original);
-  edits.redo(); CHECK(session.dirty());
+  edits.undo();
+  CHECK(!session.dirty() && session.view().text == original);
+  edits.redo();
+  CHECK(session.dirty());
   docs.chooseUnsaved = [] { return UnsavedChoice::Cancel; };
   CHECK(!docs.requestOpen(b) && opens == 1);
   docs.chooseUnsaved = [] { return UnsavedChoice::Discard; };
   CHECK(!docs.requestOpen((dir / "missing.md").string()) && session.dirty());
   CHECK(docs.save());
   CHECK(!session.dirty());
-  struct stat stat{}; CHECK(::stat(a.c_str(), &stat) == 0 && (stat.st_mode & 0777) == 0640);
-  char attr[4]; CHECK(getxattr(a.c_str(), "user.xfmd-test", attr, sizeof(attr)) == 4);
+  struct stat stat{};
+  CHECK(::stat(a.c_str(), &stat) == 0 && (stat.st_mode & 0777) == 0640);
+  char attr[4];
+  CHECK(getxattr(a.c_str(), "user.xfmd-test", attr, sizeof(attr)) == 4);
   CHECK(std::string(attr, 4) == "keep");
   edits.applyProjectedText("changed\n");
   auto before = files.read(a).text;
@@ -63,15 +73,37 @@ void run() {
   CHECK(!docs.save());
   CHECK(docs.requestOpen(b));
   CHECK(opens == 2 && !session.dirty() && !edits.canUndo());
-  for (const auto& text : {std::string("\0", 1), std::string("\xc0\xaf", 2), std::string("\xed\xa0\x80", 3), std::string("\xf4\x90\x80\x80", 4)}) {
+  for (const auto& text : {std::string("\0", 1), std::string("\xc0\xaf", 2),
+                           std::string("\xed\xa0\x80", 3), std::string("\xf4\x90\x80\x80", 4)}) {
     bool rejected = false;
-    try { InputPolicy::validate(text); } catch (const Error&) { rejected = true; }
+    try {
+      InputPolicy::validate(text);
+    } catch (const Error&) {
+      rejected = true;
+    }
     CHECK(rejected);
   }
   bool tooLarge = false;
-  try { InputPolicy::validate(std::string(maxDocumentBytes + 1, 'a')); } catch (const Error& e) { tooLarge = e.code == ErrorCode::TooLarge; }
+  try {
+    InputPolicy::validate(std::string(maxDocumentBytes + 1, 'a'));
+  } catch (const Error& e) {
+    tooLarge = e.code == ErrorCode::TooLarge;
+  }
   CHECK(tooLarge);
   CHECK(errors >= 4);
+  auto linked = files.read(saveAs);
+  bool hardRejected = false;
+  try {
+    files.writeAtomic({{1, 1}, "replacement", saveAs, false}, saveAs, linked.identity);
+  } catch (const Error& e) {
+    hardRejected = e.code == ErrorCode::Unsupported;
+  }
+  CHECK(hardRejected && files.read(saveAs).text == linked.text);
+  auto sym = (dir / "symbolic.md").string();
+  fs::create_symlink(b, sym);
+  auto target = files.read(sym);
+  files.writeAtomic({{1, 1}, "symlink edit", sym, false}, sym, target.identity);
+  CHECK(fs::is_symlink(sym) && files.read(b).text == "symlink edit");
   CHECK(TextProjection("\xef\xbb\xbf").sourceOffset(0) == 3);
   CHECK(edits.find("next", 0) == 0);
 }

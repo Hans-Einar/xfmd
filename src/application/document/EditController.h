@@ -5,10 +5,13 @@
 namespace xfmd {
 class EditController {
   DocumentSession& session;
-  struct Change { Edit forward, backward; };
+  struct Change {
+    Edit forward, backward;
+  };
   std::vector<Change> undoStack, redoStack;
   std::size_t historyBytes = 0;
   void apply(const Edit&, bool record);
+
 public:
   std::function<void()> changed;
   explicit EditController(DocumentSession& session) : session(session) {}
@@ -21,4 +24,4 @@ public:
   bool canRedo() const { return !redoStack.empty(); }
   std::size_t find(const std::string&, std::size_t from) const;
 };
-}
+} // namespace xfmd

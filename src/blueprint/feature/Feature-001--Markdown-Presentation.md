@@ -35,7 +35,7 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `Application::open` | `DocumentCoordinator::requestOpen` | `src/application/document/DocumentCoordinator.cpp` | Path → committed snapshot | Dirty/I/O før commit | Implemented |
+| 1 | `NavigationCoordinator::openTarget` | `DocumentCoordinator::requestOpen` | `src/application/document/DocumentCoordinator.cpp` | Path → committed snapshot | Dirty/I/O før commit | Implemented |
 | 2 | `DocumentCoordinator opened callback` | `PreviewCoordinator::refresh` | `src/application/preview/PreviewCoordinator.cpp` | Snapshot → pipeline | Åpning rendres | Implemented |
 | 3 | `ParserWorker::run` | `IInterpreter::parse` | `src/contracts/IInterpreter.h` | Snapshot → model | Typet feil | Implemented |
 | 4 | `PreviewCoordinator::relayout` | `IRenderer::layout` | `src/contracts/IRenderer.h` | Model/metrics → frame | Gyldig token/bredde | Implemented |

@@ -1,0 +1,24 @@
+.TH XFMD 1 "2026-09-12" "xfmd 0.1.0"
+.SH NAME
+xfmd \- native FOX Markdown viewer and editor
+.SH SYNOPSIS
+.B xfmd
+.RI [ file.md | file.txt ]
+.SH DESCRIPTION
+Read and edit local UTF-8 Markdown and text files using FOX.
+Markdown is rendered natively without a browser engine or network resource loading.
+.SH KEYS
+Ctrl+O opens a file. Ctrl+S saves. Ctrl+Shift+S saves under another name.
+Ctrl+Z and Ctrl+Y undo and redo. Ctrl+F searches.
+Ctrl+1 shows preview, Ctrl+2 the editor, Ctrl+3 split view.
+F10 toggles the sidebar. Alt+Left and Alt+Right traverse document history.
+Ctrl+Q quits after checking unsaved changes.
+.SH LIMITS
+Files must be UTF-8 and no larger than 8 MiB. NUL bytes are rejected.
+Local links are supported; fragments, remote resources and scripts are not executed.
+Images are represented by alt-text placeholders. The parser uses CommonMark 0.31.1
+without extension dialects. Glyph coverage depends on installed fonts.
+.SH SEE ALSO
+.BR xfe (1),
+.BR xfw (1),
+.BR xfi (1)

@@ -5,6 +5,7 @@ class DocumentSession {
   SourceSnapshot current{{1, 0}, {}, {}, false};
   std::string baseline;
   std::optional<FileIdentity> file;
+
 public:
   const SourceSnapshot& view() const { return current; }
   SourceSnapshot snapshot() const { return current; }
@@ -14,4 +15,4 @@ public:
   Revision applyEdit(const Edit&);
   void markSaved(const SourceSnapshot&, const SavedDocument&);
 };
-}
+} // namespace xfmd

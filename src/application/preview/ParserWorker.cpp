@@ -2,36 +2,63 @@
 namespace xfmd {
 ParserWorker::ParserWorker(IInterpreter& parser) : interpreter(parser), thread([this] { run(); }) {}
 ParserWorker::~ParserWorker() {
-  { std::lock_guard<std::mutex> lock(mutex); stopping = true; pending.reset(); }
-  ready.notify_one(); thread.join();
+  {
+    std::lock_guard<std::mutex> lock(mutex);
+    stopping = true;
+    pending.reset();
+  }
+  ready.notify_one();
+  thread.join();
 }
 void ParserWorker::submit(SourceSnapshot source) {
-  { std::lock_guard<std::mutex> lock(mutex); pending = std::move(source); completed.reset(); ++ticket; }
+  {
+    std::lock_guard<std::mutex> lock(mutex);
+    pending = std::move(source);
+    completed.reset();
+    ++ticket;
+  }
   ready.notify_one();
 }
 std::optional<ParseCompletion> ParserWorker::take() {
   std::lock_guard<std::mutex> lock(mutex);
-  auto result = std::move(completed); completed.reset(); return result;
+  auto result = std::move(completed);
+  completed.reset();
+  return result;
 }
-bool ParserWorker::busy() const { std::lock_guard<std::mutex> lock(mutex); return working || bool(pending); }
+bool ParserWorker::busy() const {
+  std::lock_guard<std::mutex> lock(mutex);
+  // A completion can arrive between the GUI's take() and busy() calls.
+  // Keep polling until that result has actually been collected.
+  return working || bool(pending) || bool(completed);
+}
 void ParserWorker::run() {
   for (;;) {
-    SourceSnapshot source; std::uint64_t current;
+    SourceSnapshot source;
+    std::uint64_t current;
     {
       std::unique_lock<std::mutex> lock(mutex);
       ready.wait(lock, [this] { return stopping || pending.has_value(); });
-      if (stopping) return;
-      source = std::move(*pending); pending.reset(); current = ticket; working = true;
+      if (stopping)
+        return;
+      source = std::move(*pending);
+      pending.reset();
+      current = ticket;
+      working = true;
     }
     ParseCompletion result{source.token, {}, {}};
-    try { result.model = interpreter.parse(source); }
-    catch (const std::exception& e) { result.error = e.what(); }
-    catch (...) { result.error = "Unexpected interpreter failure."; }
+    try {
+      result.model = interpreter.parse(source);
+    } catch (const std::exception& e) {
+      result.error = e.what();
+    } catch (...) {
+      result.error = "Unexpected interpreter failure.";
+    }
     {
       std::lock_guard<std::mutex> lock(mutex);
       working = false;
-      if (!stopping && current == ticket) completed = std::move(result);
+      if (!stopping && current == ticket)
+        completed = std::move(result);
     }
   }
 }
-}
+} // namespace xfmd

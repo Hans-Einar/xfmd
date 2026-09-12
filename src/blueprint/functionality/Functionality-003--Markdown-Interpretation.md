@@ -35,7 +35,7 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `PreviewCoordinator::refresh` | `CmarkInterpreter::parse` | `src/interpreter/CmarkInterpreter.cpp` | Snapshot/options → immutable model | Error ved ressursfeil | Implemented |
+| 1 | `ParserWorker::run via IInterpreter` | `CmarkInterpreter::parse` | `src/interpreter/CmarkInterpreter.cpp` | Snapshot/options → immutable model | Error ved ressursfeil | Implemented |
 | 2 | `CmarkInterpreter::parse` | `ModelBuilder::appendNode` | `src/interpreter/ModelBuilder.cpp` | AST traversal → blocks/runs | Ingen cmark-typer ut av laget | Implemented |
 | 3 | `ModelBuilder::beginBlock / appendNode` | `SourceMapBuilder::record` | `src/interpreter/SourceMapBuilder.cpp` | Node → byteområde/kvalitet | Ukjent range arver blokk approximate | Implemented |
 | 4 | `CmarkInterpreter::parse` | `ModelBuilder::finish` | `src/interpreter/ModelBuilder.cpp` | Builder → eid modell | Ingen lånte inputpekere | Implemented |

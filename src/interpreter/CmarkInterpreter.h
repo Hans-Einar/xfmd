@@ -5,4 +5,4 @@ class CmarkInterpreter final : public IInterpreter {
 public:
   ParseResult parse(const SourceSnapshot&, const ParseOptions& = {}) override;
 };
-}
+} // namespace xfmd

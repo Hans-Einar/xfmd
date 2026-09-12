@@ -8,4 +8,4 @@ public:
   static bool plainText(const std::string&);
   static void validate(std::string_view text, const std::string& path = {});
 };
-}
+} // namespace xfmd

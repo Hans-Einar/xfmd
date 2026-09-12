@@ -35,7 +35,7 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `Application::open` | `DocumentCoordinator::requestOpen` | `src/application/document/DocumentCoordinator.cpp` | Path → bool | Feil via callback | Implemented |
+| 1 | `NavigationCoordinator::openTarget` | `DocumentCoordinator::requestOpen` | `src/application/document/DocumentCoordinator.cpp` | Path → bool | Feil via callback | Implemented |
 | 2 | `DocumentCoordinator::requestOpen` | `DocumentCoordinator::resolveUnsaved` | `src/application/document/DocumentCoordinator.cpp` | Dirty → Save/Discard/Cancel | Save-feil avbryter | Implemented |
 | 3 | `DocumentCoordinator::requestOpen` | `LocalFileStore::read` | `src/application/io/LocalFileStore.cpp` | Path → kandidat | Ingen mutasjon før suksess | Implemented |
 | 4 | `DocumentCoordinator::requestOpen` | `DocumentSession::replace` | `src/application/document/DocumentSession.cpp` | Kandidat → ny token | opened etter commit | Implemented |

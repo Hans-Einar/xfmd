@@ -3,13 +3,22 @@
 #include "HitTester.h"
 #include <algorithm>
 namespace xfmd {
-LayoutResult MarkdownRenderer::layout(const SemanticDocument& model, const LayoutRequest& request, ITextMetrics& metrics) {
-  if (request.width <= 0) throw Error(ErrorCode::Layout, "Viewport width must be positive.");
+LayoutResult MarkdownRenderer::layout(const SemanticDocument& model, const LayoutRequest& request,
+                                      ITextMetrics& metrics) {
+  if (request.width <= 0)
+    throw Error(ErrorCode::Layout, "Viewport width must be positive.");
   auto frame = std::make_shared<RenderFrame>();
-  frame->token = model.token; frame->generation = request.generation;
-  frame->width = request.width; frame->contentWidth = request.width;
+  frame->token = model.token;
+  frame->generation = request.generation;
+  frame->width = request.width;
+  frame->contentWidth = request.width;
+  frame->runs.reserve(model.blocks.size() * 8);
+  frame->anchors.reserve(model.blocks.size() * 10);
+  frame->decorations.reserve(model.blocks.size());
   BlockLayout::layout(model, request, metrics, *frame);
   return frame;
 }
-HitResult MarkdownRenderer::hitTest(const RenderFrame& frame, Point point) const { return HitTester::hitTest(frame, point); }
+HitResult MarkdownRenderer::hitTest(const RenderFrame& frame, Point point) const {
+  return HitTester::hitTest(frame, point);
 }
+} // namespace xfmd

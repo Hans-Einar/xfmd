@@ -3,7 +3,9 @@
 #include <memory>
 
 namespace xfmd {
-struct ParseOptions { std::size_t maxBytes = maxDocumentBytes; };
+struct ParseOptions {
+  std::size_t maxBytes = maxDocumentBytes;
+};
 using ParseResult = std::shared_ptr<const SemanticDocument>;
 class IInterpreter {
 public:

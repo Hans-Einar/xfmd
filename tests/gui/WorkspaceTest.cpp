@@ -5,10 +5,15 @@
 #include <unistd.h>
 using namespace xfmd;
 void run() {
-  int argc = 1; char name[] = "xfmd-test"; char* argv[] = {name, nullptr};
+  int argc = 1;
+  char name[] = "xfmd-test";
+  char* argv[] = {name, nullptr};
   Application application;
   application.initialize(argc, argv);
   auto& app = application;
+  for (const auto* key : {"Ctrl+O", "Ctrl+S", "Ctrl+Shift+S", "Ctrl+Z", "Ctrl+Y", "Ctrl+F",
+                          "Ctrl+1", "Ctrl+2", "Ctrl+3", "F10", "Alt+Left", "Alt+Right"})
+    CHECK(app.window->getAccelTable()->hasAccel(FX::parseAccel(key)));
   CHECK(app.views->mode() == ViewMode::Preview);
   CHECK(!app.window->editor->shown());
   app.views->setMode(ViewMode::Split);
@@ -20,15 +25,22 @@ void run() {
   CHECK(app.session.dirty());
   app.window->editor->appendText(FX::FXString("next"), true);
   CHECK(app.session.view().text == raw + "next");
-  app.edits.undo(); CHECK(app.session.view().text == raw);
-  app.edits.redo(); CHECK(app.session.view().text == raw + "next");
+  app.edits.undo();
+  CHECK(app.session.view().text == raw);
+  app.edits.redo();
+  CHECK(app.session.view().text == raw + "next");
   app.views->setMode(ViewMode::Editor);
   CHECK(!app.window->previewArea->shown() && app.edits.canUndo());
-  app.views->toggleSidebar(); CHECK(!app.window->sidebar->shown());
-  app.views->toggleSidebar(); CHECK(app.window->sidebar->shown());
-  CHECK(FX::FXPath::match(app.window->sidebar->getPattern(), "hello.MD", app.window->sidebar->getMatchMode()));
-  CHECK(FX::FXPath::match(app.window->sidebar->getPattern(), "hello.txt", app.window->sidebar->getMatchMode()));
-  CHECK(!FX::FXPath::match(app.window->sidebar->getPattern(), "hello.png", app.window->sidebar->getMatchMode()));
+  app.views->toggleSidebar();
+  CHECK(!app.window->sidebar->shown());
+  app.views->toggleSidebar();
+  CHECK(app.window->sidebar->shown());
+  CHECK(FX::FXPath::match(app.window->sidebar->getPattern(), "hello.MD",
+                          app.window->sidebar->getMatchMode()));
+  CHECK(FX::FXPath::match(app.window->sidebar->getPattern(), "hello.txt",
+                          app.window->sidebar->getMatchMode()));
+  CHECK(!FX::FXPath::match(app.window->sidebar->getPattern(), "hello.png",
+                           app.window->sidebar->getMatchMode()));
   app.documents.chooseUnsaved = [] { return UnsavedChoice::Cancel; };
   CHECK(!app.documents.requestClose());
   app.documents.chooseUnsaved = [] { return UnsavedChoice::Discard; };

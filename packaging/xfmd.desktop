@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=xfmd
+GenericName=Markdown Viewer and Editor
+Comment=Read and edit local Markdown with native preview
+Exec=xfmd %f
+Icon=xfmd
+Terminal=false
+Categories=Utility;TextEditor;
+MimeType=text/markdown;text/plain;
+StartupNotify=true

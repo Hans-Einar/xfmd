@@ -5,7 +5,11 @@
 #include <optional>
 #include <thread>
 namespace xfmd {
-struct ParseCompletion { DocumentToken token; ParseResult model; std::string error; };
+struct ParseCompletion {
+  DocumentToken token;
+  ParseResult model;
+  std::string error;
+};
 class ParserWorker {
   IInterpreter& interpreter;
   mutable std::mutex mutex;
@@ -16,6 +20,7 @@ class ParserWorker {
   std::uint64_t ticket = 0;
   std::thread thread;
   void run();
+
 public:
   explicit ParserWorker(IInterpreter&);
   ~ParserWorker();
@@ -23,4 +28,4 @@ public:
   std::optional<ParseCompletion> take();
   bool busy() const;
 };
-}
+} // namespace xfmd

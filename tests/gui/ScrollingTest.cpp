@@ -5,13 +5,22 @@
 using namespace xfmd;
 void events(Application& app, int milliseconds) {
   auto end = std::chrono::steady_clock::now() + std::chrono::milliseconds(milliseconds);
-  do { app.app.runWhileEvents(); std::this_thread::sleep_for(std::chrono::milliseconds(2)); } while (std::chrono::steady_clock::now() < end);
+  do {
+    app.app.runWhileEvents();
+    std::this_thread::sleep_for(std::chrono::milliseconds(2));
+  } while (std::chrono::steady_clock::now() < end);
 }
 void run() {
-  int argc = 1; char name[] = "xfmd-scroll"; char* argv[] = {name, nullptr};
-  Application app; app.initialize(argc, argv); app.views->setMode(ViewMode::Split);
+  int argc = 1;
+  char name[] = "xfmd-scroll";
+  char* argv[] = {name, nullptr};
+  Application app;
+  app.initialize(argc, argv);
+  app.views->setMode(ViewMode::Split);
   std::string source;
-  for (int i=0;i<80;++i) source += "## Section " + std::to_string(i) + "\n\nParagraph with **bold** and long content to wrap in a narrower window.\n\n";
+  for (int i = 0; i < 80; ++i)
+    source += "## Section " + std::to_string(i) +
+              "\n\nParagraph with **bold** and long content to wrap in a narrower window.\n\n";
   app.edits.applyEdit({0, 0, source});
   events(app, 700);
   CHECK(app.host->interactive());

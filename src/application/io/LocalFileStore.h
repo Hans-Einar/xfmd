@@ -9,8 +9,16 @@ struct FileIdentity {
   std::size_t size = 0;
   bool operator==(const FileIdentity&) const;
 };
-struct LoadedDocument { std::string path, text; FileIdentity identity; bool plainText = false; };
-struct SavedDocument { FileIdentity identity; bool durable = true; std::string path; };
+struct LoadedDocument {
+  std::string path, text;
+  FileIdentity identity;
+  bool plainText = false;
+};
+struct SavedDocument {
+  FileIdentity identity;
+  bool durable = true;
+  std::string path;
+};
 class LocalFileStore {
 public:
   std::function<void(const char*)> checkpoint; // Optional fault injection; empty in production.
@@ -19,4 +27,4 @@ public:
   virtual SavedDocument writeAtomic(const SourceSnapshot&, const std::string&,
                                     const std::optional<FileIdentity>& expected) const;
 };
-}
+} // namespace xfmd

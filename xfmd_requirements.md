@@ -1,8 +1,8 @@
 # Kravspesifikasjon: xfmd
 
-Status: **Proposed**, revisjon 0.2, 2026-09-12. Revisjonen konkretiserer opprinnelig
-intensjon og brukerens arkitekturføringer. Tallgrenser og detaljpolicyer merket
-«foreslått» er forslag til gjennomgang, ikke målte egenskaper.
+Status: **Implemented baseline**, revisjon 1.0, 2026-09-12. Designgrunnlaget ble
+godkjent før implementasjon. Krav er normative; målinger og begrensninger finnes
+i [P7-verifikasjonen](docs/evidence/P7.md).
 
 ## 1. Formål og avgrensning
 
@@ -24,7 +24,7 @@ uavhengig gjennom avtalte kontrakter. Se [arkitekturen](softwareArchitecture.md)
 - **Feature (FTR):** avgrenset, sammenhengende evne med egen akseptanse.
 - **Functionality (FUNC):** tjeneste/atferd med ett eierlag og eksplisitte kall.
 
-Alle krav er foreslått for første leveranse med mindre «senere» er angitt. ID-er
+Alle krav gjelder første leveranse med mindre «senere» er angitt. ID-er
 er stabile; slettede krav beholdes som `Retired` med begrunnelse. Et dokument eller
 en stub oppfyller ikke i seg selv et funksjonelt krav.
 
@@ -41,7 +41,7 @@ en stub oppfyller ikke i seg selv et funksjonelt krav.
 
 ## 4. Brukerkrav
 
-| ID | Krav | Akseptanse / planlagt bevis |
+| ID | Krav | Akseptanse / beviskriterium |
 | --- | --- | --- |
 | UR-001 | Åpne lokale `.md`/`.txt` via CLI, dialog og sidepanel i samme aktive økt. `.txt` vises som ren tekst. | AT-001: mellomrom/Unicode i sti, tom/manglende fil; ingen uønsket ekstra prosess. |
 | UR-002 | Vis H1–H6, avsnitt, fet/kursiv, lister, sitater, kode og lenketekst. Brødtekst/overskrifter er proporsjonale; kode er monospace; overskriftsnivåer er tydelige. | AT-002: fixtures og visuell kontroll av blandede fonter, nesting og linjebryting. |
@@ -56,9 +56,9 @@ en stub oppfyller ikke i seg selv et funksjonelt krav.
 
 ## 5. Systemkrav
 
-| ID | Krav | Akseptanse / planlagt bevis |
+| ID | Krav | Akseptanse / beviskriterium |
 | --- | --- | --- |
-| SR-001 | `application`, `interpreter`, `renderer` er egne kildekataloger. Bare application integrerer FOX; delte kontrakter har ingen FOX-/MD4C-typer. | AT-011: byggeavhengigheter og headless kontrakttester; alternative implementasjoner krever bare wiring. |
+| SR-001 | `application`, `interpreter`, `renderer` er egne kildekataloger. Bare application integrerer FOX; delte kontrakter har ingen FOX-/parser-typer. | AT-011: byggeavhengigheter og headless kontrakttester; alternative implementasjoner krever bare wiring. |
 | SR-002 | Én tydelig eier per dokumenttilstand og functionality; ingen direkte mutasjon mellom søskenwidgets eller feature-interner. | AT-012: eierskaps- og kallgjennomgang mot blueprints. |
 | SR-003 | Interpreter produserer uforanderlig semantisk modell med revisjon og kildeankre; renderer konsumerer uten parserkall. | AT-013: fixture og ekte/fake implementasjoner bruker samme kontraktstest. |
 | SR-004 | Bruk cmark 0.31.1 / CommonMark 0.31.1 med CMARK_OPT_DEFAULT; ingen utvidelser. Ingen stilltiende aktivering av voksende «GitHub dialect». | AT-014: versjon/flaggliste og corpus med Unicode, entiteter, HTML som inert tekst og ufullstendig syntaks. |
@@ -68,7 +68,7 @@ en stub oppfyller ikke i seg selv et funksjonelt krav.
 | SR-008 | Preview/layout har dokument-ID, revisjon og layoutgenerasjon. Foreldet resultat publiseres eller brukes aldri til scrolling. | AT-018: dokumentbytte, edit og resize mens arbeid er ventende. |
 | SR-009 | Mapping bruker eksplisitte UTF-8-byteoffsets/kildeankre, ikke likhet mellom byte, tegn, visuelle rader og linjenumre. | AT-019: Unicode, gjentatt tekst, entiteter, lister, tomme blokker og wrapping; mappingkvalitet rapporteres. |
 | SR-010 | FOX-objekter/GUI-mutasjon eies av GUI-tråden. Én bounded parser-worker bruker bare rene data; FOX-måling/layout/paint bruker GUI-tråden. | AT-020: timer-/objektlevetid og blokkering måles; worker-design krever eksplisitt revisjon. |
-| SR-011 | Foreslått: filgrense 8 MiB; benchmark-corpus til 1 MiB. Referansemaskin: p95 parse+layout ≤100 ms, første visning ≤500 ms for 1 MiB, RSS ≤100 MiB. | AT-021: 30 varme kjøringer og egen kaldstart; oppgi maskin/bygg/input. Overskridelse krever tiltak eller kravrevisjon. |
+| SR-011 | Filgrense 8 MiB; benchmark-corpus til 1 MiB. Referansemaskin: p95 parse+layout ≤100 ms, første visning ≤500 ms for 1 MiB, RSS ≤100 MiB. | AT-021: 30 varme kjøringer og egen kaldstart; oppgi maskin/bygg/input. Overskridelse krever tiltak eller kravrevisjon. |
 | SR-012 | Features/functionality har krav-ID, eier, kontrakter, plumbing, feilvei, gjenbruk og verifikasjon. | AT-022: validator og manuell semantisk sporbarhetskontroll. |
 | SR-013 | Roller deles i fokuserte filer; nye tjenester begrunnes i krav og gjenbruk eller nødvendig ansvarsgrense. | AT-023: filkart og review; ingen skjult funksjonalitet i vindusklasse/generisk hjelpefil. |
 | SR-014 | Senere: IPC versjonerer protokoll, avgrenser meldingsstørrelse, kontrollerer lokal peer og dokument/revisjon. | AT-024: framtidige tester av feil peer, partial reads, gammel revisjon og frakobling. |

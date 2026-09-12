@@ -14,10 +14,13 @@ struct TextInterpreter final : IInterpreter {
   }
 };
 struct Metrics final : ITextMetrics {
-  TextExtent measure(std::string_view text, FontSpec) override { return {int(text.size()) * 8, 16, 12}; }
+  TextExtent measure(std::string_view text, FontSpec) override {
+    return {int(text.size()) * 8, 16, 12};
+  }
 };
 struct TextRenderer final : IRenderer {
-  LayoutResult layout(const SemanticDocument& model, const LayoutRequest& request, ITextMetrics& metrics) override {
+  LayoutResult layout(const SemanticDocument& model, const LayoutRequest& request,
+                      ITextMetrics& metrics) override {
     auto result = std::make_shared<RenderFrame>();
     result->token = model.token;
     result->generation = request.generation;

@@ -5,6 +5,7 @@ namespace xfmd {
 class TextProjection {
   std::vector<std::size_t> offsets;
   std::string newline = "\n";
+
 public:
   std::string text;
   explicit TextProjection(const std::string& raw);
@@ -12,4 +13,4 @@ public:
   std::size_t displayOffset(std::size_t source) const;
   Edit difference(const std::string& edited) const;
 };
-}
+} // namespace xfmd
