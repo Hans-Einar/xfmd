@@ -20,6 +20,15 @@ void run() {
     CHECK(application.metrics->measure(run.text, run.font).width == run.bounds.width);
   }
   CHECK(heading && monospace);
+  application.window->editor->setFocus();
+  application.window->editor->appendText(FX::FXString("\nLive edit"), true);
+  auto cursor = application.window->editor->getCursorPos();
+  CHECK(!application.host->interactive());
+  for (int i = 0; i < 100; ++i) { application.app.runWhileEvents(); std::this_thread::sleep_for(std::chrono::milliseconds(5)); }
+  CHECK(application.host->interactive());
+  CHECK(application.host->frame()->token == application.session.view().token);
+  CHECK(application.window->editor->getCursorPos() == cursor);
+  CHECK(application.window->editor->hasFocus());
   auto old = application.host->frame();
   application.host->expect({999, 0});
   application.host->present(old);

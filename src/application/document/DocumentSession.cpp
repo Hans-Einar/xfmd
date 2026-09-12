@@ -17,6 +17,7 @@ Revision DocumentSession::applyEdit(const Edit& edit) {
 void DocumentSession::markSaved(const SourceSnapshot& saved, const SavedDocument& result) {
   if (saved.token.document != current.token.document) return;
   baseline = saved.text;
+  if (current.plainText != InputPolicy::plainText(result.path)) ++current.token.revision;
   current.path = result.path;
   current.plainText = InputPolicy::plainText(result.path);
   file = result.identity;

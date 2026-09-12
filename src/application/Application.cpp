@@ -4,7 +4,7 @@
 #include <filesystem>
 using namespace FX;
 namespace xfmd {
-Application::~Application() { delete window; }
+Application::~Application() { preview.reset(); scheduler.reset(); delete window; }
 void Application::initialize(int& argc, char** argv) {
   app.init(argc, argv);
   window = new XfmdWindow(&app, commands);
@@ -22,12 +22,13 @@ void Application::initialize(int& argc, char** argv) {
   renderer = std::make_unique<MarkdownRenderer>();
   metrics = std::make_unique<FoxTextMetrics>(app);
   host = new FoxRenderHost(window->previewArea, *renderer, *metrics);
-  preview = std::make_unique<PreviewCoordinator>(session, *interpreter, *renderer, *metrics);
+  scheduler = std::make_unique<FoxScheduler>(app);
+  preview = std::make_unique<PreviewCoordinator>(session, *interpreter, *renderer, *metrics, *scheduler);
   preview->invalidated = [this](DocumentToken token) { host->expect(token); };
   preview->present = [this](LayoutResult frame) { host->present(std::move(frame)); };
   preview->failed = [this](const std::string& error) { window->status->setText(("Preview unavailable: " + error).c_str()); };
   documentOpened = [this] { preview->refresh(); };
-  contentChanged = [this] { preview->invalidate(); };
+  contentChanged = [this] { preview->schedule(); };
   host->resized = [this](int width) { preview->relayout(width); };
   views->changed = [this] { host->recalc(); };
   app.create();

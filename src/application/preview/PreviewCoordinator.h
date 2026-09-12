@@ -3,10 +3,13 @@
 #include "contracts/IRenderer.h"
 #include "application/document/DocumentSession.h"
 #include <functional>
+#include "application/adapters/IScheduler.h"
+#include "ParserWorker.h"
 namespace xfmd {
 class PreviewCoordinator {
   DocumentSession& session;
-  IInterpreter& interpreter;
+  IScheduler& scheduler;
+  ParserWorker worker;
   IRenderer& renderer;
   ITextMetrics& metrics;
   ParseResult model;
@@ -16,8 +19,12 @@ public:
   std::function<void(DocumentToken)> invalidated;
   std::function<void(LayoutResult)> present;
   std::function<void(const std::string&)> failed;
-  PreviewCoordinator(DocumentSession& s, IInterpreter& i, IRenderer& r, ITextMetrics& m)
-      : session(s), interpreter(i), renderer(r), metrics(m) {}
+  PreviewCoordinator(DocumentSession& s, IInterpreter& i, IRenderer& r, ITextMetrics& m, IScheduler& clock)
+      : session(s), scheduler(clock), worker(i), renderer(r), metrics(m) {}
+  ~PreviewCoordinator();
+  void schedule();
+  void poll();
+  bool busy() const { return worker.busy(); }
   void refresh();
   void relayout(int);
   void invalidate();

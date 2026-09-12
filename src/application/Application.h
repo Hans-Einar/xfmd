@@ -10,6 +10,7 @@
 #include "contracts/IRenderer.h"
 #include "adapters/FoxTextMetrics.h"
 #include "adapters/FoxRenderHost.h"
+#include "adapters/FoxScheduler.h"
 #include "preview/PreviewCoordinator.h"
 namespace xfmd {
 class Application {
@@ -26,6 +27,7 @@ public:
   std::unique_ptr<IRenderer> renderer;
   std::unique_ptr<FoxTextMetrics> metrics;
   FoxRenderHost* host = nullptr;
+  std::unique_ptr<FoxScheduler> scheduler;
   std::unique_ptr<PreviewCoordinator> preview;
   std::function<void()> contentChanged, documentOpened;
   std::function<void()> back, forward;
