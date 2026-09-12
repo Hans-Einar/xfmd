@@ -6,6 +6,11 @@
 #include "ui/ViewModeController.h"
 #include "ui/XfmdWindow.h"
 #include <memory>
+#include "contracts/IInterpreter.h"
+#include "contracts/IRenderer.h"
+#include "adapters/FoxTextMetrics.h"
+#include "adapters/FoxRenderHost.h"
+#include "preview/PreviewCoordinator.h"
 namespace xfmd {
 class Application {
 public:
@@ -17,6 +22,11 @@ public:
   CommandRouter commands;
   XfmdWindow* window = nullptr;
   std::unique_ptr<ViewModeController> views;
+  std::unique_ptr<IInterpreter> interpreter;
+  std::unique_ptr<IRenderer> renderer;
+  std::unique_ptr<FoxTextMetrics> metrics;
+  FoxRenderHost* host = nullptr;
+  std::unique_ptr<PreviewCoordinator> preview;
   std::function<void()> contentChanged, documentOpened;
   std::function<void()> back, forward;
   std::function<bool(bool)> canNavigate;

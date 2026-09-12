@@ -1,0 +1,36 @@
+#pragma once
+#include <fx.h>
+#include "contracts/IRenderer.h"
+#include "FoxTextMetrics.h"
+#include <functional>
+namespace xfmd {
+class FoxRenderHost : public FX::FXScrollArea {
+  FXDECLARE(FoxRenderHost)
+  IRenderer* renderer = nullptr;
+  FoxTextMetrics* metrics = nullptr;
+  LayoutResult current;
+  DocumentToken expected;
+  bool active = false, programmatic = false;
+  int lastWidth = 0;
+protected:
+  FoxRenderHost() = default;
+  void moveContents(FX::FXint, FX::FXint) override;
+public:
+  std::function<void(int)> resized;
+  std::function<void(int)> viewportChanged;
+  std::function<void(const std::string&)> linkActivated;
+  FoxRenderHost(FX::FXComposite*, IRenderer&, FoxTextMetrics&);
+  void layout() override;
+  FX::FXint getContentWidth() override;
+  FX::FXint getContentHeight() override;
+  void expect(DocumentToken token) { if (token.document != expected.document) current.reset(); expected = token; active = false; update(); }
+  void present(LayoutResult);
+  void invalidate() { active = false; update(); }
+  bool interactive() const { return active; }
+  const LayoutResult& frame() const { return current; }
+  void setViewport(int y);
+  long onPaint(FX::FXObject*, FX::FXSelector, void*);
+  long onPointer(FX::FXObject*, FX::FXSelector, void*);
+  long onMotion(FX::FXObject*, FX::FXSelector, void*);
+};
+}
