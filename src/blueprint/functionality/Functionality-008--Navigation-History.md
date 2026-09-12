@@ -41,8 +41,8 @@ Bibliotekskall verifiseres mot valgt dependency-versjon før implementering.
 | 3 | `CommandRouter::back / forward` | `HistoryStore::propose` | `src/application/navigation/HistoryStore.cpp` | Retning → pending mål/token | Ved endepunkt returneres NoOp. | Planned |
 | 4 | `NavigationCoordinator::openTarget` | `ScrollCoordinator::captureAnchor` | `src/application/scroll/ScrollCoordinator.cpp` | Aktiv viewport → pending anker | Endrer ikke historikk før dokumentcommit. | Planned |
 | 5 | `NavigationCoordinator::openTarget` | `DocumentCoordinator::requestOpen` | `src/application/document/DocumentCoordinator.cpp` | NavigationRequest → OpenResult | Failed/Cancelled beholder cursor og gren. | Planned |
-| 5 | `DocumentOpened event` | `NavigationCoordinator::commitVisit` | `src/application/navigation/NavigationCoordinator.cpp` | Vellykket OpenResult + token | Commit én gang; NewVisit trunkerer frem-gren. | Planned |
-| 6 | `FrameReady event` | `ScrollCoordinator::restoreAnchor` | `src/application/scroll/ScrollCoordinator.cpp` | Pending historikkanker + gyldig frame | Clamp ved endret fil; feil frame avvises. | Planned |
+| 6 | `DocumentOpened event` | `NavigationCoordinator::commitVisit` | `src/application/navigation/NavigationCoordinator.cpp` | Vellykket OpenResult + token | Commit én gang; NewVisit trunkerer frem-gren. | Planned |
+| 7 | `FrameReady event` | `ScrollCoordinator::restoreAnchor` | `src/application/scroll/ScrollCoordinator.cpp` | Pending historikkanker + gyldig frame | Clamp ved endret fil; feil frame avvises. | Planned |
 
 ## 6. Gjenbruk og avhengigheter
 

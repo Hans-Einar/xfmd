@@ -1,7 +1,7 @@
 # Implementeringsplan: xfmd
 
-Status: **Proposed**, 2026-09-12. Denne runden leverer design og dokumentasjonsmetode,
-ikke applikasjonsimplementasjon. Ingen av stegene nedenfor er utført. Rekkefølgen
+Status: **In progress**, 2026-09-12. Brukeren har gjennomgått designgrunnlaget og
+autorisert full implementasjon av første leveranse i én sesjon. Rekkefølgen
 styres av kontrakter, risiko og akseptanse; ikke av sprintlengde.
 
 ## 1. Gjennomgang av designgrunnlaget
@@ -123,3 +123,10 @@ Kontrollen verifiserer dokumentstruktur, ID-er, lokale fillenker, kravdekning,
 avhengighetsreferanser og plumbing-status. Den erstatter ikke semantisk review,
 symbolanalyse eller tester av framtidig applikasjonskode. Se
 [arbeidsmåten](docs/working-method.md) for forslag til videre prosessforbedringer.
+
+## 7. Branch- og milepælpraksis
+
+En phase er en avhengighetsstyrt leveranse, ikke en tidsbokset sprint. Hver phase
+får `phase/pN-<navn>`, med commits for konkrete milepæler. Ferdige faser integreres
+i `main` med merge-commit, og fasebranchene beholdes på GitHub. Testbevis føres i
+`docs/evidence/`; P0-beslutninger står i [P0-rapporten](docs/evidence/P0.md).
