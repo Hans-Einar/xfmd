@@ -4,7 +4,7 @@ kind: Functionality
 audience: User
 role: Workflow
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-001, UR-005, UR-009, SR-002, SR-005, SR-008, SR-013
 uses: FUNC-001, FUNC-009
@@ -23,26 +23,26 @@ Krav: UR-001, UR-005, UR-009, SR-002, SR-005, SR-008, SR-013. Definisjoner og no
 
 ## 3. Kontrakter og eierskap
 
-`NavigationCoordinator::followLink(LinkTarget)`, `goBack()`, `goForward()`, `openTarget(NavigationRequest)`, `commitVisit(OpenResult)`; `LinkResolver::resolve` returnerer lokal sti eller UnsupportedTarget; `HistoryStore::propose`, `commit`, `recordCurrentAnchor`. Post har normalisert målsti og kildeanker, ikke kopi av filinnhold.
+NavigationCoordinator::openTarget/followLink/goBack/goForward er offentlige innganger. HistoryStore eier in-memory liste/cursor (maks 100), LinkResolver eier lokal sti-/URI-policy. Pending request bevarer forrige anker og eventuell historikkindeks. DocumentCoordinator opened-callback er eneste commitVisit-inngang.
 
 ## 4. Atferd, tilstand og feil
 
-Før bytte registreres gjeldende anker i en pending transaksjon. Resolve/dirty/lasting må lykkes før cursor eller grenen endres. DocumentOpened-observeren er eneste commit-inngang også for CLI/dialog/sidebar. Historikkforespørsel har token som skiller Back/Forward fra NewVisit og hindrer dobbel commit. Tilbake/frem gjenoppretter anker etter FrameReady med riktig dokument/revisjon; endret fil clampler anker. Maksimalt 100 poster er foreslått.
+CLI/dialog/sidebar går via Application::open til samme navigation→document-vei. resolveUnsaved og lasting må lykkes før history.commit. Ny visit etter back trunkerer frem-gren; samme fil dupliseres ikke. Back/forward leser fil på nytt og gjenoppretter anker når frame er klart. Percent-encoding dekodes én gang; schemes/network/fragment/query/control-byte avvises. SaveAs oppdaterer aktuell poststi.
 
 ## 5. Plumbing
 
-Alle symboler og kildefiler i tabellen er **planlagte**, ikke implementert kode.
-Bibliotekskall verifiseres mot valgt dependency-versjon før implementering.
+Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `FoxRenderHost LinkActivated` | `NavigationCoordinator::followLink` | `src/application/navigation/NavigationCoordinator.cpp` | LinkTarget + aktiv frame-token | Stale frame ignoreres. | Planned |
-| 2 | `NavigationCoordinator::followLink` | `LinkResolver::resolve` | `src/application/navigation/LinkResolver.cpp` | Basepath + mål → lokal Path | Scheme/fragment/ugyldig escape avvises uten åpning. | Planned |
-| 3 | `CommandRouter::back / forward` | `HistoryStore::propose` | `src/application/navigation/HistoryStore.cpp` | Retning → pending mål/token | Ved endepunkt returneres NoOp. | Planned |
-| 4 | `NavigationCoordinator::openTarget` | `ScrollCoordinator::captureAnchor` | `src/application/scroll/ScrollCoordinator.cpp` | Aktiv viewport → pending anker | Endrer ikke historikk før dokumentcommit. | Planned |
-| 5 | `NavigationCoordinator::openTarget` | `DocumentCoordinator::requestOpen` | `src/application/document/DocumentCoordinator.cpp` | NavigationRequest → OpenResult | Failed/Cancelled beholder cursor og gren. | Planned |
-| 6 | `DocumentOpened event` | `NavigationCoordinator::commitVisit` | `src/application/navigation/NavigationCoordinator.cpp` | Vellykket OpenResult + token | Commit én gang; NewVisit trunkerer frem-gren. | Planned |
-| 7 | `FrameReady event` | `ScrollCoordinator::restoreAnchor` | `src/application/scroll/ScrollCoordinator.cpp` | Pending historikkanker + gyldig frame | Clamp ved endret fil; feil frame avvises. | Planned |
+| 1 | `Application::open` | `NavigationCoordinator::openTarget` | `src/application/navigation/NavigationCoordinator.cpp` | Path → pending request | Reentrant request avvises | Implemented |
+| 2 | `FoxRenderHost link callback` | `NavigationCoordinator::followLink` | `src/application/navigation/NavigationCoordinator.cpp` | LinkTarget → lokal navigasjon | Feil gir status/dialog | Implemented |
+| 3 | `NavigationCoordinator::followLink` | `LinkResolver::resolve` | `src/application/navigation/LinkResolver.cpp` | Basepath/target → canonical local path | Ingen shell/network | Implemented |
+| 4 | `NavigationCoordinator::goBack / goForward` | `HistoryStore::propose` | `src/application/navigation/HistoryStore.cpp` | Retning → indeks | NoOp ved endepunkt | Implemented |
+| 5 | `NavigationCoordinator::openTarget` | `DocumentCoordinator::requestOpen` | `src/application/document/DocumentCoordinator.cpp` | Path → success/failure | Failed/cancel muterer ikke history | Implemented |
+| 6 | `DocumentCoordinator opened callback` | `NavigationCoordinator::commitVisit` | `src/application/navigation/NavigationCoordinator.cpp` | Committed dokument → history | Én callback per commit | Implemented |
+| 7 | `NavigationCoordinator::commitVisit` | `HistoryStore::commit` | `src/application/navigation/HistoryStore.cpp` | Path/forrige anker/target → cursor | Ny visit trunkerer frem-gren | Implemented |
+| 8 | `NavigationCoordinator::commitVisit` | `ScrollCoordinator::restoreAnchor` | `src/application/scroll/ScrollCoordinator.cpp` | Historikkanker → pending restore | Venter på gyldig FrameReady | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -52,16 +52,13 @@ CLI, dialog, sidebar og lenker deler dokumentbytte/commit-policy. Source-anchor-
 
 ## 7. Verifikasjon
 
-AT-001, AT-005, AT-009, AT-012, AT-015, AT-018, AT-023: A/B/C-back-D, feilet last, dirty-cancel, ny initial fil, grensene, repeated same target, endret/slettet besøkt fil og én commit. Planlagt `tests/application/NavigationCoordinatorTest.cpp`.
+Relevante akseptanse-ID-er: AT-001, AT-005, AT-009, AT-012, AT-015, AT-018, AT-023.
 
-Bevis: ingen applikasjonstest kjørt; testfiler ovenfor er planlagte. Ved implementering
-oppgis kommando, fixture, miljø, commit og faktisk utfall. Strukturkontroll alene
-oppfyller ikke atferdskravene.
+`NavigationTest` tester A/B/C/back/D, avbrudd, brutt lenke, 100-grense, encoding/schemes og ingen dobbel commit. NavigationGuiTest klikker et ekte renderer-hit og kontrollerer back/forward i FOX.
+
+Evidence: [Fase P6](../../../docs/evidence/P6.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Proposed, revisjon 0.1, 2026-09-12. Fragmenter/ekstern nettleseråpning er utsatt. URI-percent decoding og normalisering må testes uten shell; vellykket filåpning kan fortsatt gi tydelig previewfeil.
-
-Ved endret offentlig kontrakt: oppdater konsumentene i registeret, dette kallkartet,
-berørte krav og kontrakttester i samme endring. Før status Ready skal relevante
-P0-spørsmål være avgjort; før Verified skal kapittel 7 inneholde testbevis.
+Implemented i P6. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
+Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.

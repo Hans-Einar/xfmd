@@ -4,7 +4,7 @@ kind: Feature
 audience: User
 role: Workflow
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-001, UR-005, UR-009, SR-002, SR-005, SR-008, SR-012, SR-013
 uses: FUNC-001, FUNC-002, FUNC-005, FUNC-008, FUNC-009, FUNC-010
@@ -23,24 +23,23 @@ Krav: UR-001, UR-005, UR-009, SR-002, SR-005, SR-008, SR-012, SR-013. Definisjon
 
 ## 3. Kontrakter og eierskap
 
-Innganger: LinkActivated, Back og Forward samt øvrige vellykkede dokumentåpninger. Utgang: aktivt dokument med konsistent historikkcursor og gjenopprettet anker. NavigationCoordinator er eneste eier av arbeidsflyten; funksjonene detaljeres i FUNC-008.
+Feature orkestreres av NavigationCoordinator. LocalFileStore, DocumentCoordinator, HistoryStore, LinkResolver og ScrollCoordinator gjenbrukes. Lenketreff utføres av renderer-porten, mens application bestemmer hva som åpnes.
 
 ## 4. Atferd, tilstand og feil
 
-Hit-test må komme fra gyldig frame. Mål resolves lokalt, nåværende anker tas vare på og vanlig dokumentbytte utføres. Bare suksess committer history. Ny lenke etter tilbake trunkerer frem-gren. Avbrutt dirty-dialog, brutt lenke eller uleselig fil beholder alt. Gjenopprett posisjon først når målfilens frame er klart. Ingen shell/nettverksåpning eller fragmentnavigasjon i første versjon.
+Et aktivt lenketreff gir lokal filnavigasjon. Historikk committes etter vellykket åpning og lagrer kildeanker. Back/forward venter på korrekt frame før restore. Brutt lenke og dirty-cancel bevarer både buffer og cursor. Eksterne schemes/fragmenter er eksplisitt unsupported, ikke sideeffekter. Alle dokumentinnganger bruker samme policy.
 
 ## 5. Plumbing
 
-Alle symboler og kildefiler i tabellen er **planlagte**, ikke implementert kode.
-Bibliotekskall verifiseres mot valgt dependency-versjon før implementering.
+Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `FoxRenderHost::onPointer` | `IRenderer::hitTest` | `src/contracts/IRenderer.h` | Gyldig frame + punkt → LinkActivated | Ingen navigasjon fra stale frame. | Planned |
-| 2 | `LinkActivated / CommandRouter back/forward` | `NavigationCoordinator::followLink / goBack / goForward` | `src/application/navigation/NavigationCoordinator.cpp` | Mål/retning → pending request | FUNC-008 eier resolve og history. | Planned |
-| 3 | `NavigationCoordinator::openTarget` | `DocumentCoordinator::requestOpen` | `src/application/document/DocumentCoordinator.cpp` | Request → OpenResult | Samme dirty/I/O-vei som all åpning. | Planned |
-| 4 | `DocumentOpened` | `NavigationCoordinator::commitVisit` | `src/application/navigation/NavigationCoordinator.cpp` | Suksess + token → history commit | Ingen commit ved Failed/Cancelled. | Planned |
-| 5 | `FrameReady` | `ScrollCoordinator::restoreAnchor` | `src/application/scroll/ScrollCoordinator.cpp` | Riktig frame + anker → posisjon | FUNC-009 clampler endret fil. | Planned |
+| 1 | `FoxRenderHost::onPointer` | `IRenderer::hitTest` | `src/contracts/IRenderer.h` | Frame/punkt → link | Kun gyldig frame | Implemented |
+| 2 | `Host linkActivated callback` | `NavigationCoordinator::followLink` | `src/application/navigation/NavigationCoordinator.cpp` | Target → request | Lokal sti-policy | Implemented |
+| 3 | `NavigationCoordinator::openTarget` | `DocumentCoordinator::requestOpen` | `src/application/document/DocumentCoordinator.cpp` | Path → dokumentcommit | Dirty/lesefeil før commit | Implemented |
+| 4 | `DocumentCoordinator opened callback` | `NavigationCoordinator::commitVisit` | `src/application/navigation/NavigationCoordinator.cpp` | Vellykket dokument → historikk | Aldri commit på failed/cancel | Implemented |
+| 5 | `NavigationCoordinator::commitVisit` | `ScrollCoordinator::restoreAnchor` | `src/application/scroll/ScrollCoordinator.cpp` | Anker → pending restore | Frame-token må stemme | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -50,16 +49,13 @@ Historikk og scrollsync deler kildeanker; sidebar/CLI bruker samme dokumentbytte
 
 ## 7. Verifikasjon
 
-AT-001, AT-005, AT-009, AT-012, AT-015, AT-018, AT-022, AT-023: A/B/C/back/D, tilbake ved dirty, slettet mål, URL-schemes, ett history-commit og restore etter resize. Planlagt `tests/acceptance/DocumentNavigationTest.cpp`.
+Relevante akseptanse-ID-er: AT-001, AT-005, AT-009, AT-012, AT-015, AT-018, AT-022, AT-023.
 
-Bevis: ingen applikasjonstest kjørt; testfiler ovenfor er planlagte. Ved implementering
-oppgis kommando, fixture, miljø, commit og faktisk utfall. Strukturkontroll alene
-oppfyller ikke atferdskravene.
+`NavigationTest` og `NavigationGuiTest` passerer, med dirty-cancel og tilbake/frem etter renderer-hit. Source-anchor/resize er også verifisert i P5.
+
+Evidence: [Fase P6](../../../docs/evidence/P6.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Proposed, revisjon 0.1, 2026-09-12. Første versjon har foreslått 100 poster, kun sesjon. Fragmenter og ekstern nettleser krever senere krav; ikke implementer skjult ekstra scope.
-
-Ved endret offentlig kontrakt: oppdater konsumentene i registeret, dette kallkartet,
-berørte krav og kontrakttester i samme endring. Før status Ready skal relevante
-P0-spørsmål være avgjort; før Verified skal kapittel 7 inneholde testbevis.
+Implemented i P6. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
+Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.
