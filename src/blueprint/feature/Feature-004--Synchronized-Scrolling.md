@@ -4,7 +4,7 @@ kind: Feature
 audience: User
 role: Workflow
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-008, SR-002, SR-008, SR-009, SR-012, SR-013
 uses: FUNC-004, FUNC-005, FUNC-009, FUNC-010
@@ -23,25 +23,24 @@ Krav: UR-008, SR-002, SR-008, SR-009, SR-012, SR-013. Definisjoner og normativ a
 
 ## 3. Kontrakter og eierskap
 
-Inngang: ViewportChanged med dokument/revisjon, origin og sekvens. Utgang: motsatt viewport oppdatert gjennom SourceAnchor, eller uttrykkelig Unavailable når mapping ikke kan brukes. Ingen egen sync-tilstand i begge widgets; ScrollCoordinator eier retning og guard.
+Feature koordineres av ScrollCoordinator og bruker samme ankerkontrakt som navigasjon. Interpreter/renderer leverer source ranges og linje-/blokkgeometri. Ingen ekstra parser og ingen total-prosent-algoritme.
 
 ## 4. Atferd, tilstand og feil
 
-Synkronisering er aktiv bare når begge flater er synlige og frame stemmer. Konverter synlig posisjon til kildeanker og derfra til motsatt flate. Programmatisk ekko gir ikke ny runde. Nye fonter, bredde eller revisjon ugyldiggjør layout; hold anker til ny FrameReady. Mappingkvalitet må være synlig i diagnostikk/testbevis; prosentfallback skal ikke utgis for presisjon.
+Begge flater synkroniseres i split-modus. Scrolling i enkeltvisning oppdaterer leseposisjonen uten å flytte skjult flate. Resize og ny revisjon ugyldiggjør mapping; FrameReady gjenoppretter anker. Blank/ukjent mapping er deaktivert. Kodelinjer med identisk tekst beholder hver sin kildeposisjon.
 
 ## 5. Plumbing
 
-Alle symboler og kildefiler i tabellen er **planlagte**, ikke implementert kode.
-Bibliotekskall verifiseres mot valgt dependency-versjon før implementering.
+Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `EditorWidget / FoxRenderHost viewport event` | `ScrollCoordinator::onViewportChanged` | `src/application/scroll/ScrollCoordinator.cpp` | Event + frame-token | Ignore stale/skjult/echo. | Planned |
-| 2 | `ScrollCoordinator::onViewportChanged` | `AnchorMapper::anchorAt` | `src/application/scroll/AnchorMapper.cpp` | Kildeviewport → SourceAnchor | FUNC-009 eier konvertering. | Planned |
-| 3 | `ScrollCoordinator::onViewportChanged` | `AnchorMapper::map` | `src/application/scroll/AnchorMapper.cpp` | SourceAnchor + frame → mål | Exact/Approximate/Unavailable. | Planned |
-| 4 | `ScrollCoordinator::applyTarget` | `EditorWidget::setSourceAnchor` | `src/application/ui/EditorWidget.cpp` | Byteanker + programmatisk origin | Clamp og undertrykk ekko. | Planned |
-| 5 | `ScrollCoordinator::applyTarget` | `FoxRenderHost::setViewport` | `src/application/adapters/FoxRenderHost.cpp` | Geometri + programmatisk origin | Alternativ retning; clamp og undertrykk ekko. | Planned |
-| 6 | `FrameReady etter resize` | `ScrollCoordinator::restoreAnchor` | `src/application/scroll/ScrollCoordinator.cpp` | Bevart anker + ny generasjon | Gammel mapping brukes aldri. | Planned |
+| 1 | `Ekte FOX viewport-event` | `ScrollCoordinator::onViewportChanged` | `src/application/scroll/ScrollCoordinator.cpp` | Origin/token/posisjon → anker | Guard stopper loops | Implemented |
+| 2 | `ScrollCoordinator::onViewportChanged` | `AnchorMapper::anchorAt` | `src/application/scroll/AnchorMapper.cpp` | Preview-y → source | Linjegeometri, ikke prosent | Implemented |
+| 3 | `ScrollCoordinator::onViewportChanged` | `AnchorMapper::map` | `src/application/scroll/AnchorMapper.cpp` | Source → y | Hidden syntax har blokkfallback | Implemented |
+| 4 | `ScrollCoordinator setEditor callback` | `EditorWidget::setSourceAnchor` | `src/application/ui/EditorWidget.cpp` | Source → editor viewport | Clamped tekstposisjon | Implemented |
+| 5 | `ScrollCoordinator setPreview callback` | `FoxRenderHost::setViewport` | `src/application/adapters/FoxRenderHost.cpp` | Y → preview viewport | Clamped geometri | Implemented |
+| 6 | `PreviewCoordinator present callback` | `ScrollCoordinator::setFrame` | `src/application/scroll/ScrollCoordinator.cpp` | Ny generasjon → restore | Stale frame brukes aldri | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -51,16 +50,13 @@ Samme mappingtjeneste som FTR-003. Interpreter-ranges og renderer-geometri gjenb
 
 ## 7. Verifikasjon
 
-AT-008, AT-012, AT-018, AT-019, AT-022, AT-023: begge retninger, lange kodeblokker, nesting, Unicode, tom fil, resize, gammel frame og forsinket echo. Planlagt `tests/acceptance/SynchronizedScrollingTest.cpp`; mål samme avsnitt synlig, ikke bare at scrollbar beveger seg.
+Relevante akseptanse-ID-er: AT-008, AT-012, AT-018, AT-019, AT-022, AT-023.
 
-Bevis: ingen applikasjonstest kjørt; testfiler ovenfor er planlagte. Ved implementering
-oppgis kommando, fixture, miljø, commit og faktisk utfall. Strukturkontroll alene
-oppfyller ikke atferdskravene.
+`ScrollTest` og `ScrollingTest` bekrefter begge retninger, samme avsnitt, gjentatt tekst, stale avvisning og resize-restore. GUI-testen bruker et dokument med 80 seksjoner.
+
+Evidence: [Fase P5](../../../docs/evidence/P5.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Proposed, revisjon 0.1, 2026-09-12. Presis interpreter-mapping og fontlayout er P0-gates. IPC er Future og ikke skjult del av denne featureleveransen.
-
-Ved endret offentlig kontrakt: oppdater konsumentene i registeret, dette kallkartet,
-berørte krav og kontrakttester i samme endring. Før status Ready skal relevante
-P0-spørsmål være avgjort; før Verified skal kapittel 7 inneholde testbevis.
+Implemented i P5. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
+Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.

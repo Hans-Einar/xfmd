@@ -12,6 +12,7 @@
 #include "adapters/FoxRenderHost.h"
 #include "adapters/FoxScheduler.h"
 #include "preview/PreviewCoordinator.h"
+#include "scroll/ScrollCoordinator.h"
 namespace xfmd {
 class Application {
 public:
@@ -29,6 +30,7 @@ public:
   FoxRenderHost* host = nullptr;
   std::unique_ptr<FoxScheduler> scheduler;
   std::unique_ptr<PreviewCoordinator> preview;
+  ScrollCoordinator scrolling;
   std::function<void()> contentChanged, documentOpened;
   std::function<void()> back, forward;
   std::function<bool(bool)> canNavigate;

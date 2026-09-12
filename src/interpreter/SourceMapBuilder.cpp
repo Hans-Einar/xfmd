@@ -23,6 +23,30 @@ SourceRange SourceMapBuilder::record(cmark_node* node) const {
   auto quality = source.find('\t', begin) < end ? MappingQuality::Approximate : MappingQuality::Exact;
   return {begin, std::max(begin, end), quality};
 }
+std::vector<InlineRun> SourceMapBuilder::codeLines(cmark_node* node, const std::string& literal) const {
+  std::vector<InlineRun> result;
+  auto block = record(node);
+  auto raw = block.begin;
+  bool fenced = raw < source.size() && (source[raw] == '`' || source[raw] == '~');
+  if (fenced) { auto newline = source.find('\n', raw); raw = newline == std::string::npos ? source.size() : newline + 1; }
+  for (std::size_t begin = 0; begin < literal.size();) {
+    auto end = literal.find('\n', begin); if (end == std::string::npos) end = literal.size();
+    auto rawEnd = source.find_first_of("\r\n", raw); if (rawEnd == std::string::npos) rawEnd = source.size();
+    auto next = rawEnd;
+    if (next < source.size() && source[next] == '\r') ++next;
+    if (next < source.size() && source[next] == '\n') ++next;
+    auto text = literal.substr(begin, end - begin);
+    auto physical = source.substr(raw, rawEnd - raw);
+    auto offset = physical.find(text);
+    SourceRange range = offset == std::string::npos ? SourceRange{raw, rawEnd, MappingQuality::Approximate}
+                                                    : SourceRange{raw + offset, raw + offset + text.size(), MappingQuality::Exact};
+    result.push_back({text, range, false, false, true, {}});
+    if (end < literal.size()) result.push_back({"\n", {rawEnd, next, MappingQuality::Approximate}, false, false, true, {}});
+    begin = end < literal.size() ? end + 1 : end;
+    raw = next;
+  }
+  return result;
+}
 bool SourceMapBuilder::matches(const std::string& text, SourceRange range) const {
   return range.end >= range.begin && range.end <= source.size() &&
          source.compare(range.begin, range.end - range.begin, text) == 0;

@@ -26,7 +26,7 @@ int InlineLayout::layout(const SemanticBlock& block, int left, int top, int widt
     for (auto i = lineStart; i < frame.runs.size(); ++i) {
       auto& draw = frame.runs[i];
       draw.bounds.y += ascent - draw.ascent;
-      frame.anchors.push_back({draw.source, draw.bounds});
+      frame.anchors.push_back({draw.source, {draw.bounds.x, y, draw.bounds.width, lineHeight}});
     }
     y += lineHeight; x = left; lineStart = frame.runs.size();
     lineHeight = defaultExtent.height + 4; ascent = defaultExtent.ascent;
@@ -46,7 +46,7 @@ int InlineLayout::layout(const SemanticBlock& block, int left, int top, int widt
     for (std::size_t begin = 0; begin < run.text.size();) {
       char c = run.text[begin];
       if (c == '\r') { ++begin; continue; }
-      if (c == '\n') { finishLine(); ++begin; continue; }
+      if (c == '\n') { frame.anchors.push_back({slice(run, begin, begin + 1), {x, y, 1, lineHeight}}); finishLine(); ++begin; continue; }
       if (c == '\t') {
         InlineRun spaces = run; spaces.text = "    "; spaces.source = slice(run, begin, begin + 1);
         spaces.source.quality = MappingQuality::Approximate;

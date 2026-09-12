@@ -1,5 +1,5 @@
 #pragma once
-#include "contracts/DocumentTypes.h"
+#include "contracts/SemanticDocument.h"
 #include <cmark.h>
 #include <vector>
 namespace xfmd {
@@ -10,6 +10,7 @@ class SourceMapBuilder {
 public:
   explicit SourceMapBuilder(const std::string&);
   SourceRange record(cmark_node*) const;
+  std::vector<InlineRun> codeLines(cmark_node*, const std::string&) const;
   bool matches(const std::string&, SourceRange) const;
 };
 }

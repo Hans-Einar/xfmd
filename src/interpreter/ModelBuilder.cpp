@@ -40,6 +40,11 @@ void ModelBuilder::appendNode(cmark_node* node, cmark_event_type event) {
   if (type == CMARK_NODE_ITEM) ++listCounts[cmark_node_parent(node)];
   if (block) beginBlock(node);
   if (!active) return;
+  if (type == CMARK_NODE_CODE_BLOCK) {
+    const char* literal = cmark_node_get_literal(node);
+    active->runs = mapping.codeLines(node, literal ? literal : "");
+    return;
+  }
   InlineRun run;
   run.source = mapping.record(node);
   if (type == CMARK_NODE_TEXT || type == CMARK_NODE_CODE || type == CMARK_NODE_CODE_BLOCK || type == CMARK_NODE_HTML_BLOCK || type == CMARK_NODE_HTML_INLINE) {

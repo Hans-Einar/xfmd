@@ -22,7 +22,9 @@ void FoxRenderHost::layout() {
 }
 void FoxRenderHost::present(LayoutResult frame) {
   if (!frame || frame->token != expected || frame->width != viewport_w) return;
-  current = std::move(frame); active = true; recalc(); update();
+  current = std::move(frame); active = true;
+  programmatic = true; FXScrollArea::layout(); programmatic = false;
+  recalc(); update();
 }
 void FoxRenderHost::moveContents(FXint x, FXint y) {
   pos_x = x; pos_y = y; update();

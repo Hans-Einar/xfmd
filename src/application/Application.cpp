@@ -24,13 +24,20 @@ void Application::initialize(int& argc, char** argv) {
   host = new FoxRenderHost(window->previewArea, *renderer, *metrics);
   scheduler = std::make_unique<FoxScheduler>(app);
   preview = std::make_unique<PreviewCoordinator>(session, *interpreter, *renderer, *metrics, *scheduler);
-  preview->invalidated = [this](DocumentToken token) { host->expect(token); };
-  preview->present = [this](LayoutResult frame) { host->present(std::move(frame)); };
+  preview->invalidated = [this](DocumentToken token) { scrolling.invalidate(token); host->expect(token); };
+  preview->present = [this](LayoutResult frame) {
+    host->present(frame);
+    if (host->interactive()) scrolling.setFrame(std::move(frame));
+  };
   preview->failed = [this](const std::string& error) { window->status->setText(("Preview unavailable: " + error).c_str()); };
   documentOpened = [this] { preview->refresh(); };
   contentChanged = [this] { preview->schedule(); };
   host->resized = [this](int width) { preview->relayout(width); };
-  views->changed = [this] { host->recalc(); };
+  scrolling.setEditor = [this](SourceAnchor anchor) { window->editor->setSourceAnchor(anchor); };
+  scrolling.setPreview = [this](int y) { host->setViewport(y); };
+  window->editor->viewportChanged = [this](std::size_t byte) { scrolling.onViewportChanged(ViewOrigin::Editor, byte, session.view().token); };
+  host->viewportChanged = [this](int y) { scrolling.onViewportChanged(ViewOrigin::Preview, y, session.view().token); };
+  views->changed = [this] { scrolling.setSplit(views->mode() == ViewMode::Split); host->recalc(); };
   app.create();
   views->setMode(ViewMode::Preview);
   window->show(PLACEMENT_SCREEN);
