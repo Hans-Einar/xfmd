@@ -2,10 +2,23 @@
 #include <algorithm>
 namespace xfmd {
 void PreviewCoordinator::invalidate() { if (invalidated) invalidated(session.view().token); }
-void PreviewCoordinator::refresh() {
+PreviewCoordinator::~PreviewCoordinator() { scheduler.cancel(1); scheduler.cancel(2); }
+void PreviewCoordinator::schedule() {
   invalidate();
-  try { model = interpreter.parse(session.snapshot()); relayout(width); }
-  catch (const std::exception& e) { if (failed) failed(e.what()); }
+  scheduler.restart(1, 300, [this] { refresh(); });
+}
+void PreviewCoordinator::refresh() {
+  scheduler.cancel(1); invalidate();
+  worker.submit(session.snapshot());
+  scheduler.restart(2, 10, [this] { poll(); });
+}
+void PreviewCoordinator::poll() {
+  auto completion = worker.take();
+  if (completion && completion->token == session.view().token) {
+    if (!completion->error.empty()) { if (failed) failed(completion->error); }
+    else { model = std::move(completion->model); relayout(width); }
+  }
+  if (worker.busy()) scheduler.restart(2, 10, [this] { poll(); });
 }
 void PreviewCoordinator::relayout(int newWidth) {
   width = std::max(40, newWidth);

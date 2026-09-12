@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Adapter
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-004, SR-008, SR-010, SR-013
 uses: none
@@ -23,23 +23,22 @@ Krav: UR-004, SR-008, SR-010, SR-013. Definisjoner og normativ akseptanse finnes
 
 ## 3. Kontrakter og eierskap
 
-`FoxScheduler::restart(TimerKey, Duration, Callback)`, `cancel(TimerKey)`, `cancelAll(OwnerId)`, `onTimeout`. En nøkkel har høyst én aktiv timer. Callback kjøres på GUI-tråden og bærer dokument/revisjon som eieren kan kontrollere. Tester bruker en deterministisk klokkeadapter.
+IScheduler er en lokal application-port. FoxScheduler implementerer restart(key, milliseconds, callback), cancel og cancelAll; FakeScheduler brukes i tester. Én schedulerinstans eies av Application, preview bruker nøkkel 1 (debounce) og 2 (worker polling).
 
 ## 4. Atferd, tilstand og feil
 
-Restart erstatter gammel timer. Ny edit setter fristen til siste edit +300 ms. Document switch eller teardown kansellerer. Timerlevering kan være senere dersom event loop er opptatt; debounce garanterer ikke maksimal renderlatens. Callback kontrollerer eierens levetid selv om cancel skjer nær dispatch.
+Restart erstatter timeren. Callback fjernes før dispatch, slik at den kan rearmere trygt. Preview kansellerer begge nøkler ved destruksjon; scheduler kansellerer alle rester. Ingen callback eier FOX-widgeten. Timere kjører på GUI-tråden.
 
 ## 5. Plumbing
 
-Alle symboler og kildefiler i tabellen er **planlagte**, ikke implementert kode.
-Bibliotekskall verifiseres mot valgt dependency-versjon før implementering.
+Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `PreviewCoordinator::schedule` | `FoxScheduler::restart` | `src/application/adapters/FoxScheduler.cpp` | Key + 300 ms + token | Erstatt gammel timer uten duplikat. | Planned |
-| 2 | `FoxScheduler::restart` | `FXApp::removeTimeout / addTimeout` | `src/application/adapters/FoxScheduler.cpp` | FOX target/selector → timer | API-verifisering mot valgt FOX-versjon i P0. | Planned |
-| 3 | `FOX timeout event` | `FoxScheduler::onTimeout` | `src/application/adapters/FoxScheduler.cpp` | Token → Callback | Utgått eier/token ignoreres. | Planned |
-| 4 | `PreviewCoordinator ved dokumentbytte/destruksjon` | `FoxScheduler::cancelAll` | `src/application/adapters/FoxScheduler.cpp` | OwnerId → ingen pending timer | Koble fra før mottaker frigjøres. | Planned |
+| 1 | `PreviewCoordinator::schedule` | `FoxScheduler::restart` | `src/application/adapters/FoxScheduler.cpp` | Key 1 + 300 ms → timer | Tidligere deadline erstattes | Implemented |
+| 2 | `FXApp timeout` | `FoxScheduler::onTimeout` | `src/application/adapters/FoxScheduler.cpp` | Selector → callback | Fjernes før callback | Implemented |
+| 3 | `PreviewCoordinator::~PreviewCoordinator` | `FoxScheduler::cancel` | `src/application/adapters/FoxScheduler.cpp` | Key 1/2 → ingen timer | Ingen dangling receiver | Implemented |
+| 4 | `FoxScheduler::~FoxScheduler` | `FoxScheduler::cancelAll` | `src/application/adapters/FoxScheduler.cpp` | Alle keys → avregistrering | App lever lenger enn scheduler | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -49,16 +48,13 @@ Preview er første konsument. Andre tidsstyrte funksjoner kan bruke adapteren n�
 
 ## 7. Verifikasjon
 
-AT-004, AT-018, AT-020, AT-023: edits ved 0/100/250 ms gir én refresh tidligst 550 ms; cancel, ny nøkkel og teardown. Planlagt `tests/application/FoxSchedulerTest.cpp` med fake clock samt ekte FOX smoke.
+Relevante akseptanse-ID-er: AT-004, AT-018, AT-020, AT-023.
 
-Bevis: ingen applikasjonstest kjørt; testfiler ovenfor er planlagte. Ved implementering
-oppgis kommando, fixture, miljø, commit og faktisk utfall. Strukturkontroll alene
-oppfyller ikke atferdskravene.
+`PreviewTest` verifiserer 0/100/250→550 ms, cancellation og teardown med FakeScheduler. PresentationTest verifiserer faktisk FOX-timer/live preview.
+
+Evidence: [Fase P4](../../../docs/evidence/P4.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Proposed, revisjon 0.1, 2026-09-12. Ingen klokketøy er implementert. Eierskap/registrering i FOX må bevises før Ready for integrasjonsdelen.
-
-Ved endret offentlig kontrakt: oppdater konsumentene i registeret, dette kallkartet,
-berørte krav og kontrakttester i samme endring. Før status Ready skal relevante
-P0-spørsmål være avgjort; før Verified skal kapittel 7 inneholde testbevis.
+Implemented i P4. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
+Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.

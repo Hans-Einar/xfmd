@@ -27,7 +27,7 @@ Krav: UR-001, UR-002, UR-009, SR-001, SR-003, SR-004, SR-005, SR-011, SR-012, SR
 
 ## 4. Atferd, tilstand og feil
 
-Lokalt dokument lastes, får semantisk modell og native layout. .txt går samme vei uten Markdown-tolkning. Parse-/layoutfeil gir tydelig status og ingen aktiv gammel frame. Live preview og worker-pipeline lander i P4; lenkeaktivering med historikk i P6.
+Lokalt dokument lastes, får semantisk modell og native layout. .txt går samme vei uten Markdown-tolkning. Parse-/layoutfeil gir tydelig status og ingen aktiv gammel frame. Live preview og worker-pipeline er integrert i P4; lenkeaktivering med historikk i P6.
 
 ## 5. Plumbing
 
@@ -37,7 +37,7 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | `Application::open` | `DocumentCoordinator::requestOpen` | `src/application/document/DocumentCoordinator.cpp` | Path → committed snapshot | Dirty/I/O før commit | Implemented |
 | 2 | `DocumentCoordinator opened callback` | `PreviewCoordinator::refresh` | `src/application/preview/PreviewCoordinator.cpp` | Snapshot → pipeline | Åpning rendres | Implemented |
-| 3 | `PreviewCoordinator::refresh` | `IInterpreter::parse` | `src/contracts/IInterpreter.h` | Snapshot → model | Typet feil | Implemented |
+| 3 | `ParserWorker::run` | `IInterpreter::parse` | `src/contracts/IInterpreter.h` | Snapshot → model | Typet feil | Implemented |
 | 4 | `PreviewCoordinator::relayout` | `IRenderer::layout` | `src/contracts/IRenderer.h` | Model/metrics → frame | Gyldig token/bredde | Implemented |
 | 5 | `PreviewCoordinator present callback` | `FoxRenderHost::present` | `src/application/adapters/FoxRenderHost.cpp` | Frame → native visning | Ingen ressurslasting | Implemented |
 

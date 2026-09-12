@@ -4,7 +4,7 @@ kind: Feature
 audience: User
 role: Workflow
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-003, UR-004, UR-009, SR-002, SR-008, SR-010, SR-011, SR-012, SR-013
 uses: FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006, FUNC-007, FUNC-011
@@ -23,24 +23,24 @@ Krav: UR-003, UR-004, UR-009, SR-002, SR-008, SR-010, SR-011, SR-012, SR-013. De
 
 ## 3. Kontrakter og eierskap
 
-Inngang er bekreftet Edit/Revision. Utgang er gyldig frame for nyeste revisjon eller synlig stale/feilstatus. Bruk EditController og PreviewCoordinator; ingen ny LivePreviewManager. Offentlige kontrakter eies av konsumert functionality.
+Live preview bruker EditController, PreviewCoordinator, IScheduler/FOX-adapter og ParserWorker. Ingen egen featureklasse eller separat renderer. Worker-resultater og frame har dokument/revisjon, layout har generasjon.
 
 ## 4. Atferd, tilstand og feil
 
-Hver edit oppdaterer dirty og restarter 300 ms debounce. Undo/redo går samme vei. Når timeren leveres, brukes aktivt snapshot. Dokumentbytte kansellerer gammelt arbeid. Feil beholder editorinnhold og gjør gammel preview ikke-interaktiv. Save endrer baseline men skal ikke i seg selv skape ny tekstedit. Skjult preview kan utsette layout til den blir synlig.
+Etter siste edit går 300 ms før snapshot sendes til parser-worker. Ny pending jobb erstatter eldre. Bare nyeste resultat går til FOX-måling/layout. Undo/redo bruker samme vei. Markør/fokus beholdes. Feil, dokumentbytte og teardown gir ingen gammel interaktiv preview eller dangling callback.
 
 ## 5. Plumbing
 
-Alle symboler og kildefiler i tabellen er **planlagte**, ikke implementert kode.
-Bibliotekskall verifiseres mot valgt dependency-versjon før implementering.
+Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `EditorWidget::onChanged` | `EditController::applyEdit` | `src/application/document/EditController.cpp` | Edit → ny Revision | FUNC-011 hindrer projection-loop. | Planned |
-| 2 | `EditController::applyEdit` | `PreviewCoordinator::schedule` | `src/application/preview/PreviewCoordinator.cpp` | Revision → preview-token | Ny edit erstatter frist. | Planned |
-| 3 | `PreviewCoordinator::schedule` | `FoxScheduler::restart` | `src/application/adapters/FoxScheduler.cpp` | 300 ms → pending callback | FUNC-006 håndterer cancel/levetid. | Planned |
-| 4 | `FoxScheduler::onTimeout` | `PreviewCoordinator::refresh` | `src/application/preview/PreviewCoordinator.cpp` | Token → snapshot/parse/layout | FUNC-007 forkaster feil token. | Planned |
-| 5 | `PreviewCoordinator::refresh` | `FoxRenderHost::present` | `src/application/adapters/FoxRenderHost.cpp` | Nyeste frame → visning | Fokus/markør skal ikke flyttes. | Planned |
+| 1 | `EditorWidget::onChanged` | `EditController::applyProjectedText` | `src/application/document/EditController.cpp` | FXText → edit/revisjon | Projeksjon korrigeres ved feil | Implemented |
+| 2 | `EditController changed callback` | `PreviewCoordinator::schedule` | `src/application/preview/PreviewCoordinator.cpp` | Ny revisjon → debounce | Stale preview deaktiveres | Implemented |
+| 3 | `PreviewCoordinator::schedule` | `FoxScheduler::restart` | `src/application/adapters/FoxScheduler.cpp` | 300 ms → refresh | Frist flyttes ved ny edit | Implemented |
+| 4 | `PreviewCoordinator::refresh` | `ParserWorker::submit` | `src/application/preview/ParserWorker.cpp` | Snapshot → latest-job queue | Ingen GUI-kall i worker | Implemented |
+| 5 | `PreviewCoordinator::poll` | `PreviewCoordinator::relayout` | `src/application/preview/PreviewCoordinator.cpp` | Gjeldende resultat → layout | Gamle tokens forkastes | Implemented |
+| 6 | `PreviewCoordinator present callback` | `FoxRenderHost::present` | `src/application/adapters/FoxRenderHost.cpp` | Gyldig frame → preview | Fokus og cursor beholdes | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -50,16 +50,13 @@ Samme tolkning/layout/host som FTR-001. Timer kan gjenbrukes av andre kravfested
 
 ## 7. Verifikasjon
 
-AT-003, AT-004, AT-009, AT-012, AT-018, AT-020, AT-021, AT-022, AT-023: klokkesekvens 0/100/250→550 ms, kontinuerlig typing, undo/redo, dirty-save, dokumentbytte og parsefeil. Planlagt `tests/acceptance/LivePreviewTest.cpp` med fake clock og FOX-fokuskontroll.
+Relevante akseptanse-ID-er: AT-003, AT-004, AT-009, AT-012, AT-018, AT-020, AT-021, AT-022, AT-023.
 
-Bevis: ingen applikasjonstest kjørt; testfiler ovenfor er planlagte. Ved implementering
-oppgis kommando, fixture, miljø, commit og faktisk utfall. Strukturkontroll alene
-oppfyller ikke atferdskravene.
+`PreviewTest` og utvidet `PresentationTest` passerer. Ytelsesbudsjettet måles samlet i P7; worker beskytter eventflyten mot parsing, ikke mot ubegrenset layout.
+
+Evidence: [Fase P4](../../../docs/evidence/P4.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Proposed, revisjon 0.1, 2026-09-12. SR-011-ytelse er foreslått og ikke målt. Timeren lover start etter stillhet, ikke ikke-blokkerende parsing. P0 avgjør om single-threaded strategi holder.
-
-Ved endret offentlig kontrakt: oppdater konsumentene i registeret, dette kallkartet,
-berørte krav og kontrakttester i samme endring. Før status Ready skal relevante
-P0-spørsmål være avgjort; før Verified skal kapittel 7 inneholde testbevis.
+Implemented i P4. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
+Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.

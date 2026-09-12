@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Workflow
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-002, UR-004, SR-001, SR-002, SR-003, SR-008, SR-010, SR-011, SR-013
 uses: FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006
@@ -23,25 +23,25 @@ Krav: UR-002, UR-004, SR-001, SR-002, SR-003, SR-008, SR-010, SR-011, SR-013. De
 
 ## 3. Kontrakter og eierskap
 
-`PreviewCoordinator::schedule(Revision)`, `refresh(PreviewToken)`, `relayout(LayoutRequest)`, `invalidate(DocumentId)`. Token består av dokument-ID, revisjon og relevant generasjon. Koordinatoren eier cached SemanticDocument og siste publiserte frame, men ikke dokumentteksten eller FOX-parenting.
+PreviewCoordinator eier cached immutable model, viewportbredde og generasjon. ParserWorker eier én tråd med maksimalt én aktiv og én pending snapshot. IInterpreter brukes bare av worker; IRenderer/ITextMetrics brukes på GUI-tråden. present/invalidated/failed er injiserte callbacks.
 
 ## 4. Atferd, tilstand og feil
 
-Åpning kjører refresh uten debounce. Edits går via timer. Refresh tar snapshot og kaller parser/layout, kontrollerer token før publisering og erstatter frame atomisk. Resize bruker cached modell bare hvis revisjonen fortsatt stemmer. Ved feil beholder editoren teksten; gammelt frame merkes stale og mister lenke/sync-interaksjon. Skjult preview utsetter layout til panelet vises, men modellen kan fortsatt være gyldig.
+schedule invaliderer med en gang og debouncer 300 ms. refresh tar snapshot og sender jobb. Worker ticket hindrer publisering av superseded resultat; poll kontrollerer også aktivt dokumenttoken. Resize gjør kun layout av riktig cached model. Feil gir status; gammel preview er ikke interaktiv. Destructor kansellerer timere før worker join og før FOX-host slettes.
 
 ## 5. Plumbing
 
-Alle symboler og kildefiler i tabellen er **planlagte**, ikke implementert kode.
-Bibliotekskall verifiseres mot valgt dependency-versjon før implementering.
+Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `DocumentOpened / EditController::applyEdit` | `PreviewCoordinator::schedule / refresh` | `src/application/preview/PreviewCoordinator.cpp` | Revisjon eller åpnet snapshot | Åpning straks; edits debounces. | Planned |
-| 2 | `PreviewCoordinator::schedule` | `FoxScheduler::restart` | `src/application/adapters/FoxScheduler.cpp` | 300 ms + PreviewToken | Ny edit erstatter planlagt arbeid. | Planned |
-| 3 | `PreviewCoordinator::refresh` | `DocumentSession::snapshot` | `src/application/document/DocumentSession.cpp` | Aktiv ID/revisjon → eid snapshot | Foreldet token avvises. | Planned |
-| 4 | `PreviewCoordinator::refresh` | `IInterpreter::parse` | `src/contracts/IInterpreter.h` | Snapshot → SemanticDocument | Parsefeil markerer preview stale. | Planned |
-| 5 | `PreviewCoordinator::refresh / relayout` | `IRenderer::layout` | `src/contracts/IRenderer.h` | Modell + bredde + metrics → frame | Gammel modell/generasjon kan ikke publiseres. | Planned |
-| 6 | `PreviewCoordinator::refresh / relayout` | `FoxRenderHost::present` | `src/application/adapters/FoxRenderHost.cpp` | Kontrollert frame → visning | Publiserer FrameReady for scroll-restore. | Planned |
+| 1 | `EditController changed callback` | `PreviewCoordinator::schedule` | `src/application/preview/PreviewCoordinator.cpp` | Revision → invalidering/debounce | Kun nyeste edit startes | Implemented |
+| 2 | `FoxScheduler timeout / DocumentOpened` | `PreviewCoordinator::refresh` | `src/application/preview/PreviewCoordinator.cpp` | Snapshot → worker-submit | Kanseller gammel debounce | Implemented |
+| 3 | `PreviewCoordinator::refresh` | `ParserWorker::submit` | `src/application/preview/ParserWorker.cpp` | Snapshot → latest pending | Overskriv kun pending, aldri aktiv data | Implemented |
+| 4 | `ParserWorker::run` | `IInterpreter::parse` | `src/contracts/IInterpreter.h` | Snapshot → immutable model | Unntak fanges i worker | Implemented |
+| 5 | `PreviewCoordinator::poll` | `ParserWorker::take` | `src/application/preview/ParserWorker.cpp` | Completion → tokencheck | Gammelt svar forkastes | Implemented |
+| 6 | `PreviewCoordinator::relayout` | `IRenderer::layout` | `src/contracts/IRenderer.h` | Model + metrics + generation → frame | Kun GUI-tråd | Implemented |
+| 7 | `PreviewCoordinator present callback` | `FoxRenderHost::present` | `src/application/adapters/FoxRenderHost.cpp` | Frame → visning | Riktig token/bredde kreves | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -51,16 +51,13 @@ FTR-001 og FTR-002 bruker denne tjenesten. View mode/resize bruker relayout. Fra
 
 ## 7. Verifikasjon
 
-AT-002, AT-004, AT-011, AT-012, AT-013, AT-018, AT-020, AT-021, AT-023: fake ports beviser riktig rekkefølge; out-of-date token, resize uten parsing og parserfeil. Planlagt `tests/application/PreviewCoordinatorTest.cpp`.
+Relevante akseptanse-ID-er: AT-002, AT-004, AT-011, AT-012, AT-013, AT-018, AT-020, AT-021, AT-023.
 
-Bevis: ingen applikasjonstest kjørt; testfiler ovenfor er planlagte. Ved implementering
-oppgis kommando, fixture, miljø, commit og faktisk utfall. Strukturkontroll alene
-oppfyller ikke atferdskravene.
+`PreviewTest` tester debounce, feil, resize uten reparse, latest-job replacement og at metrics kjøres på opprettende tråd. PresentationTest kontrollerer faktisk live preview, fokus og cursor.
+
+Evidence: [Fase P4](../../../docs/evidence/P4.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Proposed, revisjon 0.1, 2026-09-12. Single-threaded første design. Revisionskontroll er nødvendig også uten workers pga. køede timer/events. Ikke påstå at debounce gjør parsing ikke-blokkerende.
-
-Ved endret offentlig kontrakt: oppdater konsumentene i registeret, dette kallkartet,
-berørte krav og kontrakttester i samme endring. Før status Ready skal relevante
-P0-spørsmål være avgjort; før Verified skal kapittel 7 inneholde testbevis.
+Implemented i P4. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
+Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.
