@@ -1,6 +1,6 @@
 # Implementeringsplan: xfmd
 
-Status: **P0–P6 fullført; P7 sluttverifikasjon**, 2026-09-13. Brukeren godkjente
+Status: **P0–P7 fullført**, 2026-09-13. Brukeren godkjente
 designgrunnlaget og autoriserte første leveranse i én sesjon. En phase er en
 avhengighetsstyrt leveranse, ikke en tidsbokset sprint. Hver phase har egen branch,
 commits per milepæl og merge-commit til main; branchene beholdes på GitHub.
@@ -16,7 +16,7 @@ commits per milepæl og merge-commit til main; branchene beholdes på GitHub.
 | P4 `phase/p4-live-preview` | Bounded worker, debounce og tokens (`773eec1`) | Levetid, fokus og gamle resultater (`65dc19c`) | [P4](docs/evidence/P4.md) |
 | P5 `phase/p5-synchronized-scrolling` | Kildeankre og begge scrollretninger (`ab5f034`) | Kodelinjer, guards og resize (`4b6c177`) | [P5](docs/evidence/P5.md) |
 | P6 `phase/p6-navigation-history` | Lokal navigasjon og transaksjonell historikk (`456d0fb`) | Branching, avbrudd og native treff (`c8f0e6a`) | [P6](docs/evidence/P6.md) |
-| P7 `phase/p7-release-verification` | Ytelse, feilhåndtering og samlet QA (`6a824d8`) | Sluttdokumentasjon, CI og installasjonsbevis | [P7](docs/evidence/P7.md) |
+| P7 `phase/p7-release-verification` | Ytelse, feilhåndtering og samlet QA (`6a824d8`) | Sluttdokumentasjon, CI og installasjonsbevis (`1a686bd`); M3 avslutter bevis | [P7](docs/evidence/P7.md) |
 
 P0 avklarte risiko før kontraktene ble låst. P1 var grunnlag for P2; P3 gjorde
 arbeidsflaten til en faktisk Markdown-viser. P4–P6 la til de tre øvrige features.
