@@ -1,4 +1,6 @@
 #include "Application.h"
+#include "interpreter/CmarkInterpreter.h"
+#include "renderer/MarkdownRenderer.h"
 #include <filesystem>
 using namespace FX;
 namespace xfmd {
@@ -16,6 +18,18 @@ void Application::initialize(int& argc, char** argv) {
     return true;
   };
   wireDocument();
+  interpreter = std::make_unique<CmarkInterpreter>();
+  renderer = std::make_unique<MarkdownRenderer>();
+  metrics = std::make_unique<FoxTextMetrics>(app);
+  host = new FoxRenderHost(window->previewArea, *renderer, *metrics);
+  preview = std::make_unique<PreviewCoordinator>(session, *interpreter, *renderer, *metrics);
+  preview->invalidated = [this](DocumentToken token) { host->expect(token); };
+  preview->present = [this](LayoutResult frame) { host->present(std::move(frame)); };
+  preview->failed = [this](const std::string& error) { window->status->setText(("Preview unavailable: " + error).c_str()); };
+  documentOpened = [this] { preview->refresh(); };
+  contentChanged = [this] { preview->invalidate(); };
+  host->resized = [this](int width) { preview->relayout(width); };
+  views->changed = [this] { host->recalc(); };
   app.create();
   views->setMode(ViewMode::Preview);
   window->show(PLACEMENT_SCREEN);

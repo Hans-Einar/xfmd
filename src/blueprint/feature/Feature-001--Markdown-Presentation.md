@@ -4,7 +4,7 @@ kind: Feature
 audience: User
 role: Workflow
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-001, UR-002, UR-009, SR-001, SR-003, SR-004, SR-005, SR-011, SR-012, SR-013
 uses: FUNC-001, FUNC-002, FUNC-003, FUNC-004, FUNC-005, FUNC-007
@@ -23,25 +23,23 @@ Krav: UR-001, UR-002, UR-009, SR-001, SR-003, SR-004, SR-005, SR-011, SR-012, SR
 
 ## 3. Kontrakter og eierskap
 
-Inngang er OpenRequest fra CLI/dialog/sidebar. Utgang er aktiv SourceSnapshot, tilsvarende SemanticDocument og gyldig RenderFrame eller tydelig feil. Ingen egen featureklasse innføres; FUNC-001/FUNC-007 er orkestratorer. FTR-001 eier akseptansescenarioet, ikke dupliserte API-er.
+Åpning bruker DocumentCoordinator og PreviewCoordinator. Ingen egen featureklasse. Pipeline konsumerer IInterpreter, IRenderer og ITextMetrics; application composition root registrerer cmark/MarkdownRenderer/FOX-host.
 
 ## 4. Atferd, tilstand og feil
 
-Åpne .md, valider input, commit dokument, bygg modell/layout og publiser native frame. .txt går samme pipeline med ren tekstmodell. Feil før dokumentcommit bevarer gammel økt; senere renderfeil viser ny kilde med feilstatus. Bilder/HTML er inert etter kravpolicy. Lenketekst vises her; faktisk historikknavigasjon er FTR-003.
+Lokalt dokument lastes, får semantisk modell og native layout. .txt går samme vei uten Markdown-tolkning. Parse-/layoutfeil gir tydelig status og ingen aktiv gammel frame. Live preview og worker-pipeline lander i P4; lenkeaktivering med historikk i P6.
 
 ## 5. Plumbing
 
-Alle symboler og kildefiler i tabellen er **planlagte**, ikke implementert kode.
-Bibliotekskall verifiseres mot valgt dependency-versjon før implementering.
+Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `CommandRouter::open` | `DocumentCoordinator::requestOpen` | `src/application/document/DocumentCoordinator.cpp` | Path → aktivt dokument | FUNC-001 håndterer dirty/feil. | Planned |
-| 2 | `DocumentCoordinator::requestOpen` | `LocalFileStore::read` | `src/application/io/LocalFileStore.cpp` | Path → validert LoadedDocument | FUNC-002 avviser format/ressursfeil. | Planned |
-| 3 | `DocumentOpened` | `PreviewCoordinator::refresh` | `src/application/preview/PreviewCoordinator.cpp` | Snapshot-token → pipeline | Kjører umiddelbart ved åpning. | Planned |
-| 4 | `PreviewCoordinator::refresh` | `IInterpreter::parse` | `src/contracts/IInterpreter.h` | Snapshot → semantisk modell | FUNC-003 eier tolking. | Planned |
-| 5 | `PreviewCoordinator::refresh` | `IRenderer::layout` | `src/contracts/IRenderer.h` | Modell + metrics → frame | FUNC-004 eier typografi/layout. | Planned |
-| 6 | `PreviewCoordinator::refresh` | `FoxRenderHost::present` | `src/application/adapters/FoxRenderHost.cpp` | Riktig frame → native visning | FUNC-005 kontrollerer gyldighet. | Planned |
+| 1 | `Application::open` | `DocumentCoordinator::requestOpen` | `src/application/document/DocumentCoordinator.cpp` | Path → committed snapshot | Dirty/I/O før commit | Implemented |
+| 2 | `DocumentCoordinator opened callback` | `PreviewCoordinator::refresh` | `src/application/preview/PreviewCoordinator.cpp` | Snapshot → pipeline | Åpning rendres | Implemented |
+| 3 | `PreviewCoordinator::refresh` | `IInterpreter::parse` | `src/contracts/IInterpreter.h` | Snapshot → model | Typet feil | Implemented |
+| 4 | `PreviewCoordinator::relayout` | `IRenderer::layout` | `src/contracts/IRenderer.h` | Model/metrics → frame | Gyldig token/bredde | Implemented |
+| 5 | `PreviewCoordinator present callback` | `FoxRenderHost::present` | `src/application/adapters/FoxRenderHost.cpp` | Frame → native visning | Ingen ressurslasting | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -51,16 +49,13 @@ Deler hele pipeline med FTR-002; navigasjon bruker samme åpning; sync leser sam
 
 ## 7. Verifikasjon
 
-AT-001, AT-002, AT-009, AT-011, AT-013, AT-014, AT-015, AT-021, AT-022, AT-023: åpne fixture med alle støttede elementer; bekreft fonter, riktig fil/revisjon, ingen eksterne sideeffekter og oppgitt ytelse. Planlagt `tests/acceptance/MarkdownPresentationTest.cpp` + manuell visuell kontroll.
+Relevante akseptanse-ID-er: AT-001, AT-002, AT-009, AT-011, AT-013, AT-014, AT-015, AT-021, AT-022, AT-023.
 
-Bevis: ingen applikasjonstest kjørt; testfiler ovenfor er planlagte. Ved implementering
-oppgis kommando, fixture, miljø, commit og faktisk utfall. Strukturkontroll alene
-oppfyller ikke atferdskravene.
+`InterpreterTest`, `RendererTest` og `PresentationTest` passerer. P3-skjermbilde bekrefter native typografi. Full ressursbenchmark og endelig AT-matrise kommer i P7.
+
+Evidence: [Fase P3](../../../docs/evidence/P3.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Proposed, revisjon 0.1, 2026-09-12. P0-font-/mappingbeslutninger må lukkes før Ready. Formatutvidelser krever krav og kontraktsanalyse, ikke bare nye MD4C-flagg.
-
-Ved endret offentlig kontrakt: oppdater konsumentene i registeret, dette kallkartet,
-berørte krav og kontrakttester i samme endring. Før status Ready skal relevante
-P0-spørsmål være avgjort; før Verified skal kapittel 7 inneholde testbevis.
+Implemented i P3. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
+Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.
