@@ -13,6 +13,7 @@
 #include "adapters/FoxScheduler.h"
 #include "preview/PreviewCoordinator.h"
 #include "scroll/ScrollCoordinator.h"
+#include "navigation/NavigationCoordinator.h"
 namespace xfmd {
 class Application {
 public:
@@ -31,6 +32,7 @@ public:
   std::unique_ptr<FoxScheduler> scheduler;
   std::unique_ptr<PreviewCoordinator> preview;
   ScrollCoordinator scrolling;
+  std::unique_ptr<NavigationCoordinator> navigation;
   std::function<void()> contentChanged, documentOpened;
   std::function<void()> back, forward;
   std::function<bool(bool)> canNavigate;
@@ -39,7 +41,7 @@ public:
   void initialize(int&, char**);
   void updateUi();
   void execute(CommandRouter::Command);
-  bool open(const std::string& path) { return documents.requestOpen(path); }
+  bool open(const std::string& path);
 private:
   void wireDocument();
   std::string savePath();

@@ -30,7 +30,13 @@ void Application::initialize(int& argc, char** argv) {
     if (host->interactive()) scrolling.setFrame(std::move(frame));
   };
   preview->failed = [this](const std::string& error) { window->status->setText(("Preview unavailable: " + error).c_str()); };
-  documentOpened = [this] { preview->refresh(); };
+  navigation = std::make_unique<NavigationCoordinator>(documents, session, scrolling);
+  navigation->error = [this](const std::string& message) { documents.error(message); };
+  back = [this] { navigation->goBack(); };
+  forward = [this] { navigation->goForward(); };
+  canNavigate = [this](bool back) { return navigation->history.propose(back).has_value(); };
+  host->linkActivated = [this](const std::string& target) { navigation->followLink(target); };
+  documentOpened = [this] { navigation->commitVisit(); preview->refresh(); };
   contentChanged = [this] { preview->schedule(); };
   host->resized = [this](int width) { preview->relayout(width); };
   scrolling.setEditor = [this](SourceAnchor anchor) { window->editor->setSourceAnchor(anchor); };
@@ -61,7 +67,7 @@ void Application::wireDocument() {
     window->sidebar->setDirectory(std::filesystem::path(session.view().path).parent_path().c_str());
     if (documentOpened) documentOpened();
   };
-  documents.saved = [this] { updateUi(); if (contentChanged) contentChanged(); };
+  documents.saved = [this] { if (navigation) navigation->documentSaved(); updateUi(); if (contentChanged) contentChanged(); };
   edits.changed = [this] { updateUi(); if (contentChanged) contentChanged(); };
   window->editor->edited = [this](const std::string& text) {
     try { edits.applyProjectedText(text); }
@@ -69,6 +75,7 @@ void Application::wireDocument() {
   };
   window->sidebar->open = [this](const std::string& path) { open(path); };
 }
+bool Application::open(const std::string& path) { return navigation ? navigation->openTarget(path) : documents.requestOpen(path); }
 void Application::updateUi() {
   window->editor->applyProjection(session.view());
   auto title = (session.dirty() ? "* " : "") + (session.view().path.empty() ? std::string("Untitled") : session.view().path) + " — xfmd";
