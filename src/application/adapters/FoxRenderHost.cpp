@@ -12,6 +12,7 @@ FXIMPLEMENT(FoxRenderHost, FXScrollArea, renderMap, ARRAYNUMBER(renderMap))
 FoxRenderHost::FoxRenderHost(FXComposite* parent, IRenderer& renderer, FoxTextMetrics& metrics)
     : FXScrollArea(parent, VSCROLLER_ALWAYS | LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 0),
       renderer(&renderer), metrics(&metrics) {
+  enable(); // FXScrollArea does not enable native pointer/key dispatch by default.
   setBackColor(FXRGB(255, 255, 255));
 }
 FXint FoxRenderHost::getContentWidth() { return current ? current->contentWidth : 100; }
@@ -80,6 +81,14 @@ long FoxRenderHost::onPaint(FXObject*, FXSelector, void* data) {
     dc.setForeground(!active            ? FXRGB(135, 135, 135)
                      : run.link.empty() ? FXRGB(29, 37, 49)
                                         : FXRGB(24, 85, 166));
+    if (run.icon == InlineIcon::Globe) {
+      const int diameter = std::max(6, r.height - 4);
+      const int iconX = r.x + pos_x, iconY = r.y + pos_y + 2;
+      dc.drawArc(iconX, iconY, diameter, diameter, 0, 360 * 64);
+      dc.drawArc(iconX + diameter / 4, iconY, diameter / 2, diameter, 0, 360 * 64);
+      dc.drawLine(iconX, iconY + diameter / 2, iconX + diameter, iconY + diameter / 2);
+      continue;
+    }
     int textX = r.x + pos_x;
     for (const auto& segment : metrics->segments(run.text, run.font)) {
       dc.setFont(segment.second);

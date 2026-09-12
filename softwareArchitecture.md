@@ -63,7 +63,7 @@ ligger ved tilhørende `.cpp`. Én hovedrolle per filpar.
 | `application/adapters/FoxScheduler.cpp` | Debounce/kansellering og levetid via FOX-event loop. |
 | `application/io/LocalFileStore.cpp`, `InputPolicy.cpp` | Lesing, formatmetadata, kontrollert erstatningslagring og inputgrenser. |
 | `interpreter/CmarkInterpreter.cpp`, `ModelBuilder.cpp`, `SourceMapBuilder.cpp` | cmark-adapter, semantikk og dokumentert kildeposisjonsstrategi. |
-| `renderer/MarkdownRenderer.cpp`, `BlockLayout.cpp`, `InlineLayout.cpp`, `HitTester.cpp` | Layoutorkestrering, block/inline-algoritmer og lenketreff. |
+| `renderer/MarkdownRenderer.cpp`, `BlockLayout.cpp`, `InlineLayout.cpp`, `HitTester.cpp`, `LinkMarker.cpp` | Layoutorkestrering, block/inline-algoritmer og lenketreff. |
 | `contracts/DocumentTypes.h`, `SemanticDocument.h`, `RenderFrame.h`, `IInterpreter.h`, `IRenderer.h`, `ITextMetrics.h` | Delte verdier/porter uten global tilstand. |
 
 Rene hjelpere som HistoryStore kan bo i application uten å bruke FOX. Det er ikke
@@ -160,3 +160,17 @@ CTest dekker kontrakter, dokumenttransaksjoner, parser, renderer, koordinatorer
 og ekte FOX under isolert Xvfb. ASan/UBSan brukes på samme tester. Struktur- og
 lagkontroll er automatisert; semantisk plumbing og eierskap gjennomgås manuelt.
 Se [bidragsguiden](CONTRIBUTING.md) for kommandoer, stil og videre arbeidsregler.
+
+## 9. Lenkeaktivering og markører
+
+FoxRenderHost kaller enable() fordi FXScrollArea ellers ikke mottar native
+muse-/tastaturhendelser. NavigationGuiTest sender nå X11-knappetrykk/-slipp gjennom
+FOX-dispatch; direkte onPointer-kall er ikke tilstrekkelig GUI-bevis.
+
+LinkResolver beholder lokal path-policy: parent_path(åpent absolutt dokument) /
+relativ lenkesti, deretter canonicalisering. Absolutte stier brukes direkte.
+LinkMarker i renderer lager # for relative .md-stier, /# for absolutte og
+Globe-primitiven for HTTP(S). Host tegner jordkloden med buer/linje, uavhengig av
+emoji-fonter. InlineRun.linkId skiller nabo-lenker med samme URL, samtidig som
+fet/kursiv inne i én lenke ikke gir flere markører. Syntetiske markører bevarer
+original tekst og kildeoffsets; markørens source-range er tom og Approximate.

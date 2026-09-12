@@ -1,4 +1,5 @@
 #include "InlineLayout.h"
+#include "LinkMarker.h"
 #include <algorithm>
 namespace xfmd {
 namespace {
@@ -51,8 +52,9 @@ int InlineLayout::layout(const SemanticBlock& block, int left, int top, int widt
     bool merged = false;
     if (frame.runs.size() > lineStart) {
       auto& previous = frame.runs.back();
-      if (previous.font == draw.font && previous.link == draw.link &&
-          previous.codeBackground == draw.codeBackground &&
+      if (previous.icon == InlineIcon::None && previous.font == draw.font &&
+          previous.link == draw.link && previous.codeBackground == draw.codeBackground &&
+          previous.source.begin != previous.source.end &&
           previous.source.end == draw.source.begin &&
           previous.source.quality == draw.source.quality && previous.bounds.y == draw.bounds.y &&
           previous.ascent == draw.ascent && previous.bounds.height == draw.bounds.height) {
@@ -69,7 +71,24 @@ int InlineLayout::layout(const SemanticBlock& block, int left, int top, int widt
     lineHeight = std::max(lineHeight, extent.height + 4);
     ascent = std::max(ascent, extent.ascent);
   };
+  std::string previousLink;
+  std::size_t previousLinkId = 0;
   for (const auto& run : block.runs) {
+    if (!run.link.empty() && (run.link != previousLink || run.linkId != previousLinkId)) {
+      if (auto marker = LinkMarker::make(run, base, metrics)) {
+        if (x > left && x + marker->bounds.width + metrics.measure("M", base).width > left + width)
+          finishLine();
+        marker->bounds.x = x;
+        marker->bounds.y = y;
+        x += marker->bounds.width;
+        lineHeight = std::max(lineHeight, marker->bounds.height + 4);
+        ascent = std::max(ascent, marker->ascent);
+        frame.contentWidth = std::max(frame.contentWidth, x + 20);
+        frame.runs.push_back(std::move(*marker));
+      }
+    }
+    previousLink = run.link;
+    previousLinkId = run.linkId;
     auto font = base;
     font.bold |= run.bold;
     font.italic |= run.italic;

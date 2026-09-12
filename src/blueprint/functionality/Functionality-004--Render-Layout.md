@@ -6,7 +6,7 @@ role: Service
 owner: renderer
 status: Implemented
 scope: FirstRelease
-requirements: UR-002, UR-008, SR-001, SR-003, SR-005, SR-008, SR-009, SR-011, SR-013
+requirements: UR-005, UR-002, UR-008, SR-001, SR-003, SR-005, SR-008, SR-009, SR-011, SR-013
 uses: none
 ---
 
@@ -18,7 +18,7 @@ Beregn presentasjon fra semantisk modell uten FOX-avhengighet. Eie fontvalg som 
 
 ## 2. Krav og akseptanse
 
-Krav: UR-002, UR-008, SR-001, SR-003, SR-005, SR-008, SR-009, SR-011, SR-013. Definisjoner og normativ akseptanse finnes i
+Krav: UR-005, UR-002, UR-008, SR-001, SR-003, SR-005, SR-008, SR-009, SR-011, SR-013. Definisjoner og normativ akseptanse finnes i
 [kravspesifikasjonen](../../../xfmd_requirements.md). Kapittel 7 konkretiserer beviset.
 
 ## 3. Kontrakter og eierskap
@@ -28,6 +28,10 @@ MarkdownRenderer implementerer IRenderer::layout/hitTest. BlockLayout og InlineL
 ## 4. Atferd, tilstand og feil
 
 Layout bryter vanlig tekst ved ord/UTF-8-grenser; kode beholder whitespace og kan scrolle horisontalt. Varierende heading-fonter, nested lister/sitater, inline-kode og inert HTML støttes. Frame inneholder både run-ranges og block-ranges for hidden syntax. Ingen parsing, I/O eller utføring av lenker.
+
+LinkMarker lager #, /# eller Globe-primitiven. InlineRun.linkId skiller
+separate lenker fra stilfragmenter i samme lenke. Markør og tekst har samme
+lenkemål; syntetisk markør har tomt, tilnærmet kildeanker.
 
 ## 5. Plumbing
 
@@ -41,6 +45,8 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 | 4 | `InlineLayout::layout` | `ITextMetrics::measure` | `src/contracts/ITextMetrics.h` | Tekst/font → extent | Ren port | Implemented |
 | 5 | `MarkdownRenderer::hitTest` | `HitTester::hitTest` | `src/renderer/HitTester.cpp` | Frame/point → HitResult | Ingen navigasjonssideeffekt | Implemented |
 
+| 6 | `InlineLayout::layout` | `LinkMarker::make` | `src/renderer/LinkMarker.cpp` | Lenke/font → markør-run | Ingen I/O; syntetisk source-range | Implemented |
+
 ## 6. Gjenbruk og avhengigheter
 
 Ingen andre functionality-kontrakter konsumeres; delte datatyper følger arkitekturen.
@@ -49,11 +55,13 @@ Preview bruker layout; FOX-host bruker hitTest; mappingtjenesten leser RenderFra
 
 ## 7. Verifikasjon
 
-Relevante akseptanse-ID-er: AT-002, AT-008, AT-011, AT-013, AT-015, AT-018, AT-019, AT-021, AT-023.
+Relevante akseptanse-ID-er: AT-005, AT-002, AT-008, AT-011, AT-013, AT-015, AT-018, AT-019, AT-021, AT-023.
 
 `RendererTest` bruker deterministiske fontmål og kontrollerer wrapping, fontstiler, UTF-8, dekorasjoner, ankere og lenketreff. PresentationTest bruker ekte FOX-mål.
 
 Evidence: [Fase P3](../../../docs/evidence/P3.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
+
+Ny regresjonskontroll: [Native lenker og markører](../../../docs/evidence/document-links.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 

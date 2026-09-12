@@ -98,6 +98,7 @@ void ModelBuilder::appendNode(cmark_node* node, cmark_event_type event) {
     if (parentType == CMARK_NODE_LINK) {
       const char* url = cmark_node_get_url(parent);
       run.link = url ? url : "";
+      run.linkId = mapping.record(parent).begin + 1;
     }
   }
   if (run.source.quality == MappingQuality::Unavailable) {

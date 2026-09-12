@@ -25,6 +25,9 @@ Krav: UR-001, UR-005, UR-009, SR-002, SR-005, SR-008, SR-013. Definisjoner og no
 
 NavigationCoordinator::openTarget/followLink/goBack/goForward er offentlige innganger. HistoryStore eier in-memory liste/cursor (maks 100), LinkResolver eier lokal sti-/URI-policy. Pending request bevarer forrige anker og eventuell historikkindeks. DocumentCoordinator opened-callback er eneste commitVisit-inngang.
 
+Relative lenker bruker det åpne dokumentets absolutte foreldremappe som base.
+Prosessens arbeidsmappe brukes ikke. Absolute stier beholdes før canonicalisering.
+
 ## 4. Atferd, tilstand og feil
 
 CLI/dialog/sidebar går via Application::open til samme navigation→document-vei. resolveUnsaved og lasting må lykkes før history.commit. Ny visit etter back trunkerer frem-gren; samme fil dupliseres ikke. Back/forward leser fil på nytt og gjenoppretter anker når frame er klart. Percent-encoding dekodes én gang; schemes/network/fragment/query/control-byte avvises. SaveAs oppdaterer aktuell poststi.
@@ -57,6 +60,8 @@ Relevante akseptanse-ID-er: AT-001, AT-005, AT-009, AT-012, AT-015, AT-018, AT-0
 `NavigationTest` tester A/B/C/back/D, avbrudd, brutt lenke, 100-grense, encoding/schemes og ingen dobbel commit. NavigationGuiTest klikker et ekte renderer-hit og kontrollerer back/forward i FOX.
 
 Evidence: [Fase P6](../../../docs/evidence/P6.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
+
+Ny regresjonskontroll: [Native lenker og markører](../../../docs/evidence/document-links.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 

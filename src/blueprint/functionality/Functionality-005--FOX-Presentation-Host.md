@@ -29,6 +29,10 @@ FoxRenderHost er FXScrollArea-adapter. present/expect/invalidate styrer frame/in
 
 Bare riktig dokumenttoken og viewportbredde aksepteres. Nytt dokument fjerner gammel frame. Pending endring gjør preview ikke-interaktiv. Paint clippes og søker synlige runs; CJK/andre glyphs kan bruke installert fallback-font. Ingen Markdown-regler i host.
 
+FoxRenderHost må være enabled for native muse- og tastaturhendelser. Host
+tegner Globe-primitiven med buer/linje uten emoji-fontavhengighet; renderer
+bestemmer lenkemarkørens type og plassering.
+
 ## 5. Plumbing
 
 Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
@@ -55,6 +59,8 @@ Relevante akseptanse-ID-er: AT-002, AT-005, AT-008, AT-011, AT-018, AT-019, AT-0
 `PresentationTest` kontrollerer ekte fontmål, frame-token, visningsbredde og stale-avvisning. Skjermbildet i P3 er visuelt kontrollert med CJK-fallback.
 
 Evidence: [Fase P3](../../../docs/evidence/P3.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
+
+Ny regresjonskontroll: [Native lenker og markører](../../../docs/evidence/document-links.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 
