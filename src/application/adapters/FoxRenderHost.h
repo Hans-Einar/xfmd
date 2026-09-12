@@ -1,8 +1,8 @@
 #pragma once
-#include <fx.h>
-#include "contracts/IRenderer.h"
 #include "FoxTextMetrics.h"
+#include "contracts/IRenderer.h"
 #include <functional>
+#include <fx.h>
 namespace xfmd {
 class FoxRenderHost : public FX::FXScrollArea {
   FXDECLARE(FoxRenderHost)
@@ -12,20 +12,33 @@ class FoxRenderHost : public FX::FXScrollArea {
   DocumentToken expected;
   bool active = false, programmatic = false;
   int lastWidth = 0;
+
 protected:
   FoxRenderHost() = default;
   void moveContents(FX::FXint, FX::FXint) override;
+
 public:
   std::function<void(int)> resized;
   std::function<void(int)> viewportChanged;
   std::function<void(const std::string&)> linkActivated;
   FoxRenderHost(FX::FXComposite*, IRenderer&, FoxTextMetrics&);
   void layout() override;
+  bool canFocus() const override { return true; }
+  long onKeyPress(FX::FXObject*, FX::FXSelector, void*);
   FX::FXint getContentWidth() override;
   FX::FXint getContentHeight() override;
-  void expect(DocumentToken token) { if (token.document != expected.document) current.reset(); expected = token; active = false; update(); }
+  void expect(DocumentToken token) {
+    if (token.document != expected.document)
+      current.reset();
+    expected = token;
+    active = false;
+    update();
+  }
   void present(LayoutResult);
-  void invalidate() { active = false; update(); }
+  void invalidate() {
+    active = false;
+    update();
+  }
   bool interactive() const { return active; }
   const LayoutResult& frame() const { return current; }
   void setViewport(int y);
@@ -33,4 +46,4 @@ public:
   long onPointer(FX::FXObject*, FX::FXSelector, void*);
   long onMotion(FX::FXObject*, FX::FXSelector, void*);
 };
-}
+} // namespace xfmd

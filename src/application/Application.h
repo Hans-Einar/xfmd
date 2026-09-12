@@ -1,19 +1,19 @@
 #pragma once
-#include <fx.h>
-#include "document/DocumentCoordinator.h"
-#include "document/EditController.h"
-#include "commands/CommandRouter.h"
-#include "ui/ViewModeController.h"
-#include "ui/XfmdWindow.h"
-#include <memory>
-#include "contracts/IInterpreter.h"
-#include "contracts/IRenderer.h"
-#include "adapters/FoxTextMetrics.h"
 #include "adapters/FoxRenderHost.h"
 #include "adapters/FoxScheduler.h"
+#include "adapters/FoxTextMetrics.h"
+#include "commands/CommandRouter.h"
+#include "contracts/IInterpreter.h"
+#include "contracts/IRenderer.h"
+#include "document/DocumentCoordinator.h"
+#include "document/EditController.h"
+#include "navigation/NavigationCoordinator.h"
 #include "preview/PreviewCoordinator.h"
 #include "scroll/ScrollCoordinator.h"
-#include "navigation/NavigationCoordinator.h"
+#include "ui/ViewModeController.h"
+#include "ui/XfmdWindow.h"
+#include <fx.h>
+#include <memory>
 namespace xfmd {
 class Application {
 public:
@@ -25,6 +25,7 @@ public:
   CommandRouter commands;
   XfmdWindow* window = nullptr;
   std::unique_ptr<ViewModeController> views;
+  std::unique_ptr<FX::FXFont> editorFont;
   std::unique_ptr<IInterpreter> interpreter;
   std::unique_ptr<IRenderer> renderer;
   std::unique_ptr<FoxTextMetrics> metrics;
@@ -42,8 +43,9 @@ public:
   void updateUi();
   void execute(CommandRouter::Command);
   bool open(const std::string& path);
+
 private:
   void wireDocument();
   std::string savePath();
 };
-}
+} // namespace xfmd

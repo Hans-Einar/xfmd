@@ -1,132 +1,60 @@
 # Implementeringsplan: xfmd
 
-Status: **In progress**, 2026-09-12. Brukeren har gjennomgått designgrunnlaget og
-autorisert full implementasjon av første leveranse i én sesjon. Rekkefølgen
-styres av kontrakter, risiko og akseptanse; ikke av sprintlengde.
+Status: **P0–P7 fullført**, 2026-09-13. Brukeren godkjente
+designgrunnlaget og autoriserte første leveranse i én sesjon. En phase er en
+avhengighetsstyrt leveranse, ikke en tidsbokset sprint. Hver phase har egen branch,
+commits per milepæl og merge-commit til main; branchene beholdes på GitHub.
 
-## 1. Gjennomgang av designgrunnlaget
+## 1. Gjennomført plan
 
-Les [krav](xfmd_requirements.md), [arkitektur](softwareArchitecture.md),
-[arbeidsmåte](docs/working-method.md) og [objektregister](src/blueprint/README.md).
-Før kodefasen gjennomgår vi særlig:
-
-- Skillet mellom features, functionality, målgruppe og eierlag.
-- Renderer som rent presentasjonslag og FOX-host som application-adapter.
-- Nødvendigheten av `src/contracts/` som felles, liten kontraktkatalog.
-- Fire features / elleve functionality-objekter; om noen er for brede/smale.
-- Foreslått format-, lenke-, fil- og ytelsespolicy, som ikke er tidligere avtalte detaljer.
-
-Dette er den etterspurte designgjennomgangen, ikke en ny godkjenningsrunde for
-hver fil. Senere autorisert implementeringsarbeid følger metoden autonomt innen
-avklart scope. Alle objekter starter Proposed; strukturelt gyldig er ikke Ready.
-
-## 2. Plan og avhengigheter
-
-| Steg | Leveranse og objekter | Avhenger av | Ferdigkriterium |
+| Phase / branch | Milepæl 1 | Milepæl 2 | Bevis |
 | --- | --- | --- | --- |
-| P0 | Teknisk bevis: fonter/FOX-host, interpreter-kildekart, editor-roundtrip og benchmark. FUNC-003/004/005/009/011. | Designgjennomgang | Reproduserbare bevis og beslutninger for portene nedenfor. |
-| P1 | C++17/CMake-grunnlag, kontrakttyper, composition root, fokuserte mapper, testoppsett og dependency-grenser. SR-001/002/003/012/013. | P0 | Ren configure/build/test og byttbarhet demonstrert med fake porter. |
-| P2 | DocumentSession/Coordinator, LocalFileStore/InputPolicy, grunneditor, CLI/dialog/workspace. FUNC-001/002/010/011. | P1 | AT-001/003/006/007/009/016/017; feil gir ikke datatap. |
-| P3 | Første ende-til-ende Markdown-visning. FUNC-003/004/005/007, FTR-001. | P2 + P0-bevis | AT-002/011/013/014/015; native fonter og synlige feil. |
-| P4 | Debounce og live preview med korrekt revisjon/levetid. FUNC-006/007/011, FTR-002. | P3 | AT-004/018/020 og fokus-/undo-scenarioer bestått. |
-| P5 | Kildeankre, begge scrollretninger og resize-restore. FUNC-009, FTR-004. | P4 | AT-008/019; samme avsnitt synlig, ingen echo-loop. |
-| P6 | Lokal lenkenavigasjon, back/forward og ankerrestore. FUNC-008, FTR-003. | P5 | AT-005/009/015/018; alle dokumentinnganger registreres én gang. |
-| P7 | Samlet QA, ressursgrenser, ytelse, dokumentasjon og pakking. Alle FirstRelease-objekter. | P6 | Hele AT-001–009 og AT-011–023 med bevis; godkjente scope-avvik listet. |
-| Senere | xfw-IPC, ev. lokale bilder, fragmentlenker og Markdown-utvidelser. | Ny kravrevisjon | Egen blueprint før kode; AT-010/024 hører ikke til første leveranse. |
+| P0 `phase/p0-technical-proof` | Native FOX-probe og parser-/kildekartvalg (`bf0ab1d`) | Roundtrip, fonter og tekniske beslutninger (`e2a25d6`) | [P0](docs/evidence/P0.md) |
+| P1 `phase/p1-build-contracts` | C++17/CMake og rene porter (`2311b52`) | Kontrakttester og lagkontroll (`3e9ebd2`) | [P1](docs/evidence/P1.md) |
+| P2 `phase/p2-document-workspace` | Dokumenttransaksjoner/editor/workspace (`c0527d1`) | Roundtrip og feilbevaring (`8ef4ce6`) | [P2](docs/evidence/P2.md) |
+| P3 `phase/p3-markdown-presentation` | Semantikk, native layout og host (`4051fd3`) | Ekte font-/GUI-verifikasjon (`6077924`) | [P3](docs/evidence/P3.md) |
+| P4 `phase/p4-live-preview` | Bounded worker, debounce og tokens (`773eec1`) | Levetid, fokus og gamle resultater (`65dc19c`) | [P4](docs/evidence/P4.md) |
+| P5 `phase/p5-synchronized-scrolling` | Kildeankre og begge scrollretninger (`ab5f034`) | Kodelinjer, guards og resize (`4b6c177`) | [P5](docs/evidence/P5.md) |
+| P6 `phase/p6-navigation-history` | Lokal navigasjon og transaksjonell historikk (`456d0fb`) | Branching, avbrudd og native treff (`c8f0e6a`) | [P6](docs/evidence/P6.md) |
+| P7 `phase/p7-release-verification` | Ytelse, feilhåndtering og samlet QA (`6a824d8`) | Sluttdokumentasjon, CI og installasjonsbevis (`1a686bd`); M3 avslutter bevis | [P7](docs/evidence/P7.md) |
 
-P2 kan åpne kilde/editor før preview eksisterer, men er ikke en full viewer-leveranse.
-Historikkens rene algoritmetester kan utvikles tidligere; P6 er ende-til-ende-gaten.
-Ingen av stegene er en automatisk forespørsel om nye subagenter.
+P0 avklarte risiko før kontraktene ble låst. P1 var grunnlag for P2; P3 gjorde
+arbeidsflaten til en faktisk Markdown-viser. P4–P6 la til de tre øvrige features.
+P7 samler kravbevis, ytelse, installasjon og dokumentasjon. Dette er ikke en plan
+om nye sprints eller automatisk delegasjon til subagenter.
 
-## 3. P0: beslutningsporter med konkrete bevis
+## 2. Beslutninger fra implementasjonen
 
-### P0-A: FOX-presentasjon
+- **Parser:** cmark 0.31.1, CMARK_OPT_DEFAULT, uten utvidelser. MD4C-kandidaten
+  manglet generelle blokkposisjoner for kildekartet. Porter og lag ble beholdt.
+- **Preview:** egen FXScrollArea-host. Renderer leverer display list gjennom rene
+  kontrakter; FOX-måling og tegning bor i application.
+- **Tråder:** én parser-worker med én aktiv og én siste ventende jobb; GUI-tråden
+  eier FOX, layout/fontmåling og paint. Token og generasjon beskytter publisering.
+- **Tester:** CTest med små eksplisitte CHECK-baserte testprogrammer fremfor ekstern
+  Catch2-dependency. Ekte FOX testes under isolert Xvfb; ASan/UBSan i separat bygg.
+- **Dependencies:** eksplisitt bootstrap med hash, ingen skjult nettverksnedlasting
+  ved configure/build. Prosjektlisens avventer eier; cmarks notis følger installasjon.
 
-Bygg et lite forsøk med proporsjonal brødtekst, H1/H2 i ulike størrelser, fet/kursiv,
-monospace, wrapping, clipping og lenketreff. Verifiser fontmål mot faktisk tegning
-og at FXScrollArea-host kan holdes uten Markdown-logikk. Dokumenter valgt FOX-
-versjon, kompilatorkommando, skjermbilde og hva som eventuelt ikke støttes.
-FXText-only-preview er ikke godkjent erstatning for UR-002 uten kravendring.
+## 3. Akseptanse og begrensninger
 
-### P0-B: interpreter og kildekart
+Første scope omfatter AT-001–009 og AT-011–023. [P7](docs/evidence/P7.md) angir
+faktiske tester, målinger og dekning, inklusive hva som er manuelt gjennomgått.
+Et bestått struktursjekk er ikke bevis for hele applikasjonen. Blueprint-status
+står Implemented der bredere desktop-akseptanse ikke er fullt automatisert.
 
-Kjør MD4C-kandidat på fixtures med gjentatt tekst, Unicode, entiteter, escapes,
-nestede lister, tomme blokker og kode. Dokumenter hvordan hver node får kildeområde
-og mappingkvalitet. Ingen søk etter første match som generell løsning. Hvis
-adapteren ikke kan gi tilstrekkelig presisjon, velg alternativ interpreter eller
-avgrenset utvidelse og dokumenter kostnad/vedlikehold før resten bygges på den.
-Lås dependency-version/commit, CommonMark-baseline og eksplisitte flagg.
+AT-010/024 (xfw-IPC) er Future. Lokale bilder, fragmentlenker og Markdown-utvidelser
+krever egne krav og blueprints. Ingen formell release publiseres før prosjektlisens
+er valgt. Installérbar kildebygging og offentlig Git-historikk leveres nå.
 
-### P0-C: dokument og editor
+## 4. Videre arbeid per designobjekt
 
-Bevis tapsfri LF/CRLF/BOM/Unicode gjennom FOX-editor, undo og lagring. Avklar
-blandet linjeslutt, NUL-policy, byteoffsetkonvertering, fontfallback, ACL/xattr,
-symlink/hardlink og feil etter rename. Velg én undo-stack. Resultat er testbevis
-og eventuelle presise kravjusteringer, ikke antakelser gjemt i adapteren.
+1. Les krav, arkitektur og berørte blueprints; finn eksisterende functionality.
+2. Beskriv kontrakt, konsumenter, feilvei og akseptanse før kode.
+3. Oppdater kapittel 5 Plumbing med riktige symboler/filer i samme endring.
+4. Implementer i fokuserte roller; behold FOX-bindinger i application.
+5. Kjør relevante tester, lagkontroll og blueprint-/symbolkontroll.
+6. Knytt bevis til commit/miljø; sett Verified bare når relevante AT-er er dekket.
 
-### P0-D: ressursbudsjett og dependencies
-
-Mål et representativt 1 MiB-corpus med 30 varme parse+layout-kjøringer og kaldstart
-på navngitt maskin. Registrer p95, RSS, compiler/build type og inputhash.
-Foreslåtte grenser står i SR-011. Hvis en GUI-tråd blokkeres for lenge, velg tiltak
-før live-preview-kontrakten fryses. Benchmark-prototype er ikke produksjonskode.
-
-Velg dependency-distribusjon og prosjektlisens med eieren før kode gjenbrukes eller
-release pakkes. Det offentlige repoet har foreløpig ingen valgt lisens; ikke legg
-inn andres kildekode eller antatt lisens bare fordi repoet er offentlig.
-
-## 4. P1: bygge- og teststruktur
-
-Planlagt C++17, CMake og CTest. Lag separate targets for contracts (header-only),
-interpreter, renderer og application. Bare application lenker FOX; bare
-interpreter-adapteren lenker MD4C. Testverktøy foreslås Catch2, men konkret versjon
-og installasjonsmåte låses i P1. Unngå skjult nettverksnedlasting under configure.
-Innfør `.clang-format` med to mellomrom og CI med låste dependencies.
-
-Følgende kommandoer er **planlagte og virker ikke før P1**:
-
-```sh
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON
-cmake --build build
-ctest --test-dir build --output-on-failure
-./build/xfmd tests/fixtures/markdown/basics.md
-```
-
-Testkart: `tests/contracts/`, `tests/interpreter/`, `tests/renderer/`,
-`tests/application/`, `tests/gui/`, `tests/acceptance/`, `tests/fixtures/`.
-Filnavn `<Subject>Test.cpp`; scenarioer identifiserer relevante AT-/UR-/SR-ID-er.
-GUI-tester skal ha eksplisitt display-oppsett; headless tester krever ikke FOX.
-Ingen prosentvis coverage-grense er valgt. Alle krav må ha relevant bevis;
-linjedekning alene er ikke akseptanse.
-
-## 5. Gjennomføring per objekt
-
-1. Avklar tilknyttede krav og P0-beslutninger; sett objekt Ready med begrunnelse.
-2. Implementer kontrakter og roller i arkitekturens filkart; ingen store samleklasser.
-3. Oppdater kapittel 5 når symboler lander, fra Planned til Implemented med riktige filer.
-4. Kjør kontrakt-/unit-/integrasjonstester som passer endringen; legg til regressjon
-   for faktisk feil, ikke tester som bare speiler en implementasjonslinje.
-5. Knytt AT-bevis til commit/miljø. Kontroller kravmatrise og konsumenter ved API-endring.
-6. Sett Verified først etter samlet akseptanse. Hold gamle bevis som historikk ved revisjon.
-
-P3 må inkludere både fake og ekte fontadapter. P5 må teste forsinket event-ekko,
-ikke bare synkrone callbacks. P6 må injisere åpnefeil og dirty-cancel. P7 må
-bekrefte at dokumenter ikke utløser nettverkskall eller shell-evaluering.
-
-## 6. Kontroll som finnes nå
-
-```sh
-python3 tools/validate_blueprints.py
-```
-
-Kontrollen verifiserer dokumentstruktur, ID-er, lokale fillenker, kravdekning,
-avhengighetsreferanser og plumbing-status. Den erstatter ikke semantisk review,
-symbolanalyse eller tester av framtidig applikasjonskode. Se
-[arbeidsmåten](docs/working-method.md) for forslag til videre prosessforbedringer.
-
-## 7. Branch- og milepælpraksis
-
-En phase er en avhengighetsstyrt leveranse, ikke en tidsbokset sprint. Hver phase
-får `phase/pN-<navn>`, med commits for konkrete milepæler. Ferdige faser integreres
-i `main` med merge-commit, og fasebranchene beholdes på GitHub. Testbevis føres i
-`docs/evidence/`; P0-beslutninger står i [P0-rapporten](docs/evidence/P0.md).
+Byggkommandoer finnes i [README](README.md); stil og bidragsregler i
+[CONTRIBUTING](CONTRIBUTING.md). Historiske tekniske forsøk beholdes i faserapportene.

@@ -3,7 +3,11 @@
 using namespace xfmd;
 void run() {
   CmarkInterpreter interpreter;
-  SourceSnapshot source{{2, 5}, "\xef\xbb\xbf# æøå\r\n\r\nrepeat &amp; **repeat**\n\n> - item\n>   - nested\n\n```\nrepeat\n```\n\n![alt](https://invalid/x)\n\n<div>x</div>\n", "a.md", false};
+  SourceSnapshot source{{2, 5},
+                        "\xef\xbb\xbf# æøå\r\n\r\nrepeat &amp; **repeat**\n\n> - item\n>   - "
+                        "nested\n\n```\nrepeat\n```\n\n![alt](https://invalid/x)\n\n<div>x</div>\n",
+                        "a.md",
+                        false};
   auto model = interpreter.parse(source);
   CHECK(model->token == source.token);
   CHECK(model->sourceSize == source.text.size());
@@ -32,7 +36,11 @@ void run() {
   auto incomplete = interpreter.parse({{1, 0}, "**unfinished [link", {}, false});
   CHECK(!incomplete->blocks.empty());
   bool limited = false;
-  try { interpreter.parse(source, {2}); } catch (const Error& e) { limited = e.code == ErrorCode::TooLarge; }
+  try {
+    interpreter.parse(source, {2});
+  } catch (const Error& e) {
+    limited = e.code == ErrorCode::TooLarge;
+  }
   CHECK(limited);
 }
 TEST_MAIN(run)

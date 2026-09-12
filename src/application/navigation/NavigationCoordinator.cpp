@@ -2,16 +2,26 @@
 #include "LinkResolver.h"
 namespace xfmd {
 bool NavigationCoordinator::openTarget(const std::string& path, std::optional<std::size_t> target) {
-  if (pending) return false;
+  if (pending)
+    return false;
   pending = Request{scrolling.captureAnchor(), target};
   try {
     bool opened = documents.requestOpen(path);
-    pending.reset(); return opened;
-  } catch (...) { pending.reset(); throw; }
+    pending.reset();
+    return opened;
+  } catch (...) {
+    pending.reset();
+    throw;
+  }
 }
 bool NavigationCoordinator::followLink(const std::string& target) {
-  try { return openTarget(LinkResolver::resolve(session.view().path, target)); }
-  catch (const std::exception& e) { if (error) error(e.what()); return false; }
+  try {
+    return openTarget(LinkResolver::resolve(session.view().path, target));
+  } catch (const std::exception& e) {
+    if (error)
+      error(e.what());
+    return false;
+  }
 }
 bool NavigationCoordinator::goBack() {
   auto target = history.propose(true);
@@ -29,4 +39,4 @@ void NavigationCoordinator::commitVisit() {
   scrolling.restoreAnchor(restore);
 }
 void NavigationCoordinator::documentSaved() { history.renameCurrent(session.view().path); }
-}
+} // namespace xfmd

@@ -1,6 +1,6 @@
 # Arbeidsmåte: krav, features og functionality
 
-Status: Proposed. Metoden er et praktisk eksperiment for agentarbeid. Den bruker
+Status: Anvendt i P0–P7. Metoden er et praktisk eksperiment for agentarbeid. Den bruker
 stabile designobjekter og eksplisitte endringsregler, uten sprintseremonier eller
 en foreløpig SDL-kompilator. Det er ikke en implementasjon av SDP, og andre
 repositoryer er ikke brukt som autoritative kilder.
@@ -39,7 +39,7 @@ har egne filer, men er ikke funksjonelle eiere.
   brukeren konkrete diagnoser og ha egne krav; tolerant Markdown er ikke en
   streng grammatikksjekk som skal blokkere lagring.
 
-Fire features og elleve functionality-objekter er første forslag. Tallet er ikke
+Fire features og elleve functionality-objekter er implementert første baseline. Tallet er ikke
 et mål. Slå sammen objekter med samme ansvar; splitt bare når eierskap, kontrakt,
 endringsårsak eller selvstendig akseptanse begrunner det.
 
@@ -69,7 +69,7 @@ ett krav. Cross-cutting krav arves ikke usynlig: oppgi dem eksplisitt der de gje
 En brukerbestilt avgrenset implementering trenger ikke ny godkjenning for hvert
 steg. Ikke bruk metoden som grunn til å stoppe rutinearbeid. Vesentlige endringer
 i produktomfang eller kontrakters betydning skal derimot beskrives og avklares.
-Denne runden slutter med et konkret designgrunnlag til gjennomgang før kodefasen.
+Designgrunnlaget ble gjennomgått før implementasjon; videre endringer følger samme sporbarhet.
 
 ## 5. Plumbing som gjenbrukskart
 
@@ -103,9 +103,14 @@ Verified, ikke nødvendigvis uavhengig arbeid.
 `python3 tools/validate_blueprints.py` sjekker metadata, ID-er, lokale fillenker,
 kapitler, kravdekning, avhengigheter og planlagt/implementert plumbing-markering.
 Dette er strukturkontroll; den beviser ikke korrekt kode, kravkvalitet eller at
-metoder faktisk kaller hverandre. Semantisk review og senere tester er obligatorisk.
+metoder faktisk kaller hverandre. Semantisk review og relevante tester er obligatorisk.
 
-Foreslåtte forbedringer etter første implementerte feature:
+`python3 tools/check_blueprint_symbols.py` kontrollerer at 83 dokumenterte
+Implemented-kall har navngitte callee-symboler i oppgitte filer. Kontrollen leser
+tekst, ikke AST, og beviser ikke at caller faktisk kaller callee. P7 avdekket gamle
+caller-navn fra tidligere faser; disse ble rettet ved manuell gjennomgang.
+
+Videre forbedringer etter første implementasjon:
 
 - Mål hvor ofte plumbing driver fra kode før vi lager en AST-basert symbolkontroll.
 - Legg bare strukturerte kontraktfelt til malen når de fjerner en konkret tvetydighet.

@@ -9,7 +9,9 @@ struct FontSpec {
   bool operator<(const FontSpec& other) const { return key() < other.key(); }
   bool operator==(const FontSpec& other) const { return key() == other.key(); }
 };
-struct TextExtent { int width = 0, height = 0, ascent = 0; };
+struct TextExtent {
+  int width = 0, height = 0, ascent = 0;
+};
 class ITextMetrics {
 public:
   virtual ~ITextMetrics() = default;

@@ -7,8 +7,12 @@ class NavigationCoordinator {
   DocumentCoordinator& documents;
   DocumentSession& session;
   ScrollCoordinator& scrolling;
-  struct Request { SourceAnchor previous; std::optional<std::size_t> target; };
+  struct Request {
+    SourceAnchor previous;
+    std::optional<std::size_t> target;
+  };
   std::optional<Request> pending;
+
 public:
   HistoryStore history;
   std::function<void(const std::string&)> error;
@@ -21,4 +25,4 @@ public:
   void commitVisit();
   void documentSaved();
 };
-}
+} // namespace xfmd

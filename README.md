@@ -1,46 +1,63 @@
 # xfmd — X File Markdown Viewer/Editor
 
-En planlagt lettvekts Markdown-viser og enkel editor for Linux, bygget på FOX
-som companion til `xfw` og `xfi`. Prosjektet skal tilby native Markdown-visning,
-live preview, dokumentnavigasjon med historikk og synkronisert scrolling.
+Native Markdown-viser og editor for Linux, bygget på FOX som companion til `xfw`
+og `xfi`. Første leveranse er implementert: typografisk visning, redigering med
+undo/redo, live preview, lokal lenkehistorikk og synkronisert scrolling.
 
-**Status: arkitektur- og designfase. Ingen applikasjon er implementert ennå.**
-Dokumentene er forslag til gjennomgang; planlagte funksjoner og tester er ikke
-påstander om levert funksjonalitet.
+## Bygg og kjør
 
-## Les prosjektet
-
-1. [Krav og use cases](xfmd_requirements.md)
-2. [Arkitektur, kontrakter og kildefilkart](softwareArchitecture.md)
-3. [Arbeidsmåte for features og functionality](docs/working-method.md)
-4. [Blueprint-register og sporbarhetsmatrise](src/blueprint/README.md)
-5. [Implementeringsplan](implementationPlan.md)
-6. [Agent- og bidragsregler](AGENTS.md)
-
-## Struktur
-
-```text
-src/
-  application/   FOX-applikasjon, roller og adaptere
-  interpreter/   Markdown → semantisk modell
-  renderer/      Semantisk modell → layout og tegnekommandoer
-  contracts/     Små, delte grensesnitt og datatyper
-  blueprint/
-    feature/       Fire sammenhengende evner
-    functionality/ Elleve tjenester og mekanismer
-    templates/     Faste maler; kapittel 5 er alltid Plumbing
-```
-
-Kodekatalogene inneholder foreløpig ansvarsdokumentasjon. Ingen byggkommandoer er
-operative før implementeringsplanens P1. Dokumentkontrollen kan kjøres nå:
+Krever C++17-kompilator, CMake ≥3.20, Ninja, pkg-config, FOX ≥1.6.57 (1.6 API),
+libcurl-verktøyet `curl` og X11. Installer DejaVu Sans/Mono og gjerne Droid Sans
+Fallback eller Noto Sans CJK. Tester krever Python 3 og Xvfb.
 
 ```sh
-python3 tools/validate_blueprints.py
+./tools/bootstrap_dependencies.sh
+cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
+cmake --build build --parallel 4
+ctest --test-dir build --output-on-failure
+./build/xfmd tests/fixtures/markdown/basics.md
 ```
 
-FOX er fast applikasjonsteknologi; interpreter og renderer er uavhengige bak
-kontrakter. Ingen browser engine, skripteksekvering eller eksterne bildenedlastinger.
-Framtidig `xfw`-IPC er utsatt og krever egen spesifikasjon.
+Bootstrap laster eksplisitt ned hashkontrollert cmark 0.31.1 til `.deps/`.
+Configure/build laster ikke ned dependencies. Bruk `-DBUILD_TESTING=OFF` for bare
+applikasjonen; `-DXFMD_SANITIZERS=ON` i separat Debug-bygg for ASan/UBSan.
 
-Prosjektlisens er foreløpig ikke valgt. Repositoryet inneholder prosjektets egne
-designtekster og kontrollverktøy; tredjeparts kildekode er ikke inkludert.
+```sh
+cmake --install build --prefix "$HOME/.local"
+```
+
+Installasjon inkluderer binærfil, desktop-entry, ikon, man-side og tredjepartsnotis.
+Prosjektlisens er fortsatt ikke valgt av eieren; ingen formell release er publisert.
+[cmark-notisen](LICENSES/cmark.txt) gjelder den statisk lenkede parseren.
+
+## Bruk
+
+| Handling | Tast |
+| --- | --- |
+| Åpne / lagre / lagre som | Ctrl+O / Ctrl+S / Ctrl+Shift+S |
+| Angre / gjør om / søk | Ctrl+Z / Ctrl+Y / Ctrl+F |
+| Preview / editor / delt visning | Ctrl+1 / Ctrl+2 / Ctrl+3 |
+| Sidepanel | F10 |
+| Tilbake / frem | Alt+Venstre / Alt+Høyre |
+
+Markdown og `.txt` åpnes lokalt; `.txt` vises uformatert. Preview oppdateres etter
+300 ms redigeringspause. Filgrensen er 8 MiB. UTF-8/BOM og eksisterende linjeslutt
+bevares. Ekstern filendring gir konflikt; hardlenker krever Lagre som.
+
+Lenker støtter lokale dokumentstier, inklusive relative stier og prosentkoding.
+Nettverkslenker, fragment-/querylenker, skript og HTML-eksekvering støttes ikke.
+Bilder vises som alternativtekst. xfw-IPC, bilder og Markdown-utvidelser er senere
+scope. Preview har fontfallback; editorens glyphdekning avhenger av valgt systemfont.
+
+## Utvikling og design
+
+- [Krav og use cases](xfmd_requirements.md)
+- [Arkitektur og filkart](softwareArchitecture.md)
+- [Arbeidsmåte](docs/working-method.md) og [blueprints](src/blueprint/README.md)
+- [Faser og milepæler](implementationPlan.md)
+- [Oppdatert bidragsguide](CONTRIBUTING.md) og [opprinnelige agentregler](AGENTS.md)
+- [Samlet verifikasjon](docs/evidence/P7.md)
+
+AGENTS.md er bevart etter instruksen om ikke å overskrive en eksisterende fil.
+Dens designfasestatus og planlagte byggkommandoer er historiske; denne README-en
+og CONTRIBUTING.md beskriver implementasjonen. Arkitektur- og arbeidsreglene gjelder.

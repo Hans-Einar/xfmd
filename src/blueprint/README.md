@@ -1,7 +1,7 @@
 # Blueprint-register
 
-Status: Proposed. Fire features og elleve functionality-objekter beskriver første
-leveranse. Ingen applikasjonskode er implementert. [Arbeidsmåten](../../docs/working-method.md)
+Status: Implemented. Fire features og elleve functionality-objekter er implementert
+i første leveranse. Samlet bevis og begrensninger: [P7](../../docs/evidence/P7.md). [Arbeidsmåten](../../docs/working-method.md)
 definerer begrepene; [malene](templates/README.md) brukes ved nye objekter.
 
 ## Designobjekter
@@ -30,8 +30,8 @@ renderer selv om orkestreringen ligger i application.
 
 ## Krav → designobjekter → akseptansetester
 
-Definisjoner: [kravspesifikasjonen](../../xfmd_requirements.md). Alle AT-er er
-planlagt akseptanse; ingen er påstått bestått. Future-rader er eksplisitt utsatt.
+Definisjoner: [kravspesifikasjonen](../../xfmd_requirements.md). AT-er er
+akseptansekriterier med bevis i faserapportene; les P7 for faktisk dekning. Future-rader er eksplisitt utsatt.
 
 | Krav | Designobjekter | Akseptanse | Scope |
 | --- | --- | --- | --- |

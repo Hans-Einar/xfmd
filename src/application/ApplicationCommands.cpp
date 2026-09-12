@@ -3,26 +3,47 @@
 using namespace FX;
 namespace xfmd {
 std::string Application::savePath() {
-  return FXFileDialog::getSaveFilename(window, "Save document", session.view().path.empty() ? "Untitled.md" : session.view().path.c_str(), "Markdown (*.md)\nText (*.txt)").text();
+  return FXFileDialog::getSaveFilename(window, "Save document",
+                                       session.view().path.empty() ? "Untitled.md"
+                                                                   : session.view().path.c_str(),
+                                       "Markdown (*.md)\nText (*.txt)")
+      .text();
 }
 void Application::execute(CommandRouter::Command command) {
   switch (command) {
   case CommandRouter::Open: {
-    auto path = FXFileDialog::getOpenFilename(window, "Open document", session.view().path.c_str(), "Markdown and text (*.md,*.txt)");
-    if (!path.empty()) open(path.text());
+    auto path = FXFileDialog::getOpenFilename(window, "Open document", session.view().path.c_str(),
+                                              "Markdown and text (*.md,*.txt)");
+    if (!path.empty())
+      open(path.text());
     break;
   }
-  case CommandRouter::Save: documents.save(); break;
+  case CommandRouter::Save:
+    documents.save();
+    break;
   case CommandRouter::SaveAs: {
     auto path = savePath();
-    if (path.empty()) break;
+    if (path.empty())
+      break;
     bool overwrite = std::filesystem::exists(path);
-    if (overwrite && FXMessageBox::question(window, MBOX_YES_NO, "Replace file", "Replace %s?", path.c_str()) != MBOX_CLICKED_YES) break;
-    documents.save(path, overwrite); break;
+    if (overwrite && FXMessageBox::question(window, MBOX_YES_NO, "Replace file", "Replace %s?",
+                                            path.c_str()) != MBOX_CLICKED_YES)
+      break;
+    documents.save(path, overwrite);
+    break;
   }
-  case CommandRouter::Close: if (documents.requestClose()) app.exit(0); break;
-  case CommandRouter::Undo: edits.undo(); updateUi(); break;
-  case CommandRouter::Redo: edits.redo(); updateUi(); break;
+  case CommandRouter::Close:
+    if (documents.requestClose())
+      app.exit(0);
+    break;
+  case CommandRouter::Undo:
+    edits.undo();
+    updateUi();
+    break;
+  case CommandRouter::Redo:
+    edits.redo();
+    updateUi();
+    break;
   case CommandRouter::Find: {
     FXString query;
     if (FXInputDialog::getString(query, window, "Find", "Text to find:") && !query.empty()) {
@@ -32,17 +53,33 @@ void Application::execute(CommandRouter::Command command) {
         window->editor->setSelection(int(found), query.length());
         window->editor->setCursorPos(int(found) + query.length());
         window->editor->makePositionVisible(int(found));
-      } else window->status->setText("Text not found.");
+      } else
+        window->status->setText("Text not found.");
     }
     break;
   }
-  case CommandRouter::Preview: views->setMode(ViewMode::Preview); break;
-  case CommandRouter::Editor: views->setMode(ViewMode::Editor); break;
-  case CommandRouter::Split: views->setMode(ViewMode::Split); break;
-  case CommandRouter::Sidebar: views->toggleSidebar(); break;
-  case CommandRouter::Back: if (back) back(); break;
-  case CommandRouter::Forward: if (forward) forward(); break;
-  default: break;
+  case CommandRouter::Preview:
+    views->setMode(ViewMode::Preview);
+    break;
+  case CommandRouter::Editor:
+    views->setMode(ViewMode::Editor);
+    break;
+  case CommandRouter::Split:
+    views->setMode(ViewMode::Split);
+    break;
+  case CommandRouter::Sidebar:
+    views->toggleSidebar();
+    break;
+  case CommandRouter::Back:
+    if (back)
+      back();
+    break;
+  case CommandRouter::Forward:
+    if (forward)
+      forward();
+    break;
+  default:
+    break;
   }
 }
-}
+} // namespace xfmd

@@ -40,7 +40,7 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 | 3 | `InlineLayout::layout` | `FoxTextMetrics::measure` | `src/application/adapters/FoxTextMetrics.cpp` | Text/font → mål | Fallback per segment | Implemented |
 | 4 | `FoxRenderHost::onPaint` | `FoxTextMetrics::segments` | `src/application/adapters/FoxTextMetrics.cpp` | Text/font → FOX-fontsegmenter | Samme mål som ved layout | Implemented |
 | 5 | `FOX pointer` | `FoxRenderHost::onPointer` | `src/application/adapters/FoxRenderHost.cpp` | Punkt → IRenderer::hitTest | Kun aktiv frame sender link callback | Implemented |
-| 6 | `ScrollCoordinator senere` | `FoxRenderHost::setViewport` | `src/application/adapters/FoxRenderHost.cpp` | Y → clamped viewport | Programmatisk echo undertrykkes | Implemented |
+| 6 | `ScrollCoordinator setPreview callback` | `FoxRenderHost::setViewport` | `src/application/adapters/FoxRenderHost.cpp` | Y → clamped viewport | Programmatisk echo undertrykkes | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
