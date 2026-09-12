@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Mechanism
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-005, UR-008, SR-002, SR-008, SR-009, SR-013
 uses: FUNC-005
@@ -23,24 +23,24 @@ Krav: UR-005, UR-008, SR-002, SR-008, SR-009, SR-013. Definisjoner og normativ a
 
 ## 3. Kontrakter og eierskap
 
-`AnchorMapper::map(SourceAnchor, RenderFrame) -> MappingResult`, `anchorAt(ViewportState, RenderFrame) -> SourceAnchor`; `ScrollCoordinator::onViewportChanged(ViewportEvent)`, `captureAnchor()`, `restoreAnchor(SourceAnchor, FrameToken)`, `applyTarget(ViewportCommand)`. Events har Origin/Sequence; positionsenheter er navngitte, ikke generiske int-linjer.
+AnchorMapper::map og anchorAt er rene funksjoner over RenderFrame. ScrollCoordinator eier aktivt token, pending restore, siste anker, split-mode og ekko-/sekvensguard. setEditor/setPreview injiseres som adaptercallbacks; captureAnchor/restoreAnchor deles med historikk.
 
 ## 4. Atferd, tilstand og feil
 
-Editorens tekstposisjon konverteres eksplisitt til snapshot-byteoffset. Rendergeometri gir nærmeste semantiske kildeanker; hidden syntax bruker relevant blokk. Eksakt mapping foretrekkes, tilnærming merkes, Unavailable deaktiverer sync. Layout-/revisjonsmismatch avvises. Guard undertrykker programmatisk ekko også når FOX leverer hendelsen senere. Restore etter resize/nav venter på korrekt FrameReady.
+Byteområder og dokumentgeometri brukes begge veier. Smaleste kildeområde foretrekkes ved source→viewport; nærmeste linjeregion ved motsatt retning. Hidden syntax bruker blokkområde, transformert tekst er Approximate. Kodelinjer får egne fysisk forankrede ranges, også ved gjentatt tekst. Gammelt token/frame avvises; resize restaurerer anker etter ny layout. Programmatisk echo og gammel sekvens ignoreres.
 
 ## 5. Plumbing
 
-Alle symboler og kildefiler i tabellen er **planlagte**, ikke implementert kode.
-Bibliotekskall verifiseres mot valgt dependency-versjon før implementering.
+Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `EditorWidget / FoxRenderHost viewport event` | `ScrollCoordinator::onViewportChanged` | `src/application/scroll/ScrollCoordinator.cpp` | Origin/Sequence + posisjon | Ignore echo/skjult panel/stale frame. | Planned |
-| 2 | `ScrollCoordinator::onViewportChanged / captureAnchor` | `AnchorMapper::anchorAt` | `src/application/scroll/AnchorMapper.cpp` | Viewport + modell/frame → SourceAnchor | Ukjent mapping returnerer kvalitet, ikke falsk presisjon. | Planned |
-| 3 | `ScrollCoordinator::onViewportChanged / restoreAnchor` | `AnchorMapper::map` | `src/application/scroll/AnchorMapper.cpp` | Anker + gyldig frame → målgeometri | Clamp tomme/endrede dokumenter. | Planned |
-| 4 | `ScrollCoordinator::applyTarget` | `EditorWidget::setSourceAnchor` | `src/application/ui/EditorWidget.cpp` | Byteanker + origin → FOX-tekstposisjon | Adapter konverterer, guard hindrer tilbakekobling. | Planned |
-| 5 | `ScrollCoordinator::applyTarget` | `FoxRenderHost::setViewport` | `src/application/adapters/FoxRenderHost.cpp` | Dokumentgeometri + origin → viewport | Programmatisk hendelse merkes. | Planned |
+| 1 | `EditorWidget / FoxRenderHost viewport callback` | `ScrollCoordinator::onViewportChanged` | `src/application/scroll/ScrollCoordinator.cpp` | Origin + posisjon + token → guard | Stale/echo/sekvens avvises | Implemented |
+| 2 | `ScrollCoordinator::onViewportChanged` | `AnchorMapper::anchorAt` | `src/application/scroll/AnchorMapper.cpp` | Preview-y → kildeanker | Unavailable ved tom mapping | Implemented |
+| 3 | `ScrollCoordinator::onViewportChanged / restoreAnchor` | `AnchorMapper::map` | `src/application/scroll/AnchorMapper.cpp` | Kildeanker → dokument-y | Clamp/nærmeste relevante område | Implemented |
+| 4 | `ScrollCoordinator setEditor callback` | `EditorWidget::setSourceAnchor` | `src/application/ui/EditorWidget.cpp` | Raw byte → projected FOX-posisjon | Undertrykker programmatisk callback | Implemented |
+| 5 | `ScrollCoordinator setPreview callback` | `FoxRenderHost::setViewport` | `src/application/adapters/FoxRenderHost.cpp` | Y → FOX-scrollposisjon | Undertrykker programmatisk callback | Implemented |
+| 6 | `PreviewCoordinator present callback` | `ScrollCoordinator::setFrame` | `src/application/scroll/ScrollCoordinator.cpp` | FrameReady → restore | Kun forventet token | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -50,16 +50,13 @@ FTR-004 bruker begge retninger; FUNC-008 bruker capture/restore. Renderer eier g
 
 ## 7. Verifikasjon
 
-AT-005, AT-008, AT-012, AT-018, AT-019, AT-023: Unicode, gjentatt tekst, whitespace/skjult syntaks, tom fil, resize, gammel frame, endret historikkfil og forsinket echo. Planlagt `tests/application/AnchorMapperTest.cpp` og `ScrollCoordinatorTest.cpp`.
+Relevante akseptanse-ID-er: AT-005, AT-008, AT-012, AT-018, AT-019, AT-023.
 
-Bevis: ingen applikasjonstest kjørt; testfiler ovenfor er planlagte. Ved implementering
-oppgis kommando, fixture, miljø, commit og faktisk utfall. Strukturkontroll alene
-oppfyller ikke atferdskravene.
+`ScrollTest` verifiserer gjentatte kodelinjer, mapping begge veier, tom fil, stale token og forsinket/merket echo. `ScrollingTest` bruker ekte FOX-scroll og resize.
+
+Evidence: [Fase P5](../../../docs/evidence/P5.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Proposed, revisjon 0.1, 2026-09-12. P0-mapping er blokkerende for presis sync. FOX getTopLine/setTopLine skal behandles som tekstposisjons-API, ikke uverifiserte linjenumre.
-
-Ved endret offentlig kontrakt: oppdater konsumentene i registeret, dette kallkartet,
-berørte krav og kontrakttester i samme endring. Før status Ready skal relevante
-P0-spørsmål være avgjort; før Verified skal kapittel 7 inneholde testbevis.
+Implemented i P5. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
+Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.
