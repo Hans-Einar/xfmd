@@ -36,7 +36,7 @@ AT-/kravbevis og feilscenarier, og bruk separat sanitizer-bygg ved levetidsendri
 C++17, to mellomrom, PascalCase typer/filer, camelCase metoder og RAII-eierskap.
 Bruk `.clang-format`; prosjektprosa er norsk, kodeidentifikatorer engelske.
 Kjør `python3 tools/validate_blueprints.py` og `python3 tools/check_layers.py`.
-Strukturkontroll erstatter ikke semantisk review av kall og eierskap.
+Kjør også `python3 tools/check_blueprint_symbols.py`. Strukturkontroll erstatter ikke semantisk review av kall og eierskap.
 
 ## Commits og gjennomgang
 

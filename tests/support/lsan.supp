@@ -1,0 +1,4 @@
+# Ubuntu 24.04 fontconfig/Xft initialization retains 320 bytes in three allocations.
+# CI run 34721786960: allocation stacks pass through FcInit -> XftInit -> openDisplay.
+# Suppress only that process-global initialization path; retain application leak checks.
+leak:FcInit

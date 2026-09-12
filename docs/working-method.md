@@ -105,7 +105,12 @@ kapitler, kravdekning, avhengigheter og planlagt/implementert plumbing-markering
 Dette er strukturkontroll; den beviser ikke korrekt kode, kravkvalitet eller at
 metoder faktisk kaller hverandre. Semantisk review og relevante tester er obligatorisk.
 
-Foreslåtte forbedringer etter første implementerte feature:
+`python3 tools/check_blueprint_symbols.py` kontrollerer at 83 dokumenterte
+Implemented-kall har navngitte callee-symboler i oppgitte filer. Kontrollen leser
+tekst, ikke AST, og beviser ikke at caller faktisk kaller callee. P7 avdekket gamle
+caller-navn fra tidligere faser; disse ble rettet ved manuell gjennomgang.
+
+Videre forbedringer etter første implementasjon:
 
 - Mål hvor ofte plumbing driver fra kode før vi lager en AST-basert symbolkontroll.
 - Legg bare strukturerte kontraktfelt til malen når de fjerner en konkret tvetydighet.
