@@ -32,3 +32,26 @@ endif()
 if(BUILD_TESTING)
   add_test(NAME LayerBoundaries COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/check_layers.py)
 endif()
+add_library(xfmd_document
+  src/application/io/InputPolicy.cpp src/application/io/LocalFileStore.cpp
+  src/application/document/DocumentSession.cpp src/application/document/DocumentCoordinator.cpp
+  src/application/document/TextProjection.cpp src/application/document/EditController.cpp)
+target_link_libraries(xfmd_document PUBLIC xfmd_contracts)
+if(BUILD_TESTING)
+  xfmd_test(DocumentTest tests/application/DocumentTest.cpp)
+  target_link_libraries(DocumentTest PRIVATE xfmd_document)
+endif()
+add_library(xfmd_application
+  src/application/Application.cpp src/application/ApplicationCommands.cpp
+  src/application/commands/CommandRouter.cpp src/application/ui/XfmdWindow.cpp
+  src/application/ui/EditorWidget.cpp src/application/ui/SidebarWidget.cpp
+  src/application/ui/ViewModeController.cpp)
+target_link_libraries(xfmd_application PUBLIC xfmd_document PkgConfig::FOX)
+add_executable(xfmd src/application/main.cpp)
+target_link_libraries(xfmd PRIVATE xfmd_application)
+if(BUILD_TESTING)
+  add_executable(WorkspaceTest tests/gui/WorkspaceTest.cpp)
+  target_include_directories(WorkspaceTest PRIVATE tests)
+  target_link_libraries(WorkspaceTest PRIVATE xfmd_application)
+  add_test(NAME WorkspaceTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/run_with_xvfb.py $<TARGET_FILE:WorkspaceTest>)
+endif()

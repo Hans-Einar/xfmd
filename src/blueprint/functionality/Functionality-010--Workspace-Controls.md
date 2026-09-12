@@ -4,7 +4,7 @@ kind: Functionality
 audience: User
 role: Adapter
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-001, UR-006, UR-007, SR-002, SR-008, SR-013
 uses: FUNC-001, FUNC-007
@@ -23,24 +23,23 @@ Krav: UR-001, UR-006, UR-007, SR-002, SR-008, SR-013. Definisjoner og normativ a
 
 ## 3. Kontrakter og eierskap
 
-`XfmdWindow::buildUi`, `CommandRouter::dispatch(Command)`, `ViewModeController::setMode(ViewMode)`, `toggleSidebar()`, `SidebarWidget::onOpen(Path)`. ViewMode er Preview, Editor eller Split. CommandRouter holder bare routing/enabled-state; de konkrete koordinatorene eier handlingene.
+XfmdWindow::buildUi oppretter vindusstruktur. CommandRouter::dispatch/update ruter handlinger og enabled-state. ViewModeController::setMode/toggleSidebar eier synlighet; SidebarWidget::onOpen sender åpneforespørsel.
 
 ## 4. Atferd, tilstand og feil
 
-Preview er standard. Split betyr editor til venstre og preview til høyre, ikke over/under. Modusbytte bevarer buffer/undo; visning/resize ber pipeline om gyldig layout. Sidepanel viser mapper samt .md/.txt uten hensyn til ASCII case. Enkeltklikk velger; dobbeltklikk bruker vanlig requestOpen. F10 og menyer går samme vei. Dialog/CLI og toolbar bruker samme router/koordinatorer.
+Preview standard, Ctrl+1/2/3 bytter modus, F10 bytter sidebar. Bare dobbeltklikk åpner. Case-insensitive .md/.txt-filter. Modusbytte bevarer økt og undo; ingen filtransaksjon i vindusklassen.
 
 ## 5. Plumbing
 
-Alle symboler og kildefiler i tabellen er **planlagte**, ikke implementert kode.
-Bibliotekskall verifiseres mot valgt dependency-versjon før implementering.
+Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `Application::initialize` | `XfmdWindow::buildUi` | `src/application/ui/XfmdWindow.cpp` | FOX-parent + koordinatorreferanser | Ingen featurelogikk ved konstruksjon. | Planned |
-| 2 | `FOX menu/key/toolbar event` | `CommandRouter::dispatch` | `src/application/commands/CommandRouter.cpp` | Command → eierens offentlige inngang | Disabled kommando gir NoOp. | Planned |
-| 3 | `CommandRouter view command` | `ViewModeController::setMode / toggleSidebar` | `src/application/ui/ViewModeController.cpp` | Mode → synlighet/fokus | Behold tekst, dirty og undo. | Planned |
-| 4 | `SidebarWidget::onOpen / CommandRouter::open` | `DocumentCoordinator::requestOpen` | `src/application/document/DocumentCoordinator.cpp` | Path → OpenResult | Single click åpner ikke; feil beholder økt. | Planned |
-| 5 | `ViewModeController ved visning/resize` | `PreviewCoordinator::relayout` | `src/application/preview/PreviewCoordinator.cpp` | Ny bredde/generasjon | Ingen stale frame-interaksjon mens layout venter. | Planned |
+| 1 | `Application::initialize` | `XfmdWindow::buildUi` | `src/application/ui/XfmdWindow.cpp` | FOX app → vindu | Parenting eier widgets | Implemented |
+| 2 | `FOX command` | `CommandRouter::dispatch` | `src/application/commands/CommandRouter.cpp` | Command → Application::execute | Enabled kontrolleres | Implemented |
+| 3 | `Application::execute` | `ViewModeController::setMode` | `src/application/ui/ViewModeController.cpp` | Mode → flater | Bevarer dokument | Implemented |
+| 4 | `FOX double click` | `SidebarWidget::onOpen` | `src/application/ui/SidebarWidget.cpp` | Tree item → Path | Enkeltklikk åpner ikke | Implemented |
+| 5 | `SidebarWidget open callback` | `Application::open` | `src/application/Application.h` | Path → requestOpen | Felles dirty-policy | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -50,16 +49,13 @@ UC-001/003/004 bruker denne functionality direkte; navigasjon/sync bruker kontro
 
 ## 7. Verifikasjon
 
-AT-001, AT-006, AT-007, AT-012, AT-018, AT-023: filtreringsfixture, F10, alle view modes, splitter/fokus, uleselig mappe, doble events og CLI med mellomrom. Planlagt `tests/gui/WorkspaceTest.cpp`.
+Relevante akseptanse-ID-er: AT-001, AT-006, AT-007, AT-012, AT-018, AT-023.
 
-Bevis: ingen applikasjonstest kjørt; testfiler ovenfor er planlagte. Ved implementering
-oppgis kommando, fixture, miljø, commit og faktisk utfall. Strukturkontroll alene
-oppfyller ikke atferdskravene.
+`WorkspaceTest` kjører under egen Xvfb og kontrollerer editor/preview-modus, F10-funksjonen, filfilter, undo og dirty-close. Kommando-/visuell ende-til-ende QA utvides i P7.
+
+Evidence: [Fase P2](../../../docs/evidence/P2.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Proposed, revisjon 0.1, 2026-09-12. Dette objektet grupperer UI-roller med samme endringsårsak. Splitt senere dersom kompleksitet eller forskjellige eiere begrunner det; ikke samle dokument-/navigasjonslogikk her.
-
-Ved endret offentlig kontrakt: oppdater konsumentene i registeret, dette kallkartet,
-berørte krav og kontrakttester i samme endring. Før status Ready skal relevante
-P0-spørsmål være avgjort; før Verified skal kapittel 7 inneholde testbevis.
+Implemented i P2. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
+Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.

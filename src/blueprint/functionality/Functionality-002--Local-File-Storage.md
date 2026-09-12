@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Service
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-001, UR-003, UR-009, SR-005, SR-006, SR-007, SR-011, SR-013
 uses: none
@@ -23,24 +23,22 @@ Krav: UR-001, UR-003, UR-009, SR-005, SR-006, SR-007, SR-011, SR-013. Definisjon
 
 ## 3. Kontrakter og eierskap
 
-`LocalFileStore::read(Path) -> Result<LoadedDocument>`, `writeAtomic(SourceSnapshot, Path, ExpectedFileIdentity) -> Result<SavedSnapshot>`; `InputPolicy::validate(ByteView, Path) -> Result<FormatInfo>`. LoadedDocument har eid tekst, BOM/linjesluttmetadata, oppløst målsti og filidentitet. Resultatet skiller UnsupportedInput, TooLarge, Conflict og IoError.
+LocalFileStore::read og writeAtomic returnerer eide data eller kaster Error. InputPolicy::validate kontrollerer størrelse, endelse og UTF-8; supportedPath/plainText deles med sidebar og dokumentøkt.
 
 ## 4. Atferd, tilstand og feil
 
-Les med størrelsesgrense under lesing, ikke bare stat før lesing. Bevar rå byte for tapsfri lagring; tolking kan bruke et eksplisitt mapped utsnitt uten BOM. Kontroller UTF-8, NUL og endelse. Skriv tempfil i målmappen, bevar støttede metadata, flush og rename; rydd temp ved feil. Kontroller ekstern endring før erstatning. Etter rename men feilet katalog-sync rapporteres durability-uklarhet og ny faktisk filidentitet, ikke påstått rollback.
+Les bare regulære filer med løpende 8 MiB-grense. Skriv temp i målmappen; bevar eier, modusbits og xattrs/ACL. Hardlinks avvises. Kontroll av ekstern identitet gjentas før rename. Ny fil publiseres uten overskriving via link/unlink. Directory-sync-feil returnerer durable=false etter commit. Stat/hash er ikke atomisk CAS.
 
 ## 5. Plumbing
 
-Alle symboler og kildefiler i tabellen er **planlagte**, ikke implementert kode.
-Bibliotekskall verifiseres mot valgt dependency-versjon før implementering.
+Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `DocumentCoordinator::requestOpen` | `LocalFileStore::read` | `src/application/io/LocalFileStore.cpp` | Path → avgrenset bytebuffer | Mangler/rettighet/størrelse gir typet feil. | Planned |
-| 2 | `LocalFileStore::read` | `InputPolicy::validate` | `src/application/io/InputPolicy.cpp` | Bytes + endelse → FormatInfo | Ugyldig UTF-8/NUL avvises før øktbytte. | Planned |
-| 3 | `DocumentCoordinator::save` | `LocalFileStore::writeAtomic` | `src/application/io/LocalFileStore.cpp` | Snapshot + filidentitet | Konflikt eller unsupported metadata avbryter. | Planned |
-| 4 | `LocalFileStore::writeAtomic` | `LocalFileStore::writeTemporary` | `src/application/io/LocalFileStore.cpp` | Bytes + metadata → tempfil | Diskfeil rydder temp; mål uendret. | Planned |
-| 5 | `LocalFileStore::writeAtomic` | `LocalFileStore::commitTemporary` | `src/application/io/LocalFileStore.cpp` | Flush + kontroll + rename → SavedSnapshot | Rename er commit-punkt; usikker durability rapporteres separat. | Planned |
+| 1 | `DocumentCoordinator::requestOpen` | `LocalFileStore::read` | `src/application/io/LocalFileStore.cpp` | Path → bytes/identity | Bounded read og stat-sjekk | Implemented |
+| 2 | `LocalFileStore::read / writeAtomic` | `InputPolicy::validate` | `src/application/io/InputPolicy.cpp` | Bytes/path → validering | Error ved ugyldig input | Implemented |
+| 3 | `DocumentCoordinator::save` | `LocalFileStore::writeAtomic` | `src/application/io/LocalFileStore.cpp` | Bytes/expected → nytt mål | Temp ryddes ved feil | Implemented |
+| 4 | `LocalFileStore::writeAtomic` | `copyAttributes` | `src/application/io/LocalFileStore.cpp` | Åpne descriptors → bevart metadata | Feil før commit | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -50,16 +48,13 @@ Dokumentkoordinatoren er første konsument; framtidig eksport kan bruke lagring 
 
 ## 7. Verifikasjon
 
-AT-001, AT-003, AT-009, AT-015, AT-016, AT-017, AT-021, AT-023: midlertidige mapper, full-disk/permission-feil via feilinjeksjon, CRLF/BOM byte-roundtrip, ekstern endring, symlink/hardlink og grense under lesing. Planlagt `tests/application/LocalFileStoreTest.cpp`.
+Relevante akseptanse-ID-er: AT-001, AT-003, AT-009, AT-015, AT-016, AT-017, AT-021, AT-023.
 
-Bevis: ingen applikasjonstest kjørt; testfiler ovenfor er planlagte. Ved implementering
-oppgis kommando, fixture, miljø, commit og faktisk utfall. Strukturkontroll alene
-oppfyller ikke atferdskravene.
+`DocumentTest` injiserer feil før rename, tester xattr/mode, hardlink, ny-fil-identitet, ekstern endring, invalid UTF-8 og 8 MiB.
+
+Evidence: [Fase P2](../../../docs/evidence/P2.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Proposed, revisjon 0.1, 2026-09-12. P0 fastsetter ACL/xattr-policy, linjesluttbevaring og grense. Før/etter-rename-feil må skilles. Stat/hash gir ikke atomisk compare-and-swap mot eksterne prosesser.
-
-Ved endret offentlig kontrakt: oppdater konsumentene i registeret, dette kallkartet,
-berørte krav og kontrakttester i samme endring. Før status Ready skal relevante
-P0-spørsmål være avgjort; før Verified skal kapittel 7 inneholde testbevis.
+Implemented i P2. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
+Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.

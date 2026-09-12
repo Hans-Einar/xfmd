@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Workflow
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-001, UR-003, UR-009, SR-002, SR-006, SR-007, SR-008, SR-013
 uses: FUNC-002
@@ -23,25 +23,24 @@ Krav: UR-001, UR-003, UR-009, SR-002, SR-006, SR-007, SR-008, SR-013. Definisjon
 
 ## 3. Kontrakter og eierskap
 
-`DocumentCoordinator::requestOpen(OpenRequest) -> OpenResult`, `save(SaveRequest) -> SaveResult`, `requestClose() -> CloseResult`; `DocumentSession::snapshot() -> SourceSnapshot`, `applyEdit(Edit) -> Revision`, `replace(LoadedDocument)`, `markSaved(SavedSnapshot)`. OpenRequest bærer opprinnelse og eventuell historikkforespørsel. Åpneresultat skiller Opened, Cancelled og Failed. Sesjonen eier baseline og filidentitet; koordinatoren låner filstore.
+DocumentSession eier rå UTF-8, baseline, filidentitet og token. DocumentCoordinator eksponerer requestOpen, save, requestClose og resolveUnsaved. Bool-resultat betyr fullført eller avbrutt/feilet; feilteksten går via error-callback. Session-mutatorer brukes bare gjennom dokument-/edit-eier.
 
 ## 4. Atferd, tilstand og feil
 
-Åpning sjekker dirty og brukerens valg. Kandidat leses før replace; feil/avbrudd beholder økten. Save-feil stopper etterfølgende bytte. Forkast betyr ikke at gammel buffer slettes før nytt dokument faktisk er lastet. Etter commit sendes DocumentOpened til preview/historikk-abonnenter; feil i preview ruller ikke tilbake en vellykket filåpning. Ulagret tomt dokument krever målsti. Dirty er innhold sammenlignet med lagret baseline, så undo kan gjøre dokumentet rent.
+Kandidat lastes før replace. Dirty-valg skjer først; Failed/Cancelled beholder buffer. Vellykket åpning gir én opened-callback. Save oppdaterer kun den lagrede baselinen; ekstern konflikt beholder dirty. Dialogene injiseres fra Application.
 
 ## 5. Plumbing
 
-Alle symboler og kildefiler i tabellen er **planlagte**, ikke implementert kode.
-Bibliotekskall verifiseres mot valgt dependency-versjon før implementering.
+Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `CommandRouter::open / SidebarWidget::onOpen / NavigationCoordinator::openTarget` | `DocumentCoordinator::requestOpen` | `src/application/document/DocumentCoordinator.cpp` | OpenRequest → beslutning | Dirty-dialog; Cancelled muterer ikke økt. | Planned |
-| 2 | `DocumentCoordinator::requestOpen` | `DocumentCoordinator::resolveUnsaved` | `src/application/document/DocumentCoordinator.cpp` | Lagre/Forkast/Avbryt | Save-feil returnerer Failed uten bytte. | Planned |
-| 3 | `DocumentCoordinator::requestOpen` | `LocalFileStore::read` | `src/application/io/LocalFileStore.cpp` | Sti → LoadedDocument | I/O/formatfeil returneres før replace. | Planned |
-| 4 | `DocumentCoordinator::requestOpen` | `DocumentSession::replace` | `src/application/document/DocumentSession.cpp` | Kandidat → ny ID/revisjon | Commit; sender DocumentOpened etter konsistent tilstand. | Planned |
-| 5 | `DocumentCoordinator::save` | `LocalFileStore::writeAtomic` | `src/application/io/LocalFileStore.cpp` | Snapshot + forventet identitet → SavedSnapshot | Konflikt/I/O beholder dirty. | Planned |
-| 6 | `DocumentCoordinator::save` | `DocumentSession::markSaved` | `src/application/document/DocumentSession.cpp` | Lagrede bytes → baseline | Senere edits forblir dirty. | Planned |
+| 1 | `Application::open` | `DocumentCoordinator::requestOpen` | `src/application/document/DocumentCoordinator.cpp` | Path → bool | Feil via callback | Implemented |
+| 2 | `DocumentCoordinator::requestOpen` | `DocumentCoordinator::resolveUnsaved` | `src/application/document/DocumentCoordinator.cpp` | Dirty → Save/Discard/Cancel | Save-feil avbryter | Implemented |
+| 3 | `DocumentCoordinator::requestOpen` | `LocalFileStore::read` | `src/application/io/LocalFileStore.cpp` | Path → kandidat | Ingen mutasjon før suksess | Implemented |
+| 4 | `DocumentCoordinator::requestOpen` | `DocumentSession::replace` | `src/application/document/DocumentSession.cpp` | Kandidat → ny token | opened etter commit | Implemented |
+| 5 | `DocumentCoordinator::save` | `LocalFileStore::writeAtomic` | `src/application/io/LocalFileStore.cpp` | Snapshot + expected → SavedDocument | Konflikt stopper save | Implemented |
+| 6 | `DocumentCoordinator::save` | `DocumentSession::markSaved` | `src/application/document/DocumentSession.cpp` | Lagret snapshot → baseline | Beholder senere edits | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -51,16 +50,13 @@ Konsumenter: preview, tekstredigering, workspace og navigasjon. Alle må bruke r
 
 ## 7. Verifikasjon
 
-AT-001, AT-003, AT-009, AT-012, AT-016, AT-017, AT-018, AT-023: test avbrutt bytte, feilet lagring, undo til baseline, save av bestemt revisjon og én DocumentOpened per commit. Planlagt `tests/application/DocumentSessionTest.cpp` og `DocumentCoordinatorTest.cpp`.
+Relevante akseptanse-ID-er: AT-001, AT-003, AT-009, AT-012, AT-016, AT-017, AT-018, AT-023.
 
-Bevis: ingen applikasjonstest kjørt; testfiler ovenfor er planlagte. Ved implementering
-oppgis kommando, fixture, miljø, commit og faktisk utfall. Strukturkontroll alene
-oppfyller ikke atferdskravene.
+`DocumentTest` bekrefter dirty-cancel, failed-open, filkonflikt, save, undo og metadata. `WorkspaceTest` verifiserer ekte FXText-projeksjon.
+
+Evidence: [Fase P2](../../../docs/evidence/P2.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Proposed, revisjon 0.1, 2026-09-12. Dialogadapter, filmetadata og editorprojeksjon avklares i P1/P2. Ingen implementerte symboler eller utførte applikasjonstester.
-
-Ved endret offentlig kontrakt: oppdater konsumentene i registeret, dette kallkartet,
-berørte krav og kontrakttester i samme endring. Før status Ready skal relevante
-P0-spørsmål være avgjort; før Verified skal kapittel 7 inneholde testbevis.
+Implemented i P2. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
+Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.
