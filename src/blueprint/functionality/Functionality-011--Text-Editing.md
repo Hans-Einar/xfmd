@@ -4,7 +4,7 @@ kind: Functionality
 audience: User
 role: Service
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-003, UR-004, UR-009, SR-002, SR-006, SR-008, SR-013
 uses: FUNC-001, FUNC-007
@@ -23,25 +23,24 @@ Krav: UR-003, UR-004, UR-009, SR-002, SR-006, SR-008, SR-013. Definisjoner og no
 
 ## 3. Kontrakter og eierskap
 
-`EditController::applyEdit(Edit)`, `undo()`, `redo()`, `find(SearchRequest)`; `EditorWidget::applyProjection(SourceSnapshot)`. Edit har byte-range, replacement og opprinnelse. EditController eier undo/redo-operasjonene, DocumentSession eier tekst/baseline. Velg én undo-mekanisme; ikke parallelle FOX- og egne stacks.
+EditController::applyEdit/applyProjectedText/undo/redo/find eier undo-operasjoner. TextProjection konverterer LF-visning til rå kildeoffsets og opprinnelig newline-policy. EditorWidget eier bare FXText-projeksjonen.
 
 ## 4. Atferd, tilstand og feil
 
-Brukeredit valideres mot aktuell revisjon og oversettes til øktendring. Programmatisk projection gir ikke ny undo-post eller rekursiv edit. Undo/redo bruker samme apply-vei og varsler preview; vanlig søk endrer bare selection/cursor. Inputpolicy hindrer NUL/ugyldig UTF-8 fra paste, uten å avvise vanlig ufullstendig Markdown. Nytt dokument resetter undo; view mode gjør det ikke.
+Én undo-stack med 32 MiB historikkbudsjett. Programmatisk projeksjon gir ikke ny edit. BOM og urørte blandede linjesluttsekvenser bevares; nye linjer bruker filens første linjesluttformat. UTF-8-diff utvides til tegnsgrense. Søk endrer ikke dokument. Åpning resetter undo, view mode gjør det ikke.
 
 ## 5. Plumbing
 
-Alle symboler og kildefiler i tabellen er **planlagte**, ikke implementert kode.
-Bibliotekskall verifiseres mot valgt dependency-versjon før implementering.
+Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `FOX insert/delete/replace event` | `EditorWidget::onChanged` | `src/application/ui/EditorWidget.cpp` | FOX-endring → bytebasert Edit | Ignorer projection-origin; valider inndata. | Planned |
-| 2 | `EditorWidget::onChanged / undo / redo` | `EditController::applyEdit` | `src/application/document/EditController.cpp` | Edit + forventet revisjon | Mismatch krever re-sync, ikke blind mutasjon. | Planned |
-| 3 | `EditController::applyEdit` | `DocumentSession::applyEdit` | `src/application/document/DocumentSession.cpp` | Byte-range + replacement → Revision | Oppdater baseline-sammenligning/dirty. | Planned |
-| 4 | `EditController::applyEdit` | `EditorWidget::applyProjection` | `src/application/ui/EditorWidget.cpp` | Bekreftet tekst → editor | Behold markør/selection; undertrykk event-loop. | Planned |
-| 5 | `EditController::applyEdit` | `PreviewCoordinator::schedule` | `src/application/preview/PreviewCoordinator.cpp` | Ny Revision | Én planlegging per faktisk edit. | Planned |
-| 6 | `CommandRouter::find` | `EditController::find` | `src/application/document/EditController.cpp` | SearchRequest → treff/selection | Ingen tekst-/dirty-endring. | Planned |
+| 1 | `FXText edit event` | `EditorWidget::onChanged` | `src/application/ui/EditorWidget.cpp` | FXString → edited callback | Projection ignoreres | Implemented |
+| 2 | `Application edited callback` | `EditController::applyProjectedText` | `src/application/document/EditController.cpp` | LF text → Edit | Feil gjenoppretter projeksjon | Implemented |
+| 3 | `EditController::applyProjectedText` | `TextProjection::difference` | `src/application/document/TextProjection.cpp` | Ny tekst → raw edit | UTF-8/newline mapping | Implemented |
+| 4 | `EditController::apply` | `DocumentSession::applyEdit` | `src/application/document/DocumentSession.cpp` | Edit → ny Revision | Input valideres | Implemented |
+| 5 | `EditController changed callback` | `Application::updateUi` | `src/application/Application.cpp` | Snapshot → editor/title | contentChanged varsler preview | Implemented |
+| 6 | `Application::execute` | `EditController::find` | `src/application/document/EditController.cpp` | Query → projected offset | Ingen dirty-endring | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -51,16 +50,13 @@ Live preview konsumerer edits; dokumentøkt/lagring brukes uendret. Nye editorha
 
 ## 7. Verifikasjon
 
-AT-003, AT-004, AT-009, AT-012, AT-016, AT-018, AT-023: Unicode-range, CRLF/BOM, paste, undo til lagret baseline, redo etter ny edit, søk uten dirty og projection uten duplikat. Planlagt `tests/application/EditControllerTest.cpp` og ekte FXText-integrasjon.
+Relevante akseptanse-ID-er: AT-003, AT-004, AT-009, AT-012, AT-016, AT-018, AT-023.
 
-Bevis: ingen applikasjonstest kjørt; testfiler ovenfor er planlagte. Ved implementering
-oppgis kommando, fixture, miljø, commit og faktisk utfall. Strukturkontroll alene
-oppfyller ikke atferdskravene.
+`DocumentTest` og `WorkspaceTest` bekrefter Unicode-edit, mixed EOL/BOM, dirty-baseline, ekte editor-events, undo/redo og søk.
+
+Evidence: [Fase P2](../../../docs/evidence/P2.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Proposed, revisjon 0.1, 2026-09-12. P0/P1 avklarer byteposisjoner, CRLF/BOM og hvilken undo-stack som brukes. Ingen garanti om tapsfri FOX-redigering før roundtrip-testene passerer.
-
-Ved endret offentlig kontrakt: oppdater konsumentene i registeret, dette kallkartet,
-berørte krav og kontrakttester i samme endring. Før status Ready skal relevante
-P0-spørsmål være avgjort; før Verified skal kapittel 7 inneholde testbevis.
+Implemented i P2. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
+Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.
