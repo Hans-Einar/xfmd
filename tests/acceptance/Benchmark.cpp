@@ -26,14 +26,15 @@ int main(int argc, char** argv) {
     std::ofstream(argv[1], std::ios::binary) << source;
   std::vector<double> parseTimes, layoutTimes, totals;
   std::size_t runs = 0;
-  const int samples=(argc>2 && std::string(argv[2])=="quick")?3:31;
+  const int samples = (argc > 2 && std::string(argv[2]) == "quick") ? 3 : 31;
   for (int i = 0; i < samples; ++i) {
     auto start = std::chrono::steady_clock::now();
     auto model = parser.parse({{1, 1}, source, "benchmark.md", false});
     auto parsed = std::chrono::steady_clock::now();
-    LayoutRequest request{675,std::uint64_t(i)};
-    if(std::getenv("XFMD_BENCH_PAGED"))request.profile.mode=LayoutMode::Paged;
-    auto frame = renderer.layout(*model,request,metrics);
+    LayoutRequest request{675, std::uint64_t(i)};
+    if (std::getenv("XFMD_BENCH_PAGED"))
+      request.profile.mode = LayoutMode::Paged;
+    auto frame = renderer.layout(*model, request, metrics);
     auto end = std::chrono::steady_clock::now();
     runs = frame->runs.size();
     double parse = std::chrono::duration<double, std::milli>(parsed - start).count();
@@ -48,11 +49,11 @@ int main(int argc, char** argv) {
   }
   auto p95 = [](std::vector<double> times) {
     std::sort(times.begin(), times.end());
-    return times[std::size_t((times.size()-1)*.95)];
+    return times[std::size_t((times.size() - 1) * .95)];
   };
   struct rusage usage{};
   getrusage(RUSAGE_SELF, &usage);
-  std::cout << "bytes=" << source.size() << " runs=" << runs << " samples=" << samples-1 << "\n"
+  std::cout << "bytes=" << source.size() << " runs=" << runs << " samples=" << samples - 1 << "\n"
             << "parse_p95_ms=" << p95(parseTimes) << " layout_p95_ms=" << p95(layoutTimes)
             << " total_p95_ms=" << p95(totals) << " peak_rss_kib=" << usage.ru_maxrss << '\n';
 }
