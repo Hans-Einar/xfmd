@@ -1,11 +1,11 @@
 #pragma once
-#include <cstdint>
+#include "application/scroll/ScrollDynamics.h"
 #include <fx.h>
 namespace xfmd {
 // FOX 1.6 wheel animation with subpixel movement retained between wheel events.
 class FoxWheelScrollBar : public FX::FXScrollBar {
   FXDECLARE(FoxWheelScrollBar)
-  std::int64_t remainder = 0;
+  ScrollDynamics motion;
 
 protected:
   FoxWheelScrollBar() = default;

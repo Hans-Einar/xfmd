@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Mechanism
 owner: application
-status: Proposed
+status: Ready
 scope: Future
 requirements: UR-011, UR-015, UR-016, SR-002, SR-015, SR-019
 uses: FUNC-014, FUNC-006
@@ -41,8 +41,8 @@ Først flyttes baseline-reglene uendret. Deretter eier adapteren én retargetbar
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `FOX SEL_MOUSEWHEEL` | `FoxWheelScrollBar::onMouseWheel` | `src/application/adapters/FoxWheelScrollBar.cpp` | FXEvent → ScrollInput | en inputvei, konsumér én gang | Planned |
-| 2 | `FoxWheelScrollBar::onMouseWheel` | `ScrollDynamics::advance` | `src/application/scroll/ScrollDynamics.cpp` | input/profil/range → clamped mål | rest og hastighet per bar | Planned |
+| 1 | `FOX SEL_MOUSEWHEEL` | `FoxWheelScrollBar::onMouseWheel` | `src/application/adapters/FoxWheelScrollBar.cpp` | FXEvent → ScrollInput | en inputvei, konsumér én gang | Implemented |
+| 2 | `FoxWheelScrollBar::onMouseWheel` | `ScrollDynamics::advance` | `src/application/scroll/ScrollDynamics.cpp` | input/profil/range → clamped mål | rest og hastighet per bar | Implemented |
 | 3 | `FOX timeout` | `FoxWheelScrollBar::onMotionTick` | `src/application/adapters/FoxWheelScrollBar.cpp` | mål → position + SEL_CHANGED | slutt gir SEL_COMMAND; ingen dobbel timer | Planned |
 
 ## 6. Gjenbruk og avhengigheter
@@ -58,5 +58,5 @@ AT-012, AT-025, AT-029, AT-030, AT-035, AT-039: planlagt verifikasjon; ingen imp
 ## 8. Status, risiko og endringskonsekvenser
 
 Revisjon 1.1, 2026-09-13. Alle nye kall i kapittel 5 er Planned.
-P9 måler inputkvalitet. Første implementasjon bruker FOX-hook. XI2 er en eksplisitt senere adapter dersom målingen viser tapt nødvendig oppløsning; den må erstatte, ikke supplere, den samme core-eventstrømmen. Ingen endring av libinput, xfw eller system-FOX.
+P9 har avklart core-eventveien; se [P9](../../../docs/evidence/P9.md). P10-M1 trekker ut rest/clamp til ScrollDynamics; akselerasjon og egen timer følger M3. Første implementasjon bruker FOX-hook. XI2 er en eksplisitt senere adapter dersom målingen viser tapt nødvendig oppløsning; den må erstatte, ikke supplere, den samme core-eventstrømmen. Ingen endring av libinput, xfw eller system-FOX.
 [Integrasjonsdesign](../../../softwareDesign.md) og [faseplan](../../../implementationPlan.md) gir kontekst.

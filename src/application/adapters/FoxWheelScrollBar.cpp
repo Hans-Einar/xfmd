@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <cstdio>
+#include <cstdint>
 using namespace FX;
 namespace xfmd {
 FXDEFMAP(FoxWheelScrollBar)
@@ -41,12 +42,7 @@ long FoxWheelScrollBar::onMouseWheel(FXObject*, FXSelector, void* data) {
   const int base = getApp()->hasTimeout(this, ID_TIMEWHEEL) ? dragpoint : pos;
   getApp()->removeTimeout(this, ID_TIMEWHEEL);
   getApp()->removeTimeout(this, ID_AUTOSCROLL);
-  const auto movement = remainder - std::int64_t(event.code) * unit;
-  const auto requested = std::int64_t(base) + movement / 120;
-  remainder = movement % 120;
-  dragpoint = int(std::clamp<std::int64_t>(requested, 0, std::max(0, range - page)));
-  if ((dragpoint == 0 && movement < 0) || (dragpoint == range - page && movement > 0))
-    remainder = 0; // Do not accumulate pressure beyond an edge.
+  dragpoint = motion.advance(event.code / 120.0, unit, base, range - page);
   if (dragpoint == pos) {
     dragpoint = 0;
     return 1;

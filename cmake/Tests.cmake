@@ -46,3 +46,5 @@ target_link_libraries(SidebarGuiTest PRIVATE X11::X11)
 
 target_link_libraries(WheelGuiTest PRIVATE X11::X11)
 target_link_libraries(WorkPathGuiTest PRIVATE X11::X11)
+
+xfmd_test(ScrollMotionTest tests/application/ScrollMotionTest.cpp xfmd_scroll)
