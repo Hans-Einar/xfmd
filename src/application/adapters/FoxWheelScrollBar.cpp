@@ -23,6 +23,10 @@ FXScrollBar* FoxWheelScrollBar::replace(FXScrollBar* previous) {
   delete previous;
   return bar;
 }
+void FoxWheelScrollBar::configureTree(FXWindow* root,const ScrollProfile& value) {
+  if(auto* bar=dynamic_cast<FoxWheelScrollBar*>(root))bar->setProfile(value);
+  for(auto* child=root->getFirst();child;child=child->getNext())configureTree(child,value);
+}
 long FoxWheelScrollBar::onMouseWheel(FXObject*, FXSelector, void* data) {
   const auto& event = *static_cast<FXEvent*>(data);
   if (!isEnabled() || (event.state & (LEFTBUTTONMASK | MIDDLEBUTTONMASK | RIGHTBUTTONMASK)))
@@ -42,7 +46,8 @@ long FoxWheelScrollBar::onMouseWheel(FXObject*, FXSelector, void* data) {
   const int base = getApp()->hasTimeout(this, ID_TIMEWHEEL) ? dragpoint : pos;
   getApp()->removeTimeout(this, ID_TIMEWHEEL);
   getApp()->removeTimeout(this, ID_AUTOSCROLL);
-  dragpoint = motion.advance(event.code / 120.0, unit, base, range - page);
+  const double scale=(event.state & (ALTMASK|CONTROLMASK)) ? 1.0 : profile.speed;
+  dragpoint = motion.advance(event.code / 120.0, unit * scale, base, range - page);
   if (dragpoint == pos) {
     dragpoint = 0;
     return 1;

@@ -1,6 +1,7 @@
 #pragma once
 #include "adapters/FoxRenderHost.h"
 #include "adapters/FoxScheduler.h"
+#include "adapters/FoxPreferencesStore.h"
 #include "adapters/FoxTextMetrics.h"
 #include "commands/CommandRouter.h"
 #include "contracts/IInterpreter.h"
@@ -23,6 +24,8 @@ public:
   DocumentCoordinator documents{session, files};
   EditController edits{session};
   CommandRouter commands;
+  std::unique_ptr<FoxPreferencesStore> preferencesStore;
+  std::unique_ptr<PreferencesService> preferences;
   XfmdWindow* window = nullptr;
   std::unique_ptr<ViewModeController> views;
   std::unique_ptr<FX::FXFont> editorFont;

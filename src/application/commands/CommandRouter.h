@@ -19,6 +19,7 @@ public:
     Sidebar,
     Back,
     Forward,
+    Preferences,
     Last
   };
   std::function<void(Command)> action;

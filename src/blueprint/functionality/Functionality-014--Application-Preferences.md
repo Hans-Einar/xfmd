@@ -4,7 +4,7 @@ kind: Functionality
 audience: User
 role: Service
 owner: application
-status: Proposed
+status: Implemented
 scope: Future
 requirements: UR-015, UR-017, SR-002, SR-018
 uses: none
@@ -23,7 +23,7 @@ Akseptanse: AT-012, AT-029, AT-031, AT-038.
 
 ## 3. Kontrakter og eierskap
 
-Planlagt `PreferencesService::begin/validate/commit/cancel` bruker `PreferencesDraft` og immutable `PreferencesSnapshot{version, scroll, paperDefaults}`. `PreferencesDialog` eier widgets og et isolert prøvefelt. `FoxPreferencesStore::load/save` bruker xfmds eksisterende FXRegistry med egne grupper `Scroll`/`Page`; `WorkPaths` bevares. FOX-/filformatdetaljer forblir i application.
+`PreferencesService::begin/validate/commit/cancel` bruker `PreferencesDraft` og immutable `PreferencesSnapshot{version, scroll, paperDefaults}`. `PreferencesDialog` eier widgets og et isolert prøvefelt. `FoxPreferencesStore::load/save` bruker xfmds eksisterende FXRegistry med egne grupper `Scroll`/`Page`; `WorkPaths` bevares. FOX-/filformatdetaljer forblir i application.
 
 Commit validerer først, lagrer gjennom store og publiserer nytt snapshot til levende scrollkonsumenter etter suksess. Callback sender preferanserevisjon; hver konsument nullstiller gammel bevegelsestilstand. Det finnes én service per Application. Framtidige ukjente nøkler bevares; nyere uforstått schema skrives ikke over.
 
@@ -35,9 +35,9 @@ OK er commit; Cancel eller vinduskryss forkaster draft. Prøvefeltet bruker samm
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `CommandRouter::dispatch Preferences` | `PreferencesService::begin` | `src/application/preferences/PreferencesService.cpp` | aktiv profil → draft | ingen bufferendring | Planned |
-| 2 | `PreferencesDialog OK` | `PreferencesService::commit` | `src/application/preferences/PreferencesService.cpp` | validerte verdier → snapshot | feil beholder draft | Planned |
-| 3 | `PreferencesService::commit` | `FoxPreferencesStore::save` | `src/application/adapters/FoxPreferencesStore.cpp` | schema → vedvarende profil | publiser først etter suksess | Planned |
+| 1 | `PreferencesDialog constructor` | `PreferencesService::begin` | `src/application/preferences/PreferencesService.h` | aktiv profil → draft | ingen bufferendring | Implemented |
+| 2 | `PreferencesDialog OK` | `PreferencesService::commit` | `src/application/preferences/PreferencesService.cpp` | validerte verdier → snapshot | feil beholder draft | Implemented |
+| 3 | `PreferencesService::commit` | `FoxPreferencesStore::save` | `src/application/adapters/FoxPreferencesStore.cpp` | schema → vedvarende profil | publiser først etter suksess | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -47,10 +47,10 @@ Konsumenter: FTR-006, FUNC-015 og FUNC-010; papirdefaults deles med FTR-007. Eks
 
 Unit: schema, grenser, schema-migrering, feil og cancel. Diskadaptertest: lagre/les med ukjente nøkler og bevart WorkPaths. FOX-test: Edit → Preferences, prøvefelt, OK/Cancel og restart.
 
-AT-012, AT-029, AT-031, AT-038: planlagt verifikasjon; ingen implementasjonsbevis for utvidelsen.
+AT-012, AT-029, AT-031, AT-038: se [P10-bevis](../../../docs/evidence/P10.md); A4-integrasjonen fullføres i P11.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Revisjon 1.1, 2026-09-13. Alle nye kall i kapittel 5 er Planned.
+Revisjon 1.1, 2026-09-13. Kallene i kapittel 5 er implementert i P10-M2.
 P9 avklarer lagringsadapter; implementeres i P10. Papirprofil bygges på samme service i P11.
 [Integrasjonsdesign](../../../softwareDesign.md) og [faseplan](../../../implementationPlan.md) gir kontekst.

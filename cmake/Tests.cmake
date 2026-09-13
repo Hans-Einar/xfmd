@@ -48,3 +48,8 @@ target_link_libraries(WheelGuiTest PRIVATE X11::X11)
 target_link_libraries(WorkPathGuiTest PRIVATE X11::X11)
 
 xfmd_test(ScrollMotionTest tests/application/ScrollMotionTest.cpp xfmd_scroll)
+
+add_executable(PreferencesTest tests/application/PreferencesTest.cpp)
+target_include_directories(PreferencesTest PRIVATE tests)
+target_link_libraries(PreferencesTest PRIVATE xfmd_application)
+add_test(NAME PreferencesTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/run_with_xvfb.py $<TARGET_FILE:PreferencesTest>)
