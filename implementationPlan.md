@@ -250,3 +250,13 @@ Maks 64 kolonner og 50 000 celler; eksisterende glyph-/run-/sidegrenser gjelder.
 P14-status: M1 (`4ac475a`) og M2 (`6fd8469`) er implementert; M3 samler endelig
 verifikasjon, TextProjection-minneretting og installasjon. Se
 [P14-evidens](docs/evidence/P14.md). Egen PR/CI kontrolleres før merge.
+
+## P15 — sidepanel med dokumentindeks og referanser
+
+Branch `phase/p15-document-index`, egen PR, commit ved hver milestone.
+
+- M1: krav/blueprints, semantisk indeksering og bounded referanse-worker med tester.
+- M2: Files/Index-faner, delt kapittel-/referansetre, enkeltklikk og kildeankre.
+  Gjenbruk filtransaksjoner, preview-modell og scrolladapter; isolert FOX-test.
+- M3: review av stale/dirty/livstid, regresjon og visuell evidens, dokumentasjon,
+  installasjon, CI og merge. Kort målrettet verifikasjon på batteri.

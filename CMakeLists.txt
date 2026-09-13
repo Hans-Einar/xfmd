@@ -50,6 +50,8 @@ add_library(xfmd_navigation
   src/application/navigation/LinkResolver.cpp src/application/navigation/HistoryStore.cpp
   src/application/navigation/NavigationCoordinator.cpp)
 target_link_libraries(xfmd_navigation PUBLIC xfmd_document xfmd_scroll)
+add_library(xfmd_index src/application/index/DocumentIndex.cpp src/application/index/ReferenceWorker.cpp)
+target_link_libraries(xfmd_index PUBLIC xfmd_navigation Threads::Threads)
 add_library(xfmd_workspace
   src/application/workspace/WorkPathHistory.cpp
   src/application/workspace/FileNameFilter.cpp
@@ -74,7 +76,7 @@ add_library(xfmd_application
   src/application/adapters/FoxRenderHost.cpp src/application/adapters/FoxScheduler.cpp
   src/application/adapters/FoxWheelScrollBar.cpp)
 target_link_libraries(xfmd_application PUBLIC
-  xfmd_export xfmd_typography xfmd_workspace xfmd_document xfmd_preview xfmd_scroll xfmd_navigation xfmd_interpreter xfmd_renderer PkgConfig::FOX X11::X11 X11::Xrandr)
+  xfmd_index xfmd_export xfmd_typography xfmd_workspace xfmd_document xfmd_preview xfmd_scroll xfmd_navigation xfmd_interpreter xfmd_renderer PkgConfig::FOX X11::X11 X11::Xrandr)
 add_executable(xfmd src/application/main.cpp)
 target_link_libraries(xfmd PRIVATE xfmd_application)
 

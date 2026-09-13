@@ -12,6 +12,8 @@ xfmd_test(RendererTest tests/renderer/RendererTest.cpp xfmd_interpreter xfmd_ren
 xfmd_test(PreviewTest tests/application/PreviewTest.cpp xfmd_preview xfmd_renderer)
 xfmd_test(ScrollTest tests/application/ScrollTest.cpp xfmd_scroll xfmd_interpreter xfmd_renderer)
 xfmd_test(WorkPathTest tests/application/WorkPathTest.cpp xfmd_workspace)
+xfmd_test(DocumentIndexTest tests/application/DocumentIndexTest.cpp xfmd_index xfmd_interpreter)
+xfmd_test(ReferenceWorkerTest tests/application/ReferenceWorkerTest.cpp xfmd_index xfmd_interpreter)
 xfmd_test(NavigationTest tests/application/NavigationTest.cpp xfmd_navigation)
 add_test(NAME BlueprintStructure COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/validate_blueprints.py)
 add_test(NAME LayerBoundaries COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/check_layers.py)

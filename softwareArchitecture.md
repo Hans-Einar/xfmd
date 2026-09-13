@@ -290,3 +290,16 @@ P14s sluttmåling avdekket kapasitetdobling i editorens TextProjection, uavhengi
 av Markdown-rendereren. Offsetkart og projisert tekst reserverer nå kapasitet
 fra inputlengden før konvertering. Det reduserer GUI-minnetoppen uten å endre
 kildeoffsets eller bruke allocator-/plattformspesifikke oppryddingskall.
+
+## P15: planlagt dokumentindeks
+
+`application/index/DocumentIndex` trekker overskrifter og lenker ut av den aksepterte
+SemanticDocument. PreviewCoordinator publiserer modellen før layout, slik at også
+layoutfeil tillater navigasjon. Ingen ekstra parsing av aktiv buffer.
+`ReferenceWorker` eier én tråd og kø for lazy lokale filoverskrifter; den får en
+egen IInterpreter og LocalFileStore i composition root. Generasjon avviser gamle
+resultater, maks 32 utestående forespørsler, eksisterende 8 MiB filgrense.
+`ui/IndexPanel` komponerer to `NavigationTree`-widgets med typed actions som verdier.
+`WorkspacePanel` eier FXTabBook. ApplicationIndex kobler portene og eier polltimer.
+Navigering skjer etter FOXs release-dispatch og bruker NavigationCoordinator;
+klikk beholder byteankre, dirty og historikk. Ingen renderer-avhengig trelogikk.
