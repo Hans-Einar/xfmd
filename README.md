@@ -85,6 +85,8 @@ scope. Preview har fontfallback; editorens glyphdekning avhenger av valgt system
 - [Krav og use cases](xfmd_requirements.md)
 - [Arkitektur og filkart](softwareArchitecture.md)
 - [Analyse: Xfe-komponenter, utseende og videre integrasjon](docs/xfe-integration-study.md)
+- [FOX UI-forslag og native prototyper](fox_ui_improvements.md)
+- [FOX UX-forslag: verktøylinje og arbeidsflate](fox_ux_improvements.md)
 - [Arbeidsmåte](docs/working-method.md) og [blueprints](src/blueprint/README.md)
 - [Faser og milepæler](implementationPlan.md)
 - [Oppdatert bidragsguide](CONTRIBUTING.md) og [opprinnelige agentregler](AGENTS.md)
