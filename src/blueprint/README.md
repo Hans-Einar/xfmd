@@ -1,7 +1,8 @@
 # Blueprint-register
 
 Status: Implemented. Baseline hadde fire features og elleve functionality-objekter;
-P8 legger til FTR-005 og FUNC-012/013 for arbeidsområder og filtrering. Samlet bevis og begrensninger: [P7](../../docs/evidence/P7.md). [Arbeidsmåten](../../docs/working-method.md)
+P8 legger til FTR-005 og FUNC-012/013 for arbeidsområder og filtrering;
+se [P8-bevis](../../docs/evidence/P8.md). Samlet bevis og begrensninger: [P7](../../docs/evidence/P7.md). [Arbeidsmåten](../../docs/working-method.md)
 definerer begrepene; [malene](templates/README.md) brukes ved nye objekter.
 
 ## Designobjekter

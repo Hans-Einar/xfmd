@@ -65,7 +65,7 @@ Ingen avhengighet til interpreter/renderer. Dokumentåpning bruker Application::
 
 `WorkPathTest` for matching, historikk og scanner; `WorkPathGuiTest` for
 native input, oppstart, filter og arbeidsrot. Eksisterende SidebarGuiTest og
-WheelGuiTest skal fortsatt bestå. Bevis føres i P8 etter utførte tester.
+WheelGuiTest består. Bevis: [P8-verifikasjon](../../../docs/evidence/P8.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 

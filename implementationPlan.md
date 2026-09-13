@@ -64,3 +64,6 @@ Byggkommandoer finnes i [README](README.md); stil og bidragsregler i
 Branch: `phase/p8-work-paths`. M1: UR-012–014 og FTR-005/FUNC-012/013 design.
 M2: arbeidsrot, historikk, stoppbar skanning og FOX-panel, CLI og brukerhjelp.
 M3: rene/native GUI-regresjoner, sanitizer, plumbing og CI før integrasjon.
+
+P8 M1 (`5c3b2d3`) definerte designet; M2 (`bbe9062`) implementerte panel,
+arbeidsstier og filter med tester. M3 dokumenterer [verifikasjon og visuell kontroll](docs/evidence/P8.md).

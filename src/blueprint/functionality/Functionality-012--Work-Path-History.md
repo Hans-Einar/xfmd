@@ -14,30 +14,29 @@ uses: none
 
 ## 1. Hensikt og avgrensning
 
-Arbeidsroten gir et fokusert filområde med gjenbrukbar filtrering og historikk.
-Dokumentnavigasjon, parsing og lagring beholder eksisterende eiere.
+Eie arbeidsroten, avgrensningspolicy og historikk som rene application-data.
+Dette er uavhengig av dokumenthistorikk, filer i editoren og GUI-skanning.
 
 ## 2. Krav og akseptanse
 
-UR-012, UR-013; se [kravspesifikasjonen](../../../xfmd_requirements.md).
-AT-026, AT-027, AT-028 dekker oppstart, rotvalg, persistens og kjedet filtrering.
+UR-012 / AT-026 og UR-013 / AT-027; se
+[kravspesifikasjonen](../../../xfmd_requirements.md).
 
 ## 3. Kontrakter og eierskap
 
-WorkPathHistory eier kanonisk rot og unik MRU-liste med maksimalt 32 stier.
-WorkspacePanel eier FOX-filterkontroller og historikkliste, og persisterer via FOX-registry.
-SidebarWidget eier FXTreeList-noder og en DirectoryScanner. FileNameFilter er ren
-navnematching. Scanner-worker eier kun filsystemdata; GUI poller nye treff.
+WorkPathHistory eier kanonisk rot, home og en unik MRU-liste på maksimalt 32 stier.
+activate validerer mappe/lesbarhet før mutasjon; broaderRoot foreslår home eller /.
+contains sammenligner path-komponenter, og displayPath forkorter bare home-prefix.
+WorkspacePanel persisterer entries via FOX-registry og bruker absolutte stier
+ved historikkvalg selv om listen viser ~/… . Ingen FOX-avhengighet i tjenesten.
 
 ## 4. Atferd, tilstand og feil
 
-Standardrot er home, mappeargument setter rot, filargument bruker foreldre-mappen.
-Roten vises utvidet. Dobbeltklikk rot gir home og deretter /; høyreklikk mappe
-og historikkvalg går gjennom samme validering. Feil beholder gammel rot.
-Filter er (valgte endelser OR) AND navnemønster. Ingen knapper betyr alle endelser.
-Med filter vises kun treffenes forfedre, uten filter lastes barn ved utvidelse.
-Søk kanselleres ved rot-/filterbytte. Uleselige mapper rapporteres; symlinkmapper
-følges ikke og filsymlinker utenfor rot utelates. Dokumenttilstand endres ikke.
+Defaultrot er alltid home, også når en tidligere historikk lastes. Vellykket
+activate flytter stien først i MRU; ugyldig sti kaster uten å endre tilstanden.
+restore beholder manglende mapper slik at valg kan gi en forståelig feilmelding.
+En rot utenfor home utvides også til home, så til /; / forblir /. Tjenesten
+endrer aldri prosessens PWD, dokumentbuffer, synlighet eller dokumenthistorikk.
 
 ## 5. Plumbing
 
@@ -51,14 +50,15 @@ følges ikke og filsymlinker utenfor rot utelates. Dokumenttilstand endres ikke.
 
 ## 6. Gjenbruk og avhengigheter
 
-FileNameFilter og DirectoryScanner brukes av samme tre ved oppstart, filter og rotbytte.
-Ingen avhengighet til interpreter/renderer. Dokumentåpning bruker Application::open.
+WorkspacePanel bruker rot, visningsetiketter og MRU ved alle brukerinnganger.
+DirectoryScanner og SidebarWidget bruker contains for samme stigrense-policy.
+Ingen avhengighet til interpreter, renderer eller dokumenthistorikk.
 
 ## 7. Verifikasjon
 
 `WorkPathTest` for matching, historikk og scanner; `WorkPathGuiTest` for
 native input, oppstart, filter og arbeidsrot. Eksisterende SidebarGuiTest og
-WheelGuiTest skal fortsatt bestå. Bevis føres i P8 etter utførte tester.
+WheelGuiTest består. Bevis: [P8-verifikasjon](../../../docs/evidence/P8.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 

@@ -14,30 +14,30 @@ uses: FUNC-012
 
 ## 1. Hensikt og avgrensning
 
-Arbeidsroten gir et fokusert filområde med gjenbrukbar filtrering og historikk.
-Dokumentnavigasjon, parsing og lagring beholder eksisterende eiere.
+Levere filnavnmatches og treinnhold uten å blokkere FOX med rekursivt søk.
+Root/historikk tilhører FUNC-012; dokumentåpning følger eksisterende tjenester.
 
 ## 2. Krav og akseptanse
 
-UR-014; se [kravspesifikasjonen](../../../xfmd_requirements.md).
-AT-026, AT-027, AT-028 dekker oppstart, rotvalg, persistens og kjedet filtrering.
+UR-014 / AT-028; se [kravspesifikasjonen](../../../xfmd_requirements.md).
 
 ## 3. Kontrakter og eierskap
 
-WorkPathHistory eier kanonisk rot og unik MRU-liste med maksimalt 32 stier.
-WorkspacePanel eier FOX-filterkontroller og historikkliste, og persisterer via FOX-registry.
-SidebarWidget eier FXTreeList-noder og en DirectoryScanner. FileNameFilter er ren
-navnematching. Scanner-worker eier kun filsystemdata; GUI poller nye treff.
+FileNameFilter eier typeflagg og navnemønster, uten FOX eller fil-I/O.
+DirectoryScanner eier én worker, katalogjobber og maks 4096 ventende oppføringer.
+GUI henter maks 512 per poll via take; worker kaller aldri FOX. SidebarWidget
+eier FXTreeList-noder, path→node-register og hvilke mapper som er forespurt.
+setRoot stopper/joiner gammel worker før gamle oppføringer slettes.
 
 ## 4. Atferd, tilstand og feil
 
-Standardrot er home, mappeargument setter rot, filargument bruker foreldre-mappen.
-Roten vises utvidet. Dobbeltklikk rot gir home og deretter /; høyreklikk mappe
-og historikkvalg går gjennom samme validering. Feil beholder gammel rot.
-Filter er (valgte endelser OR) AND navnemønster. Ingen knapper betyr alle endelser.
-Med filter vises kun treffenes forfedre, uten filter lastes barn ved utvidelse.
-Søk kanselleres ved rot-/filterbytte. Uleselige mapper rapporteres; symlinkmapper
-følges ikke og filsymlinker utenfor rot utelates. Dokumenttilstand endres ikke.
+Valgte typer kombineres med OR, deretter AND med navn. Ingen typer betyr alle;
+uten wildcard matches delstreng, ellers hele navnet. ? teller UTF-8-tegn og
+ASCII-bokstaver matches case-insensitivt. Tomt filter leser direkte barn ved
+utvidelse; aktivt filter søker rekursivt og publiserer bare filer med treff.
+GUI legger til forfedremapper og beholder roten ved null treff. Uleselige mapper
+rapporteres; symlinkmapper traverseres ikke og filsymlinker utenfor rot utelates.
+Køens backpressure vekkes ved kansellering. Refresh starter ny skanning.
 
 ## 5. Plumbing
 
@@ -62,7 +62,7 @@ Ingen avhengighet til interpreter/renderer. Dokumentåpning bruker Application::
 
 `WorkPathTest` for matching, historikk og scanner; `WorkPathGuiTest` for
 native input, oppstart, filter og arbeidsrot. Eksisterende SidebarGuiTest og
-WheelGuiTest skal fortsatt bestå. Bevis føres i P8 etter utførte tester.
+WheelGuiTest består. Bevis: [P8-verifikasjon](../../../docs/evidence/P8.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 
