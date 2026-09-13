@@ -66,8 +66,8 @@ add_library(xfmd_application
   src/application/Application.cpp src/application/ApplicationCommands.cpp src/application/ApplicationExport.cpp
   src/application/commands/CommandRouter.cpp src/application/ui/XfmdWindow.cpp src/application/ui/IconResources.cpp
   src/application/ui/EditorWidget.cpp src/application/ui/SidebarWidget.cpp src/application/ui/WorkspacePanel.cpp
-  src/application/ui/ViewModeController.cpp src/application/adapters/FoxTextMetrics.cpp
-  src/application/adapters/ViewTransform.cpp src/application/adapters/FoxWindowMode.cpp
+  src/application/ui/ViewModeController.cpp
+  src/application/adapters/FoxCairoCanvas.cpp src/application/adapters/ViewTransform.cpp src/application/adapters/FoxWindowMode.cpp
   src/application/adapters/FoxRenderHost.cpp src/application/adapters/FoxScheduler.cpp
   src/application/adapters/FoxWheelScrollBar.cpp)
 target_link_libraries(xfmd_application PUBLIC

@@ -125,6 +125,7 @@ void Application::initialize(int& argc, char** argv) {
   window->workspacePanel->setWorkPath(FXSystem::getHomeDirectory().text());
   views->setMode(ViewMode::Preview);
   window->show(PLACEMENT_SCREEN);
+  preview->refresh();
 }
 void Application::wireDocument() {
   documents.chooseUnsaved = [this] {

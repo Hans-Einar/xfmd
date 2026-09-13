@@ -5,7 +5,7 @@ audience: User
 role: Workflow
 owner: application
 status: Implemented
-scope: Future
+scope: FirstRelease
 requirements: UR-018, SR-002, SR-005, SR-007, SR-010, SR-017
 uses: FUNC-001, FUNC-003, FUNC-004, FUNC-006, FUNC-016, FUNC-017
 ---

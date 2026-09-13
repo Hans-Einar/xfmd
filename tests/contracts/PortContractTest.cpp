@@ -15,7 +15,7 @@ struct TextInterpreter final : IInterpreter {
 };
 struct Metrics final : ITextMetrics {
   TextExtent measure(std::string_view text, FontSpec) override {
-    return {int(text.size()) * 8, 16, 12};
+    return {double(text.size()) * 8, 16, 12};
   }
 };
 struct TextRenderer final : IRenderer {

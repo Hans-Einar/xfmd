@@ -5,7 +5,7 @@ audience: Integration
 role: Adapter
 owner: application
 status: Implemented
-scope: Future
+scope: FirstRelease
 requirements: UR-020, SR-013
 uses: none
 ---
@@ -46,7 +46,7 @@ Konsumenter: FUNC-010 og packaging. Deler ingen tegnekode med dokumentrenderer; 
 
 Visuell kontroll på lys/mørk bakgrunn og alle størrelser; native FOX-window property og ren installasjon av desktop-entry kontrolleres. SVG-utkastet i denne dokumentendringen er et forslag, ikke installert ikon.
 
-AT-023, AT-034: planlagt verifikasjon; ingen implementasjonsbevis for utvidelsen.
+AT-023, AT-034: se fasebevis i [P13](../../../docs/evidence/P13.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 

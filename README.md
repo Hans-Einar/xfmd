@@ -2,14 +2,17 @@
 
 Native Markdown-viser og editor for Linux, bygget på FOX som companion til `xfw`
 og `xfi`. Første leveranse er implementert: typografisk visning, redigering med
-undo/redo, live preview, lokal lenkehistorikk og synkronisert scrolling.
+undo/redo, live preview, lokal lenkehistorikk, justerbar scrolling, A4-preview,
+PDF-eksport og fullscreen.
+
+![XFMD-ikon](packaging/icons/xfmd-64.png)
 
 ## Bygg og kjør
 
 Krever C++17-kompilator, CMake ≥3.20, Ninja, pkg-config, FOX ≥1.6.57 (1.6 API),
-libcurl-verktøyet `curl`, X11, Cairo og PangoCairo/Fontconfig (inkludert utviklingsfiler).
-PDF-verifikasjon bruker Poppler-verktøyene `pdfinfo` og `pdftotext`. Installer DejaVu Sans/Mono og gjerne Droid Sans
-Fallback eller Noto Sans CJK. Tester krever Python 3 og Xvfb.
+libcurl-verktøyet `curl`, X11/RandR, Cairo og PangoCairo/Fontconfig (inkludert utviklingsfiler).
+PDF-verifikasjon bruker Poppler-verktøyene `pdfinfo`, `pdftotext` og `pdftoppm`. Installer DejaVu Sans/Mono og gjerne Droid Sans
+Fallback eller Noto Sans CJK. Tester krever Python 3 og Xvfb. Fullscreen-testen bruker Window Maker når den er installert.
 
 ```sh
 ./tools/bootstrap_dependencies.sh
@@ -39,6 +42,8 @@ Prosjektlisens er fortsatt ikke valgt av eieren; ingen formell release er publis
 | Angre / gjør om / søk | Ctrl+Z / Ctrl+Y / Ctrl+F |
 | Preview / editor / delt visning | Ctrl+1 / Ctrl+2 / Ctrl+3 |
 | Sidepanel | F10 |
+| Fullscreen / tilbake | F11 / Escape |
+| Eksporter gjeldende buffer til PDF | Ctrl+Shift+E |
 | Tilbake / frem | Alt+Venstre / Alt+Høyre |
 
 Sidepanelet beholdes ved mappevalg og filåpning; skjul/vis det selv med F10.
@@ -90,9 +95,39 @@ Arbeidsrot og historikk endrer ikke dokumentbuffer, prosessens PWD eller
 sidepanelets synlighet. Dokumentlenker og Åpne-dialogen flytter ikke arbeidsroten.
 Filer av andre typer kan vises i treet, men bare `.md`/`.txt` kan åpnes i editoren.
 
-## Planlagt utvidelse
+## Preferences, scrolling og sidevisning
 
-[Designrevisjon 1.1](softwareDesign.md) beskriver Preferences med scrollhastighet/
-akselerasjon, A4-preview, PDF-eksport, fullscreen og [ikonforslag](docs/design/xfmd-icon-proposal.svg).
-Dette er **Proposed**, ikke tilgjengelige funksjoner ennå. Se [P9–P13-planen](implementationPlan.md#5-planlagt-utvidelse-p9p13)
-og oppdatert [blueprint-register](src/blueprint/README.md).
+**Edit → Preferences** justerer grunnhastighet og valgfri scrollakselerasjon.
+Prøv innstillingene i dialogens eget felt. OK lagrer profilen og oppdaterer
+editor, preview, sidetre og historikkliste; Cancel beholder tidligere profil.
+Standard er hastighet 1,5× med akselerasjon av. Alt bruker linjescroll og Ctrl
+sidescroll uten akselerasjon. FOX/X11 kan levere kvantiserte hjulhendelser;
+applikasjonen bruker ikke global libinput-hook og endrer ikke andre programmer.
+
+**View → Window wrap / A4 page preview** velger flytende eller paginert layout.
+A4 er portrett, med 20 mm marger som kan endres i Preferences. Fit page width
+og Actual size (100%) endrer bare visningsskala. Formatbytte bevarer kildeanker,
+redigering og delt visning. Lang kode får visuell wrap på papir, men kilden endres ikke.
+
+**File → Export PDF** eksporterer hele gjeldende buffer, inkludert ulagrede edits.
+Eksport fra Window wrap bruker samme A4-profil. PDF og preview deler fontforming,
+linje-/sideskift og glyphposisjoner. Du kan fortsette å redigere under eksport;
+status oppgir hvilken revisjon som ble eksportert. **File → Cancel PDF export**
+avbryter før publisering. Eksport lagrer ikke Markdown-filen og endrer ikke undo.
+Eksisterende PDF erstattes først etter vellykket skriving/flush; symlinks/hardlinks
+som mål avvises. Nye PDF-er er private (0600); eksisterende POSIX-modus bevares.
+Eierskap og utvidede attributter på tidligere PDF kopieres ikke.
+
+**View → Full Screen / F11** bruker Window Makers fullscreen på aktuell skjerm.
+F11 eller Escape går tilbake; en aktiv dialog får Escape først. Normal/maksimert
+geometri, sidepanel, splitter og visningsmodus bevares.
+
+Alle ikonstørrelser er committet og installeres med samme desktop-identitet.
+Ved endring av SVG-masteren: `python3 tools/generate_icons.py` (krever rsvg-convert).
+
+## Verifikasjon av P9–P13
+
+[Faseplanen](implementationPlan.md) og [sluttrapporten](docs/evidence/P13.md)
+knytter implementasjon til tester, målinger og kjente begrensninger.
+[Endringsnotater](RELEASE_NOTES.md) beskriver leveransen. Fysisk touchpad og
+fler-monitor hotplug må fortsatt prøves i den aktuelle desktop-oppsettingen.

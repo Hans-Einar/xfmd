@@ -1,7 +1,9 @@
 #include "application/Application.h"
 #include "support/TestSupport.h"
+#include <chrono>
 #include <filesystem>
 #include <fstream>
+#include <thread>
 #include <unistd.h>
 using namespace xfmd;
 void run() {
@@ -10,6 +12,12 @@ void run() {
   char* argv[] = {name, nullptr};
   Application application;
   application.initialize(argc, argv);
+  for (int i = 0; i < 100 && !application.host->interactive(); ++i) {
+    application.app.runWhileEvents();
+    std::this_thread::sleep_for(std::chrono::milliseconds(3));
+  }
+  CHECK(application.host->interactive());
+  CHECK(application.window->status->getText() == "0 bytes — saved");
   auto& app = application;
   for (const auto* key : {"Ctrl+O", "Ctrl+S", "Ctrl+Shift+S", "Ctrl+Z", "Ctrl+Y", "Ctrl+F",
                           "Ctrl+1", "Ctrl+2", "Ctrl+3", "F10", "Alt+Left", "Alt+Right"})

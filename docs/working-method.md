@@ -1,6 +1,6 @@
 # Arbeidsmåte: krav, features og functionality
 
-Status: Anvendt i P0–P7. Metoden er et praktisk eksperiment for agentarbeid. Den bruker
+Status: Anvendt i P0–P13. Metoden er et praktisk eksperiment for agentarbeid. Den bruker
 stabile designobjekter og eksplisitte endringsregler, uten sprintseremonier eller
 en foreløpig SDL-kompilator. Det er ikke en implementasjon av SDP, og andre
 repositoryer er ikke brukt som autoritative kilder.
@@ -129,3 +129,12 @@ status Proposed. Berørte eksisterende objekter beholder FirstRelease som opprin
 scope, men får Proposed-status for endret kontrakt. Deres Implemented plumbing og
 eldre bevis gjelder baseline; nye Planned-rader og akseptanse må verifiseres separat.
 Faseplanen P9–P13 beskriver neste leveranse; Future betyr ikke ubestemt utsettelse.
+
+## Revisjon 1.2: gjennomført implementasjon
+
+P9–P13 brukte phase-brancher, milestone-commits og egne PR-er som planlagt.
+Blueprint-registeret speiler nå Implemented/FirstRelease for de leverte objektene;
+Verified brukes ikke som synonym for fullført kode. Tester/evidence dekker mekanismer,
+native FOX, isolert Window Maker, PDF-leser/raster og feilveier. Fysiske touchpad- og
+monitorforsøk er tydelig avgrenset. Historiske revisjon 1.1-avsnitt over forklarer
+prosessen da objektene fremdeles var planlagt.

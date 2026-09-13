@@ -3,6 +3,7 @@
 #include "renderer/MarkdownRenderer.h"
 #include <algorithm>
 #include <chrono>
+#include <cmath>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -49,7 +50,7 @@ int main(int argc, char** argv) {
   }
   auto p95 = [](std::vector<double> times) {
     std::sort(times.begin(), times.end());
-    return times[std::size_t((times.size() - 1) * .95)];
+    return times[std::size_t(std::ceil(times.size() * .95)) - 1];
   };
   struct rusage usage{};
   getrusage(RUSAGE_SELF, &usage);

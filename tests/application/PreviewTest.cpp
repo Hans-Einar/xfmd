@@ -28,7 +28,7 @@ struct Metrics : ITextMetrics {
   std::thread::id owner = std::this_thread::get_id();
   TextExtent measure(std::string_view text, FontSpec) override {
     CHECK(std::this_thread::get_id() == owner);
-    return {int(text.size()) * 8, 16, 12};
+    return {double(text.size()) * 8, 16, 12};
   }
 };
 template <typename Predicate> void waitUntil(Predicate predicate) {

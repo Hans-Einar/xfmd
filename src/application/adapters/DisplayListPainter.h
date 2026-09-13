@@ -4,7 +4,7 @@
 namespace xfmd {
 class DisplayListPainter {
   FontCatalog& fonts;
-  void text(cairo_t*, const DrawRun&);
+  void text(cairo_t*, const RenderFrame&, const DrawRun&);
 
 public:
   explicit DisplayListPainter(FontCatalog& value) : fonts(value) {}

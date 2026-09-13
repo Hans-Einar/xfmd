@@ -1,7 +1,7 @@
 # Software Architecture Design: xfmd
 
-Status: **Implemented baseline P0–P8 + Proposed utvidelse 1.1**, 2026-09-13.
-Kapittel 1–12 beskriver implementasjonen; kapittel 13 er måldesign. Historiske veivalg og målinger finnes i [P0](docs/evidence/P0.md) og
+Status: **Implemented P0–P13, revisjon 1.2**, 2026-09-13.
+Kapittel 1–13 beskriver implementasjonen. Historiske veivalg og målinger finnes i [P0](docs/evidence/P0.md) og
 [sluttverifikasjonen](docs/evidence/P7.md).
 
 ## 1. Horisontale lag og avhengigheter
@@ -25,12 +25,12 @@ Application kjenner de konkrete interpreter-/renderer-implementasjonene.
 ## 2. Native presentasjon
 
 Editor er FXText med monospace-font. Preview er FoxRenderHost, en FXScrollArea
-som tegner rendererens display list med FXDCWindow. ITextMetrics måler samme
-fontsegmenter som host tegner. Proporsjonale overskrifter/brødtekst, fet/kursiv,
+som utfører DisplayListPainter på en Cairo image-overflate. SharedTextMetrics
+former Pango-glypher som både skjerm og PDF bruker. Proporsjonale overskrifter/brødtekst, fet/kursiv,
 monospace, bakgrunner og lenkeregioner krever ingen HTML/CSS-motor.
 
-Fontadapteren bruker DejaVu og søker CJK-fallback per segment. Målecache er
-begrenset til 4096 korte tekstnøkler. Editorens ene font kan mangle glypher;
+FontCatalog bruker DejaVu med Pango/Fontconfig-fallback. Shaping-cache er
+begrenset til 8192 tekstnøkler på maks 256 bytes. Editorens ene font kan mangle glypher;
 UTF-8 bevares uavhengig av glyphdekning. Fontvalg er systemavhengig.
 
 ## 3. Kildekart og individuelle roller
@@ -58,8 +58,8 @@ ligger ved tilhørende `.cpp`. Én hovedrolle per filpar.
 | `application/navigation/LinkResolver.cpp` | Lokal sti-/scheme-policy; ingen shell eller lasting. |
 | `application/scroll/ScrollCoordinator.cpp` | Begge retninger, guard, gyldig mapping og gjenoppretting. |
 | `application/scroll/AnchorMapper.cpp` | Kildeforankring og kontrollert tilnærming; ingen widgets. |
-| `application/adapters/FoxRenderHost.cpp` | FOX paint/resize/input, viewport og utføring av RenderFrame. |
-| `application/adapters/FoxTextMetrics.cpp` | Fontcache og tekstmåling via FOX; ingen Markdown-regler. |
+| `application/adapters/FoxRenderHost.cpp`, `FoxCairoCanvas.cpp` | Paint/resize/input, viewport og gjenbrukbar Cairo-bakbuffer med FOX-pixmapoverføring. |
+| `application/adapters/SharedTextMetrics.cpp`, `FontCatalog.cpp`, `DisplayListPainter.cpp` | Pango-shaping, fontidentitet og felles Cairo-glyphreplay; ingen Markdown-regler. |
 | `application/adapters/FoxWheelScrollBar.cpp` | Felles presis wheel-input for begge akser i sidetre, editor og preview; bevarer FOXs scrollbar-interaksjon. |
 | `application/adapters/FoxScheduler.cpp` | Debounce/kansellering og levetid via FOX-event loop. |
 | `application/io/LocalFileStore.cpp`, `InputPolicy.cpp` | Lesing, formatmetadata, kontrollert erstatningslagring og inputgrenser. |
@@ -104,7 +104,7 @@ FoxRenderHost::present. Blueprintenes kapittel 5 spesifiserer symbolene.
 
 300 ms debounce gjelder redigering; åpning starter straks. Én parser-worker har
 én aktiv og én siste ventende jobb. Arbeid kanselleres logisk med token; gamle
-resultater forkastes. FOX-måling, layout og paint skjer på GUI-tråden. Resize
+resultater forkastes. Preview-shaping, layout og paint skjer på GUI-tråden. Resize
 bruker gjeldende modell uten ny parsing. Foreldet frame er ikke interaktivt;
 nytt dokument fjerner gammelt frame. Feil beholder redigerbar kilde og synlig status.
 
@@ -144,7 +144,7 @@ hevder ikke full visuell conformance til alle CommonMark-eksempler.
 InputPolicy avviser ugyldig UTF-8, NUL, ikke-støttet filtype og filer over 8 MiB.
 HTML er inert tekst, bilder alttekst, lenker bare lokale dokumentstier. Ingen
 nettverksklient, shell-evaluering eller browser engine finnes i applikasjonen.
-Benchmark måler faktisk FOX-måling og parse/layout på et 1 MiB-corpus; resultater
+Benchmark måler faktisk Pango-shaping og parse/layout på et 1 MiB-corpus; resultater
 og kjente begrensninger føres separat fra kravene.
 
 ## 7. Byttbarhet og videre arbeid
@@ -191,8 +191,9 @@ FOX 1.6 regner wheel-bevegelse i heltallspiksler per hendelse. FoxWheelScrollBar
 bevarer rest i 1/120 pixel-enheter slik at små deltaer summeres, og bruker
 barens aktive animasjonsmål ved ny input. Rester nullstilles ved bevegelse ut
 over scrollgrensen; reversering har dermed ingen oppsamlet overskytende bevegelse.
-Standard linje-/sidehastighet, Alt/Ctrl, dragging og FOXs onTimeWheel med
-changed/command-varsler beholdes. Bare application kjenner FOX-detaljene.
+Alt/Ctrl og dragging beholder sin egen policy. ScrollDynamics eier hastighet/
+akselerasjon, mens FoxWheelScrollBar eier en 8 ms retargeterbar bevegelsestimer
+og standard changed/command-varsler. Bare application kjenner FOX-detaljene.
 
 Widget-konstruktørene erstatter begge standardbarene før create(), med samme
 parent, target, selector, stil og range/page/line. FOX-parenting eier adapterne
@@ -221,41 +222,52 @@ Application::startPath velger CLI-mappe eller dokument; vanlig open/bytte flytte
 ikke arbeidsroten. FOX-registry lagrer kun de 32 historikkstiene, mens defaultrot
 fortsatt er home ved neste oppstart. GUI-worker og timere stoppes før widgets slettes.
 
-## 13. Planlagt arkitekturutvidelse 1.1
+## 13. Integrert utvidelse P9–P13
 
-**Proposed, 2026-09-13:** Kapitel 1–12 beskriver baseline P0–P8 ved `0712c29`.
-Utvidelsen nedenfor erstatter ikke denne koden før P9–P13 er implementert.
-[Designrevisjonen](softwareDesign.md) begrunner valg, viser inputkjeden og definerer
-feil-/tilstandspolicy. [Faseplanen](implementationPlan.md#5-planlagt-utvidelse-p9p13)
-gir avhengigheter, milepæler og beslutningsporter.
+Se [P9](docs/evidence/P9.md) for tekniske beslutninger, [P10](docs/evidence/P10.md)
+for scrolling, [P11](docs/evidence/P11.md) for sider, [P12](docs/evidence/P12.md)
+for PDF og [P13](docs/evidence/P13.md) for samlet review.
 
-| Eier | Nytt/utvidet ansvar | Planlagte filer / kontrakter |
-| --- | --- | --- |
-| application / FUNC-014 | Profil, draft, validering og vedvarende preferences | `preferences/PreferencesService`, `adapters/FoxPreferencesStore`, `ui/PreferencesDialog` |
-| application / FUNC-015 | Wheelnormalisering og felles bevegelsespolicy | `scroll/ScrollDynamics`, `scroll/ScrollInput`, eksisterende `adapters/FoxWheelScrollBar` |
-| application / FUNC-016 | Fontressurser, shaping og felles glyphreplay | `adapters/FontCatalog`, `adapters/DisplayListPainter`, shaping-/metricsadapter |
-| renderer / FUNC-017 | Fysisk paginering fra målt flyt | `FlowLayout`, `PageComposer`; ingen native font- eller GUI-ressurser |
-| application / FUNC-018 | Frosset eksportjobb og transaksjonell PDF | `export/ExportCoordinator`, `adapters/PdfOutput`, `io/PdfFilePublisher` |
-| application / FUNC-019 | App-/desktopikon | `ui/IconResources`, packaging-ressurser |
-| application / FUNC-010 | Kommandoer og fullscreen | `adapters/FoxWindowMode`; XfmdWindow delegerer |
-| contracts | Plattformfrie datatyper/porter | `LayoutUnit`, `LayoutProfile`, `FrameKey`, `PaperSpec`, glyph-/clusterverdier og `PageLayout` |
+| Eier | Implementerte filer / ansvar |
+| --- | --- |
+| application / FUNC-014 | preferences/PreferencesService, adapters/FoxPreferencesStore, ui/PreferencesDialog: versjonert draft/validering/lagring før publisering |
+| application / FUNC-015 | scroll/ScrollDynamics (inkl. ScrollInput/Profile/Origin), adapters/FoxWheelScrollBar: én normalisering, bounded rate/gain og timer |
+| application / FUNC-016 | adapters/FontCatalog, SharedTextMetrics, DisplayListPainter: thread-eide fonter og immutable glyphverdier |
+| renderer / FUNC-017 | PageBreaker, PageComposer, PageAnchorIndex: fysisk sideflyt, keeps og ankre |
+| application / FUNC-018 | export/ExportCoordinator og ExportPipeline, adapters/PdfOutput, io/PdfFilePublisher: frosset jobb, status og publisering |
+| application / FUNC-019 | ui/IconResources, IconData.h og packaging: innbygde og installerte ikoner |
+| application / FUNC-010 | adapters/FoxWindowMode: EWMH, faktisk WM-state og RandR-synlighetskontroll |
+| contracts | LayoutProfile.h, ITextShaper.h, PageLayout.h, RenderFrame.h: points, papir, FrameKey, glypher og sider |
 
-Filnavn uten extension over er planlagte C++ header/implementasjonspar under
-angitt lag. De er ikke påstander om eksisterende symboler.
+RenderFrame bruker points. ViewTransform eier DPI/zoom/pixelkoordinater og sidegap;
+A4-resize/zoom reflower ikke dokumentet. FrameKey validerer token, profil, fontsett,
+generasjon og continuous-bredde. SourceAnchor beholder UTF-8-bytebetydning.
+Typed viewport-origin hindrer at sync/restore går gjennom akselerasjon.
 
-Avhengighetsretningen består: application bruker interpreter/renderer via porter;
-renderer og interpreter bruker bare contracts. Renderer eier wrapping/plassering,
-application leverer målte/formede glyphverdier fra et stabilt fontsett. Cairo og
-PangoCairo er tekniske kandidater i application; FOX forblir widget-toolkit.
-P9 må bevise font-/PDF-kontrakten før dette er et fast avhengighetsvalg.
+Preview har én parser-worker og GUI-eid layout. PDF har én separat worker og eget
+Pango-context/parser-instans, opprettet av ApplicationExport.cpp. Work callback
+injiseres i ExportCoordinator; ExportPipeline bruker offentlige interpreter-/
+renderer-porter. Ingen FOX-kall fra worker. SourceSnapshot/papir/fontsett fryses;
+matchende paged frame kan gjenbrukes. Ellers bygges det med samme renderer.
+PdfOutput bruker samme DisplayListPainter som skjermen.
 
-Pixelkoordinater i dagens RenderFrame migreres til points. ViewTransform i host
-mapper viewport/DPI/zoom, mens PageLayout er uavhengig av skjermstørrelse. FrameKey
-utvider DocumentToken/generation med profil/fontidentitet. SourceAnchor beholder
-UTF-8-bytebetydning. Sideankre og typed viewport-origins migreres sammen med
-AnchorMapper/ScrollCoordinator for å bevare sync uten dobbel scrollgain.
+RenderFrame eier en flat liste med immutable shapingfragmenter, og DrawRun har
+indeks/lengde inn i den. Sammenhengende ord samles uten ny shaping. Sortering skjer
+per visuell linje; hele dokumentet kopieres ikke til en sorteringsbuffer.
+Dette reduserer allokeringer uten å endre glyphposisjoner eller kildemapping.
 
-Eksport gjenbruker immutable modeller og offentlige porter, men har separat
-jobb-/canceltilstand. En parallell interpreter får egen instans. Ingen FOX-ressurs
-brukes fra worker. Maks én eksportjobb; ressursgrenser må fastsettes i P9.
-Eksisterende fil-/dokumentlagring beholder dirty- og undo-semantikken.
+Eksport bruker privat søskentemp, finaliserer Cairo og fsync før atomisk
+rename/link. Identitetssjekk beskytter mot oppdagede eksterne målendringer;
+det er ikke atomisk compare-and-swap. Cancel serialiseres mot commit. Etter commit
+rapporteres suksess. PDF er et nytt outputdokument: POSIX-modus på eksisterende mål
+bevares, men eier/xattrs kopieres ikke. DocumentSession/undo/historikk endres ikke.
+
+Ressursgrenser: 8 MiB input, 64 KiB shapingtoken, 1M glypher, 100k runs,
+2000 sider og 128 MiB PDF. Cancel kontrolleres i layout, per side/stream og før
+commit. cmarks ene parse-kall er ikke avbrytbart midt i kallet.
+
+P13-review erstattet direkte Cairo Xlib-paint med FoxCairoCanvas. Cairo tegner
+fortsatt de samme glyphene; FOX håndterer X11-pixmap og én samlet blit. Bakbufferen
+gjenbrukes til viewporten endrer størrelse. To pixelbuffere begrenses til maks
+16M piksler hver. Dette unngår Cairo-Xlib-ressurslekkasjen observert i våre
+native levetidstester, uten sanitizer-suppression for denne tegnestien.

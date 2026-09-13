@@ -41,7 +41,7 @@ changed/command-varsler. Konstruktørene bytter barene før create(); widgets ei
 
 ## 5. Plumbing
 
-Implemented-rader beskriver baseline 0712c29; Planned-rader beskriver utvidelsen. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
+Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiserer tidligere baseline. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -55,6 +55,8 @@ Implemented-rader beskriver baseline 0712c29; Planned-rader beskriver utvidelsen
 | 8 | `FOX wheel dispatch` | `FoxWheelScrollBar::onMouseWheel` | `src/application/adapters/FoxWheelScrollBar.cpp` | Delta/rest → target og FOX-timer | Clamp, behold delpiksel-rest, standard varsler | Implemented |
 | 9 | `FoxRenderHost::present` | `ViewTransform::configure` | `src/application/adapters/ViewTransform.cpp` | PageLayout + viewport → transform | zoom er ikke reflow | Implemented |
 | 10 | `FoxRenderHost paint` | `DisplayListPainter::paint` | `src/application/adapters/DisplayListPainter.cpp` | frame + target → pixels | felles glyphgrunnlag | Implemented |
+
+| 13 | `FoxRenderHost::onPaint` | `FoxCairoCanvas::present` | `src/application/adapters/FoxCairoCanvas.cpp` | Cairo viewportbuffer → FOX-pixmap | native ressurslevetid; ingen Cairo Xlib-device | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 

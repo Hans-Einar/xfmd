@@ -6,7 +6,7 @@
 using namespace xfmd;
 struct Metrics : ITextMetrics {
   TextExtent measure(std::string_view text, FontSpec font) override {
-    return {int(text.size()) * 7, font.points + 4, font.points};
+    return {double(text.size()) * 7, font.points + 4.0, double(font.points)};
   }
 };
 void run() {

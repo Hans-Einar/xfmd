@@ -1,9 +1,9 @@
 # Blueprint-register
 
-Baseline P0–P8 er implementert ved `0712c29`. Revisjon 1.1 er **Proposed**:
-7 features og 19 functionality-objekter totalt. Endrede objekter har beholdt
-Implemented-rader som baseline og fått Planned-rader for utvidelsen.
-Future for nye objekter betyr neste planlagte leveranse P9–P13.
+P0–P13 er implementert: 7 features og 19 functionality-objekter.
+Registerstatus speiler metadata i blueprint-filene. Implemented betyr at koden
+finnes; [P13-bevis](../../docs/evidence/P13.md) angir faktisk testdekning og
+begrensninger. UR-010/SR-014 (xfw-IPC) er fortsatt Future.
 
 Se [designrevisjonen](../../softwareDesign.md), [arbeidsmåten](../../docs/working-method.md),
 [malene](templates/README.md), [P7-bevis](../../docs/evidence/P7.md) og [P8-bevis](../../docs/evidence/P8.md).
@@ -12,32 +12,32 @@ Se [designrevisjonen](../../softwareDesign.md), [arbeidsmåten](../../docs/worki
 
 | ID | Type / målgruppe | Eier | Status | Bruker functionality |
 | --- | --- | --- | --- | --- |
-| [FTR-001](feature/Feature-001--Markdown-Presentation.md) | Feature / User | application | Proposed | FUNC-001, FUNC-002, FUNC-003, FUNC-004, FUNC-005, FUNC-007, FUNC-010, FUNC-016, FUNC-017 |
-| [FTR-002](feature/Feature-002--Live-Preview.md) | Feature / User | application | Proposed | FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006, FUNC-007, FUNC-011 |
-| [FTR-003](feature/Feature-003--Document-Navigation.md) | Feature / User | application | Proposed | FUNC-001, FUNC-002, FUNC-005, FUNC-008, FUNC-009, FUNC-010 |
-| [FTR-004](feature/Feature-004--Synchronized-Scrolling.md) | Feature / User | application | Proposed | FUNC-004, FUNC-005, FUNC-009, FUNC-010, FUNC-015 |
+| [FTR-001](feature/Feature-001--Markdown-Presentation.md) | Feature / User | application | Implemented | FUNC-001, FUNC-002, FUNC-003, FUNC-004, FUNC-005, FUNC-007, FUNC-010, FUNC-016, FUNC-017 |
+| [FTR-002](feature/Feature-002--Live-Preview.md) | Feature / User | application | Implemented | FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006, FUNC-007, FUNC-011 |
+| [FTR-003](feature/Feature-003--Document-Navigation.md) | Feature / User | application | Implemented | FUNC-001, FUNC-002, FUNC-005, FUNC-008, FUNC-009, FUNC-010 |
+| [FTR-004](feature/Feature-004--Synchronized-Scrolling.md) | Feature / User | application | Implemented | FUNC-004, FUNC-005, FUNC-009, FUNC-010, FUNC-015 |
 | [FTR-005](feature/Feature-005--Work-Path-Navigation.md) | Feature / User | application | Implemented | FUNC-010, FUNC-012, FUNC-013 |
-| [FTR-006](feature/Feature-006--Configurable-Scrolling.md) | Feature / User | application | Proposed | FUNC-005, FUNC-009, FUNC-010, FUNC-011, FUNC-014, FUNC-015 |
-| [FTR-007](feature/Feature-007--Paged-Publication.md) | Feature / User | application | Proposed | FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-007, FUNC-009, FUNC-010, FUNC-014, FUNC-016, FUNC-017, FUNC-018 |
+| [FTR-006](feature/Feature-006--Configurable-Scrolling.md) | Feature / User | application | Implemented | FUNC-005, FUNC-009, FUNC-010, FUNC-011, FUNC-014, FUNC-015 |
+| [FTR-007](feature/Feature-007--Paged-Publication.md) | Feature / User | application | Implemented | FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-007, FUNC-009, FUNC-010, FUNC-014, FUNC-016, FUNC-017, FUNC-018 |
 | [FUNC-001](functionality/Functionality-001--Document-Session.md) | Functionality / System | application | Implemented | FUNC-002 |
 | [FUNC-002](functionality/Functionality-002--Local-File-Storage.md) | Functionality / System | application | Implemented | none |
 | [FUNC-003](functionality/Functionality-003--Markdown-Interpretation.md) | Functionality / System | interpreter | Implemented | none |
-| [FUNC-004](functionality/Functionality-004--Render-Layout.md) | Functionality / System | renderer | Proposed | FUNC-017 |
-| [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md) | Functionality / System | application | Proposed | FUNC-004, FUNC-015, FUNC-016 |
+| [FUNC-004](functionality/Functionality-004--Render-Layout.md) | Functionality / System | renderer | Implemented | FUNC-017 |
+| [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md) | Functionality / System | application | Implemented | FUNC-004, FUNC-015, FUNC-016 |
 | [FUNC-006](functionality/Functionality-006--Event-Scheduling.md) | Functionality / System | application | Implemented | none |
-| [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md) | Functionality / System | application | Proposed | FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006 |
+| [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md) | Functionality / System | application | Implemented | FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006 |
 | [FUNC-008](functionality/Functionality-008--Navigation-History.md) | Functionality / User | application | Implemented | FUNC-001, FUNC-009 |
-| [FUNC-009](functionality/Functionality-009--Source-Anchor-Mapping.md) | Functionality / System | application | Proposed | FUNC-005 |
-| [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | Functionality / User | application | Proposed | FUNC-001, FUNC-005, FUNC-007, FUNC-012, FUNC-013, FUNC-014, FUNC-015, FUNC-018, FUNC-019 |
-| [FUNC-011](functionality/Functionality-011--Text-Editing.md) | Functionality / User | application | Proposed | FUNC-001, FUNC-005, FUNC-007, FUNC-015 |
+| [FUNC-009](functionality/Functionality-009--Source-Anchor-Mapping.md) | Functionality / System | application | Implemented | FUNC-005 |
+| [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | Functionality / User | application | Implemented | FUNC-001, FUNC-005, FUNC-007, FUNC-012, FUNC-013, FUNC-014, FUNC-015, FUNC-018, FUNC-019 |
+| [FUNC-011](functionality/Functionality-011--Text-Editing.md) | Functionality / User | application | Implemented | FUNC-001, FUNC-005, FUNC-007, FUNC-015 |
 | [FUNC-012](functionality/Functionality-012--Work-Path-History.md) | Functionality / User | application | Implemented | none |
 | [FUNC-013](functionality/Functionality-013--Filtered-File-Tree.md) | Functionality / User | application | Implemented | FUNC-012 |
-| [FUNC-014](functionality/Functionality-014--Application-Preferences.md) | Functionality / User | application | Proposed | none |
-| [FUNC-015](functionality/Functionality-015--Scroll-Motion.md) | Functionality / System | application | Proposed | FUNC-014, FUNC-006 |
-| [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md) | Functionality / System | application | Proposed | none |
-| [FUNC-017](functionality/Functionality-017--Page-Composition.md) | Functionality / System | renderer | Proposed | none |
-| [FUNC-018](functionality/Functionality-018--PDF-Export.md) | Functionality / User | application | Proposed | FUNC-001, FUNC-003, FUNC-004, FUNC-006, FUNC-016, FUNC-017 |
-| [FUNC-019](functionality/Functionality-019--Application-Identity.md) | Functionality / Integration | application | Proposed | none |
+| [FUNC-014](functionality/Functionality-014--Application-Preferences.md) | Functionality / User | application | Implemented | none |
+| [FUNC-015](functionality/Functionality-015--Scroll-Motion.md) | Functionality / System | application | Implemented | FUNC-014, FUNC-006 |
+| [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md) | Functionality / System | application | Implemented | none |
+| [FUNC-017](functionality/Functionality-017--Page-Composition.md) | Functionality / System | renderer | Implemented | none |
+| [FUNC-018](functionality/Functionality-018--PDF-Export.md) | Functionality / User | application | Implemented | FUNC-001, FUNC-003, FUNC-004, FUNC-006, FUNC-016, FUNC-017 |
+| [FUNC-019](functionality/Functionality-019--Application-Identity.md) | Functionality / Integration | application | Implemented | none |
 
 ## Krav → designobjekter → akseptansetester
 
@@ -59,12 +59,12 @@ Se [designrevisjonen](../../softwareDesign.md), [arbeidsmåten](../../docs/worki
 | UR-012 | [FTR-005](feature/Feature-005--Work-Path-Navigation.md), [FUNC-012](functionality/Functionality-012--Work-Path-History.md) | AT-026 | FirstRelease |
 | UR-013 | [FTR-005](feature/Feature-005--Work-Path-Navigation.md), [FUNC-012](functionality/Functionality-012--Work-Path-History.md) | AT-027 | FirstRelease |
 | UR-014 | [FTR-005](feature/Feature-005--Work-Path-Navigation.md), [FUNC-013](functionality/Functionality-013--Filtered-File-Tree.md) | AT-028 | FirstRelease |
-| UR-015 | [FTR-006](feature/Feature-006--Configurable-Scrolling.md), [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FUNC-014](functionality/Functionality-014--Application-Preferences.md), [FUNC-015](functionality/Functionality-015--Scroll-Motion.md) | AT-029 | Future |
-| UR-016 | [FTR-004](feature/Feature-004--Synchronized-Scrolling.md), [FTR-006](feature/Feature-006--Configurable-Scrolling.md), [FUNC-011](functionality/Functionality-011--Text-Editing.md), [FUNC-015](functionality/Functionality-015--Scroll-Motion.md) | AT-030 | Future |
-| UR-017 | [FTR-001](feature/Feature-001--Markdown-Presentation.md), [FTR-007](feature/Feature-007--Paged-Publication.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md), [FUNC-009](functionality/Functionality-009--Source-Anchor-Mapping.md), [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FUNC-014](functionality/Functionality-014--Application-Preferences.md), [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md), [FUNC-017](functionality/Functionality-017--Page-Composition.md) | AT-031 | Future |
-| UR-018 | [FTR-007](feature/Feature-007--Paged-Publication.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md), [FUNC-017](functionality/Functionality-017--Page-Composition.md), [FUNC-018](functionality/Functionality-018--PDF-Export.md) | AT-032 | Future |
-| UR-019 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | AT-033 | Future |
-| UR-020 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FUNC-019](functionality/Functionality-019--Application-Identity.md) | AT-034 | Future |
+| UR-015 | [FTR-006](feature/Feature-006--Configurable-Scrolling.md), [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FUNC-014](functionality/Functionality-014--Application-Preferences.md), [FUNC-015](functionality/Functionality-015--Scroll-Motion.md) | AT-029 | FirstRelease |
+| UR-016 | [FTR-004](feature/Feature-004--Synchronized-Scrolling.md), [FTR-006](feature/Feature-006--Configurable-Scrolling.md), [FUNC-011](functionality/Functionality-011--Text-Editing.md), [FUNC-015](functionality/Functionality-015--Scroll-Motion.md) | AT-030 | FirstRelease |
+| UR-017 | [FTR-001](feature/Feature-001--Markdown-Presentation.md), [FTR-007](feature/Feature-007--Paged-Publication.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md), [FUNC-009](functionality/Functionality-009--Source-Anchor-Mapping.md), [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FUNC-014](functionality/Functionality-014--Application-Preferences.md), [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md), [FUNC-017](functionality/Functionality-017--Page-Composition.md) | AT-031 | FirstRelease |
+| UR-018 | [FTR-007](feature/Feature-007--Paged-Publication.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md), [FUNC-017](functionality/Functionality-017--Page-Composition.md), [FUNC-018](functionality/Functionality-018--PDF-Export.md) | AT-032 | FirstRelease |
+| UR-019 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | AT-033 | FirstRelease |
+| UR-020 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FUNC-019](functionality/Functionality-019--Application-Identity.md) | AT-034 | FirstRelease |
 | SR-001 | [FTR-001](feature/Feature-001--Markdown-Presentation.md), [FTR-007](feature/Feature-007--Paged-Publication.md), [FUNC-003](functionality/Functionality-003--Markdown-Interpretation.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md), [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md), [FUNC-017](functionality/Functionality-017--Page-Composition.md) | AT-011 | FirstRelease |
 | SR-002 | [FTR-002](feature/Feature-002--Live-Preview.md), [FTR-003](feature/Feature-003--Document-Navigation.md), [FTR-004](feature/Feature-004--Synchronized-Scrolling.md), [FTR-006](feature/Feature-006--Configurable-Scrolling.md), [FUNC-001](functionality/Functionality-001--Document-Session.md), [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md), [FUNC-008](functionality/Functionality-008--Navigation-History.md), [FUNC-009](functionality/Functionality-009--Source-Anchor-Mapping.md), [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FUNC-011](functionality/Functionality-011--Text-Editing.md), [FUNC-014](functionality/Functionality-014--Application-Preferences.md), [FUNC-015](functionality/Functionality-015--Scroll-Motion.md), [FUNC-018](functionality/Functionality-018--PDF-Export.md) | AT-012 | FirstRelease |
 | SR-003 | [FTR-001](feature/Feature-001--Markdown-Presentation.md), [FUNC-003](functionality/Functionality-003--Markdown-Interpretation.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md) | AT-013 | FirstRelease |
@@ -79,8 +79,8 @@ Se [designrevisjonen](../../softwareDesign.md), [arbeidsmåten](../../docs/worki
 | SR-012 | [FTR-001](feature/Feature-001--Markdown-Presentation.md), [FTR-002](feature/Feature-002--Live-Preview.md), [FTR-003](feature/Feature-003--Document-Navigation.md), [FTR-004](feature/Feature-004--Synchronized-Scrolling.md) | AT-022 | FirstRelease |
 | SR-013 | [FTR-001](feature/Feature-001--Markdown-Presentation.md), [FTR-002](feature/Feature-002--Live-Preview.md), [FTR-003](feature/Feature-003--Document-Navigation.md), [FTR-004](feature/Feature-004--Synchronized-Scrolling.md), [FUNC-001](functionality/Functionality-001--Document-Session.md), [FUNC-002](functionality/Functionality-002--Local-File-Storage.md), [FUNC-003](functionality/Functionality-003--Markdown-Interpretation.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-006](functionality/Functionality-006--Event-Scheduling.md), [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md), [FUNC-008](functionality/Functionality-008--Navigation-History.md), [FUNC-009](functionality/Functionality-009--Source-Anchor-Mapping.md), [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FUNC-011](functionality/Functionality-011--Text-Editing.md), [FUNC-019](functionality/Functionality-019--Application-Identity.md) | AT-023 | FirstRelease |
 | SR-014 | Deferred: egen IPC-blueprint før arbeid | AT-024 | Future |
-| SR-015 | [FTR-006](feature/Feature-006--Configurable-Scrolling.md), [FUNC-015](functionality/Functionality-015--Scroll-Motion.md) | AT-035 | Future |
-| SR-016 | [FTR-007](feature/Feature-007--Paged-Publication.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md), [FUNC-017](functionality/Functionality-017--Page-Composition.md) | AT-036 | Future |
-| SR-017 | [FTR-007](feature/Feature-007--Paged-Publication.md), [FUNC-018](functionality/Functionality-018--PDF-Export.md) | AT-037 | Future |
-| SR-018 | [FUNC-014](functionality/Functionality-014--Application-Preferences.md) | AT-038 | Future |
-| SR-019 | [FTR-002](feature/Feature-002--Live-Preview.md), [FTR-003](feature/Feature-003--Document-Navigation.md), [FTR-004](feature/Feature-004--Synchronized-Scrolling.md), [FTR-006](feature/Feature-006--Configurable-Scrolling.md), [FTR-007](feature/Feature-007--Paged-Publication.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md), [FUNC-009](functionality/Functionality-009--Source-Anchor-Mapping.md), [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FUNC-011](functionality/Functionality-011--Text-Editing.md), [FUNC-015](functionality/Functionality-015--Scroll-Motion.md), [FUNC-017](functionality/Functionality-017--Page-Composition.md) | AT-039 | Future |
+| SR-015 | [FTR-006](feature/Feature-006--Configurable-Scrolling.md), [FUNC-015](functionality/Functionality-015--Scroll-Motion.md) | AT-035 | FirstRelease |
+| SR-016 | [FTR-007](feature/Feature-007--Paged-Publication.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md), [FUNC-017](functionality/Functionality-017--Page-Composition.md) | AT-036 | FirstRelease |
+| SR-017 | [FTR-007](feature/Feature-007--Paged-Publication.md), [FUNC-018](functionality/Functionality-018--PDF-Export.md) | AT-037 | FirstRelease |
+| SR-018 | [FUNC-014](functionality/Functionality-014--Application-Preferences.md) | AT-038 | FirstRelease |
+| SR-019 | [FTR-002](feature/Feature-002--Live-Preview.md), [FTR-003](feature/Feature-003--Document-Navigation.md), [FTR-004](feature/Feature-004--Synchronized-Scrolling.md), [FTR-006](feature/Feature-006--Configurable-Scrolling.md), [FTR-007](feature/Feature-007--Paged-Publication.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md), [FUNC-009](functionality/Functionality-009--Source-Anchor-Mapping.md), [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FUNC-011](functionality/Functionality-011--Text-Editing.md), [FUNC-015](functionality/Functionality-015--Scroll-Motion.md), [FUNC-017](functionality/Functionality-017--Page-Composition.md) | AT-039 | FirstRelease |
