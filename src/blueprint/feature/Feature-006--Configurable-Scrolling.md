@@ -4,7 +4,7 @@ kind: Feature
 audience: User
 role: Workflow
 owner: application
-status: Proposed
+status: Implemented
 scope: Future
 requirements: UR-011, UR-015, UR-016, SR-002, SR-015, SR-019
 uses: FUNC-005, FUNC-009, FUNC-010, FUNC-011, FUNC-014, FUNC-015
@@ -33,9 +33,9 @@ Edit → Preferences → prøv hastighet/akselerasjon → OK oppdaterer levende 
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `Edit Preferences` | `PreferencesService::begin` | `src/application/preferences/PreferencesService.cpp` | profil → dialog-draft | prøvefelt isolert | Planned |
-| 2 | `FOX wheel i hvilken som helst xfmd-flate` | `ScrollDynamics::advance` | `src/application/scroll/ScrollDynamics.cpp` | normalisert input/profil → mål | clamp og reset | Planned |
-| 3 | `Faktisk editor/preview viewport` | `ScrollCoordinator::onViewportChanged` | `src/application/scroll/ScrollCoordinator.cpp` | origin/token/anker → sync | ingen ny gain på mottaker | Planned |
+| 1 | `Edit Preferences` | `PreferencesService::begin` | `src/application/preferences/PreferencesService.h` | profil → dialog-draft | prøvefelt isolert | Implemented |
+| 2 | `FOX wheel i hvilken som helst xfmd-flate` | `ScrollDynamics::advance` | `src/application/scroll/ScrollDynamics.cpp` | normalisert input/profil → mål | clamp og reset | Implemented |
+| 3 | `Faktisk editor/preview viewport` | `ScrollCoordinator::onViewportChanged` | `src/application/scroll/ScrollCoordinator.cpp` | origin/token/anker → sync | ingen ny gain på mottaker | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -45,10 +45,10 @@ Gjenbruk FUNC-014/015, eksisterende hosts og FUNC-009. ScrollDynamics trekkes ut
 
 Akseptanse kombinerer profil-roundtrip, tidsstyrte kurver, native dispatch og kildeanker-sync i begge retninger. Sammenlign speed=1/no-acceleration med baseline før personlig tuning.
 
-AT-012, AT-025, AT-029, AT-030, AT-035, AT-039: planlagt verifikasjon; ingen implementasjonsbevis for utvidelsen.
+AT-012, AT-025, AT-029, AT-030, AT-035, AT-039: se [P10](../../../docs/evidence/P10.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Revisjon 1.1, 2026-09-13. Alle nye kall i kapittel 5 er Planned.
+Revisjon 1.1, 2026-09-13. Kallene er implementert i P10.
 P9 inputgate og P10 implementasjon. Fysisk touchpad-testing må supplere syntetiske smådeltaer; ingen garanti om rå gestureoppløsning i FOX 1.6.
 [Integrasjonsdesign](../../../softwareDesign.md) og [faseplan](../../../implementationPlan.md) gir kontekst.

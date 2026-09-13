@@ -1,16 +1,29 @@
 #include "FoxWheelScrollBar.h"
 #include <algorithm>
-#include <cstdlib>
+#include <chrono>
+#include <cmath>
 #include <cstdio>
-#include <cstdint>
+#include <cstdlib>
 using namespace FX;
 namespace xfmd {
+namespace {
+std::uint64_t nowMs() {
+  return std::chrono::duration_cast<std::chrono::milliseconds>(
+             std::chrono::steady_clock::now().time_since_epoch())
+      .count();
+}
+} // namespace
+FoxWheelScrollBar* FoxWheelScrollBar::activeBar = nullptr;
 FXDEFMAP(FoxWheelScrollBar)
-wheelMap[] = {FXMAPFUNC(SEL_MOUSEWHEEL, 0, FoxWheelScrollBar::onMouseWheel)};
+wheelMap[] = {FXMAPFUNC(SEL_MOUSEWHEEL, 0, FoxWheelScrollBar::onMouseWheel),
+              FXMAPFUNC(SEL_TIMEOUT, FoxWheelScrollBar::ID_MOTION, FoxWheelScrollBar::onMotionTick),
+              FXMAPFUNC(SEL_LEFTBUTTONPRESS, 0, FoxWheelScrollBar::onPress),
+              FXMAPFUNC(SEL_MIDDLEBUTTONPRESS, 0, FoxWheelScrollBar::onPress)};
 FXIMPLEMENT(FoxWheelScrollBar, FXScrollBar, wheelMap, ARRAYNUMBER(wheelMap))
 FoxWheelScrollBar::FoxWheelScrollBar(FXComposite* parent, FXObject* target, FXSelector selector,
                                      FXuint style)
     : FXScrollBar(parent, target, selector, style) {}
+FoxWheelScrollBar::~FoxWheelScrollBar() { cancelMotion(); }
 FXScrollBar* FoxWheelScrollBar::replace(FXScrollBar* previous) {
   auto* bar =
       new FoxWheelScrollBar(static_cast<FXComposite*>(previous->getParent()), previous->getTarget(),
@@ -23,9 +36,30 @@ FXScrollBar* FoxWheelScrollBar::replace(FXScrollBar* previous) {
   delete previous;
   return bar;
 }
-void FoxWheelScrollBar::configureTree(FXWindow* root,const ScrollProfile& value) {
-  if(auto* bar=dynamic_cast<FoxWheelScrollBar*>(root))bar->setProfile(value);
-  for(auto* child=root->getFirst();child;child=child->getNext())configureTree(child,value);
+void FoxWheelScrollBar::configureTree(FXWindow* root, const ScrollProfile& value) {
+  if (auto* bar = dynamic_cast<FoxWheelScrollBar*>(root))
+    bar->setProfile(value);
+  for (auto* child = root->getFirst(); child; child = child->getNext())
+    configureTree(child, value);
+}
+void FoxWheelScrollBar::cancelTree(FXWindow* root) {
+  if (auto* bar = dynamic_cast<FoxWheelScrollBar*>(root))
+    bar->cancelMotion();
+  for (auto* child = root->getFirst(); child; child = child->getNext())
+    cancelTree(child);
+}
+void FoxWheelScrollBar::cancelMotion() {
+  getApp()->removeTimeout(this, ID_MOTION);
+  getApp()->removeTimeout(this, ID_TIMEWHEEL);
+  motion.reset();
+  direction = 0;
+  if (activeBar == this)
+    activeBar = nullptr;
+}
+long FoxWheelScrollBar::onPress(FXObject* sender, FXSelector sel, void* data) {
+  cancelMotion();
+  return FXSELTYPE(sel) == SEL_LEFTBUTTONPRESS ? FXScrollBar::onLeftBtnPress(sender, sel, data)
+                                               : FXScrollBar::onMiddleBtnPress(sender, sel, data);
 }
 long FoxWheelScrollBar::onMouseWheel(FXObject*, FXSelector, void* data) {
   const auto& event = *static_cast<FXEvent*>(data);
@@ -33,35 +67,69 @@ long FoxWheelScrollBar::onMouseWheel(FXObject*, FXSelector, void* data) {
     return 0;
   if (std::getenv("XFMD_TRACE_WHEEL"))
     std::fprintf(stderr, "wheel axis=%s code=%d time=%u modifiers=%u source=unknown\n",
-                 (getScrollBarStyle() & SCROLLBAR_HORIZONTAL) ? "x" : "y",
-                 event.code, event.time, event.state);
+                 (getScrollBarStyle() & SCROLLBAR_HORIZONTAL) ? "x" : "y", event.code, event.time,
+                 event.state);
   if (!event.code)
     return 1;
-  // Preserve FOX's Alt=line, Ctrl=page and configured wheel-lines behavior.
-  std::int64_t unit =
-      (event.state & ALTMASK) ? line
-      : (event.state & CONTROLMASK)
-          ? page
-          : std::min<std::int64_t>(page, std::int64_t(line) * getApp()->getWheelLines());
-  const int base = getApp()->hasTimeout(this, ID_TIMEWHEEL) ? dragpoint : pos;
+  if (activeBar && activeBar != this)
+    activeBar->cancelMotion();
+  bool pending = getApp()->hasTimeout(this, ID_MOTION);
+  if ((pending && (pos != observed || range != observedRange || page != observedPage)) ||
+      event.code * direction < 0) {
+    cancelMotion();
+    pending = false;
+  }
+  activeBar = this;
+  direction = event.code;
+  const double unit = (event.state & ALTMASK) ? line
+                      : (event.state & CONTROLMASK)
+                          ? page
+                          : std::min<double>(page, double(line) * getApp()->getWheelLines());
+  auto selected = profile;
+  if (event.state & (ALTMASK | CONTROLMASK)) {
+    selected = {1, false, .5, 3};
+    motion.reset();
+  }
+  const auto now = nowMs();
+  destination =
+      motion.advance({event.code / 120.0, now,
+                      (getScrollBarStyle() & SCROLLBAR_HORIZONTAL) ? ScrollAxis::Horizontal
+                                                                   : ScrollAxis::Vertical},
+                     selected, unit, pending ? destination : pos, range - page);
+  observed = pos;
+  observedRange = range;
+  observedPage = page;
+  getApp()->removeTimeout(this, ID_MOTION);
   getApp()->removeTimeout(this, ID_TIMEWHEEL);
   getApp()->removeTimeout(this, ID_AUTOSCROLL);
-  const double scale=(event.state & (ALTMASK|CONTROLMASK)) ? 1.0 : profile.speed;
-  dragpoint = motion.advance(event.code / 120.0, unit * scale, base, range - page);
-  if (dragpoint == pos) {
-    dragpoint = 0;
+  finish = now + 80;
+  if (getScrollBarStyle() & SCROLLBAR_WHEELJUMP)
+    finish = now;
+  if (destination != pos)
+    onMotionTick(this, 0, nullptr);
+  return 1;
+}
+long FoxWheelScrollBar::onMotionTick(FXObject*, FXSelector, void*) {
+  if (pos != observed || range != observedRange || page != observedPage) {
+    cancelMotion();
     return 1;
   }
-  // Reuse FOX's bounded animation and standard changed/command notifications.
-  // Every timer step is nonzero and the inherited timer clamps its final step.
-  int distance = dragpoint - pos;
-  int step = distance;
-  if (!(getScrollBarStyle() & SCROLLBAR_WHEELJUMP) && (distance > 16 || distance < -16))
-    step = distance / 16;
-  if (getScrollBarStyle() & SCROLLBAR_WHEELJUMP)
-    return onTimeWheel(this, FXSEL(SEL_TIMEOUT, ID_TIMEWHEEL),
-                       reinterpret_cast<void*>(FXival(step)));
-  getApp()->addTimeout(this, ID_TIMEWHEEL, 5, reinterpret_cast<void*>(FXival(step)));
+  const auto now = nowMs();
+  const int remaining = destination - pos;
+  int next = destination;
+  if (now < finish && std::abs(remaining) > 1) {
+    const int step = std::max(
+        1, int(std::ceil(std::abs(remaining) * std::min(1.0, 8.0 / double(finish - now)))));
+    next = pos + (remaining < 0 ? -step : step);
+  }
+  setPosition(next);
+  observed = pos;
+  const bool done = pos == destination;
+  if (!done)
+    getApp()->addTimeout(this, ID_MOTION, 8);
+  if (target)
+    target->tryHandle(this, FXSEL(done ? SEL_COMMAND : SEL_CHANGED, message),
+                      reinterpret_cast<void*>(FXival(pos)));
   return 1;
 }
 } // namespace xfmd

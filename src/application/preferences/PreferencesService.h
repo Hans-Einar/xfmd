@@ -12,6 +12,7 @@ using PreferencesDraft = PreferencesSnapshot;
 class PreferencesService {
   PreferencesSnapshot current;
   std::function<bool(const PreferencesSnapshot&, std::string&)> save;
+
 public:
   PreferencesService(PreferencesSnapshot initial,
                      std::function<bool(const PreferencesSnapshot&, std::string&)> store)
