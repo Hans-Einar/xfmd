@@ -4,7 +4,7 @@ kind: Feature
 audience: User
 role: Workflow
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-001, UR-002, UR-009, SR-001, SR-003, SR-004, SR-005, SR-011, SR-012, SR-013, UR-017
 uses: FUNC-001, FUNC-002, FUNC-003, FUNC-004, FUNC-005, FUNC-007, FUNC-010, FUNC-016, FUNC-017
@@ -25,7 +25,7 @@ Krav: UR-001, UR-002, UR-009, SR-001, SR-003, SR-004, SR-005, SR-011, SR-012, SR
 
 Åpning bruker DocumentCoordinator og PreviewCoordinator. Ingen egen featureklasse. Pipeline konsumerer IInterpreter, IRenderer og ITextMetrics; application composition root registrerer cmark/MarkdownRenderer/FOX-host.
 
-**Planlagt utvidelse 1.1:** Lesing får Window wrap og A4. Samme dokumentmodell brukes i begge; fit-width skalerer papir uten ny wrapping.
+**Implementert utvidelse 1.1 (P11):** Lesing får Window wrap og A4. Samme dokumentmodell brukes i begge; fit-width skalerer papir uten ny wrapping.
 
 ## 4. Atferd, tilstand og feil
 
@@ -42,7 +42,7 @@ Implemented-rader beskriver baseline 0712c29; Planned-rader beskriver utvidelsen
 | 3 | `ParserWorker::run` | `IInterpreter::parse` | `src/contracts/IInterpreter.h` | Snapshot → model | Typet feil | Implemented |
 | 4 | `PreviewCoordinator::relayout` | `IRenderer::layout` | `src/contracts/IRenderer.h` | Model/metrics → frame | Gyldig token/bredde | Implemented |
 | 5 | `PreviewCoordinator present callback` | `FoxRenderHost::present` | `src/application/adapters/FoxRenderHost.cpp` | Frame → native visning | Ingen ressurslasting | Implemented |
-| 6 | `View mode` | `PreviewCoordinator::setLayoutProfile` | `src/application/preview/PreviewCoordinator.cpp` | profil → FrameKey | bevar source anchor | Planned |
+| 6 | `View mode` | `PreviewCoordinator::setLayoutProfile` | `src/application/preview/PreviewCoordinator.cpp` | profil → FrameKey | bevar source anchor | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -62,7 +62,7 @@ Utvidelsen krever AT-031. Dette er planlagt dekning, ikke nye testbevis.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-**Proposed 1.1:** Historisk Implemented/evidence nedenfor gjelder baseline. Nye kontrakter er beskrevet i [designrevisjonen](../../../softwareDesign.md); gamle bevis verifiserer ikke disse.
+**Implemented 1.1:** [P11-bevis](../../../docs/evidence/P11.md) beskriver ny kode og kontroller. Historiske bevis nedenfor gjelder baseline, ikke automatisk de nye kravene.
 
 
 Implemented i P3. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.

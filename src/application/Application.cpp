@@ -1,8 +1,8 @@
 #include "Application.h"
+#include "adapters/FoxWheelScrollBar.h"
 #include "interpreter/CmarkInterpreter.h"
 #include "renderer/MarkdownRenderer.h"
 #include <filesystem>
-#include "adapters/FoxWheelScrollBar.h"
 using namespace FX;
 namespace xfmd {
 Application::~Application() {
@@ -12,9 +12,11 @@ Application::~Application() {
 }
 void Application::initialize(int& argc, char** argv) {
   app.init(argc, argv);
-  preferencesStore=std::make_unique<FoxPreferencesStore>(app.reg());
-  preferences=std::make_unique<PreferencesService>(preferencesStore->load(),
-      [this](const auto& value,std::string& error){return preferencesStore->save(value,error);});
+  preferencesStore = std::make_unique<FoxPreferencesStore>(app.reg());
+  preferences = std::make_unique<PreferencesService>(preferencesStore->load(),
+                                                     [this](const auto& value, std::string& error) {
+                                                       return preferencesStore->save(value, error);
+                                                     });
   window = new XfmdWindow(&app, commands);
   editorFont = std::make_unique<FXFont>(&app, "DejaVu Sans Mono", 11);
   window->editor->setFont(editorFont.get());
@@ -22,6 +24,8 @@ void Application::initialize(int& argc, char** argv) {
                                                window->workspacePanel, window->split);
   commands.action = [this](auto command) { execute(command); };
   commands.enabled = [this](auto command) {
+    if (command == CommandRouter::FitWidth || command == CommandRouter::ActualSize)
+      return preview && preview->layoutProfile().mode == LayoutMode::Paged;
     if (command == CommandRouter::Undo)
       return edits.canUndo();
     if (command == CommandRouter::Redo)
@@ -30,10 +34,23 @@ void Application::initialize(int& argc, char** argv) {
       return canNavigate && canNavigate(command == CommandRouter::Back);
     return true;
   };
+  commands.checked = [this](auto command) {
+    if (!preview || !host)
+      return false;
+    if (command == CommandRouter::A4)
+      return preview->layoutProfile().mode == LayoutMode::Paged;
+    if (command == CommandRouter::WindowWrap)
+      return preview->layoutProfile().mode == LayoutMode::Continuous;
+    if (command == CommandRouter::FitWidth)
+      return host->fitWidth();
+    if (command == CommandRouter::ActualSize)
+      return !host->fitWidth();
+    return false;
+  };
   wireDocument();
   interpreter = std::make_unique<CmarkInterpreter>();
   renderer = std::make_unique<MarkdownRenderer>();
-  metrics = std::make_unique<FoxTextMetrics>(app);
+  metrics = std::make_unique<SharedTextMetrics>();
   host = new FoxRenderHost(window->previewArea, *renderer, *metrics);
   scheduler = std::make_unique<FoxScheduler>(app);
   preview =
@@ -42,6 +59,10 @@ void Application::initialize(int& argc, char** argv) {
     scrolling.invalidate(token);
     host->expect(token);
     window->status->setText("Updating preview…");
+  };
+  preview->layoutRequested = [this](FrameKey key) {
+    host->expectLayout(key);
+    scrolling.expectLayout(key);
   };
   preview->present = [this](LayoutResult frame) {
     host->present(frame);
@@ -64,14 +85,16 @@ void Application::initialize(int& argc, char** argv) {
     preview->refresh();
   };
   contentChanged = [this] { preview->schedule(); };
-  host->resized = [this](int width) { preview->relayout(width); };
+  host->resized = [this](double width) { preview->relayout(width); };
   scrolling.setEditor = [this](SourceAnchor anchor) { window->editor->setSourceAnchor(anchor); };
-  scrolling.setPreview = [this](int y) { host->setViewport(y); };
+  scrolling.setPreview = [this](double y) { host->setViewport(y, ScrollOrigin::Sync); };
   window->editor->viewportChanged = [this](std::size_t byte) {
-    scrolling.onViewportChanged(ViewOrigin::Editor, byte, session.view().token);
+    scrolling.onViewportChanged(ViewOrigin::Editor, byte, session.view().token, 0, false,
+                                window->editor->lastScrollOrigin);
   };
-  host->viewportChanged = [this](int y) {
-    scrolling.onViewportChanged(ViewOrigin::Preview, y, session.view().token);
+  host->viewportChanged = [this](double y) {
+    scrolling.onViewportChanged(ViewOrigin::Preview, y, session.view().token, 0, false,
+                                host->lastScrollOrigin);
   };
   views->changed = [this] {
     scrolling.setSplit(views->mode() == ViewMode::Split);
@@ -79,8 +102,11 @@ void Application::initialize(int& argc, char** argv) {
       host->setFocus();
     host->recalc();
   };
-  preferences->changed=[this](const auto& value) {
-    FoxWheelScrollBar::configureTree(window,value.scroll);
+  preferences->changed = [this](const auto& value) {
+    FoxWheelScrollBar::configureTree(window, value.scroll);
+    auto profile = preview->layoutProfile();
+    profile.paper.margin = value.marginMm * 72 / 25.4;
+    preview->setLayoutProfile(profile);
   };
   preferences->changed(preferences->active());
   app.create();

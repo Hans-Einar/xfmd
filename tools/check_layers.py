@@ -14,7 +14,7 @@ for layer in ('contracts', 'interpreter', 'renderer'):
             if not match:
                 continue
             inc = match.group(1)
-            banned = ('application/', 'fx.h', 'FX')
+            banned = ('application/', 'fx.h', 'FX', 'pango', 'cairo', 'fontconfig')
             if layer != 'interpreter':
                 banned += ('cmark', 'md4c', 'interpreter/')
             if layer != 'renderer':

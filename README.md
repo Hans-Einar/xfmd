@@ -7,7 +7,8 @@ undo/redo, live preview, lokal lenkehistorikk og synkronisert scrolling.
 ## Bygg og kjør
 
 Krever C++17-kompilator, CMake ≥3.20, Ninja, pkg-config, FOX ≥1.6.57 (1.6 API),
-libcurl-verktøyet `curl` og X11. Installer DejaVu Sans/Mono og gjerne Droid Sans
+libcurl-verktøyet `curl`, X11, Cairo og PangoCairo/Fontconfig (inkludert utviklingsfiler).
+PDF-verifikasjon bruker Poppler-verktøyene `pdfinfo` og `pdftotext`. Installer DejaVu Sans/Mono og gjerne Droid Sans
 Fallback eller Noto Sans CJK. Tester krever Python 3 og Xvfb.
 
 ```sh

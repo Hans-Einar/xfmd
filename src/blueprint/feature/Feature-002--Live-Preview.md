@@ -4,7 +4,7 @@ kind: Feature
 audience: User
 role: Workflow
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-003, UR-004, UR-009, SR-002, SR-008, SR-010, SR-011, SR-012, SR-013, SR-019
 uses: FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006, FUNC-007, FUNC-011
@@ -25,7 +25,7 @@ Krav: UR-003, UR-004, UR-009, SR-002, SR-008, SR-010, SR-011, SR-012, SR-013. De
 
 Live preview bruker EditController, PreviewCoordinator, IScheduler/FOX-adapter og ParserWorker. Ingen egen featureklasse eller separat renderer. Worker-resultater og frame har dokument/revisjon, layout har generasjon.
 
-**Planlagt utvidelse 1.1:** Live preview validerer full FrameKey, også papirprofil/fontsett. Eksport får separat livssyklus og bruker ikke denne featurens private worker.
+**Implementert utvidelse 1.1 (P11):** Live preview validerer full FrameKey, også papirprofil/fontsett. Eksport får separat livssyklus og bruker ikke denne featurens private worker.
 
 ## 4. Atferd, tilstand og feil
 
@@ -43,7 +43,7 @@ Implemented-rader beskriver baseline 0712c29; Planned-rader beskriver utvidelsen
 | 4 | `PreviewCoordinator::refresh` | `ParserWorker::submit` | `src/application/preview/ParserWorker.cpp` | Snapshot → latest-job queue | Ingen GUI-kall i worker | Implemented |
 | 5 | `PreviewCoordinator::poll` | `PreviewCoordinator::relayout` | `src/application/preview/PreviewCoordinator.cpp` | Gjeldende resultat → layout | Gamle tokens forkastes | Implemented |
 | 6 | `PreviewCoordinator present callback` | `FoxRenderHost::present` | `src/application/adapters/FoxRenderHost.cpp` | Gyldig frame → preview | Fokus og cursor beholdes | Implemented |
-| 7 | `Preview completed` | `PreviewCoordinator::acceptFrame` | `src/application/preview/PreviewCoordinator.cpp` | FrameKey → present | avvis gammel profil | Planned |
+| 7 | `Preview completed` | `PreviewCoordinator::acceptFrame` | `src/application/preview/PreviewCoordinator.cpp` | FrameKey → present | avvis gammel profil | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -63,7 +63,7 @@ Utvidelsen krever AT-039. Dette er planlagt dekning, ikke nye testbevis.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-**Proposed 1.1:** Historisk Implemented/evidence nedenfor gjelder baseline. Nye kontrakter er beskrevet i [designrevisjonen](../../../softwareDesign.md); gamle bevis verifiserer ikke disse.
+**Implemented 1.1:** [P11-bevis](../../../docs/evidence/P11.md) beskriver ny kode og kontroller. Historiske bevis nedenfor gjelder baseline, ikke automatisk de nye kravene.
 
 
 Implemented i P4. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.

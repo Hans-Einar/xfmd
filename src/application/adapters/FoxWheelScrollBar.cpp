@@ -127,9 +127,11 @@ long FoxWheelScrollBar::onMotionTick(FXObject*, FXSelector, void*) {
   const bool done = pos == destination;
   if (!done)
     getApp()->addTimeout(this, ID_MOTION, 8);
+  notifying = true;
   if (target)
     target->tryHandle(this, FXSEL(done ? SEL_COMMAND : SEL_CHANGED, message),
                       reinterpret_cast<void*>(FXival(pos)));
+  notifying = false;
   return 1;
 }
 } // namespace xfmd

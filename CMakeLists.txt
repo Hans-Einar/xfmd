@@ -10,6 +10,7 @@ include(GNUInstallDirs)
 find_package(Threads REQUIRED)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(FOX REQUIRED IMPORTED_TARGET fox>=1.6.57)
+pkg_check_modules(PANGO REQUIRED IMPORTED_TARGET pangocairo pangofc)
 find_package(cmark 0.31.1 EXACT CONFIG REQUIRED)
 option(XFMD_SANITIZERS "Enable Address/UndefinedBehavior sanitizers" OFF)
 if(XFMD_SANITIZERS)
@@ -26,6 +27,7 @@ add_library(xfmd_interpreter
 target_link_libraries(xfmd_interpreter PUBLIC xfmd_contracts PRIVATE cmark::cmark)
 add_library(xfmd_renderer
   src/renderer/MarkdownRenderer.cpp src/renderer/BlockLayout.cpp
+  src/renderer/PageBreaker.cpp src/renderer/PageComposer.cpp src/renderer/PageAnchorIndex.cpp
   src/renderer/InlineLayout.cpp src/renderer/HitTester.cpp src/renderer/LinkMarker.cpp)
 target_link_libraries(xfmd_renderer PUBLIC xfmd_contracts)
 add_library(xfmd_document
@@ -49,6 +51,10 @@ add_library(xfmd_workspace
   src/application/workspace/FileNameFilter.cpp
   src/application/workspace/DirectoryScanner.cpp)
 target_link_libraries(xfmd_workspace PUBLIC xfmd_contracts Threads::Threads)
+add_library(xfmd_typography
+  src/application/adapters/FontCatalog.cpp src/application/adapters/SharedTextMetrics.cpp
+  src/application/adapters/DisplayListPainter.cpp)
+target_link_libraries(xfmd_typography PUBLIC xfmd_contracts PkgConfig::PANGO)
 add_library(xfmd_application
   src/application/preferences/PreferencesService.cpp
   src/application/adapters/FoxPreferencesStore.cpp src/application/ui/PreferencesDialog.cpp
@@ -56,10 +62,11 @@ add_library(xfmd_application
   src/application/commands/CommandRouter.cpp src/application/ui/XfmdWindow.cpp
   src/application/ui/EditorWidget.cpp src/application/ui/SidebarWidget.cpp src/application/ui/WorkspacePanel.cpp
   src/application/ui/ViewModeController.cpp src/application/adapters/FoxTextMetrics.cpp
+  src/application/adapters/ViewTransform.cpp
   src/application/adapters/FoxRenderHost.cpp src/application/adapters/FoxScheduler.cpp
   src/application/adapters/FoxWheelScrollBar.cpp)
 target_link_libraries(xfmd_application PUBLIC
-  xfmd_workspace xfmd_document xfmd_preview xfmd_scroll xfmd_navigation xfmd_interpreter xfmd_renderer PkgConfig::FOX)
+  xfmd_typography xfmd_workspace xfmd_document xfmd_preview xfmd_scroll xfmd_navigation xfmd_interpreter xfmd_renderer PkgConfig::FOX)
 add_executable(xfmd src/application/main.cpp)
 target_link_libraries(xfmd PRIVATE xfmd_application)
 

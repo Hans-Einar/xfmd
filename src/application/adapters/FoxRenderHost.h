@@ -1,39 +1,38 @@
 #pragma once
-#include "FoxTextMetrics.h"
+#include "SharedTextMetrics.h"
+#include "ViewTransform.h"
+#include "application/scroll/ScrollDynamics.h"
 #include "contracts/IRenderer.h"
 #include <functional>
 #include <fx.h>
+#include <optional>
 namespace xfmd {
 class FoxRenderHost : public FX::FXScrollArea {
   FXDECLARE(FoxRenderHost)
   IRenderer* renderer = nullptr;
-  FoxTextMetrics* metrics = nullptr;
+  SharedTextMetrics* metrics = nullptr;
   LayoutResult current;
   DocumentToken expected;
-  bool active = false, programmatic = false;
-  int lastWidth = 0;
+  std::optional<FrameKey> requested;
+  bool active = false, programmatic = false, keyboard = false, fit = true;
+  double lastWidth = 0, dpiScale = 4.0 / 3, zoom = 1;
+  ViewTransform transform;
 
 protected:
   FoxRenderHost() = default;
   void moveContents(FX::FXint, FX::FXint) override;
 
 public:
-  std::function<void(int)> resized;
-  std::function<void(int)> viewportChanged;
+  std::function<void(double)> resized, viewportChanged;
   std::function<void(const std::string&)> linkActivated;
-  FoxRenderHost(FX::FXComposite*, IRenderer&, FoxTextMetrics&);
+  ScrollOrigin lastScrollOrigin = ScrollOrigin::UserDrag;
+  FoxRenderHost(FX::FXComposite*, IRenderer&, SharedTextMetrics&);
   void layout() override;
   bool canFocus() const override { return true; }
-  long onKeyPress(FX::FXObject*, FX::FXSelector, void*);
   FX::FXint getContentWidth() override;
   FX::FXint getContentHeight() override;
-  void expect(DocumentToken token) {
-    if (token.document != expected.document)
-      current.reset();
-    expected = token;
-    active = false;
-    update();
-  }
+  void expect(DocumentToken);
+  void expectLayout(FrameKey);
   void present(LayoutResult);
   void invalidate() {
     active = false;
@@ -41,9 +40,14 @@ public:
   }
   bool interactive() const { return active; }
   const LayoutResult& frame() const { return current; }
-  void setViewport(int y);
+  void setViewport(double y, ScrollOrigin = ScrollOrigin::Restore);
+  void setViewScale(bool fitWidth, double factor = 1);
+  bool fitWidth() const { return fit; }
+  Point documentToView(Point p) const { return transform.toView(p); }
+  Point viewToDocument(Point p) const { return transform.toDocument(p); }
   long onPaint(FX::FXObject*, FX::FXSelector, void*);
   long onPointer(FX::FXObject*, FX::FXSelector, void*);
   long onMotion(FX::FXObject*, FX::FXSelector, void*);
+  long onKeyPress(FX::FXObject*, FX::FXSelector, void*);
 };
 } // namespace xfmd

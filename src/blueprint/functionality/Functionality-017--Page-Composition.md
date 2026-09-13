@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Service
 owner: renderer
-status: Proposed
+status: Implemented
 scope: Future
 requirements: UR-017, UR-018, SR-001, SR-008, SR-009, SR-016, SR-019
 uses: none
@@ -23,7 +23,7 @@ Akseptanse: AT-011, AT-018, AT-019, AT-031, AT-032, AT-036, AT-039.
 
 ## 3. Kontrakter og eierskap
 
-Planlagt `PageComposer::compose(FlowLayout, PaperSpec)` returnerer `PageLayout` med sidebokser, paginerte glyph-/dekorasjonsreferanser og ankerregioner. FUNC-004 produserer FlowLayout og kaller tjenesten; PageComposer kaller ikke FUNC-004 tilbake. Kontraktene bor i `src/contracts/PageLayout.h` og `LayoutProfile.h`.
+`PageComposer::compose(RenderFrame&, PaperSpec, cancelled)` fyller `PageLayout` fra frame.flow med sidebokser, paginerte glyph-/dekorasjonsreferanser og ankerregioner. FUNC-004 produserer FlowLayout og kaller tjenesten; PageComposer kaller ikke FUNC-004 tilbake. Kontraktene bor i `src/contracts/PageLayout.h` og `LayoutProfile.h`.
 
 `LayoutUnit` er double points, 1/72 inch; mm konverteres med 72/25.4. A4 er 210×297 mm, omtrent 595.276×841.890 pt. Første profil er portrett med 20 mm marger. Alle marger må være endelige og gi positivt innholdsområde. `LayoutMode` er Continuous eller Paged; continuous er én logisk flyt. Page gap/skygge og zoom er viewer-dekorasjon utenfor sidemodellen.
 
@@ -37,9 +37,9 @@ Brødtekst brytes til innholdsbredde. Kode bevarer whitespace, men visual-wrap i
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `MarkdownRenderer::layout Paged` | `PageComposer::compose` | `src/renderer/PageComposer.cpp` | målt flyt + papir → sider | valider innholdsmål/ressurser | Planned |
-| 2 | `PageComposer::compose` | `PageBreaker::breakLines` | `src/renderer/PageBreaker.cpp` | visuelle linjer/keep-regler → sidegrenser | stor blokk splittes; udelelig overflow feiler | Planned |
-| 3 | `PageComposer::compose` | `PageAnchorIndex::build` | `src/renderer/PageAnchorIndex.cpp` | flytankre → sideankre | behold source og mappingkvalitet | Planned |
+| 1 | `MarkdownRenderer::layout Paged` | `PageComposer::compose` | `src/renderer/PageComposer.cpp` | målt flyt + papir → sider | valider innholdsmål/ressurser | Implemented |
+| 2 | `PageComposer::compose` | `PageBreaker::breakLines` | `src/renderer/PageBreaker.cpp` | visuelle linjer/keep-regler → sidegrenser | stor blokk splittes; udelelig overflow feiler | Implemented |
+| 3 | `PageComposer::compose` | `PageAnchorIndex::build` | `src/renderer/PageAnchorIndex.cpp` | flytankre → sideankre | behold source og mappingkvalitet | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -49,10 +49,10 @@ FUNC-004 bruker denne functionality; FUNC-005/009/018 konsumerer PageLayout-data
 
 Fixtures for tom side, eksakt sidegrense, heading ved bunn, lang kode/listenesting og Unicode. Samme papirprofil gir identisk paginering ved resize/zoom/fullscreen. Sidegap og begge sync-retninger testes med FUNC-009.
 
-AT-011, AT-018, AT-019, AT-031, AT-032, AT-036, AT-039: planlagt verifikasjon; ingen implementasjonsbevis for utvidelsen.
+AT-011, AT-018, AT-019, AT-031, AT-032, AT-036, AT-039: se [P11](../../../docs/evidence/P11.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Revisjon 1.1, 2026-09-13. Alle nye kall i kapittel 5 er Planned.
+Revisjon 1.1, 2026-09-13. Kallene er implementert i P11-M2.
 P11. PageComposer skal bruke en flyt med eksplisitte visuelle linjer; dagens flate DrawRun-liste alene gir ikke robuste sideskift. Ressursgrenser/målinger avklares i P9 før Ready.
 [Integrasjonsdesign](../../../softwareDesign.md) og [faseplan](../../../implementationPlan.md) gir kontekst.

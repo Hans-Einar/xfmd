@@ -3,7 +3,8 @@
 namespace xfmd {
 class InlineLayout {
 public:
-  static int layout(const SemanticBlock&, int x, int y, int width, FontSpec, ITextMetrics&,
-                    RenderFrame&);
+  static double layout(const SemanticBlock&, double x, double y, double width, FontSpec,
+                       ITextMetrics&, RenderFrame&, bool wrapCode = false,
+                       const std::function<bool()>& cancelled = {});
 };
 } // namespace xfmd

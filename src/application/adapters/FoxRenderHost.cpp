@@ -1,6 +1,9 @@
 #include "FoxRenderHost.h"
-#include "application/adapters/FoxWheelScrollBar.h"
+#include "DisplayListPainter.h"
+#include "FoxWheelScrollBar.h"
 #include <algorithm>
+#include <cairo-xlib.h>
+#include <cmath>
 #include <fxkeys.h>
 using namespace FX;
 namespace xfmd {
@@ -10,30 +13,61 @@ renderMap[] = {FXMAPFUNC(SEL_PAINT, 0, FoxRenderHost::onPaint),
                FXMAPFUNC(SEL_LEFTBUTTONRELEASE, 0, FoxRenderHost::onPointer),
                FXMAPFUNC(SEL_MOTION, 0, FoxRenderHost::onMotion)};
 FXIMPLEMENT(FoxRenderHost, FXScrollArea, renderMap, ARRAYNUMBER(renderMap))
-FoxRenderHost::FoxRenderHost(FXComposite* parent, IRenderer& renderer, FoxTextMetrics& metrics)
+FoxRenderHost::FoxRenderHost(FXComposite* parent, IRenderer& r, SharedTextMetrics& m)
     : FXScrollArea(parent, VSCROLLER_ALWAYS | LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 0),
-      renderer(&renderer), metrics(&metrics) {
+      renderer(&r), metrics(&m) {
   horizontal = FoxWheelScrollBar::replace(horizontal);
   vertical = FoxWheelScrollBar::replace(vertical);
-  enable(); // FXScrollArea does not enable native pointer/key dispatch by default.
+  enable();
   setBackColor(FXRGB(255, 255, 255));
+  dpiScale =
+      std::clamp(getApp()->reg().readRealEntry("SETTINGS", "screenres", 96.0) / 72.0, .5, 4.0);
 }
-FXint FoxRenderHost::getContentWidth() { return current ? current->contentWidth : 100; }
-FXint FoxRenderHost::getContentHeight() { return current ? current->height : 60; }
+FXint FoxRenderHost::getContentWidth() { return current ? transform.contentWidth : 100; }
+FXint FoxRenderHost::getContentHeight() { return current ? transform.contentHeight : 60; }
 void FoxRenderHost::layout() {
+  const auto before = transform.toDocument({-double(pos_x), -double(pos_y)});
   FXScrollArea::layout();
-  if (viewport_w > 0 && viewport_w != lastWidth) {
-    lastWidth = viewport_w;
-    active = false;
+  if (current) {
+    transform.configure(*current, viewport_w, dpiScale, zoom, fit);
+    programmatic = true;
+    FXScrollArea::layout();
+    programmatic = false;
+  }
+  const double flowWidth = viewport_w / dpiScale;
+  if (viewport_w > 0 && flowWidth != lastWidth) {
+    lastWidth = flowWidth;
+    if (current && current->key.profile.mode == LayoutMode::Paged)
+      setViewport(before.y);
+    else
+      active = false;
     if (resized)
-      resized(viewport_w);
+      resized(flowWidth);
   }
 }
+void FoxRenderHost::expect(DocumentToken token) {
+  if (token.document != expected.document)
+    current.reset();
+  expected = token;
+  requested.reset();
+  active = false;
+  update();
+}
+void FoxRenderHost::expectLayout(FrameKey key) {
+  expected = key.token;
+  requested = std::move(key);
+  active = false;
+  update();
+}
 void FoxRenderHost::present(LayoutResult frame) {
-  if (!frame || frame->token != expected || frame->width != viewport_w)
+  if (!frame || frame->token != expected || (requested && !(frame->key == *requested)))
+    return;
+  if (frame->key.profile.mode == LayoutMode::Continuous &&
+      std::abs(frame->width - viewport_w / dpiScale) > .01)
     return;
   current = std::move(frame);
   active = true;
+  transform.configure(*current, viewport_w, dpiScale, zoom, fit);
   programmatic = true;
   FXScrollArea::layout();
   programmatic = false;
@@ -44,86 +78,102 @@ void FoxRenderHost::moveContents(FXint x, FXint y) {
   pos_x = x;
   pos_y = y;
   update();
-  if (!programmatic && active && viewportChanged)
-    viewportChanged(-y);
+  if (!programmatic && active && viewportChanged) {
+    lastScrollOrigin = FoxWheelScrollBar::isWheelChange(this) ? ScrollOrigin::UserWheel
+                       : keyboard                             ? ScrollOrigin::Keyboard
+                                                              : ScrollOrigin::UserDrag;
+    viewportChanged(transform.toDocument({-double(x), -double(y)}).y);
+  }
 }
-void FoxRenderHost::setViewport(int y) {
+void FoxRenderHost::setViewport(double y, ScrollOrigin origin) {
   FoxWheelScrollBar::cancelTree(this);
   programmatic = true;
-  setPosition(pos_x, -std::max(0, y));
+  lastScrollOrigin = origin;
+  setPosition(pos_x, -int(std::lround(transform.toView({0, std::max(0.0, y)}).y)));
   programmatic = false;
 }
-long FoxRenderHost::onPaint(FXObject*, FXSelector, void* data) {
-  auto* event = static_cast<FXEvent*>(data);
-  FXDCWindow dc(this, event);
-  dc.setForeground(getBackColor());
-  dc.fillRectangle(0, 0, width, height);
-  dc.setClipRectangle(0, 0, viewport_w, viewport_h);
-  if (!current) {
-    dc.setFont(metrics->font({}));
-    dc.setForeground(FXRGB(90, 99, 112));
-    dc.drawText(24, 40, "Open a Markdown or text file.", 29);
-    return 1;
+void FoxRenderHost::setViewScale(bool fitWidth, double factor) {
+  if (!std::isfinite(factor))
+    return;
+  auto before = transform.toDocument({-double(pos_x), -double(pos_y)});
+  fit = fitWidth;
+  zoom = std::clamp(factor, .25, 4.0);
+  if (current) {
+    transform.configure(*current, viewport_w, dpiScale, zoom, fit);
+    programmatic = true;
+    FXScrollArea::layout();
+    programmatic = false;
+    setViewport(before.y);
   }
-  for (const auto& decoration : current->decorations) {
-    auto r = decoration.bounds;
-    if (r.y + r.height < -pos_y || r.y > -pos_y + viewport_h)
-      continue;
-    dc.setForeground(FXRGB((decoration.color >> 16) & 255, (decoration.color >> 8) & 255,
-                           decoration.color & 255));
-    dc.fillRectangle(r.x + pos_x, r.y + pos_y, r.width, r.height);
+  recalc();
+  update();
+}
+long FoxRenderHost::onPaint(FXObject*, FXSelector, void*) {
+  auto* d = static_cast<Display*>(getApp()->getDisplay());
+  auto* surface = cairo_xlib_surface_create(d, id(), static_cast<Visual*>(getVisual()->getVisual()),
+                                            width, height);
+  auto* cr = cairo_create(surface);
+  bool paged = current && current->key.profile.mode == LayoutMode::Paged;
+  cairo_set_source_rgb(cr, paged ? .18 : 1, paged ? .20 : 1, paged ? .23 : 1);
+  cairo_paint(cr);
+  cairo_rectangle(cr, 0, 0, viewport_w, viewport_h);
+  cairo_clip(cr);
+  try {
+    if (current) {
+      DisplayListPainter painter(metrics->catalog);
+      if (paged) {
+        const auto& paper = current->pages.paper;
+        for (std::size_t i = 0; i < current->pages.slices.size(); ++i) {
+          const auto box = transform.pageRect(i);
+          if (box.y + pos_y > viewport_h || box.y + box.height + pos_y < 0)
+            continue;
+          cairo_set_source_rgb(cr, 1, 1, 1);
+          cairo_rectangle(cr, box.x + pos_x, box.y + pos_y, box.width, box.height);
+          cairo_fill(cr);
+          cairo_save(cr);
+          cairo_translate(cr, box.x + pos_x, box.y + pos_y - i * paper.height * transform.scale);
+          cairo_scale(cr, transform.scale, transform.scale);
+          painter.paint(*current, cr, {0, i * paper.height, paper.width, paper.height}, active);
+          cairo_restore(cr);
+        }
+      } else {
+        cairo_translate(cr, pos_x, pos_y);
+        cairo_scale(cr, transform.scale, transform.scale);
+        auto top = transform.toDocument({-double(pos_x), -double(pos_y)});
+        painter.paint(*current, cr,
+                      {top.x, top.y, viewport_w / transform.scale, viewport_h / transform.scale},
+                      active);
+      }
+    }
+  } catch (const std::exception& e) {
+    active = false;
+    cairo_identity_matrix(cr);
+    cairo_set_source_rgb(cr, .8, .1, .1);
+    cairo_move_to(cr, 20, 30);
+    cairo_show_text(cr, e.what());
   }
-  auto first = std::lower_bound(current->runs.begin(), current->runs.end(), -pos_y - 150,
-                                [](const DrawRun& run, int y) { return run.bounds.y < y; });
-  for (; first != current->runs.end() && first->bounds.y < -pos_y + viewport_h; ++first) {
-    const auto& run = *first;
-    auto r = run.bounds;
-    if (run.codeBackground) {
-      dc.setForeground(FXRGB(239, 241, 245));
-      dc.fillRectangle(r.x + pos_x, r.y + pos_y, r.width, r.height);
-    }
-    dc.setForeground(!active            ? FXRGB(135, 135, 135)
-                     : run.link.empty() ? FXRGB(29, 37, 49)
-                                        : FXRGB(24, 85, 166));
-    if (run.icon == InlineIcon::Globe) {
-      const int diameter = std::max(6, r.height - 4);
-      const int iconX = r.x + pos_x, iconY = r.y + pos_y + 2;
-      dc.drawArc(iconX, iconY, diameter, diameter, 0, 360 * 64);
-      dc.drawArc(iconX + diameter / 4, iconY, diameter / 2, diameter, 0, 360 * 64);
-      dc.drawLine(iconX, iconY + diameter / 2, iconX + diameter, iconY + diameter / 2);
-      continue;
-    }
-    int textX = r.x + pos_x;
-    for (const auto& segment : metrics->segments(run.text, run.font)) {
-      dc.setFont(segment.second);
-      dc.drawText(textX, r.y + pos_y + run.ascent, segment.first.data(), int(segment.first.size()));
-      textX += segment.second->getTextWidth(segment.first.data(), int(segment.first.size()));
-    }
-    if (!run.link.empty())
-      dc.drawLine(r.x + pos_x, r.y + pos_y + run.ascent + 2, r.x + r.width + pos_x,
-                  r.y + pos_y + run.ascent + 2);
-  }
+  cairo_destroy(cr);
+  cairo_surface_destroy(surface);
   return 1;
 }
 long FoxRenderHost::onPointer(FXObject*, FXSelector, void* data) {
   if (!active || !current)
     return 1;
   auto* event = static_cast<FXEvent*>(data);
-  auto hit = renderer->hitTest(*current, {event->win_x - pos_x, event->win_y - pos_y});
+  auto point = transform.toDocument({double(event->win_x - pos_x), double(event->win_y - pos_y)});
+  auto hit = renderer->hitTest(*current, point);
   if (!hit.link.empty() && linkActivated)
     linkActivated(hit.link);
   return 1;
 }
 long FoxRenderHost::onMotion(FXObject*, FXSelector, void* data) {
   auto* event = static_cast<FXEvent*>(data);
-  bool link =
-      active && current &&
-      !renderer->hitTest(*current, {event->win_x - pos_x, event->win_y - pos_y}).link.empty();
+  auto point = transform.toDocument({double(event->win_x - pos_x), double(event->win_y - pos_y)});
+  bool link = active && current && !renderer->hitTest(*current, point).link.empty();
   setDefaultCursor(getApp()->getDefaultCursor(link ? DEF_HAND_CURSOR : DEF_ARROW_CURSOR));
   return 1;
 }
 long FoxRenderHost::onKeyPress(FXObject*, FXSelector, void* data) {
-  FoxWheelScrollBar::cancelTree(this);
   auto* event = static_cast<FXEvent*>(data);
   int y = pos_y;
   switch (event->code) {
@@ -148,7 +198,10 @@ long FoxRenderHost::onKeyPress(FXObject*, FXSelector, void* data) {
   default:
     return 0;
   }
+  FoxWheelScrollBar::cancelTree(this);
+  keyboard = true;
   setPosition(pos_x, y);
+  keyboard = false;
   return 1;
 }
 } // namespace xfmd

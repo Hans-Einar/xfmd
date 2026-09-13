@@ -23,19 +23,19 @@ MappingResult AnchorMapper::map(SourceAnchor anchor, const RenderFrame& frame) {
   if (!best)
     return {};
   auto quality = distance == 0 ? best->source.quality : MappingQuality::Approximate;
-  return {std::max(0, best->bounds.y +
-                          int(std::clamp(anchor.fraction, 0.0, 0.99) * best->bounds.height)),
-          quality};
+  return {
+      std::max(0.0, best->bounds.y + std::clamp(anchor.fraction, 0.0, .99) * best->bounds.height),
+      quality, best->pageIndex};
 }
-SourceAnchor AnchorMapper::anchorAt(int y, const RenderFrame& frame) {
+SourceAnchor AnchorMapper::anchorAt(double y, const RenderFrame& frame) {
   const AnchorRegion* best = nullptr;
-  int distance = std::numeric_limits<int>::max();
-  int height = distance;
+  double distance = std::numeric_limits<double>::max();
+  double height = distance;
   for (const auto& region : frame.anchors) {
     if (region.source.quality == MappingQuality::Unavailable)
       continue;
-    int start = region.bounds.y, end = start + region.bounds.height;
-    int delta = y < start ? start - y : y >= end ? y - end + 1 : 0;
+    double start = region.bounds.y, end = start + region.bounds.height;
+    double delta = y < start ? start - y : y >= end ? y - end + 1 : 0;
     if (delta < distance || (delta == distance && region.bounds.height < height) ||
         (delta == distance && region.bounds.height == height && best &&
          region.source.begin < best->source.begin)) {
@@ -47,7 +47,7 @@ SourceAnchor AnchorMapper::anchorAt(int y, const RenderFrame& frame) {
   if (!best)
     return {0, 0, MappingQuality::Unavailable};
   double fraction =
-      std::clamp(double(y - best->bounds.y) / std::max(1, best->bounds.height), 0.0, 0.99);
+      std::clamp(double(y - best->bounds.y) / std::max(1.0, best->bounds.height), 0.0, 0.99);
   return {best->source.begin, fraction,
           distance == 0 ? best->source.quality : MappingQuality::Approximate};
 }

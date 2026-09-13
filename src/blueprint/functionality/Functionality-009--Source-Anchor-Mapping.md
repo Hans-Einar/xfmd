@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Mechanism
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-005, UR-008, SR-002, SR-008, SR-009, SR-013, UR-017, SR-019
 uses: FUNC-005
@@ -25,7 +25,7 @@ Krav: UR-005, UR-008, SR-002, SR-008, SR-009, SR-013. Definisjoner og normativ a
 
 AnchorMapper::map og anchorAt er rene funksjoner over RenderFrame. ScrollCoordinator eier aktivt token, pending restore, siste anker, split-mode og ekko-/sekvensguard. setEditor/setPreview injiseres som adaptercallbacks; captureAnchor/restoreAnchor deles med historikk.
 
-**Planlagt utvidelse 1.1:** AnchorMapper gir VisualLocation med sideindeks og points; host mapper visningskoordinater gjennom ViewTransform før lookup. Klikk/scroll i page gap velger nærmeste dokumentkant med deterministisk tie-break mot neste side. Sync og Restore er eksplisitte origins, uten wheel-gain.
+**Implementert utvidelse 1.1 (P11):** AnchorMapper gir VisualLocation med sideindeks og points; host mapper visningskoordinater gjennom ViewTransform før lookup. Klikk/scroll i page gap velger nærmeste dokumentkant med deterministisk tie-break mot neste side. Sync og Restore er eksplisitte origins, uten wheel-gain.
 
 ## 4. Atferd, tilstand og feil
 
@@ -43,7 +43,7 @@ Implemented-rader beskriver baseline 0712c29; Planned-rader beskriver utvidelsen
 | 4 | `ScrollCoordinator setEditor callback` | `EditorWidget::setSourceAnchor` | `src/application/ui/EditorWidget.cpp` | Raw byte → projected FOX-posisjon | Undertrykker programmatisk callback | Implemented |
 | 5 | `ScrollCoordinator setPreview callback` | `FoxRenderHost::setViewport` | `src/application/adapters/FoxRenderHost.cpp` | Y → FOX-scrollposisjon | Undertrykker programmatisk callback | Implemented |
 | 6 | `PreviewCoordinator present callback` | `ScrollCoordinator::setFrame` | `src/application/scroll/ScrollCoordinator.cpp` | FrameReady → restore | Kun forventet token | Implemented |
-| 7 | `ScrollCoordinator restore` | `AnchorMapper::map` | `src/application/scroll/AnchorMapper.cpp` | SourceAnchor + PageLayout → VisualLocation | Approximate eller Unavailable | Planned |
+| 7 | `ScrollCoordinator restore` | `AnchorMapper::map` | `src/application/scroll/AnchorMapper.cpp` | SourceAnchor + PageLayout → VisualLocation | Approximate eller Unavailable | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -63,7 +63,7 @@ Utvidelsen krever AT-031, AT-039. Dette er planlagt dekning, ikke nye testbevis.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-**Proposed 1.1:** Historisk Implemented/evidence nedenfor gjelder baseline. Nye kontrakter er beskrevet i [designrevisjonen](../../../softwareDesign.md); gamle bevis verifiserer ikke disse.
+**Implemented 1.1:** [P11-bevis](../../../docs/evidence/P11.md) beskriver ny kode og kontroller. Historiske bevis nedenfor gjelder baseline, ikke automatisk de nye kravene.
 
 
 Implemented i P5. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
