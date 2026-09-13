@@ -40,6 +40,7 @@ Prosjektlisens er fortsatt ikke valgt av eieren; ingen formell release er publis
 | Sidepanel | F10 |
 | Tilbake / frem | Alt+Venstre / Alt+Høyre |
 
+Sidepanelet beholdes ved mappevalg og filåpning; skjul/vis det selv med F10.
 Markdown og `.txt` åpnes lokalt; `.txt` vises uformatert. Preview oppdateres etter
 300 ms redigeringspause. Filgrensen er 8 MiB. UTF-8/BOM og eksisterende linjeslutt
 bevares. Ekstern filendring gir konflikt; hardlenker krever Lagre som.

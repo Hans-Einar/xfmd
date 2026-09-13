@@ -27,7 +27,11 @@ XfmdWindow::buildUi oppretter vindusstruktur. CommandRouter::dispatch/update rut
 
 ## 4. Atferd, tilstand og feil
 
-Preview standard, Ctrl+1/2/3 bytter modus, F10 bytter sidebar. Bare dobbeltklikk åpner. Case-insensitive .md/.txt-filter. Modusbytte bevarer økt og undo; ingen filtransaksjon i vindusklassen.
+Preview standard, Ctrl+1/2/3 bytter modus, F10 bytter sidebar. Bare dobbeltklikk på en faktisk fil åpner dokument. Mapper, også mapper med
+.md-suffiks, forblir tre-navigasjon. SidebarWidget bruker ID_TREE_EVENT fra
+FXDirList::ID_LAST slik at treets SEL_COMMAND ikke treffer FOXs ID_HIDE.
+Treklikk og dokumentbytte bevarer sidepanelets synlighet; bare eksplisitt
+F10/Sidebar-handling endrer den. Case-insensitive .md/.txt-filter. Modusbytte bevarer økt og undo; ingen filtransaksjon i vindusklassen.
 
 ## 5. Plumbing
 
@@ -38,7 +42,7 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 | 1 | `XfmdWindow constructor` | `XfmdWindow::buildUi` | `src/application/ui/XfmdWindow.cpp` | FOX app → vindu | Parenting eier widgets | Implemented |
 | 2 | `FOX command` | `CommandRouter::dispatch` | `src/application/commands/CommandRouter.cpp` | Command → Application::execute | Enabled kontrolleres | Implemented |
 | 3 | `Application::execute` | `ViewModeController::setMode` | `src/application/ui/ViewModeController.cpp` | Mode → flater | Bevarer dokument | Implemented |
-| 4 | `FOX double click` | `SidebarWidget::onOpen` | `src/application/ui/SidebarWidget.cpp` | Tree item → Path | Enkeltklikk åpner ikke | Implemented |
+| 4 | `FOX SEL_DOUBLECLICKED / ID_TREE_EVENT` | `SidebarWidget::onOpen` | `src/application/ui/SidebarWidget.cpp` | Faktisk fil → Path | Mappe/enkeltklikk åpner ikke og skjuler ikke panelet | Implemented |
 | 5 | `SidebarWidget open callback` | `Application::open` | `src/application/Application.cpp` | Path → requestOpen | Felles dirty-policy | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
@@ -54,6 +58,8 @@ Relevante akseptanse-ID-er: AT-001, AT-006, AT-007, AT-012, AT-018, AT-023.
 `WorkspaceTest` kjører under egen Xvfb og kontrollerer editor/preview-modus, F10-funksjonen, filfilter, undo og dirty-close. Kommando-/visuell ende-til-ende QA utvides i P7.
 
 Evidence: [Fase P2](../../../docs/evidence/P2.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
+
+Regresjon: [Sidepanel og rotklikk](../../../docs/evidence/sidebar-tree.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 
