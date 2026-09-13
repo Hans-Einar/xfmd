@@ -1,5 +1,7 @@
 #include "FoxWheelScrollBar.h"
 #include <algorithm>
+#include <cstdlib>
+#include <cstdio>
 using namespace FX;
 namespace xfmd {
 FXDEFMAP(FoxWheelScrollBar)
@@ -24,6 +26,10 @@ long FoxWheelScrollBar::onMouseWheel(FXObject*, FXSelector, void* data) {
   const auto& event = *static_cast<FXEvent*>(data);
   if (!isEnabled() || (event.state & (LEFTBUTTONMASK | MIDDLEBUTTONMASK | RIGHTBUTTONMASK)))
     return 0;
+  if (std::getenv("XFMD_TRACE_WHEEL"))
+    std::fprintf(stderr, "wheel axis=%s code=%d time=%u modifiers=%u source=unknown\n",
+                 (getScrollBarStyle() & SCROLLBAR_HORIZONTAL) ? "x" : "y",
+                 event.code, event.time, event.state);
   if (!event.code)
     return 1;
   // Preserve FOX's Alt=line, Ctrl=page and configured wheel-lines behavior.
