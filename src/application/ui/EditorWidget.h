@@ -21,6 +21,7 @@ public:
   void applyProjection(const SourceSnapshot&);
   void setSourceAnchor(SourceAnchor);
   std::size_t sourceAnchor() const;
+  long onKeyPress(FX::FXObject*, FX::FXSelector, void*);
   long onChanged(FX::FXObject*, FX::FXSelector, void*);
 };
 } // namespace xfmd

@@ -2,6 +2,7 @@
 #include "interpreter/CmarkInterpreter.h"
 #include "renderer/MarkdownRenderer.h"
 #include <filesystem>
+#include "adapters/FoxWheelScrollBar.h"
 using namespace FX;
 namespace xfmd {
 Application::~Application() {
@@ -11,6 +12,9 @@ Application::~Application() {
 }
 void Application::initialize(int& argc, char** argv) {
   app.init(argc, argv);
+  preferencesStore=std::make_unique<FoxPreferencesStore>(app.reg());
+  preferences=std::make_unique<PreferencesService>(preferencesStore->load(),
+      [this](const auto& value,std::string& error){return preferencesStore->save(value,error);});
   window = new XfmdWindow(&app, commands);
   editorFont = std::make_unique<FXFont>(&app, "DejaVu Sans Mono", 11);
   window->editor->setFont(editorFont.get());
@@ -75,6 +79,10 @@ void Application::initialize(int& argc, char** argv) {
       host->setFocus();
     host->recalc();
   };
+  preferences->changed=[this](const auto& value) {
+    FoxWheelScrollBar::configureTree(window,value.scroll);
+  };
+  preferences->changed(preferences->active());
   app.create();
   window->workspacePanel->setWorkPath(FXSystem::getHomeDirectory().text());
   views->setMode(ViewMode::Preview);

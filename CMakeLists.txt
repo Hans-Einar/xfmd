@@ -37,7 +37,8 @@ add_library(xfmd_preview
   src/application/preview/PreviewCoordinator.cpp src/application/preview/ParserWorker.cpp)
 target_link_libraries(xfmd_preview PUBLIC xfmd_document Threads::Threads)
 add_library(xfmd_scroll
-  src/application/scroll/AnchorMapper.cpp src/application/scroll/ScrollCoordinator.cpp)
+  src/application/scroll/AnchorMapper.cpp src/application/scroll/ScrollCoordinator.cpp
+  src/application/scroll/ScrollDynamics.cpp)
 target_link_libraries(xfmd_scroll PUBLIC xfmd_contracts)
 add_library(xfmd_navigation
   src/application/navigation/LinkResolver.cpp src/application/navigation/HistoryStore.cpp
@@ -49,6 +50,8 @@ add_library(xfmd_workspace
   src/application/workspace/DirectoryScanner.cpp)
 target_link_libraries(xfmd_workspace PUBLIC xfmd_contracts Threads::Threads)
 add_library(xfmd_application
+  src/application/preferences/PreferencesService.cpp
+  src/application/adapters/FoxPreferencesStore.cpp src/application/ui/PreferencesDialog.cpp
   src/application/Application.cpp src/application/ApplicationCommands.cpp
   src/application/commands/CommandRouter.cpp src/application/ui/XfmdWindow.cpp
   src/application/ui/EditorWidget.cpp src/application/ui/SidebarWidget.cpp src/application/ui/WorkspacePanel.cpp

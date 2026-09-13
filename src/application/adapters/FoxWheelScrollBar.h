@@ -1,19 +1,33 @@
 #pragma once
-#include <cstdint>
+#include "application/scroll/ScrollDynamics.h"
 #include <fx.h>
 namespace xfmd {
-// FOX 1.6 wheel animation with subpixel movement retained between wheel events.
 class FoxWheelScrollBar : public FX::FXScrollBar {
   FXDECLARE(FoxWheelScrollBar)
-  std::int64_t remainder = 0;
+  ScrollDynamics motion;
+  ScrollProfile profile{1, false, .5, 3};
+  int destination = 0, observed = 0, observedRange = 0, observedPage = 0;
+  std::uint64_t finish = 0;
+  double direction = 0;
+  static FoxWheelScrollBar* activeBar;
 
 protected:
   FoxWheelScrollBar() = default;
 
 public:
+  enum { ID_MOTION = FX::FXScrollBar::ID_LAST };
   FoxWheelScrollBar(FX::FXComposite*, FX::FXObject*, FX::FXSelector, FX::FXuint);
-  // Used by scroll-area constructors before FOX resources are created.
+  ~FoxWheelScrollBar() override;
   static FX::FXScrollBar* replace(FX::FXScrollBar*);
+  static void configureTree(FX::FXWindow*, const ScrollProfile&);
+  static void cancelTree(FX::FXWindow*);
+  void setProfile(const ScrollProfile& value) {
+    cancelMotion();
+    profile = value;
+  }
+  void cancelMotion();
   long onMouseWheel(FX::FXObject*, FX::FXSelector, void*);
+  long onMotionTick(FX::FXObject*, FX::FXSelector, void*);
+  long onPress(FX::FXObject*, FX::FXSelector, void*);
 };
 } // namespace xfmd

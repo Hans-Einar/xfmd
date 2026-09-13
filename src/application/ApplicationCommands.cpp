@@ -1,5 +1,6 @@
 #include "Application.h"
 #include <filesystem>
+#include "ui/PreferencesDialog.h"
 using namespace FX;
 namespace xfmd {
 std::string Application::savePath() {
@@ -11,6 +12,11 @@ std::string Application::savePath() {
 }
 void Application::execute(CommandRouter::Command command) {
   switch (command) {
+  case CommandRouter::Preferences: {
+    PreferencesDialog dialog(window,*preferences);
+    dialog.execute(PLACEMENT_OWNER);
+    break;
+  }
   case CommandRouter::Open: {
     auto path = FXFileDialog::getOpenFilename(window, "Open document", session.view().path.c_str(),
                                               "Markdown and text (*.md,*.txt)");

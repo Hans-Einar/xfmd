@@ -28,6 +28,7 @@ void XfmdWindow::buildUi() {
   add(editMenu, "&Undo\tCtrl+Z", CommandRouter::Undo);
   add(editMenu, "&Redo\tCtrl+Y", CommandRouter::Redo);
   add(editMenu, "&Find...\tCtrl+F", CommandRouter::Find);
+  add(editMenu, "&Preferences...", CommandRouter::Preferences);
   new FXMenuTitle(bar, "&Edit", nullptr, editMenu);
   viewMenu = new FXMenuPane(this);
   add(viewMenu, "&Preview\tCtrl+1", CommandRouter::Preview);

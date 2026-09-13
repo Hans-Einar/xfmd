@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Mechanism
 owner: application
-status: Proposed
+status: Implemented
 scope: Future
 requirements: UR-011, UR-015, UR-016, SR-002, SR-015, SR-019
 uses: FUNC-014, FUNC-006
@@ -23,7 +23,7 @@ Akseptanse: AT-012, AT-025, AT-029, AT-030, AT-035, AT-039.
 
 ## 3. Kontrakter og eierskap
 
-Planlagte `ScrollInput{axis,delta,timestamp,source,origin}` og `ScrollProfile{speed,acceleration,k,v0,maxGain}` er application-verdier uten FOX. `ScrollDynamics::advance(input,range,now)` og `reset(reason)` er rene og får injisert monoton klokke. `FoxWheelScrollBar` normaliserer `FXEvent.code/120.0` til logiske wheel-enheter, håndterer FOX-target/varsler og har separat dynamikk per bar/akse. Unknown kilde er gyldig; FOXs core-eventvei kan ikke pålitelig identifisere fingerantall eller fingerløft.
+`ScrollInput{axis,delta,timestamp,origin}` (kilde er alltid Unknown) og `ScrollProfile{speed,acceleration,strength,maxGain}` (v0=8 internt) er application-verdier uten FOX. `ScrollDynamics::advance(input,range,now)` og `reset(reason)` er rene og får injisert monoton klokke. `FoxWheelScrollBar` normaliserer `FXEvent.code/120.0` til logiske wheel-enheter, håndterer FOX-target/varsler og har separat dynamikk per bar/akse. Unknown kilde er gyldig; FOXs core-eventvei kan ikke pålitelig identifisere fingerantall eller fingerløft.
 
 Foreslått første profil: speed=1.5 (0.25–4), acceleration=false, k=0.5 (0–2), v0=8 wheel-enheter/s, maxGain=3 (1–5). Dette er tuningforslag; P10 sammenligner med kompatibilitetsprofil speed=1, acceleration=false.
 
@@ -41,9 +41,9 @@ Først flyttes baseline-reglene uendret. Deretter eier adapteren én retargetbar
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `FOX SEL_MOUSEWHEEL` | `FoxWheelScrollBar::onMouseWheel` | `src/application/adapters/FoxWheelScrollBar.cpp` | FXEvent → ScrollInput | en inputvei, konsumér én gang | Planned |
-| 2 | `FoxWheelScrollBar::onMouseWheel` | `ScrollDynamics::advance` | `src/application/scroll/ScrollDynamics.cpp` | input/profil/range → clamped mål | rest og hastighet per bar | Planned |
-| 3 | `FOX timeout` | `FoxWheelScrollBar::onMotionTick` | `src/application/adapters/FoxWheelScrollBar.cpp` | mål → position + SEL_CHANGED | slutt gir SEL_COMMAND; ingen dobbel timer | Planned |
+| 1 | `FOX SEL_MOUSEWHEEL` | `FoxWheelScrollBar::onMouseWheel` | `src/application/adapters/FoxWheelScrollBar.cpp` | FXEvent → ScrollInput | en inputvei, konsumér én gang | Implemented |
+| 2 | `FoxWheelScrollBar::onMouseWheel` | `ScrollDynamics::advance` | `src/application/scroll/ScrollDynamics.cpp` | input/profil/range → clamped mål | rest og hastighet per bar | Implemented |
+| 3 | `FOX timeout` | `FoxWheelScrollBar::onMotionTick` | `src/application/adapters/FoxWheelScrollBar.cpp` | mål → position + SEL_CHANGED | slutt gir SEL_COMMAND; ingen dobbel timer | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -53,10 +53,10 @@ Alle scrollflater bruker samme policyinstans-type og samme profil: SidebarWidget
 
 Deterministiske serier tester base uavhengig av gain, små ±1/120, batching innen samme tidsboks, reversering, idle, overflow og endepunkter. Ekte FOX/X11-tester skal teste selve tre-/tekst-/preview-flaten, ikke bare adaptermetoden. Mål physical touchpad separat; syntetisk fin-delta er ikke driverbevis.
 
-AT-012, AT-025, AT-029, AT-030, AT-035, AT-039: planlagt verifikasjon; ingen implementasjonsbevis for utvidelsen.
+AT-012, AT-025, AT-029, AT-030, AT-035, AT-039: se [P10](../../../docs/evidence/P10.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Revisjon 1.1, 2026-09-13. Alle nye kall i kapittel 5 er Planned.
-P9 måler inputkvalitet. Første implementasjon bruker FOX-hook. XI2 er en eksplisitt senere adapter dersom målingen viser tapt nødvendig oppløsning; den må erstatte, ikke supplere, den samme core-eventstrømmen. Ingen endring av libinput, xfw eller system-FOX.
+Revisjon 1.1, 2026-09-13. Alle kall i kapittel 5 er implementert i P10.
+P9 har avklart core-eventveien; se [P9](../../../docs/evidence/P9.md). P10-M1 trekker ut rest/clamp til ScrollDynamics; akselerasjon og egen timer følger M3. Første implementasjon bruker FOX-hook. XI2 er en eksplisitt senere adapter dersom målingen viser tapt nødvendig oppløsning; den må erstatte, ikke supplere, den samme core-eventstrømmen. Ingen endring av libinput, xfw eller system-FOX.
 [Integrasjonsdesign](../../../softwareDesign.md) og [faseplan](../../../implementationPlan.md) gir kontekst.

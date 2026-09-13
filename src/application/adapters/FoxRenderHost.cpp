@@ -48,6 +48,7 @@ void FoxRenderHost::moveContents(FXint x, FXint y) {
     viewportChanged(-y);
 }
 void FoxRenderHost::setViewport(int y) {
+  FoxWheelScrollBar::cancelTree(this);
   programmatic = true;
   setPosition(pos_x, -std::max(0, y));
   programmatic = false;
@@ -122,6 +123,7 @@ long FoxRenderHost::onMotion(FXObject*, FXSelector, void* data) {
   return 1;
 }
 long FoxRenderHost::onKeyPress(FXObject*, FXSelector, void* data) {
+  FoxWheelScrollBar::cancelTree(this);
   auto* event = static_cast<FXEvent*>(data);
   int y = pos_y;
   switch (event->code) {

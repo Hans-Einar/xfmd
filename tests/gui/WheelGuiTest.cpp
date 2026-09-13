@@ -1,4 +1,5 @@
 #include "application/Application.h"
+#include "application/adapters/FoxWheelScrollBar.h"
 #include "support/TestSupport.h"
 #include <X11/Xlib.h>
 #include <chrono>
@@ -124,5 +125,13 @@ void run() {
           center - (modifier == FX::ALTMASK ? bar->getLine() : bar->getPage()));
   }
   bar->setScrollBarStyle(style);
+  app.host->setViewport(center);
+  FX::FXEvent moving{};
+  moving.code = -120;
+  bar->handle(bar, FXSEL(FX::SEL_MOUSEWHEEL, 0), &moving);
+  app.host->setViewport(0); // Restore cancels unfinished wheel motion, even before next tick.
+  events(app);
+  CHECK(bar->getPosition() == 0);
+  CHECK(!app.app.hasTimeout(bar, FoxWheelScrollBar::ID_MOTION));
 }
 TEST_MAIN(run)
