@@ -4,10 +4,10 @@ kind: Functionality
 audience: User
 role: Service
 owner: application
-status: Implemented
+status: Proposed
 scope: FirstRelease
-requirements: UR-011, UR-003, UR-004, UR-009, SR-002, SR-006, SR-008, SR-013
-uses: FUNC-001, FUNC-005, FUNC-007
+requirements: UR-011, UR-003, UR-004, UR-009, SR-002, SR-006, SR-008, SR-013, UR-016, SR-019
+uses: FUNC-001, FUNC-005, FUNC-007, FUNC-015
 ---
 
 # Functionality-011: Tekstredigering, undo og søk
@@ -25,6 +25,8 @@ Krav: UR-011, UR-003, UR-004, UR-009, SR-002, SR-006, SR-008, SR-013. Definisjon
 
 EditController::applyEdit/applyProjectedText/undo/redo/find eier undo-operasjoner. TextProjection konverterer LF-visning til rå kildeoffsets og opprinnelig newline-policy. EditorWidget eier bare FXText-projeksjonen.
 
+**Planlagt utvidelse 1.1:** EditorWidget beholder tekst, undo og kildeprojeksjon. FoxWheelScrollBar konsumerer felles FUNC-015-profil, uten egen akselerasjonsformel. Source-anchor restore og søketreff flytter direkte med korrekt origin.
+
 ## 4. Atferd, tilstand og feil
 
 Én undo-stack med 32 MiB historikkbudsjett. Programmatisk projeksjon gir ikke ny edit. BOM og urørte blandede linjesluttsekvenser bevares; nye linjer bruker filens første linjesluttformat. UTF-8-diff utvides til tegnsgrense. Søk endrer ikke dokument. Åpning resetter undo, view mode gjør det ikke.
@@ -35,7 +37,7 @@ changed/command-varsler. Konstruktørene bytter barene før create(); widgets ei
 
 ## 5. Plumbing
 
-Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
+Implemented-rader beskriver baseline 0712c29; Planned-rader beskriver utvidelsen. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -47,6 +49,7 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 | 6 | `Application::execute` | `EditController::find` | `src/application/document/EditController.cpp` | Query → projected offset | Ingen dirty-endring | Implemented |
 | 7 | `EditorWidget constructor` | `FoxWheelScrollBar::replace` | `src/application/adapters/FoxWheelScrollBar.cpp` | Standard bar → presis wheel-adapter | Parent eier ny bar; før create | Implemented |
 | 8 | `FOX wheel dispatch` | `FoxWheelScrollBar::onMouseWheel` | `src/application/adapters/FoxWheelScrollBar.cpp` | Delta/rest → target og FOX-timer | Clamp, behold delpiksel-rest, standard varsler | Implemented |
+| 9 | `Editor wheel` | `ScrollDynamics::advance` | `src/application/scroll/ScrollDynamics.cpp` | input → mål | ingen tekstendring | Planned |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -64,7 +67,12 @@ Evidence: [Fase P2](../../../docs/evidence/P2.md). Samlet kravdekning og eventue
 
 Regresjonsbevis: [Gesture og scrollgrenser](../../../docs/evidence/wheel-scrolling.md).
 
+Utvidelsen krever AT-030, AT-039. Dette er planlagt dekning, ikke nye testbevis.
+
 ## 8. Status, risiko og endringskonsekvenser
+
+**Proposed 1.1:** Historisk Implemented/evidence nedenfor gjelder baseline. Nye kontrakter er beskrevet i [designrevisjonen](../../../softwareDesign.md); gamle bevis verifiserer ikke disse.
+
 
 Implemented i P2. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
 Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.

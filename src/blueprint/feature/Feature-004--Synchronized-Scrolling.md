@@ -4,10 +4,10 @@ kind: Feature
 audience: User
 role: Workflow
 owner: application
-status: Implemented
+status: Proposed
 scope: FirstRelease
-requirements: UR-008, SR-002, SR-008, SR-009, SR-012, SR-013
-uses: FUNC-004, FUNC-005, FUNC-009, FUNC-010
+requirements: UR-008, SR-002, SR-008, SR-009, SR-012, SR-013, UR-016, SR-019
+uses: FUNC-004, FUNC-005, FUNC-009, FUNC-010, FUNC-015
 ---
 
 # Feature-004: Synkronisert scrolling mellom kilde og visning
@@ -25,13 +25,15 @@ Krav: UR-008, SR-002, SR-008, SR-009, SR-012, SR-013. Definisjoner og normativ a
 
 Feature koordineres av ScrollCoordinator og bruker samme ankerkontrakt som navigasjon. Interpreter/renderer leverer source ranges og linje-/blokkgeometri. Ingen ekstra parser og ingen total-prosent-algoritme.
 
+**Planlagt utvidelse 1.1:** Bevegelsespolicy kjøres bare på inputflaten. Synkroniserte absolutte posisjoner skal aldri akselereres på nytt. Sidemapping erstatter antakelsen om ett kontinuerlig y-plan.
+
 ## 4. Atferd, tilstand og feil
 
 Begge flater synkroniseres i split-modus. Scrolling i enkeltvisning oppdaterer leseposisjonen uten å flytte skjult flate. Resize og ny revisjon ugyldiggjør mapping; FrameReady gjenoppretter anker. Blank/ukjent mapping er deaktivert. Kodelinjer med identisk tekst beholder hver sin kildeposisjon.
 
 ## 5. Plumbing
 
-Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
+Implemented-rader beskriver baseline 0712c29; Planned-rader beskriver utvidelsen. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -41,6 +43,7 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 | 4 | `ScrollCoordinator setEditor callback` | `EditorWidget::setSourceAnchor` | `src/application/ui/EditorWidget.cpp` | Source → editor viewport | Clamped tekstposisjon | Implemented |
 | 5 | `ScrollCoordinator setPreview callback` | `FoxRenderHost::setViewport` | `src/application/adapters/FoxRenderHost.cpp` | Y → preview viewport | Clamped geometri | Implemented |
 | 6 | `PreviewCoordinator present callback` | `ScrollCoordinator::setFrame` | `src/application/scroll/ScrollCoordinator.cpp` | Ny generasjon → restore | Stale frame brukes aldri | Implemented |
+| 7 | `Sync receiver` | `ScrollCoordinator::onViewportChanged` | `src/application/scroll/ScrollCoordinator.cpp` | merket origin + FrameKey → guard | ingen dobbel gain | Planned |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -56,7 +59,12 @@ Relevante akseptanse-ID-er: AT-008, AT-012, AT-018, AT-019, AT-022, AT-023.
 
 Evidence: [Fase P5](../../../docs/evidence/P5.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
 
+Utvidelsen krever AT-030, AT-039. Dette er planlagt dekning, ikke nye testbevis.
+
 ## 8. Status, risiko og endringskonsekvenser
+
+**Proposed 1.1:** Historisk Implemented/evidence nedenfor gjelder baseline. Nye kontrakter er beskrevet i [designrevisjonen](../../../softwareDesign.md); gamle bevis verifiserer ikke disse.
+
 
 Implemented i P5. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
 Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.

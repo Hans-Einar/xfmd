@@ -120,3 +120,12 @@ Videre forbedringer etter første implementasjon:
 Målet er minst mulig **duplisert** functionality og dokumentasjon, ikke færrest
 mulig nødvendige tjenester. Metoden skal gjøre neste agent i stand til å finne
 riktig vei gjennom systemet uten å måtte gjette eller gjenoppfinne den.
+
+## Revisjon 1.1
+
+[Designrevisjonen](../softwareDesign.md) utvider P0–P8-baseline med to features og
+seks functionality-objekter (7 og 19 totalt). Nye objekter har scope Future og
+status Proposed. Berørte eksisterende objekter beholder FirstRelease som opprinnelig
+scope, men får Proposed-status for endret kontrakt. Deres Implemented plumbing og
+eldre bevis gjelder baseline; nye Planned-rader og akseptanse må verifiseres separat.
+Faseplanen P9–P13 beskriver neste leveranse; Future betyr ikke ubestemt utsettelse.

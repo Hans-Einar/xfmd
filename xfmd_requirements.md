@@ -1,6 +1,7 @@
 # Kravspesifikasjon: xfmd
 
-Status: **Implemented baseline**, revisjon 1.0, 2026-09-12. Designgrunnlaget ble
+Status: **Implemented baseline P0–P8 + Proposed utvidelse 1.1**, 2026-09-13.
+UR-015–020 og SR-015–019 er nytt måldesign, ikke implementert. Tidligere designgrunnlag ble
 godkjent før implementasjon. Krav er normative; målinger og begrensninger finnes
 i [P7-verifikasjonen](docs/evidence/P7.md).
 
@@ -24,7 +25,9 @@ uavhengig gjennom avtalte kontrakter. Se [arkitekturen](softwareArchitecture.md)
 - **Feature (FTR):** avgrenset, sammenhengende evne med egen akseptanse.
 - **Functionality (FUNC):** tjeneste/atferd med ett eierlag og eksplisitte kall.
 
-Alle krav gjelder første leveranse med mindre «senere» er angitt. ID-er
+UR-001–014 og SR-001–014 beholder tidligere leveransescope. Nye UR-015–020 og
+SR-015–019 har scope Future: planlagt neste leveranse P9–P13, uten implementasjonsbevis.
+«Future» betyr her neste planlagte utvidelse, ikke ubestemt utsettelse. ID-er
 er stabile; slettede krav beholdes som `Retired` med begrunnelse. Et dokument eller
 en stub oppfyller ikke i seg selv et funksjonelt krav.
 
@@ -38,6 +41,9 @@ en stub oppfyller ikke i seg selv et funksjonelt krav.
 | UC-004 | Velg side-ved-side, rediger, se preview etter pause, angre/gjør om, søk og lagre. | Parse-/lagringsfeil beholder edits; lukking/dokumentbytte spør om ulagret tekst. | UR-003, UR-004, UR-007, UR-009 |
 | UC-005 | Scroll i editor eller preview og se tilsvarende kildeavsnitt i motsatt flate. | Resize, skjult panel eller gammel mapping gir re-layout eller midlertidig deaktivert sync. | UR-008 |
 | UC-006 | Senere: bruk separat `xfw` som editor og xfmd som preview. | Frakobling beholder siste lokale visning og gir status. | UR-010 |
+| UC-007 | Åpne Preferences, juster og prøv scrolling, lagre eller avbryt. | Feil verdier/lagring bevarer aktiv profil. | UR-011, UR-015, UR-016 |
+| UC-008 | Bytt til A4, kontroller sideskift og eksporter PDF fra aktuell buffer. | Cancel/feil bevarer kilde og mål. | UR-017, UR-018 |
+| UC-009 | Les eller rediger i fullscreen og gå tilbake til samme arbeidsflate. | Aktiv dialog bruker Escape først. | UR-019, UR-007 |
 
 ## 4. Brukerkrav
 
@@ -54,10 +60,20 @@ en stub oppfyller ikke i seg selv et funksjonelt krav.
 | UR-009 | Vis dirty-status og handlingsrettede feil. Ved bytte/lukking tilby Lagre, Forkast eller Avbryt. Avbrudd/feil bevarer gjeldende dokument. | AT-009: skrivefeil, ekstern endring, avbrudd og feilet nytt dokument gir ingen stille tap. |
 | UR-010 | Senere: motta dokument- og kildeankeroppdateringer fra `xfw` uten å endre interpreter/renderer. | AT-010: framtidig IPC-integrasjonstest; ikke første leveranse. |
 | UR-011 | Wheel-/gesture-scrolling i sidetre, arbeidsstihistorikk, editor og preview bevarer små delbevegelser og når eksakt topp/bunn eller venstre/høyre. Dragging av scrollbar og standard modifikatortaster beholdes. | AT-025: små og hele wheel-deltaer, begge retninger/akser, endepunkter og reversering testes med ekte FOX-scrollbarer. |
-
 | UR-012 | Start uten argument med ~ som arbeidsrot; `xfmd .` bruker absolutt PWD, og annet mappeargument brukes som rot. Filargument åpner dokument med foreldre-mappen som arbeidsrot. Treets rot er synlig og utvidet ved oppstart. Vanlig trenavigasjon kan ikke gå utenfor roten. Dobbeltklikk rot utvider eksplisitt til ~, deretter /. | AT-026: oppstart uten argument, relativ/absolutt mappe og fil; rotsekvens, feil sti og avgrensning. |
 | UR-013 | Høyreklikk mappe tilbyr «Set work path». Arbeidsstier vises under treet som klikkbar, unik historikk (nyeste først, maksimum 32), lagret mellom oppstarter. Aktivering av ugyldig historikk bevarer roten og gir forklaring. Dokument, dirty og panelsynlighet bevares ved rotbytte. | AT-027: kontekstmeny, historikkvalg, persistens, slettet mappe og dirty-buffer. |
 | UR-014 | Filtrer filnavn med delstreng, ? (ett Unicode-tegn) og * (null eller flere tegn). Aktive *.md / *.txt-knapper kombineres med OR før AND med navnefeltet. Ingen aktiv typeknapp betyr alle filtyper; tomt navnefelt betyr alle navn. Vis bare matchende filer og deres forfedremapper ved aktivt filter; behold roten også ved null treff. | AT-028: knappkombinasjoner, kjedet filter, wildcard/Unicode, dype treff, null treff, raske filter-/rotbytter og uleselige mapper. |
+
+### Planlagt utvidelse 1.1 (Future / Proposed)
+
+| ID | Krav | Akseptanse / beviskriterium |
+| --- | --- | --- |
+| UR-015 | Edit → Preferences åpner en FOX-dialog med scrollhastighet og akselerasjonskontroller. Endringer prøves i et avgrenset scrollfelt; OK lagrer og oppdaterer alle xfmd-scrollflater, Cancel bevarer tidligere aktive/lagrede verdier. Ingen endring i andre FOX-programmer. | AT-029: åpning via meny, prøvefelt, OK/Cancel, restart og gyldig hastighet i tre, historikk, editor og preview. |
+| UR-016 | Brukeren kan aktivere scrollakselerasjon og justere styrke og maksimum separat fra grunnhastighet. Langsom bevegelse skal være presis, rask bevegelse kunne flytte mer; reversering og endepunkter gir ingen oppsamlet bevegelse. Dragging, tastaturscroll og synkronisering akselereres ikke. | AT-030: tidsbestemte inputserier, egen base/gain, av/på, begge akser, reversering og eksakt topp/bunn. |
+| UR-017 | View tilbyr Window wrap og A4 page preview. Window wrap følger previewens innholdsbredde; A4 viser faktisk sidegeometri med marger og sideskift. Zoom/fit-width endrer A4-visningens skala, aldri papirbredden. Bytte bevarer kildeanker, dirty, undo og view mode. | AT-031: resize, formatbytte, A4 210×297 mm, marger, zoom, lang kode/lister og kildekart over sideskift. |
+| UR-018 | File → Export PDF eksporterer gjeldende buffer, også ulagrede edits, som lokal flersiders PDF. Sidevisning og eksport bruker samme papirprofil, fontgrunnlag og layout. Feil/Cancel bevarer kilde og eksisterende målfil; eksport endrer ikke dirty eller dokumenthistorikk. | AT-032: A4-preview/PDF har samme tekstplassering og sideskift; valgbar Unicode-tekst, bufferrevisjon, feilet skriving og avbrudd. |
+| UR-019 | View → Full Screen / F11 toggler fullscreen på aktuell skjerm. F11 og Escape uten aktiv modal dialog forlater modusen. Tidligere vindusgeometri, maksimert tilstand, splitter, sidebar og editor/preview-modus bevares; fullscreen er uavhengig av papirprofil. | AT-033: Window Maker-bekreftet fullscreen og retur, modal Escape, flere skjermer, dirty/undo og A4/continuous. |
+| UR-020 | xfmd får en egen gjenkjennelig dokument-/Markdown-identitet med samme ikon i desktop-entry og FOX-vindu. Master er SVG med avledede størrelser som er lesbare ved 16–64 px. | AT-034: lys/mørk bakgrunn, 16/24/32/48/64/128 px, desktop-entry og faktisk window icon; motiv endrer ikke appnavn/MIME-identitet. |
 
 ## 5. Systemkrav
 
@@ -77,6 +93,16 @@ en stub oppfyller ikke i seg selv et funksjonelt krav.
 | SR-012 | Features/functionality har krav-ID, eier, kontrakter, plumbing, feilvei, gjenbruk og verifikasjon. | AT-022: validator og manuell semantisk sporbarhetskontroll. |
 | SR-013 | Roller deles i fokuserte filer; nye tjenester begrunnes i krav og gjenbruk eller nødvendig ansvarsgrense. | AT-023: filkart og review; ingen skjult funksjonalitet i vindusklasse/generisk hjelpefil. |
 | SR-014 | Senere: IPC versjonerer protokoll, avgrenser meldingsstørrelse, kontrollerer lokal peer og dokument/revisjon. | AT-024: framtidige tester av feil peer, partial reads, gammel revisjon og frakobling. |
+
+### Planlagte systemkontrakter 1.1 (Future / Proposed)
+
+| ID | Krav | Akseptanse / beviskriterium |
+| --- | --- | --- |
+| SR-015 | Scrollinput normaliseres én gang i application. Standardvei er FOX SEL_MOUSEWHEEL; direkte libinput/evdev/grab er ikke nødvendig. Kilde, enhet, tidsenhet og akse er eksplisitte eller Unknown. Ingen dobbelbehandling ved eventuell senere XI2-adapter. | AT-035: ekte X11-dispatch, kvantisert fallback, komprimerte events, små syntetiske deltaer, akser og ingen dobbeltforsterkning. |
+| SR-016 | Renderer/kontrakter forblir FOX-/Cairo-/parser-frie. Sidegeometri bruker fysiske points (1/72 inch); sidepreview og PDF deler formede glypher/fontidentitet og sidemodell. Viewport/DPI/zoom er separat transform. | AT-036: fontfallback og glyph-/clusterdata, PDF MediaBox, identiske sidelinjer ved DPI/zoom-bytte; rastertoleranse dokumenteres. |
+| SR-017 | Eksport har frosset SourceSnapshot, PaperSpec og FontSetId. Jobben publiserer atomisk fra søsken-tempfil etter suksess; dokumentbytte, edits, cancel og shutdown har eksplisitt policy. Ressurser og tråder er begrenset og eies uten FOX-kall fra worker. | AT-037: pågående eksport under edit/bytte, ugyldig/slettet mål, full disk, cancellation før commit og bounded shutdown. |
+| SR-018 | Applikasjonspreferanser har versjonert skjema, grenser og validering ved både lesing og skriving. Ugyldig eller ukjent innhold gir dokumentert fallback/bevaring. Aktiv profil skifter først etter bekreftet lagring; WorkPaths-historikken bevares. | AT-038: roundtrip, manglende/ugyldige verdier, lagringsfeil, ukjente felter, schema-version og eksisterende historikk. |
+| SR-019 | FrameKey identifiserer dokument/revisjon, layoutprofil, fontsett og generasjon. SourceAnchor beholder UTF-8-bytebetydning. Viewportmeldinger skiller UserWheel, UserDrag, Keyboard, Sync og Restore; bare UserWheel gjennomgår scrollakselerasjon. | AT-039: ingen echo/dobbel gain; gamle layoutprofiler avvises; ankerrestore gjennom A4, page gap, zoom og fullscreen. |
 
 ## 6. Detaljpolicy for første leveranse
 
@@ -128,3 +154,17 @@ fortløpende. Vanlig treutvidelse leser bare den valgte mappen. Rot-/filterbytte
 kansellerer gammel skanning; GUI-objekter tilhører bare GUI-tråden. Status viser
 pågående søk, null treff eller antall uleselige mapper. Historikk er separat fra
 dokumenthistorikk og endrer ikke prosessens arbeidsmappe.
+
+## 9. Avgrensning for neste leveranse
+
+[Designrevisjon 1.1](softwareDesign.md) og [P9–P13](implementationPlan.md#5-planlagt-utvidelse-p9p13)
+beskriver integrasjonen. A4 er første papirformat, portrett og 20 mm marger som
+forslag til standard. Sideprofil har egen kontrakt slik at flere formater kan
+legges til senere. Window wrap er fortsatt standard. Kode beholder horisontal
+scroll i Window wrap; i A4 brukes visuell wrapping uten å endre kildebytes.
+Markdown-dialekten, bilde-/HTML-policy og UR-010/IPC utvides ikke av PDF-eksport.
+
+SR-008/009 er baseline for SR-019. SR-010s GUI-eierskap består: ingen FOX-ressurser
+deles med eksport-worker. P11/P12 må eksplisitt verifisere ny typografi-/PDF-
+adapters trådeierskap. SR-011s eksisterende terskler gjelder baseline continuous;
+P9 måler et eget bounded side-/PDF-budsjett før det nye formatet kan bli Ready.
