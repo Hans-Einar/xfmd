@@ -21,8 +21,8 @@ Se [designrevisjonen](../../softwareDesign.md), [arbeidsmåten](../../docs/worki
 | [FTR-007](feature/Feature-007--Paged-Publication.md) | Feature / User | application | Implemented | FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-007, FUNC-009, FUNC-010, FUNC-014, FUNC-016, FUNC-017, FUNC-018 |
 | [FUNC-001](functionality/Functionality-001--Document-Session.md) | Functionality / System | application | Implemented | FUNC-002 |
 | [FUNC-002](functionality/Functionality-002--Local-File-Storage.md) | Functionality / System | application | Implemented | none |
-| [FUNC-003](functionality/Functionality-003--Markdown-Interpretation.md) | Functionality / System | interpreter | Implemented | none |
-| [FUNC-004](functionality/Functionality-004--Render-Layout.md) | Functionality / System | renderer | Implemented | FUNC-017 |
+| [FUNC-003](functionality/Functionality-003--Markdown-Interpretation.md) | Functionality / System | interpreter | Ready | none |
+| [FUNC-004](functionality/Functionality-004--Render-Layout.md) | Functionality / System | renderer | Ready | FUNC-017 |
 | [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md) | Functionality / System | application | Implemented | FUNC-004, FUNC-015, FUNC-016 |
 | [FUNC-006](functionality/Functionality-006--Event-Scheduling.md) | Functionality / System | application | Implemented | none |
 | [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md) | Functionality / System | application | Implemented | FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006 |

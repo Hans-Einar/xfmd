@@ -78,17 +78,8 @@ void DisplayListPainter::paint(const RenderFrame& frame, cairo_t* cr, Rect clip,
       rectangle(cr, run.bounds);
     }
     color(cr, !active ? 0x878787 : run.link.empty() ? 0x1d2531 : 0x1855a6);
-    if (run.icon == InlineIcon::Globe) {
-      double size = std::max(6.0, run.bounds.height - 4), x = run.bounds.x, y = run.bounds.y + 2;
-      cairo_set_line_width(cr, .8);
-      cairo_arc(cr, x + size / 2, y + size / 2, size / 2, 0, 6.283185307);
-      cairo_stroke(cr);
-      cairo_move_to(cr, x, y + size / 2);
-      cairo_line_to(cr, x + size, y + size / 2);
-      cairo_stroke(cr);
-    } else
-      text(cr, frame, run);
-    if (!run.link.empty()) {
+    text(cr, frame, run);
+    if (!run.link.empty() && run.icon == InlineIcon::None) {
       cairo_set_line_width(cr, .6);
       cairo_move_to(cr, run.bounds.x, run.bounds.y + run.ascent + 2);
       cairo_line_to(cr, run.bounds.x + run.bounds.width, run.bounds.y + run.ascent + 2);

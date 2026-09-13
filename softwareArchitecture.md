@@ -271,3 +271,15 @@ fortsatt de samme glyphene; FOX håndterer X11-pixmap og én samlet blit. Bakbuf
 gjenbrukes til viewporten endrer størrelse. To pixelbuffere begrenses til maks
 16M piksler hver. Dette unngår Cairo-Xlib-ressurslekkasjen observert i våre
 native levetidstester, uten sanitizer-suppression for denne tegnestien.
+
+
+## P14 — native tabeller og inputretting
+
+cmark-gfm erstatter cmark innenfor interpreter-adapteren, med kun table aktivert.
+SemanticTable/Row/Cell er eide verdier. Renderer/TableLayout gjenbruker InlineLayout
+og leverer vanlige DrawRuns/Decoration/AnchorRegion til skjerm og PDF. FOXs FXTable
+brukes ikke: dens interaktive celler og separate scrolling passer ikke dokumentets
+fysiske sideflyt. Pango/Cairo forblir tekst- og tegnemotor for preview/PDF, mens FOX
+tegner editor og øvrig GUI. Unicode ↗ erstatter den håndtegnede nettlenkemarkøren.
+FoxRenderHost eier nå hele knappeparet slik at arvet FXWindow::grab alltid balanseres
+før callback; chord/drag/stale frame aktiverer aldri en lenke.

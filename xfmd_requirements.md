@@ -53,7 +53,7 @@ en stub oppfyller ikke i seg selv et funksjonelt krav.
 | UR-002 | Vis H1–H6, avsnitt, fet/kursiv, lister, sitater, kode og lenketekst. Brødtekst/overskrifter er proporsjonale; kode er monospace; overskriftsnivåer er tydelige. | AT-002: fixtures og visuell kontroll av blandede fonter, nesting og linjebryting. |
 | UR-003 | Tilby tekstredigering, vanlig utklippstavle, angre Ctrl+Z, gjør om Ctrl+Y, søk Ctrl+F og lagring Ctrl+S. | AT-003: lagre–åpne gir samme tekst; undo/redo oppdaterer dirty og preview. |
 | UR-004 | Oppdater preview når det har gått 300 ms uten ny redigering. Behold fokus og editorens markør. | AT-004: simulert klokke bekrefter debounce; GUI-sjekk bekrefter fokus og nyeste revisjon. |
-| UR-005 | Relative dokumentlenker løses fra mappen til den åpne filens absolutte sti, uavhengig av prosessens arbeidsmappe. Absolutte dokumentstier åpnes direkte. Vis `#` foran relative Markdown-lenker, `/#` foran absolutte Markdown-lenker og jordklode foran HTTP(S)-lenker. Lokale lenker og tilbake/frem gir dokumentnavigasjon med sesjonshistorikk og gjenopprettet leseposisjon. | AT-005: A→B→C, tilbake til B, ny lenke D sletter frem-grenen; avbrutt/feilet åpning endrer ikke køen. |
+| UR-005 | Relative dokumentlenker løses fra mappen til den åpne filens absolutte sti, uavhengig av prosessens arbeidsmappe. Absolutte dokumentstier åpnes direkte. Vis `#` foran relative Markdown-lenker, `/#` foran absolutte Markdown-lenker og fonttegnet `↗` foran HTTP(S)-lenker. Lokale lenker og tilbake/frem gir dokumentnavigasjon med sesjonshistorikk og gjenopprettet leseposisjon. | AT-005: A→B→C, tilbake til B, ny lenke D sletter frem-grenen; avbrutt/feilet åpning endrer ikke køen. |
 | UR-006 | Sidepanelet viser mapper og filer under arbeidsroten, med valgfrie filtype-/navnefiltre, kan skjules eksplisitt og åpner filer på dobbeltklikk. Klikk på `/`, mapper og filer skal aldri automatisk skjule panelet; dokumentbytte bevarer valgt synlighet. Mapper navigeres også når navnet ender på `.md`. | AT-006: blandede filtyper, enkelt-/dobbeltklikk og F10. |
 | UR-007 | Tilby preview alene (standard), editor alene og editor venstre/preview høyre i justerbar splitter. | AT-007: modusbytte bevarer dokument, dirty, undo og fokus. |
 | UR-008 | Synkroniser scrolling begge veier etter kildeanker, også med wrapping og varierende teksthøyde, uten pendling. | AT-008: overskrift, lang liste og kodeblokk holder tilsvarende avsnitt synlig; resize og tom fil testes. |
@@ -82,7 +82,7 @@ en stub oppfyller ikke i seg selv et funksjonelt krav.
 | SR-001 | `application`, `interpreter`, `renderer` er egne kildekataloger. Bare application integrerer FOX; delte kontrakter har ingen FOX-/parser-typer. | AT-011: byggeavhengigheter og headless kontrakttester; alternative implementasjoner krever bare wiring. |
 | SR-002 | Én tydelig eier per dokumenttilstand og functionality; ingen direkte mutasjon mellom søskenwidgets eller feature-interner. | AT-012: eierskaps- og kallgjennomgang mot blueprints. |
 | SR-003 | Interpreter produserer uforanderlig semantisk modell med revisjon og kildeankre; renderer konsumerer uten parserkall. | AT-013: fixture og ekte/fake implementasjoner bruker samme kontraktstest. |
-| SR-004 | Bruk cmark 0.31.1 / CommonMark 0.31.1 med CMARK_OPT_DEFAULT; ingen utvidelser. Ingen stilltiende aktivering av voksende «GitHub dialect». | AT-014: versjon/flaggliste og corpus med Unicode, entiteter, HTML som inert tekst og ufullstendig syntaks. |
+| SR-004 | Bruk cmark-gfm 0.29.0.gfm.13 med CMARK_OPT_DEFAULT og eksplisitt table-utvidelse; andre utvidelser er av. Ingen stilltiende aktivering av voksende «GitHub dialect». | AT-014: versjon/flaggliste og corpus med Unicode, entiteter, HTML som inert tekst og ufullstendig syntaks. |
 | SR-005 | Ingen nettverkslasting, skripteksekvering eller browser engine. Lenker sendes aldri til shell for evaluering. | AT-015: eksterne ressurser, `javascript:`, `data:` og HTML gir ingen slik sideeffekt. |
 | SR-006 | Valider UTF-8 og input før dokumentbytte. Bevar linjeslutt og BOM ved lagring; ingen automatisk normalisering. | AT-016: UTF-8, LF/CRLF, BOM, ugyldige byte og NUL-policy testes byte-for-byte. |
 | SR-007 | Lagring skriver midlertidig søskenfil og erstatter mål bare ved suksess, bevarer vanlige modusbits og kontrollerer ekstern endring. | AT-017: feil før rename, full disk og endret mål bevarer fil og dirty-buffer. |
@@ -115,7 +115,7 @@ Dette er eksplisitte forslag slik at implementasjonen slipper å gjette:
   avvises med forklaring. NUL avvises som ikke-støttet editorinput; tom fil er
   gyldig. Blandede linjesluttsekvenser må bevares via editoradapteren; hvis ikke,
   avvis redigering eksplisitt fremfor å normalisere stille.
-- CommonMark-kjerne prioriteres. Tabeller, task lists, strikethrough og fotnoter
+- CommonMark-kjerne prioriteres. GFM-tabeller inngår fra P14. Task lists, strikethrough og fotnoter
   er senere utvidelser. Full CommonMark-konformitet påstås først etter tester.
 - HTML vises inert. Bilder vises med alt-tekst/plassholder; heller ikke lokale
   bilder dekodes i første leveranse. CSS, JavaScript, plugins og IDE er utenfor scope.
@@ -167,3 +167,19 @@ Markdown-dialekten, bilde-/HTML-policy og UR-010/IPC utvides ikke av PDF-eksport
 SR-008/009 er baseline for SR-019. SR-010s GUI-eierskap består: ingen FOX-ressurser
 deles med eksport-worker. P11/P12 og P13 verifiserer typografi-/PDF-adapternes trådeierskap. SR-011s eksisterende terskler gjelder baseline continuous;
 P9 definerer side-/PDF-grenser, og P12/P13 dokumenterer målingene.
+
+
+## P14: konkretisert tabell- og inputatferd
+
+UR-002 / SR-004: GFM-tabeller viser header, celler, kolonnejustering og bryter
+tekst innenfor kolonnen. Rader beholdes samlet i A4/PDF. Maks 64 kolonner og
+50 000 celler; for smal A4 eller rad høyere enn siden gir forklaring uten kildetap.
+AT-002/014/032 dekker escaped pipes, Unicode, inline-stiler, tomme/ujevne rader,
+kildeankre, smal preview og tabeller over flere sider. Ingen andre GFM-utvidelser
+aktiveres automatisk. Header gjentas ikke på fortsettelsessider i P14.
+
+UR-005 / SR-010: Preview frigjør pointer-grab ved release før lenkecallback,
+også når frame er foreldet. Bare et venstreklikk startet på samme lenke og uten
+andre knapper eller drag aktiverer den. Høyre-/midtklikk endrer ikke kildetekst.
+AT-005/020 dekker blandede knapper, gjentatte klikk, release utenfor og videre
+knappebruk; Unicode-markøren bruker samme fontmåling/tegning som lenketeksten.

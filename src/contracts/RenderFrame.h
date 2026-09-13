@@ -17,7 +17,7 @@ struct Rect {
     return p.x >= x && p.y >= y && p.x < x + width && p.y < y + height;
   }
 };
-enum class InlineIcon { None, Globe };
+enum class InlineIcon { None, ExternalLink };
 struct DrawRun {
   std::string text;
   FontSpec font;

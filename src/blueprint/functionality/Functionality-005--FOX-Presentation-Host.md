@@ -32,12 +32,16 @@ FoxRenderHost er FXScrollArea-adapter. present/expect/invalidate styrer frame/in
 Bare riktig dokumenttoken og viewportbredde aksepteres. Nytt dokument fjerner gammel frame. Pending endring gjør preview ikke-interaktiv. Paint clippes og søker synlige runs; CJK/andre glyphs kan bruke installert fallback-font. Ingen Markdown-regler i host.
 
 FoxRenderHost må være enabled for native muse- og tastaturhendelser. Host
-tegner Globe-primitiven med buer/linje uten emoji-fontavhengighet; renderer
+tegner Unicode-markøren ↗ gjennom den vanlige Pango/Cairo-tekstveien; renderer
 bestemmer lenkemarkørens type og plassering.
 
 FoxWheelScrollBar er delt FOX-adapter for begge scrollakser. Den bevarer
 fraksjoner mellom små wheel-events og eier en retargetbar timer og
 changed/command-varsler. Konstruktørene bytter barene før create(); widgets eier dem.
+
+Preview eier balanserte press/release og frigjør egen grab før enhver callback.
+Bare venstreklikk på samme mål uten drag/chord aktiverer lenken; andre knapper
+ignoreres i dokumentflaten, men beholder fokus. Stale frame kansellerer klikket.
 
 ## 5. Plumbing
 
@@ -57,6 +61,9 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 | 10 | `FoxRenderHost paint` | `DisplayListPainter::paint` | `src/application/adapters/DisplayListPainter.cpp` | frame + target → pixels | felles glyphgrunnlag | Implemented |
 
 | 13 | `FoxRenderHost::onPaint` | `FoxCairoCanvas::present` | `src/application/adapters/FoxCairoCanvas.cpp` | Cairo viewportbuffer → FOX-pixmap | native ressurslevetid; ingen Cairo Xlib-device | Implemented |
+
+| 14 | `FOX press` | `FoxRenderHost::onButtonPress` | `src/application/adapters/FoxRenderHost.cpp` | Knapp/frame/lenke → klikktilstand og grab | Chord kansellerer aktivering | Implemented |
+| 15 | `FOX grab loss` | `FoxRenderHost::onUngrabbed` | `src/application/adapters/FoxRenderHost.cpp` | Tap av grab → nullstill klikk | Ingen lenkecallback | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 

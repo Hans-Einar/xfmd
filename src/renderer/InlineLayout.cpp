@@ -107,6 +107,11 @@ double InlineLayout::layout(const SemanticBlock& block, double left, double top,
         lineHeight = std::max(lineHeight, marker->bounds.height + 4);
         ascent = std::max(ascent, marker->ascent);
         frame.contentWidth = std::max(frame.contentWidth, x + 20);
+        if (marker->shaped)
+          for (const auto& part : marker->shaped->segments)
+            frame.glyphCount += part.glyphs.size();
+        if (frame.glyphCount > 1000000 || frame.runs.size() >= 100000)
+          throw Error(ErrorCode::TooLarge, "Document exceeds the rendering complexity limit.");
         frame.runs.push_back(std::move(*marker));
       }
     }

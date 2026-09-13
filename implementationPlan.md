@@ -227,3 +227,21 @@ brukes først; lange stresstester er ikke et generelt milepælkrav.
 Designgrunnlaget ble integrert i [PR #1](https://github.com/Hans-Einar/xfmd/pull/1).
 Brancher beholdes. Fysisk touchpad/fler-monitor-hotplug er ikke erklært verifisert;
 automatiserte tester og isolert Window Maker er dokumentert per fase.
+
+
+## P14 — native tabeller, lenkemarkør og muselevetid
+
+Branch: `phase/p14-tables-input`, egen PR og milestone-commits.
+
+- M1: reproduser og rett ubalansert pointer-grab, bruk fonttegnet ↗ for HTTP(S).
+  Native blandede knappetrykk, stale preview og videre meny-/knappebruk testes.
+- M2: pin cmark-gfm 0.29.0.gfm.13 med bare table-utvidelsen. Eide tabellrader/celler
+  i kontrakten, egen TableLayout, samme inline-shaping, ankre og PDF-tegning.
+- M3: tabell-/PDF-/inputregresjon, visuell kontroll, baseline-ytelse, installasjon,
+  oppdatert dokumentasjon og CI før merge.
+
+Ingen browser engine eller FXTable-widget inne i dokumentflaten. TableLayout
+beregner kolonner, bryter celleinnhold, tegner header/borders og holder en rad
+samlet ved sideskift. En rad høyere enn utskrivbar side avvises med forklaring;
+header gjentas ikke automatisk på neste side i denne første tabellutvidelsen.
+Maks 64 kolonner og 50 000 celler; eksisterende glyph-/run-/sidegrenser gjelder.

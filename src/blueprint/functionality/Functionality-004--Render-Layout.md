@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Service
 owner: renderer
-status: Implemented
+status: Ready
 scope: FirstRelease
 requirements: UR-005, UR-002, UR-008, SR-001, SR-003, SR-005, SR-008, SR-009, SR-011, SR-013, UR-017, UR-018, SR-016, SR-019
 uses: FUNC-017
@@ -31,9 +31,13 @@ MarkdownRenderer implementerer IRenderer::layout/hitTest. BlockLayout og InlineL
 
 Layout bryter vanlig tekst ved ord/UTF-8-grenser; kode beholder whitespace og kan scrolle horisontalt. Varierende heading-fonter, nested lister/sitater, inline-kode og inert HTML støttes. Frame inneholder både run-ranges og block-ranges for hidden syntax. Ingen parsing, I/O eller utføring av lenker.
 
-LinkMarker lager #, /# eller Globe-primitiven. InlineRun.linkId skiller
+LinkMarker lager #, /# eller fonttegnet ↗. InlineRun.linkId skiller
 separate lenker fra stilfragmenter i samme lenke. Markør og tekst har samme
 lenkemål; syntetisk markør har tomt, tilnærmet kildeanker.
+
+TableLayout (planlagt) eier kolonnebredder, cellenes InlineLayout, radbakgrunn/
+rammer, justering og samlet rad ved sideskift. Rader/celler har egne kildeankre.
+Ingen FXTable eller HTML; felles frame brukes uendret av skjerm/PDF.
 
 ## 5. Plumbing
 
