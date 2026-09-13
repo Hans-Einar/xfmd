@@ -45,7 +45,6 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 | 4 | `EditController::apply` | `DocumentSession::applyEdit` | `src/application/document/DocumentSession.cpp` | Edit → ny Revision | Input valideres | Implemented |
 | 5 | `EditController changed callback` | `Application::updateUi` | `src/application/Application.cpp` | Snapshot → editor/title | contentChanged varsler preview | Implemented |
 | 6 | `Application::execute` | `EditController::find` | `src/application/document/EditController.cpp` | Query → projected offset | Ingen dirty-endring | Implemented |
-
 | 7 | `EditorWidget constructor` | `FoxWheelScrollBar::replace` | `src/application/adapters/FoxWheelScrollBar.cpp` | Standard bar → presis wheel-adapter | Parent eier ny bar; før create | Implemented |
 | 8 | `FOX wheel dispatch` | `FoxWheelScrollBar::onMouseWheel` | `src/application/adapters/FoxWheelScrollBar.cpp` | Delta/rest → target og FOX-timer | Clamp, behold delpiksel-rest, standard varsler | Implemented |
 

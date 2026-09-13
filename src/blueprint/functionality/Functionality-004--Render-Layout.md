@@ -44,7 +44,6 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 | 3 | `BlockLayout::layout` | `InlineLayout::layout` | `src/renderer/InlineLayout.cpp` | Runs → linjer og ankere | UTF-8 splitter aldri inne i tegn | Implemented |
 | 4 | `InlineLayout::layout` | `ITextMetrics::measure` | `src/contracts/ITextMetrics.h` | Tekst/font → extent | Ren port | Implemented |
 | 5 | `MarkdownRenderer::hitTest` | `HitTester::hitTest` | `src/renderer/HitTester.cpp` | Frame/point → HitResult | Ingen navigasjonssideeffekt | Implemented |
-
 | 6 | `InlineLayout::layout` | `LinkMarker::make` | `src/renderer/LinkMarker.cpp` | Lenke/font → markør-run | Ingen I/O; syntetisk source-range | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
