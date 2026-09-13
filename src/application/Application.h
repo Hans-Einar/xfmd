@@ -2,6 +2,7 @@
 #include "adapters/FoxPreferencesStore.h"
 #include "adapters/FoxRenderHost.h"
 #include "adapters/FoxScheduler.h"
+#include "adapters/FoxWindowMode.h"
 #include "adapters/SharedTextMetrics.h"
 #include "commands/CommandRouter.h"
 #include "contracts/IInterpreter.h"
@@ -29,6 +30,7 @@ public:
   std::unique_ptr<PreferencesService> preferences;
   XfmdWindow* window = nullptr;
   std::unique_ptr<ViewModeController> views;
+  std::unique_ptr<FoxWindowMode> windowMode;
   std::unique_ptr<FX::FXFont> editorFont;
   std::unique_ptr<IInterpreter> interpreter;
   std::unique_ptr<IRenderer> renderer;

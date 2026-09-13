@@ -8,6 +8,7 @@ list(PREPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/.deps")
 include(CTest)
 include(GNUInstallDirs)
 find_package(Threads REQUIRED)
+find_package(X11 REQUIRED COMPONENTS Xrandr)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(FOX REQUIRED IMPORTED_TARGET fox>=1.6.57)
 pkg_check_modules(PANGO REQUIRED IMPORTED_TARGET pangocairo pangofc)
@@ -66,11 +67,11 @@ add_library(xfmd_application
   src/application/commands/CommandRouter.cpp src/application/ui/XfmdWindow.cpp
   src/application/ui/EditorWidget.cpp src/application/ui/SidebarWidget.cpp src/application/ui/WorkspacePanel.cpp
   src/application/ui/ViewModeController.cpp src/application/adapters/FoxTextMetrics.cpp
-  src/application/adapters/ViewTransform.cpp
+  src/application/adapters/ViewTransform.cpp src/application/adapters/FoxWindowMode.cpp
   src/application/adapters/FoxRenderHost.cpp src/application/adapters/FoxScheduler.cpp
   src/application/adapters/FoxWheelScrollBar.cpp)
 target_link_libraries(xfmd_application PUBLIC
-  xfmd_export xfmd_typography xfmd_workspace xfmd_document xfmd_preview xfmd_scroll xfmd_navigation xfmd_interpreter xfmd_renderer PkgConfig::FOX)
+  xfmd_export xfmd_typography xfmd_workspace xfmd_document xfmd_preview xfmd_scroll xfmd_navigation xfmd_interpreter xfmd_renderer PkgConfig::FOX X11::X11 X11::Xrandr)
 add_executable(xfmd src/application/main.cpp)
 target_link_libraries(xfmd PRIVATE xfmd_application)
 
