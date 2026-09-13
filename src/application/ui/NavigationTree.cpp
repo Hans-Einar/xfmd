@@ -14,7 +14,7 @@ FXIMPLEMENT(NavigationTree, FXTreeList, navigationTreeMap, ARRAYNUMBER(navigatio
 NavigationTree::NavigationTree(FXComposite* parent)
     : FXTreeList(parent, this, ID_EVENT,
                  TREELIST_BROWSESELECT | TREELIST_SHOWS_LINES | TREELIST_SHOWS_BOXES |
-                     LAYOUT_FILL_X | LAYOUT_FILL_Y) {
+                     TREELIST_ROOT_BOXES | LAYOUT_FILL_X | LAYOUT_FILL_Y) {
   horizontal = FoxWheelScrollBar::replace(horizontal);
   vertical = FoxWheelScrollBar::replace(vertical);
 }

@@ -59,6 +59,19 @@ void clickItem(Application& app, FXTreeList* tree, FXTreeItem* item, unsigned lo
   CHECK(y >= 0);
   click(app, tree, 45 + depth * tree->getIndent(), y, time);
 }
+void clickBox(Application& app, FXTreeList* tree, FXTreeItem* item, unsigned long time) {
+  tree->makeItemVisible(item);
+  events(app, 2);
+  for (int y = 0; y < tree->getViewportHeight(); ++y)
+    if (tree->getItemAt(100, y) == item) {
+      for (int x = 0; x < 120; ++x)
+        if (tree->hitItem(item, x, y + 5) == 3) {
+          click(app, tree, x, y + 5, time);
+          return;
+        }
+    }
+  CHECK(false);
+}
 void key(Application& app, FXWindow* window, KeySym symbol) {
   auto* display = static_cast<Display*>(app.app.getDisplay());
   XEvent e{};
@@ -109,6 +122,10 @@ void run() {
   CHECK(panel->tabs->getCurrent() == 1 && app.session.view().token == token);
   auto* title = index->outline->getFirstItem();
   CHECK(title && title->getText() == "XFMD guide");
+  clickBox(app, index->outline, title, 1200);
+  CHECK(!title->isExpanded() && app.session.view().token == token);
+  clickBox(app, index->outline, title, 1300);
+  CHECK(title->isExpanded());
   auto* workspace = title->getFirst();
   CHECK(workspace && workspace->getFirst()->getText() == "Sidebar");
   auto* chapter = workspace->getNext();
@@ -126,7 +143,7 @@ void run() {
   CHECK(root->getText() == "References" && root->getFirst()->getText() == "Markdown");
   CHECK(root->getLast()->getText() == "Hyperlinks");
   auto* file = root->getFirst()->getFirst();
-  index->references->expandTree(file, true);
+  clickBox(app, index->references, file, 2500);
   events(app);
   settle(app);
   CHECK(file->getFirst()->getText() == "Architecture");
