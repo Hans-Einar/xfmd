@@ -3,6 +3,8 @@
 namespace xfmd {
 TextProjection::TextProjection(const std::string& raw) {
   std::size_t i = raw.compare(0, 3, "\xef\xbb\xbf") == 0 ? 3 : 0;
+  offsets.reserve(raw.size() - i + 1);
+  text.reserve(raw.size() - i);
   auto first = raw.find('\n');
   if (first != std::string::npos && first && raw[first - 1] == '\r')
     newline = "\r\n";

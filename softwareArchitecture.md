@@ -284,3 +284,9 @@ fysiske sideflyt. Pango/Cairo forblir tekst- og tegnemotor for preview/PDF, mens
 tegner editor og øvrig GUI. Unicode ↗ erstatter den håndtegnede nettlenkemarkøren.
 FoxRenderHost eier nå hele knappeparet slik at arvet FXWindow::grab alltid balanseres
 før callback; chord/drag/stale frame aktiverer aldri en lenke.
+
+
+P14s sluttmåling avdekket kapasitetdobling i editorens TextProjection, uavhengig
+av Markdown-rendereren. Offsetkart og projisert tekst reserverer nå kapasitet
+fra inputlengden før konvertering. Det reduserer GUI-minnetoppen uten å endre
+kildeoffsets eller bruke allocator-/plattformspesifikke oppryddingskall.

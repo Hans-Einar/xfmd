@@ -35,6 +35,10 @@ FoxWheelScrollBar er delt FOX-adapter for begge scrollakser. Den bevarer
 fraksjoner mellom små wheel-events og bruker FOXs eksisterende animasjon og
 changed/command-varsler. Konstruktørene bytter barene før create(); widgets eier dem.
 
+TextProjection reserverer offset-/tekstkapasitet fra kjent raw-lengde før
+konvertering. Dette unngår kapasitetdobling og store midlertidige topper ved
+ny projeksjon; byte-/BOM-/CRLF-kontrakten er uendret. Se P14-målingen.
+
 ## 5. Plumbing
 
 Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiserer tidligere baseline. Navngitte hendelser er injiserte callbacks, ikke en global event bus.

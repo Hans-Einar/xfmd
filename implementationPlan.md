@@ -245,3 +245,8 @@ beregner kolonner, bryter celleinnhold, tegner header/borders og holder en rad
 samlet ved sideskift. En rad høyere enn utskrivbar side avvises med forklaring;
 header gjentas ikke automatisk på neste side i denne første tabellutvidelsen.
 Maks 64 kolonner og 50 000 celler; eksisterende glyph-/run-/sidegrenser gjelder.
+
+
+P14-status: M1 (`4ac475a`) og M2 (`6fd8469`) er implementert; M3 samler endelig
+verifikasjon, TextProjection-minneretting og installasjon. Se
+[P14-evidens](docs/evidence/P14.md). Egen PR/CI kontrolleres før merge.
