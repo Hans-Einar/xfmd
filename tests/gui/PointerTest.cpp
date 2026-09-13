@@ -27,6 +27,14 @@ void button(Application& app, unsigned code, bool press, unsigned state = 0, int
   XFlush(d);
   pump(app);
 }
+FX::FXButton* editorButton(FX::FXWindow* root) {
+  if (auto* b = dynamic_cast<FX::FXButton*>(root); b && b->getText() == "Editor")
+    return b;
+  for (auto* child = root->getFirst(); child; child = child->getNext())
+    if (auto* b = editorButton(child))
+      return b;
+  return nullptr;
+}
 void run() {
   int argc = 1;
   char name[] = "xfmd-pointer-test";
@@ -63,5 +71,58 @@ void run() {
   button(app, Button1, false);
   CHECK(!app.host->grabbed());
   CHECK(app.session.snapshot().text.empty());
+  app.edits.applyEdit({0, 0, "[link](next.md)"});
+  for (int i = 0; i < 20; ++i)
+    pump(app);
+  CHECK(app.host->interactive());
+  auto frame = app.host->frame();
+  const DrawRun* link = nullptr;
+  for (const auto& run : frame->runs)
+    if (run.text == "link")
+      link = &run;
+  CHECK(link);
+  auto point = app.host->documentToView({link->bounds.x + 1, link->bounds.y + 1});
+  int x = int(point.x), y = int(point.y), activations = 0;
+  app.host->linkActivated = [&](const std::string&) {
+    CHECK(!app.host->grabbed());
+    ++activations;
+  };
+  button(app, Button1, true, 0, x, y);
+  button(app, Button1, false, Button1Mask, x, y);
+  CHECK(activations == 1);
+  button(app, Button1, false, 0, x, y); // Orphan release cannot follow a link.
+  button(app, Button1, true, 0, x, y);
+  button(app, Button2, true, Button1Mask, x, y);
+  button(app, Button2, false, Button1Mask | Button2Mask, x, y);
+  button(app, Button1, false, Button1Mask, x, y);
+  CHECK(!app.host->grabbed() && activations == 1);
+  button(app, Button1, true, 0, x, y);
+  button(app, Button1, false, Button1Mask, x + 100, y);
+  CHECK(!app.host->grabbed() && activations == 1);
+  button(app, Button1, true, 0, x, y);
+  app.host->invalidate();
+  button(app, Button1, false, Button1Mask, x, y);
+  CHECK(!app.host->grabbed() && activations == 1);
+  CHECK(app.session.snapshot().text == "[link](next.md)");
+  auto* editor = editorButton(app.window);
+  CHECK(editor);
+  auto* d = static_cast<Display*>(app.app.getDisplay());
+  XEvent e{};
+  e.xbutton.display = d;
+  e.xbutton.window = editor->id();
+  e.xbutton.root = DefaultRootWindow(d);
+  e.xbutton.button = Button1;
+  e.xbutton.same_screen = True;
+  e.xbutton.x = 5;
+  e.xbutton.y = 5;
+  e.type = ButtonPress;
+  CHECK(XSendEvent(d, editor->id(), False, ButtonPressMask, &e));
+  e.type = ButtonRelease;
+  e.xbutton.state = Button1Mask;
+  CHECK(XSendEvent(d, editor->id(), False, ButtonReleaseMask, &e));
+  XFlush(d);
+  pump(app);
+  CHECK(app.views->mode() == ViewMode::Editor);
+  CHECK(!editor->grabbed());
 }
 TEST_MAIN(run)

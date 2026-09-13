@@ -41,7 +41,7 @@ void FoxRenderHost::layout() {
     FXScrollArea::layout();
     programmatic = false;
   }
-  const double flowWidth = viewport_w / dpiScale;
+  const double flowWidth = std::max(40.0, viewport_w / dpiScale);
   if (viewport_w > 0 && flowWidth != lastWidth) {
     lastWidth = flowWidth;
     if (current && current->key.profile.mode == LayoutMode::Paged)
@@ -72,7 +72,7 @@ void FoxRenderHost::present(LayoutResult frame) {
   if (!frame || frame->token != expected || (requested && !(frame->key == *requested)))
     return;
   if (frame->key.profile.mode == LayoutMode::Continuous &&
-      std::abs(frame->width - viewport_w / dpiScale) > .01)
+      std::abs(frame->width - std::max(40.0, viewport_w / dpiScale)) > .01)
     return;
   current = std::move(frame);
   active = true;

@@ -1,6 +1,6 @@
 # Kravspesifikasjon: xfmd
 
-Status: **Implemented P0–P13, revisjon 1.2**, 2026-09-13.
+Status: **Implemented P0–P14, revisjon 1.3**, 2026-09-13.
 UR-015–020 og SR-015–019 er implementert i P9–P13; se fasebevis for faktisk dekning. Tidligere designgrunnlag ble
 godkjent før implementasjon. Krav er normative; målinger og begrensninger finnes
 i [P13-verifikasjonen](docs/evidence/P13.md), med P7 som historisk baseline.

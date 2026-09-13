@@ -19,7 +19,11 @@ int main(int argc, char** argv) {
       text += "## Marker" + std::to_string(i) +
               "\n\nA paragraph with **bold**, *italic* and `code` with a "
               "[link](local.md).\n\n```cpp\nint value = 42; // a code line\n```\n\n";
-    text += "ENDOFFROZENBUFFER\n";
+    text += "| TableHeader | Center | Right |\n|:---|:---:|---:|\n";
+    for (int i = 0; i < 80; ++i)
+      text += "| TableRow" + std::to_string(i) +
+              " | æøå **bold** [web](https://example.org) | 1234 |\n";
+    text += "\nENDOFFROZENBUFFER\n";
     ExportRequest request{
         {{7, 11}, text, {}, false}, {}, metrics.fontSetId(), (dir / "export.pdf").string(), {}};
     request.frame = renderer.layout(*parser.parse(request.source),

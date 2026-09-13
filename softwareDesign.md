@@ -288,3 +288,26 @@ P13s sanitizer-review avgrenset en ressurslekkasje til direkte Cairo/Xlib-tegnin
 Endelig skjermadapter er FoxCairoCanvas: Cairo image-buffer og FOX-eid pixmap/blit.
 Dette endrer ikke shaping, paginering eller PDF-motor. CanvasTest kontrollerer
 RGB-kanaler og resize i ekte X11; native levetidstester kontrollerer oppryddingen.
+
+
+## Revisjon 1.3 — tabeller og robuste museklikk
+
+Native renderer beholdes. FOX har FXTable, men det ville gitt én interaktiv widget
+per tabell med egen geometri, input og scrolling som også måtte gjenskapes i PDF.
+TableLayout gjenbruker eksisterende InlineLayout/Pango-shaping og vanlige frame-
+primitiver. Bare cmark-gfm table-utvidelsen aktiveres. Dermed holdes Markdown-
+semantikk i interpreter, tabellgeometri i renderer og FOX/Pango/Cairo i application.
+
+SemanticTable har kolonnejusteringer og eide rader/celler. Kolonnebreddene bruker
+et begrenset estimat av innholdsbredde, med minste cellebredde og wrapping. Header
+vises fet på lys bakgrunn. Rader er pagination-enheter, med header holdt sammen
+med første datarad der det passer. Fortsettelsessider gjentar ikke header. En rad
+som er høyere enn en A4-side eller flere kolonner enn papirbredden tåler gir en
+handlingsrettet feil; kilden kan fortsatt redigeres. Continuous kan scrolle brede
+minstebredde-tabeller horisontalt. 64 kolonner / 50 000 celler og øvrige grenser
+hindrer ubegrenset vekst. Ingen tabellwidget-/nettleseravhengighet legges til.
+
+PointerTest demonstrerte at arvet FXWindow::onLeftBtnPress tok grab, mens vår
+release overstyrte FOXs frigjøring. Host eier nå hele knappeforløpet og frigjør
+før callback og stale-sjekk. Chord, drag og orphan release aktiverer ikke lenker.
+HTTP(S)-markøren ↗ formes som vanlig tekst, med reell bredde og uten understrek.

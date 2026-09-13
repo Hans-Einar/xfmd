@@ -17,7 +17,16 @@
 Skjermtegning bruker en gjenbrukbar bakbuffer med FOX-eid X11-overføring, slik at
 hele viewporten tegnes samlet og native ressurser ryddes ved lukking.
 
-Ingen endring i Markdown-dialekt, bilde-/HTML-policy eller xfw-IPC.
+P9–P13 endret ikke Markdown-dialekten. Bilde-/HTML-policy og xfw-IPC er uendret.
 Fysisk touchpad og fler-monitor hotplug krever kontroll i faktisk desktop-oppsett.
 Se [verifikasjonen](docs/evidence/P13.md) og [README](README.md).
 Prosjektlisens er ikke valgt; dette er endringsnotater, ikke en formell release.
+
+
+## P14: tabeller og museklikk
+
+- GFM-tabeller via cmark-gfm, med kolonnejustering, wrapping, header og rammer.
+  Samme native layout i preview og PDF; radene holdes samlet ved sideskift.
+- Fonttegnet ↗ erstatter nettlenkens håndtegnede sirkel og uønskede forbindelseslinje.
+- Rettet musegrab som ble stående etter klikk i preview og kunne blokkere menyer.
+  Blandede knapper, drag og foreldet preview aktiverer ikke lenker.

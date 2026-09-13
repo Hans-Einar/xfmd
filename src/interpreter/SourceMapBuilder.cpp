@@ -25,7 +25,8 @@ SourceRange SourceMapBuilder::record(cmark_node* node) const {
   if (!cmark_node_get_start_line(node))
     return {0, 0, MappingQuality::Unavailable};
   auto begin = offset(cmark_node_get_start_line(node), cmark_node_get_start_column(node), false);
-  auto end = offset(cmark_node_get_end_line(node), cmark_node_get_end_column(node), true);
+  auto end =
+      std::max(begin, offset(cmark_node_get_end_line(node), cmark_node_get_end_column(node), true));
   // Tabs affect parser indentation columns; preserve block location but avoid claiming exact
   // intra-run positions.
   auto quality =

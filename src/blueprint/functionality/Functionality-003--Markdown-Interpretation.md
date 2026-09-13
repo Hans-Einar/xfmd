@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Service
 owner: interpreter
-status: Ready
+status: Implemented
 scope: FirstRelease
 requirements: UR-005, UR-002, SR-001, SR-003, SR-004, SR-005, SR-009, SR-011, SR-013
 uses: none
@@ -49,6 +49,8 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 | 3 | `ModelBuilder::beginBlock / appendNode` | `SourceMapBuilder::record` | `src/interpreter/SourceMapBuilder.cpp` | Node → byteområde/kvalitet | Ukjent range arver blokk approximate | Implemented |
 | 4 | `CmarkInterpreter::parse` | `ModelBuilder::finish` | `src/interpreter/ModelBuilder.cpp` | Builder → eid modell | Ingen lånte inputpekere | Implemented |
 
+| 5 | `ModelBuilder::appendNode` | `ModelBuilder::appendTable` | `src/interpreter/TableModelBuilder.cpp` | GFM-noder → eide tabellrader/celler | 64 kolonner / 50 000 celler | Implemented |
+
 ## 6. Gjenbruk og avhengigheter
 
 Ingen andre functionality-kontrakter konsumeres; delte datatyper følger arkitekturen.
@@ -64,6 +66,9 @@ Relevante akseptanse-ID-er: AT-005, AT-002, AT-011, AT-013, AT-014, AT-015, AT-0
 Evidence: [Fase P3](../../../docs/evidence/P3.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
 
 Ny regresjonskontroll: [Native lenker og markører](../../../docs/evidence/document-links.md).
+
+P14: TableTest, TablePreviewTest og utvidet PdfFidelityTest dekker tabellutvidelsen;
+se [P14](../../../docs/evidence/P14.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 

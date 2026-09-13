@@ -44,6 +44,8 @@ void ModelBuilder::beginBlock(cmark_node* node) {
   active = &model.blocks.back();
 }
 void ModelBuilder::appendNode(cmark_node* node, cmark_event_type event) {
+  if (appendTable(node, event))
+    return;
   auto type = cmark_node_get_type(node);
   bool block = type == CMARK_NODE_PARAGRAPH || type == CMARK_NODE_HEADING ||
                type == CMARK_NODE_CODE_BLOCK || type == CMARK_NODE_HTML_BLOCK ||

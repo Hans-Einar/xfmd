@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Service
 owner: renderer
-status: Ready
+status: Implemented
 scope: FirstRelease
 requirements: UR-005, UR-002, UR-008, SR-001, SR-003, SR-005, SR-008, SR-009, SR-011, SR-013, UR-017, UR-018, SR-016, SR-019
 uses: FUNC-017
@@ -35,7 +35,7 @@ LinkMarker lager #, /# eller fonttegnet ↗. InlineRun.linkId skiller
 separate lenker fra stilfragmenter i samme lenke. Markør og tekst har samme
 lenkemål; syntetisk markør har tomt, tilnærmet kildeanker.
 
-TableLayout (planlagt) eier kolonnebredder, cellenes InlineLayout, radbakgrunn/
+TableLayout eier kolonnebredder, cellenes InlineLayout, radbakgrunn/
 rammer, justering og samlet rad ved sideskift. Rader/celler har egne kildeankre.
 Ingen FXTable eller HTML; felles frame brukes uendret av skjerm/PDF.
 
@@ -52,6 +52,8 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 | 5 | `MarkdownRenderer::hitTest` | `HitTester::hitTest` | `src/renderer/HitTester.cpp` | Frame/point → HitResult | Ingen navigasjonssideeffekt | Implemented |
 | 6 | `InlineLayout::layout` | `LinkMarker::make` | `src/renderer/LinkMarker.cpp` | Lenke/font → markør-run | Ingen I/O; syntetisk source-range | Implemented |
 | 7 | `MarkdownRenderer::layout` | `PageComposer::compose` | `src/renderer/PageComposer.cpp` | FlowLayout + PaperSpec → PageLayout | begrens store blokker | Implemented |
+
+| 8 | `BlockLayout::layout` | `TableLayout::layout` | `src/renderer/TableLayout.cpp` | Tabell/tilgjengelig bredde → celler, rader og dekorasjoner | Smal A4 eller for høy rad gir Error | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -70,6 +72,9 @@ Evidence: [Fase P3](../../../docs/evidence/P3.md). Samlet kravdekning og eventue
 Ny regresjonskontroll: [Native lenker og markører](../../../docs/evidence/document-links.md).
 
 Utvidelsen krever AT-031, AT-032, AT-036, AT-039. Dette er planlagt dekning, ikke nye testbevis.
+
+P14: TableTest, TablePreviewTest og utvidet PdfFidelityTest dekker tabellutvidelsen;
+se [P14](../../../docs/evidence/P14.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 
