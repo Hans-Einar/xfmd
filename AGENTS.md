@@ -5,15 +5,15 @@
 xfmd er en lettvekts Markdown-viser/editor og companion til `xfw` og `xfi`.
 Les [kravene](xfmd_requirements.md), [arkitekturen](softwareArchitecture.md),
 [arbeidsmåten](docs/working-method.md) og berørte [blueprints](src/blueprint/README.md)
-før endringer. Dokumentasjonen beskriver planlagt programvare; applikasjonen er
-ikke implementert ennå.
+før endringer. Baseline P0–P8 er implementert. [Designrevisjon 1.1](softwareDesign.md)
+beskriver Proposed utvidelser; Planned-symboler er ikke eksisterende kode.
 
 ## Arkitektur og plassering
 
 - `src/application/`: FOX-applikasjon, vinduer, kommandoer, koordinering og adaptere.
 - `src/interpreter/`: Markdown-tolkning; ingen FOX- eller renderer-avhengighet.
 - `src/renderer/`: presentasjon, layout, hit-testing og visuell kildemapping; ingen FOX- eller interpreter-avhengighet.
-- `src/contracts/`: minimale, FOX- og MD4C-frie grensesnitt og datatyper.
+- `src/contracts/`: minimale, FOX- og parser-frie grensesnitt og datatyper.
 - `src/blueprint/feature/` og `src/blueprint/functionality/`: designobjekter, ikke kode.
 
 FOX er et varig valg. Application eier FOX-integrasjonen; renderer beskriver hva
@@ -43,12 +43,12 @@ små, begrunnede kontrakter, og oppgi faktisk eller planlagt konsument.
 
 ## Stil, kontroll og bidrag
 
-Skriv prosjektprosa på norsk og kodeidentifikatorer på engelsk. Planlagt C++17-stil:
+Skriv prosjektprosa på norsk og kodeidentifikatorer på engelsk. C++17-stil:
 to mellomrom, `PascalCase` for typer/filer, `camelCase` for metoder og RAII for
-eierskap. Formatter og applikasjonstester innføres i implementeringsplanens P1.
+eierskap. Behold etablerte CMake-/CTest-kontroller.
 
-Kjør `python3 tools/validate_blueprints.py` ved dokumentendringer. Byggekommandoer
-er foreløpig planlagte, se [implementeringsplanen](implementationPlan.md).
+Kjør `python3 tools/validate_blueprints.py` og `python3 tools/check_blueprint_symbols.py`
+ved designendringer. Gjeldende bygge-/testkommandoer står i [README](README.md).
 Commits skal ha korte imperative titler. PR-er oppgir krav-/blueprint-ID-er,
 endret plumbing, utførte kontroller og kjente begrensninger; legg ved skjermbilder
 ved synlige GUI-endringer. Ikke marker noe `Verified` uten dokumentert testbevis.

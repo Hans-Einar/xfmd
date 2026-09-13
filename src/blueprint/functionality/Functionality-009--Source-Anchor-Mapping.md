@@ -4,9 +4,9 @@ kind: Functionality
 audience: System
 role: Mechanism
 owner: application
-status: Implemented
+status: Proposed
 scope: FirstRelease
-requirements: UR-005, UR-008, SR-002, SR-008, SR-009, SR-013
+requirements: UR-005, UR-008, SR-002, SR-008, SR-009, SR-013, UR-017, SR-019
 uses: FUNC-005
 ---
 
@@ -25,13 +25,15 @@ Krav: UR-005, UR-008, SR-002, SR-008, SR-009, SR-013. Definisjoner og normativ a
 
 AnchorMapper::map og anchorAt er rene funksjoner over RenderFrame. ScrollCoordinator eier aktivt token, pending restore, siste anker, split-mode og ekko-/sekvensguard. setEditor/setPreview injiseres som adaptercallbacks; captureAnchor/restoreAnchor deles med historikk.
 
+**Planlagt utvidelse 1.1:** AnchorMapper gir VisualLocation med sideindeks og points; host mapper visningskoordinater gjennom ViewTransform før lookup. Klikk/scroll i page gap velger nærmeste dokumentkant med deterministisk tie-break mot neste side. Sync og Restore er eksplisitte origins, uten wheel-gain.
+
 ## 4. Atferd, tilstand og feil
 
 Byteområder og dokumentgeometri brukes begge veier. Smaleste kildeområde foretrekkes ved source→viewport; nærmeste linjeregion ved motsatt retning. Hidden syntax bruker blokkområde, transformert tekst er Approximate. Kodelinjer får egne fysisk forankrede ranges, også ved gjentatt tekst. Gammelt token/frame avvises; resize restaurerer anker etter ny layout. Programmatisk echo og gammel sekvens ignoreres.
 
 ## 5. Plumbing
 
-Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
+Implemented-rader beskriver baseline 0712c29; Planned-rader beskriver utvidelsen. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -41,6 +43,7 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 | 4 | `ScrollCoordinator setEditor callback` | `EditorWidget::setSourceAnchor` | `src/application/ui/EditorWidget.cpp` | Raw byte → projected FOX-posisjon | Undertrykker programmatisk callback | Implemented |
 | 5 | `ScrollCoordinator setPreview callback` | `FoxRenderHost::setViewport` | `src/application/adapters/FoxRenderHost.cpp` | Y → FOX-scrollposisjon | Undertrykker programmatisk callback | Implemented |
 | 6 | `PreviewCoordinator present callback` | `ScrollCoordinator::setFrame` | `src/application/scroll/ScrollCoordinator.cpp` | FrameReady → restore | Kun forventet token | Implemented |
+| 7 | `ScrollCoordinator restore` | `AnchorMapper::map` | `src/application/scroll/AnchorMapper.cpp` | SourceAnchor + PageLayout → VisualLocation | Approximate eller Unavailable | Planned |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -56,7 +59,12 @@ Relevante akseptanse-ID-er: AT-005, AT-008, AT-012, AT-018, AT-019, AT-023.
 
 Evidence: [Fase P5](../../../docs/evidence/P5.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
 
+Utvidelsen krever AT-031, AT-039. Dette er planlagt dekning, ikke nye testbevis.
+
 ## 8. Status, risiko og endringskonsekvenser
+
+**Proposed 1.1:** Historisk Implemented/evidence nedenfor gjelder baseline. Nye kontrakter er beskrevet i [designrevisjonen](../../../softwareDesign.md); gamle bevis verifiserer ikke disse.
+
 
 Implemented i P5. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
 Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.

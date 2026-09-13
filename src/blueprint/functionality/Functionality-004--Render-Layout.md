@@ -4,10 +4,10 @@ kind: Functionality
 audience: System
 role: Service
 owner: renderer
-status: Implemented
+status: Proposed
 scope: FirstRelease
-requirements: UR-005, UR-002, UR-008, SR-001, SR-003, SR-005, SR-008, SR-009, SR-011, SR-013
-uses: none
+requirements: UR-005, UR-002, UR-008, SR-001, SR-003, SR-005, SR-008, SR-009, SR-011, SR-013, UR-017, UR-018, SR-016, SR-019
+uses: FUNC-017
 ---
 
 # Functionality-004: Layout og visuell dokumentmodell
@@ -25,6 +25,8 @@ Krav: UR-005, UR-002, UR-008, SR-001, SR-003, SR-005, SR-008, SR-009, SR-011, SR
 
 MarkdownRenderer implementerer IRenderer::layout/hitTest. BlockLayout og InlineLayout eier layout; HitTester eier lenketreff. Bare rene kontrakter konsumeres. DrawRun inneholder FontSpec og dokumentkoordinater, ikke FOX-ressurser.
 
+**Planlagt utvidelse 1.1:** Trekk ut målt FlowLayout med visuelle linjer fra dagens layout. LayoutUnit blir points; PageComposer fordeler flyten over sider. Shaping injiseres via rene porter. Renderer eier plassering, aldri native fontressurser.
+
 ## 4. Atferd, tilstand og feil
 
 Layout bryter vanlig tekst ved ord/UTF-8-grenser; kode beholder whitespace og kan scrolle horisontalt. Varierende heading-fonter, nested lister/sitater, inline-kode og inert HTML støttes. Frame inneholder både run-ranges og block-ranges for hidden syntax. Ingen parsing, I/O eller utføring av lenker.
@@ -35,7 +37,7 @@ lenkemål; syntetisk markør har tomt, tilnærmet kildeanker.
 
 ## 5. Plumbing
 
-Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
+Implemented-rader beskriver baseline 0712c29; Planned-rader beskriver utvidelsen. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -45,6 +47,7 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 | 4 | `InlineLayout::layout` | `ITextMetrics::measure` | `src/contracts/ITextMetrics.h` | Tekst/font → extent | Ren port | Implemented |
 | 5 | `MarkdownRenderer::hitTest` | `HitTester::hitTest` | `src/renderer/HitTester.cpp` | Frame/point → HitResult | Ingen navigasjonssideeffekt | Implemented |
 | 6 | `InlineLayout::layout` | `LinkMarker::make` | `src/renderer/LinkMarker.cpp` | Lenke/font → markør-run | Ingen I/O; syntetisk source-range | Implemented |
+| 7 | `MarkdownRenderer::layout` | `PageComposer::compose` | `src/renderer/PageComposer.cpp` | FlowLayout + PaperSpec → PageLayout | begrens store blokker | Planned |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -62,7 +65,12 @@ Evidence: [Fase P3](../../../docs/evidence/P3.md). Samlet kravdekning og eventue
 
 Ny regresjonskontroll: [Native lenker og markører](../../../docs/evidence/document-links.md).
 
+Utvidelsen krever AT-031, AT-032, AT-036, AT-039. Dette er planlagt dekning, ikke nye testbevis.
+
 ## 8. Status, risiko og endringskonsekvenser
+
+**Proposed 1.1:** Historisk Implemented/evidence nedenfor gjelder baseline. Nye kontrakter er beskrevet i [designrevisjonen](../../../softwareDesign.md); gamle bevis verifiserer ikke disse.
+
 
 Implemented i P3. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
 Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.

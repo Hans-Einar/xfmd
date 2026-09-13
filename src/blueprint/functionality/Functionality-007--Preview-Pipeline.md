@@ -4,9 +4,9 @@ kind: Functionality
 audience: System
 role: Workflow
 owner: application
-status: Implemented
+status: Proposed
 scope: FirstRelease
-requirements: UR-002, UR-004, SR-001, SR-002, SR-003, SR-008, SR-010, SR-011, SR-013
+requirements: UR-002, UR-004, SR-001, SR-002, SR-003, SR-008, SR-010, SR-011, SR-013, UR-017, SR-019
 uses: FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006
 ---
 
@@ -25,13 +25,15 @@ Krav: UR-002, UR-004, SR-001, SR-002, SR-003, SR-008, SR-010, SR-011, SR-013. De
 
 PreviewCoordinator eier cached immutable model, viewportbredde og generasjon. ParserWorker eier én tråd med maksimalt én aktiv og én pending snapshot. IInterpreter brukes bare av worker; IRenderer/ITextMetrics brukes på GUI-tråden. present/invalidated/failed er injiserte callbacks.
 
+**Planlagt utvidelse 1.1:** LayoutProfile og FontSetId inngår i FrameKey; continuous bredde utløser reflow, paged viewport-resize bare view transform. Modellcache og bounded parserarbeid beholdes. Lagre source anchor før profilbytte og restaurer etter riktig frame.
+
 ## 4. Atferd, tilstand og feil
 
 schedule invaliderer med en gang og debouncer 300 ms. refresh tar snapshot og sender jobb. Worker ticket hindrer publisering av superseded resultat; poll kontrollerer også aktivt dokumenttoken. Resize gjør kun layout av riktig cached model. Feil gir status; gammel preview er ikke interaktiv. Destructor kansellerer timere før worker join og før FOX-host slettes.
 
 ## 5. Plumbing
 
-Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
+Implemented-rader beskriver baseline 0712c29; Planned-rader beskriver utvidelsen. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -42,6 +44,8 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 | 5 | `PreviewCoordinator::poll` | `ParserWorker::take` | `src/application/preview/ParserWorker.cpp` | Completion → tokencheck | Gammelt svar forkastes | Implemented |
 | 6 | `PreviewCoordinator::relayout` | `IRenderer::layout` | `src/contracts/IRenderer.h` | Model + metrics + generation → frame | Kun GUI-tråd | Implemented |
 | 7 | `PreviewCoordinator present callback` | `FoxRenderHost::present` | `src/application/adapters/FoxRenderHost.cpp` | Frame → visning | Riktig token/bredde kreves | Implemented |
+| 8 | `Workspace mode` | `PreviewCoordinator::setLayoutProfile` | `src/application/preview/PreviewCoordinator.cpp` | profil → layout request | ny generasjon | Planned |
+| 9 | `Layout completion` | `PreviewCoordinator::acceptFrame` | `src/application/preview/PreviewCoordinator.cpp` | FrameKey → present | stale avvises | Planned |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -57,7 +61,12 @@ Relevante akseptanse-ID-er: AT-002, AT-004, AT-011, AT-012, AT-013, AT-018, AT-0
 
 Evidence: [Fase P4](../../../docs/evidence/P4.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
 
+Utvidelsen krever AT-031, AT-039. Dette er planlagt dekning, ikke nye testbevis.
+
 ## 8. Status, risiko og endringskonsekvenser
+
+**Proposed 1.1:** Historisk Implemented/evidence nedenfor gjelder baseline. Nye kontrakter er beskrevet i [designrevisjonen](../../../softwareDesign.md); gamle bevis verifiserer ikke disse.
+
 
 Implemented i P4. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
 Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.

@@ -88,3 +88,10 @@ og CONTRIBUTING.md beskriver implementasjonen. Arkitektur- og arbeidsreglene gje
 Arbeidsrot og historikk endrer ikke dokumentbuffer, prosessens PWD eller
 sidepanelets synlighet. Dokumentlenker og Åpne-dialogen flytter ikke arbeidsroten.
 Filer av andre typer kan vises i treet, men bare `.md`/`.txt` kan åpnes i editoren.
+
+## Planlagt utvidelse
+
+[Designrevisjon 1.1](softwareDesign.md) beskriver Preferences med scrollhastighet/
+akselerasjon, A4-preview, PDF-eksport, fullscreen og [ikonforslag](docs/design/xfmd-icon-proposal.svg).
+Dette er **Proposed**, ikke tilgjengelige funksjoner ennå. Se [P9–P13-planen](implementationPlan.md#5-planlagt-utvidelse-p9p13)
+og oppdatert [blueprint-register](src/blueprint/README.md).

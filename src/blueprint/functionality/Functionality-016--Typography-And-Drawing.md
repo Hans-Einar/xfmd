@@ -1,0 +1,56 @@
+---
+id: FUNC-016
+kind: Functionality
+audience: System
+role: Adapter
+owner: application
+status: Proposed
+scope: Future
+requirements: UR-002, UR-017, UR-018, SR-001, SR-010, SR-016
+uses: none
+---
+
+# Functionality-016: Delt typografi og tegnegrunnlag
+
+## 1. Hensikt og avgrensning
+
+Gi renderer rene tekstmål og formede glypher, og utføre det samme tegnede dokumentet på skjerm og PDF. Trekk felles font-/tegneansvar ut av FOX-host slik at fontmåling og PDF-fontvalg ikke divergerer.
+
+## 2. Krav og akseptanse
+
+UR-002, UR-017, UR-018, SR-001, SR-010, SR-016. Definisjoner: [krav](../../../xfmd_requirements.md).
+Akseptanse: AT-002, AT-011, AT-020, AT-031, AT-032, AT-036.
+
+## 3. Kontrakter og eierskap
+
+Planlagt `ITextShaper::shape(text, FontSpec, FontSetId)` returnerer rene `GlyphRun`-data med UTF-8-clusters, fontface-id, glyph-id, advances og offsets i points. ITextMetrics::measure bruker de samme shaped resultatene. `FontCatalog` eier konkret fontidentitet/fallback; frame inneholder bare FontSetId og rene glyphdata. Application holder en lease på det immutable fontsettet så lenge frame/eksport bruker det; native contexts er fortsatt trådeide. Ingen FOX-, Pango- eller Cairo-peker krysser contracts.
+
+Foretrukket teknisk kandidat er Cairo + PangoCairo/Fontconfig for shaping/fallback, i application-adaptere. `DisplayListPainter::paint(frame, target)` bruker samme glyphplassering på en skjermoverflate i FOX-host og på en PDF-overflate. Renderer bestemmer layout/primitiver; adapteren utfører dem. FOX forblir toolkit; ingen GTK-widget eller browser engine innføres.
+
+## 4. Atferd, tilstand og feil
+
+P9 må bevise fontfallback, glyph-/clusteruttrekk, PDF-fontembedding/tekstuttrekk og målekonsistens før bibliotekvalget låses. Stille fontbytte mellom preview og eksport er feil: rapporter manglende font og bygg begge på nytt med nytt FontSetId. Fontcache er bounded; fontressurser/contexts er trådeide. GUI eier FOX og skjermoverflate. Eksport-worker får egne output-contexts og immutable data, aldri FXFont. Legacy FoxTextMetrics forsvinner først når continuous-regresjonene består.
+
+## 5. Plumbing
+
+| Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | `InlineLayout::layout` | `ITextShaper::shape` | `src/contracts/ITextShaper.h` | UTF-8/fontsett → glypher/clusters | unsupported glyph markeres likt i begge mål | Planned |
+| 2 | `ITextShaper adapter` | `SharedTextMetrics::shape` | `src/application/adapters/SharedTextMetrics.cpp` | ren kontrakt → konkret shaping | fontcatalog/cache eies i application | Planned |
+| 3 | `FoxRenderHost paint / PDF output` | `DisplayListPainter::paint` | `src/application/adapters/DisplayListPainter.cpp` | frame + target → samme glyphplassering | targetfeil rapporteres | Planned |
+
+## 6. Gjenbruk og avhengigheter
+
+Konsumenter: FUNC-004, FUNC-005 og FUNC-018. Samme shapingkontrakt kan brukes av en erstattet renderer; interpreter påvirkes ikke. Editorens FXText-font forblir separat.
+
+## 7. Verifikasjon
+
+Latin/æøå, CJK-fallback, sammensatte tegn, fet/kursiv og monospace testes. Sammenlign font-id, advances, linjebrudd og PDF-uttrekk; raster sammenlignes med avtalt antialias-toleranse, ikke krav om identiske skjermpiksler.
+
+AT-002, AT-011, AT-020, AT-031, AT-032, AT-036: planlagt verifikasjon; ingen implementasjonsbevis for utvidelsen.
+
+## 8. Status, risiko og endringskonsekvenser
+
+Revisjon 1.1, 2026-09-13. Alle nye kall i kapittel 5 er Planned.
+P9 teknisk gate, P11 migrering, P12 PDF-konsument. Lokal tilstedeværelse av Cairo er ikke bevis for ferdig WYSIWYG eller for at PangoCairo-kandidaten passer.
+[Integrasjonsdesign](../../../softwareDesign.md) og [faseplan](../../../implementationPlan.md) gir kontekst.

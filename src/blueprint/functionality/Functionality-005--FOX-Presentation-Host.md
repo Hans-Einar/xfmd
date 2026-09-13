@@ -4,10 +4,10 @@ kind: Functionality
 audience: System
 role: Adapter
 owner: application
-status: Implemented
+status: Proposed
 scope: FirstRelease
-requirements: UR-011, UR-002, UR-005, UR-008, SR-001, SR-008, SR-009, SR-010, SR-013
-uses: FUNC-004
+requirements: UR-011, UR-002, UR-005, UR-008, SR-001, SR-008, SR-009, SR-010, SR-013, UR-017, SR-016, SR-019
+uses: FUNC-004, FUNC-015, FUNC-016
 ---
 
 # Functionality-005: FOX-host for presentasjon
@@ -25,6 +25,8 @@ Krav: UR-011, UR-002, UR-005, UR-008, SR-001, SR-008, SR-009, SR-010, SR-013. De
 
 FoxRenderHost er FXScrollArea-adapter. present/expect/invalidate styrer frame/interaktivitet. FoxTextMetrics::segments velger font per tegnsegment med samme ressurser for measure og paint. Host kjenner bare IRenderer for hitTest.
 
+**Planlagt utvidelse 1.1:** Behold FOX-host, input-enable og viewportvarsler. Wheelpolicy flyttes til FUNC-015, fontmåling/glyphtegning til FUNC-016. Host eier ViewTransform for points/zoom/DPI og page gaps. present må erstatte frame.width==viewport_w med profilbasert validering.
+
 ## 4. Atferd, tilstand og feil
 
 Bare riktig dokumenttoken og viewportbredde aksepteres. Nytt dokument fjerner gammel frame. Pending endring gjør preview ikke-interaktiv. Paint clippes og søker synlige runs; CJK/andre glyphs kan bruke installert fallback-font. Ingen Markdown-regler i host.
@@ -39,7 +41,7 @@ changed/command-varsler. Konstruktørene bytter barene før create(); widgets ei
 
 ## 5. Plumbing
 
-Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
+Implemented-rader beskriver baseline 0712c29; Planned-rader beskriver utvidelsen. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -51,6 +53,8 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 | 6 | `ScrollCoordinator setPreview callback` | `FoxRenderHost::setViewport` | `src/application/adapters/FoxRenderHost.cpp` | Y → clamped viewport | Programmatisk echo undertrykkes | Implemented |
 | 7 | `FoxRenderHost constructor` | `FoxWheelScrollBar::replace` | `src/application/adapters/FoxWheelScrollBar.cpp` | Standard bar → presis wheel-adapter | Parent eier ny bar; før create | Implemented |
 | 8 | `FOX wheel dispatch` | `FoxWheelScrollBar::onMouseWheel` | `src/application/adapters/FoxWheelScrollBar.cpp` | Delta/rest → target og FOX-timer | Clamp, behold delpiksel-rest, standard varsler | Implemented |
+| 9 | `FoxRenderHost::present` | `ViewTransform::configure` | `src/application/adapters/ViewTransform.cpp` | PageLayout + viewport → transform | zoom er ikke reflow | Planned |
+| 10 | `FoxRenderHost paint` | `DisplayListPainter::paint` | `src/application/adapters/DisplayListPainter.cpp` | frame + target → pixels | felles glyphgrunnlag | Planned |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -70,7 +74,12 @@ Ny regresjonskontroll: [Native lenker og markører](../../../docs/evidence/docum
 
 Regresjonsbevis: [Gesture og scrollgrenser](../../../docs/evidence/wheel-scrolling.md).
 
+Utvidelsen krever AT-031, AT-036, AT-039. Dette er planlagt dekning, ikke nye testbevis.
+
 ## 8. Status, risiko og endringskonsekvenser
+
+**Proposed 1.1:** Historisk Implemented/evidence nedenfor gjelder baseline. Nye kontrakter er beskrevet i [designrevisjonen](../../../softwareDesign.md); gamle bevis verifiserer ikke disse.
+
 
 Implemented i P3. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
 Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.
