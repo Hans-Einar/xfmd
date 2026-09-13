@@ -2,7 +2,7 @@
 
 P0–P15 er implementert: 9 features og 20 functionality-objekter.
 Registerstatus speiler metadata i blueprint-filene. Implemented betyr at koden
-finnes; [P13-bevis](../../docs/evidence/P13.md) angir faktisk testdekning og
+finnes; [P15-bevis](../../docs/evidence/P15.md) angir faktisk testdekning og
 begrensninger. UR-010/SR-014 (xfw-IPC) er fortsatt Future.
 
 Se [designrevisjonen](../../softwareDesign.md), [arbeidsmåten](../../docs/working-method.md),

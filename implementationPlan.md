@@ -260,3 +260,8 @@ Branch `phase/p15-document-index`, egen PR, commit ved hver milestone.
   Gjenbruk filtransaksjoner, preview-modell og scrolladapter; isolert FOX-test.
 - M3: review av stale/dirty/livstid, regresjon og visuell evidens, dokumentasjon,
   installasjon, CI og merge. Kort målrettet verifikasjon på batteri.
+
+P15-status: M1 (`33634d6`) og M2 (`2d187cd`) implementert. M3 dokumenterer review,
+regresjon, GUI-evidens og installasjon. Alle 39 Release-tester passerte; etter
+Save As-/levetidsjusteringer passerte berørte tester på nytt, inklusive seks
+ASan/UBSan/LSan-tester. GitHub kjører hele matrisen før merge.

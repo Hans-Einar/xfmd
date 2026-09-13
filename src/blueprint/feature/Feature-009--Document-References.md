@@ -48,10 +48,12 @@ FUNC-010 arbeidsflate. FTR-008/009 er konsumentene; ingen feature-internkall.
 
 ## 7. Verifikasjon
 
-Planlagt AT-040, AT-041, AT-042, AT-043: DocumentIndexTest, ReferenceWorkerTest og IndexGuiTest.
+AT-040, AT-041, AT-042, AT-043: DocumentIndexTest, ReferenceWorkerTest og IndexGuiTest.
 Test semantiske nivåer, lenker i tabeller, lazy feil/stale og native enkeltklikk.
 
 ## 8. Status, risiko og endringskonsekvenser
 
 Implemented P15, 2026-09-13. M1-modelltester og M2-GUI-tester er gjennomført; samlet evidens samles i M3. Referanser er øyeblikksbilder;
 utvidelse leser filen igjen. Blokkerende filsystemkall kan ikke avbrytes midt i kall.
+
+Evidence: [P15 — utførte tester, review og skjermbilde](../../../docs/evidence/P15.md).
