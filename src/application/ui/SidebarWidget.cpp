@@ -1,12 +1,12 @@
 #include "SidebarWidget.h"
 #include "application/io/InputPolicy.h"
-#include <filesystem>
 using namespace FX;
 namespace xfmd {
-FXDEFMAP(SidebarWidget) sidebarMap[] = {FXMAPFUNC(SEL_DOUBLECLICKED, 1, SidebarWidget::onOpen)};
+FXDEFMAP(SidebarWidget)
+sidebarMap[] = {FXMAPFUNC(SEL_DOUBLECLICKED, SidebarWidget::ID_TREE_EVENT, SidebarWidget::onOpen)};
 FXIMPLEMENT(SidebarWidget, FXDirList, sidebarMap, ARRAYNUMBER(sidebarMap))
 SidebarWidget::SidebarWidget(FXComposite* parent)
-    : FXDirList(parent, this, 1,
+    : FXDirList(parent, this, ID_TREE_EVENT,
                 DIRLIST_SHOWFILES | TREELIST_SHOWS_LINES | TREELIST_SHOWS_BOXES | LAYOUT_FILL_Y, 0,
                 0, 220, 0) {
   setPattern("*.md,*.txt");
@@ -16,7 +16,7 @@ long SidebarWidget::onOpen(FXObject*, FXSelector, void* data) {
   auto* item = static_cast<FXTreeItem*>(data);
   if (!item)
     item = getCurrentItem();
-  if (!item)
+  if (!item || !isItemFile(item))
     return 1;
   std::string path = getItemPathname(item).text();
   if (InputPolicy::supportedPath(path) && open)

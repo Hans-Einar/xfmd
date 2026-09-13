@@ -174,3 +174,12 @@ Globe-primitiven for HTTP(S). Host tegner jordkloden med buer/linje, uavhengig a
 emoji-fonter. InlineRun.linkId skiller nabo-lenker med samme URL, samtidig som
 fet/kursiv inne i én lenke ikke gir flere markører. Syntetiske markører bevarer
 original tekst og kildeoffsets; markørens source-range er tom og Approximate.
+
+## 10. Sidepanelets FOX-meldinger
+
+SidebarWidget er sitt eget meldingstarget. Egne selector-ID-er starter derfor
+ved FXDirList::ID_LAST, aldri på vilkårlige små tall som overlapper arvede
+kommandoer. SEL_DOUBLECLICKED/ID_TREE_EVENT åpner bare faktiske filer.
+SEL_COMMAND fra vanlig treklikk skal ikke bli en ID_HIDE-kommando.
+ViewModeController::toggleSidebar er eneste eksplisitte synlighetsendring;
+mappevalg og dokumentåpning bevarer synlig/skjult tilstand.
