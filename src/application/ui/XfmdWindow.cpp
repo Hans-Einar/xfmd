@@ -17,6 +17,10 @@ XfmdWindow::~XfmdWindow() {
   delete viewMenu;
   delete goMenu;
 }
+void XfmdWindow::setApplicationIcons(FXIcon* large, FXIcon* small) {
+  setIcon(large);
+  setMiniIcon(small);
+}
 void XfmdWindow::buildUi() {
   auto* bar = new FXMenuBar(this, LAYOUT_SIDE_TOP | LAYOUT_FILL_X);
   auto add = [&](FXMenuPane* menu, const char* name, CommandRouter::Command command) {

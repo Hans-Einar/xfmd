@@ -4,7 +4,7 @@ kind: Functionality
 audience: Integration
 role: Adapter
 owner: application
-status: Proposed
+status: Implemented
 scope: Future
 requirements: UR-020, SR-013
 uses: none
@@ -35,8 +35,8 @@ Manglende ikon må ikke hindre oppstart. Bygget bruker eksplisitt, dokumentert k
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `Application::initialize` | `IconResources::load` | `src/application/ui/IconResources.cpp` | ressursstørrelse → FOX-ikon | fallback uten krasj | Planned |
-| 2 | `XfmdWindow constructor` | `XfmdWindow::setApplicationIcons` | `src/application/ui/XfmdWindow.cpp` | eide store/små ikoner → vindu | GUI-ressurslevetid | Planned |
+| 1 | `Application::initialize` | `IconResources::load` | `src/application/ui/IconResources.cpp` | ressursstørrelse → FOX-ikon | fallback uten krasj | Implemented |
+| 2 | `Application::initialize` | `XfmdWindow::setApplicationIcons` | `src/application/ui/XfmdWindow.cpp` | eide store/små ikoner → vindu | GUI-ressurslevetid | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -50,6 +50,6 @@ AT-023, AT-034: planlagt verifikasjon; ingen implementasjonsbevis for utvidelsen
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Revisjon 1.1, 2026-09-13. Alle nye kall i kapittel 5 er Planned.
-P13. Eksisterende packaging/xfmd.svg beholdes frem til implementasjon/visuell godkjenning av varianten.
+P13-M2: implementerte kall; [bevis](../../../docs/evidence/P13.md).
+Master: packaging/xfmd.svg. tools/generate_icons.py avleder PNG og IconData.h; normalbygg bruker committede ressurser.
 [Integrasjonsdesign](../../../softwareDesign.md) og [faseplan](../../../implementationPlan.md) gir kontekst.

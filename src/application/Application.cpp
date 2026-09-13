@@ -19,7 +19,9 @@ void Application::initialize(int& argc, char** argv) {
                                                      [this](const auto& value, std::string& error) {
                                                        return preferencesStore->save(value, error);
                                                      });
+  icons.load(app);
   window = new XfmdWindow(&app, commands);
+  window->setApplicationIcons(icons.large.get(), icons.small.get());
   windowMode = std::make_unique<FoxWindowMode>(*window);
   window->configured = [this] { windowMode->observe(); };
   editorFont = std::make_unique<FXFont>(&app, "DejaVu Sans Mono", 11);

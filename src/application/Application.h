@@ -13,6 +13,7 @@
 #include "navigation/NavigationCoordinator.h"
 #include "preview/PreviewCoordinator.h"
 #include "scroll/ScrollCoordinator.h"
+#include "ui/IconResources.h"
 #include "ui/ViewModeController.h"
 #include "ui/XfmdWindow.h"
 #include <fx.h>
@@ -28,6 +29,7 @@ public:
   CommandRouter commands;
   std::unique_ptr<FoxPreferencesStore> preferencesStore;
   std::unique_ptr<PreferencesService> preferences;
+  IconResources icons;
   XfmdWindow* window = nullptr;
   std::unique_ptr<ViewModeController> views;
   std::unique_ptr<FoxWindowMode> windowMode;

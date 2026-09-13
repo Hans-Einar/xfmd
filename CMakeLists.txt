@@ -64,7 +64,7 @@ add_library(xfmd_application
   src/application/preferences/PreferencesService.cpp
   src/application/adapters/FoxPreferencesStore.cpp src/application/ui/PreferencesDialog.cpp
   src/application/Application.cpp src/application/ApplicationCommands.cpp src/application/ApplicationExport.cpp
-  src/application/commands/CommandRouter.cpp src/application/ui/XfmdWindow.cpp
+  src/application/commands/CommandRouter.cpp src/application/ui/XfmdWindow.cpp src/application/ui/IconResources.cpp
   src/application/ui/EditorWidget.cpp src/application/ui/SidebarWidget.cpp src/application/ui/WorkspacePanel.cpp
   src/application/ui/ViewModeController.cpp src/application/adapters/FoxTextMetrics.cpp
   src/application/adapters/ViewTransform.cpp src/application/adapters/FoxWindowMode.cpp
@@ -88,3 +88,7 @@ set(CPACK_PACKAGE_VENDOR "Hans-Einar")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Native FOX Markdown viewer and editor")
 set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 include(CPack)
+
+foreach(size 16 24 32 48 64 128)
+  install(FILES packaging/icons/xfmd-${size}.png DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/${size}x${size}/apps RENAME xfmd.png)
+endforeach()
