@@ -10,6 +10,7 @@ LayoutResult MarkdownRenderer::layout(const SemanticDocument& model, const Layou
   auto frame = std::make_shared<RenderFrame>();
   frame->token = model.token;
   frame->generation = request.generation;
+  frame->key={model.token,request.profile,metrics.fontSetId(),request.generation,request.width};
   frame->width = request.width;
   frame->contentWidth = request.width;
   frame->runs.reserve(model.blocks.size() * 8);

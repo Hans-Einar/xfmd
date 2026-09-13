@@ -84,7 +84,7 @@ TextExtent FoxTextMetrics::measure(std::string_view text, FontSpec spec) {
   for (const auto& segment : segments(text, spec)) {
     result.width += segment.second->getTextWidth(segment.first.data(), int(segment.first.size()));
     descent = std::max(descent, segment.second->getFontDescent());
-    result.ascent = std::max(result.ascent, segment.second->getFontAscent());
+    result.ascent = std::max(result.ascent, double(segment.second->getFontAscent()));
   }
   result.height = result.ascent + descent;
   if (cachedCount < 4096 && text.size() <= 256) {

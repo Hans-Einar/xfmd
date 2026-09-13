@@ -2,7 +2,7 @@
 #include "adapters/FoxRenderHost.h"
 #include "adapters/FoxScheduler.h"
 #include "adapters/FoxPreferencesStore.h"
-#include "adapters/FoxTextMetrics.h"
+#include "adapters/SharedTextMetrics.h"
 #include "commands/CommandRouter.h"
 #include "contracts/IInterpreter.h"
 #include "contracts/IRenderer.h"
@@ -31,7 +31,7 @@ public:
   std::unique_ptr<FX::FXFont> editorFont;
   std::unique_ptr<IInterpreter> interpreter;
   std::unique_ptr<IRenderer> renderer;
-  std::unique_ptr<FoxTextMetrics> metrics;
+  std::unique_ptr<SharedTextMetrics> metrics;
   FoxRenderHost* host = nullptr;
   std::unique_ptr<FoxScheduler> scheduler;
   std::unique_ptr<PreviewCoordinator> preview;

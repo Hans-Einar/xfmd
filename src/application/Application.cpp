@@ -33,7 +33,7 @@ void Application::initialize(int& argc, char** argv) {
   wireDocument();
   interpreter = std::make_unique<CmarkInterpreter>();
   renderer = std::make_unique<MarkdownRenderer>();
-  metrics = std::make_unique<FoxTextMetrics>(app);
+  metrics = std::make_unique<SharedTextMetrics>();
   host = new FoxRenderHost(window->previewArea, *renderer, *metrics);
   scheduler = std::make_unique<FoxScheduler>(app);
   preview =

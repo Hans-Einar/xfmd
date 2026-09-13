@@ -20,11 +20,11 @@ SourceRange slice(const InlineRun& run, std::size_t begin, std::size_t end) {
           MappingQuality::Approximate};
 }
 } // namespace
-int InlineLayout::layout(const SemanticBlock& block, int left, int top, int width, FontSpec base,
+double InlineLayout::layout(const SemanticBlock& block, double left, double top, double width, FontSpec base,
                          ITextMetrics& metrics, RenderFrame& frame) {
-  int x = left, y = top;
+  double x = left, y = top;
   auto defaultExtent = metrics.measure("M", base);
-  int lineHeight = defaultExtent.height + 4, ascent = defaultExtent.ascent;
+  double lineHeight = defaultExtent.height + 4, ascent = defaultExtent.ascent;
   std::size_t lineStart = frame.runs.size();
   auto finishLine = [&] {
     for (auto i = lineStart; i < frame.runs.size(); ++i) {
@@ -49,8 +49,9 @@ int InlineLayout::layout(const SemanticBlock& block, int left, int top, int widt
                  slice(run, begin, end),
                  run.link,
                  run.code && block.kind != BlockKind::Code};
+    draw.shaped=metrics.shape(draw.text,draw.font);
     bool merged = false;
-    if (frame.runs.size() > lineStart) {
+    if (!draw.shaped && frame.runs.size() > lineStart) {
       auto& previous = frame.runs.back();
       if (previous.icon == InlineIcon::None && previous.font == draw.font &&
           previous.link == draw.link && previous.codeBackground == draw.codeBackground &&
@@ -124,7 +125,7 @@ int InlineLayout::layout(const SemanticBlock& block, int left, int top, int widt
           ++end;
       auto word = std::string_view(run.text).substr(begin, end - begin);
       auto wordExtent = c == ' ' ? spaceExtent : metrics.measure(word, font);
-      int measured = wordExtent.width;
+      double measured = wordExtent.width;
       bool code = block.kind == BlockKind::Code;
       if (!code && x > left && x + measured > left + width)
         finishLine();

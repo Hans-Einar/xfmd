@@ -1,5 +1,5 @@
 #pragma once
-#include "FoxTextMetrics.h"
+#include "SharedTextMetrics.h"
 #include "contracts/IRenderer.h"
 #include <functional>
 #include <fx.h>
@@ -7,7 +7,7 @@ namespace xfmd {
 class FoxRenderHost : public FX::FXScrollArea {
   FXDECLARE(FoxRenderHost)
   IRenderer* renderer = nullptr;
-  FoxTextMetrics* metrics = nullptr;
+  SharedTextMetrics* metrics = nullptr;
   LayoutResult current;
   DocumentToken expected;
   bool active = false, programmatic = false;
@@ -21,7 +21,7 @@ public:
   std::function<void(int)> resized;
   std::function<void(int)> viewportChanged;
   std::function<void(const std::string&)> linkActivated;
-  FoxRenderHost(FX::FXComposite*, IRenderer&, FoxTextMetrics&);
+  FoxRenderHost(FX::FXComposite*, IRenderer&, SharedTextMetrics&);
   void layout() override;
   bool canFocus() const override { return true; }
   long onKeyPress(FX::FXObject*, FX::FXSelector, void*);

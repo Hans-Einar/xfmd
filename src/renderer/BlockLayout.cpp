@@ -4,7 +4,7 @@
 namespace xfmd {
 void BlockLayout::layout(const SemanticDocument& model, const LayoutRequest& request,
                          ITextMetrics& metrics, RenderFrame& frame) {
-  int y = 20;
+  double y = 20;
   for (const auto& block : model.blocks) {
     FontSpec font;
     if (block.kind == BlockKind::Heading) {
@@ -17,9 +17,9 @@ void BlockLayout::layout(const SemanticDocument& model, const LayoutRequest& req
       font.mono = true;
       font.points = 11;
     }
-    int left = 24 + block.indent * 24 + block.quoteDepth * 16;
-    int width = std::max(40, request.width - left - 24);
-    int start = y;
+    double left = 24 + block.indent * 24 + block.quoteDepth * 16;
+    double width = std::max(40.0, request.width - left - 24);
+    double start = y;
     if (block.kind == BlockKind::Rule) {
       frame.decorations.push_back({{left, y + 8, width, 1}, 0xb8bec7});
       y += 20;
@@ -33,6 +33,7 @@ void BlockLayout::layout(const SemanticDocument& model, const LayoutRequest& req
                               block.source,
                               {},
                               false});
+        frame.runs.back().shaped=metrics.shape(block.marker,font);
       }
       y += InlineLayout::layout(block, left, y, width, font, metrics, frame);
       if (block.kind == BlockKind::Code)
@@ -43,10 +44,10 @@ void BlockLayout::layout(const SemanticDocument& model, const LayoutRequest& req
         frame.decorations.push_back({{left - 12 - 16 * depth, start, 3, y - start}, 0xc4cbd5});
     }
     // Block region covers hidden syntax, empty blocks and unpainted whitespace.
-    frame.anchors.push_back({block.source, {left, start, width, std::max(1, y - start)}});
+    frame.anchors.push_back({block.source, {left, start, width, std::max(1.0, y - start)}});
     y += block.indent ? 5 : 10;
   }
-  frame.height = std::max(60, y + 20);
+  frame.height = std::max(60.0, y + 20);
   std::stable_sort(frame.runs.begin(), frame.runs.end(),
                    [](const DrawRun& a, const DrawRun& b) { return a.bounds.y < b.bounds.y; });
 }

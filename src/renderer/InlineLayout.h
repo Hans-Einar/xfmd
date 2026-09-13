@@ -3,7 +3,7 @@
 namespace xfmd {
 class InlineLayout {
 public:
-  static int layout(const SemanticBlock&, int x, int y, int width, FontSpec, ITextMetrics&,
+  static double layout(const SemanticBlock&, double x, double y, double width, FontSpec, ITextMetrics&,
                     RenderFrame&);
 };
 } // namespace xfmd
