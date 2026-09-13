@@ -310,3 +310,12 @@ bestiller lesing, og ingen barn slettes mens dette kallet bruker nodepekere.
 Sti inngår i UI-invalidering fordi Lagre som kan endre lenkebasen uten ny revisjon.
 `adapters/ExternalBrowser` tillater HTTP(S), starter xdg-open med argv og reaper
 barneprosessen fra egen polltimer. Ingen shell, rendering eller automatisk nettlast.
+
+## P16: valgt ekstern nettleser
+
+PreferencesSnapshot får browserProgram; FoxPreferencesStore bruker Programs/browser
+uten å endre versjon 1 eller overskrive ukjente nøkler. PreferencesDialog får
+programfelt med forslag og filvalg. Application::openBrowser er felles inngang
+fra preview og referansetre og leser aktiv preferanse ved hvert klikk.
+ExternalBrowser får executable og URL separat. Standard er xdg-open, og ingen
+browseravhengighet trekkes inn i interpreter/renderer.

@@ -25,6 +25,10 @@ PreferencesSnapshot FoxPreferencesStore::load() {
   s.scroll.maxGain = read("Scroll", "maxGain", 3, 1, 5);
   s.scroll.acceleration = registry.readBoolEntry("Scroll", "acceleration", false);
   s.marginMm = read("Page", "marginMm", 20, 5, 50);
+  s.browserProgram = registry.readStringEntry("Programs", "browser", "xdg-open");
+  std::string error;
+  if (!PreferencesService::validate(s, error))
+    s.browserProgram = "xdg-open";
   return s;
 }
 bool FoxPreferencesStore::save(const PreferencesSnapshot& s, std::string& error) {
@@ -41,6 +45,7 @@ bool FoxPreferencesStore::save(const PreferencesSnapshot& s, std::string& error)
   registry.writeRealEntry("Scroll", "strength", s.scroll.strength);
   registry.writeRealEntry("Scroll", "maxGain", s.scroll.maxGain);
   registry.writeRealEntry("Page", "marginMm", s.marginMm);
+  registry.writeStringEntry("Programs", "browser", s.browserProgram.c_str());
   if (!registry.write()) {
     static_cast<FX::FXSettings&>(registry) = before;
     error = "Could not save preferences. Your previous settings are still active.";

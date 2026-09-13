@@ -7,6 +7,7 @@ struct PreferencesSnapshot {
   int version = 1;
   ScrollProfile scroll;
   double marginMm = 20;
+  std::string browserProgram = "xdg-open";
 };
 using PreferencesDraft = PreferencesSnapshot;
 class PreferencesService {

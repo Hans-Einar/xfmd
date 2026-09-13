@@ -201,3 +201,15 @@ Kategorinoder velger/utvider treet; de har ingen fil å åpne. Dobbeltklikk på
 filtreets rot beholder «bredere arbeidsrot». «Top level» er laveste heading-nummer
 som finnes i referert fil; H2 vises hvis filen ikke har H1. Filreferanser med
 fragment åpner filen; kapittelbarn navigerer med byteanker, ikke URL-slug.
+
+## P16: programvalg for nettlenker
+
+| Krav | Normativ atferd | Akseptanse |
+| --- | --- | --- |
+| UR-024 | Edit → Preferences lar brukeren velge programmet som åpner HTTP(S)-lenker fra både preview og referansetreet. `google-chrome-stable` kan velges eller skrives inn, alternativt programnavn/full sti eller systemvalget `xdg-open`. OK lagrer, Cancel forkaster. | AT-044: vedvarende verdi, Cancel, ugyldig verdi, manglende program og samme rute fra begge flater. |
+
+P16 presiserer SR-005 og P15-policy: bare eksplisitt aktivering åpner HTTP(S) i
+valgt eksternt program. Program og URL er separate argv-elementer; ingen shell
+eller kommandolinje-evaluering. Feltet inneholder én executable, uten parametre.
+Systemstandard er xdg-open; lokale innstillinger kan velge Chrome. Andre URI-schemes
+blir ikke eksekvert. Konfigurasjon og analyser av Xfe endrer ikke renderer-arkitekturen.

@@ -93,7 +93,12 @@ void Application::initialize(int& argc, char** argv) {
   back = [this] { navigation->goBack(); };
   forward = [this] { navigation->goForward(); };
   canNavigate = [this](bool back) { return navigation->history.propose(back).has_value(); };
-  host->linkActivated = [this](const std::string& target) { navigation->followLink(target); };
+  host->linkActivated = [this](const std::string& target) {
+    if (ExternalBrowser::accepts(target))
+      openBrowser(target);
+    else
+      navigation->followLink(target);
+  };
   wireIndex();
   documentOpened = [this] {
     references->cancel();
