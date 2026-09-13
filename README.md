@@ -3,9 +3,26 @@
 Native Markdown-viser og editor for Linux, bygget på FOX som companion til `xfw`
 og `xfi`. Første leveranse er implementert: typografisk visning, redigering med
 undo/redo, live preview, lokal lenkehistorikk, justerbar scrolling, A4-preview,
-PDF-eksport og fullscreen.
+PDF-eksport, fullscreen og kapittel-/referanseindeks.
 
 ![XFMD-ikon](packaging/icons/xfmd-64.png)
+
+## Dokumentindeks og referanser
+
+Sidepanelet har **Files** og **Index**. Files beholder arbeidsrot, filfilter og
+historikk; enkeltklikk åpner en fil. Index har et kapitteltre øverst og et
+referansetre nederst, med en flyttbar skillelinje. Indeksen følger aktiv buffer.
+
+- Klikk en overskrift for å hoppe dit; Enter aktiverer også, piltaster velger bare.
+- **References → Markdown** viser lokale `.md`-lenker. Utvid en fil for å lese dens
+  hovedkapitler. Klikk filen eller et kapittel for å åpne. Kollaps/utvid leser på nytt.
+- **References → Hyperlinks** viser øvrige lenker. HTTP(S) åpnes i standardnettleseren
+  via `xdg-open`; andre lenker hopper til forekomsten i gjeldende dokument.
+- Filbytte beholder dagens kontroll for ulagrede endringer og tilbake/frem-historikk.
+
+Hovedkapitler er det øverste nivået filen faktisk bruker (H1, ellers H2 osv.).
+Referanser leses ved utvidelse, ett nivå dypt, med samme 8 MiB-grense som filåpning.
+Brutte lenker står synlig med feilmelding; trebygging laster aldri fra nettet.
 
 ## Bygg og kjør
 
@@ -54,7 +71,8 @@ bevares. Ekstern filendring gir konflikt; hardlenker krever Lagre som.
 Lenker støtter lokale dokumentstier, inklusive relative stier og prosentkoding.
 Relative Markdown-lenker merkes med `#`, absolutte med `/#`, og nettlenker med
 `↗`. Relative stier regnes fra mappen til den åpne filen.
-Nettverkslenker, fragment-/querylenker, skript og HTML-eksekvering støttes ikke.
+Preview følger bare lokale lenker uten fragment/query. HTTP(S) kan åpnes fra
+referansetreet; skript og HTML-eksekvering støttes ikke.
 Bilder vises som alternativtekst. xfw-IPC, bilder og andre Markdown-utvidelser er senere
 scope. Preview har fontfallback; editorens glyphdekning avhenger av valgt systemfont.
 

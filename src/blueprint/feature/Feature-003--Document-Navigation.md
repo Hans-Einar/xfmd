@@ -72,3 +72,10 @@ Utvidelsen krever AT-039. Dette er planlagt dekning, ikke nye testbevis.
 
 Implemented i P6. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
 Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.
+
+P15-presisering: `NavigationCoordinator::openAt` tar eksplisitt SourceAnchor.
+Samme fil hopper i aktiv buffer, uten ny lesing/dirty-dialog. Annen fil bruker
+samme DocumentCoordinator og committer historikk før pending ankerrestore.
+Refererte kapitler finnes på nytt ved modellaksept etter filåpning; fjernet kapittel
+faller tilbake til start. HTTP(S) i referansetreet går via separat argv-adapter;
+previewens eksisterende link-policy gjelder fortsatt.

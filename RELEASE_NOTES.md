@@ -30,3 +30,15 @@ Prosjektlisens er ikke valgt; dette er endringsnotater, ikke en formell release.
 - Fonttegnet ↗ erstatter nettlenkens håndtegnede sirkel og uønskede forbindelseslinje.
 - Rettet musegrab som ble stående etter klikk i preview og kunne blokkere menyer.
   Blandede knapper, drag og foreldet preview aktiverer ikke lenker.
+
+## P15: sidepanelfaner, kapitteltre og referanser
+
+- Files/Index-faner; Index har kapitteltre øverst og References nederst.
+- Kapitteltreet bruker aktiv buffers heading-hierarki og oppdateres ved redigering.
+- References grupperer lokale Markdown-filer og Hyperlinks. Utvid en fil for å lese
+  hovedkapitlene i bakgrunnen. Filene leses ikke rekursivt.
+- Enkeltklikk åpner filer/kapitler; Enter aktiverer, piltaster velger. Dirty-dialog,
+  tilbake/frem og kildeankre gjenbrukes. Filrotens dobbeltklikk beholder sin funksjon.
+- Nettlenker i referansetreet kan åpnes i standardnettleseren uten shell-evaluering.
+- Revisjons- og stiavhengig invalidering beskytter mot gamle klikk og referansejobber,
+  også ved Lagre som. Refererte kapittelankre finnes på nytt etter filåpning.

@@ -27,6 +27,8 @@ void PreviewCoordinator::poll() {
         failed(completion->error);
     } else {
       model = std::move(completion->model);
+      if (modelReady)
+        modelReady(model);
       currentFrame.reset();
       relayout(width);
     }

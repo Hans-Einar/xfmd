@@ -311,3 +311,12 @@ PointerTest demonstrerte at arvet FXWindow::onLeftBtnPress tok grab, mens vår
 release overstyrte FOXs frigjøring. Host eier nå hele knappeforløpet og frigjør
 før callback og stale-sjekk. Chord, drag og orphan release aktiverer ikke lenker.
 HTTP(S)-markøren ↗ formes som vanlig tekst, med reell bredde og uten understrek.
+
+## Revisjon P15: dokumentindeks
+
+FTR-008 gir kapittelnavigasjon, FTR-009 gir lokale dokumentreferanser. Begge bruker
+FUNC-020 Dokumentindeks (modell og lazy referanse-lesing), FUNC-010 for faner og
+FUNC-008/009 for transaksjoner og kildeankre. Det opprettes ikke én feature per
+widget; Files beholder filter/arbeidsrot/historikk. En egen NavigationTree håndterer
+avgrensede klikkhandlinger etter event-dispatch, slik at treet trygt kan erstattes
+ved dokumentbytte. Ved redigering deaktiveres gamle indeksankre frem til ny modell.

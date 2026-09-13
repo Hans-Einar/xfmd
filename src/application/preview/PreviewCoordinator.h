@@ -22,6 +22,7 @@ class PreviewCoordinator {
 public:
   std::function<void(DocumentToken)> invalidated;
   std::function<void(LayoutResult)> present;
+  std::function<void(ParseResult)> modelReady;
   std::function<void(FrameKey)> layoutRequested;
   std::function<void(const std::string&)> failed;
   PreviewCoordinator(DocumentSession& s, IInterpreter& i, IRenderer& r, ITextMetrics& m,

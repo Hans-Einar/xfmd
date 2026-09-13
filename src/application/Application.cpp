@@ -8,6 +8,7 @@ namespace xfmd {
 Application::~Application() {
   windowMode.reset();
   exporter.reset();
+  references.reset();
   preview.reset();
   scheduler.reset();
   delete window;
@@ -68,6 +69,7 @@ void Application::initialize(int& argc, char** argv) {
   preview =
       std::make_unique<PreviewCoordinator>(session, *interpreter, *renderer, *metrics, *scheduler);
   preview->invalidated = [this](DocumentToken token) {
+    window->workspacePanel->index->invalidate(token, session.view().path);
     scrolling.invalidate(token);
     host->expect(token);
     window->status->setText("Updating preview…");
@@ -92,11 +94,18 @@ void Application::initialize(int& argc, char** argv) {
   forward = [this] { navigation->goForward(); };
   canNavigate = [this](bool back) { return navigation->history.propose(back).has_value(); };
   host->linkActivated = [this](const std::string& target) { navigation->followLink(target); };
+  wireIndex();
   documentOpened = [this] {
+    references->cancel();
+    pendingHeading.reset();
     navigation->commitVisit();
     preview->refresh();
   };
-  contentChanged = [this] { preview->schedule(); };
+  contentChanged = [this] {
+    pendingHeading.reset();
+    references->cancel();
+    preview->schedule();
+  };
   host->resized = [this](double width) { preview->relayout(width); };
   scrolling.setEditor = [this](SourceAnchor anchor) { window->editor->setSourceAnchor(anchor); };
   scrolling.setPreview = [this](double y) { host->setViewport(y, ScrollOrigin::Sync); };

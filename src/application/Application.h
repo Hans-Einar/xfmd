@@ -1,4 +1,5 @@
 #pragma once
+#include "adapters/ExternalBrowser.h"
 #include "adapters/FoxPreferencesStore.h"
 #include "adapters/FoxRenderHost.h"
 #include "adapters/FoxScheduler.h"
@@ -10,6 +11,7 @@
 #include "document/DocumentCoordinator.h"
 #include "document/EditController.h"
 #include "export/ExportCoordinator.h"
+#include "index/ReferenceWorker.h"
 #include "navigation/NavigationCoordinator.h"
 #include "preview/PreviewCoordinator.h"
 #include "scroll/ScrollCoordinator.h"
@@ -34,7 +36,9 @@ public:
   std::unique_ptr<ViewModeController> views;
   std::unique_ptr<FoxWindowMode> windowMode;
   std::unique_ptr<FX::FXFont> editorFont;
-  std::unique_ptr<IInterpreter> interpreter;
+  std::unique_ptr<IInterpreter> interpreter, referenceInterpreter;
+  std::unique_ptr<ReferenceWorker> references;
+  ExternalBrowser browser;
   std::unique_ptr<IRenderer> renderer;
   std::unique_ptr<SharedTextMetrics> metrics;
   FoxRenderHost* host = nullptr;
@@ -57,6 +61,11 @@ public:
 
 private:
   void wireDocument();
+  void wireIndex();
+  void pollReferences();
+  void pollBrowser();
+  void activateIndex(const IndexAction&);
+  std::optional<IndexAction> pendingHeading;
   void chooseExport();
   void pollExport();
   std::string savePath();

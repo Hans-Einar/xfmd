@@ -12,7 +12,8 @@ class SidebarWidget : public FX::FXTreeList {
   std::filesystem::path root;
   std::map<std::string, FX::FXTreeItem*> items;
   std::set<std::string> requested;
-  std::string contextPath, rootLabel;
+  std::string contextPath, rootLabel, pendingOpen;
+  bool pointerClick = false;
   std::size_t files = 0;
   FX::FXTreeItem* add(const TreeEntry&);
 
@@ -20,7 +21,7 @@ protected:
   SidebarWidget() = default;
 
 public:
-  enum { ID_TREE_EVENT = FX::FXTreeList::ID_LAST, ID_POLL, ID_SET_WORK_PATH, ID_LAST };
+  enum { ID_TREE_EVENT = FX::FXTreeList::ID_LAST, ID_POLL, ID_ACTIVATE, ID_SET_WORK_PATH, ID_LAST };
   std::function<void(const std::string&)> open, workPathRequested;
   std::function<void()> broadenRoot;
   std::function<void(const std::string&)> status;
@@ -36,6 +37,9 @@ public:
   bool isItemDirectory(const FX::FXTreeItem*) const;
   bool isItemFile(const FX::FXTreeItem* item) const { return item && !isItemDirectory(item); }
   FX::FXbool expandTree(FX::FXTreeItem*, FX::FXbool notify = false) override;
+  long onRelease(FX::FXObject*, FX::FXSelector, void*);
+  long onKey(FX::FXObject*, FX::FXSelector, void*);
+  long onActivate(FX::FXObject*, FX::FXSelector, void*);
   long onOpen(FX::FXObject*, FX::FXSelector, void*);
   long onPoll(FX::FXObject*, FX::FXSelector, void*);
   long onContext(FX::FXObject*, FX::FXSelector, void*);

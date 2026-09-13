@@ -24,7 +24,7 @@ int hex(unsigned char c) {
   return -1;
 }
 } // namespace
-std::string LinkResolver::resolve(const std::string& document, const std::string& target) {
+std::string LinkResolver::localPath(const std::string& document, const std::string& target) {
   localOnly(target);
   if (target.find('#') != std::string::npos || target.find('?') != std::string::npos)
     throw Error(ErrorCode::Unsupported,
@@ -49,6 +49,9 @@ std::string LinkResolver::resolve(const std::string& document, const std::string
     path = std::filesystem::path(document).parent_path() / path;
   }
   InputPolicy::validate({}, path.string());
-  return std::filesystem::weakly_canonical(path).string();
+  return path.lexically_normal().string();
+}
+std::string LinkResolver::resolve(const std::string& document, const std::string& target) {
+  return std::filesystem::weakly_canonical(localPath(document, target)).string();
 }
 } // namespace xfmd

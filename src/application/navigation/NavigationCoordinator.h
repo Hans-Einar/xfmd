@@ -10,6 +10,7 @@ class NavigationCoordinator {
   struct Request {
     SourceAnchor previous;
     std::optional<std::size_t> target;
+    SourceAnchor destination;
   };
   std::optional<Request> pending;
 
@@ -19,6 +20,7 @@ public:
   NavigationCoordinator(DocumentCoordinator& d, DocumentSession& s, ScrollCoordinator& scroll)
       : documents(d), session(s), scrolling(scroll) {}
   bool openTarget(const std::string&, std::optional<std::size_t> = {});
+  bool openAt(const std::string&, SourceAnchor);
   bool followLink(const std::string&);
   bool goBack();
   bool goForward();

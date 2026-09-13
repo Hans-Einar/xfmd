@@ -37,7 +37,7 @@ en stub oppfyller ikke i seg selv et funksjonelt krav.
 | --- | --- | --- | --- |
 | UC-001 | Start `xfmd fil.md` eller åpne via filbehandler; les rendret dokument. Uten argument vises tom dokumentflate og utfylt sidetre med ~ som arbeidsrot. Mappeargument setter arbeidsroten. | Manglende/uleselig fil eller ugyldig encoding gir feil uten tap av gjeldende buffer. | UR-001, UR-002, UR-009 |
 | UC-002 | Følg lokal dokumentlenke; bruk Alt+Venstre/Høyre til tilbake/frem med bevart leseposisjon. | Avbryt dirty-dialog, brutt lenke eller feilet lasting endrer ikke historikken. | UR-005, UR-009 |
-| UC-003 | Vis/skjul sidepanel med F10; velg mappe og dobbeltklikk `.md`/`.txt`. | Enkeltklikk velger bare. Uleselig mappe gir feil uten dokumentbytte. | UR-006, UR-009 |
+| UC-003 | Vis/skjul sidepanel med F10; velg mappe og enkeltklikk `.md`/`.txt`. | Enkeltklikk på fil åpner; mapper navigeres. Uleselig mappe gir feil uten dokumentbytte. | UR-006, UR-009 |
 | UC-004 | Velg side-ved-side, rediger, se preview etter pause, angre/gjør om, søk og lagre. | Parse-/lagringsfeil beholder edits; lukking/dokumentbytte spør om ulagret tekst. | UR-003, UR-004, UR-007, UR-009 |
 | UC-005 | Scroll i editor eller preview og se tilsvarende kildeavsnitt i motsatt flate. | Resize, skjult panel eller gammel mapping gir re-layout eller midlertidig deaktivert sync. | UR-008 |
 | UC-006 | Senere: bruk separat `xfw` som editor og xfmd som preview. | Frakobling beholder siste lokale visning og gir status. | UR-010 |
@@ -54,7 +54,7 @@ en stub oppfyller ikke i seg selv et funksjonelt krav.
 | UR-003 | Tilby tekstredigering, vanlig utklippstavle, angre Ctrl+Z, gjør om Ctrl+Y, søk Ctrl+F og lagring Ctrl+S. | AT-003: lagre–åpne gir samme tekst; undo/redo oppdaterer dirty og preview. |
 | UR-004 | Oppdater preview når det har gått 300 ms uten ny redigering. Behold fokus og editorens markør. | AT-004: simulert klokke bekrefter debounce; GUI-sjekk bekrefter fokus og nyeste revisjon. |
 | UR-005 | Relative dokumentlenker løses fra mappen til den åpne filens absolutte sti, uavhengig av prosessens arbeidsmappe. Absolutte dokumentstier åpnes direkte. Vis `#` foran relative Markdown-lenker, `/#` foran absolutte Markdown-lenker og fonttegnet `↗` foran HTTP(S)-lenker. Lokale lenker og tilbake/frem gir dokumentnavigasjon med sesjonshistorikk og gjenopprettet leseposisjon. | AT-005: A→B→C, tilbake til B, ny lenke D sletter frem-grenen; avbrutt/feilet åpning endrer ikke køen. |
-| UR-006 | Sidepanelet viser mapper og filer under arbeidsroten, med valgfrie filtype-/navnefiltre, kan skjules eksplisitt og åpner filer på dobbeltklikk. Klikk på `/`, mapper og filer skal aldri automatisk skjule panelet; dokumentbytte bevarer valgt synlighet. Mapper navigeres også når navnet ender på `.md`. | AT-006: blandede filtyper, enkelt-/dobbeltklikk og F10. |
+| UR-006 | Sidepanelet viser mapper og filer under arbeidsroten, med valgfrie filtype-/navnefiltre, kan skjules eksplisitt og åpner filer på enkeltklikk. Klikk på `/`, mapper og filer skal aldri automatisk skjule panelet; dokumentbytte bevarer valgt synlighet. Mapper navigeres også når navnet ender på `.md`. | AT-006: blandede filtyper, enkelt-/dobbeltklikk og F10. |
 | UR-007 | Tilby preview alene (standard), editor alene og editor venstre/preview høyre i justerbar splitter. | AT-007: modusbytte bevarer dokument, dirty, undo og fokus. |
 | UR-008 | Synkroniser scrolling begge veier etter kildeanker, også med wrapping og varierende teksthøyde, uten pendling. | AT-008: overskrift, lang liste og kodeblokk holder tilsvarende avsnitt synlig; resize og tom fil testes. |
 | UR-009 | Vis dirty-status og handlingsrettede feil. Ved bytte/lukking tilby Lagre, Forkast eller Avbryt. Avbrudd/feil bevarer gjeldende dokument. | AT-009: skrivefeil, ekstern endring, avbrudd og feilet nytt dokument gir ingen stille tap. |
@@ -183,3 +183,21 @@ også når frame er foreldet. Bare et venstreklikk startet på samme lenke og ut
 andre knapper eller drag aktiverer den. Høyre-/midtklikk endrer ikke kildetekst.
 AT-005/020 dekker blandede knapper, gjentatte klikk, release utenfor og videre
 knappebruk; Unicode-markøren bruker samme fontmåling/tegning som lenketeksten.
+
+## P15: sidepanelmoduser, indeks og referanser
+
+| Krav | Normativ atferd | Akseptanse |
+| --- | --- | --- |
+| UR-021 | Sidepanelet har Files- og Index-faner. Index deles vertikalt i kapitteltre øverst og References nederst. F10 gjelder hele panelet. | AT-040: fanebytte, splitter og F10 bevarer dokument/dirty. |
+| UR-022 | Kapitler og underkapitler vises etter heading-nivå i gjeldende buffer. Enkeltklikk navigerer til overskriften i editor/preview uten å lese filen på nytt. | AT-041: nivåhopp, UTF-8, redigering og byteankre. |
+| UR-023 | References har Markdown og Hyperlinks. Lokale .md-lenker listes én gang per normalisert sti; utvid filen for å lese dens øverste heading-nivå. Enkeltklikk åpner fil/kapittel med felles dirty-policy og historikk. | AT-042: relative/escaped stier, tabell-lenker, manglende filer, toppnivå og dirty-cancel. |
+| SR-020 | Referanseoverskrifter lastes ved utvidelse på én arbeidstråd via parserporten; ingen rekursiv skanning eller nettlasting. Gamle jobber/klikk forkastes ved dokumentrevisjon. | AT-043: stale resultater, bytte under lasting, lesefeil og ryddig stopp. |
+
+Presisering av SR-005: eksplisitt klikk på HTTP(S) under Hyperlinks kan åpne
+standardnettleseren via argv til xdg-open, aldri shell. Alle andre lenker der
+hopper til forekomsten i dokumentet. Previewens eksisterende lokal-lenke-policy
+endres ikke. Ingen lenker aktiveres ved bygging av treet eller fokus med piltaster.
+Kategorinoder velger/utvider treet; de har ingen fil å åpne. Dobbeltklikk på
+filtreets rot beholder «bredere arbeidsrot». «Top level» er laveste heading-nummer
+som finnes i referert fil; H2 vises hvis filen ikke har H1. Filreferanser med
+fragment åpner filen; kapittelbarn navigerer med byteanker, ikke URL-slug.

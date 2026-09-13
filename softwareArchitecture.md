@@ -1,6 +1,6 @@
 # Software Architecture Design: xfmd
 
-Status: **Implemented P0–P14, revisjon 1.3**, 2026-09-13.
+Status: **Implemented P0–P15, revisjon 1.4**, 2026-09-13.
 Kapittel 1–13 beskriver implementasjonen. Historiske veivalg og målinger finnes i [P0](docs/evidence/P0.md) og
 [sluttverifikasjonen](docs/evidence/P7.md).
 
@@ -181,7 +181,7 @@ original tekst og kildeoffsets; markørens source-range er tom og Approximate.
 
 SidebarWidget er sitt eget meldingstarget. Egne selector-ID-er starter derfor
 ved FXTreeList::ID_LAST (tidligere FXDirList::ID_LAST), aldri på vilkårlige små tall som overlapper arvede
-kommandoer. SEL_DOUBLECLICKED/ID_TREE_EVENT åpner bare faktiske filer.
+kommandoer. SEL_CLICKED/ID_TREE_EVENT åpner bare faktiske filer etter event-dispatch (P15).
 SEL_COMMAND fra vanlig treklikk skal ikke bli en ID_HIDE-kommando.
 ViewModeController::toggleSidebar er eneste eksplisitte synlighetsendring;
 mappevalg og dokumentåpning bevarer synlig/skjult tilstand.
@@ -290,3 +290,23 @@ P14s sluttmåling avdekket kapasitetdobling i editorens TextProjection, uavhengi
 av Markdown-rendereren. Offsetkart og projisert tekst reserverer nå kapasitet
 fra inputlengden før konvertering. Det reduserer GUI-minnetoppen uten å endre
 kildeoffsets eller bruke allocator-/plattformspesifikke oppryddingskall.
+
+## P15: dokumentindeks
+
+`application/index/DocumentIndex` trekker overskrifter og lenker ut av den aksepterte
+SemanticDocument. PreviewCoordinator publiserer modellen før layout, slik at også
+layoutfeil tillater navigasjon. Ingen ekstra parsing av aktiv buffer.
+`ReferenceWorker` eier én tråd og kø for lazy lokale filoverskrifter; den får en
+egen IInterpreter og LocalFileStore i composition root. Generasjon avviser gamle
+resultater, maks 32 utestående forespørsler, eksisterende 8 MiB filgrense.
+`ui/IndexPanel` komponerer to `NavigationTree`-widgets med typed actions som verdier.
+`WorkspacePanel` eier FXTabBook. ApplicationIndex kobler portene og eier polltimer.
+Navigering skjer etter FOXs release-dispatch og bruker NavigationCoordinator;
+klikk beholder byteankre, dirty og historikk. Ingen renderer-avhengig trelogikk.
+
+Utvidelse og aktivering utsettes til egne FOX-timere etter event-dispatch. FOXs
+makeItemVisible kan også kalle expandTree; bare en reell lukket→åpen-overgang
+bestiller lesing, og ingen barn slettes mens dette kallet bruker nodepekere.
+Sti inngår i UI-invalidering fordi Lagre som kan endre lenkebasen uten ny revisjon.
+`adapters/ExternalBrowser` tillater HTTP(S), starter xdg-open med argv og reaper
+barneprosessen fra egen polltimer. Ingen shell, rendering eller automatisk nettlast.
