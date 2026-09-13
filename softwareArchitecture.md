@@ -60,6 +60,7 @@ ligger ved tilhørende `.cpp`. Én hovedrolle per filpar.
 | `application/scroll/AnchorMapper.cpp` | Kildeforankring og kontrollert tilnærming; ingen widgets. |
 | `application/adapters/FoxRenderHost.cpp` | FOX paint/resize/input, viewport og utføring av RenderFrame. |
 | `application/adapters/FoxTextMetrics.cpp` | Fontcache og tekstmåling via FOX; ingen Markdown-regler. |
+| `application/adapters/FoxWheelScrollBar.cpp` | Felles presis wheel-input for begge akser i sidetre, editor og preview; bevarer FOXs scrollbar-interaksjon. |
 | `application/adapters/FoxScheduler.cpp` | Debounce/kansellering og levetid via FOX-event loop. |
 | `application/io/LocalFileStore.cpp`, `InputPolicy.cpp` | Lesing, formatmetadata, kontrollert erstatningslagring og inputgrenser. |
 | `interpreter/CmarkInterpreter.cpp`, `ModelBuilder.cpp`, `SourceMapBuilder.cpp` | cmark-adapter, semantikk og dokumentert kildeposisjonsstrategi. |
@@ -183,3 +184,17 @@ kommandoer. SEL_DOUBLECLICKED/ID_TREE_EVENT åpner bare faktiske filer.
 SEL_COMMAND fra vanlig treklikk skal ikke bli en ID_HIDE-kommando.
 ViewModeController::toggleSidebar er eneste eksplisitte synlighetsendring;
 mappevalg og dokumentåpning bevarer synlig/skjult tilstand.
+
+## 11. Små gesture-deltaer og scrollgrenser
+
+FOX 1.6 regner wheel-bevegelse i heltallspiksler per hendelse. FoxWheelScrollBar
+bevarer rest i 1/120 pixel-enheter slik at små deltaer summeres, og bruker
+barens aktive animasjonsmål ved ny input. Rester nullstilles ved bevegelse ut
+over scrollgrensen; reversering har dermed ingen oppsamlet overskytende bevegelse.
+Standard linje-/sidehastighet, Alt/Ctrl, dragging og FOXs onTimeWheel med
+changed/command-varsler beholdes. Bare application kjenner FOX-detaljene.
+
+Widget-konstruktørene erstatter begge standardbarene før create(), med samme
+parent, target, selector, stil og range/page/line. FOX-parenting eier adapterne
+og FOX avregistrerer timere ved destruksjon. Dette er en xfmd-lokal kompatibilitets-
+rettelse, ikke en endring i systemets FOX-bibliotek eller i xfw.

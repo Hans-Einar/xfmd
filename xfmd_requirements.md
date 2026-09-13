@@ -53,6 +53,7 @@ en stub oppfyller ikke i seg selv et funksjonelt krav.
 | UR-008 | Synkroniser scrolling begge veier etter kildeanker, også med wrapping og varierende teksthøyde, uten pendling. | AT-008: overskrift, lang liste og kodeblokk holder tilsvarende avsnitt synlig; resize og tom fil testes. |
 | UR-009 | Vis dirty-status og handlingsrettede feil. Ved bytte/lukking tilby Lagre, Forkast eller Avbryt. Avbrudd/feil bevarer gjeldende dokument. | AT-009: skrivefeil, ekstern endring, avbrudd og feilet nytt dokument gir ingen stille tap. |
 | UR-010 | Senere: motta dokument- og kildeankeroppdateringer fra `xfw` uten å endre interpreter/renderer. | AT-010: framtidig IPC-integrasjonstest; ikke første leveranse. |
+| UR-011 | Wheel-/gesture-scrolling i sidetre, editor og preview bevarer små delbevegelser og når eksakt topp/bunn eller venstre/høyre. Dragging av scrollbar og standard modifikatortaster beholdes. | AT-025: små og hele wheel-deltaer, begge retninger/akser, endepunkter og reversering testes med ekte FOX-scrollbarer. |
 
 ## 5. Systemkrav
 

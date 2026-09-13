@@ -1,4 +1,5 @@
 #include "SidebarWidget.h"
+#include "application/adapters/FoxWheelScrollBar.h"
 #include "application/io/InputPolicy.h"
 using namespace FX;
 namespace xfmd {
@@ -9,6 +10,8 @@ SidebarWidget::SidebarWidget(FXComposite* parent)
     : FXDirList(parent, this, ID_TREE_EVENT,
                 DIRLIST_SHOWFILES | TREELIST_SHOWS_LINES | TREELIST_SHOWS_BOXES | LAYOUT_FILL_Y, 0,
                 0, 220, 0) {
+  horizontal = FoxWheelScrollBar::replace(horizontal);
+  vertical = FoxWheelScrollBar::replace(vertical);
   setPattern("*.md,*.txt");
   setMatchMode(FILEMATCH_FILE_NAME | FILEMATCH_NOESCAPE | FILEMATCH_CASEFOLD);
 }

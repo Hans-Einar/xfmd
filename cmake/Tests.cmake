@@ -14,7 +14,7 @@ xfmd_test(ScrollTest tests/application/ScrollTest.cpp xfmd_scroll xfmd_interpret
 xfmd_test(NavigationTest tests/application/NavigationTest.cpp xfmd_navigation)
 add_test(NAME BlueprintStructure COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/validate_blueprints.py)
 add_test(NAME LayerBoundaries COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/check_layers.py)
-foreach(name WorkspaceTest PresentationTest ScrollingTest NavigationGuiTest SidebarGuiTest)
+foreach(name WorkspaceTest PresentationTest ScrollingTest NavigationGuiTest SidebarGuiTest WheelGuiTest)
   add_executable(${name} tests/gui/${name}.cpp)
   target_include_directories(${name} PRIVATE tests)
   target_link_libraries(${name} PRIVATE xfmd_application)
@@ -42,3 +42,5 @@ add_test(NAME BlueprintSymbols COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOU
 find_package(X11 REQUIRED)
 target_link_libraries(NavigationGuiTest PRIVATE X11::X11)
 target_link_libraries(SidebarGuiTest PRIVATE X11::X11)
+
+target_link_libraries(WheelGuiTest PRIVATE X11::X11)
