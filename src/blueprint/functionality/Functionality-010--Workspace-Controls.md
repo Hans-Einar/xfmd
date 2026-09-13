@@ -6,8 +6,8 @@ role: Adapter
 owner: application
 status: Implemented
 scope: FirstRelease
-requirements: UR-011, UR-001, UR-006, UR-007, SR-002, SR-008, SR-013, UR-015, UR-017, UR-018, UR-019, UR-020, SR-019
-uses: FUNC-001, FUNC-005, FUNC-007, FUNC-012, FUNC-013, FUNC-014, FUNC-015, FUNC-018, FUNC-019
+requirements: UR-021, UR-011, UR-001, UR-006, UR-007, SR-002, SR-008, SR-013, UR-015, UR-017, UR-018, UR-019, UR-020, SR-019
+uses: FUNC-020, FUNC-001, FUNC-005, FUNC-007, FUNC-012, FUNC-013, FUNC-014, FUNC-015, FUNC-018, FUNC-019
 ---
 
 # Functionality-010: Arbeidsflate, kommandoer og sidepanel
@@ -29,7 +29,7 @@ XfmdWindow::buildUi oppretter vindusstruktur. CommandRouter::dispatch/update rut
 
 ## 4. Atferd, tilstand og feil
 
-Preview standard, Ctrl+1/2/3 bytter modus, F10 bytter sidebar. Dobbeltklikk på en faktisk fil åpner dokument. Dobbeltklikk rot utvider arbeidsroten eksplisitt, uten dokumentbytte. Mapper, også mapper med
+Preview standard, Ctrl+1/2/3 bytter modus, F10 bytter sidebar. Enkeltklikk eller Enter på en faktisk fil åpner dokument. Dobbeltklikk rot utvider arbeidsroten eksplisitt, uten dokumentbytte. Mapper, også mapper med
 .md-suffiks, forblir tre-navigasjon. SidebarWidget bruker ID_TREE_EVENT fra
 FXTreeList::ID_LAST slik at treets SEL_COMMAND ikke treffer FOXs ID_HIDE.
 Treklikk og dokumentbytte bevarer sidepanelets synlighet; bare eksplisitt
@@ -48,7 +48,7 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 | 1 | `XfmdWindow constructor` | `XfmdWindow::buildUi` | `src/application/ui/XfmdWindow.cpp` | FOX app → vindu | Parenting eier widgets | Implemented |
 | 2 | `FOX command` | `CommandRouter::dispatch` | `src/application/commands/CommandRouter.cpp` | Command → Application::execute | Enabled kontrolleres | Implemented |
 | 3 | `Application::execute` | `ViewModeController::setMode` | `src/application/ui/ViewModeController.cpp` | Mode → flater | Bevarer dokument | Implemented |
-| 4 | `FOX SEL_DOUBLECLICKED / ID_TREE_EVENT` | `SidebarWidget::onOpen` | `src/application/ui/SidebarWidget.cpp` | Faktisk fil → Path | Mappe/enkeltklikk åpner ikke og skjuler ikke panelet | Implemented |
+| 4 | `FOX SEL_CLICKED / ID_TREE_EVENT` | `SidebarWidget::onOpen` | `src/application/ui/SidebarWidget.cpp` | Faktisk fil → Path | Mapper navigeres; filåpning utsettes til release-dispatch er ferdig | Implemented |
 | 5 | `SidebarWidget open callback` | `Application::open` | `src/application/Application.cpp` | Path → requestOpen | Felles dirty-policy | Implemented |
 | 6 | `SidebarWidget constructor` | `FoxWheelScrollBar::replace` | `src/application/adapters/FoxWheelScrollBar.cpp` | Standard bar → presis wheel-adapter | Parent eier ny bar; før create | Implemented |
 | 7 | `FOX wheel dispatch` | `FoxWheelScrollBar::onMouseWheel` | `src/application/adapters/FoxWheelScrollBar.cpp` | Delta/rest → target og FOX-timer | Clamp, behold delpiksel-rest, standard varsler | Implemented |
@@ -79,6 +79,10 @@ Regresjon: [Sidepanel og rotklikk](../../../docs/evidence/sidebar-tree.md).
 Regresjonsbevis: [Gesture og scrollgrenser](../../../docs/evidence/wheel-scrolling.md).
 
 Utvidelsen krever AT-029, AT-031, AT-032, AT-033, AT-034, AT-039. Dette er planlagt dekning, ikke nye testbevis.
+
+P15: WorkspacePanel eier Files/Index-faner. IndexPanel komponerer to NavigationTree
+med samme scrollprofil. Enkeltklikk åpner, Enter aktiverer og piltaster velger;
+filrotens dobbeltklikk beholder utvidelse av arbeidsrot. Se FUNC-020 og AT-040.
 
 ## 8. Status, risiko og endringskonsekvenser
 

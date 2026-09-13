@@ -24,7 +24,10 @@ FXIMPLEMENT(WorkspacePanel, FXVerticalFrame, panelMap, ARRAYNUMBER(panelMap))
 WorkspacePanel::WorkspacePanel(FXComposite* parent)
     : FXVerticalFrame(parent, LAYOUT_FILL_Y, 0, 0, 260, 0, 2, 2, 2, 2),
       history(FXSystem::getHomeDirectory().text()) {
-  auto* row = new FXHorizontalFrame(this, LAYOUT_FILL_X, 0, 0, 0, 0, 0, 0, 0, 0);
+  tabs = new FXTabBook(this, nullptr, 0, LAYOUT_FILL_X | LAYOUT_FILL_Y);
+  new FXTabItem(tabs, "Files");
+  auto* filePage = new FXVerticalFrame(tabs, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0);
+  auto* row = new FXHorizontalFrame(filePage, LAYOUT_FILL_X, 0, 0, 0, 0, 0, 0, 0, 0);
   markdown = new FXToggleButton(row, "*.md", "*.md", nullptr, nullptr, this, ID_FILTER,
                                 TOGGLEBUTTON_NORMAL | TOGGLEBUTTON_KEEPSTATE);
   text = new FXToggleButton(row, "*.txt", "*.txt", nullptr, nullptr, this, ID_FILTER,
@@ -32,11 +35,11 @@ WorkspacePanel::WorkspacePanel(FXComposite* parent)
   new FXButton(row, "Refresh", nullptr, this, ID_FILTER, BUTTON_NORMAL);
   markdown->setTipText("Include Markdown (OR with *.txt, then AND name filter)");
   text->setTipText("Include text files (OR with *.md, then AND name filter)");
-  new FXLabel(this, "Filename filter (* and ?)", nullptr, LAYOUT_FILL_X | JUSTIFY_LEFT);
-  filterInput = new FXTextField(this, 18, this, ID_FILTER, TEXTFIELD_NORMAL | LAYOUT_FILL_X);
+  new FXLabel(filePage, "Filename filter (* and ?)", nullptr, LAYOUT_FILL_X | JUSTIFY_LEFT);
+  filterInput = new FXTextField(filePage, 18, this, ID_FILTER, TEXTFIELD_NORMAL | LAYOUT_FILL_X);
   filterInput->setTipText("Filter filenames: text contains; ? one character; * any characters");
-  auto* split =
-      new FXSplitter(this, SPLITTER_VERTICAL | SPLITTER_TRACKING | LAYOUT_FILL_X | LAYOUT_FILL_Y);
+  auto* split = new FXSplitter(filePage, SPLITTER_VERTICAL | SPLITTER_TRACKING | LAYOUT_FILL_X |
+                                             LAYOUT_FILL_Y);
   auto* upper = new FXVerticalFrame(split, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 450, 0, 0, 0, 0);
   tree = new SidebarWidget(upper);
   searchStatus = new FXLabel(upper, "", nullptr, LAYOUT_FILL_X | JUSTIFY_LEFT);
@@ -44,6 +47,8 @@ WorkspacePanel::WorkspacePanel(FXComposite* parent)
   new FXLabel(lower, "Historic work paths", nullptr, LAYOUT_FILL_X | JUSTIFY_LEFT);
   workPaths = new WorkPathList(lower, this, ID_HISTORY);
   workPaths->setNumVisible(5);
+  new FXTabItem(tabs, "Index");
+  index = new IndexPanel(tabs);
   std::vector<std::string> saved;
   for (int i = 0; i < 32; ++i) {
     auto key = "Path" + std::to_string(i);

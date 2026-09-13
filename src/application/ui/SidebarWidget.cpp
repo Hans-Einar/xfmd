@@ -1,6 +1,7 @@
 #include "SidebarWidget.h"
 #include "application/adapters/FoxWheelScrollBar.h"
 #include "application/workspace/WorkPathHistory.h"
+#include <fxkeys.h>
 using namespace FX;
 namespace xfmd {
 namespace {
@@ -23,6 +24,10 @@ FXint order(const FXTreeItem* left, const FXTreeItem* right) {
 } // namespace
 FXDEFMAP(SidebarWidget)
 sidebarMap[] = {
+    FXMAPFUNC(SEL_LEFTBUTTONRELEASE, 0, SidebarWidget::onRelease),
+    FXMAPFUNC(SEL_KEYPRESS, 0, SidebarWidget::onKey),
+    FXMAPFUNC(SEL_CLICKED, SidebarWidget::ID_TREE_EVENT, SidebarWidget::onOpen),
+    FXMAPFUNC(SEL_TIMEOUT, SidebarWidget::ID_ACTIVATE, SidebarWidget::onActivate),
     FXMAPFUNC(SEL_DOUBLECLICKED, SidebarWidget::ID_TREE_EVENT, SidebarWidget::onOpen),
     FXMAPFUNC(SEL_TIMEOUT, SidebarWidget::ID_POLL, SidebarWidget::onPoll),
     FXMAPFUNC(SEL_RIGHTBUTTONRELEASE, 0, SidebarWidget::onContext),
@@ -37,6 +42,8 @@ SidebarWidget::SidebarWidget(FXComposite* parent)
 }
 SidebarWidget::~SidebarWidget() {
   getApp()->removeTimeout(this, ID_POLL);
+  getApp()->removeTimeout(this, ID_ACTIVATE);
+  pendingOpen.clear();
   scanner.stop();
 }
 void SidebarWidget::create() {
@@ -44,6 +51,8 @@ void SidebarWidget::create() {
   getApp()->addTimeout(this, ID_POLL, 30);
 }
 void SidebarWidget::setRoot(const std::filesystem::path& path, const std::string& label) {
+  getApp()->removeTimeout(this, ID_ACTIVATE);
+  pendingOpen.clear();
   scanner.stop();
   root = path;
   rootLabel = label;
@@ -100,23 +109,64 @@ FXString SidebarWidget::getItemPathname(const FXTreeItem* item) const {
 bool SidebarWidget::isItemDirectory(const FXTreeItem* item) const {
   return item && static_cast<const PathItem*>(item)->directory;
 }
-long SidebarWidget::onOpen(FXObject*, FXSelector, void* data) {
+long SidebarWidget::onOpen(FXObject*, FXSelector selector, void* data) {
   auto* item = static_cast<FXTreeItem*>(data);
   if (!item)
     item = getCurrentItem();
   if (!item)
     return 1;
-  if (item == getFirstItem()) {
+  const bool twice = FXSELTYPE(selector) == SEL_DOUBLECLICKED;
+  if (!pointerClick)
+    return 1;
+  if (item == getFirstItem() && twice) {
     if (broadenRoot)
       broadenRoot();
-  } else if (isItemFile(item) && open) {
+  } else if (isItemDirectory(item) && twice) {
+    if (item->isExpanded())
+      collapseTree(item, true);
+    else
+      expandTree(item, true);
+  } else if (isItemFile(item) && open && !twice) {
     std::error_code ec;
     auto target = std::filesystem::canonical(getItemPathname(item).text(), ec);
-    if (!ec && WorkPathHistory::contains(root, target))
-      open(target.string());
-    else if (status)
+    if (!ec && WorkPathHistory::contains(root, target)) {
+      pendingOpen = target.string();
+      getApp()->addTimeout(this, ID_ACTIVATE, 0);
+    } else if (status)
       status("File unavailable or outside work path.");
   }
+  return 1;
+}
+long SidebarWidget::onRelease(FXObject* sender, FXSelector sel, void* data) {
+  auto* event = static_cast<FXEvent*>(data);
+  pointerClick = !event->moved && !(event->state & (CONTROLMASK | SHIFTMASK | ALTMASK)) &&
+                 getItemAt(event->win_x, event->win_y) == getCurrentItem();
+  auto result = FXTreeList::onLeftBtnRelease(sender, sel, data);
+  pointerClick = false;
+  return result;
+}
+long SidebarWidget::onKey(FXObject* sender, FXSelector sel, void* data) {
+  auto* event = static_cast<FXEvent*>(data);
+  if (event->code == KEY_Return || event->code == KEY_KP_Enter) {
+    pointerClick = true;
+    auto* item = getCurrentItem();
+    if (item && isItemDirectory(item)) {
+      if (item->isExpanded())
+        collapseTree(item, true);
+      else
+        expandTree(item, true);
+    } else
+      onOpen(this, FXSEL(SEL_CLICKED, ID_TREE_EVENT), item);
+    pointerClick = false;
+    return 1;
+  }
+  return FXTreeList::onKeyPress(sender, sel, data);
+}
+long SidebarWidget::onActivate(FXObject*, FXSelector, void*) {
+  auto path = std::move(pendingOpen);
+  pendingOpen.clear();
+  if (!path.empty() && open)
+    open(path);
   return 1;
 }
 long SidebarWidget::onPoll(FXObject*, FXSelector, void*) {

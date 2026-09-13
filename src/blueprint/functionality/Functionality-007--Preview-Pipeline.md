@@ -70,3 +70,6 @@ Utvidelsen krever AT-031, AT-039. Dette er planlagt dekning, ikke nye testbevis.
 
 Implemented i P4. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
 Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.
+
+P15: `modelReady(ParseResult)` publiserer bare akseptert dokument/revisjon, før layout.
+Dokumentindeksen er ny konsument. Resize/zoom publiserer ikke metadata på nytt.

@@ -4,10 +4,10 @@ kind: Functionality
 audience: System
 role: Service
 owner: application
-status: Ready
+status: Implemented
 scope: FirstRelease
 requirements: UR-021, UR-022, UR-023, SR-020
-uses: FUNC-002, FUNC-003
+uses: FUNC-002, FUNC-003, FUNC-008
 ---
 
 # Functionality-020: Dokumentindeks
@@ -24,7 +24,7 @@ UR-021, UR-022, UR-023, SR-020. Se [kravene](../../../xfmd_requirements.md).
 
 DocumentIndex er verdi-basert semantisk metadata. ReferenceWorker får IInterpreter
 og LocalFileStore fra composition root, og eier ingen widgets eller aktiv økt.
-IndexPanel bruker NavigationTree med eide action-verdier og byteankre.
+UI ligger i FUNC-010; tjenesten returnerer kun eide strenger, nivåer og byteankre.
 
 ## 4. Atferd, tilstand og feil
 
@@ -39,7 +39,9 @@ Enkeltklikk/Enter navigerer, piltaster velger. Dirty-cancel beholder aktiv fil.
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | `PreviewCoordinator modelReady` | `DocumentIndex::build` | `src/application/index/DocumentIndex.cpp` | Semantikk → overskrifter/lenker | Ingen ny parsing | Implemented |
 | 2 | `IndexPanel referenceRequested` | `ReferenceWorker::submit` | `src/application/index/ReferenceWorker.cpp` | Sti → lazy lesing | Køgrense og feilresultat | Implemented |
-| 3 | `IndexPanel activated` | `NavigationCoordinator::openAt` | `src/application/navigation/NavigationCoordinator.cpp` | Sti/byte → navigasjon | Dirty-cancel før commit | Planned |
+| 3 | `ReferenceWorker::run` | `LocalFileStore::read` | `src/application/io/LocalFileStore.cpp` | Sti → snapshot | Filtype, lesefeil, 8 MiB-grense | Implemented |
+| 4 | `ReferenceWorker::run` | `IInterpreter::parse` | `src/contracts/IInterpreter.h` | Snapshot → semantikk | Parserfeil som resultat | Implemented |
+| 5 | `Application::pollReferences` | `ReferenceWorker::take` | `src/application/index/ReferenceWorker.cpp` | Resultatkø → eide overskrifter | Generasjon avviser gamle jobber | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -53,5 +55,5 @@ Test semantiske nivåer, lenker i tabeller, lazy feil/stale og native enkeltklik
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Ready P15, 2026-09-13. Ingen nye testbevis ennå. Referanser er øyeblikksbilder;
+Implemented P15, 2026-09-13. M1-modelltester og M2-GUI-tester er gjennomført; samlet evidens samles i M3. Referanser er øyeblikksbilder;
 utvidelse leser filen igjen. Blokkerende filsystemkall kan ikke avbrytes midt i kall.

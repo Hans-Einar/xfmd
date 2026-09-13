@@ -52,6 +52,18 @@ void run() {
   CHECK(nav.openTarget(session.view().path));
   CHECK(nav.history.size() == count);
   CHECK(errors >= 9);
+  auto sameToken = session.view().token;
+  session.applyEdit({0, 0, "dirty"});
+  sameToken = session.view().token;
+  docs.chooseUnsaved = [] { return UnsavedChoice::Cancel; };
+  CHECK(nav.openAt(session.view().path, {4}));
+  CHECK(session.view().token == sameToken && session.dirty() && scroll.captureAnchor().byte == 4);
+  CHECK(!nav.openAt((dir / "a.md").string(), {2}));
+  CHECK(session.view().token == sameToken && scroll.captureAnchor().byte == 4);
+  docs.chooseUnsaved = [] { return UnsavedChoice::Discard; };
+  CHECK(nav.openAt((dir / "a.md").string(), {2}));
+  CHECK(scroll.captureAnchor().byte == 2);
+  CHECK(nav.history.at(nav.history.position() - 1).anchor.byte == 4);
   HistoryStore many;
   for (int i = 0; i < 105; ++i)
     many.commit(std::to_string(i), {});

@@ -83,8 +83,10 @@ void run() {
   auto* file = tree->getPathnameItem(document.string().c_str());
   CHECK(file);
   clickItem(app, file, 4000);
-  CHECK(tree->shown() && app.session.view().token == token);
+  CHECK(tree->shown() && app.session.view().path == document.string());
+  auto openedToken = app.session.view().token;
   clickItem(app, file, 4050);
+  CHECK(app.session.view().token == openedToken);
   CHECK(app.session.view().path == document.string() && tree->shown());
   CHECK(tree->getWidth() > 50);
   app.views->toggleSidebar();

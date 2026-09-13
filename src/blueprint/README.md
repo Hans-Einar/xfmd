@@ -1,6 +1,6 @@
 # Blueprint-register
 
-P0–P13 er implementert: 7 features og 19 functionality-objekter.
+P0–P15 er implementert: 9 features og 20 functionality-objekter.
 Registerstatus speiler metadata i blueprint-filene. Implemented betyr at koden
 finnes; [P13-bevis](../../docs/evidence/P13.md) angir faktisk testdekning og
 begrensninger. UR-010/SR-014 (xfw-IPC) er fortsatt Future.
@@ -38,12 +38,9 @@ Se [designrevisjonen](../../softwareDesign.md), [arbeidsmåten](../../docs/worki
 | [FUNC-017](functionality/Functionality-017--Page-Composition.md) | Functionality / System | renderer | Implemented | none |
 | [FUNC-018](functionality/Functionality-018--PDF-Export.md) | Functionality / User | application | Implemented | FUNC-001, FUNC-003, FUNC-004, FUNC-006, FUNC-016, FUNC-017 |
 | [FUNC-019](functionality/Functionality-019--Application-Identity.md) | Functionality / Integration | application | Implemented | none |
-
-| [FUNC-020](functionality/Functionality-020--Document-Index.md) | Functionality / System | application | Ready | FUNC-002, FUNC-003 |
-
-| [FTR-008](feature/Feature-008--Chapter-Navigation.md) | Feature / User | application | Ready | FUNC-020, FUNC-008, FUNC-009, FUNC-010 |
-
-| [FTR-009](feature/Feature-009--Document-References.md) | Feature / User | application | Ready | FUNC-020, FUNC-008, FUNC-009, FUNC-010 |
+| [FUNC-020](functionality/Functionality-020--Document-Index.md) | Functionality / System | application | Implemented | FUNC-002, FUNC-003, FUNC-008 |
+| [FTR-008](feature/Feature-008--Chapter-Navigation.md) | Feature / User | application | Implemented | FUNC-020, FUNC-008, FUNC-009, FUNC-010 |
+| [FTR-009](feature/Feature-009--Document-References.md) | Feature / User | application | Implemented | FUNC-020, FUNC-008, FUNC-009, FUNC-010 |
 
 ## Krav → designobjekter → akseptansetester
 
@@ -90,7 +87,7 @@ Se [designrevisjonen](../../softwareDesign.md), [arbeidsmåten](../../docs/worki
 | SR-017 | [FTR-007](feature/Feature-007--Paged-Publication.md), [FUNC-018](functionality/Functionality-018--PDF-Export.md) | AT-037 | FirstRelease |
 | SR-018 | [FUNC-014](functionality/Functionality-014--Application-Preferences.md) | AT-038 | FirstRelease |
 | SR-019 | [FTR-002](feature/Feature-002--Live-Preview.md), [FTR-003](feature/Feature-003--Document-Navigation.md), [FTR-004](feature/Feature-004--Synchronized-Scrolling.md), [FTR-006](feature/Feature-006--Configurable-Scrolling.md), [FTR-007](feature/Feature-007--Paged-Publication.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md), [FUNC-009](functionality/Functionality-009--Source-Anchor-Mapping.md), [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FUNC-011](functionality/Functionality-011--Text-Editing.md), [FUNC-015](functionality/Functionality-015--Scroll-Motion.md), [FUNC-017](functionality/Functionality-017--Page-Composition.md) | AT-039 | FirstRelease |
-| UR-021 | [FUNC-020](functionality/Functionality-020--Document-Index.md), [FTR-008](feature/Feature-008--Chapter-Navigation.md) | AT-040 | FirstRelease |
+| UR-021 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FUNC-020](functionality/Functionality-020--Document-Index.md), [FTR-008](feature/Feature-008--Chapter-Navigation.md) | AT-040 | FirstRelease |
 | UR-022 | [FUNC-020](functionality/Functionality-020--Document-Index.md), [FTR-008](feature/Feature-008--Chapter-Navigation.md) | AT-041 | FirstRelease |
 | UR-023 | [FUNC-020](functionality/Functionality-020--Document-Index.md), [FTR-009](feature/Feature-009--Document-References.md) | AT-042 | FirstRelease |
 | SR-020 | [FUNC-020](functionality/Functionality-020--Document-Index.md), [FTR-009](feature/Feature-009--Document-References.md) | AT-043 | FirstRelease |

@@ -4,7 +4,7 @@ kind: Feature
 audience: User
 role: Workflow
 owner: application
-status: Ready
+status: Implemented
 scope: FirstRelease
 requirements: UR-021, UR-022
 uses: FUNC-020, FUNC-008, FUNC-009, FUNC-010
@@ -37,9 +37,9 @@ Enkeltklikk/Enter navigerer, piltaster velger. Dirty-cancel beholder aktiv fil.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `PreviewCoordinator modelReady` | `DocumentIndex::build` | `src/application/index/DocumentIndex.cpp` | Semantikk → overskrifter/lenker | Ingen ny parsing | Planned |
-| 2 | `IndexPanel referenceRequested` | `ReferenceWorker::submit` | `src/application/index/ReferenceWorker.cpp` | Sti → lazy lesing | Køgrense og feilresultat | Planned |
-| 3 | `IndexPanel activated` | `NavigationCoordinator::openAt` | `src/application/navigation/NavigationCoordinator.cpp` | Sti/byte → navigasjon | Dirty-cancel før commit | Planned |
+| 1 | `PreviewCoordinator modelReady` | `DocumentIndex::build` | `src/application/index/DocumentIndex.cpp` | Semantikk → overskrifter/lenker | Ingen ny parsing | Implemented |
+| 2 | `Application modelReady callback` | `IndexPanel::present` | `src/application/ui/IndexPanel.cpp` | Indeks → heading-hierarki | Gamle klikk forkastes før trebytte | Implemented |
+| 3 | `IndexPanel activated` | `NavigationCoordinator::openAt` | `src/application/navigation/NavigationCoordinator.cpp` | Sti/byte → navigasjon | Dirty-cancel før commit | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -53,5 +53,5 @@ Test semantiske nivåer, lenker i tabeller, lazy feil/stale og native enkeltklik
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Ready P15, 2026-09-13. Ingen nye testbevis ennå. Referanser er øyeblikksbilder;
+Implemented P15, 2026-09-13. M1-modelltester og M2-GUI-tester er gjennomført; samlet evidens samles i M3. Referanser er øyeblikksbilder;
 utvidelse leser filen igjen. Blokkerende filsystemkall kan ikke avbrytes midt i kall.

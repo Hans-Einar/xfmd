@@ -1,4 +1,5 @@
 #pragma once
+#include "IndexPanel.h"
 #include "SidebarWidget.h"
 #include "application/workspace/WorkPathHistory.h"
 namespace xfmd {
@@ -21,6 +22,8 @@ public:
   };
   WorkPathHistory history;
   SidebarWidget* tree = nullptr;
+  FX::FXTabBook* tabs = nullptr;
+  IndexPanel* index = nullptr;
   FX::FXTextField* filterInput = nullptr;
   FX::FXToggleButton *markdown = nullptr, *text = nullptr;
   FX::FXList* workPaths = nullptr;
