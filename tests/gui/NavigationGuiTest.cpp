@@ -21,8 +21,9 @@ void click(Application& app, const DrawRun& link) {
   event.xbutton.root = DefaultRootWindow(display);
   event.xbutton.button = Button1;
   event.xbutton.same_screen = True;
-  event.xbutton.x = link.bounds.x + 1 + app.host->getXPosition();
-  event.xbutton.y = link.bounds.y + 1 + app.host->getYPosition();
+  auto point = app.host->documentToView({link.bounds.x + 1, link.bounds.y + 1});
+  event.xbutton.x = int(point.x) + app.host->getXPosition();
+  event.xbutton.y = int(point.y) + app.host->getYPosition();
   event.type = ButtonPress;
   CHECK(XSendEvent(display, app.host->id(), False, ButtonPressMask, &event));
   event.type = ButtonRelease;

@@ -29,10 +29,10 @@ void run() {
   app.window->editor->setTopLine(int(anchor));
   events(app, 30);
   auto target = AnchorMapper::map({anchor}, *app.host->frame());
-  CHECK(std::abs(-app.host->getYPosition() - target.y) < 60);
+  CHECK(std::abs(-app.host->getYPosition() - app.host->documentToView({0, target.y}).y) < 60);
   auto next = source.find("## Section 40\n");
   auto nextY = AnchorMapper::map({next}, *app.host->frame()).y;
-  app.host->setPosition(0, -nextY);
+  app.host->setPosition(0, -int(app.host->documentToView({0, nextY}).y));
   events(app, 30);
   CHECK(std::abs(long(app.window->editor->sourceAnchor()) - long(next)) < 120);
   auto before = app.scrolling.captureAnchor();
@@ -40,6 +40,6 @@ void run() {
   events(app, 100);
   CHECK(app.host->interactive());
   auto expected = AnchorMapper::map(before, *app.host->frame()).y;
-  CHECK(std::abs(-app.host->getYPosition() - expected) < 70);
+  CHECK(std::abs(-app.host->getYPosition() - app.host->documentToView({0, expected}).y) < 70);
 }
 TEST_MAIN(run)

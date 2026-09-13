@@ -1,6 +1,6 @@
 #pragma once
-#include <string_view>
 #include "ITextShaper.h"
+#include <string_view>
 #include <tuple>
 namespace xfmd {
 struct FontSpec {
@@ -11,7 +11,8 @@ struct FontSpec {
   bool operator==(const FontSpec& other) const { return key() == other.key(); }
 };
 struct TextExtent {
-  TextExtent(LayoutUnit w=0,LayoutUnit h=0,LayoutUnit a=0):width(w),height(h),ascent(a){}
+  TextExtent(LayoutUnit w = 0, LayoutUnit h = 0, LayoutUnit a = 0)
+      : width(w), height(h), ascent(a) {}
   LayoutUnit width = 0, height = 0, ascent = 0;
   std::shared_ptr<const ShapedText> shaped{};
 };

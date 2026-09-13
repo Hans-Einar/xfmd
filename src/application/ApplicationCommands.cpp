@@ -1,6 +1,6 @@
 #include "Application.h"
-#include <filesystem>
 #include "ui/PreferencesDialog.h"
+#include <filesystem>
 using namespace FX;
 namespace xfmd {
 std::string Application::savePath() {
@@ -12,8 +12,21 @@ std::string Application::savePath() {
 }
 void Application::execute(CommandRouter::Command command) {
   switch (command) {
+  case CommandRouter::WindowWrap:
+  case CommandRouter::A4: {
+    auto profile = preview->layoutProfile();
+    profile.mode = command == CommandRouter::A4 ? LayoutMode::Paged : LayoutMode::Continuous;
+    preview->setLayoutProfile(profile);
+    break;
+  }
+  case CommandRouter::FitWidth:
+    host->setViewScale(true);
+    break;
+  case CommandRouter::ActualSize:
+    host->setViewScale(false, 1);
+    break;
   case CommandRouter::Preferences: {
-    PreferencesDialog dialog(window,*preferences);
+    PreferencesDialog dialog(window, *preferences);
     dialog.execute(PLACEMENT_OWNER);
     break;
   }

@@ -6,8 +6,9 @@ void BlockLayout::layout(const SemanticDocument& model, const LayoutRequest& req
                          ITextMetrics& metrics, RenderFrame& frame) {
   double y = 20;
   for (const auto& block : model.blocks) {
-    if(request.cancelled && request.cancelled())throw Error(ErrorCode::Layout,"Layout cancelled.");
-    auto firstLine=frame.flow.lines.size();
+    if (request.cancelled && request.cancelled())
+      throw Error(ErrorCode::Layout, "Layout cancelled.");
+    auto firstLine = frame.flow.lines.size();
     FontSpec font;
     if (block.kind == BlockKind::Heading) {
       const int sizes[] = {26, 22, 19, 16, 14, 12};
@@ -24,7 +25,7 @@ void BlockLayout::layout(const SemanticDocument& model, const LayoutRequest& req
     double start = y;
     if (block.kind == BlockKind::Rule) {
       frame.decorations.push_back({{left, y + 8, width, 1}, 0xb8bec7});
-      frame.flow.lines.push_back({y,20,0});
+      frame.flow.lines.push_back({y, 20, 0});
       y += 20;
     } else {
       if (!block.marker.empty()) {
@@ -36,9 +37,10 @@ void BlockLayout::layout(const SemanticDocument& model, const LayoutRequest& req
                               block.source,
                               {},
                               false});
-        frame.runs.back().shaped=size.shaped;
+        frame.runs.back().shaped = size.shaped;
       }
-      y += InlineLayout::layout(block, left, y, width, font, metrics, frame, request.profile.mode==LayoutMode::Paged, request.cancelled);
+      y += InlineLayout::layout(block, left, y, width, font, metrics, frame,
+                                request.profile.mode == LayoutMode::Paged, request.cancelled);
       if (block.kind == BlockKind::Code)
         frame.decorations.push_back(
             {{left - 6, start - 4, std::max(width + 12, frame.contentWidth - left), y - start + 8},
@@ -46,10 +48,12 @@ void BlockLayout::layout(const SemanticDocument& model, const LayoutRequest& req
       for (int depth = 0; depth < block.quoteDepth; ++depth)
         frame.decorations.push_back({{left - 12 - 16 * depth, start, 3, y - start}, 0xc4cbd5});
     }
-    const auto count=frame.flow.lines.size()-firstLine;
-    for(std::size_t i=firstLine;i<frame.flow.lines.size();++i) {
-      if(block.kind==BlockKind::Heading)frame.flow.lines[i].keepFollowing=2;
-      else if(count>1 && (i==firstLine || i+2==frame.flow.lines.size()))frame.flow.lines[i].keepFollowing=1;
+    const auto count = frame.flow.lines.size() - firstLine;
+    for (std::size_t i = firstLine; i < frame.flow.lines.size(); ++i) {
+      if (block.kind == BlockKind::Heading)
+        frame.flow.lines[i].keepFollowing = 2;
+      else if (count > 1 && (i == firstLine || i + 2 == frame.flow.lines.size()))
+        frame.flow.lines[i].keepFollowing = 1;
     }
     // Block region covers hidden syntax, empty blocks and unpainted whitespace.
     frame.anchors.push_back({block.source, {left, start, width, std::max(1.0, y - start)}});

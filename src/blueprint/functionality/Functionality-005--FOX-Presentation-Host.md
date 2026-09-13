@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Adapter
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-011, UR-002, UR-005, UR-008, SR-001, SR-008, SR-009, SR-010, SR-013, UR-017, SR-016, SR-019
 uses: FUNC-004, FUNC-015, FUNC-016
@@ -23,9 +23,9 @@ Krav: UR-011, UR-002, UR-005, UR-008, SR-001, SR-008, SR-009, SR-010, SR-013. De
 
 ## 3. Kontrakter og eierskap
 
-FoxRenderHost er FXScrollArea-adapter. present/expect/invalidate styrer frame/interaktivitet. FoxTextMetrics::segments velger font per tegnsegment med samme ressurser for measure og paint. Host kjenner bare IRenderer for hitTest.
+FoxRenderHost er FXScrollArea-adapter. present/expect/invalidate styrer frame/interaktivitet. SharedTextMetrics former tekst; DisplayListPainter tegner samme glyphdata gjennom FontCatalog. Host kjenner bare IRenderer for hitTest.
 
-**Planlagt utvidelse 1.1:** Behold FOX-host, input-enable og viewportvarsler. Wheelpolicy flyttes til FUNC-015, fontmåling/glyphtegning til FUNC-016. Host eier ViewTransform for points/zoom/DPI og page gaps. present må erstatte frame.width==viewport_w med profilbasert validering.
+**Implementert utvidelse 1.1 (P11):** Behold FOX-host, input-enable og viewportvarsler. Wheelpolicy flyttes til FUNC-015, fontmåling/glyphtegning til FUNC-016. Host eier ViewTransform for points/zoom/DPI og page gaps. present må erstatte frame.width==viewport_w med profilbasert validering.
 
 ## 4. Atferd, tilstand og feil
 
@@ -36,7 +36,7 @@ tegner Globe-primitiven med buer/linje uten emoji-fontavhengighet; renderer
 bestemmer lenkemarkørens type og plassering.
 
 FoxWheelScrollBar er delt FOX-adapter for begge scrollakser. Den bevarer
-fraksjoner mellom små wheel-events og bruker FOXs eksisterende animasjon og
+fraksjoner mellom små wheel-events og eier en retargetbar timer og
 changed/command-varsler. Konstruktørene bytter barene før create(); widgets eier dem.
 
 ## 5. Plumbing
@@ -47,14 +47,14 @@ Implemented-rader beskriver baseline 0712c29; Planned-rader beskriver utvidelsen
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | `PreviewCoordinator present callback` | `FoxRenderHost::present` | `src/application/adapters/FoxRenderHost.cpp` | Frame → aktiv visning | Feil token/bredde avvises | Implemented |
 | 2 | `FOX paint` | `FoxRenderHost::onPaint` | `src/application/adapters/FoxRenderHost.cpp` | Display list → native drawing | Clip og ingen parserkall | Implemented |
-| 3 | `InlineLayout::layout` | `FoxTextMetrics::measure` | `src/application/adapters/FoxTextMetrics.cpp` | Text/font → mål | Fallback per segment | Implemented |
-| 4 | `FoxRenderHost::onPaint` | `FoxTextMetrics::segments` | `src/application/adapters/FoxTextMetrics.cpp` | Text/font → FOX-fontsegmenter | Samme mål som ved layout | Implemented |
+| 3 | `InlineLayout::layout` | `SharedTextMetrics::measure` | `src/application/adapters/SharedTextMetrics.cpp` | Text/font → mål | Fallback per segment | Implemented |
+| 4 | `DisplayListPainter::text` | `FontCatalog::font` | `src/application/adapters/FontCatalog.cpp` | Fontidentitet → native font | Endret font avvises | Implemented |
 | 5 | `FOX pointer` | `FoxRenderHost::onPointer` | `src/application/adapters/FoxRenderHost.cpp` | Punkt → IRenderer::hitTest | Kun aktiv frame sender link callback | Implemented |
 | 6 | `ScrollCoordinator setPreview callback` | `FoxRenderHost::setViewport` | `src/application/adapters/FoxRenderHost.cpp` | Y → clamped viewport | Programmatisk echo undertrykkes | Implemented |
 | 7 | `FoxRenderHost constructor` | `FoxWheelScrollBar::replace` | `src/application/adapters/FoxWheelScrollBar.cpp` | Standard bar → presis wheel-adapter | Parent eier ny bar; før create | Implemented |
 | 8 | `FOX wheel dispatch` | `FoxWheelScrollBar::onMouseWheel` | `src/application/adapters/FoxWheelScrollBar.cpp` | Delta/rest → target og FOX-timer | Clamp, behold delpiksel-rest, standard varsler | Implemented |
-| 9 | `FoxRenderHost::present` | `ViewTransform::configure` | `src/application/adapters/ViewTransform.cpp` | PageLayout + viewport → transform | zoom er ikke reflow | Planned |
-| 10 | `FoxRenderHost paint` | `DisplayListPainter::paint` | `src/application/adapters/DisplayListPainter.cpp` | frame + target → pixels | felles glyphgrunnlag | Planned |
+| 9 | `FoxRenderHost::present` | `ViewTransform::configure` | `src/application/adapters/ViewTransform.cpp` | PageLayout + viewport → transform | zoom er ikke reflow | Implemented |
+| 10 | `FoxRenderHost paint` | `DisplayListPainter::paint` | `src/application/adapters/DisplayListPainter.cpp` | frame + target → pixels | felles glyphgrunnlag | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -78,7 +78,7 @@ Utvidelsen krever AT-031, AT-036, AT-039. Dette er planlagt dekning, ikke nye te
 
 ## 8. Status, risiko og endringskonsekvenser
 
-**Proposed 1.1:** Historisk Implemented/evidence nedenfor gjelder baseline. Nye kontrakter er beskrevet i [designrevisjonen](../../../softwareDesign.md); gamle bevis verifiserer ikke disse.
+**Implemented 1.1:** [P11-bevis](../../../docs/evidence/P11.md) beskriver ny kode og kontroller. Historiske bevis nedenfor gjelder baseline, ikke automatisk de nye kravene.
 
 
 Implemented i P3. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.

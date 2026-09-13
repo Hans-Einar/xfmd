@@ -4,7 +4,7 @@ kind: Functionality
 audience: User
 role: Service
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-011, UR-003, UR-004, UR-009, SR-002, SR-006, SR-008, SR-013, UR-016, SR-019
 uses: FUNC-001, FUNC-005, FUNC-007, FUNC-015
@@ -25,7 +25,7 @@ Krav: UR-011, UR-003, UR-004, UR-009, SR-002, SR-006, SR-008, SR-013. Definisjon
 
 EditController::applyEdit/applyProjectedText/undo/redo/find eier undo-operasjoner. TextProjection konverterer LF-visning til rå kildeoffsets og opprinnelig newline-policy. EditorWidget eier bare FXText-projeksjonen.
 
-**Planlagt utvidelse 1.1:** EditorWidget beholder tekst, undo og kildeprojeksjon. FoxWheelScrollBar konsumerer felles FUNC-015-profil, uten egen akselerasjonsformel. Source-anchor restore og søketreff flytter direkte med korrekt origin.
+**Implementert utvidelse 1.1 (P11):** EditorWidget beholder tekst, undo og kildeprojeksjon. FoxWheelScrollBar konsumerer felles FUNC-015-profil, uten egen akselerasjonsformel. Source-anchor restore og søketreff flytter direkte med korrekt origin.
 
 ## 4. Atferd, tilstand og feil
 
@@ -49,7 +49,7 @@ Implemented-rader beskriver baseline 0712c29; Planned-rader beskriver utvidelsen
 | 6 | `Application::execute` | `EditController::find` | `src/application/document/EditController.cpp` | Query → projected offset | Ingen dirty-endring | Implemented |
 | 7 | `EditorWidget constructor` | `FoxWheelScrollBar::replace` | `src/application/adapters/FoxWheelScrollBar.cpp` | Standard bar → presis wheel-adapter | Parent eier ny bar; før create | Implemented |
 | 8 | `FOX wheel dispatch` | `FoxWheelScrollBar::onMouseWheel` | `src/application/adapters/FoxWheelScrollBar.cpp` | Delta/rest → target og FOX-timer | Clamp, behold delpiksel-rest, standard varsler | Implemented |
-| 9 | `Editor wheel` | `ScrollDynamics::advance` | `src/application/scroll/ScrollDynamics.cpp` | input → mål | ingen tekstendring | Planned |
+| 9 | `Editor wheel` | `ScrollDynamics::advance` | `src/application/scroll/ScrollDynamics.cpp` | input → mål | ingen tekstendring | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -71,7 +71,7 @@ Utvidelsen krever AT-030, AT-039. Dette er planlagt dekning, ikke nye testbevis.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-**Proposed 1.1:** Historisk Implemented/evidence nedenfor gjelder baseline. Nye kontrakter er beskrevet i [designrevisjonen](../../../softwareDesign.md); gamle bevis verifiserer ikke disse.
+**Implemented 1.1:** [P11-bevis](../../../docs/evidence/P11.md) beskriver ny kode og kontroller. Historiske bevis nedenfor gjelder baseline, ikke automatisk de nye kravene.
 
 
 Implemented i P2. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.

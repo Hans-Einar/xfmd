@@ -35,6 +35,12 @@ void XfmdWindow::buildUi() {
   add(viewMenu, "&Editor\tCtrl+2", CommandRouter::Editor);
   add(viewMenu, "&Split view\tCtrl+3", CommandRouter::Split);
   add(viewMenu, "&Sidebar\tF10", CommandRouter::Sidebar);
+  new FXMenuSeparator(viewMenu);
+  new FXMenuRadio(viewMenu, "Window &wrap", commands, CommandRouter::WindowWrap);
+  new FXMenuRadio(viewMenu, "&A4 page preview", commands, CommandRouter::A4);
+  new FXMenuSeparator(viewMenu);
+  new FXMenuRadio(viewMenu, "Fit page &width", commands, CommandRouter::FitWidth);
+  new FXMenuRadio(viewMenu, "Actual size (100%)", commands, CommandRouter::ActualSize);
   new FXMenuTitle(bar, "&View", nullptr, viewMenu);
   goMenu = new FXMenuPane(this);
   add(goMenu, "&Back\tAlt+Left", CommandRouter::Back);

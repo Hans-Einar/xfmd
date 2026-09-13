@@ -9,6 +9,7 @@ class FoxWheelScrollBar : public FX::FXScrollBar {
   int destination = 0, observed = 0, observedRange = 0, observedPage = 0;
   std::uint64_t finish = 0;
   double direction = 0;
+  bool notifying = false;
   static FoxWheelScrollBar* activeBar;
 
 protected:
@@ -20,6 +21,9 @@ public:
   ~FoxWheelScrollBar() override;
   static FX::FXScrollBar* replace(FX::FXScrollBar*);
   static void configureTree(FX::FXWindow*, const ScrollProfile&);
+  static bool isWheelChange(FX::FXWindow* area) {
+    return activeBar && activeBar->notifying && activeBar->getParent() == area;
+  }
   static void cancelTree(FX::FXWindow*);
   void setProfile(const ScrollProfile& value) {
     cancelMotion();

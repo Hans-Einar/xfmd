@@ -20,10 +20,14 @@ public:
     Back,
     Forward,
     Preferences,
+    WindowWrap,
+    A4,
+    FitWidth,
+    ActualSize,
     Last
   };
   std::function<void(Command)> action;
-  std::function<bool(Command)> enabled;
+  std::function<bool(Command)> enabled, checked;
   long dispatch(FX::FXObject*, FX::FXSelector, void*);
   long update(FX::FXObject*, FX::FXSelector, void*);
 };

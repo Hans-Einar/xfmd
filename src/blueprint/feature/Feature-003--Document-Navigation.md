@@ -4,7 +4,7 @@ kind: Feature
 audience: User
 role: Workflow
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-001, UR-005, UR-009, SR-002, SR-005, SR-008, SR-012, SR-013, SR-019
 uses: FUNC-001, FUNC-002, FUNC-005, FUNC-008, FUNC-009, FUNC-010
@@ -25,7 +25,7 @@ Krav: UR-001, UR-005, UR-009, SR-002, SR-005, SR-008, SR-012, SR-013. Definisjon
 
 Feature orkestreres av NavigationCoordinator. LocalFileStore, DocumentCoordinator, HistoryStore, LinkResolver og ScrollCoordinator gjenbrukes. Lenketreff utføres av renderer-porten, mens application bestemmer hva som åpnes.
 
-**Planlagt utvidelse 1.1:** Historikk beholder source-byteankre på tvers av sideprofil, zoom og fullscreen; ingen lagring av skjermpiksler som dokumentposisjon.
+**Implementert utvidelse 1.1 (P11):** Historikk beholder source-byteankre på tvers av sideprofil, zoom og fullscreen; ingen lagring av skjermpiksler som dokumentposisjon.
 
 ## 4. Atferd, tilstand og feil
 
@@ -45,7 +45,7 @@ Implemented-rader beskriver baseline 0712c29; Planned-rader beskriver utvidelsen
 | 3 | `NavigationCoordinator::openTarget` | `DocumentCoordinator::requestOpen` | `src/application/document/DocumentCoordinator.cpp` | Path → dokumentcommit | Dirty/lesefeil før commit | Implemented |
 | 4 | `DocumentCoordinator opened callback` | `NavigationCoordinator::commitVisit` | `src/application/navigation/NavigationCoordinator.cpp` | Vellykket dokument → historikk | Aldri commit på failed/cancel | Implemented |
 | 5 | `NavigationCoordinator::commitVisit` | `ScrollCoordinator::restoreAnchor` | `src/application/scroll/ScrollCoordinator.cpp` | Anker → pending restore | Frame-token må stemme | Implemented |
-| 6 | `History restore` | `ScrollCoordinator::restoreAnchor` | `src/application/scroll/ScrollCoordinator.cpp` | SourceAnchor → VisualLocation | vent på riktig FrameKey | Planned |
+| 6 | `History restore` | `ScrollCoordinator::restoreAnchor` | `src/application/scroll/ScrollCoordinator.cpp` | SourceAnchor → VisualLocation | vent på riktig FrameKey | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -67,7 +67,7 @@ Utvidelsen krever AT-039. Dette er planlagt dekning, ikke nye testbevis.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-**Proposed 1.1:** Historisk Implemented/evidence nedenfor gjelder baseline. Nye kontrakter er beskrevet i [designrevisjonen](../../../softwareDesign.md); gamle bevis verifiserer ikke disse.
+**Implemented 1.1:** [P11-bevis](../../../docs/evidence/P11.md) beskriver ny kode og kontroller. Historiske bevis nedenfor gjelder baseline, ikke automatisk de nye kravene.
 
 
 Implemented i P6. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.

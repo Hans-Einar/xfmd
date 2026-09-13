@@ -1,6 +1,7 @@
 #include "ScrollCoordinator.h"
 namespace xfmd {
 void ScrollCoordinator::invalidate(DocumentToken token) {
+  expectedFrame.reset();
   if (token.document != expected.document) {
     last = {};
     pending = SourceAnchor{};
@@ -11,7 +12,7 @@ void ScrollCoordinator::invalidate(DocumentToken token) {
   valid = false;
 }
 void ScrollCoordinator::setFrame(LayoutResult value) {
-  if (!value || value->token != expected)
+  if (!value || value->token != expected || (expectedFrame && !(value->key == *expectedFrame)))
     return;
   frame = std::move(value);
   valid = true;
@@ -37,17 +38,19 @@ void ScrollCoordinator::restoreAnchor(SourceAnchor anchor) {
     setEditor(anchor);
   synchronizing = false;
 }
-void ScrollCoordinator::onViewportChanged(ViewOrigin origin, std::size_t position,
-                                          DocumentToken token, std::uint64_t sequence,
-                                          bool programmatic) {
+void ScrollCoordinator::onViewportChanged(ViewOrigin origin, double position, DocumentToken token,
+                                          std::uint64_t sequence, bool programmatic,
+                                          ScrollOrigin input) {
+  if (input == ScrollOrigin::Sync || input == ScrollOrigin::Restore)
+    return;
   if (synchronizing || programmatic || !valid || !frame || token != expected)
     return;
   if (sequence && sequence <= lastSequence)
     return;
   if (sequence)
     lastSequence = sequence;
-  last = origin == ViewOrigin::Editor ? SourceAnchor{position}
-                                      : AnchorMapper::anchorAt(int(position), *frame);
+  last = origin == ViewOrigin::Editor ? SourceAnchor{std::size_t(position)}
+                                      : AnchorMapper::anchorAt(position, *frame);
   if (!split || last.quality == MappingQuality::Unavailable)
     return;
   synchronizing = true;

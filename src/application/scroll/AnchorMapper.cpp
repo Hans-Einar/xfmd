@@ -23,11 +23,11 @@ MappingResult AnchorMapper::map(SourceAnchor anchor, const RenderFrame& frame) {
   if (!best)
     return {};
   auto quality = distance == 0 ? best->source.quality : MappingQuality::Approximate;
-  return {int(std::max(0.0, best->bounds.y +
-                          int(std::clamp(anchor.fraction, 0.0, 0.99) * best->bounds.height))),
-          quality};
+  return {
+      std::max(0.0, best->bounds.y + std::clamp(anchor.fraction, 0.0, .99) * best->bounds.height),
+      quality, best->pageIndex};
 }
-SourceAnchor AnchorMapper::anchorAt(int y, const RenderFrame& frame) {
+SourceAnchor AnchorMapper::anchorAt(double y, const RenderFrame& frame) {
   const AnchorRegion* best = nullptr;
   double distance = std::numeric_limits<double>::max();
   double height = distance;

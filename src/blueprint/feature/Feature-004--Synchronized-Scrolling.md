@@ -4,7 +4,7 @@ kind: Feature
 audience: User
 role: Workflow
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-008, SR-002, SR-008, SR-009, SR-012, SR-013, UR-016, SR-019
 uses: FUNC-004, FUNC-005, FUNC-009, FUNC-010, FUNC-015
@@ -25,7 +25,7 @@ Krav: UR-008, SR-002, SR-008, SR-009, SR-012, SR-013. Definisjoner og normativ a
 
 Feature koordineres av ScrollCoordinator og bruker samme ankerkontrakt som navigasjon. Interpreter/renderer leverer source ranges og linje-/blokkgeometri. Ingen ekstra parser og ingen total-prosent-algoritme.
 
-**Planlagt utvidelse 1.1:** Bevegelsespolicy kjøres bare på inputflaten. Synkroniserte absolutte posisjoner skal aldri akselereres på nytt. Sidemapping erstatter antakelsen om ett kontinuerlig y-plan.
+**Implementert utvidelse 1.1 (P11):** Bevegelsespolicy kjøres bare på inputflaten. Synkroniserte absolutte posisjoner skal aldri akselereres på nytt. Sidemapping erstatter antakelsen om ett kontinuerlig y-plan.
 
 ## 4. Atferd, tilstand og feil
 
@@ -43,7 +43,7 @@ Implemented-rader beskriver baseline 0712c29; Planned-rader beskriver utvidelsen
 | 4 | `ScrollCoordinator setEditor callback` | `EditorWidget::setSourceAnchor` | `src/application/ui/EditorWidget.cpp` | Source → editor viewport | Clamped tekstposisjon | Implemented |
 | 5 | `ScrollCoordinator setPreview callback` | `FoxRenderHost::setViewport` | `src/application/adapters/FoxRenderHost.cpp` | Y → preview viewport | Clamped geometri | Implemented |
 | 6 | `PreviewCoordinator present callback` | `ScrollCoordinator::setFrame` | `src/application/scroll/ScrollCoordinator.cpp` | Ny generasjon → restore | Stale frame brukes aldri | Implemented |
-| 7 | `Sync receiver` | `ScrollCoordinator::onViewportChanged` | `src/application/scroll/ScrollCoordinator.cpp` | merket origin + FrameKey → guard | ingen dobbel gain | Planned |
+| 7 | `Sync receiver` | `ScrollCoordinator::onViewportChanged` | `src/application/scroll/ScrollCoordinator.cpp` | merket origin + FrameKey → guard | ingen dobbel gain | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -63,7 +63,7 @@ Utvidelsen krever AT-030, AT-039. Dette er planlagt dekning, ikke nye testbevis.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-**Proposed 1.1:** Historisk Implemented/evidence nedenfor gjelder baseline. Nye kontrakter er beskrevet i [designrevisjonen](../../../softwareDesign.md); gamle bevis verifiserer ikke disse.
+**Implemented 1.1:** [P11-bevis](../../../docs/evidence/P11.md) beskriver ny kode og kontroller. Historiske bevis nedenfor gjelder baseline, ikke automatisk de nye kravene.
 
 
 Implemented i P5. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.

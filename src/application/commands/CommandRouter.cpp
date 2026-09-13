@@ -13,6 +13,12 @@ long CommandRouter::dispatch(FXObject*, FXSelector selector, void*) {
   return 1;
 }
 long CommandRouter::update(FXObject* sender, FXSelector selector, void*) {
+  if (checked)
+    sender->handle(this,
+                   FXSEL(SEL_COMMAND, checked(static_cast<Command>(FXSELID(selector)))
+                                          ? FXWindow::ID_CHECK
+                                          : FXWindow::ID_UNCHECK),
+                   nullptr);
   bool state = !enabled || enabled(static_cast<Command>(FXSELID(selector)));
   sender->handle(this, FXSEL(SEL_COMMAND, state ? FXWindow::ID_ENABLE : FXWindow::ID_DISABLE),
                  nullptr);

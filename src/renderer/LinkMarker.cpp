@@ -28,7 +28,8 @@ std::optional<DrawRun> LinkMarker::make(const InlineRun& link, FontSpec font,
     extent.width = extent.height + metrics.measure(" ", font).width;
   marker.bounds = {0, 0, extent.width, extent.height};
   marker.ascent = extent.ascent;
-  if(!web)marker.shaped=extent.shaped;
+  if (!web)
+    marker.shaped = extent.shaped;
   return marker;
 }
 } // namespace xfmd

@@ -1,5 +1,6 @@
 #pragma once
 #include "application/document/TextProjection.h"
+#include "application/scroll/ScrollDynamics.h"
 #include <functional>
 #include <fx.h>
 #include <memory>
@@ -7,7 +8,7 @@ namespace xfmd {
 class EditorWidget : public FX::FXText {
   FXDECLARE(EditorWidget)
   std::unique_ptr<TextProjection> projection;
-  bool projecting = false, scrolling = false;
+  bool projecting = false, scrolling = false, keyboard = false;
 
 protected:
   EditorWidget() = default;
@@ -17,6 +18,7 @@ public:
   enum { ID_EDIT = FX::FXText::ID_LAST, ID_LAST };
   std::function<void(const std::string&)> edited;
   std::function<void(std::size_t)> viewportChanged;
+  ScrollOrigin lastScrollOrigin = ScrollOrigin::UserDrag;
   explicit EditorWidget(FX::FXComposite*);
   void applyProjection(const SourceSnapshot&);
   void setSourceAnchor(SourceAnchor);

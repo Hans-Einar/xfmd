@@ -1,7 +1,7 @@
 #pragma once
+#include "adapters/FoxPreferencesStore.h"
 #include "adapters/FoxRenderHost.h"
 #include "adapters/FoxScheduler.h"
-#include "adapters/FoxPreferencesStore.h"
 #include "adapters/SharedTextMetrics.h"
 #include "commands/CommandRouter.h"
 #include "contracts/IInterpreter.h"

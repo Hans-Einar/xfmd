@@ -21,7 +21,10 @@ EditorWidget::EditorWidget(FXComposite* parent)
 }
 long EditorWidget::onKeyPress(FXObject* sender, FXSelector sel, void* data) {
   FoxWheelScrollBar::cancelTree(this);
-  return FXText::onKeyPress(sender, sel, data);
+  keyboard = true;
+  auto result = FXText::onKeyPress(sender, sel, data);
+  keyboard = false;
+  return result;
 }
 long EditorWidget::onChanged(FXObject*, FXSelector, void*) {
   if (!projecting && edited) {
@@ -56,7 +59,11 @@ void EditorWidget::setSourceAnchor(SourceAnchor anchor) {
 }
 void EditorWidget::moveContents(FXint x, FXint y) {
   FXText::moveContents(x, y);
-  if (!projecting && !scrolling && viewportChanged)
+  if (!projecting && !scrolling && viewportChanged) {
+    lastScrollOrigin = FoxWheelScrollBar::isWheelChange(this) ? ScrollOrigin::UserWheel
+                       : keyboard                             ? ScrollOrigin::Keyboard
+                                                              : ScrollOrigin::UserDrag;
     viewportChanged(sourceAnchor());
+  }
 }
 } // namespace xfmd
