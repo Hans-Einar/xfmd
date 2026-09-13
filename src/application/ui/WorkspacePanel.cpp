@@ -1,6 +1,18 @@
 #include "WorkspacePanel.h"
+#include "application/adapters/FoxWheelScrollBar.h"
 using namespace FX;
 namespace xfmd {
+namespace {
+class WorkPathList : public FXList {
+public:
+  WorkPathList(FXComposite* parent, FXObject* target, FXSelector selector)
+      : FXList(parent, target, selector, LIST_BROWSESELECT | LAYOUT_FILL_X | LAYOUT_FILL_Y) {
+    horizontal = FoxWheelScrollBar::replace(horizontal);
+    vertical = FoxWheelScrollBar::replace(vertical);
+  }
+};
+} // namespace
+
 FXDEFMAP(WorkspacePanel)
 panelMap[] = {
     FXMAPFUNC(SEL_COMMAND, WorkspacePanel::ID_HISTORY, WorkspacePanel::onHistory),
@@ -30,8 +42,7 @@ WorkspacePanel::WorkspacePanel(FXComposite* parent)
   searchStatus = new FXLabel(upper, "", nullptr, LAYOUT_FILL_X | JUSTIFY_LEFT);
   auto* lower = new FXVerticalFrame(split, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 140, 0, 0, 0, 0);
   new FXLabel(lower, "Historic work paths", nullptr, LAYOUT_FILL_X | JUSTIFY_LEFT);
-  workPaths =
-      new FXList(lower, this, ID_HISTORY, LIST_BROWSESELECT | LAYOUT_FILL_X | LAYOUT_FILL_Y);
+  workPaths = new WorkPathList(lower, this, ID_HISTORY);
   workPaths->setNumVisible(5);
   std::vector<std::string> saved;
   for (int i = 0; i < 32; ++i) {

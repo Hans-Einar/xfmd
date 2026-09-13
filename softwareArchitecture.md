@@ -205,7 +205,8 @@ WorkspacePanel i application/ui komponerer filterfelt, to typeknapper,
 SidebarWidget, søkestatus og arbeidsstihistorikk i vertikal splitter. F10 styrer
 hele panelet. SidebarWidget bygger eget FXTreeList med en eksplisitt rot; arvet
 FXDirList kan ikke avgrense rotnavigasjonen og er erstattet. Egne hendelses-ID-er
-starter ved basens ID_LAST. Begge tree-scrollbarer bruker FoxWheelScrollBar.
+starter ved basens ID_LAST. Begge tree-scrollbarer og begge scrollbarer i historikklisten bruker FoxWheelScrollBar.
+Den lille WorkPathList-adapteren i WorkspacePanel.cpp erstatter bare standardbarene.
 
 application/workspace/WorkPathHistory.cpp eier kanoniske stier, rotutvidelse og MRU.
 FileNameFilter.cpp eier wildcard/delstreng og typekombinasjon. DirectoryScanner.cpp

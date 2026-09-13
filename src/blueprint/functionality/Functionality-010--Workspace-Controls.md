@@ -51,6 +51,7 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 | 6 | `SidebarWidget constructor` | `FoxWheelScrollBar::replace` | `src/application/adapters/FoxWheelScrollBar.cpp` | Standard bar → presis wheel-adapter | Parent eier ny bar; før create | Implemented |
 | 7 | `FOX wheel dispatch` | `FoxWheelScrollBar::onMouseWheel` | `src/application/adapters/FoxWheelScrollBar.cpp` | Delta/rest → target og FOX-timer | Clamp, behold delpiksel-rest, standard varsler | Implemented |
 | 8 | `XfmdWindow::buildUi` | `WorkspacePanel::WorkspacePanel` | `src/application/ui/WorkspacePanel.cpp` | Filter, tre og historikk → ett panel | Parent eier widgets | Implemented |
+| 9 | `WorkPathList constructor` | `FoxWheelScrollBar::replace` | `src/application/adapters/FoxWheelScrollBar.cpp` | Historikkliste → samme presise scrollbarer | Parent eier adapterne; før create | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 

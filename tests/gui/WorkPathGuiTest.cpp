@@ -182,6 +182,28 @@ void run() {
   CHECK(saved.read());
   CHECK(saved.readStringEntry("WorkPaths", "Path0", "") == dir.string());
   CHECK(panel->history.entries().front() == dir.string());
+  // The added history list must retain the same fractional-wheel fix as the tree.
+  for (int i = 0; i < 12; ++i) {
+    auto path = home / ("history-" + std::to_string(i));
+    fs::create_directory(path);
+    CHECK(panel->setWorkPath(path.string()));
+  }
+  settle(app);
+  auto* historyBar = panel->workPaths->verticalScrollBar();
+  const int maximum = historyBar->getRange() - historyBar->getPage();
+  CHECK(maximum > 20);
+  for (bool bottom : {false, true}) {
+    panel->workPaths->setPosition(0, -(bottom ? maximum - 7 : 7));
+    for (int i = 0; i < 120; ++i) {
+      FX::FXEvent event{};
+      event.code = bottom ? -1 : 1;
+      panel->workPaths->handle(panel->workPaths, FXSEL(FX::SEL_MOUSEWHEEL, 0), &event);
+      events(app, 1);
+    }
+    events(app);
+    CHECK(historyBar->getPosition() == (bottom ? maximum : 0));
+    CHECK(panel->workPaths->getYPosition() == -(bottom ? maximum : 0));
+  }
   CHECK(app.session.dirty() && app.session.view().token == token);
 }
 TEST_MAIN(run)
