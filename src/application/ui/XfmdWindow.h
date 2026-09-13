@@ -1,6 +1,6 @@
 #pragma once
 #include "EditorWidget.h"
-#include "SidebarWidget.h"
+#include "WorkspacePanel.h"
 #include "application/commands/CommandRouter.h"
 #include <fx.h>
 namespace xfmd {
@@ -15,6 +15,7 @@ protected:
 public:
   EditorWidget* editor = nullptr;
   SidebarWidget* sidebar = nullptr;
+  WorkspacePanel* workspacePanel = nullptr;
   FX::FXSplitter* split = nullptr;
   FX::FXVerticalFrame* previewArea = nullptr;
   FX::FXLabel* status = nullptr;

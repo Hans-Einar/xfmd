@@ -3,10 +3,24 @@
 xfmd \- native FOX Markdown viewer and editor
 .SH SYNOPSIS
 .B xfmd
-.RI [ file.md | file.txt ]
+.RI [ directory | file.md | file.txt ]
 .SH DESCRIPTION
 Read and edit local UTF-8 Markdown and text files using FOX.
 Markdown is rendered natively without a browser engine or network resource loading.
+.SH WORK PATHS
+Without an argument the expanded tree starts at the home directory.
+A directory argument sets the tree root; "xfmd ." uses the current working directory.
+A file argument opens the document with its parent directory as the work path.
+Double-click the root to widen to home, then to /. Right-click a directory and
+choose Set work path. Click a historic work path below the tree to reactivate it.
+The 32 most recent distinct work paths persist between runs.
+.PP
+The *.md and *.txt toggles are ORed, then intersected with the filename filter.
+Both toggles are initially off (all file types). Plain text matches a substring;
+? matches one Unicode character and * zero or more characters in the full filename.
+Matching ignores ASCII case. Filtering searches descendants in the background,
+showing matching files and their ancestor directories. Refresh rescans the tree.
+Directory symlinks are not traversed. File symlinks outside the root are omitted.
 .SH KEYS
 Ctrl+O opens a file. Ctrl+S saves. Ctrl+Shift+S saves under another name.
 Ctrl+Z and Ctrl+Y undo and redo. Ctrl+F searches.

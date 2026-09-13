@@ -1,29 +1,159 @@
 #include "SidebarWidget.h"
 #include "application/adapters/FoxWheelScrollBar.h"
-#include "application/io/InputPolicy.h"
+#include "application/workspace/WorkPathHistory.h"
 using namespace FX;
 namespace xfmd {
+namespace {
+struct PathItem : FXTreeItem {
+  std::filesystem::path path;
+  bool directory;
+  PathItem(const TreeEntry& entry, const std::string& label)
+      : FXTreeItem(label.c_str()), path(entry.path), directory(entry.directory) {
+    setHasItems(directory);
+    setDraggable(false);
+  }
+};
+FXint order(const FXTreeItem* left, const FXTreeItem* right) {
+  const auto* a = static_cast<const PathItem*>(left);
+  const auto* b = static_cast<const PathItem*>(right);
+  if (a->directory != b->directory)
+    return a->directory ? -1 : 1;
+  return comparecase(a->getText(), b->getText());
+}
+} // namespace
 FXDEFMAP(SidebarWidget)
-sidebarMap[] = {FXMAPFUNC(SEL_DOUBLECLICKED, SidebarWidget::ID_TREE_EVENT, SidebarWidget::onOpen)};
-FXIMPLEMENT(SidebarWidget, FXDirList, sidebarMap, ARRAYNUMBER(sidebarMap))
+sidebarMap[] = {
+    FXMAPFUNC(SEL_DOUBLECLICKED, SidebarWidget::ID_TREE_EVENT, SidebarWidget::onOpen),
+    FXMAPFUNC(SEL_TIMEOUT, SidebarWidget::ID_POLL, SidebarWidget::onPoll),
+    FXMAPFUNC(SEL_RIGHTBUTTONRELEASE, 0, SidebarWidget::onContext),
+    FXMAPFUNC(SEL_COMMAND, SidebarWidget::ID_SET_WORK_PATH, SidebarWidget::onSetWorkPath)};
+FXIMPLEMENT(SidebarWidget, FXTreeList, sidebarMap, ARRAYNUMBER(sidebarMap))
 SidebarWidget::SidebarWidget(FXComposite* parent)
-    : FXDirList(parent, this, ID_TREE_EVENT,
-                DIRLIST_SHOWFILES | TREELIST_SHOWS_LINES | TREELIST_SHOWS_BOXES | LAYOUT_FILL_Y, 0,
-                0, 220, 0) {
+    : FXTreeList(parent, this, ID_TREE_EVENT,
+                 TREELIST_SHOWS_LINES | TREELIST_SHOWS_BOXES | LAYOUT_FILL_X | LAYOUT_FILL_Y) {
   horizontal = FoxWheelScrollBar::replace(horizontal);
   vertical = FoxWheelScrollBar::replace(vertical);
-  setPattern("*.md,*.txt");
-  setMatchMode(FILEMATCH_FILE_NAME | FILEMATCH_NOESCAPE | FILEMATCH_CASEFOLD);
+  setSortFunc(order);
+}
+SidebarWidget::~SidebarWidget() {
+  getApp()->removeTimeout(this, ID_POLL);
+  scanner.stop();
+}
+void SidebarWidget::create() {
+  FXTreeList::create();
+  getApp()->addTimeout(this, ID_POLL, 30);
+}
+void SidebarWidget::setRoot(const std::filesystem::path& path, const std::string& label) {
+  scanner.stop();
+  root = path;
+  rootLabel = label;
+  clearItems();
+  items.clear();
+  requested.clear();
+  files = 0;
+  auto* item = appendItem(nullptr, new PathItem({root, true}, rootLabel));
+  items[root.string()] = item;
+  requested.insert(root.string());
+  FXTreeList::expandTree(item);
+  setCurrentItem(item);
+  setPosition(0, 0);
+  scanning = true;
+  scanner.start(root, filter);
+}
+void SidebarWidget::setFilter(FileNameFilter value) {
+  filter = std::move(value);
+  if (!root.empty())
+    setRoot(root, rootLabel);
+}
+FXTreeItem* SidebarWidget::add(const TreeEntry& entry) {
+  auto found = items.find(entry.path.string());
+  if (found != items.end())
+    return found->second;
+  if (!WorkPathHistory::contains(root, entry.path))
+    return nullptr;
+  auto* parent = add({entry.path.parent_path(), true});
+  if (!parent)
+    return nullptr;
+  auto* item = appendItem(parent, new PathItem(entry, entry.path.filename().string()));
+  items[entry.path.string()] = item;
+  if (!entry.directory)
+    ++files;
+  return item;
+}
+FXbool SidebarWidget::expandTree(FXTreeItem* item, FXbool notify) {
+  if (item && isItemDirectory(item) && !filter.active()) {
+    const auto path = getItemPathname(item);
+    if (requested.insert(path.text()).second) {
+      scanner.request(path.text());
+      scanning = true;
+    }
+  }
+  return FXTreeList::expandTree(item, notify);
+}
+FXTreeItem* SidebarWidget::getPathnameItem(const FXString& path) const {
+  auto found = items.find(path.text());
+  return found == items.end() ? nullptr : found->second;
+}
+FXString SidebarWidget::getItemPathname(const FXTreeItem* item) const {
+  return item ? static_cast<const PathItem*>(item)->path.c_str() : "";
+}
+bool SidebarWidget::isItemDirectory(const FXTreeItem* item) const {
+  return item && static_cast<const PathItem*>(item)->directory;
 }
 long SidebarWidget::onOpen(FXObject*, FXSelector, void* data) {
   auto* item = static_cast<FXTreeItem*>(data);
   if (!item)
     item = getCurrentItem();
-  if (!item || !isItemFile(item))
+  if (!item)
     return 1;
-  std::string path = getItemPathname(item).text();
-  if (InputPolicy::supportedPath(path) && open)
-    open(path);
+  if (item == getFirstItem()) {
+    if (broadenRoot)
+      broadenRoot();
+  } else if (isItemFile(item) && open) {
+    std::error_code ec;
+    auto target = std::filesystem::canonical(getItemPathname(item).text(), ec);
+    if (!ec && WorkPathHistory::contains(root, target))
+      open(target.string());
+    else if (status)
+      status("File unavailable or outside work path.");
+  }
+  return 1;
+}
+long SidebarWidget::onPoll(FXObject*, FXSelector, void*) {
+  auto batch = scanner.take();
+  for (const auto& entry : batch.entries)
+    add(entry);
+  if (!batch.entries.empty())
+    sortItems();
+  scanning = batch.busy;
+  if (status) {
+    std::string text = scanning ? "Searching… " : (files ? "" : "No matching files. ");
+    text += std::to_string(files) + " files";
+    if (batch.errors)
+      text += "; unreadable: " + std::to_string(batch.errors);
+    status(text);
+  }
+  getApp()->addTimeout(this, ID_POLL, 30);
+  return 1;
+}
+long SidebarWidget::onContext(FXObject*, FXSelector, void* data) {
+  // Let FOX release its pointer grab before entering the popup's modal loop.
+  FXTreeList::onRightBtnRelease(this, 0, data);
+  auto* event = static_cast<FXEvent*>(data);
+  auto* item = getItemAt(event->win_x, event->win_y);
+  if (!isItemDirectory(item))
+    return 1;
+  contextPath = getItemPathname(item).text();
+  FXMenuPane menu(this);
+  new FXMenuCommand(&menu, "Set work path", nullptr, this, ID_SET_WORK_PATH);
+  menu.create();
+  menu.popup(nullptr, event->root_x, event->root_y);
+  getApp()->runModalWhileShown(&menu);
+  return 1;
+}
+long SidebarWidget::onSetWorkPath(FXObject*, FXSelector, void*) {
+  if (workPathRequested && !contextPath.empty())
+    workPathRequested(contextPath);
   return 1;
 }
 } // namespace xfmd

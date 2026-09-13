@@ -43,7 +43,7 @@ ligger ved tilhørende `.cpp`. Én hovedrolle per filpar.
 | `application/main.cpp`, `Application.cpp` | Oppstart, levetid og composition root; registrerer interpreter/renderer, ingen arbeidsflytlogikk. |
 | `application/ui/XfmdWindow.cpp` | Bygger menyer, toolbar, status og containere; kobler targets. |
 | `application/ui/EditorWidget.cpp` | FXText-hendelser, tekst/byteposisjonsadapter og brukerredigering. |
-| `application/ui/SidebarWidget.cpp` | FOX-mappetre og seleksjon; delegerer åpning. |
+| `application/ui/SidebarWidget.cpp` | Avgrenset FXTreeList, lazy barn og filtrerte treff; delegerer åpning. |
 | `application/ui/ViewModeController.cpp` | Splitter, synlighet, fokus og modus. |
 | `application/commands/CommandRouter.cpp` | CLI/menu/tastatur til samme operasjoner; enabled-state. |
 | `application/document/DocumentSession.cpp` | Aktiv tekst, revisjon, lagret baseline, dirty og snapshots. |
@@ -179,7 +179,7 @@ original tekst og kildeoffsets; markørens source-range er tom og Approximate.
 ## 10. Sidepanelets FOX-meldinger
 
 SidebarWidget er sitt eget meldingstarget. Egne selector-ID-er starter derfor
-ved FXDirList::ID_LAST, aldri på vilkårlige små tall som overlapper arvede
+ved FXTreeList::ID_LAST (tidligere FXDirList::ID_LAST), aldri på vilkårlige små tall som overlapper arvede
 kommandoer. SEL_DOUBLECLICKED/ID_TREE_EVENT åpner bare faktiske filer.
 SEL_COMMAND fra vanlig treklikk skal ikke bli en ID_HIDE-kommando.
 ViewModeController::toggleSidebar er eneste eksplisitte synlighetsendring;
@@ -198,3 +198,25 @@ Widget-konstruktørene erstatter begge standardbarene før create(), med samme
 parent, target, selector, stil og range/page/line. FOX-parenting eier adapterne
 og FOX avregistrerer timere ved destruksjon. Dette er en xfmd-lokal kompatibilitets-
 rettelse, ikke en endring i systemets FOX-bibliotek eller i xfw.
+
+## 12. Arbeidsrot, historikk og filtrert tre (P8)
+
+WorkspacePanel i application/ui komponerer filterfelt, to typeknapper,
+SidebarWidget, søkestatus og arbeidsstihistorikk i vertikal splitter. F10 styrer
+hele panelet. SidebarWidget bygger eget FXTreeList med en eksplisitt rot; arvet
+FXDirList kan ikke avgrense rotnavigasjonen og er erstattet. Egne hendelses-ID-er
+starter ved basens ID_LAST. Begge tree-scrollbarer og begge scrollbarer i historikklisten bruker FoxWheelScrollBar.
+Den lille WorkPathList-adapteren i WorkspacePanel.cpp erstatter bare standardbarene.
+
+application/workspace/WorkPathHistory.cpp eier kanoniske stier, rotutvidelse og MRU.
+FileNameFilter.cpp eier wildcard/delstreng og typekombinasjon. DirectoryScanner.cpp
+eier én stoppbar worker for katalogjobber og en bounded kø med treff som GUI
+henter via timer. Ingen FOX-kall fra worker. Vanlig navigasjon leser direkte barn;
+aktivt filter søker rekursivt og GUI bygger bare forfedre til matchende filer.
+Rot/filterbytte stopper tidligere jobb før noder erstattes. Ingen callbacks
+bærer gamle nodepekere over rotbytte. Root-dobbeltklikk og kontekstmeny utsetter
+rotbytte til etter FOXs event-dispatch for å unngå sletting av aktive noder.
+
+Application::startPath velger CLI-mappe eller dokument; vanlig open/bytte flytter
+ikke arbeidsroten. FOX-registry lagrer kun de 32 historikkstiene, mens defaultrot
+fortsatt er home ved neste oppstart. GUI-worker og timere stoppes før widgets slettes.

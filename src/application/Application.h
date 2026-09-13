@@ -42,6 +42,7 @@ public:
   void initialize(int&, char**);
   void updateUi();
   void execute(CommandRouter::Command);
+  bool startPath(const std::string& path);
   bool open(const std::string& path);
 
 private:

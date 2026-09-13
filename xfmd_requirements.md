@@ -32,7 +32,7 @@ en stub oppfyller ikke i seg selv et funksjonelt krav.
 
 | ID | Forløp og forventet resultat | Alternative forløp | Krav |
 | --- | --- | --- | --- |
-| UC-001 | Start `xfmd fil.md` eller åpne via filbehandler; les rendret dokument. Uten argument vises tom arbeidsflate med Åpne. | Manglende/uleselig fil eller ugyldig encoding gir feil uten tap av gjeldende buffer. | UR-001, UR-002, UR-009 |
+| UC-001 | Start `xfmd fil.md` eller åpne via filbehandler; les rendret dokument. Uten argument vises tom dokumentflate og utfylt sidetre med ~ som arbeidsrot. Mappeargument setter arbeidsroten. | Manglende/uleselig fil eller ugyldig encoding gir feil uten tap av gjeldende buffer. | UR-001, UR-002, UR-009 |
 | UC-002 | Følg lokal dokumentlenke; bruk Alt+Venstre/Høyre til tilbake/frem med bevart leseposisjon. | Avbryt dirty-dialog, brutt lenke eller feilet lasting endrer ikke historikken. | UR-005, UR-009 |
 | UC-003 | Vis/skjul sidepanel med F10; velg mappe og dobbeltklikk `.md`/`.txt`. | Enkeltklikk velger bare. Uleselig mappe gir feil uten dokumentbytte. | UR-006, UR-009 |
 | UC-004 | Velg side-ved-side, rediger, se preview etter pause, angre/gjør om, søk og lagre. | Parse-/lagringsfeil beholder edits; lukking/dokumentbytte spør om ulagret tekst. | UR-003, UR-004, UR-007, UR-009 |
@@ -48,12 +48,16 @@ en stub oppfyller ikke i seg selv et funksjonelt krav.
 | UR-003 | Tilby tekstredigering, vanlig utklippstavle, angre Ctrl+Z, gjør om Ctrl+Y, søk Ctrl+F og lagring Ctrl+S. | AT-003: lagre–åpne gir samme tekst; undo/redo oppdaterer dirty og preview. |
 | UR-004 | Oppdater preview når det har gått 300 ms uten ny redigering. Behold fokus og editorens markør. | AT-004: simulert klokke bekrefter debounce; GUI-sjekk bekrefter fokus og nyeste revisjon. |
 | UR-005 | Relative dokumentlenker løses fra mappen til den åpne filens absolutte sti, uavhengig av prosessens arbeidsmappe. Absolutte dokumentstier åpnes direkte. Vis `#` foran relative Markdown-lenker, `/#` foran absolutte Markdown-lenker og jordklode foran HTTP(S)-lenker. Lokale lenker og tilbake/frem gir dokumentnavigasjon med sesjonshistorikk og gjenopprettet leseposisjon. | AT-005: A→B→C, tilbake til B, ny lenke D sletter frem-grenen; avbrutt/feilet åpning endrer ikke køen. |
-| UR-006 | Sidepanelet viser mapper og `.md`/`.txt`, kan skjules eksplisitt og åpner filer på dobbeltklikk. Klikk på `/`, mapper og filer skal aldri automatisk skjule panelet; dokumentbytte bevarer valgt synlighet. Mapper navigeres også når navnet ender på `.md`. | AT-006: blandede filtyper, enkelt-/dobbeltklikk og F10. |
+| UR-006 | Sidepanelet viser mapper og filer under arbeidsroten, med valgfrie filtype-/navnefiltre, kan skjules eksplisitt og åpner filer på dobbeltklikk. Klikk på `/`, mapper og filer skal aldri automatisk skjule panelet; dokumentbytte bevarer valgt synlighet. Mapper navigeres også når navnet ender på `.md`. | AT-006: blandede filtyper, enkelt-/dobbeltklikk og F10. |
 | UR-007 | Tilby preview alene (standard), editor alene og editor venstre/preview høyre i justerbar splitter. | AT-007: modusbytte bevarer dokument, dirty, undo og fokus. |
 | UR-008 | Synkroniser scrolling begge veier etter kildeanker, også med wrapping og varierende teksthøyde, uten pendling. | AT-008: overskrift, lang liste og kodeblokk holder tilsvarende avsnitt synlig; resize og tom fil testes. |
 | UR-009 | Vis dirty-status og handlingsrettede feil. Ved bytte/lukking tilby Lagre, Forkast eller Avbryt. Avbrudd/feil bevarer gjeldende dokument. | AT-009: skrivefeil, ekstern endring, avbrudd og feilet nytt dokument gir ingen stille tap. |
 | UR-010 | Senere: motta dokument- og kildeankeroppdateringer fra `xfw` uten å endre interpreter/renderer. | AT-010: framtidig IPC-integrasjonstest; ikke første leveranse. |
-| UR-011 | Wheel-/gesture-scrolling i sidetre, editor og preview bevarer små delbevegelser og når eksakt topp/bunn eller venstre/høyre. Dragging av scrollbar og standard modifikatortaster beholdes. | AT-025: små og hele wheel-deltaer, begge retninger/akser, endepunkter og reversering testes med ekte FOX-scrollbarer. |
+| UR-011 | Wheel-/gesture-scrolling i sidetre, arbeidsstihistorikk, editor og preview bevarer små delbevegelser og når eksakt topp/bunn eller venstre/høyre. Dragging av scrollbar og standard modifikatortaster beholdes. | AT-025: små og hele wheel-deltaer, begge retninger/akser, endepunkter og reversering testes med ekte FOX-scrollbarer. |
+
+| UR-012 | Start uten argument med ~ som arbeidsrot; `xfmd .` bruker absolutt PWD, og annet mappeargument brukes som rot. Filargument åpner dokument med foreldre-mappen som arbeidsrot. Treets rot er synlig og utvidet ved oppstart. Vanlig trenavigasjon kan ikke gå utenfor roten. Dobbeltklikk rot utvider eksplisitt til ~, deretter /. | AT-026: oppstart uten argument, relativ/absolutt mappe og fil; rotsekvens, feil sti og avgrensning. |
+| UR-013 | Høyreklikk mappe tilbyr «Set work path». Arbeidsstier vises under treet som klikkbar, unik historikk (nyeste først, maksimum 32), lagret mellom oppstarter. Aktivering av ugyldig historikk bevarer roten og gir forklaring. Dokument, dirty og panelsynlighet bevares ved rotbytte. | AT-027: kontekstmeny, historikkvalg, persistens, slettet mappe og dirty-buffer. |
+| UR-014 | Filtrer filnavn med delstreng, ? (ett Unicode-tegn) og * (null eller flere tegn). Aktive *.md / *.txt-knapper kombineres med OR før AND med navnefeltet. Ingen aktiv typeknapp betyr alle filtyper; tomt navnefelt betyr alle navn. Vis bare matchende filer og deres forfedremapper ved aktivt filter; behold roten også ved null treff. | AT-028: knappkombinasjoner, kjedet filter, wildcard/Unicode, dype treff, null treff, raske filter-/rotbytter og uleselige mapper. |
 
 ## 5. Systemkrav
 
@@ -108,3 +112,19 @@ og AT-ID-er. Load/save, splitter og filtrering er functionality, ikke automatisk
 features. Før implementering gjennomgås fontstrategi, presis mapping, ytelsesbudsjett,
 Markdown-profil og filpolicy. IPC, fragmentlenker og lokale bilder krever senere
 kravrevisjon. Ingen SDL-kompilator eller avhengighet til SDP innføres nå.
+
+## 8. Arbeidsrot og filfilter
+
+Arbeidsroten avgrenser sidetreet; eksplisitt Åpne og dokumentlenker beholder sin
+sti-policy og flytter ikke arbeidsroten. Symlinker til filer utenfor roten og
+symbolske mappelenker traverseres ikke i treet. Skjulte mapper/filer tas med.
+Dobbeltklikk en rot utenfor home går også til home, deretter /; på / beholdes /.
+Begge typeknapper er av som standard, så oppstart viser direkte mappeinnhold uten
+et fullstendig rekursivt søk. Navnefilter uten wildcard er delstreng; med wildcard
+matches hele filnavnet. ASCII-bokstaver matches uten hensyn til store/små bokstaver.
+
+Rekursiv filtrering utføres i separat worker uten FOX-kall og publiserer treff
+fortløpende. Vanlig treutvidelse leser bare den valgte mappen. Rot-/filterbytte
+kansellerer gammel skanning; GUI-objekter tilhører bare GUI-tråden. Status viser
+pågående søk, null treff eller antall uleselige mapper. Historikk er separat fra
+dokumenthistorikk og endrer ikke prosessens arbeidsmappe.

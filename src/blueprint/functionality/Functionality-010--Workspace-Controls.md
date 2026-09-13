@@ -7,7 +7,7 @@ owner: application
 status: Implemented
 scope: FirstRelease
 requirements: UR-011, UR-001, UR-006, UR-007, SR-002, SR-008, SR-013
-uses: FUNC-001, FUNC-005, FUNC-007
+uses: FUNC-001, FUNC-005, FUNC-007, FUNC-012, FUNC-013
 ---
 
 # Functionality-010: Arbeidsflate, kommandoer og sidepanel
@@ -23,15 +23,15 @@ Krav: UR-011, UR-001, UR-006, UR-007, SR-002, SR-008, SR-013. Definisjoner og no
 
 ## 3. Kontrakter og eierskap
 
-XfmdWindow::buildUi oppretter vindusstruktur. CommandRouter::dispatch/update ruter handlinger og enabled-state. ViewModeController::setMode/toggleSidebar eier synlighet; SidebarWidget::onOpen sender åpneforespørsel.
+XfmdWindow::buildUi oppretter vindusstruktur. CommandRouter::dispatch/update ruter handlinger og enabled-state. ViewModeController::setMode/toggleSidebar eier synlighet for hele WorkspacePanel; SidebarWidget::onOpen sender åpneforespørsel.
 
 ## 4. Atferd, tilstand og feil
 
-Preview standard, Ctrl+1/2/3 bytter modus, F10 bytter sidebar. Bare dobbeltklikk på en faktisk fil åpner dokument. Mapper, også mapper med
+Preview standard, Ctrl+1/2/3 bytter modus, F10 bytter sidebar. Dobbeltklikk på en faktisk fil åpner dokument. Dobbeltklikk rot utvider arbeidsroten eksplisitt, uten dokumentbytte. Mapper, også mapper med
 .md-suffiks, forblir tre-navigasjon. SidebarWidget bruker ID_TREE_EVENT fra
-FXDirList::ID_LAST slik at treets SEL_COMMAND ikke treffer FOXs ID_HIDE.
+FXTreeList::ID_LAST slik at treets SEL_COMMAND ikke treffer FOXs ID_HIDE.
 Treklikk og dokumentbytte bevarer sidepanelets synlighet; bare eksplisitt
-F10/Sidebar-handling endrer den. Case-insensitive .md/.txt-filter. Modusbytte bevarer økt og undo; ingen filtransaksjon i vindusklassen.
+F10/Sidebar-handling endrer den. WorkspacePanel komponerer arbeidsrot, filter og historikk; FTR-005 beskriver arbeidsflyten. Modusbytte bevarer økt og undo; ingen filtransaksjon i vindusklassen.
 
 FoxWheelScrollBar er delt FOX-adapter for begge scrollakser. Den bevarer
 fraksjoner mellom små wheel-events og bruker FOXs eksisterende animasjon og
@@ -50,10 +50,14 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 | 5 | `SidebarWidget open callback` | `Application::open` | `src/application/Application.cpp` | Path → requestOpen | Felles dirty-policy | Implemented |
 | 6 | `SidebarWidget constructor` | `FoxWheelScrollBar::replace` | `src/application/adapters/FoxWheelScrollBar.cpp` | Standard bar → presis wheel-adapter | Parent eier ny bar; før create | Implemented |
 | 7 | `FOX wheel dispatch` | `FoxWheelScrollBar::onMouseWheel` | `src/application/adapters/FoxWheelScrollBar.cpp` | Delta/rest → target og FOX-timer | Clamp, behold delpiksel-rest, standard varsler | Implemented |
+| 8 | `XfmdWindow::buildUi` | `WorkspacePanel::WorkspacePanel` | `src/application/ui/WorkspacePanel.cpp` | Filter, tre og historikk → ett panel | Parent eier widgets | Implemented |
+| 9 | `WorkPathList constructor` | `FoxWheelScrollBar::replace` | `src/application/adapters/FoxWheelScrollBar.cpp` | Historikkliste → samme presise scrollbarer | Parent eier adapterne; før create | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
 [FUNC-001](../functionality/Functionality-001--Document-Session.md), [FUNC-005](../functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-007](../functionality/Functionality-007--Preview-Pipeline.md)
+
+[FUNC-012](Functionality-012--Work-Path-History.md) og [FUNC-013](Functionality-013--Filtered-File-Tree.md) eier arbeidsstier og filtret tre.
 
 UC-001/003/004 bruker denne functionality direkte; navigasjon/sync bruker kontrollene uten å eie dem. Nye kommandoer rutes til riktig tjeneste, aldri en ny stor switch med implementasjoner i vinduet.
 

@@ -1,7 +1,8 @@
 # Blueprint-register
 
-Status: Implemented. Fire features og elleve functionality-objekter er implementert
-i første leveranse. Samlet bevis og begrensninger: [P7](../../docs/evidence/P7.md). [Arbeidsmåten](../../docs/working-method.md)
+Status: Implemented. Baseline hadde fire features og elleve functionality-objekter;
+P8 legger til FTR-005 og FUNC-012/013 for arbeidsområder og filtrering;
+se [P8-bevis](../../docs/evidence/P8.md). Samlet bevis og begrensninger: [P7](../../docs/evidence/P7.md). [Arbeidsmåten](../../docs/working-method.md)
 definerer begrepene; [malene](templates/README.md) brukes ved nye objekter.
 
 ## Designobjekter
@@ -21,8 +22,11 @@ definerer begrepene; [malene](templates/README.md) brukes ved nye objekter.
 | [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md) | Preview-orkestrering | Functionality / System | application | FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006 |
 | [FUNC-008](functionality/Functionality-008--Navigation-History.md) | Dokumentnavigasjon og historikk | Functionality / User | application | FUNC-001, FUNC-009 |
 | [FUNC-009](functionality/Functionality-009--Source-Anchor-Mapping.md) | Kildeankre og viewport-koordinering | Functionality / System | application | FUNC-005 |
-| [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | Arbeidsflate, kommandoer og sidepanel | Functionality / User | application | FUNC-001, FUNC-005, FUNC-007 |
+| [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | Arbeidsflate, kommandoer og sidepanel | Functionality / User | application | FUNC-001, FUNC-005, FUNC-007, FUNC-012, FUNC-013 |
 | [FUNC-011](functionality/Functionality-011--Text-Editing.md) | Tekstredigering, undo og søk | Functionality / User | application | FUNC-001, FUNC-005, FUNC-007 |
+| [FTR-005](feature/Feature-005--Work-Path-Navigation.md) | Arbeidsområder med historikk | Feature / User | application | FUNC-010, FUNC-012, FUNC-013 |
+| [FUNC-012](functionality/Functionality-012--Work-Path-History.md) | Arbeidsrot og historikk | Functionality / User | application | none |
+| [FUNC-013](functionality/Functionality-013--Filtered-File-Tree.md) | Filnavnfilter og treinnhold | Functionality / User | application | FUNC-012 |
 
 Feature-eier er eier av ende-til-ende-koordineringen, ikke av all kode i featuren.
 Hver functionality har ett lag som kontrakteier. Rendererens tjenester ligger i
@@ -46,6 +50,9 @@ akseptansekriterier med bevis i faserapportene; les P7 for faktisk dekning. Futu
 | UR-009 | [FUNC-001](functionality/Functionality-001--Document-Session.md), [FUNC-002](functionality/Functionality-002--Local-File-Storage.md), [FUNC-008](functionality/Functionality-008--Navigation-History.md), [FUNC-011](functionality/Functionality-011--Text-Editing.md), [FTR-001](feature/Feature-001--Markdown-Presentation.md), [FTR-002](feature/Feature-002--Live-Preview.md), [FTR-003](feature/Feature-003--Document-Navigation.md) | AT-009 | FirstRelease |
 | UR-010 | Deferred: egen IPC-blueprint opprettes før arbeid | AT-010 | Future |
 | UR-011 | [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FUNC-011](functionality/Functionality-011--Text-Editing.md) | AT-025 | FirstRelease |
+| UR-012 | [FTR-005](feature/Feature-005--Work-Path-Navigation.md), [FUNC-012](functionality/Functionality-012--Work-Path-History.md) | AT-026 | FirstRelease |
+| UR-013 | [FTR-005](feature/Feature-005--Work-Path-Navigation.md), [FUNC-012](functionality/Functionality-012--Work-Path-History.md) | AT-027 | FirstRelease |
+| UR-014 | [FTR-005](feature/Feature-005--Work-Path-Navigation.md), [FUNC-013](functionality/Functionality-013--Filtered-File-Tree.md) | AT-028 | FirstRelease |
 | SR-001 | [FUNC-003](functionality/Functionality-003--Markdown-Interpretation.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md), [FTR-001](feature/Feature-001--Markdown-Presentation.md) | AT-011 | FirstRelease |
 | SR-002 | [FUNC-001](functionality/Functionality-001--Document-Session.md), [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md), [FUNC-008](functionality/Functionality-008--Navigation-History.md), [FUNC-009](functionality/Functionality-009--Source-Anchor-Mapping.md), [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FUNC-011](functionality/Functionality-011--Text-Editing.md), [FTR-002](feature/Feature-002--Live-Preview.md), [FTR-003](feature/Feature-003--Document-Navigation.md), [FTR-004](feature/Feature-004--Synchronized-Scrolling.md) | AT-012 | FirstRelease |
 | SR-003 | [FUNC-003](functionality/Functionality-003--Markdown-Interpretation.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md), [FTR-001](feature/Feature-001--Markdown-Presentation.md) | AT-013 | FirstRelease |

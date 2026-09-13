@@ -1,0 +1,37 @@
+#pragma once
+#include "SidebarWidget.h"
+#include "application/workspace/WorkPathHistory.h"
+namespace xfmd {
+class WorkspacePanel : public FX::FXVerticalFrame {
+  FXDECLARE(WorkspacePanel)
+  std::string pendingPath;
+  bool pathError = false;
+  void remember();
+
+protected:
+  WorkspacePanel() : history("/") {}
+
+public:
+  enum {
+    ID_FILTER = FX::FXVerticalFrame::ID_LAST,
+    ID_HISTORY,
+    ID_ACTIVATE,
+    ID_FILTER_APPLY,
+    ID_LAST
+  };
+  WorkPathHistory history;
+  SidebarWidget* tree = nullptr;
+  FX::FXTextField* filterInput = nullptr;
+  FX::FXToggleButton *markdown = nullptr, *text = nullptr;
+  FX::FXList* workPaths = nullptr;
+  FX::FXLabel* searchStatus = nullptr;
+  explicit WorkspacePanel(FX::FXComposite*);
+  ~WorkspacePanel() override;
+  bool setWorkPath(const std::string&);
+  void requestWorkPath(const std::string&);
+  long onActivate(FX::FXObject*, FX::FXSelector, void*);
+  long onHistory(FX::FXObject*, FX::FXSelector, void*);
+  long onFilter(FX::FXObject*, FX::FXSelector, void*);
+  long onApplyFilter(FX::FXObject*, FX::FXSelector, void*);
+};
+} // namespace xfmd
