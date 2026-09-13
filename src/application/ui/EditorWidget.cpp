@@ -1,4 +1,5 @@
 #include "EditorWidget.h"
+#include "application/adapters/FoxWheelScrollBar.h"
 #include <algorithm>
 using namespace FX;
 namespace xfmd {
@@ -10,6 +11,8 @@ FXIMPLEMENT(EditorWidget, FXText, editorMap, ARRAYNUMBER(editorMap))
 EditorWidget::EditorWidget(FXComposite* parent)
     : FXText(parent, this, ID_EDIT, TEXT_WORDWRAP | LAYOUT_FILL_X | LAYOUT_FILL_Y),
       projection(std::make_unique<TextProjection>("")) {
+  horizontal = FoxWheelScrollBar::replace(horizontal);
+  vertical = FoxWheelScrollBar::replace(vertical);
   setMarginLeft(12);
   setMarginRight(12);
   setMarginTop(10);

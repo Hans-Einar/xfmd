@@ -1,4 +1,5 @@
 #include "FoxRenderHost.h"
+#include "application/adapters/FoxWheelScrollBar.h"
 #include <algorithm>
 #include <fxkeys.h>
 using namespace FX;
@@ -12,6 +13,8 @@ FXIMPLEMENT(FoxRenderHost, FXScrollArea, renderMap, ARRAYNUMBER(renderMap))
 FoxRenderHost::FoxRenderHost(FXComposite* parent, IRenderer& renderer, FoxTextMetrics& metrics)
     : FXScrollArea(parent, VSCROLLER_ALWAYS | LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 0),
       renderer(&renderer), metrics(&metrics) {
+  horizontal = FoxWheelScrollBar::replace(horizontal);
+  vertical = FoxWheelScrollBar::replace(vertical);
   enable(); // FXScrollArea does not enable native pointer/key dispatch by default.
   setBackColor(FXRGB(255, 255, 255));
 }

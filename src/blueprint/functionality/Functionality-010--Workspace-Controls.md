@@ -6,8 +6,8 @@ role: Adapter
 owner: application
 status: Implemented
 scope: FirstRelease
-requirements: UR-001, UR-006, UR-007, SR-002, SR-008, SR-013
-uses: FUNC-001, FUNC-007
+requirements: UR-011, UR-001, UR-006, UR-007, SR-002, SR-008, SR-013
+uses: FUNC-001, FUNC-005, FUNC-007
 ---
 
 # Functionality-010: Arbeidsflate, kommandoer og sidepanel
@@ -18,7 +18,7 @@ Samle tynn UI-plumbing for vindu, splitter, view modes, sidepanel og kommandoinn
 
 ## 2. Krav og akseptanse
 
-Krav: UR-001, UR-006, UR-007, SR-002, SR-008, SR-013. Definisjoner og normativ akseptanse finnes i
+Krav: UR-011, UR-001, UR-006, UR-007, SR-002, SR-008, SR-013. Definisjoner og normativ akseptanse finnes i
 [kravspesifikasjonen](../../../xfmd_requirements.md). Kapittel 7 konkretiserer beviset.
 
 ## 3. Kontrakter og eierskap
@@ -33,6 +33,10 @@ FXDirList::ID_LAST slik at treets SEL_COMMAND ikke treffer FOXs ID_HIDE.
 Treklikk og dokumentbytte bevarer sidepanelets synlighet; bare eksplisitt
 F10/Sidebar-handling endrer den. Case-insensitive .md/.txt-filter. Modusbytte bevarer økt og undo; ingen filtransaksjon i vindusklassen.
 
+FoxWheelScrollBar er delt FOX-adapter for begge scrollakser. Den bevarer
+fraksjoner mellom små wheel-events og bruker FOXs eksisterende animasjon og
+changed/command-varsler. Konstruktørene bytter barene før create(); widgets eier dem.
+
 ## 5. Plumbing
 
 Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
@@ -45,21 +49,26 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 | 4 | `FOX SEL_DOUBLECLICKED / ID_TREE_EVENT` | `SidebarWidget::onOpen` | `src/application/ui/SidebarWidget.cpp` | Faktisk fil → Path | Mappe/enkeltklikk åpner ikke og skjuler ikke panelet | Implemented |
 | 5 | `SidebarWidget open callback` | `Application::open` | `src/application/Application.cpp` | Path → requestOpen | Felles dirty-policy | Implemented |
 
+| 6 | `SidebarWidget constructor` | `FoxWheelScrollBar::replace` | `src/application/adapters/FoxWheelScrollBar.cpp` | Standard bar → presis wheel-adapter | Parent eier ny bar; før create | Implemented |
+| 7 | `FOX wheel dispatch` | `FoxWheelScrollBar::onMouseWheel` | `src/application/adapters/FoxWheelScrollBar.cpp` | Delta/rest → target og FOX-timer | Clamp, behold delpiksel-rest, standard varsler | Implemented |
+
 ## 6. Gjenbruk og avhengigheter
 
-[FUNC-001](../functionality/Functionality-001--Document-Session.md), [FUNC-007](../functionality/Functionality-007--Preview-Pipeline.md)
+[FUNC-001](../functionality/Functionality-001--Document-Session.md), [FUNC-005](../functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-007](../functionality/Functionality-007--Preview-Pipeline.md)
 
 UC-001/003/004 bruker denne functionality direkte; navigasjon/sync bruker kontrollene uten å eie dem. Nye kommandoer rutes til riktig tjeneste, aldri en ny stor switch med implementasjoner i vinduet.
 
 ## 7. Verifikasjon
 
-Relevante akseptanse-ID-er: AT-001, AT-006, AT-007, AT-012, AT-018, AT-023.
+Relevante akseptanse-ID-er: AT-025, AT-001, AT-006, AT-007, AT-012, AT-018, AT-023.
 
 `WorkspaceTest` kjører under egen Xvfb og kontrollerer editor/preview-modus, F10-funksjonen, filfilter, undo og dirty-close. Kommando-/visuell ende-til-ende QA utvides i P7.
 
 Evidence: [Fase P2](../../../docs/evidence/P2.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
 
 Regresjon: [Sidepanel og rotklikk](../../../docs/evidence/sidebar-tree.md).
+
+Regresjonsbevis: [Gesture og scrollgrenser](../../../docs/evidence/wheel-scrolling.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 
