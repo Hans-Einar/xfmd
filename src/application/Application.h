@@ -8,6 +8,7 @@
 #include "contracts/IRenderer.h"
 #include "document/DocumentCoordinator.h"
 #include "document/EditController.h"
+#include "export/ExportCoordinator.h"
 #include "navigation/NavigationCoordinator.h"
 #include "preview/PreviewCoordinator.h"
 #include "scroll/ScrollCoordinator.h"
@@ -35,6 +36,7 @@ public:
   FoxRenderHost* host = nullptr;
   std::unique_ptr<FoxScheduler> scheduler;
   std::unique_ptr<PreviewCoordinator> preview;
+  std::unique_ptr<ExportCoordinator> exporter;
   ScrollCoordinator scrolling;
   std::unique_ptr<NavigationCoordinator> navigation;
   std::function<void()> contentChanged, documentOpened;
@@ -47,9 +49,12 @@ public:
   void execute(CommandRouter::Command);
   bool startPath(const std::string& path);
   bool open(const std::string& path);
+  bool startExport(const std::string& path);
 
 private:
   void wireDocument();
+  void chooseExport();
+  void pollExport();
   std::string savePath();
 };
 } // namespace xfmd

@@ -6,6 +6,7 @@
 using namespace FX;
 namespace xfmd {
 Application::~Application() {
+  exporter.reset();
   preview.reset();
   scheduler.reset();
   delete window;
@@ -24,6 +25,10 @@ void Application::initialize(int& argc, char** argv) {
                                                window->workspacePanel, window->split);
   commands.action = [this](auto command) { execute(command); };
   commands.enabled = [this](auto command) {
+    if (command == CommandRouter::ExportPdf)
+      return !exporter || !exporter->busy();
+    if (command == CommandRouter::CancelExport)
+      return exporter && exporter->busy();
     if (command == CommandRouter::FitWidth || command == CommandRouter::ActualSize)
       return preview && preview->layoutProfile().mode == LayoutMode::Paged;
     if (command == CommandRouter::Undo)

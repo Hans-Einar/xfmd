@@ -24,6 +24,8 @@ public:
     A4,
     FitWidth,
     ActualSize,
+    ExportPdf,
+    CancelExport,
     Last
   };
   std::function<void(Command)> action;

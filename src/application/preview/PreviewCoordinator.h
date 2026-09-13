@@ -36,6 +36,7 @@ public:
   void setLayoutProfile(LayoutProfile);
   const LayoutProfile& layoutProfile() const { return profile; }
   bool acceptFrame(LayoutResult);
+  LayoutResult frame() const { return currentFrame; }
   void invalidate();
   const ParseResult& currentModel() const { return model; }
 };
