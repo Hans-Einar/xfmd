@@ -36,6 +36,9 @@ void run() {
   app.initialize(argc, argv);
   CHECK(app.open(file.string()));
   app.views->setMode(ViewMode::Split);
+  auto* directoryItem = app.window->sidebar->getPathnameItem(dir.string().c_str());
+  CHECK(directoryItem);
+  app.window->sidebar->expandTree(directoryItem);
   events(app);
   app.scrolling.setSplit(false); // Check each physical viewport independently.
   for (auto* area : {static_cast<FX::FXScrollArea*>(app.window->sidebar),
@@ -43,6 +46,7 @@ void run() {
                      static_cast<FX::FXScrollArea*>(app.host)}) {
     auto* bar = area->verticalScrollBar();
     int maximum = bar->getRange() - bar->getPage();
+    std::cerr << area->getClassName() << " initial maximum=" << maximum << '\n';
     CHECK(maximum > 20);
     for (int delta : {120, 30, 1}) {
       for (bool bottom : {false, true}) {
