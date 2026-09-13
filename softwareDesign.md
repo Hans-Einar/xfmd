@@ -320,3 +320,14 @@ FUNC-008/009 for transaksjoner og kildeankre. Det opprettes ikke én feature per
 widget; Files beholder filter/arbeidsrot/historikk. En egen NavigationTree håndterer
 avgrensede klikkhandlinger etter event-dispatch, slik at treet trygt kan erstattes
 ved dokumentbytte. Ved redigering deaktiveres gamle indeksankre frem til ny modell.
+
+## Revisjon P16: nettleservalg og Xfe-integrasjon
+
+FUNC-014 eier nå `browserProgram`; preview og referanser bruker samme
+`Application::openBrowser` / `ExternalBrowser::open`-vei. Standard er `xdg-open`;
+programnavn eller full sti lagres uten en shell-argumentstreng.
+
+[Xfe-studien](docs/xfe-integration-study.md) sammenligner dagens FOX-integrasjon
+med upstream Xfe og vår fork. Den anbefaler selektivt kildegjenbruk av utseende,
+ikoner og kontroller. Foreslåtte P17–P19 og `xfe_ui` er analyse, ikke implementerte
+klasser eller en endring av rendererens kontrakter.

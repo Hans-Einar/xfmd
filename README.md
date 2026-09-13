@@ -16,8 +16,8 @@ referansetre nederst, med en flyttbar skillelinje. Indeksen følger aktiv buffer
 - Klikk en overskrift for å hoppe dit; Enter aktiverer også, piltaster velger bare.
 - **References → Markdown** viser lokale `.md`-lenker. Utvid en fil for å lese dens
   hovedkapitler. Klikk filen eller et kapittel for å åpne. Kollaps/utvid leser på nytt.
-- **References → Hyperlinks** viser øvrige lenker. HTTP(S) åpnes i standardnettleseren
-  via `xdg-open`; andre lenker hopper til forekomsten i gjeldende dokument.
+- **References → Hyperlinks** viser øvrige lenker. HTTP(S) åpnes i valgt nettleser;
+  andre lenker hopper til forekomsten i gjeldende dokument.
 - Filbytte beholder dagens kontroll for ulagrede endringer og tilbake/frem-historikk.
 
 Hovedkapitler er det øverste nivået filen faktisk bruker (H1, ellers H2 osv.).
@@ -71,8 +71,12 @@ bevares. Ekstern filendring gir konflikt; hardlenker krever Lagre som.
 Lenker støtter lokale dokumentstier, inklusive relative stier og prosentkoding.
 Relative Markdown-lenker merkes med `#`, absolutte med `/#`, og nettlenker med
 `↗`. Relative stier regnes fra mappen til den åpne filen.
-Preview følger bare lokale lenker uten fragment/query. HTTP(S) kan åpnes fra
-referansetreet; skript og HTML-eksekvering støttes ikke.
+Lokale preview-lenker støttes uten fragment/query. HTTP(S) åpnes fra både preview
+og referansetreet med programmet i **Edit → Preferences → Hyperlinks → Browser program**.
+Velg eksempelvis `google-chrome-stable`, `firefox` eller `xdg-open` (systemstandard),
+eller skriv full sti / bruk Browse. Feltet tar ett program uten argumenter; URL-en
+overføres separat uten shell. OK lagrer valget; Cancel beholder det gamle.
+Skript og HTML-eksekvering støttes ikke.
 Bilder vises som alternativtekst. xfw-IPC, bilder og andre Markdown-utvidelser er senere
 scope. Preview har fontfallback; editorens glyphdekning avhenger av valgt systemfont.
 
@@ -80,6 +84,7 @@ scope. Preview har fontfallback; editorens glyphdekning avhenger av valgt system
 
 - [Krav og use cases](xfmd_requirements.md)
 - [Arkitektur og filkart](softwareArchitecture.md)
+- [Analyse: Xfe-komponenter, utseende og videre integrasjon](docs/xfe-integration-study.md)
 - [Arbeidsmåte](docs/working-method.md) og [blueprints](src/blueprint/README.md)
 - [Faser og milepæler](implementationPlan.md)
 - [Oppdatert bidragsguide](CONTRIBUTING.md) og [opprinnelige agentregler](AGENTS.md)

@@ -42,3 +42,12 @@ Prosjektlisens er ikke valgt; dette er endringsnotater, ikke en formell release.
 - Nettlenker i referansetreet kan åpnes i standardnettleseren uten shell-evaluering.
 - Revisjons- og stiavhengig invalidering beskytter mot gamle klikk og referansejobber,
   også ved Lagre som. Refererte kapittelankre finnes på nytt etter filåpning.
+
+## P16: valg av nettleser og Xfe-studie
+
+- Edit → Preferences → Hyperlinks lar deg velge nettleserprogram, inkludert
+  `google-chrome-stable`, eller finne et program med Browse. `xdg-open` er standard.
+- Preview og referansetreet bruker samme valg for HTTP(S); lenken sendes som ett
+  argument uten shell. Feil ved programstart vises uten å endre dokumentet.
+- [Xfe-studien](docs/xfe-integration-study.md) kartlegger komponenter, koblinger
+  og anbefalt integrasjonsrekkefølge. Xfe-stil er ennå ikke importert.
