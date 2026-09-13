@@ -4,7 +4,7 @@ kind: Functionality
 audience: User
 role: Workflow
 owner: application
-status: Ready
+status: Implemented
 scope: Future
 requirements: UR-018, SR-002, SR-005, SR-007, SR-010, SR-017
 uses: FUNC-001, FUNC-003, FUNC-004, FUNC-006, FUNC-016, FUNC-017
@@ -29,7 +29,7 @@ Dersom et komplett paged frame har eksakt samme FrameKey, gjenbrukes immutable f
 
 ## 4. Atferd, tilstand og feil
 
-Foreslått File → Export PDF… (Ctrl+Shift+E). Fra Window wrap brukes A4-profilen, aldri viewportbredde som PDF-sidebredde. Dialogen angir at gjeldende buffer eksporteres. Senere edits/dokumentbytte påvirker ikke den frosne jobben; status viser eksportert revisjon og om nyere edits finnes. Maks én eksportjobb; knapp deaktiveres til ferdig/cancel. Avbrudd før publisering sletter tempfil; etter commit rapporteres fullført, ikke «avbrutt».
+File → Export PDF… (Ctrl+Shift+E). Fra Window wrap brukes A4-profilen, aldri viewportbredde som PDF-sidebredde. Dialogen angir at gjeldende buffer eksporteres. Senere edits/dokumentbytte påvirker ikke den frosne jobben; status viser eksportert revisjon og om nyere edits finnes. Maks én eksportjobb; knapp deaktiveres til ferdig/cancel. Avbrudd før publisering sletter tempfil; etter commit rapporteres fullført, ikke «avbrutt».
 
 GUI-tråden eier FOX/layout som krever GUI-ressurser. Worker kan parse og skrive PDF med egne ikke-FOX-contexts. Publisering skjer fra søsken-temp etter finalisering/statuskontroll og flush; eksisterende mål endres først ved commit. Målidentitet sjekkes ved commit, med samme dokumenterte eksterne-racebegrensning som vanlig lagring. PDF-jobben bruker ikke DocumentSession::markSaved. PDF inkluderer sidens innhold og marger, ikke toolbar/sidegap/markør. Ressursprofilen setter maks sider/outputstørrelse og cancel-sjekkpunkter etter P9-måling.
 
@@ -38,9 +38,9 @@ GUI-tråden eier FOX/layout som krever GUI-ressurser. Worker kan parse og skrive
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | `CommandRouter ExportPdf` | `ExportCoordinator::start` | `src/application/export/ExportCoordinator.cpp` | snapshot/profil/mål → job | dirty og historikk uendret | Implemented |
-| 2 | `ExportCoordinator build` | `IRenderer::layout` | `src/contracts/IRenderer.h` | immutable model/paged request → frame | riktig token og FontSetId | Planned |
-| 3 | `ExportCoordinator write` | `PdfOutput::write` | `src/application/adapters/PdfOutput.cpp` | hele PageLayout → temp-PDF | finalisering/cancel/feil | Planned |
-| 4 | `ExportCoordinator successful completion` | `PdfFilePublisher::commit` | `src/application/io/PdfFilePublisher.cpp` | temp + forventet mål → publisering | ingen delvis målfil ved feil før commit | Planned |
+| 2 | `ExportPipeline::run` | `IRenderer::layout` | `src/contracts/IRenderer.h` | immutable model/paged request → frame | riktig token og FontSetId | Implemented |
+| 3 | `ExportPipeline::run` | `PdfOutput::write` | `src/application/adapters/PdfOutput.cpp` | hele PageLayout → temp-PDF | finalisering/cancel/feil | Implemented |
+| 4 | `ExportPipeline::run` | `PdfFilePublisher::commit` | `src/application/io/PdfFilePublisher.cpp` | temp + forventet mål → publisering | ingen delvis målfil ved feil før commit | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -50,10 +50,10 @@ Gjenbruk FUNC-001 snapshots, FUNC-003 parsing, FUNC-004 layout, FUNC-016 glyphre
 
 Fake-output for cancel/feil ved hvert commit-steg; integrasjon leser PDF-sider, MediaBox og tekst med uavhengig leser. Rastrert PDF sammenlignes med samme paged frame ved samme DPI. Test ulagret buffer, edit/bytte under jobb, full disk og bounded shutdown.
 
-AT-012, AT-015, AT-017, AT-020, AT-032, AT-037: planlagt verifikasjon; ingen implementasjonsbevis for utvidelsen.
+AT-012, AT-015, AT-017, AT-020, AT-032, AT-037: se [P11](../../../docs/evidence/P11.md) og [P12](../../../docs/evidence/P12.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Revisjon 1.1, 2026-09-13. Alle nye kall i kapittel 5 er Planned.
+Revisjon 1.2: P11/P12 implementert; se [bevis](../../../docs/evidence/P12.md).
 P12 etter side-/fontgate. Støtter først dagens Markdown-profil; tabeller/bilder/fragmentnavigasjon er ikke implisitt lagt til av eksport.
 [Integrasjonsdesign](../../../softwareDesign.md) og [faseplan](../../../implementationPlan.md) gir kontekst.

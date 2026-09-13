@@ -69,3 +69,10 @@ add_test(NAME PagedPreviewTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOU
 set_tests_properties(PagedPreviewTest PROPERTIES TIMEOUT 30 LABELS GUI)
 
 xfmd_test(ExportJobTest tests/application/ExportJobTest.cpp xfmd_export)
+
+xfmd_test(PdfExportTest tests/application/PdfExportTest.cpp xfmd_export xfmd_interpreter xfmd_renderer)
+add_executable(ExportGuiTest tests/gui/ExportGuiTest.cpp)
+target_include_directories(ExportGuiTest PRIVATE tests)
+target_link_libraries(ExportGuiTest PRIVATE xfmd_application)
+add_test(NAME ExportGuiTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/run_with_xvfb.py $<TARGET_FILE:ExportGuiTest>)
+set_tests_properties(ExportGuiTest PROPERTIES TIMEOUT 30 LABELS GUI)

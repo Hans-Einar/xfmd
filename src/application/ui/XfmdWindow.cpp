@@ -22,6 +22,8 @@ void XfmdWindow::buildUi() {
   add(fileMenu, "&Open...\tCtrl+O", CommandRouter::Open);
   add(fileMenu, "&Save\tCtrl+S", CommandRouter::Save);
   add(fileMenu, "Save &As...\tCtrl+Shift+S", CommandRouter::SaveAs);
+  add(fileMenu, "Export &PDF...\tCtrl+Shift+E", CommandRouter::ExportPdf);
+  add(fileMenu, "Cancel PDF export", CommandRouter::CancelExport);
   add(fileMenu, "&Quit\tCtrl+Q", CommandRouter::Close);
   new FXMenuTitle(bar, "&File", nullptr, fileMenu);
   editMenu = new FXMenuPane(this);

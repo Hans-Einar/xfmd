@@ -12,6 +12,13 @@ std::string Application::savePath() {
 }
 void Application::execute(CommandRouter::Command command) {
   switch (command) {
+  case CommandRouter::ExportPdf:
+    chooseExport();
+    break;
+  case CommandRouter::CancelExport:
+    if (exporter)
+      exporter->cancel();
+    break;
   case CommandRouter::WindowWrap:
   case CommandRouter::A4: {
     auto profile = preview->layoutProfile();

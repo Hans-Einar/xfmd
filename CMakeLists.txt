@@ -55,12 +55,14 @@ add_library(xfmd_typography
   src/application/adapters/FontCatalog.cpp src/application/adapters/SharedTextMetrics.cpp
   src/application/adapters/DisplayListPainter.cpp)
 target_link_libraries(xfmd_typography PUBLIC xfmd_contracts PkgConfig::PANGO)
-add_library(xfmd_export src/application/export/ExportCoordinator.cpp)
-target_link_libraries(xfmd_export PUBLIC xfmd_contracts Threads::Threads)
+add_library(xfmd_export src/application/export/ExportCoordinator.cpp
+  src/application/export/ExportPipeline.cpp src/application/io/PdfFilePublisher.cpp
+  src/application/adapters/PdfOutput.cpp)
+target_link_libraries(xfmd_export PUBLIC xfmd_typography Threads::Threads)
 add_library(xfmd_application
   src/application/preferences/PreferencesService.cpp
   src/application/adapters/FoxPreferencesStore.cpp src/application/ui/PreferencesDialog.cpp
-  src/application/Application.cpp src/application/ApplicationCommands.cpp
+  src/application/Application.cpp src/application/ApplicationCommands.cpp src/application/ApplicationExport.cpp
   src/application/commands/CommandRouter.cpp src/application/ui/XfmdWindow.cpp
   src/application/ui/EditorWidget.cpp src/application/ui/SidebarWidget.cpp src/application/ui/WorkspacePanel.cpp
   src/application/ui/ViewModeController.cpp src/application/adapters/FoxTextMetrics.cpp
@@ -68,7 +70,7 @@ add_library(xfmd_application
   src/application/adapters/FoxRenderHost.cpp src/application/adapters/FoxScheduler.cpp
   src/application/adapters/FoxWheelScrollBar.cpp)
 target_link_libraries(xfmd_application PUBLIC
-  xfmd_typography xfmd_workspace xfmd_document xfmd_preview xfmd_scroll xfmd_navigation xfmd_interpreter xfmd_renderer PkgConfig::FOX)
+  xfmd_export xfmd_typography xfmd_workspace xfmd_document xfmd_preview xfmd_scroll xfmd_navigation xfmd_interpreter xfmd_renderer PkgConfig::FOX)
 add_executable(xfmd src/application/main.cpp)
 target_link_libraries(xfmd PRIVATE xfmd_application)
 
