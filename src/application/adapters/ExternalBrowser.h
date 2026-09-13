@@ -8,7 +8,7 @@ class ExternalBrowser {
 
 public:
   static bool accepts(const std::string&);
-  void open(const std::string&);
+  void open(const std::string& target, const std::string& program = "xdg-open");
   bool poll();
   ~ExternalBrowser();
 };

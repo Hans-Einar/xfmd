@@ -77,5 +77,6 @@ P15-presisering: `NavigationCoordinator::openAt` tar eksplisitt SourceAnchor.
 Samme fil hopper i aktiv buffer, uten ny lesing/dirty-dialog. Annen fil bruker
 samme DocumentCoordinator og committer historikk før pending ankerrestore.
 Refererte kapitler finnes på nytt ved modellaksept etter filåpning; fjernet kapittel
-faller tilbake til start. HTTP(S) i referansetreet går via separat argv-adapter;
-previewens eksisterende link-policy gjelder fortsatt.
+faller tilbake til start. P16: HTTP(S) fra både preview og referansetreet går via samme argv-adapter
+og valgt nettleser i FUNC-014. LocalFileStore og lokal navigasjon håndterer
+fortsatt ikke nettinnhold; nettleseråpning endrer ikke dokument eller historikk.

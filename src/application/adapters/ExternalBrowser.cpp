@@ -16,18 +16,21 @@ bool ExternalBrowser::accepts(const std::string& target) {
   return std::none_of(target.begin(), target.end(),
                       [](unsigned char c) { return c <= 32 || c == 127; });
 }
-void ExternalBrowser::open(const std::string& target) {
+void ExternalBrowser::open(const std::string& target, const std::string& program) {
   if (!accepts(target))
     throw std::runtime_error("Only HTTP(S) can be opened in the browser.");
   poll();
   if (children.size() >= 16)
     throw std::runtime_error("Too many browser requests still running.");
-  const char* argv[] = {"xdg-open", target.c_str(), nullptr};
+  if (program.empty() || program.find('\0') != std::string::npos)
+    throw std::runtime_error("Choose a browser program in Edit → Preferences.");
+  const char* argv[] = {program.c_str(), target.c_str(), nullptr};
   pid_t child;
   const int error =
       posix_spawnp(&child, argv[0], nullptr, nullptr, const_cast<char**>(argv), environ);
   if (error)
-    throw std::runtime_error(std::string("Cannot start browser: ") + std::strerror(error));
+    throw std::runtime_error("Cannot start browser '" + program + "': " + std::strerror(error) +
+                             ". Check Edit → Preferences.");
   children.push_back(child);
 }
 bool ExternalBrowser::poll() {

@@ -38,5 +38,32 @@ void run() {
   std::getline(result, count);
   std::getline(result, argument);
   CHECK(count == "1" && argument == url);
+  const auto program = dir / "browser with spaces;literal";
+  std::filesystem::copy(dir / "xdg-open", program);
+  std::filesystem::remove(dir / "args");
+  browser.open(url, program.string());
+  for (int i = 0; i < 1000 && browser.poll(); ++i)
+    std::this_thread::sleep_for(std::chrono::milliseconds(1));
+  CHECK(!browser.poll());
+  std::ifstream custom(dir / "args");
+  std::getline(custom, count);
+  std::getline(custom, argument);
+  CHECK(count == "1" && argument == url);
+  bool failed = false;
+  try {
+    browser.open(url, "missing-browser");
+  } catch (const std::exception& e) {
+    failed = std::string(e.what()).find("missing-browser") != std::string::npos;
+  }
+  CHECK(failed);
+  for (const auto& programName : {std::string{}, std::string("a\0b", 3)}) {
+    failed = false;
+    try {
+      browser.open(url, programName);
+    } catch (const std::exception&) {
+      failed = true;
+    }
+    CHECK(failed);
+  }
 }
 TEST_MAIN(run)

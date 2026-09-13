@@ -50,18 +50,21 @@ void Application::pollBrowser() {
   if (browser.poll())
     scheduler->restart(5, 250, [this] { pollBrowser(); });
 }
+void Application::openBrowser(const std::string& target) {
+  try {
+    browser.open(target, preferences->active().browserProgram);
+    scheduler->restart(5, 250, [this] { pollBrowser(); });
+  } catch (const std::exception& e) {
+    documents.error(e.what());
+  }
+}
 void Application::activateIndex(const IndexAction& action) {
   if (!action.error.empty()) {
     documents.error(action.error);
     return;
   }
   if (action.kind == IndexActionKind::Hyperlink && ExternalBrowser::accepts(action.target)) {
-    try {
-      browser.open(action.target);
-      scheduler->restart(5, 250, [this] { pollBrowser(); });
-    } catch (const std::exception& e) {
-      documents.error(e.what());
-    }
+    openBrowser(action.target);
     return;
   }
   const auto token = session.view().token;

@@ -64,6 +64,7 @@ private:
   void wireIndex();
   void pollReferences();
   void pollBrowser();
+  void openBrowser(const std::string&);
   void activateIndex(const IndexAction&);
   std::optional<IndexAction> pendingHeading;
   void chooseExport();

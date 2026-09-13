@@ -5,11 +5,12 @@ namespace xfmd {
 FXDEFMAP(PreferencesDialog)
 preferencesMap[] = {
     FXMAPFUNC(SEL_COMMAND, FXDialogBox::ID_ACCEPT, PreferencesDialog::onAccept),
+    FXMAPFUNC(SEL_COMMAND, PreferencesDialog::BrowseBrowser, PreferencesDialog::onBrowseBrowser),
     FXMAPFUNC(SEL_COMMAND, PreferencesDialog::Changed, PreferencesDialog::onChanged),
     FXMAPFUNC(SEL_CHANGED, PreferencesDialog::Changed, PreferencesDialog::onChanged)};
 FXIMPLEMENT(PreferencesDialog, FXDialogBox, preferencesMap, ARRAYNUMBER(preferencesMap))
 PreferencesDialog::PreferencesDialog(FXWindow* owner, PreferencesService& preferences)
-    : FXDialogBox(owner, "Preferences", DECOR_TITLE | DECOR_BORDER | DECOR_CLOSE, 0, 0, 480, 440),
+    : FXDialogBox(owner, "Preferences", DECOR_TITLE | DECOR_BORDER | DECOR_CLOSE, 0, 0, 520, 480),
       service(&preferences), draft(preferences.begin()) {
   auto* content = new FXVerticalFrame(this, LAYOUT_FILL_X | LAYOUT_FILL_Y);
   auto* grid = new FXMatrix(content, 2, MATRIX_BY_COLUMNS | LAYOUT_FILL_X);
@@ -27,6 +28,18 @@ PreferencesDialog::PreferencesDialog(FXWindow* owner, PreferencesService& prefer
   acceleration = new FXCheckButton(content, "Enable scroll acceleration", this, Changed);
   acceleration->setCheck(draft.scroll.acceleration);
   margin = number("A4 margin (mm)", draft.marginMm, 5, 50, 1);
+  auto* programs = new FXGroupBox(content, "Hyperlinks", GROUPBOX_NORMAL | LAYOUT_FILL_X);
+  auto* browserRow = new FXHorizontalFrame(programs, LAYOUT_FILL_X, 0, 0, 0, 0, 0, 0, 0, 0);
+  new FXLabel(browserRow, "Browser program", nullptr, JUSTIFY_LEFT | LAYOUT_CENTER_Y);
+  browser = new FXComboBox(browserRow, 24, this, Changed, COMBOBOX_NORMAL | LAYOUT_FILL_X);
+  browser->appendItem("xdg-open");
+  browser->appendItem("google-chrome-stable");
+  browser->appendItem("firefox");
+  browser->setNumVisible(3);
+  browser->setText(draft.browserProgram.c_str());
+  browser->setTipText("Executable name or full path; the link is passed automatically.");
+  new FXButton(browserRow, "Browse…", nullptr, this, BrowseBrowser, BUTTON_NORMAL);
+  new FXLabel(programs, "xdg-open uses the system default browser.", nullptr, JUSTIFY_LEFT);
   new FXLabel(content, "Try scrolling here — the document stays unchanged.");
   sample = new EditorWidget(content);
   sample->setEditable(false);
@@ -51,7 +64,17 @@ long PreferencesDialog::onChanged(FXObject*, FXSelector, void*) {
   draft.scroll = {speed->getValue(), bool(acceleration->getCheck()), strength->getValue(),
                   maximum->getValue()};
   draft.marginMm = margin->getValue();
+  draft.browserProgram = browser->getText().text();
   FoxWheelScrollBar::configureTree(sample, draft.scroll);
+  return 1;
+}
+long PreferencesDialog::onBrowseBrowser(FXObject*, FXSelector, void*) {
+  auto path =
+      FXFileDialog::getOpenFilename(this, "Select browser program", "/usr/bin/", "All files (*)");
+  if (!path.empty()) {
+    browser->setText(path);
+    onChanged(nullptr, 0, nullptr);
+  }
   return 1;
 }
 long PreferencesDialog::onAccept(FXObject*, FXSelector, void*) {

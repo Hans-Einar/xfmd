@@ -1,4 +1,5 @@
 #include "PreferencesService.h"
+#include <algorithm>
 #include <cmath>
 namespace xfmd {
 bool PreferencesService::validate(const PreferencesSnapshot& s, std::string& error) {
@@ -15,6 +16,10 @@ bool PreferencesService::validate(const PreferencesSnapshot& s, std::string& err
     error = "Maximum acceleration must be between 1 and 5.";
   else if (!within(s.marginMm, 5, 50))
     error = "Page margins must be between 5 and 50 mm.";
+  else if (s.browserProgram.empty() || s.browserProgram.size() > 4096 ||
+           std::any_of(s.browserProgram.begin(), s.browserProgram.end(),
+                       [](unsigned char c) { return c < 32 || c == 127; }))
+    error = "Choose a browser program name or path (without arguments).";
   else {
     error.clear();
     return true;

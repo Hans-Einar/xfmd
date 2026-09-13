@@ -7,7 +7,7 @@ owner: application
 status: Implemented
 scope: FirstRelease
 requirements: UR-023, SR-020
-uses: FUNC-020, FUNC-008, FUNC-009, FUNC-010
+uses: FUNC-020, FUNC-008, FUNC-009, FUNC-010, FUNC-014
 ---
 
 # Feature-009: Dokumentreferanser
@@ -32,6 +32,7 @@ Heading-hierarki følger nærmeste grunnere nivå; ingen tomme mellomnivåer.
 References grupperer Markdown og Hyperlinks; filbarn lastes lazy, ett nivå dypt.
 Gamle revisjoner deaktiverer klikk og forkaster jobber; feil vises under filen.
 Enkeltklikk/Enter navigerer, piltaster velger. Dirty-cancel beholder aktiv fil.
+P16: HTTP(S) bruker samme nettleservalg i FUNC-014 som preview, uten å endre dokumentet.
 
 ## 5. Plumbing
 

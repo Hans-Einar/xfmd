@@ -265,3 +265,12 @@ P15-status: M1 (`33634d6`) og M2 (`2d187cd`) implementert. M3 dokumenterer revie
 regresjon, GUI-evidens og installasjon. Alle 39 Release-tester passerte; etter
 Save As-/levetidsjusteringer passerte berørte tester på nytt, inklusive seks
 ASan/UBSan/LSan-tester. GitHub kjører hele matrisen før merge.
+
+## P16 — nettleserpreferanse og Xfe-studie
+
+Branch `phase/p16-browser-xfe-study`, egen PR.
+- M1: utvid eksisterende Preferences og felles HTTP(S)-aktivering, vedvarende
+  programvalg, målrettede tester for argv/Cancel/feil og native dialog.
+- M2: kildebasert Xfe-analyse mot upstream og vår fork, komponentkart og anbefalt
+  integrasjonsrekkefølge; dokumentasjon, review, installasjon og CI før merge.
+Xfe-integrasjonen er en studie i denne fasen, ikke et uavklart toolkit-bytte.
