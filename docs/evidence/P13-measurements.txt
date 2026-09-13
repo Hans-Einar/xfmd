@@ -1,0 +1,85 @@
+P13-M3 — AlmaLinux 10.2, kernel 6.12.0-211.7.3.el10_2.x86_64
+Intel i5-7200U, 4 logical CPUs; AC connected. GCC 14 / CMake Release (-O3).
+FOX 1.6.57, Cairo 1.18.2, Pango 1.54.0, Fontconfig 2.15.0.
+Corpus SHA256 cc310b886cc2cd9f340377c1b1a54b8ef5176dbcf2bd21d7764220450d985a82
+
+benchmark
+cold_parse_layout_ms=118.829
+bytes=1049346 runs=49824 samples=30
+parse_p95_ms=40.4989 layout_p95_ms=45.7771 total_p95_ms=93.0535 peak_rss_kib=58684
+	Command being timed: "build-release/xfmd_benchmark /tmp/xfmd-benchmark.md"
+	User time (seconds): 2.58
+	System time (seconds): 0.11
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:02.71
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 58684
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 3
+	Minor (reclaiming a frame) page faults: 54200
+	Voluntary context switches: 26
+	Involuntary context switches: 54
+	Swaps: 0
+	File system inputs: 280
+	File system outputs: 2064
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+
+pdf-benchmark
+bytes=1049346 pages=554 pdf_bytes=1100972 export_ms=2254.62 peak_rss_kib=66820
+	Command being timed: "build-release/PdfBenchmark /tmp/xfmd-benchmark.md /tmp/xfmd-pdf-measure-HDQnxh/result.pdf"
+	User time (seconds): 2.17
+	System time (seconds): 0.06
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:02.26
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 66820
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 11447
+	Voluntary context switches: 49
+	Involuntary context switches: 19
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 2160
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+
+cold
+first_view_ms=241.997 peak_rss_kib=101572
+	Command being timed: "build-release/xfmd_cold_start /tmp/xfmd-benchmark.md"
+	User time (seconds): 0.21
+	System time (seconds): 0.04
+	Percent of CPU this job got: 96%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.27
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 101572
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 12460
+	Voluntary context switches: 200
+	Involuntary context switches: 19
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 80
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+

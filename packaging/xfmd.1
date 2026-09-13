@@ -1,4 +1,4 @@
-.TH XFMD 1 "2026-09-12" "xfmd 0.1.0"
+.TH XFMD 1 "2026-09-13" "xfmd 0.1.0"
 .SH NAME
 xfmd \- native FOX Markdown viewer and editor
 .SH SYNOPSIS
@@ -26,7 +26,17 @@ Ctrl+O opens a file. Ctrl+S saves. Ctrl+Shift+S saves under another name.
 Ctrl+Z and Ctrl+Y undo and redo. Ctrl+F searches.
 Ctrl+1 shows preview, Ctrl+2 the editor, Ctrl+3 split view.
 F10 toggles the sidebar. Alt+Left and Alt+Right traverse document history.
+F11 toggles fullscreen; Escape leaves fullscreen unless a dialog is active.
+Ctrl+Shift+E exports the current buffer as PDF.
 Ctrl+Q quits after checking unsaved changes.
+.SH PREFERENCES AND PUBLICATION
+Edit > Preferences controls scroll speed, optional acceleration and A4 margins.
+The dialog has an isolated scroll test area. OK saves; Cancel keeps the active profile.
+View > Window wrap or A4 page preview selects layout. Fit page width and Actual size
+change only the paged display scale. File > Export PDF exports the full current
+buffer, including unsaved edits, using the same A4 layout and fonts as preview.
+File > Cancel PDF export cancels before publication. Export does not save the source.
+New PDF targets are private (0600); replacement preserves POSIX mode only.
 .SH LIMITS
 Files must be UTF-8 and no larger than 8 MiB. NUL bytes are rejected.
 Local links are supported; fragments, remote resources and scripts are not executed.

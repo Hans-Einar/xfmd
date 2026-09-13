@@ -2,6 +2,7 @@
 #include "adapters/FoxPreferencesStore.h"
 #include "adapters/FoxRenderHost.h"
 #include "adapters/FoxScheduler.h"
+#include "adapters/FoxWindowMode.h"
 #include "adapters/SharedTextMetrics.h"
 #include "commands/CommandRouter.h"
 #include "contracts/IInterpreter.h"
@@ -12,6 +13,7 @@
 #include "navigation/NavigationCoordinator.h"
 #include "preview/PreviewCoordinator.h"
 #include "scroll/ScrollCoordinator.h"
+#include "ui/IconResources.h"
 #include "ui/ViewModeController.h"
 #include "ui/XfmdWindow.h"
 #include <fx.h>
@@ -27,8 +29,10 @@ public:
   CommandRouter commands;
   std::unique_ptr<FoxPreferencesStore> preferencesStore;
   std::unique_ptr<PreferencesService> preferences;
+  IconResources icons;
   XfmdWindow* window = nullptr;
   std::unique_ptr<ViewModeController> views;
+  std::unique_ptr<FoxWindowMode> windowMode;
   std::unique_ptr<FX::FXFont> editorFont;
   std::unique_ptr<IInterpreter> interpreter;
   std::unique_ptr<IRenderer> renderer;

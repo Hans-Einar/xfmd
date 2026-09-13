@@ -1,5 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-  <rect x="5" y="5" width="54" height="54" rx="9" fill="#253a54"/>
-  <path d="M14 42V23h5l7 9 7-9h5v19h-6V32l-6 8-6-8v10z" fill="#fff"/>
-  <path d="M47 23v14m-5-4 5 6 5-6" fill="none" stroke="#a9d8fb" stroke-width="4"/>
+  <title>XFMD: Markdown source and rendered document</title>
+  <path d="M14 4h26l12 12v40a4 4 0 0 1-4 4H14a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4Z" fill="#101e2c" stroke="#64cddd" stroke-width="2"/>
+  <path d="M40 5v12h11" fill="#286275" stroke="#64cddd" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M19 36V23l7 8 7-8v13" fill="none" stroke="#e6f7f8" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M40 25v10m-4-4 4 4 4-4" fill="none" stroke="#61dacb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M19 43h26M19 50h19" fill="none" stroke="#61dacb" stroke-width="3" stroke-linecap="round"/>
 </svg>

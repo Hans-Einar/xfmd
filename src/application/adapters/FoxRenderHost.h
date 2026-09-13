@@ -1,4 +1,5 @@
 #pragma once
+#include "FoxCairoCanvas.h"
 #include "SharedTextMetrics.h"
 #include "ViewTransform.h"
 #include "application/scroll/ScrollDynamics.h"
@@ -9,6 +10,7 @@
 namespace xfmd {
 class FoxRenderHost : public FX::FXScrollArea {
   FXDECLARE(FoxRenderHost)
+  FoxCairoCanvas canvas;
   IRenderer* renderer = nullptr;
   SharedTextMetrics* metrics = nullptr;
   LayoutResult current;

@@ -28,7 +28,7 @@ struct DrawRun {
   bool codeBackground = false;
   InlineIcon icon = InlineIcon::None;
   std::shared_ptr<const ShapedText> shaped{};
-  std::vector<std::shared_ptr<const ShapedText>> shapeParts{};
+  std::size_t shapeBegin = 0, shapeCount = 0;
 };
 struct Decoration {
   Rect bounds;
@@ -48,6 +48,7 @@ struct RenderFrame {
   PageLayout pages;
   std::size_t glyphCount = 0;
   std::vector<DrawRun> runs;
+  std::vector<std::shared_ptr<const ShapedText>> shapeParts;
   std::vector<Decoration> decorations;
   std::vector<AnchorRegion> anchors;
 };

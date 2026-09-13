@@ -21,7 +21,7 @@ bool visible(Rect r, Rect clip) {
          r.x <= clip.x + clip.width;
 }
 } // namespace
-void DisplayListPainter::text(cairo_t* cr, const DrawRun& draw) {
+void DisplayListPainter::text(cairo_t* cr, const RenderFrame& frame, const DrawRun& draw) {
   if (!draw.shaped)
     return;
   double x = draw.bounds.x;
@@ -55,8 +55,8 @@ void DisplayListPainter::text(cairo_t* cr, const DrawRun& draw) {
     }
   };
   drawPart(*draw.shaped);
-  for (const auto& part : draw.shapeParts)
-    drawPart(*part);
+  for (std::size_t i = 0; i < draw.shapeCount; ++i)
+    drawPart(*frame.shapeParts.at(draw.shapeBegin + i));
 }
 void DisplayListPainter::paint(const RenderFrame& frame, cairo_t* cr, Rect clip, bool active) {
   SavedState saved(cr);
@@ -87,7 +87,7 @@ void DisplayListPainter::paint(const RenderFrame& frame, cairo_t* cr, Rect clip,
       cairo_line_to(cr, x + size, y + size / 2);
       cairo_stroke(cr);
     } else
-      text(cr, run);
+      text(cr, frame, run);
     if (!run.link.empty()) {
       cairo_set_line_width(cr, .6);
       cairo_move_to(cr, run.bounds.x, run.bounds.y + run.ascent + 2);

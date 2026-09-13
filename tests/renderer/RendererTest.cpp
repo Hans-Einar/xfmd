@@ -8,7 +8,7 @@ struct FixedMetrics : ITextMetrics {
     for (unsigned char c : text)
       if ((c & 0xc0) != 0x80)
         ++characters;
-    return {characters * font.points / 2, font.points + 4, font.points};
+    return {characters * font.points / 2.0, font.points + 4.0, double(font.points)};
   }
 };
 void run() {

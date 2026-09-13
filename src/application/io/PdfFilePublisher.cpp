@@ -4,7 +4,6 @@
 #include <fcntl.h>
 #include <filesystem>
 #include <unistd.h>
-#include <vector>
 namespace xfmd {
 namespace {
 [[noreturn]] void fail(const char* operation) {
@@ -30,13 +29,10 @@ PdfTarget PdfTarget::inspect(const std::string& name) {
   return value;
 }
 PdfFilePublisher::PdfFilePublisher(PdfTarget value) : target(std::move(value)) {
-  std::string pattern = target.path + ".xfmd-pdf-XXXXXX";
-  std::vector<char> name(pattern.begin(), pattern.end());
-  name.push_back(0);
-  descriptor = ::mkostemp(name.data(), O_CLOEXEC);
+  temporary = target.path + ".xfmd-pdf-XXXXXX";
+  descriptor = ::mkostemp(temporary.data(), O_CLOEXEC);
   if (descriptor < 0)
     fail("Create PDF temporary file");
-  temporary = name.data();
 }
 PdfFilePublisher::~PdfFilePublisher() {
   if (descriptor >= 0)

@@ -1,6 +1,6 @@
 # Implementeringsplan: xfmd
 
-Status: **P0–P8 fullført; P9–P13 planlagt, ikke startet**, 2026-09-13.
+Status: **P0–P13 implementert og lokalt verifisert**, 2026-09-13.
 Brukeren godkjente designgrunnlaget og autoriserte første leveranse i én sesjon.
 Neste implementeringsløp er konkretisert nedenfor; tekniske kontrakter med
 uavklarte P9-prøver beholder Proposed-status. En phase er en
@@ -72,9 +72,8 @@ arbeidsstier og filter med tester. M3 dokumenterer [verifikasjon og visuell kont
 
 ## 5. Planlagt utvidelse P9–P13
 
-Status: **Planlagt, ikke startet**, 2026-09-13. Krav UR-015–020 / SR-015–019 og
-[designrevisjonen](softwareDesign.md) beskriver neste leveranse. Dette er ikke
-påbegynt runtime-implementasjon. Designet ligger på `design/scroll-pages-pdf`.
+Status: **Implementert P9–P13**, 2026-09-13. Krav UR-015–020 / SR-015–019 og
+[designrevisjonen](softwareDesign.md) beskriver neste leveranse. Runtime-implementasjonen følger milepælene nedenfor; tabellene bevarer de opprinnelige akseptansekriteriene. Designet ligger på `design/scroll-pages-pdf`.
 Hver fase får egen branch og PR; hver milepæl avsluttes med én meningsfull commit
 og målrettet review. En milepæl kan omfatte flere nært relaterte klasser.
 Merge skjer når fasens bevis og relevante regresjoner er ferdige. Neste fase
@@ -214,3 +213,17 @@ etter P9, men integreres på én tydelig baseline. Eiere: FUNC-010/019.
 Unit-tester prioriteres for mekanismer med egen logikk. Native UI-/PDF-bevis
 brukes der enhetstester ikke kan verifisere reell integrasjon. Korte målinger
 brukes først; lange stresstester er ikke et generelt milepælkrav.
+
+## 6. Gjennomføring av P9–P13
+
+| Fase | Milepælcommits | Integrasjon / bevis |
+| --- | --- | --- |
+| P9 | 628354e, 2025098, 029d82c | [PR #2](https://github.com/Hans-Einar/xfmd/pull/2), [P9](docs/evidence/P9.md) |
+| P10 | 1bbf461, 52beeb0, a331fdd | [PR #3](https://github.com/Hans-Einar/xfmd/pull/3), [P10](docs/evidence/P10.md) |
+| P11 | a162d3d, 73614d3, 2648611; benchmark c2107dc | [PR #4](https://github.com/Hans-Einar/xfmd/pull/4), [P11](docs/evidence/P11.md) |
+| P12 | 293fe08, 7f3b220, 0a126e5 | [PR #5](https://github.com/Hans-Einar/xfmd/pull/5), [P12](docs/evidence/P12.md) |
+| P13 | 1f92f20, f7a2259, P13-M3 | [P13](docs/evidence/P13.md); siste commit identifiseres i fase-PR |
+
+Designgrunnlaget ble integrert i [PR #1](https://github.com/Hans-Einar/xfmd/pull/1).
+Brancher beholdes. Fysisk touchpad/fler-monitor-hotplug er ikke erklært verifisert;
+automatiserte tester og isolert Window Maker er dokumentert per fase.

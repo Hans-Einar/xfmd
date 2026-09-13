@@ -1,0 +1,23 @@
+# Endringsnotater — WIP
+
+## P9–P13: scrolling, sider og publisering
+
+- Edit → Preferences med vedvarende scrollhastighet, valgfri akselerasjon og
+  isolert prøvefelt. Samme profil brukes i editor, preview, sidetre og historikk.
+- View → A4 page preview eller Window wrap. A4 har justerbare marger,
+  fit-width/100 % og bevarer kildeanker ved visningsbytte.
+- File → Export PDF / Ctrl+Shift+E eksporterer ulagret buffer i bakgrunnen.
+  Samme shaping og paginering som preview; cancel og transaksjonell målfil.
+- View → Full Screen / F11, Escape tilbake, med modal dialog først og bevart
+  normal/maksimert arbeidsflate i Window Maker.
+- Nytt dokument-/Markdown-ikon i FOX-vindu, desktop-entry og installerte størrelser.
+- Felles Pango/Cairo-typografi, fysisk layout og presis frame-identitet.
+  Færre layoutallokeringer og sortering per linje reduserer ressursbruken.
+
+Skjermtegning bruker en gjenbrukbar bakbuffer med FOX-eid X11-overføring, slik at
+hele viewporten tegnes samlet og native ressurser ryddes ved lukking.
+
+Ingen endring i Markdown-dialekt, bilde-/HTML-policy eller xfw-IPC.
+Fysisk touchpad og fler-monitor hotplug krever kontroll i faktisk desktop-oppsett.
+Se [verifikasjonen](docs/evidence/P13.md) og [README](README.md).
+Prosjektlisens er ikke valgt; dette er endringsnotater, ikke en formell release.

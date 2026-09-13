@@ -60,7 +60,5 @@ void BlockLayout::layout(const SemanticDocument& model, const LayoutRequest& req
     y += block.indent ? 5 : 10;
   }
   frame.height = std::max(60.0, y + 20);
-  std::stable_sort(frame.runs.begin(), frame.runs.end(),
-                   [](const DrawRun& a, const DrawRun& b) { return a.bounds.y < b.bounds.y; });
 }
 } // namespace xfmd

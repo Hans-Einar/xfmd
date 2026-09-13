@@ -6,6 +6,7 @@
 using namespace FX;
 namespace xfmd {
 Application::~Application() {
+  windowMode.reset();
   exporter.reset();
   preview.reset();
   scheduler.reset();
@@ -18,7 +19,11 @@ void Application::initialize(int& argc, char** argv) {
                                                      [this](const auto& value, std::string& error) {
                                                        return preferencesStore->save(value, error);
                                                      });
+  icons.load(app);
   window = new XfmdWindow(&app, commands);
+  window->setApplicationIcons(icons.large.get(), icons.small.get());
+  windowMode = std::make_unique<FoxWindowMode>(*window);
+  window->configured = [this] { windowMode->observe(); };
   editorFont = std::make_unique<FXFont>(&app, "DejaVu Sans Mono", 11);
   window->editor->setFont(editorFont.get());
   views = std::make_unique<ViewModeController>(window->editor, window->previewArea,
@@ -40,6 +45,8 @@ void Application::initialize(int& argc, char** argv) {
     return true;
   };
   commands.checked = [this](auto command) {
+    if (command == CommandRouter::FullScreen)
+      return windowMode && windowMode->fullscreen();
     if (!preview || !host)
       return false;
     if (command == CommandRouter::A4)
@@ -118,6 +125,7 @@ void Application::initialize(int& argc, char** argv) {
   window->workspacePanel->setWorkPath(FXSystem::getHomeDirectory().text());
   views->setMode(ViewMode::Preview);
   window->show(PLACEMENT_SCREEN);
+  preview->refresh();
 }
 void Application::wireDocument() {
   documents.chooseUnsaved = [this] {

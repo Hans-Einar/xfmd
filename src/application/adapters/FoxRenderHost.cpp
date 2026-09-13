@@ -2,8 +2,9 @@
 #include "DisplayListPainter.h"
 #include "FoxWheelScrollBar.h"
 #include <algorithm>
-#include <cairo-xlib.h>
+
 #include <cmath>
+#include <cstring>
 #include <fxkeys.h>
 using namespace FX;
 namespace xfmd {
@@ -109,9 +110,16 @@ void FoxRenderHost::setViewScale(bool fitWidth, double factor) {
   update();
 }
 long FoxRenderHost::onPaint(FXObject*, FXSelector, void*) {
-  auto* d = static_cast<Display*>(getApp()->getDisplay());
-  auto* surface = cairo_xlib_surface_create(d, id(), static_cast<Visual*>(getVisual()->getVisual()),
-                                            width, height);
+  cairo_surface_t* surface = nullptr;
+  try {
+    surface = canvas.begin(*getApp(), viewport_w, viewport_h);
+  } catch (const std::exception& e) {
+    active = false;
+    FXDCWindow dc(this);
+    dc.setForeground(FXRGB(200, 20, 20));
+    dc.drawText(20, 30, e.what(), std::strlen(e.what()));
+    return 1;
+  }
   auto* cr = cairo_create(surface);
   bool paged = current && current->key.profile.mode == LayoutMode::Paged;
   cairo_set_source_rgb(cr, paged ? .18 : 1, paged ? .20 : 1, paged ? .23 : 1);
@@ -153,7 +161,7 @@ long FoxRenderHost::onPaint(FXObject*, FXSelector, void*) {
     cairo_show_text(cr, e.what());
   }
   cairo_destroy(cr);
-  cairo_surface_destroy(surface);
+  canvas.present(*this);
   return 1;
 }
 long FoxRenderHost::onPointer(FXObject*, FXSelector, void* data) {

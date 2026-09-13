@@ -35,6 +35,10 @@ double InlineLayout::layout(const SemanticBlock& block, double left, double top,
       draw.bounds.y += ascent - draw.ascent;
       frame.anchors.push_back({draw.source, {draw.bounds.x, y, draw.bounds.width, lineHeight}});
     }
+    std::sort(
+        frame.runs.begin() + lineStart, frame.runs.end(), [](const DrawRun& a, const DrawRun& b) {
+          return a.bounds.y < b.bounds.y || (a.bounds.y == b.bounds.y && a.bounds.x < b.bounds.x);
+        });
     y += lineHeight;
     x = left;
     lineStart = frame.runs.size();
@@ -43,45 +47,48 @@ double InlineLayout::layout(const SemanticBlock& block, double left, double top,
   };
   auto emit = [&](const InlineRun& run, std::size_t begin, std::size_t end, FontSpec font,
                   const TextExtent* known = nullptr) {
-    auto text = run.text.substr(begin, end - begin);
-    auto extent = known ? *known : metrics.measure(text, font);
-    DrawRun draw{text,
-                 font,
-                 {x, y, extent.width, extent.height},
-                 extent.ascent,
-                 slice(run, begin, end),
-                 run.link,
-                 run.code && block.kind != BlockKind::Code};
-    draw.shaped = extent.shaped;
-    if (draw.shaped)
-      for (const auto& part : draw.shaped->segments)
+    const auto text = std::string_view(run.text).substr(begin, end - begin);
+    TextExtent measured;
+    if (!known)
+      measured = metrics.measure(text, font);
+    const auto& extent = known ? *known : measured;
+    const auto source = slice(run, begin, end);
+    const bool background = run.code && block.kind != BlockKind::Code;
+    if (extent.shaped)
+      for (const auto& part : extent.shaped->segments)
         frame.glyphCount += part.glyphs.size();
     if (frame.glyphCount > 1000000 || frame.runs.size() >= 100000)
       throw Error(ErrorCode::TooLarge, "Document exceeds the rendering complexity limit.");
     bool merged = false;
     if (frame.runs.size() > lineStart) {
       auto& previous = frame.runs.back();
-      if (previous.icon == InlineIcon::None && previous.font == draw.font &&
-          previous.link == draw.link && previous.codeBackground == draw.codeBackground &&
-          previous.source.begin != previous.source.end &&
-          previous.source.end == draw.source.begin &&
-          previous.source.quality == draw.source.quality && previous.bounds.y == draw.bounds.y &&
-          previous.ascent == draw.ascent && previous.bounds.height == draw.bounds.height) {
-        if (draw.shaped) {
-          if (previous.shapeParts.empty()) {
-            previous.shapeParts.reserve(16);
-            previous.text.reserve(128);
-          }
-          previous.shapeParts.push_back(draw.shaped);
+      if (previous.icon == InlineIcon::None && previous.font == font && previous.link == run.link &&
+          previous.codeBackground == background && previous.source.begin != previous.source.end &&
+          previous.source.end == source.begin && previous.source.quality == source.quality &&
+          previous.bounds.y == y && previous.ascent == extent.ascent &&
+          previous.bounds.height == extent.height) {
+        if (extent.shaped) {
+          if (!previous.shapeCount)
+            previous.shapeBegin = frame.shapeParts.size();
+          frame.shapeParts.push_back(extent.shaped);
+          ++previous.shapeCount;
         }
-        previous.text += draw.text;
-        previous.bounds.width += draw.bounds.width;
-        previous.source.end = draw.source.end;
+        previous.text.append(text);
+        previous.bounds.width += extent.width;
+        previous.source.end = source.end;
         merged = true;
       }
     }
-    if (!merged)
-      frame.runs.push_back(std::move(draw));
+    if (!merged) {
+      frame.runs.push_back({std::string(text),
+                            font,
+                            {x, y, extent.width, extent.height},
+                            extent.ascent,
+                            source,
+                            run.link,
+                            background});
+      frame.runs.back().shaped = extent.shaped;
+    }
     x += extent.width;
     frame.contentWidth = std::max(frame.contentWidth, x + 20);
     lineHeight = std::max(lineHeight, extent.height + 4);

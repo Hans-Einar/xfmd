@@ -1,9 +1,9 @@
 # Kravspesifikasjon: xfmd
 
-Status: **Implemented baseline P0–P8 + Proposed utvidelse 1.1**, 2026-09-13.
-UR-015–020 og SR-015–019 er nytt måldesign, ikke implementert. Tidligere designgrunnlag ble
+Status: **Implemented P0–P13, revisjon 1.2**, 2026-09-13.
+UR-015–020 og SR-015–019 er implementert i P9–P13; se fasebevis for faktisk dekning. Tidligere designgrunnlag ble
 godkjent før implementasjon. Krav er normative; målinger og begrensninger finnes
-i [P7-verifikasjonen](docs/evidence/P7.md).
+i [P13-verifikasjonen](docs/evidence/P13.md), med P7 som historisk baseline.
 
 ## 1. Formål og avgrensning
 
@@ -26,8 +26,8 @@ uavhengig gjennom avtalte kontrakter. Se [arkitekturen](softwareArchitecture.md)
 - **Functionality (FUNC):** tjeneste/atferd med ett eierlag og eksplisitte kall.
 
 UR-001–014 og SR-001–014 beholder tidligere leveransescope. Nye UR-015–020 og
-SR-015–019 har scope Future: planlagt neste leveranse P9–P13, uten implementasjonsbevis.
-«Future» betyr her neste planlagte utvidelse, ikke ubestemt utsettelse. ID-er
+SR-015–019 inngår nå i FirstRelease gjennom P9–P13.
+UR-010/SR-014 for xfw-IPC står fortsatt Future. ID-er
 er stabile; slettede krav beholdes som `Retired` med begrunnelse. Et dokument eller
 en stub oppfyller ikke i seg selv et funksjonelt krav.
 
@@ -64,7 +64,7 @@ en stub oppfyller ikke i seg selv et funksjonelt krav.
 | UR-013 | Høyreklikk mappe tilbyr «Set work path». Arbeidsstier vises under treet som klikkbar, unik historikk (nyeste først, maksimum 32), lagret mellom oppstarter. Aktivering av ugyldig historikk bevarer roten og gir forklaring. Dokument, dirty og panelsynlighet bevares ved rotbytte. | AT-027: kontekstmeny, historikkvalg, persistens, slettet mappe og dirty-buffer. |
 | UR-014 | Filtrer filnavn med delstreng, ? (ett Unicode-tegn) og * (null eller flere tegn). Aktive *.md / *.txt-knapper kombineres med OR før AND med navnefeltet. Ingen aktiv typeknapp betyr alle filtyper; tomt navnefelt betyr alle navn. Vis bare matchende filer og deres forfedremapper ved aktivt filter; behold roten også ved null treff. | AT-028: knappkombinasjoner, kjedet filter, wildcard/Unicode, dype treff, null treff, raske filter-/rotbytter og uleselige mapper. |
 
-### Planlagt utvidelse 1.1 (Future / Proposed)
+### Utvidelse 1.2 (FirstRelease / Implemented)
 
 | ID | Krav | Akseptanse / beviskriterium |
 | --- | --- | --- |
@@ -94,7 +94,7 @@ en stub oppfyller ikke i seg selv et funksjonelt krav.
 | SR-013 | Roller deles i fokuserte filer; nye tjenester begrunnes i krav og gjenbruk eller nødvendig ansvarsgrense. | AT-023: filkart og review; ingen skjult funksjonalitet i vindusklasse/generisk hjelpefil. |
 | SR-014 | Senere: IPC versjonerer protokoll, avgrenser meldingsstørrelse, kontrollerer lokal peer og dokument/revisjon. | AT-024: framtidige tester av feil peer, partial reads, gammel revisjon og frakobling. |
 
-### Planlagte systemkontrakter 1.1 (Future / Proposed)
+### Systemkontrakter 1.2 (FirstRelease / Implemented)
 
 | ID | Krav | Akseptanse / beviskriterium |
 | --- | --- | --- |
@@ -155,16 +155,15 @@ kansellerer gammel skanning; GUI-objekter tilhører bare GUI-tråden. Status vis
 pågående søk, null treff eller antall uleselige mapper. Historikk er separat fra
 dokumenthistorikk og endrer ikke prosessens arbeidsmappe.
 
-## 9. Avgrensning for neste leveranse
+## 9. Avgrensning for P9–P13
 
 [Designrevisjon 1.1](softwareDesign.md) og [P9–P13](implementationPlan.md#5-planlagt-utvidelse-p9p13)
 beskriver integrasjonen. A4 er første papirformat, portrett og 20 mm marger som
-forslag til standard. Sideprofil har egen kontrakt slik at flere formater kan
+standard. Sideprofil har egen kontrakt slik at flere formater kan
 legges til senere. Window wrap er fortsatt standard. Kode beholder horisontal
 scroll i Window wrap; i A4 brukes visuell wrapping uten å endre kildebytes.
 Markdown-dialekten, bilde-/HTML-policy og UR-010/IPC utvides ikke av PDF-eksport.
 
 SR-008/009 er baseline for SR-019. SR-010s GUI-eierskap består: ingen FOX-ressurser
-deles med eksport-worker. P11/P12 må eksplisitt verifisere ny typografi-/PDF-
-adapters trådeierskap. SR-011s eksisterende terskler gjelder baseline continuous;
-P9 måler et eget bounded side-/PDF-budsjett før det nye formatet kan bli Ready.
+deles med eksport-worker. P11/P12 og P13 verifiserer typografi-/PDF-adapternes trådeierskap. SR-011s eksisterende terskler gjelder baseline continuous;
+P9 definerer side-/PDF-grenser, og P12/P13 dokumenterer målingene.

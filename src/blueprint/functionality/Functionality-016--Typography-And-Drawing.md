@@ -5,7 +5,7 @@ audience: System
 role: Adapter
 owner: application
 status: Implemented
-scope: Future
+scope: FirstRelease
 requirements: UR-002, UR-017, UR-018, SR-001, SR-010, SR-016
 uses: none
 ---
@@ -23,13 +23,13 @@ Akseptanse: AT-002, AT-011, AT-020, AT-031, AT-032, AT-036.
 
 ## 3. Kontrakter og eierskap
 
-`ITextShaper::shape(text, FontSpec)` med `ITextMetrics::fontSetId()` returnerer rene `GlyphRun`-data med UTF-8-clusters, fontface-id, glyph-id, advances og offsets i points. ITextMetrics::measure bruker de samme shaped resultatene. `FontCatalog` eier konkret fontidentitet/fallback; frame inneholder bare FontSetId og rene glyphdata. Application holder en lease på det immutable fontsettet så lenge frame/eksport bruker det; native contexts er fortsatt trådeide. Ingen FOX-, Pango- eller Cairo-peker krysser contracts.
+`ITextShaper::shape(text, FontSpec)` med `ITextMetrics::fontSetId()` returnerer rene `ShapedText`/`GlyphSegment`-data med UTF-8-clusters, fontface-id, glyph-id, advances og offsets i points. ITextMetrics::measure bruker de samme shaped resultatene. `FontCatalog` eier konkret fontidentitet/fallback; frame inneholder bare FontSetId og rene glyphdata. FontCatalog holder native fontreferanser i sin tråd. Immutable frame bærer fontfilidentitet; en ny eksportkatalog avviser endrede/manglende fontfiler i stedet for stille fallback. Ingen FOX-, Pango- eller Cairo-peker krysser contracts.
 
-Foretrukket teknisk kandidat er Cairo + PangoCairo/Fontconfig for shaping/fallback, i application-adaptere. `DisplayListPainter::paint(frame, target)` bruker samme glyphplassering på en skjermoverflate i FOX-host og på en PDF-overflate. Renderer bestemmer layout/primitiver; adapteren utfører dem. FOX forblir toolkit; ingen GTK-widget eller browser engine innføres.
+Valgt backend etter P9 er Cairo + PangoCairo/Fontconfig for shaping/fallback, i application-adaptere. `DisplayListPainter::paint(frame, target)` bruker samme glyphplassering på en skjermoverflate i FOX-host og på en PDF-overflate. Renderer bestemmer layout/primitiver; adapteren utfører dem. FOX forblir toolkit; ingen GTK-widget eller browser engine innføres.
 
 ## 4. Atferd, tilstand og feil
 
-P9 må bevise fontfallback, glyph-/clusteruttrekk, PDF-fontembedding/tekstuttrekk og målekonsistens før bibliotekvalget låses. Stille fontbytte mellom preview og eksport er feil: rapporter manglende font og bygg begge på nytt med nytt FontSetId. Fontcache er bounded; fontressurser/contexts er trådeide. GUI eier FOX og skjermoverflate. Eksport-worker får egne output-contexts og immutable data, aldri FXFont. Legacy FoxTextMetrics forsvinner først når continuous-regresjonene består.
+P9/P11/P12 dokumenterer fontfallback, glyph-/clusteruttrekk, PDF-fontembedding/tekstuttrekk og målekonsistens. Stille fontbytte mellom preview og eksport er feil: rapporter manglende font og bygg begge på nytt med nytt FontSetId. Fontcache er bounded; fontressurser/contexts er trådeide. GUI eier FOX og skjermoverflate. Eksport-worker får egne output-contexts og immutable data, aldri FXFont. Legacy FoxTextMetrics er fjernet etter continuous-regresjonene. RenderFrame eier en flat liste med ekstra glyphfragmenter; DrawRun holder indeks/lengde. Samme immutable shaping gjenbrukes uten å allokere en vector per linjefragment.
 
 ## 5. Plumbing
 
@@ -52,5 +52,5 @@ AT-002, AT-011, AT-020, AT-031, AT-032, AT-036: se [P11](../../../docs/evidence/
 ## 8. Status, risiko og endringskonsekvenser
 
 Revisjon 1.1, 2026-09-13. Kallene er implementert i P11-M1.
-P9 teknisk gate, P11 migrering, P12 PDF-konsument. Lokal tilstedeværelse av Cairo er ikke bevis for ferdig WYSIWYG eller for at PangoCairo-kandidaten passer.
+P9 teknisk gate, P11 migrering, P12 PDF-konsument. P12 beviser samsvar med uavhengig PDF-leser, og P13 kontrollerer den endelige tegnestien.
 [Integrasjonsdesign](../../../softwareDesign.md) og [faseplan](../../../implementationPlan.md) gir kontekst.

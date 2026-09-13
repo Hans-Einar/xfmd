@@ -18,9 +18,9 @@ bool ExportCoordinator::start(ExportRequest request) {
   control = std::make_unique<ExportControl>();
   done = false;
   result = {};
+  result.token = request.source.token;
+  result.target = request.target;
   worker = std::thread([this, request = std::move(request)] {
-    result.token = request.source.token;
-    result.target = request.target;
     try {
       result.pages = work(request, *control);
       result.success = true;

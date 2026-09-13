@@ -18,7 +18,9 @@ int main(int argc, char** argv) {
     for (const auto& run : frame->runs) {
       CHECK(run.shaped);
       double advance = 0;
-      auto parts = run.shapeParts;
+      std::vector<std::shared_ptr<const xfmd::ShapedText>> parts(
+          frame->shapeParts.begin() + run.shapeBegin,
+          frame->shapeParts.begin() + run.shapeBegin + run.shapeCount);
       parts.insert(parts.begin(), run.shaped);
       for (const auto& part : parts)
         for (const auto& segment : part->segments)

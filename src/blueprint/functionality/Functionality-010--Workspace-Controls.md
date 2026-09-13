@@ -4,7 +4,7 @@ kind: Functionality
 audience: User
 role: Adapter
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-011, UR-001, UR-006, UR-007, SR-002, SR-008, SR-013, UR-015, UR-017, UR-018, UR-019, UR-020, SR-019
 uses: FUNC-001, FUNC-005, FUNC-007, FUNC-012, FUNC-013, FUNC-014, FUNC-015, FUNC-018, FUNC-019
@@ -25,7 +25,7 @@ Krav: UR-011, UR-001, UR-006, UR-007, SR-002, SR-008, SR-013. Definisjoner og no
 
 XfmdWindow::buildUi oppretter vindusstruktur. CommandRouter::dispatch/update ruter handlinger og enabled-state. ViewModeController::setMode/toggleSidebar eier synlighet for hele WorkspacePanel; SidebarWidget::onOpen sender åpneforespørsel.
 
-**Planlagt utvidelse 1.1:** CommandRouter delegerer Preferences, eksport og visningsprofil til egne tjenester. FoxWindowMode eier fullscreen/restore, XfmdWindow bygger kun widgets. Sidebar og WorkPathList får samme scrollprofil. Menyvalgene endrer ikke dirty/undo.
+**Implementert P10–P13:** CommandRouter delegerer Preferences, eksport og visningsprofil til egne tjenester. FoxWindowMode eier fullscreen/restore, XfmdWindow bygger kun widgets. Sidebar og WorkPathList får samme scrollprofil. Menyvalgene endrer ikke dirty/undo.
 
 ## 4. Atferd, tilstand og feil
 
@@ -41,7 +41,7 @@ changed/command-varsler. Konstruktørene bytter barene før create(); widgets ei
 
 ## 5. Plumbing
 
-Implemented-rader beskriver baseline 0712c29; Planned-rader beskriver utvidelsen. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
+Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiserer tidligere baseline. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -54,9 +54,9 @@ Implemented-rader beskriver baseline 0712c29; Planned-rader beskriver utvidelsen
 | 7 | `FOX wheel dispatch` | `FoxWheelScrollBar::onMouseWheel` | `src/application/adapters/FoxWheelScrollBar.cpp` | Delta/rest → target og FOX-timer | Clamp, behold delpiksel-rest, standard varsler | Implemented |
 | 8 | `XfmdWindow::buildUi` | `WorkspacePanel::WorkspacePanel` | `src/application/ui/WorkspacePanel.cpp` | Filter, tre og historikk → ett panel | Parent eier widgets | Implemented |
 | 9 | `WorkPathList constructor` | `FoxWheelScrollBar::replace` | `src/application/adapters/FoxWheelScrollBar.cpp` | Historikkliste → samme presise scrollbarer | Parent eier adapterne; før create | Implemented |
-| 10 | `Edit Preferences` | `PreferencesService::begin` | `src/application/preferences/PreferencesService.cpp` | aktiv profil → dialog | Cancel forkaster | Planned |
-| 11 | `View Full Screen` | `FoxWindowMode::requestFullscreen` | `src/application/adapters/FoxWindowMode.cpp` | bool → WM-request | bekreft faktisk WM-state | Planned |
-| 12 | `File Export PDF` | `ExportCoordinator::start` | `src/application/export/ExportCoordinator.cpp` | snapshot → jobb | ingen markSaved | Planned |
+| 10 | `Edit Preferences` | `PreferencesService::begin` | `src/application/preferences/PreferencesService.h` | aktiv profil → dialog | Cancel forkaster | Implemented |
+| 11 | `View Full Screen` | `FoxWindowMode::requestFullscreen` | `src/application/adapters/FoxWindowMode.cpp` | bool → WM-request | bekreft faktisk WM-state | Implemented |
+| 12 | `File Export PDF` | `ExportCoordinator::start` | `src/application/export/ExportCoordinator.cpp` | snapshot → jobb | ingen markSaved | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -82,7 +82,7 @@ Utvidelsen krever AT-029, AT-031, AT-032, AT-033, AT-034, AT-039. Dette er planl
 
 ## 8. Status, risiko og endringskonsekvenser
 
-**Proposed 1.1:** Historisk Implemented/evidence nedenfor gjelder baseline. Nye kontrakter er beskrevet i [designrevisjonen](../../../softwareDesign.md); gamle bevis verifiserer ikke disse.
+**Implementert 1.2:** Historisk Implemented/evidence nedenfor gjelder baseline. Nye kontrakter er beskrevet i [designrevisjonen](../../../softwareDesign.md); gamle bevis verifiserer ikke disse.
 
 
 Implemented i P2. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.

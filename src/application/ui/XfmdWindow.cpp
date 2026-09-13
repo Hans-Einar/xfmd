@@ -1,7 +1,11 @@
 #include "XfmdWindow.h"
+#include <fxkeys.h>
 using namespace FX;
 namespace xfmd {
-FXDEFMAP(XfmdWindow) windowMap[] = {FXMAPFUNC(SEL_CLOSE, 0, XfmdWindow::onClose)};
+FXDEFMAP(XfmdWindow)
+windowMap[] = {FXMAPFUNC(SEL_CLOSE, 0, XfmdWindow::onClose),
+               FXMAPFUNC(SEL_CONFIGURE, 0, XfmdWindow::onConfigure),
+               FXMAPFUNC(SEL_KEYPRESS, 0, XfmdWindow::onKeyPress)};
 FXIMPLEMENT(XfmdWindow, FXMainWindow, windowMap, ARRAYNUMBER(windowMap))
 XfmdWindow::XfmdWindow(FXApp* app, CommandRouter& router)
     : FXMainWindow(app, "xfmd", nullptr, nullptr, DECOR_ALL, 0, 0, 1100, 760), commands(&router) {
@@ -12,6 +16,10 @@ XfmdWindow::~XfmdWindow() {
   delete editMenu;
   delete viewMenu;
   delete goMenu;
+}
+void XfmdWindow::setApplicationIcons(FXIcon* large, FXIcon* small) {
+  setIcon(large);
+  setMiniIcon(small);
 }
 void XfmdWindow::buildUi() {
   auto* bar = new FXMenuBar(this, LAYOUT_SIDE_TOP | LAYOUT_FILL_X);
@@ -43,6 +51,7 @@ void XfmdWindow::buildUi() {
   new FXMenuSeparator(viewMenu);
   new FXMenuRadio(viewMenu, "Fit page &width", commands, CommandRouter::FitWidth);
   new FXMenuRadio(viewMenu, "Actual size (100%)", commands, CommandRouter::ActualSize);
+  new FXMenuCheck(viewMenu, "Full &Screen\tF11", commands, CommandRouter::FullScreen);
   new FXMenuTitle(bar, "&View", nullptr, viewMenu);
   goMenu = new FXMenuPane(this);
   add(goMenu, "&Back\tAlt+Left", CommandRouter::Back);
@@ -70,6 +79,21 @@ void XfmdWindow::buildUi() {
   editor = new EditorWidget(split);
   previewArea = new FXVerticalFrame(split, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0);
   editor->setWidth(420);
+}
+long XfmdWindow::onConfigure(FXObject* sender, FXSelector sel, void* data) {
+  auto result = FXMainWindow::onConfigure(sender, sel, data);
+  if (configured)
+    configured();
+  return result;
+}
+long XfmdWindow::onKeyPress(FXObject* sender, FXSelector sel, void* data) {
+  auto* event = static_cast<FXEvent*>(data);
+  if (event->code == KEY_Escape && !getApp()->getModalWindow() && commands->checked &&
+      commands->checked(CommandRouter::FullScreen)) {
+    commands->dispatch(this, FXSEL(SEL_COMMAND, CommandRouter::LeaveFullScreen), nullptr);
+    return 1;
+  }
+  return FXMainWindow::onKeyPress(sender, sel, data);
 }
 long XfmdWindow::onClose(FXObject*, FXSelector, void*) {
   commands->dispatch(this, FXSEL(SEL_COMMAND, CommandRouter::Close), nullptr);

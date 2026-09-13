@@ -15,8 +15,12 @@ LayoutResult MarkdownRenderer::layout(const SemanticDocument& model, const Layou
                 request.width};
   frame->width = request.width;
   frame->contentWidth = request.width;
-  frame->runs.reserve(model.blocks.size() * 8);
-  frame->anchors.reserve(model.blocks.size() * 10);
+  frame->runs.reserve(
+      std::min<std::size_t>(100000, std::max(model.blocks.size() * 12, model.sourceSize / 16)));
+  frame->shapeParts.reserve(std::min<std::size_t>(1000000, model.sourceSize / 6));
+  frame->flow.lines.reserve(model.sourceSize / 40);
+  frame->anchors.reserve(
+      std::min<std::size_t>(200000, std::max(model.blocks.size() * 16, model.sourceSize / 12)));
   frame->decorations.reserve(model.blocks.size());
   auto flowRequest = request;
   if (request.profile.mode == LayoutMode::Paged) {

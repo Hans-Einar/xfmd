@@ -1,8 +1,9 @@
 # XFMD: arkitektur- og designrevisjon 1.1
 
-Status: **Proposed**, 2026-09-13. Undersøkt baseline: `0712c29`, P0–P8.
-Dette dokumentet er måldesign og integrasjonsplan, ikke en rapport om ferdige
-runtime-endringer. Se [krav](xfmd_requirements.md), [arkitektur](softwareArchitecture.md),
+Status: **Implementert som revisjon 1.2 i P9–P13**. Den opprinnelige
+arkitekturrevisjonen nedenfor vurderte baseline `0712c29`, P0–P8. Forslagsform
+i de opprinnelige kapitlene bevarer beslutningsgrunnlaget; siste kapittel oppgir
+faktiske implementasjonsvalg og bevis. Se [krav](xfmd_requirements.md), [arkitektur](softwareArchitecture.md),
 [blueprints](src/blueprint/README.md) og [milepælplan](implementationPlan.md#5-planlagt-utvidelse-p9p13).
 
 ## 1. Abstract
@@ -260,3 +261,30 @@ med en ren, testbar bevegelsespolicy. Gjør fysisk layout og fontgrunnlag felles
 PDF-eksport bygges. Seks avgrensede functionality-objekter dekker de nye behovene;
 to features samler brukerakseptansen. [P9–P13](implementationPlan.md#5-planlagt-utvidelse-p9p13)
 leverer dette i verifiserbare steg uten å endre den kjørende appen i denne designfasen.
+
+## 13. Implementasjonsbeslutninger og review etter P13
+
+- FOX SEL_MOUSEWHEEL er valgt inngang; ingen global libinput-hook. ScrollInput og
+  typed origins bor sammen med ScrollDynamics. FOX-adapteren eier timeren.
+- PangoCairo/Fontconfig og Cairo er valgt etter P9. Legacy FoxTextMetrics er fjernet.
+  Immutable glyphfragmenter og fysiske points er felles for skjerm og PDF.
+- Font-/frameidentitet avvises ved mismatch; A4-resize og zoom endrer kun transform.
+  Marger er en dokumentuavhengig preference, med default 20 mm.
+- ExportCoordinator eier én worker, mens injisert arbeid i composition root bygger
+  separate backends. ExportPipeline orkestrerer porter, PdfOutput utfører glypher,
+  PdfFilePublisher eier filtransaksjonen. Previewens private jobb brukes ikke.
+- FoxWindowMode sender EWMH og observerer faktisk state. Window Maker utfører
+  fullscreen/restore; RandR brukes kun for å gjøre bortflyttet tittellinje tilgjengelig.
+- Ikonmaster og PNG/FOX-ressurser har eksplisitt regenerering, ingen runtime-konvertering.
+- Review fant overflødige per-run vectors og global sortering i layout. En flat
+  fragmentliste og sortering per linje bevarer samme visuelle resultat og reduserer
+  kostnaden. Uavhengig PDF-rasterkontroll følger denne endringen.
+
+Avgrensningene for Markdown, bilder, IPC og fysisk input gjelder fortsatt.
+Gjennomførte tester og faktiske ytelsesmålinger står i [P13](docs/evidence/P13.md),
+med [P9](docs/evidence/P9.md)–[P12](docs/evidence/P12.md) som historiske delbevis.
+
+P13s sanitizer-review avgrenset en ressurslekkasje til direkte Cairo/Xlib-tegning.
+Endelig skjermadapter er FoxCairoCanvas: Cairo image-buffer og FOX-eid pixmap/blit.
+Dette endrer ikke shaping, paginering eller PDF-motor. CanvasTest kontrollerer
+RGB-kanaler og resize i ekte X11; native levetidstester kontrollerer oppryddingen.

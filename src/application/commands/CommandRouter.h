@@ -26,6 +26,8 @@ public:
     ActualSize,
     ExportPdf,
     CancelExport,
+    FullScreen,
+    LeaveFullScreen,
     Last
   };
   std::function<void(Command)> action;

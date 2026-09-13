@@ -22,6 +22,10 @@ public:
   XfmdWindow(FX::FXApp*, CommandRouter&);
   ~XfmdWindow() override;
   void buildUi();
+  void setApplicationIcons(FX::FXIcon*, FX::FXIcon*);
+  std::function<void()> configured;
+  long onConfigure(FX::FXObject*, FX::FXSelector, void*);
+  long onKeyPress(FX::FXObject*, FX::FXSelector, void*);
   long onClose(FX::FXObject*, FX::FXSelector, void*);
 };
 } // namespace xfmd

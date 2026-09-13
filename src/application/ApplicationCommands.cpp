@@ -12,6 +12,15 @@ std::string Application::savePath() {
 }
 void Application::execute(CommandRouter::Command command) {
   switch (command) {
+  case CommandRouter::FullScreen:
+  case CommandRouter::LeaveFullScreen:
+    if (!app.getModalWindow() &&
+        (command == CommandRouter::FullScreen || windowMode->requested())) {
+      if (!windowMode->requestFullscreen(command == CommandRouter::FullScreen &&
+                                         !windowMode->requested()))
+        window->status->setText("This window manager does not support fullscreen.");
+    }
+    break;
   case CommandRouter::ExportPdf:
     chooseExport();
     break;
