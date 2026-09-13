@@ -15,6 +15,7 @@ struct GlyphSegment {
   std::string text,fontFace;
   std::vector<Glyph> glyphs;
   unsigned level=0;
+  std::size_t byteOffset=0;
 };
 struct ShapedText {
   LayoutUnit width=0,height=0,ascent=0;

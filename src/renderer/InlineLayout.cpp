@@ -1,9 +1,10 @@
 #include "InlineLayout.h"
 #include "LinkMarker.h"
 #include <algorithm>
+#include <cmath>
 namespace xfmd {
 namespace {
-std::size_t nextCharacter(const std::string& text, std::size_t at) {
+std::size_t nextCharacter(std::string_view text, std::size_t at) {
   ++at;
   while (at < text.size() && (static_cast<unsigned char>(text[at]) & 0xc0) == 0x80)
     ++at;
@@ -21,12 +22,13 @@ SourceRange slice(const InlineRun& run, std::size_t begin, std::size_t end) {
 }
 } // namespace
 double InlineLayout::layout(const SemanticBlock& block, double left, double top, double width, FontSpec base,
-                         ITextMetrics& metrics, RenderFrame& frame) {
+                         ITextMetrics& metrics, RenderFrame& frame, bool wrapCode, const std::function<bool()>& cancelled) {
   double x = left, y = top;
   auto defaultExtent = metrics.measure("M", base);
   double lineHeight = defaultExtent.height + 4, ascent = defaultExtent.ascent;
   std::size_t lineStart = frame.runs.size();
   auto finishLine = [&] {
+    frame.flow.lines.push_back({y,lineHeight,0});
     for (auto i = lineStart; i < frame.runs.size(); ++i) {
       auto& draw = frame.runs[i];
       draw.bounds.y += ascent - draw.ascent;
@@ -49,9 +51,12 @@ double InlineLayout::layout(const SemanticBlock& block, double left, double top,
                  slice(run, begin, end),
                  run.link,
                  run.code && block.kind != BlockKind::Code};
-    draw.shaped=metrics.shape(draw.text,draw.font);
+    draw.shaped=extent.shaped;
+    if(draw.shaped)for(const auto& part:draw.shaped->segments)frame.glyphCount+=part.glyphs.size();
+    if(frame.glyphCount>1000000 || frame.runs.size()>=100000)
+      throw Error(ErrorCode::TooLarge,"Document exceeds the rendering complexity limit.");
     bool merged = false;
-    if (!draw.shaped && frame.runs.size() > lineStart) {
+    if (frame.runs.size() > lineStart) {
       auto& previous = frame.runs.back();
       if (previous.icon == InlineIcon::None && previous.font == draw.font &&
           previous.link == draw.link && previous.codeBackground == draw.codeBackground &&
@@ -59,6 +64,10 @@ double InlineLayout::layout(const SemanticBlock& block, double left, double top,
           previous.source.end == draw.source.begin &&
           previous.source.quality == draw.source.quality && previous.bounds.y == draw.bounds.y &&
           previous.ascent == draw.ascent && previous.bounds.height == draw.bounds.height) {
+        if(draw.shaped) {
+          if(previous.shapeParts.empty()) {previous.shapeParts.reserve(16);previous.text.reserve(128);}
+          previous.shapeParts.push_back(draw.shaped);
+        }
         previous.text += draw.text;
         previous.bounds.width += draw.bounds.width;
         previous.source.end = draw.source.end;
@@ -98,6 +107,7 @@ double InlineLayout::layout(const SemanticBlock& block, double left, double top,
       font.points = block.kind == BlockKind::Code ? 11 : base.points;
     const auto spaceExtent = metrics.measure(" ", font);
     for (std::size_t begin = 0; begin < run.text.size();) {
+      if(cancelled && cancelled())throw Error(ErrorCode::Layout,"Layout cancelled.");
       char c = run.text[begin];
       if (c == '\r') {
         ++begin;
@@ -114,6 +124,7 @@ double InlineLayout::layout(const SemanticBlock& block, double left, double top,
         spaces.text = "    ";
         spaces.source = slice(run, begin, begin + 1);
         spaces.source.quality = MappingQuality::Approximate;
+        if(wrapCode && x>left && x+4*spaceExtent.width>left+width)finishLine();
         emit(spaces, 0, 4, font);
         ++begin;
         continue;
@@ -126,28 +137,40 @@ double InlineLayout::layout(const SemanticBlock& block, double left, double top,
       auto word = std::string_view(run.text).substr(begin, end - begin);
       auto wordExtent = c == ' ' ? spaceExtent : metrics.measure(word, font);
       double measured = wordExtent.width;
-      bool code = block.kind == BlockKind::Code;
+      bool code = block.kind == BlockKind::Code && !wrapCode;
       if (!code && x > left && x + measured > left + width)
         finishLine();
-      if (!code && c == ' ' && x == left) {
+      if (!code && block.kind != BlockKind::Code && c == ' ' && x == left) {
         begin = end;
         continue;
       }
       if (!code && measured > width) {
-        // Split long unbroken words at UTF-8 boundaries, never in a multibyte character.
-        while (begin < end) {
-          std::size_t stop = nextCharacter(run.text, begin);
-          while (stop < end) {
-            auto next = nextCharacter(run.text, stop);
-            if (metrics.measure(std::string_view(run.text).substr(begin, next - begin), font)
-                    .width > width)
-              break;
-            stop = next;
+        // Shaper clusters preserve combining sequences and ligatures at visual wraps.
+        std::vector<std::size_t> boundaries;
+        if(auto shaped=metrics.shape(word,font)) {
+          for(const auto& part:shaped->segments)for(const auto& glyph:part.glyphs)
+            boundaries.push_back(part.byteOffset+glyph.cluster);
+          boundaries.push_back(word.size());
+          std::sort(boundaries.begin(),boundaries.end());
+          boundaries.erase(std::unique(boundaries.begin(),boundaries.end()),boundaries.end());
+        } else {
+          for(std::size_t at=0;at<word.size();) {at=nextCharacter(word,at);boundaries.push_back(at);}
+        }
+        const auto wordStart=begin;
+        while(begin<end) {
+          auto lower=std::upper_bound(boundaries.begin(),boundaries.end(),begin-wordStart);
+          if(lower==boundaries.end())throw Error(ErrorCode::Layout,"Invalid text cluster mapping.");
+          // Binary search avoids quadratic shaping of long unbroken words.
+          auto best=lower;auto hi=boundaries.end();
+          while(lower<hi) {
+            auto mid=lower+(hi-lower)/2;
+            if(metrics.measure(std::string_view(run.text).substr(begin,wordStart+*mid-begin),font).width<=width) {
+              best=mid;lower=mid+1;
+            } else hi=mid;
           }
-          emit(run, begin, stop, font);
-          begin = stop;
-          if (begin < end)
-            finishLine();
+          const auto stop=wordStart+*best;
+          emit(run,begin,stop,font);begin=stop;
+          if(begin<end)finishLine();
         }
       } else {
         emit(run, begin, end, font, &wordExtent);

@@ -13,7 +13,8 @@ int main(int argc,char** argv) {
     auto frame=renderer.layout(*model,{595.276,1},metrics);
     for(const auto& run:frame->runs) {
       CHECK(run.shaped);double advance=0;
-      for(const auto& segment:run.shaped->segments)for(const auto& glyph:segment.glyphs) {
+      auto parts=run.shapeParts;parts.insert(parts.begin(),run.shaped);
+      for(const auto& part:parts)for(const auto& segment:part->segments)for(const auto& glyph:segment.glyphs) {
         CHECK(glyph.cluster<segment.text.size());advance+=glyph.advance;
       }
       CHECK(std::abs(advance-run.bounds.width)<.01);

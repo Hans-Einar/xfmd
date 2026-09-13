@@ -17,7 +17,8 @@ bool visible(Rect r,Rect clip) {return r.y+r.height>=clip.y && r.y<=clip.y+clip.
 void DisplayListPainter::text(cairo_t* cr,const DrawRun& draw) {
   if(!draw.shaped)return;
   double x=draw.bounds.x;
-  for(const auto& segment:draw.shaped->segments) {
+  auto drawPart=[&](const ShapedText& part) {
+  for(const auto& segment:part.segments) {
     PangoItem item{};item.length=int(segment.text.size());item.num_chars=int(g_utf8_strlen(segment.text.data(),item.length));
     item.analysis.font=fonts.font(segment.fontFace);item.analysis.level=segment.level;
     auto* glyphs=pango_glyph_string_new();pango_glyph_string_set_size(glyphs,int(segment.glyphs.size()));
@@ -34,6 +35,9 @@ void DisplayListPainter::text(cairo_t* cr,const DrawRun& draw) {
     for(const auto& glyph:segment.glyphs)x+=glyph.advance;
     pango_glyph_string_free(glyphs);
   }
+  };
+  drawPart(*draw.shaped);
+  for(const auto& part:draw.shapeParts)drawPart(*part);
 }
 void DisplayListPainter::paint(const RenderFrame& frame,cairo_t* cr,Rect clip,bool active) {
   SavedState saved(cr);cairo_rectangle(cr,clip.x,clip.y,clip.width,clip.height);cairo_clip(cr);

@@ -1,5 +1,6 @@
 #include "MarkdownRenderer.h"
 #include "BlockLayout.h"
+#include "PageComposer.h"
 #include "HitTester.h"
 #include <algorithm>
 namespace xfmd {
@@ -16,7 +17,14 @@ LayoutResult MarkdownRenderer::layout(const SemanticDocument& model, const Layou
   frame->runs.reserve(model.blocks.size() * 8);
   frame->anchors.reserve(model.blocks.size() * 10);
   frame->decorations.reserve(model.blocks.size());
-  BlockLayout::layout(model, request, metrics, *frame);
+  auto flowRequest=request;
+  if(request.profile.mode==LayoutMode::Paged) {
+    request.profile.paper.validate();
+    flowRequest.width=request.profile.paper.width-2*request.profile.paper.margin+48;
+    frame->key.flowWidth=0;
+  }
+  BlockLayout::layout(model, flowRequest, metrics, *frame);
+  if(request.profile.mode==LayoutMode::Paged)PageComposer::compose(*frame,request.profile.paper,request.cancelled);
   return frame;
 }
 HitResult MarkdownRenderer::hitTest(const RenderFrame& frame, Point point) const {

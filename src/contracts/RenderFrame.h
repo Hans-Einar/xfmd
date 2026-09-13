@@ -2,6 +2,7 @@
 #include "DocumentTypes.h"
 #include "ITextMetrics.h"
 #include "LayoutProfile.h"
+#include "PageLayout.h"
 #include <vector>
 namespace xfmd {
 struct Point {
@@ -26,6 +27,7 @@ struct DrawRun {
   bool codeBackground = false;
   InlineIcon icon = InlineIcon::None;
   std::shared_ptr<const ShapedText> shaped{};
+  std::vector<std::shared_ptr<const ShapedText>> shapeParts{};
 };
 struct Decoration {
   Rect bounds;
@@ -34,12 +36,16 @@ struct Decoration {
 struct AnchorRegion {
   SourceRange source;
   Rect bounds;
+  std::size_t pageIndex=0;
 };
 struct RenderFrame {
   DocumentToken token;
   std::uint64_t generation = 0;
   LayoutUnit width = 0, height = 0, contentWidth = 0;
   FrameKey key;
+  FlowLayout flow;
+  PageLayout pages;
+  std::size_t glyphCount=0;
   std::vector<DrawRun> runs;
   std::vector<Decoration> decorations;
   std::vector<AnchorRegion> anchors;

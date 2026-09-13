@@ -3,7 +3,9 @@
 namespace xfmd {
 std::shared_ptr<const ShapedText> SharedTextMetrics::shape(std::string_view text,FontSpec spec) {
   if(text.size()>65536)throw Error(ErrorCode::TooLarge,"A text token is too large to shape safely.");
-  std::string key=std::to_string(spec.points)+char('0'+spec.bold)+char('0'+spec.italic)+char('0'+spec.mono)+":"+std::string(text);
+  std::string key;key.reserve(text.size()+4);key.append(text);
+  key.push_back(char(spec.points&255));key.push_back(char((spec.points>>8)&255));
+  key.push_back(char(spec.bold | (spec.italic<<1) | (spec.mono<<2)));
   auto found=cache.find(key);if(found!=cache.end())return found->second;
   std::unique_ptr<PangoLayout,decltype(&g_object_unref)> owner(pango_layout_new(catalog.context()),g_object_unref);
   auto* layout=owner.get();
@@ -22,7 +24,7 @@ std::shared_ptr<const ShapedText> SharedTextMetrics::shape(std::string_view text
   if(line)for(auto* node=line->runs;node;node=node->next) {
     auto* run=static_cast<PangoGlyphItem*>(node->data);GlyphSegment segment;
     segment.text=std::string(text.substr(run->item->offset,run->item->length));
-    segment.fontFace=catalog.remember(run->item->analysis.font);segment.level=run->item->analysis.level;
+    segment.fontFace=catalog.remember(run->item->analysis.font);segment.level=run->item->analysis.level;segment.byteOffset=run->item->offset;
     for(int i=0;i<run->glyphs->num_glyphs;++i) {
       auto& g=run->glyphs->glyphs[i];
       segment.glyphs.push_back({g.glyph,std::uint32_t(run->glyphs->log_clusters[i]),double(g.geometry.width)/PANGO_SCALE,
@@ -35,6 +37,7 @@ std::shared_ptr<const ShapedText> SharedTextMetrics::shape(std::string_view text
   return result;
 }
 TextExtent SharedTextMetrics::measure(std::string_view text,FontSpec font) {
-  auto shaped=shape(text,font);return {shaped->width,shaped->height,shaped->ascent};
+  auto shaped=shape(text,font);TextExtent result{shaped->width,shaped->height,shaped->ascent};
+  result.shaped=std::move(shaped);return result;
 }
 } // namespace xfmd
