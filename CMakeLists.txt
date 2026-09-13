@@ -55,6 +55,8 @@ add_library(xfmd_typography
   src/application/adapters/FontCatalog.cpp src/application/adapters/SharedTextMetrics.cpp
   src/application/adapters/DisplayListPainter.cpp)
 target_link_libraries(xfmd_typography PUBLIC xfmd_contracts PkgConfig::PANGO)
+add_library(xfmd_export src/application/export/ExportCoordinator.cpp)
+target_link_libraries(xfmd_export PUBLIC xfmd_contracts Threads::Threads)
 add_library(xfmd_application
   src/application/preferences/PreferencesService.cpp
   src/application/adapters/FoxPreferencesStore.cpp src/application/ui/PreferencesDialog.cpp

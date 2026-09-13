@@ -67,3 +67,5 @@ target_include_directories(PagedPreviewTest PRIVATE tests)
 target_link_libraries(PagedPreviewTest PRIVATE xfmd_application)
 add_test(NAME PagedPreviewTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/run_with_xvfb.py $<TARGET_FILE:PagedPreviewTest>)
 set_tests_properties(PagedPreviewTest PROPERTIES TIMEOUT 30 LABELS GUI)
+
+xfmd_test(ExportJobTest tests/application/ExportJobTest.cpp xfmd_export)

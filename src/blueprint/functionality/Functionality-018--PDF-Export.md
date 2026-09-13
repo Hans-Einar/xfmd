@@ -4,7 +4,7 @@ kind: Functionality
 audience: User
 role: Workflow
 owner: application
-status: Proposed
+status: Ready
 scope: Future
 requirements: UR-018, SR-002, SR-005, SR-007, SR-010, SR-017
 uses: FUNC-001, FUNC-003, FUNC-004, FUNC-006, FUNC-016, FUNC-017
@@ -23,7 +23,7 @@ Akseptanse: AT-012, AT-015, AT-017, AT-020, AT-032, AT-037.
 
 ## 3. Kontrakter og eierskap
 
-Planlagte `ExportCoordinator::start/cancel` tar `SourceSnapshot`, `PaperSpec`, `FontSetId` og mål med overskrivingsbeslutning. `ExportJob` får eget id og immutable inputs. `PdfOutput::write(PageLayout,FontSet,target)` utfører FUNC-016s display list med Cairo PDF-kandidat. `PdfFilePublisher::commit` har eksplisitt tempfil/identitets-/feilkontrakt.
+`ExportCoordinator::start/cancel` tar `SourceSnapshot`, `PaperSpec`, `FontSetId` og mål med overskrivingsbeslutning. `ExportRequest` eier kopierte inputs og dokumenttoken; `ExportControl` eier cancel/progress. Injisert Work bygger egne backend-instanser i composition root. `PdfOutput::write(PageLayout,FontSet,target)` utfører FUNC-016s display list med Cairo PDF-kandidat. `PdfFilePublisher::commit` har eksplisitt tempfil/identitets-/feilkontrakt.
 
 Dersom et komplett paged frame har eksakt samme FrameKey, gjenbrukes immutable frame. Ellers brukes IInterpreter::parse/IRenderer::layout gjennom offentlige kontrakter; eksport kaller aldri private PreviewCoordinator-metoder og venter ikke på preview-debounce. En separat interpreter-instans opprettes i composition root dersom parsing skjer parallelt; thread-safety antas ikke fra en delt instance.
 
@@ -37,7 +37,7 @@ GUI-tråden eier FOX/layout som krever GUI-ressurser. Worker kan parse og skrive
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `CommandRouter ExportPdf` | `ExportCoordinator::start` | `src/application/export/ExportCoordinator.cpp` | snapshot/profil/mål → job | dirty og historikk uendret | Planned |
+| 1 | `CommandRouter ExportPdf` | `ExportCoordinator::start` | `src/application/export/ExportCoordinator.cpp` | snapshot/profil/mål → job | dirty og historikk uendret | Implemented |
 | 2 | `ExportCoordinator build` | `IRenderer::layout` | `src/contracts/IRenderer.h` | immutable model/paged request → frame | riktig token og FontSetId | Planned |
 | 3 | `ExportCoordinator write` | `PdfOutput::write` | `src/application/adapters/PdfOutput.cpp` | hele PageLayout → temp-PDF | finalisering/cancel/feil | Planned |
 | 4 | `ExportCoordinator successful completion` | `PdfFilePublisher::commit` | `src/application/io/PdfFilePublisher.cpp` | temp + forventet mål → publisering | ingen delvis målfil ved feil før commit | Planned |
