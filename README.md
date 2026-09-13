@@ -22,7 +22,7 @@ ctest --test-dir build --output-on-failure
 ./build/xfmd tests/fixtures/markdown/basics.md
 ```
 
-Bootstrap laster eksplisitt ned hashkontrollert cmark 0.31.1 til `.deps/`.
+Bootstrap laster eksplisitt ned hashkontrollert cmark-gfm 0.29.0.gfm.13 til `.deps/`.
 Configure/build laster ikke ned dependencies. Bruk `-DBUILD_TESTING=OFF` for bare
 applikasjonen; `-DXFMD_SANITIZERS=ON` i separat Debug-bygg for ASan/UBSan.
 
@@ -53,9 +53,9 @@ bevares. Ekstern filendring gir konflikt; hardlenker krever Lagre som.
 
 Lenker støtter lokale dokumentstier, inklusive relative stier og prosentkoding.
 Relative Markdown-lenker merkes med `#`, absolutte med `/#`, og nettlenker med
-en jordklode. Relative stier regnes fra mappen til den åpne filen.
+`↗`. Relative stier regnes fra mappen til den åpne filen.
 Nettverkslenker, fragment-/querylenker, skript og HTML-eksekvering støttes ikke.
-Bilder vises som alternativtekst. xfw-IPC, bilder og Markdown-utvidelser er senere
+Bilder vises som alternativtekst. xfw-IPC, bilder og andre Markdown-utvidelser er senere
 scope. Preview har fontfallback; editorens glyphdekning avhenger av valgt systemfont.
 
 ## Utvikling og design
@@ -131,3 +131,17 @@ Ved endring av SVG-masteren: `python3 tools/generate_icons.py` (krever rsvg-conv
 knytter implementasjon til tester, målinger og kjente begrensninger.
 [Endringsnotater](RELEASE_NOTES.md) beskriver leveransen. Fysisk touchpad og
 fler-monitor hotplug må fortsatt prøves i den aktuelle desktop-oppsettingen.
+
+
+### Tabeller og lenkemarkører (P14)
+
+GFM-tabeller støtter header, kolonnejustering, inline-stiler/lenker og tekstbryting.
+Preview og PDF bruker samme native layout. I A4 holdes hver rad samlet; header
+vises på starten av tabellen og gjentas ikke på fortsettelsessider. Svært høye
+rader må deles i kilden. For mange kolonner for A4 krever mindre marger eller
+oppdeling; Window wrap kan scrolle brede tabeller horisontalt. Maks 64 kolonner
+og 50 000 celler. Andre GFM-utvidelser er ikke aktivert.
+
+HTTP(S)-lenker vises med Unicode ↗. Preview frigjør musegrab etter klikk, også
+ved endret layout; høyre-/midtklikk i preview limer ikke inn eller følger lenker.
+Editorens vanlige midtklikk/paste påvirkes ikke.

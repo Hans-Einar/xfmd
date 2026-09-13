@@ -39,7 +39,7 @@ with tempfile.TemporaryDirectory(prefix='xfmd-pdf-fidelity-') as directory:
     assert re.search(r'Pages:\s+'+str(count)+r'\b', info), info
     assert re.search(r'Page size:\s+595\.\d+ x 841\.\d+ pts', info), info
     text = subprocess.check_output(['pdftotext', '-layout', str(root/'export.pdf'), '-'], text=True)
-    for marker in ['æøå', 'office', '日本語', 'ENDOFFROZENBUFFER'] + ['Marker'+str(i) for i in range(45)]:
+    for marker in ['æøå', 'office', '日本語', 'ENDOFFROZENBUFFER'] + ['Marker'+str(i) for i in range(45)] + ['TableHeader', '↗'] + ['TableRow'+str(i) for i in range(80)]:
         assert marker in text, marker
     subprocess.run(['pdftoppm','-r','96',str(root/'export.pdf'),str(root/'pdf')],check=True)
     outputs = sorted(root.glob('pdf-*.ppm'))

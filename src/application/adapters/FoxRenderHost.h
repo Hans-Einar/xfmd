@@ -19,6 +19,11 @@ class FoxRenderHost : public FX::FXScrollArea {
   bool active = false, programmatic = false, keyboard = false, fit = true;
   double lastWidth = 0, dpiScale = 4.0 / 3, zoom = 1;
   ViewTransform transform;
+  unsigned buttons = 0;
+  bool clickCancelled = false;
+  Point pressPoint;
+  std::optional<FrameKey> pressedFrame;
+  std::string pressedLink;
 
 protected:
   FoxRenderHost() = default;
@@ -37,6 +42,7 @@ public:
   void expectLayout(FrameKey);
   void present(LayoutResult);
   void invalidate() {
+    clickCancelled = true;
     active = false;
     update();
   }
@@ -48,6 +54,8 @@ public:
   Point documentToView(Point p) const { return transform.toView(p); }
   Point viewToDocument(Point p) const { return transform.toDocument(p); }
   long onPaint(FX::FXObject*, FX::FXSelector, void*);
+  long onButtonPress(FX::FXObject*, FX::FXSelector, void*);
+  long onUngrabbed(FX::FXObject*, FX::FXSelector, void*);
   long onPointer(FX::FXObject*, FX::FXSelector, void*);
   long onMotion(FX::FXObject*, FX::FXSelector, void*);
   long onKeyPress(FX::FXObject*, FX::FXSelector, void*);

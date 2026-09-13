@@ -47,10 +47,10 @@ void run() {
   auto marked = renderer.layout(*links, {900, 4}, metrics);
   int relativeMarkers = 0, absoluteMarkers = 0, globes = 0;
   for (const auto& run : marked->runs) {
-    bool marker = run.text == "# " || run.text == "/# " || run.icon == InlineIcon::Globe;
+    bool marker = run.text == "# " || run.text == "/# " || run.icon == InlineIcon::ExternalLink;
     relativeMarkers += run.text == "# ";
     absoluteMarkers += run.text == "/# ";
-    globes += run.icon == InlineIcon::Globe;
+    globes += run.icon == InlineIcon::ExternalLink;
     if (marker) {
       CHECK(run.source.quality == MappingQuality::Approximate);
       CHECK(run.source.begin == run.source.end);

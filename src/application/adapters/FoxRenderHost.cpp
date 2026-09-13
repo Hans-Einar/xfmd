@@ -11,7 +11,13 @@ namespace xfmd {
 FXDEFMAP(FoxRenderHost)
 renderMap[] = {FXMAPFUNC(SEL_PAINT, 0, FoxRenderHost::onPaint),
                FXMAPFUNC(SEL_KEYPRESS, 0, FoxRenderHost::onKeyPress),
+               FXMAPFUNC(SEL_LEFTBUTTONPRESS, 0, FoxRenderHost::onButtonPress),
+               FXMAPFUNC(SEL_MIDDLEBUTTONPRESS, 0, FoxRenderHost::onButtonPress),
+               FXMAPFUNC(SEL_RIGHTBUTTONPRESS, 0, FoxRenderHost::onButtonPress),
                FXMAPFUNC(SEL_LEFTBUTTONRELEASE, 0, FoxRenderHost::onPointer),
+               FXMAPFUNC(SEL_MIDDLEBUTTONRELEASE, 0, FoxRenderHost::onPointer),
+               FXMAPFUNC(SEL_RIGHTBUTTONRELEASE, 0, FoxRenderHost::onPointer),
+               FXMAPFUNC(SEL_UNGRABBED, 0, FoxRenderHost::onUngrabbed),
                FXMAPFUNC(SEL_MOTION, 0, FoxRenderHost::onMotion)};
 FXIMPLEMENT(FoxRenderHost, FXScrollArea, renderMap, ARRAYNUMBER(renderMap))
 FoxRenderHost::FoxRenderHost(FXComposite* parent, IRenderer& r, SharedTextMetrics& m)
@@ -35,7 +41,7 @@ void FoxRenderHost::layout() {
     FXScrollArea::layout();
     programmatic = false;
   }
-  const double flowWidth = viewport_w / dpiScale;
+  const double flowWidth = std::max(40.0, viewport_w / dpiScale);
   if (viewport_w > 0 && flowWidth != lastWidth) {
     lastWidth = flowWidth;
     if (current && current->key.profile.mode == LayoutMode::Paged)
@@ -47,6 +53,7 @@ void FoxRenderHost::layout() {
   }
 }
 void FoxRenderHost::expect(DocumentToken token) {
+  clickCancelled = true;
   if (token.document != expected.document)
     current.reset();
   expected = token;
@@ -55,6 +62,7 @@ void FoxRenderHost::expect(DocumentToken token) {
   update();
 }
 void FoxRenderHost::expectLayout(FrameKey key) {
+  clickCancelled = true;
   expected = key.token;
   requested = std::move(key);
   active = false;
@@ -64,7 +72,7 @@ void FoxRenderHost::present(LayoutResult frame) {
   if (!frame || frame->token != expected || (requested && !(frame->key == *requested)))
     return;
   if (frame->key.profile.mode == LayoutMode::Continuous &&
-      std::abs(frame->width - viewport_w / dpiScale) > .01)
+      std::abs(frame->width - std::max(40.0, viewport_w / dpiScale)) > .01)
     return;
   current = std::move(frame);
   active = true;
@@ -164,18 +172,71 @@ long FoxRenderHost::onPaint(FXObject*, FXSelector, void*) {
   canvas.present(*this);
   return 1;
 }
-long FoxRenderHost::onPointer(FXObject*, FXSelector, void* data) {
-  if (!active || !current)
-    return 1;
+long FoxRenderHost::onButtonPress(FXObject*, FXSelector sel, void* data) {
   auto* event = static_cast<FXEvent*>(data);
-  auto point = transform.toDocument({double(event->win_x - pos_x), double(event->win_y - pos_y)});
-  auto hit = renderer->hitTest(*current, point);
-  if (!hit.link.empty() && linkActivated)
-    linkActivated(hit.link);
+  unsigned bit = FXSELTYPE(sel) == SEL_LEFTBUTTONPRESS     ? 1u
+                 : FXSELTYPE(sel) == SEL_MIDDLEBUTTONPRESS ? 2u
+                                                           : 4u;
+  handle(this, FXSEL(SEL_FOCUS_SELF, 0), data);
+  if (!buttons) {
+    pressedFrame.reset();
+    pressedLink.clear();
+    clickCancelled = bit != 1 || (event->state & (MIDDLEBUTTONMASK | RIGHTBUTTONMASK));
+    pressPoint = {double(event->win_x), double(event->win_y)};
+    if (!clickCancelled && active && current) {
+      pressedFrame = current->key;
+      pressedLink = renderer
+                        ->hitTest(*current, transform.toDocument({double(event->win_x - pos_x),
+                                                                  double(event->win_y - pos_y)}))
+                        .link;
+    }
+    grab();
+  } else {
+    clickCancelled = true;
+  }
+  buttons |= bit;
   return 1;
+}
+long FoxRenderHost::onPointer(FXObject*, FXSelector sel, void* data) {
+  auto* event = static_cast<FXEvent*>(data);
+  unsigned bit = FXSELTYPE(sel) == SEL_LEFTBUTTONRELEASE     ? 1u
+                 : FXSELTYPE(sel) == SEL_MIDDLEBUTTONRELEASE ? 2u
+                                                             : 4u;
+  bool activate = (buttons == 1 && bit == 1 && !clickCancelled &&
+                   !(event->state & (MIDDLEBUTTONMASK | RIGHTBUTTONMASK)));
+  buttons &= ~bit;
+  // Release before stale-frame checks or callbacks (which can open modal dialogs).
+  if (!buttons && grabbed())
+    ungrab();
+  if (activate && active && current && pressedFrame && *pressedFrame == current->key &&
+      std::abs(event->win_x - pressPoint.x) <= getApp()->getDragDelta() &&
+      std::abs(event->win_y - pressPoint.y) <= getApp()->getDragDelta()) {
+    auto point = transform.toDocument({double(event->win_x - pos_x), double(event->win_y - pos_y)});
+    auto hit = renderer->hitTest(*current, point);
+    if (!hit.link.empty() && hit.link == pressedLink && linkActivated) {
+      pressedFrame.reset();
+      pressedLink.clear();
+      linkActivated(hit.link);
+    }
+  }
+  if (!buttons) {
+    pressedFrame.reset();
+    pressedLink.clear();
+  }
+  return 1;
+}
+long FoxRenderHost::onUngrabbed(FXObject* sender, FXSelector sel, void* data) {
+  buttons = 0;
+  pressedFrame.reset();
+  pressedLink.clear();
+  clickCancelled = true;
+  return FXScrollArea::onUngrabbed(sender, sel, data);
 }
 long FoxRenderHost::onMotion(FXObject*, FXSelector, void* data) {
   auto* event = static_cast<FXEvent*>(data);
+  if (buttons && (std::abs(event->win_x - pressPoint.x) > getApp()->getDragDelta() ||
+                  std::abs(event->win_y - pressPoint.y) > getApp()->getDragDelta()))
+    clickCancelled = true;
   auto point = transform.toDocument({double(event->win_x - pos_x), double(event->win_y - pos_y)});
   bool link = active && current && !renderer->hitTest(*current, point).link.empty();
   setDefaultCursor(getApp()->getDefaultCursor(link ? DEF_HAND_CURSOR : DEF_ARROW_CURSOR));

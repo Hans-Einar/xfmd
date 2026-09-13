@@ -1,5 +1,6 @@
 #include "BlockLayout.h"
 #include "InlineLayout.h"
+#include "TableLayout.h"
 #include <algorithm>
 namespace xfmd {
 void BlockLayout::layout(const SemanticDocument& model, const LayoutRequest& request,
@@ -23,7 +24,9 @@ void BlockLayout::layout(const SemanticDocument& model, const LayoutRequest& req
     double left = 24 + block.indent * 24 + block.quoteDepth * 16;
     double width = std::max(40.0, request.width - left - 24);
     double start = y;
-    if (block.kind == BlockKind::Rule) {
+    if (block.kind == BlockKind::Table && block.table) {
+      y += TableLayout::layout(*block.table, left, y, width, metrics, frame, request);
+    } else if (block.kind == BlockKind::Rule) {
       frame.decorations.push_back({{left, y + 8, width, 1}, 0xb8bec7});
       frame.flow.lines.push_back({y, 20, 0});
       y += 20;
@@ -50,6 +53,8 @@ void BlockLayout::layout(const SemanticDocument& model, const LayoutRequest& req
     }
     const auto count = frame.flow.lines.size() - firstLine;
     for (std::size_t i = firstLine; i < frame.flow.lines.size(); ++i) {
+      if (block.kind == BlockKind::Table)
+        continue;
       if (block.kind == BlockKind::Heading)
         frame.flow.lines[i].keepFollowing = 2;
       else if (count > 1 && (i == firstLine || i + 2 == frame.flow.lines.size()))

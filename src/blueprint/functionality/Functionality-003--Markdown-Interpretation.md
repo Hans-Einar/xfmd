@@ -27,11 +27,16 @@ CmarkInterpreter implementerer IInterpreter::parse. ModelBuilder oversetter AST 
 
 ## 4. Atferd, tilstand og feil
 
-CommonMark 0.31.1 med CMARK_OPT_DEFAULT, ingen utvidelser. .txt er ren tekst. HTML vises inert, bilder som alt-plassholder. Blokker beholder egne ranges; transformerte entiteter/escapes merkes Approximate. BOM tas ut før parse og legges til offsets. Tabs merkes konservativt Approximate. Inndata begrenses; overdyp nesting avvises.
+cmark-gfm 0.29.0.gfm.13 med CMARK_OPT_DEFAULT og bare table-utvidelsen. .txt er ren tekst. HTML vises inert, bilder som alt-plassholder. Blokker beholder egne ranges; transformerte entiteter/escapes merkes Approximate. BOM tas ut før parse og legges til offsets. Tabs merkes konservativt Approximate. Inndata begrenses; overdyp nesting avvises.
 
 InlineRun.linkId er kildeposisjon + 1 for lenkenoden. Stilfragmenter i samme
 lenke deler ID; tilstøtende lenker har hver sin ID, også ved lik URL. Interpreter
 leverer semantisk identitet, ikke synlige markører.
+
+SemanticTable eier alignments og rader med kildeområder og InlineRun-celler.
+Ingen biblioteknoder lekker ut. Utvidelsesregister initieres én gang før parser-
+instanser opprettes; preview og PDF har hver sin parser. Maks 64 kolonner og
+50 000 celler per dokument.
 
 ## 5. Plumbing
 
@@ -43,6 +48,8 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 | 2 | `CmarkInterpreter::parse` | `ModelBuilder::appendNode` | `src/interpreter/ModelBuilder.cpp` | AST traversal → blocks/runs | Ingen cmark-typer ut av laget | Implemented |
 | 3 | `ModelBuilder::beginBlock / appendNode` | `SourceMapBuilder::record` | `src/interpreter/SourceMapBuilder.cpp` | Node → byteområde/kvalitet | Ukjent range arver blokk approximate | Implemented |
 | 4 | `CmarkInterpreter::parse` | `ModelBuilder::finish` | `src/interpreter/ModelBuilder.cpp` | Builder → eid modell | Ingen lånte inputpekere | Implemented |
+
+| 5 | `ModelBuilder::appendNode` | `ModelBuilder::appendTable` | `src/interpreter/TableModelBuilder.cpp` | GFM-noder → eide tabellrader/celler | 64 kolonner / 50 000 celler | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -59,6 +66,9 @@ Relevante akseptanse-ID-er: AT-005, AT-002, AT-011, AT-013, AT-014, AT-015, AT-0
 Evidence: [Fase P3](../../../docs/evidence/P3.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
 
 Ny regresjonskontroll: [Native lenker og markører](../../../docs/evidence/document-links.md).
+
+P14: TableTest, TablePreviewTest og utvidet PdfFidelityTest dekker tabellutvidelsen;
+se [P14](../../../docs/evidence/P14.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 

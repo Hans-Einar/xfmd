@@ -23,15 +23,20 @@ SourceRange slice(const InlineRun& run, std::size_t begin, std::size_t end) {
 } // namespace
 double InlineLayout::layout(const SemanticBlock& block, double left, double top, double width,
                             FontSpec base, ITextMetrics& metrics, RenderFrame& frame, bool wrapCode,
-                            const std::function<bool()>& cancelled) {
+                            const std::function<bool()>& cancelled, ColumnAlignment alignment) {
   double x = left, y = top;
   auto defaultExtent = metrics.measure("M", base);
   double lineHeight = defaultExtent.height + 4, ascent = defaultExtent.ascent;
   std::size_t lineStart = frame.runs.size();
   auto finishLine = [&] {
     frame.flow.lines.push_back({y, lineHeight, 0});
+    double shift = std::max(0.0, width - (x - left));
+    shift *= alignment == ColumnAlignment::Right    ? 1
+             : alignment == ColumnAlignment::Center ? .5
+                                                    : 0;
     for (auto i = lineStart; i < frame.runs.size(); ++i) {
       auto& draw = frame.runs[i];
+      draw.bounds.x += shift;
       draw.bounds.y += ascent - draw.ascent;
       frame.anchors.push_back({draw.source, {draw.bounds.x, y, draw.bounds.width, lineHeight}});
     }
@@ -107,6 +112,11 @@ double InlineLayout::layout(const SemanticBlock& block, double left, double top,
         lineHeight = std::max(lineHeight, marker->bounds.height + 4);
         ascent = std::max(ascent, marker->ascent);
         frame.contentWidth = std::max(frame.contentWidth, x + 20);
+        if (marker->shaped)
+          for (const auto& part : marker->shaped->segments)
+            frame.glyphCount += part.glyphs.size();
+        if (frame.glyphCount > 1000000 || frame.runs.size() >= 100000)
+          throw Error(ErrorCode::TooLarge, "Document exceeds the rendering complexity limit.");
         frame.runs.push_back(std::move(*marker));
       }
     }

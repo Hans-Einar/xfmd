@@ -1,6 +1,6 @@
 # Software Architecture Design: xfmd
 
-Status: **Implemented P0–P13, revisjon 1.2**, 2026-09-13.
+Status: **Implemented P0–P14, revisjon 1.3**, 2026-09-13.
 Kapittel 1–13 beskriver implementasjonen. Historiske veivalg og målinger finnes i [P0](docs/evidence/P0.md) og
 [sluttverifikasjonen](docs/evidence/P7.md).
 
@@ -63,8 +63,8 @@ ligger ved tilhørende `.cpp`. Én hovedrolle per filpar.
 | `application/adapters/FoxWheelScrollBar.cpp` | Felles presis wheel-input for begge akser i sidetre, editor og preview; bevarer FOXs scrollbar-interaksjon. |
 | `application/adapters/FoxScheduler.cpp` | Debounce/kansellering og levetid via FOX-event loop. |
 | `application/io/LocalFileStore.cpp`, `InputPolicy.cpp` | Lesing, formatmetadata, kontrollert erstatningslagring og inputgrenser. |
-| `interpreter/CmarkInterpreter.cpp`, `ModelBuilder.cpp`, `SourceMapBuilder.cpp` | cmark-adapter, semantikk og dokumentert kildeposisjonsstrategi. |
-| `renderer/MarkdownRenderer.cpp`, `BlockLayout.cpp`, `InlineLayout.cpp`, `HitTester.cpp`, `LinkMarker.cpp` | Layoutorkestrering, block/inline-algoritmer og lenketreff. |
+| `interpreter/CmarkInterpreter.cpp`, `ModelBuilder.cpp`, `TableModelBuilder.cpp`, `SourceMapBuilder.cpp` | cmark-gfm-adapter, semantikk og dokumentert kildeposisjonsstrategi. |
+| `renderer/MarkdownRenderer.cpp`, `BlockLayout.cpp`, `TableLayout.cpp`, `InlineLayout.cpp`, `HitTester.cpp`, `LinkMarker.cpp` | Layoutorkestrering, block/inline-algoritmer og lenketreff. |
 | `contracts/DocumentTypes.h`, `SemanticDocument.h`, `RenderFrame.h`, `IInterpreter.h`, `IRenderer.h`, `ITextMetrics.h` | Delte verdier/porter uten global tilstand. |
 
 Rene hjelpere som HistoryStore kan bo i application uten å bruke FOX. Det er ikke
@@ -136,9 +136,10 @@ Approximate; kode har eksplisitte linjeområder. Fallback kalles aldri Exact.
 
 ## 6. Parser og ressursgrenser
 
-P0 valgte cmark 0.31.1, CMARK_OPT_DEFAULT, uten utvidelser. cmarks kildeposisjoner
+P0 valgte cmark 0.31.1 uten utvidelser. P14 bruker cmark-gfm 0.29.0.gfm.13,
+CMARK_OPT_DEFAULT med eksplisitt table-utvidelse. cmark-gfms kildeposisjoner
 brukes av SourceMapBuilder; ingen global første-match-søking. Inline-transformasjoner
-merkes tilnærmet. Baseline er CommonMark 0.31.1; xfmds native presentasjonsadapter
+merkes tilnærmet. Parseren er nå GitHubs CommonMark/GFM-fork (0.29-basert); xfmds native presentasjonsadapter
 hevder ikke full visuell conformance til alle CommonMark-eksempler.
 
 InputPolicy avviser ugyldig UTF-8, NUL, ikke-støttet filtype og filer over 8 MiB.
@@ -171,8 +172,8 @@ FOX-dispatch; direkte onPointer-kall er ikke tilstrekkelig GUI-bevis.
 LinkResolver beholder lokal path-policy: parent_path(åpent absolutt dokument) /
 relativ lenkesti, deretter canonicalisering. Absolutte stier brukes direkte.
 LinkMarker i renderer lager # for relative .md-stier, /# for absolutte og
-Globe-primitiven for HTTP(S). Host tegner jordkloden med buer/linje, uavhengig av
-emoji-fonter. InlineRun.linkId skiller nabo-lenker med samme URL, samtidig som
+Unicode ↗ for HTTP(S), formet med den vanlige tekstfonten. Ingen
+Cairo-bueprimitiv eller farge-emoji brukes. InlineRun.linkId skiller nabo-lenker med samme URL, samtidig som
 fet/kursiv inne i én lenke ikke gir flere markører. Syntetiske markører bevarer
 original tekst og kildeoffsets; markørens source-range er tom og Approximate.
 
@@ -271,3 +272,21 @@ fortsatt de samme glyphene; FOX håndterer X11-pixmap og én samlet blit. Bakbuf
 gjenbrukes til viewporten endrer størrelse. To pixelbuffere begrenses til maks
 16M piksler hver. Dette unngår Cairo-Xlib-ressurslekkasjen observert i våre
 native levetidstester, uten sanitizer-suppression for denne tegnestien.
+
+
+## P14 — native tabeller og inputretting
+
+cmark-gfm erstatter cmark innenfor interpreter-adapteren, med kun table aktivert.
+SemanticTable/Row/Cell er eide verdier. Renderer/TableLayout gjenbruker InlineLayout
+og leverer vanlige DrawRuns/Decoration/AnchorRegion til skjerm og PDF. FOXs FXTable
+brukes ikke: dens interaktive celler og separate scrolling passer ikke dokumentets
+fysiske sideflyt. Pango/Cairo forblir tekst- og tegnemotor for preview/PDF, mens FOX
+tegner editor og øvrig GUI. Unicode ↗ erstatter den håndtegnede nettlenkemarkøren.
+FoxRenderHost eier nå hele knappeparet slik at arvet FXWindow::grab alltid balanseres
+før callback; chord/drag/stale frame aktiverer aldri en lenke.
+
+
+P14s sluttmåling avdekket kapasitetdobling i editorens TextProjection, uavhengig
+av Markdown-rendereren. Offsetkart og projisert tekst reserverer nå kapasitet
+fra inputlengden før konvertering. Det reduserer GUI-minnetoppen uten å endre
+kildeoffsets eller bruke allocator-/plattformspesifikke oppryddingskall.

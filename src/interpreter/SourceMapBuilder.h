@@ -1,6 +1,6 @@
 #pragma once
 #include "contracts/SemanticDocument.h"
-#include <cmark.h>
+#include <cmark-gfm.h>
 #include <vector>
 namespace xfmd {
 class SourceMapBuilder {

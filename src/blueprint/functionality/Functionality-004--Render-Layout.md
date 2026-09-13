@@ -31,9 +31,13 @@ MarkdownRenderer implementerer IRenderer::layout/hitTest. BlockLayout og InlineL
 
 Layout bryter vanlig tekst ved ord/UTF-8-grenser; kode beholder whitespace og kan scrolle horisontalt. Varierende heading-fonter, nested lister/sitater, inline-kode og inert HTML støttes. Frame inneholder både run-ranges og block-ranges for hidden syntax. Ingen parsing, I/O eller utføring av lenker.
 
-LinkMarker lager #, /# eller Globe-primitiven. InlineRun.linkId skiller
+LinkMarker lager #, /# eller fonttegnet ↗. InlineRun.linkId skiller
 separate lenker fra stilfragmenter i samme lenke. Markør og tekst har samme
 lenkemål; syntetisk markør har tomt, tilnærmet kildeanker.
+
+TableLayout eier kolonnebredder, cellenes InlineLayout, radbakgrunn/
+rammer, justering og samlet rad ved sideskift. Rader/celler har egne kildeankre.
+Ingen FXTable eller HTML; felles frame brukes uendret av skjerm/PDF.
 
 ## 5. Plumbing
 
@@ -48,6 +52,8 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 | 5 | `MarkdownRenderer::hitTest` | `HitTester::hitTest` | `src/renderer/HitTester.cpp` | Frame/point → HitResult | Ingen navigasjonssideeffekt | Implemented |
 | 6 | `InlineLayout::layout` | `LinkMarker::make` | `src/renderer/LinkMarker.cpp` | Lenke/font → markør-run | Ingen I/O; syntetisk source-range | Implemented |
 | 7 | `MarkdownRenderer::layout` | `PageComposer::compose` | `src/renderer/PageComposer.cpp` | FlowLayout + PaperSpec → PageLayout | begrens store blokker | Implemented |
+
+| 8 | `BlockLayout::layout` | `TableLayout::layout` | `src/renderer/TableLayout.cpp` | Tabell/tilgjengelig bredde → celler, rader og dekorasjoner | Smal A4 eller for høy rad gir Error | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -66,6 +72,9 @@ Evidence: [Fase P3](../../../docs/evidence/P3.md). Samlet kravdekning og eventue
 Ny regresjonskontroll: [Native lenker og markører](../../../docs/evidence/document-links.md).
 
 Utvidelsen krever AT-031, AT-032, AT-036, AT-039. Dette er planlagt dekning, ikke nye testbevis.
+
+P14: TableTest, TablePreviewTest og utvidet PdfFidelityTest dekker tabellutvidelsen;
+se [P14](../../../docs/evidence/P14.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 

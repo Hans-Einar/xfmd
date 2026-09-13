@@ -21,15 +21,12 @@ std::optional<DrawRun> LinkMarker::make(const InlineRun& link, FontSpec font,
   marker.font = font;
   marker.link = link.link;
   marker.source = {link.source.begin, link.source.begin, MappingQuality::Approximate};
-  marker.text = web ? "" : (target.front() == '/' ? "/# " : "# ");
-  marker.icon = web ? InlineIcon::Globe : InlineIcon::None;
-  auto extent = metrics.measure(web ? "M " : marker.text, font);
-  if (web)
-    extent.width = extent.height + metrics.measure(" ", font).width;
+  marker.text = web ? "↗ " : (target.front() == '/' ? "/# " : "# ");
+  marker.icon = web ? InlineIcon::ExternalLink : InlineIcon::None;
+  auto extent = metrics.measure(marker.text, font);
   marker.bounds = {0, 0, extent.width, extent.height};
   marker.ascent = extent.ascent;
-  if (!web)
-    marker.shaped = extent.shaped;
+  marker.shaped = extent.shaped;
   return marker;
 }
 } // namespace xfmd
