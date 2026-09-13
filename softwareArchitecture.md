@@ -198,3 +198,24 @@ Widget-konstruktørene erstatter begge standardbarene før create(), med samme
 parent, target, selector, stil og range/page/line. FOX-parenting eier adapterne
 og FOX avregistrerer timere ved destruksjon. Dette er en xfmd-lokal kompatibilitets-
 rettelse, ikke en endring i systemets FOX-bibliotek eller i xfw.
+
+## 12. Arbeidsrot, historikk og filtrert tre (P8)
+
+WorkspacePanel i application/ui komponerer filterfelt, to typeknapper,
+SidebarWidget, søkestatus og arbeidsstihistorikk i vertikal splitter. F10 styrer
+hele panelet. SidebarWidget bygger eget FXTreeList med en eksplisitt rot; arvet
+FXDirList kan ikke avgrense rotnavigasjonen og erstattes. Egne hendelses-ID-er
+starter ved basens ID_LAST. Begge tree-scrollbarer bruker FoxWheelScrollBar.
+
+application/workspace/WorkPathHistory.cpp eier kanoniske stier, rotutvidelse og MRU.
+FileNameFilter.cpp eier wildcard/delstreng og typekombinasjon. DirectoryScanner.cpp
+eier én stoppbar worker for katalogjobber og en bounded kø med treff som GUI
+henter via timer. Ingen FOX-kall fra worker. Vanlig navigasjon leser direkte barn;
+aktivt filter søker rekursivt og GUI bygger bare forfedre til matchende filer.
+Rot/filterbytte stopper tidligere jobb før noder erstattes. Ingen callbacks
+bærer gamle nodepekere over rotbytte. Root-dobbeltklikk og kontekstmeny utsetter
+rotbytte til etter FOXs event-dispatch for å unngå sletting av aktive noder.
+
+Application::startPath velger CLI-mappe eller dokument; vanlig open/bytte flytter
+ikke arbeidsroten. FOX-registry lagrer kun de 32 historikkstiene, mens defaultrot
+fortsatt er home ved neste oppstart. GUI-worker og timere stoppes før widgets slettes.

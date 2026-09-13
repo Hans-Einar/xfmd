@@ -58,3 +58,9 @@ er valgt. Installérbar kildebygging og offentlig Git-historikk leveres nå.
 
 Byggkommandoer finnes i [README](README.md); stil og bidragsregler i
 [CONTRIBUTING](CONTRIBUTING.md). Historiske tekniske forsøk beholdes i faserapportene.
+
+## P8 — Arbeidsområder og kjedet filfilter
+
+Branch: `phase/p8-work-paths`. M1: UR-012–014 og FTR-005/FUNC-012/013 design.
+M2: arbeidsrot, historikk, stoppbar skanning og FOX-panel, CLI og brukerhjelp.
+M3: rene/native GUI-regresjoner, sanitizer, plumbing og CI før integrasjon.
