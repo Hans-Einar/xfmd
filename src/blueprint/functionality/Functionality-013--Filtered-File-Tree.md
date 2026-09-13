@@ -4,10 +4,10 @@ kind: Functionality
 audience: User
 role: Service
 owner: application
-status: Ready
+status: Implemented
 scope: FirstRelease
 requirements: UR-014
-uses: none
+uses: FUNC-012
 ---
 
 # Functionality-013: Filnavnfilter og treinnhold
@@ -43,23 +43,28 @@ følges ikke og filsymlinker utenfor rot utelates. Dokumenttilstand endres ikke.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `WorkspacePanel filter event` | `SidebarWidget::setFilter` | `src/application/ui/SidebarWidget.cpp` | Rot/filter → nytt tre eller historikk | Validering og kansellering før bytte | Planned |
-| 2 | `SidebarWidget` | `DirectoryScanner::start` | `src/application/workspace/DirectoryScanner.cpp` | Rot/filter → nytt tre eller historikk | Validering og kansellering før bytte | Planned |
-| 3 | `DirectoryScanner worker` | `FileNameFilter::matches` | `src/application/workspace/FileNameFilter.cpp` | Rot/filter → nytt tre eller historikk | Validering og kansellering før bytte | Planned |
-| 4 | `FOX poll timer` | `SidebarWidget::onPoll` | `src/application/ui/SidebarWidget.cpp` | Rot/filter → nytt tre eller historikk | Validering og kansellering før bytte | Planned |
+| 1 | `WorkspacePanel::onApplyFilter` | `SidebarWidget::setFilter` | `src/application/ui/SidebarWidget.cpp` | Toggle states and pattern → rebuild current root | Old scan stopped; document unaffected | Implemented |
+| 2 | `SidebarWidget::setRoot` | `DirectoryScanner::start` | `src/application/workspace/DirectoryScanner.cpp` | Root and filter → one worker with root job | Stop/join old worker and discard old pending entries | Implemented |
+| 3 | `SidebarWidget::expandTree` | `DirectoryScanner::request` | `src/application/workspace/DirectoryScanner.cpp` | Unfiltered directory → queued direct-child job | Once per node generation; no request outside root | Implemented |
+| 4 | `DirectoryScanner::scan` | `FileNameFilter::matches` | `src/application/workspace/FileNameFilter.cpp` | Basename → type OR followed by name AND | No parsing or FOX dependency | Implemented |
+| 5 | `FOX poll timer` | `SidebarWidget::onPoll` | `src/application/ui/SidebarWidget.cpp` | Entries → path nodes and matching ancestors | GUI thread only; status includes unreadable count | Implemented |
+| 6 | `SidebarWidget::onPoll` | `DirectoryScanner::take` | `src/application/workspace/DirectoryScanner.cpp` | Up to 512 entries, busy state and errors | Mutex exchange releases bounded producer backpressure | Implemented |
+| 7 | `DirectoryScanner::scan` | `DirectoryScanner::publish` | `src/application/workspace/DirectoryScanner.cpp` | Entry → pending queue | Wait at 4096 entries; cancellation wakes producer | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
+
+[FUNC-012](Functionality-012--Work-Path-History.md) eier stigrense-policy.
 
 FileNameFilter og DirectoryScanner brukes av samme tre ved oppstart, filter og rotbytte.
 Ingen avhengighet til interpreter/renderer. Dokumentåpning bruker Application::open.
 
 ## 7. Verifikasjon
 
-Planlagt: WorkPathTest for matching, historikk og scanner; WorkPathGuiTest for
+`WorkPathTest` for matching, historikk og scanner; `WorkPathGuiTest` for
 native input, oppstart, filter og arbeidsrot. Eksisterende SidebarGuiTest og
-WheelGuiTest skal fortsatt bestå. Ingen Verified-status før utførte tester.
+WheelGuiTest skal fortsatt bestå. Bevis føres i P8 etter utførte tester.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Ready i P8. Store eller langsomme filsystemer kan bruke tid; GUI viser fremdrift
+Implemented i P8. Store eller langsomme filsystemer kan bruke tid; GUI viser fremdrift
 og kansellerer gammelt arbeid. Dette er treavgrensning, ikke en OS-sandbox.

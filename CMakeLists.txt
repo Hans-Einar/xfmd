@@ -43,15 +43,20 @@ add_library(xfmd_navigation
   src/application/navigation/LinkResolver.cpp src/application/navigation/HistoryStore.cpp
   src/application/navigation/NavigationCoordinator.cpp)
 target_link_libraries(xfmd_navigation PUBLIC xfmd_document xfmd_scroll)
+add_library(xfmd_workspace
+  src/application/workspace/WorkPathHistory.cpp
+  src/application/workspace/FileNameFilter.cpp
+  src/application/workspace/DirectoryScanner.cpp)
+target_link_libraries(xfmd_workspace PUBLIC xfmd_contracts Threads::Threads)
 add_library(xfmd_application
   src/application/Application.cpp src/application/ApplicationCommands.cpp
   src/application/commands/CommandRouter.cpp src/application/ui/XfmdWindow.cpp
-  src/application/ui/EditorWidget.cpp src/application/ui/SidebarWidget.cpp
+  src/application/ui/EditorWidget.cpp src/application/ui/SidebarWidget.cpp src/application/ui/WorkspacePanel.cpp
   src/application/ui/ViewModeController.cpp src/application/adapters/FoxTextMetrics.cpp
   src/application/adapters/FoxRenderHost.cpp src/application/adapters/FoxScheduler.cpp
   src/application/adapters/FoxWheelScrollBar.cpp)
 target_link_libraries(xfmd_application PUBLIC
-  xfmd_document xfmd_preview xfmd_scroll xfmd_navigation xfmd_interpreter xfmd_renderer PkgConfig::FOX)
+  xfmd_workspace xfmd_document xfmd_preview xfmd_scroll xfmd_navigation xfmd_interpreter xfmd_renderer PkgConfig::FOX)
 add_executable(xfmd src/application/main.cpp)
 target_link_libraries(xfmd PRIVATE xfmd_application)
 

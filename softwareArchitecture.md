@@ -43,7 +43,7 @@ ligger ved tilhørende `.cpp`. Én hovedrolle per filpar.
 | `application/main.cpp`, `Application.cpp` | Oppstart, levetid og composition root; registrerer interpreter/renderer, ingen arbeidsflytlogikk. |
 | `application/ui/XfmdWindow.cpp` | Bygger menyer, toolbar, status og containere; kobler targets. |
 | `application/ui/EditorWidget.cpp` | FXText-hendelser, tekst/byteposisjonsadapter og brukerredigering. |
-| `application/ui/SidebarWidget.cpp` | FOX-mappetre og seleksjon; delegerer åpning. |
+| `application/ui/SidebarWidget.cpp` | Avgrenset FXTreeList, lazy barn og filtrerte treff; delegerer åpning. |
 | `application/ui/ViewModeController.cpp` | Splitter, synlighet, fokus og modus. |
 | `application/commands/CommandRouter.cpp` | CLI/menu/tastatur til samme operasjoner; enabled-state. |
 | `application/document/DocumentSession.cpp` | Aktiv tekst, revisjon, lagret baseline, dirty og snapshots. |
@@ -179,7 +179,7 @@ original tekst og kildeoffsets; markørens source-range er tom og Approximate.
 ## 10. Sidepanelets FOX-meldinger
 
 SidebarWidget er sitt eget meldingstarget. Egne selector-ID-er starter derfor
-ved FXDirList::ID_LAST, aldri på vilkårlige små tall som overlapper arvede
+ved FXTreeList::ID_LAST (tidligere FXDirList::ID_LAST), aldri på vilkårlige små tall som overlapper arvede
 kommandoer. SEL_DOUBLECLICKED/ID_TREE_EVENT åpner bare faktiske filer.
 SEL_COMMAND fra vanlig treklikk skal ikke bli en ID_HIDE-kommando.
 ViewModeController::toggleSidebar er eneste eksplisitte synlighetsendring;
@@ -204,7 +204,7 @@ rettelse, ikke en endring i systemets FOX-bibliotek eller i xfw.
 WorkspacePanel i application/ui komponerer filterfelt, to typeknapper,
 SidebarWidget, søkestatus og arbeidsstihistorikk i vertikal splitter. F10 styrer
 hele panelet. SidebarWidget bygger eget FXTreeList med en eksplisitt rot; arvet
-FXDirList kan ikke avgrense rotnavigasjonen og erstattes. Egne hendelses-ID-er
+FXDirList kan ikke avgrense rotnavigasjonen og er erstattet. Egne hendelses-ID-er
 starter ved basens ID_LAST. Begge tree-scrollbarer bruker FoxWheelScrollBar.
 
 application/workspace/WorkPathHistory.cpp eier kanoniske stier, rotutvidelse og MRU.

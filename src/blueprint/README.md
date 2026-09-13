@@ -1,7 +1,7 @@
 # Blueprint-register
 
-Status: Implemented. Fire features og elleve functionality-objekter er implementert
-i første leveranse. Samlet bevis og begrensninger: [P7](../../docs/evidence/P7.md). [Arbeidsmåten](../../docs/working-method.md)
+Status: Implemented. Baseline hadde fire features og elleve functionality-objekter;
+P8 legger til FTR-005 og FUNC-012/013 for arbeidsområder og filtrering. Samlet bevis og begrensninger: [P7](../../docs/evidence/P7.md). [Arbeidsmåten](../../docs/working-method.md)
 definerer begrepene; [malene](templates/README.md) brukes ved nye objekter.
 
 ## Designobjekter
@@ -21,12 +21,11 @@ definerer begrepene; [malene](templates/README.md) brukes ved nye objekter.
 | [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md) | Preview-orkestrering | Functionality / System | application | FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006 |
 | [FUNC-008](functionality/Functionality-008--Navigation-History.md) | Dokumentnavigasjon og historikk | Functionality / User | application | FUNC-001, FUNC-009 |
 | [FUNC-009](functionality/Functionality-009--Source-Anchor-Mapping.md) | Kildeankre og viewport-koordinering | Functionality / System | application | FUNC-005 |
-| [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | Arbeidsflate, kommandoer og sidepanel | Functionality / User | application | FUNC-001, FUNC-005, FUNC-007 |
+| [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | Arbeidsflate, kommandoer og sidepanel | Functionality / User | application | FUNC-001, FUNC-005, FUNC-007, FUNC-012, FUNC-013 |
 | [FUNC-011](functionality/Functionality-011--Text-Editing.md) | Tekstredigering, undo og søk | Functionality / User | application | FUNC-001, FUNC-005, FUNC-007 |
-
 | [FTR-005](feature/Feature-005--Work-Path-Navigation.md) | Arbeidsområder med historikk | Feature / User | application | FUNC-010, FUNC-012, FUNC-013 |
 | [FUNC-012](functionality/Functionality-012--Work-Path-History.md) | Arbeidsrot og historikk | Functionality / User | application | none |
-| [FUNC-013](functionality/Functionality-013--Filtered-File-Tree.md) | Filnavnfilter og treinnhold | Functionality / User | application | none |
+| [FUNC-013](functionality/Functionality-013--Filtered-File-Tree.md) | Filnavnfilter og treinnhold | Functionality / User | application | FUNC-012 |
 
 Feature-eier er eier av ende-til-ende-koordineringen, ikke av all kode i featuren.
 Hver functionality har ett lag som kontrakteier. Rendererens tjenester ligger i

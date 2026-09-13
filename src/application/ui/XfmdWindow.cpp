@@ -54,7 +54,8 @@ void XfmdWindow::buildUi() {
                        LAYOUT_SIDE_BOTTOM | LAYOUT_FILL_X | JUSTIFY_LEFT);
   auto* workspace =
       new FXSplitter(this, SPLITTER_HORIZONTAL | SPLITTER_TRACKING | LAYOUT_FILL_X | LAYOUT_FILL_Y);
-  sidebar = new SidebarWidget(workspace);
+  workspacePanel = new WorkspacePanel(workspace);
+  sidebar = workspacePanel->tree;
   split = new FXSplitter(workspace,
                          SPLITTER_HORIZONTAL | SPLITTER_TRACKING | LAYOUT_FILL_X | LAYOUT_FILL_Y);
   editor = new EditorWidget(split);

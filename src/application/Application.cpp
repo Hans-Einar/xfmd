@@ -14,8 +14,8 @@ void Application::initialize(int& argc, char** argv) {
   window = new XfmdWindow(&app, commands);
   editorFont = std::make_unique<FXFont>(&app, "DejaVu Sans Mono", 11);
   window->editor->setFont(editorFont.get());
-  views = std::make_unique<ViewModeController>(window->editor, window->previewArea, window->sidebar,
-                                               window->split);
+  views = std::make_unique<ViewModeController>(window->editor, window->previewArea,
+                                               window->workspacePanel, window->split);
   commands.action = [this](auto command) { execute(command); };
   commands.enabled = [this](auto command) {
     if (command == CommandRouter::Undo)
@@ -76,6 +76,7 @@ void Application::initialize(int& argc, char** argv) {
     host->recalc();
   };
   app.create();
+  window->workspacePanel->setWorkPath(FXSystem::getHomeDirectory().text());
   views->setMode(ViewMode::Preview);
   window->show(PLACEMENT_SCREEN);
 }
@@ -99,7 +100,6 @@ void Application::wireDocument() {
     updateUi();
     window->editor->setCursorPos(0);
     window->editor->setSourceAnchor({0});
-    window->sidebar->setDirectory(std::filesystem::path(session.view().path).parent_path().c_str());
     if (documentOpened)
       documentOpened();
   };
@@ -137,5 +137,22 @@ void Application::updateUi() {
   window->status->setText((std::to_string(session.view().text.size()) + " bytes" +
                            (session.dirty() ? " — modified" : " — saved"))
                               .c_str());
+}
+bool Application::startPath(const std::string& path) {
+  std::error_code ec;
+  const auto resolved = std::filesystem::canonical(path, ec);
+  if (ec) {
+    window->status->setText(("Cannot open path: " + path + ": " + ec.message()).c_str());
+    return false;
+  }
+  if (std::filesystem::is_directory(resolved, ec)) {
+    bool changed = window->workspacePanel->setWorkPath(resolved.string());
+    if (!changed)
+      window->status->setText(window->workspacePanel->searchStatus->getText());
+    return changed;
+  }
+  if (!open(resolved.string()))
+    return false;
+  return window->workspacePanel->setWorkPath(resolved.parent_path().string());
 }
 } // namespace xfmd

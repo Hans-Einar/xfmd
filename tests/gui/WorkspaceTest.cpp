@@ -32,15 +32,9 @@ void run() {
   app.views->setMode(ViewMode::Editor);
   CHECK(!app.window->previewArea->shown() && app.edits.canUndo());
   app.views->toggleSidebar();
-  CHECK(!app.window->sidebar->shown());
+  CHECK(!app.window->workspacePanel->shown());
   app.views->toggleSidebar();
-  CHECK(app.window->sidebar->shown());
-  CHECK(FX::FXPath::match(app.window->sidebar->getPattern(), "hello.MD",
-                          app.window->sidebar->getMatchMode()));
-  CHECK(FX::FXPath::match(app.window->sidebar->getPattern(), "hello.txt",
-                          app.window->sidebar->getMatchMode()));
-  CHECK(!FX::FXPath::match(app.window->sidebar->getPattern(), "hello.png",
-                           app.window->sidebar->getMatchMode()));
+  CHECK(app.window->workspacePanel->shown());
   app.documents.chooseUnsaved = [] { return UnsavedChoice::Cancel; };
   CHECK(!app.documents.requestClose());
   app.documents.chooseUnsaved = [] { return UnsavedChoice::Discard; };

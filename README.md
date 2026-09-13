@@ -64,3 +64,27 @@ scope. Preview har fontfallback; editorens glyphdekning avhenger av valgt system
 AGENTS.md er bevart etter instruksen om ikke å overskrive en eksisterende fil.
 Dens designfasestatus og planlagte byggkommandoer er historiske; denne README-en
 og CONTRIBUTING.md beskriver implementasjonen. Arkitektur- og arbeidsreglene gjelder.
+
+## Arbeidsområder og filfilter
+
+- `xfmd` starter med utvidet hjemmekatalog (`~`) i sidetreet.
+- `xfmd .` setter treets rot til gjeldende arbeidsmappe. `xfmd /sti/til/mappe`
+  velger en annen rot; `xfmd fil.md` åpner filen med dens mappe som arbeidsrot.
+- Dobbeltklikk rotnoden for å utvide til `~`, og igjen for å utvide til `/`.
+  Vanlig mappeutvidelse holder seg innenfor valgt rot.
+- Høyreklikk en mappe og velg **Set work path**. Tidligere arbeidsstier finnes
+  under treet; ett klikk aktiverer en sti. De 32 nyeste unike stiene lagres mellom
+  oppstarter. Start uten argument bruker fortsatt `~`.
+- Filterknappene kombineres slik: `(*.md OR *.txt) AND navnefilter` når begge er
+  på. Ingen aktiv knapp betyr alle filtyper. Knappene er av som standard.
+  Tekst uten wildcard matches som delstreng; `?` matcher ett Unicode-tegn og `*`
+  null eller flere tegn i hele filnavnet. `report?.*` matcher `report1.md` og
+  `reportø.txt`, men ikke `report12.md`. ASCII-matching er case-insensitive.
+- Aktivt filter søker i undermapper i bakgrunnen og viser bare filer med treff
+  og mappene som leder til dem. **Refresh** leser treet på nytt etter filendringer.
+  Status viser søk og uleselige mapper. Skjulte filer tas med; symbolske
+  mappelenker traverseres ikke, og filsymlinker utenfor arbeidsroten utelates.
+
+Arbeidsrot og historikk endrer ikke dokumentbuffer, prosessens PWD eller
+sidepanelets synlighet. Dokumentlenker og Åpne-dialogen flytter ikke arbeidsroten.
+Filer av andre typer kan vises i treet, men bare `.md`/`.txt` kan åpnes i editoren.

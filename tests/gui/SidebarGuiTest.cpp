@@ -63,7 +63,7 @@ void run() {
   app.documents.error = [](const std::string& error) { throw std::runtime_error(error); };
   events(app);
   auto* tree = app.window->sidebar;
-  tree->setDirectory("/");
+  CHECK(app.window->workspacePanel->setWorkPath("/"));
   events(app);
   auto token = app.session.view().token;
   auto* root = tree->getPathnameItem("/");
@@ -73,7 +73,7 @@ void run() {
   clickItem(app, root, 2000);
   clickItem(app, root, 2050);
   CHECK(tree->shown() && app.session.view().token == token);
-  tree->setDirectory(directory.string().c_str());
+  CHECK(app.window->workspacePanel->setWorkPath(directory.string()));
   events(app);
   auto* folder = tree->getPathnameItem((directory / "folder.md").string().c_str());
   CHECK(folder);
@@ -88,8 +88,8 @@ void run() {
   CHECK(app.session.view().path == document.string() && tree->shown());
   CHECK(tree->getWidth() > 50);
   app.views->toggleSidebar();
-  CHECK(!tree->shown());
-  CHECK(app.open(document.string()) && !tree->shown());
+  CHECK(!app.window->workspacePanel->shown());
+  CHECK(app.open(document.string()) && !app.window->workspacePanel->shown());
   app.views->toggleSidebar();
   CHECK(tree->shown());
 }

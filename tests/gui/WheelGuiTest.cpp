@@ -36,9 +36,12 @@ void run() {
   app.initialize(argc, argv);
   CHECK(app.open(file.string()));
   app.views->setMode(ViewMode::Split);
-  auto* directoryItem = app.window->sidebar->getPathnameItem(dir.string().c_str());
-  CHECK(directoryItem);
-  app.window->sidebar->expandTree(directoryItem);
+  CHECK(app.window->workspacePanel->setWorkPath(dir.string()));
+  events(app);
+  for (int i = 0; i < 100 && app.window->sidebar->scanning; ++i)
+    events(app, 2);
+  CHECK(!app.window->sidebar->scanning);
+  CHECK(app.window->sidebar->getPathnameItem(file.c_str()));
   events(app);
   app.scrolling.setSplit(false); // Check each physical viewport independently.
   for (auto* area : {static_cast<FX::FXScrollArea*>(app.window->sidebar),
