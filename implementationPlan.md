@@ -339,3 +339,7 @@ Seks native Release-tester og fem sanitizer-tester passerte lokalt; full CI er m
 Branch phase/p21-reading-colors. M1: UR-030/031, eiere og forskningsgrunnlag.
 M2: profiler, semantiske dekorasjoner, repaint og fire native sliders.
 M3: lagring/rollback, raster/GUI/PDF-regresjoner, visuell kontroll og integrasjon.
+
+P21 M1 `b6f934a`, M2 `9b259a9` er implementert. M3 samler
+[testbevis, visuell kontroll og installasjon](docs/evidence/P21.md).
+47 Release-tester og 45 sanitizer-tester består lokalt; fase-PR krever grønn CI.

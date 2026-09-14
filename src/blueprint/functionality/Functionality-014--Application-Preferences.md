@@ -46,6 +46,7 @@ OK er commit; Cancel eller vinduskryss forkaster draft. Prøvefeltet bruker samm
 | 4 | `Application::openBrowser` | `ExternalBrowser::open` | `src/application/adapters/ExternalBrowser.cpp` | Aktiv browserProgram + URL → prosess | Feil vises; ingen shell | Implemented |
 | 20 | `PreviewColorControls changed callback` | `Application::changeReadingColors` | `src/application/ApplicationAppearance.cpp` | Lesefarger → repaint/profil | Ingen dokumentmutasjon | Implemented |
 | 21 | `Application::applyAppearance` | `PreviewColorControls::sync` | `src/application/ui/controls/PreviewColorControls.cpp` | Lesefarger → repaint/profil | Ingen dokumentmutasjon | Implemented |
+| 22 | `Application::changeReadingColors` | `PreferencesService::commit` | `src/application/preferences/PreferencesService.cpp` | Release/tastatur/reset → aktiv Light- eller Dark-profil | Skrivefeil gjenoppretter lagret palett og sliders | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -92,3 +93,5 @@ DisplayListPainter en skjermpalett; PDF beholder standardfargene. DecorationRole
 bevarer semantisk rolle gjennom PageComposer, uten FOX-typer i renderer/kontrakter.
 Profiler lagres additivt i ReadingLight/ReadingDark via eksisterende preferences-service.
 Live endring er repaint; commit ved release, med rollback ved skrivefeil.
+
+P21: [AT-050/051, regresjoner og skjermbilder](../../../docs/evidence/P21.md).

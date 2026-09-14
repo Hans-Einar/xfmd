@@ -62,3 +62,5 @@ DisplayListPainter en skjermpalett; PDF beholder standardfargene. DecorationRole
 bevarer semantisk rolle gjennom PageComposer, uten FOX-typer i renderer/kontrakter.
 Profiler lagres additivt i ReadingLight/ReadingDark via eksisterende preferences-service.
 Live endring er repaint; commit ved release, med rollback ved skrivefeil.
+
+P21: [AT-050/051, regresjoner og skjermbilder](../../../docs/evidence/P21.md).
