@@ -28,6 +28,7 @@ public:
     CancelExport,
     FullScreen,
     LeaveFullScreen,
+    ToggleTheme,
     Last
   };
   std::function<void(Command)> action;

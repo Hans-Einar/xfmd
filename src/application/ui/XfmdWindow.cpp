@@ -7,8 +7,9 @@ windowMap[] = {FXMAPFUNC(SEL_CLOSE, 0, XfmdWindow::onClose),
                FXMAPFUNC(SEL_CONFIGURE, 0, XfmdWindow::onConfigure),
                FXMAPFUNC(SEL_KEYPRESS, 0, XfmdWindow::onKeyPress)};
 FXIMPLEMENT(XfmdWindow, FXMainWindow, windowMap, ARRAYNUMBER(windowMap))
-XfmdWindow::XfmdWindow(FXApp* app, CommandRouter& router)
-    : FXMainWindow(app, "xfmd", nullptr, nullptr, DECOR_ALL, 0, 0, 1100, 760), commands(&router) {
+XfmdWindow::XfmdWindow(FXApp* app, CommandRouter& router, UiContext& context)
+    : FXMainWindow(app, "xfmd", nullptr, nullptr, DECOR_ALL, 0, 0, 1100, 760), commands(&router),
+      ui(&context) {
   buildUi();
 }
 XfmdWindow::~XfmdWindow() {
@@ -23,28 +24,29 @@ void XfmdWindow::setApplicationIcons(FXIcon* large, FXIcon* small) {
 }
 void XfmdWindow::buildUi() {
   auto* bar = new FXMenuBar(this, LAYOUT_SIDE_TOP | LAYOUT_FILL_X);
-  auto add = [&](FXMenuPane* menu, const char* name, CommandRouter::Command command) {
-    new FXMenuCommand(menu, name, nullptr, commands, command);
+  auto add = [&](FXMenuPane* menu, const char* name, CommandRouter::Command command,
+                 UiIcon icon = UiIcon::NoIcon) {
+    new FXMenuCommand(menu, name, ui->icons.get(icon), commands, command);
   };
   fileMenu = new FXMenuPane(this);
-  add(fileMenu, "&Open...\tCtrl+O", CommandRouter::Open);
-  add(fileMenu, "&Save\tCtrl+S", CommandRouter::Save);
+  add(fileMenu, "&Open...\tCtrl+O", CommandRouter::Open, UiIcon::Open);
+  add(fileMenu, "&Save\tCtrl+S", CommandRouter::Save, UiIcon::Save);
   add(fileMenu, "Save &As...\tCtrl+Shift+S", CommandRouter::SaveAs);
-  add(fileMenu, "Export &PDF...\tCtrl+Shift+E", CommandRouter::ExportPdf);
+  add(fileMenu, "Export &PDF...\tCtrl+Shift+E", CommandRouter::ExportPdf, UiIcon::Pdf);
   add(fileMenu, "Cancel PDF export", CommandRouter::CancelExport);
   add(fileMenu, "&Quit\tCtrl+Q", CommandRouter::Close);
   new FXMenuTitle(bar, "&File", nullptr, fileMenu);
   editMenu = new FXMenuPane(this);
   add(editMenu, "&Undo\tCtrl+Z", CommandRouter::Undo);
   add(editMenu, "&Redo\tCtrl+Y", CommandRouter::Redo);
-  add(editMenu, "&Find...\tCtrl+F", CommandRouter::Find);
+  add(editMenu, "&Find...\tCtrl+F", CommandRouter::Find, UiIcon::Search);
   add(editMenu, "&Preferences...", CommandRouter::Preferences);
   new FXMenuTitle(bar, "&Edit", nullptr, editMenu);
   viewMenu = new FXMenuPane(this);
   add(viewMenu, "&Preview\tCtrl+1", CommandRouter::Preview);
   add(viewMenu, "&Editor\tCtrl+2", CommandRouter::Editor);
   add(viewMenu, "&Split view\tCtrl+3", CommandRouter::Split);
-  add(viewMenu, "&Sidebar\tF10", CommandRouter::Sidebar);
+  add(viewMenu, "&Sidebar\tF10", CommandRouter::Sidebar, UiIcon::Sidebar);
   new FXMenuSeparator(viewMenu);
   new FXMenuRadio(viewMenu, "Window &wrap", commands, CommandRouter::WindowWrap);
   new FXMenuRadio(viewMenu, "&A4 page preview", commands, CommandRouter::A4);
@@ -52,22 +54,14 @@ void XfmdWindow::buildUi() {
   new FXMenuRadio(viewMenu, "Fit page &width", commands, CommandRouter::FitWidth);
   new FXMenuRadio(viewMenu, "Actual size (100%)", commands, CommandRouter::ActualSize);
   new FXMenuCheck(viewMenu, "Full &Screen\tF11", commands, CommandRouter::FullScreen);
+  new FXMenuSeparator(viewMenu);
+  new FXMenuCheck(viewMenu, "&Dark appearance", commands, CommandRouter::ToggleTheme);
   new FXMenuTitle(bar, "&View", nullptr, viewMenu);
   goMenu = new FXMenuPane(this);
-  add(goMenu, "&Back\tAlt+Left", CommandRouter::Back);
-  add(goMenu, "&Forward\tAlt+Right", CommandRouter::Forward);
+  add(goMenu, "&Back\tAlt+Left", CommandRouter::Back, UiIcon::Back);
+  add(goMenu, "&Forward\tAlt+Right", CommandRouter::Forward, UiIcon::Forward);
   new FXMenuTitle(bar, "&Go", nullptr, goMenu);
-  auto* toolbar =
-      new FXHorizontalFrame(this, LAYOUT_SIDE_TOP | LAYOUT_FILL_X | PACK_UNIFORM_HEIGHT);
-  for (const auto& item :
-       {std::pair<const char*, CommandRouter::Command>{"Open", CommandRouter::Open},
-        {"Save", CommandRouter::Save},
-        {"Back", CommandRouter::Back},
-        {"Forward", CommandRouter::Forward},
-        {"Preview", CommandRouter::Preview},
-        {"Split", CommandRouter::Split},
-        {"Editor", CommandRouter::Editor}})
-    new FXButton(toolbar, item.first, nullptr, commands, item.second, BUTTON_NORMAL);
+  buildToolbar();
   status = new FXLabel(this, "Open a local Markdown or text file.", nullptr,
                        LAYOUT_SIDE_BOTTOM | LAYOUT_FILL_X | JUSTIFY_LEFT);
   auto* workspace =
@@ -82,6 +76,7 @@ void XfmdWindow::buildUi() {
 }
 long XfmdWindow::onConfigure(FXObject* sender, FXSelector sel, void* data) {
   auto result = FXMainWindow::onConfigure(sender, sel, data);
+  layoutToolbar();
   if (configured)
     configured();
   return result;

@@ -32,6 +32,7 @@ public:
   std::unique_ptr<FoxPreferencesStore> preferencesStore;
   std::unique_ptr<PreferencesService> preferences;
   IconResources icons;
+  std::unique_ptr<UiContext> ui;
   XfmdWindow* window = nullptr;
   std::unique_ptr<ViewModeController> views;
   std::unique_ptr<FoxWindowMode> windowMode;
@@ -61,6 +62,7 @@ public:
 
 private:
   void wireDocument();
+  void applyAppearance(const Appearance&);
   void wireIndex();
   void pollReferences();
   void pollBrowser();

@@ -21,7 +21,9 @@ void Application::initialize(int& argc, char** argv) {
                                                        return preferencesStore->save(value, error);
                                                      });
   icons.load(app);
-  window = new XfmdWindow(&app, commands);
+  ui = std::make_unique<UiContext>(app, preferences->active().appearance);
+  window = new XfmdWindow(&app, commands, *ui);
+  new FXToolTip(&app);
   window->setApplicationIcons(icons.large.get(), icons.small.get());
   windowMode = std::make_unique<FoxWindowMode>(*window);
   window->configured = [this] { windowMode->observe(); };
@@ -46,6 +48,16 @@ void Application::initialize(int& argc, char** argv) {
     return true;
   };
   commands.checked = [this](auto command) {
+    if (command == CommandRouter::ToggleTheme)
+      return ui && ui->appearance().theme == "dark";
+    if (command == CommandRouter::Preview)
+      return views && views->mode() == ViewMode::Preview;
+    if (command == CommandRouter::Editor)
+      return views && views->mode() == ViewMode::Editor;
+    if (command == CommandRouter::Split)
+      return views && views->mode() == ViewMode::Split;
+    if (command == CommandRouter::Sidebar)
+      return window && window->workspacePanel->shown();
     if (command == CommandRouter::FullScreen)
       return windowMode && windowMode->fullscreen();
     if (!preview || !host)
@@ -129,6 +141,7 @@ void Application::initialize(int& argc, char** argv) {
     host->recalc();
   };
   preferences->changed = [this](const auto& value) {
+    applyAppearance(value.appearance);
     FoxWheelScrollBar::configureTree(window, value.scroll);
     auto profile = preview->layoutProfile();
     profile.paper.margin = value.marginMm * 72 / 25.4;
