@@ -18,7 +18,7 @@ xfmd_test(ReferenceWorkerTest tests/application/ReferenceWorkerTest.cpp xfmd_ind
 xfmd_test(NavigationTest tests/application/NavigationTest.cpp xfmd_navigation)
 add_test(NAME BlueprintStructure COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/validate_blueprints.py)
 add_test(NAME LayerBoundaries COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/check_layers.py)
-foreach(name BrowserPreferencesTest IndexGuiTest WorkspaceTest PresentationTest ScrollingTest NavigationGuiTest SidebarGuiTest WheelGuiTest WorkPathGuiTest PointerTest TablePreviewTest)
+foreach(name UiControlsTest BrowserPreferencesTest IndexGuiTest WorkspaceTest PresentationTest ScrollingTest NavigationGuiTest SidebarGuiTest WheelGuiTest WorkPathGuiTest PointerTest TablePreviewTest)
   add_executable(${name} tests/gui/${name}.cpp)
   target_include_directories(${name} PRIVATE tests)
   target_link_libraries(${name} PRIVATE xfmd_application)
@@ -126,3 +126,4 @@ target_link_libraries(PdfBenchmark PRIVATE xfmd_export xfmd_interpreter xfmd_ren
 add_executable(CapturePreferences tests/gui/CapturePreferences.cpp)
 target_include_directories(CapturePreferences PRIVATE tests)
 target_link_libraries(CapturePreferences PRIVATE xfmd_application)
+xfmd_test(ThemeProfilesTest tests/application/ThemeProfilesTest.cpp xfmd_application)

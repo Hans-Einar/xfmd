@@ -6,7 +6,7 @@ role: Adapter
 owner: application
 status: Implemented
 scope: FirstRelease
-requirements: UR-021, UR-011, UR-001, UR-006, UR-007, SR-002, SR-008, SR-013, UR-015, UR-017, UR-018, UR-019, UR-020, SR-019
+requirements: UR-025, UR-026, UR-021, UR-011, UR-001, UR-006, UR-007, SR-002, SR-008, SR-013, UR-015, UR-017, UR-018, UR-019, UR-020, SR-019
 uses: FUNC-020, FUNC-001, FUNC-005, FUNC-007, FUNC-012, FUNC-013, FUNC-014, FUNC-015, FUNC-018, FUNC-019
 ---
 
@@ -57,6 +57,7 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 | 10 | `Edit Preferences` | `PreferencesService::begin` | `src/application/preferences/PreferencesService.h` | aktiv profil → dialog | Cancel forkaster | Implemented |
 | 11 | `View Full Screen` | `FoxWindowMode::requestFullscreen` | `src/application/adapters/FoxWindowMode.cpp` | bool → WM-request | bekreft faktisk WM-state | Implemented |
 | 12 | `File Export PDF` | `ExportCoordinator::start` | `src/application/export/ExportCoordinator.cpp` | snapshot → jobb | ingen markSaved | Implemented |
+| 13 | `UiFactory::button` | `UiButton::UiButton` | `src/application/ui/controls/UiButton.cpp` | Rolle, target og selector → FOX-knapp | Normal FOX-input; painter eier tegning | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -91,3 +92,7 @@ filrotens dobbeltklikk beholder utvidelse av arbeidsrot. Se FUNC-020 og AT-040.
 
 Implemented i P2. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
 Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.
+
+P17–P19: UR-025, UR-026 utvider dette ansvaret; se [faseplan](../../../implementationPlan.md).
+Nye UI-klasser er planlagt under application/ui/style og controls. Stilendring
+beholder dokument, arbeidsflyter og FOX-input. AT-045, AT-046, AT-047 får egne testbevis.

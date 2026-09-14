@@ -16,6 +16,10 @@ bool PreferencesService::validate(const PreferencesSnapshot& s, std::string& err
     error = "Maximum acceleration must be between 1 and 5.";
   else if (!within(s.marginMm, 5, 50))
     error = "Page margins must be between 5 and 50 mm.";
+  else if ((s.appearance.theme != "light" && s.appearance.theme != "dark") ||
+           (s.appearance.buttons != "flat" && s.appearance.buttons != "classic") ||
+           s.appearance.fontSize < 8 || s.appearance.fontSize > 18)
+    error = "Choose Light/Dark, Flat/Classic and a UI font size from 8 to 18.";
   else if (s.browserProgram.empty() || s.browserProgram.size() > 4096 ||
            std::any_of(s.browserProgram.begin(), s.browserProgram.end(),
                        [](unsigned char c) { return c < 32 || c == 127; }))

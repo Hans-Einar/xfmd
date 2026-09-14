@@ -20,9 +20,11 @@ void run() {
   auto draft = service.begin();
   draft.scroll.speed = 2.5;
   draft.browserProgram = "google-chrome-stable";
+  draft.appearance = {"dark", true, "classic", 12};
   std::string error;
   service.cancel();
   CHECK(service.active().scroll.speed == 1.5);
+  CHECK(service.active().appearance.theme == "light");
   CHECK(service.active().browserProgram == "xdg-open");
   CHECK(service.commit(draft, error));
   CHECK(service.active().scroll.speed == 2.5);
@@ -31,6 +33,7 @@ void run() {
   FX::FXRegistry fresh("xfmd", "xfmd");
   CHECK(fresh.read());
   FoxPreferencesStore freshStore(fresh);
+  CHECK(freshStore.load().appearance == draft.appearance);
   CHECK(freshStore.load().browserProgram == "google-chrome-stable");
   CHECK(std::string(app.reg().readStringEntry("Future", "key", "")) == "keep");
   CHECK(std::string(app.reg().readStringEntry("WorkPaths", "path0", "")) == "/tmp");
@@ -61,6 +64,11 @@ void run() {
   CHECK(app.reg().readRealEntry("Scroll", "speed", 0) == 2.5);
   CHECK(std::string(app.reg().readStringEntry("Programs", "browser", "")) ==
         "google-chrome-stable");
+  CHECK(service.active().appearance.theme == "dark");
+  CHECK(std::string(app.reg().readStringEntry("Appearance", "theme", "")) == "dark");
+  draft = service.begin();
+  draft.appearance.theme = "missing";
+  CHECK(!service.commit(draft, error));
   app.reg().writeIntEntry("Preferences", "version", 2);
   FoxPreferencesStore future(app.reg());
   future.load();
