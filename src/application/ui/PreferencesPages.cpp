@@ -26,8 +26,14 @@ void PreferencesDialog::buildAppearance(FXComposite* parent) {
   auto* row = factory.row(parent);
   factory.button(row, "Reload style file", this, ReloadStyle, UiIcon::Refresh, ButtonRole::Normal)
       ->setTipText(ui->profilePath().c_str());
-  new FXLabel(parent, "Changes are previewed immediately. Cancel restores your appearance.",
-              nullptr, JUSTIFY_LEFT);
+  auto* examples = factory.row(parent);
+  factory.button(examples, "Normal", this, SampleToggle, UiIcon::Open, ButtonRole::Normal);
+  auto* selected =
+      factory.button(examples, "Selected", this, SampleToggle, UiIcon::Sidebar, ButtonRole::Normal);
+  selected->handle(this, FXSEL(SEL_COMMAND, FXWindow::ID_CHECK), nullptr);
+  factory.button(examples, "Disabled", nullptr, 0, UiIcon::Save, ButtonRole::Normal)->disable();
+  new FXLabel(parent, "Preview changes here. Cancel restores your appearance.", nullptr,
+              JUSTIFY_LEFT);
   new FXLabel(parent, "Document typography and PDF output keep their own settings.", nullptr,
               JUSTIFY_LEFT);
 }

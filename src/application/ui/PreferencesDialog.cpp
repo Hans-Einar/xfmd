@@ -9,6 +9,7 @@ preferencesMap[] = {
     FXMAPFUNC(SEL_CLOSE, 0, PreferencesDialog::onCancel),
     FXMAPFUNC(SEL_COMMAND, PreferencesDialog::BrowseBrowser, PreferencesDialog::onBrowseBrowser),
     FXMAPFUNC(SEL_COMMAND, PreferencesDialog::ReloadStyle, PreferencesDialog::onReload),
+    FXMAPFUNC(SEL_COMMAND, PreferencesDialog::SampleToggle, PreferencesDialog::onSampleToggle),
     FXMAPFUNC(SEL_COMMAND, PreferencesDialog::Changed, PreferencesDialog::onChanged),
     FXMAPFUNC(SEL_CHANGED, PreferencesDialog::Changed, PreferencesDialog::onChanged),
     FXMAPFUNC(SEL_COMMAND, PreferencesDialog::BrowserChanged, PreferencesDialog::onChanged),
@@ -22,8 +23,8 @@ PreferencesDialog::PreferencesDialog(FXWindow* owner, PreferencesService& prefer
                                      UiContext& context,
                                      std::function<void(const Appearance&)> callback)
     : FXDialogBox(owner, "Preferences", DECOR_TITLE | DECOR_BORDER | DECOR_CLOSE, 0, 0, 640, 490),
-      service(&preferences), ui(&context), draft(preferences.begin()),
-      preview(std::move(callback)) {
+      service(&preferences), ui(&context), draft(preferences.begin()), preview(std::move(callback)),
+      originalProfiles(context.profileSnapshot()), draftProfiles(originalProfiles) {
   auto* content = new FXVerticalFrame(this, LAYOUT_FILL_X | LAYOUT_FILL_Y);
   auto* tabs = new FXTabBook(content, nullptr, 0, LAYOUT_FILL_X | LAYOUT_FILL_Y);
   auto page = [&](const char* title) {
@@ -59,20 +60,33 @@ void PreferencesDialog::apply(const Appearance& value) {
   getApp()->refresh();
 }
 void PreferencesDialog::restore() {
-  if (service && ui)
+  if (service && ui) {
+    ui->restoreProfiles(originalProfiles);
     apply(service->active().appearance);
+  }
 }
 long PreferencesDialog::onAppearance(FXObject*, FXSelector, void*) {
   draft.appearance = {theme->getCurrentItem() == 1 ? "dark" : "light",
                       density->getCurrentItem() == 1,
                       buttons->getCurrentItem() == 1 ? "classic" : "flat", fontSize->getValue()};
+  ui->restoreProfiles(draftProfiles);
   apply(draft.appearance);
+  return 1;
+}
+long PreferencesDialog::onSampleToggle(FXObject* sender, FXSelector, void*) {
+  auto* button = dynamic_cast<UiButton*>(sender);
+  if (button)
+    button->handle(
+        this, FXSEL(SEL_COMMAND, button->isChecked() ? FXWindow::ID_UNCHECK : FXWindow::ID_CHECK),
+        nullptr);
   return 1;
 }
 long PreferencesDialog::onReload(FXObject*, FXSelector, void*) {
   std::string message;
-  if (ui->reload(message))
+  if (ui->reload(message)) {
+    draftProfiles = ui->profileSnapshot();
     apply(draft.appearance);
+  }
   error->setText(message.c_str());
   return 1;
 }
@@ -96,6 +110,7 @@ long PreferencesDialog::onBrowseBrowser(FXObject*, FXSelector, void*) {
 long PreferencesDialog::onAccept(FXObject*, FXSelector, void*) {
   onChanged(nullptr, 0, nullptr);
   std::string message;
+  ui->restoreProfiles(draftProfiles);
   if (!service->commit(draft, message)) {
     restore();
     error->setText(message.c_str());

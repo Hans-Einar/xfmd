@@ -21,6 +21,11 @@ public:
   const std::string& error() const { return startupError; }
   void setAppearance(const Appearance&);
   bool reload(std::string&);
+  const ThemeProfiles& profileSnapshot() const { return profiles; }
+  void restoreProfiles(const ThemeProfiles& value) {
+    profiles = value;
+    refresh();
+  }
   void apply(FX::FXWindow*);
   void refresh();
 };

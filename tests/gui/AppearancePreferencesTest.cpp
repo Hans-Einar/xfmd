@@ -1,5 +1,6 @@
 #include "application/Application.h"
 #include "application/ui/PreferencesDialog.h"
+#include "support/DrainEvents.h"
 #include "support/TestSupport.h"
 #include <X11/Xlib.h>
 #include <X11/keysym.h>
@@ -22,24 +23,12 @@ void choose(PreferencesDialog& dialog, FXSelector id, int value) {
   CHECK(combo);
   combo->setCurrentItem(value, true);
 }
-void drain(Application& app) {
-  auto* display = static_cast<Display*>(app.app.getDisplay());
-  for (int round = 0; round < 5; ++round) {
-    app.app.runWhileEvents();
-    XSync(display, False);
-    int remaining = 10000;
-    // FOX may return false for a deferred expose even when more events remain.
-    while (XPending(display) && --remaining)
-      app.app.runOneEvent(false);
-    CHECK(remaining > 0);
-  }
-}
 void key(Application& app, PreferencesDialog& dialog, KeySym symbol) {
   auto* display = static_cast<Display*>(app.app.getDisplay());
-  drain(app);
+  drainEvents(app.app);
   dialog.setFocus();
   XSetInputFocus(display, dialog.id(), RevertToParent, CurrentTime);
-  drain(app);
+  drainEvents(app.app);
   CHECK(app.app.getActiveWindow() == &dialog);
   XEvent event{};
   event.xkey.display = display;
@@ -51,7 +40,7 @@ void key(Application& app, PreferencesDialog& dialog, KeySym symbol) {
   CHECK(XSendEvent(display, dialog.id(), False, KeyPressMask, &event));
   event.type = KeyRelease;
   CHECK(XSendEvent(display, dialog.id(), False, KeyReleaseMask, &event));
-  drain(app);
+  drainEvents(app.app);
 }
 void run() {
   int argc = 1;
@@ -119,6 +108,18 @@ void run() {
     dialog.onAccept(nullptr, 0, nullptr);
     CHECK(dialog.shown() && failing.active().appearance == saved && app.ui->appearance() == saved);
     CHECK(field<FXComboBox>(&dialog, PreferencesDialog::ThemeChanged)->getCurrentItem() == 1);
+  }
+  const auto accent = app.ui->palette().accent;
+  const auto profile = std::filesystem::path(app.ui->profilePath());
+  std::filesystem::create_directories(profile.parent_path());
+  {
+    PreferencesDialog dialog(app.window, *app.preferences, *app.ui, preview);
+    dialog.create();
+    std::ofstream(profile) << "[light]\naccent=#D02070\n";
+    dialog.onReload(nullptr, 0, nullptr);
+    CHECK(app.ui->palette().accent == FXRGB(208, 32, 112));
+    dialog.onCancel(nullptr, 0, nullptr);
+    CHECK(app.ui->palette().accent == accent);
   }
   CHECK(app.session.view().token == token);
 }

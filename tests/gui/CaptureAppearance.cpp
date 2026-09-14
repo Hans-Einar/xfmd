@@ -1,5 +1,6 @@
 #include "application/Application.h"
 #include "support/Capture.h"
+#include "support/DrainEvents.h"
 #include <chrono>
 #include <filesystem>
 #include <thread>
@@ -30,5 +31,6 @@ int main(int argc, char** argv) {
   app.app.forceRefresh();
   app.app.repaint();
   app.app.flush(true);
+  drainEvents(app.app);
   captureDesktop(app.app, output.c_str());
 }
