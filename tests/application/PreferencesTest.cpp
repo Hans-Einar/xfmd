@@ -17,7 +17,15 @@ void run() {
   FoxPreferencesStore store(app.reg());
   PreferencesService service(store.load(),
                              [&](const auto& s, std::string& e) { return store.save(s, e); });
+  CHECK(service.active().lightReading == ReadingColors::defaults(false));
+  CHECK(service.active().darkReading == ReadingColors::defaults(true));
+  app.reg().writeStringEntry("ReadingDark", "textTone", "nan");
+  app.reg().writeRealEntry("ReadingLight", "backgroundBrightness", 3.5);
+  CHECK(store.load().darkReading == ReadingColors::defaults(true));
+  CHECK(store.load().lightReading == ReadingColors::defaults(false));
   auto draft = service.begin();
+  draft.darkReading = {-1, 12, 45, 85};
+  draft.lightReading = {60, 99, -1, 10};
   draft.scroll.speed = 2.5;
   draft.browserProgram = "google-chrome-stable";
   draft.appearance = {"dark", true, "classic", 12};
@@ -34,6 +42,8 @@ void run() {
   CHECK(fresh.read());
   FoxPreferencesStore freshStore(fresh);
   CHECK(freshStore.load().appearance == draft.appearance);
+  CHECK(freshStore.load().darkReading == draft.darkReading);
+  CHECK(freshStore.load().lightReading == draft.lightReading);
   CHECK(freshStore.load().browserProgram == "google-chrome-stable");
   CHECK(std::string(app.reg().readStringEntry("Future", "key", "")) == "keep");
   CHECK(std::string(app.reg().readStringEntry("WorkPaths", "path0", "")) == "/tmp");

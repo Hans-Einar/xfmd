@@ -98,3 +98,10 @@ Se [designrevisjonen](../../softwareDesign.md), [arbeidsmåten](../../docs/worki
 
 | UR-028 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | AT-048 | FirstRelease |
 | UR-029 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | AT-049 | FirstRelease |
+
+## P21 kravdekning
+
+| Krav | Designobjekter | Akseptanse | Scope |
+| --- | --- | --- | --- |
+| UR-030 | [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-014](functionality/Functionality-014--Application-Preferences.md), [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md) | AT-050 | FirstRelease |
+| UR-031 | [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-014](functionality/Functionality-014--Application-Preferences.md), [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md) | AT-051 | FirstRelease |

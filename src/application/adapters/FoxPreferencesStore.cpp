@@ -33,6 +33,19 @@ PreferencesSnapshot FoxPreferencesStore::load() {
     s.appearance.buttons = "flat";
   s.appearance.compact = registry.readBoolEntry("Appearance", "compact", false);
   s.appearance.fontSize = int(read("Appearance", "fontSize", 10, 8, 18));
+  auto reading = [&](const char* section, ReadingColors& colors) {
+    auto integer = [&](const char* key, int fallback, int low, int high) {
+      double value = read(section, key, fallback, low, high);
+      return value == std::floor(value) ? int(value) : fallback;
+    };
+    colors.backgroundTone = integer("backgroundTone", colors.backgroundTone, -1, 359);
+    colors.backgroundBrightness =
+        integer("backgroundBrightness", colors.backgroundBrightness, 0, 100);
+    colors.textTone = integer("textTone", colors.textTone, -1, 359);
+    colors.textBrightness = integer("textBrightness", colors.textBrightness, 0, 100);
+  };
+  reading("ReadingLight", s.lightReading);
+  reading("ReadingDark", s.darkReading);
   s.browserProgram = registry.readStringEntry("Programs", "browser", "xdg-open");
   std::string error;
   if (!PreferencesService::validate(s, error))
@@ -57,6 +70,14 @@ bool FoxPreferencesStore::save(const PreferencesSnapshot& s, std::string& error)
   registry.writeStringEntry("Appearance", "buttons", s.appearance.buttons.c_str());
   registry.writeBoolEntry("Appearance", "compact", s.appearance.compact);
   registry.writeIntEntry("Appearance", "fontSize", s.appearance.fontSize);
+  auto reading = [&](const char* section, const ReadingColors& colors) {
+    registry.writeIntEntry(section, "backgroundTone", colors.backgroundTone);
+    registry.writeIntEntry(section, "backgroundBrightness", colors.backgroundBrightness);
+    registry.writeIntEntry(section, "textTone", colors.textTone);
+    registry.writeIntEntry(section, "textBrightness", colors.textBrightness);
+  };
+  reading("ReadingLight", s.lightReading);
+  reading("ReadingDark", s.darkReading);
   registry.writeStringEntry("Programs", "browser", s.browserProgram.c_str());
   if (!registry.write()) {
     static_cast<FX::FXSettings&>(registry) = before;

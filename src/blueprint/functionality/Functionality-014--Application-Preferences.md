@@ -6,7 +6,7 @@ role: Service
 owner: application
 status: Implemented
 scope: FirstRelease
-requirements: UR-025, UR-027, UR-024, UR-015, UR-017, SR-002, SR-018
+requirements: UR-030, UR-031, UR-025, UR-027, UR-024, UR-015, UR-017, SR-002, SR-018
 uses: none
 ---
 
@@ -44,6 +44,9 @@ OK er commit; Cancel eller vinduskryss forkaster draft. Prøvefeltet bruker samm
 | 5 | `PreferencesDialog appearance preview` | `UiContext::setAppearance` | `src/application/ui/style/UiContext.cpp` | draft → levende UI | Cancel/close/lagringsfeil gjenoppretter aktivt utseende | Implemented |
 | 6 | `PreferencesDialog reload style` | `UiContext::reload` | `src/application/ui/style/UiContext.cpp` | validert appearance.ini | gammel profil beholdes ved feil | Implemented |
 | 4 | `Application::openBrowser` | `ExternalBrowser::open` | `src/application/adapters/ExternalBrowser.cpp` | Aktiv browserProgram + URL → prosess | Feil vises; ingen shell | Implemented |
+| 20 | `PreviewColorControls changed callback` | `Application::changeReadingColors` | `src/application/ApplicationAppearance.cpp` | Lesefarger → repaint/profil | Ingen dokumentmutasjon | Implemented |
+| 21 | `Application::applyAppearance` | `PreviewColorControls::sync` | `src/application/ui/controls/PreviewColorControls.cpp` | Lesefarger → repaint/profil | Ingen dokumentmutasjon | Implemented |
+| 22 | `Application::changeReadingColors` | `PreferencesService::commit` | `src/application/preferences/PreferencesService.cpp` | Release/tastatur/reset → aktiv Light- eller Dark-profil | Skrivefeil gjenoppretter lagret palett og sliders | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -83,3 +86,12 @@ P17–P19 er implementert og kontrollert mot AT-045–047. Se
 [testbevis og produksjonsskjermbilder](../../../docs/evidence/P17-P19.md) og
 [konkrete UI-klasser](../../../docs/design/fox-ui-layer.md). Blueprint-status
 beholdes som Implemented; fysisk brukeropplevelse/andre DPI er ikke automatisert verifisert.
+
+P21 utvider samme eier med UR-030/031, AT-050, AT-051. ReadingColors er rene
+lesepreferanser; PreviewColorControls bruker UiRow/UiContext. Bare FOX-host gir
+DisplayListPainter en skjermpalett; PDF beholder standardfargene. DecorationRole
+bevarer semantisk rolle gjennom PageComposer, uten FOX-typer i renderer/kontrakter.
+Profiler lagres additivt i ReadingLight/ReadingDark via eksisterende preferences-service.
+Live endring er repaint; commit ved release, med rollback ved skrivefeil.
+
+P21: [AT-050/051, regresjoner og skjermbilder](../../../docs/evidence/P21.md).

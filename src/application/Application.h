@@ -64,6 +64,7 @@ public:
 
 private:
   void wireDocument();
+  void changeReadingColors(const ReadingColors&, bool commit);
   void applyAppearance(const Appearance&);
   void wireIndex();
   void pollReferences();

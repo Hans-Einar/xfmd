@@ -104,7 +104,10 @@ double TableLayout::layout(const SemanticTable& table, double left, double top, 
     frame.decorations.push_back({{left, y, tableWidth, height},
                                  row.header     ? 0xe9edf3u
                                  : rowIndex % 2 ? 0xffffffu
-                                                : 0xf7f9fbu});
+                                                : 0xf7f9fbu,
+                                 row.header     ? DecorationRole::Surface
+                                 : rowIndex % 2 ? DecorationRole::Background
+                                                : DecorationRole::Alternate});
     auto edge = [&](double xx, double yy, double w, double h) {
       frame.decorations.push_back({{xx, yy, w, h}, 0xb8bec7});
     };

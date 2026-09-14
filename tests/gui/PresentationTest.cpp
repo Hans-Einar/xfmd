@@ -1,4 +1,5 @@
 #include "application/Application.h"
+#include "support/DrainEvents.h"
 #include "support/TestSupport.h"
 #include <X11/Xlib.h>
 #include <chrono>
@@ -22,7 +23,7 @@ void run() {
   auto* display = static_cast<Display*>(application.app.getDisplay());
   XSetInputFocus(display, application.window->id(), RevertToParent, CurrentTime);
   XSync(display, False);
-  application.app.runWhileEvents();
+  drainEvents(application.app);
   CHECK(application.host->frame());
   CHECK(application.host->interactive());
   CHECK(application.host->frame()->token == application.session.view().token);
@@ -42,6 +43,7 @@ void run() {
     application.app.runWhileEvents();
     std::this_thread::sleep_for(std::chrono::milliseconds(5));
   }
+  drainEvents(application.app);
   CHECK(application.host->interactive());
   CHECK(application.host->frame()->token == application.session.view().token);
   CHECK(application.window->editor->getCursorPos() == cursor);

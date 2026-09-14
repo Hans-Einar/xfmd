@@ -2,6 +2,7 @@
 #include "EditorWidget.h"
 #include "WorkspacePanel.h"
 #include "application/commands/CommandRouter.h"
+#include "controls/PreviewColorControls.h"
 #include "controls/PreviewControls.h"
 #include "controls/UiLayout.h"
 #include <fx.h>
@@ -21,6 +22,7 @@ protected:
 
 public:
   PreviewControls* previewControls = nullptr;
+  PreviewColorControls* previewColors = nullptr;
   EditorWidget* editor = nullptr;
   SidebarWidget* sidebar = nullptr;
   WorkspacePanel* workspacePanel = nullptr;

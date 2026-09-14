@@ -2,6 +2,7 @@
 #include "FoxCairoCanvas.h"
 #include "SharedTextMetrics.h"
 #include "ViewTransform.h"
+#include "application/preferences/ReadingColors.h"
 #include "application/scroll/ScrollDynamics.h"
 #include "contracts/IRenderer.h"
 #include <functional>
@@ -11,6 +12,7 @@ namespace xfmd {
 class FoxRenderHost : public FX::FXScrollArea {
   FXDECLARE(FoxRenderHost)
   FoxCairoCanvas canvas;
+  ReadingColors reading;
   IRenderer* renderer = nullptr;
   SharedTextMetrics* metrics = nullptr;
   LayoutResult current;
@@ -34,6 +36,8 @@ public:
   std::function<void(const std::string&)> linkActivated;
   ScrollOrigin lastScrollOrigin = ScrollOrigin::UserDrag;
   FoxRenderHost(FX::FXComposite*, IRenderer&, SharedTextMetrics&);
+  void setReadingColors(const ReadingColors&);
+  const ReadingColors& readingColors() const { return reading; }
   void layout() override;
   bool canFocus() const override { return true; }
   FX::FXint getContentWidth() override;

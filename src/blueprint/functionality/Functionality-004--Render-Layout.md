@@ -83,3 +83,10 @@ se [P14](../../../docs/evidence/P14.md).
 
 Implemented i P3. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
 Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.
+
+P21: Decoration har en ren DecorationRole (Border, Surface, Alternate, Background)
+ved siden av den opprinnelige printfargen. BlockLayout og TableLayout angir rolle
+ved opprettelse, slik at skjermadapteren kan bruke lesepalett uten å sammenligne
+magiske RGB-verdier. Geometri, fontdata og FrameKey er uendret. Rollen er ingen
+FOX-/Cairo-type og ingen brukerpreferanse lagres i renderer. ReadingColorsTest
+kontrollerer rolledekning og at utskriftspaletten fortsatt brukes uten skjermoverstyring.
