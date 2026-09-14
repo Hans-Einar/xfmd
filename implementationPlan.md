@@ -304,3 +304,18 @@ Cancel/gammel lagringsfeil gjenopprettes aktivt utseende. Light/Dark på toolbar
 committer bare temafeltet og beholder density, font, knappestil og øvrige valg.
 Alle nye produksjonsklasser hører til application/ui/style eller controls;
 interpreter/renderer-kontraktene er uendret.
+
+
+### Gjennomføring P17–P19
+
+| Fase | Milestone-commits | PR |
+| --- | --- | --- |
+| P17 | M0 1e158b3, M1 2caac7c, M2 69f77c1 | [#10](https://github.com/Hans-Einar/xfmd/pull/10) |
+| P18 | M1 41a9748, M2 23a2cd4, testmiljø 22bfcd6 | [#11](https://github.com/Hans-Einar/xfmd/pull/11) |
+| P19 | M1 beb3b26, M2 9f110b6, M3 dokumentasjon/installasjon | [#12](https://github.com/Hans-Einar/xfmd/pull/12) |
+
+Implementert etter første leveranses avgrensning. [Produksjonsdesign](docs/design/fox-ui-layer.md)
+oppgir faktiske klasser; [evidens](docs/evidence/P17-P19.md) dokumenterer tester,
+review, produktskjermbilder og en kort oppstartsmåling. Framtidspunktene over
+(automatisk kapittelfølging, sammenleggbar historikk, dynamisk overflow) er ikke
+merket implementert.

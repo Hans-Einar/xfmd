@@ -51,3 +51,20 @@ Prosjektlisens er ikke valgt; dette er endringsnotater, ikke en formell release.
   argument uten shell. Feil ved programstart vises uten å endre dokumentet.
 - [Xfe-studien](docs/xfe-integration-study.md) kartlegger komponenter, koblinger
   og anbefalt integrasjonsrekkefølge. Xfe-stil er ennå ikke importert.
+
+
+## P17–P19: FOX UI-lag og Appearance
+
+- Gruppert ikonverktøylinje med samme kommandoer/snarveier, valgt visningsmodus,
+  dokumentnavn og vedvarende Light/Dark-toggle. Smale vinduer bruker menyfallback.
+- Edit → Preferences har Appearance, Scrolling, Document og Programs.
+  Light/Dark, Comfortable/Compact, Flat/Classic og UI-font kan forhåndsvises.
+  OK lagrer samlet; Cancel/Escape/close angrer. Lagringsfeil beholder utkastet.
+- Sentralt UiContext/ThemeProfiles/IconCatalog, UiButton med utskiftbar painter
+  og factory, delte layoutkomponenter og native FOX-input. Ingen ny runtime-motor.
+- Files/Index har felles seksjonsutforming; A4/Wrap/zoom ligger ved preview.
+- Validerte, valgfrie appearance.ini-overrides med manuell reload og rollback.
+  Dokument-/PDF-typografi er uendret av kontrolltemaet.
+
+Se [produksjonsdesign](docs/design/fox-ui-layer.md) og
+[testbevis med skjermbilder](docs/evidence/P17-P19.md).

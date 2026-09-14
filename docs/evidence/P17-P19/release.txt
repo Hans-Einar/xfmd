@@ -1,0 +1,97 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd/build-release
+Test project /home/warloc/git/xfmd/build-release
+      Start  1: PortContractTest
+ 1/44 Test  #1: PortContractTest .................   Passed    0.00 sec
+      Start  2: DocumentTest
+ 2/44 Test  #2: DocumentTest .....................   Passed    0.03 sec
+      Start  3: InterpreterTest
+ 3/44 Test  #3: InterpreterTest ..................   Passed    0.00 sec
+      Start  4: RendererTest
+ 4/44 Test  #4: RendererTest .....................   Passed    0.01 sec
+      Start  5: PreviewTest
+ 5/44 Test  #5: PreviewTest ......................   Passed    0.01 sec
+      Start  6: ScrollTest
+ 6/44 Test  #6: ScrollTest .......................   Passed    0.00 sec
+      Start  7: WorkPathTest
+ 7/44 Test  #7: WorkPathTest .....................   Passed    0.39 sec
+      Start  8: ExternalBrowserTest
+ 8/44 Test  #8: ExternalBrowserTest ..............   Passed    0.03 sec
+      Start  9: DocumentIndexTest
+ 9/44 Test  #9: DocumentIndexTest ................   Passed    0.00 sec
+      Start 10: ReferenceWorkerTest
+10/44 Test #10: ReferenceWorkerTest ..............   Passed    0.01 sec
+      Start 11: NavigationTest
+11/44 Test #11: NavigationTest ...................   Passed    0.00 sec
+      Start 12: BlueprintStructure
+12/44 Test #12: BlueprintStructure ...............   Passed    0.34 sec
+      Start 13: LayerBoundaries
+13/44 Test #13: LayerBoundaries ..................   Passed    0.06 sec
+      Start 14: AppearancePreferencesTest
+14/44 Test #14: AppearancePreferencesTest ........   Passed    0.45 sec
+      Start 15: AppearanceGuiTest
+15/44 Test #15: AppearanceGuiTest ................   Passed    3.06 sec
+      Start 16: UiControlsTest
+16/44 Test #16: UiControlsTest ...................   Passed    1.67 sec
+      Start 17: BrowserPreferencesTest
+17/44 Test #17: BrowserPreferencesTest ...........   Passed    0.37 sec
+      Start 18: IndexGuiTest
+18/44 Test #18: IndexGuiTest .....................   Passed    3.36 sec
+      Start 19: WorkspaceTest
+19/44 Test #19: WorkspaceTest ....................   Passed    0.32 sec
+      Start 20: PresentationTest
+20/44 Test #20: PresentationTest .................   Passed    1.47 sec
+      Start 21: ScrollingTest
+21/44 Test #21: ScrollingTest ....................   Passed    1.20 sec
+      Start 22: NavigationGuiTest
+22/44 Test #22: NavigationGuiTest ................   Passed    2.24 sec
+      Start 23: SidebarGuiTest
+23/44 Test #23: SidebarGuiTest ...................   Passed    5.56 sec
+      Start 24: WheelGuiTest
+24/44 Test #24: WheelGuiTest .....................   Passed   21.74 sec
+      Start 25: WorkPathGuiTest
+25/44 Test #25: WorkPathGuiTest ..................   Passed   10.07 sec
+      Start 26: PointerTest
+26/44 Test #26: PointerTest ......................   Passed    3.48 sec
+      Start 27: TablePreviewTest
+27/44 Test #27: TablePreviewTest .................   Passed    1.38 sec
+      Start 28: DiskFullFailure
+28/44 Test #28: DiskFullFailure ..................   Passed    0.06 sec
+      Start 29: BlueprintSymbols
+29/44 Test #29: BlueprintSymbols .................   Passed    0.06 sec
+      Start 30: ScrollMotionTest
+30/44 Test #30: ScrollMotionTest .................   Passed    0.00 sec
+      Start 31: PreferencesTest
+31/44 Test #31: PreferencesTest ..................   Passed    0.21 sec
+      Start 32: TypographyTest
+32/44 Test #32: TypographyTest ...................   Passed    0.14 sec
+      Start 33: PageLayoutTest
+33/44 Test #33: PageLayoutTest ...................   Passed    0.03 sec
+      Start 34: PagedPreviewTest
+34/44 Test #34: PagedPreviewTest .................   Passed    1.63 sec
+      Start 35: ExportJobTest
+35/44 Test #35: ExportJobTest ....................   Passed    0.01 sec
+      Start 36: PdfExportTest
+36/44 Test #36: PdfExportTest ....................   Passed    0.04 sec
+      Start 37: ExportGuiTest
+37/44 Test #37: ExportGuiTest ....................   Passed    0.25 sec
+      Start 38: PdfFidelityTest
+38/44 Test #38: PdfFidelityTest ..................   Passed    7.34 sec
+      Start 39: PdfFlushFailure
+39/44 Test #39: PdfFlushFailure ..................   Passed    0.10 sec
+      Start 40: FullscreenTest
+40/44 Test #40: FullscreenTest ...................   Passed    3.80 sec
+      Start 41: IconTest
+41/44 Test #41: IconTest .........................   Passed    0.21 sec
+      Start 42: CanvasTest
+42/44 Test #42: CanvasTest .......................   Passed    0.19 sec
+      Start 43: TableTest
+43/44 Test #43: TableTest ........................   Passed    1.10 sec
+      Start 44: ThemeProfilesTest
+44/44 Test #44: ThemeProfilesTest ................   Passed    0.01 sec
+
+100% tests passed, 0 tests failed out of 44
+
+Label Time Summary:
+GUI    =  62.44 sec*proc (19 tests)
+
+Total Test time (real) =  72.46 sec

@@ -170,3 +170,36 @@ og 50 000 celler. Andre GFM-utvidelser er ikke aktivert.
 HTTP(S)-lenker vises med Unicode ↗. Preview frigjør musegrab etter klikk, også
 ved endret layout; høyre-/midtklikk i preview limer ikke inn eller følger lenker.
 Editorens vanlige midtklikk/paste påvirkes ikke.
+
+
+## Utseende og arbeidsflate
+
+Verktøylinjen har Open/Save, Back/Forward, Sidebar og et eksklusivt valg mellom
+Preview, Split og Editor. Light/Dark-knappen bytter og lagrer tema, og beholder
+øvrige utseendevalg. Ved smalt vindu flyttes tilgangen til skjulte verktøy over
+til de eksisterende menyene og snarveiene. A4/Wrap og relevant zoom står ved preview.
+
+**Edit → Preferences → Appearance** gir Light/Dark, Comfortable/Compact,
+Flat/Classic og UI-fontstørrelse 8–18. Endringer forhåndsvises i appen. OK lagrer;
+Cancel, Escape eller vinduskrysset gjenoppretter aktivt utseende. Lagringsfeil
+beholder utkastet i dialogen og gjenoppretter aktivt utseende i arbeidsflaten.
+Scrolling, Document og Programs er egne faner i samme dialog/transaksjon.
+Tema endrer kontrollene og editorens farger. Dokumenttypografi, hvit preview-side
+og PDF-farger er uavhengige av tema.
+
+For å prøve egne farger og mål: kopier [appearance.ini](packaging/appearance.ini)
+til `$XDG_CONFIG_HOME/xfmd/appearance.ini` (vanligvis
+`~/.config/xfmd/appearance.ini`). Trykk **Reload style file** i Appearance.
+Palettfeltene i `[light]`/`[dark]` er `surface`, `panel`, `field`, `text`, `muted`,
+`border`, `accent`, `selected`, `hover` og `danger`, alle som `#RRGGBB`.
+`[comfortable]`/`[compact]` støtter `gap` (2–16), `inset` (4–24), `height` (24–48),
+`radius` (0–10) og `iconSize` (14–32). Mål skaleres med UI-fontstørrelsen.
+
+Manglende verdier bruker innebygde standarder; filen er begrenset til 64 KiB.
+Ugyldig reload viser en feil og beholder sist fungerende profil. Cancel angrer
+også den levende profilforhåndsvisningen, men skriver ikke tilbake den eksternt
+redigerte filen. Neste oppstart leser filen på nytt. Det finnes ingen filovervåker
+eller ny runtime-avhengighet. Eksempelprofil installeres under `share/doc/xfmd`.
+
+Se [implementasjonsplan](implementationPlan.md), [UI-laget](docs/design/fox-ui-layer.md)
+og [testbevis og produktskjermbilder](docs/evidence/P17-P19.md).

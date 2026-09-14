@@ -107,3 +107,9 @@ P18-M2: PreviewControls sender Wrap/A4/zoom til samme CommandRouter; zoom
 vises kun ved A4 og tilstrekkelig bredde. Files-header har rot/filter/Refresh;
 Index/References bruker PanelHeader. Endret radhøyde går via FOXs item-mål,
 ikke via nye klikkkoordinater. Native IndexGuiTest og SidebarGuiTest passerer.
+
+
+P17–P19 er implementert og kontrollert mot AT-045–047. Se
+[testbevis og produksjonsskjermbilder](../../../docs/evidence/P17-P19.md) og
+[konkrete UI-klasser](../../../docs/design/fox-ui-layer.md). Blueprint-status
+beholdes som Implemented; fysisk brukeropplevelse/andre DPI er ikke automatisert verifisert.

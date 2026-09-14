@@ -77,3 +77,9 @@ UiForm og DialogActions standardiserer spacing og OK/Cancel. Appearance forhånd
 gjennom UiContext; OK lagrer, mens Cancel, vinduskryss og lagringsfeil gjenoppretter
 aktiv Appearance. Feil beholder utkastet for nytt forsøk. AppearancePreferencesTest
 dekker preview, commit, cancel, close, lagringsfeil og toolbar som bevarer øvrige valg.
+
+
+P17–P19 er implementert og kontrollert mot AT-045–047. Se
+[testbevis og produksjonsskjermbilder](../../../docs/evidence/P17-P19.md) og
+[konkrete UI-klasser](../../../docs/design/fox-ui-layer.md). Blueprint-status
+beholdes som Implemented; fysisk brukeropplevelse/andre DPI er ikke automatisert verifisert.

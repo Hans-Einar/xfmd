@@ -1,8 +1,14 @@
 # FOX UI: et lite lag for et enhetlig og utskiftbart utseende
 
 Dato: 2026-09-14. Status: **forslag**, med separat kjørbar FOX-prototype.
-Produksjonsappen er ikke endret. [UX-forslaget](fox_ux_improvements.md) beskriver
+Dette var utgangspunktet før P17–P19-integrasjonen. [UX-forslaget](fox_ux_improvements.md) beskriver
 hvilke handlinger som bør stå hvor; dette dokumentet beskriver hvordan de tegnes.
+
+
+**Integrasjonsstatus P17–P19:** første leveranse er nå implementert. Avsnittene
+nedenfor beskriver utgangspunktet og forslaget; se [produksjonsdesignet](docs/design/fox-ui-layer.md)
+for faktiske klassenavn og avgrensning, og [testbevis](docs/evidence/P17-P19.md)
+for skjermbilder fra produksjonsappen. Light/Dark og Flat/Classic er separate valg.
 
 ## 1. Mål og anbefalt omfang
 
