@@ -1,0 +1,17 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd/build-release
+Test project /home/warloc/git/xfmd/build-release
+    Start 15: AppearanceGuiTest
+1/1 Test #15: AppearanceGuiTest ................***Failed    1.64 sec
+/home/warloc/git/xfmd/tests/gui/AppearanceGuiTest.cpp:61: app.window->previewArea->getWidth() > 100
+
+
+0% tests passed, 1 tests failed out of 1
+
+Label Time Summary:
+GUI    =   1.64 sec*proc (1 test)
+
+Total Test time (real) =   1.64 sec
+
+The following tests FAILED:
+	 15 - AppearanceGuiTest (Failed)                        GUI
+Errors while running CTest

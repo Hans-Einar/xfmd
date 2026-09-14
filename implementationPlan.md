@@ -328,3 +328,8 @@ Branch phase/p20-navigation-split med egen PR.
 - M2: reproduser Editor → Split med faktisk geometri, bevar deling og tegn
   Editor/Split/Preview-ikoner i samme katalog som eksisterende toolbar.
 - M3: målrettede native/regresjonstester, dokumentasjon, installasjon og CI før merge.
+
+
+P20 M1 `7e4d159` og M2 `7eb8346` er implementert. M3 samler
+[testbevis](docs/evidence/P20.md), produktskjermbilde og installasjon.
+Seks native Release-tester og fem sanitizer-tester passerte lokalt; full CI er merge-gate.

@@ -132,3 +132,5 @@ P20-M2: geometritesten reproduserte Editor → Split med preview-bredde under
 og setter begge bredder ved retur; reaktivert Split gjenoppretter et kollapset
 panel. AppearanceGuiTest dekker gjentatte bytter/resize, beholdt deling og
 Editor/Split/Preview-rekkefølgen med distinkte ikoner.
+
+P20-bevis for AT-048/049 og oppdatert AT-046: [native tester og geometri](../../../docs/evidence/P20.md).

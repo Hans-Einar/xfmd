@@ -68,3 +68,17 @@ Prosjektlisens er ikke valgt; dette er endringsnotater, ikke en formell release.
 
 Se [produksjonsdesign](docs/design/fox-ui-layer.md) og
 [testbevis med skjermbilder](docs/evidence/P17-P19.md).
+
+
+## P20: filåpning, tretaster og Split
+
+- Files-treet bruker xdg-open for andre regulære filtyper enn .md/.txt.
+  Ekstern åpning beholder dokument, dirty og undo; oppstarts-/exitfeil vises.
+- Space og Enter aktiverer noder; høyrepil aktiverer endenoder. Mapper og
+  lazy referansegrener beholder vanlig høyrepilutvidelse.
+- Rettet Editor → Split: fullbredde i enkeltpanel overskriver ikke den tidligere
+  delingen. Gjentatte bytter, resize og kollapset preview er regresjonstestet.
+- Editor / Split / Preview står i samme rekkefølge i toolbar og View-meny,
+  med kodeklammer, delt rute og øyeikon. Tastatursnarveiene er beholdt.
+
+[Testbevis og skjermbilde](docs/evidence/P20.md).
