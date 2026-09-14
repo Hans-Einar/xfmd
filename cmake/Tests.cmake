@@ -126,3 +126,4 @@ target_link_libraries(PdfBenchmark PRIVATE xfmd_export xfmd_interpreter xfmd_ren
 add_executable(CapturePreferences tests/gui/CapturePreferences.cpp)
 target_include_directories(CapturePreferences PRIVATE tests)
 target_link_libraries(CapturePreferences PRIVATE xfmd_application)
+xfmd_test(ThemeProfilesTest tests/application/ThemeProfilesTest.cpp xfmd_application)

@@ -25,6 +25,14 @@ PreferencesSnapshot FoxPreferencesStore::load() {
   s.scroll.maxGain = read("Scroll", "maxGain", 3, 1, 5);
   s.scroll.acceleration = registry.readBoolEntry("Scroll", "acceleration", false);
   s.marginMm = read("Page", "marginMm", 20, 5, 50);
+  s.appearance.theme = registry.readStringEntry("Appearance", "theme", "light");
+  if (s.appearance.theme != "light" && s.appearance.theme != "dark")
+    s.appearance.theme = "light";
+  s.appearance.buttons = registry.readStringEntry("Appearance", "buttons", "flat");
+  if (s.appearance.buttons != "flat" && s.appearance.buttons != "classic")
+    s.appearance.buttons = "flat";
+  s.appearance.compact = registry.readBoolEntry("Appearance", "compact", false);
+  s.appearance.fontSize = int(read("Appearance", "fontSize", 10, 8, 18));
   s.browserProgram = registry.readStringEntry("Programs", "browser", "xdg-open");
   std::string error;
   if (!PreferencesService::validate(s, error))
@@ -45,6 +53,10 @@ bool FoxPreferencesStore::save(const PreferencesSnapshot& s, std::string& error)
   registry.writeRealEntry("Scroll", "strength", s.scroll.strength);
   registry.writeRealEntry("Scroll", "maxGain", s.scroll.maxGain);
   registry.writeRealEntry("Page", "marginMm", s.marginMm);
+  registry.writeStringEntry("Appearance", "theme", s.appearance.theme.c_str());
+  registry.writeStringEntry("Appearance", "buttons", s.appearance.buttons.c_str());
+  registry.writeBoolEntry("Appearance", "compact", s.appearance.compact);
+  registry.writeIntEntry("Appearance", "fontSize", s.appearance.fontSize);
   registry.writeStringEntry("Programs", "browser", s.browserProgram.c_str());
   if (!registry.write()) {
     static_cast<FX::FXSettings&>(registry) = before;

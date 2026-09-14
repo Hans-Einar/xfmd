@@ -1,4 +1,5 @@
 #pragma once
+#include "Appearance.h"
 #include "application/scroll/ScrollDynamics.h"
 #include <functional>
 #include <string>
@@ -6,6 +7,7 @@ namespace xfmd {
 struct PreferencesSnapshot {
   int version = 1;
   ScrollProfile scroll;
+  Appearance appearance;
   double marginMm = 20;
   std::string browserProgram = "xdg-open";
 };
