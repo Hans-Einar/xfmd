@@ -348,3 +348,17 @@ TreeActivation.h deler tastaturpolicy mellom SidebarWidget og NavigationTree;
 klasse-spesifikk leaf-vurdering bevarer mapper og lazy grener. ViewModeController
 eier tidligere paneandel og restaurerer begge bredder ved overgang tilbake til
 Split. IconCatalog eier Editor/Split/Preview-symbolene.
+
+## P21: lesepalett uten reflow
+
+application/preferences/ReadingColors eier profilverdier, RGB-konvertering,
+kontrast og skjermpalett. PreferencesSnapshot har separate lightReading/darkReading.
+FoxPreferencesStore laster/lagrer disse additivt. PreviewColorControls i ui/controls
+har fire sliders i to kolonner og gjenbruker UiRow/UiContext for layout og stil.
+ApplicationAppearance kobler live repaint, commit og rollback til eksisterende service.
+
+FoxRenderHost sender en ReadingPalette til DisplayListPainter. Renderer gir
+Decoration en ren semantisk rolle (kode, tabellflate, kant) som PageComposer bevarer.
+Paletten endrer ingen FrameKey, glypher, treffregioner eller kildeankre. PDF utelater
+skjermpaletten og bruker opprinnelige printfarger. Theme-preview/Cancel velger riktig
+lagret lesepalett uten å skrive noen sliderverdier.

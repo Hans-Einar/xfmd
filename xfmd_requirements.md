@@ -218,7 +218,7 @@ blir ikke eksekvert. Konfigurasjon og analyser av Xfe endrer ikke renderer-arkit
 
 | Krav | Normativ atferd | Akseptanse |
 | --- | --- | --- |
-| UR-025 | Appearance har Light/Dark, Comfortable/Compact, Flat/Classic og kontrollfontstørrelse. Tema, mål og ikoner har felles eiere og validerte profilverdier. Dokument/PDF-utseendet endres ikke av kontrolltemaet. | AT-045: profiler, ugyldige overrides/fallback, persistens og uendret dokument/layoutprofil. |
+| UR-025 | Appearance har Light/Dark, Comfortable/Compact, Flat/Classic og kontrollfontstørrelse. Tema, mål og ikoner har felles eiere og validerte profilverdier. Previewens lesefarger følger Light/Dark med egne profiler (UR-030); dokumentlayout og PDF-utseende endres ikke. | AT-045: profiler, ugyldige overrides/fallback, persistens og uendret dokument/layoutprofil. |
 | UR-026 | Toolbar grupperer ikonhandlinger for Open/Save og Back/Forward, Sidebar, eksklusiv Editor/Split/Preview og Light/Dark-toggle. Meny/tastatur/toolbar deler enabled/checked via CommandRouter. Files og Index samt lokal preview-header følger samme stil/mål og beholder eksisterende navigasjon. | AT-046: native klikk/Space, disabled/checked, tema-toggle, smalt vindu og eksisterende navigasjons-/scrolltester. |
 | UR-027 | Preferences grupperer Appearance, Scrolling, Document og Programs i én transaksjon. Live utseendeprøving lagres først ved OK; Cancel/kryss gjenoppretter aktivt utseende. Skrivefeil beholder gammel lagret/aktiv profil og viser feil. | AT-047: OK/Cancel/kryss, skrivefeil, tema fra begge innganger, øvrige innstillinger og fokus. |
 
@@ -234,3 +234,16 @@ UR-026 / AT-046 presiseres: knapperekkefølgen er Editor/Split/Preview med
 layoutikoner. Retur fra Editor/Preview til Split gjenoppretter en brukbar,
 lagret deling; gjentatte bytter, resize og kollapsede paneler må ikke skjule
 preview bak en editor i full bredde. Snarveier Ctrl+1/2/3 beholdes.
+
+## P21: lesefarger i preview
+
+| Krav | Normativ atferd | Akseptanse |
+| --- | --- | --- |
+| UR-030 | Light/Dark velger egen lesepalett i både kontinuerlig og A4-preview, også ved levende Appearance-prøving/Cancel. Over preview ligger bakgrunnskontroller til venstre og tekstkontroller til høyre: fargetone øverst, lysstyrke nederst. Endringer tegnes under dragging uten parsing, shaping, reflow, endret anker eller dirty. Alle tekstelementer, kode, tabeller og sidebakgrunn følger paletten; lenker beholder understreking. | AT-050: native slider-input, begge temaer/formater, dekorasjoner og uendret frame/revisjon/scroll; ingen endring av PDF-palett. |
+| UR-031 | De fire sliderposisjonene lagres separat for Light og Dark og gjenopprettes ved temabytte og omstart. Manglende/ugyldige verdier får temaspesifikke standarder. Lagring skjer ved avsluttet brukerjustering; feil vises og gjenoppretter sist lagrede profil. | AT-051: separate profiler, restart, gamle preferanser, ugyldige verdier, skrivefeil og Cancel i Preferences. |
+
+Fargetone -1 er nøytral gråtone; 0–359 er hue med fast metning. Lysstyrke 0–100
+skalerer RGB-kanalene (HSV Value), ikke skjermens fysiske baklys eller perseptuell
+luminans. Standarder er nøytral mørk bakgrunn/lys tekst i Dark og omvendt i Light.
+Kontrast vises etter sRGB/WCAG-formelen, uten å hevde at én farge er medisinsk best.
+PDF bruker fortsatt standard utskriftspalett. Samme formede glypher/layout gjenbrukes.

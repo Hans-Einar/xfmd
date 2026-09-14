@@ -4,9 +4,9 @@ kind: Functionality
 audience: System
 role: Adapter
 owner: application
-status: Implemented
+status: Ready
 scope: FirstRelease
-requirements: UR-011, UR-002, UR-005, UR-008, SR-001, SR-008, SR-009, SR-010, SR-013, UR-017, SR-016, SR-019
+requirements: UR-030, UR-031, UR-011, UR-002, UR-005, UR-008, SR-001, SR-008, SR-009, SR-010, SR-013, UR-017, SR-016, SR-019
 uses: FUNC-004, FUNC-015, FUNC-016
 ---
 
@@ -64,6 +64,7 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 
 | 14 | `FOX press` | `FoxRenderHost::onButtonPress` | `src/application/adapters/FoxRenderHost.cpp` | Knapp/frame/lenke → klikktilstand og grab | Chord kansellerer aktivering | Implemented |
 | 15 | `FOX grab loss` | `FoxRenderHost::onUngrabbed` | `src/application/adapters/FoxRenderHost.cpp` | Tap av grab → nullstill klikk | Ingen lenkecallback | Implemented |
+| 20 | `PreviewColorControls changed callback` | `FoxRenderHost::setReadingColors` | `src/application/adapters/FoxRenderHost.cpp` | Lesefarger → repaint/profil | Ingen dokumentmutasjon | Planned |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -92,3 +93,10 @@ Utvidelsen krever AT-031, AT-036, AT-039. Dette er planlagt dekning, ikke nye te
 
 Implemented i P3. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
 Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.
+
+P21 utvider samme eier med UR-030/031, AT-050, AT-051. ReadingColors er rene
+lesepreferanser; PreviewColorControls bruker UiRow/UiContext. Bare FOX-host gir
+DisplayListPainter en skjermpalett; PDF beholder standardfargene. DecorationRole
+bevarer semantisk rolle gjennom PageComposer, uten FOX-typer i renderer/kontrakter.
+Profiler lagres additivt i ReadingLight/ReadingDark via eksisterende preferences-service.
+Live endring er repaint; commit ved release, med rollback ved skrivefeil.

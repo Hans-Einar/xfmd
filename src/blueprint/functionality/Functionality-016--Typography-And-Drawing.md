@@ -4,9 +4,9 @@ kind: Functionality
 audience: System
 role: Adapter
 owner: application
-status: Implemented
+status: Ready
 scope: FirstRelease
-requirements: UR-002, UR-017, UR-018, SR-001, SR-010, SR-016
+requirements: UR-030, UR-031, UR-002, UR-017, UR-018, SR-001, SR-010, SR-016
 uses: none
 ---
 
@@ -38,6 +38,7 @@ P9/P11/P12 dokumenterer fontfallback, glyph-/clusteruttrekk, PDF-fontembedding/t
 | 1 | `InlineLayout::layout` | `ITextShaper::shape` | `src/contracts/ITextShaper.h` | UTF-8/fontsett → glypher/clusters | unsupported glyph markeres likt i begge mål | Implemented |
 | 2 | `ITextShaper adapter` | `SharedTextMetrics::shape` | `src/application/adapters/SharedTextMetrics.cpp` | ren kontrakt → konkret shaping | fontcatalog/cache eies i application | Implemented |
 | 3 | `FoxRenderHost paint / PDF output` | `DisplayListPainter::paint` | `src/application/adapters/DisplayListPainter.cpp` | frame + target → samme glyphplassering | targetfeil rapporteres | Implemented |
+| 20 | `FoxRenderHost::onPaint` | `ReadingPalette::from` | `src/application/preferences/ReadingColors.cpp` | Lesefarger → repaint/profil | Ingen dokumentmutasjon | Planned |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -54,3 +55,10 @@ AT-002, AT-011, AT-020, AT-031, AT-032, AT-036: se [P11](../../../docs/evidence/
 Revisjon 1.1, 2026-09-13. Kallene er implementert i P11-M1.
 P9 teknisk gate, P11 migrering, P12 PDF-konsument. P12 beviser samsvar med uavhengig PDF-leser, og P13 kontrollerer den endelige tegnestien.
 [Integrasjonsdesign](../../../softwareDesign.md) og [faseplan](../../../implementationPlan.md) gir kontekst.
+
+P21 utvider samme eier med UR-030/031, AT-050, AT-051. ReadingColors er rene
+lesepreferanser; PreviewColorControls bruker UiRow/UiContext. Bare FOX-host gir
+DisplayListPainter en skjermpalett; PDF beholder standardfargene. DecorationRole
+bevarer semantisk rolle gjennom PageComposer, uten FOX-typer i renderer/kontrakter.
+Profiler lagres additivt i ReadingLight/ReadingDark via eksisterende preferences-service.
+Live endring er repaint; commit ved release, med rollback ved skrivefeil.

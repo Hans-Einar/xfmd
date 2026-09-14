@@ -333,3 +333,9 @@ Branch phase/p20-navigation-split med egen PR.
 P20 M1 `7e4d159` og M2 `7eb8346` er implementert. M3 samler
 [testbevis](docs/evidence/P20.md), produktskjermbilde og installasjon.
 Seks native Release-tester og fem sanitizer-tester passerte lokalt; full CI er merge-gate.
+
+## P21 — Live lesefarger og temaspesifikk persistens
+
+Branch phase/p21-reading-colors. M1: UR-030/031, eiere og forskningsgrunnlag.
+M2: profiler, semantiske dekorasjoner, repaint og fire native sliders.
+M3: lagring/rollback, raster/GUI/PDF-regresjoner, visuell kontroll og integrasjon.
