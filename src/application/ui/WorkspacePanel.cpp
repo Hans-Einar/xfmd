@@ -21,34 +21,42 @@ panelMap[] = {
     FXMAPFUNC(SEL_TIMEOUT, WorkspacePanel::ID_ACTIVATE, WorkspacePanel::onActivate),
     FXMAPFUNC(SEL_TIMEOUT, WorkspacePanel::ID_FILTER_APPLY, WorkspacePanel::onApplyFilter)};
 FXIMPLEMENT(WorkspacePanel, FXVerticalFrame, panelMap, ARRAYNUMBER(panelMap))
-WorkspacePanel::WorkspacePanel(FXComposite* parent)
+WorkspacePanel::WorkspacePanel(FXComposite* parent, UiContext& context)
     : FXVerticalFrame(parent, LAYOUT_FILL_Y, 0, 0, 260, 0, 2, 2, 2, 2),
       history(FXSystem::getHomeDirectory().text()) {
   tabs = new FXTabBook(this, nullptr, 0, LAYOUT_FILL_X | LAYOUT_FILL_Y);
   new FXTabItem(tabs, "Files");
   auto* filePage = new FXVerticalFrame(tabs, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0);
-  auto* row = new FXHorizontalFrame(filePage, LAYOUT_FILL_X, 0, 0, 0, 0, 0, 0, 0, 0);
-  markdown = new FXToggleButton(row, "*.md", "*.md", nullptr, nullptr, this, ID_FILTER,
-                                TOGGLEBUTTON_NORMAL | TOGGLEBUTTON_KEEPSTATE);
-  text = new FXToggleButton(row, "*.txt", "*.txt", nullptr, nullptr, this, ID_FILTER,
-                            TOGGLEBUTTON_NORMAL | TOGGLEBUTTON_KEEPSTATE);
-  new FXButton(row, "Refresh", nullptr, this, ID_FILTER, BUTTON_NORMAL);
-  markdown->setTipText("Include Markdown (OR with *.txt, then AND name filter)");
-  text->setTipText("Include text files (OR with *.md, then AND name filter)");
-  new FXLabel(filePage, "Filename filter (* and ?)", nullptr, LAYOUT_FILL_X | JUSTIFY_LEFT);
-  filterInput = new FXTextField(filePage, 18, this, ID_FILTER, TEXTFIELD_NORMAL | LAYOUT_FILL_X);
+  UiFactory ui(context);
+  auto* heading = ui.row(filePage);
+  rootLabel =
+      new FXLabel(heading, "Files", nullptr, JUSTIFY_LEFT | LAYOUT_FILL_X | LAYOUT_CENTER_Y);
+  ui.button(heading, "\tRefresh files", this, ID_FILTER, UiIcon::Refresh);
+  auto* filterRow = ui.row(filePage);
+  ui.button(filterRow, "\tApply filename filter (* and ?)", this, ID_FILTER, UiIcon::Search);
+  filterInput = new FXTextField(filterRow, 14, this, ID_FILTER,
+                                TEXTFIELD_NORMAL | LAYOUT_FILL_X | LAYOUT_CENTER_Y);
   filterInput->setTipText("Filter filenames: text contains; ? one character; * any characters");
-  auto* split = new FXSplitter(filePage, SPLITTER_VERTICAL | SPLITTER_TRACKING | LAYOUT_FILL_X |
-                                             LAYOUT_FILL_Y);
+  auto* row = ui.row(filePage);
+  markdown =
+      new FXToggleButton(row, ".md", ".md", nullptr, nullptr, this, ID_FILTER,
+                         TOGGLEBUTTON_NORMAL | TOGGLEBUTTON_TOOLBAR | TOGGLEBUTTON_KEEPSTATE);
+  text = new FXToggleButton(row, ".txt", ".txt", nullptr, nullptr, this, ID_FILTER,
+                            TOGGLEBUTTON_NORMAL | TOGGLEBUTTON_TOOLBAR | TOGGLEBUTTON_KEEPSTATE);
+  markdown->setTipText("Include Markdown (OR with .txt, then AND name filter)");
+  text->setTipText("Include text files (OR with .md, then AND name filter)");
+  auto* split = new FXSplitter(filePage, SPLITTER_VERTICAL | SPLITTER_REVERSED | SPLITTER_TRACKING |
+                                             LAYOUT_FILL_X | LAYOUT_FILL_Y);
   auto* upper = new FXVerticalFrame(split, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 450, 0, 0, 0, 0);
   tree = new SidebarWidget(upper);
   searchStatus = new FXLabel(upper, "", nullptr, LAYOUT_FILL_X | JUSTIFY_LEFT);
   auto* lower = new FXVerticalFrame(split, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 140, 0, 0, 0, 0);
-  new FXLabel(lower, "Historic work paths", nullptr, LAYOUT_FILL_X | JUSTIFY_LEFT);
+  ui.header(lower, "Recent folders");
   workPaths = new WorkPathList(lower, this, ID_HISTORY);
+  workPaths->setNumVisible(4);
   workPaths->setNumVisible(5);
   new FXTabItem(tabs, "Index");
-  index = new IndexPanel(tabs);
+  index = new IndexPanel(tabs, context);
   std::vector<std::string> saved;
   for (int i = 0; i < 32; ++i) {
     auto key = "Path" + std::to_string(i);
@@ -83,6 +91,9 @@ void WorkspacePanel::remember() {
 bool WorkspacePanel::setWorkPath(const std::string& path) {
   try {
     history.activate(path);
+    rootLabel->setText(
+        history.root().filename().empty() ? "/" : history.root().filename().string().c_str());
+    rootLabel->setTipText(history.root().string().c_str());
     pathError = false;
     searchStatus->setTipText("");
     tree->setRoot(history.root(), history.displayPath(history.root()));

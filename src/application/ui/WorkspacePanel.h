@@ -2,10 +2,12 @@
 #include "IndexPanel.h"
 #include "SidebarWidget.h"
 #include "application/workspace/WorkPathHistory.h"
+#include "controls/UiLayout.h"
 namespace xfmd {
 class WorkspacePanel : public FX::FXVerticalFrame {
   FXDECLARE(WorkspacePanel)
   std::string pendingPath;
+  FX::FXLabel* rootLabel = nullptr;
   bool pathError = false;
   void remember();
 
@@ -28,7 +30,7 @@ public:
   FX::FXToggleButton *markdown = nullptr, *text = nullptr;
   FX::FXList* workPaths = nullptr;
   FX::FXLabel* searchStatus = nullptr;
-  explicit WorkspacePanel(FX::FXComposite*);
+  WorkspacePanel(FX::FXComposite*, UiContext&);
   ~WorkspacePanel() override;
   bool setWorkPath(const std::string&);
   void requestWorkPath(const std::string&);

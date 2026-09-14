@@ -12,6 +12,14 @@ std::string Application::savePath() {
 }
 void Application::execute(CommandRouter::Command command) {
   switch (command) {
+  case CommandRouter::ToggleTheme: {
+    auto draft = preferences->begin();
+    draft.appearance.theme = draft.appearance.theme == "dark" ? "light" : "dark";
+    std::string error;
+    if (!preferences->commit(draft, error))
+      documents.error(error);
+    break;
+  }
   case CommandRouter::FullScreen:
   case CommandRouter::LeaveFullScreen:
     if (!app.getModalWindow() &&
@@ -116,5 +124,9 @@ void Application::execute(CommandRouter::Command command) {
   default:
     break;
   }
+  app.forceRefresh();
+  if (preview && host)
+    window->previewControls->sync(preview->layoutProfile().mode == LayoutMode::Paged,
+                                  host->fitWidth());
 }
 } // namespace xfmd

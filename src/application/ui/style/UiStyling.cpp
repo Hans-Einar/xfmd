@@ -5,6 +5,11 @@ namespace xfmd {
 void UiContext::apply(FXWindow* window) {
   if (!window)
     return;
+  if (dynamic_cast<FXRootWindow*>(window)) {
+    for (auto* child = window->getFirst(); child; child = child->getNext())
+      apply(child);
+    return;
+  }
   const auto& p = palette();
   auto m = metrics();
   auto* font = window->getApp()->getNormalFont();

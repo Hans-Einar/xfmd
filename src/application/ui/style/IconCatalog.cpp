@@ -13,8 +13,8 @@ void IconCatalog::update(const UiPalette& p, int size) {
       std::fill(pixels, pixels + size * size, FXRGBA(0, 0, 0, 0));
       const FXColor color = disabled ? p.muted : p.text;
       auto point = [&](int x, int y) {
-        for (int dy = 0; dy < std::max(1, size / 12); ++dy)
-          for (int dx = 0; dx < std::max(1, size / 12); ++dx)
+        for (int dy = 0; dy < std::max(1, int(std::lround(size / 10.0))); ++dy)
+          for (int dx = 0; dx < std::max(1, int(std::lround(size / 10.0))); ++dx)
             if (x + dx >= 0 && x + dx < size && y + dy >= 0 && y + dy < size)
               pixels[(y + dy) * size + x + dx] = color;
       };

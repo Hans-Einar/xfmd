@@ -59,6 +59,8 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 | 12 | `File Export PDF` | `ExportCoordinator::start` | `src/application/export/ExportCoordinator.cpp` | snapshot → jobb | ingen markSaved | Implemented |
 | 13 | `UiFactory::button` | `UiButton::UiButton` | `src/application/ui/controls/UiButton.cpp` | Rolle, target og selector → FOX-knapp | Normal FOX-input; painter eier tegning | Implemented |
 
+| 14 | `Application::applyAppearance` | `UiContext::apply` | `src/application/ui/style/UiStyling.cpp` | Profil → levende FOX-kontroller | Dokumentfonter beholdes | Implemented |
+
 ## 6. Gjenbruk og avhengigheter
 
 [FUNC-001](../functionality/Functionality-001--Document-Session.md), [FUNC-005](../functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-007](../functionality/Functionality-007--Preview-Pipeline.md)
@@ -96,3 +98,12 @@ Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik st
 P17–P19: UR-025, UR-026 utvider dette ansvaret; se [faseplan](../../../implementationPlan.md).
 Nye UI-klasser er planlagt under application/ui/style og controls. Stilendring
 beholder dokument, arbeidsflyter og FOX-input. AT-045, AT-046, AT-047 får egne testbevis.
+
+P18-M1: AppearanceGuiTest verifiserer toolbar-tema begge veier, persistens,
+checked visningsmodus og smal toolbar ved stor kontrollfont. UiControlsTest
+verifiserer separat valgt/trykket state og native mus/Space.
+
+P18-M2: PreviewControls sender Wrap/A4/zoom til samme CommandRouter; zoom
+vises kun ved A4 og tilstrekkelig bredde. Files-header har rot/filter/Refresh;
+Index/References bruker PanelHeader. Endret radhøyde går via FOXs item-mål,
+ikke via nye klikkkoordinater. Native IndexGuiTest og SidebarGuiTest passerer.
