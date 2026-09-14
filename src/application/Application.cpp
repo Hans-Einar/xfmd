@@ -203,6 +203,10 @@ bool Application::open(const std::string& path) {
   return navigation ? navigation->openTarget(path) : documents.requestOpen(path);
 }
 void Application::updateUi() {
+  window->setDocumentLabel(session.view().path, session.dirty());
+  if (preview && host)
+    window->previewControls->sync(preview->layoutProfile().mode == LayoutMode::Paged,
+                                  host->fitWidth());
   window->editor->applyProjection(session.view());
   auto title = (session.dirty() ? "* " : "") +
                (session.view().path.empty() ? std::string("Untitled") : session.view().path) +

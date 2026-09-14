@@ -66,12 +66,13 @@ void XfmdWindow::buildUi() {
                        LAYOUT_SIDE_BOTTOM | LAYOUT_FILL_X | JUSTIFY_LEFT);
   auto* workspace =
       new FXSplitter(this, SPLITTER_HORIZONTAL | SPLITTER_TRACKING | LAYOUT_FILL_X | LAYOUT_FILL_Y);
-  workspacePanel = new WorkspacePanel(workspace);
+  workspacePanel = new WorkspacePanel(workspace, *ui);
   sidebar = workspacePanel->tree;
   split = new FXSplitter(workspace,
                          SPLITTER_HORIZONTAL | SPLITTER_TRACKING | LAYOUT_FILL_X | LAYOUT_FILL_Y);
   editor = new EditorWidget(split);
   previewArea = new FXVerticalFrame(split, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0);
+  previewControls = new PreviewControls(previewArea, *ui, *commands);
   editor->setWidth(420);
 }
 long XfmdWindow::onConfigure(FXObject* sender, FXSelector sel, void* data) {

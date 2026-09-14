@@ -15,6 +15,9 @@ struct IndexAction {
 };
 struct NavigationItem : FX::FXTreeItem {
   IndexAction action;
+  FX::FXint getHeight(const FX::FXTreeList* list) const override {
+    return FXTreeItem::getHeight(list) + list->getFont()->getFontHeight() / 3;
+  }
   explicit NavigationItem(const std::string& label, IndexAction value = {})
       : FXTreeItem(label.c_str()), action(std::move(value)) {
     setDraggable(false);

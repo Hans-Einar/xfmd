@@ -1,4 +1,5 @@
 #include "XfmdWindow.h"
+#include <filesystem>
 using namespace FX;
 namespace xfmd {
 void XfmdWindow::buildToolbar() {
@@ -47,6 +48,11 @@ void XfmdWindow::layoutToolbar() {
   else
     documentTitle->show();
   toolbar->recalc();
+}
+void XfmdWindow::setDocumentLabel(const std::string& path, bool dirty) {
+  std::string label = path.empty() ? "Untitled" : std::filesystem::path(path).filename().string();
+  documentTitle->setText(((dirty ? "* " : "") + label).c_str());
+  documentTitle->setTipText(path.c_str());
 }
 void XfmdWindow::restyle() {
   themeButton->setText(ui->appearance().theme == "dark" ? "Dark" : "Light");

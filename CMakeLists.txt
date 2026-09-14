@@ -66,6 +66,7 @@ add_library(xfmd_export src/application/export/ExportCoordinator.cpp
   src/application/adapters/PdfOutput.cpp)
 target_link_libraries(xfmd_export PUBLIC xfmd_typography Threads::Threads)
 add_library(xfmd_application
+  src/application/ui/controls/PreviewControls.cpp
   src/application/ui/style/ThemeProfiles.cpp
   src/application/ui/style/IconCatalog.cpp src/application/ui/style/UiContext.cpp
   src/application/ui/style/UiStyling.cpp src/application/ui/controls/ButtonPainter.cpp

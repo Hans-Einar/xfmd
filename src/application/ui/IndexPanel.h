@@ -5,6 +5,7 @@
 #include <map>
 #include <set>
 namespace xfmd {
+class UiContext;
 class IndexPanel : public FX::FXVerticalFrame {
   FXDECLARE(IndexPanel)
   DocumentToken token;
@@ -22,7 +23,7 @@ public:
   NavigationTree *outline = nullptr, *references = nullptr;
   std::function<void(const IndexAction&)> activated;
   std::function<void(const std::string&)> referenceRequested;
-  explicit IndexPanel(FX::FXComposite*);
+  IndexPanel(FX::FXComposite*, UiContext&);
   ~IndexPanel() override;
   long onRequest(FX::FXObject*, FX::FXSelector, void*);
   void invalidate(DocumentToken, const std::string& path);

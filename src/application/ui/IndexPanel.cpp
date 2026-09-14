@@ -1,4 +1,5 @@
 #include "IndexPanel.h"
+#include "controls/UiLayout.h"
 #include <filesystem>
 using namespace FX;
 namespace xfmd {
@@ -17,14 +18,16 @@ void clearChildren(NavigationTree* tree, FXTreeItem* parent) {
     tree->removeItem(parent->getFirst());
 }
 } // namespace
-IndexPanel::IndexPanel(FXComposite* parent)
+IndexPanel::IndexPanel(FXComposite* parent, UiContext& context)
     : FXVerticalFrame(parent, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0) {
   auto* split =
       new FXSplitter(this, SPLITTER_VERTICAL | SPLITTER_TRACKING | LAYOUT_FILL_X | LAYOUT_FILL_Y);
   auto* upper = new FXVerticalFrame(split, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 300, 0, 0, 0, 0);
-  new FXLabel(upper, "Document index", nullptr, JUSTIFY_LEFT | LAYOUT_FILL_X);
+  UiFactory ui(context);
+  ui.header(upper, "Document index");
   outline = new NavigationTree(upper);
   auto* lower = new FXVerticalFrame(split, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 280, 0, 0, 0, 0);
+  ui.header(lower, "References");
   references = new NavigationTree(lower);
   auto activate = [this](const IndexAction& action) {
     if (valid && activated)

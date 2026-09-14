@@ -12,6 +12,7 @@ void events(Application& app) {
     app.app.runWhileEvents();
     std::this_thread::sleep_for(std::chrono::milliseconds(3));
   }
+  app.app.forceRefresh();
   app.app.repaint();
   app.app.flush(true);
 }

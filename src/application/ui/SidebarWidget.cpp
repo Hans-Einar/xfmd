@@ -8,6 +8,9 @@ namespace {
 struct PathItem : FXTreeItem {
   std::filesystem::path path;
   bool directory;
+  FXint getHeight(const FXTreeList* list) const override {
+    return FXTreeItem::getHeight(list) + list->getFont()->getFontHeight() / 3;
+  }
   PathItem(const TreeEntry& entry, const std::string& label)
       : FXTreeItem(label.c_str()), path(entry.path), directory(entry.directory) {
     setHasItems(directory);

@@ -102,3 +102,8 @@ beholder dokument, arbeidsflyter og FOX-input. AT-045, AT-046, AT-047 får egne 
 P18-M1: AppearanceGuiTest verifiserer toolbar-tema begge veier, persistens,
 checked visningsmodus og smal toolbar ved stor kontrollfont. UiControlsTest
 verifiserer separat valgt/trykket state og native mus/Space.
+
+P18-M2: PreviewControls sender Wrap/A4/zoom til samme CommandRouter; zoom
+vises kun ved A4 og tilstrekkelig bredde. Files-header har rot/filter/Refresh;
+Index/References bruker PanelHeader. Endret radhøyde går via FOXs item-mål,
+ikke via nye klikkkoordinater. Native IndexGuiTest og SidebarGuiTest passerer.

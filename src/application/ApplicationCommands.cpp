@@ -124,5 +124,9 @@ void Application::execute(CommandRouter::Command command) {
   default:
     break;
   }
+  app.forceRefresh();
+  if (preview && host)
+    window->previewControls->sync(preview->layoutProfile().mode == LayoutMode::Paged,
+                                  host->fitWidth());
 }
 } // namespace xfmd

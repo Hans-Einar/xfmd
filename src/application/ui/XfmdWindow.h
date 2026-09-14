@@ -2,6 +2,7 @@
 #include "EditorWidget.h"
 #include "WorkspacePanel.h"
 #include "application/commands/CommandRouter.h"
+#include "controls/PreviewControls.h"
 #include "controls/UiLayout.h"
 #include <fx.h>
 namespace xfmd {
@@ -19,6 +20,7 @@ protected:
   XfmdWindow() = default;
 
 public:
+  PreviewControls* previewControls = nullptr;
   EditorWidget* editor = nullptr;
   SidebarWidget* sidebar = nullptr;
   WorkspacePanel* workspacePanel = nullptr;
@@ -27,6 +29,7 @@ public:
   FX::FXLabel* status = nullptr;
   XfmdWindow(FX::FXApp*, CommandRouter&, UiContext&);
   void buildToolbar();
+  void setDocumentLabel(const std::string&, bool dirty);
   void restyle();
   void layoutToolbar();
   ~XfmdWindow() override;
