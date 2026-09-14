@@ -1,4 +1,5 @@
 #include "SidebarWidget.h"
+#include "TreeActivation.h"
 #include "application/adapters/FoxWheelScrollBar.h"
 #include "application/workspace/WorkPathHistory.h"
 #include <fxkeys.h>
@@ -150,7 +151,7 @@ long SidebarWidget::onRelease(FXObject* sender, FXSelector sel, void* data) {
 }
 long SidebarWidget::onKey(FXObject* sender, FXSelector sel, void* data) {
   auto* event = static_cast<FXEvent*>(data);
-  if (event->code == KEY_Return || event->code == KEY_KP_Enter) {
+  if (activatesTreeItem(*event, isItemFile(getCurrentItem()))) {
     pointerClick = true;
     auto* item = getCurrentItem();
     if (item && isItemDirectory(item)) {

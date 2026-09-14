@@ -13,7 +13,7 @@ Sidepanelet har **Files** og **Index**. Files beholder arbeidsrot, filfilter og
 historikk; enkeltklikk åpner en fil. Index har et kapitteltre øverst og et
 referansetre nederst, med en flyttbar skillelinje. Indeksen følger aktiv buffer.
 
-- Klikk en overskrift for å hoppe dit; Enter aktiverer også, piltaster velger bare.
+- Klikk en overskrift for å hoppe dit; Enter og Space aktiverer også; høyrepil aktiverer endenoder og utvider grener.
 - **References → Markdown** viser lokale `.md`-lenker. Utvid en fil for å lese dens
   hovedkapitler. Klikk filen eller et kapittel for å åpne. Kollaps/utvid leser på nytt.
 - **References → Hyperlinks** viser øvrige lenker. HTTP(S) åpnes i valgt nettleser;
@@ -118,7 +118,12 @@ og CONTRIBUTING.md beskriver implementasjonen. Arkitektur- og arbeidsreglene gje
 
 Arbeidsrot og historikk endrer ikke dokumentbuffer, prosessens PWD eller
 sidepanelets synlighet. Dokumentlenker og Åpne-dialogen flytter ikke arbeidsroten.
-Filer av andre typer kan vises i treet, men bare `.md`/`.txt` kan åpnes i editoren.
+Klikk på `.md`/`.txt` (også store bokstaver) åpner i XFMD. Andre regulære filer
+åpnes med `xdg-open`, uten å bytte dokument eller spørre om å lagre det. Feil fra
+starteren vises i XFMD. Dette gjelder Files-treet; Åpne-dialogen og CLI beholder
+XFMDs dokumentpolicy. Enter og Space aktiverer valgt node; høyrepil aktiverer
+fil-/endenoder. På mapper og lazy referansegrener beholder høyrepil vanlig
+utvidelse og navigasjon til barn. Opp/ned/venstre åpner ikke filer.
 
 ## Preferences, scrolling og sidevisning
 
@@ -175,7 +180,7 @@ Editorens vanlige midtklikk/paste påvirkes ikke.
 ## Utseende og arbeidsflate
 
 Verktøylinjen har Open/Save, Back/Forward, Sidebar og et eksklusivt valg mellom
-Preview, Split og Editor. Light/Dark-knappen bytter og lagrer tema, og beholder
+Editor, Split og Preview, med kode-, delt rute- og øyeikon. Light/Dark-knappen bytter og lagrer tema, og beholder
 øvrige utseendevalg. Ved smalt vindu flyttes tilgangen til skjulte verktøy over
 til de eksisterende menyene og snarveiene. A4/Wrap og relevant zoom står ved preview.
 
@@ -203,3 +208,10 @@ eller ny runtime-avhengighet. Eksempelprofil installeres under `share/doc/xfmd`.
 
 Se [implementasjonsplan](implementationPlan.md), [UI-laget](docs/design/fox-ui-layer.md)
 og [testbevis og produktskjermbilder](docs/evidence/P17-P19.md).
+
+
+P20 retter Editor → Split slik at editorens fullbredde ikke kollapser preview.
+Den forrige paneandelen gjenopprettes ved retur til Split, tilpasset gjeldende
+bredde. Klikk Split igjen for å hente tilbake et sammenklemt panel. Snarveiene
+Ctrl+2 (Editor), Ctrl+3 (Split), Ctrl+1 (Preview) er beholdt.
+[Testbevis og skjermbilde](docs/evidence/P20.md).

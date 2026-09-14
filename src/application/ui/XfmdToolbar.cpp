@@ -22,9 +22,12 @@ void XfmdWindow::buildToolbar() {
   factory.button(navTools, "\tSidebar (F10)", commands, CommandRouter::Sidebar, UiIcon::Sidebar);
   documentTitle = new FXLabel(toolbar, "", nullptr, LAYOUT_FILL_X | LAYOUT_CENTER_Y | JUSTIFY_LEFT);
   viewTools = group();
-  factory.button(viewTools, "Preview\tPreview (Ctrl+1)", commands, CommandRouter::Preview);
-  factory.button(viewTools, "Split\tSplit view (Ctrl+3)", commands, CommandRouter::Split);
-  factory.button(viewTools, "Editor\tEditor (Ctrl+2)", commands, CommandRouter::Editor);
+  factory.button(viewTools, "Editor\tEditor (Ctrl+2)", commands, CommandRouter::Editor,
+                 UiIcon::Editor);
+  factory.button(viewTools, "Split\tSplit view (Ctrl+3)", commands, CommandRouter::Split,
+                 UiIcon::Split);
+  factory.button(viewTools, "Preview\tPreview (Ctrl+1)", commands, CommandRouter::Preview,
+                 UiIcon::Preview);
   themeButton = factory.button(toolbar, "Light\tToggle Light / Dark appearance", commands,
                                CommandRouter::ToggleTheme, UiIcon::Theme);
 }

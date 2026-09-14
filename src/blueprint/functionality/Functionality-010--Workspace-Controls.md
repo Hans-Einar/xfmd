@@ -6,7 +6,7 @@ role: Adapter
 owner: application
 status: Implemented
 scope: FirstRelease
-requirements: UR-025, UR-026, UR-021, UR-011, UR-001, UR-006, UR-007, SR-002, SR-008, SR-013, UR-015, UR-017, UR-018, UR-019, UR-020, SR-019
+requirements: UR-028, UR-029, UR-025, UR-026, UR-021, UR-011, UR-001, UR-006, UR-007, SR-002, SR-008, SR-013, UR-015, UR-017, UR-018, UR-019, UR-020, SR-019
 uses: FUNC-020, FUNC-001, FUNC-005, FUNC-007, FUNC-012, FUNC-013, FUNC-014, FUNC-015, FUNC-018, FUNC-019
 ---
 
@@ -61,6 +61,10 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 
 | 14 | `Application::applyAppearance` | `UiContext::apply` | `src/application/ui/style/UiStyling.cpp` | Profil → levende FOX-kontroller | Dokumentfonter beholdes | Implemented |
 
+| 15 | `SidebarWidget::onActivate` callback | `Application::openTreePath` | `src/application/ApplicationTree.cpp` | lokal sti → intern eller ekstern åpning | ingen bufferbytte ved ekstern åpning | Implemented |
+| 16 | `Application::openTreePath` | `DesktopFileOpener::open` | `src/application/adapters/DesktopFileOpener.cpp` | regulær fil → xdg-open argv | startfeil vises; asynkron exitstatus polles | Implemented |
+| 17 | `SidebarWidget/NavigationTree::onKey` | `activatesTreeItem` | `src/application/ui/TreeActivation.h` | tast/modifiers/leaf → aktivering | grenutvidelse beholdes | Implemented |
+
 ## 6. Gjenbruk og avhengigheter
 
 [FUNC-001](../functionality/Functionality-001--Document-Session.md), [FUNC-005](../functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-007](../functionality/Functionality-007--Preview-Pipeline.md)
@@ -113,3 +117,20 @@ P17–P19 er implementert og kontrollert mot AT-045–047. Se
 [testbevis og produksjonsskjermbilder](../../../docs/evidence/P17-P19.md) og
 [konkrete UI-klasser](../../../docs/design/fox-ui-layer.md). Blueprint-status
 beholdes som Implemented; fysisk brukeropplevelse/andre DPI er ikke automatisert verifisert.
+
+
+P20: UR-028/029, AT-048, AT-049 og presisert AT-046. Files delegerer støttede suffikser til
+Application::open; andre regulære filer til en separat DesktopFileOpener-adapter.
+Begge sidetreklassene deler tastaturpolicy for Enter/Space og Right på leaf.
+ViewModeController beholder split-andel ved overgang til enkeltpanel og
+restaurerer geometri ved retur. Editor/Split/Preview viser semantiske layoutikoner.
+Planlagt implementasjon og testbevis følger P20 i implementasjonsplanen.
+
+
+P20-M2: geometritesten reproduserte Editor → Split med preview-bredde under
+100 px før rettingen. ViewModeController lagrer andelen fra en gyldig deling
+og setter begge bredder ved retur; reaktivert Split gjenoppretter et kollapset
+panel. AppearanceGuiTest dekker gjentatte bytter/resize, beholdt deling og
+Editor/Split/Preview-rekkefølgen med distinkte ikoner.
+
+P20-bevis for AT-048/049 og oppdatert AT-046: [native tester og geometri](../../../docs/evidence/P20.md).

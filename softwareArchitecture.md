@@ -333,3 +333,18 @@ levende Appearance-preview og rollback. Light/Dark-knappen lagrer bare temavalge
 klasser, eierskap og avgrensning. [Testbevis](docs/evidence/P17-P19.md) skiller
 native UI-verifikasjon fra designprototyper. Interpreter/renderer-kontraktene,
 dokumentmodell og PDF-tegning er uendret.
+
+
+## P20: ekstern filaktivering og panegeometri
+
+ApplicationTree.cpp ruter Files-treets eksplisitte aktivering via InputPolicy:
+.md/.txt til eksisterende dokumentåpning, øvrige regulære filer til
+DesktopFileOpener. Adapteren eier begrensede, ikke-blokkerende xdg-open-jobber,
+argv og exitstatus; Application eier feilmelding og polling via FoxScheduler.
+HTTP(S)-åpning beholder ExternalBrowser og eget programvalg. Renderer og parser
+får ingen ny avhengighet. Ingen ekstern åpning fra automatisk trebygging.
+
+TreeActivation.h deler tastaturpolicy mellom SidebarWidget og NavigationTree;
+klasse-spesifikk leaf-vurdering bevarer mapper og lazy grener. ViewModeController
+eier tidligere paneandel og restaurerer begge bredder ved overgang tilbake til
+Split. IconCatalog eier Editor/Split/Preview-symbolene.

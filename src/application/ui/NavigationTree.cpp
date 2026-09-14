@@ -1,4 +1,5 @@
 #include "NavigationTree.h"
+#include "TreeActivation.h"
 #include "application/adapters/FoxWheelScrollBar.h"
 #include <fxkeys.h>
 using namespace FX;
@@ -40,7 +41,9 @@ long NavigationTree::onRelease(FXObject* sender, FXSelector sel, void* data) {
 }
 long NavigationTree::onKey(FXObject* sender, FXSelector sel, void* data) {
   const auto* event = static_cast<FXEvent*>(data);
-  if (event->code == KEY_Return || event->code == KEY_KP_Enter) {
+  auto* item = getCurrentItem();
+  const bool leaf = item && !item->getFirst() && !item->hasItems();
+  if (activatesTreeItem(*event, leaf)) {
     pointerClick = true;
     onClick(this, 0, getCurrentItem());
     pointerClick = false;

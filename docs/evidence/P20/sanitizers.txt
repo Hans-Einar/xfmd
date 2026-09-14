@@ -1,0 +1,19 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd/build-asan
+Test project /home/warloc/git/xfmd/build-asan
+    Start 14: TreeActionsTest
+1/5 Test #14: TreeActionsTest ..................   Passed    5.54 sec
+    Start 16: AppearanceGuiTest
+2/5 Test #16: AppearanceGuiTest ................   Passed    4.46 sec
+    Start 19: IndexGuiTest
+3/5 Test #19: IndexGuiTest .....................   Passed    3.75 sec
+    Start 20: WorkspaceTest
+4/5 Test #20: WorkspaceTest ....................   Passed    0.24 sec
+    Start 24: SidebarGuiTest
+5/5 Test #24: SidebarGuiTest ...................   Passed    5.79 sec
+
+100% tests passed, 0 tests failed out of 5
+
+Label Time Summary:
+GUI    =  19.79 sec*proc (5 tests)
+
+Total Test time (real) =  19.79 sec

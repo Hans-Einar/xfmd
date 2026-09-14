@@ -21,6 +21,9 @@ Both toggles are initially off (all file types). Plain text matches a substring;
 Matching ignores ASCII case. Filtering searches descendants in the background,
 showing matching files and their ancestor directories. Refresh rescans the tree.
 Directory symlinks are not traversed. File symlinks outside the root are omitted.
+Regular files with .md/.txt extensions open in XFMD (case-insensitive).
+Other file types selected in the Files tree open with xdg-open and leave the
+current buffer and undo history unchanged. Launcher errors are reported.
 .SH KEYS
 Ctrl+O opens a file. Ctrl+S saves. Ctrl+Shift+S saves under another name.
 Ctrl+Z and Ctrl+Y undo and redo. Ctrl+F searches.
@@ -29,6 +32,10 @@ F10 toggles the sidebar. Alt+Left and Alt+Right traverse document history.
 F11 toggles fullscreen; Escape leaves fullscreen unless a dialog is active.
 Ctrl+Shift+E exports the current buffer as PDF.
 Ctrl+Q quits after checking unsaved changes.
+Enter and Space activate the current tree node. Right activates leaves;
+directories and lazy reference branches retain normal expansion/navigation.
+The toolbar order is Editor / Split / Preview. Returning to Split restores the
+previous pane proportion; selecting Split again recovers a collapsed pane.
 .SH PREFERENCES AND PUBLICATION
 Edit > Preferences has Appearance, Scrolling, Document and Programs tabs.
 Appearance controls Light/Dark, Comfortable/Compact spacing, Flat/Classic buttons

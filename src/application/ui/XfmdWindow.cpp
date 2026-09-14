@@ -43,9 +43,9 @@ void XfmdWindow::buildUi() {
   add(editMenu, "&Preferences...", CommandRouter::Preferences);
   new FXMenuTitle(bar, "&Edit", nullptr, editMenu);
   viewMenu = new FXMenuPane(this);
-  add(viewMenu, "&Preview\tCtrl+1", CommandRouter::Preview);
-  add(viewMenu, "&Editor\tCtrl+2", CommandRouter::Editor);
-  add(viewMenu, "&Split view\tCtrl+3", CommandRouter::Split);
+  add(viewMenu, "&Editor\tCtrl+2", CommandRouter::Editor, UiIcon::Editor);
+  add(viewMenu, "&Split view\tCtrl+3", CommandRouter::Split, UiIcon::Split);
+  add(viewMenu, "&Preview\tCtrl+1", CommandRouter::Preview, UiIcon::Preview);
   add(viewMenu, "&Sidebar\tF10", CommandRouter::Sidebar, UiIcon::Sidebar);
   new FXMenuSeparator(viewMenu);
   new FXMenuRadio(viewMenu, "Window &wrap", commands, CommandRouter::WindowWrap);

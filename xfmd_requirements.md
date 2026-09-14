@@ -196,7 +196,7 @@ knappebruk; Unicode-markøren bruker samme fontmåling/tegning som lenketeksten.
 Presisering av SR-005: eksplisitt klikk på HTTP(S) under Hyperlinks kan åpne
 standardnettleseren via argv til xdg-open, aldri shell. Alle andre lenker der
 hopper til forekomsten i dokumentet. Previewens eksisterende lokal-lenke-policy
-endres ikke. Ingen lenker aktiveres ved bygging av treet eller fokus med piltaster.
+endres ikke. Ingen lenker aktiveres ved bygging av treet eller valg med opp/ned/venstre.
 Kategorinoder velger/utvider treet; de har ingen fil å åpne. Dobbeltklikk på
 filtreets rot beholder «bredere arbeidsrot». «Top level» er laveste heading-nummer
 som finnes i referert fil; H2 vises hvis filen ikke har H1. Filreferanser med
@@ -219,5 +219,18 @@ blir ikke eksekvert. Konfigurasjon og analyser av Xfe endrer ikke renderer-arkit
 | Krav | Normativ atferd | Akseptanse |
 | --- | --- | --- |
 | UR-025 | Appearance har Light/Dark, Comfortable/Compact, Flat/Classic og kontrollfontstørrelse. Tema, mål og ikoner har felles eiere og validerte profilverdier. Dokument/PDF-utseendet endres ikke av kontrolltemaet. | AT-045: profiler, ugyldige overrides/fallback, persistens og uendret dokument/layoutprofil. |
-| UR-026 | Toolbar grupperer ikonhandlinger for Open/Save og Back/Forward, Sidebar, eksklusiv Preview/Split/Editor og Light/Dark-toggle. Meny/tastatur/toolbar deler enabled/checked via CommandRouter. Files og Index samt lokal preview-header følger samme stil/mål og beholder eksisterende navigasjon. | AT-046: native klikk/Space, disabled/checked, tema-toggle, smalt vindu og eksisterende navigasjons-/scrolltester. |
+| UR-026 | Toolbar grupperer ikonhandlinger for Open/Save og Back/Forward, Sidebar, eksklusiv Editor/Split/Preview og Light/Dark-toggle. Meny/tastatur/toolbar deler enabled/checked via CommandRouter. Files og Index samt lokal preview-header følger samme stil/mål og beholder eksisterende navigasjon. | AT-046: native klikk/Space, disabled/checked, tema-toggle, smalt vindu og eksisterende navigasjons-/scrolltester. |
 | UR-027 | Preferences grupperer Appearance, Scrolling, Document og Programs i én transaksjon. Live utseendeprøving lagres først ved OK; Cancel/kryss gjenoppretter aktivt utseende. Skrivefeil beholder gammel lagret/aktiv profil og viser feil. | AT-047: OK/Cancel/kryss, skrivefeil, tema fra begge innganger, øvrige innstillinger og fokus. |
+
+
+## P20: ekstern filåpning og tydeligere visningsmoduser
+
+| Krav | Normativ atferd | Akseptanse |
+| --- | --- | --- |
+| UR-028 | Files-treet åpner .md/.txt i XFMD og andre regulære filer med xdg-open. Ekstern åpning endrer ikke buffer, dirty, undo eller dokumenthistorikk. Feil rapporteres; filsti er eget argv-element uten shell. | AT-048: klikk/tastatur, mellomrom/metategn, store suffikser, feil og uendret dokument. |
+| UR-029 | Enter og Space aktiverer valgt node i sidetrærne. Høyrepil aktiverer leaf-noder; grennoder beholder vanlig utvidelse/barnenavigasjon. Opp/ned/venstre åpner ikke filer. | AT-049: Files, Index og References med native tastetrykk; lazy grener regnes ikke som leaf. |
+
+UR-026 / AT-046 presiseres: knapperekkefølgen er Editor/Split/Preview med
+layoutikoner. Retur fra Editor/Preview til Split gjenoppretter en brukbar,
+lagret deling; gjentatte bytter, resize og kollapsede paneler må ikke skjule
+preview bak en editor i full bredde. Snarveier Ctrl+1/2/3 beholdes.

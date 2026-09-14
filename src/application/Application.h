@@ -1,4 +1,5 @@
 #pragma once
+#include "adapters/DesktopFileOpener.h"
 #include "adapters/ExternalBrowser.h"
 #include "adapters/FoxPreferencesStore.h"
 #include "adapters/FoxRenderHost.h"
@@ -40,6 +41,7 @@ public:
   std::unique_ptr<IInterpreter> interpreter, referenceInterpreter;
   std::unique_ptr<ReferenceWorker> references;
   ExternalBrowser browser;
+  DesktopFileOpener desktopFiles;
   std::unique_ptr<IRenderer> renderer;
   std::unique_ptr<SharedTextMetrics> metrics;
   FoxRenderHost* host = nullptr;
@@ -66,6 +68,8 @@ private:
   void wireIndex();
   void pollReferences();
   void pollBrowser();
+  void openTreePath(const std::string&);
+  void pollDesktopFiles();
   void openBrowser(const std::string&);
   void activateIndex(const IndexAction&);
   std::optional<IndexAction> pendingHeading;

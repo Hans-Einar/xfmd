@@ -1,5 +1,6 @@
 #include "application/Application.h"
 #include "application/ui/controls/UiButton.h"
+#include "support/DrainEvents.h"
 #include "support/TestSupport.h"
 #include <X11/Xlib.h>
 #include <chrono>
@@ -54,11 +55,43 @@ void run() {
     events(app);
   CHECK(app.host->interactive());
   events(app);
+  app.execute(CommandRouter::Editor);
+  events(app);
+  app.execute(CommandRouter::Split);
+  events(app);
+  CHECK(app.window->previewArea->getWidth() > 100);
+  auto* panes = app.window->split;
+  panes->setSplit(0, 270);
+  drainEvents(app.app);
+  const double fraction =
+      double(app.window->editor->getWidth()) / (panes->getWidth() - panes->getBarSize());
+  for (auto mode : {CommandRouter::Preview, CommandRouter::Editor, CommandRouter::Preview}) {
+    app.execute(mode);
+    drainEvents(app.app);
+    app.window->resize(1200, 800);
+    drainEvents(app.app);
+    app.execute(CommandRouter::Split);
+    drainEvents(app.app);
+    CHECK(app.window->editor->getWidth() > 100 && app.window->previewArea->getWidth() > 100);
+    CHECK(std::abs(double(app.window->editor->getWidth()) /
+                       (panes->getWidth() - panes->getBarSize()) -
+                   fraction) < .01);
+  }
+  panes->setSplit(0, panes->getWidth());
+  drainEvents(app.app);
+  app.execute(CommandRouter::Split);
+  drainEvents(app.app);
+  CHECK(app.window->previewArea->getWidth() > 100);
   auto token = app.session.view().token;
   auto profile = app.preview->layoutProfile();
   auto* toggle = find(app.window, CommandRouter::ToggleTheme);
   auto* split = find(app.window, CommandRouter::Split);
   CHECK(split && split->isChecked());
+  auto* editorMode = find(app.window, CommandRouter::Editor);
+  auto* previewMode = find(app.window, CommandRouter::Preview);
+  CHECK(editorMode->getNext() == split && split->getNext() == previewMode);
+  CHECK(editorMode->getIcon() && split->getIcon() && previewMode->getIcon());
+  CHECK(editorMode->getIcon() != previewMode->getIcon());
   CHECK(toggle && !toggle->isChecked());
   auto icon = toggle->getIcon();
   auto id = toggle->id();
