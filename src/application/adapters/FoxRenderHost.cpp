@@ -117,6 +117,12 @@ void FoxRenderHost::setViewScale(bool fitWidth, double factor) {
   recalc();
   update();
 }
+void FoxRenderHost::setReadingColors(const ReadingColors& colors) {
+  if (!colors.valid())
+    return;
+  reading = colors;
+  update();
+}
 long FoxRenderHost::onPaint(FXObject*, FXSelector, void*) {
   cairo_surface_t* surface = nullptr;
   try {
@@ -129,8 +135,13 @@ long FoxRenderHost::onPaint(FXObject*, FXSelector, void*) {
     return 1;
   }
   auto* cr = cairo_create(surface);
+  const auto palette = ReadingPalette::from(reading);
+  auto setColor = [&](std::uint32_t rgb) {
+    cairo_set_source_rgb(cr, ((rgb >> 16) & 255) / 255.0, ((rgb >> 8) & 255) / 255.0,
+                         (rgb & 255) / 255.0);
+  };
   bool paged = current && current->key.profile.mode == LayoutMode::Paged;
-  cairo_set_source_rgb(cr, paged ? .18 : 1, paged ? .20 : 1, paged ? .23 : 1);
+  setColor(paged ? palette.surround : palette.background);
   cairo_paint(cr);
   cairo_rectangle(cr, 0, 0, viewport_w, viewport_h);
   cairo_clip(cr);
@@ -143,13 +154,14 @@ long FoxRenderHost::onPaint(FXObject*, FXSelector, void*) {
           const auto box = transform.pageRect(i);
           if (box.y + pos_y > viewport_h || box.y + box.height + pos_y < 0)
             continue;
-          cairo_set_source_rgb(cr, 1, 1, 1);
+          setColor(palette.background);
           cairo_rectangle(cr, box.x + pos_x, box.y + pos_y, box.width, box.height);
           cairo_fill(cr);
           cairo_save(cr);
           cairo_translate(cr, box.x + pos_x, box.y + pos_y - i * paper.height * transform.scale);
           cairo_scale(cr, transform.scale, transform.scale);
-          painter.paint(*current, cr, {0, i * paper.height, paper.width, paper.height}, active);
+          painter.paint(*current, cr, {0, i * paper.height, paper.width, paper.height}, active,
+                        &palette);
           cairo_restore(cr);
         }
       } else {
@@ -158,7 +170,7 @@ long FoxRenderHost::onPaint(FXObject*, FXSelector, void*) {
         auto top = transform.toDocument({-double(pos_x), -double(pos_y)});
         painter.paint(*current, cr,
                       {top.x, top.y, viewport_w / transform.scale, viewport_h / transform.scale},
-                      active);
+                      active, &palette);
       }
     }
   } catch (const std::exception& e) {

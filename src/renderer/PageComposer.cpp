@@ -31,7 +31,7 @@ void PageComposer::compose(RenderFrame& frame, const PaperSpec& paper,
              bottom - top};
       r.width = std::min(r.width, paper.width - paper.margin - r.x);
       if (r.height > 0 && r.width > 0)
-        decorations.push_back({r, item.color});
+        decorations.push_back({r, item.color, item.role});
     }
   }
   frame.decorations = std::move(decorations);

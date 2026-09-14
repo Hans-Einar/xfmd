@@ -20,6 +20,8 @@ bool PreferencesService::validate(const PreferencesSnapshot& s, std::string& err
            (s.appearance.buttons != "flat" && s.appearance.buttons != "classic") ||
            s.appearance.fontSize < 8 || s.appearance.fontSize > 18)
     error = "Choose Light/Dark, Flat/Classic and a UI font size from 8 to 18.";
+  else if (!s.lightReading.valid() || !s.darkReading.valid())
+    error = "Reading colors require hue -1..359 and brightness 0..100.";
   else if (s.browserProgram.empty() || s.browserProgram.size() > 4096 ||
            std::any_of(s.browserProgram.begin(), s.browserProgram.end(),
                        [](unsigned char c) { return c < 32 || c == 127; }))

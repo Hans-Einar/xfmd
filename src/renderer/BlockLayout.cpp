@@ -47,7 +47,8 @@ void BlockLayout::layout(const SemanticDocument& model, const LayoutRequest& req
       if (block.kind == BlockKind::Code)
         frame.decorations.push_back(
             {{left - 6, start - 4, std::max(width + 12, frame.contentWidth - left), y - start + 8},
-             0xf0f2f5});
+             0xf0f2f5,
+             DecorationRole::Surface});
       for (int depth = 0; depth < block.quoteDepth; ++depth)
         frame.decorations.push_back({{left - 12 - 16 * depth, start, 3, y - start}, 0xc4cbd5});
     }

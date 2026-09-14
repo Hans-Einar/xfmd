@@ -56,3 +56,8 @@ AT-011, AT-018, AT-019, AT-031, AT-032, AT-036, AT-039: se [P11](../../../docs/e
 Revisjon 1.1, 2026-09-13. Kallene er implementert i P11-M2.
 P11. PageComposer skal bruke en flyt med eksplisitte visuelle linjer; dagens flate DrawRun-liste alene gir ikke robuste sideskift. Ressursgrenser/målinger avklares i P9 før Ready.
 [Integrasjonsdesign](../../../softwareDesign.md) og [faseplan](../../../implementationPlan.md) gir kontekst.
+
+P21: PageComposer::compose kopierer DecorationRole sammen med color når dekorasjoner
+deles over sider. Det lar A4-skjermen bruke samme lesepalett som continuous, mens
+PDF beholder opprinnelige farger. Sidegeometri og tekstplassering endres ikke.
+ReadingColorsTest kontrollerer alle dekorasjonsroller etter sidekomposisjon.

@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Adapter
 owner: application
-status: Ready
+status: Implemented
 scope: FirstRelease
 requirements: UR-030, UR-031, UR-011, UR-002, UR-005, UR-008, SR-001, SR-008, SR-009, SR-010, SR-013, UR-017, SR-016, SR-019
 uses: FUNC-004, FUNC-015, FUNC-016
@@ -64,7 +64,7 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 
 | 14 | `FOX press` | `FoxRenderHost::onButtonPress` | `src/application/adapters/FoxRenderHost.cpp` | Knapp/frame/lenke → klikktilstand og grab | Chord kansellerer aktivering | Implemented |
 | 15 | `FOX grab loss` | `FoxRenderHost::onUngrabbed` | `src/application/adapters/FoxRenderHost.cpp` | Tap av grab → nullstill klikk | Ingen lenkecallback | Implemented |
-| 20 | `PreviewColorControls changed callback` | `FoxRenderHost::setReadingColors` | `src/application/adapters/FoxRenderHost.cpp` | Lesefarger → repaint/profil | Ingen dokumentmutasjon | Planned |
+| 20 | `PreviewColorControls changed callback` | `FoxRenderHost::setReadingColors` | `src/application/adapters/FoxRenderHost.cpp` | Lesefarger → repaint/profil | Ingen dokumentmutasjon | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 

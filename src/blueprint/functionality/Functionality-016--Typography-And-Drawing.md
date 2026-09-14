@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Adapter
 owner: application
-status: Ready
+status: Implemented
 scope: FirstRelease
 requirements: UR-030, UR-031, UR-002, UR-017, UR-018, SR-001, SR-010, SR-016
 uses: none
@@ -38,7 +38,7 @@ P9/P11/P12 dokumenterer fontfallback, glyph-/clusteruttrekk, PDF-fontembedding/t
 | 1 | `InlineLayout::layout` | `ITextShaper::shape` | `src/contracts/ITextShaper.h` | UTF-8/fontsett → glypher/clusters | unsupported glyph markeres likt i begge mål | Implemented |
 | 2 | `ITextShaper adapter` | `SharedTextMetrics::shape` | `src/application/adapters/SharedTextMetrics.cpp` | ren kontrakt → konkret shaping | fontcatalog/cache eies i application | Implemented |
 | 3 | `FoxRenderHost paint / PDF output` | `DisplayListPainter::paint` | `src/application/adapters/DisplayListPainter.cpp` | frame + target → samme glyphplassering | targetfeil rapporteres | Implemented |
-| 20 | `FoxRenderHost::onPaint` | `ReadingPalette::from` | `src/application/preferences/ReadingColors.cpp` | Lesefarger → repaint/profil | Ingen dokumentmutasjon | Planned |
+| 20 | `FoxRenderHost::onPaint` | `ReadingPalette::from` | `src/application/preferences/ReadingColors.cpp` | Lesefarger → repaint/profil | Ingen dokumentmutasjon | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 

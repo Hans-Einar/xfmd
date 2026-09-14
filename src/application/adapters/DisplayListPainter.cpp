@@ -58,13 +58,14 @@ void DisplayListPainter::text(cairo_t* cr, const RenderFrame& frame, const DrawR
   for (std::size_t i = 0; i < draw.shapeCount; ++i)
     drawPart(*frame.shapeParts.at(draw.shapeBegin + i));
 }
-void DisplayListPainter::paint(const RenderFrame& frame, cairo_t* cr, Rect clip, bool active) {
+void DisplayListPainter::paint(const RenderFrame& frame, cairo_t* cr, Rect clip, bool active,
+                               const ReadingPalette* palette) {
   SavedState saved(cr);
   cairo_rectangle(cr, clip.x, clip.y, clip.width, clip.height);
   cairo_clip(cr);
   for (const auto& decoration : frame.decorations)
     if (visible(decoration.bounds, clip)) {
-      color(cr, decoration.color);
+      color(cr, palette ? palette->decoration(decoration.role) : decoration.color);
       rectangle(cr, decoration.bounds);
     }
   auto first = std::lower_bound(frame.runs.begin(), frame.runs.end(), clip.y - 150,
@@ -74,10 +75,13 @@ void DisplayListPainter::paint(const RenderFrame& frame, cairo_t* cr, Rect clip,
     if (!visible(run.bounds, clip))
       continue;
     if (run.codeBackground) {
-      color(cr, 0xeff1f5);
+      color(cr, palette ? palette->surface : 0xeff1f5);
       rectangle(cr, run.bounds);
     }
-    color(cr, !active ? 0x878787 : run.link.empty() ? 0x1d2531 : 0x1855a6);
+    color(cr, palette            ? (active ? palette->text : palette->inactive)
+              : !active          ? 0x878787
+              : run.link.empty() ? 0x1d2531
+                                 : 0x1855a6);
     text(cr, frame, run);
     if (!run.link.empty() && run.icon == InlineIcon::None) {
       cairo_set_line_width(cr, .6);

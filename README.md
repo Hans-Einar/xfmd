@@ -215,3 +215,16 @@ Den forrige paneandelen gjenopprettes ved retur til Split, tilpasset gjeldende
 bredde. Klikk Split igjen for å hente tilbake et sammenklemt panel. Snarveiene
 Ctrl+2 (Editor), Ctrl+3 (Split), Ctrl+1 (Preview) er beholdt.
 [Testbevis og skjermbilde](docs/evidence/P20.md).
+
+## Lesefarger i preview
+
+Light/Dark gjelder også dokumentpreview, inkludert A4-sidene. Over previewen
+ligger fargetone og lysstyrke for bakgrunn (venstre) og tekst (høyre). Venstre ende
+av hue-skalaen er nøytral gråtone; 60° er gul og 120° grønn. Lysstyrke justerer
+RGB-fargen, ikke monitorens baklys. Bildet oppdateres mens du drar.
+
+Hvert tema husker sine fire sliderverdier mellom omstarter. Verdiene lagres ved
+avsluttet justering. **Reset colors** nullstiller bare temaet som vises. Ved
+lagringsfeil gjenopprettes tidligere verdier og feilen vises under kontrollene.
+Kontrasttallet gjelder vanlig tekst mot bakgrunn. Lesefarger endrer ikke PDF,
+dokumenttekst, layout eller leseposisjon. Se [forskningsnotatet](docs/design/reading-colors.md).

@@ -77,6 +77,9 @@ void Application::initialize(int& argc, char** argv) {
   renderer = std::make_unique<MarkdownRenderer>();
   metrics = std::make_unique<SharedTextMetrics>();
   host = new FoxRenderHost(window->previewArea, *renderer, *metrics);
+  window->previewColors->changed = [this](const ReadingColors& colors, bool commit) {
+    changeReadingColors(colors, commit);
+  };
   scheduler = std::make_unique<FoxScheduler>(app);
   preview =
       std::make_unique<PreviewCoordinator>(session, *interpreter, *renderer, *metrics, *scheduler);

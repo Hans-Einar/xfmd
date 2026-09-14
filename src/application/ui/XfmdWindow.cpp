@@ -73,6 +73,7 @@ void XfmdWindow::buildUi() {
   editor = new EditorWidget(split);
   previewArea = new FXVerticalFrame(split, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0);
   previewControls = new PreviewControls(previewArea, *ui, *commands);
+  previewColors = new PreviewColorControls(previewArea, *ui);
   editor->setWidth(420);
 }
 long XfmdWindow::onConfigure(FXObject* sender, FXSelector sel, void* data) {

@@ -1,5 +1,6 @@
 #pragma once
 #include "Appearance.h"
+#include "ReadingColors.h"
 #include "application/scroll/ScrollDynamics.h"
 #include <functional>
 #include <string>
@@ -8,6 +9,8 @@ struct PreferencesSnapshot {
   int version = 1;
   ScrollProfile scroll;
   Appearance appearance;
+  ReadingColors lightReading = ReadingColors::defaults(false),
+                darkReading = ReadingColors::defaults(true);
   double marginMm = 20;
   std::string browserProgram = "xdg-open";
 };

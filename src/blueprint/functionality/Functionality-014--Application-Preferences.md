@@ -4,7 +4,7 @@ kind: Functionality
 audience: User
 role: Service
 owner: application
-status: Ready
+status: Implemented
 scope: FirstRelease
 requirements: UR-030, UR-031, UR-025, UR-027, UR-024, UR-015, UR-017, SR-002, SR-018
 uses: none
@@ -44,8 +44,8 @@ OK er commit; Cancel eller vinduskryss forkaster draft. Prøvefeltet bruker samm
 | 5 | `PreferencesDialog appearance preview` | `UiContext::setAppearance` | `src/application/ui/style/UiContext.cpp` | draft → levende UI | Cancel/close/lagringsfeil gjenoppretter aktivt utseende | Implemented |
 | 6 | `PreferencesDialog reload style` | `UiContext::reload` | `src/application/ui/style/UiContext.cpp` | validert appearance.ini | gammel profil beholdes ved feil | Implemented |
 | 4 | `Application::openBrowser` | `ExternalBrowser::open` | `src/application/adapters/ExternalBrowser.cpp` | Aktiv browserProgram + URL → prosess | Feil vises; ingen shell | Implemented |
-| 20 | `PreviewColorControls changed callback` | `Application::changeReadingColors` | `src/application/ApplicationAppearance.cpp` | Lesefarger → repaint/profil | Ingen dokumentmutasjon | Planned |
-| 21 | `Application::applyAppearance` | `PreviewColorControls::sync` | `src/application/ui/controls/PreviewColorControls.cpp` | Lesefarger → repaint/profil | Ingen dokumentmutasjon | Planned |
+| 20 | `PreviewColorControls changed callback` | `Application::changeReadingColors` | `src/application/ApplicationAppearance.cpp` | Lesefarger → repaint/profil | Ingen dokumentmutasjon | Implemented |
+| 21 | `Application::applyAppearance` | `PreviewColorControls::sync` | `src/application/ui/controls/PreviewColorControls.cpp` | Lesefarger → repaint/profil | Ingen dokumentmutasjon | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 

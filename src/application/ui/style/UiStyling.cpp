@@ -97,6 +97,8 @@ void UiContext::apply(FXWindow* window) {
     list->setSelBackColor(p.selected);
     list->setSelTextColor(p.text);
   }
+  if (auto* slider = dynamic_cast<FXSlider*>(window))
+    slider->setSlotColor(p.field);
   if (auto* bar = dynamic_cast<FXScrollBar*>(window)) {
     bar->setBackColor(p.surface);
     bar->setHiliteColor(p.panel);

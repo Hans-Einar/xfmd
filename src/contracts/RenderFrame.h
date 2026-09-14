@@ -30,9 +30,11 @@ struct DrawRun {
   std::shared_ptr<const ShapedText> shaped{};
   std::size_t shapeBegin = 0, shapeCount = 0;
 };
+enum class DecorationRole { Border, Surface, Alternate, Background };
 struct Decoration {
   Rect bounds;
   std::uint32_t color = 0;
+  DecorationRole role = DecorationRole::Border;
 };
 struct AnchorRegion {
   SourceRange source;

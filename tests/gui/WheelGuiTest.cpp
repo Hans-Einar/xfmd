@@ -1,5 +1,6 @@
 #include "application/Application.h"
 #include "application/adapters/FoxWheelScrollBar.h"
+#include "support/DrainEvents.h"
 #include "support/TestSupport.h"
 #include <X11/Xlib.h>
 #include <chrono>
@@ -13,6 +14,7 @@ void events(Application& app, int count = 60) {
     app.app.runWhileEvents();
     std::this_thread::sleep_for(std::chrono::milliseconds(5));
   }
+  drainEvents(app.app);
 }
 void run() {
   char pattern[] = "/tmp/xfmd-wheel-XXXXXX";
