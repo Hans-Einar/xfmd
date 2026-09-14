@@ -125,3 +125,10 @@ Begge sidetreklassene deler tastaturpolicy for Enter/Space og Right på leaf.
 ViewModeController beholder split-andel ved overgang til enkeltpanel og
 restaurerer geometri ved retur. Editor/Split/Preview viser semantiske layoutikoner.
 Planlagt implementasjon og testbevis følger P20 i implementasjonsplanen.
+
+
+P20-M2: geometritesten reproduserte Editor → Split med preview-bredde under
+100 px før rettingen. ViewModeController lagrer andelen fra en gyldig deling
+og setter begge bredder ved retur; reaktivert Split gjenoppretter et kollapset
+panel. AppearanceGuiTest dekker gjentatte bytter/resize, beholdt deling og
+Editor/Split/Preview-rekkefølgen med distinkte ikoner.

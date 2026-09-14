@@ -96,6 +96,32 @@ void IconCatalog::update(const UiPalette& p, int size) {
           line(x, 10 - h, x, 10 + h);
         }
         break;
+      case UiIcon::Editor:
+        line(6, 5, 2, 10);
+        line(2, 10, 6, 15);
+        line(14, 5, 18, 10);
+        line(18, 10, 14, 15);
+        line(12, 4, 8, 16);
+        break;
+      case UiIcon::Split:
+        rect(2, 3, 16, 14);
+        line(10, 3, 10, 17);
+        line(4, 7, 7, 7);
+        line(4, 11, 7, 11);
+        line(13, 7, 16, 7);
+        line(13, 11, 16, 11);
+        break;
+      case UiIcon::Preview:
+        line(1, 10, 5, 6);
+        line(5, 6, 10, 4);
+        line(10, 4, 15, 6);
+        line(15, 6, 19, 10);
+        line(19, 10, 15, 14);
+        line(15, 14, 10, 16);
+        line(10, 16, 5, 14);
+        line(5, 14, 1, 10);
+        circle(10, 10, 2);
+        break;
       case UiIcon::Pdf:
         rect(4, 2, 12, 16);
         line(7, 7, 13, 7);

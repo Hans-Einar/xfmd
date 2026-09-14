@@ -14,6 +14,9 @@ enum class UiIcon {
   Search,
   Theme,
   Pdf,
+  Editor,
+  Split,
+  Preview,
   Count
 };
 class IconCatalog {
