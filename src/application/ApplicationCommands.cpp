@@ -50,7 +50,8 @@ void Application::execute(CommandRouter::Command command) {
     host->setViewScale(false, 1);
     break;
   case CommandRouter::Preferences: {
-    PreferencesDialog dialog(window, *preferences);
+    PreferencesDialog dialog(window, *preferences, *ui,
+                             [this](const Appearance& value) { applyAppearance(value); });
     dialog.execute(PLACEMENT_OWNER);
     break;
   }

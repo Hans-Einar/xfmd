@@ -26,10 +26,27 @@ void UiContext::apply(FXWindow* window) {
     packer->setHiliteColor(p.panel);
     packer->setShadowColor(p.border);
   }
+  if (auto* tip = dynamic_cast<FXToolTip*>(window)) {
+    tip->setFont(font);
+    tip->setTextColor(p.text);
+    tip->setBackColor(p.panel);
+  }
+  if (auto* arrow = dynamic_cast<FXArrowButton*>(window))
+    arrow->setArrowColor(p.text);
   if (auto* label = dynamic_cast<FXLabel*>(window)) {
     label->setFont(font);
     label->setTextColor(p.text);
   }
+  if (auto* check = dynamic_cast<FXCheckButton*>(window)) {
+    check->setBoxColor(p.field);
+    check->setCheckColor(p.text);
+  }
+  if (auto* radio = dynamic_cast<FXRadioButton*>(window)) {
+    radio->setDiskColor(p.field);
+    radio->setRadioColor(p.text);
+  }
+  if (auto* form = dynamic_cast<UiForm*>(window))
+    form->restyle();
   if (auto* menu = dynamic_cast<FXMenuCaption*>(window)) {
     menu->setFont(font);
     menu->setTextColor(p.text);

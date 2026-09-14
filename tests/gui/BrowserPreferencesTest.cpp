@@ -9,7 +9,8 @@ using namespace xfmd;
 using namespace FX;
 FXComboBox* browserField(FXWindow* window) {
   if (auto* combo = dynamic_cast<FXComboBox*>(window))
-    return combo;
+    if (combo->getSelector() == PreferencesDialog::BrowserChanged)
+      return combo;
   for (auto* child = window->getFirst(); child; child = child->getNext())
     if (auto* result = browserField(child))
       return result;
@@ -26,7 +27,7 @@ void run() {
   std::ofstream(program) << "#!/bin/sh\nprintf '%s\\n' \"$1\" >> \"$HOME/browser-requests\"\n";
   std::filesystem::permissions(program, std::filesystem::perms::owner_all);
   {
-    PreferencesDialog dialog(app.window, *app.preferences);
+    PreferencesDialog dialog(app.window, *app.preferences, *app.ui);
     dialog.create();
     auto* field = browserField(&dialog);
     CHECK(field && field->getText() == "xdg-open");
@@ -35,7 +36,7 @@ void run() {
   }
   CHECK(app.preferences->active().browserProgram == program.string());
   {
-    PreferencesDialog dialog(app.window, *app.preferences);
+    PreferencesDialog dialog(app.window, *app.preferences, *app.ui);
     dialog.create();
     browserField(&dialog)->setText("cancelled-browser");
     dialog.handle(&dialog, FXSEL(SEL_COMMAND, FXDialogBox::ID_CANCEL), nullptr);

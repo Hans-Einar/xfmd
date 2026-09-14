@@ -1,7 +1,13 @@
 # FOX UX: færre konkurrerende kontroller og tydeligere arbeidsflate
 
-Dato: 2026-09-14. Status: **forslag**, ikke nye funksjoner i installert XFMD.
+Dato: 2026-09-14. Status: opprinnelig **forslag**, nå integrert etter avgrensningen nedenfor.
 [UI-forslaget](fox_ui_improvements.md) beskriver stilprofiler og widgetlaget.
+
+
+**Integrasjonsstatus P17–P19:** første leveranse er nå implementert. Avsnittene
+nedenfor beskriver utgangspunktet og forslaget; se [produksjonsdesignet](docs/design/fox-ui-layer.md)
+for faktiske klassenavn og avgrensning, og [testbevis](docs/evidence/P17-P19.md)
+for skjermbilder fra produksjonsappen. Light/Dark og Flat/Classic er separate valg.
 
 ## 1. Retning
 

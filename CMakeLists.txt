@@ -73,7 +73,7 @@ add_library(xfmd_application
   src/application/ui/controls/UiButton.cpp src/application/ui/controls/UiLayout.cpp
   src/application/preferences/PreferencesService.cpp
   src/application/adapters/ExternalBrowser.cpp
-  src/application/adapters/FoxPreferencesStore.cpp src/application/ui/PreferencesDialog.cpp
+  src/application/adapters/FoxPreferencesStore.cpp src/application/ui/PreferencesDialog.cpp src/application/ui/PreferencesPages.cpp
   src/application/ApplicationAppearance.cpp src/application/ui/XfmdToolbar.cpp
   src/application/ApplicationIndex.cpp src/application/Application.cpp src/application/ApplicationCommands.cpp src/application/ApplicationExport.cpp
   src/application/commands/CommandRouter.cpp src/application/ui/XfmdWindow.cpp src/application/ui/IconResources.cpp
@@ -95,7 +95,7 @@ install(TARGETS xfmd RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 install(FILES packaging/xfmd.desktop DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
 install(FILES packaging/xfmd.svg DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps)
 install(FILES packaging/xfmd.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1)
-install(FILES README.md LICENSES/cmark-gfm.txt DESTINATION ${CMAKE_INSTALL_DOCDIR})
+install(FILES README.md packaging/appearance.ini LICENSES/cmark-gfm.txt DESTINATION ${CMAKE_INSTALL_DOCDIR})
 set(CPACK_GENERATOR TGZ)
 set(CPACK_PACKAGE_VENDOR "Hans-Einar")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Native FOX Markdown viewer and editor")

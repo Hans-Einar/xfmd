@@ -1,0 +1,21 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd/build-asan
+Test project /home/warloc/git/xfmd/build-asan
+    Start 14: AppearancePreferencesTest
+1/6 Test #14: AppearancePreferencesTest ........   Passed    0.53 sec
+    Start 15: AppearanceGuiTest
+2/6 Test #15: AppearanceGuiTest ................   Passed    3.38 sec
+    Start 16: UiControlsTest
+3/6 Test #16: UiControlsTest ...................   Passed    1.60 sec
+    Start 17: BrowserPreferencesTest
+4/6 Test #17: BrowserPreferencesTest ...........   Passed    0.33 sec
+    Start 30: PreferencesTest
+5/6 Test #30: PreferencesTest ..................   Passed    0.23 sec
+    Start 42: ThemeProfilesTest
+6/6 Test #42: ThemeProfilesTest ................   Passed    0.03 sec
+
+100% tests passed, 0 tests failed out of 6
+
+Label Time Summary:
+GUI    =   5.84 sec*proc (4 tests)
+
+Total Test time (real) =   6.10 sec

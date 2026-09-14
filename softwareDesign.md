@@ -331,3 +331,17 @@ programnavn eller full sti lagres uten en shell-argumentstreng.
 med upstream Xfe og vår fork. Den anbefaler selektivt kildegjenbruk av utseende,
 ikoner og kontroller. Foreslåtte P17–P19 og `xfe_ui` er analyse, ikke implementerte
 klasser eller en endring av rendererens kontrakter.
+
+
+## P17–P19: implementert FOX UI/UX-lag
+
+Application eier nå UiContext med ThemeProfiles, IconCatalog og sentral normal
+UI-font. UiFactory lager UiButton med Flat/Classic-painter; UiRow, UiForm,
+PanelHeader og DialogActions samler layoutmål. Workspace og toolbar bruker
+samme CommandRouter. Preferences har fire faner og ett draft, med separat
+levende Appearance-preview og rollback. Light/Dark-knappen lagrer bare temavalget.
+
+[Produksjonsdesign og filkart](docs/design/fox-ui-layer.md) beskriver konkrete
+klasser, eierskap og avgrensning. [Testbevis](docs/evidence/P17-P19.md) skiller
+native UI-verifikasjon fra designprototyper. Interpreter/renderer-kontraktene,
+dokumentmodell og PDF-tegning er uendret.

@@ -319,3 +319,17 @@ programfelt med forslag og filvalg. Application::openBrowser er felles inngang
 fra preview og referansetre og leser aktiv preferanse ved hvert klikk.
 ExternalBrowser får executable og URL separat. Standard er xdg-open, og ingen
 browseravhengighet trekkes inn i interpreter/renderer.
+
+
+## P17–P19: implementert FOX UI/UX-lag
+
+Application eier nå UiContext med ThemeProfiles, IconCatalog og sentral normal
+UI-font. UiFactory lager UiButton med Flat/Classic-painter; UiRow, UiForm,
+PanelHeader og DialogActions samler layoutmål. Workspace og toolbar bruker
+samme CommandRouter. Preferences har fire faner og ett draft, med separat
+levende Appearance-preview og rollback. Light/Dark-knappen lagrer bare temavalget.
+
+[Produksjonsdesign og filkart](docs/design/fox-ui-layer.md) beskriver konkrete
+klasser, eierskap og avgrensning. [Testbevis](docs/evidence/P17-P19.md) skiller
+native UI-verifikasjon fra designprototyper. Interpreter/renderer-kontraktene,
+dokumentmodell og PDF-tegning er uendret.
