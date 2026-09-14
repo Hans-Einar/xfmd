@@ -1,5 +1,6 @@
 #include "application/Application.h"
 #include "support/TestSupport.h"
+#include <X11/Xlib.h>
 #include <chrono>
 #include <thread>
 using namespace xfmd;
@@ -17,6 +18,11 @@ void run() {
     application.app.runWhileEvents();
     std::this_thread::sleep_for(std::chrono::milliseconds(5));
   }
+  // Xvfb has no window manager to activate the mapped top-level window.
+  auto* display = static_cast<Display*>(application.app.getDisplay());
+  XSetInputFocus(display, application.window->id(), RevertToParent, CurrentTime);
+  XSync(display, False);
+  application.app.runWhileEvents();
   CHECK(application.host->frame());
   CHECK(application.host->interactive());
   CHECK(application.host->frame()->token == application.session.view().token);
