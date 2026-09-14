@@ -9,6 +9,17 @@ public:
   UiRow(FX::FXComposite*, UiContext&, FX::FXuint flags = 0);
   void restyle();
 };
+class UiForm : public FX::FXMatrix {
+  UiContext& ui;
+
+public:
+  UiForm(FX::FXComposite*, UiContext&);
+  void restyle();
+};
+class DialogActions : public UiRow {
+public:
+  DialogActions(FX::FXComposite*, UiContext&, FX::FXObject*, FX::FXSelector, FX::FXSelector);
+};
 class PanelHeader : public FX::FXLabel {
   UiContext& ui;
 

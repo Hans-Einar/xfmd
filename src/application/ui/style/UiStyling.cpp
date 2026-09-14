@@ -30,6 +30,16 @@ void UiContext::apply(FXWindow* window) {
     label->setFont(font);
     label->setTextColor(p.text);
   }
+  if (auto* check = dynamic_cast<FXCheckButton*>(window)) {
+    check->setBoxColor(p.field);
+    check->setCheckColor(p.text);
+  }
+  if (auto* radio = dynamic_cast<FXRadioButton*>(window)) {
+    radio->setDiskColor(p.field);
+    radio->setRadioColor(p.text);
+  }
+  if (auto* form = dynamic_cast<UiForm*>(window))
+    form->restyle();
   if (auto* menu = dynamic_cast<FXMenuCaption*>(window)) {
     menu->setFont(font);
     menu->setTextColor(p.text);

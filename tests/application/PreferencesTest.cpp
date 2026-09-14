@@ -47,8 +47,9 @@ void run() {
     CHECK(!service.commit(draft, error));
     CHECK(service.active().browserProgram == "google-chrome-stable");
   }
+  UiContext context(app, service.active().appearance);
   {
-    PreferencesDialog dialog(window, service);
+    PreferencesDialog dialog(window, service, context);
     app.create();
     dialog.create();
   }

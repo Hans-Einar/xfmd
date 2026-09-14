@@ -5,60 +5,76 @@ namespace xfmd {
 FXDEFMAP(PreferencesDialog)
 preferencesMap[] = {
     FXMAPFUNC(SEL_COMMAND, FXDialogBox::ID_ACCEPT, PreferencesDialog::onAccept),
+    FXMAPFUNC(SEL_COMMAND, FXDialogBox::ID_CANCEL, PreferencesDialog::onCancel),
+    FXMAPFUNC(SEL_CLOSE, 0, PreferencesDialog::onCancel),
     FXMAPFUNC(SEL_COMMAND, PreferencesDialog::BrowseBrowser, PreferencesDialog::onBrowseBrowser),
+    FXMAPFUNC(SEL_COMMAND, PreferencesDialog::ReloadStyle, PreferencesDialog::onReload),
     FXMAPFUNC(SEL_COMMAND, PreferencesDialog::Changed, PreferencesDialog::onChanged),
-    FXMAPFUNC(SEL_CHANGED, PreferencesDialog::Changed, PreferencesDialog::onChanged)};
+    FXMAPFUNC(SEL_CHANGED, PreferencesDialog::Changed, PreferencesDialog::onChanged),
+    FXMAPFUNC(SEL_COMMAND, PreferencesDialog::BrowserChanged, PreferencesDialog::onChanged),
+    FXMAPFUNC(SEL_CHANGED, PreferencesDialog::BrowserChanged, PreferencesDialog::onChanged),
+    FXMAPFUNCS(SEL_COMMAND, PreferencesDialog::ThemeChanged, PreferencesDialog::FontChanged,
+               PreferencesDialog::onAppearance),
+    FXMAPFUNCS(SEL_CHANGED, PreferencesDialog::ThemeChanged, PreferencesDialog::FontChanged,
+               PreferencesDialog::onAppearance)};
 FXIMPLEMENT(PreferencesDialog, FXDialogBox, preferencesMap, ARRAYNUMBER(preferencesMap))
-PreferencesDialog::PreferencesDialog(FXWindow* owner, PreferencesService& preferences)
-    : FXDialogBox(owner, "Preferences", DECOR_TITLE | DECOR_BORDER | DECOR_CLOSE, 0, 0, 520, 480),
-      service(&preferences), draft(preferences.begin()) {
+PreferencesDialog::PreferencesDialog(FXWindow* owner, PreferencesService& preferences,
+                                     UiContext& context,
+                                     std::function<void(const Appearance&)> callback)
+    : FXDialogBox(owner, "Preferences", DECOR_TITLE | DECOR_BORDER | DECOR_CLOSE, 0, 0, 640, 490),
+      service(&preferences), ui(&context), draft(preferences.begin()),
+      preview(std::move(callback)) {
   auto* content = new FXVerticalFrame(this, LAYOUT_FILL_X | LAYOUT_FILL_Y);
-  auto* grid = new FXMatrix(content, 2, MATRIX_BY_COLUMNS | LAYOUT_FILL_X);
-  auto number = [&](const char* label, double value, double min, double max, double step) {
-    new FXLabel(grid, label, nullptr, JUSTIFY_LEFT);
-    auto* input = new FXRealSpinner(grid, 8, this, Changed, REALSPIN_NORMAL | LAYOUT_FILL_X);
-    input->setRange(min, max);
-    input->setIncrement(step);
-    input->setValue(value);
-    return input;
+  auto* tabs = new FXTabBook(content, nullptr, 0, LAYOUT_FILL_X | LAYOUT_FILL_Y);
+  auto page = [&](const char* title) {
+    new FXTabItem(tabs, title);
+    return new FXVerticalFrame(tabs, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 0, 12, 12, 12, 12);
   };
-  speed = number("Scroll speed", draft.scroll.speed, .25, 4, .25);
-  strength = number("Acceleration strength", draft.scroll.strength, 0, 2, .1);
-  maximum = number("Maximum acceleration", draft.scroll.maxGain, 1, 5, .25);
-  acceleration = new FXCheckButton(content, "Enable scroll acceleration", this, Changed);
-  acceleration->setCheck(draft.scroll.acceleration);
-  margin = number("A4 margin (mm)", draft.marginMm, 5, 50, 1);
-  auto* programs = new FXGroupBox(content, "Hyperlinks", GROUPBOX_NORMAL | LAYOUT_FILL_X);
-  auto* browserRow = new FXHorizontalFrame(programs, LAYOUT_FILL_X, 0, 0, 0, 0, 0, 0, 0, 0);
-  new FXLabel(browserRow, "Browser program", nullptr, JUSTIFY_LEFT | LAYOUT_CENTER_Y);
-  browser = new FXComboBox(browserRow, 24, this, Changed, COMBOBOX_NORMAL | LAYOUT_FILL_X);
-  browser->appendItem("xdg-open");
-  browser->appendItem("google-chrome-stable");
-  browser->appendItem("firefox");
-  browser->setNumVisible(3);
-  browser->setText(draft.browserProgram.c_str());
-  browser->setTipText("Executable name or full path; the link is passed automatically.");
-  new FXButton(browserRow, "Browse…", nullptr, this, BrowseBrowser, BUTTON_NORMAL);
-  new FXLabel(programs, "xdg-open uses the system default browser.", nullptr, JUSTIFY_LEFT);
-  new FXLabel(content, "Try scrolling here — the document stays unchanged.");
-  sample = new EditorWidget(content);
-  sample->setEditable(false);
-  sample->setHeight(150);
-  sample->setLayoutHints(LAYOUT_FILL_X | LAYOUT_FILL_Y);
-  FXString text;
-  for (int i = 1; i <= 100; ++i) {
-    FXString row;
-    row.format("Scroll sample %03d — slow and fast movement\n", i);
-    text += row;
-  }
-  sample->setText(text);
+  buildAppearance(page("Appearance"));
+  buildScrolling(page("Scrolling"));
+  buildDocument(page("Document"));
+  buildPrograms(page("Programs"));
   error = new FXLabel(content, "", nullptr, JUSTIFY_LEFT | LAYOUT_FILL_X);
-  error->setTextColor(FXRGB(170, 40, 40));
-  auto* buttons = new FXHorizontalFrame(content, LAYOUT_FILL_X | PACK_UNIFORM_WIDTH);
-  new FXButton(buttons, "&Cancel", nullptr, this, ID_CANCEL, BUTTON_NORMAL | LAYOUT_RIGHT);
-  new FXButton(buttons, "&OK", nullptr, this, ID_ACCEPT,
-               BUTTON_INITIAL | BUTTON_DEFAULT | BUTTON_NORMAL | LAYOUT_RIGHT);
+  new DialogActions(content, context, this, ID_ACCEPT, ID_CANCEL);
+  context.apply(this);
+  error->setTextColor(context.palette().danger);
+  error->setText(context.error().c_str());
   onChanged(nullptr, 0, nullptr);
+}
+PreferencesDialog::~PreferencesDialog() {
+  if (!committed)
+    restore();
+}
+void PreferencesDialog::apply(const Appearance& value) {
+  if (preview)
+    preview(value);
+  else {
+    ui->setAppearance(value);
+    ui->apply(getApp()->getRootWindow());
+  }
+  ui->apply(this);
+  if (error)
+    error->setTextColor(ui->palette().danger);
+  resize(std::max(640, value.fontSize * 48), std::max(490, value.fontSize * 37));
+  getApp()->refresh();
+}
+void PreferencesDialog::restore() {
+  if (service && ui)
+    apply(service->active().appearance);
+}
+long PreferencesDialog::onAppearance(FXObject*, FXSelector, void*) {
+  draft.appearance = {theme->getCurrentItem() == 1 ? "dark" : "light",
+                      density->getCurrentItem() == 1,
+                      buttons->getCurrentItem() == 1 ? "classic" : "flat", fontSize->getValue()};
+  apply(draft.appearance);
+  return 1;
+}
+long PreferencesDialog::onReload(FXObject*, FXSelector, void*) {
+  std::string message;
+  if (ui->reload(message))
+    apply(draft.appearance);
+  error->setText(message.c_str());
+  return 1;
 }
 long PreferencesDialog::onChanged(FXObject*, FXSelector, void*) {
   draft.scroll = {speed->getValue(), bool(acceleration->getCheck()), strength->getValue(),
@@ -81,9 +97,16 @@ long PreferencesDialog::onAccept(FXObject*, FXSelector, void*) {
   onChanged(nullptr, 0, nullptr);
   std::string message;
   if (!service->commit(draft, message)) {
+    restore();
     error->setText(message.c_str());
     return 1;
   }
+  committed = true;
+  apply(service->active().appearance);
   return FXDialogBox::onCmdAccept(this, FXSEL(SEL_COMMAND, ID_ACCEPT), nullptr);
+}
+long PreferencesDialog::onCancel(FXObject*, FXSelector, void*) {
+  restore();
+  return FXDialogBox::onCmdCancel(this, FXSEL(SEL_COMMAND, ID_CANCEL), nullptr);
 }
 } // namespace xfmd

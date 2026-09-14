@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
     }
   };
   settle();
-  xfmd::PreferencesDialog dialog(app.window, *app.preferences);
+  xfmd::PreferencesDialog dialog(app.window, *app.preferences, *app.ui);
   dialog.create();
   dialog.show(FX::PLACEMENT_OWNER);
   settle();

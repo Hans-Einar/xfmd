@@ -73,7 +73,7 @@ add_library(xfmd_application
   src/application/ui/controls/UiButton.cpp src/application/ui/controls/UiLayout.cpp
   src/application/preferences/PreferencesService.cpp
   src/application/adapters/ExternalBrowser.cpp
-  src/application/adapters/FoxPreferencesStore.cpp src/application/ui/PreferencesDialog.cpp
+  src/application/adapters/FoxPreferencesStore.cpp src/application/ui/PreferencesDialog.cpp src/application/ui/PreferencesPages.cpp
   src/application/ApplicationAppearance.cpp src/application/ui/XfmdToolbar.cpp
   src/application/ApplicationIndex.cpp src/application/Application.cpp src/application/ApplicationCommands.cpp src/application/ApplicationExport.cpp
   src/application/commands/CommandRouter.cpp src/application/ui/XfmdWindow.cpp src/application/ui/IconResources.cpp

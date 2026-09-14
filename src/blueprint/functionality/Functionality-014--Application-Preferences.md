@@ -41,6 +41,8 @@ OK er commit; Cancel eller vinduskryss forkaster draft. Prøvefeltet bruker samm
 | 1 | `PreferencesDialog constructor` | `PreferencesService::begin` | `src/application/preferences/PreferencesService.h` | aktiv profil → draft | ingen bufferendring | Implemented |
 | 2 | `PreferencesDialog OK` | `PreferencesService::commit` | `src/application/preferences/PreferencesService.cpp` | validerte verdier → snapshot | feil beholder draft | Implemented |
 | 3 | `PreferencesService::commit` | `FoxPreferencesStore::save` | `src/application/adapters/FoxPreferencesStore.cpp` | schema → vedvarende profil | publiser først etter suksess | Implemented |
+| 5 | `PreferencesDialog appearance preview` | `UiContext::setAppearance` | `src/application/ui/style/UiContext.cpp` | draft → levende UI | Cancel/close/lagringsfeil gjenoppretter aktivt utseende | Implemented |
+| 6 | `PreferencesDialog reload style` | `UiContext::reload` | `src/application/ui/style/UiContext.cpp` | validert appearance.ini | gammel profil beholdes ved feil | Implemented |
 | 4 | `Application::openBrowser` | `ExternalBrowser::open` | `src/application/adapters/ExternalBrowser.cpp` | Aktiv browserProgram + URL → prosess | Feil vises; ingen shell | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
@@ -69,3 +71,9 @@ P17: Appearance lagres additivt i skjema 1 med theme, compact, buttons og fontSi
 ThemeProfiles laster validerte, begrensede overrides fra appearance.ini; ugyldig
 reload beholder gammel profil. PreferencesTest, ThemeProfilesTest og UiControlsTest
 dekker første foundation; toolbar/Preferences-integrasjon følger i P18/P19.
+
+P19: Preferences har Appearance, Scrolling, Document og Programs med ett draft.
+UiForm og DialogActions standardiserer spacing og OK/Cancel. Appearance forhåndsvises
+gjennom UiContext; OK lagrer, mens Cancel, vinduskryss og lagringsfeil gjenoppretter
+aktiv Appearance. Feil beholder utkastet for nytt forsøk. AppearancePreferencesTest
+dekker preview, commit, cancel, close, lagringsfeil og toolbar som bevarer øvrige valg.
