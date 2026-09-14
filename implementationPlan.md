@@ -319,3 +319,12 @@ oppgir faktiske klasser; [evidens](docs/evidence/P17-P19.md) dokumenterer tester
 review, produktskjermbilder og en kort oppstartsmåling. Framtidspunktene over
 (automatisk kapittelfølging, sammenleggbar historikk, dynamisk overflow) er ikke
 merket implementert.
+
+
+## P20 — trehandlinger og robust Split
+
+Branch phase/p20-navigation-split med egen PR.
+- M1: xdg-open for eksterne filtyper og delt Enter/Space/leaf-Right-policy.
+- M2: reproduser Editor → Split med faktisk geometri, bevar deling og tegn
+  Editor/Split/Preview-ikoner i samme katalog som eksisterende toolbar.
+- M3: målrettede native/regresjonstester, dokumentasjon, installasjon og CI før merge.

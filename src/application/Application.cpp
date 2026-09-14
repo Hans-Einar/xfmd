@@ -197,7 +197,7 @@ void Application::wireDocument() {
       documents.error(e.what());
     }
   };
-  window->sidebar->open = [this](const std::string& path) { open(path); };
+  window->sidebar->open = [this](const std::string& path) { openTreePath(path); };
 }
 bool Application::open(const std::string& path) {
   return navigation ? navigation->openTarget(path) : documents.requestOpen(path);

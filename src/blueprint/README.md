@@ -95,3 +95,6 @@ Se [designrevisjonen](../../softwareDesign.md), [arbeidsmåten](../../docs/worki
 | UR-025 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FUNC-014](functionality/Functionality-014--Application-Preferences.md) | AT-045 | FirstRelease |
 | UR-026 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | AT-046 | FirstRelease |
 | UR-027 | [FUNC-014](functionality/Functionality-014--Application-Preferences.md) | AT-047 | FirstRelease |
+
+| UR-028 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | AT-048 | FirstRelease |
+| UR-029 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | AT-049 | FirstRelease |
