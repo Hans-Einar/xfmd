@@ -64,3 +64,8 @@ P16: AT-044 dekkes av PreferencesTest, ExternalBrowserTest og BrowserPreferences
 P17–P19: UR-025, UR-027 utvider dette ansvaret; se [faseplan](../../../implementationPlan.md).
 Nye UI-klasser er planlagt under application/ui/style og controls. Stilendring
 beholder dokument, arbeidsflyter og FOX-input. AT-045, AT-046, AT-047 får egne testbevis.
+
+P17: Appearance lagres additivt i skjema 1 med theme, compact, buttons og fontSize.
+ThemeProfiles laster validerte, begrensede overrides fra appearance.ini; ugyldig
+reload beholder gammel profil. PreferencesTest, ThemeProfilesTest og UiControlsTest
+dekker første foundation; toolbar/Preferences-integrasjon følger i P18/P19.

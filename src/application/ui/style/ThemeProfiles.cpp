@@ -17,7 +17,7 @@ UiMetrics ThemeProfiles::metrics(const Appearance& a) const {
   auto m = a.compact ? compact : comfortable;
   const double factor = a.fontSize / 10.0;
   for (auto* value : {&m.gap, &m.inset, &m.height, &m.radius, &m.iconSize})
-    *value = std::max(1, int(std::lround(*value * factor)));
+    *value = *value == 0 ? 0 : std::max(1, int(std::lround(*value * factor)));
   return m;
 }
 bool ThemeProfiles::load(const std::string& path, std::string& error) {

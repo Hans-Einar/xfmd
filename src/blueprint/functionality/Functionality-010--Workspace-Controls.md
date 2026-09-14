@@ -57,6 +57,7 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 | 10 | `Edit Preferences` | `PreferencesService::begin` | `src/application/preferences/PreferencesService.h` | aktiv profil → dialog | Cancel forkaster | Implemented |
 | 11 | `View Full Screen` | `FoxWindowMode::requestFullscreen` | `src/application/adapters/FoxWindowMode.cpp` | bool → WM-request | bekreft faktisk WM-state | Implemented |
 | 12 | `File Export PDF` | `ExportCoordinator::start` | `src/application/export/ExportCoordinator.cpp` | snapshot → jobb | ingen markSaved | Implemented |
+| 13 | `UiFactory::button` | `UiButton::UiButton` | `src/application/ui/controls/UiButton.cpp` | Rolle, target og selector → FOX-knapp | Normal FOX-input; painter eier tegning | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
