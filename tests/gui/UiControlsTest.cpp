@@ -55,7 +55,9 @@ void run() {
   commands.enabled = [&](auto) { return enabled; };
   commands.checked = [&](auto) { return selected; };
   auto* window = new FXMainWindow(&app, "Controls", nullptr, nullptr, DECOR_ALL, 0, 0, 500, 180);
+  auto* tip = new FXToolTip(&app);
   auto* row = factory.row(window);
+  auto* arrow = new FXArrowButton(row);
   auto* button =
       factory.button(row, "&Open\tOpen file", &commands, CommandRouter::Open, UiIcon::Open);
   factory.buttonClass = [](auto* p, auto& ui, const auto& text, auto* target, auto id, auto icon,
@@ -64,7 +66,7 @@ void run() {
   };
   auto* alternate = factory.button(row, "Alternate", &commands, CommandRouter::Save);
   CHECK(dynamic_cast<AlternateButton*>(alternate));
-  ui.apply(window);
+  ui.apply(app.getRootWindow());
   app.create();
   window->show();
   settle(app);
@@ -83,12 +85,14 @@ void run() {
   auto id = button->id();
   Appearance dark{"dark", true, "classic", 15};
   ui.setAppearance(dark);
-  ui.apply(window);
+  ui.apply(app.getRootWindow());
   settle(app);
   CHECK(button->id() == id && button->getIcon() == icon);
   CHECK(icon->getWidth() == ui.metrics().iconSize);
   CHECK(button->getDefaultWidth() > previousWidth);
   CHECK(button->isChecked() && button->hasFocus());
+  CHECK(tip->getTextColor() == ui.palette().text && tip->getBackColor() == ui.palette().panel);
+  CHECK(arrow->getArrowColor() == ui.palette().text);
   auto* d = static_cast<Display*>(app.getDisplay());
   XSetInputFocus(d, window->id(), RevertToParent, CurrentTime);
   XSync(d, False);
@@ -110,9 +114,10 @@ void run() {
   settle(app);
   CHECK(calls == 2);
   ui.setAppearance({});
-  ui.apply(window);
+  ui.apply(app.getRootWindow());
   settle(app);
   CHECK(button->id() == id && button->getDefaultWidth() == previousWidth);
+  delete tip;
   delete window;
 }
 TEST_MAIN(run)

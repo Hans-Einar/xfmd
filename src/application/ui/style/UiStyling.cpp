@@ -26,6 +26,13 @@ void UiContext::apply(FXWindow* window) {
     packer->setHiliteColor(p.panel);
     packer->setShadowColor(p.border);
   }
+  if (auto* tip = dynamic_cast<FXToolTip*>(window)) {
+    tip->setFont(font);
+    tip->setTextColor(p.text);
+    tip->setBackColor(p.panel);
+  }
+  if (auto* arrow = dynamic_cast<FXArrowButton*>(window))
+    arrow->setArrowColor(p.text);
   if (auto* label = dynamic_cast<FXLabel*>(window)) {
     label->setFont(font);
     label->setTextColor(p.text);
