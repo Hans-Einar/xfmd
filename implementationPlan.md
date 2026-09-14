@@ -274,3 +274,33 @@ Branch `phase/p16-browser-xfe-study`, egen PR.
 - M2: kildebasert Xfe-analyse mot upstream og vår fork, komponentkart og anbefalt
   integrasjonsrekkefølge; dokumentasjon, review, installasjon og CI før merge.
 Xfe-integrasjonen er en studie i denne fasen, ikke et uavklart toolkit-bytte.
+
+## P17–P19: integrasjon av FOX UI/UX-forslagene
+
+Bestilt 2026-09-14. Grunnlag: fox_ui_improvements.md og fox_ux_improvements.md.
+Light/Dark er ett vedvarende valg som deles av toolbar og Preferences. Egen
+phase-branch/PR per fase; commit per milestone. Designprototypen inngår som
+historisk sammenligningsgrunnlag, ikke produktkode.
+
+| Phase / branch | Milestone-commit | Resultat og gate |
+| --- | --- | --- |
+| P17 / phase/p17-ui-foundation | M0: krav og integrasjonsplan | UR-025/026/027 og AT-045/046/047; eiere FUNC-010/014 |
+| P17 | M1: preferanser og profiler | Light/Dark, Comfortable/Compact, Flat/Classic og kontrollfont. En profilkilde med validerte overrides; persistens/fallback-tester |
+| P17 | M2: UI-komponenter | UiContext, ikonressurser, UiButton/ButtonPainter, factory og layoutkomponenter. Native input, state, ressurslevetid og mål testes |
+| P18 / phase/p18-themed-workspace | M1: toolbar og tema | Ikonhandlinger, grupper, checked modus/sidebar og Light/Dark; felles CommandRouter og vedvarende valg |
+| P18 | M2: arbeidsflate | Files-header/filter/Refresh, tydelige Index/References, lokal preview-format/zoom og konsistente avstander. Behold lazy/dirty/history/scroll |
+| P19 / phase/p19-appearance-preferences | M1: Preferences | Appearance/Scrolling/Document/Programs, live utseendeutkast, OK/Cancel/feil og felles dialogknapper; reload av profilfil |
+| P19 | M2: samlet kvalitet | Unit/native GUI, Light/Dark og compact, tastatur/state, rollback, smal layout, eksisterende regresjoner, sanitizer og korte ytelsesmål |
+| P19 | M3: dokumentasjon og installasjon | Ekte produktskjermbilder, release notes og evidens; CI/PR, atomisk installasjon uten å lukke brukerens dokument |
+
+Avgrensning: alle de foreslåtte første UI-/UX-stegene integreres. Automatisk
+kapittelfølging, sammenleggbar historikk og dynamisk toolbar-overflow var merket
+«senere, bare hvis nyttig» og inngår ikke. Smal layout håndteres med en eksplisitt
+kompakt toolbar/fallback; ingen kontroll får overlappe. Ingen Xfe-import, global
+FOX-override, dokumentfontendring, renderer-bytte eller plugin-SO-er.
+
+Tema-preview skal ikke committe preferanser eller endre dokument/undo. Ved
+Cancel/gammel lagringsfeil gjenopprettes aktivt utseende. Light/Dark på toolbar
+committer bare temafeltet og beholder density, font, knappestil og øvrige valg.
+Alle nye produksjonsklasser hører til application/ui/style eller controls;
+interpreter/renderer-kontraktene er uendret.

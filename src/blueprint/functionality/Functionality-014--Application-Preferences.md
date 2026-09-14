@@ -6,7 +6,7 @@ role: Service
 owner: application
 status: Implemented
 scope: FirstRelease
-requirements: UR-024, UR-015, UR-017, SR-002, SR-018
+requirements: UR-025, UR-027, UR-024, UR-015, UR-017, SR-002, SR-018
 uses: none
 ---
 
@@ -60,3 +60,7 @@ P9 avklarer lagringsadapter; implementeres i P10. Papirprofil bygges på samme s
 [Integrasjonsdesign](../../../softwareDesign.md) og [faseplan](../../../implementationPlan.md) gir kontekst.
 
 P16: AT-044 dekkes av PreferencesTest, ExternalBrowserTest og BrowserPreferencesTest.
+
+P17–P19: UR-025, UR-027 utvider dette ansvaret; se [faseplan](../../../implementationPlan.md).
+Nye UI-klasser er planlagt under application/ui/style og controls. Stilendring
+beholder dokument, arbeidsflyter og FOX-input. AT-045, AT-046, AT-047 får egne testbevis.

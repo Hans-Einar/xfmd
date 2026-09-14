@@ -213,3 +213,11 @@ valgt eksternt program. Program og URL er separate argv-elementer; ingen shell
 eller kommandolinje-evaluering. Feltet inneholder én executable, uten parametre.
 Systemstandard er xdg-open; lokale innstillinger kan velge Chrome. Andre URI-schemes
 blir ikke eksekvert. Konfigurasjon og analyser av Xfe endrer ikke renderer-arkitekturen.
+
+## P17–P19: konsistent FOX-utseende og arbeidsflate
+
+| Krav | Normativ atferd | Akseptanse |
+| --- | --- | --- |
+| UR-025 | Appearance har Light/Dark, Comfortable/Compact, Flat/Classic og kontrollfontstørrelse. Tema, mål og ikoner har felles eiere og validerte profilverdier. Dokument/PDF-utseendet endres ikke av kontrolltemaet. | AT-045: profiler, ugyldige overrides/fallback, persistens og uendret dokument/layoutprofil. |
+| UR-026 | Toolbar grupperer ikonhandlinger for Open/Save og Back/Forward, Sidebar, eksklusiv Preview/Split/Editor og Light/Dark-toggle. Meny/tastatur/toolbar deler enabled/checked via CommandRouter. Files og Index samt lokal preview-header følger samme stil/mål og beholder eksisterende navigasjon. | AT-046: native klikk/Space, disabled/checked, tema-toggle, smalt vindu og eksisterende navigasjons-/scrolltester. |
+| UR-027 | Preferences grupperer Appearance, Scrolling, Document og Programs i én transaksjon. Live utseendeprøving lagres først ved OK; Cancel/kryss gjenoppretter aktivt utseende. Skrivefeil beholder gammel lagret/aktiv profil og viser feil. | AT-047: OK/Cancel/kryss, skrivefeil, tema fra begge innganger, øvrige innstillinger og fokus. |

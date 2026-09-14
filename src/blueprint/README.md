@@ -92,3 +92,6 @@ Se [designrevisjonen](../../softwareDesign.md), [arbeidsmåten](../../docs/worki
 | UR-023 | [FUNC-020](functionality/Functionality-020--Document-Index.md), [FTR-009](feature/Feature-009--Document-References.md) | AT-042 | FirstRelease |
 | SR-020 | [FUNC-020](functionality/Functionality-020--Document-Index.md), [FTR-009](feature/Feature-009--Document-References.md) | AT-043 | FirstRelease |
 | UR-024 | [FUNC-014](functionality/Functionality-014--Application-Preferences.md) | AT-044 | FirstRelease |
+| UR-025 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FUNC-014](functionality/Functionality-014--Application-Preferences.md) | AT-045 | FirstRelease |
+| UR-026 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | AT-046 | FirstRelease |
+| UR-027 | [FUNC-014](functionality/Functionality-014--Application-Preferences.md) | AT-047 | FirstRelease |
