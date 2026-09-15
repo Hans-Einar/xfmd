@@ -152,3 +152,5 @@ den under mappehistorikken. Ingen ny feature eller filåpningstjeneste. Manglend
 filer beholdes til aktivering, som gir vanlig åpningsfeil. Absolutte stier brukes
 som identitet. Etiketten viser filnavn først, deretter mappe;
 WorkPathHistory::displayPath gjenbrukes for ~/forkorting.
+
+P24: [AT-058, testbevis og skjermbilder](../../../docs/evidence/P24.md).

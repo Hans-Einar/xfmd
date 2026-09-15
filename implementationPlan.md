@@ -371,3 +371,6 @@ Branch: `phase/p24-recent-files`. M1: UR-038, FUNC-010 og plumbing.
 M2: egen listeadapter, persistens og dokumentkobling. M3: AT-058 med
 GUI-/restart-/feilveitest, regresjon og installasjon. Mermaid er et separat
 diagramformat og inngår ikke i denne avgrensede filhistorikkendringen.
+
+P24 M1–M3 er implementert. [Testbevis](docs/evidence/P24.md) dekker AT-058,
+Release, sanitizers og Light/Dark.
