@@ -84,3 +84,5 @@ Implemented i P2. Oppdater kontrakter, kallkart, konsumenter og tester i samme e
 Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.
 
 P22: UR-032/033, AT-052, AT-053. EditorPresentation.cpp eier visning separat fra edit-operasjoner.
+
+P22: [testbevis og visuell kontroll](../../../docs/evidence/P22.md).

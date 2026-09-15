@@ -62,6 +62,7 @@ void run() {
   CHECK(editor->getTextStyle() & TEXT_FIXEDWRAP);
   CHECK(editor->getWrapColumns() > 20);
   CHECK(editor->getFont()->getSize() < baseSize);
+  CHECK(editor->getContentWidth() <= editor->getViewportWidth());
   int columns = editor->getWrapColumns();
   app.execute(CommandRouter::ActualSize);
   events(app);

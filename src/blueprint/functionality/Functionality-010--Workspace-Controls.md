@@ -140,3 +140,5 @@ P20-bevis for AT-048/049 og oppdatert AT-046: [native tester og geometri](../../
 P22: felles kompakt topplinje; UR-032/033/034 beskriver endret scope.
 
 P22 verifikasjon: AT-052, AT-053, CompactWorkspaceTest og eksisterende regresjoner.
+
+P22: [testbevis og visuell kontroll](../../../docs/evidence/P22.md).

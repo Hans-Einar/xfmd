@@ -349,3 +349,7 @@ P21 M1 `b6f934a`, M2 `9b259a9` er implementert. M3 samler
 Branch phase/p22-compact-workspace. M1: UR-032–034 og eierskap.
 M2: felles lav layout, editorpalett/format og oppløst hover-mål.
 M3: native geometri/input/regresjon, skjermbilder, installasjon og CI.
+
+P22 M1 `b89149d`, M2 `35400a9`; M3 inkluderer Fit width ved hele tegnpiksler,
+[testbevis og installasjon](docs/evidence/P22.md). Lokalt består 48 Release-tester
+og 46 sanitizer-tester. CI er merge-gate.

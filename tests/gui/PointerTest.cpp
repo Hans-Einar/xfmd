@@ -28,7 +28,7 @@ void button(Application& app, unsigned code, bool press, unsigned state = 0, int
   pump(app);
 }
 FX::FXButton* editorButton(FX::FXWindow* root) {
-  if (auto* b = dynamic_cast<FX::FXButton*>(root); b && b->getText() == "Editor")
+  if (auto* b = dynamic_cast<FX::FXButton*>(root); b && b->getSelector() == CommandRouter::Editor)
     return b;
   for (auto* child = root->getFirst(); child; child = child->getNext())
     if (auto* b = editorButton(child))

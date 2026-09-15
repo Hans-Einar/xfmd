@@ -99,3 +99,5 @@ P21: [AT-050/051, regresjoner og skjermbilder](../../../docs/evidence/P21.md).
 P22: felles kompakt topplinje; UR-032/033/034 beskriver endret scope.
 
 P22 verifikasjon: AT-052, CompactWorkspaceTest og eksisterende regresjoner.
+
+P22: [testbevis og visuell kontroll](../../../docs/evidence/P22.md).
