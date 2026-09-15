@@ -384,7 +384,7 @@ egen branch og commits per milestone; ingen fase behandles som sprint.
 
 | Fase / branch | Milestones | Utgangskriterium |
 | --- | --- | --- |
-| P25 `phase/p25-mermaid-design` | M1: UR-039–041/SR-021–023 og use case; M2: blueprints, modell/ABI, kildeundersøkelse og plan; M3: konsistenskontroll og designgjennomgang | Dokumenterte beslutninger, risiko og gates; kun design, Proposed. |
+| P25 `phase/p25-mermaid-design` | M1: krav, blueprints, kildeundersøkelse og kontraktsutkast; M2: plumbingreview, eierskap og tekniske gates; M3: dokumentert konsistenskontroll og designgjennomgang | Dokumenterte beslutninger, risiko og gates; kun design, Proposed. |
 | P26 `phase/p26-mermaid-foundation` | M1: låst toolchain/pin/Cargo.lock, minimal C++/Rust-link og lisensoversikt; M2: ren Flowchart-modell, parserprofil og ABI-eierskap; M3: måleseam og ren layout roundtrip med begge brukerfixtures | AT-062/064-prober; ingen renderer→parser-avhengighet, ingen tapte konstruksjoner, målt labelgeometri og akseptabel verste graf. Først da Ready for integrasjon. |
 | P27 `phase/p27-mermaid-preview` | M1: cmark-gjerder, kildekart og blokklokal fallback; M2: request keys, worker-lokal font/cache og felles prepare-kjede; M3: native scene/placement og støttet Flowchart-profil | AT-059/063, baseline-regresjoner, stabilt preview ved edits/resize og ingen Rust-layout på GUI-tråden. |
 | P28 `phase/p28-mermaid-reading-export` | M1: semantiske paintroller og slider-repaint; M2: DrawRuns, leserekkefølge, markering og ankre; M3: A4 og felles PDF-geometri | AT-060/061, begge temaer, Unicode, vektor-PDF og faktisk tekstuttrekk. |

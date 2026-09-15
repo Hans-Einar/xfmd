@@ -35,8 +35,8 @@ Gjenkjenn bare eksplisitt mermaid-gjerde. Rust bruker parse_mermaid_strict, men 
 | 1 | `ModelBuilder::appendNode` | `MermaidBlockBuilder::build` | `src/interpreter/mermaid/MermaidBlockBuilder.cpp` | fence info + literal + SourceRange → DiagramSource | bevar original fallback | Planned |
 | 2 | `IDiagramInterpreter virtual dispatch` | `MermaidInterpreter::parse` | `src/interpreter/mermaid/MermaidInterpreter.cpp` | DiagramSource → DiagramParseResult | grense og profil sjekkes | Planned |
 | 3 | `MermaidInterpreter::parse` | `xfmd_mermaid_parse_v1` | `src/application/composition/mermaid/src/lib.rs` | lånt UTF-8 → eid ABI-resultat | panic/feil blir status | Planned |
-| 4 | `xfmd_mermaid_parse_v1` | `parseProfile` | `src/interpreter/mermaid/rust/src/profile.rs` | strict upstream-resultat → tillatt Flowchart 1 | ikke godta delvis tolket graf | Planned |
-| 5 | `parseProfile` | `mapGraph` | `src/interpreter/mermaid/rust/src/model.rs` | upstream Graph → ren ABI-modell | avvis ukjent enum/overstørrelse | Planned |
+| 4 | `xfmd_mermaid_parse_v1` | `parse_profile` | `src/interpreter/mermaid/rust/src/profile.rs` | strict upstream-resultat → tillatt Flowchart 1 | ikke godta delvis tolket graf | Planned |
+| 5 | `parse_profile` | `map_graph` | `src/interpreter/mermaid/rust/src/model.rs` | upstream Graph → ren ABI-modell | avvis ukjent enum/overstørrelse | Planned |
 
 
 ## 6. Gjenbruk og avhengigheter
@@ -51,4 +51,4 @@ Planlagt MermaidInterpreterTest og Rust-profiltester: brukerfixtures, Unicode/CR
 
 Proposed. P26 må avklare fullconsumption og span-kvalitet mot pin; mangler løses med liten dokumentert adapter/patch eller eksplisitt profilsnevring, aldri stille tap.
 
-Planlagt akseptanse: AT-059, AT-060, AT-061, AT-062, AT-063, AT-064.
+Planlagt akseptanse: AT-059, AT-061, AT-062, AT-063, AT-064.

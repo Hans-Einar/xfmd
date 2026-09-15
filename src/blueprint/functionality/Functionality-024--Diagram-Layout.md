@@ -35,7 +35,7 @@ Layout forberedes i worker. Tekstmåling skjer med samme fontgrunnlag som brødt
 | 1 | `IDiagramLayout virtual dispatch` | `MermaidDiagramLayout::layout` | `src/renderer/diagram/MermaidDiagramLayout.cpp` | modell + font/request → immutable scene | checkpoint før/etter Rust | Planned |
 | 2 | `MermaidDiagramLayout::layout` | `DiagramTextLayout::measure` | `src/renderer/diagram/DiagramTextLayout.cpp` | etiketter → formede linjer og mål | samme ITextMetrics-port | Planned |
 | 3 | `MermaidDiagramLayout::layout` | `xfmd_diagram_layout_v1` | `src/application/composition/mermaid/src/lib.rs` | ren graf + labelmål → LayoutResult | ingen parserkall/opaque parserhandle | Planned |
-| 4 | `xfmd_diagram_layout_v1` | `layoutGraph` | `src/renderer/diagram/rust/src/layout.rs` | mapping → upstream compute_layout → ren geometri | mål-seam må verifiseres i P26 | Planned |
+| 4 | `xfmd_diagram_layout_v1` | `layout_graph` | `src/renderer/diagram/rust/src/layout.rs` | mapping → upstream compute_layout → ren geometri | mål-seam må verifiseres i P26 | Planned |
 | 5 | `MermaidDiagramLayout::layout` | `DiagramSceneBuilder::build` | `src/renderer/diagram/DiagramSceneBuilder.cpp` | layout → stier + semantiske etiketter | forme-/piltester | Planned |
 | 6 | `MarkdownRenderer::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | scene → skalert frame og lesetekst | Approximate blokkanker, ingen sideklipping | Planned |
 

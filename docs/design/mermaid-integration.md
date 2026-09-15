@@ -119,6 +119,8 @@ ABI v1 har planlagte innganger `xfmd_mermaid_parse_v1`,
   pointer+length for lånt input og eid output. Null tillates bare ved lengde null.
 - Alle inputpekere lånes kun under kallet; ingen callbacks eller beholdte C++-objekter.
   C++ kopierer output og bruker Rust free-funksjon via RAII, også ved exception.
+  En privat allokeringsholder kan eie hvert ABI-resultat, men kan aldri sendes
+  videre til layout som parsermodell; layout får nye lånte verdistrukturer.
 - Ingen std::string, Rust Vec/String, traits eller bool-layout over grensen. Ingen
   casting mellom C++- og Rust-graf. Utvidelser valideres med ABI-versjon.
 - Ved feil er output null/zero og status/diagnostikk eid av dokumentert resultatholder.
@@ -126,7 +128,9 @@ ABI v1 har planlagte innganger `xfmd_mermaid_parse_v1`,
 - `catch_unwind` med unwind-profil ved alle Rust-eksporter; ingen panic eller C++
   exception over ABI. Statusverdier: Ok, Syntax, Unsupported, Limit, InvalidAbi,
   InvalidModel, Layout og Panic. Diagnostikk har UTF-8, byteområde/kvalitet og ingen
-  native pekere. OOM/process-abort kan ikke fanges av catch_unwind og må ikke
+  native pekere. Parserdiagnostikk med bare linje/kolonne eller generisk 1:1
+  mappes konservativt til blokkens Approximate-område; presisjon oppgraderes bare
+  når offsetkonvensjonen faktisk er bevist. OOM/process-abort kan ikke fanges av catch_unwind og må ikke
   omtales som garantert recoverable. Fuzz/ASan/Miri brukes med sine faktiske grenser.
 - Ingen Rust-parserhandle som renderer må forstå. Tredjepartsbytte kan endre begge
   private mappere, men skal ikke endre dokumentarbeidsflyt eller portene.
@@ -176,6 +180,8 @@ mot kanonisk modellnøkkel. Cache er worker-lokal; immutable resultater kan dele
 
 Startgrenser som skal valideres i P26: 64 KiB per blokk, 128 noder, 512 kanter,
 32 grupper, nesting 8, 16 diagrammer per dokument, 8 MiB per scene og 32 MiB LRU.
+Byte-/syntaksnesting sjekkes før upstream-parsing med quote-bevisst profilkontroll;
+node-/kant-/gruppegrenser kontrolleres på modellen før layout.
 Overflow i størrelsesberegning er feil. Ingen automatisk fil-/nettressurslasting
 fra kilden; appens eksisterende fontlasting er en konfigurert lokal ressurs.
 
