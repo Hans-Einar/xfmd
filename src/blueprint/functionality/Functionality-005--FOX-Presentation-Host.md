@@ -4,9 +4,9 @@ kind: Functionality
 audience: System
 role: Adapter
 owner: application
-status: Implemented
+status: Proposed
 scope: FirstRelease
-requirements: UR-035, UR-034, UR-030, UR-031, UR-011, UR-002, UR-005, UR-008, SR-001, SR-008, SR-009, SR-010, SR-013, UR-017, SR-016, SR-019
+requirements: UR-040, UR-041, UR-035, UR-034, UR-030, UR-031, UR-011, UR-002, UR-005, UR-008, SR-001, SR-008, SR-009, SR-010, SR-013, UR-017, SR-016, SR-019
 uses: FUNC-021, FUNC-004, FUNC-015, FUNC-016
 ---
 
@@ -70,6 +70,8 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 
 P23: FoxPreviewInput eier merking og clipboard-input; PreviewSelection holder logiske tekstposisjoner. Repaint bevarer merking, nytt dokumenttoken nullstiller den.
 
+| 99 | `DisplayListPainter::paint` | `DiagramPainter::paint` | `src/application/adapters/DiagramPainter.cpp` | Planlagt diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Planned |
+
 ## 6. Gjenbruk og avhengigheter
 
 [FUNC-004](../functionality/Functionality-004--Render-Layout.md)
@@ -116,3 +118,7 @@ P22: [testbevis og visuell kontroll](../../../docs/evidence/P22.md).
 Hover og gjenopprettet statustekst behandler `&` bokstavelig, uten FOX-mnemonic.
 
 P23 akseptanse: AT-055. Tester: RichPreviewTest og PreviewSelectionGuiTest.
+
+P25 (Proposed): Host gjenbruker palett, viewport-transform og PreviewSelection for diagrammets stier/tekst; ingen egen Mermaid-host. Krav: UR-040, UR-041; AT-060, AT-061.
+Se [design](../../../docs/design/mermaid-integration.md). Eksisterende Implemented-rader
+og eldre bevis gjelder baseline; ny plumbing er ikke implementert eller testet.

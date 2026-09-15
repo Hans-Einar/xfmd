@@ -4,10 +4,10 @@ kind: Functionality
 audience: System
 role: Service
 owner: interpreter
-status: Implemented
+status: Proposed
 scope: FirstRelease
-requirements: UR-036, UR-037, UR-005, UR-002, SR-001, SR-003, SR-004, SR-005, SR-009, SR-011, SR-013
-uses: none
+requirements: UR-039, UR-036, UR-037, UR-005, UR-002, SR-001, SR-003, SR-004, SR-005, SR-009, SR-011, SR-013
+uses: FUNC-023
 ---
 
 # Functionality-003: Markdown-tolkning og semantisk modell
@@ -56,6 +56,8 @@ P23: MathSyntax maskerer formeldelimitere med uendret bytelengde og eget koordin
 
 | 60 | `CmarkInterpreter::parse` | `MathSyntax::MathSyntax` | `src/interpreter/MathSyntax.cpp` | Raw kilde + AST → kodebeskyttet matematikkprofil | Feil gir plassholder | Implemented |
 
+| 99 | `ModelBuilder::appendNode` | `MermaidBlockBuilder::build` | `src/interpreter/mermaid/MermaidBlockBuilder.cpp` | Planlagt diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Planned |
+
 ## 6. Gjenbruk og avhengigheter
 
 Ingen andre functionality-kontrakter konsumeres; delte datatyper følger arkitekturen.
@@ -81,3 +83,7 @@ Implemented i P3. Oppdater kontrakter, kallkart, konsumenter og tester i samme e
 Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.
 
 P23 akseptanse: AT-056, AT-057. Tester: RichPreviewTest og PreviewSelectionGuiTest.
+
+P25 (Proposed): MermaidBlockBuilder kobles til injisert IDiagramInterpreter. Vanlige kodegjerder og math/latex beholder sin eksisterende vei. Krav: UR-039; AT-059.
+Se [design](../../../docs/design/mermaid-integration.md). Eksisterende Implemented-rader
+og eldre bevis gjelder baseline; ny plumbing er ikke implementert eller testet.

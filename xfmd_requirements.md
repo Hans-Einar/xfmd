@@ -278,3 +278,22 @@ Ressursarbeid skjer utenfor GUI-tråden med avgrenset input og bildestørrelse.
 | ID | Krav | Akseptanse |
 | --- | --- | --- |
 | UR-038 | Sidepanelet viser Recent files under Recent folders. Vellykket åpning og lagring registrerer absolutte filstier, nyest først, uten duplikater, maksimalt 32. Listen lagres separat fra arbeidsmapper og gjenopprettes ved oppstart. Valg bruker vanlig dokumentnavigasjon med dirty-kontroll, uten å endre arbeidsrot eller skjule panelet. | AT-058: rekkefølge, grense, restart, åpning/Save As, kansellering og manglende fil. |
+
+## P25–P29: Mermaid-diagrammer — Proposed
+
+UC-008: Brukeren leser og redigerer Mermaid-blokker i et Markdown-dokument,
+merker/kopierer diagrametiketter og eksporterer samme diagram til PDF.
+Kravene nedenfor er planlagt atferd, ikke eksisterende støtte.
+Første leveranse bruker profil **XFMD Flowchart 1**, definert i
+[Mermaid-designet](docs/design/mermaid-integration.md). Andre diagramtyper utvides
+først når modell, plumbing og akseptanse er definert; bibliotekets annonserte
+støtte er ikke automatisk XFMD-støtte.
+
+| ID | Krav | Akseptanse |
+| --- | --- | --- |
+| UR-039 | Et eksplisitt mermaid-kodegjerde skal vise flowchart/graph etter XFMD Flowchart 1, inkludert brukerens to eksempler. Vanlig kode og .txt forblir bokstavelig. Ugyldig, uferdig eller ustøttet innhold beholder hele kildeblokken med lokal forklaring uten å hindre resten av dokumentet. | AT-059: begge brukerdiagrammer, retninger, former, kanter, subgraphs, Unicode, ugyldig/ustøttet syntaks og vanlige kodeblokker. |
+| UR-040 | Diagrammet skal følge Light/Dark og levende lesefarger uten ny parsing, layout, dirty eller scrollendring. Wrap/A4/zoom skal bevare aspekt og vise hele diagrammet; PDF bruker samme geometri med utskriftspaletten. | AT-060: tema/slider, resize, A4/sidegrense, skalering, flersidet dokument og vektorbasert PDF. |
+| UR-041 | Diagrammets synlige etiketter skal kunne merkes og kopieres som Unicode-tekst. Ctrl+A/C kopierer deterministisk leserekkefølge gjennom vanlig tekst og diagram. Diagrammet beholder kildeanker til kodeblokken; upresis mapping merkes Approximate. | AT-061: delmerking, drag, PRIMARY/clipboard, etikettorden, transform/zoom og kildesynkronisering uten oppdiktede presise offsets. |
+| SR-021 | Mermaid-parser og diagramlayout skal være uavhengig utskiftbare bak XFMD-eide, FOX-/Rust-/bibliotekfrie verdikontrakter. Renderer skal ikke parse Mermaid-kildetekst. C++/Rust-broen skal ha eksplisitt ABI-versjon, eierskap, feil og separate parser-/layoutinnganger. | AT-062: alternativ/falsk parser og layout, roundtrip-modell, C-ABI-livsløp, feil/panic og lag-/dependency-kontroll. |
+| SR-022 | Diagramarbeid skal skje utenfor GUI-tråden med begrenset input, kø og cache. Ny revisjon gjør gamle svar ugyldige. Preview/PDF skal bruke samme forberedelse og fontgrunnlag. Ingen automatisk nettverk, shell, HTML, script eller filressurser fra diagramkilden. | AT-063: raske edits, stale svar, kansellert eksport, ressursgrenser, fontendring og input som forsøker aktive/eksterne konstruksjoner. |
+| SR-023 | mermaid-rs-renderer og Rust-verktøykjeden skal bygges fra låste versjoner med sjekket Cargo.lock, lisensoversikt og dokumentert offline-bygg. Manglende byggavhengigheter skal gi tydelig configure-feil; full støtte må ikke avhenge av installert Node/Chromium eller nettverk ved kjøring. | AT-064: rent Linux-bygg, offline etter bootstrap, installert program, dependency-/lisenskontroll og Rust-/C++-verifikasjon. |

@@ -4,10 +4,10 @@ kind: Functionality
 audience: System
 role: Service
 owner: renderer
-status: Implemented
+status: Proposed
 scope: FirstRelease
-requirements: UR-035, UR-036, UR-037, UR-005, UR-002, UR-008, SR-001, SR-003, SR-005, SR-008, SR-009, SR-011, SR-013, UR-017, UR-018, SR-016, SR-019
-uses: FUNC-017
+requirements: UR-040, UR-041, UR-035, UR-036, UR-037, UR-005, UR-002, UR-008, SR-001, SR-003, SR-005, SR-008, SR-009, SR-011, SR-013, UR-017, UR-018, SR-016, SR-019
+uses: FUNC-024, FUNC-017
 ---
 
 # Functionality-004: Layout og visuell dokumentmodell
@@ -58,6 +58,8 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 
 P23: DrawRun får logiske UTF-8-intervaller i RenderFrame.readingText. EmbeddedContent.visual plasseres med aspektbevaring, baseline og høydegrense før PageComposer; kildeankre og lenker bevares.
 
+| 99 | `MarkdownRenderer::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | Planlagt diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Planned |
+
 ## 6. Gjenbruk og avhengigheter
 
 Ingen andre functionality-kontrakter konsumeres; delte datatyper følger arkitekturen.
@@ -95,3 +97,7 @@ FOX-/Cairo-type og ingen brukerpreferanse lagres i renderer. ReadingColorsTest
 kontrollerer rolledekning og at utskriftspaletten fortsatt brukes uten skjermoverstyring.
 
 P23 akseptanse: AT-055, AT-056, AT-057. Tester: RichPreviewTest og PreviewSelectionGuiTest.
+
+P25 (Proposed): DiagramPlacement setter ferdig scene inn som stier og vanlige DrawRuns; dyr diagramlayout skjer ikke i MarkdownRenderer på GUI-tråden. Krav: UR-040, UR-041; AT-060, AT-061.
+Se [design](../../../docs/design/mermaid-integration.md). Eksisterende Implemented-rader
+og eldre bevis gjelder baseline; ny plumbing er ikke implementert eller testet.

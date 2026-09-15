@@ -374,3 +374,35 @@ diagramformat og inngår ikke i denne avgrensede filhistorikkendringen.
 
 P24 M1–M3 er implementert. [Testbevis](docs/evidence/P24.md) dekker AT-058,
 Release, sanitizers og Light/Dark.
+
+## P25–P29 — Mermaid via mermaid-rs-renderer
+
+Status: **Proposed design**, ingen produksjonsimplementasjon. Se
+[design, filkart og ABI](docs/design/mermaid-integration.md), FTR-010 og FUNC-023–025.
+Alle planlagte symboler nedenfor skal forbli Planned til de finnes. Hver fase får
+egen branch og commits per milestone; ingen fase behandles som sprint.
+
+| Fase / branch | Milestones | Utgangskriterium |
+| --- | --- | --- |
+| P25 `phase/p25-mermaid-design` | M1: krav, blueprints, kildeundersøkelse og kontraktsutkast; M2: plumbingreview, eierskap og tekniske gates; M3: dokumentert konsistenskontroll og designgjennomgang | Dokumenterte beslutninger, risiko og gates; kun design, Proposed. |
+| P26 `phase/p26-mermaid-foundation` | M1: låst toolchain/pin/Cargo.lock, minimal C++/Rust-link og lisensoversikt; M2: ren Flowchart-modell, parserprofil og ABI-eierskap; M3: måleseam og ren layout roundtrip med begge brukerfixtures | AT-062/064-prober; ingen renderer→parser-avhengighet, ingen tapte konstruksjoner, målt labelgeometri og akseptabel verste graf. Først da Ready for integrasjon. |
+| P27 `phase/p27-mermaid-preview` | M1: cmark-gjerder, kildekart og blokklokal fallback; M2: request keys, worker-lokal font/cache og felles prepare-kjede; M3: native scene/placement og støttet Flowchart-profil | AT-059/063, baseline-regresjoner, stabilt preview ved edits/resize og ingen Rust-layout på GUI-tråden. |
+| P28 `phase/p28-mermaid-reading-export` | M1: semantiske paintroller og slider-repaint; M2: DrawRuns, leserekkefølge, markering og ankre; M3: A4 og felles PDF-geometri | AT-060/061, begge temaer, Unicode, vektor-PDF og faktisk tekstuttrekk. |
+| P29 `phase/p29-mermaid-verification` | M1: full profil-/failure-/fuzzmatrise og dependency-check; M2: native skjermbilder, ytelse og offline/installasjonsprøve; M3: bevisrapport, grønn CI og installasjon | AT-059–064 samlet; ingen Verified uten identifisert testbevis. |
+
+P26-gaten er konkret: mål-seam finnes ikke som offentlig upstream-port i undersøkt
+pin. Vis kontrollert node-/edge-/gruppe-måling med Pango-data, ingen stille syntax-
+tap og håndterbar kjøretid for 128 noder/512 kanter. Ved behov for stor upstream-fork
+eller prosessisolasjon revideres designet før P27; ikke skjul reparsing i renderer.
+Rust-cancel er foreløpig checkpoint før/etter kall, ikke hard tidsavbrudd.
+
+Planlagte testnavn: MermaidInterpreterTest, DiagramAbiTest, DiagramLayoutTest,
+DiagramPlacementTest, DiagramPreparationTest, MermaidGuiTest og MermaidPdfTest,
+med egne Rust-unit-/FFI-tester. Navnene er ikke eksisterende testtargets. Bygg, test,
+CLI-verktøy og avhengigheter tilføyes først i implementeringsfasene.
+
+Utvidelse utover Flowchart 1 (bl.a. sequence/class/ER) krever egne modellvarianter,
+kravprofil og fixture-dekning; det er ikke en skjult del av P27.
+
+P25 M1 `60a63aa`, M2 `f0cdb41`; M3 samler
+[designgjennomgang og kontroller](docs/evidence/P25.md). P26–P29 er ikke startet.

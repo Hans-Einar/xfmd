@@ -345,3 +345,12 @@ levende Appearance-preview og rollback. Light/Dark-knappen lagrer bare temavalge
 klasser, eierskap og avgrensning. [Testbevis](docs/evidence/P17-P19.md) skiller
 native UI-verifikasjon fra designprototyper. Interpreter/renderer-kontraktene,
 dokumentmodell og PDF-tegning er uendret.
+
+## P25 — Mermaid designrevisjon 1.0 (Proposed)
+
+Ny avgrenset designrevisjon: [Mermaid-integrasjon](docs/design/mermaid-integration.md).
+Den bevarer horisontale lag og introduserer FTR-010, FUNC-023–025 og en ren
+diagrammodell. Første profil er flowchart/graph. Parser og graf-layout gjenbrukes
+fra mermaid-rs-renderer; native tekst/tegning integreres med eksisterende
+preview/PDF. Dette er et designforslag med eksplisitte P26-gater, ikke implementert
+støtte eller en erstatning av eldre revisjoners testbevis.
