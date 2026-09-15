@@ -159,3 +159,7 @@ if(XFMD_SANITIZERS)
 endif()
 
 target_link_libraries(MermaidGuiTest PRIVATE X11::X11)
+
+xfmd_test(DiagramWorkerTest tests/application/DiagramWorkerTest.cpp xfmd_preview xfmd_interpreter)
+add_test(NAME MermaidDependencies COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/check_mermaid_dependencies.py)
+set_tests_properties(DiagramWorkerTest PROPERTIES TIMEOUT 10)

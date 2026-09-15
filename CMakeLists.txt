@@ -116,3 +116,7 @@ include(CPack)
 foreach(size 16 24 32 48 64 128)
   install(FILES packaging/icons/xfmd-${size}.png DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/${size}x${size}/apps RENAME xfmd.png)
 endforeach()
+
+install(FILES LICENSES/mermaid-rs-renderer.txt LICENSES/mermaid-dependencies.md
+  DESTINATION ${CMAKE_INSTALL_DOCDIR}/licenses)
+install(DIRECTORY LICENSES/rust/ DESTINATION ${CMAKE_INSTALL_DOCDIR}/licenses/rust)

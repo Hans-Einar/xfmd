@@ -65,5 +65,8 @@ void run() {
            .count();
   std::cout << "128-node / 512-edge cyclic graph: " << ms << " ms\n";
   CHECK(ms < 5000);
+  model = {};
+  model.nodes.push_back({"after", "After cancellation", DiagramShape::Rectangle});
+  CHECK(layout.layout(model, {}, metrics)->nodes.size() == 1);
 }
 TEST_MAIN(run)

@@ -16,6 +16,7 @@ jobs:
         run: rustup toolchain install 1.92.0 --profile minimal --component rustfmt --component clippy
       - run: ./tools/bootstrap_dependencies.sh
       - run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DXFMD_SANITIZERS=${{ matrix.sanitizer }} -DBUILD_TESTING=ON
+      - run: cargo fmt --all -- --check
       - run: cmake --build build --parallel 2
       - run: ctest --test-dir build --output-on-failure
       - run: cmake --install build --prefix "$RUNNER_TEMP/xfmd-install"

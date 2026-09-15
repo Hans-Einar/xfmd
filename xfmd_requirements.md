@@ -279,11 +279,12 @@ Ressursarbeid skjer utenfor GUI-tråden med avgrenset input og bildestørrelse.
 | --- | --- | --- |
 | UR-038 | Sidepanelet viser Recent files under Recent folders. Vellykket åpning og lagring registrerer absolutte filstier, nyest først, uten duplikater, maksimalt 32. Listen lagres separat fra arbeidsmapper og gjenopprettes ved oppstart. Valg bruker vanlig dokumentnavigasjon med dirty-kontroll, uten å endre arbeidsrot eller skjule panelet. | AT-058: rekkefølge, grense, restart, åpning/Save As, kansellering og manglende fil. |
 
-## P25–P29: Mermaid-diagrammer — Proposed
+## P25–P29: Mermaid-diagrammer
 
 UC-008: Brukeren leser og redigerer Mermaid-blokker i et Markdown-dokument,
 merker/kopierer diagrametiketter og eksporterer samme diagram til PDF.
-Kravene nedenfor er planlagt atferd, ikke eksisterende støtte.
+Kravene nedenfor er implementert i P26–P29; [P29-bevis](docs/evidence/P29.md)
+angir faktisk testdekning og begrensninger.
 Første leveranse bruker profil **XFMD Flowchart 1**, definert i
 [Mermaid-designet](docs/design/mermaid-integration.md). Andre diagramtyper utvides
 først når modell, plumbing og akseptanse er definert; bibliotekets annonserte
