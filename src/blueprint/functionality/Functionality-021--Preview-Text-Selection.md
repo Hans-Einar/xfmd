@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Mechanism
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-041, UR-035
 uses: none
@@ -35,7 +35,7 @@ Ny dokumentrevisjon nullstiller merking; fargeendring bevarer merking. Clipboard
 | 1 | `FoxRenderHost input` | `PreviewSelection::hit` | `src/application/preview/PreviewSelection.cpp` | Dokumentpunkt → UTF-8-posisjon | Avvis ugyldig input | Implemented |
 | 2 | `FOX clipboard request` | `FoxRenderHost::onClipboardRequest` | `src/application/adapters/FoxPreviewInput.cpp` | Eid tekst → UTF-8 clipboard | Avvis ugyldig input | Implemented |
 
-| 99 | `MarkdownRenderer::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | Planlagt diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Planned |
+| 99 | `MarkdownRenderer::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | Diagrametiketter i logisk leserekkefølge | Blokkfeil og stale-data følger Mermaid-designet | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -54,3 +54,7 @@ P23: [testbevis og visuell kontroll](../../../docs/evidence/P23.md).
 P25 (Proposed): Diagrametiketter inngår i normal readingText med eksplisitt leserekkefølge og skalerte DrawRuns; eksisterende PreviewSelection og clipboard brukes. Krav: UR-041; AT-061.
 Se [design](../../../docs/design/mermaid-integration.md). Eksisterende Implemented-rader
 og eldre bevis gjelder baseline; ny plumbing er ikke implementert eller testet.
+
+P28: glyph-advance multipliseres med DrawRun.textScale ved hit-testing og
+markeringsrektangler. MermaidGuiTest viser native drag, PRIMARY, Ctrl+C og
+Ctrl+A; DiagramReadingTest kontrollerer skalerte grenser og Approximate-anker.

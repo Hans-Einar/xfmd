@@ -149,3 +149,5 @@ xfmd_test(DiagramPreparationTest tests/application/DiagramPreparationTest.cpp xf
 set_tests_properties(WorkPathTest DiagramLayoutTest PROPERTIES TIMEOUT 30)
 
 xfmd_test(DiagramReadingTest tests/application/DiagramReadingTest.cpp xfmd_diagrams xfmd_preview)
+
+target_link_libraries(MermaidGuiTest PRIVATE X11::X11)
