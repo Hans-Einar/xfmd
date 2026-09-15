@@ -4,8 +4,8 @@ kind: Functionality
 audience: System
 role: Service
 owner: interpreter
-status: Proposed
-scope: Future
+status: Implemented
+scope: FirstRelease
 requirements: UR-039, UR-041, SR-021, SR-022, SR-023
 uses: none
 ---
@@ -32,7 +32,7 @@ Gjenkjenn bare eksplisitt mermaid-gjerde. Rust bruker parse_mermaid_strict, men 
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `ModelBuilder::appendNode` | `MermaidBlockBuilder::build` | `src/interpreter/mermaid/MermaidBlockBuilder.cpp` | fence info + literal + SourceRange → DiagramSource | bevar original fallback | Planned |
+| 1 | `ModelBuilder::appendNode` | `MermaidBlockBuilder::build` | `src/interpreter/mermaid/MermaidBlockBuilder.cpp` | fence info + literal + SourceRange → DiagramSource | bevar original fallback | Implemented |
 | 2 | `IDiagramInterpreter virtual dispatch` | `MermaidInterpreter::parse` | `src/interpreter/mermaid/MermaidInterpreter.cpp` | DiagramSource → DiagramParseResult | grense og profil sjekkes | Implemented |
 | 3 | `MermaidInterpreter::parse` | `xfmd_mermaid_parse_v1` | `src/application/composition/mermaid/src/lib.rs` | lånt UTF-8 → eid ABI-resultat | panic/feil blir status | Implemented |
 | 4 | `xfmd_mermaid_parse_v1` | `inspect` | `src/interpreter/mermaid/rust/src/profile.rs` | strict upstream-resultat → tillatt Flowchart 1 | ikke godta delvis tolket graf | Implemented |
@@ -49,6 +49,6 @@ Planlagt MermaidInterpreterTest og Rust-profiltester: brukerfixtures, Unicode/CR
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Proposed. P26 må avklare fullconsumption og span-kvalitet mot pin; mangler løses med liten dokumentert adapter/patch eller eksplisitt profilsnevring, aldri stille tap.
+Implementert i P26/P27. Hele kildeprofilen kontrolleres før upstream, og node-/kant-/gruppetap avvises. Kildemapping er Approximate for den komplette blokken.
 
 Planlagt akseptanse: AT-059, AT-061, AT-062, AT-063, AT-064.
