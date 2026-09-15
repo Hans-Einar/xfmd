@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Service
 owner: renderer
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-040, UR-017, UR-018, SR-001, SR-008, SR-009, SR-016, SR-019
 uses: none
@@ -41,7 +41,7 @@ Brødtekst brytes til innholdsbredde. Kode bevarer whitespace, men visual-wrap i
 | 2 | `PageComposer::compose` | `PageBreaker::breakLines` | `src/renderer/PageBreaker.cpp` | visuelle linjer/keep-regler → sidegrenser | stor blokk splittes; udelelig overflow feiler | Implemented |
 | 3 | `PageComposer::compose` | `PageAnchorIndex::build` | `src/renderer/PageAnchorIndex.cpp` | flytankre → sideankre | behold source og mappingkvalitet | Implemented |
 
-| 99 | `MarkdownRenderer::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | Planlagt diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Planned |
+| 99 | `MarkdownRenderer::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | Implementert diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 

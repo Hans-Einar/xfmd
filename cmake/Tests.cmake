@@ -149,5 +149,13 @@ xfmd_test(DiagramPreparationTest tests/application/DiagramPreparationTest.cpp xf
 set_tests_properties(WorkPathTest DiagramLayoutTest PROPERTIES TIMEOUT 30)
 
 xfmd_test(DiagramReadingTest tests/application/DiagramReadingTest.cpp xfmd_diagrams xfmd_preview)
+add_executable(MermaidPdfFixture tests/acceptance/MermaidPdfFixture.cpp)
+target_include_directories(MermaidPdfFixture PRIVATE tests)
+target_link_libraries(MermaidPdfFixture PRIVATE xfmd_export)
+target_compile_definitions(MermaidPdfFixture PRIVATE XFMD_DIAGRAM_FIXTURES="${CMAKE_CURRENT_SOURCE_DIR}/docs/design/mermaid")
+add_test(NAME MermaidPdfTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/check_mermaid_pdf.py $<TARGET_FILE:MermaidPdfFixture>)
+if(XFMD_SANITIZERS)
+  set_tests_properties(MermaidPdfTest PROPERTIES ENVIRONMENT "LSAN_OPTIONS=suppressions=${CMAKE_CURRENT_SOURCE_DIR}/tests/support/lsan.supp;ASAN_OPTIONS=detect_leaks=1:halt_on_error=1;UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1")
+endif()
 
 target_link_libraries(MermaidGuiTest PRIVATE X11::X11)

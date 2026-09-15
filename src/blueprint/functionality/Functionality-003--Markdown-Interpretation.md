@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Service
 owner: interpreter
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-039, UR-036, UR-037, UR-005, UR-002, SR-001, SR-003, SR-004, SR-005, SR-009, SR-011, SR-013
 uses: FUNC-023
@@ -56,7 +56,7 @@ P23: MathSyntax maskerer formeldelimitere med uendret bytelengde og eget koordin
 
 | 60 | `CmarkInterpreter::parse` | `MathSyntax::MathSyntax` | `src/interpreter/MathSyntax.cpp` | Raw kilde + AST → kodebeskyttet matematikkprofil | Feil gir plassholder | Implemented |
 
-| 99 | `ModelBuilder::appendNode` | `MermaidBlockBuilder::build` | `src/interpreter/mermaid/MermaidBlockBuilder.cpp` | Planlagt diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Planned |
+| 99 | `ModelBuilder::appendNode` | `MermaidBlockBuilder::build` | `src/interpreter/mermaid/MermaidBlockBuilder.cpp` | Implementert diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
