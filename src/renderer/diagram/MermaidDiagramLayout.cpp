@@ -1,5 +1,6 @@
 #include "MermaidDiagramLayout.h"
 #include "DiagramTextLayout.h"
+#include "contracts/diagram/DiagramLimits.h"
 #include "contracts/diagram/DiagramWire.h"
 #include <algorithm>
 namespace xfmd {
@@ -14,6 +15,7 @@ MermaidDiagramLayout::layout(const DiagramModel& model, const DiagramLayoutReque
   auto texts = DiagramTextLayout::measure(model, metrics);
   diagramWire::Writer w;
   w.model(model);
+  w.integer(diagramLayoutBudgetMilliseconds);
   w.integer(texts.size());
   for (const auto& pair : texts) {
     w.text(pair.first);

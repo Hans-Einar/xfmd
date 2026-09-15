@@ -295,6 +295,8 @@ vises som kilde med forklaring, uten å ødelegge resten av dokumentet.
 Grensene er 64 KiB, 128 noder, 512 kanter, 32 grupper, gruppedybde 8 og
 16 diagrammer per dokument. Dyr layout avbrytes kooperativt etter omtrent
 to sekunder og gir lokal fallback; dette er ingen hard realtime-garanti.
+AddressSanitizer-bygg har ti sekunders budsjett for instrumenteringskostnaden;
+den installerte Release-utgaven beholder to sekunder.
 
 ### Bygg uten nett
 

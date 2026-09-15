@@ -85,7 +85,8 @@ Bytte av adapter skjer i DiagramServices, med ny prepare/cache-instans.
 
 C-ABI v1 har parse/layout og separate free-funksjoner. Resultatholderen har
 `abi_version`, `struct_size`, `status`, lånt data-peker, størrelse og owner.
-Payloaden bruker little-endian u32-tellere, UTF-8 med u32-byteantall og finite
+Layout-requesten inneholder modell, tidsbudsjett i millisekunder og
+etikettmål. Payloaden bruker little-endian u32-tellere, UTF-8 med u32-byteantall og finite
 IEEE754 f64-geometri. Modellen er samme eksplisitte verdi-format på begge sider;
 ingen pointer er serialisert. C++ kopierer verdier og frigjør Rust-resultatet
 med ResultOwner også ved exception. Resultat-eierskap må ikke kopieres.
@@ -140,6 +141,11 @@ trådlokal deadline på to sekunder med kooperative checkpoints i layout-løkker
 labelplassering, A*-kø og rutekandidater. Unwinding gjenoppretter måletabellen
 og deadline via RAII. Dette er ikke hard preemption eller hard realtime.
 Vanlige brukerdiagrammer og 128-noders kjede lykkes; tett graf blir fallback.
+AddressSanitizer-bygg bruker et eksplisitt ti-sekunders instrumenteringsbudsjett
+fra DiagramLimits. Produksjonsbygget beholder to sekunder. Dette kompenserer
+for instrumentering uten å deaktivere tidsavbrudd eller minnekontroller.
+Budsjettet velges av C++-bygget, aldri av Mermaid-kilden; Rust avviser verdier
+utenfor 1–10000 ms.
 
 ## 7. Verifikasjon og begrensninger
 

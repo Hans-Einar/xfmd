@@ -166,17 +166,24 @@
 +    }
 --- /dev/null
 +++ b/src/layout/measurements.rs
-@@ -0,0 +1,36 @@
+@@ -0,0 +1,47 @@
 +//! XFMD seam: per-call premeasured labels, restored even during unwinding.
 +use super::{Layout, TextBlock, compute_layout};
 +use crate::{LayoutConfig, Theme, ir::Graph};
-+use std::{cell::RefCell, collections::HashMap, time::{Duration, Instant}};
++use std::{
++    cell::RefCell,
++    collections::HashMap,
++    time::{Duration, Instant},
++};
 +thread_local! { static LABELS: RefCell<Option<HashMap<String, TextBlock>>> = const { RefCell::new(None) }; }
 +thread_local! { static DEADLINE: RefCell<Option<Instant>> = const { RefCell::new(None) }; }
 +pub fn checkpoint() {
-+ if DEADLINE.with(|d| d.borrow().is_some_and(|deadline| Instant::now() >= deadline)) {
-+  std::panic::panic_any("Diagram layout time budget exceeded (2 seconds)");
-+ }
++    if DEADLINE.with(|d| {
++        d.borrow()
++            .is_some_and(|deadline| Instant::now() >= deadline)
++    }) {
++        std::panic::panic_any("Diagram layout time budget exceeded");
++    }
 +}
 +pub fn lookup(text: &str) -> Option<TextBlock> {
 +    LABELS.with(|slot| {
@@ -193,6 +200,7 @@
 +    theme: &Theme,
 +    config: &LayoutConfig,
 +    labels: HashMap<String, TextBlock>,
++    budget: Duration,
 +) -> Layout {
 +    struct Restore(Option<HashMap<String, TextBlock>>, Option<Instant>);
 +    impl Drop for Restore {
@@ -200,7 +208,10 @@
 +            LABELS.with(|slot| *slot.borrow_mut() = self.0.take());
 +        }
 +    }
-+    let _restore = Restore(LABELS.with(|slot| slot.replace(Some(labels))), DEADLINE.with(|slot| slot.replace(Some(Instant::now()+Duration::from_secs(2)))));
++    let _restore = Restore(
++        LABELS.with(|slot| slot.replace(Some(labels))),
++        DEADLINE.with(|slot| slot.replace(Some(Instant::now() + budget))),
++    );
 +    compute_layout(graph, theme, config)
 +}
 --- a/src/layout/routing.rs

@@ -1,4 +1,5 @@
 #include "application/adapters/SharedTextMetrics.h"
+#include "contracts/diagram/DiagramLimits.h"
 #include "contracts/diagram/DiagramWire.h"
 #include "interpreter/mermaid/MermaidInterpreter.h"
 #include "renderer/diagram/MermaidDiagramLayout.h"
@@ -53,7 +54,7 @@ void run() {
                                                                   start)
                 .count();
   std::cout << "128-node chain: " << ms << " ms\n";
-  CHECK(ms < 5000);
+  CHECK(ms < diagramLayoutBudgetMilliseconds + 3000);
   model = {};
   for (unsigned i = 0; i < 128; ++i)
     model.nodes.push_back({"n" + std::to_string(i), "Node", DiagramShape::Rectangle});
@@ -64,14 +65,15 @@ void run() {
   try {
     layout.layout(model, {}, metrics);
   } catch (const std::exception& e) {
-    budget = true;
+    budget = std::string(e.what()) == "Diagram layout time budget exceeded";
   }
   CHECK(budget);
   ms = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() -
                                                              start)
            .count();
   std::cout << "128-node / 512-edge cyclic graph: " << ms << " ms\n";
-  CHECK(ms < 5000);
+  CHECK(ms + 100 >= diagramLayoutBudgetMilliseconds);
+  CHECK(ms < diagramLayoutBudgetMilliseconds + 3000);
   model = {};
   model.nodes.push_back({"after", "After cancellation", DiagramShape::Rectangle});
   CHECK(layout.layout(model, {}, metrics)->nodes.size() == 1);

@@ -42,7 +42,7 @@ unsafe fn invoke(
         Ok(Ok(v)) => owned(0, v),
         Ok(Err(e)) => owned(1, e.into_bytes()),
         Err(payload) => {
-            let deadline = "Diagram layout time budget exceeded (2 seconds)";
+            let deadline = "Diagram layout time budget exceeded";
             if payload.downcast_ref::<&str>() == Some(&deadline) {
                 owned(1, deadline.as_bytes().to_vec())
             } else {

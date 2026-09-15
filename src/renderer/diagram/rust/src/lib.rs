@@ -7,6 +7,10 @@ use xfmd_diagram_contracts::{
 pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
     let mut r = Reader::new(input);
     let model = Model::read(&mut r)?;
+    let budget = r.count(10000)?;
+    if budget == 0 {
+        return Err("Invalid diagram deadline".into());
+    }
     let mut labels = HashMap::new();
     for _ in 0..r.count(1024)? {
         let text = r.text()?;
@@ -34,6 +38,7 @@ pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
         &theme,
         &mermaid_rs_renderer::LayoutConfig::default(),
         labels,
+        std::time::Duration::from_millis(budget as u64),
     );
     let mut w = Writer::default();
     w.number(layout.width as f64);
