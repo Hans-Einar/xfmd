@@ -4,6 +4,7 @@
 #include <X11/Xlib.h>
 #include <X11/keysym.h>
 #include <chrono>
+#include <filesystem>
 #include <thread>
 using namespace xfmd;
 void pump(Application& app) {
@@ -97,5 +98,22 @@ void run() {
   CHECK(app.host->selectedText().empty());
   CHECK(app.window->editor->getDNDData(FX::FROM_CLIPBOARD, utf8, clipboard));
   CHECK(std::string(clipboard.text(), clipboard.length()) == copied);
+  const auto image =
+      std::filesystem::path(__FILE__).parent_path().parent_path() / "fixtures/markdown/diagram.svg";
+  app.edits.applyEdit(
+      {0, app.session.snapshot().text.size(),
+       "# Resources\n\n$\\frac{x^2}{2} + \\text{blåbær}$\n\n![Image](" + image.string() + ")"});
+  for (int i = 0; i < 30; ++i)
+    pump(app);
+  CHECK(app.host->interactive());
+  auto rich = app.host->frame();
+  int visuals = 0;
+  for (auto& run : rich->runs)
+    if (run.visual)
+      ++visuals;
+  CHECK(visuals == 2);
+  app.execute(CommandRouter::ToggleTheme);
+  pump(app);
+  CHECK(app.host->frame() == rich);
 }
 TEST_MAIN(run)

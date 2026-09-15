@@ -84,6 +84,19 @@ $not_math$
   paged.mode = LayoutMode::Paged;
   frame = renderer.layout(*model, {600, 0, paged}, metrics);
   CHECK(!frame->pages.slices.empty());
+  auto longSource = source;
+  longSource.text.clear();
+  for (int i = 0; i < 160; ++i)
+    longSource.text += "Avsnitt " + std::to_string(i) + ": blåbær og tekst.\n\n";
+  auto longModel = parser.parse(longSource);
+  auto pages = renderer.layout(*longModel, {600, 0, paged}, metrics);
+  auto flow = renderer.layout(*longModel, {220}, metrics);
+  CHECK(pages->pages.slices.size() > 1);
+  selection.all(*pages);
+  CHECK(selection.text(*pages) == flow->readingText);
+  auto boxes = selection.rectangles(*pages);
+  CHECK(!boxes.empty() && boxes.back().y > pages->pages.paper.height);
+
   auto* surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, 600, 900);
   auto* cr = cairo_create(surface);
   cairo_set_source_rgb(cr, 1, 1, 1);
@@ -123,7 +136,7 @@ $not_math$
   frame = renderer.layout(*model, {100}, metrics);
   CHECK(frame->runs[0].bounds.width <= 52.01);
   CHECK(std::abs(frame->runs[0].bounds.width / frame->runs[0].bounds.height - 2) < .01);
-  source.text = "# Rich PDF\n\n$$\frac{a}{b}$$\n\n![Image](test%20image.png)";
+  source.text = "# Rich PDF\n\n$$\\frac{a}{b}$$\n\n![Image](test%20image.png)";
   model = EmbeddedVisuals::prepare(parser.parse(source), source);
   frame = renderer.layout(*model, {600, 0, paged}, metrics);
   int fd = open("/tmp/xfmd-rich-preview.pdf", O_CREAT | O_TRUNC | O_WRONLY, 0600);

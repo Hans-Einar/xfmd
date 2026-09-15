@@ -7,7 +7,7 @@ owner: application
 status: Implemented
 scope: FirstRelease
 requirements: UR-035, UR-034, UR-030, UR-031, UR-011, UR-002, UR-005, UR-008, SR-001, SR-008, SR-009, SR-010, SR-013, UR-017, SR-016, SR-019
-uses: FUNC-004, FUNC-015, FUNC-016
+uses: FUNC-021, FUNC-004, FUNC-015, FUNC-016
 ---
 
 # Functionality-005: FOX-host for presentasjon

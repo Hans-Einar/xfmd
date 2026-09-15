@@ -7,7 +7,7 @@ owner: application
 status: Implemented
 scope: FirstRelease
 requirements: UR-036, UR-037, UR-002, UR-004, SR-001, SR-002, SR-003, SR-008, SR-010, SR-011, SR-013, UR-017, SR-019
-uses: FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006
+uses: FUNC-022, FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006
 ---
 
 # Functionality-007: Preview-orkestrering

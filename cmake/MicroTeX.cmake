@@ -45,3 +45,18 @@ if(NOT definitions_source MATCHES "XfmdMacroCleanup")
   file(APPEND "${microtex_SOURCE_DIR}/src/core/macro_def.cpp"
     "\nnamespace { struct XfmdMacroCleanup { ~XfmdMacroCleanup() { tex::MacroInfo::_free_(); } }; XfmdMacroCleanup xfmdMacroCleanup; }\n")
 endif()
+
+# Duplicate symbol registrations replace an owned CharFont in upstream's raw map.
+file(READ "${microtex_SOURCE_DIR}/src/fonts/fonts.cpp" fonts_source)
+if(NOT fonts_source MATCHES "delete _symbolMappings\\[c.name\\]")
+  string(REPLACE "_symbolMappings[c.name] = new CharFont(c.code, c.font);"
+    "delete _symbolMappings[c.name];\n    _symbolMappings[c.name] = new CharFont(c.code, c.font);" fonts_source "${fonts_source}")
+  file(WRITE "${microtex_SOURCE_DIR}/src/fonts/fonts.cpp" "${fonts_source}")
+endif()
+
+# Inclusive binary search must stop at rows-1 (accent/next-larger lookup).
+file(READ "${microtex_SOURCE_DIR}/src/utils/indexed_arr.h" indexed_source)
+if(NOT indexed_source MATCHES "h = int\\(_rows\\) - 1")
+  string(REPLACE "int     l = 0, h = _rows;" "int     l = 0, h = int(_rows) - 1;" indexed_source "${indexed_source}")
+  file(WRITE "${microtex_SOURCE_DIR}/src/utils/indexed_arr.h" "${indexed_source}")
+endif()

@@ -23,9 +23,9 @@ Se [designrevisjonen](../../softwareDesign.md), [arbeidsmåten](../../docs/worki
 | [FUNC-002](functionality/Functionality-002--Local-File-Storage.md) | Functionality / System | application | Implemented | none |
 | [FUNC-003](functionality/Functionality-003--Markdown-Interpretation.md) | Functionality / System | interpreter | Implemented | none |
 | [FUNC-004](functionality/Functionality-004--Render-Layout.md) | Functionality / System | renderer | Implemented | FUNC-017 |
-| [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md) | Functionality / System | application | Implemented | FUNC-004, FUNC-015, FUNC-016 |
+| [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md) | Functionality / System | application | Implemented | FUNC-004, FUNC-015, FUNC-016, FUNC-021 |
 | [FUNC-006](functionality/Functionality-006--Event-Scheduling.md) | Functionality / System | application | Implemented | none |
-| [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md) | Functionality / System | application | Implemented | FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006 |
+| [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md) | Functionality / System | application | Implemented | FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006, FUNC-022 |
 | [FUNC-008](functionality/Functionality-008--Navigation-History.md) | Functionality / User | application | Implemented | FUNC-001, FUNC-009 |
 | [FUNC-009](functionality/Functionality-009--Source-Anchor-Mapping.md) | Functionality / System | application | Implemented | FUNC-005 |
 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | Functionality / User | application | Implemented | FUNC-001, FUNC-005, FUNC-007, FUNC-012, FUNC-013, FUNC-014, FUNC-015, FUNC-018, FUNC-019 |
@@ -36,7 +36,7 @@ Se [designrevisjonen](../../softwareDesign.md), [arbeidsmåten](../../docs/worki
 | [FUNC-015](functionality/Functionality-015--Scroll-Motion.md) | Functionality / System | application | Implemented | FUNC-014, FUNC-006 |
 | [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md) | Functionality / System | application | Implemented | none |
 | [FUNC-017](functionality/Functionality-017--Page-Composition.md) | Functionality / System | renderer | Implemented | none |
-| [FUNC-018](functionality/Functionality-018--PDF-Export.md) | Functionality / User | application | Implemented | FUNC-001, FUNC-003, FUNC-004, FUNC-006, FUNC-016, FUNC-017 |
+| [FUNC-018](functionality/Functionality-018--PDF-Export.md) | Functionality / User | application | Implemented | FUNC-001, FUNC-003, FUNC-004, FUNC-006, FUNC-016, FUNC-017, FUNC-022 |
 | [FUNC-019](functionality/Functionality-019--Application-Identity.md) | Functionality / Integration | application | Implemented | none |
 | [FUNC-020](functionality/Functionality-020--Document-Index.md) | Functionality / System | application | Implemented | FUNC-002, FUNC-003, FUNC-008 |
 | [FTR-008](feature/Feature-008--Chapter-Navigation.md) | Feature / User | application | Implemented | FUNC-020, FUNC-008, FUNC-009, FUNC-010 |

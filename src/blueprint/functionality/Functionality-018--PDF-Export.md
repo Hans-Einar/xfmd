@@ -7,7 +7,7 @@ owner: application
 status: Implemented
 scope: FirstRelease
 requirements: UR-036, UR-037, UR-018, SR-002, SR-005, SR-007, SR-010, SR-017
-uses: FUNC-001, FUNC-003, FUNC-004, FUNC-006, FUNC-016, FUNC-017
+uses: FUNC-022, FUNC-001, FUNC-003, FUNC-004, FUNC-006, FUNC-016, FUNC-017
 ---
 
 # Functionality-018: Revisjonssikker lokal PDF-eksport

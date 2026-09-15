@@ -13,4 +13,7 @@ Greek/Cyrillic LICENSE følger uendret med hele `share/xfmd/math/`.
 XFMD bygger bare kjernen og Cairo-adapteren. Lokale rettelser gjøres eksplisitt
 i CMake: korrekt `free` for `asprintf`-minne og inkludering av fontconfig sin
 FreeType-deklarasjon, samt opprydding av statisk allokerte makroer også når
-matematikk aldri initialiseres. Ingen demoprogrammer eller GTK-widgets bygges.
+matematikk aldri initialiseres og sletting av erstattede symboldefinisjoner.
+Øvre indeksgrense i fonttabellsøk rettes også (ASan-avdekket lesing utenfor
+tabellen ved aksenter).
+Ingen demoprogrammer eller GTK-widgets bygges.
