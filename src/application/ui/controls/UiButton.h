@@ -5,7 +5,7 @@ class UiButton : public FX::FXButton {
   FXDECLARE(UiButton)
   UiContext* ui = nullptr;
   UiIcon glyph = UiIcon::NoIcon;
-  bool checked = false;
+  bool checked = false, compactControl = false;
   ButtonRole role = ButtonRole::Normal;
 
 protected:
@@ -14,6 +14,10 @@ protected:
 public:
   UiButton(FX::FXComposite*, UiContext&, const FX::FXString&, FX::FXObject*, FX::FXSelector,
            UiIcon = UiIcon::NoIcon, ButtonRole = ButtonRole::Normal, FX::FXuint flags = 0);
+  void setCompact(bool value) {
+    compactControl = value;
+    recalc();
+  }
   bool isChecked() const { return checked; }
   long onChecked(FX::FXObject*, FX::FXSelector, void*);
   void create() override;

@@ -18,6 +18,7 @@ renderMap[] = {FXMAPFUNC(SEL_PAINT, 0, FoxRenderHost::onPaint),
                FXMAPFUNC(SEL_MIDDLEBUTTONRELEASE, 0, FoxRenderHost::onPointer),
                FXMAPFUNC(SEL_RIGHTBUTTONRELEASE, 0, FoxRenderHost::onPointer),
                FXMAPFUNC(SEL_UNGRABBED, 0, FoxRenderHost::onUngrabbed),
+               FXMAPFUNC(SEL_LEAVE, 0, FoxRenderHost::onLeave),
                FXMAPFUNC(SEL_MOTION, 0, FoxRenderHost::onMotion)};
 FXIMPLEMENT(FoxRenderHost, FXScrollArea, renderMap, ARRAYNUMBER(renderMap))
 FoxRenderHost::FoxRenderHost(FXComposite* parent, IRenderer& r, SharedTextMetrics& m)
@@ -53,6 +54,8 @@ void FoxRenderHost::layout() {
   }
 }
 void FoxRenderHost::expect(DocumentToken token) {
+  if (linkHovered)
+    linkHovered("");
   clickCancelled = true;
   if (token.document != expected.document)
     current.reset();
@@ -62,6 +65,8 @@ void FoxRenderHost::expect(DocumentToken token) {
   update();
 }
 void FoxRenderHost::expectLayout(FrameKey key) {
+  if (linkHovered)
+    linkHovered("");
   clickCancelled = true;
   expected = key.token;
   requested = std::move(key);
@@ -84,6 +89,8 @@ void FoxRenderHost::present(LayoutResult frame) {
   update();
 }
 void FoxRenderHost::moveContents(FXint x, FXint y) {
+  if (linkHovered)
+    linkHovered("");
   pos_x = x;
   pos_y = y;
   update();
@@ -95,6 +102,8 @@ void FoxRenderHost::moveContents(FXint x, FXint y) {
   }
 }
 void FoxRenderHost::setViewport(double y, ScrollOrigin origin) {
+  if (linkHovered)
+    linkHovered("");
   FoxWheelScrollBar::cancelTree(this);
   programmatic = true;
   lastScrollOrigin = origin;
@@ -102,6 +111,8 @@ void FoxRenderHost::setViewport(double y, ScrollOrigin origin) {
   programmatic = false;
 }
 void FoxRenderHost::setViewScale(bool fitWidth, double factor) {
+  if (linkHovered)
+    linkHovered("");
   if (!std::isfinite(factor))
     return;
   auto before = transform.toDocument({-double(pos_x), -double(pos_y)});
@@ -244,13 +255,22 @@ long FoxRenderHost::onUngrabbed(FXObject* sender, FXSelector sel, void* data) {
   clickCancelled = true;
   return FXScrollArea::onUngrabbed(sender, sel, data);
 }
+long FoxRenderHost::onLeave(FXObject* sender, FXSelector sel, void* data) {
+  if (linkHovered)
+    linkHovered("");
+  setDefaultCursor(getApp()->getDefaultCursor(DEF_ARROW_CURSOR));
+  return FXScrollArea::onLeave(sender, sel, data);
+}
 long FoxRenderHost::onMotion(FXObject*, FXSelector, void* data) {
   auto* event = static_cast<FXEvent*>(data);
   if (buttons && (std::abs(event->win_x - pressPoint.x) > getApp()->getDragDelta() ||
                   std::abs(event->win_y - pressPoint.y) > getApp()->getDragDelta()))
     clickCancelled = true;
   auto point = transform.toDocument({double(event->win_x - pos_x), double(event->win_y - pos_y)});
-  bool link = active && current && !renderer->hitTest(*current, point).link.empty();
+  auto target = active && current ? renderer->hitTest(*current, point).link : std::string{};
+  bool link = !target.empty();
+  if (linkHovered)
+    linkHovered(target);
   setDefaultCursor(getApp()->getDefaultCursor(link ? DEF_HAND_CURSOR : DEF_ARROW_CURSOR));
   return 1;
 }

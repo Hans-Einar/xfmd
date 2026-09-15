@@ -107,3 +107,9 @@ Se [designrevisjonen](../../softwareDesign.md), [arbeidsmåten](../../docs/worki
 | UR-031 | [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-014](functionality/Functionality-014--Application-Preferences.md), [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md) | AT-051 | FirstRelease |
 
 P22: UR-032 → FUNC-010/014; UR-033 → FUNC-010; UR-034 → FUNC-005. AT-052–054.
+
+| Krav | Implementerende objekter | Akseptanse | Scope |
+| --- | --- | --- | --- |
+| UR-032 | [FUNC-011](functionality/Functionality-011--Text-Editing.md), [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FUNC-014](functionality/Functionality-014--Application-Preferences.md) | AT-052 | FirstRelease |
+| UR-033 | [FUNC-011](functionality/Functionality-011--Text-Editing.md), [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | AT-053 | FirstRelease |
+| UR-034 | [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md) | AT-054 | FirstRelease |

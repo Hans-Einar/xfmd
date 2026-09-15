@@ -65,8 +65,7 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 | 14 | `FOX press` | `FoxRenderHost::onButtonPress` | `src/application/adapters/FoxRenderHost.cpp` | Knapp/frame/lenke → klikktilstand og grab | Chord kansellerer aktivering | Implemented |
 | 15 | `FOX grab loss` | `FoxRenderHost::onUngrabbed` | `src/application/adapters/FoxRenderHost.cpp` | Tap av grab → nullstill klikk | Ingen lenkecallback | Implemented |
 | 20 | `Application::changeReadingColors / applyAppearance` | `FoxRenderHost::setReadingColors` | `src/application/adapters/FoxRenderHost.cpp` | Lesefarger → repaint/profil | Ingen dokumentmutasjon | Implemented |
-
-| 30 | `FoxRenderHost hover callback` | `Application::showLinkTarget` | `src/application/ApplicationAppearance.cpp` | Lenke → statuslinje | Ingen aktivering; ugyldig sti vises som mål | Planned |
+| 30 | `FoxRenderHost hover callback` | `Application::showLinkTarget` | `src/application/ApplicationAppearance.cpp` | Lenke → statuslinje | Ingen aktivering; ugyldig sti vises som mål | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -106,3 +105,5 @@ Live endring er repaint; commit ved release, med rollback ved skrivefeil.
 P21: [AT-050/051, regresjoner og skjermbilder](../../../docs/evidence/P21.md).
 
 P22: felles kompakt topplinje; UR-032/033/034 beskriver endret scope.
+
+P22 verifikasjon: AT-054, CompactWorkspaceTest og eksisterende regresjoner.

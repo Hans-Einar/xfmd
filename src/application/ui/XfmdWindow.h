@@ -2,6 +2,7 @@
 #include "EditorWidget.h"
 #include "WorkspacePanel.h"
 #include "application/commands/CommandRouter.h"
+#include "controls/CompactToolbar.h"
 #include "controls/PreviewColorControls.h"
 #include "controls/PreviewControls.h"
 #include "controls/UiLayout.h"
@@ -11,7 +12,7 @@ class XfmdWindow : public FX::FXMainWindow {
   FXDECLARE(XfmdWindow)
   CommandRouter* commands = nullptr;
   UiContext* ui = nullptr;
-  UiRow* toolbar = nullptr;
+  CompactToolbar* toolbar = nullptr;
   FX::FXHorizontalFrame *fileTools = nullptr, *navTools = nullptr, *viewTools = nullptr;
   FX::FXLabel* documentTitle = nullptr;
   UiButton* themeButton = nullptr;

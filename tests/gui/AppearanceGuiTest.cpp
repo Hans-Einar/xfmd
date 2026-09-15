@@ -97,7 +97,7 @@ void run() {
   auto id = toggle->id();
   click(app, toggle);
   CHECK(app.preferences->active().appearance.theme == "dark" && toggle->isChecked());
-  CHECK(toggle->getText() == "Dark" && toggle->getIcon() == icon && toggle->id() == id);
+  CHECK(toggle->getTipText().find("Dark") >= 0 && toggle->getIcon() == icon && toggle->id() == id);
   CHECK(app.session.view().token == token);
   CHECK(app.preview->layoutProfile().mode == profile.mode);
   CHECK(app.preview->layoutProfile().paper.margin == profile.paper.margin);
@@ -122,7 +122,7 @@ void run() {
   for (auto* child = bar->getFirst(); child; child = child->getNext())
     if (child->shown())
       CHECK(child->getX() >= 0 && child->getX() + child->getWidth() <= bar->getWidth());
-  CHECK(!split->getParent()->shown());
+  CHECK(split->getParent()->shown()); // Narrow toolbar wraps instead of hiding view actions.
   app.execute(CommandRouter::Split);
   events(app);
   CHECK(app.views->mode() == ViewMode::Split);

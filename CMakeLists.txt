@@ -66,7 +66,7 @@ add_library(xfmd_export src/application/export/ExportCoordinator.cpp
   src/application/adapters/PdfOutput.cpp)
 target_link_libraries(xfmd_export PUBLIC xfmd_typography Threads::Threads)
 add_library(xfmd_application
-  src/application/ui/controls/PreviewControls.cpp src/application/ui/controls/PreviewColorControls.cpp
+  src/application/ui/controls/CompactToolbar.cpp src/application/ui/controls/PreviewControls.cpp src/application/ui/controls/PreviewColorControls.cpp
   src/application/ui/style/ThemeProfiles.cpp
   src/application/ui/style/IconCatalog.cpp src/application/ui/style/UiContext.cpp
   src/application/ui/style/UiStyling.cpp src/application/ui/controls/ButtonPainter.cpp
@@ -78,7 +78,7 @@ add_library(xfmd_application
   src/application/ApplicationAppearance.cpp src/application/ui/XfmdToolbar.cpp
   src/application/ApplicationIndex.cpp src/application/Application.cpp src/application/ApplicationCommands.cpp src/application/ApplicationExport.cpp
   src/application/commands/CommandRouter.cpp src/application/ui/XfmdWindow.cpp src/application/ui/IconResources.cpp
-  src/application/ui/EditorWidget.cpp src/application/ui/SidebarWidget.cpp src/application/ui/WorkspacePanel.cpp
+  src/application/ui/EditorWidget.cpp src/application/ui/EditorPresentation.cpp src/application/ui/SidebarWidget.cpp src/application/ui/WorkspacePanel.cpp
   src/application/ui/NavigationTree.cpp src/application/ui/IndexPanel.cpp
   src/application/ui/ViewModeController.cpp
   src/application/adapters/FoxCairoCanvas.cpp src/application/adapters/ViewTransform.cpp src/application/adapters/FoxWindowMode.cpp

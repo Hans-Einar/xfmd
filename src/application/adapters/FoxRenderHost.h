@@ -33,7 +33,7 @@ protected:
 
 public:
   std::function<void(double)> resized, viewportChanged;
-  std::function<void(const std::string&)> linkActivated;
+  std::function<void(const std::string&)> linkActivated, linkHovered;
   ScrollOrigin lastScrollOrigin = ScrollOrigin::UserDrag;
   FoxRenderHost(FX::FXComposite*, IRenderer&, SharedTextMetrics&);
   void setReadingColors(const ReadingColors&);
@@ -48,6 +48,8 @@ public:
   void invalidate() {
     clickCancelled = true;
     active = false;
+    if (linkHovered)
+      linkHovered("");
     update();
   }
   bool interactive() const { return active; }
@@ -61,6 +63,7 @@ public:
   long onButtonPress(FX::FXObject*, FX::FXSelector, void*);
   long onUngrabbed(FX::FXObject*, FX::FXSelector, void*);
   long onPointer(FX::FXObject*, FX::FXSelector, void*);
+  long onLeave(FX::FXObject*, FX::FXSelector, void*);
   long onMotion(FX::FXObject*, FX::FXSelector, void*);
   long onKeyPress(FX::FXObject*, FX::FXSelector, void*);
 };

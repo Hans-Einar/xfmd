@@ -30,10 +30,12 @@ FXint UiButton::getDefaultWidth() {
   const int width = getFont()->getTextWidth(getText());
   return std::max(getDefaultHeight(),
                   width + (glyph == UiIcon::NoIcon ? 0 : m.iconSize + (width ? m.gap : 0)) +
-                      m.inset * 2);
+                      (compactControl ? 8 : m.inset * 2));
 }
 FXint UiButton::getDefaultHeight() {
   auto m = ui->metrics();
+  if (compactControl)
+    return std::max(getFont()->getFontHeight() + 4, m.iconSize + 4);
   return std::max({m.height, getFont()->getFontHeight() + 10, m.iconSize + 8});
 }
 long UiButton::onPaint(FXObject*, FXSelector, void* ptr) {

@@ -64,6 +64,8 @@ public:
 
 private:
   void wireDocument();
+  void showLinkTarget(const std::string&);
+  std::string hoverStatus, beforeHover;
   void changeReadingColors(const ReadingColors&, bool commit);
   void applyAppearance(const Appearance&);
   void wireIndex();

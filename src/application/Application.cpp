@@ -114,6 +114,7 @@ void Application::initialize(int& argc, char** argv) {
     else
       navigation->followLink(target);
   };
+  host->linkHovered = [this](const std::string& target) { showLinkTarget(target); };
   wireIndex();
   documentOpened = [this] {
     references->cancel();
@@ -149,6 +150,7 @@ void Application::initialize(int& argc, char** argv) {
     auto profile = preview->layoutProfile();
     profile.paper.margin = value.marginMm * 72 / 25.4;
     preview->setLayoutProfile(profile);
+    window->editor->setViewProfile(profile, host->fitWidth());
   };
   preferences->changed(preferences->active());
   app.create();
