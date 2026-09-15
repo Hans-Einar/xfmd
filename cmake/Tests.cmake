@@ -147,3 +147,5 @@ set_tests_properties(MermaidRustTests PROPERTIES WORKING_DIRECTORY "${CMAKE_CURR
 xfmd_test(DiagramPreparationTest tests/application/DiagramPreparationTest.cpp xfmd_diagrams)
 
 set_tests_properties(WorkPathTest DiagramLayoutTest PROPERTIES TIMEOUT 30)
+
+xfmd_test(DiagramReadingTest tests/application/DiagramReadingTest.cpp xfmd_diagrams xfmd_preview)
