@@ -9,6 +9,7 @@
 #include <iostream>
 using namespace xfmd;
 void run() {
+  std::cout << std::unitbuf;
   MermaidInterpreter parser;
   MermaidDiagramLayout layout;
   SharedTextMetrics metrics;

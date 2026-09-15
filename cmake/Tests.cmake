@@ -147,6 +147,11 @@ set_tests_properties(MermaidRustTests PROPERTIES WORKING_DIRECTORY "${CMAKE_CURR
 xfmd_test(DiagramPreparationTest tests/application/DiagramPreparationTest.cpp xfmd_diagrams)
 
 set_tests_properties(WorkPathTest DiagramLayoutTest PROPERTIES TIMEOUT 30)
+if(XFMD_SANITIZERS)
+  # The suite exercises several layouts and includes sanitizer shutdown. Keep
+  # per-layout deadline assertions in the test; allow diagnostics to finish.
+  set_tests_properties(DiagramLayoutTest PROPERTIES TIMEOUT 90)
+endif()
 
 xfmd_test(DiagramReadingTest tests/application/DiagramReadingTest.cpp xfmd_diagrams xfmd_preview)
 add_executable(MermaidPdfFixture tests/acceptance/MermaidPdfFixture.cpp)
