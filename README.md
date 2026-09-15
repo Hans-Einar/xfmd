@@ -25,6 +25,11 @@ Hovedkapitler er det øverste nivået filen faktisk bruker (H1, ellers H2 osv.).
 Referanser leses ved utvidelse, ett nivå dypt, med samme 8 MiB-grense som filåpning.
 Brutte lenker står synlig med feilmelding; trebygging laster aldri fra nettet.
 
+Sidepanelets **Files**-fane har **Recent files** under **Recent folders**.
+De 32 sist åpnede/lagrede filene huskes mellom omstarter. Klikk eller Enter åpner
+med vanlig kontroll for ulagrede endringer; arbeidsroten beholdes. Fillisten
+lagres i FOX-registry-seksjonen `RecentFiles`, separat fra `WorkPaths`.
+
 ## Bygg og kjør
 
 Krever C++17-kompilator, CMake ≥3.20, Ninja, pkg-config, FOX ≥1.6.57 (1.6 API),

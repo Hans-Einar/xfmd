@@ -18,7 +18,7 @@ xfmd_test(ReferenceWorkerTest tests/application/ReferenceWorkerTest.cpp xfmd_ind
 xfmd_test(NavigationTest tests/application/NavigationTest.cpp xfmd_navigation)
 add_test(NAME BlueprintStructure COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/validate_blueprints.py)
 add_test(NAME LayerBoundaries COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/check_layers.py)
-foreach(name PreviewSelectionGuiTest CompactWorkspaceTest ReadingColorsGuiTest TreeActionsTest AppearancePreferencesTest AppearanceGuiTest UiControlsTest BrowserPreferencesTest IndexGuiTest WorkspaceTest PresentationTest ScrollingTest NavigationGuiTest SidebarGuiTest WheelGuiTest WorkPathGuiTest PointerTest TablePreviewTest)
+foreach(name RecentFilesGuiTest PreviewSelectionGuiTest CompactWorkspaceTest ReadingColorsGuiTest TreeActionsTest AppearancePreferencesTest AppearanceGuiTest UiControlsTest BrowserPreferencesTest IndexGuiTest WorkspaceTest PresentationTest ScrollingTest NavigationGuiTest SidebarGuiTest WheelGuiTest WorkPathGuiTest PointerTest TablePreviewTest)
   add_executable(${name} tests/gui/${name}.cpp)
   target_include_directories(${name} PRIVATE tests)
   target_link_libraries(${name} PRIVATE xfmd_application)
@@ -48,6 +48,7 @@ target_link_libraries(SidebarGuiTest PRIVATE X11::X11)
 
 target_link_libraries(WheelGuiTest PRIVATE X11::X11)
 target_link_libraries(WorkPathGuiTest PRIVATE X11::X11)
+target_link_libraries(RecentFilesGuiTest PRIVATE X11::X11)
 
 xfmd_test(ScrollMotionTest tests/application/ScrollMotionTest.cpp xfmd_scroll)
 

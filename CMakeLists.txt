@@ -84,7 +84,7 @@ add_library(xfmd_application
   src/application/ApplicationAppearance.cpp src/application/ui/XfmdToolbar.cpp
   src/application/ApplicationIndex.cpp src/application/Application.cpp src/application/ApplicationCommands.cpp src/application/ApplicationExport.cpp
   src/application/commands/CommandRouter.cpp src/application/ui/XfmdWindow.cpp src/application/ui/IconResources.cpp
-  src/application/ui/EditorWidget.cpp src/application/ui/EditorPresentation.cpp src/application/ui/SidebarWidget.cpp src/application/ui/WorkspacePanel.cpp
+  src/application/ui/EditorWidget.cpp src/application/ui/EditorPresentation.cpp src/application/ui/SidebarWidget.cpp src/application/ui/WorkspacePanel.cpp src/application/ui/RecentFilesPanel.cpp
   src/application/ui/NavigationTree.cpp src/application/ui/IndexPanel.cpp
   src/application/ui/ViewModeController.cpp
   src/application/adapters/FoxCairoCanvas.cpp src/application/adapters/ViewTransform.cpp src/application/adapters/FoxWindowMode.cpp

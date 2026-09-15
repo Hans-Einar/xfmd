@@ -67,8 +67,8 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 | 30 | `FOX layout` | `CompactToolbar::layout` | `src/application/ui/controls/CompactToolbar.cpp` | Bredde → lave rader | Bryt grupper ved liten bredde | Implemented |
 | 31 | `Application::execute` | `EditorWidget::setViewProfile` | `src/application/ui/EditorPresentation.cpp` | Layout/zoom → redigerbar tekstbredde | Bevar tekst/markering/anker | Implemented |
 
-| 32 | `Application documents.opened/saved` | `RecentFilesPanel::remember` | `src/application/ui/RecentFilesPanel.cpp` | Vellykket dokumentsti → MRU og RecentFiles registry | Maks 32; ingen registrering ved avbrutt/feilet operasjon | Planned |
-| 33 | `FOX list activation` | `RecentFilesPanel::onActivate` | `src/application/ui/RecentFilesPanel.cpp` | Valgt absolutt sti → injisert Application::open | Utsatt dispatch; dirty-kontroll og feil via eksisterende dokumenttjeneste | Planned |
+| 32 | `Application documents.opened/saved` | `RecentFilesPanel::remember` | `src/application/ui/RecentFilesPanel.cpp` | Vellykket dokumentsti → MRU og RecentFiles registry | Maks 32; ingen registrering ved avbrutt/feilet operasjon | Implemented |
+| 33 | `FOX list activation` | `RecentFilesPanel::onActivate` | `src/application/ui/RecentFilesPanel.cpp` | Valgt absolutt sti → injisert Application::open | Utsatt dispatch; dirty-kontroll og feil via eksisterende dokumenttjeneste | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -150,4 +150,5 @@ P24 / UR-038 / AT-058: RecentFilesPanel eier en avgrenset listeadapter med MRU
 og FOX-registry-seksjonen RecentFiles (Path0–Path31). WorkspacePanel komponerer
 den under mappehistorikken. Ingen ny feature eller filåpningstjeneste. Manglende
 filer beholdes til aktivering, som gir vanlig åpningsfeil. Absolutte stier brukes
-som identitet, og WorkPathHistory::displayPath gjenbrukes for ~/etiketter.
+som identitet. Etiketten viser filnavn først, deretter mappe;
+WorkPathHistory::displayPath gjenbrukes for ~/forkorting.
