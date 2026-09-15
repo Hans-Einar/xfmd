@@ -136,3 +136,8 @@ add_executable(CaptureAppearance tests/gui/CaptureAppearance.cpp)
 target_link_libraries(CaptureAppearance PRIVATE xfmd_application)
 target_include_directories(CaptureAppearance PRIVATE tests)
 target_compile_definitions(CaptureAppearance PRIVATE XFMD_FIXTURE="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/markdown/basics.md")
+
+xfmd_test(DiagramLayoutTest tests/renderer/DiagramLayoutTest.cpp xfmd_interpreter xfmd_renderer xfmd_typography)
+target_compile_definitions(DiagramLayoutTest PRIVATE XFMD_DIAGRAM_FIXTURES="${CMAKE_CURRENT_SOURCE_DIR}/docs/design/mermaid")
+add_test(NAME MermaidRustTests COMMAND ${CARGO_EXECUTABLE} test --workspace --locked --offline --target-dir ${XFMD_CARGO_TARGET})
+set_tests_properties(MermaidRustTests PROPERTIES WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" TIMEOUT 180)

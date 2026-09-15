@@ -1,37 +1,451 @@
 --- a/src/layout/mod.rs
 +++ b/src/layout/mod.rs
-@@ -19,6 +19,7 @@
- mod sankey;
- mod sequence;
- mod subgraphs;
+@@ -12,0 +13 @@
 +pub mod measurements;
- mod text;
- mod timeline;
- mod treemap;
+@@ -261,0 +263 @@
++        crate::layout::measurements::checkpoint();
+@@ -269,0 +272 @@
++            crate::layout::measurements::checkpoint();
+@@ -296,0 +300 @@
++        crate::layout::measurements::checkpoint();
+@@ -300,0 +305 @@
++        crate::layout::measurements::checkpoint();
+@@ -304,0 +310 @@
++        crate::layout::measurements::checkpoint();
+@@ -305,0 +312 @@
++            crate::layout::measurements::checkpoint();
+@@ -323,0 +331 @@
++            crate::layout::measurements::checkpoint();
+@@ -337,0 +346 @@
++        crate::layout::measurements::checkpoint();
+@@ -349,0 +359 @@
++        crate::layout::measurements::checkpoint();
+@@ -361,0 +372 @@
++        crate::layout::measurements::checkpoint();
+@@ -362,0 +374 @@
++            crate::layout::measurements::checkpoint();
+@@ -406,0 +419 @@
++            crate::layout::measurements::checkpoint();
+@@ -450,0 +464 @@
++        crate::layout::measurements::checkpoint();
+@@ -506,0 +521 @@
++        crate::layout::measurements::checkpoint();
+@@ -515,0 +531 @@
++            crate::layout::measurements::checkpoint();
+@@ -531,0 +548 @@
++        crate::layout::measurements::checkpoint();
+@@ -560,0 +578 @@
++            crate::layout::measurements::checkpoint();
+@@ -853,0 +872 @@
++        crate::layout::measurements::checkpoint();
+@@ -858,0 +878 @@
++        crate::layout::measurements::checkpoint();
+@@ -864,0 +885 @@
++        crate::layout::measurements::checkpoint();
+@@ -869,0 +891 @@
++        crate::layout::measurements::checkpoint();
+@@ -872,0 +895 @@
++            crate::layout::measurements::checkpoint();
+@@ -905,0 +929 @@
++        crate::layout::measurements::checkpoint();
+@@ -909,0 +934 @@
++        crate::layout::measurements::checkpoint();
+@@ -920,0 +946 @@
++        crate::layout::measurements::checkpoint();
+@@ -921,0 +948 @@
++            crate::layout::measurements::checkpoint();
+@@ -963,0 +991 @@
++        crate::layout::measurements::checkpoint();
+@@ -1005,0 +1034 @@
++        crate::layout::measurements::checkpoint();
+@@ -1045,0 +1075 @@
++        crate::layout::measurements::checkpoint();
+@@ -1049,0 +1080 @@
++        crate::layout::measurements::checkpoint();
+@@ -1050,0 +1082 @@
++            crate::layout::measurements::checkpoint();
+@@ -1067,0 +1100 @@
++        crate::layout::measurements::checkpoint();
+@@ -1074,0 +1108 @@
++            crate::layout::measurements::checkpoint();
+@@ -1084,0 +1119 @@
++            crate::layout::measurements::checkpoint();
+@@ -1103,0 +1139 @@
++            crate::layout::measurements::checkpoint();
+@@ -1106,0 +1143 @@
++            crate::layout::measurements::checkpoint();
+@@ -1107,0 +1145 @@
++                crate::layout::measurements::checkpoint();
+@@ -1120,0 +1159 @@
++            crate::layout::measurements::checkpoint();
+@@ -1125,0 +1165 @@
++            crate::layout::measurements::checkpoint();
+@@ -1128,0 +1169 @@
++            crate::layout::measurements::checkpoint();
+@@ -1129,0 +1171 @@
++                crate::layout::measurements::checkpoint();
+@@ -1142,0 +1185 @@
++            crate::layout::measurements::checkpoint();
+@@ -1155,0 +1199 @@
++        crate::layout::measurements::checkpoint();
+@@ -1159,0 +1204 @@
++        crate::layout::measurements::checkpoint();
+@@ -1164,0 +1210 @@
++        crate::layout::measurements::checkpoint();
+@@ -1165,0 +1212 @@
++            crate::layout::measurements::checkpoint();
+@@ -1182,0 +1230 @@
++        crate::layout::measurements::checkpoint();
+@@ -1186,0 +1235 @@
++        crate::layout::measurements::checkpoint();
+@@ -1187,0 +1237 @@
++            crate::layout::measurements::checkpoint();
+@@ -1204,0 +1255 @@
++        crate::layout::measurements::checkpoint();
+@@ -1214,0 +1266 @@
++            crate::layout::measurements::checkpoint();
+@@ -1265,0 +1318 @@
++        crate::layout::measurements::checkpoint();
+@@ -1305,0 +1359 @@
++        crate::layout::measurements::checkpoint();
+@@ -1314,0 +1369 @@
++            crate::layout::measurements::checkpoint();
+@@ -1353,0 +1409 @@
++        crate::layout::measurements::checkpoint();
+@@ -1354,0 +1411 @@
++            crate::layout::measurements::checkpoint();
+@@ -1361,0 +1419 @@
++        crate::layout::measurements::checkpoint();
+@@ -1374,0 +1433 @@
++        crate::layout::measurements::checkpoint();
+@@ -1379,0 +1439 @@
++            crate::layout::measurements::checkpoint();
+@@ -1402,0 +1463 @@
++        crate::layout::measurements::checkpoint();
+@@ -1415,0 +1477 @@
++            crate::layout::measurements::checkpoint();
+@@ -1706,0 +1769 @@
++            crate::layout::measurements::checkpoint();
+@@ -1865,0 +1929 @@
++            crate::layout::measurements::checkpoint();
+@@ -1866,0 +1931 @@
++                crate::layout::measurements::checkpoint();
+@@ -1920,0 +1986 @@
++            crate::layout::measurements::checkpoint();
+@@ -1921,0 +1988 @@
++                crate::layout::measurements::checkpoint();
+@@ -1947,0 +2015 @@
++            crate::layout::measurements::checkpoint();
+@@ -2080,0 +2149 @@
++            crate::layout::measurements::checkpoint();
+@@ -2134,0 +2204 @@
++            crate::layout::measurements::checkpoint();
+@@ -2220,0 +2291 @@
++            crate::layout::measurements::checkpoint();
+@@ -2335,0 +2407 @@
++            crate::layout::measurements::checkpoint();
+@@ -2336,0 +2409 @@
++                crate::layout::measurements::checkpoint();
+@@ -2593,0 +2667 @@
++            crate::layout::measurements::checkpoint();
+@@ -2627,0 +2702 @@
++            crate::layout::measurements::checkpoint();
+@@ -2702,0 +2778 @@
++            crate::layout::measurements::checkpoint();
+@@ -2711,0 +2788 @@
++            crate::layout::measurements::checkpoint();
+@@ -2718,0 +2796 @@
++            crate::layout::measurements::checkpoint();
+@@ -2752,0 +2831 @@
++            crate::layout::measurements::checkpoint();
 --- a/src/layout/text.rs
 +++ b/src/layout/text.rs
-@@ -44,6 +44,7 @@
-     wrap: bool,
-     font_family: &str,
- ) -> TextBlock {
-+    if let Some(measured) = super::measurements::lookup(text) { return measured; }
-     let raw_lines = split_lines(text);
-     let mut lines = Vec::new();
-     let fast_metrics = config.fast_text_metrics;
+@@ -46,0 +47,3 @@
++    if let Some(measured) = super::measurements::lookup(text) {
++        return measured;
++    }
 --- /dev/null
 +++ b/src/layout/measurements.rs
-@@ -0,0 +1,14 @@
+@@ -0,0 +1,36 @@
 +//! XFMD seam: per-call premeasured labels, restored even during unwinding.
-+use std::{cell::RefCell, collections::HashMap};
-+use super::{TextBlock, Layout, compute_layout};
-+use crate::{ir::Graph, Theme, LayoutConfig};
++use super::{Layout, TextBlock, compute_layout};
++use crate::{LayoutConfig, Theme, ir::Graph};
++use std::{cell::RefCell, collections::HashMap, time::{Duration, Instant}};
 +thread_local! { static LABELS: RefCell<Option<HashMap<String, TextBlock>>> = const { RefCell::new(None) }; }
++thread_local! { static DEADLINE: RefCell<Option<Instant>> = const { RefCell::new(None) }; }
++pub fn checkpoint() {
++ if DEADLINE.with(|d| d.borrow().is_some_and(|deadline| Instant::now() >= deadline)) {
++  std::panic::panic_any("Diagram layout time budget exceeded (2 seconds)");
++ }
++}
 +pub fn lookup(text: &str) -> Option<TextBlock> {
-+ LABELS.with(|slot| slot.borrow().as_ref().map(|labels| labels.get(text).unwrap_or_else(|| panic!("Missing measured label: {text}")).clone()))
++    LABELS.with(|slot| {
++        slot.borrow().as_ref().map(|labels| {
++            labels
++                .get(text)
++                .unwrap_or_else(|| panic!("Missing measured label: {text}"))
++                .clone()
++        })
++    })
 +}
-+pub fn layout(graph: &Graph, theme: &Theme, config: &LayoutConfig, labels: HashMap<String, TextBlock>) -> Layout {
-+ struct Restore(Option<HashMap<String, TextBlock>>);
-+ impl Drop for Restore { fn drop(&mut self) { LABELS.with(|slot| *slot.borrow_mut()=self.0.take()); } }
-+ let _restore=Restore(LABELS.with(|slot| slot.replace(Some(labels))));
-+ compute_layout(graph, theme, config)
++pub fn layout(
++    graph: &Graph,
++    theme: &Theme,
++    config: &LayoutConfig,
++    labels: HashMap<String, TextBlock>,
++) -> Layout {
++    struct Restore(Option<HashMap<String, TextBlock>>, Option<Instant>);
++    impl Drop for Restore {
++        fn drop(&mut self) {
++            LABELS.with(|slot| *slot.borrow_mut() = self.0.take());
++        }
++    }
++    let _restore = Restore(LABELS.with(|slot| slot.replace(Some(labels))), DEADLINE.with(|slot| slot.replace(Some(Instant::now()+Duration::from_secs(2)))));
++    compute_layout(graph, theme, config)
 +}
+--- a/src/layout/routing.rs
++++ b/src/layout/routing.rs
+@@ -1229,0 +1230 @@
++        super::measurements::checkpoint();
+@@ -1335,0 +1337 @@
++    super::measurements::checkpoint();
+@@ -1759,0 +1762 @@
++    super::measurements::checkpoint();
+--- a/src/layout/label_placement.rs
++++ b/src/layout/label_placement.rs
+@@ -216,0 +217 @@
++        crate::layout::measurements::checkpoint();
+@@ -297,0 +299 @@
++        crate::layout::measurements::checkpoint();
+@@ -377,0 +380 @@
++        crate::layout::measurements::checkpoint();
+@@ -395,0 +399 @@
++                crate::layout::measurements::checkpoint();
+@@ -402,0 +407 @@
++            crate::layout::measurements::checkpoint();
+@@ -407,0 +413 @@
++            crate::layout::measurements::checkpoint();
+@@ -411,0 +418 @@
++                crate::layout::measurements::checkpoint();
+@@ -554,0 +562 @@
++                crate::layout::measurements::checkpoint();
+@@ -557,0 +566 @@
++                    crate::layout::measurements::checkpoint();
+@@ -575,0 +585 @@
++                crate::layout::measurements::checkpoint();
+@@ -578,0 +589 @@
++                    crate::layout::measurements::checkpoint();
+@@ -590,0 +602 @@
++            crate::layout::measurements::checkpoint();
+@@ -603,0 +616 @@
++                crate::layout::measurements::checkpoint();
+@@ -647,0 +661 @@
++                crate::layout::measurements::checkpoint();
+@@ -660,0 +675 @@
++                    crate::layout::measurements::checkpoint();
+@@ -783,0 +799 @@
++        crate::layout::measurements::checkpoint();
+@@ -784,0 +801 @@
++            crate::layout::measurements::checkpoint();
+@@ -822,0 +840 @@
++        crate::layout::measurements::checkpoint();
+@@ -846,0 +865 @@
++            crate::layout::measurements::checkpoint();
+@@ -847,0 +867 @@
++                crate::layout::measurements::checkpoint();
+@@ -864,0 +885 @@
++                    crate::layout::measurements::checkpoint();
+@@ -906,0 +928 @@
++        crate::layout::measurements::checkpoint();
+@@ -975,0 +998 @@
++        crate::layout::measurements::checkpoint();
+@@ -1008,0 +1032 @@
++        crate::layout::measurements::checkpoint();
+@@ -1022,0 +1047 @@
++            crate::layout::measurements::checkpoint();
+@@ -1024,0 +1050 @@
++                crate::layout::measurements::checkpoint();
+@@ -1033,0 +1060 @@
++                crate::layout::measurements::checkpoint();
+@@ -1049,0 +1077 @@
++            crate::layout::measurements::checkpoint();
+@@ -1081,0 +1110 @@
++                    crate::layout::measurements::checkpoint();
+@@ -1166,0 +1196 @@
++        crate::layout::measurements::checkpoint();
+@@ -1181,0 +1212 @@
++                crate::layout::measurements::checkpoint();
+@@ -1187,0 +1219 @@
++                    crate::layout::measurements::checkpoint();
+@@ -1215,0 +1248 @@
++                            crate::layout::measurements::checkpoint();
+@@ -1247,0 +1281 @@
++                                crate::layout::measurements::checkpoint();
+@@ -1254,0 +1289 @@
++                                crate::layout::measurements::checkpoint();
+@@ -1333,0 +1369 @@
++        crate::layout::measurements::checkpoint();
+@@ -1429,0 +1466 @@
++        crate::layout::measurements::checkpoint();
+@@ -1434,0 +1472 @@
++        crate::layout::measurements::checkpoint();
+@@ -1438,0 +1477 @@
++            crate::layout::measurements::checkpoint();
+@@ -1469,0 +1509 @@
++        crate::layout::measurements::checkpoint();
+@@ -1485,0 +1526 @@
++            crate::layout::measurements::checkpoint();
+@@ -1488,0 +1530 @@
++                crate::layout::measurements::checkpoint();
+@@ -1494,0 +1537 @@
++            crate::layout::measurements::checkpoint();
+@@ -1497,0 +1541 @@
++                crate::layout::measurements::checkpoint();
+@@ -1555,0 +1600 @@
++        crate::layout::measurements::checkpoint();
+@@ -1586,0 +1632 @@
++            crate::layout::measurements::checkpoint();
+@@ -1599,0 +1646 @@
++                crate::layout::measurements::checkpoint();
+@@ -1700,0 +1748 @@
++                crate::layout::measurements::checkpoint();
+@@ -1712,0 +1761 @@
++                    crate::layout::measurements::checkpoint();
+@@ -1790,0 +1840 @@
++        crate::layout::measurements::checkpoint();
+@@ -1806,0 +1857 @@
++            crate::layout::measurements::checkpoint();
+@@ -1853,0 +1905 @@
++                crate::layout::measurements::checkpoint();
+@@ -1854,0 +1907 @@
++                    crate::layout::measurements::checkpoint();
+@@ -1879,0 +1933 @@
++                crate::layout::measurements::checkpoint();
+@@ -1892,0 +1947 @@
++                    crate::layout::measurements::checkpoint();
+@@ -1895,0 +1951 @@
++                    crate::layout::measurements::checkpoint();
+@@ -1951,0 +2008 @@
++        crate::layout::measurements::checkpoint();
+@@ -1978,0 +2036 @@
++            crate::layout::measurements::checkpoint();
+@@ -2059,0 +2118 @@
++        crate::layout::measurements::checkpoint();
+@@ -2065,0 +2125 @@
++            crate::layout::measurements::checkpoint();
+@@ -2066,0 +2127 @@
++                crate::layout::measurements::checkpoint();
+@@ -2128,0 +2190 @@
++                    crate::layout::measurements::checkpoint();
+@@ -2196,0 +2259 @@
++        crate::layout::measurements::checkpoint();
+@@ -2333,0 +2397 @@
++        crate::layout::measurements::checkpoint();
+@@ -2334,0 +2399 @@
++            crate::layout::measurements::checkpoint();
+@@ -2347,0 +2413 @@
++        crate::layout::measurements::checkpoint();
+@@ -2354,0 +2421 @@
++            crate::layout::measurements::checkpoint();
+@@ -2355,0 +2423 @@
++                crate::layout::measurements::checkpoint();
+@@ -2376,0 +2445 @@
++        crate::layout::measurements::checkpoint();
+@@ -2395,0 +2465 @@
++        crate::layout::measurements::checkpoint();
+@@ -2445,0 +2516 @@
++        crate::layout::measurements::checkpoint();
+@@ -2551,0 +2623 @@
++        crate::layout::measurements::checkpoint();
+@@ -2580,0 +2653 @@
++        crate::layout::measurements::checkpoint();
+@@ -2581,0 +2655 @@
++            crate::layout::measurements::checkpoint();
+@@ -2625,0 +2700 @@
++        crate::layout::measurements::checkpoint();
+@@ -2629,0 +2705 @@
++        crate::layout::measurements::checkpoint();
+@@ -2668,0 +2745 @@
++        crate::layout::measurements::checkpoint();
+@@ -2673,0 +2751 @@
++        crate::layout::measurements::checkpoint();
+@@ -2676,0 +2755 @@
++        crate::layout::measurements::checkpoint();
+@@ -2697,0 +2777 @@
++            crate::layout::measurements::checkpoint();
+@@ -2717,0 +2798 @@
++        crate::layout::measurements::checkpoint();
+@@ -2730,0 +2812 @@
++            crate::layout::measurements::checkpoint();
+@@ -2733,0 +2816 @@
++                crate::layout::measurements::checkpoint();
+@@ -2774,0 +2858 @@
++        crate::layout::measurements::checkpoint();
+@@ -2790,0 +2875 @@
++        crate::layout::measurements::checkpoint();
+@@ -2843,0 +2929 @@
++        crate::layout::measurements::checkpoint();
+@@ -2971,0 +3058 @@
++        crate::layout::measurements::checkpoint();
+@@ -3006,0 +3094 @@
++        crate::layout::measurements::checkpoint();
+@@ -3097,0 +3186 @@
++        crate::layout::measurements::checkpoint();
+@@ -3107,0 +3197 @@
++        crate::layout::measurements::checkpoint();
+@@ -3138,0 +3229 @@
++        crate::layout::measurements::checkpoint();
+@@ -3238,0 +3330 @@
++        crate::layout::measurements::checkpoint();
+@@ -3249,0 +3342 @@
++        crate::layout::measurements::checkpoint();
+@@ -3292,0 +3386 @@
++        crate::layout::measurements::checkpoint();
+@@ -3303,0 +3398 @@
++        crate::layout::measurements::checkpoint();
+@@ -3318,0 +3414 @@
++        crate::layout::measurements::checkpoint();
+@@ -3339,0 +3436 @@
++        crate::layout::measurements::checkpoint();
+@@ -3340,0 +3438 @@
++            crate::layout::measurements::checkpoint();
+@@ -3366,0 +3465 @@
++        crate::layout::measurements::checkpoint();
+@@ -3379,0 +3479 @@
++            crate::layout::measurements::checkpoint();
+@@ -3417,0 +3518 @@
++        crate::layout::measurements::checkpoint();
+@@ -3430,0 +3532 @@
++        crate::layout::measurements::checkpoint();
+@@ -3464,0 +3567 @@
++        crate::layout::measurements::checkpoint();
+@@ -3506,0 +3610 @@
++        crate::layout::measurements::checkpoint();
+@@ -3536,0 +3641 @@
++        crate::layout::measurements::checkpoint();
+@@ -3581,0 +3687 @@
++        crate::layout::measurements::checkpoint();
+@@ -3591,0 +3698 @@
++        crate::layout::measurements::checkpoint();
+@@ -3600,0 +3708 @@
++            crate::layout::measurements::checkpoint();
+@@ -3625,0 +3734 @@
++        crate::layout::measurements::checkpoint();
+@@ -3729,0 +3839 @@
++            crate::layout::measurements::checkpoint();
+@@ -3734,0 +3845 @@
++                crate::layout::measurements::checkpoint();
+@@ -3735,0 +3847 @@
++                    crate::layout::measurements::checkpoint();
+@@ -3749,0 +3862 @@
++            crate::layout::measurements::checkpoint();
+@@ -3750,0 +3864 @@
++                crate::layout::measurements::checkpoint();
+@@ -3863,0 +3978 @@
++        crate::layout::measurements::checkpoint();
+@@ -3878,0 +3994 @@
++        crate::layout::measurements::checkpoint();
+@@ -4059,0 +4176 @@
++        crate::layout::measurements::checkpoint();
+@@ -4062,0 +4180 @@
++            crate::layout::measurements::checkpoint();

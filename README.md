@@ -32,7 +32,7 @@ lagres i FOX-registry-seksjonen `RecentFiles`, separat fra `WorkPaths`.
 
 ## Bygg og kjør
 
-Krever C++17-kompilator, CMake ≥3.20, Ninja, pkg-config, FOX ≥1.6.57 (1.6 API),
+Krever Rust/Cargo **1.92.0**, Python 3, `patch`, C++17-kompilator, CMake ≥3.20, Ninja, pkg-config, FOX ≥1.6.57 (1.6 API),
 libcurl-verktøyet `curl`, X11/RandR, Cairo og PangoCairo/Fontconfig (inkludert utviklingsfiler).
 Bilder/formler krever GdkPixbuf med SVG-loader, cairomm-1.0, pangomm-1.4 og tinyxml2.
 På Debian/Ubuntu: `libgdk-pixbuf-2.0-dev librsvg2-common libcairomm-1.0-dev libpangomm-1.4-dev libtinyxml2-dev`.
@@ -42,6 +42,8 @@ Fallback eller Noto Sans CJK. Tester krever Python 3 og Xvfb. Fullscreen-testen 
 
 ```sh
 ./tools/bootstrap_dependencies.sh
+python3 tools/bootstrap_mermaid.py
+cargo fetch --locked
 cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
 cmake --build build --parallel 4
 ctest --test-dir build --output-on-failure

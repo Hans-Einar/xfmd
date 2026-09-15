@@ -267,3 +267,18 @@ betyr verdi, 1 profil/layoutfeil, 4 ABI-feil og 7 fanget Rust-panic.
 Resultatets owner må frigjøres nøyaktig én gang med riktig free-funksjon;
 C++ ResultOwner gjør dette også ved exception. Layout får målt tekst i logical
 pixels; adapteren konverterer tilbake til punkter med 0,75 én gang.
+
+### P26 gate: kooperativ tidsgrense
+
+Proben med 128 noder / 512 sykliske kanter overskred 30 sekunder og ble
+avbrutt. Inputgrensen alene godtas derfor ikke. Den versjonsbundne patchen
+har nå en trådlokal deadline på to sekunder, kontrollert i layout-løkker,
+labelplassering og A*-køen. Rust unwinder til C-ABI-feil; RAII gjenoppretter
+måletabell og deadline. Dette er kooperativ kontroll, ikke en hard realtime-
+garanti. Application kontrollerer kansellering mellom blokker og før/etter
+layout; en utdatert worker kan derfor avslutte etter gjeldende blokk.
+
+Patchens loop-checkpoints er mekaniske og algoritmene er uendret. Testen må
+bevise at tett graf blir fallback innen fem sekunder, mens brukerfixture og
+128-noders kjede fremdeles lykkes. Ingen gjennomføring merkes Verified før
+samlet bevis i P29.
