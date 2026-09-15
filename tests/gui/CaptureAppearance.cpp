@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
   argc = 1;
   xfmd::Application app;
   app.initialize(argc, argv);
-  app.window->resize(1200, 800);
+  app.window->resize(std::getenv("XFMD_CAPTURE_NARROW") ? 640 : 1200, 800);
   app.window->move(40, 40);
   app.window->workspacePanel->setWorkPath(
       std::filesystem::path(XFMD_FIXTURE).parent_path().string());
@@ -22,6 +22,8 @@ int main(int argc, char** argv) {
   std::string error;
   if (!app.preferences->commit(draft, error))
     return 3;
+  if (std::getenv("XFMD_CAPTURE_A4"))
+    app.execute(xfmd::CommandRouter::A4);
   for (int i = 0; i < 300; ++i) {
     app.app.runWhileEvents();
     std::this_thread::sleep_for(std::chrono::milliseconds(3));

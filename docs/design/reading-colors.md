@@ -45,9 +45,9 @@ akkurat dette tilfellet. Personlig komfort kan likevel være annerledes.
   nederst. Hue -1 velger nøytralt; 0–359 bruker full HSV-metning. Value 0–100
   skalerer RGB-kanalene. Value er ikke perseptuelt jevn lyshet eller monitorens
   baklys. F.eks. 60° gir gul og 120° grønn; rav ligger mellom rødt og gult.
-- Beregnet kontrast mellom vanlig tekst og bakgrunn vises. Brukeren kan prøve
-  også lav kontrast; kontrollene tvinger ikke et bestemt fargepar.
+- P21 viste beregnet kontrast. P22 fjerner den synlige indikatoren for å spare
+  høyde; beregningen beholdes for tester. Kontrollene tvinger ikke et bestemt fargepar.
 - Light og Dark lagres hver for seg i eksisterende preferanser. Repaint skjer
-  under dragging; avsluttet input lagrer. Reset colors nullstiller bare aktivt tema.
+  under dragging; avsluttet input lagrer. P22 fjerner Reset-knappen.
 - Ingen ny parsing eller layout ved fargejustering. Tekst, lenkeunderstreking,
   kode og tabellflater bruker samme lesepalett. PDF beholder utskriftspaletten.

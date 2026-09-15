@@ -4,7 +4,6 @@
 namespace xfmd {
 class PreviewControls : public UiRow {
   UiContext& ui;
-  FX::FXLabel* title;
   UiButton *wrap, *a4;
   FX::FXMenuButton* zoom;
   FX::FXMenuPane* menu;
@@ -15,5 +14,6 @@ public:
   ~PreviewControls() override;
   void sync(bool paged, bool fitWidth);
   void layout() override;
+  void compact();
 };
 } // namespace xfmd

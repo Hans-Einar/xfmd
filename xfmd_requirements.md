@@ -247,3 +247,14 @@ skalerer RGB-kanalene (HSV Value), ikke skjermens fysiske baklys eller perseptue
 luminans. Standarder er nøytral mørk bakgrunn/lys tekst i Dark og omvendt i Light.
 Kontrast vises etter sRGB/WCAG-formelen, uten å hevde at én farge er medisinsk best.
 PDF bruker fortsatt standard utskriftspalett. Samme formede glypher/layout gjenbrukes.
+
+## P22: minimal felles kontrollflate
+
+| Krav | Normativ atferd | Akseptanse |
+| --- | --- | --- |
+| UR-032 | Meny, filhandlinger, visningsvalg og farger deler en lav topplinje; ved liten bredde brytes grupper uten overlapping. PREVIEW-tittel, kontrasttekst og Reset-knapp fjernes. Fargene gjelder både editor og preview med fortsatt separate Light/Dark-profiler. | AT-052: faktisk kontrollgeometri ved bredt/smalt vindu, alle moduser/temaer, live farger i begge flater og restart. |
+| UR-033 | Wrap, A4 og Fit width/100% styrer begge dokumentflater. Editorens A4-modus viser redigerbar kilde med papirbasert tekstbredde; preview viser paginerte sider. Visningsendring bevarer buffer, markering, undo og kildeposisjon. | AT-053: editorbredde/font ved resize/format/zoom, begge paneler og fortsatt redigering. |
+| UR-034 | Hover over preview-lenke viser oppløst lokal filsti eller nettadresse i statuslinjen. Avsluttet hover, scroll eller ugyldig frame fjerner gammel lenkeinformasjon. Hover åpner aldri dokumenter/programmer. | AT-054: relativ/absolutt/nettlenke, A4/scroll/leave og ingen navigasjon. |
+
+P22 erstatter P21s plassering over preview og den synlige kontrastindikatoren.
+Fargetone står over lysstyrke i to kompakte kolonner, med forklaring/verdi i tooltip.

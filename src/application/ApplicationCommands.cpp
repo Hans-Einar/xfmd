@@ -126,8 +126,10 @@ void Application::execute(CommandRouter::Command command) {
     break;
   }
   app.forceRefresh();
-  if (preview && host)
+  if (preview && host) {
+    window->editor->setViewProfile(preview->layoutProfile(), host->fitWidth());
     window->previewControls->sync(preview->layoutProfile().mode == LayoutMode::Paged,
                                   host->fitWidth());
+  }
 }
 } // namespace xfmd

@@ -1,5 +1,6 @@
 #pragma once
 #include "application/document/TextProjection.h"
+#include "application/preferences/ReadingColors.h"
 #include "application/scroll/ScrollDynamics.h"
 #include <functional>
 #include <fx.h>
@@ -8,6 +9,12 @@ namespace xfmd {
 class EditorWidget : public FX::FXText {
   FXDECLARE(EditorWidget)
   std::unique_ptr<TextProjection> projection;
+  LayoutProfile viewProfile;
+  bool fitPage = true, layingOut = false, presentationDirty = false;
+  int presentationWidth = -1;
+  FX::FXFont* baseFont = nullptr;
+  std::unique_ptr<FX::FXFont> scaledFont;
+  void applyViewProfile();
   bool projecting = false, scrolling = false, keyboard = false;
 
 protected:
@@ -20,6 +27,9 @@ public:
   std::function<void(std::size_t)> viewportChanged;
   ScrollOrigin lastScrollOrigin = ScrollOrigin::UserDrag;
   explicit EditorWidget(FX::FXComposite*);
+  void setReadingColors(const ReadingColors&);
+  void setViewProfile(const LayoutProfile&, bool fit);
+  void layout() override;
   void applyProjection(const SourceSnapshot&);
   void setSourceAnchor(SourceAnchor);
   std::size_t sourceAnchor() const;

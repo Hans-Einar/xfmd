@@ -343,3 +343,13 @@ M3: lagring/rollback, raster/GUI/PDF-regresjoner, visuell kontroll og integrasjo
 P21 M1 `b6f934a`, M2 `9b259a9` er implementert. M3 samler
 [testbevis, visuell kontroll og installasjon](docs/evidence/P21.md).
 47 Release-tester og 45 sanitizer-tester består lokalt; fase-PR krever grønn CI.
+
+## P22 — kompakt topplinje, delte kontroller og hover
+
+Branch phase/p22-compact-workspace. M1: UR-032–034 og eierskap.
+M2: felles lav layout, editorpalett/format og oppløst hover-mål.
+M3: native geometri/input/regresjon, skjermbilder, installasjon og CI.
+
+P22 M1 `b89149d`, M2 `35400a9`; M3 inkluderer Fit width ved hele tegnpiksler,
+[testbevis og installasjon](docs/evidence/P22.md). Lokalt består 48 Release-tester
+og 46 sanitizer-tester. CI er merge-gate.

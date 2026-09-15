@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "navigation/LinkResolver.h"
 namespace xfmd {
 void Application::applyAppearance(const Appearance& value) {
   ui->setAppearance(value);
@@ -9,11 +10,13 @@ void Application::applyAppearance(const Appearance& value) {
       dark ? preferences->active().darkReading : preferences->active().lightReading;
   if (host)
     host->setReadingColors(colors);
+  window->editor->setReadingColors(colors);
   window->previewColors->sync(colors, dark);
   app.refresh();
 }
 void Application::changeReadingColors(const ReadingColors& colors, bool commit) {
   host->setReadingColors(colors);
+  window->editor->setReadingColors(colors);
   if (!commit)
     return;
   auto draft = preferences->begin();
@@ -25,7 +28,36 @@ void Application::changeReadingColors(const ReadingColors& colors, bool commit) 
         dark ? preferences->active().darkReading : preferences->active().lightReading;
     host->setReadingColors(saved);
     window->previewColors->sync(saved, dark);
-    window->previewColors->showError(error);
+    window->editor->setReadingColors(saved);
+    window->status->setText(("Colors not saved: " + error).c_str());
   }
+}
+void Application::showLinkTarget(const std::string& target) {
+  // FXLabel treats a single ampersand as a mnemonic; paths and URLs are literal.
+  auto literal = [](const std::string& value) {
+    std::string text;
+    for (char c : value) {
+      if (c == '&')
+        text += '&';
+      text += c;
+    }
+    return FX::FXString(text.c_str());
+  };
+  if (target.empty()) {
+    if (!hoverStatus.empty() && window->status->getText() == hoverStatus.c_str())
+      window->status->setText(literal(beforeHover));
+    hoverStatus.clear();
+    return;
+  }
+  if (hoverStatus.empty() || window->status->getText() != hoverStatus.c_str())
+    beforeHover = window->status->getText().text();
+  try {
+    hoverStatus = ExternalBrowser::accepts(target)
+                      ? target
+                      : LinkResolver::localPath(session.view().path, target);
+  } catch (const std::exception&) {
+    hoverStatus = target;
+  }
+  window->status->setText(literal(hoverStatus));
 }
 } // namespace xfmd

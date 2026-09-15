@@ -362,3 +362,16 @@ Decoration en ren semantisk rolle (kode, tabellflate, kant) som PageComposer bev
 Paletten endrer ingen FrameKey, glypher, treffregioner eller kildeankre. PDF utelater
 skjermpaletten og bruker opprinnelige printfarger. Theme-preview/Cancel velger riktig
 lagret lesepalett uten å skrive noen sliderverdier.
+
+## P22: felles kompakt arbeidsflate
+
+CompactToolbar eier responsiv gruppering i application/ui/controls. XfmdWindow
+bygger én felles kontrollflate. EditorPresentation.cpp eier EditorWidget-metoder
+for lesepalett og papirbredde/zoom under FUNC-011; tekstmutasjoner forblir i EditorWidget.cpp.
+ApplicationAppearance koordinerer begge flater og hover-status gjennom LinkResolver.
+Renderer og interpreter kjenner ikke topplinjen eller editorens visning.
+
+P22 filstørrelsesreview: FoxRenderHost.cpp er 308 linjer. Hover legger bare til
+input-varsling ved eksisterende hit-testing/invalidering. Den beholdes samlet
+med hostens øvrige input og frame-livsløp; ny topplinje og editorpresentasjon er
+skilt ut i egne filer. Ingen parsing, lagring eller arbeidsflyt flyttes inn i hosten.

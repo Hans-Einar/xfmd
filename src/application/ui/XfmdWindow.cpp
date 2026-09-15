@@ -23,7 +23,8 @@ void XfmdWindow::setApplicationIcons(FXIcon* large, FXIcon* small) {
   setMiniIcon(small);
 }
 void XfmdWindow::buildUi() {
-  auto* bar = new FXMenuBar(this, LAYOUT_SIDE_TOP | LAYOUT_FILL_X);
+  toolbar = new CompactToolbar(this);
+  auto* bar = new FXMenuBar(toolbar, LAYOUT_CENTER_Y, 0, 0, 0, 0, 0, 0, 0, 0);
   auto add = [&](FXMenuPane* menu, const char* name, CommandRouter::Command command,
                  UiIcon icon = UiIcon::NoIcon) {
     new FXMenuCommand(menu, name, ui->icons.get(icon), commands, command);
@@ -72,8 +73,7 @@ void XfmdWindow::buildUi() {
                          SPLITTER_HORIZONTAL | SPLITTER_TRACKING | LAYOUT_FILL_X | LAYOUT_FILL_Y);
   editor = new EditorWidget(split);
   previewArea = new FXVerticalFrame(split, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0);
-  previewControls = new PreviewControls(previewArea, *ui, *commands);
-  previewColors = new PreviewColorControls(previewArea, *ui);
+
   editor->setWidth(420);
 }
 long XfmdWindow::onConfigure(FXObject* sender, FXSelector sel, void* data) {

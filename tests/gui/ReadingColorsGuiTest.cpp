@@ -77,6 +77,9 @@ void run(bool restart) {
     CHECK(app.preferences->active().lightReading == savedLight);
     CHECK(app.preferences->active().darkReading == savedDark);
     CHECK(app.host->readingColors() == savedDark && controls->values() == savedDark);
+    auto rgb = ReadingPalette::from(savedDark).text;
+    CHECK(app.window->editor->getTextColor() ==
+          FXRGB((rgb >> 16) & 255, (rgb >> 8) & 255, rgb & 255));
     app.execute(CommandRouter::ToggleTheme);
     CHECK(app.host->readingColors() == savedLight && controls->values() == savedLight);
     return;

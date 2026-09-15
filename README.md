@@ -216,15 +216,25 @@ bredde. Klikk Split igjen for å hente tilbake et sammenklemt panel. Snarveiene
 Ctrl+2 (Editor), Ctrl+3 (Split), Ctrl+1 (Preview) er beholdt.
 [Testbevis og skjermbilde](docs/evidence/P20.md).
 
-## Lesefarger i preview
+## Lesefarger
 
-Light/Dark gjelder også dokumentpreview, inkludert A4-sidene. Over previewen
+Light/Dark gjelder editor og dokumentpreview, inkludert A4-sidene. I topplinjen
 ligger fargetone og lysstyrke for bakgrunn (venstre) og tekst (høyre). Venstre ende
 av hue-skalaen er nøytral gråtone; 60° er gul og 120° grønn. Lysstyrke justerer
 RGB-fargen, ikke monitorens baklys. Bildet oppdateres mens du drar.
 
 Hvert tema husker sine fire sliderverdier mellom omstarter. Verdiene lagres ved
-avsluttet justering. **Reset colors** nullstiller bare temaet som vises. Ved
-lagringsfeil gjenopprettes tidligere verdier og feilen vises under kontrollene.
-Kontrasttallet gjelder vanlig tekst mot bakgrunn. Lesefarger endrer ikke PDF,
+avsluttet justering. Ved
+lagringsfeil gjenopprettes tidligere verdier og feilen vises i statuslinjen.
+Lesefarger endrer ikke PDF,
 dokumenttekst, layout eller leseposisjon. Se [forskningsnotatet](docs/design/reading-colors.md).
+
+### Kompakt felles topplinje (P22)
+
+Meny, fil-/visningsikoner, Wrap/A4/zoom og farger deler én lav topplinje, med
+radbryting ved liten bredde. PREVIEW-overskrift, kontrasttekst og Reset-knapp er
+fjernet. BG og Text har fargetone øverst og lysstyrke nederst; tooltip viser verdi.
+Begge dokumentflater bruker valgt lesepalett, fortsatt lagret separat per tema.
+A4 gir editoren papirbasert tekstbredde med Fit width/100%, mens preview viser
+sideskift. Wrap gjenoppretter vindusbredde og normal editorfont. Lenke-hover i
+preview viser oppløst lokal sti eller nettadresse nederst uten å åpne målet.
