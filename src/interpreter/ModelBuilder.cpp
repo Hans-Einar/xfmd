@@ -1,6 +1,7 @@
 #include "ModelBuilder.h"
 namespace xfmd {
-ModelBuilder::ModelBuilder(const SourceSnapshot& source) : mapping(source.text) {
+ModelBuilder::ModelBuilder(const SourceSnapshot& source, const MathSyntax* syntax)
+    : math(syntax), mapping(source.text, syntax ? &syntax->masked : nullptr) {
   model.token = source.token;
   model.sourceSize = source.text.size();
 }
@@ -44,6 +45,9 @@ void ModelBuilder::beginBlock(cmark_node* node) {
   active = &model.blocks.back();
 }
 void ModelBuilder::appendNode(cmark_node* node, cmark_event_type event) {
+  for (auto* parent = cmark_node_parent(node); parent; parent = cmark_node_parent(parent))
+    if (cmark_node_get_type(parent) == CMARK_NODE_IMAGE)
+      return;
   if (appendTable(node, event))
     return;
   auto type = cmark_node_get_type(node);
@@ -51,8 +55,6 @@ void ModelBuilder::appendNode(cmark_node* node, cmark_event_type event) {
                type == CMARK_NODE_CODE_BLOCK || type == CMARK_NODE_HTML_BLOCK ||
                type == CMARK_NODE_THEMATIC_BREAK;
   if (event == CMARK_EVENT_EXIT) {
-    if (type == CMARK_NODE_IMAGE && active)
-      active->runs.push_back({"]", mapping.record(node), false, true, false, {}});
     if (block)
       active = nullptr;
     return;
@@ -67,13 +69,27 @@ void ModelBuilder::appendNode(cmark_node* node, cmark_event_type event) {
     return;
   if (type == CMARK_NODE_CODE_BLOCK) {
     const char* literal = cmark_node_get_literal(node);
-    active->runs = mapping.codeLines(node, literal ? literal : "");
+    const char* info = cmark_node_get_fence_info(node);
+    if (info && (std::string(info) == "math" || std::string(info) == "latex")) {
+      active->kind = BlockKind::Paragraph;
+      InlineRun formula;
+      formula.source = mapping.record(node);
+      formula.text = literal ? literal : "";
+      formula.embedded = {EmbeddedKind::Math, formula.text, true, {}};
+      active->runs.push_back(std::move(formula));
+    } else
+      active->runs = mapping.codeLines(node, literal ? literal : "");
     return;
   }
   InlineRun run;
   run.source = mapping.record(node);
-  if (type == CMARK_NODE_TEXT || type == CMARK_NODE_CODE || type == CMARK_NODE_CODE_BLOCK ||
-      type == CMARK_NODE_HTML_BLOCK || type == CMARK_NODE_HTML_INLINE) {
+  const auto* formula = math && type == CMARK_NODE_CODE ? math->at(run.source) : nullptr;
+  if (formula) {
+    run.text = formula->formula;
+    run.source = formula->range;
+    run.embedded = {EmbeddedKind::Math, formula->formula, formula->display, {}};
+  } else if (type == CMARK_NODE_TEXT || type == CMARK_NODE_CODE || type == CMARK_NODE_CODE_BLOCK ||
+             type == CMARK_NODE_HTML_BLOCK || type == CMARK_NODE_HTML_INLINE) {
     const char* literal = cmark_node_get_literal(node);
     run.text = literal ? literal : "";
     run.code = type == CMARK_NODE_CODE || type == CMARK_NODE_CODE_BLOCK;
@@ -86,8 +102,20 @@ void ModelBuilder::appendNode(cmark_node* node, cmark_event_type event) {
     run.text = "\n";
     run.source.quality = MappingQuality::Approximate;
   } else if (type == CMARK_NODE_IMAGE) {
-    run.text = "[image: ";
-    run.italic = true;
+    auto* iter = cmark_iter_new(node);
+    while (cmark_iter_next(iter) != CMARK_EVENT_DONE) {
+      auto* child = cmark_iter_get_node(iter);
+      if (cmark_iter_get_event_type(iter) == CMARK_EVENT_ENTER &&
+          (cmark_node_get_type(child) == CMARK_NODE_TEXT ||
+           cmark_node_get_type(child) == CMARK_NODE_CODE)) {
+        const char* text = cmark_node_get_literal(child);
+        if (text)
+          run.text += text;
+      }
+    }
+    cmark_iter_free(iter);
+    const char* url = cmark_node_get_url(node);
+    run.embedded = {EmbeddedKind::Image, url ? url : "", false, {}};
     run.source.quality = MappingQuality::Approximate;
   } else
     return;

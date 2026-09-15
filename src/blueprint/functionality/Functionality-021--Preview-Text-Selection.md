@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Mechanism
 owner: application
-status: Ready
+status: Implemented
 scope: FirstRelease
 requirements: UR-035
 uses: none
@@ -32,8 +32,8 @@ Ny dokumentrevisjon nullstiller merking; fargeendring bevarer merking. Clipboard
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `FoxRenderHost input` | `PreviewSelection::hit` | `src/application/preview/PreviewSelection.cpp` | Dokumentpunkt → UTF-8-posisjon | Avvis ugyldig input | Planned |
-| 2 | `FOX clipboard request` | `FoxRenderHost::onClipboardRequest` | `src/application/adapters/FoxPreviewInput.cpp` | Eid tekst → UTF-8 clipboard | Avvis ugyldig input | Planned |
+| 1 | `FoxRenderHost input` | `PreviewSelection::hit` | `src/application/preview/PreviewSelection.cpp` | Dokumentpunkt → UTF-8-posisjon | Avvis ugyldig input | Implemented |
+| 2 | `FOX clipboard request` | `FoxRenderHost::onClipboardRequest` | `src/application/adapters/FoxPreviewInput.cpp` | Eid tekst → UTF-8 clipboard | Avvis ugyldig input | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -45,4 +45,4 @@ AT-055. Planlagt: målrettede unit- og native FOX-tester samt full regresjon.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Ready for brukerbestilt P23. Implementasjon og faktisk testbevis følger i samme fase.
+Implemented i brukerbestilt P23. M3 samler testbevis og kjente grenser.

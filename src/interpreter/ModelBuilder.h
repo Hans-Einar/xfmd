@@ -1,9 +1,11 @@
 #pragma once
+#include "MathSyntax.h"
 #include "SourceMapBuilder.h"
 #include "contracts/SemanticDocument.h"
 #include <map>
 namespace xfmd {
 class ModelBuilder {
+  const MathSyntax* math;
   SemanticDocument model;
   SourceMapBuilder mapping;
   SemanticBlock* active = nullptr;
@@ -15,7 +17,7 @@ class ModelBuilder {
   std::size_t cells = 0;
 
 public:
-  explicit ModelBuilder(const SourceSnapshot&);
+  explicit ModelBuilder(const SourceSnapshot&, const MathSyntax* = nullptr);
   void appendNode(cmark_node*, cmark_event_type);
   SemanticDocument finish();
 };

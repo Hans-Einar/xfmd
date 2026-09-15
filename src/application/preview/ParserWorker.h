@@ -1,6 +1,7 @@
 #pragma once
 #include "contracts/IInterpreter.h"
 #include <condition_variable>
+#include <functional>
 #include <mutex>
 #include <optional>
 #include <thread>
@@ -12,6 +13,7 @@ struct ParseCompletion {
 };
 class ParserWorker {
   IInterpreter& interpreter;
+  std::function<ParseResult(ParseResult, const SourceSnapshot&)> prepare;
   mutable std::mutex mutex;
   std::condition_variable ready;
   std::optional<SourceSnapshot> pending;
@@ -22,7 +24,8 @@ class ParserWorker {
   void run();
 
 public:
-  explicit ParserWorker(IInterpreter&);
+  explicit ParserWorker(IInterpreter&,
+                        std::function<ParseResult(ParseResult, const SourceSnapshot&)> = {});
   ~ParserWorker();
   void submit(SourceSnapshot);
   std::optional<ParseCompletion> take();

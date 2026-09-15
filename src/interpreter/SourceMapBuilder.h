@@ -9,7 +9,7 @@ class SourceMapBuilder {
   std::size_t offset(int line, int column, bool end) const;
 
 public:
-  explicit SourceMapBuilder(const std::string&);
+  explicit SourceMapBuilder(const std::string&, const std::string* coordinates = nullptr);
   SourceRange record(cmark_node*) const;
   std::vector<InlineRun> codeLines(cmark_node*, const std::string&) const;
   bool matches(const std::string&, SourceRange) const;

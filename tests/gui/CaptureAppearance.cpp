@@ -13,9 +13,11 @@ int main(int argc, char** argv) {
   app.initialize(argc, argv);
   app.window->resize(std::getenv("XFMD_CAPTURE_NARROW") ? 640 : 1200, 800);
   app.window->move(40, 40);
+  const char* fixture = std::getenv("XFMD_CAPTURE_FIXTURE");
+  if (!fixture) fixture = XFMD_FIXTURE;
   app.window->workspacePanel->setWorkPath(
-      std::filesystem::path(XFMD_FIXTURE).parent_path().string());
-  app.open(XFMD_FIXTURE);
+      std::filesystem::path(fixture).parent_path().string());
+  app.open(fixture);
   app.views->setMode(xfmd::ViewMode::Split);
   auto draft = app.preferences->begin();
   draft.appearance.theme = theme;

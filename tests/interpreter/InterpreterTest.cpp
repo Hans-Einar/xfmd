@@ -25,7 +25,7 @@ void run() {
       CHECK(run.source.begin <= run.source.end && run.source.end <= source.text.size());
       entity |= run.text.find("repeat & ") != std::string::npos;
       bold |= run.text == "repeat" && run.bold && run.source.begin > 20;
-      image |= run.text == "[image: ";
+      image |= run.embedded.kind == EmbeddedKind::Image;
     }
   }
   CHECK(entity && bold && nested && code && html && image);

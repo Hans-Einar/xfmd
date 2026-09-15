@@ -3,7 +3,8 @@
 Native Markdown-viser og editor for Linux, bygget på FOX som companion til `xfw`
 og `xfi`. Første leveranse er implementert: typografisk visning, redigering med
 undo/redo, live preview, lokal lenkehistorikk, justerbar scrolling, A4-preview,
-PDF-eksport, fullscreen og kapittel-/referanseindeks.
+PDF-eksport, fullscreen, tekstmerking i preview, LaTeX-matematikk, lokale bilder
+og kapittel-/referanseindeks.
 
 ![XFMD-ikon](packaging/icons/xfmd-64.png)
 
@@ -28,6 +29,9 @@ Brutte lenker står synlig med feilmelding; trebygging laster aldri fra nettet.
 
 Krever C++17-kompilator, CMake ≥3.20, Ninja, pkg-config, FOX ≥1.6.57 (1.6 API),
 libcurl-verktøyet `curl`, X11/RandR, Cairo og PangoCairo/Fontconfig (inkludert utviklingsfiler).
+Bilder/formler krever GdkPixbuf med SVG-loader, cairomm-1.0, pangomm-1.4 og tinyxml2.
+På Debian/Ubuntu: `libgdk-pixbuf-2.0-dev librsvg2-common libcairomm-1.0-dev libpangomm-1.4-dev libtinyxml2-dev`.
+På AlmaLinux/Fedora: `gdk-pixbuf2-devel librsvg2 cairomm-devel pangomm-devel tinyxml2-devel`.
 PDF-verifikasjon bruker Poppler-verktøyene `pdfinfo`, `pdftotext` og `pdftoppm`. Installer DejaVu Sans/Mono og gjerne Droid Sans
 Fallback eller Noto Sans CJK. Tester krever Python 3 og Xvfb. Fullscreen-testen bruker Window Maker når den er installert.
 
@@ -40,7 +44,10 @@ ctest --test-dir build --output-on-failure
 ```
 
 Bootstrap laster eksplisitt ned hashkontrollert cmark-gfm 0.29.0.gfm.13 til `.deps/`.
-Configure/build laster ikke ned dependencies. Bruk `-DBUILD_TESTING=OFF` for bare
+Første configure laster også hashkontrollert MicroTeX fra commit
+`0e3707f6dafebb121d98b53c64364d16fefe481d`; ingen GTK-widgets eller nettlesermotor
+bygges. For offline-bygg kan `FETCHCONTENT_SOURCE_DIR_MICROTEX` peke til denne
+utpakkede kilden. Bruk `-DBUILD_TESTING=OFF` for bare
 applikasjonen; `-DXFMD_SANITIZERS=ON` i separat Debug-bygg for ASan/UBSan.
 
 ```sh
@@ -58,6 +65,7 @@ Prosjektlisens er fortsatt ikke valgt av eieren; ingen formell release er publis
 | Åpne / lagre / lagre som | Ctrl+O / Ctrl+S / Ctrl+Shift+S |
 | Angre / gjør om / søk | Ctrl+Z / Ctrl+Y / Ctrl+F |
 | Preview / editor / delt visning | Ctrl+1 / Ctrl+2 / Ctrl+3 |
+| Merk alt / kopier i aktiv preview | Ctrl+A / Ctrl+C |
 | Sidepanel | F10 |
 | Fullscreen / tilbake | F11 / Escape |
 | Eksporter gjeldende buffer til PDF | Ctrl+Shift+E |
@@ -238,3 +246,27 @@ Begge dokumentflater bruker valgt lesepalett, fortsatt lagret separat per tema.
 A4 gir editoren papirbasert tekstbredde med Fit width/100%, mens preview viser
 sideskift. Wrap gjenoppretter vindusbredde og normal editorfont. Lenke-hover i
 preview viser oppløst lokal sti eller nettadresse nederst uten å åpne målet.
+
+## Tekstmerking, matematikk og bilder
+
+Dra med venstre museknapp for å merke preview-tekst. Ctrl+C kopierer leseteksten,
+utelater dekorative lenkemarkører og beholder eksplisitte linjeskift. Linux PRIMARY
+støttes også. Dra over en lenke merker teksten; et vanlig klikk følger lenken.
+Ny dokumentrevisjon nullstiller merkingen, men bevarer allerede kopiert tekst.
+
+Formler støtter `$x^2$`, `\(x^2\)`, `$$\frac{a}{b}$$`, `\[\sum_i x_i\]`
+og kodegjerder merket `math` eller `latex`. Brøker, røtter, indekser, summer,
+integraler og matriser typesettes av [MicroTeX](https://github.com/NanoMichael/MicroTeX).
+Vanlige kodegjerder og inline-kode tolkes fortsatt bokstavelig. Dette er formelsats,
+ikke en komplett TeX-installasjon; filinnlesing og makrodefinisjoner er av.
+
+Bilder: `![Beskrivelse](tests/fixtures/markdown/diagram.svg)`. PNG, JPEG, GIF (første frame) og SVG støttes med
+bevart aspekt; relative stier regnes fra dokumentets mappe. Lagre nye dokumenter
+før relative bilder brukes. Eksterne URL-er lastes ikke ned automatisk. Manglende
+eller ugyldige ressurser viser alttekst/formelkilde og en forklaring.
+
+Maks 16 MiB per bildefil, 16 millioner piksler, 256 ressursforekomster og 16 KiB
+per formel. Store bilder skaleres til tekstbredden/siden. Formler følger lesefargene;
+bilder beholder egne farger. Begge inngår i PDF-eksporten.
+Installasjonen inkluderer MicroTeX-ressurser og deres opprinnelige lisenser i
+`share/xfmd/math/`; selve biblioteket er MIT-lisensiert.

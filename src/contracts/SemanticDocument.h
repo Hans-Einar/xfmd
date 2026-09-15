@@ -1,5 +1,6 @@
 #pragma once
 #include "DocumentTypes.h"
+#include "VisualResource.h"
 #include <memory>
 #include <vector>
 
@@ -10,6 +11,7 @@ struct InlineRun {
   bool bold = false, italic = false, code = false;
   std::string link;
   std::size_t linkId = 0; // Shared by style fragments of one link; distinct for adjacent links.
+  EmbeddedContent embedded{};
 };
 enum class ColumnAlignment { Left, Center, Right };
 struct TableCell {

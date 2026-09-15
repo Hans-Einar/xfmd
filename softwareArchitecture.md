@@ -385,3 +385,10 @@ logisk lesetekst. `application/adapters/FoxPreviewInput` eier input og clipboard
 i worker/PDF-tråden. Rene ressursreferanser i semantikken får immutable visuelle
 ressurser før layout; renderer kjenner bare mål og eierskap. FOX-/Cairo-adapteren
 tegner dem. Fargebytte krever repaint, ikke ny parsing eller formelsats.
+
+P23-filansvar: `MathSyntax` gjenkjenner matematikk uten I/O og bevarer kildeoffsets.
+`VisualResource` og `EmbeddedContent` er rene kontrakter. `CairoVisual` eier native
+ressurslevetid; `ImageDecoder` + `GifBudget` begrenser dekoding, `MathTypesetter`
+eier MicroTeX-integrasjonen. `LinkResolver::resourcePath` gjenbruker den lokale
+URI-policyen; `localPath` beholder .md/.txt-valideringen for dokumentnavigasjon.
+`RenderFrame.maxRunHeight` avgrenser synlighets-/hit-test-søk også for høye bilder.

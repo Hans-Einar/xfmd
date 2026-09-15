@@ -357,6 +357,6 @@ og 46 sanitizer-tester. CI er merge-gate.
 ## P23 — rikt Markdown-innhold og kopiering
 
 Branch phase/p23-rich-preview. M1: UR-035–037, FUNC-021/022 og kontraktdesign.
-M2: logisk lesetekst, glyph-basert merking og native clipboard.
-M3: matematikkprofil, lokale bilder, felles ressursforberedelse og PDF-tegning.
-M4: regresjoner, visuell kontroll, dokumentasjon og installasjon.
+M2: logisk lesetekst, glyph-basert merking, native clipboard, matematikkprofil,
+lokale bilder, felles ressursforberedelse og PDF-tegning.
+M3: regresjoner, visuell kontroll, dokumentasjon og installasjon.

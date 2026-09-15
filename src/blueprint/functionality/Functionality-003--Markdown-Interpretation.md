@@ -6,7 +6,7 @@ role: Service
 owner: interpreter
 status: Implemented
 scope: FirstRelease
-requirements: UR-005, UR-002, SR-001, SR-003, SR-004, SR-005, SR-009, SR-011, SR-013
+requirements: UR-036, UR-037, UR-005, UR-002, SR-001, SR-003, SR-004, SR-005, SR-009, SR-011, SR-013
 uses: none
 ---
 
@@ -51,6 +51,11 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 
 | 5 | `ModelBuilder::appendNode` | `ModelBuilder::appendTable` | `src/interpreter/TableModelBuilder.cpp` | GFM-noder → eide tabellrader/celler | 64 kolonner / 50 000 celler | Implemented |
 
+
+P23: MathSyntax maskerer formeldelimitere med uendret bytelengde og eget koordinatgrunnlag for SourceMapBuilder. ModelBuilder produserer EmbeddedContent for bilde- og formelnoder; ingen ressurs-I/O.
+
+| 60 | `CmarkInterpreter::parse` | `MathSyntax::MathSyntax` | `src/interpreter/MathSyntax.cpp` | Raw kilde + AST → kodebeskyttet matematikkprofil | Feil gir plassholder | Implemented |
+
 ## 6. Gjenbruk og avhengigheter
 
 Ingen andre functionality-kontrakter konsumeres; delte datatyper følger arkitekturen.
@@ -74,3 +79,5 @@ se [P14](../../../docs/evidence/P14.md).
 
 Implemented i P3. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
 Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.
+
+P23 akseptanse: AT-056, AT-057. Tester: RichPreviewTest og PreviewSelectionGuiTest.

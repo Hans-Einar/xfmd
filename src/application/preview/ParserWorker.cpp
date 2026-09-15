@@ -1,6 +1,8 @@
 #include "ParserWorker.h"
 namespace xfmd {
-ParserWorker::ParserWorker(IInterpreter& parser) : interpreter(parser), thread([this] { run(); }) {}
+ParserWorker::ParserWorker(IInterpreter& parser,
+                           std::function<ParseResult(ParseResult, const SourceSnapshot&)> prepare)
+    : interpreter(parser), prepare(std::move(prepare)), thread([this] { run(); }) {}
 ParserWorker::~ParserWorker() {
   {
     std::lock_guard<std::mutex> lock(mutex);
@@ -48,6 +50,8 @@ void ParserWorker::run() {
     ParseCompletion result{source.token, {}, {}};
     try {
       result.model = interpreter.parse(source);
+      if (prepare)
+        result.model = prepare(result.model, source);
     } catch (const std::exception& e) {
       result.error = e.what();
     } catch (...) {

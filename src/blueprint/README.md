@@ -1,6 +1,6 @@
 # Blueprint-register
 
-P0–P15 er implementert: 9 features og 20 functionality-objekter.
+P0–P23 omfatter 9 features og 22 functionality-objekter.
 Registerstatus speiler metadata i blueprint-filene. Implemented betyr at koden
 finnes; [P15-bevis](../../docs/evidence/P15.md) angir faktisk testdekning og
 begrensninger. UR-010/SR-014 (xfw-IPC) er fortsatt Future.
@@ -118,11 +118,11 @@ P22: UR-032 → FUNC-010/014; UR-033 → FUNC-010; UR-034 → FUNC-005. AT-052�
 
 | ID | Type / målgruppe | Eier | Status | Bruker functionality |
 | --- | --- | --- | --- | --- |
-| [FUNC-021](functionality/Functionality-021--Preview-Text-Selection.md) | Functionality / System | application | Ready | none |
-| [FUNC-022](functionality/Functionality-022--Embedded-Visuals.md) | Functionality / System | application | Ready | none |
+| [FUNC-021](functionality/Functionality-021--Preview-Text-Selection.md) | Functionality / System | application | Implemented | none |
+| [FUNC-022](functionality/Functionality-022--Embedded-Visuals.md) | Functionality / System | application | Implemented | FUNC-008 |
 
 | Krav | Designobjekter | Akseptanse | Scope |
 | --- | --- | --- | --- |
-| UR-035 | [FUNC-021](functionality/Functionality-021--Preview-Text-Selection.md) | AT-055 | FirstRelease |
-| UR-036 | [FUNC-022](functionality/Functionality-022--Embedded-Visuals.md) | AT-056 | FirstRelease |
-| UR-037 | [FUNC-022](functionality/Functionality-022--Embedded-Visuals.md) | AT-057 | FirstRelease |
+| UR-035 | [FUNC-021](functionality/Functionality-021--Preview-Text-Selection.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FTR-001](feature/Feature-001--Markdown-Presentation.md) | AT-055 | FirstRelease |
+| UR-036 | [FUNC-022](functionality/Functionality-022--Embedded-Visuals.md), [FUNC-003](functionality/Functionality-003--Markdown-Interpretation.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md), [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md), [FUNC-018](functionality/Functionality-018--PDF-Export.md), [FTR-001](feature/Feature-001--Markdown-Presentation.md) | AT-056 | FirstRelease |
+| UR-037 | [FUNC-022](functionality/Functionality-022--Embedded-Visuals.md), [FUNC-003](functionality/Functionality-003--Markdown-Interpretation.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md), [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md), [FUNC-018](functionality/Functionality-018--PDF-Export.md), [FTR-001](feature/Feature-001--Markdown-Presentation.md) | AT-057 | FirstRelease |

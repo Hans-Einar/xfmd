@@ -4,10 +4,10 @@ kind: Functionality
 audience: System
 role: Adapter
 owner: application
-status: Ready
+status: Implemented
 scope: FirstRelease
 requirements: UR-036, UR-037
-uses: none
+uses: FUNC-008
 ---
 
 # Functionality-022: Embedded-Visuals
@@ -32,9 +32,11 @@ Kun lokale regulære filer, maksimalt 16 MiB komprimert og 16 millioner piksler.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `ParserWorker prepare callback / ExportPipeline` | `EmbeddedVisuals::prepare` | `src/application/media/EmbeddedVisuals.cpp` | Semantikk + dokumentsti → immutable visuelle ressurser | Avvis ugyldig input | Planned |
-| 2 | `EmbeddedVisuals` | `MathTypesetter::render` | `src/application/media/MathTypesetter.cpp` | LaTeX → vektorressurs | Avvis ugyldig input | Planned |
-| 3 | `EmbeddedVisuals` | `ImageDecoder::load` | `src/application/media/ImageDecoder.cpp` | Lokal sti → begrenset bilde | Avvis ugyldig input | Planned |
+| 1 | `ParserWorker prepare callback / ExportPipeline` | `EmbeddedVisuals::prepare` | `src/application/media/EmbeddedVisuals.cpp` | Semantikk + dokumentsti → immutable visuelle ressurser | Avvis ugyldig input | Implemented |
+| 2 | `EmbeddedVisuals` | `MathTypesetter::render` | `src/application/media/MathTypesetter.cpp` | LaTeX → vektorressurs | Avvis ugyldig input | Implemented |
+| 3 | `EmbeddedVisuals` | `ImageDecoder::load` | `src/application/media/ImageDecoder.cpp` | Lokal sti → begrenset bilde | Avvis ugyldig input | Implemented |
+
+| 4 | `EmbeddedVisuals::prepare` | `LinkResolver::resourcePath` | `src/application/navigation/LinkResolver.cpp` | Dokumentsti + bildereferanse → lokal sti | Bevarer eksisterende strengere dokumentpolicy i localPath | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -46,4 +48,8 @@ AT-056, AT-057. Planlagt: målrettede unit- og native FOX-tester samt full regre
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Ready for brukerbestilt P23. Implementasjon og faktisk testbevis følger i samme fase.
+Implemented i brukerbestilt P23. M3 samler testbevis og kjente grenser.
+
+ImageDecoder bruker GifBudget for samlet frame-budsjett før GIF-dekoding.
+MathTypesetter serialiserer bibliotekets globale tilstand; CairoVisual holder
+ferdig vektor-/pikselressurs uten videre MicroTeX-kall i GUI/PDF-paint.

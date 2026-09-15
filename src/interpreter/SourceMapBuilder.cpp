@@ -2,15 +2,17 @@
 #include <algorithm>
 #include <string_view>
 namespace xfmd {
-SourceMapBuilder::SourceMapBuilder(const std::string& source) : source(source) {
+SourceMapBuilder::SourceMapBuilder(const std::string& source, const std::string* coordinates)
+    : source(source) {
+  const auto& parsed = coordinates ? *coordinates : source;
   std::size_t start = source.compare(0, 3, "\xef\xbb\xbf") == 0 ? 3 : 0;
   lines.push_back(start);
-  for (std::size_t i = start; i < source.size(); ++i) {
-    if (source[i] == '\r') {
-      if (i + 1 < source.size() && source[i + 1] == '\n')
+  for (std::size_t i = start; i < parsed.size(); ++i) {
+    if (parsed[i] == '\r') {
+      if (i + 1 < parsed.size() && parsed[i + 1] == '\n')
         ++i;
       lines.push_back(i + 1);
-    } else if (source[i] == '\n')
+    } else if (parsed[i] == '\n')
       lines.push_back(i + 1);
   }
 }

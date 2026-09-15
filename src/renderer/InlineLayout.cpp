@@ -25,6 +25,9 @@ double InlineLayout::layout(const SemanticBlock& block, double left, double top,
                             FontSpec base, ITextMetrics& metrics, RenderFrame& frame, bool wrapCode,
                             const std::function<bool()>& cancelled, ColumnAlignment alignment) {
   double x = left, y = top;
+  if (!frame.readingText.empty())
+    frame.readingText += "\n";
+  std::size_t textBase = frame.readingText.size();
   auto defaultExtent = metrics.measure("M", base);
   double lineHeight = defaultExtent.height + 4, ascent = defaultExtent.ascent;
   std::size_t lineStart = frame.runs.size();
@@ -67,17 +70,18 @@ double InlineLayout::layout(const SemanticBlock& block, double left, double top,
     bool merged = false;
     if (frame.runs.size() > lineStart) {
       auto& previous = frame.runs.back();
-      if (previous.icon == InlineIcon::None && previous.font == font && previous.link == run.link &&
-          previous.codeBackground == background && previous.source.begin != previous.source.end &&
-          previous.source.end == source.begin && previous.source.quality == source.quality &&
-          previous.bounds.y == y && previous.ascent == extent.ascent &&
-          previous.bounds.height == extent.height) {
+      if (!previous.visual && previous.icon == InlineIcon::None && previous.font == font &&
+          previous.link == run.link && previous.codeBackground == background &&
+          previous.source.begin != previous.source.end && previous.source.end == source.begin &&
+          previous.source.quality == source.quality && previous.bounds.y == y &&
+          previous.ascent == extent.ascent && previous.bounds.height == extent.height) {
         if (extent.shaped) {
           if (!previous.shapeCount)
             previous.shapeBegin = frame.shapeParts.size();
           frame.shapeParts.push_back(extent.shaped);
           ++previous.shapeCount;
         }
+        previous.textEnd = textBase + end;
         previous.text.append(text);
         previous.bounds.width += extent.width;
         previous.source.end = source.end;
@@ -93,6 +97,8 @@ double InlineLayout::layout(const SemanticBlock& block, double left, double top,
                             run.link,
                             background});
       frame.runs.back().shaped = extent.shaped;
+      frame.runs.back().textBegin = textBase + begin;
+      frame.runs.back().textEnd = textBase + end;
     }
     x += extent.width;
     frame.contentWidth = std::max(frame.contentWidth, x + 20);
@@ -102,6 +108,8 @@ double InlineLayout::layout(const SemanticBlock& block, double left, double top,
   std::string previousLink;
   std::size_t previousLinkId = 0;
   for (const auto& run : block.runs) {
+    textBase = frame.readingText.size();
+    frame.readingText += run.text;
     if (!run.link.empty() && (run.link != previousLink || run.linkId != previousLinkId)) {
       if (auto marker = LinkMarker::make(run, base, metrics)) {
         if (x > left && x + marker->bounds.width + metrics.measure("M", base).width > left + width)
@@ -128,6 +136,37 @@ double InlineLayout::layout(const SemanticBlock& block, double left, double top,
     font.mono |= run.code;
     if (run.code)
       font.points = block.kind == BlockKind::Code ? 11 : base.points;
+    if (run.embedded.visual) {
+      const auto& visual = run.embedded.visual;
+      const double maxHeight =
+          frame.key.profile.mode == LayoutMode::Paged
+              ? frame.key.profile.paper.height - 2 * frame.key.profile.paper.margin - 60
+              : 1000;
+      double factor = std::min({1.0, width / visual->width, maxHeight / visual->height});
+      double w = visual->width * factor, h = visual->height * factor;
+      frame.maxRunHeight = std::max(frame.maxRunHeight, h);
+      if ((run.embedded.display || x + w > left + width) && x > left)
+        finishLine();
+      DrawRun draw;
+      draw.text = run.text;
+      draw.source = run.source;
+      draw.link = run.link;
+      draw.visual = visual;
+      draw.bounds = {x, y, w, h};
+      draw.ascent = visual->ascent * factor;
+      draw.textBegin = textBase;
+      draw.textEnd = textBase + run.text.size();
+      if (run.embedded.display)
+        draw.bounds.x += (width - w) / 2;
+      frame.runs.push_back(std::move(draw));
+      x += w;
+      lineHeight = std::max(lineHeight, h + 4);
+      ascent = std::max(ascent, visual->ascent * factor);
+      frame.contentWidth = std::max(frame.contentWidth, x + 20);
+      if (run.embedded.display)
+        finishLine();
+      continue;
+    }
     const auto spaceExtent = metrics.measure(" ", font);
     for (std::size_t begin = 0; begin < run.text.size();) {
       if (cancelled && cancelled())
@@ -151,6 +190,7 @@ double InlineLayout::layout(const SemanticBlock& block, double left, double top,
         if (wrapCode && x > left && x + 4 * spaceExtent.width > left + width)
           finishLine();
         emit(spaces, 0, 4, font);
+        frame.runs.back().textEnd = textBase + begin + 1;
         ++begin;
         continue;
       }
