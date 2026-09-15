@@ -403,3 +403,6 @@ CLI-verktøy og avhengigheter tilføyes først i implementeringsfasene.
 
 Utvidelse utover Flowchart 1 (bl.a. sequence/class/ER) krever egne modellvarianter,
 kravprofil og fixture-dekning; det er ikke en skjult del av P27.
+
+P25 M1 `60a63aa`, M2 `f0cdb41`; M3 samler
+[designgjennomgang og kontroller](docs/evidence/P25.md). P26–P29 er ikke startet.

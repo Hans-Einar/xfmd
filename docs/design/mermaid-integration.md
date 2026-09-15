@@ -239,3 +239,5 @@ at all Rust-kode er instrumentert. P26 fastsetter Rust FFI-/fuzz-/Miri-kontroll 
 supplerende instrumentering der verktøykjeden støtter det. Lagkontrollen utvides
 til Cargo-avhengigheter og rendererens forbud mot parserkall. Ingen stubber eller
 ny build-option legges til før implementasjonen begynner.
+
+P25-kontroller og avgrensninger: [designbevis](../evidence/P25.md).
