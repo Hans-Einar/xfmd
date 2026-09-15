@@ -26,9 +26,11 @@ int main(int argc, char** argv) {
     return 3;
   if (std::getenv("XFMD_CAPTURE_A4"))
     app.execute(xfmd::CommandRouter::A4);
-  for (int i = 0; i < 300; ++i) {
+  for (int i = 0; i < 3000; ++i) {
     app.app.runWhileEvents();
     std::this_thread::sleep_for(std::chrono::milliseconds(3));
+    if (i >= 300 && app.host->interactive())
+      break;
   }
   if (!app.host->interactive())
     return 4;

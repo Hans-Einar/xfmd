@@ -27,6 +27,13 @@ void run() {
     }
     std::cout << name << " " << scene->width << "x" << scene->height << " pt\n";
   }
+  auto grouped = parser.parse({"flowchart LR\nsubgraph Outer [Group A]\nsubgraph Inner [Group "
+                               "B]\nA[Ærlig]-->B\nend\nC[Rest]\nend\nB-->C",
+                               {}});
+  CHECK(grouped.model);
+  auto groupedScene = layout.layout(*grouped.model, {}, metrics);
+  CHECK(groupedScene->groups.size() == 2 && groupedScene->nodes.size() == 3);
+  CHECK(groupedScene->labels[0].text == "Group A" && groupedScene->labels[1].text == "Group B");
   // Layout is independently replaceable: no parser or source needed here.
   DiagramModel model;
   model.nodes.push_back({"a", "Ærlig måling", DiagramShape::Rectangle});
