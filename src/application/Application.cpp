@@ -1,7 +1,7 @@
 #include "Application.h"
 #include "adapters/FoxWheelScrollBar.h"
 #include "interpreter/CmarkInterpreter.h"
-#include "media/EmbeddedVisuals.h"
+#include "composition/DiagramServices.h"
 #include "renderer/MarkdownRenderer.h"
 #include <filesystem>
 using namespace FX;
@@ -74,7 +74,7 @@ void Application::initialize(int& argc, char** argv) {
     return false;
   };
   wireDocument();
-  interpreter = std::make_unique<CmarkInterpreter>();
+  interpreter = DiagramServices::interpreter();
   renderer = std::make_unique<MarkdownRenderer>();
   metrics = std::make_unique<SharedTextMetrics>();
   host = new FoxRenderHost(window->previewArea, *renderer, *metrics);
@@ -83,7 +83,7 @@ void Application::initialize(int& argc, char** argv) {
   };
   scheduler = std::make_unique<FoxScheduler>(app);
   preview = std::make_unique<PreviewCoordinator>(session, *interpreter, *renderer, *metrics,
-                                                 *scheduler, EmbeddedVisuals::prepare);
+                                                 *scheduler, DiagramServices::preview());
   preview->invalidated = [this](DocumentToken token) {
     window->workspacePanel->index->invalidate(token, session.view().path);
     scrolling.invalidate(token);
