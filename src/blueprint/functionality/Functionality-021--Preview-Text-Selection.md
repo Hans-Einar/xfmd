@@ -35,7 +35,7 @@ Ny dokumentrevisjon nullstiller merking; fargeendring bevarer merking. Clipboard
 | 1 | `FoxRenderHost input` | `PreviewSelection::hit` | `src/application/preview/PreviewSelection.cpp` | Dokumentpunkt → UTF-8-posisjon | Avvis ugyldig input | Implemented |
 | 2 | `FOX clipboard request` | `FoxRenderHost::onClipboardRequest` | `src/application/adapters/FoxPreviewInput.cpp` | Eid tekst → UTF-8 clipboard | Avvis ugyldig input | Implemented |
 
-| 99 | `MarkdownRenderer::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | Diagrametiketter i logisk leserekkefølge | Blokkfeil og stale-data følger Mermaid-designet | Implemented |
+| 99 | `BlockLayout::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | Diagrametiketter i logisk leserekkefølge | Blokkfeil og stale-data følger Mermaid-designet | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 

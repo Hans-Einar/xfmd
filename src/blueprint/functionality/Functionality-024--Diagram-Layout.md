@@ -22,11 +22,11 @@ UR-039–041, SR-021–023; AT-059–064. Se [design og kontrakter](../../../doc
 
 ## 3. Kontrakter og eierskap
 
-IDiagramLayout::layout(DiagramModel, DiagramLayoutRequest, ITextMetrics&) → DiagramScene. Modellen og resultatet er XFMD-eide verdier. Rust-bridge rekonstruerer upstream Graph fra den rene modellen og bruker compute_layout. Layout inneholder tekstbokser/edge points; DiagramSceneBuilder lager støttede former og pilspisser med semantiske farger. DiagramPlacement gjenbruker normal frame-tekst/shaping.
+IDiagramLayout::layout(DiagramModel, DiagramLayoutRequest, ITextMetrics&) → DiagramScene. Modellen og resultatet er XFMD-eide verdier. Rust-bridge rekonstruerer upstream Graph fra den rene modellen og bruker compute_layout. Layout inneholder tekstbokser/edge points; MermaidDiagramLayout dekoder til semantiske former og kantruter; DiagramPainter utfører primitivene med Cairo. DiagramPlacement gjenbruker normal frame-tekst/shaping.
 
 ## 4. Atferd, tilstand og feil
 
-Layout forberedes i worker. Tekstmåling skjer med samme fontgrunnlag som brødtekst/PDF; en planlagt, versjonsbundet upstream-seam mater målte TextBlock-verdier til layout. Ingen oversettelse fra kildestreng til layout i denne tjenesten. Ingen SVG-rasterisering eller glyph-konturer som erstatning for kopierbar tekst. Ukjent form, NaN, ugyldig kant eller budsjettbrudd gir blokklokal feil.
+Layout forberedes i worker. Tekstmåling skjer med samme fontgrunnlag som brødtekst/PDF; en versjonsbundet upstream-seam mater målte TextBlock-verdier til layout. Ingen oversettelse fra kildestreng til layout i denne tjenesten. Ingen SVG-rasterisering eller glyph-konturer som erstatning for kopierbar tekst. Ukjent form, NaN, ugyldig kant eller budsjettbrudd gir blokklokal feil.
 
 ## 5. Plumbing
 
@@ -36,8 +36,8 @@ Layout forberedes i worker. Tekstmåling skjer med samme fontgrunnlag som brødt
 | 2 | `MermaidDiagramLayout::layout` | `DiagramTextLayout::measure` | `src/renderer/diagram/DiagramTextLayout.cpp` | etiketter → formede linjer og mål | samme ITextMetrics-port | Implemented |
 | 3 | `MermaidDiagramLayout::layout` | `xfmd_diagram_layout_v1` | `src/application/composition/mermaid/src/lib.rs` | ren graf + labelmål → LayoutResult | ingen parserkall/opaque parserhandle | Implemented |
 | 4 | `xfmd_diagram_layout_v1` | `layout` | `src/renderer/diagram/rust/src/lib.rs` | mapping → upstream compute_layout → ren geometri | mål-seam må verifiseres i P26 | Implemented |
-| 5 | `MermaidDiagramLayout::layout` | `MermaidDiagramLayout::layout` | `src/renderer/diagram/MermaidDiagramLayout.cpp` | layout → stier + semantiske etiketter | forme-/piltester | Implemented |
-| 6 | `MarkdownRenderer::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | scene → skalert frame og lesetekst | Approximate blokkanker, ingen sideklipping | Implemented |
+| 5 | `MermaidDiagramLayout::layout` | `Reader::finish` | `src/contracts/diagram/DiagramWire.h` | ferdig dekodet scene → kontrollert buffer | trailing data avvises; scene er XFMD-eid | Implemented |
+| 6 | `BlockLayout::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | scene → skalert frame og lesetekst | Approximate blokkanker, ingen sideklipping | Implemented |
 
 
 ## 6. Gjenbruk og avhengigheter
@@ -46,10 +46,10 @@ Konsumenter: FUNC-025, eksisterende MarkdownRenderer og PDF via vanlig frame. IT
 
 ## 7. Verifikasjon
 
-Planlagt DiagramLayoutTest og DiagramPlacementTest, plus Rust/C-ABI-tester. Sammenlign geometri/kanter mot upstream, og mål tekstoverløp med norske etiketter. Native merking og PDF er AT-060/061. Parserfri alternativ modell er AT-062.
+DiagramLayoutTest dekker parserfri modell, begge brukerdiagrammer, nested grupper, fontmål, 128-noders kjede og tidsavbrudd med etterfølgende normal layout. DiagramReadingTest og MermaidPdfTest dekker skalering, merking og native tekst. Se [P29](../../../docs/evidence/P29.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 
 Implementert. Versjonsbundet patch leverer måleseam og kooperativ tidsgrense. Scene bygges i adapteren; DiagramPlacement lager vanlige DrawRuns. Se P26-bevis og videre P28/P29-verifikasjon.
 
-Planlagt akseptanse: AT-059, AT-060, AT-061, AT-062, AT-063, AT-064.
+Akseptanse: AT-059, AT-060, AT-061, AT-062, AT-063, AT-064.

@@ -22,7 +22,7 @@ UR-039–041, SR-021–023; AT-059–064. Se [design og kontrakter](../../../doc
 
 ## 3. Kontrakter og eierskap
 
-DiagramPreparation::prepare(model, request, metrics, cancellation) produserer en ny immutable presentasjonsmodell. Injisert IDiagramLayout brukes; DiagramCache eier begrenset LRU. Composition root kobler portene og lenker én Rust staticlib, sammensatt av separate parser-/layout-crates.
+DiagramPreparation::prepare(model, metrics, cancellation) produserer en ny immutable presentasjonsmodell. Injisert IDiagramLayout brukes; DiagramCache eier begrenset LRU. Composition root kobler portene og lenker én Rust staticlib, sammensatt av separate parser-/layout-crates.
 
 ## 4. Atferd, tilstand og feil
 
@@ -33,7 +33,7 @@ Gjenbruk ParserWorker med én aktiv/én ventende jobb og ExportPipeline med egne
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | `DiagramServices::preview` | `DiagramPreparation::DiagramPreparation` | `src/application/diagrams/DiagramPreparation.h` | injected layout → prepare-objekt per worker | ingen global singleton | Implemented |
-| 2 | `ParserWorker::run / ExportPipeline::run` | `DiagramPreparation::prepare` | `src/application/diagrams/DiagramPreparation.cpp` | immutable modell + request key → dekorert modell | gjenbruk også EmbeddedVisuals i samme prepare-kjede | Implemented |
+| 2 | `DiagramServices::preview / DiagramServices::prepare` | `DiagramPreparation::prepare` | `src/application/diagrams/DiagramPreparation.cpp` | immutable modell + request key → dekorert modell | gjenbruk også EmbeddedVisuals i samme prepare-kjede | Implemented |
 | 3 | `DiagramPreparation::prepare` | `DiagramCache::find` | `src/application/diagrams/DiagramCache.cpp` | innhold + profil + font/backend → treff/miss | begrenset LRU; ingen diskcache | Implemented |
 | 4 | `DiagramPreparation::prepare` | `IDiagramLayout::layout` | `src/contracts/diagram/IDiagramLayout.h` | ren modell → scene | blokkfeil blir fallback | Implemented |
 | 5 | `DiagramPreparation::prepare` | `DiagramCache::insert` | `src/application/diagrams/DiagramCache.cpp` | vellykket scene → worker-lokal cache | ikke cache transient feil | Implemented |
@@ -46,10 +46,10 @@ FUNC-007 og FUNC-018 er konsumenter; gjenbruk FUNC-016 for shaping/tegning. Diag
 
 ## 7. Verifikasjon
 
-Planlagt DiagramPreparationTest, MermaidGuiTest og MermaidPdfTest: stale/font/resize-race, rask editing, cachegrense, kansellering, palettrepaint, glyph-markering og PDF-vektor/tekst. AT-059–064. Ingen runtime-test er utført i P25.
+DiagramPreparationTest dekker feil, fontidentitet og cachegrense. DiagramWorkerTest verifiserer kansellering av gammel prepare-jobb med samme token. MermaidGuiTest og MermaidPdfTest dekker native presentasjon og eksport. Se [P29](../../../docs/evidence/P29.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 
 Implementert. P26 avdekket dyr kantruting og la til kooperative checkpoints. Ingen hard preemption eller global cache. Hver preview-worker eier egne font-/layout-/cacheobjekter; PDF-jobben har tilsvarende kortlivet prepare-kjede.
 
-Planlagt akseptanse: AT-059, AT-060, AT-061, AT-062, AT-063, AT-064.
+Akseptanse: AT-059, AT-060, AT-061, AT-062, AT-063, AT-064.

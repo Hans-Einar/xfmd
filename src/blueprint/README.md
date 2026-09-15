@@ -133,7 +133,7 @@ P22: UR-032 → FUNC-010/014; UR-033 → FUNC-010; UR-034 → FUNC-005. AT-052�
 | --- | --- | --- | --- |
 | UR-038 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | AT-058 | FirstRelease |
 
-## P25 — Mermaid-design (Proposed, Future)
+## P25–P29 — Mermaid Flowchart 1 (Implemented, FirstRelease)
 
 | ID | Type / målgruppe | Eier | Status |
 | --- | --- | --- | --- |

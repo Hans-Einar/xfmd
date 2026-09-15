@@ -377,7 +377,7 @@ Release, sanitizers og Light/Dark.
 
 ## P25–P29 — Mermaid via mermaid-rs-renderer
 
-Status: **Proposed design**, ingen produksjonsimplementasjon. Se
+Status: **Implemented**, med testbevis i P26–P29. Se
 [design, filkart og ABI](docs/design/mermaid-integration.md), FTR-010 og FUNC-023–025.
 Alle planlagte symboler nedenfor skal forbli Planned til de finnes. Hver fase får
 egen branch og commits per milestone; ingen fase behandles som sprint.
@@ -394,22 +394,33 @@ P26-gaten er konkret: mål-seam finnes ikke som offentlig upstream-port i unders
 pin. Vis kontrollert node-/edge-/gruppe-måling med Pango-data, ingen stille syntax-
 tap og håndterbar kjøretid for 128 noder/512 kanter. Ved behov for stor upstream-fork
 eller prosessisolasjon revideres designet før P27; ikke skjul reparsing i renderer.
-Rust-cancel er foreløpig checkpoint før/etter kall, ikke hard tidsavbrudd.
+Rust har en versjonsbundet kooperativ tosekunders deadline i tillegg til
+checkpoint før/etter kall; det er ikke hard tidsavbrudd.
 
-Planlagte testnavn: MermaidInterpreterTest, DiagramAbiTest, DiagramLayoutTest,
-DiagramPlacementTest, DiagramPreparationTest, MermaidGuiTest og MermaidPdfTest,
-med egne Rust-unit-/FFI-tester. Navnene er ikke eksisterende testtargets. Bygg, test,
-CLI-verktøy og avhengigheter tilføyes først i implementeringsfasene.
+De planlagte testnavnene er konsolidert til Rust-profil-/FFI-tester,
+DiagramLayoutTest, DiagramPreparationTest, DiagramWorkerTest, DiagramReadingTest,
+MermaidGuiTest og MermaidPdfTest. MermaidDependencies kontrollerer låst graf;
+vanlige lag-/blueprint-/regresjonskontroller beholdes.
 
 Utvidelse utover Flowchart 1 (bl.a. sequence/class/ER) krever egne modellvarianter,
 kravprofil og fixture-dekning; det er ikke en skjult del av P27.
 
 P25 M1 `60a63aa`, M2 `f0cdb41`; M3 samler
 [designgjennomgang og kontroller](docs/evidence/P25.md). P26 er implementert og lokal gate består; M1 `1e13664`, M2 `68b9c01`.
-M3 bevis samles i [P26](docs/evidence/P26.md). P27–P29 følger.
+M3 bevis samles i [P26](docs/evidence/P26.md). P27–P29 er implementert; verifikasjon og integrasjon står nedenfor.
 
 P27 M1 `012361c`, M2 `7aedb48`; M3 samler native preview og regresjon.
 Alle 55 lokale tester består; se [P27](docs/evidence/P27.md).
 
 P28 M1 `6d85642`, M2 dokumenterer native clipboard; M3 verifiserer
 A4 og tekst-/vektor-PDF. Se [P28](docs/evidence/P28.md).
+
+P29 M1 `a19bb17` styrker ABI/feil og dependency-kontroll. M2/M3 samler
+sluttverifikasjon, offline/installasjon og CI i [P29](docs/evidence/P29.md).
+
+
+P29 M2 `9b0156b` kontrollerer offline og native installasjon. Rettelsen
+`168e6a1` skiller produksjons- og instrumenteringsbudsjett. M3 samler
+faktiske plumbing-symboler, flersidet PDF og testbevis: Release 59/59 og
+Debug ASan/UBSan/LSan 57/57, med berørte tester kjørt igjen etter utvidelser.
+P26–P28 er integrert via PR 19–21; P29 går gjennom samme CI før merge/installasjon.
