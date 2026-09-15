@@ -46,3 +46,5 @@ AT-055. Planlagt: målrettede unit- og native FOX-tester samt full regresjon.
 ## 8. Status, risiko og endringskonsekvenser
 
 Implemented i brukerbestilt P23. M3 samler testbevis og kjente grenser.
+
+P23: [testbevis og visuell kontroll](../../../docs/evidence/P23.md).

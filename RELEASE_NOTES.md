@@ -82,3 +82,11 @@ Se [produksjonsdesign](docs/design/fox-ui-layer.md) og
   med kodeklammer, delt rute og øyeikon. Tastatursnarveiene er beholdt.
 
 [Testbevis og skjermbilde](docs/evidence/P20.md).
+
+## P23 — rikt Markdown-innhold
+
+- Merk tekst i preview med musen; Ctrl+A/Ctrl+C og Linux PRIMARY støttes.
+- LaTeX-formler inline og i blokker, inklusive brøk, rot, sum, integral og matrise.
+- Lokale PNG-, JPEG-, GIF- og SVG-bilder med relative/absolutte stier og aspektbevaring.
+- Formler følger lesefargene; bilder/formler inngår også i PDF-eksport.
+- Dokumentasjon, native clipboard-tester og sanitizer-verifiserte bibliotekrettelser.

@@ -53,3 +53,5 @@ Implemented i brukerbestilt P23. M3 samler testbevis og kjente grenser.
 ImageDecoder bruker GifBudget for samlet frame-budsjett før GIF-dekoding.
 MathTypesetter serialiserer bibliotekets globale tilstand; CairoVisual holder
 ferdig vektor-/pikselressurs uten videre MicroTeX-kall i GUI/PDF-paint.
+
+P23: [testbevis og visuell kontroll](../../../docs/evidence/P23.md).

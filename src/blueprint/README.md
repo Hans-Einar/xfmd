@@ -12,7 +12,7 @@ Se [designrevisjonen](../../softwareDesign.md), [arbeidsmåten](../../docs/worki
 
 | ID | Type / målgruppe | Eier | Status | Bruker functionality |
 | --- | --- | --- | --- | --- |
-| [FTR-001](feature/Feature-001--Markdown-Presentation.md) | Feature / User | application | Implemented | FUNC-001, FUNC-002, FUNC-003, FUNC-004, FUNC-005, FUNC-007, FUNC-010, FUNC-016, FUNC-017 |
+| [FTR-001](feature/Feature-001--Markdown-Presentation.md) | Feature / User | application | Implemented | FUNC-001, FUNC-002, FUNC-003, FUNC-004, FUNC-005, FUNC-007, FUNC-010, FUNC-016, FUNC-017, FUNC-021, FUNC-022 |
 | [FTR-002](feature/Feature-002--Live-Preview.md) | Feature / User | application | Implemented | FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006, FUNC-007, FUNC-011 |
 | [FTR-003](feature/Feature-003--Document-Navigation.md) | Feature / User | application | Implemented | FUNC-001, FUNC-002, FUNC-005, FUNC-008, FUNC-009, FUNC-010 |
 | [FTR-004](feature/Feature-004--Synchronized-Scrolling.md) | Feature / User | application | Implemented | FUNC-004, FUNC-005, FUNC-009, FUNC-010, FUNC-015 |
