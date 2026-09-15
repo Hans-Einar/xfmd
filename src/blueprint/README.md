@@ -105,3 +105,5 @@ Se [designrevisjonen](../../softwareDesign.md), [arbeidsmåten](../../docs/worki
 | --- | --- | --- | --- |
 | UR-030 | [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-014](functionality/Functionality-014--Application-Preferences.md), [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md) | AT-050 | FirstRelease |
 | UR-031 | [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-014](functionality/Functionality-014--Application-Preferences.md), [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md) | AT-051 | FirstRelease |
+
+P22: UR-032 → FUNC-010/014; UR-033 → FUNC-010; UR-034 → FUNC-005. AT-052–054.

@@ -6,7 +6,7 @@ role: Adapter
 owner: application
 status: Implemented
 scope: FirstRelease
-requirements: UR-030, UR-031, UR-011, UR-002, UR-005, UR-008, SR-001, SR-008, SR-009, SR-010, SR-013, UR-017, SR-016, SR-019
+requirements: UR-034, UR-030, UR-031, UR-011, UR-002, UR-005, UR-008, SR-001, SR-008, SR-009, SR-010, SR-013, UR-017, SR-016, SR-019
 uses: FUNC-004, FUNC-015, FUNC-016
 ---
 
@@ -66,6 +66,8 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 | 15 | `FOX grab loss` | `FoxRenderHost::onUngrabbed` | `src/application/adapters/FoxRenderHost.cpp` | Tap av grab → nullstill klikk | Ingen lenkecallback | Implemented |
 | 20 | `Application::changeReadingColors / applyAppearance` | `FoxRenderHost::setReadingColors` | `src/application/adapters/FoxRenderHost.cpp` | Lesefarger → repaint/profil | Ingen dokumentmutasjon | Implemented |
 
+| 30 | `FoxRenderHost hover callback` | `Application::showLinkTarget` | `src/application/ApplicationAppearance.cpp` | Lenke → statuslinje | Ingen aktivering; ugyldig sti vises som mål | Planned |
+
 ## 6. Gjenbruk og avhengigheter
 
 [FUNC-004](../functionality/Functionality-004--Render-Layout.md)
@@ -102,3 +104,5 @@ Profiler lagres additivt i ReadingLight/ReadingDark via eksisterende preferences
 Live endring er repaint; commit ved release, med rollback ved skrivefeil.
 
 P21: [AT-050/051, regresjoner og skjermbilder](../../../docs/evidence/P21.md).
+
+P22: felles kompakt topplinje; UR-032/033/034 beskriver endret scope.
