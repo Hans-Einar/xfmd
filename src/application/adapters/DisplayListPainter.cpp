@@ -1,4 +1,5 @@
 #include "DisplayListPainter.h"
+#include "DiagramPainter.h"
 #include "application/media/CairoVisual.h"
 #include <algorithm>
 #include <cmath>
@@ -25,7 +26,10 @@ bool visible(Rect r, Rect clip) {
 void DisplayListPainter::text(cairo_t* cr, const RenderFrame& frame, const DrawRun& draw) {
   if (!draw.shaped)
     return;
-  double x = draw.bounds.x;
+  SavedState saved(cr);
+  cairo_translate(cr, draw.bounds.x, draw.bounds.y);
+  cairo_scale(cr, draw.textScale, draw.textScale);
+  double x = 0;
   auto drawPart = [&](const ShapedText& part) {
     for (const auto& segment : part.segments) {
       PangoItem item{};
@@ -48,7 +52,7 @@ void DisplayListPainter::text(cairo_t* cr, const RenderFrame& frame, const DrawR
       PangoGlyphItem run{};
       run.item = &item;
       run.glyphs = glyphs;
-      cairo_move_to(cr, x, draw.bounds.y + draw.ascent);
+      cairo_move_to(cr, x, draw.ascent / draw.textScale);
       pango_cairo_show_glyph_item(cr, segment.text.c_str(), &run);
       for (const auto& glyph : segment.glyphs)
         x += glyph.advance;
@@ -83,7 +87,9 @@ void DisplayListPainter::paint(const RenderFrame& frame, cairo_t* cr, Rect clip,
               : !active          ? 0x878787
               : run.link.empty() ? 0x1d2531
                                  : 0x1855a6);
-    if (const auto* visual = dynamic_cast<const CairoVisual*>(run.visual.get())) {
+    if (const auto* diagram = dynamic_cast<const DiagramScene*>(run.visual.get())) {
+      DiagramPainter::paint(cr, *diagram, run.bounds, palette, active);
+    } else if (const auto* visual = dynamic_cast<const CairoVisual*>(run.visual.get())) {
       SavedState resourceState(cr);
       cairo_translate(cr, run.bounds.x, run.bounds.y);
       const double w =

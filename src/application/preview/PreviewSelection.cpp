@@ -23,11 +23,11 @@ std::vector<Cluster> clusters(const RenderFrame& frame, const DrawRun& run) {
         auto end = *std::upper_bound(ends.begin(), ends.end(), glyph.cluster);
         const auto begin = offset + segment.byteOffset + glyph.cluster;
         if (!result.empty() && result.back().begin == begin) {
-          result.back().width += glyph.advance;
+          result.back().width += (glyph.advance * run.textScale);
         } else
-          result.push_back({begin, offset + segment.byteOffset + end, x, glyph.advance,
-                            bool(segment.level & 1)});
-        x += glyph.advance;
+          result.push_back({begin, offset + segment.byteOffset + end, x,
+                            (glyph.advance * run.textScale), bool(segment.level & 1)});
+        x += (glyph.advance * run.textScale);
       }
     }
     for (const auto& segment : shape.segments)

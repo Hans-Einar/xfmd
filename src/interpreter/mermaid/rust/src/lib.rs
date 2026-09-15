@@ -39,3 +39,70 @@ mod tests {
         assert!(parse(b"flowchart LR\nA[click] -->|style| B[end]").is_ok());
     }
 }
+#[cfg(test)]
+mod profile_matrix {
+    use super::parse;
+    use xfmd_diagram_contracts::{Model, wire::Reader};
+    fn model(s: &str) -> Model {
+        let bytes = parse(s.as_bytes()).unwrap();
+        Model::read(&mut Reader::new(&bytes)).unwrap()
+    }
+    #[test]
+    fn shapes_arrows_and_directions() {
+        for direction in ["LR", "RL", "TD", "TB", "BT"] {
+            let m = model(&format!(
+                "flowchart {direction}\nA[Ærlig] <--> B(Round)\nB -.-> C{{Choice}}\nC ==> D((Circle))\nD --> D"
+            ));
+            assert_eq!(
+                m.nodes.iter().map(|n| n.shape).collect::<Vec<_>>(),
+                vec![0, 1, 2, 3]
+            );
+            assert_eq!(m.edges[0].arrows, 3);
+            assert_eq!(m.edges[1].style, 1);
+            assert_eq!(m.edges[2].style, 2);
+            assert_eq!(m.edges[3].from, m.edges[3].to);
+        }
+    }
+    #[test]
+    fn groups_and_chain() {
+        let m = model(
+            "flowchart LR\nsubgraph G [Outer]\ndirection TD\nsubgraph H [Inner]\nA-->B-->C\nend\nend\nC-->A\nA-->B",
+        );
+        assert_eq!(m.groups.len(), 2);
+        assert_eq!(m.edges.len(), 4);
+        assert_eq!(m.groups[1].parent, 0);
+    }
+    #[test]
+    fn unsupported_is_local_error() {
+        for body in [
+            "A-->B\nstyle A fill:red",
+            "A:::red",
+            "A[[Subroutine]]",
+            "A[(Database)]",
+            "A[<b>HTML</b>]",
+            "A[`Markdown`]",
+            "A-->B\nclassDef c fill:red",
+            "A-->B\nclick A href https://example.com",
+            "A & B --> C",
+            "A@{img: x}",
+        ] {
+            assert!(
+                parse(format!("flowchart LR\n{body}").as_bytes()).is_err(),
+                "{body}"
+            );
+        }
+    }
+    #[test]
+    fn arbitrary_input_does_not_panic() {
+        let mut seed = 1u64;
+        for length in 0..512 {
+            let mut input = b"flowchart LR\n".to_vec();
+            for _ in 0..length {
+                seed = seed.wrapping_mul(6364136223846793005).wrapping_add(1);
+                input.push((seed >> 32) as u8);
+            }
+            let _ = parse(&input);
+        }
+        assert!(parse(&vec![b'A'; 65537]).is_err());
+    }
+}

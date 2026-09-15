@@ -28,12 +28,12 @@ pkg_check_modules(PIXBUF REQUIRED IMPORTED_TARGET gdk-pixbuf-2.0)
 add_library(xfmd_contracts INTERFACE)
 target_include_directories(xfmd_contracts INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src")
 add_library(xfmd_interpreter
-  src/interpreter/mermaid/MermaidInterpreter.cpp src/interpreter/MathSyntax.cpp src/interpreter/CmarkInterpreter.cpp src/interpreter/ModelBuilder.cpp
+  src/interpreter/mermaid/MermaidBlockBuilder.cpp src/interpreter/mermaid/MermaidInterpreter.cpp src/interpreter/MathSyntax.cpp src/interpreter/CmarkInterpreter.cpp src/interpreter/ModelBuilder.cpp
   src/interpreter/SourceMapBuilder.cpp src/interpreter/TableModelBuilder.cpp)
 target_link_libraries(xfmd_interpreter PUBLIC xfmd_contracts PRIVATE xfmd_rust ${CMARK_EXTENSIONS} ${CMARK_CORE})
 target_include_directories(xfmd_interpreter PRIVATE ${CMARK_INCLUDE_DIRS})
 add_library(xfmd_renderer
-  src/renderer/diagram/DiagramTextLayout.cpp src/renderer/diagram/MermaidDiagramLayout.cpp
+  src/renderer/diagram/DiagramPlacement.cpp src/renderer/diagram/DiagramTextLayout.cpp src/renderer/diagram/MermaidDiagramLayout.cpp
   src/renderer/MarkdownRenderer.cpp src/renderer/BlockLayout.cpp src/renderer/TableLayout.cpp
   src/renderer/PageBreaker.cpp src/renderer/PageComposer.cpp src/renderer/PageAnchorIndex.cpp
   src/renderer/InlineLayout.cpp src/renderer/HitTester.cpp src/renderer/LinkMarker.cpp)
@@ -67,12 +67,14 @@ target_link_libraries(xfmd_media PUBLIC xfmd_contracts PRIVATE xfmd_navigation x
 target_compile_definitions(xfmd_media PRIVATE XFMD_MATH_RESOURCES="${microtex_SOURCE_DIR}/res")
 add_library(xfmd_typography
   src/application/adapters/FontCatalog.cpp src/application/adapters/SharedTextMetrics.cpp
-  src/application/adapters/DisplayListPainter.cpp src/application/preferences/ReadingColors.cpp)
+  src/application/adapters/DiagramPainter.cpp src/application/adapters/DisplayListPainter.cpp src/application/preferences/ReadingColors.cpp)
 target_link_libraries(xfmd_typography PUBLIC xfmd_contracts PkgConfig::PANGO)
+add_library(xfmd_diagrams src/application/diagrams/DiagramCache.cpp src/application/diagrams/DiagramPreparation.cpp src/application/composition/DiagramServices.cpp)
+target_link_libraries(xfmd_diagrams PUBLIC xfmd_typography xfmd_media xfmd_renderer xfmd_interpreter)
 add_library(xfmd_export src/application/export/ExportCoordinator.cpp
   src/application/export/ExportPipeline.cpp src/application/io/PdfFilePublisher.cpp
   src/application/adapters/PdfOutput.cpp)
-target_link_libraries(xfmd_export PUBLIC xfmd_typography xfmd_media Threads::Threads)
+target_link_libraries(xfmd_export PUBLIC xfmd_typography xfmd_media xfmd_diagrams Threads::Threads)
 add_library(xfmd_application
   src/application/ui/controls/CompactToolbar.cpp src/application/ui/controls/PreviewControls.cpp src/application/ui/controls/PreviewColorControls.cpp
   src/application/ui/style/ThemeProfiles.cpp

@@ -303,3 +303,7 @@ DrawRun.textScale brukes av samme Pango/Cairo-tegning og glyph-hit-testing.
 Leserekkefølge bindes før runs sorteres visuelt: grupper, noder og kantetiketter.
 Ustøttet blokk beholder kilden med blokklokal diagnose. Naked flowchart-tekst
 aktiverer aldri diagramtolkning.
+
+P27-profiladapteren normaliserer upstream DoubleCircle til Circle fordi pinnen
+feilklassifiserer `((label))`. Profilvalideringen avviser `(((label)))`, så ekte
+dobbeltsirkler blir ikke feiltolket som den støttede enkle sirkelen.

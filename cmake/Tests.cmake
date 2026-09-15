@@ -18,7 +18,7 @@ xfmd_test(ReferenceWorkerTest tests/application/ReferenceWorkerTest.cpp xfmd_ind
 xfmd_test(NavigationTest tests/application/NavigationTest.cpp xfmd_navigation)
 add_test(NAME BlueprintStructure COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/validate_blueprints.py)
 add_test(NAME LayerBoundaries COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/check_layers.py)
-foreach(name RecentFilesGuiTest PreviewSelectionGuiTest CompactWorkspaceTest ReadingColorsGuiTest TreeActionsTest AppearancePreferencesTest AppearanceGuiTest UiControlsTest BrowserPreferencesTest IndexGuiTest WorkspaceTest PresentationTest ScrollingTest NavigationGuiTest SidebarGuiTest WheelGuiTest WorkPathGuiTest PointerTest TablePreviewTest)
+foreach(name MermaidGuiTest RecentFilesGuiTest PreviewSelectionGuiTest CompactWorkspaceTest ReadingColorsGuiTest TreeActionsTest AppearancePreferencesTest AppearanceGuiTest UiControlsTest BrowserPreferencesTest IndexGuiTest WorkspaceTest PresentationTest ScrollingTest NavigationGuiTest SidebarGuiTest WheelGuiTest WorkPathGuiTest PointerTest TablePreviewTest)
   add_executable(${name} tests/gui/${name}.cpp)
   target_include_directories(${name} PRIVATE tests)
   target_link_libraries(${name} PRIVATE xfmd_application)
@@ -141,3 +141,6 @@ xfmd_test(DiagramLayoutTest tests/renderer/DiagramLayoutTest.cpp xfmd_interprete
 target_compile_definitions(DiagramLayoutTest PRIVATE XFMD_DIAGRAM_FIXTURES="${CMAKE_CURRENT_SOURCE_DIR}/docs/design/mermaid")
 add_test(NAME MermaidRustTests COMMAND ${CARGO_EXECUTABLE} test --workspace --locked --offline --target-dir ${XFMD_CARGO_TARGET})
 set_tests_properties(MermaidRustTests PROPERTIES WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" TIMEOUT 180)
+xfmd_test(DiagramPreparationTest tests/application/DiagramPreparationTest.cpp xfmd_diagrams)
+
+set_tests_properties(WorkPathTest DiagramLayoutTest PROPERTIES TIMEOUT 30)

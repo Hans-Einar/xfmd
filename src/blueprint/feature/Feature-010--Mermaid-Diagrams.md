@@ -4,8 +4,8 @@ kind: Feature
 audience: User
 role: Workflow
 owner: application
-status: Proposed
-scope: Future
+status: Implemented
+scope: FirstRelease
 requirements: UR-039, UR-040, UR-041, SR-021, SR-022, SR-023
 uses: FUNC-003, FUNC-004, FUNC-005, FUNC-007, FUNC-016, FUNC-017, FUNC-018, FUNC-021, FUNC-023, FUNC-024, FUNC-025
 ---
@@ -32,12 +32,12 @@ Edit → eksisterende debounce → tolkning → forberedelse → normal dokument
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `ModelBuilder::appendNode` | `MermaidBlockBuilder::build` | `src/interpreter/mermaid/MermaidBlockBuilder.cpp` | mermaid-gjerde → kilde og modell | vanlig kode bevares | Planned |
-| 2 | `MermaidBlockBuilder::build` | `IDiagramInterpreter::parse` | `src/contracts/diagram/IDiagramInterpreter.h` | UTF-8 → DiagramModel/diagnostic | lokal fallback | Planned |
-| 3 | `ParserWorker prepare callback / ExportPipeline` | `DiagramPreparation::prepare` | `src/application/diagrams/DiagramPreparation.cpp` | modell + request key → forberedt scene | stale/cancel forkastes | Planned |
-| 4 | `DiagramPreparation::prepare` | `IDiagramLayout::layout` | `src/contracts/diagram/IDiagramLayout.h` | ren modell + målte etiketter → scene | ingen kildeparsing | Planned |
-| 5 | `MarkdownRenderer::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | scene → frame-paths, tekst og source anchors | bevar aspekt og sidegrenser | Planned |
-| 6 | `DisplayListPainter::paint` | `DiagramPainter::paint` | `src/application/adapters/DiagramPainter.cpp` | rene stier + palett → Cairo | samme primitive kontrakt for preview/PDF | Planned |
+| 1 | `ModelBuilder::appendNode` | `MermaidBlockBuilder::build` | `src/interpreter/mermaid/MermaidBlockBuilder.cpp` | mermaid-gjerde → kilde og modell | vanlig kode bevares | Implemented |
+| 2 | `MermaidBlockBuilder::build` | `IDiagramInterpreter::parse` | `src/contracts/diagram/IDiagramInterpreter.h` | UTF-8 → DiagramModel/diagnostic | lokal fallback | Implemented |
+| 3 | `ParserWorker prepare callback / ExportPipeline` | `DiagramPreparation::prepare` | `src/application/diagrams/DiagramPreparation.cpp` | modell + request key → forberedt scene | stale/cancel forkastes | Implemented |
+| 4 | `DiagramPreparation::prepare` | `IDiagramLayout::layout` | `src/contracts/diagram/IDiagramLayout.h` | ren modell + målte etiketter → scene | ingen kildeparsing | Implemented |
+| 5 | `MarkdownRenderer::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | scene → frame-paths, tekst og source anchors | bevar aspekt og sidegrenser | Implemented |
+| 6 | `DisplayListPainter::paint` | `DiagramPainter::paint` | `src/application/adapters/DiagramPainter.cpp` | rene stier + palett → Cairo | samme primitive kontrakt for preview/PDF | Implemented |
 
 
 ## 6. Gjenbruk og avhengigheter
@@ -50,6 +50,6 @@ AT-059–064 er planlagt, ikke utført. Begge brukerdiagrammer finnes i designet
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Proposed 2026-09-16. Designarbeid P25; gates og faser står i implementeringsplanen. Biblioteket er valgt kandidat; commit/toolchain/patch låses etter P26-probe. Ingen produksjonskode er lagt til.
+Implementert i P26/P27. Commit/toolchain/patch er låst. P28/P29 samler lese-, eksport- og full profilverifikasjon; ikke full Mermaid-kompatibilitet.
 
 Planlagt akseptanse: AT-059, AT-060, AT-061, AT-062, AT-063, AT-064.

@@ -31,6 +31,7 @@ struct DrawRun {
   std::shared_ptr<const ShapedText> shaped{};
   std::size_t shapeBegin = 0, shapeCount = 0;
   std::shared_ptr<const VisualResource> visual{};
+  double textScale = 1;
   std::size_t textBegin = std::string::npos, textEnd = std::string::npos;
 };
 enum class DecorationRole { Border, Surface, Alternate, Background };

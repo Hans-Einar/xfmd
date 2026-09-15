@@ -31,6 +31,7 @@ LayoutResult MarkdownRenderer::layout(const SemanticDocument& model, const Layou
   BlockLayout::layout(model, flowRequest, metrics, *frame);
   if (request.profile.mode == LayoutMode::Paged)
     PageComposer::compose(*frame, request.profile.paper, request.cancelled);
+  std::stable_sort(frame->runs.begin(),frame->runs.end(),[](const DrawRun& a,const DrawRun& b){return a.bounds.y<b.bounds.y;});
   return frame;
 }
 HitResult MarkdownRenderer::hitTest(const RenderFrame& frame, Point point) const {

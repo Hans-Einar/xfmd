@@ -36,7 +36,9 @@ pub fn map_graph(graph: Graph, profile: &super::profile::Profile) -> Result<Mode
                 NodeShape::Rectangle => 0,
                 NodeShape::RoundRect => 1,
                 NodeShape::Diamond => 2,
-                NodeShape::Circle => 3,
+                // The pinned upstream maps ((label)) to DoubleCircle. The profile
+                // rejects triple parentheses, so both variants mean our circle here.
+                NodeShape::Circle | NodeShape::DoubleCircle => 3,
                 _ => return Err("Unsupported node shape".into()),
             },
         })
