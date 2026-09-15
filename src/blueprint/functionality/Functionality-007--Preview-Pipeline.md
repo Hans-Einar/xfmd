@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Workflow
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: SR-022, UR-036, UR-037, UR-002, UR-004, SR-001, SR-002, SR-003, SR-008, SR-010, SR-011, SR-013, UR-017, SR-019
 uses: FUNC-025, FUNC-022, FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006
@@ -52,7 +52,7 @@ P23: ParserWorker injiseres med EmbeddedVisuals::prepare fra composition root. R
 
 | 60 | `ParserWorker::run injected prepare` | `EmbeddedVisuals::prepare` | `src/application/media/EmbeddedVisuals.cpp` | Semantikk + snapshot → bilde/formelressurser | Feil gir plassholder | Implemented |
 
-| 99 | `ParserWorker::run prepare callback` | `DiagramPreparation::prepare` | `src/application/diagrams/DiagramPreparation.cpp` | Planlagt diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Planned |
+| 99 | `ParserWorker::run prepare callback` | `DiagramPreparation::prepare` | `src/application/diagrams/DiagramPreparation.cpp` | Implementert diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 

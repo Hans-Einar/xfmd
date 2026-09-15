@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Adapter
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-040, UR-041, UR-035, UR-034, UR-030, UR-031, UR-011, UR-002, UR-005, UR-008, SR-001, SR-008, SR-009, SR-010, SR-013, UR-017, SR-016, SR-019
 uses: FUNC-021, FUNC-004, FUNC-015, FUNC-016
@@ -70,7 +70,7 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 
 P23: FoxPreviewInput eier merking og clipboard-input; PreviewSelection holder logiske tekstposisjoner. Repaint bevarer merking, nytt dokumenttoken nullstiller den.
 
-| 99 | `DisplayListPainter::paint` | `DiagramPainter::paint` | `src/application/adapters/DiagramPainter.cpp` | Planlagt diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Planned |
+| 99 | `DisplayListPainter::paint` | `DiagramPainter::paint` | `src/application/adapters/DiagramPainter.cpp` | Implementert diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 

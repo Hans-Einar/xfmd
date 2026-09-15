@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Service
 owner: renderer
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-040, UR-041, UR-035, UR-036, UR-037, UR-005, UR-002, UR-008, SR-001, SR-003, SR-005, SR-008, SR-009, SR-011, SR-013, UR-017, UR-018, SR-016, SR-019
 uses: FUNC-024, FUNC-017
@@ -58,7 +58,7 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 
 P23: DrawRun får logiske UTF-8-intervaller i RenderFrame.readingText. EmbeddedContent.visual plasseres med aspektbevaring, baseline og høydegrense før PageComposer; kildeankre og lenker bevares.
 
-| 99 | `MarkdownRenderer::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | Planlagt diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Planned |
+| 99 | `MarkdownRenderer::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | Implementert diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 

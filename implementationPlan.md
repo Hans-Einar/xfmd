@@ -410,3 +410,6 @@ M3 bevis samles i [P26](docs/evidence/P26.md). P27–P29 følger.
 
 P27 M1 `012361c`, M2 `7aedb48`; M3 samler native preview og regresjon.
 Alle 55 lokale tester består; se [P27](docs/evidence/P27.md).
+
+P28 M1 `6d85642`, M2 dokumenterer native clipboard; M3 verifiserer
+A4 og tekst-/vektor-PDF. Se [P28](docs/evidence/P28.md).

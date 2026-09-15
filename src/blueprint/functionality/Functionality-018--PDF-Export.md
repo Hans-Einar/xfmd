@@ -4,7 +4,7 @@ kind: Functionality
 audience: User
 role: Workflow
 owner: application
-status: Proposed
+status: Implemented
 scope: FirstRelease
 requirements: UR-040, SR-022, UR-036, UR-037, UR-018, SR-002, SR-005, SR-007, SR-010, SR-017
 uses: FUNC-025, FUNC-022, FUNC-001, FUNC-003, FUNC-004, FUNC-006, FUNC-016, FUNC-017
@@ -47,7 +47,7 @@ P23: Eksport av en ny layout bruker samme EmbeddedVisuals::prepare som preview. 
 
 | 60 | `ExportPipeline::run` | `EmbeddedVisuals::prepare` | `src/application/media/EmbeddedVisuals.cpp` | Snapshot → forberedte PDF-ressurser | Feil gir plassholder | Implemented |
 
-| 99 | `ExportPipeline::run` | `DiagramPreparation::prepare` | `src/application/diagrams/DiagramPreparation.cpp` | Planlagt diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Planned |
+| 99 | `ExportPipeline::run` | `DiagramPreparation::prepare` | `src/application/diagrams/DiagramPreparation.cpp` | Implementert diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
