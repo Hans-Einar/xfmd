@@ -26,8 +26,9 @@ public:
   std::function<void(FrameKey)> layoutRequested;
   std::function<void(const std::string&)> failed;
   PreviewCoordinator(DocumentSession& s, IInterpreter& i, IRenderer& r, ITextMetrics& m,
-                     IScheduler& clock)
-      : session(s), scheduler(clock), worker(i), renderer(r), metrics(m) {}
+                     IScheduler& clock,
+                     std::function<ParseResult(ParseResult, const SourceSnapshot&)> prepare = {})
+      : session(s), scheduler(clock), worker(i, std::move(prepare)), renderer(r), metrics(m) {}
   ~PreviewCoordinator();
   void schedule();
   void poll();

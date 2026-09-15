@@ -6,8 +6,8 @@ role: Workflow
 owner: application
 status: Implemented
 scope: FirstRelease
-requirements: UR-001, UR-002, UR-009, SR-001, SR-003, SR-004, SR-005, SR-011, SR-012, SR-013, UR-017
-uses: FUNC-001, FUNC-002, FUNC-003, FUNC-004, FUNC-005, FUNC-007, FUNC-010, FUNC-016, FUNC-017
+requirements: UR-035, UR-036, UR-037, UR-001, UR-002, UR-009, SR-001, SR-003, SR-004, SR-005, SR-011, SR-012, SR-013, UR-017
+uses: FUNC-021, FUNC-022, FUNC-001, FUNC-002, FUNC-003, FUNC-004, FUNC-005, FUNC-007, FUNC-010, FUNC-016, FUNC-017
 ---
 
 # Feature-001: Lesbar Markdown-presentasjon
@@ -44,6 +44,9 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 | 5 | `PreviewCoordinator present callback` | `FoxRenderHost::present` | `src/application/adapters/FoxRenderHost.cpp` | Frame → native visning | Ingen ressurslasting | Implemented |
 | 6 | `View mode` | `PreviewCoordinator::setLayoutProfile` | `src/application/preview/PreviewCoordinator.cpp` | profil → FrameKey | bevar source anchor | Implemented |
 
+
+P23: Tekstmerking og rikt innhold er del av Markdown-presentasjonen. FUNC-021 eier kopiering; FUNC-022 eier ressursforberedelse. Begge gjenbruker eksisterende pipeline og layout.
+
 ## 6. Gjenbruk og avhengigheter
 
 [FUNC-001](../functionality/Functionality-001--Document-Session.md), [FUNC-002](../functionality/Functionality-002--Local-File-Storage.md), [FUNC-003](../functionality/Functionality-003--Markdown-Interpretation.md), [FUNC-004](../functionality/Functionality-004--Render-Layout.md), [FUNC-005](../functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-007](../functionality/Functionality-007--Preview-Pipeline.md)
@@ -67,3 +70,5 @@ Utvidelsen krever AT-031. Dette er planlagt dekning, ikke nye testbevis.
 
 Implemented i P3. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
 Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.
+
+P23 akseptanse: AT-055, AT-056, AT-057. Tester: RichPreviewTest og PreviewSelectionGuiTest.

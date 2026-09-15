@@ -6,8 +6,8 @@ role: Workflow
 owner: application
 status: Implemented
 scope: FirstRelease
-requirements: UR-002, UR-004, SR-001, SR-002, SR-003, SR-008, SR-010, SR-011, SR-013, UR-017, SR-019
-uses: FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006
+requirements: UR-036, UR-037, UR-002, UR-004, SR-001, SR-002, SR-003, SR-008, SR-010, SR-011, SR-013, UR-017, SR-019
+uses: FUNC-022, FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006
 ---
 
 # Functionality-007: Preview-orkestrering
@@ -47,6 +47,11 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 | 8 | `Workspace mode` | `PreviewCoordinator::setLayoutProfile` | `src/application/preview/PreviewCoordinator.cpp` | profil → layout request | ny generasjon | Implemented |
 | 9 | `Layout completion` | `PreviewCoordinator::acceptFrame` | `src/application/preview/PreviewCoordinator.cpp` | FrameKey → present | stale avvises | Implemented |
 
+
+P23: ParserWorker injiseres med EmbeddedVisuals::prepare fra composition root. Ressursforberedelse kjører i worker før publisering av samme immutable modell; stale token avvises som før.
+
+| 60 | `ParserWorker::run injected prepare` | `EmbeddedVisuals::prepare` | `src/application/media/EmbeddedVisuals.cpp` | Semantikk + snapshot → bilde/formelressurser | Feil gir plassholder | Implemented |
+
 ## 6. Gjenbruk og avhengigheter
 
 [FUNC-001](../functionality/Functionality-001--Document-Session.md), [FUNC-003](../functionality/Functionality-003--Markdown-Interpretation.md), [FUNC-004](../functionality/Functionality-004--Render-Layout.md), [FUNC-005](../functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-006](../functionality/Functionality-006--Event-Scheduling.md)
@@ -73,3 +78,5 @@ Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik st
 
 P15: `modelReady(ParseResult)` publiserer bare akseptert dokument/revisjon, før layout.
 Dokumentindeksen er ny konsument. Resize/zoom publiserer ikke metadata på nytt.
+
+P23 akseptanse: AT-056, AT-057. Tester: RichPreviewTest og PreviewSelectionGuiTest.

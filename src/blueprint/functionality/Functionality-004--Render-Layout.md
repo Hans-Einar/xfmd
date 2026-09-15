@@ -6,7 +6,7 @@ role: Service
 owner: renderer
 status: Implemented
 scope: FirstRelease
-requirements: UR-005, UR-002, UR-008, SR-001, SR-003, SR-005, SR-008, SR-009, SR-011, SR-013, UR-017, UR-018, SR-016, SR-019
+requirements: UR-035, UR-036, UR-037, UR-005, UR-002, UR-008, SR-001, SR-003, SR-005, SR-008, SR-009, SR-011, SR-013, UR-017, UR-018, SR-016, SR-019
 uses: FUNC-017
 ---
 
@@ -55,6 +55,9 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 
 | 8 | `BlockLayout::layout` | `TableLayout::layout` | `src/renderer/TableLayout.cpp` | Tabell/tilgjengelig bredde → celler, rader og dekorasjoner | Smal A4 eller for høy rad gir Error | Implemented |
 
+
+P23: DrawRun får logiske UTF-8-intervaller i RenderFrame.readingText. EmbeddedContent.visual plasseres med aspektbevaring, baseline og høydegrense før PageComposer; kildeankre og lenker bevares.
+
 ## 6. Gjenbruk og avhengigheter
 
 Ingen andre functionality-kontrakter konsumeres; delte datatyper følger arkitekturen.
@@ -90,3 +93,5 @@ ved opprettelse, slik at skjermadapteren kan bruke lesepalett uten å sammenlign
 magiske RGB-verdier. Geometri, fontdata og FrameKey er uendret. Rollen er ingen
 FOX-/Cairo-type og ingen brukerpreferanse lagres i renderer. ReadingColorsTest
 kontrollerer rolledekning og at utskriftspaletten fortsatt brukes uten skjermoverstyring.
+
+P23 akseptanse: AT-055, AT-056, AT-057. Tester: RichPreviewTest og PreviewSelectionGuiTest.

@@ -1,4 +1,5 @@
 #include "DisplayListPainter.h"
+#include "application/media/CairoVisual.h"
 #include <algorithm>
 #include <cmath>
 namespace xfmd {
@@ -68,8 +69,8 @@ void DisplayListPainter::paint(const RenderFrame& frame, cairo_t* cr, Rect clip,
       color(cr, palette ? palette->decoration(decoration.role) : decoration.color);
       rectangle(cr, decoration.bounds);
     }
-  auto first = std::lower_bound(frame.runs.begin(), frame.runs.end(), clip.y - 150,
-                                [](const DrawRun& r, double y) { return r.bounds.y < y; });
+  auto first = std::lower_bound(frame.runs.begin(), frame.runs.end(), clip.y - frame.maxRunHeight,
+                                [](const DrawRun& run, double y) { return run.bounds.y < y; });
   for (; first != frame.runs.end() && first->bounds.y < clip.y + clip.height; ++first) {
     const auto& run = *first;
     if (!visible(run.bounds, clip))
@@ -82,8 +83,23 @@ void DisplayListPainter::paint(const RenderFrame& frame, cairo_t* cr, Rect clip,
               : !active          ? 0x878787
               : run.link.empty() ? 0x1d2531
                                  : 0x1855a6);
-    text(cr, frame, run);
-    if (!run.link.empty() && run.icon == InlineIcon::None) {
+    if (const auto* visual = dynamic_cast<const CairoVisual*>(run.visual.get())) {
+      SavedState resourceState(cr);
+      cairo_translate(cr, run.bounds.x, run.bounds.y);
+      const double w =
+          visual->monochrome ? visual->width : cairo_image_surface_get_width(visual->surface);
+      const double h =
+          visual->monochrome ? visual->height : cairo_image_surface_get_height(visual->surface);
+      cairo_scale(cr, run.bounds.width / w, run.bounds.height / h);
+      if (visual->monochrome)
+        cairo_mask_surface(cr, visual->surface, 0, 0);
+      else {
+        cairo_set_source_surface(cr, visual->surface, 0, 0);
+        cairo_paint(cr);
+      }
+    } else
+      text(cr, frame, run);
+    if (!run.visual && !run.link.empty() && run.icon == InlineIcon::None) {
       cairo_set_line_width(cr, .6);
       cairo_move_to(cr, run.bounds.x, run.bounds.y + run.ascent + 2);
       cairo_line_to(cr, run.bounds.x + run.bounds.width, run.bounds.y + run.ascent + 2);

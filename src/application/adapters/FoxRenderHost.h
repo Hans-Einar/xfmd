@@ -3,6 +3,7 @@
 #include "SharedTextMetrics.h"
 #include "ViewTransform.h"
 #include "application/preferences/ReadingColors.h"
+#include "application/preview/PreviewSelection.h"
 #include "application/scroll/ScrollDynamics.h"
 #include "contracts/IRenderer.h"
 #include <functional>
@@ -25,7 +26,9 @@ class FoxRenderHost : public FX::FXScrollArea {
   bool clickCancelled = false;
   Point pressPoint;
   std::optional<FrameKey> pressedFrame;
-  std::string pressedLink;
+  std::string pressedLink, clipboardText;
+  PreviewSelection selection;
+  void paintSelection(cairo_t*);
 
 protected:
   FoxRenderHost() = default;
@@ -59,6 +62,10 @@ public:
   bool fitWidth() const { return fit; }
   Point documentToView(Point p) const { return transform.toView(p); }
   Point viewToDocument(Point p) const { return transform.toDocument(p); }
+  void copySelection();
+  std::string selectedText() const { return current ? selection.text(*current) : std::string{}; }
+  long onClipboardRequest(FX::FXObject*, FX::FXSelector, void*);
+  long onSelectionLost(FX::FXObject*, FX::FXSelector, void*);
   long onPaint(FX::FXObject*, FX::FXSelector, void*);
   long onButtonPress(FX::FXObject*, FX::FXSelector, void*);
   long onUngrabbed(FX::FXObject*, FX::FXSelector, void*);

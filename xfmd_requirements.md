@@ -258,3 +258,17 @@ PDF bruker fortsatt standard utskriftspalett. Samme formede glypher/layout gjenb
 
 P22 erstatter P21s plassering over preview og den synlige kontrastindikatoren.
 Fargetone står over lysstyrke i to kompakte kolonner, med forklaring/verdi i tooltip.
+
+## P23 — merking, matematikk og bilder
+
+| ID | Krav | Akseptanse |
+| --- | --- | --- |
+| UR-035 | Preview skal støtte musemerking, Ctrl+A og Ctrl+C. Kopiert tekst er lesetekst, uten Markdown-markører; eksplisitte linje-/avsnittsskift bevares. Dra over en lenke skal merke, ikke navigere. | AT-055: Unicode, flere blokker/sider, clipboard/PRIMARY, stale frame og lenkedrag i native FOX. |
+| UR-036 | LaTeX-matematikk støttes inline med `$…$`/`\(…\)` og separat med `$$…$$`/`\[…\]` samt math-kodegjerder. Kodeeksempler forblir bokstavelige. Formler følger lesefarger og vises også i PDF. | AT-056: brøk, rot, sum, indeks, matrise, kodegjerde og ufullstendig syntaks i begge visningsprofiler. |
+| UR-037 | Markdown-bilder med lokal relativ eller absolutt filsti skal vises med bevart aspekt. Relative stier løses fra dokumentets mappe. PNG, JPEG, GIF og SVG støttes; feil gir synlig alttekst/forklaring. Bilder inngår i PDF. | AT-057: lokale/URL-kodede stier, manglende/ugyldig/stort bilde, lenket bilde, A4 og PDF. |
+
+P23 erstatter tidligere bildeplassholder-avgrensning og utvider SR-004 med
+den eksplisitte matematikkprofilen over. SR-005 gjelder fortsatt: ingen automatisk
+nettverkslasting. Eksterne bilde-URL-er får forklarende plassholder. HTML er inert.
+Matematikk er formelsats, uten TeX-fil-I/O, shell eller brukerdefinerte makroer.
+Ressursarbeid skjer utenfor GUI-tråden med avgrenset input og bildestørrelse.

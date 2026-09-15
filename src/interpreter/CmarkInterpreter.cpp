@@ -35,11 +35,21 @@ ParseResult CmarkInterpreter::parse(const SourceSnapshot& source, const ParseOpt
                                                                cmark_node_free);
   if (!root)
     throw Error(ErrorCode::Parse, "Unable to parse Markdown.");
+  MathSyntax math(source.text, root.get());
+  if (!math.tokens.empty()) {
+    parser.reset(cmark_parser_new(CMARK_OPT_DEFAULT));
+    if (!parser || !cmark_parser_attach_syntax_extension(parser.get(), tables))
+      throw Error(ErrorCode::Parse, "Unable to initialize math Markdown parser.");
+    cmark_parser_feed(parser.get(), math.masked.data() + start, math.masked.size() - start);
+    root.reset(cmark_parser_finish(parser.get()));
+    if (!root)
+      throw Error(ErrorCode::Parse, "Unable to parse math Markdown.");
+  }
   std::unique_ptr<cmark_iter, decltype(&cmark_iter_free)> it(cmark_iter_new(root.get()),
                                                              cmark_iter_free);
   if (!it)
     throw Error(ErrorCode::Parse, "Unable to traverse Markdown.");
-  ModelBuilder builder(source);
+  ModelBuilder builder(source, &math);
   cmark_event_type event;
   while ((event = cmark_iter_next(it.get())) != CMARK_EVENT_DONE)
     builder.appendNode(cmark_iter_get_node(it.get()), event);

@@ -22,10 +22,12 @@ if(XFMD_SANITIZERS)
 endif()
 add_compile_options(-Wall -Wextra -Wpedantic)
 
+include(cmake/MicroTeX.cmake)
+pkg_check_modules(PIXBUF REQUIRED IMPORTED_TARGET gdk-pixbuf-2.0)
 add_library(xfmd_contracts INTERFACE)
 target_include_directories(xfmd_contracts INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src")
 add_library(xfmd_interpreter
-  src/interpreter/CmarkInterpreter.cpp src/interpreter/ModelBuilder.cpp
+  src/interpreter/MathSyntax.cpp src/interpreter/CmarkInterpreter.cpp src/interpreter/ModelBuilder.cpp
   src/interpreter/SourceMapBuilder.cpp src/interpreter/TableModelBuilder.cpp)
 target_link_libraries(xfmd_interpreter PUBLIC xfmd_contracts PRIVATE ${CMARK_EXTENSIONS} ${CMARK_CORE})
 target_include_directories(xfmd_interpreter PRIVATE ${CMARK_INCLUDE_DIRS})
@@ -40,7 +42,7 @@ add_library(xfmd_document
   src/application/document/TextProjection.cpp src/application/document/EditController.cpp)
 target_link_libraries(xfmd_document PUBLIC xfmd_contracts)
 add_library(xfmd_preview
-  src/application/preview/PreviewCoordinator.cpp src/application/preview/ParserWorker.cpp)
+  src/application/preview/PreviewSelection.cpp src/application/preview/PreviewCoordinator.cpp src/application/preview/ParserWorker.cpp)
 target_link_libraries(xfmd_preview PUBLIC xfmd_document Threads::Threads)
 add_library(xfmd_scroll
   src/application/scroll/AnchorMapper.cpp src/application/scroll/ScrollCoordinator.cpp
@@ -57,6 +59,10 @@ add_library(xfmd_workspace
   src/application/workspace/FileNameFilter.cpp
   src/application/workspace/DirectoryScanner.cpp)
 target_link_libraries(xfmd_workspace PUBLIC xfmd_contracts Threads::Threads)
+add_library(xfmd_media src/application/media/EmbeddedVisuals.cpp
+  src/application/media/ImageDecoder.cpp src/application/media/MathTypesetter.cpp)
+target_link_libraries(xfmd_media PUBLIC xfmd_contracts PRIVATE xfmd_navigation xfmd_math_engine PkgConfig::PIXBUF)
+target_compile_definitions(xfmd_media PRIVATE XFMD_MATH_RESOURCES="${microtex_SOURCE_DIR}/res")
 add_library(xfmd_typography
   src/application/adapters/FontCatalog.cpp src/application/adapters/SharedTextMetrics.cpp
   src/application/adapters/DisplayListPainter.cpp src/application/preferences/ReadingColors.cpp)
@@ -64,7 +70,7 @@ target_link_libraries(xfmd_typography PUBLIC xfmd_contracts PkgConfig::PANGO)
 add_library(xfmd_export src/application/export/ExportCoordinator.cpp
   src/application/export/ExportPipeline.cpp src/application/io/PdfFilePublisher.cpp
   src/application/adapters/PdfOutput.cpp)
-target_link_libraries(xfmd_export PUBLIC xfmd_typography Threads::Threads)
+target_link_libraries(xfmd_export PUBLIC xfmd_typography xfmd_media Threads::Threads)
 add_library(xfmd_application
   src/application/ui/controls/CompactToolbar.cpp src/application/ui/controls/PreviewControls.cpp src/application/ui/controls/PreviewColorControls.cpp
   src/application/ui/style/ThemeProfiles.cpp
@@ -82,7 +88,7 @@ add_library(xfmd_application
   src/application/ui/NavigationTree.cpp src/application/ui/IndexPanel.cpp
   src/application/ui/ViewModeController.cpp
   src/application/adapters/FoxCairoCanvas.cpp src/application/adapters/ViewTransform.cpp src/application/adapters/FoxWindowMode.cpp
-  src/application/adapters/FoxRenderHost.cpp src/application/adapters/FoxScheduler.cpp
+  src/application/adapters/FoxPreviewInput.cpp src/application/adapters/FoxRenderHost.cpp src/application/adapters/FoxScheduler.cpp
   src/application/adapters/FoxWheelScrollBar.cpp)
 target_link_libraries(xfmd_application PUBLIC
   xfmd_index xfmd_export xfmd_typography xfmd_workspace xfmd_document xfmd_preview xfmd_scroll xfmd_navigation xfmd_interpreter xfmd_renderer PkgConfig::FOX X11::X11 X11::Xrandr)

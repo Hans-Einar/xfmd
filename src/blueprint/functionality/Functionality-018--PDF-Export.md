@@ -6,8 +6,8 @@ role: Workflow
 owner: application
 status: Implemented
 scope: FirstRelease
-requirements: UR-018, SR-002, SR-005, SR-007, SR-010, SR-017
-uses: FUNC-001, FUNC-003, FUNC-004, FUNC-006, FUNC-016, FUNC-017
+requirements: UR-036, UR-037, UR-018, SR-002, SR-005, SR-007, SR-010, SR-017
+uses: FUNC-022, FUNC-001, FUNC-003, FUNC-004, FUNC-006, FUNC-016, FUNC-017
 ---
 
 # Functionality-018: Revisjonssikker lokal PDF-eksport
@@ -42,6 +42,11 @@ GUI-tråden eier FOX/layout som krever GUI-ressurser. Worker kan parse og skrive
 | 3 | `ExportPipeline::run` | `PdfOutput::write` | `src/application/adapters/PdfOutput.cpp` | hele PageLayout → temp-PDF | finalisering/cancel/feil | Implemented |
 | 4 | `ExportPipeline::run` | `PdfFilePublisher::commit` | `src/application/io/PdfFilePublisher.cpp` | temp + forventet mål → publisering | ingen delvis målfil ved feil før commit | Implemented |
 
+
+P23: Eksport av en ny layout bruker samme EmbeddedVisuals::prepare som preview. Eksisterende A4-frame gjenbruker immutable ressurser. Kopimarkering eksporteres ikke.
+
+| 60 | `ExportPipeline::run` | `EmbeddedVisuals::prepare` | `src/application/media/EmbeddedVisuals.cpp` | Snapshot → forberedte PDF-ressurser | Feil gir plassholder | Implemented |
+
 ## 6. Gjenbruk og avhengigheter
 
 Gjenbruk FUNC-001 snapshots, FUNC-003 parsing, FUNC-004 layout, FUNC-016 glyphreplay og FUNC-017 sider. FUNC-002s lagringsregler er forbilde; binær publiseringsmekanisme trekkes bare ut som felles privat primitiv når begge reelle konsumenter kan beholde metadata-/dirty-kontraktene.
@@ -57,3 +62,5 @@ AT-012, AT-015, AT-017, AT-020, AT-032, AT-037: se [P11](../../../docs/evidence/
 Revisjon 1.2: P11/P12 implementert; se [bevis](../../../docs/evidence/P12.md).
 P12 etter side-/fontgate. Støtter først dagens Markdown-profil; tabeller/bilder/fragmentnavigasjon er ikke implisitt lagt til av eksport.
 [Integrasjonsdesign](../../../softwareDesign.md) og [faseplan](../../../implementationPlan.md) gir kontekst.
+
+P23 akseptanse: AT-056, AT-057. Tester: RichPreviewTest og PreviewSelectionGuiTest.

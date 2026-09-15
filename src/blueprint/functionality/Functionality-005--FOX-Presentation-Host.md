@@ -6,8 +6,8 @@ role: Adapter
 owner: application
 status: Implemented
 scope: FirstRelease
-requirements: UR-034, UR-030, UR-031, UR-011, UR-002, UR-005, UR-008, SR-001, SR-008, SR-009, SR-010, SR-013, UR-017, SR-016, SR-019
-uses: FUNC-004, FUNC-015, FUNC-016
+requirements: UR-035, UR-034, UR-030, UR-031, UR-011, UR-002, UR-005, UR-008, SR-001, SR-008, SR-009, SR-010, SR-013, UR-017, SR-016, SR-019
+uses: FUNC-021, FUNC-004, FUNC-015, FUNC-016
 ---
 
 # Functionality-005: FOX-host for presentasjon
@@ -53,7 +53,7 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 | 2 | `FOX paint` | `FoxRenderHost::onPaint` | `src/application/adapters/FoxRenderHost.cpp` | Display list → native drawing | Clip og ingen parserkall | Implemented |
 | 3 | `InlineLayout::layout` | `SharedTextMetrics::measure` | `src/application/adapters/SharedTextMetrics.cpp` | Text/font → mål | Fallback per segment | Implemented |
 | 4 | `DisplayListPainter::text` | `FontCatalog::font` | `src/application/adapters/FontCatalog.cpp` | Fontidentitet → native font | Endret font avvises | Implemented |
-| 5 | `FOX pointer` | `FoxRenderHost::onPointer` | `src/application/adapters/FoxRenderHost.cpp` | Punkt → IRenderer::hitTest | Kun aktiv frame sender link callback | Implemented |
+| 5 | `FOX pointer` | `FoxRenderHost::onPointer` | `src/application/adapters/FoxPreviewInput.cpp` | Punkt → IRenderer::hitTest | Kun aktiv frame sender link callback | Implemented |
 | 6 | `ScrollCoordinator setPreview callback` | `FoxRenderHost::setViewport` | `src/application/adapters/FoxRenderHost.cpp` | Y → clamped viewport | Programmatisk echo undertrykkes | Implemented |
 | 7 | `FoxRenderHost constructor` | `FoxWheelScrollBar::replace` | `src/application/adapters/FoxWheelScrollBar.cpp` | Standard bar → presis wheel-adapter | Parent eier ny bar; før create | Implemented |
 | 8 | `FOX wheel dispatch` | `FoxWheelScrollBar::onMouseWheel` | `src/application/adapters/FoxWheelScrollBar.cpp` | Delta/rest → target og FOX-timer | Clamp, behold delpiksel-rest, standard varsler | Implemented |
@@ -62,10 +62,13 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 
 | 13 | `FoxRenderHost::onPaint` | `FoxCairoCanvas::present` | `src/application/adapters/FoxCairoCanvas.cpp` | Cairo viewportbuffer → FOX-pixmap | native ressurslevetid; ingen Cairo Xlib-device | Implemented |
 
-| 14 | `FOX press` | `FoxRenderHost::onButtonPress` | `src/application/adapters/FoxRenderHost.cpp` | Knapp/frame/lenke → klikktilstand og grab | Chord kansellerer aktivering | Implemented |
-| 15 | `FOX grab loss` | `FoxRenderHost::onUngrabbed` | `src/application/adapters/FoxRenderHost.cpp` | Tap av grab → nullstill klikk | Ingen lenkecallback | Implemented |
+| 14 | `FOX press` | `FoxRenderHost::onButtonPress` | `src/application/adapters/FoxPreviewInput.cpp` | Knapp/frame/lenke → klikktilstand og grab | Chord kansellerer aktivering | Implemented |
+| 15 | `FOX grab loss` | `FoxRenderHost::onUngrabbed` | `src/application/adapters/FoxPreviewInput.cpp` | Tap av grab → nullstill klikk | Ingen lenkecallback | Implemented |
 | 20 | `Application::changeReadingColors / applyAppearance` | `FoxRenderHost::setReadingColors` | `src/application/adapters/FoxRenderHost.cpp` | Lesefarger → repaint/profil | Ingen dokumentmutasjon | Implemented |
 | 30 | `FoxRenderHost hover callback` | `Application::showLinkTarget` | `src/application/ApplicationAppearance.cpp` | Lenke → statuslinje | Ingen aktivering; ugyldig sti vises som mål | Implemented |
+
+
+P23: FoxPreviewInput eier merking og clipboard-input; PreviewSelection holder logiske tekstposisjoner. Repaint bevarer merking, nytt dokumenttoken nullstiller den.
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -111,3 +114,5 @@ P22 verifikasjon: AT-054, CompactWorkspaceTest og eksisterende regresjoner.
 P22: [testbevis og visuell kontroll](../../../docs/evidence/P22.md).
 
 Hover og gjenopprettet statustekst behandler `&` bokstavelig, uten FOX-mnemonic.
+
+P23 akseptanse: AT-055. Tester: RichPreviewTest og PreviewSelectionGuiTest.

@@ -3,6 +3,7 @@
 #include "ITextMetrics.h"
 #include "LayoutProfile.h"
 #include "PageLayout.h"
+#include "VisualResource.h"
 #include <vector>
 namespace xfmd {
 struct Point {
@@ -29,6 +30,8 @@ struct DrawRun {
   InlineIcon icon = InlineIcon::None;
   std::shared_ptr<const ShapedText> shaped{};
   std::size_t shapeBegin = 0, shapeCount = 0;
+  std::shared_ptr<const VisualResource> visual{};
+  std::size_t textBegin = std::string::npos, textEnd = std::string::npos;
 };
 enum class DecorationRole { Border, Surface, Alternate, Background };
 struct Decoration {
@@ -44,11 +47,12 @@ struct AnchorRegion {
 struct RenderFrame {
   DocumentToken token;
   std::uint64_t generation = 0;
-  LayoutUnit width = 0, height = 0, contentWidth = 0;
+  LayoutUnit width = 0, height = 0, contentWidth = 0, maxRunHeight = 150;
   FrameKey key;
   FlowLayout flow;
   PageLayout pages;
   std::size_t glyphCount = 0;
+  std::string readingText;
   std::vector<DrawRun> runs;
   std::vector<std::shared_ptr<const ShapedText>> shapeParts;
   std::vector<Decoration> decorations;

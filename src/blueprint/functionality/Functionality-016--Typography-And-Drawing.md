@@ -6,7 +6,7 @@ role: Adapter
 owner: application
 status: Implemented
 scope: FirstRelease
-requirements: UR-030, UR-031, UR-002, UR-017, UR-018, SR-001, SR-010, SR-016
+requirements: UR-036, UR-037, UR-030, UR-031, UR-002, UR-017, UR-018, SR-001, SR-010, SR-016
 uses: none
 ---
 
@@ -40,6 +40,9 @@ P9/P11/P12 dokumenterer fontfallback, glyph-/clusteruttrekk, PDF-fontembedding/t
 | 3 | `FoxRenderHost paint / PDF output` | `DisplayListPainter::paint` | `src/application/adapters/DisplayListPainter.cpp` | frame + target → samme glyphplassering | targetfeil rapporteres | Implemented |
 | 20 | `FoxRenderHost::onPaint` | `ReadingPalette::from` | `src/application/preferences/ReadingColors.cpp` | Lesefarger → repaint/profil | Ingen dokumentmutasjon | Implemented |
 
+
+P23: DisplayListPainter tegner CairoVisual i samme adapter som tekst. Matematikkressursen brukes som vektormaske med aktuell tekstfarge; bilder tegnes i egne farger. PDF bruker samme ressurs uten skjermpalett.
+
 ## 6. Gjenbruk og avhengigheter
 
 Konsumenter: FUNC-004, FUNC-005 og FUNC-018. Samme shapingkontrakt kan brukes av en erstattet renderer; interpreter påvirkes ikke. Editorens FXText-font forblir separat.
@@ -64,3 +67,5 @@ Profiler lagres additivt i ReadingLight/ReadingDark via eksisterende preferences
 Live endring er repaint; commit ved release, med rollback ved skrivefeil.
 
 P21: [AT-050/051, regresjoner og skjermbilder](../../../docs/evidence/P21.md).
+
+P23 akseptanse: AT-056, AT-057. Tester: RichPreviewTest og PreviewSelectionGuiTest.

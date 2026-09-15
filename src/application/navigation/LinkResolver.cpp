@@ -24,7 +24,7 @@ int hex(unsigned char c) {
   return -1;
 }
 } // namespace
-std::string LinkResolver::localPath(const std::string& document, const std::string& target) {
+std::string LinkResolver::resourcePath(const std::string& document, const std::string& target) {
   localOnly(target);
   if (target.find('#') != std::string::npos || target.find('?') != std::string::npos)
     throw Error(ErrorCode::Unsupported,
@@ -48,8 +48,12 @@ std::string LinkResolver::localPath(const std::string& document, const std::stri
       throw Error(ErrorCode::Unsupported, "Save this document before following relative links.");
     path = std::filesystem::path(document).parent_path() / path;
   }
-  InputPolicy::validate({}, path.string());
   return path.lexically_normal().string();
+}
+std::string LinkResolver::localPath(const std::string& document, const std::string& target) {
+  auto path = resourcePath(document, target);
+  InputPolicy::validate({}, path);
+  return path;
 }
 std::string LinkResolver::resolve(const std::string& document, const std::string& target) {
   return std::filesystem::weakly_canonical(localPath(document, target)).string();

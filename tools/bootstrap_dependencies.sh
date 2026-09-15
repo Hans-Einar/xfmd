@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Explicit network/bootstrap step; configure/build never downloads dependencies.
+# Explicit cmark bootstrap; configure separately fetches the pinned MicroTeX archive.
 set -euo pipefail
 xfmd_root=$(cd "$(dirname "$0")/.." && pwd)
 xfmd_work=$(mktemp -d)

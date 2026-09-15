@@ -375,3 +375,20 @@ P22 filstørrelsesreview: FoxRenderHost.cpp er 308 linjer. Hover legger bare til
 input-varsling ved eksisterende hit-testing/invalidering. Den beholdes samlet
 med hostens øvrige input og frame-livsløp; ny topplinje og editorpresentasjon er
 skilt ut i egne filer. Ingen parsing, lagring eller arbeidsflyt flyttes inn i hosten.
+
+## P23 — tekstmerking og innebygde visuelle ressurser
+
+Den tidligere bildeplassholder-policyen erstattes av UR-037; nettverk/HTML er
+fortsatt utenfor renderer. `application/preview/PreviewSelection` eier merking av
+logisk lesetekst. `application/adapters/FoxPreviewInput` eier input og clipboard.
+`application/media/EmbeddedVisuals` koordinerer `ImageDecoder` og `MathTypesetter`
+i worker/PDF-tråden. Rene ressursreferanser i semantikken får immutable visuelle
+ressurser før layout; renderer kjenner bare mål og eierskap. FOX-/Cairo-adapteren
+tegner dem. Fargebytte krever repaint, ikke ny parsing eller formelsats.
+
+P23-filansvar: `MathSyntax` gjenkjenner matematikk uten I/O og bevarer kildeoffsets.
+`VisualResource` og `EmbeddedContent` er rene kontrakter. `CairoVisual` eier native
+ressurslevetid; `ImageDecoder` + `GifBudget` begrenser dekoding, `MathTypesetter`
+eier MicroTeX-integrasjonen. `LinkResolver::resourcePath` gjenbruker den lokale
+URI-policyen; `localPath` beholder .md/.txt-valideringen for dokumentnavigasjon.
+`RenderFrame.maxRunHeight` avgrenser synlighets-/hit-test-søk også for høye bilder.

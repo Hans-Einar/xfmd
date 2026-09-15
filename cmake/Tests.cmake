@@ -18,7 +18,7 @@ xfmd_test(ReferenceWorkerTest tests/application/ReferenceWorkerTest.cpp xfmd_ind
 xfmd_test(NavigationTest tests/application/NavigationTest.cpp xfmd_navigation)
 add_test(NAME BlueprintStructure COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/validate_blueprints.py)
 add_test(NAME LayerBoundaries COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/check_layers.py)
-foreach(name CompactWorkspaceTest ReadingColorsGuiTest TreeActionsTest AppearancePreferencesTest AppearanceGuiTest UiControlsTest BrowserPreferencesTest IndexGuiTest WorkspaceTest PresentationTest ScrollingTest NavigationGuiTest SidebarGuiTest WheelGuiTest WorkPathGuiTest PointerTest TablePreviewTest)
+foreach(name PreviewSelectionGuiTest CompactWorkspaceTest ReadingColorsGuiTest TreeActionsTest AppearancePreferencesTest AppearanceGuiTest UiControlsTest BrowserPreferencesTest IndexGuiTest WorkspaceTest PresentationTest ScrollingTest NavigationGuiTest SidebarGuiTest WheelGuiTest WorkPathGuiTest PointerTest TablePreviewTest)
   add_executable(${name} tests/gui/${name}.cpp)
   target_include_directories(${name} PRIVATE tests)
   target_link_libraries(${name} PRIVATE xfmd_application)
@@ -118,6 +118,8 @@ target_compile_definitions(TablePreviewTest PRIVATE XFMD_TABLE_FIXTURE="${CMAKE_
 target_compile_definitions(TableTest PRIVATE XFMD_TABLE_FIXTURE="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/markdown/tables.md")
 
 xfmd_test(ReadingColorsTest tests/application/ReadingColorsTest.cpp xfmd_typography xfmd_renderer xfmd_interpreter)
+
+xfmd_test(RichPreviewTest tests/application/RichPreviewTest.cpp xfmd_export xfmd_media xfmd_typography xfmd_preview xfmd_interpreter xfmd_renderer)
 
 if(XFMD_SANITIZERS)
   get_property(xfmd_tests DIRECTORY PROPERTY TESTS)
