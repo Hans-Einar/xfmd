@@ -33,10 +33,10 @@ Gjenkjenn bare eksplisitt mermaid-gjerde. Rust bruker parse_mermaid_strict, men 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | `ModelBuilder::appendNode` | `MermaidBlockBuilder::build` | `src/interpreter/mermaid/MermaidBlockBuilder.cpp` | fence info + literal + SourceRange → DiagramSource | bevar original fallback | Planned |
-| 2 | `IDiagramInterpreter virtual dispatch` | `MermaidInterpreter::parse` | `src/interpreter/mermaid/MermaidInterpreter.cpp` | DiagramSource → DiagramParseResult | grense og profil sjekkes | Planned |
-| 3 | `MermaidInterpreter::parse` | `xfmd_mermaid_parse_v1` | `src/application/composition/mermaid/src/lib.rs` | lånt UTF-8 → eid ABI-resultat | panic/feil blir status | Planned |
-| 4 | `xfmd_mermaid_parse_v1` | `parse_profile` | `src/interpreter/mermaid/rust/src/profile.rs` | strict upstream-resultat → tillatt Flowchart 1 | ikke godta delvis tolket graf | Planned |
-| 5 | `parse_profile` | `map_graph` | `src/interpreter/mermaid/rust/src/model.rs` | upstream Graph → ren ABI-modell | avvis ukjent enum/overstørrelse | Planned |
+| 2 | `IDiagramInterpreter virtual dispatch` | `MermaidInterpreter::parse` | `src/interpreter/mermaid/MermaidInterpreter.cpp` | DiagramSource → DiagramParseResult | grense og profil sjekkes | Implemented |
+| 3 | `MermaidInterpreter::parse` | `xfmd_mermaid_parse_v1` | `src/application/composition/mermaid/src/lib.rs` | lånt UTF-8 → eid ABI-resultat | panic/feil blir status | Implemented |
+| 4 | `xfmd_mermaid_parse_v1` | `inspect` | `src/interpreter/mermaid/rust/src/profile.rs` | strict upstream-resultat → tillatt Flowchart 1 | ikke godta delvis tolket graf | Implemented |
+| 5 | `inspect` | `map_graph` | `src/interpreter/mermaid/rust/src/model.rs` | upstream Graph → ren ABI-modell | avvis ukjent enum/overstørrelse | Implemented |
 
 
 ## 6. Gjenbruk og avhengigheter
