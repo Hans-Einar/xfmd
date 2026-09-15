@@ -241,3 +241,44 @@ til Cargo-avhengigheter og rendererens forbud mot parserkall. Ingen stubber elle
 ny build-option legges til før implementasjonen begynner.
 
 P25-kontroller og avgrensninger: [designbevis](../evidence/P25.md).
+
+### P26 presisering: ABI-transport
+
+Verdikontrakten transporteres som versjonerte little-endian records gjennom en
+C-layout resultatholder (ABI/struct-size/status/bytebuffer/owner). DiagramWire
+avgrenser strenger, antall og mål. Parser-resultatet dekodes til C++-verdier og
+frigis før renderer får en ny verdikoding; ingen Rust-handle deles mellom lag.
+Dette erstatter planlagte C-arrayer uten å endre de semantiske portene.
+Rust 1.92.0 og upstream-pin fra P25 brukes i P26-proben.
+
+### P26: faktiske symboler og eierskap
+
+Parserkallet er `MermaidInterpreter::parse` → `xfmd_mermaid_parse_v1` →
+Rust `parse` → `profile::inspect` → `model::map_graph`. Layout er
+`MermaidDiagramLayout::layout` → `DiagramTextLayout::measure` →
+`xfmd_diagram_layout_v1` → Rust `layout`/`model::graph` → måleseam.
+Geometrien dekodes av MermaidDiagramLayout til DiagramScene; separat
+DiagramSceneBuilder ville bare gitt en ekstra passering over de samme verdiene
+og utgår. Sceneformer er semantiske primitive bokser og kantpunkter.
+
+Wire v1 bruker little-endian u32-tellere, UTF-8-strenger med u32-byteantall og
+finite IEEE754 f64-geometri. Ingen pointer finnes inne i payloaden. Status 0
+betyr verdi, 1 profil/layoutfeil, 4 ABI-feil og 7 fanget Rust-panic.
+Resultatets owner må frigjøres nøyaktig én gang med riktig free-funksjon;
+C++ ResultOwner gjør dette også ved exception. Layout får målt tekst i logical
+pixels; adapteren konverterer tilbake til punkter med 0,75 én gang.
+
+### P26 gate: kooperativ tidsgrense
+
+Proben med 128 noder / 512 sykliske kanter overskred 30 sekunder og ble
+avbrutt. Inputgrensen alene godtas derfor ikke. Den versjonsbundne patchen
+har nå en trådlokal deadline på to sekunder, kontrollert i layout-løkker,
+labelplassering og A*-køen. Rust unwinder til C-ABI-feil; RAII gjenoppretter
+måletabell og deadline. Dette er kooperativ kontroll, ikke en hard realtime-
+garanti. Application kontrollerer kansellering mellom blokker og før/etter
+layout; en utdatert worker kan derfor avslutte etter gjeldende blokk.
+
+Patchens loop-checkpoints er mekaniske og algoritmene er uendret. Testen må
+bevise at tett graf blir fallback innen fem sekunder, mens brukerfixture og
+128-noders kjede fremdeles lykkes. Ingen gjennomføring merkes Verified før
+samlet bevis i P29.

@@ -1,0 +1,11 @@
+[package]
+name = "xfmd-mermaid-ffi"
+version = "0.1.0"
+edition = "2024"
+publish = false
+[lib]
+crate-type = ["staticlib"]
+[dependencies]
+xfmd-diagram-contracts.workspace = true
+xfmd-mermaid-interpreter = { path = "../../../interpreter/mermaid/rust" }
+xfmd-diagram-layout = { path = "../../../renderer/diagram/rust" }

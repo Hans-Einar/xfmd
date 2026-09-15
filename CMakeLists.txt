@@ -23,19 +23,21 @@ endif()
 add_compile_options(-Wall -Wextra -Wpedantic)
 
 include(cmake/MicroTeX.cmake)
+include(cmake/Mermaid.cmake)
 pkg_check_modules(PIXBUF REQUIRED IMPORTED_TARGET gdk-pixbuf-2.0)
 add_library(xfmd_contracts INTERFACE)
 target_include_directories(xfmd_contracts INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src")
 add_library(xfmd_interpreter
-  src/interpreter/MathSyntax.cpp src/interpreter/CmarkInterpreter.cpp src/interpreter/ModelBuilder.cpp
+  src/interpreter/mermaid/MermaidInterpreter.cpp src/interpreter/MathSyntax.cpp src/interpreter/CmarkInterpreter.cpp src/interpreter/ModelBuilder.cpp
   src/interpreter/SourceMapBuilder.cpp src/interpreter/TableModelBuilder.cpp)
-target_link_libraries(xfmd_interpreter PUBLIC xfmd_contracts PRIVATE ${CMARK_EXTENSIONS} ${CMARK_CORE})
+target_link_libraries(xfmd_interpreter PUBLIC xfmd_contracts PRIVATE xfmd_rust ${CMARK_EXTENSIONS} ${CMARK_CORE})
 target_include_directories(xfmd_interpreter PRIVATE ${CMARK_INCLUDE_DIRS})
 add_library(xfmd_renderer
+  src/renderer/diagram/DiagramTextLayout.cpp src/renderer/diagram/MermaidDiagramLayout.cpp
   src/renderer/MarkdownRenderer.cpp src/renderer/BlockLayout.cpp src/renderer/TableLayout.cpp
   src/renderer/PageBreaker.cpp src/renderer/PageComposer.cpp src/renderer/PageAnchorIndex.cpp
   src/renderer/InlineLayout.cpp src/renderer/HitTester.cpp src/renderer/LinkMarker.cpp)
-target_link_libraries(xfmd_renderer PUBLIC xfmd_contracts)
+target_link_libraries(xfmd_renderer PUBLIC xfmd_contracts PRIVATE xfmd_rust)
 add_library(xfmd_document
   src/application/io/InputPolicy.cpp src/application/io/LocalFileStore.cpp
   src/application/document/DocumentSession.cpp src/application/document/DocumentCoordinator.cpp
