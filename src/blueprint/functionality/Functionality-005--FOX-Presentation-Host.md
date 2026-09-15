@@ -109,3 +109,5 @@ P22: felles kompakt topplinje; UR-032/033/034 beskriver endret scope.
 P22 verifikasjon: AT-054, CompactWorkspaceTest og eksisterende regresjoner.
 
 P22: [testbevis og visuell kontroll](../../../docs/evidence/P22.md).
+
+Hover og gjenopprettet statustekst behandler `&` bokstavelig, uten FOX-mnemonic.

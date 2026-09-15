@@ -121,7 +121,7 @@ void run() {
   CHECK(app.session.dirty() && app.edits.canUndo());
   app.edits.applyEdit(
       {0, app.session.view().text.size(),
-       "[Web](https://example.org/a?b=1#part)\n\n[Absolute](/tmp/xfmd-target.md)\n"});
+       "[Web](https://example.org/a?b=1&c=2#part)\n\n[Absolute](/tmp/xfmd&target.md)\n"});
   app.execute(CommandRouter::Split);
   app.execute(CommandRouter::WindowWrap);
   events(app);
@@ -130,6 +130,7 @@ void run() {
   CHECK(app.host->interactive());
   auto hoverToken = app.session.view().token;
   CHECK(app.host->frame()->token == hoverToken);
+  app.window->status->setText("Ready && waiting");
   int targets = 0;
   for (const auto& run : app.host->frame()->runs)
     if (run.text == "Web" || run.text == "Absolute") {
@@ -140,6 +141,7 @@ void run() {
       CHECK(app.session.view().token == hoverToken);
       ++targets;
       hover(app, point, LeaveNotify);
+      CHECK(app.window->status->getText() == "Ready & waiting");
     }
   CHECK(targets == 2);
 }

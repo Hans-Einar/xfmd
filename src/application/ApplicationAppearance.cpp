@@ -33,9 +33,19 @@ void Application::changeReadingColors(const ReadingColors& colors, bool commit) 
   }
 }
 void Application::showLinkTarget(const std::string& target) {
+  // FXLabel treats a single ampersand as a mnemonic; paths and URLs are literal.
+  auto literal = [](const std::string& value) {
+    std::string text;
+    for (char c : value) {
+      if (c == '&')
+        text += '&';
+      text += c;
+    }
+    return FX::FXString(text.c_str());
+  };
   if (target.empty()) {
     if (!hoverStatus.empty() && window->status->getText() == hoverStatus.c_str())
-      window->status->setText(beforeHover.c_str());
+      window->status->setText(literal(beforeHover));
     hoverStatus.clear();
     return;
   }
@@ -48,6 +58,6 @@ void Application::showLinkTarget(const std::string& target) {
   } catch (const std::exception&) {
     hoverStatus = target;
   }
-  window->status->setText(hoverStatus.c_str());
+  window->status->setText(literal(hoverStatus));
 }
 } // namespace xfmd
