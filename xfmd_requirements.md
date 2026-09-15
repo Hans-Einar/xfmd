@@ -272,3 +272,9 @@ den eksplisitte matematikkprofilen over. SR-005 gjelder fortsatt: ingen automati
 nettverkslasting. Eksterne bilde-URL-er får forklarende plassholder. HTML er inert.
 Matematikk er formelsats, uten TeX-fil-I/O, shell eller brukerdefinerte makroer.
 Ressursarbeid skjer utenfor GUI-tråden med avgrenset input og bildestørrelse.
+
+## P24: nylig brukte filer
+
+| ID | Krav | Akseptanse |
+| --- | --- | --- |
+| UR-038 | Sidepanelet viser Recent files under Recent folders. Vellykket åpning og lagring registrerer absolutte filstier, nyest først, uten duplikater, maksimalt 32. Listen lagres separat fra arbeidsmapper og gjenopprettes ved oppstart. Valg bruker vanlig dokumentnavigasjon med dirty-kontroll, uten å endre arbeidsrot eller skjule panelet. | AT-058: rekkefølge, grense, restart, åpning/Save As, kansellering og manglende fil. |
