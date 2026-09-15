@@ -1,5 +1,6 @@
 #pragma once
 #include "IndexPanel.h"
+#include "RecentFilesPanel.h"
 #include "SidebarWidget.h"
 #include "application/workspace/WorkPathHistory.h"
 #include "controls/UiLayout.h"
@@ -29,6 +30,7 @@ public:
   FX::FXTextField* filterInput = nullptr;
   FX::FXToggleButton *markdown = nullptr, *text = nullptr;
   FX::FXList* workPaths = nullptr;
+  RecentFilesPanel* recentFiles = nullptr;
   FX::FXLabel* searchStatus = nullptr;
   WorkspacePanel(FX::FXComposite*, UiContext&);
   ~WorkspacePanel() override;

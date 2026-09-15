@@ -126,3 +126,7 @@ P22: UR-032 → FUNC-010/014; UR-033 → FUNC-010; UR-034 → FUNC-005. AT-052�
 | UR-035 | [FUNC-021](functionality/Functionality-021--Preview-Text-Selection.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FTR-001](feature/Feature-001--Markdown-Presentation.md) | AT-055 | FirstRelease |
 | UR-036 | [FUNC-022](functionality/Functionality-022--Embedded-Visuals.md), [FUNC-003](functionality/Functionality-003--Markdown-Interpretation.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md), [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md), [FUNC-018](functionality/Functionality-018--PDF-Export.md), [FTR-001](feature/Feature-001--Markdown-Presentation.md) | AT-056 | FirstRelease |
 | UR-037 | [FUNC-022](functionality/Functionality-022--Embedded-Visuals.md), [FUNC-003](functionality/Functionality-003--Markdown-Interpretation.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md), [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md), [FUNC-018](functionality/Functionality-018--PDF-Export.md), [FTR-001](feature/Feature-001--Markdown-Presentation.md) | AT-057 | FirstRelease |
+
+| Krav | Designobjekter | Akseptanse | Scope |
+| --- | --- | --- | --- |
+| UR-038 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | AT-058 | FirstRelease |

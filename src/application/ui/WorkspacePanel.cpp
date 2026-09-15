@@ -50,11 +50,11 @@ WorkspacePanel::WorkspacePanel(FXComposite* parent, UiContext& context)
   auto* upper = new FXVerticalFrame(split, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 450, 0, 0, 0, 0);
   tree = new SidebarWidget(upper);
   searchStatus = new FXLabel(upper, "", nullptr, LAYOUT_FILL_X | JUSTIFY_LEFT);
-  auto* lower = new FXVerticalFrame(split, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 140, 0, 0, 0, 0);
+  auto* lower = new FXVerticalFrame(split, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 240, 0, 0, 0, 0);
   ui.header(lower, "Recent folders");
   workPaths = new WorkPathList(lower, this, ID_HISTORY);
   workPaths->setNumVisible(4);
-  workPaths->setNumVisible(5);
+  recentFiles = new RecentFilesPanel(lower, context);
   new FXTabItem(tabs, "Index");
   index = new IndexPanel(tabs, context);
   std::vector<std::string> saved;

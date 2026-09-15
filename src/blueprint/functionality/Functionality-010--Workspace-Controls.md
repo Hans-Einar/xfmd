@@ -6,7 +6,7 @@ role: Adapter
 owner: application
 status: Implemented
 scope: FirstRelease
-requirements: UR-032, UR-033, UR-028, UR-029, UR-025, UR-026, UR-021, UR-011, UR-001, UR-006, UR-007, SR-002, SR-008, SR-013, UR-015, UR-017, UR-018, UR-019, UR-020, SR-019
+requirements: UR-038, UR-032, UR-033, UR-028, UR-029, UR-025, UR-026, UR-021, UR-011, UR-001, UR-006, UR-007, SR-002, SR-008, SR-013, UR-015, UR-017, UR-018, UR-019, UR-020, SR-019
 uses: FUNC-020, FUNC-001, FUNC-005, FUNC-007, FUNC-012, FUNC-013, FUNC-014, FUNC-015, FUNC-018, FUNC-019
 ---
 
@@ -66,6 +66,9 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 | 17 | `SidebarWidget/NavigationTree::onKey` | `activatesTreeItem` | `src/application/ui/TreeActivation.h` | tast/modifiers/leaf → aktivering | grenutvidelse beholdes | Implemented |
 | 30 | `FOX layout` | `CompactToolbar::layout` | `src/application/ui/controls/CompactToolbar.cpp` | Bredde → lave rader | Bryt grupper ved liten bredde | Implemented |
 | 31 | `Application::execute` | `EditorWidget::setViewProfile` | `src/application/ui/EditorPresentation.cpp` | Layout/zoom → redigerbar tekstbredde | Bevar tekst/markering/anker | Implemented |
+
+| 32 | `Application documents.opened/saved` | `RecentFilesPanel::remember` | `src/application/ui/RecentFilesPanel.cpp` | Vellykket dokumentsti → MRU og RecentFiles registry | Maks 32; ingen registrering ved avbrutt/feilet operasjon | Implemented |
+| 33 | `FOX list activation` | `RecentFilesPanel::onActivate` | `src/application/ui/RecentFilesPanel.cpp` | Valgt absolutt sti → injisert Application::open | Utsatt dispatch; dirty-kontroll og feil via eksisterende dokumenttjeneste | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -142,3 +145,12 @@ P22: felles kompakt topplinje; UR-032/033/034 beskriver endret scope.
 P22 verifikasjon: AT-052, AT-053, CompactWorkspaceTest og eksisterende regresjoner.
 
 P22: [testbevis og visuell kontroll](../../../docs/evidence/P22.md).
+
+P24 / UR-038 / AT-058: RecentFilesPanel eier en avgrenset listeadapter med MRU
+og FOX-registry-seksjonen RecentFiles (Path0–Path31). WorkspacePanel komponerer
+den under mappehistorikken. Ingen ny feature eller filåpningstjeneste. Manglende
+filer beholdes til aktivering, som gir vanlig åpningsfeil. Absolutte stier brukes
+som identitet. Etiketten viser filnavn først, deretter mappe;
+WorkPathHistory::displayPath gjenbrukes for ~/forkorting.
+
+P24: [AT-058, testbevis og skjermbilder](../../../docs/evidence/P24.md).

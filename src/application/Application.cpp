@@ -176,6 +176,7 @@ void Application::wireDocument() {
     FXMessageBox::error(window, MBOX_OK, "xfmd", "%s", message.c_str());
   };
   documents.opened = [this] {
+    window->workspacePanel->recentFiles->remember(session.view().path);
     edits.reset();
     updateUi();
     window->editor->setCursorPos(0);
@@ -184,6 +185,7 @@ void Application::wireDocument() {
       documentOpened();
   };
   documents.saved = [this] {
+    window->workspacePanel->recentFiles->remember(session.view().path);
     if (navigation)
       navigation->documentSaved();
     updateUi();
@@ -203,6 +205,7 @@ void Application::wireDocument() {
       documents.error(e.what());
     }
   };
+  window->workspacePanel->recentFiles->open = [this](const std::string& path) { open(path); };
   window->sidebar->open = [this](const std::string& path) { openTreePath(path); };
 }
 bool Application::open(const std::string& path) {
