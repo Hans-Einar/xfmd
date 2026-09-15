@@ -1,0 +1,37 @@
+--- a/src/layout/mod.rs
++++ b/src/layout/mod.rs
+@@ -19,6 +19,7 @@
+ mod sankey;
+ mod sequence;
+ mod subgraphs;
++pub mod measurements;
+ mod text;
+ mod timeline;
+ mod treemap;
+--- a/src/layout/text.rs
++++ b/src/layout/text.rs
+@@ -44,6 +44,7 @@
+     wrap: bool,
+     font_family: &str,
+ ) -> TextBlock {
++    if let Some(measured) = super::measurements::lookup(text) { return measured; }
+     let raw_lines = split_lines(text);
+     let mut lines = Vec::new();
+     let fast_metrics = config.fast_text_metrics;
+--- /dev/null
++++ b/src/layout/measurements.rs
+@@ -0,0 +1,14 @@
++//! XFMD seam: per-call premeasured labels, restored even during unwinding.
++use std::{cell::RefCell, collections::HashMap};
++use super::{TextBlock, Layout, compute_layout};
++use crate::{ir::Graph, Theme, LayoutConfig};
++thread_local! { static LABELS: RefCell<Option<HashMap<String, TextBlock>>> = const { RefCell::new(None) }; }
++pub fn lookup(text: &str) -> Option<TextBlock> {
++ LABELS.with(|slot| slot.borrow().as_ref().map(|labels| labels.get(text).unwrap_or_else(|| panic!("Missing measured label: {text}")).clone()))
++}
++pub fn layout(graph: &Graph, theme: &Theme, config: &LayoutConfig, labels: HashMap<String, TextBlock>) -> Layout {
++ struct Restore(Option<HashMap<String, TextBlock>>);
++ impl Drop for Restore { fn drop(&mut self) { LABELS.with(|slot| *slot.borrow_mut()=self.0.take()); } }
++ let _restore=Restore(LABELS.with(|slot| slot.replace(Some(labels))));
++ compute_layout(graph, theme, config)
++}
