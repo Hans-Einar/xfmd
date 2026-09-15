@@ -353,3 +353,10 @@ M3: native geometri/input/regresjon, skjermbilder, installasjon og CI.
 P22 M1 `b89149d`, M2 `35400a9`; M3 inkluderer Fit width ved hele tegnpiksler,
 [testbevis og installasjon](docs/evidence/P22.md). Lokalt består 48 Release-tester
 og 46 sanitizer-tester. CI er merge-gate.
+
+## P23 — rikt Markdown-innhold og kopiering
+
+Branch phase/p23-rich-preview. M1: UR-035–037, FUNC-021/022 og kontraktdesign.
+M2: logisk lesetekst, glyph-basert merking og native clipboard.
+M3: matematikkprofil, lokale bilder, felles ressursforberedelse og PDF-tegning.
+M4: regresjoner, visuell kontroll, dokumentasjon og installasjon.

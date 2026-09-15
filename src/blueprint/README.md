@@ -113,3 +113,16 @@ P22: UR-032 → FUNC-010/014; UR-033 → FUNC-010; UR-034 → FUNC-005. AT-052�
 | UR-032 | [FUNC-011](functionality/Functionality-011--Text-Editing.md), [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FUNC-014](functionality/Functionality-014--Application-Preferences.md) | AT-052 | FirstRelease |
 | UR-033 | [FUNC-011](functionality/Functionality-011--Text-Editing.md), [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | AT-053 | FirstRelease |
 | UR-034 | [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md) | AT-054 | FirstRelease |
+
+## P23
+
+| ID | Type / målgruppe | Eier | Status | Bruker functionality |
+| --- | --- | --- | --- | --- |
+| [FUNC-021](functionality/Functionality-021--Preview-Text-Selection.md) | Functionality / System | application | Ready | none |
+| [FUNC-022](functionality/Functionality-022--Embedded-Visuals.md) | Functionality / System | application | Ready | none |
+
+| Krav | Designobjekter | Akseptanse | Scope |
+| --- | --- | --- | --- |
+| UR-035 | [FUNC-021](functionality/Functionality-021--Preview-Text-Selection.md) | AT-055 | FirstRelease |
+| UR-036 | [FUNC-022](functionality/Functionality-022--Embedded-Visuals.md) | AT-056 | FirstRelease |
+| UR-037 | [FUNC-022](functionality/Functionality-022--Embedded-Visuals.md) | AT-057 | FirstRelease |
