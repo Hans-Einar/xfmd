@@ -4,10 +4,10 @@ kind: Functionality
 audience: User
 role: Workflow
 owner: application
-status: Implemented
+status: Proposed
 scope: FirstRelease
-requirements: UR-036, UR-037, UR-018, SR-002, SR-005, SR-007, SR-010, SR-017
-uses: FUNC-022, FUNC-001, FUNC-003, FUNC-004, FUNC-006, FUNC-016, FUNC-017
+requirements: UR-040, SR-022, UR-036, UR-037, UR-018, SR-002, SR-005, SR-007, SR-010, SR-017
+uses: FUNC-025, FUNC-022, FUNC-001, FUNC-003, FUNC-004, FUNC-006, FUNC-016, FUNC-017
 ---
 
 # Functionality-018: Revisjonssikker lokal PDF-eksport
@@ -47,6 +47,8 @@ P23: Eksport av en ny layout bruker samme EmbeddedVisuals::prepare som preview. 
 
 | 60 | `ExportPipeline::run` | `EmbeddedVisuals::prepare` | `src/application/media/EmbeddedVisuals.cpp` | Snapshot → forberedte PDF-ressurser | Feil gir plassholder | Implemented |
 
+| 99 | `ExportPipeline::run` | `DiagramPreparation::prepare` | `src/application/diagrams/DiagramPreparation.cpp` | Planlagt diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Planned |
+
 ## 6. Gjenbruk og avhengigheter
 
 Gjenbruk FUNC-001 snapshots, FUNC-003 parsing, FUNC-004 layout, FUNC-016 glyphreplay og FUNC-017 sider. FUNC-002s lagringsregler er forbilde; binær publiseringsmekanisme trekkes bare ut som felles privat primitiv når begge reelle konsumenter kan beholde metadata-/dirty-kontraktene.
@@ -64,3 +66,7 @@ P12 etter side-/fontgate. Støtter først dagens Markdown-profil; tabeller/bilde
 [Integrasjonsdesign](../../../softwareDesign.md) og [faseplan](../../../implementationPlan.md) gir kontekst.
 
 P23 akseptanse: AT-056, AT-057. Tester: RichPreviewTest og PreviewSelectionGuiTest.
+
+P25 (Proposed): Eksport får samme injiserte prepare-kjede og diagramscene som preview; font-key og cancellation inngår. Ingen separat kilde→SVG-eksportvei. Krav: UR-040, SR-022; AT-060, AT-063.
+Se [design](../../../docs/design/mermaid-integration.md). Eksisterende Implemented-rader
+og eldre bevis gjelder baseline; ny plumbing er ikke implementert eller testet.

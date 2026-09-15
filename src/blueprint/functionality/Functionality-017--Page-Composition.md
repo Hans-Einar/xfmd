@@ -4,9 +4,9 @@ kind: Functionality
 audience: System
 role: Service
 owner: renderer
-status: Implemented
+status: Proposed
 scope: FirstRelease
-requirements: UR-017, UR-018, SR-001, SR-008, SR-009, SR-016, SR-019
+requirements: UR-040, UR-017, UR-018, SR-001, SR-008, SR-009, SR-016, SR-019
 uses: none
 ---
 
@@ -41,6 +41,8 @@ Brødtekst brytes til innholdsbredde. Kode bevarer whitespace, men visual-wrap i
 | 2 | `PageComposer::compose` | `PageBreaker::breakLines` | `src/renderer/PageBreaker.cpp` | visuelle linjer/keep-regler → sidegrenser | stor blokk splittes; udelelig overflow feiler | Implemented |
 | 3 | `PageComposer::compose` | `PageAnchorIndex::build` | `src/renderer/PageAnchorIndex.cpp` | flytankre → sideankre | behold source og mappingkvalitet | Implemented |
 
+| 99 | `MarkdownRenderer::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | Planlagt diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Planned |
+
 ## 6. Gjenbruk og avhengigheter
 
 FUNC-004 bruker denne functionality; FUNC-005/009/018 konsumerer PageLayout-data. Eksport får hele dokumentet, ikke et screenshot av viewport. Ingen separat Markdown-/PDF-layoutmotor.
@@ -61,3 +63,7 @@ P21: PageComposer::compose kopierer DecorationRole sammen med color når dekoras
 deles over sider. Det lar A4-skjermen bruke samme lesepalett som continuous, mens
 PDF beholder opprinnelige farger. Sidegeometri og tekstplassering endres ikke.
 ReadingColorsTest kontrollerer alle dekorasjonsroller etter sidekomposisjon.
+
+P25 (Proposed): Diagrammet er udelelig sideblokk; flytt/skaler til tilgjengelig hel side uten å klippe, og behold samme transform for tekst og treff. Krav: UR-040; AT-060.
+Se [design](../../../docs/design/mermaid-integration.md). Eksisterende Implemented-rader
+og eldre bevis gjelder baseline; ny plumbing er ikke implementert eller testet.

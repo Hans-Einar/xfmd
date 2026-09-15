@@ -4,10 +4,10 @@ kind: Functionality
 audience: System
 role: Workflow
 owner: application
-status: Implemented
+status: Proposed
 scope: FirstRelease
-requirements: UR-036, UR-037, UR-002, UR-004, SR-001, SR-002, SR-003, SR-008, SR-010, SR-011, SR-013, UR-017, SR-019
-uses: FUNC-022, FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006
+requirements: SR-022, UR-036, UR-037, UR-002, UR-004, SR-001, SR-002, SR-003, SR-008, SR-010, SR-011, SR-013, UR-017, SR-019
+uses: FUNC-025, FUNC-022, FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006
 ---
 
 # Functionality-007: Preview-orkestrering
@@ -52,6 +52,8 @@ P23: ParserWorker injiseres med EmbeddedVisuals::prepare fra composition root. R
 
 | 60 | `ParserWorker::run injected prepare` | `EmbeddedVisuals::prepare` | `src/application/media/EmbeddedVisuals.cpp` | Semantikk + snapshot → bilde/formelressurser | Feil gir plassholder | Implemented |
 
+| 99 | `ParserWorker::run prepare callback` | `DiagramPreparation::prepare` | `src/application/diagrams/DiagramPreparation.cpp` | Planlagt diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Planned |
+
 ## 6. Gjenbruk og avhengigheter
 
 [FUNC-001](../functionality/Functionality-001--Document-Session.md), [FUNC-003](../functionality/Functionality-003--Markdown-Interpretation.md), [FUNC-004](../functionality/Functionality-004--Render-Layout.md), [FUNC-005](../functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-006](../functionality/Functionality-006--Event-Scheduling.md)
@@ -80,3 +82,7 @@ P15: `modelReady(ParseResult)` publiserer bare akseptert dokument/revisjon, før
 Dokumentindeksen er ny konsument. Resize/zoom publiserer ikke metadata på nytt.
 
 P23 akseptanse: AT-056, AT-057. Tester: RichPreviewTest og PreviewSelectionGuiTest.
+
+P25 (Proposed): Prepare-request og completion inkluderer font-/profilgenerasjon. Worker eier egne fonter; gamle svar forkastes før modelReady. Krav: SR-022; AT-063.
+Se [design](../../../docs/design/mermaid-integration.md). Eksisterende Implemented-rader
+og eldre bevis gjelder baseline; ny plumbing er ikke implementert eller testet.

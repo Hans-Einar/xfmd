@@ -4,9 +4,9 @@ kind: Functionality
 audience: System
 role: Adapter
 owner: application
-status: Implemented
+status: Proposed
 scope: FirstRelease
-requirements: UR-036, UR-037, UR-030, UR-031, UR-002, UR-017, UR-018, SR-001, SR-010, SR-016
+requirements: UR-040, UR-041, UR-036, UR-037, UR-030, UR-031, UR-002, UR-017, UR-018, SR-001, SR-010, SR-016
 uses: none
 ---
 
@@ -43,6 +43,8 @@ P9/P11/P12 dokumenterer fontfallback, glyph-/clusteruttrekk, PDF-fontembedding/t
 
 P23: DisplayListPainter tegner CairoVisual i samme adapter som tekst. Matematikkressursen brukes som vektormaske med aktuell tekstfarge; bilder tegnes i egne farger. PDF bruker samme ressurs uten skjermpalett.
 
+| 99 | `DisplayListPainter::paint` | `DiagramPainter::paint` | `src/application/adapters/DiagramPainter.cpp` | Planlagt diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Planned |
+
 ## 6. Gjenbruk og avhengigheter
 
 Konsumenter: FUNC-004, FUNC-005 og FUNC-018. Samme shapingkontrakt kan brukes av en erstattet renderer; interpreter påvirkes ikke. Editorens FXText-font forblir separat.
@@ -69,3 +71,7 @@ Live endring er repaint; commit ved release, med rollback ved skrivefeil.
 P21: [AT-050/051, regresjoner og skjermbilder](../../../docs/evidence/P21.md).
 
 P23 akseptanse: AT-056, AT-057. Tester: RichPreviewTest og PreviewSelectionGuiTest.
+
+P25 (Proposed): Diagramtekst formes med trådeid SharedTextMetrics. Vanlige DrawRuns beholdes; DiagramPainter utfører bare rene stier med semantisk paintrolle. Krav: UR-040, UR-041; AT-060, AT-061.
+Se [design](../../../docs/design/mermaid-integration.md). Eksisterende Implemented-rader
+og eldre bevis gjelder baseline; ny plumbing er ikke implementert eller testet.

@@ -1,0 +1,55 @@
+---
+id: FTR-010
+kind: Feature
+audience: User
+role: Workflow
+owner: application
+status: Proposed
+scope: Future
+requirements: UR-039, UR-040, UR-041, SR-021, SR-022, SR-023
+uses: FUNC-003, FUNC-004, FUNC-005, FUNC-007, FUNC-016, FUNC-017, FUNC-018, FUNC-021, FUNC-023, FUNC-024, FUNC-025
+---
+
+# Feature-010: Mermaid-diagrammer
+
+## 1. Hensikt og avgrensning
+
+UC-008: lese, redigere og kopiere diagrammer og publisere dem i PDF. Samlet brukerresultat med syntax-/feilpolicy og akseptanse; ingen egen featureklasse. Første profil er flowchart/graph, ikke alle Mermaid-dialekter.
+
+## 2. Krav og akseptanse
+
+UR-039–041 og SR-021–023; AT-059–064. Se [design og kontrakter](../../../docs/design/mermaid-integration.md) og [krav](../../../xfmd_requirements.md).
+
+## 3. Kontrakter og eierskap
+
+Feature bruker IDiagramInterpreter, IDiagramLayout og DiagramPreparation. DiagramModel er semantisk verdi, DiagramScene er visuell verdi; Application eier jobber og FOX/Cairo. cmark beholder Markdown-rollen. Ingen feature kaller interne metoder i andre features.
+
+## 4. Atferd, tilstand og feil
+
+Edit → eksisterende debounce → tolkning → forberedelse → normal dokumentlayout → presentasjon. Kun komplett svar for riktig token/font/profil publiseres. Blokkfeil gir kildetekst og forklaring; resten av dokumentet overlever. Fargebytte er repaint. PDF bruker samme scene. Bibliotekets interne typer krysser aldri laggrensen.
+
+## 5. Plumbing
+
+| Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | `ModelBuilder::appendNode` | `MermaidBlockBuilder::build` | `src/interpreter/mermaid/MermaidBlockBuilder.cpp` | mermaid-gjerde → kilde og modell | vanlig kode bevares | Planned |
+| 2 | `MermaidBlockBuilder::build` | `IDiagramInterpreter::parse` | `src/contracts/diagram/IDiagramInterpreter.h` | UTF-8 → DiagramModel/diagnostic | lokal fallback | Planned |
+| 3 | `ParserWorker prepare callback / ExportPipeline` | `DiagramPreparation::prepare` | `src/application/diagrams/DiagramPreparation.cpp` | modell + request key → forberedt scene | stale/cancel forkastes | Planned |
+| 4 | `DiagramPreparation::prepare` | `IDiagramLayout::layout` | `src/contracts/diagram/IDiagramLayout.h` | ren modell + målte etiketter → scene | ingen kildeparsing | Planned |
+| 5 | `MarkdownRenderer::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | scene → frame-paths, tekst og source anchors | bevar aspekt og sidegrenser | Planned |
+| 6 | `DisplayListPainter::paint` | `DiagramPainter::paint` | `src/application/adapters/DiagramPainter.cpp` | rene stier + palett → Cairo | samme primitive kontrakt for preview/PDF | Planned |
+
+
+## 6. Gjenbruk og avhengigheter
+
+Gjenbruk FUNC-003/004/005/007 for Markdown, layout, host og scheduling; FUNC-016/017/018 for tekst og PDF; FUNC-021 for markering. Nye eiere: [tolkning](../functionality/Functionality-023--Mermaid-Interpretation.md), [diagramlayout](../functionality/Functionality-024--Diagram-Layout.md), [forberedelse](../functionality/Functionality-025--Diagram-Preparation.md).
+
+## 7. Verifikasjon
+
+AT-059–064 er planlagt, ikke utført. Begge brukerdiagrammer finnes i designets fixtures. P26 avklarer bridge, måling og strict-profil; P27–P29 verifiserer lagvis og native. Ingen full Mermaid-kompatibilitet hevdes.
+
+## 8. Status, risiko og endringskonsekvenser
+
+Proposed 2026-09-16. Designarbeid P25; gates og faser står i implementeringsplanen. Biblioteket er valgt kandidat; commit/toolchain/patch låses etter P26-probe. Ingen produksjonskode er lagt til.
+
+Planlagt akseptanse: AT-059, AT-060, AT-061, AT-062, AT-063, AT-064.

@@ -4,9 +4,9 @@ kind: Functionality
 audience: System
 role: Mechanism
 owner: application
-status: Implemented
+status: Proposed
 scope: FirstRelease
-requirements: UR-035
+requirements: UR-041, UR-035
 uses: none
 ---
 
@@ -35,6 +35,8 @@ Ny dokumentrevisjon nullstiller merking; fargeendring bevarer merking. Clipboard
 | 1 | `FoxRenderHost input` | `PreviewSelection::hit` | `src/application/preview/PreviewSelection.cpp` | Dokumentpunkt → UTF-8-posisjon | Avvis ugyldig input | Implemented |
 | 2 | `FOX clipboard request` | `FoxRenderHost::onClipboardRequest` | `src/application/adapters/FoxPreviewInput.cpp` | Eid tekst → UTF-8 clipboard | Avvis ugyldig input | Implemented |
 
+| 99 | `MarkdownRenderer::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | Planlagt diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Planned |
+
 ## 6. Gjenbruk og avhengigheter
 
 Konsument: Markdown-presentasjon. Rene kontrakter beholder laggrensene.
@@ -48,3 +50,7 @@ AT-055. Planlagt: målrettede unit- og native FOX-tester samt full regresjon.
 Implemented i brukerbestilt P23. M3 samler testbevis og kjente grenser.
 
 P23: [testbevis og visuell kontroll](../../../docs/evidence/P23.md).
+
+P25 (Proposed): Diagrametiketter inngår i normal readingText med eksplisitt leserekkefølge og skalerte DrawRuns; eksisterende PreviewSelection og clipboard brukes. Krav: UR-041; AT-061.
+Se [design](../../../docs/design/mermaid-integration.md). Eksisterende Implemented-rader
+og eldre bevis gjelder baseline; ny plumbing er ikke implementert eller testet.

@@ -399,3 +399,18 @@ URI-policyen; `localPath` beholder .md/.txt-valideringen for dokumentnavigasjon.
 RecentFiles registry-seksjon. WorkspacePanel komponerer den under Recent folders.
 Application kobler vellykkede opened/saved-hendelser til registrering og aktivering
 til eksisterende open/navigasjon. Mapperot og back/forward-historikk er uavhengige.
+
+## P25: planlagt Mermaid-integrasjon
+
+Status **Proposed**. [Designrevisjonen](docs/design/mermaid-integration.md) beskriver
+FTR-010 og FUNC-023/024/025, separate interpreter-/renderer-adaptere og en XFMD-eid
+DiagramModel. Rust Graph eller Mermaid-kilde brukes ikke som layoutkontrakt.
+Én Rust staticlib lenkes i composition root; separate adaptercrates har ingen
+innbyrdes avhengighet. FOX forblir applikasjonsteknologien.
+
+Cmark delegerer eksplisitte mermaid-gjerder via injisert IDiagramInterpreter.
+Application forbereder diagramscener i worker via IDiagramLayout, med trådeide
+fonter og generasjonskontroll. MarkdownRenderer plasserer ferdige scener;
+DisplayListPainter/DiagramPainter tegner native Cairo og vanlig tekst i preview/PDF.
+P25 endrer ikke dagens kjørevei. Filkart, ABI, måleseam, policy, cache og faser
+finnes i designet; alle nye source-filer er Planned.
