@@ -51,6 +51,8 @@ Køens backpressure vekkes ved kansellering. Refresh starter ny skanning.
 | 6 | `SidebarWidget::onPoll` | `DirectoryScanner::take` | `src/application/workspace/DirectoryScanner.cpp` | Up to 512 entries, busy state and errors | Mutex exchange releases bounded producer backpressure | Implemented |
 | 7 | `DirectoryScanner::scan` | `DirectoryScanner::publish` | `src/application/workspace/DirectoryScanner.cpp` | Entry → pending queue | Wait at 4096 entries; cancellation wakes producer | Implemented |
 
+| 8 | `DirectoryScanner::start / destructor` | `DirectoryScanner::stop` | `src/application/workspace/DirectoryScanner.cpp` | cancellation predicate under mutex → notify → join | prevents lost wakeup between predicate check and wait | Implemented |
+
 ## 6. Gjenbruk og avhengigheter
 
 [FUNC-012](Functionality-012--Work-Path-History.md) eier stigrense-policy.
@@ -68,3 +70,7 @@ WheelGuiTest består. Bevis: [P8-verifikasjon](../../../docs/evidence/P8.md).
 
 Implemented i P8. Store eller langsomme filsystemer kan bruke tid; GUI viser fremdrift
 og kansellerer gammelt arbeid. Dette er treavgrensning, ikke en OS-sandbox.
+
+P27 regresjon avdekket lost wakeup ved stop/join. Predikatendring skjer nå
+under samme mutex som condition-variable-ventingen. WorkPathTest utfører
+100 raske start/stopp i tillegg til backpressure-scenariet.

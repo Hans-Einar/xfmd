@@ -1,6 +1,6 @@
 #include "Application.h"
 #include "export/ExportPipeline.h"
-#include "interpreter/CmarkInterpreter.h"
+#include "composition/DiagramServices.h"
 #include "renderer/MarkdownRenderer.h"
 #include <filesystem>
 using namespace FX;
@@ -16,10 +16,10 @@ bool Application::startExport(const std::string& path) {
     ExportRequest request{session.snapshot(), preview->layoutProfile().paper, metrics->fontSetId(),
                           target.path, preview->frame()};
     exporter = std::make_unique<ExportCoordinator>([target](const auto& frozen, auto& control) {
-      CmarkInterpreter parser;
+      auto parser = DiagramServices::interpreter();
       MarkdownRenderer renderer;
       SharedTextMetrics fonts;
-      return ExportPipeline::run(frozen, target, control, parser, renderer, fonts);
+      return ExportPipeline::run(frozen, target, control, *parser, renderer, fonts);
     });
     exporter->start(std::move(request));
     pollExport();

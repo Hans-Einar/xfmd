@@ -13,7 +13,8 @@ struct ParseCompletion {
 };
 class ParserWorker {
   IInterpreter& interpreter;
-  std::function<ParseResult(ParseResult, const SourceSnapshot&)> prepare;
+  std::function<ParseResult(ParseResult, const SourceSnapshot&, const std::function<bool()>&)>
+      prepare;
   mutable std::mutex mutex;
   std::condition_variable ready;
   std::optional<SourceSnapshot> pending;
@@ -25,7 +26,8 @@ class ParserWorker {
 
 public:
   explicit ParserWorker(IInterpreter&,
-                        std::function<ParseResult(ParseResult, const SourceSnapshot&)> = {});
+                        std::function<ParseResult(ParseResult, const SourceSnapshot&,
+                                                  const std::function<bool()>&)> = {});
   ~ParserWorker();
   void submit(SourceSnapshot);
   std::optional<ParseCompletion> take();

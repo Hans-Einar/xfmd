@@ -5,6 +5,8 @@
 #include <vector>
 
 namespace xfmd {
+struct DiagramModel;
+struct DiagramScene;
 struct InlineRun {
   std::string text;
   SourceRange source;
@@ -27,7 +29,7 @@ struct SemanticTable {
   std::vector<ColumnAlignment> alignments;
   std::vector<TableRow> rows;
 };
-enum class BlockKind { Paragraph, Heading, Code, Rule, Html, Table };
+enum class BlockKind { Paragraph, Heading, Code, Rule, Html, Table, Diagram };
 struct SemanticBlock {
   BlockKind kind = BlockKind::Paragraph;
   SourceRange source;
@@ -35,6 +37,9 @@ struct SemanticBlock {
   std::string marker;
   std::vector<InlineRun> runs;
   std::shared_ptr<const SemanticTable> table;
+  std::shared_ptr<const DiagramModel> diagram;
+  std::shared_ptr<const DiagramScene> diagramScene;
+  std::string diagramSource;
 };
 struct SemanticDocument {
   DocumentToken token;

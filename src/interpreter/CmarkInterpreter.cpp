@@ -49,7 +49,7 @@ ParseResult CmarkInterpreter::parse(const SourceSnapshot& source, const ParseOpt
                                                              cmark_iter_free);
   if (!it)
     throw Error(ErrorCode::Parse, "Unable to traverse Markdown.");
-  ModelBuilder builder(source, &math);
+  ModelBuilder builder(source, &math, diagrams.get());
   cmark_event_type event;
   while ((event = cmark_iter_next(it.get())) != CMARK_EVENT_DONE)
     builder.appendNode(cmark_iter_get_node(it.get()), event);

@@ -282,3 +282,28 @@ Patchens loop-checkpoints er mekaniske og algoritmene er uendret. Testen må
 bevise at tett graf blir fallback innen fem sekunder, mens brukerfixture og
 128-noders kjede fremdeles lykkes. Ingen gjennomføring merkes Verified før
 samlet bevis i P29.
+
+### P27: faktisk forberedelse og publisering
+
+Composition root er `DiagramServices::interpreter/preview/prepare`. Callbacken
+oppretter WorkerResources ved første kall på parsertråden: egen SharedTextMetrics,
+MermaidDiagramLayout og DiagramPreparation med 32 MiB LRU. Cacheidentiteten er
+serialisert modell + Flowchart1/layout1/font12 + FontSetId; likhet bruker hele
+verdien og har ingen hashkollisjon. Ingen SourceRange eller DocumentToken lagres
+i scenen. Feilscener caches ikke. PDF har en tilsvarende instans per jobb.
+
+ParserWorker-ticket er prepare-generasjonen og forkaster eldre resultat også
+ved ny refresh av samme token. Cancellation-kallet låser workerens mutex kort
+og sjekker ticket/stopping; ingen GUI-lesing skjer på workertråden. Scene-fonten
+valideres i placement. FrameKey håndterer publisering etter bredde/profilendring.
+Palette, bredde og A4 er ikke Rust-layoutnøkler: naturlig scene skaleres uniformt.
+
+DiagramPlacement legger ett atomisk flowelement og vanlige formede DrawRuns.
+DrawRun.textScale brukes av samme Pango/Cairo-tegning og glyph-hit-testing.
+Leserekkefølge bindes før runs sorteres visuelt: grupper, noder og kantetiketter.
+Ustøttet blokk beholder kilden med blokklokal diagnose. Naked flowchart-tekst
+aktiverer aldri diagramtolkning.
+
+P27-profiladapteren normaliserer upstream DoubleCircle til Circle fordi pinnen
+feilklassifiserer `((label))`. Profilvalideringen avviser `(((label)))`, så ekte
+dobbeltsirkler blir ikke feiltolket som den støttede enkle sirkelen.

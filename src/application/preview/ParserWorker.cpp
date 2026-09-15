@@ -1,7 +1,9 @@
 #include "ParserWorker.h"
 namespace xfmd {
-ParserWorker::ParserWorker(IInterpreter& parser,
-                           std::function<ParseResult(ParseResult, const SourceSnapshot&)> prepare)
+ParserWorker::ParserWorker(
+    IInterpreter& parser,
+    std::function<ParseResult(ParseResult, const SourceSnapshot&, const std::function<bool()>&)>
+        prepare)
     : interpreter(parser), prepare(std::move(prepare)), thread([this] { run(); }) {}
 ParserWorker::~ParserWorker() {
   {
@@ -51,7 +53,10 @@ void ParserWorker::run() {
     try {
       result.model = interpreter.parse(source);
       if (prepare)
-        result.model = prepare(result.model, source);
+        result.model = prepare(result.model, source, [this, current] {
+          std::lock_guard<std::mutex> lock(mutex);
+          return stopping || current != ticket;
+        });
     } catch (const std::exception& e) {
       result.error = e.what();
     } catch (...) {

@@ -98,5 +98,9 @@ void run() {
     history.activate(dir / std::to_string(i));
   }
   CHECK(history.entries().size() == 32);
+  for (int i = 0; i < 100; ++i) {
+    scanner.start(dir / "home", {});
+    scanner.stop();
+  }
 }
 TEST_MAIN(run)

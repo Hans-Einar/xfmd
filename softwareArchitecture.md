@@ -400,9 +400,9 @@ RecentFiles registry-seksjon. WorkspacePanel komponerer den under Recent folders
 Application kobler vellykkede opened/saved-hendelser til registrering og aktivering
 til eksisterende open/navigasjon. Mapperot og back/forward-historikk er uavhengige.
 
-## P25: planlagt Mermaid-integrasjon
+## P25–P29: Mermaid-integrasjon
 
-Status **Proposed**. [Designrevisjonen](docs/design/mermaid-integration.md) beskriver
+Grunnlag og native integrasjon er implementert i P26/P27. [Designrevisjonen](docs/design/mermaid-integration.md) beskriver
 FTR-010 og FUNC-023/024/025, separate interpreter-/renderer-adaptere og en XFMD-eid
 DiagramModel. Rust Graph eller Mermaid-kilde brukes ikke som layoutkontrakt.
 Én Rust staticlib lenkes i composition root; separate adaptercrates har ingen
@@ -414,3 +414,13 @@ fonter og generasjonskontroll. MarkdownRenderer plasserer ferdige scener;
 DisplayListPainter/DiagramPainter tegner native Cairo og vanlig tekst i preview/PDF.
 P25 endrer ikke dagens kjørevei. Filkart, ABI, måleseam, policy, cache og faser
 finnes i designet; alle nye source-filer er Planned.
+
+
+Mermaid-filansvar: `application/composition/DiagramServices` registrerer
+parser/prepare-kjeden; `application/diagrams/DiagramPreparation` koordinerer,
+`DiagramCache` eier worker-lokal LRU, og `adapters/DiagramPainter` utfører
+Cairo-primitiver. `interpreter/mermaid/MermaidBlockBuilder` kjenner gjerdet,
+`MermaidInterpreter` eier parser-ABI-adapteren. `renderer/diagram/DiagramTextLayout`
+måler etiketter, `MermaidDiagramLayout` dekoder layout og `DiagramPlacement`
+plasserer scenen i dokumentet. Rust-algoritmeadaptere ligger i respektive
+interpreter/renderer-undermapper; C-eksporter ligger bare i composition root.

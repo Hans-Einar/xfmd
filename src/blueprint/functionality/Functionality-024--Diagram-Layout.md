@@ -4,8 +4,8 @@ kind: Functionality
 audience: System
 role: Service
 owner: renderer
-status: Proposed
-scope: Future
+status: Implemented
+scope: FirstRelease
 requirements: UR-039, UR-040, UR-041, SR-021, SR-022, SR-023
 uses: none
 ---
@@ -37,7 +37,7 @@ Layout forberedes i worker. Tekstmåling skjer med samme fontgrunnlag som brødt
 | 3 | `MermaidDiagramLayout::layout` | `xfmd_diagram_layout_v1` | `src/application/composition/mermaid/src/lib.rs` | ren graf + labelmål → LayoutResult | ingen parserkall/opaque parserhandle | Implemented |
 | 4 | `xfmd_diagram_layout_v1` | `layout` | `src/renderer/diagram/rust/src/lib.rs` | mapping → upstream compute_layout → ren geometri | mål-seam må verifiseres i P26 | Implemented |
 | 5 | `MermaidDiagramLayout::layout` | `MermaidDiagramLayout::layout` | `src/renderer/diagram/MermaidDiagramLayout.cpp` | layout → stier + semantiske etiketter | forme-/piltester | Implemented |
-| 6 | `MarkdownRenderer::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | scene → skalert frame og lesetekst | Approximate blokkanker, ingen sideklipping | Planned |
+| 6 | `MarkdownRenderer::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | scene → skalert frame og lesetekst | Approximate blokkanker, ingen sideklipping | Implemented |
 
 
 ## 6. Gjenbruk og avhengigheter
@@ -50,6 +50,6 @@ Planlagt DiagramLayoutTest og DiagramPlacementTest, plus Rust/C-ABI-tester. Samm
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Proposed. Måleseam er ikke et eksisterende upstream-API. Scene-API-et render_scene er bevisst ikke valgt som produksjonsport: det parser igjen og gjør tekst til konturer. P26 gate må bevise valgt vei før Ready.
+Implementert. Versjonsbundet patch leverer måleseam og kooperativ tidsgrense. Scene bygges i adapteren; DiagramPlacement lager vanlige DrawRuns. Se P26-bevis og videre P28/P29-verifikasjon.
 
 Planlagt akseptanse: AT-059, AT-060, AT-061, AT-062, AT-063, AT-064.

@@ -4,7 +4,11 @@ namespace xfmd {
 namespace fs = std::filesystem;
 DirectoryScanner::~DirectoryScanner() { stop(); }
 void DirectoryScanner::stop() {
-  cancelled = true;
+  {
+    // Coordinate the predicate transition with wait() to avoid a lost wakeup.
+    std::lock_guard<std::mutex> lock(mutex);
+    cancelled = true;
+  }
   ready.notify_all();
   if (worker.joinable())
     worker.join();

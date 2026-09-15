@@ -1,7 +1,9 @@
 #include "ModelBuilder.h"
+#include "mermaid/MermaidBlockBuilder.h"
 namespace xfmd {
-ModelBuilder::ModelBuilder(const SourceSnapshot& source, const MathSyntax* syntax)
-    : math(syntax), mapping(source.text, syntax ? &syntax->masked : nullptr) {
+ModelBuilder::ModelBuilder(const SourceSnapshot& source, const MathSyntax* syntax,
+                           IDiagramInterpreter* parser)
+    : math(syntax), diagrams(parser), mapping(source.text, syntax ? &syntax->masked : nullptr) {
   model.token = source.token;
   model.sourceSize = source.text.size();
 }
@@ -70,6 +72,8 @@ void ModelBuilder::appendNode(cmark_node* node, cmark_event_type event) {
   if (type == CMARK_NODE_CODE_BLOCK) {
     const char* literal = cmark_node_get_literal(node);
     const char* info = cmark_node_get_fence_info(node);
+    if (MermaidBlockBuilder::build(*active, info, literal, diagrams, diagramCount))
+      return;
     if (info && (std::string(info) == "math" || std::string(info) == "latex")) {
       active->kind = BlockKind::Paragraph;
       InlineRun formula;
