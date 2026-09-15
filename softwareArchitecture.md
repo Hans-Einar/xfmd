@@ -392,3 +392,10 @@ ressurslevetid; `ImageDecoder` + `GifBudget` begrenser dekoding, `MathTypesetter
 eier MicroTeX-integrasjonen. `LinkResolver::resourcePath` gjenbruker den lokale
 URI-policyen; `localPath` beholder .md/.txt-valideringen for dokumentnavigasjon.
 `RenderFrame.maxRunHeight` avgrenser synlighets-/hit-test-søk også for høye bilder.
+
+## P24: nylig brukte filer
+
+`application/ui/RecentFilesPanel.cpp` eier liste, avgrenset MRU og separat
+RecentFiles registry-seksjon. WorkspacePanel komponerer den under Recent folders.
+Application kobler vellykkede opened/saved-hendelser til registrering og aktivering
+til eksisterende open/navigasjon. Mapperot og back/forward-historikk er uavhengige.

@@ -364,3 +364,10 @@ M3: regresjoner, visuell kontroll, dokumentasjon og installasjon.
 P23 er implementert: M1 `e190f49`, M2 `094adf3`, M3 `fc38d0b` og
 [evidens/installasjon](docs/evidence/P23.md). 50 Release- og 48 sanitizer-tester
 består lokalt, med tilleggskontroll av flersidet kopiering. CI er merge-gate.
+
+## P24 — Recent files
+
+Branch: `phase/p24-recent-files`. M1: UR-038, FUNC-010 og plumbing.
+M2: egen listeadapter, persistens og dokumentkobling. M3: AT-058 med
+GUI-/restart-/feilveitest, regresjon og installasjon. Mermaid er et separat
+diagramformat og inngår ikke i denne avgrensede filhistorikkendringen.
