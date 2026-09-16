@@ -424,3 +424,13 @@ P29 M2 `9b0156b` kontrollerer offline og native installasjon. Rettelsen
 faktiske plumbing-symboler, flersidet PDF og testbevis: Release 59/59 og
 Debug ASan/UBSan/LSan 57/57, med berørte tester kjørt igjen etter utvidelser.
 P26–P28 er integrert via PR 19–21; P29 går gjennom samme CI før merge/installasjon.
+
+## P30: Mermaid-layout uten overdreven fristkontroll
+
+Branch: `phase/p30-mermaid-layout-performance`. UR-039/SR-022, FUNC-024.
+
+- M1: reproduser brukerens sporbarhetsdiagram (13 noder / 17 kanter), lokaliser kostnaden og legg til regresjonsfixture.
+- M2: reduser klokkeoverhead i indre geometri uten endret geometri eller lengre tidsbudsjett; behold frist- og TLS-kontroll.
+- M3: verifiser native preview, PDF, Release/sanitizere og CI før merge og atomisk installasjon.
+
+P30 M1 `6217bcb`, M2 `dc17db4`; M3 samler [testbevis](docs/evidence/P30.md).

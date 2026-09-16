@@ -141,6 +141,9 @@ trådlokal deadline på to sekunder med kooperative checkpoints i layout-løkker
 labelplassering, A*-kø og rutekandidater. P29-CI avdekket en lengre vei mellom
 kontrollpunktene; patchen dekker derfor også indre løkker i rangering,
 flowchart-planlegging, kantpipeline, ruting og etterbehandling.
+P30 beholder kontrollpunktene, men avleser klokken ved første og deretter hvert
+64. kontrollpunkt i hvert layoutkall. Dette reduserer fristoverhead i små
+geometrioperasjoner uten å endre algoritme, geometri eller tidsbudsjett.
 Unwinding gjenoppretter måletabellen
 og deadline via RAII. Dette er ikke hard preemption eller hard realtime.
 Vanlige brukerdiagrammer og 128-noders kjede lykkes; tett graf blir fallback.
