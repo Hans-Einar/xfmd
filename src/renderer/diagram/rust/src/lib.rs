@@ -98,6 +98,9 @@ mod tests {
                 std::time::Duration::ZERO,
             )
         });
-        measurements::checkpoint();
+        // Cover a complete clock-sampling interval, including the expiry check.
+        for _ in 0..64 {
+            measurements::checkpoint();
+        }
     }
 }
