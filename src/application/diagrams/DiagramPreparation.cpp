@@ -28,9 +28,11 @@ ParseResult DiagramPreparation::prepare(ParseResult original, ITextMetrics& metr
       checkpoint();
       block.kind = BlockKind::Code;
       block.diagramScene.reset();
+      auto approximate = block.source;
+      approximate.quality = MappingQuality::Approximate;
       block.runs.insert(
           block.runs.begin(),
-          {std::string("Mermaid: ") + e.what() + "\n", block.source, false, false, true, {}});
+          {std::string("Mermaid: ") + e.what() + "\n", approximate, false, false, true, {}});
     }
   }
   checkpoint();

@@ -8,21 +8,23 @@ bool MermaidBlockBuilder::build(SemanticBlock& block, const char* info, const ch
   tokens >> language;
   if (language != "mermaid")
     return false;
+  auto approximate = block.source;
+  approximate.quality = MappingQuality::Approximate;
   block.diagramSource = literal ? literal : "";
-  block.runs.push_back({block.diagramSource, block.source, false, false, true, {}});
+  block.runs.push_back({block.diagramSource, approximate, false, false, true, {}});
   DiagramParseResult result;
   if (++count > 16)
     result.error = "At most 16 diagrams per document";
   else if (!parser)
     result.error = "Diagram interpreter is unavailable";
   else
-    result = parser->parse({block.diagramSource, block.source});
+    result = parser->parse({block.diagramSource, approximate});
   block.diagram = result.model;
   if (result.model)
     block.kind = BlockKind::Diagram;
   else
     block.runs.insert(block.runs.begin(),
-                      {"Mermaid: " + result.error + "\n", block.source, false, false, true, {}});
+                      {"Mermaid: " + result.error + "\n", approximate, false, false, true, {}});
   return true;
 }
 } // namespace xfmd

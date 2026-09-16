@@ -32,7 +32,7 @@ lagres i FOX-registry-seksjonen `RecentFiles`, separat fra `WorkPaths`.
 
 ## Bygg og kjør
 
-Krever Rust/Cargo **1.92.0**, Python 3, `patch`, C++17-kompilator, CMake ≥3.20, Ninja, pkg-config, FOX ≥1.6.57 (1.6 API),
+Krever Rust/Cargo **1.92.0**, Python ≥3.11, `patch`, C++17-kompilator, CMake ≥3.20, Ninja, pkg-config, FOX ≥1.6.57 (1.6 API),
 libcurl-verktøyet `curl`, X11/RandR, Cairo og PangoCairo/Fontconfig (inkludert utviklingsfiler).
 Bilder/formler krever GdkPixbuf med SVG-loader, cairomm-1.0, pangomm-1.4 og tinyxml2.
 På Debian/Ubuntu: `libgdk-pixbuf-2.0-dev librsvg2-common libcairomm-1.0-dev libpangomm-1.4-dev libtinyxml2-dev`.
@@ -277,3 +277,32 @@ per formel. Store bilder skaleres til tekstbredden/siden. Formler følger lesefa
 bilder beholder egne farger. Begge inngår i PDF-eksporten.
 Installasjonen inkluderer MicroTeX-ressurser og deres opprinnelige lisenser i
 `share/xfmd/math/`; selve biblioteket er MIT-lisensiert.
+
+
+## Mermaid-diagrammer
+
+Gjerder med første infotoken `mermaid` rendres native. Flowchart 1 støtter
+`flowchart`/`graph` med LR/RL/TD/TB/BT, rektangler, avrundede rektangler,
+beslutningsnoder, sirkler, grupper, kjeder, sykluser og solide/stiplete/tykke
+kanter. Bruk `A[Etikett] -->|Kanttekst| B{Valg}`. Begge brukerdiagrammene
+finnes i `tests/fixtures/markdown/mermaid.md`.
+
+Etiketter kan merkes og kopieres; fargekontrollene virker direkte. A4 og PDF
+bruker samme geometri og ekte tekst. Lange LR-diagrammer skaleres ned til
+visningsbredden. Andre diagramtyper og init/CSS/HTML/click/ressursdirektiver
+vises som kilde med forklaring, uten å ødelegge resten av dokumentet.
+
+Grensene er 64 KiB, 128 noder, 512 kanter, 32 grupper, gruppedybde 8 og
+16 diagrammer per dokument. Dyr layout avbrytes kooperativt etter omtrent
+to sekunder og gir lokal fallback; dette er ingen hard realtime-garanti.
+AddressSanitizer-bygg har ti sekunders budsjett for instrumenteringskostnaden;
+den installerte Release-utgaven beholder to sekunder.
+
+### Bygg uten nett
+
+Kjør dependency-bootstrapene og `cargo fetch --locked` én gang med nett,
+og gjør en vanlig CMake-konfigurering. Behold `.deps/`, Cargo-cachen og
+CMake-byggets `_deps/` (MicroTeX). Deretter kan konfigurering og bygg kjøres
+med `CARGO_NET_OFFLINE=true` og `-DFETCHCONTENT_FULLY_DISCONNECTED=ON`.
+Den installerte applikasjonen trenger verken Cargo, Rust, Node eller nettleser
+for å vise Mermaid. Rust-/Mermaid-lisenser installeres under `share/doc/xfmd/licenses/`.

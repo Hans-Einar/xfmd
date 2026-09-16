@@ -1,9 +1,8 @@
 # Blueprint-register
 
-P0–P24 har 9 implementerte features og 22 functionality-objekter.
-P25 foreslår 1 ny feature og 3 functionality-objekter (10/25 totalt).
-Berørte eksisterende objekter står Proposed for de nye kontraktene; eldre kode
-og testbevis beholdes som implementert baseline.
+P0–P29 har 10 implementerte features og 25 functionality-objekter.
+Mermaid Flowchart 1 er implementert; faktisk verifikasjon og begrensninger
+står i [P29-bevis](../../docs/evidence/P29.md).
 Registerstatus speiler metadata i blueprint-filene. Implemented betyr at koden
 finnes; [P15-bevis](../../docs/evidence/P15.md) angir faktisk testdekning og
 begrensninger. UR-010/SR-014 (xfw-IPC) er fortsatt Future.
@@ -24,11 +23,11 @@ Se [designrevisjonen](../../softwareDesign.md), [arbeidsmåten](../../docs/worki
 | [FTR-007](feature/Feature-007--Paged-Publication.md) | Feature / User | application | Implemented | FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-007, FUNC-009, FUNC-010, FUNC-014, FUNC-016, FUNC-017, FUNC-018 |
 | [FUNC-001](functionality/Functionality-001--Document-Session.md) | Functionality / System | application | Implemented | FUNC-002 |
 | [FUNC-002](functionality/Functionality-002--Local-File-Storage.md) | Functionality / System | application | Implemented | none |
-| [FUNC-003](functionality/Functionality-003--Markdown-Interpretation.md) | Functionality / System | interpreter | Proposed | FUNC-023 |
-| [FUNC-004](functionality/Functionality-004--Render-Layout.md) | Functionality / System | renderer | Proposed | FUNC-017, FUNC-024 |
-| [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md) | Functionality / System | application | Proposed | FUNC-004, FUNC-015, FUNC-016, FUNC-021 |
+| [FUNC-003](functionality/Functionality-003--Markdown-Interpretation.md) | Functionality / System | interpreter | Implemented | FUNC-023 |
+| [FUNC-004](functionality/Functionality-004--Render-Layout.md) | Functionality / System | renderer | Implemented | FUNC-017, FUNC-024 |
+| [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md) | Functionality / System | application | Implemented | FUNC-004, FUNC-015, FUNC-016, FUNC-021 |
 | [FUNC-006](functionality/Functionality-006--Event-Scheduling.md) | Functionality / System | application | Implemented | none |
-| [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md) | Functionality / System | application | Proposed | FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006, FUNC-022, FUNC-025 |
+| [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md) | Functionality / System | application | Implemented | FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-006, FUNC-022, FUNC-025 |
 | [FUNC-008](functionality/Functionality-008--Navigation-History.md) | Functionality / User | application | Implemented | FUNC-001, FUNC-009 |
 | [FUNC-009](functionality/Functionality-009--Source-Anchor-Mapping.md) | Functionality / System | application | Implemented | FUNC-005 |
 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | Functionality / User | application | Implemented | FUNC-001, FUNC-005, FUNC-007, FUNC-012, FUNC-013, FUNC-014, FUNC-015, FUNC-018, FUNC-019 |
@@ -37,9 +36,9 @@ Se [designrevisjonen](../../softwareDesign.md), [arbeidsmåten](../../docs/worki
 | [FUNC-013](functionality/Functionality-013--Filtered-File-Tree.md) | Functionality / User | application | Implemented | FUNC-012 |
 | [FUNC-014](functionality/Functionality-014--Application-Preferences.md) | Functionality / User | application | Implemented | none |
 | [FUNC-015](functionality/Functionality-015--Scroll-Motion.md) | Functionality / System | application | Implemented | FUNC-014, FUNC-006 |
-| [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md) | Functionality / System | application | Proposed | none |
-| [FUNC-017](functionality/Functionality-017--Page-Composition.md) | Functionality / System | renderer | Proposed | none |
-| [FUNC-018](functionality/Functionality-018--PDF-Export.md) | Functionality / User | application | Proposed | FUNC-001, FUNC-003, FUNC-004, FUNC-006, FUNC-016, FUNC-017, FUNC-022, FUNC-025 |
+| [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md) | Functionality / System | application | Implemented | none |
+| [FUNC-017](functionality/Functionality-017--Page-Composition.md) | Functionality / System | renderer | Implemented | none |
+| [FUNC-018](functionality/Functionality-018--PDF-Export.md) | Functionality / User | application | Implemented | FUNC-001, FUNC-003, FUNC-004, FUNC-006, FUNC-016, FUNC-017, FUNC-022, FUNC-025 |
 | [FUNC-019](functionality/Functionality-019--Application-Identity.md) | Functionality / Integration | application | Implemented | none |
 | [FUNC-020](functionality/Functionality-020--Document-Index.md) | Functionality / System | application | Implemented | FUNC-002, FUNC-003, FUNC-008 |
 | [FTR-008](feature/Feature-008--Chapter-Navigation.md) | Feature / User | application | Implemented | FUNC-020, FUNC-008, FUNC-009, FUNC-010 |
@@ -121,7 +120,7 @@ P22: UR-032 → FUNC-010/014; UR-033 → FUNC-010; UR-034 → FUNC-005. AT-052�
 
 | ID | Type / målgruppe | Eier | Status | Bruker functionality |
 | --- | --- | --- | --- | --- |
-| [FUNC-021](functionality/Functionality-021--Preview-Text-Selection.md) | Functionality / System | application | Proposed | none |
+| [FUNC-021](functionality/Functionality-021--Preview-Text-Selection.md) | Functionality / System | application | Implemented | none |
 | [FUNC-022](functionality/Functionality-022--Embedded-Visuals.md) | Functionality / System | application | Implemented | FUNC-008 |
 
 | Krav | Designobjekter | Akseptanse | Scope |
@@ -134,14 +133,14 @@ P22: UR-032 → FUNC-010/014; UR-033 → FUNC-010; UR-034 → FUNC-005. AT-052�
 | --- | --- | --- | --- |
 | UR-038 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | AT-058 | FirstRelease |
 
-## P25 — Mermaid-design (Proposed, Future)
+## P25–P29 — Mermaid Flowchart 1 (Implemented, FirstRelease)
 
 | ID | Type / målgruppe | Eier | Status |
 | --- | --- | --- | --- |
-| [FTR-010](feature/Feature-010--Mermaid-Diagrams.md) | Feature / User | application | Proposed |
-| [FUNC-023](functionality/Functionality-023--Mermaid-Interpretation.md) | Functionality / System | interpreter | Proposed |
-| [FUNC-024](functionality/Functionality-024--Diagram-Layout.md) | Functionality / System | renderer | Proposed |
-| [FUNC-025](functionality/Functionality-025--Diagram-Preparation.md) | Functionality / System | application | Proposed |
+| [FTR-010](feature/Feature-010--Mermaid-Diagrams.md) | Feature / User | application | Implemented |
+| [FUNC-023](functionality/Functionality-023--Mermaid-Interpretation.md) | Functionality / System | interpreter | Implemented |
+| [FUNC-024](functionality/Functionality-024--Diagram-Layout.md) | Functionality / System | renderer | Implemented |
+| [FUNC-025](functionality/Functionality-025--Diagram-Preparation.md) | Functionality / System | application | Implemented |
 
 | Krav | Designobjekter | Akseptanse | Scope |
 | --- | --- | --- | --- |

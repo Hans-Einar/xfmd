@@ -41,7 +41,7 @@ Brødtekst brytes til innholdsbredde. Kode bevarer whitespace, men visual-wrap i
 | 2 | `PageComposer::compose` | `PageBreaker::breakLines` | `src/renderer/PageBreaker.cpp` | visuelle linjer/keep-regler → sidegrenser | stor blokk splittes; udelelig overflow feiler | Implemented |
 | 3 | `PageComposer::compose` | `PageAnchorIndex::build` | `src/renderer/PageAnchorIndex.cpp` | flytankre → sideankre | behold source og mappingkvalitet | Implemented |
 
-| 99 | `MarkdownRenderer::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | Implementert diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Implemented |
+| 99 | `BlockLayout::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | Implementert diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 

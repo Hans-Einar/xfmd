@@ -34,9 +34,9 @@ Edit → eksisterende debounce → tolkning → forberedelse → normal dokument
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | `ModelBuilder::appendNode` | `MermaidBlockBuilder::build` | `src/interpreter/mermaid/MermaidBlockBuilder.cpp` | mermaid-gjerde → kilde og modell | vanlig kode bevares | Implemented |
 | 2 | `MermaidBlockBuilder::build` | `IDiagramInterpreter::parse` | `src/contracts/diagram/IDiagramInterpreter.h` | UTF-8 → DiagramModel/diagnostic | lokal fallback | Implemented |
-| 3 | `ParserWorker prepare callback / ExportPipeline` | `DiagramPreparation::prepare` | `src/application/diagrams/DiagramPreparation.cpp` | modell + request key → forberedt scene | stale/cancel forkastes | Implemented |
+| 3 | `DiagramServices prepare chain` | `DiagramPreparation::prepare` | `src/application/diagrams/DiagramPreparation.cpp` | modell + request key → forberedt scene | stale/cancel forkastes | Implemented |
 | 4 | `DiagramPreparation::prepare` | `IDiagramLayout::layout` | `src/contracts/diagram/IDiagramLayout.h` | ren modell + målte etiketter → scene | ingen kildeparsing | Implemented |
-| 5 | `MarkdownRenderer::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | scene → frame-paths, tekst og source anchors | bevar aspekt og sidegrenser | Implemented |
+| 5 | `BlockLayout::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | scene → frame-paths, tekst og source anchors | bevar aspekt og sidegrenser | Implemented |
 | 6 | `DisplayListPainter::paint` | `DiagramPainter::paint` | `src/application/adapters/DiagramPainter.cpp` | rene stier + palett → Cairo | samme primitive kontrakt for preview/PDF | Implemented |
 
 
@@ -46,10 +46,10 @@ Gjenbruk FUNC-003/004/005/007 for Markdown, layout, host og scheduling; FUNC-016
 
 ## 7. Verifikasjon
 
-AT-059–064 er planlagt, ikke utført. Begge brukerdiagrammer finnes i designets fixtures. P26 avklarer bridge, måling og strict-profil; P27–P29 verifiserer lagvis og native. Ingen full Mermaid-kompatibilitet hevdes.
+AT-059–064 dekkes av Rust-profil-/ABI-kontroller, DiagramLayoutTest, DiagramPreparationTest, DiagramWorkerTest, DiagramReadingTest, MermaidGuiTest og MermaidPdfTest. Faktiske kjøringer og begrensninger står i [P29](../../../docs/evidence/P29.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 
 Implementert i P26/P27. Commit/toolchain/patch er låst. P28/P29 samler lese-, eksport- og full profilverifikasjon; ikke full Mermaid-kompatibilitet.
 
-Planlagt akseptanse: AT-059, AT-060, AT-061, AT-062, AT-063, AT-064.
+Akseptanse: AT-059, AT-060, AT-061, AT-062, AT-063, AT-064.

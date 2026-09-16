@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch the pinned Mermaid source; apply only the reviewed text measurement seam."""
+"""Fetch the pinned Mermaid source; apply the reviewed measurement/deadline seam."""
 import hashlib
 import io
 import pathlib

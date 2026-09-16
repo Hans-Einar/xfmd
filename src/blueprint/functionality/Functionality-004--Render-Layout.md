@@ -58,7 +58,7 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 
 P23: DrawRun får logiske UTF-8-intervaller i RenderFrame.readingText. EmbeddedContent.visual plasseres med aspektbevaring, baseline og høydegrense før PageComposer; kildeankre og lenker bevares.
 
-| 99 | `MarkdownRenderer::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | Implementert diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Implemented |
+| 99 | `BlockLayout::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | Implementert diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 

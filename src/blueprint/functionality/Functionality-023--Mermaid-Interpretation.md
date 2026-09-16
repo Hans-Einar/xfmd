@@ -22,7 +22,7 @@ UR-039/041, SR-021/022/023; AT-059/061/062/063/064. Se [design og kontrakter](..
 
 ## 3. Kontrakter og eierskap
 
-IDiagramInterpreter::parse(DiagramSource) → DiagramParseResult. DiagramModel inneholder ordnede noder, kanter, grupper, retning og profilversjon. Kilde ligger ved resultatet for diagnostikk, ikke som input til layout. C++ eier kopierte verdier; Rust-eide FFI-resultater frigjøres med tilhørende free-funksjon.
+IDiagramInterpreter::parse(DiagramSource) → DiagramParseResult. DiagramModel inneholder ordnede noder, kanter, grupper og retning. Flowchart 1 er fast adapter-/cacheprofil. SemanticBlock beholder kilde og spans for diagnostikk; layout mottar ingen kilde. C++ eier kopierte verdier; Rust-eide FFI-resultater frigjøres med tilhørende free-funksjon.
 
 ## 4. Atferd, tilstand og feil
 
@@ -35,8 +35,9 @@ Gjenkjenn bare eksplisitt mermaid-gjerde. Rust bruker parse_mermaid_strict, men 
 | 1 | `ModelBuilder::appendNode` | `MermaidBlockBuilder::build` | `src/interpreter/mermaid/MermaidBlockBuilder.cpp` | fence info + literal + SourceRange → DiagramSource | bevar original fallback | Implemented |
 | 2 | `IDiagramInterpreter virtual dispatch` | `MermaidInterpreter::parse` | `src/interpreter/mermaid/MermaidInterpreter.cpp` | DiagramSource → DiagramParseResult | grense og profil sjekkes | Implemented |
 | 3 | `MermaidInterpreter::parse` | `xfmd_mermaid_parse_v1` | `src/application/composition/mermaid/src/lib.rs` | lånt UTF-8 → eid ABI-resultat | panic/feil blir status | Implemented |
-| 4 | `xfmd_mermaid_parse_v1` | `inspect` | `src/interpreter/mermaid/rust/src/profile.rs` | strict upstream-resultat → tillatt Flowchart 1 | ikke godta delvis tolket graf | Implemented |
-| 5 | `inspect` | `map_graph` | `src/interpreter/mermaid/rust/src/model.rs` | upstream Graph → ren ABI-modell | avvis ukjent enum/overstørrelse | Implemented |
+| 4 | `xfmd_mermaid_parse_v1` | `parse` | `src/interpreter/mermaid/rust/src/lib.rs` | UTF-8 → profil, upstream og modell | Result/feil returneres til ABI | Implemented |
+| 5 | `parse` | `inspect` | `src/interpreter/mermaid/rust/src/profile.rs` | kilde → tillatt Flowchart 1 | ikke godta uavklart syntaks | Implemented |
+| 6 | `parse` | `map_graph` | `src/interpreter/mermaid/rust/src/model.rs` | upstream Graph → ren modell | kontroller enums og bevarte noder/kanter | Implemented |
 
 
 ## 6. Gjenbruk og avhengigheter
@@ -45,10 +46,10 @@ Konsument: FUNC-003 via injisert port. Bibliotek og Rust-typer er private. Ingen
 
 ## 7. Verifikasjon
 
-Planlagt MermaidInterpreterTest og Rust-profiltester: brukerfixtures, Unicode/CRLF/list-indent, gjentatte noder, parallelle kanter, diagnostikk, ukjente konstruksjoner og alloker/frigi/panic. AT-059/061/062/063/064.
+Rust-profil-/FFI-tester, DiagramLayoutTest og DiagramPreparationTest dekker brukerfixtures, retninger/former/grupper, avvist syntaks, grenser, panic og eierskap. Native/PDF-dekning og avgrensninger står i [P29](../../../docs/evidence/P29.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 
 Implementert i P26/P27. Hele kildeprofilen kontrolleres før upstream, og node-/kant-/gruppetap avvises. Kildemapping er Approximate for den komplette blokken.
 
-Planlagt akseptanse: AT-059, AT-061, AT-062, AT-063, AT-064.
+Akseptanse: AT-059, AT-061, AT-062, AT-063, AT-064.

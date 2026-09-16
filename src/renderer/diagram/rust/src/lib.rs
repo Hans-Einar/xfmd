@@ -7,6 +7,10 @@ use xfmd_diagram_contracts::{
 pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
     let mut r = Reader::new(input);
     let model = Model::read(&mut r)?;
+    let budget = r.count(10000)?;
+    if budget == 0 {
+        return Err("Invalid diagram deadline".into());
+    }
     let mut labels = HashMap::new();
     for _ in 0..r.count(1024)? {
         let text = r.text()?;
@@ -34,6 +38,7 @@ pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
         &theme,
         &mermaid_rs_renderer::LayoutConfig::default(),
         labels,
+        std::time::Duration::from_millis(budget as u64),
     );
     let mut w = Writer::default();
     w.number(layout.width as f64);
@@ -75,4 +80,24 @@ pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
         return Err("Diagram scene limit exceeded".into());
     }
     Ok(w.0)
+}
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn deadline_does_not_escape_layout_call() {
+        use mermaid_rs_renderer::{LayoutConfig, Theme, ir::Graph, layout::measurements};
+        // An expired nested call may return or unwind, depending on its graph.
+        // In both cases an unrelated checkpoint must see the original TLS state.
+        let _ = std::panic::catch_unwind(|| {
+            measurements::layout(
+                &Graph::new(),
+                &Theme::modern(),
+                &LayoutConfig::default(),
+                std::collections::HashMap::new(),
+                std::time::Duration::ZERO,
+            )
+        });
+        measurements::checkpoint();
+    }
 }
