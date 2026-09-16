@@ -3,6 +3,7 @@
 #include <librsvg/rsvg.h>
 #include <list>
 #include <memory>
+#include <pango/pangocairo.h>
 namespace xfmd {
 namespace {
 struct Entry {
@@ -12,6 +13,12 @@ struct Entry {
 struct Cache {
   std::list<Entry> entries;
   std::size_t bytes = 0;
+  ~Cache() {
+    // librsvg's text renderer uses Pango's per-thread default font map.
+    // Drop handles first, then release that map while this thread is alive.
+    entries.clear();
+    pango_cairo_font_map_set_default(nullptr);
+  }
 };
 thread_local Cache cache;
 void check(bool ok, GError* error) {
