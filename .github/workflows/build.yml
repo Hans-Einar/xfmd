@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Install build and native test dependencies
-        run: sudo apt-get update && sudo apt-get install -y build-essential cmake ninja-build pkg-config libfox-1.6-dev xvfb curl strace fonts-dejavu-core fonts-droid-fallback libcairo2-dev libpango1.0-dev libcairomm-1.0-dev libpangomm-1.4-dev libtinyxml2-dev libgdk-pixbuf-2.0-dev librsvg2-common poppler-utils libxrandr-dev wmaker
+        run: sudo apt-get update && sudo apt-get install -y build-essential cmake ninja-build pkg-config libfox-1.6-dev xvfb curl strace fonts-dejavu-core fonts-droid-fallback libcairo2-dev libpango1.0-dev libcairomm-1.0-dev libpangomm-1.4-dev libtinyxml2-dev libgdk-pixbuf-2.0-dev librsvg2-dev poppler-utils libxrandr-dev wmaker
       - name: Install pinned Rust toolchain
         run: rustup toolchain install 1.92.0 --profile minimal --component rustfmt --component clippy
       - run: ./tools/bootstrap_dependencies.sh

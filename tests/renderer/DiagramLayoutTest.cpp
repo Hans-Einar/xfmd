@@ -25,16 +25,19 @@ void run() {
     const auto layoutStart = std::chrono::steady_clock::now();
     auto scene = layout.layout(*parsed.model, {}, metrics);
     const auto layoutMs = std::chrono::duration_cast<std::chrono::milliseconds>(
-                              std::chrono::steady_clock::now() - layoutStart).count();
+                              std::chrono::steady_clock::now() - layoutStart)
+                              .count();
     CHECK(scene->nodes.size() == nodes && scene->width > 0 && scene->height > 0);
     CHECK(scene->edges.size() == parsed.model->edges.size());
+    CHECK(scene->svg.rfind("<svg", 0) == 0);
+    CHECK(scene->svg.find("edge-0") != std::string::npos);
     for (std::size_t i = 0; i < scene->nodes.size(); ++i) {
       auto label = metrics.measure(parsed.model->nodes[i].label, {});
       CHECK(scene->nodes[i].bounds.width >= label.width);
       CHECK(scene->nodes[i].bounds.height >= label.height);
     }
-    std::cout << name << " " << scene->width << "x" << scene->height << " pt, "
-              << layoutMs << " ms\n";
+    std::cout << name << " " << scene->width << "x" << scene->height << " pt, " << layoutMs
+              << " ms\n";
   }
   auto grouped = parser.parse({"flowchart LR\nsubgraph Outer [Group A]\nsubgraph Inner [Group "
                                "B]\nA[Ærlig]-->B\nend\nC[Rest]\nend\nB-->C",

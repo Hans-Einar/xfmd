@@ -89,8 +89,8 @@ struct Reader {
       throw std::runtime_error("Invalid diagram geometry");
     return v;
   }
-  std::string text() {
-    auto n = count(65536);
+  std::string text(std::uint32_t limit = 65536) {
+    auto n = count(limit);
     need(n);
     std::string s(reinterpret_cast<const char*>(data + at), n);
     at += n;

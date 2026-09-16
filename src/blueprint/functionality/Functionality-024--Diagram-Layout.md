@@ -35,14 +35,16 @@ Layout forberedes i worker. Tekstmåling skjer med samme fontgrunnlag som brødt
 | 1 | `IDiagramLayout virtual dispatch` | `MermaidDiagramLayout::layout` | `src/renderer/diagram/MermaidDiagramLayout.cpp` | modell + font/request → immutable scene | checkpoint før/etter Rust | Implemented |
 | 2 | `MermaidDiagramLayout::layout` | `DiagramTextLayout::measure` | `src/renderer/diagram/DiagramTextLayout.cpp` | etiketter → formede linjer og mål | samme ITextMetrics-port | Implemented |
 | 3 | `MermaidDiagramLayout::layout` | `xfmd_diagram_layout_v1` | `src/application/composition/mermaid/src/lib.rs` | ren graf + labelmål → LayoutResult | ingen parserkall/opaque parserhandle | Implemented |
-| 4 | `xfmd_diagram_layout_v1` | `layout` | `src/renderer/diagram/rust/src/lib.rs` | mapping → upstream compute_layout → ren geometri | mål-seam må verifiseres i P26 | Implemented |
+| 4 | `xfmd_diagram_layout_v1` | `layout` | `src/renderer/diagram/rust/src/lib.rs` | mapping → upstream compute_layout/render_svg → geometri og SVG | payload 2; maks 8 MiB | Implemented |
 | 5 | `MermaidDiagramLayout::layout` | `Reader::finish` | `src/contracts/diagram/DiagramWire.h` | ferdig dekodet scene → kontrollert buffer | trailing data avvises; scene er XFMD-eid | Implemented |
 | 6 | `BlockLayout::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | SVG-scene → én skalert visual-run | Approximate blokkanker, ingen sideklipping | Implemented |
+
+| 7 | `layout` | `render_svg` | `src/renderer/diagram/rust/src/lib.rs` | eksisterende Layout → SVG-bytes | ingen ny parsing | Implemented |
 
 
 ## 6. Gjenbruk og avhengigheter
 
-Konsumenter: FUNC-025, eksisterende MarkdownRenderer og PDF via vanlig frame. ITextMetrics er en ren kontrakt; Application injiserer implementasjonen. Bruker ikke parserens crate, kilde eller skjulte handle. Form-/pilgeometri eies her, Cairo utfører bare kommandoene.
+Konsumenter: FUNC-025, eksisterende MarkdownRenderer og PDF via vanlig frame. ITextMetrics er en ren kontrakt; Application injiserer implementasjonen. Bruker ikke parserens crate, kilde eller skjulte handle. Biblioteket eier SVG-former/piler/etiketter; Application eier SVG-leseren.
 
 ## 7. Verifikasjon
 
@@ -70,7 +72,7 @@ eksisterende sidevalg/A*/portfinjustering og foreslått felles kostnadspolicy.
 En eventuell ny strategi utvikles i en separat bibliotekfork etter beslutning.
 Planlagte symboler i studien er ikke del av dagens plumbing.
 
-Implementert. Versjonsbundet patch leverer måleseam og kooperativ tidsgrense. Scene bygges i adapteren; DiagramPlacement lager vanlige DrawRuns. Se P26-bevis og videre P28/P29-verifikasjon.
+Implementert. Versjonsbundet patch leverer måleseam og kooperativ tidsgrense. P25–P30 bygget scene i adapteren og separate DrawRuns; dette erstattes i P31. Se P26-bevis og videre P28/P29-verifikasjon.
 
 Akseptanse: AT-059, AT-060, AT-061, AT-062, AT-063, AT-064.
 

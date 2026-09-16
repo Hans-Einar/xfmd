@@ -34,9 +34,9 @@ lagres i FOX-registry-seksjonen `RecentFiles`, separat fra `WorkPaths`.
 
 Krever Rust/Cargo **1.92.0**, Python ≥3.11, `patch`, C++17-kompilator, CMake ≥3.20, Ninja, pkg-config, FOX ≥1.6.57 (1.6 API),
 libcurl-verktøyet `curl`, X11/RandR, Cairo og PangoCairo/Fontconfig (inkludert utviklingsfiler).
-Bilder/formler krever GdkPixbuf med SVG-loader, cairomm-1.0, pangomm-1.4 og tinyxml2.
-På Debian/Ubuntu: `libgdk-pixbuf-2.0-dev librsvg2-common libcairomm-1.0-dev libpangomm-1.4-dev libtinyxml2-dev`.
-På AlmaLinux/Fedora: `gdk-pixbuf2-devel librsvg2 cairomm-devel pangomm-devel tinyxml2-devel`.
+Diagram-SVG krever librsvg ≥2.46 med utviklingsheaders. Bilder/formler krever GdkPixbuf med SVG-loader, cairomm-1.0, pangomm-1.4 og tinyxml2.
+På Debian/Ubuntu: `libgdk-pixbuf-2.0-dev librsvg2-dev libcairomm-1.0-dev libpangomm-1.4-dev libtinyxml2-dev`.
+På AlmaLinux/Fedora: `gdk-pixbuf2-devel librsvg2-devel cairomm-devel pangomm-devel tinyxml2-devel`.
 PDF-verifikasjon bruker Poppler-verktøyene `pdfinfo`, `pdftotext` og `pdftoppm`. Installer DejaVu Sans/Mono og gjerne Droid Sans
 Fallback eller Noto Sans CJK. Tester krever Python 3 og Xvfb. Fullscreen-testen bruker Window Maker når den er installert.
 
@@ -281,14 +281,14 @@ Installasjonen inkluderer MicroTeX-ressurser og deres opprinnelige lisenser i
 
 ## Mermaid-diagrammer
 
-Gjerder med første infotoken `mermaid` rendres native. Flowchart 1 støtter
+Gjerder med første infotoken `mermaid` vises med bibliotekets SVG via librsvg/Cairo. Flowchart 1 støtter
 `flowchart`/`graph` med LR/RL/TD/TB/BT, rektangler, avrundede rektangler,
 beslutningsnoder, sirkler, grupper, kjeder, sykluser og solide/stiplete/tykke
 kanter. Bruk `A[Etikett] -->|Kanttekst| B{Valg}`. Begge brukerdiagrammene
 finnes i `tests/fixtures/markdown/mermaid.md`.
 
-Etiketter kan merkes og kopieres; fargekontrollene virker direkte. A4 og PDF
-bruker samme geometri og ekte tekst. Lange LR-diagrammer skaleres ned til
+Fargekontrollene virker direkte. Diagrametikettmerking er utsatt; diagramkilden
+kan kopieres fra editoren. A4 og PDF bruker samme SVG og vektorgeometri. Lange LR-diagrammer skaleres ned til
 visningsbredden. Andre diagramtyper og init/CSS/HTML/click/ressursdirektiver
 vises som kilde med forklaring, uten å ødelegge resten av dokumentet.
 

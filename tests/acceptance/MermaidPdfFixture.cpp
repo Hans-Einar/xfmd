@@ -1,4 +1,5 @@
 #include "application/composition/DiagramServices.h"
+#include "contracts/diagram/DiagramScene.h"
 #include "application/export/ExportPipeline.h"
 #include "renderer/MarkdownRenderer.h"
 #include "support/TestSupport.h"
@@ -51,7 +52,13 @@ int main(int argc, char** argv) {
                   std::size_t(visual.bounds.y / frame->pages.paper.height));
       }
     std::ofstream expected(argv[2]);
-    expected << frame->readingText;
+    expected << frame->readingText << "\n";
+    // SVG text must still survive vector PDF export although GUI label
+    // selection is deliberately deferred.
+    for (const auto& b : model->blocks)
+      if (b.diagramScene)
+        for (const auto& label : b.diagramScene->labels)
+          expected << label.text << "\n";
     return 0;
   } catch (const std::exception& e) {
     std::cerr << e.what() << '\n';

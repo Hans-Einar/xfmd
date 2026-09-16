@@ -39,6 +39,10 @@ Gjenbruk ParserWorker med én aktiv/én ventende jobb og ExportPipeline med egne
 | 5 | `DiagramPreparation::prepare` | `DiagramCache::insert` | `src/application/diagrams/DiagramCache.cpp` | vellykket scene → worker-lokal cache | ikke cache transient feil | Implemented |
 | 6 | `DisplayListPainter::paint` | `DiagramPainter::paint` | `src/application/adapters/DiagramPainter.cpp` | SVG + semantisk palett → librsvg/Cairo | ingen separate diagrametikett-runs | Implemented |
 
+| 7 | `DiagramPainter::paint` | `SvgDiagramCache::paint` | `src/application/adapters/SvgDiagramCache.cpp` | bibliotek-SVG + stylesheet → Cairo viewport | trådlokal begrenset handle-cache; ingen rasterisering | Implemented |
+
+| 8 | `DiagramPreparation::prepare` | `SvgDiagramCache::validate` | `src/application/adapters/SvgDiagramCache.cpp` | ferdig SVG → validert handle i worker | ugyldig SVG blir blokklokal kildefallback før publisering | Implemented |
+
 
 ## 6. Gjenbruk og avhengigheter
 

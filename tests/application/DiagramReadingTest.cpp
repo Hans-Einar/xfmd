@@ -16,27 +16,15 @@ void run() {
       DiagramServices::prepare(parser->parse(source), source, metrics, [] { return false; });
   CHECK(model->blocks[0].diagramScene);
   auto frame = renderer.layout(*model, {180, 1}, metrics);
-  const DrawRun* label = nullptr;
   const DrawRun* picture = nullptr;
   for (const auto& run : frame->runs) {
-    if (run.text == "Blåbær")
-      label = &run;
+    CHECK(run.text != "Blåbær" && run.text != "Ready");
     if (run.visual)
       picture = &run;
   }
-  CHECK(label && picture && label->textScale < 1);
-  PreviewSelection selection;
-  selection.start(
-      PreviewSelection::hit(*frame, {label->bounds.x, label->bounds.y + label->bounds.height / 2}));
-  selection.extend(PreviewSelection::hit(
-      *frame, {label->bounds.x + label->bounds.width, label->bounds.y + label->bounds.height / 2}));
-  CHECK(selection.text(*frame) == "Blåbær");
-  auto rectangles = selection.rectangles(*frame);
-  double width = 0;
-  for (auto box : rectangles)
-    width += box.width;
-  CHECK(std::abs(width - label->bounds.width) < .01);
-  CHECK(label->source.quality == MappingQuality::Approximate && label->source.begin == 0);
+  CHECK(picture && picture->source.quality == MappingQuality::Approximate);
+  CHECK(frame->readingText.find("Blåbær") == std::string::npos);
+  CHECK(model->blocks[0].diagramScene->svg.find("Blåbær") != std::string::npos);
   auto* surface = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, 180, 300);
   auto* cr = cairo_create(surface);
   DisplayListPainter painter(metrics.catalog);
@@ -57,7 +45,6 @@ void run() {
     CHECK((row[x] & 0xffffff) == palette.surface);
     CHECK((row[x] & 0xffffff) != previous);
     previous = row[x] & 0xffffff;
-    CHECK(selection.text(*frame) == "Blåbær");
   }
   cairo_destroy(cr);
   cairo_surface_destroy(surface);
