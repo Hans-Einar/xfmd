@@ -114,3 +114,5 @@ MermaidDiagramLayout::layout serialiserer original nøkkel og faktiske linjer
 i inputpayload 4; Rust layout bruker linjene direkte i TextBlock. Eksisterende
 plumbing i kapittel 5 gjelder. Node-/gruppetitler prioriteres ved delt tekstnøkkel.
 Se [policy og akseptanse](../../../docs/design/mermaid-label-wrap.md).
+
+P33-verifikasjon: [før/etter-SVG og 8/8 relevante tester](../../../docs/evidence/P33.md).
