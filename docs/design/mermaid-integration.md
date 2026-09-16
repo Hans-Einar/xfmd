@@ -6,6 +6,10 @@ og verifiserer den. [Krav](../../xfmd_requirements.md),
 [faseplan](../../implementationPlan.md) og [testbevis](../evidence/P29.md)
 beskriver omfang og faktisk verifikasjon. Ingen full Mermaid-kompatibilitet hevdes.
 
+[Rutestudien](mermaid-routing-study.md) sammenligner brukerens forslag til
+begrenset side-/portsøk med bibliotekets faktiske algoritmer. Den beskriver en
+mulig fork og SVG-retning; dette er forslag, ikke endring av implementert baseline.
+
 ## 1. Beslutning og bibliotek
 
 `mermaid-rs-renderer` brukes for parsing og graf-layout, med

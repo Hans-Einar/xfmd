@@ -63,6 +63,11 @@ Tidsassertene gjelder fortsatt både produksjon og sanitizer-bygg.
 
 ## 8. Status, risiko og endringskonsekvenser
 
+[Rutestudien](../../../docs/design/mermaid-routing-study.md) dokumenterer
+eksisterende sidevalg/A*/portfinjustering og foreslått felles kostnadspolicy.
+En eventuell ny strategi utvikles i en separat bibliotekfork etter beslutning.
+Planlagte symboler i studien er ikke del av dagens plumbing.
+
 Implementert. Versjonsbundet patch leverer måleseam og kooperativ tidsgrense. Scene bygges i adapteren; DiagramPlacement lager vanlige DrawRuns. Se P26-bevis og videre P28/P29-verifikasjon.
 
 Akseptanse: AT-059, AT-060, AT-061, AT-062, AT-063, AT-064.
