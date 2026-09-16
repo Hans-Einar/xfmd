@@ -41,6 +41,9 @@ Layout forberedes i worker. Tekstmåling skjer med samme fontgrunnlag som brødt
 
 | 7 | `layout` | `render_svg` | `src/renderer/diagram/rust/src/lib.rs` | eksisterende Layout → SVG-bytes | ingen ny parsing | Implemented |
 
+| 8 | `layout` | `with_measurements` | `src/renderer/diagram/rust/src/lib.rs` | scoped TextBlock-mål og frist → valgt layout | TLS gjenopprettes også ved panic | Implemented |
+| 9 | `layout` | `compute` | `src/renderer/diagram/rust/src/lib.rs` | graph + Engine + RoutingControl → RoutedLayout | Libavoid-feil blir synlig kildefallback | Implemented |
+| 10 | `layout` | `render_svg_with_crossings` | `src/renderer/diagram/rust/src/lib.rs` | ferdige logiske ruter → valgfrie presentasjonshopp | ingen endring av rutepunkter | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -96,3 +99,8 @@ Før native arbeid avviser adapteren over 256 kanter / 2048 kandidatporter.
 DiagramLayoutTest skiller denne admission-feilen fra faktisk tidsavbrudd;
 fristens nedre tidsassert gjelder bare tidsavbrudd. Etter begge feilveier
 skal en vanlig modell fortsatt kunne rendres.
+
+Et siste etikett-only-pass kan plassere på de ferdige rutene etter tredje
+transaksjon; det kan ikke starte flere transaksjoner. Ubuntu/Pango-fixture
+verifiserer dette i forken. Self-loop-endepunkter er distinkte punkter på
+formgrensen; libavoid eier fortsatt ruting og segmentforskyvning.

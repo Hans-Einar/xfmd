@@ -90,6 +90,14 @@ kan derfor få en eksplisitt layoutdiagnose. Dette beskytter mot observert lang
 nudging på 128 noder / 512 kanter. 128-noders kjede støttes. Grensen erstatter
 ikke kooperativ frist og innebærer ingen hard tidsisolasjon.
 
-P32-pin: `cee062412a9f20ee691c1564b2ff63e96f9de678`. Forkens dokumentasjon og
+P32-pin: `6ff5a54ce39d912e399493ec4639a7b8ff8bdc7f`. Forkens dokumentasjon og
 før/etter-SVG/PNG ligger i `docs/libavoid-review.md` og `docs/libavoid-preview/`
 på samme commit. Arkivkontrollsummen står i `cmake/mermaid-source.json`.
+
+Ubuntu-regresjonen bruker et siste etikett-only-pass på ferdige ruter, uten
+flere native transaksjoner. En frosset Pango 1.52.1-fixture i forken reproduserer
+den tidligere feilen. Self-loops bruker distinkte retningsbundne grensepunkter
+i libavoid, siden virtuelle shape-pin-endepunkter kunne kollapse til nullrute.
+
+SVG-cacheoppryddingen frigjør også Pango sitt per-tråd standardfontkart; se
+[P31-livsløpsbevis](../evidence/P31-lifecycle.md). Ingen nye LSan-suppresjoner.
