@@ -13,21 +13,28 @@ void run() {
   MermaidInterpreter parser;
   MermaidDiagramLayout layout;
   SharedTextMetrics metrics;
-  for (auto name : {"service-map", "layer-delivery"}) {
+  for (auto name : {"traceability", "service-map", "layer-delivery"}) {
     std::ifstream file(std::string(XFMD_DIAGRAM_FIXTURES) + "/" + name + ".mmd");
     std::string text((std::istreambuf_iterator<char>(file)), {});
     auto parsed = parser.parse({text, {}});
     CHECK(parsed.model && parsed.error.empty());
-    CHECK(parsed.model->nodes.size() == 9);
+    const unsigned nodes = std::string(name) == "traceability" ? 13 : 9;
+    CHECK(parsed.model->nodes.size() == nodes);
+    if (nodes == 13)
+      CHECK(parsed.model->edges.size() == 17);
+    const auto layoutStart = std::chrono::steady_clock::now();
     auto scene = layout.layout(*parsed.model, {}, metrics);
-    CHECK(scene->nodes.size() == 9 && scene->width > 0 && scene->height > 0);
+    const auto layoutMs = std::chrono::duration_cast<std::chrono::milliseconds>(
+                              std::chrono::steady_clock::now() - layoutStart).count();
+    CHECK(scene->nodes.size() == nodes && scene->width > 0 && scene->height > 0);
     CHECK(scene->edges.size() == parsed.model->edges.size());
     for (std::size_t i = 0; i < scene->nodes.size(); ++i) {
       auto label = metrics.measure(parsed.model->nodes[i].label, {});
       CHECK(scene->nodes[i].bounds.width >= label.width);
       CHECK(scene->nodes[i].bounds.height >= label.height);
     }
-    std::cout << name << " " << scene->width << "x" << scene->height << " pt\n";
+    std::cout << name << " " << scene->width << "x" << scene->height << " pt, "
+              << layoutMs << " ms\n";
   }
   auto grouped = parser.parse({"flowchart LR\nsubgraph Outer [Group A]\nsubgraph Inner [Group "
                                "B]\nA[Ærlig]-->B\nend\nC[Rest]\nend\nB-->C",

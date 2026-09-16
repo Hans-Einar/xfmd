@@ -46,6 +46,10 @@ Konsumenter: FUNC-025, eksisterende MarkdownRenderer og PDF via vanlig frame. IT
 
 ## 7. Verifikasjon
 
+P30-regresjon: `docs/design/mermaid/traceability.mmd` (13 noder, 17 merkede
+kanter) skal gi en full scene innen produksjonens eksisterende tidsbudsjett.
+Undersøk og begrens kostbar ruteforbedring; ikke skjul feilen med lengre frist.
+
 DiagramLayoutTest dekker parserfri modell, begge brukerdiagrammer, nested grupper, fontmål, 128-noders kjede og tidsavbrudd med etterfølgende normal layout. DiagramReadingTest og MermaidPdfTest dekker skalering, merking og native tekst. Se [P29](../../../docs/evidence/P29.md).
 
 P29 utvider fristkontrollene til indre løkker i rangering, kantpipeline, ruting
