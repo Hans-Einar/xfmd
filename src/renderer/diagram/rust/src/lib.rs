@@ -6,7 +6,7 @@ use xfmd_diagram_contracts::{
 };
 pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
     let mut r = Reader::new(input);
-    if r.count(3)? != 3 {
+    if r.count(4)? != 4 {
         return Err("Unsupported diagram layout payload".into());
     }
     let model = Model::read(&mut r)?;
@@ -22,7 +22,14 @@ pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
         if width < 0.0 || height <= 0.0 {
             return Err("Invalid label metrics".into());
         }
-        let lines = text.split('\n').map(str::to_owned).collect();
+        let count = r.count(4096)?;
+        if count == 0 {
+            return Err("Missing measured label lines".into());
+        }
+        let mut lines = Vec::with_capacity(count as usize);
+        for _ in 0..count {
+            lines.push(r.text()?);
+        }
         labels.insert(
             text,
             mermaid_rs_renderer::layout::TextBlock {

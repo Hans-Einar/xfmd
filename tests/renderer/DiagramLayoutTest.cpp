@@ -2,6 +2,7 @@
 #include "contracts/diagram/DiagramLimits.h"
 #include "contracts/diagram/DiagramWire.h"
 #include "interpreter/mermaid/MermaidInterpreter.h"
+#include "renderer/diagram/DiagramTextLayout.h"
 #include "renderer/diagram/MermaidDiagramLayout.h"
 #include "support/TestSupport.h"
 #include <chrono>
@@ -14,6 +15,39 @@ void run() {
   MermaidInterpreter parser;
   MermaidDiagramLayout layout;
   SharedTextMetrics metrics;
+  DiagramModel wrapping;
+  wrapping.nodes.push_back({"a", "A", DiagramShape::Rectangle});
+  wrapping.nodes.push_back({"b", "B", DiagramShape::Rectangle});
+  const std::string caption = "provides or requires at its boundary";
+  wrapping.edges.push_back({0, 1, caption, false, true, 0});
+  auto measured = DiagramTextLayout::measure(wrapping, metrics).at(caption);
+  CHECK(measured.lines.size() > 1 && measured.width <= 120.);
+  std::string joined;
+  for (const auto& line : measured.lines) {
+    if (!joined.empty())
+      joined += " ";
+    joined += line.text;
+  }
+  CHECK(joined == caption);
+  auto wrappedScene = layout.layout(wrapping, {}, metrics);
+  for (const auto& line : measured.lines)
+    CHECK(wrappedScene->svg.find(">" + line.text + "<") != std::string::npos);
+  for (const auto& caption : {std::string("Ærlig måling av blåbær gir nyttig informasjon"),
+                              std::string("First\n\nSecond"), std::string(50, 'W')}) {
+    wrapping.edges[0].label = caption;
+    auto text = DiagramTextLayout::measure(wrapping, metrics).at(caption);
+    CHECK(!text.lines.empty());
+    if (caption == "First\n\nSecond")
+      CHECK(text.lines.size() == 3 && text.lines[1].text.empty());
+    else if (caption == std::string(50, 'W'))
+      CHECK(text.lines.size() == 1 && text.width > 120.);
+    else
+      CHECK(text.lines.size() > 1 && text.width <= 120.);
+  }
+  wrapping.nodes[0].label = caption;
+  wrapping.edges[0].label = caption;
+  CHECK(DiagramTextLayout::measure(wrapping, metrics).at(caption).lines.size() == 1);
+
   for (auto name : {"traceability", "service-map", "layer-delivery"}) {
     std::ifstream file(std::string(XFMD_DIAGRAM_FIXTURES) + "/" + name + ".mmd");
     std::string text((std::istreambuf_iterator<char>(file)), {});
@@ -32,6 +66,11 @@ void run() {
     CHECK(scene->edges.size() == parsed.model->edges.size());
     CHECK(scene->svg.rfind("<svg", 0) == 0);
     CHECK(!scene->diagnostics.empty());
+    if (const char* directory = std::getenv("XFMD_DIAGRAM_EVIDENCE")) {
+      std::ofstream output(std::string(directory) + "/" + name + ".svg");
+      output << scene->svg;
+      CHECK(output.good());
+    }
     CHECK(scene->svg.find("edge-0") != std::string::npos);
     for (std::size_t i = 0; i < scene->nodes.size(); ++i) {
       auto label = metrics.measure(parsed.model->nodes[i].label, {});

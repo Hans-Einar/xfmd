@@ -314,3 +314,8 @@ tillatt; etiketter og noder skal være hindringer. Ved plassmangel vises en loka
 feil ved Mermaid-kilden, uten skjult motorbytte. Se
 [bygg, lisens og relinking](docs/design/mermaid-libavoid-build.md) og
 [SVG-/rutebeslutningen](docs/design/mermaid-svg-routing.md).
+
+Lange Mermaid-kantetiketter brytes automatisk ved ordgrenser rundt 120 pt.
+Eksplisitte linjeskift bevares, og enkeltord deles ikke. Node-/gruppetitler
+beholdes; ved identisk tekst i node/gruppe og kant brukes den felles uombrutte
+målingen. Preview og PDF bruker de samme målte linjene.

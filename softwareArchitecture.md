@@ -434,3 +434,8 @@ Application eier librsvg/Cairo og palettadapter. Interpreter er uendret.
 Rutemotoren og C++-bindingen til libavoid bor i bibliotekforken. Ingen rutelogikk
 skal legges under XFMDs `.deps` eller vokse i FOX-adapteren. DiagramPainter er
 SVG-presentasjon; DiagramPlacement er kun plassering/kildeanker.
+
+P33: DiagramTextLayout former lange kantetiketter med ordombryting før layout.
+Inputpayload 4 overfører faktiske linjer og mål; sceneformatet forblir 3.
+[Tekstpolicy og framtidig begrenset omplassering](docs/design/mermaid-label-wrap.md)
+beskriver ansvar og avgrensning. Libavoid plasserer fortsatt ikke noder.

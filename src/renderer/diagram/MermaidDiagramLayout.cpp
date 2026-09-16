@@ -14,7 +14,7 @@ MermaidDiagramLayout::layout(const DiagramModel& model, const DiagramLayoutReque
   checkpoint();
   auto texts = DiagramTextLayout::measure(model, metrics);
   diagramWire::Writer w;
-  w.integer(3); // Versioned layout payload; C ABI envelope remains v1.
+  w.integer(4); // Versioned layout payload; C ABI envelope remains v1.
   w.model(model);
   w.integer(diagramLayoutBudgetMilliseconds);
   w.integer(texts.size());
@@ -22,6 +22,9 @@ MermaidDiagramLayout::layout(const DiagramModel& model, const DiagramLayoutReque
     w.text(pair.first);
     w.number(pair.second.width / .75);
     w.number(pair.second.height / .75);
+    w.integer(pair.second.lines.size());
+    for (const auto& line : pair.second.lines)
+      w.text(line.text);
   }
   diagramWire::ResultOwner result(xfmd_diagram_layout_v1(1, w.data.data(), w.data.size()),
                                   xfmd_diagram_layout_free_v1);
