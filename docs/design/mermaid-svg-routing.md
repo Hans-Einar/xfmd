@@ -59,3 +59,15 @@ Forken leverer frosne posisjoner/tekst før–etter, separat ende-til-ende,
 SVG/PNG, metrikk-JSON og kjente begrensninger. Ingen generell påstand om
 optimalitet eller hard tidsfrist. LGPL-kilder, lisens og relink-oppskrift
 følger eventuell binærdistribusjon.
+
+## P31 verifikasjon 2026-09-16
+
+Implementasjon `d789d54`: Release-bygg og seriell CTest: **59/59 bestått**
+(122 sekunder). GUI kjørt isolert i Xvfb. PDF-test verifiserer vektorinnhold,
+uttrekkbar Unicode-tekst og ingen rasterbilder. Tema/fargeslidere, A4, zoom,
+vanlig Markdown-tekstkopiering, ugyldig SVG og cache er dekket. Parallelle
+kjøringer under byggeaktivitet traff gammel ruters budsjett; seriell fullkjøring
+bestod uten å øke fristen. Begge blueprint-validatorer består.
+
+Denne milepælen beholder upstream-pin og gammel ruting. SVG-omleggingen er
+ferdig før P32 bytter rutemotor; diagrametiketter er ikke separate Pango-felt.
