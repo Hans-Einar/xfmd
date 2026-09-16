@@ -81,3 +81,23 @@ pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
     }
     Ok(w.0)
 }
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn deadline_does_not_escape_layout_call() {
+        use mermaid_rs_renderer::{LayoutConfig, Theme, ir::Graph, layout::measurements};
+        // An expired nested call may return or unwind, depending on its graph.
+        // In both cases an unrelated checkpoint must see the original TLS state.
+        let _ = std::panic::catch_unwind(|| {
+            measurements::layout(
+                &Graph::new(),
+                &Theme::modern(),
+                &LayoutConfig::default(),
+                std::collections::HashMap::new(),
+                std::time::Duration::ZERO,
+            )
+        });
+        measurements::checkpoint();
+    }
+}

@@ -48,6 +48,10 @@ Konsumenter: FUNC-025, eksisterende MarkdownRenderer og PDF via vanlig frame. IT
 
 DiagramLayoutTest dekker parserfri modell, begge brukerdiagrammer, nested grupper, fontmål, 128-noders kjede og tidsavbrudd med etterfølgende normal layout. DiagramReadingTest og MermaidPdfTest dekker skalering, merking og native tekst. Se [P29](../../../docs/evidence/P29.md).
 
+P29 utvider fristkontrollene til indre løkker i rangering, kantpipeline, ruting
+og etterbehandling etter at CI avdekket et langt intervall uten kontroll.
+Tidsassertene gjelder fortsatt både produksjon og sanitizer-bygg.
+
 ## 8. Status, risiko og endringskonsekvenser
 
 Implementert. Versjonsbundet patch leverer måleseam og kooperativ tidsgrense. Scene bygges i adapteren; DiagramPlacement lager vanlige DrawRuns. Se P26-bevis og videre P28/P29-verifikasjon.

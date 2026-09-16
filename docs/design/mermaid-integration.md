@@ -138,7 +138,10 @@ placement; eksisterende FrameKey kontrollerer token, font og layoutgenerasjon.
 
 P26 fant en 128/512-graf som overskred 30 sekunder. Den låste patchen legger
 trådlokal deadline på to sekunder med kooperative checkpoints i layout-løkker,
-labelplassering, A*-kø og rutekandidater. Unwinding gjenoppretter måletabellen
+labelplassering, A*-kø og rutekandidater. P29-CI avdekket en lengre vei mellom
+kontrollpunktene; patchen dekker derfor også indre løkker i rangering,
+flowchart-planlegging, kantpipeline, ruting og etterbehandling.
+Unwinding gjenoppretter måletabellen
 og deadline via RAII. Dette er ikke hard preemption eller hard realtime.
 Vanlige brukerdiagrammer og 128-noders kjede lykkes; tett graf blir fallback.
 AddressSanitizer-bygg bruker et eksplisitt ti-sekunders instrumenteringsbudsjett
