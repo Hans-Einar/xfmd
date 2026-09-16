@@ -432,3 +432,5 @@ Branch: `phase/p30-mermaid-layout-performance`. UR-039/SR-022, FUNC-024.
 - M1: reproduser brukerens sporbarhetsdiagram (13 noder / 17 kanter), lokaliser kostnaden og legg til regresjonsfixture.
 - M2: reduser klokkeoverhead i indre geometri uten endret geometri eller lengre tidsbudsjett; behold frist- og TLS-kontroll.
 - M3: verifiser native preview, PDF, Release/sanitizere og CI før merge og atomisk installasjon.
+
+P30 M1 `6217bcb`, M2 `dc17db4`; M3 samler [testbevis](docs/evidence/P30.md).
