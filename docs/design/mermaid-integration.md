@@ -1,4 +1,7 @@
-# Mermaid i XFMD — designrevisjon 1.1
+# Mermaid i XFMD — designrevisjon 1.1 (historisk native baseline)
+
+Gjeldende videreføring: [P31/P32 SVG og libavoid](mermaid-svg-routing.md).
+Teksten nedenfor beskriver P25–P30 der den avviker fra denne beslutningen.
 
 Status: **Implemented**, 2026-09-16. P25 var designfasen; P26–P29 implementerer
 og verifiserer den. [Krav](../../xfmd_requirements.md),

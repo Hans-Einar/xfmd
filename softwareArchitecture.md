@@ -424,3 +424,13 @@ Cairo-primitiver. `interpreter/mermaid/MermaidBlockBuilder` kjenner gjerdet,
 måler etiketter, `MermaidDiagramLayout` dekoder layout og `DiagramPlacement`
 plasserer scenen i dokumentet. Rust-algoritmeadaptere ligger i respektive
 interpreter/renderer-undermapper; C-eksporter ligger bare i composition root.
+
+
+## Mermaid-presentasjon og ruting — revisjon P31/P32
+
+[SVG-/rutebeslutningen](docs/design/mermaid-svg-routing.md) erstatter den tidligere
+native form-/etikettmalingen. Renderer leverer bibliotekets SVG som en ren verdi;
+Application eier librsvg/Cairo og palettadapter. Interpreter er uendret.
+Rutemotoren og C++-bindingen til libavoid bor i bibliotekforken. Ingen rutelogikk
+skal legges under XFMDs `.deps` eller vokse i FOX-adapteren. DiagramPainter er
+SVG-presentasjon; DiagramPlacement er kun plassering/kildeanker.

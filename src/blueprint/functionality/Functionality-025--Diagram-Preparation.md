@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Workflow
 owner: application
-status: Implemented
+status: Ready
 scope: FirstRelease
 requirements: UR-039, UR-040, UR-041, SR-021, SR-022, SR-023
 uses: FUNC-016, FUNC-024
@@ -37,7 +37,7 @@ Gjenbruk ParserWorker med én aktiv/én ventende jobb og ExportPipeline med egne
 | 3 | `DiagramPreparation::prepare` | `DiagramCache::find` | `src/application/diagrams/DiagramCache.cpp` | innhold + profil + font/backend → treff/miss | begrenset LRU; ingen diskcache | Implemented |
 | 4 | `DiagramPreparation::prepare` | `IDiagramLayout::layout` | `src/contracts/diagram/IDiagramLayout.h` | ren modell → scene | blokkfeil blir fallback | Implemented |
 | 5 | `DiagramPreparation::prepare` | `DiagramCache::insert` | `src/application/diagrams/DiagramCache.cpp` | vellykket scene → worker-lokal cache | ikke cache transient feil | Implemented |
-| 6 | `DisplayListPainter::paint` | `DiagramPainter::paint` | `src/application/adapters/DiagramPainter.cpp` | frame paths + semantisk palett → Cairo | bevar tekst som normale DrawRuns | Implemented |
+| 6 | `DisplayListPainter::paint` | `DiagramPainter::paint` | `src/application/adapters/DiagramPainter.cpp` | SVG + semantisk palett → librsvg/Cairo | ingen separate diagrametikett-runs | Implemented |
 
 
 ## 6. Gjenbruk og avhengigheter
@@ -49,6 +49,8 @@ FUNC-007 og FUNC-018 er konsumenter; gjenbruk FUNC-016 for shaping/tegning. Diag
 DiagramPreparationTest dekker feil, fontidentitet og cachegrense. DiagramWorkerTest verifiserer kansellering av gammel prepare-jobb med samme token. MermaidGuiTest og MermaidPdfTest dekker native presentasjon og eksport. Se [P29](../../../docs/evidence/P29.md).
 
 ## 8. Status, risiko og endringskonsekvenser
+
+P31/P32: [Gjeldende SVG-/rutebeslutning](../../../docs/design/mermaid-svg-routing.md) erstatter tidligere native etiketttegning. Historiske tester nedenfor gjelder P25–P30; ny atferd er Ready frem til nytt testbevis.
 
 Implementert. P26 avdekket dyr kantruting og la til kooperative checkpoints. Ingen hard preemption eller global cache. Hver preview-worker eier egne font-/layout-/cacheobjekter; PDF-jobben har tilsvarende kortlivet prepare-kjede.
 

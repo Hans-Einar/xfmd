@@ -4,9 +4,9 @@ kind: Functionality
 audience: System
 role: Service
 owner: renderer
-status: Implemented
+status: Ready
 scope: FirstRelease
-requirements: UR-039, UR-040, UR-041, SR-021, SR-022, SR-023
+requirements: UR-039, UR-040, UR-041, SR-021, SR-022, SR-023, SR-024
 uses: none
 ---
 
@@ -14,7 +14,7 @@ uses: none
 
 ## 1. Hensikt og avgrensning
 
-Renderer-tjeneste for grafplassering, rutegeometri og lesbar diagramtekst. Gjenbruker bibliotekets layout; har ingen dependency til interpreter og mottar aldri Mermaid-kilde.
+Renderer-tjeneste for grafplassering, rutegeometri og bibliotekgenerert SVG. Gjenbruker bibliotekets layout; har ingen dependency til interpreter og mottar aldri Mermaid-kilde.
 
 ## 2. Krav og akseptanse
 
@@ -22,11 +22,11 @@ UR-039–041, SR-021–023; AT-059–064. Se [design og kontrakter](../../../doc
 
 ## 3. Kontrakter og eierskap
 
-IDiagramLayout::layout(DiagramModel, DiagramLayoutRequest, ITextMetrics&) → DiagramScene. Modellen og resultatet er XFMD-eide verdier. Rust-bridge rekonstruerer upstream Graph fra den rene modellen og bruker compute_layout. Layout inneholder tekstbokser/edge points; MermaidDiagramLayout dekoder til semantiske former og kantruter; DiagramPainter utfører primitivene med Cairo. DiagramPlacement gjenbruker normal frame-tekst/shaping.
+IDiagramLayout::layout(DiagramModel, DiagramLayoutRequest, ITextMetrics&) → DiagramScene. Modellen og resultatet er XFMD-eide verdier. Rust-bridge rekonstruerer upstream Graph fra den rene modellen og bruker compute_layout. Layout inneholder tekstbokser/edge points; MermaidDiagramLayout dekoder inspeksjonsgeometri og ferdig SVG; DiagramPainter viser SVG gjennom librsvg/Cairo. DiagramPlacement lager én visual-run.
 
 ## 4. Atferd, tilstand og feil
 
-Layout forberedes i worker. Tekstmåling skjer med samme fontgrunnlag som brødtekst/PDF; en versjonsbundet upstream-seam mater målte TextBlock-verdier til layout. Ingen oversettelse fra kildestreng til layout i denne tjenesten. Ingen SVG-rasterisering eller glyph-konturer som erstatning for kopierbar tekst. Ukjent form, NaN, ugyldig kant eller budsjettbrudd gir blokklokal feil.
+Layout forberedes i worker. Tekstmåling skjer med samme fontgrunnlag som brødtekst/PDF; en versjonsbundet upstream-seam mater målte TextBlock-verdier til layout. Ingen oversettelse fra kildestreng til layout i denne tjenesten. Ingen SVG-rasterisering eller separate Pango-tekstobjekter for diagrametiketter. Ukjent form, NaN, ugyldig kant eller budsjettbrudd gir blokklokal feil.
 
 ## 5. Plumbing
 
@@ -37,7 +37,7 @@ Layout forberedes i worker. Tekstmåling skjer med samme fontgrunnlag som brødt
 | 3 | `MermaidDiagramLayout::layout` | `xfmd_diagram_layout_v1` | `src/application/composition/mermaid/src/lib.rs` | ren graf + labelmål → LayoutResult | ingen parserkall/opaque parserhandle | Implemented |
 | 4 | `xfmd_diagram_layout_v1` | `layout` | `src/renderer/diagram/rust/src/lib.rs` | mapping → upstream compute_layout → ren geometri | mål-seam må verifiseres i P26 | Implemented |
 | 5 | `MermaidDiagramLayout::layout` | `Reader::finish` | `src/contracts/diagram/DiagramWire.h` | ferdig dekodet scene → kontrollert buffer | trailing data avvises; scene er XFMD-eid | Implemented |
-| 6 | `BlockLayout::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | scene → skalert frame og lesetekst | Approximate blokkanker, ingen sideklipping | Implemented |
+| 6 | `BlockLayout::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | SVG-scene → én skalert visual-run | Approximate blokkanker, ingen sideklipping | Implemented |
 
 
 ## 6. Gjenbruk og avhengigheter
@@ -63,6 +63,8 @@ Tidsassertene gjelder fortsatt både produksjon og sanitizer-bygg.
 
 ## 8. Status, risiko og endringskonsekvenser
 
+P31/P32: [Gjeldende SVG-/rutebeslutning](../../../docs/design/mermaid-svg-routing.md) erstatter tidligere native etiketttegning. Historiske tester nedenfor gjelder P25–P30; ny atferd er Ready frem til nytt testbevis.
+
 [Rutestudien](../../../docs/design/mermaid-routing-study.md) dokumenterer
 eksisterende sidevalg/A*/portfinjustering og foreslått felles kostnadspolicy.
 En eventuell ny strategi utvikles i en separat bibliotekfork etter beslutning.
@@ -71,3 +73,5 @@ Planlagte symboler i studien er ikke del av dagens plumbing.
 Implementert. Versjonsbundet patch leverer måleseam og kooperativ tidsgrense. Scene bygges i adapteren; DiagramPlacement lager vanlige DrawRuns. Se P26-bevis og videre P28/P29-verifikasjon.
 
 Akseptanse: AT-059, AT-060, AT-061, AT-062, AT-063, AT-064.
+
+AT-065 dekkes av P32 og forkens rapport.

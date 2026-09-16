@@ -434,3 +434,18 @@ Branch: `phase/p30-mermaid-layout-performance`. UR-039/SR-022, FUNC-024.
 - M3: verifiser native preview, PDF, Release/sanitizere og CI før merge og atomisk installasjon.
 
 P30 M1 `6217bcb`, M2 `dc17db4`; M3 samler [testbevis](docs/evidence/P30.md).
+
+
+## P31 — Bibliotekets SVG som presentasjonsformat
+
+Branch `phase/p31-mermaid-svg`. M1: revider UR-041/FUNC-024/025 og payload.
+M2: ferdig SVG, librsvg/Cairo og én visual-run; behold gammel ruter/pin.
+M3: CTest, visuell Light/Dark og vektor-PDF. Se
+[beslutningen](docs/design/mermaid-svg-routing.md).
+
+## P32 — Libavoid fra låst bibliotekfork
+
+Branch `phase/p32-libavoid-integration`. M1: forkens måleseam og sammenligningsbevis;
+M2: konkret pin, backendvalg, diagnostikk og bygg/lisens; M3: regresjoner,
+SVG/PNG, tidsmåling, CI/integrasjonskontroll. Bibliotekarbeidet ligger på
+forkens `phase/libavoid-routing`, med separate milestone-commits.
