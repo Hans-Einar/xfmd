@@ -5,6 +5,7 @@
 #include "renderer/diagram/MermaidDiagramLayout.h"
 #include "support/TestSupport.h"
 #include <chrono>
+#include <cstdlib>
 #include <fstream>
 #include <iostream>
 using namespace xfmd;
@@ -30,6 +31,7 @@ void run() {
     CHECK(scene->nodes.size() == nodes && scene->width > 0 && scene->height > 0);
     CHECK(scene->edges.size() == parsed.model->edges.size());
     CHECK(scene->svg.rfind("<svg", 0) == 0);
+    CHECK(!scene->diagnostics.empty());
     CHECK(scene->svg.find("edge-0") != std::string::npos);
     for (std::size_t i = 0; i < scene->nodes.size(); ++i) {
       auto label = metrics.measure(parsed.model->nodes[i].label, {});
@@ -50,6 +52,24 @@ void run() {
   DiagramModel model;
   model.nodes.push_back({"a", "Ærlig måling", DiagramShape::Rectangle});
   CHECK(layout.layout(model, {}, metrics)->nodes.size() == 1);
+  // Explicit selection and bad configuration must never silently switch engines.
+  const char* oldEngine = std::getenv("XFMD_MERMAID_ROUTER");
+  const std::string savedEngine = oldEngine ? oldEngine : "";
+  const bool hadEngine = oldEngine != nullptr;
+  setenv("XFMD_MERMAID_ROUTER", "legacy", 1);
+  CHECK(layout.layout(model, {}, metrics)->diagnostics.find("Legacy") == 0);
+  setenv("XFMD_MERMAID_ROUTER", "unknown", 1);
+  bool invalidEngine = false;
+  try {
+    layout.layout(model, {}, metrics);
+  } catch (const std::exception& e) {
+    invalidEngine = std::string(e.what()).find("XFMD_MERMAID_ROUTER") != std::string::npos;
+  }
+  CHECK(invalidEngine);
+  if (hadEngine)
+    setenv("XFMD_MERMAID_ROUTER", savedEngine.c_str(), 1);
+  else
+    unsetenv("XFMD_MERMAID_ROUTER");
   auto failed = parser.parse({"flowchart LR\nA-->B\nclick A call()", {}});
   CHECK(!failed.model && !failed.error.empty());
   diagramWire::ResultOwner bad(xfmd_mermaid_parse_v1(99, nullptr, 0), xfmd_mermaid_parse_free_v1);
@@ -72,18 +92,21 @@ void run() {
   for (unsigned i = 0; i < 512; ++i)
     model.edges.push_back({i % 128, (i * 17 + i / 128 + 1) % 128, "", false, true, 0});
   start = std::chrono::steady_clock::now();
-  bool budget = false;
+  bool budget = false, complexity = false;
   try {
     layout.layout(model, {}, metrics);
   } catch (const std::exception& e) {
-    budget = std::string(e.what()) == "Diagram layout time budget exceeded";
+    budget = std::string(e.what()) == "Diagram layout time budget exceeded" ||
+             std::string(e.what()).find("BudgetExceeded") != std::string::npos;
+    complexity = std::string(e.what()).find("complexity limit") != std::string::npos;
   }
-  CHECK(budget);
+  CHECK(budget || complexity);
   ms = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() -
                                                              start)
            .count();
   std::cout << "128-node / 512-edge cyclic graph: " << ms << " ms\n";
-  CHECK(ms + 100 >= diagramLayoutBudgetMilliseconds);
+  if (budget)
+    CHECK(ms + 100 >= diagramLayoutBudgetMilliseconds);
   CHECK(ms < diagramLayoutBudgetMilliseconds + 3000);
   model = {};
   model.nodes.push_back({"after", "After cancellation", DiagramShape::Rectangle});

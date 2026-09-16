@@ -4,7 +4,7 @@ kind: Feature
 audience: User
 role: Workflow
 owner: application
-status: Ready
+status: Implemented
 scope: FirstRelease
 requirements: UR-039, UR-040, UR-041, SR-021, SR-022, SR-023, SR-024
 uses: FUNC-003, FUNC-004, FUNC-005, FUNC-007, FUNC-016, FUNC-017, FUNC-018, FUNC-021, FUNC-023, FUNC-024, FUNC-025
@@ -50,7 +50,7 @@ AT-059–064 dekkes av Rust-profil-/ABI-kontroller, DiagramLayoutTest, DiagramPr
 
 ## 8. Status, risiko og endringskonsekvenser
 
-P31/P32: [Gjeldende SVG-/rutebeslutning](../../../docs/design/mermaid-svg-routing.md) erstatter tidligere native etiketttegning. Historiske tester nedenfor gjelder P25–P30; ny atferd er Ready frem til nytt testbevis.
+P31/P32: [Gjeldende SVG-/rutebeslutning](../../../docs/design/mermaid-svg-routing.md) erstatter tidligere native etiketttegning. Historiske tester nedenfor gjelder P25–P30; ny atferd er implementert; P31/P32-bevis beskriver faktisk verifikasjon.
 
 Implementert i P26/P27. Commit/toolchain/patch er låst. P28/P29 samler lese-, eksport- og full profilverifikasjon; ikke full Mermaid-kompatibilitet.
 

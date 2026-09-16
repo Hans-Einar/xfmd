@@ -121,3 +121,6 @@ endforeach()
 install(FILES LICENSES/mermaid-rs-renderer.txt LICENSES/mermaid-dependencies.md
   DESTINATION ${CMAKE_INSTALL_DOCDIR}/licenses)
 install(DIRECTORY LICENSES/rust/ DESTINATION ${CMAKE_INSTALL_DOCDIR}/licenses/rust)
+
+install(FILES LICENSES/libavoid-LGPL-2.1.txt docs/design/mermaid-libavoid-build.md
+  cmake/mermaid-source.json DESTINATION ${CMAKE_INSTALL_DOCDIR})

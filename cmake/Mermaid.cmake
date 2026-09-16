@@ -12,7 +12,7 @@ set(XFMD_RUST_ARCHIVE "${XFMD_CARGO_TARGET}/release/libxfmd_mermaid_ffi.a")
 add_custom_command(OUTPUT "${XFMD_RUST_ARCHIVE}"
   COMMAND ${CARGO_EXECUTABLE} build --release --locked -p xfmd-mermaid-ffi --target-dir "${XFMD_CARGO_TARGET}"
   WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
-  DEPENDS ${XFMD_RUST_SOURCES} "${CMAKE_SOURCE_DIR}/Cargo.toml" "${CMAKE_SOURCE_DIR}/Cargo.lock" "${CMAKE_SOURCE_DIR}/cmake/patches/mermaid-measurements.patch"
+  DEPENDS ${XFMD_RUST_SOURCES} "${CMAKE_SOURCE_DIR}/Cargo.toml" "${CMAKE_SOURCE_DIR}/Cargo.lock" "${CMAKE_SOURCE_DIR}/cmake/mermaid-source.json"
   VERBATIM)
 add_custom_target(xfmd_rust_build DEPENDS "${XFMD_RUST_ARCHIVE}")
 add_library(xfmd_rust STATIC IMPORTED GLOBAL)

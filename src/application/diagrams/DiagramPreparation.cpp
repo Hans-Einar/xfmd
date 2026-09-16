@@ -1,6 +1,7 @@
 #include "DiagramPreparation.h"
 #include "application/adapters/SvgDiagramCache.h"
 #include "contracts/diagram/DiagramWire.h"
+#include <cstdlib>
 namespace xfmd {
 ParseResult DiagramPreparation::prepare(ParseResult original, ITextMetrics& metrics,
                                         const std::function<bool()>& cancelled) {
@@ -17,7 +18,12 @@ ParseResult DiagramPreparation::prepare(ParseResult original, ITextMetrics& metr
       diagramWire::Writer value;
       value.model(*block.diagram);
       // Value-based identity: no hash collision, source range or palette in cached scene.
-      std::string key = "flowchart1/svg2/font12/" + std::to_string(metrics.fontSetId()) + "/";
+      std::string key = "flowchart1/svg3/font12/" + std::to_string(metrics.fontSetId()) + "/";
+      for (const char* name : {"XFMD_MERMAID_ROUTER", "XFMD_MERMAID_CROSSING_JUMPS"}) {
+        const char* setting = std::getenv(name);
+        key += setting ? setting : "<default>";
+        key += '/';
+      }
       key.append(reinterpret_cast<const char*>(value.data.data()), value.data.size());
       block.diagramScene = cache.find(key);
       if (!block.diagramScene) {

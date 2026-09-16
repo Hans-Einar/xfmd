@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Workflow
 owner: application
-status: Ready
+status: Implemented
 scope: FirstRelease
 requirements: UR-039, UR-040, UR-041, SR-021, SR-022, SR-023
 uses: FUNC-016, FUNC-024
@@ -54,7 +54,7 @@ DiagramPreparationTest dekker feil, fontidentitet og cachegrense. DiagramWorkerT
 
 ## 8. Status, risiko og endringskonsekvenser
 
-P31/P32: [Gjeldende SVG-/rutebeslutning](../../../docs/design/mermaid-svg-routing.md) erstatter tidligere native etiketttegning. Historiske tester nedenfor gjelder P25–P30; ny atferd er Ready frem til nytt testbevis.
+P31/P32: [Gjeldende SVG-/rutebeslutning](../../../docs/design/mermaid-svg-routing.md) erstatter tidligere native etiketttegning. Historiske tester nedenfor gjelder P25–P30; ny atferd er implementert; P31/P32-bevis beskriver faktisk verifikasjon.
 
 Implementert. P26 avdekket dyr kantruting og la til kooperative checkpoints. Ingen hard preemption eller global cache. Hver preview-worker eier egne font-/layout-/cacheobjekter; PDF-jobben har tilsvarende kortlivet prepare-kjede.
 

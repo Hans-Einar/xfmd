@@ -1,27 +1,33 @@
 #!/usr/bin/env python3
-"""Fetch the pinned Mermaid source; apply the reviewed measurement/deadline seam."""
+"""Fetch the reviewed fork exactly; never patch or replace existing source."""
 import hashlib
 import io
+import json
 import pathlib
 import subprocess
 import tarfile
+import tempfile
 import urllib.request
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-PIN = '3726ccbffe0e8032361eb9668694b24f77858060'
-SHA = '8bedf9632b455e829998e0ae9f6429b7a5e6fc8460e0a4ccf7df85b08ff94066'
+source = json.loads((ROOT / 'cmake/mermaid-source.json').read_text())
+PIN = source['commit']
 DEST = ROOT / '.deps/mermaid-rs-renderer'
-PATCH = ROOT / 'cmake/patches/mermaid-measurements.patch'
-stamp = PIN + ':' + hashlib.sha256(PATCH.read_bytes()).hexdigest()
-if not DEST.exists():
-    data = urllib.request.urlopen('https://codeload.github.com/1jehuang/mermaid-rs-renderer/tar.gz/' + PIN, timeout=60).read()
-    if hashlib.sha256(data).hexdigest() != SHA:
+stamp = PIN + ':' + source['sha256']
+if DEST.exists():
+    marker = DEST / '.xfmd-pin'
+    if not marker.exists() or marker.read_text() != stamp:
+        raise SystemExit('Mermaid pin changed: preserve/move existing .deps/mermaid-rs-renderer before bootstrap')
+else:
+    data = urllib.request.urlopen(
+        'https://codeload.github.com/' + source['repository'] + '/tar.gz/' + PIN,
+        timeout=60).read()
+    if hashlib.sha256(data).hexdigest() != source['sha256']:
         raise SystemExit('Mermaid source checksum mismatch')
     DEST.parent.mkdir(exist_ok=True)
-    with tarfile.open(fileobj=io.BytesIO(data)) as archive:
-        archive.extractall(DEST.parent, filter='data')
-    (DEST.parent / ('mermaid-rs-renderer-' + PIN)).rename(DEST)
-if not (DEST / '.xfmd-pin').exists():
-    subprocess.run(['patch', '-p1', '-i', str(PATCH)], cwd=DEST, check=True)
-    (DEST / '.xfmd-pin').write_text(stamp)
-elif (DEST / '.xfmd-pin').read_text() != stamp:
-    raise SystemExit('Mermaid pin/patch changed; remove .deps/mermaid-rs-renderer and bootstrap again')
+    with tempfile.TemporaryDirectory(dir=DEST.parent) as tmp:
+        with tarfile.open(fileobj=io.BytesIO(data)) as archive:
+            archive.extractall(tmp, filter='data')
+        extracted = pathlib.Path(tmp) / ('mermaid-rs-renderer-' + PIN)
+        subprocess.run(['python3', str(extracted / 'tools/verify_libavoid.py')], check=True)
+        (extracted / '.xfmd-pin').write_text(stamp)
+        extracted.rename(DEST)

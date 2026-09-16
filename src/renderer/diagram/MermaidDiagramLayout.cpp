@@ -14,7 +14,7 @@ MermaidDiagramLayout::layout(const DiagramModel& model, const DiagramLayoutReque
   checkpoint();
   auto texts = DiagramTextLayout::measure(model, metrics);
   diagramWire::Writer w;
-  w.integer(2); // Versioned layout payload; C ABI envelope remains v1.
+  w.integer(3); // Versioned layout payload; C ABI envelope remains v1.
   w.model(model);
   w.integer(diagramLayoutBudgetMilliseconds);
   w.integer(texts.size());
@@ -27,7 +27,7 @@ MermaidDiagramLayout::layout(const DiagramModel& model, const DiagramLayoutReque
                                   xfmd_diagram_layout_free_v1);
   checkpoint();
   diagramWire::Reader r(result.result);
-  if (r.integer() != 2)
+  if (r.integer() != 3)
     throw Error(ErrorCode::Layout, "Unsupported diagram layout payload");
   auto scene = std::make_shared<DiagramScene>();
   scene->fonts = metrics.fontSetId();
@@ -94,6 +94,7 @@ MermaidDiagramLayout::layout(const DiagramModel& model, const DiagramLayoutReque
   scene->svg = r.text(8 * 1024 * 1024);
   if (scene->svg.rfind("<svg", 0) != 0)
     throw Error(ErrorCode::Layout, "Missing diagram SVG");
+  scene->diagnostics = r.text();
   r.finish();
   scene->bytes = result.result.size;
   for (const auto& l : scene->labels)

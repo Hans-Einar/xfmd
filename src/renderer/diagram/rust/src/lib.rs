@@ -6,7 +6,7 @@ use xfmd_diagram_contracts::{
 };
 pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
     let mut r = Reader::new(input);
-    if r.count(2)? != 2 {
+    if r.count(3)? != 3 {
         return Err("Unsupported diagram layout payload".into());
     }
     let model = Model::read(&mut r)?;
@@ -37,15 +37,40 @@ pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
     let mut theme = mermaid_rs_renderer::Theme::modern();
     theme.font_size = 16.0;
     theme.font_family = "DejaVu Sans".into();
-    let layout = mermaid_rs_renderer::layout::measurements::layout(
-        &graph,
-        &theme,
-        &mermaid_rs_renderer::LayoutConfig::default(),
-        labels,
-        std::time::Duration::from_millis(budget as u64),
-    );
+    use mermaid_rs_renderer::layout::{
+        measurements,
+        routed::{self, Engine},
+    };
+    use mermaid_rs_renderer::routing_backend::RoutingControl;
+    let engine = match std::env::var("XFMD_MERMAID_ROUTER").as_deref() {
+        Err(std::env::VarError::NotPresent) | Ok("libavoid") => Engine::Libavoid,
+        Ok("legacy") => Engine::Legacy,
+        _ => return Err("XFMD_MERMAID_ROUTER must be libavoid or legacy".into()),
+    };
+    let jumps = match std::env::var("XFMD_MERMAID_CROSSING_JUMPS").as_deref() {
+        Err(std::env::VarError::NotPresent) | Ok("0") => false,
+        Ok("1") => true,
+        _ => return Err("XFMD_MERMAID_CROSSING_JUMPS must be 0 or 1".into()),
+    };
+    let duration = std::time::Duration::from_millis(budget as u64);
+    let deadline = std::time::Instant::now() + duration;
+    let routed = measurements::with_measurements(labels, duration, || {
+        routed::compute(
+            &graph,
+            &theme,
+            &mermaid_rs_renderer::LayoutConfig::default(),
+            engine,
+            &RoutingControl {
+                deadline,
+                cancelled: &|| false,
+            },
+        )
+    })
+    .map_err(|e| format!("{engine:?}: {e}"))?;
+    let diagnostics = format!("{engine:?}; {}", routed.diagnostics.join("; "));
+    let layout = routed.layout;
     let mut w = Writer::default();
-    w.u32(2);
+    w.u32(3);
     w.number(layout.width as f64);
     w.number(layout.height as f64);
     w.u32(model.nodes.len() as u32);
@@ -81,12 +106,19 @@ pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
         w.number(anchor.0 as f64);
         w.number(anchor.1 as f64);
     }
-    let svg = mermaid_rs_renderer::render_svg(
-        &layout,
-        &theme,
-        &mermaid_rs_renderer::LayoutConfig::default(),
-    );
+    let config = mermaid_rs_renderer::LayoutConfig::default();
+    let svg = if jumps {
+        mermaid_rs_renderer::render::render_svg_with_crossings(
+            &layout,
+            &theme,
+            &config,
+            mermaid_rs_renderer::render::CrossingJumps::default(),
+        )
+    } else {
+        mermaid_rs_renderer::render_svg(&layout, &theme, &config)
+    };
     w.text(&svg);
+    w.text(&diagnostics);
     if w.0.len() > 8 * 1024 * 1024 {
         return Err("Diagram scene limit exceeded".into());
     }

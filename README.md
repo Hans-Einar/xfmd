@@ -306,3 +306,11 @@ CMake-byggets `_deps/` (MicroTeX). Deretter kan konfigurering og bygg kjøres
 med `CARGO_NET_OFFLINE=true` og `-DFETCHCONTENT_FULLY_DISCONNECTED=ON`.
 Den installerte applikasjonen trenger verken Cargo, Rust, Node eller nettleser
 for å vise Mermaid. Rust-/Mermaid-lisenser installeres under `share/doc/xfmd/licenses/`.
+
+Mermaid-flowcharts bruker nå Libavoid fra en låst fork. Sett
+`XFMD_MERMAID_ROUTER=legacy` før oppstart for eksplisitt sammenligning med gammel
+ruter. `XFMD_MERMAID_CROSSING_JUMPS=1` viser valgfrie kryssingsbuer. Kryssinger er
+tillatt; etiketter og noder skal være hindringer. Ved plassmangel vises en lokal
+feil ved Mermaid-kilden, uten skjult motorbytte. Se
+[bygg, lisens og relinking](docs/design/mermaid-libavoid-build.md) og
+[SVG-/rutebeslutningen](docs/design/mermaid-svg-routing.md).

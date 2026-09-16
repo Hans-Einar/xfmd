@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Service
 owner: renderer
-status: Ready
+status: Implemented
 scope: FirstRelease
 requirements: UR-039, UR-040, UR-041, SR-021, SR-022, SR-023, SR-024
 uses: none
@@ -22,11 +22,11 @@ UR-039–041, SR-021–023; AT-059–064. Se [design og kontrakter](../../../doc
 
 ## 3. Kontrakter og eierskap
 
-IDiagramLayout::layout(DiagramModel, DiagramLayoutRequest, ITextMetrics&) → DiagramScene. Modellen og resultatet er XFMD-eide verdier. Rust-bridge rekonstruerer upstream Graph fra den rene modellen og bruker compute_layout. Layout inneholder tekstbokser/edge points; MermaidDiagramLayout dekoder inspeksjonsgeometri og ferdig SVG; DiagramPainter viser SVG gjennom librsvg/Cairo. DiagramPlacement lager én visual-run.
+IDiagramLayout::layout(DiagramModel, DiagramLayoutRequest, ITextMetrics&) → DiagramScene. Modellen og resultatet er XFMD-eide verdier. Rust-bridge rekonstruerer upstream Graph fra den rene modellen og bruker routed::compute med separat rutervalg. Layout inneholder tekstbokser/edge points; MermaidDiagramLayout dekoder inspeksjonsgeometri og ferdig SVG; DiagramPainter viser SVG gjennom librsvg/Cairo. DiagramPlacement lager én visual-run.
 
 ## 4. Atferd, tilstand og feil
 
-Layout forberedes i worker. Tekstmåling skjer med samme fontgrunnlag som brødtekst/PDF; en versjonsbundet upstream-seam mater målte TextBlock-verdier til layout. Ingen oversettelse fra kildestreng til layout i denne tjenesten. Ingen SVG-rasterisering eller separate Pango-tekstobjekter for diagrametiketter. Ukjent form, NaN, ugyldig kant eller budsjettbrudd gir blokklokal feil.
+Layout forberedes i worker. Tekstmåling skjer med samme fontgrunnlag som brødtekst/PDF; forkens measurements::with_measurements mater målte TextBlock-verdier til layout. Ingen oversettelse fra kildestreng til layout i denne tjenesten. Ingen SVG-rasterisering eller separate Pango-tekstobjekter for diagrametiketter. Ukjent form, NaN, ugyldig kant eller budsjettbrudd gir blokklokal feil.
 
 ## 5. Plumbing
 
@@ -35,7 +35,7 @@ Layout forberedes i worker. Tekstmåling skjer med samme fontgrunnlag som brødt
 | 1 | `IDiagramLayout virtual dispatch` | `MermaidDiagramLayout::layout` | `src/renderer/diagram/MermaidDiagramLayout.cpp` | modell + font/request → immutable scene | checkpoint før/etter Rust | Implemented |
 | 2 | `MermaidDiagramLayout::layout` | `DiagramTextLayout::measure` | `src/renderer/diagram/DiagramTextLayout.cpp` | etiketter → formede linjer og mål | samme ITextMetrics-port | Implemented |
 | 3 | `MermaidDiagramLayout::layout` | `xfmd_diagram_layout_v1` | `src/application/composition/mermaid/src/lib.rs` | ren graf + labelmål → LayoutResult | ingen parserkall/opaque parserhandle | Implemented |
-| 4 | `xfmd_diagram_layout_v1` | `layout` | `src/renderer/diagram/rust/src/lib.rs` | mapping → upstream compute_layout/render_svg → geometri og SVG | payload 2; maks 8 MiB | Implemented |
+| 4 | `xfmd_diagram_layout_v1` | `layout` | `src/renderer/diagram/rust/src/lib.rs` | mapping → forkens routed::compute/render_svg → geometri og SVG | payload 3; maks 8 MiB | Implemented |
 | 5 | `MermaidDiagramLayout::layout` | `Reader::finish` | `src/contracts/diagram/DiagramWire.h` | ferdig dekodet scene → kontrollert buffer | trailing data avvises; scene er XFMD-eid | Implemented |
 | 6 | `BlockLayout::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | SVG-scene → én skalert visual-run | Approximate blokkanker, ingen sideklipping | Implemented |
 
@@ -65,7 +65,7 @@ Tidsassertene gjelder fortsatt både produksjon og sanitizer-bygg.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-P31/P32: [Gjeldende SVG-/rutebeslutning](../../../docs/design/mermaid-svg-routing.md) erstatter tidligere native etiketttegning. Historiske tester nedenfor gjelder P25–P30; ny atferd er Ready frem til nytt testbevis.
+P31/P32: [Gjeldende SVG-/rutebeslutning](../../../docs/design/mermaid-svg-routing.md) erstatter tidligere native etiketttegning. Historiske tester nedenfor gjelder P25–P30; ny atferd er implementert; P31/P32-bevis beskriver faktisk verifikasjon.
 
 [Rutestudien](../../../docs/design/mermaid-routing-study.md) dokumenterer
 eksisterende sidevalg/A*/portfinjustering og foreslått felles kostnadspolicy.
@@ -77,3 +77,22 @@ Implementert. Versjonsbundet patch leverer måleseam og kooperativ tidsgrense. P
 Akseptanse: AT-059, AT-060, AT-061, AT-062, AT-063, AT-064.
 
 AT-065 dekkes av P32 og forkens rapport.
+
+### P32: autoritativ ruting
+
+Standardmotor er Libavoid; `XFMD_MERMAID_ROUTER=legacy` velger gammel motor
+eksplisitt. Ukjente verdier avvises. `XFMD_MERMAID_CROSSING_JUMPS=1` slår på
+presentasjonshopp. Valgene inngår i scenecachen. Resultatet eier diagnostikk
+med faktisk motor og begrensninger; feil gir synlig kildefallback, ikke motorbytte.
+
+Rust `layout` → `measurements::with_measurements` → `routed::compute` →
+backendens samlede libavoid-transaksjon → målte etiketter/validering →
+`render_svg` eller `render_svg_with_crossings` → payload 3. Ingen gamle
+reparasjonspass endrer Libavoid-rutene. Native tidsavbrudd er kooperativt;
+XFMDs dokumentkansellering kontrolleres før/etter FFI, mens native callback
+kontrollerer fristen under transaksjonen.
+
+Før native arbeid avviser adapteren over 256 kanter / 2048 kandidatporter.
+DiagramLayoutTest skiller denne admission-feilen fra faktisk tidsavbrudd;
+fristens nedre tidsassert gjelder bare tidsavbrudd. Etter begge feilveier
+skal en vanlig modell fortsatt kunne rendres.

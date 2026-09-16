@@ -1,6 +1,6 @@
 # Mermaid: bibliotekets SVG og utskiftbar ruting
 
-Status: Ready for implementasjon, 2026-09-16. Denne beslutningen erstatter
+Status: P31 verifisert; P32 implementert, samlet verifikasjon pågår, 2026-09-16. Denne beslutningen erstatter
 native diagramtegning og studiens foreslåtte egen rutemotor. P25–P30-bevis
 beholdes som historikk. P31 endrer bare presentasjon; P32 bytter bibliotekpin
 og velger libavoid etter sammenligning i forken.
@@ -71,3 +71,25 @@ bestod uten å øke fristen. Begge blueprint-validatorer består.
 
 Denne milepælen beholder upstream-pin og gammel ruting. SVG-omleggingen er
 ferdig før P32 bytter rutemotor; diagrametiketter er ikke separate Pango-felt.
+
+## P32 kjøretidsvalg og begrensninger
+
+Payload 3 legger til eid diagnostikk etter SVG. Miljøvalg settes før oppstart:
+`XFMD_MERMAID_ROUTER=libavoid` (standard) eller `legacy`, og
+`XFMD_MERMAID_CROSSING_JUMPS=0` (standard) eller `1`. Ugyldige verdier gir
+blokklokal feil. Cacheidentiteten inkluderer begge valg.
+
+Forken tillater maksimalt tre etikett/rutetransaksjoner per plassering og én
+eksplisitt, diagnostisert plassering med større avstand ved plassmangel.
+Sammenligning med låste posisjoner bruker aldri denne utvidelsen. Resterende
+parallelle nærføringer rapporteres; null kryssinger er ikke et mål i seg selv.
+
+Native admission: mer enn 256 forbindelser eller 2048 kandidatporter avvises
+før C++-transaksjon. Parserens modellgrense kan være høyere; en gyldig modell
+kan derfor få en eksplisitt layoutdiagnose. Dette beskytter mot observert lang
+nudging på 128 noder / 512 kanter. 128-noders kjede støttes. Grensen erstatter
+ikke kooperativ frist og innebærer ingen hard tidsisolasjon.
+
+P32-pin: `cee062412a9f20ee691c1564b2ff63e96f9de678`. Forkens dokumentasjon og
+før/etter-SVG/PNG ligger i `docs/libavoid-review.md` og `docs/libavoid-preview/`
+på samme commit. Arkivkontrollsummen står i `cmake/mermaid-source.json`.
