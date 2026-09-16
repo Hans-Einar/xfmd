@@ -59,3 +59,5 @@ P31/P32: [Gjeldende SVG-/rutebeslutning](../../../docs/design/mermaid-svg-routin
 Implementert. P26 avdekket dyr kantruting og la til kooperative checkpoints. Ingen hard preemption eller global cache. Hver preview-worker eier egne font-/layout-/cacheobjekter; PDF-jobben har tilsvarende kortlivet prepare-kjede.
 
 Akseptanse: AT-059, AT-060, AT-061, AT-062, AT-063, AT-064.
+
+Gjeldende P31/P32-verifikasjon: [samlet testbevis](../../../docs/evidence/P32.md).

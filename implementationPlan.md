@@ -449,3 +449,9 @@ Branch `phase/p32-libavoid-integration`. M1: forkens måleseam og sammenlignings
 M2: konkret pin, backendvalg, diagnostikk og bygg/lisens; M3: regresjoner,
 SVG/PNG, tidsmåling, CI/integrasjonskontroll. Bibliotekarbeidet ligger på
 forkens `phase/libavoid-routing`, med separate milestone-commits.
+
+P31/P32 er gjennomført på separate brancher og PR 24/25. P31 består av
+`ae00de1`, `d789d54`, `9a7156e` og livsløpsrettelsen `35e70b7`. P32 integrerer
+fork-pin `6ff5a54ce39d912e399493ec4639a7b8ff8bdc7f` via `59f885f`/`0ec9b2b`;
+P31-rettelsen er tatt inn før sluttesten. Begge faser har grønne CI-jobber
+med og uten sanitizer. Se [samlet bevis, commits og begrensninger](docs/evidence/P32.md).

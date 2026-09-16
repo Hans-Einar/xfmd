@@ -104,3 +104,5 @@ Et siste etikett-only-pass kan plassere på de ferdige rutene etter tredje
 transaksjon; det kan ikke starte flere transaksjoner. Ubuntu/Pango-fixture
 verifiserer dette i forken. Self-loop-endepunkter er distinkte punkter på
 formgrensen; libavoid eier fortsatt ruting og segmentforskyvning.
+
+Gjeldende P31/P32-verifikasjon: [samlet testbevis](../../../docs/evidence/P32.md).

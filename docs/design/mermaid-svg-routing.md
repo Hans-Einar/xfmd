@@ -1,6 +1,6 @@
 # Mermaid: bibliotekets SVG og utskiftbar ruting
 
-Status: P31 verifisert; P32 implementert, samlet verifikasjon pågår, 2026-09-16. Denne beslutningen erstatter
+Status: P31/P32 implementert og verifisert som beskrevet i testbeviset, 2026-09-16. Denne beslutningen erstatter
 native diagramtegning og studiens foreslåtte egen rutemotor. P25–P30-bevis
 beholdes som historikk. P31 endrer bare presentasjon; P32 bytter bibliotekpin
 og velger libavoid etter sammenligning i forken.
@@ -101,3 +101,6 @@ i libavoid, siden virtuelle shape-pin-endepunkter kunne kollapse til nullrute.
 
 SVG-cacheoppryddingen frigjør også Pango sitt per-tråd standardfontkart; se
 [P31-livsløpsbevis](../evidence/P31-lifecycle.md). Ingen nye LSan-suppresjoner.
+
+Sluttbevis: [P32](../evidence/P32.md), med 59/59 lokale tester, grønne CI-jobber
+med/uten sanitizer, faktiske Light/Dark-bilder og vektor-PDF.
