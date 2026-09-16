@@ -300,3 +300,7 @@ støtte er ikke automatisk XFMD-støtte.
 | SR-023 | mermaid-rs-renderer og Rust-verktøykjeden skal bygges fra låste versjoner med sjekket Cargo.lock, lisensoversikt og dokumentert offline-bygg. Manglende byggavhengigheter skal gi tydelig configure-feil; full støtte må ikke avhenge av installert Node/Chromium eller nettverk ved kjøring. | AT-064: rent Linux-bygg, offline etter bootstrap, installert program, dependency-/lisenskontroll og Rust-/C++-verifikasjon. |
 
 | SR-024 | Flowchart-ruting skal være utskiftbar uavhengig av nodeplassering. Libavoid integreres i bibliotekforken med låst kilde, eksplisitte port-/kantidentiteter, begrensede etikettpass, kooperativt avbrudd og synlig feil/fallback. | AT-065: frosne posisjoner/mål, rute-/kollisjonsmålinger, determinisme, native SVG, Legacy-valg og budsjett. |
+
+P33 presiserer UR-039: lange kantetiketter skal kunne brytes ved ordgrenser før
+layout, med faktiske linjemål brukt både til hindringer og SVG. Eksplisitte
+linjeskift bevares; enkeltord deles ikke. Se [tekstpolicy](docs/design/mermaid-label-wrap.md).

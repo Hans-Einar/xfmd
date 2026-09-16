@@ -35,7 +35,7 @@ Layout forberedes i worker. Tekstmåling skjer med samme fontgrunnlag som brødt
 | 1 | `IDiagramLayout virtual dispatch` | `MermaidDiagramLayout::layout` | `src/renderer/diagram/MermaidDiagramLayout.cpp` | modell + font/request → immutable scene | checkpoint før/etter Rust | Implemented |
 | 2 | `MermaidDiagramLayout::layout` | `DiagramTextLayout::measure` | `src/renderer/diagram/DiagramTextLayout.cpp` | etiketter → formede linjer og mål | samme ITextMetrics-port | Implemented |
 | 3 | `MermaidDiagramLayout::layout` | `xfmd_diagram_layout_v1` | `src/application/composition/mermaid/src/lib.rs` | ren graf + labelmål → LayoutResult | ingen parserkall/opaque parserhandle | Implemented |
-| 4 | `xfmd_diagram_layout_v1` | `layout` | `src/renderer/diagram/rust/src/lib.rs` | mapping → forkens routed::compute/render_svg → geometri og SVG | payload 3; maks 8 MiB | Implemented |
+| 4 | `xfmd_diagram_layout_v1` | `layout` | `src/renderer/diagram/rust/src/lib.rs` | mapping → forkens routed::compute/render_svg → geometri og SVG | inputpayload 4 / scene 3; maks 8 MiB | Implemented |
 | 5 | `MermaidDiagramLayout::layout` | `Reader::finish` | `src/contracts/diagram/DiagramWire.h` | ferdig dekodet scene → kontrollert buffer | trailing data avvises; scene er XFMD-eid | Implemented |
 | 6 | `BlockLayout::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | SVG-scene → én skalert visual-run | Approximate blokkanker, ingen sideklipping | Implemented |
 
@@ -106,3 +106,11 @@ verifiserer dette i forken. Self-loop-endepunkter er distinkte punkter på
 formgrensen; libavoid eier fortsatt ruting og segmentforskyvning.
 
 Gjeldende P31/P32-verifikasjon: [samlet testbevis](../../../docs/evidence/P32.md).
+
+### P33: målte, ombrutte kantetiketter
+
+DiagramTextLayout::measure bryter kanttekst ved ordgrenser før måling.
+MermaidDiagramLayout::layout serialiserer original nøkkel og faktiske linjer
+i inputpayload 4; Rust layout bruker linjene direkte i TextBlock. Eksisterende
+plumbing i kapittel 5 gjelder. Node-/gruppetitler prioriteres ved delt tekstnøkkel.
+Se [policy og akseptanse](../../../docs/design/mermaid-label-wrap.md).
