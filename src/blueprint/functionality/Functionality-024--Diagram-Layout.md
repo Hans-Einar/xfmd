@@ -116,3 +116,11 @@ plumbing i kapittel 5 gjelder. Node-/gruppetitler prioriteres ved delt tekstnøk
 Se [policy og akseptanse](../../../docs/design/mermaid-label-wrap.md).
 
 P33-verifikasjon: [før/etter-SVG og 8/8 relevante tester](../../../docs/evidence/P33.md).
+
+### P34: beskyttet etikettilhørighet
+
+SR-024 presiseres med en beskyttet sone mellom etikett og tilordnet segment.
+Forkens labels::place prioriterer fri sone; labels::obstacles reserverer den
+under eksisterende avgrensede pass; labels::validate avviser fremmede kanter
+i sonen etter omruting. Planlagt inntil ny fork-pin og regresjonsbevis foreligger.
+Ingen nye kall i XFMDs plumbing; endringen eies av bibliotekets rutepipeline.

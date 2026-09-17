@@ -304,3 +304,7 @@ støtte er ikke automatisk XFMD-støtte.
 P33 presiserer UR-039: lange kantetiketter skal kunne brytes ved ordgrenser før
 layout, med faktiske linjemål brukt både til hindringer og SVG. Eksplisitte
 linjeskift bevares; enkeltord deles ikke. Se [tekstpolicy](docs/design/mermaid-label-wrap.md).
+
+P34 presiserer SR-024: en fremmed forbindelse skal ikke passere mellom en
+kantetikett og segmentet etiketten er tilordnet. Dette valideres på ferdige
+ruter; plassmangel skal gi eksplisitt diagnose.
