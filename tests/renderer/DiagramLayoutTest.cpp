@@ -30,6 +30,9 @@ void run() {
   }
   CHECK(joined == caption);
   auto wrappedScene = layout.layout(wrapping, {}, metrics);
+  CHECK(wrappedScene->svg.find("label-leader") != std::string::npos);
+  CHECK(wrappedScene->svg.find("<circle") != std::string::npos);
+  CHECK(wrappedScene->diagnostics.find("label leaders omitted: 0") != std::string::npos);
   for (const auto& line : measured.lines)
     CHECK(wrappedScene->svg.find(">" + line.text + "<") != std::string::npos);
   for (const auto& caption : {std::string("Ærlig måling av blåbær gir nyttig informasjon"),

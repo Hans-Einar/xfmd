@@ -443,3 +443,8 @@ beskriver ansvar og avgrensning. Libavoid plasserer fortsatt ikke noder.
 P34: [Beskyttet etikettilhørighet](docs/design/mermaid-label-attachment.md)
 eies av rutepipelinen i forken. Soner, hindringer og sluttvalidering deles;
 FOX-/SVG-adapteren endres ikke. Eventuelt portsøk er et separat framtidig steg.
+
+P35: [Etikettpekere](docs/design/mermaid-label-leaders.md) eies av forkens
+render::label_leaders. Rust-adapteren kaller add_label_leaders etter vanlig
+SVG-rendering; returnert utelatelsesantall inngår i scenediagnostikken.
+Layout, portvalg og ruter er immutable i dette presentasjonssteget.

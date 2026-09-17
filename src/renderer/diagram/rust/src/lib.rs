@@ -74,7 +74,7 @@ pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
         )
     })
     .map_err(|e| format!("{engine:?}: {e}"))?;
-    let diagnostics = format!("{engine:?}; {}", routed.diagnostics.join("; "));
+    let mut diagnostics = format!("{engine:?}; {}", routed.diagnostics.join("; "));
     let layout = routed.layout;
     let mut w = Writer::default();
     w.u32(3);
@@ -124,6 +124,9 @@ pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
     } else {
         mermaid_rs_renderer::render_svg(&layout, &theme, &config)
     };
+    let (svg, omitted) =
+        mermaid_rs_renderer::render::add_label_leaders(svg, &layout, &theme, &config);
+    diagnostics.push_str(&format!("; label leaders omitted: {omitted}"));
     w.text(&svg);
     w.text(&diagnostics);
     if w.0.len() > 8 * 1024 * 1024 {

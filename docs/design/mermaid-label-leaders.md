@@ -4,7 +4,7 @@ UR-039/041 og FUNC-024: en tynn peker med prikk på eierkanten gjør
 etikettilhørighet synlig. Dette er presentasjon etter fullført ruting. Ingen
 node, kant, port, etikett eller kildekobling flyttes av presentasjonssteget.
 
-Forkens planlagte add_label_leaders tar ferdig SVG, Layout, Theme og config.
+Forkens add_label_leaders tar ferdig SVG, Layout, Theme og config.
 Venstre kandidater prioriteres når de er frie; høyre er fallback. Loddrett
 målsegment gir vannrett peker fra midten av etikettkanten. Vannrett målsegment
 gir 45° ut fra øvre/nedre hjørne, deretter loddrett til kanten. Skarpe hjørner,

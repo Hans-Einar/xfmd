@@ -45,6 +45,8 @@ Layout forberedes i worker. Tekstmåling skjer med samme fontgrunnlag som brødt
 | 9 | `layout` | `compute` | `src/renderer/diagram/rust/src/lib.rs` | graph + Engine + RoutingControl → RoutedLayout | Libavoid-feil blir synlig kildefallback | Implemented |
 | 10 | `layout` | `render_svg_with_crossings` | `src/renderer/diagram/rust/src/lib.rs` | ferdige logiske ruter → valgfrie presentasjonshopp | ingen endring av rutepunkter | Implemented |
 
+| 11 | `layout` | `add_label_leaders` | `src/renderer/diagram/rust/src/lib.rs` | ferdig SVG + immutable Layout → SVG med pekere og antall utelatelser | ingen ruteflytting; blokkerte pekere utelates med diagnostikk | Implemented |
+
 ## 6. Gjenbruk og avhengigheter
 
 Konsumenter: FUNC-025, eksisterende MarkdownRenderer og PDF via vanlig frame. ITextMetrics er en ren kontrakt; Application injiserer implementasjonen. Bruker ikke parserens crate, kilde eller skjulte handle. Biblioteket eier SVG-former/piler/etiketter; Application eier SVG-leseren.
@@ -129,6 +131,6 @@ P34-verifikasjon: [soneregresjoner og før/etter-SVG](../../../docs/evidence/P34
 
 ### P35: synlige etikettpekere
 
-Planlagt: Rust layout kaller forkens add_label_leaders etter SVG-rendering.
+Implementert: Rust layout kaller forkens add_label_leaders etter SVG-rendering.
 Steget bruker ferdige ruter og mål, uten ny layout. Se
 [geometri og feilvei](../../../docs/design/mermaid-label-leaders.md).
