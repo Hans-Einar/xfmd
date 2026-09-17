@@ -122,5 +122,5 @@ P33-verifikasjon: [før/etter-SVG og 8/8 relevante tester](../../../docs/evidenc
 SR-024 presiseres med en beskyttet sone mellom etikett og tilordnet segment.
 Forkens labels::place prioriterer fri sone; labels::obstacles reserverer den
 under eksisterende avgrensede pass; labels::validate avviser fremmede kanter
-i sonen etter omruting. Planlagt inntil ny fork-pin og regresjonsbevis foreligger.
+i sonen etter omruting. Implementert i fork-pin `0f23b7e`; verifikasjon dokumenteres i P34.
 Ingen nye kall i XFMDs plumbing; endringen eies av bibliotekets rutepipeline.

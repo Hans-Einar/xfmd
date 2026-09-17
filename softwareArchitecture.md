@@ -439,3 +439,7 @@ P33: DiagramTextLayout former lange kantetiketter med ordombryting før layout.
 Inputpayload 4 overfører faktiske linjer og mål; sceneformatet forblir 3.
 [Tekstpolicy og framtidig begrenset omplassering](docs/design/mermaid-label-wrap.md)
 beskriver ansvar og avgrensning. Libavoid plasserer fortsatt ikke noder.
+
+P34: [Beskyttet etikettilhørighet](docs/design/mermaid-label-attachment.md)
+eies av rutepipelinen i forken. Soner, hindringer og sluttvalidering deles;
+FOX-/SVG-adapteren endres ikke. Eventuelt portsøk er et separat framtidig steg.
