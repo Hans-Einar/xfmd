@@ -124,3 +124,5 @@ Forkens labels::place prioriterer fri sone; labels::obstacles reserverer den
 under eksisterende avgrensede pass; labels::validate avviser fremmede kanter
 i sonen etter omruting. Implementert i fork-pin `0f23b7e`; verifikasjon dokumenteres i P34.
 Ingen nye kall i XFMDs plumbing; endringen eies av bibliotekets rutepipeline.
+
+P34-verifikasjon: [soneregresjoner og før/etter-SVG](../../../docs/evidence/P34.md).
