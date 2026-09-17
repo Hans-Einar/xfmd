@@ -134,3 +134,5 @@ P34-verifikasjon: [soneregresjoner og før/etter-SVG](../../../docs/evidence/P34
 Implementert: Rust layout kaller forkens add_label_leaders etter SVG-rendering.
 Steget bruker ferdige ruter og mål, uten ny layout. Se
 [geometri og feilvei](../../../docs/design/mermaid-label-leaders.md).
+
+P35-verifikasjon: [SVG-sammenligning og testbevis](../../../docs/evidence/P35.md).

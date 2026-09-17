@@ -319,3 +319,7 @@ Lange Mermaid-kantetiketter brytes automatisk ved ordgrenser rundt 120 pt.
 Eksplisitte linjeskift bevares, og enkeltord deles ikke. Node-/gruppetitler
 beholdes; ved identisk tekst i node/gruppe og kant brukes den felles uombrutte
 målingen. Preview og PDF bruker de samme målte linjene.
+
+Der det er fri plass, får Mermaid-kantetiketter en tynn peker med prikk på
+forbindelsen de tilhører. Venstre side prioriteres, med høyre som alternativ.
+Pekerne følger lesefargene og vises også i PDF; de endrer ikke diagramlayouten.

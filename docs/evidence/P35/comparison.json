@@ -1,0 +1,22 @@
+{
+  "traceability": {
+    "labels": 17,
+    "leaders": 17,
+    "omitted_edge_ids": [],
+    "base_svg_unchanged": true
+  },
+  "service-map": {
+    "labels": 9,
+    "leaders": 8,
+    "omitted_edge_ids": [
+      "edge-7"
+    ],
+    "base_svg_unchanged": true
+  },
+  "layer-delivery": {
+    "labels": 7,
+    "leaders": 7,
+    "omitted_edge_ids": [],
+    "base_svg_unchanged": true
+  }
+}
