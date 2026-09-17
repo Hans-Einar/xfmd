@@ -53,3 +53,6 @@ Rust-profil-/FFI-tester, DiagramLayoutTest og DiagramPreparationTest dekker bruk
 Implementert i P26/P27. Hele kildeprofilen kontrolleres før upstream, og node-/kant-/gruppetap avvises. Kildemapping er Approximate for den komplette blokken.
 
 Akseptanse: AT-059, AT-061, AT-062, AT-063, AT-064.
+
+P36: [Typed dekning og Sequence 1](../../../docs/design/mermaid-coverage.md)
+utvider samme porter. Ny plumbing er Planned inntil implementasjon og testbevis.

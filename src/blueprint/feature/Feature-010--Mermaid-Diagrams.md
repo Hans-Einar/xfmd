@@ -59,3 +59,6 @@ Akseptanse: AT-059, AT-060, AT-061, AT-062, AT-063, AT-064.
 AT-065 dekkes av P32 og forkens rapport.
 
 Gjeldende P31/P32-verifikasjon: [samlet testbevis](../../../docs/evidence/P32.md).
+
+P36: [Typed dekning og Sequence 1](../../../docs/design/mermaid-coverage.md)
+utvider samme porter. Ny plumbing er Planned inntil implementasjon og testbevis.

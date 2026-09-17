@@ -455,3 +455,11 @@ P31/P32 er gjennomført på separate brancher og PR 24/25. P31 består av
 fork-pin `6ff5a54ce39d912e399493ec4639a7b8ff8bdc7f` via `59f885f`/`0ec9b2b`;
 P31-rettelsen er tatt inn før sluttesten. Begge faser har grønne CI-jobber
 med og uten sanitizer. Se [samlet bevis, commits og begrensninger](docs/evidence/P32.md).
+
+## P36 — typed dekning og første sekvensprofil
+
+Branch `phase/p36-sequence-foundation`. M1: undersøk pin/upstream og dokumenter
+matrise, semantiske grenser og roadmap. M2: SequenceModel, versjonert wire,
+streng Sequence 1-profil, separat layoutdispatch og SVG. M3: APT-fixture,
+negative syntakstester, mixed Markdown, preview/PDF og dokumentert evidens.
+Videre sekvensutvidelser og typeprioritet følger [matrisen](docs/design/mermaid-coverage.md).

@@ -136,3 +136,6 @@ Steget bruker ferdige ruter og mål, uten ny layout. Se
 [geometri og feilvei](../../../docs/design/mermaid-label-leaders.md).
 
 P35-verifikasjon: [SVG-sammenligning og testbevis](../../../docs/evidence/P35.md).
+
+P36: [Typed dekning og Sequence 1](../../../docs/design/mermaid-coverage.md)
+utvider samme porter. Ny plumbing er Planned inntil implementasjon og testbevis.

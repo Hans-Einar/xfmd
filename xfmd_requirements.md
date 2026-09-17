@@ -313,3 +313,12 @@ P35 presiserer UR-039/041: kantetiketter skal om mulig ha en tynn SVG-peker
 med prikk på tilhørende kant. Venstre side prioriteres; pekeren skal ikke
 krysse andre noder, etiketter eller forbindelser. Manglende fri plass oppgis
 som diagnostikk uten å skjule etiketten. Logiske ruter endres ikke.
+
+## P36 — typed Mermaid-dekning
+
+UR-039 og SR-021 presiseres med [versjonert matrise](docs/design/mermaid-coverage.md):
+diagramtyper bevarer egen semantikk og får eksplisitte profiler. Sequence 1 skal
+vise ordnede Commands/svar, deltakere, notater og avgrensede fragmenter. Ustøttet
+syntaks gir lokal kildefallback; diagrammer evaluerer ikke SDL-regler eller guards.
+AT-059/060/062/063 utvides med APT-importens tre utfall, adskilt fra aktivering,
+modell-roundtrip, Unicode, feilscope, preview og PDF. Senere typer følger matrisen.
