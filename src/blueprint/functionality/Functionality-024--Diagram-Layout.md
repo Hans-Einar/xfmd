@@ -126,3 +126,9 @@ i sonen etter omruting. Implementert i fork-pin `0f23b7e`; verifikasjon dokument
 Ingen nye kall i XFMDs plumbing; endringen eies av bibliotekets rutepipeline.
 
 P34-verifikasjon: [soneregresjoner og før/etter-SVG](../../../docs/evidence/P34.md).
+
+### P35: synlige etikettpekere
+
+Planlagt: Rust layout kaller forkens add_label_leaders etter SVG-rendering.
+Steget bruker ferdige ruter og mål, uten ny layout. Se
+[geometri og feilvei](../../../docs/design/mermaid-label-leaders.md).

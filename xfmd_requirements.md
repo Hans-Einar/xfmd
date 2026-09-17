@@ -308,3 +308,8 @@ linjeskift bevares; enkeltord deles ikke. Se [tekstpolicy](docs/design/mermaid-l
 P34 presiserer SR-024: en fremmed forbindelse skal ikke passere mellom en
 kantetikett og segmentet etiketten er tilordnet. Dette valideres på ferdige
 ruter; plassmangel skal gi eksplisitt diagnose.
+
+P35 presiserer UR-039/041: kantetiketter skal om mulig ha en tynn SVG-peker
+med prikk på tilhørende kant. Venstre side prioriteres; pekeren skal ikke
+krysse andre noder, etiketter eller forbindelser. Manglende fri plass oppgis
+som diagnostikk uten å skjule etiketten. Logiske ruter endres ikke.
