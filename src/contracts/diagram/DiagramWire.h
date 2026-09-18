@@ -140,13 +140,13 @@ struct Reader {
     auto kind = count(2);
     if (kind == 2) {
       SemanticDiagram d;
-      auto family = count(5);
+      auto family = count(8);
       if (family < 2)
         throw std::runtime_error("Invalid semantic family");
       d.family = DiagramFamily(family);
       auto countRecords = count(512);
       for (unsigned i = 0; i < countRecords; ++i) {
-        SemanticRecord record{SemanticTag(count(42)), {}};
+        SemanticRecord record{SemanticTag(count(73)), {}};
         auto fields = count(16);
         for (unsigned j = 0; j < fields; ++j)
           record.fields.push_back(text(4096));

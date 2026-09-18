@@ -1,4 +1,7 @@
 //! Strict profiles produce domain records; no source crosses the layout boundary.
+mod architecture;
+mod block;
+mod c4;
 mod requirements;
 mod state;
 mod types;
@@ -15,6 +18,9 @@ pub fn parse(source: &str, header: &str) -> Result<Model, String> {
         "classDiagram" => 3,
         "requirementDiagram" => 4,
         "erDiagram" => 5,
+        "C4Context" | "C4Container" | "C4Component" => 6,
+        "architecture-beta" => 7,
+        "block-beta" => 8,
         _ => return Err(format!("Unsupported diagram family: {header}")),
     };
     let mut d = Diagram {
@@ -31,6 +37,9 @@ pub fn parse(source: &str, header: &str) -> Result<Model, String> {
         2 => state::parse(&lines, &mut d)?,
         3 | 5 => types::parse(&lines, &mut d)?,
         4 => requirements::parse(&lines, &mut d)?,
+        6 => c4::parse(&lines, &mut d, header)?,
+        7 => architecture::parse(&lines, &mut d)?,
+        8 => block::parse(&lines, &mut d)?,
         _ => unreachable!(),
     }
     d.validate()?;
@@ -165,3 +174,6 @@ mod tests {
         assert_eq!(d.records.iter().filter(|r| r.tag == 12).count(), 2);
     }
 }
+
+#[cfg(test)]
+mod architecture_tests;

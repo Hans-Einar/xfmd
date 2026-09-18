@@ -475,3 +475,7 @@ utvider eksisterende diagramporter. `SemanticDiagram.h` eies av contracts;
 `interpreter/mermaid/rust/src/semantic/` eier profiler og
 `renderer/diagram/rust/src/semantic/` eier oversettelse til layoutbiblioteket.
 `text_metrics.rs` eier den synkrone, lånte målecallbacken, uten FOX-avhengighet.
+
+P39: `contracts/diagram/rust/src/semantic_architecture.rs` eier C4-, port- og grid-skjema.
+`interpreter/mermaid/rust/src/semantic/{c4,architecture,block}.rs` konsumerer
+profilene; tilsvarende renderer-filer mapper til native typer uten ny parsing.

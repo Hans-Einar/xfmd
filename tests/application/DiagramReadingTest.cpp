@@ -56,7 +56,7 @@ void run() {
   CHECK(paged->readingText == frame->readingText);
   for (const auto* name :
        {"apt-import", "sequence-fragments", "sequence-nested", "measurement-state", "state-regions",
-        "state-choice", "sdl-class", "apt-requirements", "provenance-er"}) {
+        "state-choice", "sdl-class", "apt-requirements", "provenance-er", "c4-context", "c4-container", "c4-component", "architecture-resources", "block-layers"}) {
     std::ifstream file(std::string(XFMD_SEQUENCE_FIXTURES) + "/" + name + ".mmd");
     SourceSnapshot sequence{{9, 1},
                             "Before\n\n```mermaid\n" +

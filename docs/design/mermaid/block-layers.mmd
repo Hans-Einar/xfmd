@@ -1,0 +1,12 @@
+block-beta
+columns 3
+application["FOX Application"]:3
+interpreter["Interpreter"]
+contracts["Contracts"]
+renderer["Renderer"]
+presentation["SVG Presentation"]:3
+application --> interpreter
+application --> renderer
+interpreter --> contracts
+contracts --> renderer
+renderer --> presentation

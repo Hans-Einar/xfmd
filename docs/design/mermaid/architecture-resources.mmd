@@ -1,0 +1,9 @@
+architecture-beta
+group workspace(cloud)[Local workspace]
+service editor(server)[XFMD editor] in workspace
+service files(disk)[Markdown files] in workspace
+service renderer(server)[Offline renderer] in workspace
+junction bus in workspace
+editor:R -- L:bus
+bus:R --> L:renderer
+bus:B --> T:files

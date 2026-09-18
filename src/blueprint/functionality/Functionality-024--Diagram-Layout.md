@@ -158,7 +158,7 @@ oversetter domenerekorder til native bibliotektyper. `layout_measured` bruker
 `measureDiagramText` via synkron ABI; forkens `with_measurer` låner konteksten.
 Samme SVG-scene går til preview og PDF; ingen kildeparsing i renderer.
 
-P39 Planned: C4/Architecture/Block utvider SemanticDiagram med egne elementer,
+P39 Implemented: C4/Architecture/Block utvider SemanticDiagram med egne elementer,
 grenser, portretninger og grid. Parserprofiler og native mapping ligger i
 `semantic/{c4,architecture,block}.rs`; felles SVG/PDF-port gjenbrukes.
 Se [profil og kontrakt](../../../docs/design/mermaid-architecture-authoring.md).

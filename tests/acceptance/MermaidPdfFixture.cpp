@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
     SourceSnapshot source{{7, 3}, "# Mermaid export\n\n", {}, false};
     for (auto name : {"service-map", "layer-delivery", "traceability", "apt-import",
                       "sequence-nested", "measurement-state", "state-regions", "state-choice",
-                      "sdl-class", "apt-requirements", "provenance-er"}) {
+                      "sdl-class", "apt-requirements", "provenance-er", "c4-context", "c4-container", "c4-component", "architecture-resources", "block-layers"}) {
       std::ifstream file(std::string(XFMD_DIAGRAM_FIXTURES) + "/" + name + ".mmd");
       source.text +=
           "```mermaid\n" + std::string((std::istreambuf_iterator<char>(file)), {}) + "\n```\n\n";
@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
     unsigned diagrams = 0;
     for (const auto& b : model->blocks)
       diagrams += bool(b.diagramScene);
-    CHECK(diagrams == 13);
+    CHECK(diagrams == 18);
     auto frame = renderer.layout(*model, {595, 1, {LayoutMode::Paged, {}}}, metrics);
     for (const auto& run : frame->runs) {
       auto page = std::size_t(run.bounds.y / frame->pages.paper.height);
@@ -79,6 +79,15 @@ int main(int argc, char** argv) {
               expected << f[i] << "\n";
           };
           switch (record.tag) {
+          case SemanticTag::C4Element:
+            emit(1); emit(3); emit(4); break;
+          case SemanticTag::C4Boundary:
+          case SemanticTag::ArchitectureGroup:
+          case SemanticTag::ArchitectureService:
+          case SemanticTag::BlockCell:
+            emit(1); break;
+          case SemanticTag::C4Relation:
+            emit(3); emit(4); break;
           case SemanticTag::State:
             if (f[3] == "normal" || f[3] == "composite")
               emit(1);

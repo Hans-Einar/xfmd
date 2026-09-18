@@ -7,8 +7,11 @@ with tempfile.TemporaryDirectory(prefix='xfmd-mermaid-pdf-') as folder:
     subprocess.run([sys.argv[1],str(pdf),str(expected)],check=True)
     extracted=subprocess.check_output(['pdftotext','-layout',str(pdf),'-'],text=True)
     actual=' '.join(extracted.split())
+    # Spatial extraction interleaves wrapped captions in adjacent columns.
+    # Content-stream order preserves each SVG text block independently.
+    raw=' '.join(subprocess.check_output(['pdftotext','-raw',str(pdf),'-'],text=True).split())
     for label in expected.read_text().splitlines():
-        assert ' '.join(label.split()) in actual, (label, actual)
+        assert ' '.join(label.split()) in actual or ' '.join(label.split()) in raw, (label, actual)
     images=subprocess.check_output(['pdfimages','-list',str(pdf)],text=True).splitlines()
     assert len(images)==2, images
     info=subprocess.check_output(['pdfinfo',str(pdf)],text=True)

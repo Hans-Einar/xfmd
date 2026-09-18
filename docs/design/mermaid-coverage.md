@@ -171,3 +171,12 @@ Se [profilene](mermaid-semantic-authoring.md) og [P38-bevis](../evidence/P38.md)
 Byteidentisk gjentatt SVG er en kjent libavoid-begrensning for konkurrerende
 porter. 64 diagramblokker og samlet 64 MiB scenesvar per dokument tillates;
 8 MiB per scene og eksisterende tids-/cachegrenser gjelder fortsatt.
+
+## Revisjon 4 — P39 arkitekturprofiler
+
+C4Context/Container/Component, architecture-beta og block-beta har strenge
+parserprofiler, egne records og native layout/SVG i preview og vektor-PDF.
+Fem nye fixtures er kontrollert med lys/mørk, resize og tekstuttrekk. C4s
+syntetiske globale rot finnes bare i adapteren; den er ikke en SDL-container.
+[Profilgrenser](mermaid-architecture-authoring.md), [bevis](../evidence/P39.md).
+Block-pilspisser krever native grenseklipping; korreksjon følger neste fork-pin.

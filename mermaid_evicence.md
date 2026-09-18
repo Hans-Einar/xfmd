@@ -249,3 +249,83 @@ erDiagram
     DATASET_INSTANCE ||--|{ ACCEPTED_REVISION : has
     ACCEPTED_REVISION ||..o{ DATAGRAM_OCCURRENCE : reported_by
 ```
+
+## C4 — kontekst
+
+Dette er en dokumentasjonsvisning, ikke en vedtatt SDL-definisjon.
+
+```mermaid
+C4Context
+Person(operator, "Operatør", "Develops SDL documentation")
+System(xfmd, "XFMD", "Offline authoring and preview")
+System_Ext(repository, "Git repository", "Versioned design proposals")
+Rel(operator, xfmd, "Reads and edits", "Markdown")
+Rel(xfmd, repository, "Works on local files", "Filesystem")
+```
+
+## C4 — containere
+
+Dette er en dokumentasjonsvisning, ikke en vedtatt SDL-definisjon.
+
+```mermaid
+C4Container
+Person(operator, "Operator")
+System_Boundary(system, "Documentation workspace") {
+Container(app, "XFMD application", "FOX and C++", "Owns document session")
+Container(preview, "Diagram worker", "Rust", "Bounded offline layout")
+ContainerDb(files, "Markdown files", "Filesystem", "Source of truth")
+}
+Rel(operator, app, "Edits proposals")
+Rel(app, preview, "Requests measured layout", "Typed model")
+Rel(app, files, "Loads and saves")
+```
+
+## C4 — komponenter
+
+Dette er en dokumentasjonsvisning, ikke en vedtatt SDL-definisjon.
+
+```mermaid
+C4Component
+Container_Boundary(application, "XFMD application") {
+Component(session, "DocumentSession", "C++", "Owns current revision")
+Component(coordinator, "Preview coordinator", "C++", "Rejects stale result")
+Component(adapter, "SVG adapter", "Cairo", "Presents accepted scene")
+}
+Rel(session, coordinator, "Revision changed")
+Rel(coordinator, adapter, "Supplies accepted scene")
+```
+
+## Architecture — lokale ressurser
+
+Dette er en dokumentasjonsvisning, ikke en vedtatt SDL-definisjon.
+
+```mermaid
+architecture-beta
+group workspace(cloud)[Local workspace]
+service editor(server)[XFMD editor] in workspace
+service files(disk)[Markdown files] in workspace
+service renderer(server)[Offline renderer] in workspace
+junction bus in workspace
+editor:R -- L:bus
+bus:R --> L:renderer
+bus:B --> T:files
+```
+
+## Block — horisontale lag
+
+Dette er en dokumentasjonsvisning, ikke en vedtatt SDL-definisjon.
+
+```mermaid
+block-beta
+columns 3
+application["FOX Application"]:3
+interpreter["Interpreter"]
+contracts["Contracts"]
+renderer["Renderer"]
+presentation["SVG Presentation"]:3
+application --> interpreter
+application --> renderer
+interpreter --> contracts
+contracts --> renderer
+renderer --> presentation
+```

@@ -1,3 +1,6 @@
+mod architecture;
+mod block;
+mod c4;
 mod state;
 mod types;
 use mermaid_rs_renderer::ir::*;
@@ -10,6 +13,9 @@ pub fn graph(d: &Diagram) -> Result<Graph, String> {
         3 => DiagramKind::Class,
         4 => DiagramKind::Requirement,
         5 => DiagramKind::Er,
+        6 => DiagramKind::C4,
+        7 => DiagramKind::Architecture,
+        8 => DiagramKind::Block,
         _ => return Err("Unknown semantic family".into()),
     };
     if let Some(r) = d.records.iter().find(|r| r.tag == DIRECTION) {
@@ -20,10 +26,13 @@ pub fn graph(d: &Diagram) -> Result<Graph, String> {
             _ => Direction::TopDown,
         };
     }
-    if d.family == 2 {
-        state::populate(d, &mut g);
-    } else {
-        types::populate(d, &mut g);
+    match d.family {
+        2 => state::populate(d, &mut g),
+        3..=5 => types::populate(d, &mut g),
+        6 => c4::populate(d, &mut g),
+        7 => architecture::populate(d, &mut g),
+        8 => block::populate(d, &mut g),
+        _ => unreachable!(),
     }
     Ok(g)
 }

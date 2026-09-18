@@ -112,6 +112,12 @@ pub fn layout_measured(
             text_metrics::measure,
             duration,
             || {
+                if d.family >= 6 {
+                    return Ok((
+                        mermaid_rs_renderer::compute_layout(&graph, &theme, &config),
+                        vec!["native family layout".into()],
+                    ));
+                }
                 mermaid_rs_renderer::layout::compute_semantic_layout(
                     &graph,
                     &theme,

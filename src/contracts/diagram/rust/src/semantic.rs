@@ -1,4 +1,6 @@
 //! XFMD-owned domain record schema. Field positions are explicit and versioned.
+#[path = "semantic_architecture.rs"]
+mod architecture;
 use crate::wire::{Reader, Writer};
 #[derive(Clone, Debug, PartialEq)]
 pub struct Record {
@@ -33,6 +35,9 @@ impl Diagram {
         });
     }
     pub fn validate(&self) -> Result<(), String> {
+        if self.family >= 6 {
+            return architecture::validate(self);
+        }
         use std::collections::HashSet;
         if !(2..=5).contains(&self.family) || self.records.is_empty() || self.records.len() > 512 {
             return Err("Invalid semantic diagram family/record count".into());

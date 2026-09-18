@@ -1,6 +1,6 @@
 # Arkitekturprofiler — C4, Architecture og Block 1
 
-Status: Planned, P39. Krav UR-039/040, SR-021/022; FUNC-023/024/025.
+Status: Implemented, P39. Krav UR-039/040, SR-021/022; FUNC-023/024/025.
 
 C4 context/container er første arkitekturtillegg fordi systemgrenser og ansvar
 passer SDL/SDP-dokumentasjon. Component viser interne roller. C4s Container-navn
@@ -50,3 +50,6 @@ etter faktisk gjennomløp. Galleriet og støttematrisen oppdateres samlet.
 Kilder: https://mermaid.js.org/syntax/c4.html,
 https://mermaid.js.org/syntax/architecture.html og
 https://mermaid.js.org/syntax/block.html.
+
+Native block-piler ender foreløpig bak boksene; korreksjon i forken inngår i neste
+pin sammen med packet-layout. C4-relasjoner har bibliotekets enkle routing.
