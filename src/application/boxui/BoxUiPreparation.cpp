@@ -33,7 +33,7 @@ ParseResult BoxUiPreparation::prepare(ParseResult original, ITextMetrics& metric
       if (it != state.blocks.end())
         request.snapshot = it->second;
       request.width = std::clamp(width, 320., 8192.);
-      request.height = std::max(480., request.width * .75);
+      request.height = std::max(640., request.width * .75);
       request.cancelled = cancelled;
       request.budgetMs = diagramLayoutBudgetMilliseconds;
       for (auto& c : b.boxUi->children) {
