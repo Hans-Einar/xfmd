@@ -1,9 +1,39 @@
 # Arbeidsmåte: krav, features og functionality
 
-Status: Anvendt i P0–P13. Metoden er et praktisk eksperiment for agentarbeid. Den bruker
-stabile designobjekter og eksplisitte endringsregler, uten sprintseremonier eller
+Status: Gjeldende arbeidsmåte for XFMD. Metoden er et praktisk eksperiment for agentarbeid. Den bruker
+stabile designobjekter og eksplisitte endringsregler, uten pålagte sprintseremonier eller
 en foreløpig SDL-kompilator. Det er ikke en implementasjon av SDP, og andre
 repositoryer er ikke brukt som autoritative kilder.
+
+## 0. Sprint, fase, milestone og bygg
+
+En sprint samler en leveranse og dokumenteres under `sprints/Sprint-NNN--Tema/`.
+Sprintens README angir mål, krav, faser og én samlet PR. Hver fase har eget
+Phase-dokument med milestones, branch, tester og faktisk bygget versjon.
+Se [register og mal](../sprints/README.md).
+
+- Én branch per fase: `sprint/NNN/phase/NNN-tema`. Fase nummereres videre fra P41.
+  Neste fase starter fra forrige fasebranch, slik at hele sprinten henger sammen.
+- Én commit per milestone; oppdater krav, blueprint og kode samlet. Registrer
+  utførte kontroller, men ikke hev at et fasebygg er kjørt før det finnes.
+- Autonom flerfaseøkt: gjør ett planlagt bygg ved avslutning av hver fase.
+  Mellomliggende commits kan bruke lette dokument-/skriptkontroller uten fullt bygg.
+  Feil ved fasekontrollen rettes og kontrolleres på nytt; byggegrensen er ikke
+  et forbud mot nødvendig feilretting.
+- Samarbeidsmodus: når brukeren prøver underveis, kan hver feilrettingscommit
+  bygges. Oppgi modus i faseplanen; ikke bruk denne hyppigheten som autonom default.
+- Etter fasebygget kan en milestone-commit dokumentere testbevis uten å bygge
+  identisk programkode igjen. Oppgi alltid commitnummeret til det faktiske bygget.
+- Én PR per sprint, fra siste fasebranch til main. Draft brukes ved behov;
+  ferdig sprint settes klar til review. Ingen PR per fase. Bruk merge-commit,
+  ikke squash/rebase av publisert historie. Merge/installasjon krever brukerens
+  bestilling; fasebygg gjør ikke automatisk en installasjon.
+
+CI bygger ved klar sprint-PR og integrasjon til main, samt eksplisitt manuell
+kjøring. Vanlige push til fasebrancher og draft-PR-er starter ikke programbygg.
+Dette erstatter tidligere praksis med fase-PR-er; gamle faseplaner er historikk.
+[Versjonering](versioning.md) definerer major/minor, branch/PR og commitnummer.
+Vi oppretter ingen SDP-mappe eller avhengighet til den parallelle SDP-prosessen.
 
 ## 1. Hva som er et designobjekt
 

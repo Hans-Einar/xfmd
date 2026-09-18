@@ -327,3 +327,10 @@ P37–P41 utvider UR-039/040 og SR-021/022 med prioriterte typed diagramprofiler
 ordnet sekvensscope og ett praktisk `mermaid_evicence.md` for løpende lesing.
 AT-059/060/062/063 gjelder hver profil. Dokumentgrensen skal fortsatt være
 avgrenset, men romme minst ett eksempel per implementert diagramtype.
+
+## Byggidentitet og leveranseflyt
+
+| ID | Krav | Akseptanse |
+| --- | --- | --- |
+| UR-042 | CLI og vindustittel viser major.minor, branch (PR-nummer på main når kjent) og numerisk commitnummer. | AT-066: samme innbakte identitet i CLI/vindu; dirty og ukjent kilde markeres. |
+| SR-025 | Identiteten beregnes fra full Git-historikk uten nettverk eller en konfliktskapende tellerfil. Et eksplisitt bygg oppdaterer metadata også uten ny CMake-konfigurering; samme commit gir stabil identitet. | AT-067: lineære commits, branches, merge, main etter PR, detached, dirty, shallow og kildearkiv; uendret metadata omskrives ikke. |
