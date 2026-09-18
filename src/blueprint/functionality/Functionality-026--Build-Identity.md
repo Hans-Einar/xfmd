@@ -4,7 +4,7 @@ kind: Functionality
 audience: Integration
 role: Service
 owner: application
-status: Ready
+status: Implemented
 scope: FirstRelease
 requirements: UR-042, SR-025
 uses: none
@@ -38,8 +38,8 @@ skrives ikke på nytt. JSON har SHA for audit, mens brukeren ser et heltall.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | CMake build target | `identity` | `tools/build_identity.py` | VERSION + Git → identitet | shallow/ugyldig versjon feiler | Planned |
-| 2 | CLI main / Application::updateUi | `buildVersion` | `src/application/build/BuildVersion.cpp` | innbakt tekst → CLI/vindu | ingen runtime-I/O | Planned |
+| 1 | CMake build target | `identity` | `tools/build_identity.py` | VERSION + Git → identitet | shallow/ugyldig versjon feiler | Implemented |
+| 2 | CLI main / Application::updateUi | `buildVersion` | `src/application/build/BuildVersion.cpp` | innbakt tekst → CLI/vindu | ingen runtime-I/O | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -48,10 +48,12 @@ major/minor fra VERSION. Interpreter og renderer får ingen ny avhengighet.
 
 ## 7. Verifikasjon
 
-Planlagt: isolerte Git-fixtures for AT-067 og CLI-/vindustittelkontroll for AT-066.
+Sju isolerte Git-fixtures for AT-067 består. CLI-/vindustittelkontroll for AT-066
+kjøres i fasebygget. Blueprint-validatoren støtter nå navngitt Python-plumbing
+under tools/, i tillegg til C++/Rust under src/.
 Fasebyggets faktiske resultat føres i sprintens fasefil.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Ready. Merge kan gi tallhopp; parallelle brancher kan dele tall. Historieomskriving
+Implemented. Merge kan gi tallhopp; parallelle brancher kan dele tall. Historieomskriving
 endrer identiteten og er forbudt for publiserte fasecommits. Ikke full global sekvens.

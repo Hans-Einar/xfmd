@@ -157,7 +157,7 @@ P22: UR-032 → FUNC-010/014; UR-033 → FUNC-010; UR-034 → FUNC-005. AT-052�
 
 | ID | Type / målgruppe | Eier | Status |
 | --- | --- | --- | --- |
-| [FUNC-026](functionality/Functionality-026--Build-Identity.md) | Functionality / Integration | application | Ready |
+| [FUNC-026](functionality/Functionality-026--Build-Identity.md) | Functionality / Integration | application | Implemented |
 
 | Krav | Designobjekter | Akseptanse | Scope |
 | --- | --- | --- | --- |

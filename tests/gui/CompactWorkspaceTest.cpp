@@ -1,4 +1,5 @@
 #include "application/Application.h"
+#include "application/build/BuildVersion.h"
 #include "support/DrainEvents.h"
 #include "support/TestSupport.h"
 #include <X11/Xlib.h>
@@ -32,6 +33,7 @@ void run() {
   CHECK(app.open(XFMD_FIXTURE));
   app.execute(CommandRouter::Split);
   events(app);
+  CHECK(std::string(app.window->getTitle().text()).find(buildVersion()) != std::string::npos);
   auto* toolbar = app.window->previewColors->getParent();
   CHECK(toolbar == app.window->previewControls->getParent());
   for (int width : {1900, 1100, 640, 450}) {

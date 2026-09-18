@@ -1,10 +1,11 @@
 #include "Application.h"
+#include "build/BuildVersion.h"
 #include <iostream>
 #include <string>
 int main(int argc, char** argv) {
   for (int i = 1; i < argc; ++i) {
     if (std::string(argv[i]) == "--version") {
-      std::cout << "xfmd 0.1.0\n";
+      std::cout << "xfmd " << xfmd::buildVersion() << '\n';
       return 0;
     }
     if (std::string(argv[i]) == "--help") {

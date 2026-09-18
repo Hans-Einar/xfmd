@@ -1,7 +1,7 @@
 # Fase 042 — Byggidentitet
 
 Sprint: 001. Branch: `sprint/001/phase/042-build-identity`.
-Byggmodus: autonom. Status: planlagt.
+Byggmodus: autonom. Status: implementert; fasebygg gjenstår.
 
 ## Mål og akseptanse
 
@@ -13,8 +13,8 @@ Prosjektreglene beskriver én branch per fase og én PR per sprint.
 
 | ID | Leveranse | Commit | Kontroll |
 | --- | --- | --- | --- |
-| M01 | Arbeidsmåte, versjonskontrakt og plan | Denne designcommiten | Blueprint-validatorer |
-| M02 | Generator, CMake, CLI/vindu og tester | Planlagt | Git-fixtures og dokumentkontroll |
+| M01 | Arbeidsmåte, versjonskontrakt og plan | `a4f55ba` | Python-plumbingsti ble avvist; validator utvidet i M02 |
+| M02 | Generator, CMake, CLI/vindu og tester | Denne implementasjonscommiten | 7 Git-tester, CMake-konfigurering og dokumentkontroll bestått |
 | M03 | Fasebygg og verifikasjon | Planlagt | Bygg én gang etter M02; relevante CTests |
 
 ## Fasebygg

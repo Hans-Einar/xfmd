@@ -490,3 +490,11 @@ ligger i `semantic/{charts,trees,git,zenuml}.rs`; native konstruksjon ligger i
 rendererens `semantic/{charts,structures}.rs`. Hver fil har én profil-/mappingrolle.
 `semantic.rs` er omtrent 310 linjer fordi basisskjema, referansevalidering og wire
 fortsatt hører sammen; nye familier delegeres til egne valideringsfiler.
+
+## Byggidentitet — FUNC-026
+
+`VERSION` eier produktets major/minor. `tools/build_identity.py` leser komplett
+Git-historikk ved eksplisitt bygg; `cmake/BuildIdentity.cmake` genererer header
+og installert JSON. `src/application/build/BuildVersion.h/.cpp` eksponerer
+`buildVersion()` for CLI og Application-vindustittel. Git/Python finnes bare
+i byggsteget, ikke i kjørende applikasjon eller interpreter/renderer.
