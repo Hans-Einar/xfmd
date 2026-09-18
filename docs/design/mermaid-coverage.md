@@ -180,3 +180,10 @@ Fem nye fixtures er kontrollert med lys/mørk, resize og tekstuttrekk. C4s
 syntetiske globale rot finnes bare i adapteren; den er ikke en SDL-container.
 [Profilgrenser](mermaid-architecture-authoring.md), [bevis](../evidence/P39.md).
 Block-pilspisser krever native grenseklipping; korreksjon følger neste fork-pin.
+
+## Revisjon 5 — P40 planlegging og encoding
+
+Pin `79d27a15c3d68b0412fc540c50913f27dfe17bdd` gir native PacketField/geometri,
+og retter block-pilspisser. Packet, Timeline, Gantt og Journey har egne records,
+strenge parserprofiler, native layout, SVG-preview og vektor-PDF.
+[Profil](mermaid-planning-authoring.md), [bevis](../evidence/P40.md).

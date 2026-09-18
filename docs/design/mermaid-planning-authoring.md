@@ -1,6 +1,6 @@
 # Packet, Timeline, Gantt og Journey 1
 
-Status: Planned P40; UR-039/040, SR-021/022, FUNC-023/024/025.
+Status: Implemented P40; UR-039/040, SR-021/022, FUNC-023/024/025.
 Packet beskriver konkret encoding, ikke en abstrakt SDL Datagram-familie.
 Tidsplaner og brukerreiser supplerer systemmodellen uten å vedta språkregler.
 
@@ -25,3 +25,5 @@ Kilder: https://mermaid.js.org/syntax/packet.html,
 https://mermaid.js.org/syntax/timeline.html,
 https://mermaid.js.org/syntax/gantt.html,
 https://mermaid.js.org/syntax/userJourney.html.
+
+Datoer begrenses til 1970–2100 og faktisk gyldige kalenderdager.

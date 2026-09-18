@@ -1,6 +1,18 @@
 use super::*;
 pub fn populate(d: &Diagram, g: &mut Graph) {
-    g.c4.boundaries.push(C4Boundary { id:"global".into(), label:"global".into(), boundary_type:"global".into(), descr:None,sprite:None,tags:None,link:None,parent_boundary:String::new(),bg_color:None,border_color:None,font_color:None });
+    g.c4.boundaries.push(C4Boundary {
+        id: "global".into(),
+        label: "global".into(),
+        boundary_type: "global".into(),
+        descr: None,
+        sprite: None,
+        tags: None,
+        link: None,
+        parent_boundary: String::new(),
+        bg_color: None,
+        border_color: None,
+        font_color: None,
+    });
     let theme = mermaid_rs_renderer::Theme::modern();
     for r in &d.records {
         let f = &r.fields;
@@ -89,4 +101,10 @@ fn optional(s: &str) -> Option<String> {
     (!s.is_empty()).then(|| s.into())
 }
 
-fn parent(s:&str)->String {if s.is_empty(){"global".into()}else{format!("c4_{s}")}}
+fn parent(s: &str) -> String {
+    if s.is_empty() {
+        "global".into()
+    } else {
+        format!("c4_{s}")
+    }
+}

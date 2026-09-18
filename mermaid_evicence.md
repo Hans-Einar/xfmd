@@ -329,3 +329,62 @@ interpreter --> contracts
 contracts --> renderer
 renderer --> presentation
 ```
+
+## Packet — konkret wire-encoding
+
+Et eksempel på konkrete feltbredder; dette definerer ikke SDL Datagram.
+
+```mermaid
+packet
+0-7: "Version"
+8-15: "Kind"
+16-31: "Payload length"
+32-63: "Source session"
+64-95: "Accepted revision"
+```
+
+## Timeline — checkpoint-historikk
+
+Ordnet kategorisk tid, ikke en proporsjonal kalenderakse.
+
+```mermaid
+timeline
+    title Documentation checkpoints
+    section Proposal
+    Baseline : Record alternatives : Identify uncertainties
+    Review : Compare examples
+    section Evidence
+    Pilot : Implement bounded profile : Capture rendering evidence
+    Decision : Accept or revise proposal
+```
+
+## Gantt — foreslått pilot
+
+Et planforslag, ikke faktisk fremdrift eller vedtatt SDP-prosess.
+
+```mermaid
+gantt
+    title Proposed documentation pilot
+    dateFormat YYYY-MM-DD
+    section Design
+    Review scope : done, scope, 2026-09-18, 2d
+    Model examples : active, model, after scope, 3d
+    section Verification
+    Render fixtures : crit, render, after model, 2d
+    Review evidence : review, after render, 1d
+```
+
+## Journey — dokumentgjennomgang
+
+Score beskriver en illustrert opplevelse, ikke systemets korrekthet.
+
+```mermaid
+journey
+    title Review an SDL proposal
+    section Understand
+    Read context : 5 : Author, Reviewer
+    Find unclear boundaries : 2 : Reviewer
+    section Improve
+    Discuss alternatives : 4 : Author, Reviewer
+    Capture decision : 5 : Author
+```

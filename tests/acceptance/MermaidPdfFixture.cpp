@@ -13,7 +13,7 @@ int main(int argc, char** argv) {
     SourceSnapshot source{{7, 3}, "# Mermaid export\n\n", {}, false};
     for (auto name : {"service-map", "layer-delivery", "traceability", "apt-import",
                       "sequence-nested", "measurement-state", "state-regions", "state-choice",
-                      "sdl-class", "apt-requirements", "provenance-er", "c4-context", "c4-container", "c4-component", "architecture-resources", "block-layers"}) {
+                      "sdl-class", "apt-requirements", "provenance-er", "c4-context", "c4-container", "c4-component", "architecture-resources", "block-layers", "packet-encoding", "timeline-decisions", "gantt-pilot", "journey-review"}) {
       std::ifstream file(std::string(XFMD_DIAGRAM_FIXTURES) + "/" + name + ".mmd");
       source.text +=
           "```mermaid\n" + std::string((std::istreambuf_iterator<char>(file)), {}) + "\n```\n\n";
@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
     unsigned diagrams = 0;
     for (const auto& b : model->blocks)
       diagrams += bool(b.diagramScene);
-    CHECK(diagrams == 18);
+    CHECK(diagrams == 22);
     auto frame = renderer.layout(*model, {595, 1, {LayoutMode::Paged, {}}}, metrics);
     for (const auto& run : frame->runs) {
       auto page = std::size_t(run.bounds.y / frame->pages.paper.height);
@@ -79,6 +79,13 @@ int main(int argc, char** argv) {
               expected << f[i] << "\n";
           };
           switch (record.tag) {
+          case SemanticTag::PacketField: emit(2); break;
+          case SemanticTag::PlanningTitle: emit(0); break;
+          case SemanticTag::PlanningSection: emit(1); break;
+          case SemanticTag::TimelineEvent:
+            emit(1); for (unsigned i=3; i<f.size(); ++i) emit(i); break;
+          case SemanticTag::GanttTask:
+          case SemanticTag::JourneyTask: emit(1); break;
           case SemanticTag::C4Element:
             emit(1); emit(3); emit(4); break;
           case SemanticTag::C4Boundary:

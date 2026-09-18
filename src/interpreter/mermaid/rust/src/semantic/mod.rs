@@ -2,6 +2,7 @@
 mod architecture;
 mod block;
 mod c4;
+mod planning;
 mod requirements;
 mod state;
 mod types;
@@ -21,6 +22,10 @@ pub fn parse(source: &str, header: &str) -> Result<Model, String> {
         "C4Context" | "C4Container" | "C4Component" => 6,
         "architecture-beta" => 7,
         "block-beta" => 8,
+        "packet" | "packet-beta" => 9,
+        "timeline" => 10,
+        "gantt" => 11,
+        "journey" => 12,
         _ => return Err(format!("Unsupported diagram family: {header}")),
     };
     let mut d = Diagram {
@@ -40,6 +45,7 @@ pub fn parse(source: &str, header: &str) -> Result<Model, String> {
         6 => c4::parse(&lines, &mut d, header)?,
         7 => architecture::parse(&lines, &mut d)?,
         8 => block::parse(&lines, &mut d)?,
+        9..=12 => planning::parse(&lines, &mut d)?,
         _ => unreachable!(),
     }
     d.validate()?;
@@ -177,3 +183,6 @@ mod tests {
 
 #[cfg(test)]
 mod architecture_tests;
+
+#[cfg(test)]
+mod planning_tests;

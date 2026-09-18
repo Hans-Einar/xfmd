@@ -1,6 +1,8 @@
 //! XFMD-owned domain record schema. Field positions are explicit and versioned.
 #[path = "semantic_architecture.rs"]
 mod architecture;
+#[path = "semantic_planning.rs"]
+mod planning;
 use crate::wire::{Reader, Writer};
 #[derive(Clone, Debug, PartialEq)]
 pub struct Record {
@@ -35,6 +37,9 @@ impl Diagram {
         });
     }
     pub fn validate(&self) -> Result<(), String> {
+        if self.family >= 9 {
+            return planning::validate(self);
+        }
         if self.family >= 6 {
             return architecture::validate(self);
         }

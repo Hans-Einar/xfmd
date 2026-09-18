@@ -45,7 +45,7 @@ void run() {
       std::ofstream(std::string(directory) + "/" + name + ".svg") << scene->svg;
   }
   for (const auto* name : {"measurement-state", "state-regions", "state-choice", "sdl-class",
-                           "apt-requirements", "provenance-er", "c4-context", "c4-container", "c4-component", "architecture-resources", "block-layers"}) {
+                           "apt-requirements", "provenance-er", "c4-context", "c4-container", "c4-component", "architecture-resources", "block-layers", "packet-encoding", "timeline-decisions", "gantt-pilot", "journey-review"}) {
     std::ifstream file(std::string(XFMD_DIAGRAM_FIXTURES) + "/" + name + ".mmd");
     auto parsed = parser.parse({std::string((std::istreambuf_iterator<char>(file)), {}), {}});
     if (!parsed.model)

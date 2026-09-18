@@ -479,3 +479,7 @@ utvider eksisterende diagramporter. `SemanticDiagram.h` eies av contracts;
 P39: `contracts/diagram/rust/src/semantic_architecture.rs` eier C4-, port- og grid-skjema.
 `interpreter/mermaid/rust/src/semantic/{c4,architecture,block}.rs` konsumerer
 profilene; tilsvarende renderer-filer mapper til native typer uten ny parsing.
+
+P40: `semantic_planning.rs` i contracts eier bit-/tids-/score-skjema.
+`semantic/planning.rs` i interpreter og renderer eier henholdsvis profil og
+native mapping. Packet-bitruter ligger i forkens `layout/packet.rs`.

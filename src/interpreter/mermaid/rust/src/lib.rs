@@ -31,6 +31,11 @@ pub fn parse(source: &[u8]) -> Result<Vec<u8>, String> {
         "C4Component",
         "architecture-beta",
         "block-beta",
+        "packet",
+        "packet-beta",
+        "timeline",
+        "gantt",
+        "journey",
     ]
     .contains(&header)
     {

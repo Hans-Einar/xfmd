@@ -5,7 +5,7 @@
 namespace xfmd {
 // Versioned domain records, never a serialized dependency Graph or source code.
 // Field schemas and validation live in contracts/diagram/rust/src/semantic.rs.
-enum class DiagramFamily : std::uint32_t { State = 2, Class, Requirement, EntityRelationship, C4, Architecture, Block };
+enum class DiagramFamily : std::uint32_t { State = 2, Class, Requirement, EntityRelationship, C4, Architecture, Block, Packet, Timeline, Gantt, Journey };
 enum class SemanticTag : std::uint32_t {
   Direction = 0,
   State = 10,
@@ -24,7 +24,9 @@ enum class SemanticTag : std::uint32_t {
   EntityRelation,
   C4View = 50, C4Element, C4Boundary, C4Relation,
   ArchitectureGroup = 60, ArchitectureService, ArchitectureJunction, ArchitectureEdge,
-  BlockColumns = 70, BlockCell, BlockSpace, BlockEdge
+  BlockColumns = 70, BlockCell, BlockSpace, BlockEdge,
+  PacketField = 80, PlanningTitle = 90, PlanningSection, TimelineEvent,
+  GanttTask = 100, JourneyTask = 110
 };
 struct SemanticRecord {
   SemanticTag tag;
