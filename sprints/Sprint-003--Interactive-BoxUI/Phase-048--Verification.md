@@ -20,3 +20,8 @@ M1 er commit 92d0dcf (nummer 195). Release-bygg og alle 65 CTest-tester bestod.
 Lys/mørk preview og PDF er visuelt kontrollert. Installert binær er identisk
 med testet bygg; se [bevis og artefakter](evidence/README.md). M2 dokumenterer
 dette uten nytt programbygg, slik arbeidsmåten tillater for dokumentcommits.
+
+M3: Fasebranchene er publisert og sprint-PR #37 opprettet. Installert XFMD åpnet
+boxui_evidence.md i isolert Xvfb uten stderr eller tidlig avslutning. Testregistreringen
+gir den nye GUI-testen samme avgrensede FcInit-suppresjon som eksisterende native
+tester i sanitizer-CI; applikasjonens egne lekkasjer forblir aktive feil.

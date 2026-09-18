@@ -18,3 +18,5 @@ Alle faser er implementert. Endelig produsent er forkcommit 61a85b6; den forelø
 045-kjernen ble erstattet, ikke lagt oppå den parallelle implementasjonen.
 [Fase 048 og faktisk installasjon](Phase-048--Verification.md) har testresultater
 og skjermbilder. Ingen fysisk IME- eller produksjonsdomeneakseptanse hevdes.
+
+Samlet leveranse: [PR #37](https://github.com/Hans-Einar/xfmd/pull/37).
