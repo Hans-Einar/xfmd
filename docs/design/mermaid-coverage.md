@@ -1,6 +1,6 @@
 # Mermaid-dekning — revisjon 1, P36
 
-Dato: 2026-09-18. Status: implementasjonsgrunnlag; testbevis publiseres separat.
+Dato: 2026-09-18. Status: Sequence 1 implementert; [faktiske testbevis](../evidence/P36.md).
 Upstream HEAD kontrollert med `git ls-remote`: `3726ccbffe0e8032361eb9668694b24f77858060`.
 Undersøkt baseline-pin: `3eb91bc78d3efee6fa8e9b746a1e99606fb2f1e7`.
 P36-pin: `1e3d2aabfe2a48e011ce067bd8fa000d9a44e924` (actor-symbol, målte

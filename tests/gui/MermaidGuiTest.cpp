@@ -104,6 +104,16 @@ void run() {
   app.execute(CommandRouter::A4);
   pump(app);
   CHECK(app.host->interactive() && app.host->frame()->pages.slices.size() == 1);
+  const auto unchangedToken = app.session.view().token;
+  for (auto command : {CommandRouter::ActualSize, CommandRouter::FitWidth}) {
+    app.execute(command);
+    pump(app);
+    CHECK(app.host->interactive() && app.session.view().token == unchangedToken);
+    unsigned visibleDiagrams = 0;
+    for (const auto& run : app.host->frame()->runs)
+      visibleDiagrams += dynamic_cast<const DiagramScene*>(run.visual.get()) != nullptr;
+    CHECK(visibleDiagrams == 2);
+  }
   app.edits.applyEdit({0, app.session.snapshot().text.size(),
                        "```mermaid\nflowchart LR\nA-->B\nclick A bad()\n```"});
   for (int i = 0; i < 4; ++i)

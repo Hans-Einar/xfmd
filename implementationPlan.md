@@ -463,3 +463,6 @@ matrise, semantiske grenser og roadmap. M2: SequenceModel, versjonert wire,
 streng Sequence 1-profil, separat layoutdispatch og SVG. M3: APT-fixture,
 negative syntakstester, mixed Markdown, preview/PDF og dokumentert evidens.
 Videre sekvensutvidelser og typeprioritet følger [matrisen](docs/design/mermaid-coverage.md).
+
+P36: M1 `2f94be1`, M2 `39a6a14`; M3 samler [sluttbevis](docs/evidence/P36.md).
+Neste inkrement er Sequence 2 (async og nested scope), deretter prioriterte typer.

@@ -1,0 +1,14 @@
+{
+  "traceability": {
+    "identical_to_P35": true,
+    "sha256": "e57033963ef8ed85e57d3d57676321bcea2c415c9f195c3ffcc8d01700dad69f"
+  },
+  "service-map": {
+    "identical_to_P35": true,
+    "sha256": "dc6986db9053c7c5833188182dca2ccd101c8f48e7cb517da899045721346d4c"
+  },
+  "layer-delivery": {
+    "identical_to_P35": true,
+    "sha256": "30c3c8c50a870b7d19fc4fa1a4793afe1047361629eb94a8cb3c7cdd3bc833bb"
+  }
+}

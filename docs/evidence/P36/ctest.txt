@@ -1,0 +1,41 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd/build
+Test project /home/warloc/git/xfmd/build
+      Start  1: PortContractTest
+ 1/16 Test  #1: PortContractTest .................   Passed    0.00 sec
+      Start  3: InterpreterTest
+ 2/16 Test  #3: InterpreterTest ..................   Passed    0.00 sec
+      Start  4: RendererTest
+ 3/16 Test  #4: RendererTest .....................   Passed    0.00 sec
+      Start 12: BlueprintStructure
+ 4/16 Test #12: BlueprintStructure ...............   Passed    0.71 sec
+      Start 13: LayerBoundaries
+ 5/16 Test #13: LayerBoundaries ..................   Passed    0.06 sec
+      Start 14: MermaidGuiTest
+ 6/16 Test #14: MermaidGuiTest ...................   Passed   10.49 sec
+      Start 35: BlueprintSymbols
+ 7/16 Test #35: BlueprintSymbols .................   Passed    0.11 sec
+      Start 39: PageLayoutTest
+ 8/16 Test #39: PageLayoutTest ...................   Passed    0.06 sec
+      Start 42: PdfExportTest
+ 9/16 Test #42: PdfExportTest ....................   Passed    0.06 sec
+      Start 53: DiagramLayoutTest
+10/16 Test #53: DiagramLayoutTest ................   Passed    1.02 sec
+      Start 54: MermaidRustTests
+11/16 Test #54: MermaidRustTests .................   Passed   64.38 sec
+      Start 55: DiagramPreparationTest
+12/16 Test #55: DiagramPreparationTest ...........   Passed    0.08 sec
+      Start 56: DiagramReadingTest
+13/16 Test #56: DiagramReadingTest ...............   Passed    0.93 sec
+      Start 57: MermaidPdfTest
+14/16 Test #57: MermaidPdfTest ...................   Passed    0.63 sec
+      Start 58: DiagramWorkerTest
+15/16 Test #58: DiagramWorkerTest ................   Passed    0.01 sec
+      Start 59: MermaidDependencies
+16/16 Test #59: MermaidDependencies ..............   Passed    0.17 sec
+
+100% tests passed, 0 tests failed out of 16
+
+Label Time Summary:
+GUI    =  10.49 sec*proc (1 test)
+
+Total Test time (real) =  78.73 sec

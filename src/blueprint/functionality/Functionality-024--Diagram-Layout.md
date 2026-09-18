@@ -142,3 +142,5 @@ P35-verifikasjon: [SVG-sammenligning og testbevis](../../../docs/evidence/P35.md
 
 P36: [Typed dekning og Sequence 1](../../../docs/design/mermaid-coverage.md)
 utvider samme porter. Sequence 1 er Implemented; verifikasjon dokumenteres separat.
+
+P36: [Faktiske kontroller og grenser](../../../docs/evidence/P36.md).

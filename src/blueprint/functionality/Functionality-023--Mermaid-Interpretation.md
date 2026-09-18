@@ -59,3 +59,5 @@ Akseptanse: AT-059, AT-061, AT-062, AT-063, AT-064.
 
 P36: [Typed dekning og Sequence 1](../../../docs/design/mermaid-coverage.md)
 utvider samme porter. Sequence 1 er Implemented; verifikasjon dokumenteres separat.
+
+P36: [Faktiske kontroller og grenser](../../../docs/evidence/P36.md).
