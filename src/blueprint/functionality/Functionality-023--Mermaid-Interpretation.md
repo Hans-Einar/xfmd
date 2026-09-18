@@ -73,3 +73,8 @@ P38 Implemented: `semantic::parse` i `src/interpreter/mermaid/rust/src/semantic/
 produserer egne state/class/requirement/ER-rekorder. `Diagram::validate` i
 `src/contracts/diagram/rust/src/semantic.rs` kontrollerer skjema og referanser.
 [Kontraktbeslutning](../../../docs/design/mermaid-semantic-model.md).
+
+P39 Planned: C4/Architecture/Block utvider SemanticDiagram med egne elementer,
+grenser, portretninger og grid. Parserprofiler og native mapping ligger i
+`semantic/{c4,architecture,block}.rs`; felles SVG/PDF-port gjenbrukes.
+Se [profil og kontrakt](../../../docs/design/mermaid-architecture-authoring.md).
