@@ -1,4 +1,6 @@
 #include "DiagramServices.h"
+#include "interpreter/boxui/BoxUiInterpreter.h"
+#include "application/boxui/BoxUiPreparation.h"
 #include "application/diagrams/DiagramPreparation.h"
 #include "application/media/EmbeddedVisuals.h"
 #include "interpreter/CmarkInterpreter.h"
@@ -13,7 +15,8 @@ struct WorkerResources {
 };
 } // namespace
 std::unique_ptr<IInterpreter> DiagramServices::interpreter() {
-  return std::make_unique<CmarkInterpreter>(std::make_shared<MermaidInterpreter>());
+  auto diagrams=std::make_shared<MermaidInterpreter>();
+  return std::make_unique<CmarkInterpreter>(diagrams, std::make_shared<BoxUiInterpreter>(diagrams));
 }
 PrepareDocument DiagramServices::preview() {
   return [resources =
@@ -21,8 +24,9 @@ PrepareDocument DiagramServices::preview() {
                                                   const std::function<bool()>& cancelled) mutable {
     if (!resources)
       resources = std::make_shared<WorkerResources>();
-    return resources->diagrams.prepare(EmbeddedVisuals::prepare(std::move(model), source),
+    auto prepared = resources->diagrams.prepare(EmbeddedVisuals::prepare(std::move(model), source),
                                        resources->metrics, cancelled);
+    return BoxUiPreparation::prepare(prepared,resources->metrics,resources->layout,{},cancelled);
   };
 }
 ParseResult DiagramServices::prepare(ParseResult model, const SourceSnapshot& source,
@@ -30,6 +34,7 @@ ParseResult DiagramServices::prepare(ParseResult model, const SourceSnapshot& so
                                      const std::function<bool()>& cancelled) {
   MermaidDiagramLayout layout;
   DiagramPreparation diagrams(layout);
-  return diagrams.prepare(EmbeddedVisuals::prepare(std::move(model), source), metrics, cancelled);
+  auto prepared=diagrams.prepare(EmbeddedVisuals::prepare(std::move(model), source), metrics, cancelled);
+  return BoxUiPreparation::prepare(prepared,metrics,layout,{},cancelled);
 }
 } // namespace xfmd

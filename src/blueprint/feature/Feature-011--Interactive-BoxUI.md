@@ -39,8 +39,8 @@ PDF bruker aksepterte verdier og kjører ingen input eller scenario.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | Cmark ModelBuilder | `BoxUiBlockBuilder::build` | `src/interpreter/boxui/BoxUiBlockBuilder.cpp` | fence → typed modell | lokal diagnostikk | Planned |
-| 2 | preview worker | `BoxUiLayout::prepare` | `src/renderer/boxui/BoxUiLayout.cpp` | modell/snapshot → frame | cancel/no-space | Planned |
+| 1 | Cmark ModelBuilder | `BoxUiBlockBuilder::build` | `src/interpreter/boxui/BoxUiBlockBuilder.cpp` | fence → typed modell | lokal diagnostikk | Implemented |
+| 2 | preview worker | `BoxUiLayout::prepare` | `src/renderer/boxui/BoxUiLayout.cpp` | modell/snapshot → frame | cancel/no-space | Implemented |
 | 3 | GUI completion | `BoxUiCoordinator::publish` | `src/application/boxui/BoxUiCoordinator.cpp` | aktuell frame → atomisk bytte | stale forkastes | Planned |
 | 4 | host input | `BoxUiCoordinator::dispatch` | `src/application/boxui/BoxUiCoordinator.cpp` | event → typed intent | gammel binding/busy avvises | Planned |
 | 5 | framebytte | `FoxBoxUiOverlay::reconcile` | `src/application/adapters/FoxBoxUiOverlay.cpp` | identitet → native felt/draft | inkompatibel state annulleres | Planned |

@@ -34,17 +34,23 @@ include(cmake/BuildIdentity.cmake)
 pkg_check_modules(PIXBUF REQUIRED IMPORTED_TARGET gdk-pixbuf-2.0)
 add_library(xfmd_contracts INTERFACE)
 target_include_directories(xfmd_contracts INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+add_library(xfmd_boxui_codec src/contracts/boxui/private/BoxUiCodec.cpp)
+target_include_directories(xfmd_boxui_codec SYSTEM PUBLIC "${CMAKE_SOURCE_DIR}/third_party")
+target_link_libraries(xfmd_boxui_codec PUBLIC xfmd_contracts PRIVATE xfmd_rust)
+install(FILES third_party/nlohmann/LICENSE.MIT DESTINATION ${CMAKE_INSTALL_DOCDIR} RENAME nlohmann-json-LICENSE)
 add_library(xfmd_interpreter
+  src/interpreter/boxui/BoxUiInterpreter.cpp src/interpreter/boxui/BoxUiBlockBuilder.cpp
   src/interpreter/mermaid/MermaidBlockBuilder.cpp src/interpreter/mermaid/MermaidInterpreter.cpp src/interpreter/MathSyntax.cpp src/interpreter/CmarkInterpreter.cpp src/interpreter/ModelBuilder.cpp
   src/interpreter/SourceMapBuilder.cpp src/interpreter/TableModelBuilder.cpp)
-target_link_libraries(xfmd_interpreter PUBLIC xfmd_contracts PRIVATE xfmd_rust ${CMARK_EXTENSIONS} ${CMARK_CORE})
+target_link_libraries(xfmd_interpreter PUBLIC xfmd_contracts PRIVATE xfmd_rust xfmd_boxui_codec ${CMARK_EXTENSIONS} ${CMARK_CORE})
 target_include_directories(xfmd_interpreter PRIVATE ${CMARK_INCLUDE_DIRS})
 add_library(xfmd_renderer
+  src/renderer/boxui/BoxUiLayout.cpp src/renderer/boxui/BoxUiPlacement.cpp
   src/renderer/diagram/DiagramPlacement.cpp src/renderer/diagram/DiagramTextLayout.cpp src/renderer/diagram/MermaidDiagramLayout.cpp
   src/renderer/MarkdownRenderer.cpp src/renderer/BlockLayout.cpp src/renderer/TableLayout.cpp
   src/renderer/PageBreaker.cpp src/renderer/PageComposer.cpp src/renderer/PageAnchorIndex.cpp
   src/renderer/InlineLayout.cpp src/renderer/HitTester.cpp src/renderer/LinkMarker.cpp)
-target_link_libraries(xfmd_renderer PUBLIC xfmd_contracts PRIVATE xfmd_rust)
+target_link_libraries(xfmd_renderer PUBLIC xfmd_contracts PRIVATE xfmd_rust xfmd_boxui_codec)
 add_library(xfmd_document
   src/application/io/InputPolicy.cpp src/application/io/LocalFileStore.cpp
   src/application/document/DocumentSession.cpp src/application/document/DocumentCoordinator.cpp
@@ -76,7 +82,7 @@ add_library(xfmd_typography
   src/application/adapters/FontCatalog.cpp src/application/adapters/SharedTextMetrics.cpp
   src/application/adapters/SvgDiagramCache.cpp src/application/adapters/DiagramPainter.cpp src/application/adapters/DisplayListPainter.cpp src/application/preferences/ReadingColors.cpp)
 target_link_libraries(xfmd_typography PUBLIC xfmd_contracts PkgConfig::PANGO PRIVATE PkgConfig::RSVG)
-add_library(xfmd_diagrams src/application/diagrams/DiagramCache.cpp src/application/diagrams/DiagramPreparation.cpp src/application/composition/DiagramServices.cpp)
+add_library(xfmd_diagrams src/application/boxui/BoxUiPreparation.cpp src/application/diagrams/DiagramCache.cpp src/application/diagrams/DiagramPreparation.cpp src/application/composition/DiagramServices.cpp)
 target_link_libraries(xfmd_diagrams PUBLIC xfmd_typography xfmd_media xfmd_renderer xfmd_interpreter)
 add_library(xfmd_export src/application/export/ExportCoordinator.cpp
   src/application/export/ExportPipeline.cpp src/application/io/PdfFilePublisher.cpp

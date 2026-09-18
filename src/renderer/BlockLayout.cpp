@@ -1,4 +1,5 @@
 #include "BlockLayout.h"
+#include "boxui/BoxUiPlacement.h"
 #include "InlineLayout.h"
 #include "TableLayout.h"
 #include "diagram/DiagramPlacement.h"
@@ -25,7 +26,9 @@ void BlockLayout::layout(const SemanticDocument& model, const LayoutRequest& req
     double left = 24 + block.indent * 24 + block.quoteDepth * 16;
     double width = std::max(40.0, request.width - left - 24);
     double start = y;
-    if (block.kind == BlockKind::Diagram && block.diagramScene) {
+    if (block.kind == BlockKind::BoxUi && block.boxUiFrame) {
+      y += BoxUiPlacement::append(block,left,y,width,request,metrics,frame);
+    } else if (block.kind == BlockKind::Diagram && block.diagramScene) {
       y += DiagramPlacement::append(block,left,y,width,request,metrics,frame);
     } else if (block.kind == BlockKind::Table && block.table) {
       y += TableLayout::layout(*block.table, left, y, width, metrics, frame, request);

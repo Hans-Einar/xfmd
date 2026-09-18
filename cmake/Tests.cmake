@@ -172,3 +172,6 @@ set_tests_properties(DiagramWorkerTest PROPERTIES TIMEOUT 10)
 
 add_test(NAME BuildIdentityTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/tests/build/BuildIdentityTest.py)
 add_test(NAME BuildVersionTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/tools/check_build_version.py $<TARGET_FILE:xfmd> ${XFMD_IDENTITY_DIR}/xfmd-build.json)
+
+xfmd_test(BoxUiCoreTest tests/application/BoxUiCoreTest.cpp xfmd_diagrams)
+target_compile_definitions(BoxUiCoreTest PRIVATE XFMD_BOXUI_FIXTURE="${CMAKE_SOURCE_DIR}/tests/fixtures/boxui/activity.json")

@@ -319,6 +319,7 @@ version = "0.1.0"
 name = "xfmd-diagram-layout"
 version = "0.1.0"
 dependencies = [
+ "serde_json",
  "mermaid-rs-renderer",
  "xfmd-diagram-contracts",
 ]
@@ -327,6 +328,7 @@ dependencies = [
 name = "xfmd-mermaid-ffi"
 version = "0.1.0"
 dependencies = [
+ "serde_json",
  "xfmd-diagram-contracts",
  "xfmd-diagram-layout",
  "xfmd-mermaid-interpreter",
@@ -336,6 +338,7 @@ dependencies = [
 name = "xfmd-mermaid-interpreter"
 version = "0.1.0"
 dependencies = [
+ "serde_json",
  "mermaid-rs-renderer",
  "xfmd-diagram-contracts",
 ]
