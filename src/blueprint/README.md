@@ -172,5 +172,14 @@ P22: UR-032 → FUNC-010/014; UR-033 → FUNC-010; UR-034 → FUNC-005. AT-052�
 
 | Krav | Designobjekter | Akseptanse | Scope |
 | --- | --- | --- | --- |
-| UR-043 | [FTR-011](feature/Feature-011--Interactive-BoxUI.md) | AT-068 | Future |
-| SR-026 | [FTR-011](feature/Feature-011--Interactive-BoxUI.md) | AT-069 | Future |
+| UR-043 | [FTR-011](feature/Feature-011--Interactive-BoxUI.md), [FUNC-027](functionality/Functionality-027--BoxUI-Interpretation.md), [FUNC-028](functionality/Functionality-028--BoxUI-Layout.md), [FUNC-029](functionality/Functionality-029--BoxUI-Session.md), [FUNC-030](functionality/Functionality-030--BoxUI-Host.md) | AT-068 | Future |
+| SR-026 | [FTR-011](feature/Feature-011--Interactive-BoxUI.md), [FUNC-027](functionality/Functionality-027--BoxUI-Interpretation.md), [FUNC-028](functionality/Functionality-028--BoxUI-Layout.md), [FUNC-029](functionality/Functionality-029--BoxUI-Session.md), [FUNC-030](functionality/Functionality-030--BoxUI-Host.md) | AT-069 | Future |
+
+## BoxUI-eiere
+
+| ID | Eier | Status |
+| --- | --- | --- |
+| [FUNC-027](functionality/Functionality-027--BoxUI-Interpretation.md) | interpreter | Ready |
+| [FUNC-028](functionality/Functionality-028--BoxUI-Layout.md) | renderer | Ready |
+| [FUNC-029](functionality/Functionality-029--BoxUI-Session.md) | application | Ready |
+| [FUNC-030](functionality/Functionality-030--BoxUI-Host.md) | application | Ready |

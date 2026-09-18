@@ -4,10 +4,10 @@ kind: Feature
 audience: User
 role: Workflow
 owner: application
-status: Proposed
-scope: Future
+status: Ready
+scope: FirstRelease
 requirements: UR-043, SR-026
-uses: FUNC-003, FUNC-004, FUNC-005, FUNC-007, FUNC-016, FUNC-018, FUNC-021, FUNC-025
+uses: FUNC-027, FUNC-028, FUNC-029, FUNC-030, FUNC-003, FUNC-004, FUNC-005, FUNC-007, FUNC-016, FUNC-018, FUNC-021, FUNC-025
 ---
 
 # Feature-011: Interaktiv BoxUI i Markdown
@@ -16,7 +16,7 @@ uses: FUNC-003, FUNC-004, FUNC-005, FUNC-007, FUNC-016, FUNC-018, FUNC-021, FUNC
 
 Native XFMD-preview er første interaktive vert for BoxUI. Ingen HTML-leveranse.
 Kilde, widgets og syntetisk domene kjøres via separate kontrakter; ingen automatisk
-kodekjøring fra Markdown. Prosjektet avventer brukerens designgjennomgang.
+kodekjøring fra Markdown. Brukeren har godkjent implementasjonen.
 
 ## 2. Krav og akseptanse
 
@@ -58,5 +58,5 @@ implementasjon, GUI/PDF-akseptanse og C-ABI-livstid er ikke testet ennå.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Proposed/Future. Stopper ved G-PARALLEL-REVIEW. Native IME, overlay-clipping og
+Ready/FirstRelease. G-PARALLEL-REVIEW er godkjent. Native IME, overlay-clipping og
 endelig forbrukerprofil skal verifiseres, ikke utledes fra et gyldig JSON-skjema.

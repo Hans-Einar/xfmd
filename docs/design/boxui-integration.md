@@ -13,7 +13,7 @@ Forkens SDP-prosjekt eier den delte kontrakten `BX-HOST/0.1-draft1`, under
 `Hans-Einar/mermaid-rs-renderer`, branch `feature/boxui-extension`.
 Lokalt finnes den i søster-worktree `../mermaid-rs-renderer-boxui/`.
 Eksakt godkjent kontraktcommit og SHA-256 skal festes her ved parallellstart;
-dagens draft er et reviewgrunnlag og gir ingen automatisk implementasjonstillatelse.
+kontrakten er godkjent som implementasjonsgrunnlag av brukeren.
 
 Les forkens SDP-12-01 for åpne spørsmål, SDP-08-02 for gate og SDP-09-03 for
 akseptansekatalog. XFMD beholder egne krav/blueprints/sprinter; ingen SDP-migrasjon.
@@ -62,8 +62,7 @@ kontrakt-/hostkontroll. JSON-skjema er ikke test av visuell kvalitet eller IME.
 
 ## Stoppunkt
 
-G-PARALLEL-REVIEW: kontrakter/eksempler/eierskap/feilveier foreligger. Brukeren tar
-recap og en designiterasjon før start. Før X1 må shared revision låses, berørte
+G-PARALLEL-REVIEW er passert: brukeren har godkjent grunnlaget uten ny iterasjon. Før X1 må shared revision låses, berørte
 functionality-blueprints konkretiseres og fasebrancher opprettes. Senere faser
 får egne brancher/milestone-commits; én samlet PR for sprinten og bygg ved faseslutt.
 
@@ -71,7 +70,7 @@ får egne brancher/milestone-commits; én samlet PR for sprinten og bygg ved fas
 
 Forkens designcommit: `54aee4e685a4454f2233060341336446d58054a9`.
 Kontraktfilens SHA-256: `9eb0b629287349e4e2f849d0d3ab9f61b1e52d8fce64de1917e4c2b26d8a1a35`.
-Dette identifiserer draften for recap, ikke en godkjent implementasjonspin.
+Dette identifiserer det godkjente kontraktgrunnlaget; runtime får egen konkret fork-pin.
 Kontraktfil, seks JSON-skjemaer og fixtures hentes fra samme commit ved X1.
 
 Innebygde diagrammer tolkes av interpreter før arbeid i renderer. Normalisert
