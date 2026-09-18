@@ -38,8 +38,14 @@ unsafe fn call(
     limit: u64,
     op: impl FnOnce(&[u8]) -> Result<Vec<u8>, String>,
 ) -> ResultBuffer {
-    if abi != 1 || size > limit || (size > 0 && data.is_null()) {
-        return failure(1, "Invalid BoxUI ABI/input");
+    if abi != 1 {
+        return failure(2, "Unsupported BoxUI ABI version");
+    }
+    if size > limit {
+        return failure(3, "BoxUI input byte budget exceeded");
+    }
+    if size > 0 && data.is_null() {
+        return failure(1, "Invalid BoxUI input pointer");
     }
     let bytes = if size == 0 {
         &[]

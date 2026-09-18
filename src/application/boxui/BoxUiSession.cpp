@@ -1,4 +1,5 @@
 #include "BoxUiSession.h"
+#include "application/io/InputPolicy.h"
 #include <algorithm>
 #include <cmath>
 namespace xfmd {
@@ -118,6 +119,11 @@ BoxUiCommandResult BoxUiSession::dispatch(const BoxUiIntent& intent) {
           std::count_if(text->begin(), text->end(),
                         [](unsigned char c) { return (c & 0xc0) != 0x80; }) > 4096)
         return reject("Input must be at most 4096 Unicode scalars");
+      try {
+        InputPolicy::validate(*text);
+      } catch (const std::exception& e) {
+        return reject(e.what());
+      }
       auto value = snap->second.values.find(node->valueBinding.value_or(""));
       if (value == snap->second.values.end() ||
           intent.expectedValueRevision != value->second.revision)

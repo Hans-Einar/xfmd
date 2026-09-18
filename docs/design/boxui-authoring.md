@@ -32,3 +32,17 @@ PDF bruker et frosset snapshot med aksepterte verdier, uten utkast eller hendels
 Tekst inne i SVG er foreløpig ikke merkbar som Markdown-tekst; native input har
 vanlig tekstmerking og clipboard. Begrensninger og faktisk testbevis registreres
 i sprintens siste fase, ikke utledes fra dette forfattereksemplet.
+
+## Plassering og prototypebindinger
+
+`size` virker langs foreldrens hovedakse. Sett `grow: 0` på en handlingsrad
+for å beholde kompakt høyde, og `grow: 1` på knappene for å dele radens bredde.
+Diagram-panelet kan få `grow: 1` for å bruke resten av høyden. XFMD tilbyr en
+målt, responsiv viewport med minimum 320 × 640 logiske SVG-piksler; for lite
+plass gir lokal diagnose, ikke skjult tekst. Hele blokken tilpasses A4 ved eksport.
+
+Den syntetiske deltakeren tilbyr string-verdiene `context`, `activity-id`, `status`,
+number-verdiene `measurement`, `progress`, string-command `set-context` og
+none-commandene `suspend`, `resume`, `mark-stale`, `reset-source`, `observe`.
+Andre bindinger forblir unbound. Suspend/resume beholder A1/progress=12; reset-source
+invaliderer målingen og en gammel kildesesjon kan ikke oppdatere den nye.

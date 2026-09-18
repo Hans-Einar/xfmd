@@ -335,12 +335,13 @@ avgrenset, men romme minst ett eksempel per implementert diagramtype.
 | UR-042 | CLI, vindustittel og høyrejustert tekst i nederste statuslinje viser major.minor, branch (PR-nummer på main når kjent) og numerisk commitnummer. | AT-066: samme innbakte identitet i CLI/vindu/statuslinje; dirty og ukjent kilde markeres. |
 | SR-025 | Identiteten beregnes fra full Git-historikk uten nettverk eller en konfliktskapende tellerfil. Et eksplisitt bygg oppdaterer metadata også uten ny CMake-konfigurering; samme commit gir stabil identitet. | AT-067: lineære commits, branches, merge, main etter PR, detached, dirty, shallow og kildearkiv; uendret metadata omskrives ikke. |
 
-## Planlagt BoxUI-integrasjon (Proposed / Future)
+## BoxUI-integrasjon (Implemented)
 
 | ID | Krav | Akseptanse |
 | --- | --- | --- |
 | UR-043 | XFMD skal vise og la brukeren betjene BoxUI-widgeter i blandet Markdown med native FOX-input, stabile kontrollidentiteter og eksplisitt simulert/unbound status. Ingen HTML-side eller nettleser er leveransen. | AT-068: mouse/keyboard, Unicode/clipboard, beholdt utkast/fokus, disabled/pending, blandet dokument, zoom/scroll/Wrap/A4 og PDF-snapshot uten interaksjon. |
 | SR-026 | BoxUI bruker separat typed parse/layout/host-kontrakt med versjonert frame- og bindingidentitet, kontrollert eierskap, begrenset arbeid og eksplisitt gammel-input-avvisning. Renderer og XFMD kan implementeres separat etter review av felles kontrakt. | AT-069: mock/real-kontraktkontroll, stale frame/result, duplicate command, feil under framebytte, livstid/ressursgrenser, lagkontroll og uendrede Mermaid-profiler. |
 
-Omfang og stoppgate: [BoxUI-prosjektet](docs/design/boxui-integration.md).
-Kravene er ikke implementert; fase 044 gjelder oppdragsregistrering/design.
+Omfang og kontrakt: [BoxUI-prosjektet](docs/design/boxui-integration.md).
+Implementasjonen leveres i Sprint 003. AT-068/AT-069 har avgrensede automatiserte
+bevis; fysisk IME og ekstern transport er ikke verifisert.

@@ -37,7 +37,8 @@ Utkast er ikke aksepterte verdier; PDF bruker bare frosset akseptert snapshot.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | BoxUI-kjeden | `BoxUiLayout::prepare` | `src/renderer/boxui/BoxUiLayout.cpp` | modell, snapshot og child SVG → statisk/interaktiv frame | avviser ugyldige/gamle data | Implemented |
+| 1 | preview/PDF | `BoxUiPreparation::prepare` | `src/application/boxui/BoxUiPreparation.cpp` | snapshot og typed barn → forberedte SVG-barn | budsjett/cancel og lokal fallback | Implemented |
+| 2 | BoxUiPreparation | `BoxUiLayout::prepare` | `src/renderer/boxui/BoxUiLayout.cpp` | tekstcallback og prepare-ABI → to SVG-varianter/kontrollkart | ugyldig identitet/geometri avvises | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -46,8 +47,8 @@ Ingen direkte kall til andre features sine interne implementasjoner.
 
 ## 7. Verifikasjon
 
-Fase 045–048 registrerer parser-, layout-, livstids-, GUI- og PDF-bevis.
-Ingen runtime-verifikasjon hevdes før testene er kjørt.
+BoxUiCoreTest, BoxUiSessionTest, BoxUiGuiTest og BoxUiPdfTest gir avgrenset
+bevis. Kjøringer og kjente begrensninger registreres i sprint 003 fase 048.
 
 ## 8. Status, risiko og endringskonsekvenser
 

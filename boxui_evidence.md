@@ -80,16 +80,25 @@ boxui 0.1
             "kind": "button",
             "version": 1,
             "label": "Suspend",
-            "commandBinding": "suspend"
+            "commandBinding": "suspend",
+            "size": {
+              "grow": 1
+            }
           },
           {
             "id": "continue",
             "kind": "button",
             "version": 1,
             "label": "Resume",
-            "commandBinding": "resume"
+            "commandBinding": "resume",
+            "size": {
+              "grow": 1
+            }
           }
-        ]
+        ],
+        "size": {
+          "grow": 0
+        }
       },
       {
         "id": "state-view",
@@ -106,7 +115,6 @@ boxui 0.1
     ]
   }
 }
-
 ```
 
 ## Vanlig Markdown beholdes

@@ -1,105 +1,84 @@
-# BoxUI i Markdown — separat XFMD-prosjekt
+# Interaktiv BoxUI i XFMD
 
-Status: Implementasjon autorisert av brukeren; felles kontraktgrunnlag godkjent. Opprettet 2026-09-18.
-Brukeren har godkjent oppstart og hele integrasjonsløpet i én økt.
-Arbeidet følger fasebrancher, milestone-commits og ett planlagt bygg per fase.
+Implementasjon autorisert 2026-09-18. XFMD er native FOX-vert, uten HTML,
+nettleser, Node eller dokumentstyrt kodekjøring. Krav: UR-043 / SR-026;
+feature FTR-011, functionality FUNC-027–030. Se [eksemplet](../../boxui_evidence.md)
+og [forfatterveiledningen](boxui-authoring.md).
 
-## Formål og felles grunnlag
+## Produsent og kontrakt
 
-XFMD skal være første interaktive vert for BoxUI-widgeter i `.md`-filer.
-Dette er en native FOX-integrasjon, ikke en HTML-side, CSS-motor eller nettleser.
-Forkens SDP-prosjekt eier den delte kontrakten `BX-HOST/0.1-draft1`, under
-`SDP/06--Container-Design/06-02--XFMD-Host-Contract.md` på
-`Hans-Einar/mermaid-rs-renderer`, branch `feature/boxui-extension`.
-Lokalt finnes den i søster-worktree `../mermaid-rs-renderer-boxui/`.
-Eksakt godkjent kontraktcommit og SHA-256 skal festes her ved parallellstart;
-kontrakten er godkjent som implementasjonsgrunnlag av brukeren.
+Felles grense er `BX-HOST/0.1-draft1`, profile `boxui/0.1`, med separate
+parse- og prepare-operasjoner. `cmake/mermaid-source.json` låser biblioteket
+og arkivhashen. Integrasjonspinnen er `61a85b670dc1755b52c0fdf82c39497d0fe39512`
+fra forkens `phase/boxui-046-implementation`. Den foreløpige, overlappende
+`phase/boxui-045-core` inngår ikke i leveransen.
 
-Les forkens SDP-12-01 for åpne spørsmål, SDP-08-02 for gate og SDP-09-03 for
-akseptansekatalog. XFMD beholder egne krav/blueprints/sprinter; ingen SDP-migrasjon.
+Godkjent designgrunnlag er forkcommit `54aee4e685a4454f2233060341336446d58054a9`.
+Kontraktfilens daværende SHA-256 var
+`9eb0b629287349e4e2f849d0d3ab9f61b1e52d8fce64de1917e4c2b26d8a1a35`.
+Produsentens SDP-08-03 angir realisert API og presiseringer; de seks draft1-skjemaene
+ble beholdt. XFMD får ingen SDP-mappe eller autoritet til å vedta SDL-begreper.
 
-## Ansvar og planlagte kildefiler
+## Faktiske eiere og kallretning
 
-| Eier | Planlagt rolle / plassering | Gjenbruk |
-| --- | --- | --- |
-| contracts | `boxui/BoxUiModel.h`, `BoxUiFrame.h`, `IBoxUiInterpreter.h`, `IBoxUiLayout.h`, `BoxUiAbi.h` | FOX-/Rust-frie verdier, separate parse/layout-porter |
-| interpreter | `boxui/BoxUiBlockBuilder.cpp`, `BoxUiInterpreter.cpp` | Cmark ModelBuilder; nytt BoxUI-blokkvalg og parserinjeksjon, vanlig Mermaid beholdes |
-| renderer | `boxui/BoxUiLayout.cpp`, `BoxUiPlacement.cpp` | tekstmål, dokumentplassering/transform, SVG-run og hit-geometri |
-| application | `boxui/BoxUiCoordinator.cpp` | PreviewCoordinator/worker: framepublisering, bindingsrevisjon og currentness |
-| application | `boxui/BoxUiSession.cpp`, `BoxUiCommandLedger.cpp` | per-blokk identitet, kontrollert livstid, deduplisering og køgrenser |
-| application | `adapters/FoxBoxUiOverlay.cpp`, `FoxBoxUiInput.cpp` | native FXTextField, fokus, clipboard, clipping; widgetinput før tekstvalg/lenker |
-| application | `boxui/SyntheticActivity.cpp` | eksplisitt lokal simuleringsmodus og typed port; ingen domeneautoritet i renderer |
-| application/composition | `BoxUiServices.cpp` | registrer parser, layout, child-diagramadapter og host; eksport bruker frosset snapshot |
+| Eier | Filer / ansvar |
+| --- | --- |
+| contracts/boxui | BoxUiModel, BoxUiFrame, IBoxUiInterpreter, IBoxUiLayout, BoxUiAbi; FOX-/Rust-/JSON-frie offentlige verdier |
+| contracts/boxui/private | BoxUiCodec: skjult wire-serialisering og resultateierskap; nlohmann/json 3.12.0, MIT, vendret uendret |
+| interpreter/boxui | BoxUiBlockBuilder velger gjerde; BoxUiInterpreter bruker parse-ABI og tolker childSources gjennom IDiagramInterpreter |
+| renderer/boxui | BoxUiLayout bruker prepare-ABI med normalisert modell, snapshots og ferdige child SVG-er; BoxUiPlacement plasserer én visual-run |
+| application/boxui | BoxUiPreparation forbereder typed diagram-barn og BoxUI på arbeider; BoxUiSession eier identitet, state og ledger; SyntheticActivity er lokal testdeltaker |
+| application/adapters | FoxBoxUiOverlay eier native felt/knapper; FoxBoxUiInput håndterer Enter/Escape og press/release; eksisterende DiagramPainter/librsvg tegner SVG |
+| application/composition | DiagramServices registrerer parseren og prepareringskjeden; mermaid/src/boxui.rs eier separate C-innganger og panic-/buffergrensen |
 
-Alle navn er Planned. Rust-bro kan bygges ved eksisterende Rust-integrasjon, men
-BoxUI får egne C-ABI-innganger og wireversjon. Ikke legg kildeparsing i renderer,
-FOX i interpreter, domene-/scenario-policy i widgets eller mer koordinering i
-XfmdWindow. Funksjonalitetseiere skal få egne blueprints før kode begynner.
+Biblioteket eksponerer `parse_boxui_bytes`, `decode_prepare_json` og
+`prepare_boxui_cancellable`. XFMD gjenimplementerer ikke parsing eller plasseringsmotor.
+SharedTextMetrics leverer bredde, høyde og baseline i SVG-piksler. Innebygde
+flowchart-, sequence- og state-diagrammer tolkes før layout; renderer får aldri
+Mermaid-kilde som skjult input. Child-feil begrenses til sin rute.
 
-## Interaksjonsregler og akseptanse
+## Publisering og interaksjon
 
-Felles kontrakt velger `boxui`-gjerde med `boxui 0.1` + strict JSON; mermaid-gjerde
-med samme header er alias. Separate typed modeller bevarer widgets/bindinger.
-SVG/control map/native overlays publiseres samlet. Native tekstfelt beholder
-utkast/caret/fokus ved kompatibel resize/theme, men ikke ved byttet binding/kontekst.
-Enter sender typed intent; blur/save sender ingenting. Gammel ramme eller gjentatt
-klikk skal ikke treffe ny kontroll. Unbound/simulated/native vises eksplisitt.
+Eksisterende ParserWorker gir én aktiv og én utskiftbar ventende forberedelse;
+både arbeidsticket og DocumentToken sjekkes. PreviewCoordinator/RenderHost eier
+publisering, så en ekstra BoxUiCoordinator er unødvendig. BoxUiSession sjekker
+source/epoch/binding/state/kontekst og aktuell enabled/type før dispatch.
 
-PDF fryser aksepterte verdier, utelater usendte utkast, bruker komplett statisk SVG
-og utløser ingen hendelser. Preview-skalering, Wrap/A4/scroll og clipping må bruke
-samme transform for bilde, overlay og hit-test. Vanlig Markdown-merking og lenker
-beholdes utenfor widgets. Ingen auto-start av scenario, nettverk eller kildekode.
+View → BoxUI prototype aktiverer en lokal, syntetisk deltaker uttrykkelig.
+Kildeendring stopper økten. Den lagres ikke mellom omstarter. Hver blokk får egen
+Activity A1; suspend/resume beholder fremdrift, mens kontekstendring gir avvist
+resume. Ingen tilstandsmaskin evalueres fra det innebygde stateDiagram.
 
-## Arbeidspakker etter review
+Native felt beholder draft/caret/fokus ved kompatibel resize/theme; Enter sender,
+Escape gjenoppretter akseptert verdi, blur/save sender ingenting. Endret kilde,
+binding eller kontekst forkaster inkompatible drafts. Endret Value-revisjon
+overskriver ikke et skittent felt: innsending avviser konflikt, Escape tar siste verdi.
+Native knapper bruker det samme kontrollkartet og FOX-fokus/tastatur; PDF bruker
+bibliotekets SVG-knapper. Dette konkretiserer draftens SVG/semantiske knapper.
 
-X1: tolkning/modell mot falsk parser og kontraktfixtures.
-X2: plassering, native input og overlay mot tydelig merkede mock-rammer.
-X3: sessions/bindinger/draft/command-ledger og syntetisk Activity med uavhengig oracle.
-X4: konkret fork-pin, faktisk grafikk, mixed Markdown, GUI/PDF og regressjoner.
-R1–R4 i forken kan utvikles parallelt. X4 krever reell R4-leveranse og begge commits.
-Ingen påstand om runtime-dekning før virkelige tester; mock-resultater er bare
-kontrakt-/hostkontroll. JSON-skjema er ikke test av visuell kvalitet eller IME.
+Kommandoer fullføres synkront av den lokale deltakeren; ingen ubundet bakgrunnskø
+opprettes. Ledger beholder opptil 4096 ID-er, returnerer identiske duplikater og
+avviser konflikt/full ledger. Det er ingen restartbestandig exactly-once-garanti.
 
-## Stoppunkt
+## Geometri, tema og PDF
 
-G-PARALLEL-REVIEW er passert: brukeren har godkjent grunnlaget uten ny iterasjon. Før X1 må shared revision låses, berørte
-functionality-blueprints konkretiseres og fasebrancher opprettes. Senere faser
-får egne brancher/milestone-commits; én samlet PR for sprinten og bygg ved faseslutt.
+SVG px → 0,75 renderer-punkt → dokumentplassering → viewport/zoom/scroll er én
+felles transform. Native klipp følger kontroll, blokk og synlig previewflate.
+Host tilbyr minst 320 × 640 px for målte widgets; plassmangel blir lokal diagnose.
+Farger følger eksisterende lesepalett i lys/mørk modus uten ny tolkning.
 
-## Identifisert reviewgrunnlag
+PDF fanger en immutable akseptert state på GUI-tråden og forbereder statisk SVG
+på eksportarbeideren. Drafts og native events inngår ikke. Simulert state merkes
+`simulated snapshot`. Vanlig Markdown og diagrammer beholder eksisterende eksportvei.
 
-Forkens designcommit: `54aee4e685a4454f2233060341336446d58054a9`.
-Kontraktfilens SHA-256: `9eb0b629287349e4e2f849d0d3ab9f61b1e52d8fce64de1917e4c2b26d8a1a35`.
-Dette identifiserer det godkjente kontraktgrunnlaget; runtime får egen konkret fork-pin.
-Kontraktfil, seks JSON-skjemaer og fixtures hentes fra samme commit ved X1.
+## Grenser og bevis
 
-Innebygde diagrammer tolkes av interpreter før arbeid i renderer. Normalisert
-BoxUiModel har childRef; application-kjeden forbereder eksisterende typed
-DiagramModel-barn til SVG/error før BoxUI-layout komponerer dem. Ingen Mermaid-
-kildetolkning flyttes til renderer. Foreslått C++ JSON-kodek er nlohmann/json
-3.12.0, MIT, låst til upstream `55f93686c01528224f448c19128836e7df245f72`;
-avhengighet/lisens/bootstrap inngår i X1. Den finnes ikke i dagens XFMD-bygg.
+256 KiB kilde, 256 noder, dybde 16, åtte child-diagrammer à 64 KiB, 4096 Unicode-
+skalarer per tekstinput, 8 MiB frame/prepare og 64 MiB aktive visualressurser per
+Markdown-dokument. Tidsbudsjett 2000 ms (10000 ved sanitizer) er kooperativt;
+en pågående callback eller diagramoperasjon kan ikke avbrytes hardt.
 
-## Realisert integrasjon (fase 047)
-
-Produsent er den parallelle forkgrenen `phase/boxui-046-implementation`,
-commit `61a85b670dc1755b52c0fdf82c39497d0fe39512`. Den foreløpige
-`phase/boxui-045-core` integreres ikke. Vertens adapter bruker `parse_boxui_bytes`,
-`decode_prepare_json` og `prepare_boxui_cancellable`; ingen duplisert parser/layout.
-Målcallbacken leverer bredde, høyde og baseline fra SharedTextMetrics.
-
-BoxUiPreparation eier child-forberedelse; BoxUiSession eier revisjoner,
-syntetiske deltakere og command-ledger. PreviewCoordinator/ParserWorker gjenbrukes
-for publisering/kooperativ kansellering, derfor trengs ingen ny BoxUiCoordinator.
-FoxBoxUiOverlay eier native tekstfelt og knapper, med nøyaktig samme geometrikart
-som SVG. Native knapper brukes for FOX-fokus/tastatur; PDF bruker bibliotekets
-statiske knappegrafikk. Dette er en bevisst konkretisering av draftens SVG-knapper.
-
-Det lokale deltakerkallet fullføres synkront; ingen kommando venter i en ubundet
-bakgrunnskø. Ledger har 4096 plasser og avviser videre innsending ved grensen.
-Snapshot fryses før arbeiderforberedelse og PDF. Kildeendring stopper prototypeøkten
-og krever ny eksplisitt aktivering. Geometri-/fargeendring beholder kompatible felt.
-
-Nlohmann-kodeken ligger privat i contracts/boxui/private som wire-adapter.
-JSON er ikke del av offentlige modell-/hostkontrakter. Bibliotekets diagnostikk
-bevares over ABI; statustall skiller ugyldig, unsupported, ressurs, cancel og panic.
+Fase 046 og 047 har konkrete core/session/GUI-bevis. Sluttkontroll, skjermbilder,
+PDF- og regresjonsresultater registreres i [sprinten](../../sprints/Sprint-003--Interactive-BoxUI/README.md).
+Status er Implemented, ikke generell Verified. Fysisk IME, AT-SPI, ekstern transport,
+produksjonsbindinger og SDL-kodegenerering er ikke bekreftet av disse testene.

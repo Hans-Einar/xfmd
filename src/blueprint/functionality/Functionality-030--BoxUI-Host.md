@@ -37,7 +37,10 @@ Utkast er ikke aksepterte verdier; PDF bruker bare frosset akseptert snapshot.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | BoxUI-kjeden | `FoxBoxUiOverlay::reconcile` | `src/application/adapters/FoxBoxUiOverlay.cpp` | publisert frame → native input og semantisk kontrollkart | avviser ugyldige/gamle data | Implemented |
+| 1 | host present | `FoxBoxUiOverlay::reconcile` | `src/application/adapters/FoxBoxUiOverlay.cpp` | kontrollkart → native felt/knapper | inkompatibelt utkast forkastes med beskjed | Implemented |
+| 2 | zoom/scroll/theme | `FoxBoxUiOverlay::position` | `src/application/adapters/FoxBoxUiOverlay.cpp` | publisert geometri → klippet viewport | ingen ny layoutberegning | Implemented |
+| 3 | Enter/knapp | `FoxBoxUiOverlay::submit` | `src/application/adapters/FoxBoxUiOverlay.cpp` | draft eller none → BoxUiIntent | bare aktuell frame kan sende | Implemented |
+| 4 | Escape | `FoxBoxUiOverlay::restore` | `src/application/adapters/FoxBoxUiOverlay.cpp` | akseptert verdi → felt | forkaster utkast | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -46,8 +49,8 @@ Ingen direkte kall til andre features sine interne implementasjoner.
 
 ## 7. Verifikasjon
 
-Fase 045–048 registrerer parser-, layout-, livstids-, GUI- og PDF-bevis.
-Ingen runtime-verifikasjon hevdes før testene er kjørt.
+BoxUiCoreTest, BoxUiSessionTest, BoxUiGuiTest og BoxUiPdfTest gir avgrenset
+bevis. Kjøringer og kjente begrensninger registreres i sprint 003 fase 048.
 
 ## 8. Status, risiko og endringskonsekvenser
 

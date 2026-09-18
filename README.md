@@ -354,3 +354,12 @@ På main brukes siste PR-nummer når kjent. Major/minor kommer fra `VERSION`;
 commitnummeret teller hele Git-historikken og er ikke en SHA. Full clone er
 nødvendig; shallow clone utvides med `git fetch --unshallow`. Detaljer om
 merge, dirty, kildearkiv og metadata: [versjonering](docs/versioning.md).
+
+## Interaktiv BoxUI-prototype
+
+Åpne [boxui_evidence.md](boxui_evidence.md) i fasebygget. Aktiver **View → BoxUI
+prototype (local simulation)** for lokale kontroller. Filåpning starter ingen
+scenarioer. Enter sender et felt; Escape gjenoppretter akseptert verdi. PDF bruker
+akseptert snapshot, aldri usendte utkast. Se [forfatterveiledningen](docs/design/boxui-authoring.md)
+og [integrasjonsgrensen](docs/design/boxui-integration.md). BoxUI er en egen
+utvidelse, ikke en standard Mermaid-diagramtype eller en SDL-typekontroll.

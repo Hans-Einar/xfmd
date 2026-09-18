@@ -32,6 +32,7 @@ protected:
 
 public:
   std::function<void(const BoxUiCommandResult&)> completed;
+  std::function<void(const std::string&)> notice;
   FoxBoxUiOverlay(FoxRenderHost&, BoxUiSession&);
   ~FoxBoxUiOverlay() override;
   void reconcile();

@@ -108,6 +108,7 @@ std::shared_ptr<const BoxUiFrame> BoxUiLayout::prepare(const BoxUiModel& model,
   }
   for (auto& d : j.at("diagnostics"))
     frame->diagnostics.push_back(d.at("message"));
+  frame->bytes = j.dump().size(); // Include control metadata, not only SVG storage.
   return frame;
 }
 } // namespace xfmd

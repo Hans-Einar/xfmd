@@ -13,7 +13,7 @@ struct ExportRequest {
   FontSetId fonts = 0;
   std::string target;
   LayoutResult frame;
-  BoxUiState boxUi;
+  BoxUiState boxUi{};
 };
 struct ExportControl {
   std::atomic<bool> cancelled{false};

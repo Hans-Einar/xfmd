@@ -35,8 +35,8 @@ BoxUiSnapshot SyntheticActivity::snapshot(const BoxUiModel& model) const {
       c.provenance = known ? "simulated" : "unbound";
       c.enabled = known && (b.id != "suspend" || !suspended) && (b.id != "resume" || suspended);
       c.reason = known ? (c.enabled ? "Local synthetic participant"
-                                    : "Not available in current Activity state")
-                       : "No host binding";
+                                    : (suspended ? "suspended" : "running"))
+                       : "unbound";
       s.commands.emplace(b.id, std::move(c));
     }
   }

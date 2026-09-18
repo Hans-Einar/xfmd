@@ -1,4 +1,5 @@
 #include "FoxBoxUiOverlay.h"
+#include <X11/XKBlib.h>
 #include <algorithm>
 #include <cmath>
 using namespace FX;
@@ -7,7 +8,10 @@ FXDEFMAP(FoxBoxUiOverlay)
 overlayMap[] = {FXMAPFUNC(SEL_CHANGED, 1, FoxBoxUiOverlay::onChanged),
                 FXMAPFUNC(SEL_COMMAND, 1, FoxBoxUiOverlay::onCommand)};
 FXIMPLEMENT(FoxBoxUiOverlay, FXObject, overlayMap, ARRAYNUMBER(overlayMap))
-FoxBoxUiOverlay::FoxBoxUiOverlay(FoxRenderHost& h, BoxUiSession& s) : host(&h), session(&s) {}
+FoxBoxUiOverlay::FoxBoxUiOverlay(FoxRenderHost& h, BoxUiSession& s) : host(&h), session(&s) {
+  Bool supported = False;
+  XkbSetDetectableAutoRepeat(static_cast<Display*>(h.getApp()->getDisplay()), True, &supported);
+}
 FoxBoxUiOverlay::~FoxBoxUiOverlay() = default;
 void FoxBoxUiOverlay::invalidate() {
   for (auto& p : items) {
@@ -82,6 +86,8 @@ void FoxBoxUiOverlay::reconcile() {
           "/" + std::to_string(c.version) + "/" + c.valueType;
       auto found = items.find(id);
       if (found != items.end() && found->second->compatibility != compatible) {
+        if (found->second->dirty && notice)
+          notice("BoxUI draft discarded: source, binding or context changed");
         items.erase(found);
       }
       auto& ptr = items[id];
@@ -120,7 +126,11 @@ void FoxBoxUiOverlay::reconcile() {
                 .c_str());
       if (i.button) {
         i.button->publication = publication;
-        i.button->setTipText(c.accessibleName.c_str());
+        auto command = frame->snapshot.commands.find(c.commandBinding);
+        i.button->setTipText(
+            (c.accessibleName +
+             (command == frame->snapshot.commands.end() ? "" : " — " + command->second.reason))
+                .c_str());
       }
       bool enabled = c.enabled && session->current(*frame);
       FXWindow* widget = i.field ? static_cast<FXWindow*>(i.field) : i.button;
@@ -154,9 +164,17 @@ void FoxBoxUiOverlay::position() {
     b.y += host->getYPosition();
     int left = int(std::floor(a.x)), top = int(std::floor(a.y)), right = int(std::ceil(b.x)),
         bottom = int(std::ceil(b.y));
-    int x = std::max(0, left), y = std::max(0, top),
-        w = std::min(host->getViewportWidth(), right) - x,
-        h = std::min(host->getViewportHeight(), bottom) - y;
+    auto ca = host->documentToView(
+        {i.bounds.x + i.control.clip.x * sx, i.bounds.y + i.control.clip.y * sy});
+    auto cb = host->documentToView({i.bounds.x + (i.control.clip.x + i.control.clip.width) * sx,
+                                    i.bounds.y + (i.control.clip.y + i.control.clip.height) * sy});
+    int clipLeft = int(std::ceil(ca.x + host->getXPosition())),
+        clipTop = int(std::ceil(ca.y + host->getYPosition()));
+    int clipRight = int(std::floor(cb.x + host->getXPosition())),
+        clipBottom = int(std::floor(cb.y + host->getYPosition()));
+    int x = std::max({0, left, clipLeft}), y = std::max({0, top, clipTop}),
+        w = std::min({host->getViewportWidth(), right, clipRight}) - x,
+        h = std::min({host->getViewportHeight(), bottom, clipBottom}) - y;
     if (w <= 0 || h <= 0) {
       i.clip->hide();
       continue;

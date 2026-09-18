@@ -69,6 +69,18 @@ void run() {
   input = widget<FoxBoxUiField>(app.host);
   CHECK(input && input->isEnabled());
   CHECK(input->getText() == "C1");
+  input->setFocus();
+  input->setText("Blåbær Æøå");
+  input->setSelection(0, input->getText().length());
+  input->handle(input, FXSEL(SEL_COMMAND, FXTextField::ID_COPY_SEL), nullptr);
+  input->setText("");
+  input->handle(input, FXSEL(SEL_COMMAND, FXTextField::ID_PASTE_SEL), nullptr);
+  events(app);
+  CHECK(input->getText() == "Blåbær Æøå");
+  key(input, KEY_Tab, false);
+  events(app);
+  CHECK(!input->hasFocus());
+  input->setFocus();
   input->setText("Draft — Æøå");
   input->getTarget()->handle(input, FXSEL(SEL_CHANGED, 1), nullptr);
   input->setFocus();
@@ -86,7 +98,15 @@ void run() {
   CHECK(input == same && input->getText() == "Draft — Æøå");
   key(input, KEY_Escape, false);
   CHECK(input->getText() == "C1");
-  activate(widget<FoxBoxUiButton>(app.host, "Suspend"));
+  {
+    auto* button = widget<FoxBoxUiButton>(app.host, "Suspend");
+    CHECK(button && button->isEnabled());
+    FXEvent event{};
+    event.win_x = button->getWidth() / 2;
+    event.win_y = button->getHeight() / 2;
+    button->handle(button, FXSEL(SEL_LEFTBUTTONPRESS, 0), &event);
+    button->handle(button, FXSEL(SEL_LEFTBUTTONRELEASE, 0), &event);
+  }
   ready(app);
   activate(widget<FoxBoxUiButton>(app.host, "Resume"));
   ready(app);
@@ -117,6 +137,11 @@ void run() {
   app.host->setViewScale(true);
   events(app);
   captureDesktop(app.app, "boxui-dark.png");
+  for (const auto& r : app.host->frame()->runs)
+    if (auto box = std::dynamic_pointer_cast<const BoxUiFrame>(r.visual)) {
+      std::ofstream("boxui-static.svg") << box->staticScene->svg;
+      std::ofstream("boxui-preview.svg") << box->previewScene->svg;
+    }
   app.execute(CommandRouter::ToggleTheme);
   events(app);
   captureDesktop(app.app, "boxui-light.png");
@@ -128,6 +153,28 @@ void run() {
   for (int i = 0; i < 200 && app.exporter && app.exporter->busy(); ++i)
     events(app, 50);
   CHECK(app.boxUiSession.freeze(app.session.view().token).stateRevision == before.stateRevision);
+  {
+    struct Receiver : FXObject {
+      unsigned commands = 0;
+      long handle(FXObject*, FXSelector sel, void*) override {
+        if (FXSELTYPE(sel) == SEL_COMMAND)
+          ++commands;
+        return 1;
+      }
+    } receiver;
+    auto* button = widget<FoxBoxUiButton>(app.host, "Resume");
+    auto* target = button->getTarget();
+    button->setTarget(&receiver);
+    key(button, KEY_space, false);
+    ++button->publication;
+    key(button, KEY_space, true);
+    CHECK(receiver.commands == 0);
+    key(button, KEY_space, false);
+    key(button, KEY_space, false);
+    key(button, KEY_space, true);
+    CHECK(receiver.commands == 1);
+    button->setTarget(target);
+  }
   app.edits.applyEdit({0, 0, "Changed\n\n"});
   CHECK(!app.boxUiSession.simulated());
   ready(app);

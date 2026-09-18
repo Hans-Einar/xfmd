@@ -24,10 +24,10 @@ UR-043 / SR-026, AT-068 / AT-069. Se [prosjektgrunnlaget](../../../docs/design/b
 
 ## 3. Kontrakter og eierskap
 
-Forkens BX-HOST/0.1-draft1 er kandidat. Interpreter eier BoxUiModel; renderer
+Forkens BX-HOST/0.1-draft1 er implementert mot den pinnede produsenten. Interpreter eier BoxUiModel; renderer
 forbereder grafikk/geometri; application eier FOX, fokus, drafts, sessions og intent.
-Fremtidige functionality-blueprints skal defineres før implementasjon; eksisterende
-functionality gjenbrukes uten at features kaller hverandres private implementasjon.
+FUNC-027–030 beskriver de fire eierrollene. Eksisterende functionality gjenbrukes
+uten at features kaller hverandres private implementasjon.
 
 ## 4. Atferd, tilstand og feil
 
@@ -53,10 +53,11 @@ Mermaid-forberedelse. Ingen endring av eksisterende Mermaid ABI som snarvei.
 
 ## 7. Verifikasjon
 
-Kun dokument- og blueprintkontroller i fase 044. AT-068/069 er planlagte;
-implementasjon, GUI/PDF-akseptanse og C-ABI-livstid er ikke testet ennå.
+BoxUiCoreTest, BoxUiSessionTest, BoxUiGuiTest og BoxUiPdfTest dekker kontrakt,
+syntetiske deltakere, native hendelser og frosset eksport. Faktisk kjøring og
+begrensninger registreres i sprint 003 fase 048.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Ready/FirstRelease. G-PARALLEL-REVIEW er godkjent. Native IME, overlay-clipping og
-endelig forbrukerprofil skal verifiseres, ikke utledes fra et gyldig JSON-skjema.
+Implemented/FirstRelease. G-PARALLEL-REVIEW er godkjent. Fysisk IME og AT-SPI
+er ikke verifisert; native Unicode/clipboard er ikke bevis for disse egenskapene.

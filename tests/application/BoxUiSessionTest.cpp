@@ -62,11 +62,44 @@ void run() {
   CHECK(session.freeze({91, 2}).blocks.empty());
   CHECK(frozen.blocks.at("activity-demo").values.at("context").value ==
         BoxUiValue(std::string("C2")));
+  // Bounded deduplication storage and input validation.
+  session.expect(source.token);
+  session.toggle(model);
+  for (unsigned n = 0; n < 4096; ++n) {
+    auto bad = intent("unknown", "resume", ("limit-" + std::to_string(n)).c_str());
+    CHECK(session.dispatch(bad).status == "rejected");
+  }
+  CHECK(session.dispatch(intent("pause", "suspend", "overflow")).message.find("exhausted") !=
+        std::string::npos);
+  session.toggle(model);
+  session.toggle(model);
+  auto invalid = intent("context-input", "set-context", "utf8");
+  invalid.value = std::string(1, char(255));
+  invalid.expectedValueRevision =
+      session.freeze(source.token).blocks.at("activity-demo").values.at("context").revision;
+  CHECK(session.dispatch(invalid).status == "rejected");
+  auto secondSource = source;
+  auto secondText = source.text;
+  secondText.replace(secondText.find("activity-demo"), 13, "second-demo");
+  secondSource.text += "\n\n" + secondText;
+  auto two = parser->parse(secondSource);
+  session.toggle(model);
+  session.toggle(two);
+  auto change = intent("context-input", "set-context", "isolated");
+  change.value = std::string("isolated-context");
+  change.expectedValueRevision =
+      session.freeze(source.token).blocks.at("activity-demo").values.at("context").revision;
+  CHECK(session.dispatch(change).status == "accepted");
+  CHECK(std::get<std::string>(
+            session.freeze(source.token).blocks.at("second-demo").values.at("context").value) ==
+        "C1");
   SyntheticActivity activity;
   CHECK(!activity.observe(1, 1, 999.));
   activity.execute("mark-stale", {});
+  CHECK(activity.snapshot(*model->blocks[0].boxUi).values.at("measurement").validity == "stale");
   CHECK(!activity.observe(1, 1, 999.));
   activity.resetSource();
+  CHECK(activity.snapshot(*model->blocks[0].boxUi).values.at("measurement").validity == "missing");
   CHECK(!activity.observe(1, 2, 999.));
   CHECK(activity.observe(2, 1, 7.));
 }

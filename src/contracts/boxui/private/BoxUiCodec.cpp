@@ -57,6 +57,8 @@ BoxUiKind kind(const std::string& s) {
 }
 std::string kind(BoxUiKind k) {
   static const char* names[] = {"row", "column", "text", "value", "button", "input", "diagram"};
+  if (static_cast<unsigned>(k) >= 7)
+    throw Error(ErrorCode::Unsupported, "Unknown BoxUI kind");
   return names[static_cast<unsigned>(k)];
 }
 BoxUiNode node(const Json& j) {

@@ -16,8 +16,15 @@ bool Application::startExport(const std::string& path) {
     ExportRequest request{session.snapshot(), preview->layoutProfile().paper, metrics->fontSetId(),
                           target.path, preview->frame()};
     request.boxUi = boxUiSession.freeze(request.source.token);
-    request.frame
-        .reset(); // Export always prepares the captured accepted state, never native drafts.
+    if (request.frame) {
+      bool hasBoxUi = false;
+      for (const auto& run : request.frame->runs)
+        hasBoxUi |= dynamic_cast<const BoxUiFrame*>(run.visual.get()) != nullptr;
+      if (hasBoxUi)
+        request.frame.reset();
+    }
+    request.boxUi.viewportWidth =
+        std::max(320., (request.paper.width - 2 * request.paper.margin - 48) / .75);
     exporter = std::make_unique<ExportCoordinator>([target](const auto& frozen, auto& control) {
       auto parser = DiagramServices::interpreter();
       MarkdownRenderer renderer;

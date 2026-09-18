@@ -37,7 +37,8 @@ Utkast er ikke aksepterte verdier; PDF bruker bare frosset akseptert snapshot.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | BoxUI-kjeden | `BoxUiBlockBuilder::build` | `src/interpreter/boxui/BoxUiBlockBuilder.cpp` | fence → typed BoxUiModel og typed diagram-barn | avviser ugyldige/gamle data | Implemented |
+| 1 | ModelBuilder | `BoxUiBlockBuilder::build` | `src/interpreter/boxui/BoxUiBlockBuilder.cpp` | fence og kildeområde → blokk | lokal kildefallback | Implemented |
+| 2 | BoxUiBlockBuilder | `BoxUiInterpreter::parse` | `src/interpreter/boxui/BoxUiInterpreter.cpp` | parse-ABI → modell og tolkede diagram-barn | ukjent syntaks avvises | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -46,8 +47,8 @@ Ingen direkte kall til andre features sine interne implementasjoner.
 
 ## 7. Verifikasjon
 
-Fase 045–048 registrerer parser-, layout-, livstids-, GUI- og PDF-bevis.
-Ingen runtime-verifikasjon hevdes før testene er kjørt.
+BoxUiCoreTest, BoxUiSessionTest, BoxUiGuiTest og BoxUiPdfTest gir avgrenset
+bevis. Kjøringer og kjente begrensninger registreres i sprint 003 fase 048.
 
 ## 8. Status, risiko og endringskonsekvenser
 

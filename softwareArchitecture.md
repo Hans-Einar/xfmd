@@ -499,10 +499,17 @@ og installert JSON. `src/application/build/BuildVersion.h/.cpp` eksponerer
 `buildVersion()` for CLI og Application-vindustittel. Git/Python finnes bare
 i byggsteget, ikke i kjørende applikasjon eller interpreter/renderer.
 
-## Planlagt BoxUI-host
+## BoxUI-host — FUNC-027–030
 
-[BoxUI-integrasjonen](docs/design/boxui-integration.md) og FTR-011 beskriver et
-separat, ikke implementert spor. Native FOX-input kombineres med bibliotekets SVG
-og typed control map. Nye modeller/porter ligger i contracts; interpreter og
-renderer beholder sine avhengighetsgrenser. Egne application-roller eier publisering,
-bindinger, kommandoledger og overlays. Arbeidet avventer design-review.
+Se [integrasjonen](docs/design/boxui-integration.md) for filkart, kontrakt og
+ressursgrenser. `interpreter/boxui` tolker typed modeller og diagram-barn;
+`renderer/boxui` forbereder og plasserer SVG/kontrollkart. `application/boxui`
+eier preparering, sesjon/ledger og syntetisk deltaker. FOX-input ligger i egne
+`FoxBoxUiOverlay`/`FoxBoxUiInput`-filer under adapters. Ingen widgetkode legges i
+XfmdWindow, Mermaid Graph eller generell Markdown-layout.
+
+Public contracts/boxui er JSON-, FOX- og parserfrie. Den private BoxUiCodec under
+contracts/boxui/private er wire-serialisering delt av to ABI-adaptere; den er ingen
+funksjonell eier. Composition root injiserer parser/layout; PreviewCoordinator og
+ParserWorker gjenbrukes for arbeiderlivstid og revisjonskontroll. PDF fanger state
+på GUI-tråden og bruker statisk SVG med aksepterte verdier på eksportarbeideren.

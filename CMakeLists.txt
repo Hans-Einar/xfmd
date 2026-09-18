@@ -83,7 +83,7 @@ add_library(xfmd_typography
   src/application/adapters/SvgDiagramCache.cpp src/application/adapters/DiagramPainter.cpp src/application/adapters/DisplayListPainter.cpp src/application/preferences/ReadingColors.cpp)
 target_link_libraries(xfmd_typography PUBLIC xfmd_contracts PkgConfig::PANGO PRIVATE PkgConfig::RSVG)
 add_library(xfmd_diagrams src/application/boxui/BoxUiSession.cpp src/application/boxui/SyntheticActivity.cpp src/application/boxui/BoxUiPreparation.cpp src/application/diagrams/DiagramCache.cpp src/application/diagrams/DiagramPreparation.cpp src/application/composition/DiagramServices.cpp)
-target_link_libraries(xfmd_diagrams PUBLIC xfmd_typography xfmd_media xfmd_renderer xfmd_interpreter)
+target_link_libraries(xfmd_diagrams PUBLIC xfmd_document xfmd_typography xfmd_media xfmd_renderer xfmd_interpreter)
 add_library(xfmd_export src/application/export/ExportCoordinator.cpp
   src/application/export/ExportPipeline.cpp src/application/io/PdfFilePublisher.cpp
   src/application/adapters/PdfOutput.cpp)
