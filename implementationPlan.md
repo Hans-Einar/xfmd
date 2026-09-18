@@ -495,3 +495,9 @@ alle PR-er er lukket og versjonen er installert.
 [gjeldende integrasjonsstatus](docs/evidence/P41-integration.md) beskriver
 faktisk PR-/CI-/installasjonsstatus. Ukjente konstruksjoner gir
 synlig kildefallback; bred type-dekning er ikke full syntakskompatibilitet.
+
+## Planlagt separat BoxUI-prosjekt
+
+[Sprint 003](sprints/Sprint-003--Interactive-BoxUI/README.md) registrerer native
+interaksjon i Markdown. Avventer felles kontraktgjennomgang med rendererforken;
+ikke del av allerede implementert Mermaid-dekning.

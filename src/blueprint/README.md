@@ -163,3 +163,14 @@ P22: UR-032 → FUNC-010/014; UR-033 → FUNC-010; UR-034 → FUNC-005. AT-052�
 | --- | --- | --- | --- |
 | UR-042 | [FUNC-026](functionality/Functionality-026--Build-Identity.md) | AT-066 | FirstRelease |
 | SR-025 | [FUNC-026](functionality/Functionality-026--Build-Identity.md) | AT-067 | FirstRelease |
+
+## Planlagt interaktiv BoxUI
+
+| ID | Type / målgruppe | Eier | Status |
+| --- | --- | --- | --- |
+| [FTR-011](feature/Feature-011--Interactive-BoxUI.md) | Feature / User | application | Proposed |
+
+| Krav | Designobjekter | Akseptanse | Scope |
+| --- | --- | --- | --- |
+| UR-043 | [FTR-011](feature/Feature-011--Interactive-BoxUI.md) | AT-068 | Future |
+| SR-026 | [FTR-011](feature/Feature-011--Interactive-BoxUI.md) | AT-069 | Future |

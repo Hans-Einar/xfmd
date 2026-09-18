@@ -498,3 +498,11 @@ Git-historikk ved eksplisitt bygg; `cmake/BuildIdentity.cmake` genererer header
 og installert JSON. `src/application/build/BuildVersion.h/.cpp` eksponerer
 `buildVersion()` for CLI og Application-vindustittel. Git/Python finnes bare
 i byggsteget, ikke i kjørende applikasjon eller interpreter/renderer.
+
+## Planlagt BoxUI-host
+
+[BoxUI-integrasjonen](docs/design/boxui-integration.md) og FTR-011 beskriver et
+separat, ikke implementert spor. Native FOX-input kombineres med bibliotekets SVG
+og typed control map. Nye modeller/porter ligger i contracts; interpreter og
+renderer beholder sine avhengighetsgrenser. Egne application-roller eier publisering,
+bindinger, kommandoledger og overlays. Arbeidet avventer design-review.
