@@ -7,7 +7,8 @@ Upstream-base `3726ccbffe0e8032361eb9668694b24f77858060`; gjeldende fork-pin `58
 [pin-manifestet](cmake/mermaid-source.json). [Faktiske bevis](docs/evidence/P41.md).
 
 Brukeren har gjennomgått galleriet og godkjent diagrammene uten behov for
-visuelle justeringer. P37–P41 er implementert; merge og installasjon er bestilt.
+visuelle justeringer. P37–P41 er implementert, merget til `main` og installert.
+Alle PR-er i XFMD og bibliotekforken er lukket.
 [Integrasjonsstatus](docs/evidence/P41-integration.md) skiller nåværende CI, merge
 og installasjon fra [P41s verifiserte baseline](docs/evidence/P41.md). Den nye
 pinnen inneholder bare rustfmt-endringer etter baseline-pinnen.
