@@ -1,34 +1,32 @@
-# Forfatterveiledning — Sequence 1
+# Forfatterveiledning — Sequence 2
 
 Bruk et `mermaid`-kodegjerde med `sequenceDiagram`. Deklarer alle deltakere først
 med `participant ID as Navn` eller `actor ID as Navn`; ID består av ASCII-bokstaver,
 sifre og understrek. Alias og vanlig etiketttekst kan bruke Unicode.
 
-Se [APT-eksemplet](mermaid/apt-import.mmd): Command til ansvarlig service og
-separate svar for akseptert utkast, ugyldig input og revisjonskonflikt. Import
-aktiverer ikke et utkast. Eksemplet illustrerer en kandidat fra SDP-checkpoint #1;
-det vedtar ingen SDL-regel.
+[APT-eksemplet](mermaid/apt-import.mmd) skiller import fra aktivering, og viser
+aksept, ugyldig input og revisjonskonflikt. [Det nestede eksemplet](mermaid/sequence-nested.mmd)
+viser asynkrone piler, aktivitet, notater og samtidige forløp. Eksemplene er
+illustrasjoner av kandidatbegreper, ikke vedtatte SDL-regler.
 
-| Konstruksjon | Sequence 1 |
+| Konstruksjon | Støttet betydning |
 | --- | --- |
-| `A->>B: Request`, `B-->>A: Reply` | Solid/stiplet lukket pilspiss, kildeorden beholdes |
-| `activate B`, `deactivate B` | Balanserte aktivitetsmarkører utenfor fragmenter; ingen implisitt tråd |
-| `Note left of A: …`, `Note right of B: …`, `Note over A,B: …` | Utenfor fragmenter; sett en melding mellom notat og påfølgende fragment |
-| `alt …` / `else …` / `end` | Ikke-nestede alternativer, minst én melding per gren |
-| `opt …`, `loop …`, `par …` / `and …` / `end` | Flate fragmenter; tekst beskriver hensikt, ingen kjøring/scheduling |
+| `A->>B: Request`, `B-->>A: Reply` | Heltrukken/stiplet lukket pilspiss |
+| `A-)B: Command`, `B--)A: Reply` | Heltrukken/stiplet åpen asynkron pilspiss |
+| `activate B`, `deactivate B` | Balanserte aktivitetsmarkører, også i fragmenter |
+| `Note left of A: …`, `Note right of B: …`, `Note over A,B: …` | Notat på riktig sted i hendelsesrekkefølgen |
+| `alt …` / `else …` / `end` | Alternativer, også nestet |
+| `opt …`, `loop …`, `par …` / `and …` / `end` | Nestede fragmenter med bevart omfang |
 
-Andre piler (inkludert async `-)`), nested fragmenter, aktivering inne i fragmenter,
-inline `+`/`-`, implisitte deltakere, box, autonumber, create/destroy, HTML,
-entities, styling og init-direktiver gir synlig forklaring og hele kildeblokken.
-Ikke erstatt en asynkron pil med en synkron bare for å få diagrammet tegnet.
-Notater og aktiveringer på komplekse fragmentgrenser trenger Sequence 2.
-Et notat må også etterfølges av en melding før activate/deactivate, slik at
-aktivitetsgrensen ikke flyttes tilbake over notatet.
+Aktiveringer må være balansert innen hver alternativ-/parallellgren; en gren
+kan ikke endre aktivitetstilstanden til en annen. Maks åtte fragmentnivåer.
+Hver gren må inneholde en hendelse. Deltakere betyr ikke automatisk tråder,
+og en asynkron pil bestemmer ikke scheduling.
 
-Én syntaktisk setning per linje. Kommentarlinjer begynner med `%%`.
-Tekst brytes ved ordgrenser; enkeltord beholdes hele. Maks 16 deltakere,
-128 hendelser og 64 KiB kilde. Store diagrammer skaleres som én blokk i A4;
-del lange scenarier i flere diagrammer for lesbar PDF.
+Andre piler, inline `+`/`-`, implisitte deltakere, box, autonumber,
+create/destroy, HTML, entities, styling og init-direktiver gir synlig feil
+med hele kildeblokken. Én syntaktisk setning per linje; kommentarer begynner
+med `%%`. Tekst brytes ved ordgrenser. Maks 16 deltakere, 128 hendelser og
+64 KiB kilde. Del lange scenarier for lesbar A4/PDF.
 
-Flowchart 1 er fortsatt støttet, med sin [egen profil](mermaid-integration.md).
 [Støttematrisen](mermaid-coverage.md) skiller bibliotekstøtte fra XFMD-støtte.

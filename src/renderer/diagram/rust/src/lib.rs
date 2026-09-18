@@ -76,7 +76,7 @@ pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
         );
         (
             layout,
-            "Sequence 1; dedicated sequence layout; cooperative deadline".into(),
+            "Sequence 2; dedicated sequence layout; cooperative deadline".into(),
         )
     } else {
         let routed = measurements::with_measurements(labels, duration, || {

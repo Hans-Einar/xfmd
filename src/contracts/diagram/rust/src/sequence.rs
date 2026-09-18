@@ -23,14 +23,16 @@ pub enum Kind {
     Else,
     And,
     End,
+    Async,
+    AsyncReply,
 }
 impl Kind {
     pub fn read(r: &mut Reader) -> Result<Self, String> {
         use Kind::*;
         Ok([
             Message, Reply, NoteLeft, NoteRight, NoteOver, Activate, Deactivate, Alt, Opt, Loop,
-            Par, Else, And, End,
-        ][r.count(13)? as usize])
+            Par, Else, And, End, Async, AsyncReply,
+        ][r.count(15)? as usize])
     }
 }
 #[derive(Clone, Debug, PartialEq)]
@@ -58,82 +60,46 @@ impl Sequence {
             }
         }
         let mut active = vec![0u32; self.participants.len()];
-        let mut frame = None;
+        let mut frames: Vec<(Kind, usize, Vec<u32>)> = vec![];
         let mut messages = 0;
-        let mut section_start = 0;
-        let mut previous_note = false;
-        for e in &self.events {
+        for (index, e) in self.events.iter().enumerate() {
             if e.first as usize >= active.len() || e.second as usize >= active.len() {
-                return Err("Invalid sequence participant reference".into());
+                return Err("Invalid sequence reference".into());
             }
             match e.kind {
-                Message | Reply => messages += 1,
-                Activate => {
-                    if previous_note {
-                        return Err(
-                            "Sequence 1: activation after a note needs an intervening message"
-                                .into(),
-                        );
-                    }
-                    if frame.is_some() {
-                        return Err(
-                            "Sequence 1: activation inside fragments is not supported".into()
-                        );
-                    }
-                    active[e.first as usize] += 1;
-                }
+                Message | Reply | Async | AsyncReply => messages += 1,
+                Activate => active[e.first as usize] += 1,
                 Deactivate => {
-                    if previous_note {
-                        return Err(
-                            "Sequence 1: deactivation after a note needs an intervening message"
-                                .into(),
-                        );
-                    }
-                    if frame.is_some() {
-                        return Err(
-                            "Sequence 1: activation inside fragments is not supported".into()
-                        );
-                    }
                     let a = &mut active[e.first as usize];
                     *a = a.checked_sub(1).ok_or("Unbalanced activation")?;
                 }
-                NoteLeft | NoteRight | NoteOver if frame.is_some() => {
-                    return Err("Sequence 1: notes inside fragments are not supported".into());
-                }
                 Alt | Opt | Loop | Par => {
-                    if previous_note {
-                        return Err(
-                            "Sequence 1: place a message between a note and a fragment".into()
-                        );
+                    if frames.len() >= 8 {
+                        return Err("Sequence nesting limit: 8".into());
                     }
-                    if frame.replace(e.kind).is_some() {
-                        return Err("Sequence 1: nested fragments are not supported".into());
-                    }
-                    section_start = messages;
+                    frames.push((e.kind, index, active.clone()));
                 }
                 Else | And => {
-                    if !matches!((frame, e.kind), (Some(Alt), Else) | (Some(Par), And))
-                        || section_start == messages
+                    let (kind, start, baseline) =
+                        frames.last_mut().ok_or("Branch outside fragment")?;
+                    if !matches!((*kind, e.kind), (Alt, Else) | (Par, And))
+                        || index == *start + 1
+                        || active != *baseline
                     {
-                        return Err("Invalid/empty sequence branch".into());
+                        return Err("Invalid branch or activation crossing alternatives".into());
                     }
-                    section_start = messages;
+                    *start = index;
                 }
                 End => {
-                    if frame.take().is_none() || section_start == messages {
-                        return Err("Invalid/empty fragment end".into());
+                    let (_, start, baseline) = frames.pop().ok_or("Unexpected fragment end")?;
+                    if index == start + 1 || active != baseline {
+                        return Err("Empty fragment or unbalanced branch activation".into());
                     }
                 }
                 _ => {}
             }
-            if matches!(e.kind, NoteLeft | NoteRight | NoteOver) {
-                previous_note = true;
-            }
-            if matches!(e.kind, Message | Reply) {
-                previous_note = false;
-            }
         }
-        if frame.is_some() || active.iter().any(|a| *a != 0) || messages == 0 {
+        if !frames.is_empty() || active.iter().any(|a| *a != 0) || messages == 0 {
             return Err("Unclosed fragment/activation or missing message".into());
         }
         Ok(())

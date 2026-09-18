@@ -134,7 +134,7 @@ struct Reader {
       }
       const auto events = count(128);
       for (unsigned i = 0; i < events; ++i) {
-        auto kind = count(13), first = integer(), second = integer();
+        auto kind = count(15), first = integer(), second = integer();
         auto value = text();
         if (first >= n || second >= n)
           throw std::runtime_error("Invalid sequence reference");

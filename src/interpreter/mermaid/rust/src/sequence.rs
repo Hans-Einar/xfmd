@@ -1,4 +1,4 @@
-//! Full-consumption Sequence 1 profile. Never send unrecognized lines to the
+//! Full-consumption Sequence 2 profile. Never send unrecognized lines to the
 //! permissive dependency parser: it silently drops several Mermaid constructs.
 use xfmd_diagram_contracts::{
     Model,
@@ -21,7 +21,7 @@ pub fn parse(source: &str) -> Result<Model, String> {
     }
     for line in lines {
         if line.contains(['<', '>', '{', '}', ';', '`', '&']) && !line.contains("->>") {
-            return Err("Sequence 1: HTML, directives and encoded labels are not supported".into());
+            return Err("Sequence 2: HTML, directives and encoded labels are not supported".into());
         }
         if let Some(rest) = line
             .strip_prefix("participant ")
@@ -50,7 +50,7 @@ pub fn parse(source: &str) -> Result<Model, String> {
                 .iter()
                 .position(|p| p.id == id.trim())
                 .map(|n| n as u32)
-                .ok_or_else(|| format!("Sequence 1: declare participant {} first", id.trim()))
+                .ok_or_else(|| format!("Sequence 2: declare participant {} first", id.trim()))
         };
         let mut event = Event {
             kind: Kind::End,
@@ -58,8 +58,15 @@ pub fn parse(source: &str) -> Result<Model, String> {
             second: 0,
             text: String::new(),
         };
-        if let Some((ends, label)) = line.split_once(':').filter(|(s, _)| s.contains("->>")) {
-            let (arrow, kind) = if ends.contains("-->>") {
+        if let Some((ends, label)) = line
+            .split_once(':')
+            .filter(|(s, _)| s.contains("->>") || s.contains("-)"))
+        {
+            let (arrow, kind) = if ends.contains("--)") {
+                ("--)", Kind::AsyncReply)
+            } else if ends.contains("-)") {
+                ("-)", Kind::Async)
+            } else if ends.contains("-->>") {
                 ("-->>", Kind::Reply)
             } else {
                 ("->>", Kind::Message)
@@ -109,7 +116,7 @@ pub fn parse(source: &str) -> Result<Model, String> {
                 "end" if rest.is_empty() => Kind::End,
                 _ => {
                     return Err(format!(
-                        "Sequence 1: unsupported statement or arrow: {line}"
+                        "Sequence 2: unsupported statement or arrow: {line}"
                     ));
                 }
             };
@@ -120,7 +127,7 @@ pub fn parse(source: &str) -> Result<Model, String> {
             }
         }
         if event.text.contains(['<', '>', '{', '}', ';', '`', '&']) {
-            return Err("Sequence 1: only plain text labels are supported".into());
+            return Err("Sequence 2: only plain text labels are supported".into());
         }
         sequence.events.push(event);
     }
@@ -133,7 +140,12 @@ pub fn parse(source: &str) -> Result<Model, String> {
     let messages: Vec<_> = sequence
         .events
         .iter()
-        .filter(|e| matches!(e.kind, Kind::Message | Kind::Reply))
+        .filter(|e| {
+            matches!(
+                e.kind,
+                Kind::Message | Kind::Reply | Kind::Async | Kind::AsyncReply
+            )
+        })
         .collect();
     if graph.edges.len() != messages.len()
         || graph.sequence_participants.len() != sequence.participants.len()
@@ -183,22 +195,31 @@ mod tests {
         r.finish().unwrap();
     }
     #[test]
+    fn nested_events_and_async_are_preserved() {
+        let m = parse(include_str!(
+            "../../../../../docs/design/mermaid/sequence-nested.mmd"
+        ))
+        .unwrap();
+        let s = m.sequence.unwrap();
+        assert!(s.events.iter().any(|e| e.kind == Kind::Async));
+        assert!(s.events.iter().any(|e| e.kind == Kind::AsyncReply));
+        assert_eq!(s.events.iter().filter(|e| e.kind == Kind::End).count(), 5);
+    }
+    #[test]
     fn reject_lossy_or_ambiguous_constructs() {
         let header = "sequenceDiagram\nparticipant A\nparticipant B\n";
         for body in [
-            "A-)B: async",
             "A->B: no arrow",
             "A->>+B: inline",
             "A->>C: implicit",
             "autonumber\nA->>B: x",
-            "alt x\nopt y\nA->>B: x\nend\nend",
-            "alt x\nNote over A: lost scope\nA->>B: x\nend",
             "else orphan\nA->>B: x",
             "loop x\nend",
             "activate A\nA->>B: x",
             "A->>B: x\ndeactivate B",
             "A->>B: <b>html</b>",
             "A->>B: x\nunknown statement",
+            "alt x\nactivate B\nA->>B: x\nelse y\nB-->>A: y\ndeactivate B\nend",
             "par x\nA->>B: x\nelse y\nB-->>A: y\nend",
         ] {
             assert!(parse(&format!("{header}{body}")).is_err(), "{body}");

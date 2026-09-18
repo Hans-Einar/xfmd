@@ -1,0 +1,33 @@
+sequenceDiagram
+    actor Operator as Operatør
+    participant UI as Operator UI
+    participant Service as APT service
+    participant Store as Draft store
+    Operator->>UI: Import APT
+    UI-)Service: Command with expected revision
+    activate Service
+    alt input valid
+        Note over Service,Store: Import and activation are distinct
+        opt draft changed
+            Service->>Store: Read accepted revision
+            Store-->>Service: Revision and provenance
+        end
+        alt revision matches
+            Service->>Store: Commit draft
+            Store-->>Service: Accepted
+            Service--)UI: Draft imported
+        else revision conflict
+            Service--)UI: Conflict, no overwrite
+        end
+    else invalid input
+        Service--)UI: Rejected input
+    end
+    deactivate Service
+    par user feedback
+        UI-->>Operator: Report import outcome
+    and background observations
+        loop bounded observation window
+            Store-)UI: Datagram with revision
+            Note right of UI: Late data does not restore currentness
+        end
+    end

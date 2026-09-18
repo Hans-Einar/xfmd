@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
     return 2;
   try {
     SourceSnapshot source{{7, 3}, "# Mermaid export\n\n", {}, false};
-    for (auto name : {"service-map", "layer-delivery", "traceability", "apt-import"}) {
+    for (auto name : {"service-map", "layer-delivery", "traceability", "apt-import", "sequence-nested"}) {
       std::ifstream file(std::string(XFMD_DIAGRAM_FIXTURES) + "/" + name + ".mmd");
       source.text +=
           "```mermaid\n" + std::string((std::istreambuf_iterator<char>(file)), {}) + "\n```\n\n";
@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
     unsigned diagrams = 0;
     for (const auto& b : model->blocks)
       diagrams += bool(b.diagramScene);
-    CHECK(diagrams == 6);
+    CHECK(diagrams == 7);
     auto frame = renderer.layout(*model, {595, 1, {LayoutMode::Paged, {}}}, metrics);
     for (const auto& run : frame->runs) {
       auto page = std::size_t(run.bounds.y / frame->pages.paper.height);

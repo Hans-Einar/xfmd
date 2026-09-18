@@ -54,7 +54,7 @@ void run() {
   auto paged = renderer.layout(*model, {595, 2, {LayoutMode::Paged, {}}}, metrics);
   CHECK(paged->pages.slices.size() == 1);
   CHECK(paged->readingText == frame->readingText);
-  for (const auto* name : {"apt-import", "sequence-fragments"}) {
+  for (const auto* name : {"apt-import", "sequence-fragments", "sequence-nested"}) {
     std::ifstream file(std::string(XFMD_SEQUENCE_FIXTURES) + "/" + name + ".mmd");
     SourceSnapshot sequence{{9, 1},
                             "Before\n\n```mermaid\n" +
@@ -68,7 +68,7 @@ void run() {
     for (const auto& block : prepared->blocks)
       if (block.diagramScene)
         scene = block.diagramScene;
-    CHECK(scene && scene->diagnostics.find("Sequence 1") != std::string::npos);
+    CHECK(scene && scene->diagnostics.find("Sequence 2") != std::string::npos);
     for (const auto width : {320., 900.}) {
       auto view = renderer.layout(*prepared, {width, 1}, metrics);
       CHECK(view->readingText.find("Before") != std::string::npos);
@@ -104,13 +104,13 @@ void run() {
   }
   SourceSnapshot unsupported{{9, 2},
                              "Before\n\n```mermaid\nsequenceDiagram\nparticipant A\nparticipant "
-                             "B\nA-)B: async\n```\n\nAfter",
+                             "B\nA-xB: lost\n```\n\nAfter",
                              {},
                              false};
   auto fallback = DiagramServices::prepare(parser->parse(unsupported), unsupported, metrics,
                                            [] { return false; });
   auto fallbackFrame = renderer.layout(*fallback, {600, 1}, metrics);
-  CHECK(fallbackFrame->readingText.find("A-)B: async") != std::string::npos);
+  CHECK(fallbackFrame->readingText.find("A-xB: lost") != std::string::npos);
   CHECK(fallbackFrame->readingText.find("Mermaid:") != std::string::npos);
   CHECK(fallbackFrame->readingText.find("After") != std::string::npos);
 }

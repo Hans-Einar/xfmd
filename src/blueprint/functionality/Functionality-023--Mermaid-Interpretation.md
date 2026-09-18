@@ -61,3 +61,7 @@ P36: [Typed dekning og Sequence 1](../../../docs/design/mermaid-coverage.md)
 utvider samme porter. Sequence 1 er Implemented; verifikasjon dokumenteres separat.
 
 P36: [Faktiske kontroller og grenser](../../../docs/evidence/P36.md).
+
+P37 Implemented: Sequence 2 bruker samme `parse`/`graph`-innganger, utvidede
+ordnede hendelser, async-piltype og forkens `sequence_events::apply`.
+Se [revisjon 2](../../../docs/design/mermaid-coverage.md).

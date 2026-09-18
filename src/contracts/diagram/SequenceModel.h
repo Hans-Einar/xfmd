@@ -21,7 +21,9 @@ enum class SequenceEventKind : std::uint32_t {
   Par,
   Else,
   And,
-  End
+  End,
+  Async,
+  AsyncReply
 };
 struct SequenceEvent {
   SequenceEventKind kind;

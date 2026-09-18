@@ -15,7 +15,7 @@ void run() {
   MermaidInterpreter parser;
   MermaidDiagramLayout layout;
   SharedTextMetrics metrics;
-  for (const auto* name : {"apt-import", "sequence-fragments"}) {
+  for (const auto* name : {"apt-import", "sequence-fragments", "sequence-nested"}) {
     std::ifstream file(std::string(XFMD_DIAGRAM_FIXTURES) + "/" + name + ".mmd");
     std::string text((std::istreambuf_iterator<char>(file)), {});
     auto parsed = parser.parse({text, {}});
@@ -23,9 +23,10 @@ void run() {
       throw std::runtime_error(parsed.error);
     CHECK(parsed.model->sequence && parsed.model->nodes.empty());
     auto scene = layout.layout(*parsed.model, {}, metrics);
-    CHECK(scene->svg.find(std::string(name) == "apt-import" ? "Operatør" : "Måletjeneste") !=
-          std::string::npos);
-    CHECK(scene->diagnostics.find("Sequence 1") != std::string::npos);
+    CHECK(
+        scene->svg.find(std::string(name) != "sequence-fragments" ? "Operatør" : "Måletjeneste") !=
+        std::string::npos);
+    CHECK(scene->diagnostics.find("Sequence 2") != std::string::npos);
     CHECK(scene->nodes.empty() && scene->edges.empty());
     diagramWire::Writer wire;
     wire.model(*parsed.model);

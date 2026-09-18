@@ -141,3 +141,16 @@ ansvarsroller, ikke implisitte tråder; async-piler fastsetter ikke scheduling.
 Alle nye typer må derfor ha egne profiler og mappingtester, også når layouten
 internt gjenbruker bibliotekets flowchart-plassering. Deling av en algoritme er
 lovlig; tap av typed mening i XFMD-kontrakten er ikke det.
+
+## Revisjon 2 — P37 Sequence 2 (implementert)
+
+P37 bevarer ordnede Message/Note/Activate/Start/Branch/End-hendelser helt frem
+til forkens layout. Egne livslinjer/sekvensrader gjenbrukes; et eksplisitt
+hendelsessteg setter vertikale avstander og nested rammer før SVG, uten
+flowchart-etterbehandling. Åpne `-)`/`--)`-piler skiller async fra lukkede piler.
+Maks nested dybde er 8; aktiveringer må være balansert i hver alternativgren.
+Kildeordning av notater og fragmentgrenser beholdes. Par beskriver mulige
+samtidige aktiviteter, ikke OS-tråder eller konkret scheduling.
+
+Pin: `e36c7374a51a00f3803e97b5e0d117f1d57c9a43`. [P37-bevis](../evidence/P37.md)
+og [forfatterprofil](mermaid-sequence-authoring.md) erstatter Sequence 1-grensene ovenfor.

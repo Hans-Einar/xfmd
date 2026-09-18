@@ -22,32 +22,39 @@ pub fn graph(s: &Sequence) -> Graph {
         );
         graph.sequence_participants.push(p.id.clone());
     }
-    let mut frame: Option<SequenceFrame> = None;
     for e in &s.events {
         let first = &s.participants[e.first as usize].id;
         let second = &s.participants[e.second as usize].id;
-        let index = graph.edges.len();
-        match e.kind {
-            Kind::Message | Kind::Reply => graph.edges.push(Edge {
-                from: first.clone(),
-                to: second.clone(),
-                label: Some(e.text.clone()),
-                start_label: None,
-                end_label: None,
-                directed: true,
-                arrow_start: false,
-                arrow_end: true,
-                arrow_start_kind: None,
-                arrow_end_kind: None,
-                start_decoration: None,
-                end_decoration: None,
-                style: if e.kind == Kind::Reply {
-                    EdgeStyle::Dotted
-                } else {
-                    EdgeStyle::Solid
-                },
-            }),
+        let event = match e.kind {
+            Kind::Message | Kind::Reply | Kind::Async | Kind::AsyncReply => {
+                let index = graph.edges.len();
+                graph.edges.push(Edge {
+                    from: first.clone(),
+                    to: second.clone(),
+                    label: Some(e.text.clone()),
+                    start_label: None,
+                    end_label: None,
+                    directed: true,
+                    arrow_start: false,
+                    arrow_end: true,
+                    arrow_start_kind: None,
+                    arrow_end_kind: if matches!(e.kind, Kind::Async | Kind::AsyncReply) {
+                        Some(EdgeArrowhead::OpenV)
+                    } else {
+                        None
+                    },
+                    start_decoration: None,
+                    end_decoration: None,
+                    style: if matches!(e.kind, Kind::Reply | Kind::AsyncReply) {
+                        EdgeStyle::Dotted
+                    } else {
+                        EdgeStyle::Solid
+                    },
+                });
+                SequenceEvent::Message(index)
+            }
             Kind::NoteLeft | Kind::NoteRight | Kind::NoteOver => {
+                let index = graph.sequence_notes.len();
                 graph.sequence_notes.push(SequenceNote {
                     position: match e.kind {
                         Kind::NoteLeft => SequenceNotePosition::LeftOf,
@@ -60,53 +67,25 @@ pub fn graph(s: &Sequence) -> Graph {
                         vec![first.clone(), second.clone()]
                     },
                     label: e.text.clone(),
-                    index,
-                })
-            }
-            Kind::Activate | Kind::Deactivate => {
-                graph.sequence_activations.push(SequenceActivation {
-                    participant: first.clone(),
-                    index: index.saturating_sub(1),
-                    kind: if e.kind == Kind::Activate {
-                        SequenceActivationKind::Activate
-                    } else {
-                        SequenceActivationKind::Deactivate
-                    },
-                })
-            }
-            Kind::Alt | Kind::Opt | Kind::Loop | Kind::Par => {
-                frame = Some(SequenceFrame {
-                    kind: match e.kind {
-                        Kind::Alt => SequenceFrameKind::Alt,
-                        Kind::Opt => SequenceFrameKind::Opt,
-                        Kind::Loop => SequenceFrameKind::Loop,
-                        _ => SequenceFrameKind::Par,
-                    },
-                    sections: vec![SequenceFrameSection {
-                        label: Some(e.text.clone()),
-                        start_idx: index,
-                        end_idx: index,
-                    }],
-                    start_idx: index,
-                    end_idx: index,
-                })
-            }
-            Kind::Else | Kind::And => {
-                let f = frame.as_mut().expect("validated frame");
-                f.sections.last_mut().unwrap().end_idx = index;
-                f.sections.push(SequenceFrameSection {
-                    label: Some(e.text.clone()),
-                    start_idx: index,
-                    end_idx: index,
+                    index: graph.edges.len(),
                 });
+                SequenceEvent::Note(index)
             }
-            Kind::End => {
-                let mut f = frame.take().expect("validated frame");
-                f.end_idx = index;
-                f.sections.last_mut().unwrap().end_idx = index;
-                graph.sequence_frames.push(f);
-            }
-        }
+            Kind::Activate => SequenceEvent::Activate(first.clone()),
+            Kind::Deactivate => SequenceEvent::Deactivate(first.clone()),
+            Kind::Alt | Kind::Opt | Kind::Loop | Kind::Par => SequenceEvent::Start(
+                match e.kind {
+                    Kind::Alt => SequenceFrameKind::Alt,
+                    Kind::Opt => SequenceFrameKind::Opt,
+                    Kind::Loop => SequenceFrameKind::Loop,
+                    _ => SequenceFrameKind::Par,
+                },
+                e.text.clone(),
+            ),
+            Kind::Else | Kind::And => SequenceEvent::Branch(e.text.clone()),
+            Kind::End => SequenceEvent::End,
+        };
+        graph.sequence_events.push(event);
     }
     graph
 }
