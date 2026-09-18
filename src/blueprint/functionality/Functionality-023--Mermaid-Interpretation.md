@@ -78,3 +78,7 @@ P39 Implemented: C4/Architecture/Block utvider SemanticDiagram med egne elemente
 grenser, portretninger og grid. Parserprofiler og native mapping ligger i
 `semantic/{c4,architecture,block}.rs`; felles SVG/PDF-port gjenbrukes.
 Se [profil og kontrakt](../../../docs/design/mermaid-architecture-authoring.md).
+
+P40 Planned: `semantic/planning.rs` parser og native adapter bevarer bitfelt,
+perioder, tidsavhengighet og score. `semantic_planning.rs` i contracts validerer
+typed records før layout. Native packet-geometri implementeres i forken.
