@@ -14,4 +14,12 @@ Ingen ekstra rad. Vindusbredder 450, 640, 1100 og 1900 kontrolleres i GUI-testen
 
 ## Verifikasjon
 
-Planlagt: fasebygg, CompactWorkspaceTest, BuildVersionTest og blueprint-kontroller.
+Bygget `3bb28f5`: `0.1 sprint/002/phase/043-status-version:185`.
+Release-bygg bestått; seks relevante CTests bestått på 7,00 sekunder.
+CompactWorkspaceTest bekrefter høyrekant og separat meldingsfelt ved alle fire
+vindusbredder, samt eksisterende lenkehover. Skjermbildet er visuelt kontrollert.
+[Tester](evidence/tests.txt), [metadata](evidence/build.json), [skjermbilde](evidence/status-version.png).
+
+Den tidligere full-suite-kjøringen på PR35 ble avbrutt under oppfølgingen;
+den brukes ikke som fullstendig testbevis. Ingen ny full-suite-påstand.
+M03 dokumenterer bevis uten nytt bygg av uendret kode.
