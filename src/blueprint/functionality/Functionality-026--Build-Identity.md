@@ -14,7 +14,7 @@ uses: none
 
 ## 1. Hensikt og avgrensning
 
-Gi CLI, vindustittel og installasjon én stabil identitet for faktisk bygget kode.
+Gi CLI, vindustittel, statuslinje og installasjon én stabil identitet for faktisk bygget kode.
 Byggverktøy eier Git-lesing; applikasjonen bruker kun innbakte verdier. Ingen ny feature.
 
 ## 2. Krav og akseptanse
@@ -39,11 +39,11 @@ skrives ikke på nytt. JSON har SHA for audit, mens brukeren ser et heltall.
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | CMake build target | `identity` | `tools/build_identity.py` | VERSION + Git → identitet | shallow/ugyldig versjon feiler | Implemented |
-| 2 | CLI main / Application::updateUi | `buildVersion` | `src/application/build/BuildVersion.cpp` | innbakt tekst → CLI/vindu | ingen runtime-I/O | Implemented |
+| 2 | CLI main / Application::updateUi / XfmdWindow::buildUi | `buildVersion` | `src/application/build/BuildVersion.cpp` | innbakt tekst → CLI/vindu/statuslinje | ingen runtime-I/O | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
-CLI og vindustittel bruker samme application-tjeneste. CPack/man-side bruker
+CLI, vindustittel og høyrejustert statusfelt bruker samme application-tjeneste. CPack/man-side bruker
 major/minor fra VERSION. Interpreter og renderer får ingen ny avhengighet.
 
 ## 7. Verifikasjon
@@ -52,6 +52,9 @@ Sju isolerte Git-fixtures for AT-067 består. CLI-/vindustittelkontroll for AT-0
 består i fasebygget. Blueprint-validatoren støtter nå navngitt Python-plumbing
 under tools/, i tillegg til C++/Rust under src/.
 Faktisk resultat: [Sprint 001 / fase 042](../../../sprints/Sprint-001--Versioning/Phase-042--Build-Identity.md).
+
+Statusfeltet har egen label slik at lenkehover og meldinger ikke overskriver versjonen.
+CompactWorkspaceTest kontrollerer identitet, høyrejustering og plassering ved fire vindusbredder.
 
 ## 8. Status, risiko og endringskonsekvenser
 
