@@ -26,7 +26,7 @@ Git-SHA lagres bare som teknisk sporbarhet i byggmetadata, ikke som commitnummer
 ## Bygg og særtilfeller
 
 Versjonen genereres ved eksplisitt CMake-bygg, ikke ved commit og ikke ved oppstart.
-Den vises av `xfmd --version` og i vindustittelen. Det tilføyes ingen ekstra
+Den vises av `xfmd --version`, i vindustittelen og høyrejustert i nederste statuslinje. Det tilføyes ingen ekstra
 verktøylinje. Bygget skriver også `build/generated/xfmd-build.json` med full
 kildeidentitet. Et allerede bygget program endrer ikke versjon når Git flyttes.
 

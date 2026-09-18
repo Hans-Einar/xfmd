@@ -30,6 +30,7 @@ public:
   FX::FXSplitter* split = nullptr;
   FX::FXVerticalFrame* previewArea = nullptr;
   FX::FXLabel* status = nullptr;
+  FX::FXLabel* versionStatus = nullptr;
   XfmdWindow(FX::FXApp*, CommandRouter&, UiContext&);
   void buildToolbar();
   void setDocumentLabel(const std::string&, bool dirty);

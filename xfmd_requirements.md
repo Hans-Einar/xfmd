@@ -332,5 +332,5 @@ avgrenset, men romme minst ett eksempel per implementert diagramtype.
 
 | ID | Krav | Akseptanse |
 | --- | --- | --- |
-| UR-042 | CLI og vindustittel viser major.minor, branch (PR-nummer på main når kjent) og numerisk commitnummer. | AT-066: samme innbakte identitet i CLI/vindu; dirty og ukjent kilde markeres. |
+| UR-042 | CLI, vindustittel og høyrejustert tekst i nederste statuslinje viser major.minor, branch (PR-nummer på main når kjent) og numerisk commitnummer. | AT-066: samme innbakte identitet i CLI/vindu/statuslinje; dirty og ukjent kilde markeres. |
 | SR-025 | Identiteten beregnes fra full Git-historikk uten nettverk eller en konfliktskapende tellerfil. Et eksplisitt bygg oppdaterer metadata også uten ny CMake-konfigurering; samme commit gir stabil identitet. | AT-067: lineære commits, branches, merge, main etter PR, detached, dirty, shallow og kildearkiv; uendret metadata omskrives ikke. |

@@ -39,6 +39,11 @@ void run() {
   for (int width : {1900, 1100, 640, 450}) {
     app.window->resize(width, 800);
     events(app);
+    auto* version = app.window->versionStatus;
+    CHECK(version->getText() == buildVersion());
+    CHECK(version->getJustify() & JUSTIFY_RIGHT);
+    CHECK(version->getX() + version->getWidth() == version->getParent()->getWidth());
+    CHECK(app.window->status->getX() + app.window->status->getWidth() <= version->getX());
     CHECK(toolbar->getHeight() <= (width >= 1100 ? 40 : 110));
     for (auto* a = toolbar->getFirst(); a; a = a->getNext())
       if (a->shown()) {

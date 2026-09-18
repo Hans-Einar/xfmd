@@ -1,4 +1,5 @@
 #include "XfmdWindow.h"
+#include "application/build/BuildVersion.h"
 #include <fxkeys.h>
 using namespace FX;
 namespace xfmd {
@@ -63,8 +64,12 @@ void XfmdWindow::buildUi() {
   add(goMenu, "&Forward\tAlt+Right", CommandRouter::Forward, UiIcon::Forward);
   new FXMenuTitle(bar, "&Go", nullptr, goMenu);
   buildToolbar();
-  status = new FXLabel(this, "Open a local Markdown or text file.", nullptr,
-                       LAYOUT_SIDE_BOTTOM | LAYOUT_FILL_X | JUSTIFY_LEFT);
+  auto* statusRow = new FXHorizontalFrame(this, LAYOUT_SIDE_BOTTOM | LAYOUT_FILL_X,
+                                           0, 0, 0, 0, 0, 0, 0, 0);
+  versionStatus = new FXLabel(statusRow, buildVersion(), nullptr,
+                              LAYOUT_SIDE_RIGHT | JUSTIFY_RIGHT);
+  status = new FXLabel(statusRow, "Open a local Markdown or text file.", nullptr,
+                       LAYOUT_FILL_X | JUSTIFY_LEFT);
   auto* workspace =
       new FXSplitter(this, SPLITTER_HORIZONTAL | SPLITTER_TRACKING | LAYOUT_FILL_X | LAYOUT_FILL_Y);
   workspacePanel = new WorkspacePanel(workspace, *ui);
