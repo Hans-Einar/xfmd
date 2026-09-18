@@ -1,0 +1,8 @@
+zenuml
+    Sensor as Measurement source
+    Service as Measurement service
+    UI as Operator UI
+    Sensor->Service: Observation with session and revision
+    Service->UI: Current value notification
+    Sensor->Service: Late observation
+    Service->UI: Stale value retained

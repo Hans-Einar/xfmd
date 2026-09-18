@@ -38,21 +38,22 @@ Layout forberedes i worker. Tekstmåling skjer med samme fontgrunnlag som brødt
 | 4 | `xfmd_diagram_layout_measured_v1` | `layout` | `src/renderer/diagram/rust/src/lib.rs` | mapping → forkens routed::compute/render_svg → geometri og SVG | inputpayload 5 / model 3 / scene 3; maks 8 MiB | Implemented |
 | 5 | `MermaidDiagramLayout::layout` | `Reader::finish` | `src/contracts/diagram/DiagramWire.h` | ferdig dekodet scene → kontrollert buffer | trailing data avvises; scene er XFMD-eid | Implemented |
 | 6 | `BlockLayout::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | SVG-scene → én skalert visual-run | Approximate blokkanker, ingen sideklipping | Implemented |
-
 | 7 | `layout` | `render_svg` | `src/renderer/diagram/rust/src/lib.rs` | eksisterende Layout → SVG-bytes | ingen ny parsing | Implemented |
-
 | 8 | `layout` | `with_measurements` | `src/renderer/diagram/rust/src/lib.rs` | scoped TextBlock-mål og frist → valgt layout | TLS gjenopprettes også ved panic | Implemented |
 | 9 | `layout` | `compute` | `src/renderer/diagram/rust/src/lib.rs` | graph + Engine + RoutingControl → RoutedLayout | Libavoid-feil blir synlig kildefallback | Implemented |
 | 10 | `layout` | `render_svg_with_crossings` | `src/renderer/diagram/rust/src/lib.rs` | ferdige logiske ruter → valgfrie presentasjonshopp | ingen endring av rutepunkter | Implemented |
-
 | 11 | `layout` | `add_label_leaders` | `src/renderer/diagram/rust/src/lib.rs` | ferdig SVG + immutable Layout → SVG med pekere og antall utelatelser | ingen ruteflytting; blokkerte pekere utelates med diagnostikk | Implemented |
-
 | P36 | `layout` | `graph` | `src/renderer/diagram/rust/src/sequence.rs` | SequenceModel → dedikert sekvens-IR | bare validerte hendelser | Implemented |
 | P36 | `layout` | `measurements::layout` | `src/renderer/diagram/rust/src/lib.rs` | målte sekvensetiketter → layout og SVG | kooperativ frist; ingen flowchart-ruting | Implemented |
-
 | P38 | `xfmd_diagram_layout_measured_v1` | `layout_measured` | `src/renderer/diagram/rust/src/lib.rs` | typed model + lånt measurer → native layout/SVG | callback lever bare under synkront kall | Implemented |
 | P38 | `layout_measured` | `graph` | `src/renderer/diagram/rust/src/semantic/mod.rs` | domenerekorder → riktig native DiagramKind | validerer kontrakt; ingen kildeparsing | Implemented |
 | P38 | `text_metrics::measure` | `measureDiagramText` | `src/renderer/diagram/MermaidDiagramLayout.cpp` | UTF-8 + størrelse → ITextMetrics-mål | exceptions blir feilkode over C ABI | Implemented |
+| P39–41 | `semantic::graph` | `populate` | `src/renderer/diagram/rust/src/semantic/c4.rs` | domain records → C4Data | validert modell, ingen parsing | Implemented |
+| P39–41 | `semantic::graph` | `populate` | `src/renderer/diagram/rust/src/semantic/architecture.rs` | domain records → native portgeometri | validert modell, ingen parsing | Implemented |
+| P39–41 | `semantic::graph` | `populate` | `src/renderer/diagram/rust/src/semantic/block.rs` | domain records → BlockDiagram | validert modell, ingen parsing | Implemented |
+| P39–41 | `semantic::graph` | `populate` | `src/renderer/diagram/rust/src/semantic/planning.rs` | domain records → PacketField, TimelineEvent, GanttTask og journey | validert modell, ingen parsing | Implemented |
+| P39–41 | `semantic::graph` | `populate` | `src/renderer/diagram/rust/src/semantic/charts.rs` | domain records → numeriske chart-data | validert modell, ingen parsing | Implemented |
+| P39–41 | `semantic::graph` | `populate` | `src/renderer/diagram/rust/src/semantic/structures.rs` | domain records → tre, commit-graf og ZenUML events | validert modell, ingen parsing | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -167,7 +168,7 @@ P40 Implemented: `semantic/planning.rs` parser og native adapter bevarer bitfelt
 perioder, tidsavhengighet og score. `semantic_planning.rs` i contracts validerer
 typed records før layout. Native packet-geometri implementeres i forken.
 
-P41 Planned: chart/tree/git/ZenUML-profiler bruger egne records.
+P41 Implemented: chart/tree/git/ZenUML-profiler bruker egne records.
 `semantic_charts.rs` validerer koordinater, hierarki og referencer; parserfiler
 `charts`, `trees`, `git`, `zenuml` og rendererfiler `charts`, `structures`
 bevarer semantikk uten original kilde over layoutgrensen.

@@ -39,13 +39,24 @@ void run() {
     auto decoded = reader.model();
     reader.finish();
     CHECK(decoded.sequence->events.size() == parsed.model->sequence->events.size());
-    auto repeated=layout.layout(decoded, {}, metrics);
+    auto repeated = layout.layout(decoded, {}, metrics);
     CHECK(repeated->svg == scene->svg);
     if (const char* directory = std::getenv("XFMD_DIAGRAM_EVIDENCE"))
       std::ofstream(std::string(directory) + "/" + name + ".svg") << scene->svg;
   }
-  for (const auto* name : {"measurement-state", "state-regions", "state-choice", "sdl-class",
-                           "apt-requirements", "provenance-er", "c4-context", "c4-container", "c4-component", "architecture-resources", "block-layers", "packet-encoding", "timeline-decisions", "gantt-pilot", "journey-review"}) {
+  for (const auto* name : {"measurement-state",  "state-regions",
+                           "state-choice",       "sdl-class",
+                           "apt-requirements",   "provenance-er",
+                           "c4-context",         "c4-container",
+                           "c4-component",       "architecture-resources",
+                           "block-layers",       "packet-encoding",
+                           "timeline-decisions", "gantt-pilot",
+                           "journey-review",     "pie-evidence",
+                           "mindmap-review",     "gitgraph-proposal",
+                           "sankey-provenance",  "quadrant-priorities",
+                           "zenuml-observation", "kanban-review",
+                           "radar-quality",      "treemap-effort",
+                           "xychart-evidence"}) {
     std::ifstream file(std::string(XFMD_DIAGRAM_FIXTURES) + "/" + name + ".mmd");
     auto parsed = parser.parse({std::string((std::istreambuf_iterator<char>(file)), {}), {}});
     if (!parsed.model)
@@ -62,7 +73,7 @@ void run() {
     auto decoded = reader.model();
     reader.finish();
     CHECK(decoded.semantic->records.size() == parsed.model->semantic->records.size());
-    auto repeated=layout.layout(decoded, {}, metrics);
+    auto repeated = layout.layout(decoded, {}, metrics);
     // Native libavoid pin ties can change geometry; semantic wire records must not.
     CHECK(repeated->width > 0 && repeated->height > 0);
     CHECK(repeated->svg.find("<text") != std::string::npos);

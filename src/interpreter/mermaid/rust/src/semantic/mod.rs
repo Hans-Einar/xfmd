@@ -2,10 +2,14 @@
 mod architecture;
 mod block;
 mod c4;
+mod charts;
+mod git;
 mod planning;
 mod requirements;
 mod state;
+mod trees;
 mod types;
+mod zenuml;
 use xfmd_diagram_contracts::{
     Model,
     semantic::{DIRECTION, Diagram},
@@ -26,6 +30,16 @@ pub fn parse(source: &str, header: &str) -> Result<Model, String> {
         "timeline" => 10,
         "gantt" => 11,
         "journey" => 12,
+        "pie" | "pie showData" => 13,
+        "mindmap" => 14,
+        "gitGraph" => 15,
+        "sankey" | "sankey-beta" => 16,
+        "quadrantChart" => 17,
+        "zenuml" => 18,
+        "kanban" => 19,
+        "radar-beta" => 20,
+        "treemap-beta" => 21,
+        "xychart-beta" => 22,
         _ => return Err(format!("Unsupported diagram family: {header}")),
     };
     let mut d = Diagram {
@@ -46,6 +60,10 @@ pub fn parse(source: &str, header: &str) -> Result<Model, String> {
         7 => architecture::parse(&lines, &mut d)?,
         8 => block::parse(&lines, &mut d)?,
         9..=12 => planning::parse(&lines, &mut d)?,
+        13 | 16 | 17 | 20 | 22 => charts::parse(&lines, &mut d, header)?,
+        14 | 19 | 21 => trees::parse(source, &mut d)?,
+        15 => git::parse(&lines, &mut d)?,
+        18 => zenuml::parse(&lines, &mut d)?,
         _ => unreachable!(),
     }
     d.validate()?;
@@ -186,3 +204,6 @@ mod architecture_tests;
 
 #[cfg(test)]
 mod planning_tests;
+
+#[cfg(test)]
+mod chart_tests;

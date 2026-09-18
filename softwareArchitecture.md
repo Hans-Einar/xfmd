@@ -483,3 +483,9 @@ profilene; tilsvarende renderer-filer mapper til native typer uten ny parsing.
 P40: `semantic_planning.rs` i contracts eier bit-/tids-/score-skjema.
 `semantic/planning.rs` i interpreter og renderer eier henholdsvis profil og
 native mapping. Packet-bitruter ligger i forkens `layout/packet.rs`.
+
+P41: `semantic_charts.rs` validerer chart-/tre-/commit-records. Parserrollene
+ligger i `semantic/{charts,trees,git,zenuml}.rs`; native konstruksjon ligger i
+rendererens `semantic/{charts,structures}.rs`. Hver fil har én profil-/mappingrolle.
+`semantic.rs` er omtrent 310 linjer fordi basisskjema, referansevalidering og wire
+fortsatt hører sammen; nye familier delegeres til egne valideringsfiler.

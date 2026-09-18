@@ -1,6 +1,6 @@
 # Øvrige Mermaid-profiler — revisjon 1
 
-P41 Planned; UR-039/040, SR-021/022, FUNC-023/024/025. Alle profiler er
+P41 Implemented; UR-039/040, SR-021/022, FUNC-023/024/025. Alle profiler er
 avgrensede; ukjente utsagn avvises. Ingen JS, nettverk eller ekstern tjeneste.
 De er illustrasjoner og utforskning, ikke typekontroll eller aksepterte SDL-regler.
 
@@ -24,3 +24,8 @@ asynkrone pilspisser. Samme kildegrense, frist og SVG/PDF-port gjelder.
 
 Nye Mermaid-typer uten DiagramKind i pinnen er fremtidig dekning, ikke stille
 konvertering. Oppdatert støttematrise skiller disse fra de 23 typene i denne pinnen.
+
+Kilder: Mermaid sine offisielle syntax-sider for pie, mindmap, gitgraph, sankey,
+quadrantChart, zenuml, kanban, radar, treemap og xychart. ZenUML `A->B: text`
+er asynkron syntaks; vanlige sequenceDiagram-pilformer avvises i den profilen.
+GitGraph `branch` bytter aktiv branch slik standarden beskriver.

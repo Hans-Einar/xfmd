@@ -1,8 +1,10 @@
 mod architecture;
 mod block;
 mod c4;
+mod charts;
 mod planning;
 mod state;
+mod structures;
 mod types;
 use mermaid_rs_renderer::ir::*;
 use xfmd_diagram_contracts::semantic::*;
@@ -21,6 +23,16 @@ pub fn graph(d: &Diagram) -> Result<Graph, String> {
         10 => DiagramKind::Timeline,
         11 => DiagramKind::Gantt,
         12 => DiagramKind::Journey,
+        13 => DiagramKind::Pie,
+        14 => DiagramKind::Mindmap,
+        15 => DiagramKind::GitGraph,
+        16 => DiagramKind::Sankey,
+        17 => DiagramKind::Quadrant,
+        18 => DiagramKind::ZenUML,
+        19 => DiagramKind::Kanban,
+        20 => DiagramKind::Radar,
+        21 => DiagramKind::Treemap,
+        22 => DiagramKind::XYChart,
         _ => return Err("Unknown semantic family".into()),
     };
     if let Some(r) = d.records.iter().find(|r| r.tag == DIRECTION) {
@@ -38,6 +50,8 @@ pub fn graph(d: &Diagram) -> Result<Graph, String> {
         7 => architecture::populate(d, &mut g),
         8 => block::populate(d, &mut g),
         9..=12 => planning::populate(d, &mut g),
+        13 | 16 | 17 | 20 | 22 => charts::populate(d, &mut g),
+        14 | 15 | 18 | 19 | 21 => structures::populate(d, &mut g),
         _ => unreachable!(),
     }
     Ok(g)

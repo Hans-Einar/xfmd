@@ -1,4 +1,61 @@
-# Mermaid-dekning — revisjon 1, P36
+# Mermaid-dekning — revisjon 6, P41
+
+Dato: 2026-09-18. XFMD støtter **23 familier gjennom eksplisitte delprofiler**.
+[Praktisk galleri](../../mermaid_evicence.md): 29 eksempler. Ingen full
+JS-Mermaid-kompatibilitet påstås. Forslagene i SDL/SDP-eksemplene er fortsatt forslag.
+Upstream-base `3726ccbffe0e8032361eb9668694b24f77858060`; endelig fork-pin `c2ccccbc27dcc087268983d84f010300e868d26e` står i
+[pin-manifestet](../../cmake/mermaid-source.json). [Faktiske bevis](../evidence/P41.md).
+
+I tabellen betyr «P/L/S» kildeinspisert parser/layout/SVG i upstream; det er
+ikke ende-til-ende-kompatibilitet. Alle XFMD-rader nedenfor har **streng parser,
+egen modell, layout, SVG-preview og vektor-PDF** for den dokumenterte profilen.
+Ingen renderer parser Mermaid-kildetekst, og bibliotekstyper krysser ikke kontrakten.
+
+| Familie | Upstream → pin | Bevarte konstruksjoner / XFMD-modell | Layout | Preview/PDF | Viktigste profilgrenser |
+| --- | --- | --- | --- | --- | --- |
+| Flowchart | P/L/S → forbedret ruting | Noder, former, kanter, grupper | Native plassering + Libavoid/Legacy | SVG/vektor | Flowchart 1, ingen vilkårlige styles/directives |
+| Sequence | P/L/S → ordnet event-IR | Actors/alias, sync/reply/async, activation, notes, nested alt/opt/loop/par | Sequence events | SVG/vektor | Åtte nivåer, balansert aktivitet ved grengrense |
+| State v2 | P/L/S → målte etiketter/ruting | State, transition, composite, region, choice, fork/join | Native + Libavoid flate grafer | SVG/vektor | Native composite-ruting; guardtekst evalueres ikke |
+| Class | P/L/S → markørrettinger | Typer, medlemmer, annotations, relasjoner, multiplicitet | Native + Libavoid | SVG/vektor | Ingen generics eller styles; ikke SDL-typekontroll |
+| Requirement | P/L/S → målt routing | Krav/element-identitet, attributter, Mermaid-relasjoner | Native + Libavoid | SVG/vektor | Verifies er ikke bestått test |
+| ER | P/L/S → crowfoot-retting | Entitet, attributt/nøkkel, kardinalitet, identifying | Native + Libavoid | SVG/vektor | Ingen databaseskjema-generering |
+| C4 | P/L/S → samme native layout | Context/container/component, grenser, ansvar, relasjoner | C4Data | SVG/vektor | Ingen Dynamic/Deployment, styles eller eksterne ressurser |
+| Architecture | P/L/S → samme native layout | Grupper, services, junctions, L/R/T/B-porter | Architecture | SVG/vektor | Ingen nested groups, group-kanter eller eksterne icons |
+| Block | P/L/S → grenseklippede piler | Grid, spans, spaces, rektangler, forbindelser | Block grid | SVG/vektor | Ingen nested block eller spesialformer |
+| Packet | Generisk flowchart → typed bitlayout | Start/end-bit, label, relative antall | 32-bit-rader | SVG/vektor | 4096 bits/128 felt, ingen overlapp eller init |
+| Timeline | P/L/S → native | Perioder, hendelser, seksjoner, tittel | Timeline | SVG/vektor | Kategorisk tid, ikke proporsjonal kalender |
+| Gantt | P/L/S → tittelplass rettet | ID, start/duration/after, section/status | Gantt | SVG/vektor | YYYY-MM-DD, hele dager, én tidligere avhengighet |
+| Journey | P/L/S → native | Ordnet oppgave, score, aktører, seksjon | Journey | SVG/vektor | Score 1–5, ingen styling |
+| Pie | P/L/S → native | Kategori/positiv verdi, tittel, showData | Pie | SVG/vektor | Maks 12 kategorier |
+| Mindmap | P/L/S → native | Foreldretre og fire nodeformer | Mindmap | SVG/vektor | Én rot, åtte nivåer, ingen icon/class |
+| GitGraph | P/L/S → native | Branch, commit-foreldre, checkout, merge | GitGraph LR | SVG/vektor | Eksplisitte commit-ID-er; ingen cherry-pick/tag/type |
+| Sankey | P/L/S → målt caption-avstand | Ordnet vektet strømnett | Sankey | SVG/vektor | Positiv DAG, enkel CSV uten quotes |
+| Quadrant | P/L/S → native | Akseender, quadrant-navn, punktkoordinater | Quadrant | SVG/vektor | Punkter 0–1, ingen styling |
+| ZenUML | Begrenset arrow-parser → egen profil | Deltakere/alias og asynkrone meldinger | Native sequence/OpenV | SVG/vektor | Ingen sync/creation/reply/kontrollblokker |
+| Kanban | P/L/S → headerklaring | Kolonner, kort og tilhørighet | Kanban | SVG/vektor | Ingen metadata eller assignments |
+| Radar | P/L/S → native | Akser/alias, komplette kurver, skala/graticule | Radar | SVG/vektor | 3–12 akser, posisjonelle verdier |
+| Treemap | P/L/S → native | Foreldretre og positive bladvekter | Treemap | SVG/vektor | Sitert tekst, foreldre uten egenverdi |
+| XYChart | P/L/S → native | Kategorier, Y-range, bar/line-serier | XYChart | SVG/vektor | Vertikal, 1–12 kategorier, komplette serier |
+
+Profiler: [Flowchart](mermaid-integration.md), [Sequence](mermaid-sequence-authoring.md),
+[State/Class/Requirement/ER](mermaid-semantic-authoring.md),
+[arkitektur](mermaid-architecture-authoring.md), [planlegging](mermaid-planning-authoring.md),
+[øvrige familier](mermaid-broad-authoring.md).
+
+Grenser: 64 KiB kilde, 64 blokker/dokument, 8 MiB/scene og 64 MiB samlede scenesvar.
+Kooperative frister er ikke hard preemption. Byteidentisk Libavoid-SVG er ikke
+lovet ved konkurrerende porter; feil blir eksplisitt kildefallback. Composite
+state og C4 bruker bibliotekets enklere ruting. Store diagrammer skaleres ned
+på A4 og kan bli små; diagramtekst er ikke separat markerbar i preview.
+Diagramfarger følger previewpaletten, mens kategorifarger beholdes der de bærer mening.
+
+Nyere JS-Mermaid-familier som ikke finnes i pinnen (for eksempel use-case,
+swimlanes og event modeling) er framtidig arbeid. Neste revisjoner kan utvide
+hver profil med egne akseptanseeksempler; de skal ikke åpnes ved bare å endre headerlisten.
+
+## Historikk: revisjon 1–5
+
+### Revisjon 1, P36
 
 Dato: 2026-09-18. Status: Sequence 1 implementert; [faktiske testbevis](../evidence/P36.md).
 Upstream HEAD kontrollert med `git ls-remote`: `3726ccbffe0e8032361eb9668694b24f77858060`.

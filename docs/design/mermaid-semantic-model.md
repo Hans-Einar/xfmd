@@ -69,3 +69,5 @@ byteidentisk SVG er ikke garantert. Åtte gjentakelser kontrollerer kantidentite
 etikettinnhold og ortogonalitet; dette er ikke bevis for determinisme.
 Forsøk med pin-kostnader og adresseuavhengige sammenligninger løste ikke hele
 problemet og er ikke inkludert. Egen router-revisjon gjenstår.
+
+Det komplette [record-skjemaet](mermaid-record-schema.md) beskriver også P39–P41.

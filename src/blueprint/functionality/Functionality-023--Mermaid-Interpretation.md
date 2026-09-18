@@ -38,13 +38,18 @@ Gjenkjenn bare eksplisitt mermaid-gjerde. Rust bruker parse_mermaid_strict, men 
 | 4 | `xfmd_mermaid_parse_v1` | `parse` | `src/interpreter/mermaid/rust/src/lib.rs` | UTF-8 → profil, upstream og modell | Result/feil returneres til ABI | Implemented |
 | 5 | `parse` | `inspect` | `src/interpreter/mermaid/rust/src/profile.rs` | kilde → tillatt Flowchart 1 | ikke godta uavklart syntaks | Implemented |
 | 6 | `parse` | `map_graph` | `src/interpreter/mermaid/rust/src/model.rs` | upstream Graph → ren modell | kontroller enums og bevarte noder/kanter | Implemented |
-
-
 | P36 | `parse` | `parse` | `src/interpreter/mermaid/rust/src/sequence.rs` | Sequence 1 → ordnede hendelser + kontroll mot bibliotekparser | ukjent syntaks/scope gir feil | Implemented |
 | P36 | `Sequence::read` | `validate` | `src/contracts/diagram/rust/src/sequence.rs` | typed wire → grenser, referanser og balanserte fragmenter | ugyldige verdier avvises | Implemented |
-
 | P38 | `parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/mod.rs` | standard Mermaid → typed State/Class/Requirement/ER-rekorder | full profilkonsum; ukjent syntaks avvises | Implemented |
 | P38 | `Diagram::read` | `validate` | `src/contracts/diagram/rust/src/semantic.rs` | model wire 3 → skjema, identiteter, scope og enumerasjoner | lokal feil før layout | Implemented |
+| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/c4.rs` | standard profil → grenser og ansvar | avvis tap/ukjent syntaks | Implemented |
+| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/architecture.rs` | standard profil → grupper og portretninger | avvis tap/ukjent syntaks | Implemented |
+| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/block.rs` | standard profil → grid og spans | avvis tap/ukjent syntaks | Implemented |
+| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/planning.rs` | standard profil → bitfelt, tid og score | avvis tap/ukjent syntaks | Implemented |
+| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/charts.rs` | standard profil → vekt, akser og kurver | avvis tap/ukjent syntaks | Implemented |
+| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/trees.rs` | standard profil → innrykk og foreldre | avvis tap/ukjent syntaks | Implemented |
+| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/git.rs` | standard profil → branch og commit-foreldre | avvis tap/ukjent syntaks | Implemented |
+| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/zenuml.rs` | standard profil → asynkrone meldinger | avvis tap/ukjent syntaks | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -83,7 +88,7 @@ P40 Implemented: `semantic/planning.rs` parser og native adapter bevarer bitfelt
 perioder, tidsavhengighet og score. `semantic_planning.rs` i contracts validerer
 typed records før layout. Native packet-geometri implementeres i forken.
 
-P41 Planned: chart/tree/git/ZenUML-profiler bruger egne records.
+P41 Implemented: chart/tree/git/ZenUML-profiler bruker egne records.
 `semantic_charts.rs` validerer koordinater, hierarki og referencer; parserfiler
 `charts`, `trees`, `git`, `zenuml` og rendererfiler `charts`, `structures`
 bevarer semantikk uten original kilde over layoutgrensen.

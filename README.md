@@ -329,3 +329,12 @@ P36 legger til en avgrenset `sequenceDiagram`-profil. Se
 [forfatterveiledningen](docs/design/mermaid-sequence-authoring.md) og
 [versjonert Mermaid-matrise](docs/design/mermaid-coverage.md). Bibliotekets
 annonserte diagramtyper er ikke automatisk støttet ende til ende i XFMD.
+
+## Mermaid-galleri (P37–P41)
+
+Start fra build-mappen: `./xfmd ../mermaid_evicence.md`.
+[Det praktiske galleriet](mermaid_evicence.md) har 29 eksempler for de 23 familiene
+i den låste avhengigheten. Dette er dokumenterte delprofiler, ikke full
+JS-Mermaid-kompatibilitet. Ustøttet syntaks gir lokal kildefallback med forklaring.
+[Oppdatert matrise og profilveiledninger](docs/design/mermaid-coverage.md) skiller
+upstream, fork og faktisk preview/PDF-støtte. Alle familier virker offline.

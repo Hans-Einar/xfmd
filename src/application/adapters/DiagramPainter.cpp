@@ -26,6 +26,9 @@ void DiagramPainter::paint(cairo_t* cr, const DiagramScene& scene, Rect bounds,
                    mapping("#0F172A", ink) + mapping("#64748B", ink) +
                    mapping("#FFF7ED", palette.surface) + mapping("#FDBA74", palette.border) +
                    mapping("#94A3B8", palette.border) + mapping("#CBD5E1", palette.border) +
+                   mapping("#131300", ink) + mapping("#c7c7f1", palette.border) +
+                   mapping("#ECECFF", palette.surface) + mapping("#f1f1ff", palette.alternate) +
+                   mapping("#f6f6ff", palette.surface) + mapping("#fbfbff", palette.alternate) +
                    "text[fill=\"#FFFFFF\"] {fill:#FFFFFF !important;}";
   cairo_save(cr);
   try {

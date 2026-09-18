@@ -1,6 +1,7 @@
 # Mermaid — praktiske eksempler i XFMD
 
-Dette dokumentet oppdateres etter hvert implementert inkrement. Eksemplene
+Dette dokumentet viser 29 eksempler som dekker 23 diagramfamilier i den låste avhengigheten.
+Profilene er avgrensede; se [støttematrisen](docs/design/mermaid-coverage.md). Eksemplene
 er forklarende SDL/SDP-kandidater, ikke vedtatt språk eller bevis for beståtte tester.
 Start fra build-mappen med `./xfmd ../mermaid_evicence.md`.
 
@@ -387,4 +388,151 @@ journey
     section Improve
     Discuss alternatives : 4 : Author, Reviewer
     Capture decision : 5 : Author
+```
+
+## Pie — evidenskategorier
+
+Illustrative antall, ikke resultatene fra denne testkjøringen.
+
+```mermaid
+pie showData
+    title Evidence categories
+    "Parser fixtures" : 12
+    "Preview checks" : 8
+    "PDF checks" : 4
+```
+
+## Mindmap — gjennomgang
+
+Et utforskende tankekart.
+
+```mermaid
+mindmap
+  root((Design review))
+    boundaries[Boundaries]
+      Ownership
+      Channels
+    evidence(Evidence)
+      Scenarios
+      Rendering
+```
+
+## GitGraph — forslag og review
+
+En illustrert versjonshistorikk, ikke en Git-operasjon.
+
+```mermaid
+gitGraph
+    commit id:"baseline"
+    branch proposal
+    checkout proposal
+    commit id:"design"
+    commit id:"evidence"
+    checkout main
+    commit id:"review"
+    merge proposal
+```
+
+## Sankey — fordeling av forekomster
+
+Illustrative mengder; ikke en påstand om én-til-én Dataset–Datagram.
+
+```mermaid
+sankey-beta
+Source artifacts,Validated datasets,12
+Validated datasets,Accepted revisions,9
+Validated datasets,Rejected candidates,3
+Accepted revisions,Datagram occurrences,9
+```
+
+## Quadrant — prioriteringer
+
+Plasseringene er forslag til diskusjon.
+
+```mermaid
+quadrantChart
+    title Proposed review priorities
+    x-axis Low uncertainty --> High uncertainty
+    y-axis Low impact --> High impact
+    quadrant-1 Investigate
+    quadrant-2 Protect
+    quadrant-3 Observe
+    quadrant-4 Clarify
+    Session reset : [0.75, 0.85]
+    Label appearance : [0.25, 0.2]
+    Ownership rules : [0.3, 0.8]
+```
+
+## ZenUML — asynkrone observasjoner
+
+Åpne piler beskriver asynkrone meldinger uten å fastsette scheduling.
+
+```mermaid
+zenuml
+    Sensor as Measurement source
+    Service as Measurement service
+    UI as Operator UI
+    Sensor->Service: Observation with session and revision
+    Service->UI: Current value notification
+    Sensor->Service: Late observation
+    Service->UI: Stale value retained
+```
+
+## Kanban — dokumentarbeid
+
+En oversikt over arbeidsobjekter, ikke en obligatorisk prosess.
+
+```mermaid
+kanban
+  proposed[Proposed]
+    boundaries[Clarify system boundaries]
+    ports[Review typed ports]
+  evidence[Evidence]
+    fixtures[Render acceptance fixtures]
+  reviewed[Reviewed]
+    provenance[Document provenance decision]
+```
+
+## Radar — illustrerte vurderinger
+
+Skalaen 0–5 er et eksempel, ikke målte kvalitetspoeng.
+
+```mermaid
+radar-beta
+    title Illustrative review scores
+    axis syntax[Syntax], semantics[Semantics], reading[Readability], evidence[Evidence]
+    curve before[Before]{3, 2, 2, 1}
+    curve after[After]{4, 4, 3, 4}
+    min 0
+    max 5
+    graticule polygon
+```
+
+## Treemap — illustrert innsats
+
+Arealene er proporsjonale med bladverdiene.
+
+```mermaid
+treemap-beta
+  "Documentation"
+    "Design"
+      "Boundaries": 30
+      "Contracts": 25
+    "Verification"
+      "Fixtures": 20
+      "Visual review": 15
+      "PDF": 10
+```
+
+## XYChart — sammenligning
+
+Illustrerte antall; søyler og linje er forskjellige serier.
+
+```mermaid
+xychart-beta
+    title Illustrative evidence counts
+    x-axis [Parser, Model, Preview, PDF]
+    y-axis "Checks" 0 --> 20
+    bar [18, 12, 10, 8]
+    line [12, 10, 8, 6]
 ```

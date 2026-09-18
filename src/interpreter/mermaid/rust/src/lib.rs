@@ -36,6 +36,18 @@ pub fn parse(source: &[u8]) -> Result<Vec<u8>, String> {
         "timeline",
         "gantt",
         "journey",
+        "pie",
+        "pie showData",
+        "mindmap",
+        "gitGraph",
+        "sankey",
+        "sankey-beta",
+        "quadrantChart",
+        "zenuml",
+        "kanban",
+        "radar-beta",
+        "treemap-beta",
+        "xychart-beta",
     ]
     .contains(&header)
     {

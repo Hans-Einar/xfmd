@@ -54,9 +54,34 @@ void run() {
   auto paged = renderer.layout(*model, {595, 2, {LayoutMode::Paged, {}}}, metrics);
   CHECK(paged->pages.slices.size() == 1);
   CHECK(paged->readingText == frame->readingText);
-  for (const auto* name :
-       {"apt-import", "sequence-fragments", "sequence-nested", "measurement-state", "state-regions",
-        "state-choice", "sdl-class", "apt-requirements", "provenance-er", "c4-context", "c4-container", "c4-component", "architecture-resources", "block-layers", "packet-encoding", "timeline-decisions", "gantt-pilot", "journey-review"}) {
+  for (const auto* name : {"apt-import",
+                           "sequence-fragments",
+                           "sequence-nested",
+                           "measurement-state",
+                           "state-regions",
+                           "state-choice",
+                           "sdl-class",
+                           "apt-requirements",
+                           "provenance-er",
+                           "c4-context",
+                           "c4-container",
+                           "c4-component",
+                           "architecture-resources",
+                           "block-layers",
+                           "packet-encoding",
+                           "timeline-decisions",
+                           "gantt-pilot",
+                           "journey-review",
+                           "pie-evidence",
+                           "mindmap-review",
+                           "gitgraph-proposal",
+                           "sankey-provenance",
+                           "quadrant-priorities",
+                           "zenuml-observation",
+                           "kanban-review",
+                           "radar-quality",
+                           "treemap-effort",
+                           "xychart-evidence"}) {
     std::ifstream file(std::string(XFMD_SEQUENCE_FIXTURES) + "/" + name + ".mmd");
     SourceSnapshot sequence{{9, 1},
                             "Before\n\n```mermaid\n" +
@@ -81,27 +106,32 @@ void run() {
                 .001);
         }
     }
-    unsigned long long previousHash = 0;
-    for (bool dark : {false, true}) {
-      const int width = 1000, height = std::ceil(width * scene->height / scene->width);
-      auto* image = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, width, height);
-      auto* canvas = cairo_create(image);
-      auto palette = ReadingPalette::from(ReadingColors::defaults(dark));
-      DiagramPainter::paint(canvas, *scene, {0, 0, double(width), double(height)}, &palette, true);
-      CHECK(cairo_status(canvas) == CAIRO_STATUS_SUCCESS);
-      cairo_surface_flush(image);
-      unsigned long long hash = 1469598103934665603ULL;
-      const auto* bytes = cairo_image_surface_get_data(image);
-      for (int k = 0; k < height * cairo_image_surface_get_stride(image); ++k)
-        hash = (hash ^ bytes[k]) * 1099511628211ULL;
-      CHECK(hash != previousHash);
-      previousHash = hash;
-      if (const auto* directory = std::getenv("XFMD_DIAGRAM_EVIDENCE")) {
-        auto output = std::string(directory) + "/" + name + (dark ? "-dark.png" : "-light.png");
-        CHECK(cairo_surface_write_to_png(image, output.c_str()) == CAIRO_STATUS_SUCCESS);
+    for (const double zoom : {.75, 1., 1.5}) {
+      unsigned long long previousHash = 0;
+      for (bool dark : {false, true}) {
+        const double logicalHeight = std::ceil(1000 * scene->height / scene->width);
+        const int width = std::ceil(1000 * zoom), height = std::ceil(logicalHeight * zoom);
+        auto* image = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, width, height);
+        auto* canvas = cairo_create(image);
+        auto palette = ReadingPalette::from(ReadingColors::defaults(dark));
+        // FOX applies the same Cairo scale through ViewTransform before painting.
+        cairo_scale(canvas, zoom, zoom);
+        DiagramPainter::paint(canvas, *scene, {0, 0, 1000., logicalHeight}, &palette, true);
+        CHECK(cairo_status(canvas) == CAIRO_STATUS_SUCCESS);
+        cairo_surface_flush(image);
+        unsigned long long hash = 1469598103934665603ULL;
+        const auto* bytes = cairo_image_surface_get_data(image);
+        for (int k = 0; k < height * cairo_image_surface_get_stride(image); ++k)
+          hash = (hash ^ bytes[k]) * 1099511628211ULL;
+        CHECK(hash != previousHash);
+        previousHash = hash;
+        if (const auto* directory = std::getenv("XFMD_DIAGRAM_EVIDENCE"); directory && zoom == 1.) {
+          auto output = std::string(directory) + "/" + name + (dark ? "-dark.png" : "-light.png");
+          CHECK(cairo_surface_write_to_png(image, output.c_str()) == CAIRO_STATUS_SUCCESS);
+        }
+        cairo_destroy(canvas);
+        cairo_surface_destroy(image);
       }
-      cairo_destroy(canvas);
-      cairo_surface_destroy(image);
     }
   }
   SourceSnapshot unsupported{{9, 2},
