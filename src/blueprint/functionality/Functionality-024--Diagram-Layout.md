@@ -152,7 +152,7 @@ P36: [Faktiske kontroller og grenser](../../../docs/evidence/P36.md).
 
 P37 Implemented: Sequence 2 bruker samme `parse`/`graph`-innganger, utvidede
 ordnede hendelser, async-piltype og forkens `sequence_events::apply`.
-Se [revisjon 2](../../../mermaid_coverage.md).
+Se [gjeldende dekning](../../../mermaid_coverage.md).
 
 P38 Implemented: `semantic::graph` i `src/renderer/diagram/rust/src/semantic/`
 oversetter domenerekorder til native bibliotektyper. `layout_measured` bruker

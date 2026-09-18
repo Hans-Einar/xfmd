@@ -43,4 +43,3 @@ Versjonsstrengen er fortsatt `xfmd 0.1.0`; pin og binærhash identifiserer denne
 [Støttematrisen](../../mermaid_coverage.md) ligger nå i repo-roten ved siden av
 `mermaid_evicence.md`. Historiske fasebevis beholder sine opprinnelige pins.
 Etterfølgende dokumentasjonscommits endrer ikke den verifiserte programkoden.
-

@@ -51,5 +51,5 @@ Kilder: https://mermaid.js.org/syntax/c4.html,
 https://mermaid.js.org/syntax/architecture.html og
 https://mermaid.js.org/syntax/block.html.
 
-Native block-piler ender foreløpig bak boksene; korreksjon i forken inngår i neste
-pin sammen med packet-layout. C4-relasjoner har bibliotekets enkle routing.
+Block-piler klippes til den synlige boksgrensen. C4-relasjoner har bibliotekets
+enkle routing.
