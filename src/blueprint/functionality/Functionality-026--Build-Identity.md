@@ -49,9 +49,9 @@ major/minor fra VERSION. Interpreter og renderer får ingen ny avhengighet.
 ## 7. Verifikasjon
 
 Sju isolerte Git-fixtures for AT-067 består. CLI-/vindustittelkontroll for AT-066
-kjøres i fasebygget. Blueprint-validatoren støtter nå navngitt Python-plumbing
+består i fasebygget. Blueprint-validatoren støtter nå navngitt Python-plumbing
 under tools/, i tillegg til C++/Rust under src/.
-Fasebyggets faktiske resultat føres i sprintens fasefil.
+Faktisk resultat: [Sprint 001 / fase 042](../../../sprints/Sprint-001--Versioning/Phase-042--Build-Identity.md).
 
 ## 8. Status, risiko og endringskonsekvenser
 

@@ -1,5 +1,9 @@
 # Implementeringsplan: xfmd
 
+Nye leveranser følger [sprintregisteret](sprints/README.md) og
+[gjeldende arbeidsmåte](docs/working-method.md). Faseplanene nedenfor er
+historikk; tidligere PR-per-fase-praksis er erstattet av én PR per sprint.
+
 Status: **P0–P13 implementert og lokalt verifisert**, 2026-09-13.
 Brukeren godkjente designgrunnlaget og autoriserte første leveranse i én sesjon.
 Neste implementeringsløp er konkretisert nedenfor; tekniske kontrakter med
