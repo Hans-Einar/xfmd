@@ -11,9 +11,11 @@ som OK, uten behov for justeringer, og har bestilt merge og installasjon.
 - Pinnen har bare rustfmt-endringer etter P41s `c2ccccb`-baseline. Den gamle
   baseline-kontrollen (59 CTests / 419 forktester) står i [P41](P41.md).
 - `cargo fmt --all -- --check` består nå. Tidligere CI stoppet på formatering.
-- Eldre P38 sanitizer-CI rapporterte lekkasje ved libavoid-porter. P41
-  dedupliserer identiske porter; det er ennå ikke påvist her at dette løser
-  lekkasjen. Ny Release-/sanitizer-CI kjører på gjeldende pin.
+- [CI 35320008006](https://github.com/Hans-Einar/xfmd/actions/runs/35320008006)
+  består med sanitizere både OFF og ON på kodecommit `109b9a9`. Den eldre
+  P38-lekkasjerapporten ved libavoid-porter forekommer ikke i denne kontrollen.
+  P41 dedupliserer identiske porter; ingen lekkasjesuppresjon er lagt til.
+  Senere endringer gjelder kun dokumentasjon og testlogger.
 - Lokal Release-build og 59/59 CTests bestått på 86,61 sekunder, inkludert
   25 isolerte GUI-tester. [Logg](p41-mermaid-coverage/integration-ctest.txt).
 - Installasjonspakken er kontrollert i en isolert staging-mappe (166 filer).

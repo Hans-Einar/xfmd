@@ -66,3 +66,9 @@ P36: [Typed dekning og Sequence 1](../../../mermaid_coverage.md)
 utvider samme porter. Sequence 1 er Implemented; verifikasjon dokumenteres separat.
 
 P36: [Faktiske kontroller og grenser](../../../docs/evidence/P36.md).
+
+Gjeldende P41-status: 23 familier er implementert gjennom eksplisitte delprofiler,
+inkludert Sequence 2. Galleriet har 29 eksempler; preview og PDF bruker samme SVG.
+Forberedelsen håndhever 64 blokker, 8 MiB per scene og 64 MiB samlet scenesvar.
+Se [samlet bevis](../../../docs/evidence/P41.md) og
+[integrasjonsstatus](../../../docs/evidence/P41-integration.md).

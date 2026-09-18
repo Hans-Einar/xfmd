@@ -281,7 +281,9 @@ Installasjonen inkluderer MicroTeX-ressurser og deres opprinnelige lisenser i
 
 ## Mermaid-diagrammer
 
-Gjerder med første infotoken `mermaid` vises med bibliotekets SVG via librsvg/Cairo. Flowchart 1 støtter
+Gjerder med første infotoken `mermaid` vises med bibliotekets SVG via librsvg/Cairo.
+XFMD støtter 23 familier med eksplisitte delprofiler; [støttematrisen](mermaid_coverage.md)
+er gjeldende oversikt. Flowchart 1 støtter
 `flowchart`/`graph` med LR/RL/TD/TB/BT, rektangler, avrundede rektangler,
 beslutningsnoder, sirkler, grupper, kjeder, sykluser og solide/stiplete/tykke
 kanter. Bruk `A[Etikett] -->|Kanttekst| B{Valg}`. Begge brukerdiagrammene
@@ -289,12 +291,13 @@ finnes i `tests/fixtures/markdown/mermaid.md`.
 
 Fargekontrollene virker direkte. Diagrametikettmerking er utsatt; diagramkilden
 kan kopieres fra editoren. A4 og PDF bruker samme SVG og vektorgeometri. Lange LR-diagrammer skaleres ned til
-visningsbredden. Sequence 1 støtter i tillegg en eksplisitt sekvensprofil,
-se forfatterveiledningen nedenfor. Andre typer og init/CSS/HTML/click/ressursdirektiver
-vises som kilde med forklaring, uten å ødelegge resten av dokumentet.
+visningsbredden. Sequence 2 omfatter ordnede hendelser, asynkrone piler og nestede
+fragmenter. De øvrige familiene har egne profiler og modeller. Ustøttede typer,
+konstruksjoner og init/CSS/HTML/click/ressursdirektiver vises som kilde med
+forklaring, uten å ødelegge resten av dokumentet.
 
 Flowchart-grensene er 64 KiB, 128 noder, 512 kanter, 32 grupper, gruppedybde 8 og
-16 diagrammer per dokument. Dyr layout avbrytes kooperativt etter omtrent
+64 diagrammer per dokument, med 8 MiB per scene og 64 MiB samlet scenesvar. Dyr layout avbrytes kooperativt etter omtrent
 to sekunder og gir lokal fallback; dette er ingen hard realtime-garanti.
 AddressSanitizer-bygg har ti sekunders budsjett for instrumenteringskostnaden;
 den installerte Release-utgaven beholder to sekunder.
@@ -325,7 +328,7 @@ Der det er fri plass, får Mermaid-kantetiketter en tynn peker med prikk på
 forbindelsen de tilhører. Venstre side prioriteres, med høyre som alternativ.
 Pekerne følger lesefargene og vises også i PDF; de endrer ikke diagramlayouten.
 
-P36 legger til en avgrenset `sequenceDiagram`-profil. Se
+`sequenceDiagram` bruker den implementerte Sequence 2-profilen. Se
 [forfatterveiledningen](docs/design/mermaid-sequence-authoring.md) og
 [versjonert Mermaid-matrise](mermaid_coverage.md). Bibliotekets
 annonserte diagramtyper er ikke automatisk støttet ende til ende i XFMD.
