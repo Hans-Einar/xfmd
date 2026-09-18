@@ -462,10 +462,10 @@ Branch `phase/p36-sequence-foundation`. M1: undersøk pin/upstream og dokumenter
 matrise, semantiske grenser og roadmap. M2: SequenceModel, versjonert wire,
 streng Sequence 1-profil, separat layoutdispatch og SVG. M3: APT-fixture,
 negative syntakstester, mixed Markdown, preview/PDF og dokumentert evidens.
-Videre sekvensutvidelser og typeprioritet følger [matrisen](docs/design/mermaid-coverage.md).
+Videre sekvensutvidelser og typeprioritet følger [matrisen](mermaid_coverage.md).
 
 P36: M1 `2f94be1`, M2 `39a6a14`; M3 samler [sluttbevis](docs/evidence/P36.md).
-Neste inkrement er Sequence 2 (async og nested scope), deretter prioriterte typer.
+Sequence 2 og de prioriterte familiene er senere implementert i P37–P41 nedenfor.
 
 ## Sammenhengende dekning P37–P41
 
@@ -486,5 +486,7 @@ Mermaid-kilde eller bibliotekeid Graph flyttes inn i layoutkontrakten.
 P37–P41 er implementert: M2 `70ab7b0`, `ab5b61d`, `3e46b04`, `7e32a86` og
 `071a876`. P41 samler sluttkontrollen i [P41](docs/evidence/P41.md),
 med 29 praktiske eksempler for 23 eksplisitte delprofiler. Hver fase ligger på
-egen branch; PR-ene er stablet og ikke slått sammen. Ukjente konstruksjoner gir
+egen branch. Brukeren har godkjent galleriet og bestilt merge/installasjon;
+[gjeldende integrasjonsstatus](docs/evidence/P41-integration.md) beskriver
+faktisk PR-/CI-/installasjonsstatus. Ukjente konstruksjoner gir
 synlig kildefallback; bred type-dekning er ikke full syntakskompatibilitet.

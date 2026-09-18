@@ -411,15 +411,16 @@ innbyrdes avhengighet. FOX forblir applikasjonsteknologien.
 Cmark delegerer eksplisitte mermaid-gjerder via injisert IDiagramInterpreter.
 Application forbereder diagramscener i worker via IDiagramLayout, med trådeide
 fonter og generasjonskontroll. MarkdownRenderer plasserer ferdige scener;
-DisplayListPainter/DiagramPainter tegner native Cairo og vanlig tekst i preview/PDF.
-P25 endrer ikke dagens kjørevei. Filkart, ABI, måleseam, policy, cache og faser
-finnes i designet; alle nye source-filer er Planned.
+DisplayListPainter/DiagramPainter brukte opprinnelig native Cairo-primitiver.
+P31 erstattet dette med bibliotekets SVG via librsvg/Cairo i preview og PDF.
+Filkart, ABI, målesøm, policy og cache er implementert; P36–P41 utvider dette
+med typebevarende modeller. Se [gjeldende dekning](mermaid_coverage.md).
 
 
 Mermaid-filansvar: `application/composition/DiagramServices` registrerer
 parser/prepare-kjeden; `application/diagrams/DiagramPreparation` koordinerer,
 `DiagramCache` eier worker-lokal LRU, og `adapters/DiagramPainter` utfører
-Cairo-primitiver. `interpreter/mermaid/MermaidBlockBuilder` kjenner gjerdet,
+SVG-presentasjon via librsvg/Cairo. `interpreter/mermaid/MermaidBlockBuilder` kjenner gjerdet,
 `MermaidInterpreter` eier parser-ABI-adapteren. `renderer/diagram/DiagramTextLayout`
 måler etiketter, `MermaidDiagramLayout` dekoder layout og `DiagramPlacement`
 plasserer scenen i dokumentet. Rust-algoritmeadaptere ligger i respektive
@@ -452,7 +453,7 @@ Layout, portvalg og ruter er immutable i dette presentasjonssteget.
 
 ## P36 — typebevarende Mermaid-modeller
 
-[Matrisen](docs/design/mermaid-coverage.md) og
+[Matrisen](mermaid_coverage.md) og
 [Sequence 1](docs/design/mermaid-sequence-authoring.md) definerer første tillegg.
 `contracts/diagram/SequenceModel.h` og `rust/src/sequence.rs` eier ordnede
 interaksjoner, deltakere og hendelsestyper. DiagramModel har en egen sequence-variant;

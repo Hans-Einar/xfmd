@@ -1,10 +1,16 @@
-# Mermaid-dekning — revisjon 6, P41
+# Mermaid-dekning — revisjon 7, P41 og integrasjon
 
 Dato: 2026-09-18. XFMD støtter **23 familier gjennom eksplisitte delprofiler**.
-[Praktisk galleri](../../mermaid_evicence.md): 29 eksempler. Ingen full
+[Praktisk galleri](mermaid_evicence.md): 29 eksempler. Ingen full
 JS-Mermaid-kompatibilitet påstås. Forslagene i SDL/SDP-eksemplene er fortsatt forslag.
-Upstream-base `3726ccbffe0e8032361eb9668694b24f77858060`; endelig fork-pin `c2ccccbc27dcc087268983d84f010300e868d26e` står i
-[pin-manifestet](../../cmake/mermaid-source.json). [Faktiske bevis](../evidence/P41.md).
+Upstream-base `3726ccbffe0e8032361eb9668694b24f77858060`; gjeldende fork-pin `589517a7107ab95ee7dfa5ae88c2f339c0a284dc` står i
+[pin-manifestet](cmake/mermaid-source.json). [Faktiske bevis](docs/evidence/P41.md).
+
+Brukeren har gjennomgått galleriet og godkjent diagrammene uten behov for
+visuelle justeringer. P37–P41 er implementert; merge og installasjon er bestilt.
+[Integrasjonsstatus](docs/evidence/P41-integration.md) skiller nåværende CI, merge
+og installasjon fra [P41s verifiserte baseline](docs/evidence/P41.md). Den nye
+pinnen inneholder bare rustfmt-endringer etter baseline-pinnen.
 
 I tabellen betyr «P/L/S» kildeinspisert parser/layout/SVG i upstream; det er
 ikke ende-til-ende-kompatibilitet. Alle XFMD-rader nedenfor har **streng parser,
@@ -37,10 +43,10 @@ Ingen renderer parser Mermaid-kildetekst, og bibliotekstyper krysser ikke kontra
 | Treemap | P/L/S → native | Foreldretre og positive bladvekter | Treemap | SVG/vektor | Sitert tekst, foreldre uten egenverdi |
 | XYChart | P/L/S → native | Kategorier, Y-range, bar/line-serier | XYChart | SVG/vektor | Vertikal, 1–12 kategorier, komplette serier |
 
-Profiler: [Flowchart](mermaid-integration.md), [Sequence](mermaid-sequence-authoring.md),
-[State/Class/Requirement/ER](mermaid-semantic-authoring.md),
-[arkitektur](mermaid-architecture-authoring.md), [planlegging](mermaid-planning-authoring.md),
-[øvrige familier](mermaid-broad-authoring.md).
+Profiler: [Flowchart](docs/design/mermaid-integration.md), [Sequence](docs/design/mermaid-sequence-authoring.md),
+[State/Class/Requirement/ER](docs/design/mermaid-semantic-authoring.md),
+[arkitektur](docs/design/mermaid-architecture-authoring.md), [planlegging](docs/design/mermaid-planning-authoring.md),
+[øvrige familier](docs/design/mermaid-broad-authoring.md).
 
 Grenser: 64 KiB kilde, 64 blokker/dokument, 8 MiB/scene og 64 MiB samlede scenesvar.
 Kooperative frister er ikke hard preemption. Byteidentisk Libavoid-SVG er ikke
@@ -57,7 +63,7 @@ hver profil med egne akseptanseeksempler; de skal ikke åpnes ved bare å endre 
 
 ### Revisjon 1, P36
 
-Dato: 2026-09-18. Status: Sequence 1 implementert; [faktiske testbevis](../evidence/P36.md).
+Dato: 2026-09-18. Status: Sequence 1 implementert; [faktiske testbevis](docs/evidence/P36.md).
 Upstream HEAD kontrollert med `git ls-remote`: `3726ccbffe0e8032361eb9668694b24f77858060`.
 Undersøkt baseline-pin: `3eb91bc78d3efee6fa8e9b746a1e99606fb2f1e7`.
 P36-pin: `1e3d2aabfe2a48e011ce067bd8fa000d9a44e924` (actor-symbol, målte
@@ -209,8 +215,8 @@ Maks nested dybde er 8; aktiveringer må være balansert i hver alternativgren.
 Kildeordning av notater og fragmentgrenser beholdes. Par beskriver mulige
 samtidige aktiviteter, ikke OS-tråder eller konkret scheduling.
 
-Pin: `e36c7374a51a00f3803e97b5e0d117f1d57c9a43`. [P37-bevis](../evidence/P37.md)
-og [forfatterprofil](mermaid-sequence-authoring.md) erstatter Sequence 1-grensene ovenfor.
+Pin: `e36c7374a51a00f3803e97b5e0d117f1d57c9a43`. [P37-bevis](docs/evidence/P37.md)
+og [forfatterprofil](docs/design/mermaid-sequence-authoring.md) erstatter Sequence 1-grensene ovenfor.
 
 ## Revisjon 3 — P38 semantiske diagrammer
 
@@ -224,7 +230,7 @@ bevarer domain records for følgende profiler. Matrisen over er historisk P36.
 | Requirement 1 | Identitet, attributter og Mermaid-relasjoner | Native layout + Libavoid | SVG | Vektor | Verifies er ikke testresultat |
 | ER 1 | Attributter, nøkler, kardinaliteter og identifying | Native layout + Libavoid | SVG | Vektor | Ingen databasegenerering |
 
-Se [profilene](mermaid-semantic-authoring.md) og [P38-bevis](../evidence/P38.md).
+Se [profilene](docs/design/mermaid-semantic-authoring.md) og [P38-bevis](docs/evidence/P38.md).
 Byteidentisk gjentatt SVG er en kjent libavoid-begrensning for konkurrerende
 porter. 64 diagramblokker og samlet 64 MiB scenesvar per dokument tillates;
 8 MiB per scene og eksisterende tids-/cachegrenser gjelder fortsatt.
@@ -235,7 +241,7 @@ C4Context/Container/Component, architecture-beta og block-beta har strenge
 parserprofiler, egne records og native layout/SVG i preview og vektor-PDF.
 Fem nye fixtures er kontrollert med lys/mørk, resize og tekstuttrekk. C4s
 syntetiske globale rot finnes bare i adapteren; den er ikke en SDL-container.
-[Profilgrenser](mermaid-architecture-authoring.md), [bevis](../evidence/P39.md).
+[Profilgrenser](docs/design/mermaid-architecture-authoring.md), [bevis](docs/evidence/P39.md).
 Block-pilspisser krever native grenseklipping; korreksjon følger neste fork-pin.
 
 ## Revisjon 5 — P40 planlegging og encoding
@@ -243,4 +249,4 @@ Block-pilspisser krever native grenseklipping; korreksjon følger neste fork-pin
 Pin `79d27a15c3d68b0412fc540c50913f27dfe17bdd` gir native PacketField/geometri,
 og retter block-pilspisser. Packet, Timeline, Gantt og Journey har egne records,
 strenge parserprofiler, native layout, SVG-preview og vektor-PDF.
-[Profil](mermaid-planning-authoring.md), [bevis](../evidence/P40.md).
+[Profil](docs/design/mermaid-planning-authoring.md), [bevis](docs/evidence/P40.md).

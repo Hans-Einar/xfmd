@@ -65,14 +65,14 @@ Implementert i P26/P27. Hele kildeprofilen kontrolleres før upstream, og node-/
 
 Akseptanse: AT-059, AT-061, AT-062, AT-063, AT-064.
 
-P36: [Typed dekning og Sequence 1](../../../docs/design/mermaid-coverage.md)
+P36: [Typed dekning og Sequence 1](../../../mermaid_coverage.md)
 utvider samme porter. Sequence 1 er Implemented; verifikasjon dokumenteres separat.
 
 P36: [Faktiske kontroller og grenser](../../../docs/evidence/P36.md).
 
 P37 Implemented: Sequence 2 bruker samme `parse`/`graph`-innganger, utvidede
 ordnede hendelser, async-piltype og forkens `sequence_events::apply`.
-Se [revisjon 2](../../../docs/design/mermaid-coverage.md).
+Se [revisjon 2](../../../mermaid_coverage.md).
 
 P38 Implemented: `semantic::parse` i `src/interpreter/mermaid/rust/src/semantic/`
 produserer egne state/class/requirement/ER-rekorder. `Diagram::validate` i

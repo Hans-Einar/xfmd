@@ -1,7 +1,7 @@
 # Mermaid — praktiske eksempler i XFMD
 
 Dette dokumentet viser 29 eksempler som dekker 23 diagramfamilier i den låste avhengigheten.
-Profilene er avgrensede; se [støttematrisen](docs/design/mermaid-coverage.md). Eksemplene
+Profilene er avgrensede; se [støttematrisen](mermaid_coverage.md). Eksemplene
 er forklarende SDL/SDP-kandidater, ikke vedtatt språk eller bevis for beståtte tester.
 Start fra build-mappen med `./xfmd ../mermaid_evicence.md`.
 

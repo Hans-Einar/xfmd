@@ -5,9 +5,10 @@ ikke studiens 3×3-søk som hovedløsning. Se [P31/P32](mermaid-svg-routing.md).
 Forken finnes nå i `Hans-Einar/mermaid-rs-renderer`; analysen nedenfor beholdes
 som historisk grunnlag.
 
-Status: **Forslag og kildekodeanalyse**, 2026-09-16. Ingen ny ruter er implementert,
-og ingen fork er opprettet. Dokumentet skiller brukerens prinsipp, eksisterende
-mekanismer og anbefalte presiseringer. Beslutning om fork tas etter gjennomgang.
+Historisk status ved studien 2026-09-16: **Forslag og kildekodeanalyse**, før
+fork og ny ruter var implementert. Fork/libavoid er senere implementert; se
+[gjeldende dekning og integrasjonsstatus](../../mermaid_coverage.md). Forslagene i
+studien er ikke nåværende implementasjonsbeskrivelse.
 
 Grunnlag: [krav](../../xfmd_requirements.md), [arkitektur](../../softwareArchitecture.md),
 [Mermaid-design](mermaid-integration.md), [FUNC-024](../../src/blueprint/functionality/Functionality-024--Diagram-Layout.md)

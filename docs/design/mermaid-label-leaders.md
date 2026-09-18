@@ -1,5 +1,7 @@
 # P35: Etikettpekere i SVG
 
+Status: Implemented P35; videreført i P41s [regresjonsbevis](../evidence/P41.md).
+
 UR-039/041 og FUNC-024: en tynn peker med prikk på eierkanten gjør
 etikettilhørighet synlig. Dette er presentasjon etter fullført ruting. Ingen
 node, kant, port, etikett eller kildekobling flyttes av presentasjonssteget.

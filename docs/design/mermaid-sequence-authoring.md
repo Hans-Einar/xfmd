@@ -29,4 +29,4 @@ med hele kildeblokken. Én syntaktisk setning per linje; kommentarer begynner
 med `%%`. Tekst brytes ved ordgrenser. Maks 16 deltakere, 128 hendelser og
 64 KiB kilde. Del lange scenarier for lesbar A4/PDF.
 
-[Støttematrisen](mermaid-coverage.md) skiller bibliotekstøtte fra XFMD-støtte.
+[Støttematrisen](../../mermaid_coverage.md) skiller bibliotekstøtte fra XFMD-støtte.

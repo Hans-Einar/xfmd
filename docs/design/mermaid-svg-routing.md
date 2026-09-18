@@ -18,8 +18,9 @@ og velger libavoid etter sammenligning i forken.
   direkte til Cairo. Samme vei brukes av preview og PDF; ingen rasterisering.
   Et lite trådlokalt, begrenset cache eier RsvgHandle. Ingen handle i contracts.
 
-Layout-record får eksplisitt payload-versjon 2 under C-ABIens eksisterende
-versjon 1-envelope. Uforenlige records avvises. SVG har 8 MiB-resultatgrense.
+P31 introduserte scene-payload 2. Gjeldende model-wire og scene-payload er
+versjon 3, under C-ABIens eksisterende versjon 1-envelope; se
+[record-skjemaet](mermaid-record-schema.md) og [støttematrisen](../../mermaid_coverage.md). Uforenlige records avvises. SVG har 8 MiB-resultatgrense.
 Bare bibliotekgenerert SVG fra den begrensede parserprofilen aksepteres;
 Mermaid-kilden får ikke HTML, script, CSS, eksterne ressurser eller URL-tilgang.
 

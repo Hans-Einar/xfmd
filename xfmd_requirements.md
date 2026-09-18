@@ -316,7 +316,7 @@ som diagnostikk uten å skjule etiketten. Logiske ruter endres ikke.
 
 ## P36 — typed Mermaid-dekning
 
-UR-039 og SR-021 presiseres med [versjonert matrise](docs/design/mermaid-coverage.md):
+UR-039 og SR-021 presiseres med [versjonert matrise](mermaid_coverage.md):
 diagramtyper bevarer egen semantikk og får eksplisitte profiler. Sequence 1 skal
 vise ordnede Commands/svar, deltakere, notater og avgrensede fragmenter. Ustøttet
 syntaks gir lokal kildefallback; diagrammer evaluerer ikke SDL-regler eller guards.

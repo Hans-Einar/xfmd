@@ -1,5 +1,8 @@
 # Bygg og distribusjon av Libavoid-integrasjonen
 
+Gjeldende commit/SHA-256 står i [pin-manifestet](../../cmake/mermaid-source.json);
+[støttematrisen](../../mermaid_coverage.md) beskriver profilene og integrasjonsstatusen.
+
 ## Bygg
 
 XFMD bruker Rust 1.92.0, Cargo.lock, C++17, CMake/Ninja, FOX, Cairo/Pango og

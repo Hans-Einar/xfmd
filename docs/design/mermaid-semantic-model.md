@@ -1,6 +1,7 @@
 # Mermaid-modeller og målte etiketter — revisjon 1
 
-Status: Planned, P38–P41. Krav UR-039/040, SR-021/022.
+Status: Implemented, P38–P41, oppdatert 2026-09-18. Se
+[gjeldende dekning](../../mermaid_coverage.md) og [testbevis](../evidence/P41.md). Krav UR-039/040, SR-021/022.
 
 ## Kontrakt
 
@@ -36,14 +37,14 @@ Eksisterende Flowchart/Sequence-målekatalog beholdes for regresjonsstabilitet.
 ## Ressurser og feil
 
 64 KiB kilde per diagram, begrenset antall rekorder og referanser, kooperativ
-layoutfrist og 8 MiB scene gjelder fortsatt. Dokumentgrensen økes til 64
-blokker, samtidig innføres 64 MiB samlet scenebudsjett. Ukjent syntaks og
+layoutfrist og 8 MiB scene gjelder fortsatt. Dokumentgrensen er 64
+blokker, med 64 MiB samlet scenebudsjett. Ukjent syntaks og
 ikke-bevart semantikk avvises lokalt med kildeblokken. Ingen diagramfamilie
 fallback-konverteres til Flowchart. Bibliotekets SVG brukes i preview og PDF.
 
 ## Verifikasjon
 
-Hver familie får akseptansefixture, negativ syntakstest, modell/wire-roundtrip,
+De implementerte profilene har akseptansefixtures, negative syntakstester, modell/wire-roundtrip,
 SVG, lys/mørk preview og vektor-PDF. Samme Markdown-galleri brukes i build/xfmd.
 Støttematrisen oppdateres med faktisk testet subset; bibliotekets reklametekst
 er aldri en kompatibilitetstest. Utestede konstruksjoner forblir eksplisitte hull.
@@ -65,7 +66,7 @@ standardtemaet slik at samme SVG kan få lys/mørk lesepalett i FOX-adapteren.
 
 Gjentatt layout av identisk currentness-modell kan velge forskjellige gyldige
 libavoid-porter/ruter i samme prosess. Nodeplassering og modell er bevart, men
-byteidentisk SVG er ikke garantert. Åtte gjentakelser kontrollerer kantidentitet,
+byteidentisk SVG er ikke garantert. 24 gjentakelser kontrollerer kantidentitet,
 etikettinnhold og ortogonalitet; dette er ikke bevis for determinisme.
 Forsøk med pin-kostnader og adresseuavhengige sammenligninger løste ikke hele
 problemet og er ikke inkludert. Egen router-revisjon gjenstår.

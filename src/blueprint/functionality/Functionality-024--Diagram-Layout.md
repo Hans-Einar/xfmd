@@ -145,14 +145,14 @@ Steget bruker ferdige ruter og mål, uten ny layout. Se
 
 P35-verifikasjon: [SVG-sammenligning og testbevis](../../../docs/evidence/P35.md).
 
-P36: [Typed dekning og Sequence 1](../../../docs/design/mermaid-coverage.md)
+P36: [Typed dekning og Sequence 1](../../../mermaid_coverage.md)
 utvider samme porter. Sequence 1 er Implemented; verifikasjon dokumenteres separat.
 
 P36: [Faktiske kontroller og grenser](../../../docs/evidence/P36.md).
 
 P37 Implemented: Sequence 2 bruker samme `parse`/`graph`-innganger, utvidede
 ordnede hendelser, async-piltype og forkens `sequence_events::apply`.
-Se [revisjon 2](../../../docs/design/mermaid-coverage.md).
+Se [revisjon 2](../../../mermaid_coverage.md).
 
 P38 Implemented: `semantic::graph` i `src/renderer/diagram/rust/src/semantic/`
 oversetter domenerekorder til native bibliotektyper. `layout_measured` bruker
