@@ -82,3 +82,8 @@ Se [profil og kontrakt](../../../docs/design/mermaid-architecture-authoring.md).
 P40 Implemented: `semantic/planning.rs` parser og native adapter bevarer bitfelt,
 perioder, tidsavhengighet og score. `semantic_planning.rs` i contracts validerer
 typed records før layout. Native packet-geometri implementeres i forken.
+
+P41 Planned: chart/tree/git/ZenUML-profiler bruger egne records.
+`semantic_charts.rs` validerer koordinater, hierarki og referencer; parserfiler
+`charts`, `trees`, `git`, `zenuml` og rendererfiler `charts`, `structures`
+bevarer semantikk uten original kilde over layoutgrensen.
