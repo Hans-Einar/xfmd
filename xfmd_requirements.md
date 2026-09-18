@@ -322,3 +322,8 @@ vise ordnede Commands/svar, deltakere, notater og avgrensede fragmenter. Ustøtt
 syntaks gir lokal kildefallback; diagrammer evaluerer ikke SDL-regler eller guards.
 AT-059/060/062/063 utvides med APT-importens tre utfall, adskilt fra aktivering,
 modell-roundtrip, Unicode, feilscope, preview og PDF. Senere typer følger matrisen.
+
+P37–P41 utvider UR-039/040 og SR-021/022 med prioriterte typed diagramprofiler,
+ordnet sekvensscope og ett praktisk `mermaid_evicence.md` for løpende lesing.
+AT-059/060/062/063 gjelder hver profil. Dokumentgrensen skal fortsatt være
+avgrenset, men romme minst ett eksempel per implementert diagramtype.

@@ -466,3 +466,19 @@ Videre sekvensutvidelser og typeprioritet følger [matrisen](docs/design/mermaid
 
 P36: M1 `2f94be1`, M2 `39a6a14`; M3 samler [sluttbevis](docs/evidence/P36.md).
 Neste inkrement er Sequence 2 (async og nested scope), deretter prioriterte typer.
+
+## Sammenhengende dekning P37–P41
+
+Brukerbestilt 2026-09-18. Hver phase har egen branch og milestone-commits.
+`mermaid_evicence.md` i roten er den løpende, praktiske lesefilen; bare støttede
+profiler legges inn. Bygg `build/xfmd` etter hvert inkrement.
+
+- P37 `phase/p37-sequence-events`: ordnet event-layout, async og nested fragmenter.
+- P38 `phase/p38-semantic-diagrams`: state, class, requirement og ER med typed kontrakter.
+- P39 `phase/p39-architecture-diagrams`: C4 context/container/component, architecture og block.
+- P40 `phase/p40-planning-diagrams`: packet, timeline, Gantt og journey.
+- P41 `phase/p41-mermaid-coverage`: øvrige annonserte diagramtyper, samlet evidens/PDF og matrise.
+
+For hver fase: M1 krav/blueprint/kontrakt, M2 implementasjon, M3 positiv/negativ
+profilkontroll, faktisk SVG/preview/PDF og oppdatering av lesefilen. Ingen
+Mermaid-kilde eller bibliotekeid Graph flyttes inn i layoutkontrakten.
