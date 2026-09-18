@@ -9,7 +9,8 @@ Ingen ekstra rad. Vindusbredder 450, 640, 1100 og 1900 kontrolleres i GUI-testen
 ## Milestones
 
 - M01: krav, blueprint, statusfelt og GUI-kontroll.
-- M02: registrer faktisk bygg og testresultat før sprint-merge/installasjon.
+- M02: GUI-test avdekket feil layoutflagg; bruk LAYOUT_RIGHT i FXHorizontalFrame.
+- M03: registrer faktisk bygg og testresultat før sprint-merge/installasjon.
 
 ## Verifikasjon
 

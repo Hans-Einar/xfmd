@@ -67,7 +67,7 @@ void XfmdWindow::buildUi() {
   auto* statusRow = new FXHorizontalFrame(this, LAYOUT_SIDE_BOTTOM | LAYOUT_FILL_X,
                                            0, 0, 0, 0, 0, 0, 0, 0);
   versionStatus = new FXLabel(statusRow, buildVersion(), nullptr,
-                              LAYOUT_SIDE_RIGHT | JUSTIFY_RIGHT);
+                              LAYOUT_RIGHT | JUSTIFY_RIGHT);
   status = new FXLabel(statusRow, "Open a local Markdown or text file.", nullptr,
                        LAYOUT_FILL_X | JUSTIFY_LEFT);
   auto* workspace =
