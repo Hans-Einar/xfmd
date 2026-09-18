@@ -152,3 +152,14 @@ P22: UR-032 → FUNC-010/014; UR-033 → FUNC-010; UR-034 → FUNC-005. AT-052�
 | SR-023 | [FTR-010](feature/Feature-010--Mermaid-Diagrams.md), [FUNC-023](functionality/Functionality-023--Mermaid-Interpretation.md), [FUNC-024](functionality/Functionality-024--Diagram-Layout.md), [FUNC-025](functionality/Functionality-025--Diagram-Preparation.md) | AT-064 | Future |
 
 | SR-024 | [FTR-010](feature/Feature-010--Mermaid-Diagrams.md), [FUNC-024](functionality/Functionality-024--Diagram-Layout.md) | AT-065 | FirstRelease |
+
+## Byggidentitet
+
+| ID | Type / målgruppe | Eier | Status |
+| --- | --- | --- | --- |
+| [FUNC-026](functionality/Functionality-026--Build-Identity.md) | Functionality / Integration | application | Implemented |
+
+| Krav | Designobjekter | Akseptanse | Scope |
+| --- | --- | --- | --- |
+| UR-042 | [FUNC-026](functionality/Functionality-026--Build-Identity.md) | AT-066 | FirstRelease |
+| SR-025 | [FUNC-026](functionality/Functionality-026--Build-Identity.md) | AT-067 | FirstRelease |

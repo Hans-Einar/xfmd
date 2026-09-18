@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "build/BuildVersion.h"
 #include "adapters/FoxWheelScrollBar.h"
 #include "interpreter/CmarkInterpreter.h"
 #include "composition/DiagramServices.h"
@@ -219,7 +220,7 @@ void Application::updateUi() {
   window->editor->applyProjection(session.view());
   auto title = (session.dirty() ? "* " : "") +
                (session.view().path.empty() ? std::string("Untitled") : session.view().path) +
-               " — xfmd";
+               " — xfmd " + buildVersion();
   window->setTitle(title.c_str());
   window->status->setText((std::to_string(session.view().text.size()) + " bytes" +
                            (session.dirty() ? " — modified" : " — saved"))

@@ -341,3 +341,16 @@ i den låste avhengigheten. Dette er dokumenterte delprofiler, ikke full
 JS-Mermaid-kompatibilitet. Ustøttet syntaks gir lokal kildefallback med forklaring.
 [Oppdatert matrise og profilveiledninger](mermaid_coverage.md) skiller
 upstream, fork og faktisk preview/PDF-støtte. Alle familier virker offline.
+
+## Arbeidsflyt og versjon
+
+Nye leveranser dokumenteres i [sprints/](sprints/README.md): én fasebranch,
+en commit per milestone og én samlet PR per sprint. Autonomt bygges programmet
+ved faseslutt; samarbeid med brukeren kan ha bygg ved hver feilretting.
+Se [arbeidsmåten](docs/working-method.md).
+
+`xfmd --version` og vindustittelen viser `major.minor branch:commitnummer`.
+På main brukes siste PR-nummer når kjent. Major/minor kommer fra `VERSION`;
+commitnummeret teller hele Git-historikken og er ikke en SHA. Full clone er
+nødvendig; shallow clone utvides med `git fetch --unshallow`. Detaljer om
+merge, dirty, kildearkiv og metadata: [versjonering](docs/versioning.md).

@@ -1,0 +1,21 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd/build
+Test project /home/warloc/git/xfmd/build
+    Start 12: BlueprintStructure
+1/6 Test #12: BlueprintStructure ...............   Passed    0.69 sec
+    Start 13: LayerBoundaries
+2/6 Test #13: LayerBoundaries ..................   Passed    0.04 sec
+    Start 17: CompactWorkspaceTest
+3/6 Test #17: CompactWorkspaceTest .............   Passed    4.82 sec
+    Start 35: BlueprintSymbols
+4/6 Test #35: BlueprintSymbols .................   Passed    0.09 sec
+    Start 60: BuildIdentityTest
+5/6 Test #60: BuildIdentityTest ................   Passed    0.98 sec
+    Start 61: BuildVersionTest
+6/6 Test #61: BuildVersionTest .................   Passed    0.07 sec
+
+100% tests passed, 0 tests failed out of 6
+
+Label Time Summary:
+GUI    =   4.82 sec*proc (1 test)
+
+Total Test time (real) =   6.70 sec

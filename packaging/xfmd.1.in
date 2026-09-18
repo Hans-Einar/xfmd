@@ -1,4 +1,4 @@
-.TH XFMD 1 "2026-09-14" "xfmd 0.1.0"
+.TH XFMD 1 "2026-09-14" "xfmd @XFMD_PRODUCT_VERSION@"
 .SH NAME
 xfmd \- native FOX Markdown viewer and editor
 .SH SYNOPSIS

@@ -41,6 +41,15 @@ Søk etter eksisterende functionality før du lager ny. Features gjenbruker
 functionality; de kaller ikke hverandres interne implementasjon. Eksponer bare
 små, begrunnede kontrakter, og oppgi faktisk eller planlagt konsument.
 
+## Sprinter, faser og bygg
+
+Følg [prosjektets arbeidsmåte](docs/working-method.md) og
+[versjonsreglene](docs/versioning.md). Dokumenter nye leveranser under `sprints/`.
+Én branch per fase, én commit per milestone og én samlet PR per sprint.
+Autonom flerfaseøkt bygger ved faseslutt, ikke ved hver commit. I samarbeid
+med brukeren kan hver feilretting bygges. Behold historikken ved merge; ikke
+squash/rebase publiserte commits. Ikke opprett en SDP-mappe som del av dette.
+
 ## Stil, kontroll og bidrag
 
 Skriv prosjektprosa på norsk og kodeidentifikatorer på engelsk. C++17-stil:

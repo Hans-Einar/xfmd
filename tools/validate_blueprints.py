@@ -145,7 +145,7 @@ def check(root):
             if status not in {'Planned', 'Implemented'}:
                 fail(path, 'plumbing status must be Planned or Implemented')
             source = cols[3].strip('`')
-            if not re.fullmatch(r'src/[A-Za-z0-9_/.-]+\.(?:cpp|h|rs)', source):
+            if not re.fullmatch(r'(?:src/[A-Za-z0-9_/.-]+\.(?:cpp|h|rs)|tools/[A-Za-z0-9_/.-]+\.py)', source):
                 fail(path, f'invalid plumbing source path: {source}')
             if status == 'Implemented' and not (root / source).is_file():
                 fail(path, f'implemented source does not exist: {source}')
