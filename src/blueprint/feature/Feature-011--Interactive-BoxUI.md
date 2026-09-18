@@ -4,7 +4,7 @@ kind: Feature
 audience: User
 role: Workflow
 owner: application
-status: Ready
+status: Implemented
 scope: FirstRelease
 requirements: UR-043, SR-026
 uses: FUNC-027, FUNC-028, FUNC-029, FUNC-030, FUNC-003, FUNC-004, FUNC-005, FUNC-007, FUNC-016, FUNC-018, FUNC-021, FUNC-025
@@ -41,9 +41,9 @@ PDF bruker aksepterte verdier og kjører ingen input eller scenario.
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Cmark ModelBuilder | `BoxUiBlockBuilder::build` | `src/interpreter/boxui/BoxUiBlockBuilder.cpp` | fence → typed modell | lokal diagnostikk | Implemented |
 | 2 | preview worker | `BoxUiLayout::prepare` | `src/renderer/boxui/BoxUiLayout.cpp` | modell/snapshot → frame | cancel/no-space | Implemented |
-| 3 | GUI completion | `BoxUiCoordinator::publish` | `src/application/boxui/BoxUiCoordinator.cpp` | aktuell frame → atomisk bytte | stale forkastes | Planned |
-| 4 | host input | `BoxUiCoordinator::dispatch` | `src/application/boxui/BoxUiCoordinator.cpp` | event → typed intent | gammel binding/busy avvises | Planned |
-| 5 | framebytte | `FoxBoxUiOverlay::reconcile` | `src/application/adapters/FoxBoxUiOverlay.cpp` | identitet → native felt/draft | inkompatibel state annulleres | Planned |
+| 3 | GUI completion | `FoxRenderHost::present` | `src/application/adapters/FoxRenderHost.cpp` | aktuell frame → atomisk bytte | stale forkastes | Implemented |
+| 4 | host input | `BoxUiSession::dispatch` | `src/application/boxui/BoxUiSession.cpp` | event → typed intent | gammel binding/busy avvises | Implemented |
+| 5 | framebytte | `FoxBoxUiOverlay::reconcile` | `src/application/adapters/FoxBoxUiOverlay.cpp` | identitet → native felt/draft | inkompatibel state annulleres | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 

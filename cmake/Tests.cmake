@@ -175,3 +175,12 @@ add_test(NAME BuildVersionTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}
 
 xfmd_test(BoxUiCoreTest tests/application/BoxUiCoreTest.cpp xfmd_diagrams)
 target_compile_definitions(BoxUiCoreTest PRIVATE XFMD_BOXUI_FIXTURE="${CMAKE_SOURCE_DIR}/tests/fixtures/boxui/activity.json")
+
+xfmd_test(BoxUiSessionTest tests/application/BoxUiSessionTest.cpp xfmd_diagrams)
+target_compile_definitions(BoxUiSessionTest PRIVATE XFMD_BOXUI_FIXTURE="${CMAKE_SOURCE_DIR}/tests/fixtures/boxui/activity.json")
+add_executable(BoxUiGuiTest tests/gui/BoxUiGuiTest.cpp)
+target_include_directories(BoxUiGuiTest PRIVATE tests)
+target_link_libraries(BoxUiGuiTest PRIVATE xfmd_application)
+target_compile_definitions(BoxUiGuiTest PRIVATE XFMD_BOXUI_FIXTURE="${CMAKE_SOURCE_DIR}/tests/fixtures/boxui/activity.json")
+add_test(NAME BoxUiGuiTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/tools/run_with_xvfb.py $<TARGET_FILE:BoxUiGuiTest>)
+set_tests_properties(BoxUiGuiTest PROPERTIES TIMEOUT 60)

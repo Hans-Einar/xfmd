@@ -12,6 +12,10 @@ std::string Application::savePath() {
 }
 void Application::execute(CommandRouter::Command command) {
   switch (command) {
+  case CommandRouter::BoxUiPrototype:
+    boxUiSession.toggle(preview->currentModel());
+    preview->refresh();
+    break;
   case CommandRouter::ToggleTheme: {
     auto draft = preferences->begin();
     draft.appearance.theme = draft.appearance.theme == "dark" ? "light" : "dark";

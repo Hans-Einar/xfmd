@@ -1,6 +1,7 @@
 #pragma once
 #include "application/adapters/SharedTextMetrics.h"
 #include "contracts/IInterpreter.h"
+#include "contracts/boxui/BoxUiFrame.h"
 #include <functional>
 namespace xfmd {
 using PrepareDocument =
@@ -8,8 +9,8 @@ using PrepareDocument =
 class DiagramServices {
 public:
   static std::unique_ptr<IInterpreter> interpreter();
-  static PrepareDocument preview();
+  static PrepareDocument preview(std::function<BoxUiState(DocumentToken)> state = {});
   static ParseResult prepare(ParseResult, const SourceSnapshot&, SharedTextMetrics&,
-                             const std::function<bool()>&);
+                             const std::function<bool()>&, const BoxUiState& state = {});
 };
 } // namespace xfmd

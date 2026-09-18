@@ -79,3 +79,27 @@ DiagramModel-barn til SVG/error før BoxUI-layout komponerer dem. Ingen Mermaid-
 kildetolkning flyttes til renderer. Foreslått C++ JSON-kodek er nlohmann/json
 3.12.0, MIT, låst til upstream `55f93686c01528224f448c19128836e7df245f72`;
 avhengighet/lisens/bootstrap inngår i X1. Den finnes ikke i dagens XFMD-bygg.
+
+## Realisert integrasjon (fase 047)
+
+Produsent er den parallelle forkgrenen `phase/boxui-046-implementation`,
+commit `61a85b670dc1755b52c0fdf82c39497d0fe39512`. Den foreløpige
+`phase/boxui-045-core` integreres ikke. Vertens adapter bruker `parse_boxui_bytes`,
+`decode_prepare_json` og `prepare_boxui_cancellable`; ingen duplisert parser/layout.
+Målcallbacken leverer bredde, høyde og baseline fra SharedTextMetrics.
+
+BoxUiPreparation eier child-forberedelse; BoxUiSession eier revisjoner,
+syntetiske deltakere og command-ledger. PreviewCoordinator/ParserWorker gjenbrukes
+for publisering/kooperativ kansellering, derfor trengs ingen ny BoxUiCoordinator.
+FoxBoxUiOverlay eier native tekstfelt og knapper, med nøyaktig samme geometrikart
+som SVG. Native knapper brukes for FOX-fokus/tastatur; PDF bruker bibliotekets
+statiske knappegrafikk. Dette er en bevisst konkretisering av draftens SVG-knapper.
+
+Det lokale deltakerkallet fullføres synkront; ingen kommando venter i en ubundet
+bakgrunnskø. Ledger har 4096 plasser og avviser videre innsending ved grensen.
+Snapshot fryses før arbeiderforberedelse og PDF. Kildeendring stopper prototypeøkten
+og krever ny eksplisitt aktivering. Geometri-/fargeendring beholder kompatible felt.
+
+Nlohmann-kodeken ligger privat i contracts/boxui/private som wire-adapter.
+JSON er ikke del av offentlige modell-/hostkontrakter. Bibliotekets diagnostikk
+bevares over ABI; statustall skiller ugyldig, unsupported, ressurs, cancel og panic.

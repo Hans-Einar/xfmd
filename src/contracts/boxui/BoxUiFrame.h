@@ -19,6 +19,7 @@ struct BoxUiSnapshot {
   std::map<std::string, BoxUiCommandState> commands;
 };
 struct BoxUiState {
+  double viewportWidth = 640;
   std::uint64_t epoch = 0, bindingRevision = 0, stateRevision = 0;
   std::map<std::string, BoxUiSnapshot> blocks;
 };

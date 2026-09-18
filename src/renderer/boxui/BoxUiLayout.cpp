@@ -7,8 +7,8 @@ struct Context {
   ITextMetrics& metrics;
   const std::function<bool()>& cancel;
 };
-uint32_t measure(void* opaque, const uint8_t* text, uint64_t n, double size, double* w,
-                 double* h) noexcept {
+uint32_t measure(void* opaque, const uint8_t* text, uint64_t n, double size, double* w, double* h,
+                 double* baseline) noexcept {
   try {
     if (!text || n > 65536 || !std::isfinite(size) || size <= 0 || size > 512)
       return 1;
@@ -18,6 +18,7 @@ uint32_t measure(void* opaque, const uint8_t* text, uint64_t n, double size, dou
         {reinterpret_cast<const char*>(text), std::size_t(n)}, font);
     *w = v.width * size / font.points;
     *h = v.height * size / font.points;
+    *baseline = v.ascent * size / font.points;
     return 0;
   } catch (...) {
     return 1;
@@ -59,7 +60,7 @@ std::shared_ptr<const BoxUiFrame> BoxUiLayout::prepare(const BoxUiModel& model,
                   {"error", "#dc2626ff"}}},
                 {"fontSignature", std::to_string(metrics.fontSetId())},
                 {"budgetMs", request.budgetMs},
-                {"childProfiles", {"flowchart", "sequenceDiagram", "stateDiagram-v2"}},
+                {"childProfiles", {"XFMD Flowchart 1", "XFMD Sequence 2", "XFMD State 1"}},
                 {"children", children}};
   auto bytes = input.dump();
   Context context{metrics, request.cancelled};

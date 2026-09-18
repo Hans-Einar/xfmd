@@ -1,6 +1,6 @@
 #include "Application.h"
-#include "export/ExportPipeline.h"
 #include "composition/DiagramServices.h"
+#include "export/ExportPipeline.h"
 #include "renderer/MarkdownRenderer.h"
 #include <filesystem>
 using namespace FX;
@@ -15,6 +15,9 @@ bool Application::startExport(const std::string& path) {
       throw Error(ErrorCode::Conflict, "Choose a PDF target different from the source document.");
     ExportRequest request{session.snapshot(), preview->layoutProfile().paper, metrics->fontSetId(),
                           target.path, preview->frame()};
+    request.boxUi = boxUiSession.freeze(request.source.token);
+    request.frame
+        .reset(); // Export always prepares the captured accepted state, never native drafts.
     exporter = std::make_unique<ExportCoordinator>([target](const auto& frozen, auto& control) {
       auto parser = DiagramServices::interpreter();
       MarkdownRenderer renderer;

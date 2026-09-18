@@ -55,6 +55,8 @@ void FoxRenderHost::layout() {
     if (resized)
       resized(flowWidth);
   }
+  if (boxUiMoved)
+    boxUiMoved();
 }
 void FoxRenderHost::expect(DocumentToken token) {
   if (linkHovered)
@@ -67,6 +69,8 @@ void FoxRenderHost::expect(DocumentToken token) {
   expected = token;
   requested.reset();
   active = false;
+  if (boxUiChanged)
+    boxUiChanged();
   update();
 }
 void FoxRenderHost::expectLayout(FrameKey key) {
@@ -78,6 +82,8 @@ void FoxRenderHost::expectLayout(FrameKey key) {
   expected = key.token;
   requested = std::move(key);
   active = false;
+  if (boxUiChanged)
+    boxUiChanged();
   update();
 }
 void FoxRenderHost::present(LayoutResult frame) {
@@ -94,6 +100,8 @@ void FoxRenderHost::present(LayoutResult frame) {
   programmatic = true;
   FXScrollArea::layout();
   programmatic = false;
+  if (boxUiChanged)
+    boxUiChanged();
   recalc();
   update();
 }
@@ -102,6 +110,8 @@ void FoxRenderHost::moveContents(FXint x, FXint y) {
     linkHovered("");
   pos_x = x;
   pos_y = y;
+  if (boxUiMoved)
+    boxUiMoved();
   update();
   if (!programmatic && active && viewportChanged) {
     lastScrollOrigin = FoxWheelScrollBar::isWheelChange(this) ? ScrollOrigin::UserWheel
@@ -134,6 +144,8 @@ void FoxRenderHost::setViewScale(bool fitWidth, double factor) {
     programmatic = false;
     setViewport(before.y);
   }
+  if (boxUiChanged)
+    boxUiChanged();
   recalc();
   update();
 }
@@ -141,6 +153,8 @@ void FoxRenderHost::setReadingColors(const ReadingColors& colors) {
   if (!colors.valid())
     return;
   reading = colors;
+  if (boxUiMoved)
+    boxUiMoved();
   update();
 }
 long FoxRenderHost::onPaint(FXObject*, FXSelector, void*) {

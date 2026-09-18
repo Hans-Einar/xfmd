@@ -1,5 +1,6 @@
 #pragma once
 #include "contracts/IRenderer.h"
+#include "contracts/boxui/BoxUiFrame.h"
 #include <atomic>
 #include <functional>
 #include <mutex>
@@ -12,6 +13,7 @@ struct ExportRequest {
   FontSetId fonts = 0;
   std::string target;
   LayoutResult frame;
+  BoxUiState boxUi;
 };
 struct ExportControl {
   std::atomic<bool> cancelled{false};

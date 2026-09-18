@@ -4,7 +4,7 @@ kind: Functionality
 audience: System
 role: Adapter
 owner: application
-status: Ready
+status: Implemented
 scope: FirstRelease
 requirements: UR-043, SR-026
 uses: none
@@ -37,7 +37,7 @@ Utkast er ikke aksepterte verdier; PDF bruker bare frosset akseptert snapshot.
 
 | Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | BoxUI-kjeden | `FoxBoxUiOverlay::reconcile` | `src/application/adapters/FoxBoxUiOverlay.cpp` | publisert frame → native input og semantisk kontrollkart | avviser ugyldige/gamle data | Planned |
+| 1 | BoxUI-kjeden | `FoxBoxUiOverlay::reconcile` | `src/application/adapters/FoxBoxUiOverlay.cpp` | publisert frame → native input og semantisk kontrollkart | avviser ugyldige/gamle data | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -51,5 +51,5 @@ Ingen runtime-verifikasjon hevdes før testene er kjørt.
 
 ## 8. Status, risiko og endringskonsekvenser
 
-Ready. Implementasjon autorisert 2026-09-18. IME/desktop-tilgjengelighet må vurderes
+Implemented. Implementasjon autorisert 2026-09-18. IME/desktop-tilgjengelighet må vurderes
 separat fra grunnleggende Unicode, clipboard og tastaturnavigasjon.

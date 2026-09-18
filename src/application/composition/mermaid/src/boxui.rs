@@ -3,10 +3,33 @@ use std::{
     ffi::c_void,
     panic::{AssertUnwindSafe, catch_unwind},
 };
-type Measure = unsafe extern "C" fn(*mut c_void, *const u8, u64, f64, *mut f64, *mut f64) -> u32;
+type Measure =
+    unsafe extern "C" fn(*mut c_void, *const u8, u64, f64, *mut f64, *mut f64, *mut f64) -> u32;
 type Cancel = unsafe extern "C" fn(*mut c_void) -> u32;
 fn failure(status: u32, message: &str) -> ResultBuffer {
-    owned(status,serde_json::to_vec(&serde_json::json!({"contract":"BX-HOST/0.1-draft1","diagnostics":[{"code":"boxui-error","severity":"error","message":message}]})).unwrap())
+    let diagnostic = serde_json::from_str::<serde_json::Value>(message)
+        .ok()
+        .filter(|d| d.get("code").is_some() && d.get("message").is_some())
+        .unwrap_or_else(
+            || serde_json::json!({"code":"boxui-error","severity":"error","message":message}),
+        );
+    let code = diagnostic["code"].as_str().unwrap_or("");
+    let status = if code == "cancelled" {
+        4
+    } else if code.contains("budget") || code.contains("limit") {
+        3
+    } else if code.contains("version") || code.contains("profile") || code.contains("contract") {
+        2
+    } else {
+        status
+    };
+    owned(
+        status,
+        serde_json::to_vec(
+            &serde_json::json!({"contract":"BX-HOST/0.1-draft1","diagnostics":[diagnostic]}),
+        )
+        .unwrap(),
+    )
 }
 unsafe fn call(
     abi: u32,
@@ -63,7 +86,7 @@ pub unsafe extern "C" fn xfmd_boxui_prepare_v1(
         return failure(1, "Missing callbacks");
     };
     let metrics = |text: &str| {
-        let (mut w, mut h) = (0., 0.);
+        let (mut w, mut h, mut baseline) = (0., 0., 0.);
         let ok = unsafe {
             measure(
                 context,
@@ -72,17 +95,18 @@ pub unsafe extern "C" fn xfmd_boxui_prepare_v1(
                 16.,
                 &mut w,
                 &mut h,
+                &mut baseline,
             )
         };
         if ok == 0 {
-            (w, h)
+            (w, h, baseline)
         } else {
-            (f64::NAN, f64::NAN)
+            (f64::NAN, f64::NAN, f64::NAN)
         }
     };
     let cancelled = || unsafe { cancel(context) != 0 };
     unsafe {
-        call(abi, data, size, 16 * 1024 * 1024, |b| {
+        call(abi, data, size, 8 * 1024 * 1024, |b| {
             xfmd_diagram_layout::boxui::prepare(b, &metrics, &cancelled)
         })
     }

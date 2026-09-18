@@ -124,6 +124,7 @@ dependencies = [
  "json5",
  "once_cell",
  "regex",
+ "roxmltree",
  "serde",
  "serde_json",
  "thiserror",
@@ -319,8 +320,8 @@ version = "0.1.0"
 name = "xfmd-diagram-layout"
 version = "0.1.0"
 dependencies = [
- "serde_json",
  "mermaid-rs-renderer",
+ "serde_json",
  "xfmd-diagram-contracts",
 ]
 
@@ -338,8 +339,8 @@ dependencies = [
 name = "xfmd-mermaid-interpreter"
 version = "0.1.0"
 dependencies = [
- "serde_json",
  "mermaid-rs-renderer",
+ "serde_json",
  "xfmd-diagram-contracts",
 ]
 

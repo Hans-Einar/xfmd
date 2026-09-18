@@ -29,6 +29,7 @@ public:
     FullScreen,
     LeaveFullScreen,
     ToggleTheme,
+    BoxUiPrototype,
     Last
   };
   std::function<void(Command)> action;
