@@ -13,3 +13,10 @@ Main-merge er ikke del av denne bestillingen.
 Fysisk IME, AT-SPI og integrasjon mot produksjonsdomene/transport inngår ikke i
 beviset. Eksemplet er en eksplisitt aktivert lokal prototype. Kjøreresultater
 føres etter test, ikke utledes fra kode eller bibliotekets egne tester.
+
+## Utført fasekontroll
+
+M1 er commit 92d0dcf (nummer 195). Release-bygg og alle 65 CTest-tester bestod.
+Lys/mørk preview og PDF er visuelt kontrollert. Installert binær er identisk
+med testet bygg; se [bevis og artefakter](evidence/README.md). M2 dokumenterer
+dette uten nytt programbygg, slik arbeidsmåten tillater for dokumentcommits.

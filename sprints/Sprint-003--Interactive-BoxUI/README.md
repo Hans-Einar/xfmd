@@ -13,3 +13,8 @@ UR-043 / SR-026 / FTR-011. Én samlet sprint-PR, én branch per fase.
 
 Autonom byggmodus: ett planlagt programbygg per fase; nødvendige feilrettinger
 kontrolleres på nytt. Ingen automatisk merge/installasjon før brukerbestilling.
+
+Alle faser er implementert. Endelig produsent er forkcommit 61a85b6; den foreløpige
+045-kjernen ble erstattet, ikke lagt oppå den parallelle implementasjonen.
+[Fase 048 og faktisk installasjon](Phase-048--Verification.md) har testresultater
+og skjermbilder. Ingen fysisk IME- eller produksjonsdomeneakseptanse hevdes.
