@@ -1,9 +1,11 @@
 #include "ModelBuilder.h"
+#include "boxui/BoxUiBlockBuilder.h"
+#include <map>
 #include "mermaid/MermaidBlockBuilder.h"
 namespace xfmd {
 ModelBuilder::ModelBuilder(const SourceSnapshot& source, const MathSyntax* syntax,
-                           IDiagramInterpreter* parser)
-    : math(syntax), diagrams(parser), mapping(source.text, syntax ? &syntax->masked : nullptr) {
+                           IDiagramInterpreter* parser, IBoxUiInterpreter* boxes)
+    : math(syntax), diagrams(parser), boxUi(boxes), mapping(source.text, syntax ? &syntax->masked : nullptr) {
   model.token = source.token;
   model.sourceSize = source.text.size();
 }
@@ -72,6 +74,8 @@ void ModelBuilder::appendNode(cmark_node* node, cmark_event_type event) {
   if (type == CMARK_NODE_CODE_BLOCK) {
     const char* literal = cmark_node_get_literal(node);
     const char* info = cmark_node_get_fence_info(node);
+    if (BoxUiBlockBuilder::build(*active, info, literal, boxUi, diagramCount))
+      return;
     if (MermaidBlockBuilder::build(*active, info, literal, diagrams, diagramCount))
       return;
     if (info && (std::string(info) == "math" || std::string(info) == "latex")) {
@@ -141,5 +145,13 @@ void ModelBuilder::appendNode(cmark_node* node, cmark_event_type event) {
   }
   active->runs.push_back(std::move(run));
 }
-SemanticDocument ModelBuilder::finish() { return std::move(model); }
+SemanticDocument ModelBuilder::finish() {
+  std::map<std::string, unsigned> counts;
+  for(const auto& b:model.blocks) if(b.boxUi) ++counts[b.boxUi->documentId];
+  for(auto& b:model.blocks) if(b.boxUi && counts[b.boxUi->documentId]>1) {
+    b.boxUi.reset(); b.kind=BlockKind::Code;
+    b.runs.push_back({"BoxUI: duplicate documentId in Markdown document\n"+b.diagramSource,b.source,false,false,true,{}});
+  }
+  return std::move(model);
+}
 } // namespace xfmd

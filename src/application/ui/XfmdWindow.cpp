@@ -58,16 +58,17 @@ void XfmdWindow::buildUi() {
   new FXMenuCheck(viewMenu, "Full &Screen\tF11", commands, CommandRouter::FullScreen);
   new FXMenuSeparator(viewMenu);
   new FXMenuCheck(viewMenu, "&Dark appearance", commands, CommandRouter::ToggleTheme);
+  new FXMenuCheck(viewMenu, "BoxUI prototype (local simulation)", commands,
+                  CommandRouter::BoxUiPrototype);
   new FXMenuTitle(bar, "&View", nullptr, viewMenu);
   goMenu = new FXMenuPane(this);
   add(goMenu, "&Back\tAlt+Left", CommandRouter::Back, UiIcon::Back);
   add(goMenu, "&Forward\tAlt+Right", CommandRouter::Forward, UiIcon::Forward);
   new FXMenuTitle(bar, "&Go", nullptr, goMenu);
   buildToolbar();
-  auto* statusRow = new FXHorizontalFrame(this, LAYOUT_SIDE_BOTTOM | LAYOUT_FILL_X,
-                                           0, 0, 0, 0, 0, 0, 0, 0);
-  versionStatus = new FXLabel(statusRow, buildVersion(), nullptr,
-                              LAYOUT_RIGHT | JUSTIFY_RIGHT);
+  auto* statusRow =
+      new FXHorizontalFrame(this, LAYOUT_SIDE_BOTTOM | LAYOUT_FILL_X, 0, 0, 0, 0, 0, 0, 0, 0);
+  versionStatus = new FXLabel(statusRow, buildVersion(), nullptr, LAYOUT_RIGHT | JUSTIFY_RIGHT);
   status = new FXLabel(statusRow, "Open a local Markdown or text file.", nullptr,
                        LAYOUT_FILL_X | JUSTIFY_LEFT);
   auto* workspace =

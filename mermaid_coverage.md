@@ -101,3 +101,11 @@ Typer eller konstruksjoner som ikke er oppført her, regnes ikke som støttet.
 ```sh
 ./xfmd ../mermaid_evicence.md
 ```
+
+## BoxUI-utvidelsen
+
+BoxUI er en separat prototypemodell, ikke en 24. standard Mermaid-familie.
+XFMD kan vise BoxUI og native kontroller i Markdown; diagram-widgeten gjenbruker
+de avgrensede flowchart-, sequenceDiagram- og stateDiagram-v2-profilene ovenfor.
+Se [BoxUI-veiledningen](docs/design/boxui-authoring.md) og
+[eksemplet](boxui_evidence.md). Øvrige Mermaid-profiler er uendret.

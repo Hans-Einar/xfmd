@@ -183,7 +183,7 @@ def check(root):
 
     # Only actual Markdown links are checked. Planned paths remain plain code spans.
     for path in root.rglob('*.md'):
-        if any(part in {'.git', 'build', '__pycache__'} or part.startswith('build-') for part in path.relative_to(root).parts):
+        if any(part in {'.git', '.deps', 'third_party', 'build', '__pycache__'} or part.startswith('build-') for part in path.relative_to(root).parts):
             continue
         text = without_code(path.read_text())
         for match in re.finditer(r'!?\[[^\]\n]*\]\(([^)\n]+)\)', text):

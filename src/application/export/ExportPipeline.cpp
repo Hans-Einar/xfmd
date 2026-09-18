@@ -13,7 +13,9 @@ unsigned ExportPipeline::run(const ExportRequest& request, const PdfTarget& targ
   LayoutProfile profile{LayoutMode::Paged, request.paper};
   if (!frame || frame->key.token != request.source.token || !(frame->key.profile == profile) ||
       frame->key.fonts != request.fonts) {
-    auto model = DiagramServices::prepare(parser.parse(request.source), request.source, metrics, [&]{return control.cancelled.load();});
+    auto model = DiagramServices::prepare(
+        parser.parse(request.source), request.source, metrics,
+        [&] { return control.cancelled.load(); }, request.boxUi);
     control.checkpoint();
     frame = renderer.layout(
         *model, {request.paper.width, 0, profile, [&] { return control.cancelled.load(); }},

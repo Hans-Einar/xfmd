@@ -1,4 +1,5 @@
 #include "DisplayListPainter.h"
+#include "contracts/boxui/BoxUiFrame.h"
 #include "DiagramPainter.h"
 #include "application/media/CairoVisual.h"
 #include <algorithm>
@@ -87,7 +88,9 @@ void DisplayListPainter::paint(const RenderFrame& frame, cairo_t* cr, Rect clip,
               : !active          ? 0x878787
               : run.link.empty() ? 0x1d2531
                                  : 0x1855a6);
-    if (const auto* diagram = dynamic_cast<const DiagramScene*>(run.visual.get())) {
+    if (const auto* box = dynamic_cast<const BoxUiFrame*>(run.visual.get())) {
+      DiagramPainter::paint(cr, *(palette ? box->previewScene : box->staticScene), run.bounds, palette, active);
+    } else if (const auto* diagram = dynamic_cast<const DiagramScene*>(run.visual.get())) {
       DiagramPainter::paint(cr, *diagram, run.bounds, palette, active);
     } else if (const auto* visual = dynamic_cast<const CairoVisual*>(run.visual.get())) {
       SavedState resourceState(cr);

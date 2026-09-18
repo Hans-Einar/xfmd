@@ -1,11 +1,13 @@
 #pragma once
 #include "adapters/DesktopFileOpener.h"
 #include "adapters/ExternalBrowser.h"
+#include "adapters/FoxBoxUiOverlay.h"
 #include "adapters/FoxPreferencesStore.h"
 #include "adapters/FoxRenderHost.h"
 #include "adapters/FoxScheduler.h"
 #include "adapters/FoxWindowMode.h"
 #include "adapters/SharedTextMetrics.h"
+#include "boxui/BoxUiSession.h"
 #include "commands/CommandRouter.h"
 #include "contracts/IInterpreter.h"
 #include "contracts/IRenderer.h"
@@ -26,6 +28,8 @@ class Application {
 public:
   FX::FXApp app{"xfmd", "xfmd"};
   DocumentSession session;
+  BoxUiSession boxUiSession;
+  std::unique_ptr<FoxBoxUiOverlay> boxUiOverlay;
   LocalFileStore files;
   DocumentCoordinator documents{session, files};
   EditController edits{session};
@@ -64,6 +68,7 @@ public:
 
 private:
   void wireDocument();
+  void wireBoxUi();
   void showLinkTarget(const std::string&);
   std::string hoverStatus, beforeHover;
   void changeReadingColors(const ReadingColors&, bool commit);

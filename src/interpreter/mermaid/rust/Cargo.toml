@@ -6,3 +6,4 @@ publish = false
 [dependencies]
 mermaid-rs-renderer.workspace = true
 xfmd-diagram-contracts.workspace = true
+serde_json = "1"

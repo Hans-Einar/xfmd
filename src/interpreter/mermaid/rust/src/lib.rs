@@ -159,3 +159,5 @@ mod profile_matrix {
         assert!(parse(&vec![b'A'; 65537]).is_err());
     }
 }
+
+pub mod boxui;

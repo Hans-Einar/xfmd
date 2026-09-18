@@ -498,3 +498,18 @@ Git-historikk ved eksplisitt bygg; `cmake/BuildIdentity.cmake` genererer header
 og installert JSON. `src/application/build/BuildVersion.h/.cpp` eksponerer
 `buildVersion()` for CLI og Application-vindustittel. Git/Python finnes bare
 i byggsteget, ikke i kjørende applikasjon eller interpreter/renderer.
+
+## BoxUI-host — FUNC-027–030
+
+Se [integrasjonen](docs/design/boxui-integration.md) for filkart, kontrakt og
+ressursgrenser. `interpreter/boxui` tolker typed modeller og diagram-barn;
+`renderer/boxui` forbereder og plasserer SVG/kontrollkart. `application/boxui`
+eier preparering, sesjon/ledger og syntetisk deltaker. FOX-input ligger i egne
+`FoxBoxUiOverlay`/`FoxBoxUiInput`-filer under adapters. Ingen widgetkode legges i
+XfmdWindow, Mermaid Graph eller generell Markdown-layout.
+
+Public contracts/boxui er JSON-, FOX- og parserfrie. Den private BoxUiCodec under
+contracts/boxui/private er wire-serialisering delt av to ABI-adaptere; den er ingen
+funksjonell eier. Composition root injiserer parser/layout; PreviewCoordinator og
+ParserWorker gjenbrukes for arbeiderlivstid og revisjonskontroll. PDF fanger state
+på GUI-tråden og bruker statisk SVG med aksepterte verdier på eksportarbeideren.

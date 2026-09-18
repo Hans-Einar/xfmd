@@ -1,5 +1,7 @@
 #include "DiagramPainter.h"
 #include "SvgDiagramCache.h"
+#include <algorithm>
+#include <cctype>
 #include <iomanip>
 #include <sstream>
 namespace xfmd {
@@ -11,8 +13,14 @@ std::string hex(std::uint32_t rgb) {
 }
 std::string mapping(const char* original, std::uint32_t value) {
   const auto color = hex(value);
-  return std::string("[fill=\"") + original + "\"] {fill:" + color + " !important;}" +
-         "[stroke=\"" + original + "\"] {stroke:" + color + " !important;}";
+  auto rule = [&](const std::string& source) {
+    return "[fill=\"" + source + "\"] {fill:" + color + " !important;}" + "[stroke=\"" + source +
+           "\"] {stroke:" + color + " !important;}";
+  };
+  std::string lower = original;
+  std::transform(lower.begin(), lower.end(), lower.begin(),
+                 [](unsigned char c) { return char(std::tolower(c)); });
+  return rule(original) + rule(lower) + rule(lower + "ff");
 }
 } // namespace
 void DiagramPainter::paint(cairo_t* cr, const DiagramScene& scene, Rect bounds,

@@ -141,7 +141,10 @@ long FoxRenderHost::onMotion(FXObject*, FXSelector, void* data) {
   setDefaultCursor(getApp()->getDefaultCursor(link ? DEF_HAND_CURSOR : DEF_TEXT_CURSOR));
   return 1;
 }
-long FoxRenderHost::onKeyPress(FXObject*, FXSelector, void* data) {
+long FoxRenderHost::onKeyPress(FXObject* sender, FXSelector selector, void* data) {
+  // Preserve FOX's focus chain for native BoxUI controls before preview shortcuts.
+  if (FXComposite::onKeyPress(sender, selector, data))
+    return 1;
   auto* event = static_cast<FXEvent*>(data);
   if (active && current && (event->state & CONTROLMASK)) {
     if (event->code == KEY_a || event->code == KEY_A) {

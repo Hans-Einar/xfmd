@@ -1,0 +1,127 @@
+54/65 Testing: MermaidRustTests
+54/65 Test: MermaidRustTests
+Command: "/usr/bin/cargo" "test" "--workspace" "--locked" "--offline" "--target-dir" "/home/warloc/git/xfmd-boxui/build/cargo"
+Directory: /home/warloc/git/xfmd-boxui
+"MermaidRustTests" start time: Sep 18 22:10 CEST
+Output:
+----------------------------------------------------------
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.24
+   Compiling quote v1.0.47
+   Compiling libm v0.2.16
+   Compiling serde_core v1.0.229
+   Compiling libc v0.2.189
+   Compiling version_check v0.9.5
+   Compiling memchr v2.8.3
+   Compiling slotmap v1.1.1
+   Compiling syn v3.0.5
+   Compiling find-msvc-tools v0.1.11
+   Compiling serde v1.0.229
+   Compiling shlex v1.3.0
+   Compiling zmij v1.0.23
+   Compiling cc v1.2.54
+   Compiling core_maths v0.1.1
+   Compiling aho-corasick v1.1.5
+   Compiling anyhow v1.0.104
+   Compiling regex-syntax v0.8.11
+   Compiling serde_derive v1.0.229
+   Compiling thiserror v2.0.20
+   Compiling serde_json v1.0.151
+   Compiling roxmltree v0.20.0
+   Compiling fontconfig-parser v0.5.8
+   Compiling regex-automata v0.4.18
+   Compiling memmap2 v0.9.11
+   Compiling thiserror-impl v2.0.20
+   Compiling mermaid-rs-renderer v0.3.1 (/home/warloc/git/xfmd-boxui/.deps/mermaid-rs-renderer)
+   Compiling ttf-parser v0.25.1
+   Compiling ucd-trie v0.1.7
+   Compiling tinyvec v1.13.3
+   Compiling itoa v1.0.18
+   Compiling log v0.4.34
+   Compiling json5 v1.3.1
+   Compiling fontdb v0.23.0
+   Compiling regex v1.13.1
+   Compiling once_cell v1.21.4
+   Compiling xfmd-diagram-contracts v0.1.0 (/home/warloc/git/xfmd-boxui/src/contracts/diagram/rust)
+   Compiling xfmd-diagram-layout v0.1.0 (/home/warloc/git/xfmd-boxui/src/renderer/diagram/rust)
+   Compiling xfmd-mermaid-interpreter v0.1.0 (/home/warloc/git/xfmd-boxui/src/interpreter/mermaid/rust)
+   Compiling xfmd-mermaid-ffi v0.1.0 (/home/warloc/git/xfmd-boxui/src/application/composition/mermaid)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2m 21s
+     Running unittests src/lib.rs (build/cargo/debug/deps/xfmd_diagram_contracts-2cf2a52506d914cf)
+
+running 1 test
+test sequence::tests::reject_corrupt_sequence_records ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (build/cargo/debug/deps/xfmd_diagram_layout-dc06cf6710158604)
+
+running 1 test
+test tests::deadline_does_not_escape_layout_call ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/lib.rs (build/cargo/debug/deps/xfmd_mermaid_ffi-0aaefcc3ffc61622)
+
+running 5 tests
+test boxui::tests::panic_stays_inside_abi ... ok
+test boxui::tests::bounds_and_owned_errors ... ok
+test tests::panic_is_contained ... ok
+test tests::malformed_layout_records ... ok
+test tests::abi_bounds_and_ownership ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running unittests src/lib.rs (build/cargo/debug/deps/xfmd_mermaid_interpreter-65a971cb73b990f5)
+
+running 21 tests
+test profile_matrix::unsupported_is_local_error ... ok
+test semantic::architecture_tests::architecture_profiles_roundtrip ... ok
+test semantic::architecture_tests::reject_architecture_semantic_loss ... ok
+test semantic::chart_tests::chart_profiles_roundtrip ... ok
+test semantic::chart_tests::git_branch_switches_context ... ok
+test semantic::chart_tests::reject_loss_or_invalid_values ... ok
+test semantic::planning_tests::planning_records_roundtrip ... ok
+test semantic::planning_tests::rejects_invalid_planning ... ok
+test semantic::tests::domain_fixtures_roundtrip ... ok
+test semantic::tests::preserves_domain_meaning ... ok
+test semantic::tests::unsupported_constructs_are_not_silently_dropped ... ok
+test sequence::tests::apt_order_and_roundtrip ... ok
+test sequence::tests::nested_events_and_async_are_preserved ... ok
+test sequence::tests::ordered_flat_fragments_and_notes ... ok
+test sequence::tests::reject_lossy_or_ambiguous_constructs ... ok
+test profile_matrix::arbitrary_input_does_not_panic ... ok
+test tests::labels_not_commands ... ok
+test tests::reject_loss ... ok
+test profile_matrix::groups_and_chain ... ok
+test tests::examples ... ok
+test profile_matrix::shapes_arrows_and_directions ... ok
+
+test result: ok. 21 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+   Doc-tests xfmd_diagram_contracts
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests xfmd_diagram_layout
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests xfmd_mermaid_interpreter
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+<end of output>
+Test time = 142.10 sec
+----------------------------------------------------------
+Test Passed.
+"MermaidRustTests" end time: Sep 18 22:12 CEST
+"MermaidRustTests" time elapsed: 00:02:22
+----------------------------------------------------------
+

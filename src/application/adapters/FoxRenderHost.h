@@ -36,6 +36,7 @@ protected:
 
 public:
   std::function<void(double)> resized, viewportChanged;
+  std::function<void()> boxUiChanged, boxUiMoved;
   std::function<void(const std::string&)> linkActivated, linkHovered;
   ScrollOrigin lastScrollOrigin = ScrollOrigin::UserDrag;
   FoxRenderHost(FX::FXComposite*, IRenderer&, SharedTextMetrics&);
@@ -51,6 +52,8 @@ public:
   void invalidate() {
     clickCancelled = true;
     active = false;
+    if (boxUiChanged)
+      boxUiChanged();
     if (linkHovered)
       linkHovered("");
     update();

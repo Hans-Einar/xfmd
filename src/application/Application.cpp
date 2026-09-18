@@ -1,8 +1,8 @@
 #include "Application.h"
-#include "build/BuildVersion.h"
 #include "adapters/FoxWheelScrollBar.h"
-#include "interpreter/CmarkInterpreter.h"
+#include "build/BuildVersion.h"
 #include "composition/DiagramServices.h"
+#include "interpreter/CmarkInterpreter.h"
 #include "renderer/MarkdownRenderer.h"
 #include <filesystem>
 using namespace FX;
@@ -13,6 +13,11 @@ Application::~Application() {
   references.reset();
   preview.reset();
   scheduler.reset();
+  if (host) {
+    host->boxUiChanged = {};
+    host->boxUiMoved = {};
+  }
+  boxUiOverlay.reset();
   delete window;
 }
 void Application::initialize(int& argc, char** argv) {
@@ -50,6 +55,8 @@ void Application::initialize(int& argc, char** argv) {
     return true;
   };
   commands.checked = [this](auto command) {
+    if (command == CommandRouter::BoxUiPrototype)
+      return boxUiSession.simulated();
     if (command == CommandRouter::ToggleTheme)
       return ui && ui->appearance().theme == "dark";
     if (command == CommandRouter::Preview)
@@ -83,11 +90,13 @@ void Application::initialize(int& argc, char** argv) {
     changeReadingColors(colors, commit);
   };
   scheduler = std::make_unique<FoxScheduler>(app);
-  preview = std::make_unique<PreviewCoordinator>(session, *interpreter, *renderer, *metrics,
-                                                 *scheduler, DiagramServices::preview());
+  preview = std::make_unique<PreviewCoordinator>(
+      session, *interpreter, *renderer, *metrics, *scheduler,
+      DiagramServices::preview([this](DocumentToken token) { return boxUiSession.freeze(token); }));
   preview->invalidated = [this](DocumentToken token) {
     window->workspacePanel->index->invalidate(token, session.view().path);
     scrolling.invalidate(token);
+    boxUiSession.expect(token);
     host->expect(token);
     window->status->setText("Updating preview…");
   };
@@ -129,7 +138,16 @@ void Application::initialize(int& argc, char** argv) {
     references->cancel();
     preview->schedule();
   };
-  host->resized = [this](double width) { preview->relayout(width); };
+  host->resized = [this](double width) {
+    preview->relayout(width);
+    if (boxUiSession.viewport((width - 48) / .75) && preview->currentModel()) {
+      for (auto& block : preview->currentModel()->blocks)
+        if (block.boxUi) {
+          preview->refresh();
+          break;
+        }
+    }
+  };
   scrolling.setEditor = [this](SourceAnchor anchor) { window->editor->setSourceAnchor(anchor); };
   scrolling.setPreview = [this](double y) { host->setViewport(y, ScrollOrigin::Sync); };
   window->editor->viewportChanged = [this](std::size_t byte) {
@@ -154,6 +172,7 @@ void Application::initialize(int& argc, char** argv) {
     preview->setLayoutProfile(profile);
     window->editor->setViewProfile(profile, host->fitWidth());
   };
+  wireBoxUi();
   preferences->changed(preferences->active());
   app.create();
   window->workspacePanel->setWorkPath(FXSystem::getHomeDirectory().text());
