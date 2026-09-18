@@ -1,0 +1,35 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd-boxui/build
+Test project /home/warloc/git/xfmd-boxui/build
+      Start 12: BlueprintStructure
+ 1/13 Test #12: BlueprintStructure ...............   Passed    0.36 sec
+      Start 13: LayerBoundaries
+ 2/13 Test #13: LayerBoundaries ..................   Passed    0.05 sec
+      Start 14: MermaidGuiTest
+ 3/13 Test #14: MermaidGuiTest ...................   Passed   11.63 sec
+      Start 16: PreviewSelectionGuiTest
+ 4/13 Test #16: PreviewSelectionGuiTest ..........   Passed    8.49 sec
+      Start 27: ScrollingTest
+ 5/13 Test #27: ScrollingTest ....................   Passed    1.16 sec
+      Start 28: NavigationGuiTest
+ 6/13 Test #28: NavigationGuiTest ................   Passed    2.42 sec
+      Start 30: WheelGuiTest
+ 7/13 Test #30: WheelGuiTest .....................   Passed   27.31 sec
+      Start 35: BlueprintSymbols
+ 8/13 Test #35: BlueprintSymbols .................   Passed    0.10 sec
+      Start 61: BuildVersionTest
+ 9/13 Test #61: BuildVersionTest .................   Passed    0.07 sec
+      Start 62: BoxUiCoreTest
+10/13 Test #62: BoxUiCoreTest ....................   Passed    0.07 sec
+      Start 63: BoxUiSessionTest
+11/13 Test #63: BoxUiSessionTest .................   Passed    0.02 sec
+      Start 64: BoxUiGuiTest
+12/13 Test #64: BoxUiGuiTest .....................   Passed    5.07 sec
+      Start 65: BoxUiPdfTest
+13/13 Test #65: BoxUiPdfTest .....................   Passed    0.09 sec
+
+100% tests passed, 0 tests failed out of 13
+
+Label Time Summary:
+GUI    =  56.08 sec*proc (6 tests)
+
+Total Test time (real) =  56.86 sec

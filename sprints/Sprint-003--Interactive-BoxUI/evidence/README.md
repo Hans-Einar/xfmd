@@ -40,3 +40,24 @@ Syntetiske deltakere er lokale og synkrone; ekstern transport, produksjonsbindin
 SDL-typekontroll og varig exactly-once er ikke levert. Ingen automatisk scenariostart.
 Tidsavbrudd er kooperativt. Dette er Implemented med konkrete delbevis, ikke en
 påstand om generell Verified-status eller full BoxUI-fremtidsdekning.
+
+## Tastaturretting etter brukerprøving
+
+Den opprinnelige GUI-testen brukte setText/direkte widget-kall. Den beviste ikke
+faktisk skriving via vinduets FOX-focus chain. En ny X11-hendelsestest gjenskapte
+feilen (C1 lot seg ikke endre til C2). FoxRenderHost delegerer nå til fokusert
+barn før preview-snarveier. Klikk, End, Backspace, tegn, Ctrl+A, Enter og Escape
+er testet gjennom vinduet; Tab bruker også ordinære X11-hendelser. Markdown-kilden
+forblir uendret, utkast er adskilt fra akseptert verdi, og Enter publiserer verdien.
+
+Programcommit **ffb98e86a386cdc8881f3306e67a905b60fc8889**, byggnummer **198**.
+Release-bygg og [13 relevante regresjonstester](keyboard-regression.txt) bestod,
+inkludert vanlig preview-merking, navigasjon, scrolling og BoxUI/PDF.
+Formateringskontrollen for XFMDs fire Rust-pakker og begge blueprintvalidatorene
+bestod. CI-formatering berører ikke lenger den pinnede path-avhengigheten.
+
+Dette bygget er installert og har erstattet 195. [Metadata](keyboard-build.json).
+Binærhash (samme for testet og installert fil):
+`238d736a15cf5046a67c9732e8cae7d40ad1f3a1e93460769c50efbddd8fdd47`.
+Tidligere logger/bilder beholdes som identifisert historikk, ikke som bevis for
+den nye tastaturtesten. Ingen ny fysisk IME-/AT-SPI-verifikasjon hevdes.

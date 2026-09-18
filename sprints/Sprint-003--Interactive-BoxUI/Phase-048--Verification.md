@@ -37,3 +37,8 @@ Ny regresjon klikker feltet og sender End/Backspace/2/Escape gjennom vinduet.
 CI avdekket dessuten at `cargo fmt --all` også formaterer en lokal path-avhengighet
 selv når den er ekskludert fra workspace. Formateringskontrollen avgrenses til
 XFMDs fire pakker; det pinnede biblioteket skal forbli uendret.
+
+M4-resultat: ffb98e8, bygg 198, 13/13 relevante tester bestod. Installert binær
+er identisk med testet bygg; se evidence/keyboard-regression.txt og
+evidence/keyboard-build.json. Rettet CI-formateringskontroll og blueprintkontroller
+bestod også. Dokumentasjon etter dette bygger ikke programmet på nytt.
