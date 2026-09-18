@@ -32,6 +32,8 @@ forbereder dem via eksisterende IDiagramLayout før BoxUI-layout.
 Kilde-/bindings-/kontekstendring ugyldiggjør input straks. Ugyldig blokk gir lokal
 feil med kilde, aldri delvis modell. Tidsbudsjett og avbrudd er kooperative.
 Utkast er ikke aksepterte verdier; PDF bruker bare frosset akseptert snapshot.
+Preview-host videresender tastetrykk gjennom FOX sin focus chain før egne
+snarveier. Tegn, Backspace, Home/End, Ctrl+A/C og Escape tilhører fokusert felt.
 
 ## 5. Plumbing
 
@@ -41,6 +43,8 @@ Utkast er ikke aksepterte verdier; PDF bruker bare frosset akseptert snapshot.
 | 2 | zoom/scroll/theme | `FoxBoxUiOverlay::position` | `src/application/adapters/FoxBoxUiOverlay.cpp` | publisert geometri → klippet viewport | ingen ny layoutberegning | Implemented |
 | 3 | Enter/knapp | `FoxBoxUiOverlay::submit` | `src/application/adapters/FoxBoxUiOverlay.cpp` | draft eller none → BoxUiIntent | bare aktuell frame kan sende | Implemented |
 | 4 | Escape | `FoxBoxUiOverlay::restore` | `src/application/adapters/FoxBoxUiOverlay.cpp` | akseptert verdi → felt | forkaster utkast | Implemented |
+
+| 5 | X11 → fokusert preview | `FoxRenderHost::onKeyPress` | `src/application/adapters/FoxPreviewInput.cpp` | FOX focus chain → native tekstredigering | preview-snarveier brukes bare når barnet ikke håndterer tasten | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 

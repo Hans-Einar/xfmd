@@ -1,6 +1,7 @@
 #include "application/Application.h"
 #include "support/Capture.h"
 #include "support/TestSupport.h"
+#include <X11/keysym.h>
 #include <chrono>
 #include <fstream>
 #include <fxkeys.h>
@@ -43,6 +44,40 @@ void key(FXWindow* w, FXuint code, bool release) {
   e.code = code;
   w->handle(w, FXSEL(release ? SEL_KEYRELEASE : SEL_KEYPRESS, 0), &e);
 }
+void nativeKey(Application& app, KeySym symbol, unsigned state = 0) {
+  auto* display = static_cast<Display*>(app.app.getDisplay());
+  XEvent e{};
+  e.xkey.display = display;
+  e.xkey.window = app.window->id();
+  e.xkey.root = DefaultRootWindow(display);
+  e.xkey.same_screen = True;
+  e.xkey.keycode = XKeysymToKeycode(display, symbol);
+  e.xkey.state = state;
+  e.type = KeyPress;
+  CHECK(XSendEvent(display, app.window->id(), False, KeyPressMask, &e));
+  e.type = KeyRelease;
+  CHECK(XSendEvent(display, app.window->id(), False, KeyReleaseMask, &e));
+  XSync(display, False);
+  events(app);
+}
+void nativeClick(Application& app, FXWindow* window) {
+  auto* display = static_cast<Display*>(app.app.getDisplay());
+  XSetInputFocus(display, app.window->id(), RevertToParent, CurrentTime);
+  XEvent e{};
+  e.xbutton.display = display;
+  e.xbutton.window = window->id();
+  e.xbutton.root = DefaultRootWindow(display);
+  e.xbutton.same_screen = True;
+  e.xbutton.button = Button1;
+  e.xbutton.x = window->getWidth() / 2;
+  e.xbutton.y = window->getHeight() / 2;
+  e.type = ButtonPress;
+  CHECK(XSendEvent(display, window->id(), False, ButtonPressMask, &e));
+  e.type = ButtonRelease;
+  CHECK(XSendEvent(display, window->id(), False, ButtonReleaseMask, &e));
+  XSync(display, False);
+  events(app);
+}
 void activate(FoxBoxUiButton* button) {
   CHECK(button && button->isEnabled());
   key(button, KEY_space, false);
@@ -69,6 +104,44 @@ void run() {
   input = widget<FoxBoxUiField>(app.host);
   CHECK(input && input->isEnabled());
   CHECK(input->getText() == "C1");
+  // Real X events must traverse the composite focus chain, not call the field directly.
+  const auto originalText = app.session.snapshot().text;
+  nativeClick(app, input);
+  CHECK(input->hasFocus());
+  nativeKey(app, XK_End);
+  nativeKey(app, XK_BackSpace);
+  nativeKey(app, XK_2);
+  CHECK(input->getText() == "C2");
+  CHECK(app.session.snapshot().text == originalText);
+  CHECK(std::get<std::string>(app.boxUiSession.freeze(app.session.view().token)
+                                  .blocks.at("activity-demo")
+                                  .values.at("context")
+                                  .value) == "C1");
+  nativeKey(app, XK_Escape);
+  CHECK(input->getText() == "C1");
+  nativeKey(app, XK_a, ControlMask);
+  nativeKey(app, XK_t);
+  CHECK(input->getText() == "t");
+  nativeKey(app, XK_Return);
+  ready(app);
+  input = widget<FoxBoxUiField>(app.host);
+  CHECK(std::get<std::string>(app.boxUiSession.freeze(app.session.view().token)
+                                  .blocks.at("activity-demo")
+                                  .values.at("context")
+                                  .value) == "t");
+  nativeClick(app, input);
+  nativeKey(app, XK_a, ControlMask);
+  nativeKey(app, XK_C, ShiftMask);
+  nativeKey(app, XK_1);
+  CHECK(input->getText() == "C1");
+  nativeKey(app, XK_Return);
+  ready(app);
+  input = widget<FoxBoxUiField>(app.host);
+  CHECK(std::get<std::string>(app.boxUiSession.freeze(app.session.view().token)
+                                  .blocks.at("activity-demo")
+                                  .values.at("context")
+                                  .value) == "C1");
+  CHECK(app.session.snapshot().text == originalText);
   input->setFocus();
   input->setText("Blåbær Æøå");
   input->setSelection(0, input->getText().length());
@@ -77,8 +150,7 @@ void run() {
   input->handle(input, FXSEL(SEL_COMMAND, FXTextField::ID_PASTE_SEL), nullptr);
   events(app);
   CHECK(input->getText() == "Blåbær Æøå");
-  key(input, KEY_Tab, false);
-  events(app);
+  nativeKey(app, XK_Tab);
   CHECK(!input->hasFocus());
   input->setFocus();
   input->setText("Draft — Æøå");

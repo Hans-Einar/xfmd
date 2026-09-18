@@ -25,3 +25,15 @@ M3: Fasebranchene er publisert og sprint-PR #37 opprettet. Installert XFMD åpne
 boxui_evidence.md i isolert Xvfb uten stderr eller tidlig avslutning. Testregistreringen
 gir den nye GUI-testen samme avgrensede FcInit-suppresjon som eksisterende native
 tester i sanitizer-CI; applikasjonens egne lekkasjer forblir aktive feil.
+
+## M4 — brukerfunnet feil i tastaturruting
+
+Samarbeidsmodus: nytt bygg/installasjon etter feilretting. Reell X11-test gjenskaper
+at C1 ikke kan redigeres: FoxRenderHost sin onKeyPress avbrøt FOX focus chain.
+Host må delegere til fokusert barn før preview-snarveier. Tidligere tester brukte
+setText og direkte widget-handler og beviste derfor ikke denne hendelsesveien.
+Ny regresjon klikker feltet og sender End/Backspace/2/Escape gjennom vinduet.
+
+CI avdekket dessuten at `cargo fmt --all` også formaterer en lokal path-avhengighet
+selv når den er ekskludert fra workspace. Formateringskontrollen avgrenses til
+XFMDs fire pakker; det pinnede biblioteket skal forbli uendret.
