@@ -10,6 +10,7 @@ using namespace xfmd;
 struct CountingLayout : IDiagramLayout {
   unsigned calls = 0;
   bool fail = false, invalidSvg = false;
+  std::size_t measuredBytes = 0;
   MermaidDiagramLayout real;
   std::shared_ptr<const DiagramScene> layout(const DiagramModel& model,
                                              const DiagramLayoutRequest& request,
@@ -18,6 +19,11 @@ struct CountingLayout : IDiagramLayout {
     if (fail)
       throw std::runtime_error("Injected failure");
     auto value = real.layout(model, request, metrics);
+    if (measuredBytes) {
+      auto sized = std::make_shared<DiagramScene>(*value);
+      sized->bytes = measuredBytes;
+      return sized;
+    }
     if (invalidSvg) {
       auto broken = std::make_shared<DiagramScene>(*value);
       broken->svg = "<svg malformed";
@@ -85,6 +91,16 @@ void run() {
     conflict = true;
   }
   CHECK(conflict);
+  CountingLayout sizedLayout;
+  sizedLayout.measuredBytes = 8 * 1024 * 1024;
+  DiagramPreparation bounded(sizedLayout);
+  SourceSnapshot repeated{{30, 1}, "", {}, false};
+  for (int i = 0; i < 9; ++i)
+    repeated.text += "```mermaid\nflowchart LR\nA-->B\n```\n\n";
+  auto boundedResult = bounded.prepare(parser->parse(repeated), metrics);
+  CHECK(boundedResult->blocks[7].diagramScene);
+  CHECK(!boundedResult->blocks[8].diagramScene);
+  CHECK(boundedResult->blocks[8].runs[0].text.find("64 MiB") != std::string::npos);
   DiagramCache cache;
   auto large = std::make_shared<DiagramScene>();
   large->bytes = 20 * 1024 * 1024;
@@ -109,9 +125,9 @@ void run() {
   source.text = "flowchart LR\nA-->B";
   CHECK(!parser->parse(source)->blocks[0].diagram);
   source.text.clear();
-  for (int i = 0; i < 17; ++i)
+  for (int i = 0; i < 65; ++i)
     source.text += "```mermaid\nflowchart LR\nA-->B\n```\n\n";
   auto limit = parser->parse(source);
-  CHECK(limit->blocks[15].diagram && !limit->blocks[16].diagram);
+  CHECK(limit->blocks[63].diagram && !limit->blocks[64].diagram);
 }
 TEST_MAIN(run)

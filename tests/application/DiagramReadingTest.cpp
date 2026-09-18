@@ -54,7 +54,9 @@ void run() {
   auto paged = renderer.layout(*model, {595, 2, {LayoutMode::Paged, {}}}, metrics);
   CHECK(paged->pages.slices.size() == 1);
   CHECK(paged->readingText == frame->readingText);
-  for (const auto* name : {"apt-import", "sequence-fragments", "sequence-nested"}) {
+  for (const auto* name :
+       {"apt-import", "sequence-fragments", "sequence-nested", "measurement-state", "state-regions",
+        "state-choice", "sdl-class", "apt-requirements", "provenance-er"}) {
     std::ifstream file(std::string(XFMD_SEQUENCE_FIXTURES) + "/" + name + ".mmd");
     SourceSnapshot sequence{{9, 1},
                             "Before\n\n```mermaid\n" +
@@ -68,7 +70,7 @@ void run() {
     for (const auto& block : prepared->blocks)
       if (block.diagramScene)
         scene = block.diagramScene;
-    CHECK(scene && scene->diagnostics.find("Sequence 2") != std::string::npos);
+    CHECK(scene && !scene->diagnostics.empty());
     for (const auto width : {320., 900.}) {
       auto view = renderer.layout(*prepared, {width, 1}, metrics);
       CHECK(view->readingText.find("Before") != std::string::npos);

@@ -104,3 +104,148 @@ sequenceDiagram
         end
     end
 ```
+
+## State — målingens aktualitet
+
+En sen observasjon beholder Stale; source-session-reset er en egen overgang. Vakter evalueres ikke.
+
+```mermaid
+stateDiagram-v2
+    direction LR
+    [*] --> Missing
+    Missing --> Current : accepted observation
+    Current --> Stale : freshness window expires
+    Stale --> Stale : late observation in same session
+    Stale --> Current : newer accepted revision
+    Current --> Missing : source session reset
+    Stale --> Missing : source session reset
+    Missing --> [*] : session closed
+```
+
+## State — samtidige regioner
+
+To regioner beskriver logiske tilstander, ikke automatisk to tråder.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Session
+    state Session {
+        [*] --> Missing
+        Missing --> Current : observation accepted
+        Current --> Stale : expires
+        --
+        [*] --> Connected
+        Connected --> Reconnecting : link lost
+        Reconnecting --> Connected : session restored
+    }
+    Session --> [*] : reset
+```
+
+## State — choice, fork og join
+
+Forgrening og samling vises eksplisitt.
+
+```mermaid
+stateDiagram-v2
+    state Valid <<choice>>
+    state Fanout <<fork>>
+    state Joined <<join>>
+    [*] --> Valid
+    Valid --> Rejected : invalid
+    Valid --> Fanout : valid
+    Fanout --> Persist
+    Fanout --> Notify
+    Persist --> Joined
+    Notify --> Joined
+    Joined --> [*]
+    Rejected --> [*]
+```
+
+## Class — kandidatmetamodell
+
+Eierskap, bruk og realisering er forskjellige relasjoner. Dette vedtar ingen SDL-regler.
+
+```mermaid
+classDiagram
+    direction TB
+    class Unit {
+        <<design constituent>>
+        +String identity
+        +provideCapability()
+    }
+    class Container
+    class Functionality
+    class Function
+    class Dataset
+    class Datagram
+    class Command
+    class Value
+    Container --|> Unit : specializes
+    Unit "1" *-- "0..*" Functionality : owns
+    Functionality "1" o-- "1..*" Function : groups
+    Function ..|> Functionality : realizes
+    Function ..> Dataset : reads
+    Datagram --> Dataset : describes occurrence of
+    Command ..> Functionality : requests
+    Dataset "1" *-- "1..*" Value : contains
+```
+
+## Requirement — APT-import
+
+Verifies kobler testspesifikasjon til krav; diagrammet hevder ikke at testen har bestått.
+
+```mermaid
+requirementDiagram
+    requirement ImportAPT {
+        id: APT-001
+        text: "Import validates input and expected revision"
+        risk: high
+        verifymethod: test
+    }
+    functionalRequirement RejectConflict {
+        id: APT-002
+        text: "Reject stale expected revision without overwriting"
+        risk: high
+        verifymethod: test
+    }
+    element ImportService {
+        type: service responsibility
+        docref: design proposal
+    }
+    element ConflictTest {
+        type: test specification
+        docref: acceptance example
+    }
+    ImportService - satisfies -> ImportAPT
+    ConflictTest - verifies -> RejectConflict
+    RejectConflict - refines -> ImportAPT
+    ImportService - traces -> RejectConflict
+```
+
+## ER — proveniens
+
+Dataset-instans og Datagram-forekomst har ulike identiteter og er ikke nødvendigvis én til én.
+
+```mermaid
+erDiagram
+    SOURCE_ARTIFACT {
+        string artifact_id PK
+        string checksum
+    }
+    DATASET_INSTANCE {
+        string dataset_id PK
+        string artifact_id FK
+    }
+    ACCEPTED_REVISION {
+        string revision_id PK
+        string dataset_id FK
+    }
+    DATAGRAM_OCCURRENCE {
+        string occurrence_id PK
+        string revision_id FK
+        string session_id
+    }
+    SOURCE_ARTIFACT ||--o{ DATASET_INSTANCE : originates
+    DATASET_INSTANCE ||--|{ ACCEPTED_REVISION : has
+    ACCEPTED_REVISION ||..o{ DATAGRAM_OCCURRENCE : reported_by
+```

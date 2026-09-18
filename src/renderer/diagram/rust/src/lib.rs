@@ -1,11 +1,19 @@
 mod model;
+mod semantic;
 mod sequence;
+pub mod text_metrics;
 use std::collections::HashMap;
 use xfmd_diagram_contracts::{
     Model,
     wire::{Reader, Writer},
 };
 pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
+    layout_measured(input, None)
+}
+pub fn layout_measured(
+    input: &[u8],
+    metrics: Option<text_metrics::Metrics>,
+) -> Result<Vec<u8>, String> {
     let mut r = Reader::new(input);
     if r.count(5)? != 5 {
         return Err("Unsupported diagram layout payload".into());
@@ -41,7 +49,9 @@ pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
         );
     }
     r.finish()?;
-    let graph = if let Some(s) = &model.sequence {
+    let graph = if let Some(d) = &model.semantic {
+        semantic::graph(d)?
+    } else if let Some(s) = &model.sequence {
         sequence::graph(s)
     } else {
         model::graph(&model)
@@ -64,9 +74,65 @@ pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
         Ok("1") => true,
         _ => return Err("XFMD_MERMAID_CROSSING_JUMPS must be 0 or 1".into()),
     };
+    let mut config = mermaid_rs_renderer::LayoutConfig::default();
+    if model.semantic.is_some() {
+        config.node_spacing = 70.;
+        config.rank_spacing = 70.;
+        config.max_label_width_chars = 20;
+        config.flowchart.auto_spacing.enabled = false;
+        if graph.subgraphs.is_empty() && model.semantic.as_ref().is_some_and(|d| d.family != 2) {
+            config.flowchart.engine = mermaid_rs_renderer::config::FlowchartLayoutEngine::Dagre;
+        } else {
+            config.node_spacing = 50.;
+            config.rank_spacing = 50.;
+        }
+        config.requirement.fill = theme.primary_color.clone();
+        config.requirement.box_stroke = theme.primary_border_color.clone();
+        config.requirement.stroke = theme.primary_border_color.clone();
+        config.requirement.label_color = theme.primary_text_color.clone();
+        config.requirement.divider_color = theme.primary_border_color.clone();
+        config.requirement.edge_stroke = theme.line_color.clone();
+        config.requirement.edge_label_color = theme.primary_text_color.clone();
+        config.requirement.edge_label_background = theme.edge_label_background.clone();
+    }
     let duration = std::time::Duration::from_millis(budget as u64);
     let deadline = std::time::Instant::now() + duration;
-    let (layout, mut diagnostics) = if model.sequence.is_some() {
+    let (layout, mut diagnostics) = if let Some(d) = &model.semantic {
+        let metrics = metrics.ok_or("Semantic diagrams require external text metrics")?;
+        let metrics = text_metrics::Context {
+            metrics,
+            no_wrap: if [3, 5].contains(&d.family) {
+                graph.nodes.values().map(|n| n.label.clone()).collect()
+            } else {
+                Default::default()
+            },
+        };
+        let layout = measurements::with_measurer(
+            &metrics as *const _ as usize,
+            text_metrics::measure,
+            duration,
+            || {
+                mermaid_rs_renderer::layout::compute_semantic_layout(
+                    &graph,
+                    &theme,
+                    &config,
+                    &RoutingControl {
+                        deadline,
+                        cancelled: &|| false,
+                    },
+                )
+            },
+        );
+        let (layout, details) = layout.map_err(|e| format!("Semantic layout: {e}"))?;
+        (
+            layout,
+            format!(
+                "Semantic profile {}; {}; cooperative deadline",
+                d.family,
+                details.join("; ")
+            ),
+        )
+    } else if model.sequence.is_some() {
         let layout = measurements::layout(
             &graph,
             &theme,
@@ -107,8 +173,13 @@ pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
         w.number(n.width as f64);
         w.number(n.height as f64);
     }
-    w.u32(layout.subgraphs.len() as u32);
-    for g in &layout.subgraphs {
+    let inspection_groups = if model.semantic.is_some() {
+        &[][..]
+    } else {
+        &layout.subgraphs[..]
+    };
+    w.u32(inspection_groups.len() as u32);
+    for g in inspection_groups {
         w.text(g.id.as_deref().unwrap_or(""));
         w.number(g.x as f64);
         w.number(g.y as f64);
@@ -116,7 +187,7 @@ pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
         w.number(g.height as f64);
         w.number(g.label_block.height as f64);
     }
-    let inspection_edges = if model.sequence.is_some() {
+    let inspection_edges = if model.sequence.is_some() || model.semantic.is_some() {
         &[][..]
     } else {
         &layout.edges[..]
@@ -137,8 +208,7 @@ pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
         w.number(anchor.0 as f64);
         w.number(anchor.1 as f64);
     }
-    let config = mermaid_rs_renderer::LayoutConfig::default();
-    let svg = if jumps && model.sequence.is_none() {
+    let svg = if jumps && model.sequence.is_none() && model.semantic.is_none() {
         mermaid_rs_renderer::render::render_svg_with_crossings(
             &layout,
             &theme,
@@ -148,8 +218,11 @@ pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
     } else {
         mermaid_rs_renderer::render_svg(&layout, &theme, &config)
     };
-    let (svg, omitted) =
-        mermaid_rs_renderer::render::add_label_leaders(svg, &layout, &theme, &config);
+    let (svg, omitted) = if model.semantic.is_some() {
+        (svg, 0)
+    } else {
+        mermaid_rs_renderer::render::add_label_leaders(svg, &layout, &theme, &config)
+    };
     diagnostics.push_str(&format!("; label leaders omitted: {omitted}"));
     if std::time::Instant::now() >= deadline {
         return Err("Diagram layout time budget exceeded".into());

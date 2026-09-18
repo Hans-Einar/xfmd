@@ -1,0 +1,21 @@
+erDiagram
+    SOURCE_ARTIFACT {
+        string artifact_id PK
+        string checksum
+    }
+    DATASET_INSTANCE {
+        string dataset_id PK
+        string artifact_id FK
+    }
+    ACCEPTED_REVISION {
+        string revision_id PK
+        string dataset_id FK
+    }
+    DATAGRAM_OCCURRENCE {
+        string occurrence_id PK
+        string revision_id FK
+        string session_id
+    }
+    SOURCE_ARTIFACT ||--o{ DATASET_INSTANCE : originates
+    DATASET_INSTANCE ||--|{ ACCEPTED_REVISION : has
+    ACCEPTED_REVISION ||..o{ DATAGRAM_OCCURRENCE : reported_by

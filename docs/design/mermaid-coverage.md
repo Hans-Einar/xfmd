@@ -154,3 +154,20 @@ samtidige aktiviteter, ikke OS-tråder eller konkret scheduling.
 
 Pin: `e36c7374a51a00f3803e97b5e0d117f1d57c9a43`. [P37-bevis](../evidence/P37.md)
 og [forfatterprofil](mermaid-sequence-authoring.md) erstatter Sequence 1-grensene ovenfor.
+
+## Revisjon 3 — P38 semantiske diagrammer
+
+Fork-pin `ba4865555c32747ab1536a8d0e19312f9f04d0f6`. Egen modellversjon 3
+bevarer domain records for følgende profiler. Matrisen over er historisk P36.
+
+| Type | Parser/modell | Layout | Preview | PDF | Grenser |
+| --- | --- | --- | --- | --- | --- |
+| State 1 | Egen state/transition/region-kontrakt | Native plassering, Libavoid flate grafer | SVG | Vektor | Composite bruker native ruting; guardtekst evalueres ikke |
+| Class 1 | Typer, medlemmer, annotations, relasjoner og multipliciteter | Native plassering og markører, Libavoid | SVG | Vektor | Ingen generics eller stylingdirektiver |
+| Requirement 1 | Identitet, attributter og Mermaid-relasjoner | Native layout + Libavoid | SVG | Vektor | Verifies er ikke testresultat |
+| ER 1 | Attributter, nøkler, kardinaliteter og identifying | Native layout + Libavoid | SVG | Vektor | Ingen databasegenerering |
+
+Se [profilene](mermaid-semantic-authoring.md) og [P38-bevis](../evidence/P38.md).
+Byteidentisk gjentatt SVG er en kjent libavoid-begrensning for konkurrerende
+porter. 64 diagramblokker og samlet 64 MiB scenesvar per dokument tillates;
+8 MiB per scene og eksisterende tids-/cachegrenser gjelder fortsatt.

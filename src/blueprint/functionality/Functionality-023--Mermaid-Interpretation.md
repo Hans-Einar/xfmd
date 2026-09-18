@@ -43,6 +43,9 @@ Gjenkjenn bare eksplisitt mermaid-gjerde. Rust bruker parse_mermaid_strict, men 
 | P36 | `parse` | `parse` | `src/interpreter/mermaid/rust/src/sequence.rs` | Sequence 1 → ordnede hendelser + kontroll mot bibliotekparser | ukjent syntaks/scope gir feil | Implemented |
 | P36 | `Sequence::read` | `validate` | `src/contracts/diagram/rust/src/sequence.rs` | typed wire → grenser, referanser og balanserte fragmenter | ugyldige verdier avvises | Implemented |
 
+| P38 | `parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/mod.rs` | standard Mermaid → typed State/Class/Requirement/ER-rekorder | full profilkonsum; ukjent syntaks avvises | Implemented |
+| P38 | `Diagram::read` | `validate` | `src/contracts/diagram/rust/src/semantic.rs` | model wire 3 → skjema, identiteter, scope og enumerasjoner | lokal feil før layout | Implemented |
+
 ## 6. Gjenbruk og avhengigheter
 
 Konsument: FUNC-003 via injisert port. Bibliotek og Rust-typer er private. Ingen dependency til FUNC-024. Et alternativ kan produsere samme modell uten å endre Application eller diagramlayout.
@@ -66,7 +69,7 @@ P37 Implemented: Sequence 2 bruker samme `parse`/`graph`-innganger, utvidede
 ordnede hendelser, async-piltype og forkens `sequence_events::apply`.
 Se [revisjon 2](../../../docs/design/mermaid-coverage.md).
 
-P38 Planned: `semantic::parse` i `src/interpreter/mermaid/rust/src/semantic/`
+P38 Implemented: `semantic::parse` i `src/interpreter/mermaid/rust/src/semantic/`
 produserer egne state/class/requirement/ER-rekorder. `Diagram::validate` i
 `src/contracts/diagram/rust/src/semantic.rs` kontrollerer skjema og referanser.
 [Kontraktbeslutning](../../../docs/design/mermaid-semantic-model.md).

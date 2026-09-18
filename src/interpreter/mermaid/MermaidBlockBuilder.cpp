@@ -13,8 +13,8 @@ bool MermaidBlockBuilder::build(SemanticBlock& block, const char* info, const ch
   block.diagramSource = literal ? literal : "";
   block.runs.push_back({block.diagramSource, approximate, false, false, true, {}});
   DiagramParseResult result;
-  if (++count > 16)
-    result.error = "At most 16 diagrams per document";
+  if (++count > 64)
+    result.error = "At most 64 diagrams per document";
   else if (!parser)
     result.error = "Diagram interpreter is unavailable";
   else

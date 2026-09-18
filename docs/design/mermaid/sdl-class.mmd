@@ -1,0 +1,22 @@
+classDiagram
+    direction TB
+    class Unit {
+        <<design constituent>>
+        +String identity
+        +provideCapability()
+    }
+    class Container
+    class Functionality
+    class Function
+    class Dataset
+    class Datagram
+    class Command
+    class Value
+    Container --|> Unit : specializes
+    Unit "1" *-- "0..*" Functionality : owns
+    Functionality "1" o-- "1..*" Function : groups
+    Function ..|> Functionality : realizes
+    Function ..> Dataset : reads
+    Datagram --> Dataset : describes occurrence of
+    Command ..> Functionality : requests
+    Dataset "1" *-- "1..*" Value : contains

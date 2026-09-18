@@ -1,0 +1,60 @@
+mod state;
+mod types;
+use mermaid_rs_renderer::ir::*;
+use xfmd_diagram_contracts::semantic::*;
+pub fn graph(d: &Diagram) -> Result<Graph, String> {
+    d.validate()?;
+    let mut g = Graph::new();
+    g.kind = match d.family {
+        2 => DiagramKind::State,
+        3 => DiagramKind::Class,
+        4 => DiagramKind::Requirement,
+        5 => DiagramKind::Er,
+        _ => return Err("Unknown semantic family".into()),
+    };
+    if let Some(r) = d.records.iter().find(|r| r.tag == DIRECTION) {
+        g.direction = match r.fields[0].as_str() {
+            "LR" => Direction::LeftRight,
+            "RL" => Direction::RightLeft,
+            "BT" => Direction::BottomTop,
+            _ => Direction::TopDown,
+        };
+    }
+    if d.family == 2 {
+        state::populate(d, &mut g);
+    } else {
+        types::populate(d, &mut g);
+    }
+    Ok(g)
+}
+pub(super) fn node(g: &mut Graph, id: &str, label: String, shape: NodeShape) {
+    let index = g.nodes.len();
+    g.node_order.insert(id.into(), index);
+    g.nodes.insert(
+        id.into(),
+        Node {
+            id: id.into(),
+            label,
+            shape,
+            value: None,
+            icon: None,
+        },
+    );
+}
+pub(super) fn edge(from: &str, to: &str, label: &str) -> Edge {
+    Edge {
+        from: from.into(),
+        to: to.into(),
+        label: (!label.is_empty()).then(|| label.into()),
+        start_label: None,
+        end_label: None,
+        directed: true,
+        arrow_start: false,
+        arrow_end: true,
+        arrow_start_kind: None,
+        arrow_end_kind: None,
+        start_decoration: None,
+        end_decoration: None,
+        style: EdgeStyle::Solid,
+    }
+}

@@ -25,7 +25,8 @@ void DiagramPainter::paint(cairo_t* cr, const DiagramScene& scene, Rect bounds,
                    mapping("#F1F5F9", palette.alternate) + mapping("#E2E8F0", palette.alternate) +
                    mapping("#0F172A", ink) + mapping("#64748B", ink) +
                    mapping("#FFF7ED", palette.surface) + mapping("#FDBA74", palette.border) +
-                   mapping("#94A3B8", palette.border) + mapping("#CBD5E1", palette.border);
+                   mapping("#94A3B8", palette.border) + mapping("#CBD5E1", palette.border) +
+                   "text[fill=\"#FFFFFF\"] {fill:#FFFFFF !important;}";
   cairo_save(cr);
   try {
     SvgDiagramCache::paint(cr, scene.svg, bounds, css);

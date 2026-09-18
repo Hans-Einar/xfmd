@@ -47,3 +47,25 @@ Hver familie får akseptansefixture, negativ syntakstest, modell/wire-roundtrip,
 SVG, lys/mørk preview og vektor-PDF. Samme Markdown-galleri brukes i build/xfmd.
 Støttematrisen oppdateres med faktisk testet subset; bibliotekets reklametekst
 er aldri en kompatibilitetstest. Utestede konstruksjoner forblir eksplisitte hull.
+
+## Visuell kontroll og rutingsvalg i P38
+
+Første prøve av native State/Class/Requirement/ER viste kolliderende etiketter
+og ER-symboler inne i nodefyll. Forkens `compute_semantic_layout` beholder native
+modell/nodeplassering, men bruker eksisterende `route_positioned` for flate grafer.
+Endepunktetiketter reserveres separat på ferdige ruter; bare én eksplisitt
+spacing-retry er tillatt. Composite-state bruker fortsatt native gruppesemantikk
+og oppgir dette i diagnostikken. Libavoid skal ikke gjøre hele gruppen ugjennomtrengelig.
+
+ER-dekorasjoner vendes ut fra begge nodegrenser, og class-multipliciteter får
+avstand som rommer faktisk teksthøyde. Kravdiagrammets presentasjonsfarger følger
+standardtemaet slik at samme SVG kan få lys/mørk lesepalett i FOX-adapteren.
+
+## Kjent reproduksjonsbegrensning
+
+Gjentatt layout av identisk currentness-modell kan velge forskjellige gyldige
+libavoid-porter/ruter i samme prosess. Nodeplassering og modell er bevart, men
+byteidentisk SVG er ikke garantert. Åtte gjentakelser kontrollerer kantidentitet,
+etikettinnhold og ortogonalitet; dette er ikke bevis for determinisme.
+Forsøk med pin-kostnader og adresseuavhengige sammenligninger løste ikke hele
+problemet og er ikke inkludert. Egen router-revisjon gjenstår.

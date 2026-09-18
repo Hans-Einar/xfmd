@@ -168,6 +168,7 @@ pub fn parse(source: &str) -> Result<Model, String> {
     }
     Ok(Model {
         sequence: Some(sequence),
+        semantic: None,
         direction: 0,
         nodes: vec![],
         edges: vec![],

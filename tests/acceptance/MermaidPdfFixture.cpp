@@ -11,7 +11,9 @@ int main(int argc, char** argv) {
     return 2;
   try {
     SourceSnapshot source{{7, 3}, "# Mermaid export\n\n", {}, false};
-    for (auto name : {"service-map", "layer-delivery", "traceability", "apt-import", "sequence-nested"}) {
+    for (auto name : {"service-map", "layer-delivery", "traceability", "apt-import",
+                      "sequence-nested", "measurement-state", "state-regions", "state-choice",
+                      "sdl-class", "apt-requirements", "provenance-er"}) {
       std::ifstream file(std::string(XFMD_DIAGRAM_FIXTURES) + "/" + name + ".mmd");
       source.text +=
           "```mermaid\n" + std::string((std::istreambuf_iterator<char>(file)), {}) + "\n```\n\n";
@@ -37,7 +39,7 @@ int main(int argc, char** argv) {
     unsigned diagrams = 0;
     for (const auto& b : model->blocks)
       diagrams += bool(b.diagramScene);
-    CHECK(diagrams == 7);
+    CHECK(diagrams == 13);
     auto frame = renderer.layout(*model, {595, 1, {LayoutMode::Paged, {}}}, metrics);
     for (const auto& run : frame->runs) {
       auto page = std::size_t(run.bounds.y / frame->pages.paper.height);
@@ -68,6 +70,61 @@ int main(int argc, char** argv) {
           if (!event.text.empty())
             expected << event.text << "\n";
       }
+    for (const auto& block : model->blocks)
+      if (block.diagram && block.diagram->semantic) {
+        for (const auto& record : block.diagram->semantic->records) {
+          const auto& f = record.fields;
+          auto emit = [&](unsigned i) {
+            if (!f[i].empty())
+              expected << f[i] << "\n";
+          };
+          switch (record.tag) {
+          case SemanticTag::State:
+            if (f[3] == "normal" || f[3] == "composite")
+              emit(1);
+            break;
+          case SemanticTag::StateTransition:
+            emit(2);
+            break;
+          case SemanticTag::ClassType:
+          case SemanticTag::ClassAttribute:
+          case SemanticTag::ClassOperation:
+          case SemanticTag::ClassAnnotation:
+            emit(1);
+            break;
+          case SemanticTag::ClassRelation:
+            emit(3);
+            emit(4);
+            emit(5);
+            break;
+          case SemanticTag::Requirement:
+            emit(0);
+            emit(1);
+            break;
+          case SemanticTag::RequirementAttribute:
+            emit(2);
+            break;
+          case SemanticTag::RequirementRelation:
+            emit(2);
+            break;
+          case SemanticTag::Entity:
+            emit(0);
+            break;
+          case SemanticTag::EntityAttribute:
+            emit(1);
+            emit(2);
+            emit(4);
+            break;
+          case SemanticTag::EntityRelation:
+            emit(5);
+            break;
+          default:
+            break;
+          }
+        }
+      }
+    expected << "Missing\nCurrent\nStale\nFunctionality\nImportAPT\nAPT-001\nSOURCE_"
+                "ARTIFACT\nDATAGRAM_OCCURRENCE\n";
     return 0;
   } catch (const std::exception& e) {
     std::cerr << e.what() << '\n';

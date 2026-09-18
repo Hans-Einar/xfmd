@@ -28,7 +28,7 @@ unsafe fn invoke(
     abi: u32,
     data: *const u8,
     size: u64,
-    operation: fn(&[u8]) -> Result<Vec<u8>, String>,
+    operation: impl FnOnce(&[u8]) -> Result<Vec<u8>, String>,
 ) -> ResultBuffer {
     if abi != 1 || size > 1024 * 1024 || (size > 0 && data.is_null()) {
         return owned(4, b"Invalid diagram ABI/input".to_vec());
@@ -74,6 +74,27 @@ pub unsafe extern "C" fn xfmd_diagram_layout_v1(
     size: u64,
 ) -> ResultBuffer {
     unsafe { invoke(abi, data, size, xfmd_diagram_layout::layout) }
+}
+/// # Safety
+/// Input and callback context must remain valid until return. The synchronous
+/// callback must not unwind or retain borrowed input/output pointers.
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn xfmd_diagram_layout_measured_v1(
+    abi: u32,
+    data: *const u8,
+    size: u64,
+    context: *mut c_void,
+    callback: Option<xfmd_diagram_layout::text_metrics::Callback>,
+) -> ResultBuffer {
+    let Some(callback) = callback else {
+        return owned(4, b"Missing text measurer".to_vec());
+    };
+    let metrics = xfmd_diagram_layout::text_metrics::Metrics { context, callback };
+    unsafe {
+        invoke(abi, data, size, |bytes| {
+            xfmd_diagram_layout::layout_measured(bytes, Some(metrics))
+        })
+    }
 }
 unsafe fn release(result: *mut ResultBuffer) {
     if let Some(r) = unsafe { result.as_mut() } {

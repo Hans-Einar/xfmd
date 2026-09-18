@@ -34,8 +34,8 @@ Layout forberedes i worker. Tekstmåling skjer med samme fontgrunnlag som brødt
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | `IDiagramLayout virtual dispatch` | `MermaidDiagramLayout::layout` | `src/renderer/diagram/MermaidDiagramLayout.cpp` | modell + font/request → immutable scene | checkpoint før/etter Rust | Implemented |
 | 2 | `MermaidDiagramLayout::layout` | `DiagramTextLayout::measure` | `src/renderer/diagram/DiagramTextLayout.cpp` | etiketter → formede linjer og mål | samme ITextMetrics-port | Implemented |
-| 3 | `MermaidDiagramLayout::layout` | `xfmd_diagram_layout_v1` | `src/application/composition/mermaid/src/lib.rs` | ren graf + labelmål → LayoutResult | ingen parserkall/opaque parserhandle | Implemented |
-| 4 | `xfmd_diagram_layout_v1` | `layout` | `src/renderer/diagram/rust/src/lib.rs` | mapping → forkens routed::compute/render_svg → geometri og SVG | inputpayload 4 / scene 3; maks 8 MiB | Implemented |
+| 3 | `MermaidDiagramLayout::layout` | `xfmd_diagram_layout_measured_v1` | `src/application/composition/mermaid/src/lib.rs` | ren graf + labelmål → LayoutResult | ingen parserkall/opaque parserhandle | Implemented |
+| 4 | `xfmd_diagram_layout_measured_v1` | `layout` | `src/renderer/diagram/rust/src/lib.rs` | mapping → forkens routed::compute/render_svg → geometri og SVG | inputpayload 5 / model 3 / scene 3; maks 8 MiB | Implemented |
 | 5 | `MermaidDiagramLayout::layout` | `Reader::finish` | `src/contracts/diagram/DiagramWire.h` | ferdig dekodet scene → kontrollert buffer | trailing data avvises; scene er XFMD-eid | Implemented |
 | 6 | `BlockLayout::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | SVG-scene → én skalert visual-run | Approximate blokkanker, ingen sideklipping | Implemented |
 
@@ -49,6 +49,10 @@ Layout forberedes i worker. Tekstmåling skjer med samme fontgrunnlag som brødt
 
 | P36 | `layout` | `graph` | `src/renderer/diagram/rust/src/sequence.rs` | SequenceModel → dedikert sekvens-IR | bare validerte hendelser | Implemented |
 | P36 | `layout` | `measurements::layout` | `src/renderer/diagram/rust/src/lib.rs` | målte sekvensetiketter → layout og SVG | kooperativ frist; ingen flowchart-ruting | Implemented |
+
+| P38 | `xfmd_diagram_layout_measured_v1` | `layout_measured` | `src/renderer/diagram/rust/src/lib.rs` | typed model + lånt measurer → native layout/SVG | callback lever bare under synkront kall | Implemented |
+| P38 | `layout_measured` | `graph` | `src/renderer/diagram/rust/src/semantic/mod.rs` | domenerekorder → riktig native DiagramKind | validerer kontrakt; ingen kildeparsing | Implemented |
+| P38 | `text_metrics::measure` | `measureDiagramText` | `src/renderer/diagram/MermaidDiagramLayout.cpp` | UTF-8 + størrelse → ITextMetrics-mål | exceptions blir feilkode over C ABI | Implemented |
 
 ## 6. Gjenbruk og avhengigheter
 
@@ -149,7 +153,7 @@ P37 Implemented: Sequence 2 bruker samme `parse`/`graph`-innganger, utvidede
 ordnede hendelser, async-piltype og forkens `sequence_events::apply`.
 Se [revisjon 2](../../../docs/design/mermaid-coverage.md).
 
-P38 Planned: `semantic::graph` i `src/renderer/diagram/rust/src/semantic/`
+P38 Implemented: `semantic::graph` i `src/renderer/diagram/rust/src/semantic/`
 oversetter domenerekorder til native bibliotektyper. `layout_measured` bruker
 `measureDiagramText` via synkron ABI; forkens `with_measurer` låner konteksten.
 Samme SVG-scene går til preview og PDF; ingen kildeparsing i renderer.

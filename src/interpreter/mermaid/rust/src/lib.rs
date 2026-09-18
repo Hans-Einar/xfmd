@@ -1,5 +1,6 @@
 mod model;
 mod profile;
+mod semantic;
 mod sequence;
 use xfmd_diagram_contracts::wire::Writer;
 pub fn parse(source: &[u8]) -> Result<Vec<u8>, String> {
@@ -11,6 +12,24 @@ pub fn parse(source: &[u8]) -> Result<Vec<u8>, String> {
         == Some("sequenceDiagram")
     {
         let model = sequence::parse(source)?;
+        let mut w = Writer::default();
+        model.write(&mut w);
+        return Ok(w.0);
+    }
+    let header = source
+        .lines()
+        .map(str::trim)
+        .find(|s| !s.is_empty() && !s.starts_with("%%"))
+        .unwrap_or("");
+    if [
+        "stateDiagram-v2",
+        "classDiagram",
+        "requirementDiagram",
+        "erDiagram",
+    ]
+    .contains(&header)
+    {
+        let model = semantic::parse(source, header)?;
         let mut w = Writer::default();
         model.write(&mut w);
         return Ok(w.0);

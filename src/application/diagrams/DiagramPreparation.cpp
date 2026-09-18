@@ -10,6 +10,7 @@ ParseResult DiagramPreparation::prepare(ParseResult original, ITextMetrics& metr
       throw Error(ErrorCode::Layout, "Diagram preparation cancelled");
   };
   auto result = std::make_shared<SemanticDocument>(*original);
+  std::size_t sceneBytes = 0;
   for (auto& block : result->blocks) {
     checkpoint();
     if (!block.diagram)
@@ -18,7 +19,8 @@ ParseResult DiagramPreparation::prepare(ParseResult original, ITextMetrics& metr
       diagramWire::Writer value;
       value.model(*block.diagram);
       // Value-based identity: no hash collision, source range or palette in cached scene.
-      std::string key = "model2/flowchart1-sequence2/svg3/leaders1/wrap120-v1/font12/" + std::to_string(metrics.fontSetId()) + "/";
+      std::string key = "model3/semantic1-sequence2/svg3/leaders1/wrap120-v1/font12/" +
+                        std::to_string(metrics.fontSetId()) + "/";
       for (const char* name : {"XFMD_MERMAID_ROUTER", "XFMD_MERMAID_CROSSING_JUMPS"}) {
         const char* setting = std::getenv(name);
         key += setting ? setting : "<default>";
@@ -32,6 +34,9 @@ ParseResult DiagramPreparation::prepare(ParseResult original, ITextMetrics& metr
         SvgDiagramCache::validate(block.diagramScene->svg);
         cache.insert(std::move(key), block.diagramScene);
       }
+      if (block.diagramScene->bytes > 64 * 1024 * 1024 - sceneBytes)
+        throw Error(ErrorCode::TooLarge, "Document diagram scenes exceed 64 MiB");
+      sceneBytes += block.diagramScene->bytes;
     } catch (const std::exception& e) {
       checkpoint();
       block.kind = BlockKind::Code;

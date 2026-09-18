@@ -23,8 +23,21 @@ struct Writer {
     data.insert(data.end(), v.begin(), v.end());
   }
   void model(const DiagramModel& m) {
-    integer(2);
-    integer(m.sequence ? 1 : 0);
+    integer(3);
+    integer(m.semantic ? 2 : m.sequence ? 1 : 0);
+    if (m.semantic) {
+      if (m.sequence || !m.nodes.empty() || !m.edges.empty() || !m.groups.empty())
+        throw std::runtime_error("Mixed semantic diagram model");
+      integer(std::uint32_t(m.semantic->family));
+      integer(m.semantic->records.size());
+      for (const auto& r : m.semantic->records) {
+        integer(std::uint32_t(r.tag));
+        integer(r.fields.size());
+        for (const auto& f : r.fields)
+          text(f);
+      }
+      return;
+    }
     if (m.sequence) {
       if (!m.nodes.empty() || !m.edges.empty() || !m.groups.empty())
         throw std::runtime_error("Mixed sequence and flowchart model");
@@ -122,9 +135,27 @@ struct Reader {
   }
   DiagramModel model() {
     DiagramModel m;
-    if (integer() != 2)
+    if (integer() != 3)
       throw std::runtime_error("Unsupported diagram model version");
-    if (count(1)) {
+    auto kind = count(2);
+    if (kind == 2) {
+      SemanticDiagram d;
+      auto family = count(5);
+      if (family < 2)
+        throw std::runtime_error("Invalid semantic family");
+      d.family = DiagramFamily(family);
+      auto countRecords = count(512);
+      for (unsigned i = 0; i < countRecords; ++i) {
+        SemanticRecord record{SemanticTag(count(42)), {}};
+        auto fields = count(16);
+        for (unsigned j = 0; j < fields; ++j)
+          record.fields.push_back(text(4096));
+        d.records.push_back(std::move(record));
+      }
+      m.semantic = std::move(d);
+      return m;
+    }
+    if (kind == 1) {
       SequenceModel s;
       const auto n = count(16);
       for (unsigned i = 0; i < n; ++i) {

@@ -39,9 +39,36 @@ void run() {
     auto decoded = reader.model();
     reader.finish();
     CHECK(decoded.sequence->events.size() == parsed.model->sequence->events.size());
-    CHECK(layout.layout(decoded, {}, metrics)->svg == scene->svg);
+    auto repeated=layout.layout(decoded, {}, metrics);
+    CHECK(repeated->svg == scene->svg);
     if (const char* directory = std::getenv("XFMD_DIAGRAM_EVIDENCE"))
       std::ofstream(std::string(directory) + "/" + name + ".svg") << scene->svg;
+  }
+  for (const auto* name : {"measurement-state", "state-regions", "state-choice", "sdl-class",
+                           "apt-requirements", "provenance-er"}) {
+    std::ifstream file(std::string(XFMD_DIAGRAM_FIXTURES) + "/" + name + ".mmd");
+    auto parsed = parser.parse({std::string((std::istreambuf_iterator<char>(file)), {}), {}});
+    if (!parsed.model)
+      throw std::runtime_error(parsed.error);
+    CHECK(parsed.model->semantic && parsed.model->nodes.empty());
+    auto scene = layout.layout(*parsed.model, {}, metrics);
+    CHECK(scene->width > 0 && scene->height > 0 && scene->svg.find("<text") != std::string::npos);
+    CHECK(scene->diagnostics.find("Semantic profile") != std::string::npos);
+    diagramWire::Writer wire;
+    wire.model(*parsed.model);
+    XfmdDiagramResult value{
+        1, sizeof(XfmdDiagramResult), 0, wire.data.data(), wire.data.size(), nullptr};
+    diagramWire::Reader reader(value);
+    auto decoded = reader.model();
+    reader.finish();
+    CHECK(decoded.semantic->records.size() == parsed.model->semantic->records.size());
+    auto repeated=layout.layout(decoded, {}, metrics);
+    // Native libavoid pin ties can change geometry; semantic wire records must not.
+    CHECK(repeated->width > 0 && repeated->height > 0);
+    CHECK(repeated->svg.find("<text") != std::string::npos);
+    if (const char* directory = std::getenv("XFMD_DIAGRAM_EVIDENCE"))
+      std::ofstream(std::string(directory) + "/" + name + ".svg") << scene->svg;
+    std::cout << name << " " << scene->width << "x" << scene->height << " pt\n";
   }
   DiagramModel wrapping;
   wrapping.nodes.push_back({"a", "A", DiagramShape::Rectangle});
