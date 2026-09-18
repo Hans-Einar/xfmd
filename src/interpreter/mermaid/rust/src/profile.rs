@@ -170,7 +170,7 @@ pub fn inspect(source: &str) -> Result<Profile, String> {
         || header.next().is_some()
     {
         return Err(
-            "Expected flowchart/graph and direction; other Mermaid types are not supported".into(),
+            "Expected Flowchart 1 header/direction or Sequence 1; other Mermaid types are not supported".into(),
         );
     }
     for statement in statements.iter().skip(1) {

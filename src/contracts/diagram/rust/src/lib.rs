@@ -1,3 +1,4 @@
+pub mod sequence;
 pub mod wire;
 use wire::{Reader, Writer};
 #[derive(Clone, Debug, PartialEq)]
@@ -24,6 +25,7 @@ pub struct Group {
 }
 #[derive(Clone, Debug, PartialEq)]
 pub struct Model {
+    pub sequence: Option<sequence::Sequence>,
     pub direction: u32,
     pub nodes: Vec<Node>,
     pub edges: Vec<Edge>,
@@ -31,6 +33,12 @@ pub struct Model {
 }
 impl Model {
     pub fn write(&self, w: &mut Writer) {
+        w.u32(2); // Semantic model wire version.
+        w.u32(u32::from(self.sequence.is_some()));
+        if let Some(s) = &self.sequence {
+            s.write(w);
+            return;
+        }
         w.u32(self.direction);
         w.u32(self.nodes.len() as u32);
         for n in &self.nodes {
@@ -59,6 +67,21 @@ impl Model {
         }
     }
     pub fn read(r: &mut Reader) -> Result<Self, String> {
+        if r.u32()? != 2 {
+            return Err("Unsupported diagram model version".into());
+        }
+        match r.count(1)? {
+            1 => {
+                return Ok(Self {
+                    sequence: Some(sequence::Sequence::read(r)?),
+                    direction: 0,
+                    nodes: vec![],
+                    edges: vec![],
+                    groups: vec![],
+                });
+            }
+            _ => {}
+        }
         let direction = r.u32()?;
         if direction > 3 {
             return Err("Invalid direction".into());
@@ -118,6 +141,7 @@ impl Model {
             });
         }
         Ok(Model {
+            sequence: None,
             direction,
             nodes,
             edges,

@@ -18,7 +18,7 @@ ParseResult DiagramPreparation::prepare(ParseResult original, ITextMetrics& metr
       diagramWire::Writer value;
       value.model(*block.diagram);
       // Value-based identity: no hash collision, source range or palette in cached scene.
-      std::string key = "flowchart1/svg3/leaders1/wrap120-v1/font12/" + std::to_string(metrics.fontSetId()) + "/";
+      std::string key = "model2/flowchart1-sequence1/svg3/leaders1/wrap120-v1/font12/" + std::to_string(metrics.fontSetId()) + "/";
       for (const char* name : {"XFMD_MERMAID_ROUTER", "XFMD_MERMAID_CROSSING_JUMPS"}) {
         const char* setting = std::getenv(name);
         key += setting ? setting : "<default>";

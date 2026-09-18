@@ -1,8 +1,20 @@
 mod model;
 mod profile;
+mod sequence;
 use xfmd_diagram_contracts::wire::Writer;
 pub fn parse(source: &[u8]) -> Result<Vec<u8>, String> {
     let source = std::str::from_utf8(source).map_err(|_| "Invalid UTF-8")?;
+    if source
+        .lines()
+        .map(str::trim)
+        .find(|s| !s.is_empty() && !s.starts_with("%%"))
+        == Some("sequenceDiagram")
+    {
+        let model = sequence::parse(source)?;
+        let mut w = Writer::default();
+        model.write(&mut w);
+        return Ok(w.0);
+    }
     let profile = profile::inspect(source)?;
     let parsed = mermaid_rs_renderer::parse_mermaid_strict(source).map_err(|e| e.to_string())?;
     let model = model::map_graph(parsed.graph, &profile)?;

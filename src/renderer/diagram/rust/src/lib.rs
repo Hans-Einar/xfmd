@@ -1,4 +1,5 @@
 mod model;
+mod sequence;
 use std::collections::HashMap;
 use xfmd_diagram_contracts::{
     Model,
@@ -6,7 +7,7 @@ use xfmd_diagram_contracts::{
 };
 pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
     let mut r = Reader::new(input);
-    if r.count(4)? != 4 {
+    if r.count(5)? != 5 {
         return Err("Unsupported diagram layout payload".into());
     }
     let model = Model::read(&mut r)?;
@@ -40,7 +41,11 @@ pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
         );
     }
     r.finish()?;
-    let graph = model::graph(&model);
+    let graph = if let Some(s) = &model.sequence {
+        sequence::graph(s)
+    } else {
+        model::graph(&model)
+    };
     let mut theme = mermaid_rs_renderer::Theme::modern();
     theme.font_size = 16.0;
     theme.font_family = "DejaVu Sans".into();
@@ -61,21 +66,35 @@ pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
     };
     let duration = std::time::Duration::from_millis(budget as u64);
     let deadline = std::time::Instant::now() + duration;
-    let routed = measurements::with_measurements(labels, duration, || {
-        routed::compute(
+    let (layout, mut diagnostics) = if model.sequence.is_some() {
+        let layout = measurements::layout(
             &graph,
             &theme,
             &mermaid_rs_renderer::LayoutConfig::default(),
-            engine,
-            &RoutingControl {
-                deadline,
-                cancelled: &|| false,
-            },
+            labels,
+            duration,
+        );
+        (
+            layout,
+            "Sequence 1; dedicated sequence layout; cooperative deadline".into(),
         )
-    })
-    .map_err(|e| format!("{engine:?}: {e}"))?;
-    let mut diagnostics = format!("{engine:?}; {}", routed.diagnostics.join("; "));
-    let layout = routed.layout;
+    } else {
+        let routed = measurements::with_measurements(labels, duration, || {
+            routed::compute(
+                &graph,
+                &theme,
+                &mermaid_rs_renderer::LayoutConfig::default(),
+                engine,
+                &RoutingControl {
+                    deadline,
+                    cancelled: &|| false,
+                },
+            )
+        })
+        .map_err(|e| format!("{engine:?}: {e}"))?;
+        let diagnostics = format!("{engine:?}; {}", routed.diagnostics.join("; "));
+        (routed.layout, diagnostics)
+    };
     let mut w = Writer::default();
     w.u32(3);
     w.number(layout.width as f64);
@@ -97,8 +116,13 @@ pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
         w.number(g.height as f64);
         w.number(g.label_block.height as f64);
     }
-    w.u32(layout.edges.len() as u32);
-    for e in &layout.edges {
+    let inspection_edges = if model.sequence.is_some() {
+        &[][..]
+    } else {
+        &layout.edges[..]
+    };
+    w.u32(inspection_edges.len() as u32);
+    for e in inspection_edges {
         w.u32(e.points.len() as u32);
         for p in &e.points {
             w.number(p.0 as f64);
@@ -114,7 +138,7 @@ pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
         w.number(anchor.1 as f64);
     }
     let config = mermaid_rs_renderer::LayoutConfig::default();
-    let svg = if jumps {
+    let svg = if jumps && model.sequence.is_none() {
         mermaid_rs_renderer::render::render_svg_with_crossings(
             &layout,
             &theme,
@@ -127,6 +151,9 @@ pub fn layout(input: &[u8]) -> Result<Vec<u8>, String> {
     let (svg, omitted) =
         mermaid_rs_renderer::render::add_label_leaders(svg, &layout, &theme, &config);
     diagnostics.push_str(&format!("; label leaders omitted: {omitted}"));
+    if std::time::Instant::now() >= deadline {
+        return Err("Diagram layout time budget exceeded".into());
+    }
     w.text(&svg);
     w.text(&diagnostics);
     if w.0.len() > 8 * 1024 * 1024 {

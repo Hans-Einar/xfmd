@@ -2,7 +2,9 @@
 
 Dato: 2026-09-18. Status: implementasjonsgrunnlag; testbevis publiseres separat.
 Upstream HEAD kontrollert med `git ls-remote`: `3726ccbffe0e8032361eb9668694b24f77858060`.
-XFMDs fork-pin: `3eb91bc78d3efee6fa8e9b746a1e99606fb2f1e7`.
+Undersøkt baseline-pin: `3eb91bc78d3efee6fa8e9b746a1e99606fb2f1e7`.
+P36-pin: `1e3d2aabfe2a48e011ce067bd8fa000d9a44e924` (actor-symbol, målte
+deltakerbredder, fristkontroll, målbasert fragmentplass og eksklusiv fragment-slutt for notater).
 Upstreams README annonserer 23 typer; dette er ikke XFMD-kompatibilitet.
 Kildekontroll: forkens `src/{parser,ir,render}.rs`, `src/layout/sequence.rs`,
 XFMDs `profile.rs`, DiagramModel, DiagramWire, MermaidDiagramLayout,
@@ -12,7 +14,9 @@ DiagramPreparation, DiagramPainter og ExportPipeline.
 
 P/L/S betyr at biblioteket har parser, typeinformasjon og layout/SVG-kode;
 det er kildeinspeksjon, ikke bevis for alle Mermaid-konstruksjoner.
-XFMD-kolonnene beskriver baseline før P36; Sequence 1 blir første tillegg.
+XFMD-kolonnene beskriver P36. P/L/S sier ikke at IR bevarer alle typer:
+state-regioner blir syntetiske subgraphs; requirement-attributter blir tekst.
+Disse trenger spesielt review før en fremtidig typed XFMD-adapter.
 
 | Type / prioritet | Upstream og pin | XFMD parser/modell | Layout/preview/PDF | Viktigste gjenstående arbeid |
 | --- | --- | --- | --- | --- |
@@ -20,7 +24,7 @@ XFMD-kolonnene beskriver baseline før P36; Sequence 1 blir første tillegg.
 | Sequence / 1 | P/L/S; parser slår sammen pilformer, frames bruker meldingsindekser | P36: separat Sequence 1 | P36: bibliotekets sekvenslayout/SVG | Async-piler, nested frames og full ordning av grensehendelser |
 | State v2 / 2 | P/L/S, egne state-notater og pseudotilstander | Avvist / mangler typed state-modell | Ikke eksponert | Regioner, hierarchy, choice/fork/join må kontrakttestes |
 | Class / 3 | P/L/S, medlemmer og dekorasjoner | Avvist / mangler | Ikke eksponert | Annotations, medlemsseksjoner, multiplicitet og relasjonstyper |
-| Requirement / 4 | P/L/S, egne requirement-verdier | Avvist / mangler | Ikke eksponert | Identitet/tekst, elementer og eksakt Mermaid-relasjonstype |
+| Requirement / 4 | P/L/S; attributter pakkes i nodeetiketter | Avvist / mangler | Ikke eksponert | Identitet/tekst, elementer og eksakt Mermaid-relasjonstype |
 | ER / 5 | P/L/S, attributter og crow-foot-dekorasjoner | Avvist / mangler | Ikke eksponert | Kardinalitet begge ender, identitet og proveniens |
 | C4 / 6 | P/L/S; C4-varianter må testes hver for seg | Avvist / mangler | Ikke eksponert | Context/container/component, grenser og relasjonsetiketter |
 | Architecture / 6 | P/L/S | Avvist / mangler | Ikke eksponert | Grupper, junctions, ikonpolicy og portretning |
@@ -28,6 +32,30 @@ XFMD-kolonnene beskriver baseline før P36; Sequence 1 blir første tillegg.
 | Packet / 7 | P/L/S | Avvist / mangler | Ikke eksponert | Bitposisjoner, bredder, faktisk encoding |
 | Timeline, Gantt, Journey / 7 | P/L/S | Avvist / mangler | Ikke eksponert | Tid, avhengigheter, aktiviteter og skala |
 | Pie, Mindmap, GitGraph, Sankey, Quadrant, ZenUML, Kanban, Radar, Treemap, XYChart / senere | P/L/S-dispatch finnes | Avvist / mangler | Ikke eksponert | Egen semantisk kontrakt og akseptanse per type |
+
+### Ende-til-ende-status per grense (P36)
+
+«Nei» betyr eksplisitt avvist før layout, ikke manglende kode i avhengigheten.
+«Subset» gjelder bare konstruksjonene i forfatterveiledningen; bevis lenkes i P36.
+
+| Type | XFMD-parser | Modellbevaring | Layout | Preview | PDF |
+| --- | --- | --- | --- | --- | --- |
+| Flowchart 1 | Subset | Noder/kanter/grupper | Libavoid eller Legacy | SVG | Vektor-SVG/Cairo |
+| Sequence 1 | Subset | Ordnet typed interaksjon | Dedikert sequence-layout | SVG | Vektor-SVG/Cairo |
+| State v2 | Nei | Nei | Nei | Nei | Nei |
+| Class | Nei | Nei | Nei | Nei | Nei |
+| Requirement | Nei | Nei | Nei | Nei | Nei |
+| ER | Nei | Nei | Nei | Nei | Nei |
+| C4 context/container/component | Nei | Nei | Nei | Nei | Nei |
+| Architecture / Block | Nei | Nei | Nei | Nei | Nei |
+| Packet | Nei | Nei | Nei | Nei | Nei |
+| Timeline / Gantt / Journey | Nei | Nei | Nei | Nei | Nei |
+| Øvrige annonserte typer | Nei | Nei | Nei | Nei | Nei |
+
+Nyere Mermaid-dokumentasjon viser også typer uten en DiagramKind i denne pinnen,
+blant annet use-case og swimlanes. De ligger i «øvrig framtidig dekning» og
+krever først bibliotekstøtte. Versjonskontroll skal aldri anta at JS-Mermaid og
+Rust-biblioteket har samme syntaks eller samme versjonsnummer.
 
 Ingen av de ueksponerte typene blir en flowchart som nødløsning.
 Nyere Mermaid-syntaks er ikke automatisk støttet av denne pinnen.
@@ -50,7 +78,8 @@ har ingen eksplisitt foreldreidentitet i layout; notater på fragmentgrenser
 kan få feil scope. Ingen delvis eller stille redusert rendering tillates.
 
 Grenser: 64 KiB kilde, 16 deltakere, 128 hendelser, minst én melding;
-aktivering skal være balansert. Samme 8 MiB scene, 16 blokker/dokument,
+aktivering skal være balansert og ligge utenfor fragmenter. Notat rett før
+fragment krever en mellomliggende melding for entydig visuell scope. Samme 8 MiB scene, 16 blokker/dokument,
 worker/cache og deadline gjelder. Sekvenslayoutens tidskontroll er kooperativ,
 ikke hard preemption; bounded input begrenser arbeid mellom checkpoints.
 
@@ -90,3 +119,25 @@ ansvarsroller, ikke implisitte tråder; async-piler fastsetter ikke scheduling.
 - [Mermaid architecture](https://mermaid.js.org/syntax/architecture.html)
 - [Mermaid block](https://mermaid.js.org/syntax/block.html)
 - [Låst upstream](https://github.com/1jehuang/mermaid-rs-renderer/tree/3726ccbffe0e8032361eb9668694b24f77858060)
+
+## Konkrete funn i den undersøkte bibliotekmodellen
+
+- `parser.rs::parse_sequence_message` returnerer bare stil og aktivering, ikke
+  piltype. `parse_sequence_diagram` lager alltid arrow_end=true. Derfor er
+  `->` versus `->>` ikke en trygg kompatibilitetspåstand, og `-)` gjenkjennes ikke.
+- SequenceFrame har meldingsintervaller, uten foreldre-ID; note har bare
+  meldingsindeks. XFMDs ordnede hendelser er rikere og skal ikke erstattes av
+  disse flatere bibliotekverdiene. Sequence 1 avgrenser mappingen eksplisitt.
+- State-parseren lager syntetiske `__region_*`-subgraphs for concurrent regions;
+  framtidig adapter må bevare regionscope og composite-identitet eksplisitt.
+- Class-parseren har multiplicitet, stereotype og medlemslinjer, men XFMDs
+  gamle fire former og utypede kantetiketter kunne ikke bevart relasjonene.
+- ER bruker crow-foot-dekorasjoner og attributtlinjer; gamle DiagramEdge har
+  bare arrowStart/arrowEnd og mister derfor kardinalitet.
+- Requirement-parseren samler attributtlinjer i nodepresentasjon og bruker
+  relasjonsnavnet som kantetikett. Bibliotekrendering alene dokumenterer ikke
+  typebevaring av krav-ID, testelement eller relasjonsvokabular.
+
+Alle nye typer må derfor ha egne profiler og mappingtester, også når layouten
+internt gjenbruker bibliotekets flowchart-plassering. Deling av en algoritme er
+lovlig; tap av typed mening i XFMD-kontrakten er ikke det.

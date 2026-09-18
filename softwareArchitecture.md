@@ -448,3 +448,22 @@ P35: [Etikettpekere](docs/design/mermaid-label-leaders.md) eies av forkens
 render::label_leaders. Rust-adapteren kaller add_label_leaders etter vanlig
 SVG-rendering; returnert utelatelsesantall inngår i scenediagnostikken.
 Layout, portvalg og ruter er immutable i dette presentasjonssteget.
+
+
+## P36 — typebevarende Mermaid-modeller
+
+[Matrisen](docs/design/mermaid-coverage.md) og
+[Sequence 1](docs/design/mermaid-sequence-authoring.md) definerer første tillegg.
+`contracts/diagram/SequenceModel.h` og `rust/src/sequence.rs` eier ordnede
+interaksjoner, deltakere og hendelsestyper. DiagramModel har en egen sequence-variant;
+flowchart-feltene er tomme for denne. Modellpayload 2 begynner med versjon og type;
+layout-input 5 inneholder denne modellen, mens SVG-scene 3/ABI-envelope 1 beholdes.
+
+`interpreter/mermaid/rust/src/sequence.rs` konsumerer hele Sequence 1-profilen,
+bruker bibliotekparseren og kontrollerer meldingsorden/tekst. `renderer/diagram/rust/src/sequence.rs`
+rekonstruerer dedikert Graph.kind=Sequence fra rene verdier, aldri kildekode.
+DiagramTextLayout måler også fragmentoverskrifter. Biblioteket eier layout og
+SVG; flowchart-ruter/pekere brukes ikke på sekvenser. Sceneformatets flowchart-
+inspeksjonslister er tomme for sequence, ikke fiktive noder og kanter.
+DiagramPainter utvider bare semantisk palettmapping av notatfarger. Worker,
+cache, librsvg/Cairo, plassering og PDF bruker eksisterende porter.

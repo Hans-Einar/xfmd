@@ -289,10 +289,11 @@ finnes i `tests/fixtures/markdown/mermaid.md`.
 
 Fargekontrollene virker direkte. Diagrametikettmerking er utsatt; diagramkilden
 kan kopieres fra editoren. A4 og PDF bruker samme SVG og vektorgeometri. Lange LR-diagrammer skaleres ned til
-visningsbredden. Andre diagramtyper og init/CSS/HTML/click/ressursdirektiver
+visningsbredden. Sequence 1 støtter i tillegg en eksplisitt sekvensprofil,
+se forfatterveiledningen nedenfor. Andre typer og init/CSS/HTML/click/ressursdirektiver
 vises som kilde med forklaring, uten å ødelegge resten av dokumentet.
 
-Grensene er 64 KiB, 128 noder, 512 kanter, 32 grupper, gruppedybde 8 og
+Flowchart-grensene er 64 KiB, 128 noder, 512 kanter, 32 grupper, gruppedybde 8 og
 16 diagrammer per dokument. Dyr layout avbrytes kooperativt etter omtrent
 to sekunder og gir lokal fallback; dette er ingen hard realtime-garanti.
 AddressSanitizer-bygg har ti sekunders budsjett for instrumenteringskostnaden;
@@ -323,3 +324,8 @@ målingen. Preview og PDF bruker de samme målte linjene.
 Der det er fri plass, får Mermaid-kantetiketter en tynn peker med prikk på
 forbindelsen de tilhører. Venstre side prioriteres, med høyre som alternativ.
 Pekerne følger lesefargene og vises også i PDF; de endrer ikke diagramlayouten.
+
+P36 legger til en avgrenset `sequenceDiagram`-profil. Se
+[forfatterveiledningen](docs/design/mermaid-sequence-authoring.md) og
+[versjonert Mermaid-matrise](docs/design/mermaid-coverage.md). Bibliotekets
+annonserte diagramtyper er ikke automatisk støttet ende til ende i XFMD.

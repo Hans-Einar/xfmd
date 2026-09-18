@@ -15,6 +15,33 @@ void run() {
   MermaidInterpreter parser;
   MermaidDiagramLayout layout;
   SharedTextMetrics metrics;
+  for (const auto* name : {"apt-import", "sequence-fragments"}) {
+    std::ifstream file(std::string(XFMD_DIAGRAM_FIXTURES) + "/" + name + ".mmd");
+    std::string text((std::istreambuf_iterator<char>(file)), {});
+    auto parsed = parser.parse({text, {}});
+    if (!parsed.model)
+      throw std::runtime_error(parsed.error);
+    CHECK(parsed.model->sequence && parsed.model->nodes.empty());
+    auto scene = layout.layout(*parsed.model, {}, metrics);
+    CHECK(scene->svg.find(std::string(name) == "apt-import" ? "Operatør" : "Måletjeneste") !=
+          std::string::npos);
+    CHECK(scene->diagnostics.find("Sequence 1") != std::string::npos);
+    CHECK(scene->nodes.empty() && scene->edges.empty());
+    diagramWire::Writer wire;
+    wire.model(*parsed.model);
+    XfmdDiagramResult value{};
+    value.abi_version = 1;
+    value.struct_size = sizeof(value);
+    value.data = wire.data.data();
+    value.size = wire.data.size();
+    diagramWire::Reader reader(value);
+    auto decoded = reader.model();
+    reader.finish();
+    CHECK(decoded.sequence->events.size() == parsed.model->sequence->events.size());
+    CHECK(layout.layout(decoded, {}, metrics)->svg == scene->svg);
+    if (const char* directory = std::getenv("XFMD_DIAGRAM_EVIDENCE"))
+      std::ofstream(std::string(directory) + "/" + name + ".svg") << scene->svg;
+  }
   DiagramModel wrapping;
   wrapping.nodes.push_back({"a", "A", DiagramShape::Rectangle});
   wrapping.nodes.push_back({"b", "B", DiagramShape::Rectangle});

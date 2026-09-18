@@ -14,6 +14,12 @@ std::map<std::string, DiagramText> DiagramTextLayout::measure(const DiagramModel
     edgeLabels.erase(n.label);
   for (const auto& g : model.groups)
     edgeLabels.erase(g.label);
+  if (model.sequence) {
+    for (const auto& p : model.sequence->participants)
+      edgeLabels.insert(p.label);
+    for (const auto& e : model.sequence->events)
+      edgeLabels.insert(e.text);
+  }
   auto add = [&](const std::string& text) {
     if (result.count(text))
       return;
@@ -60,6 +66,22 @@ std::map<std::string, DiagramText> DiagramTextLayout::measure(const DiagramModel
     add(e.label);
   for (const auto& g : model.groups)
     add(g.label);
+  if (model.sequence) {
+    for (const auto& p : model.sequence->participants)
+      add(p.label);
+    for (const auto& e : model.sequence->events) {
+      add(e.text);
+      if (e.kind == SequenceEventKind::Alt || e.kind == SequenceEventKind::Opt ||
+          e.kind == SequenceEventKind::Loop || e.kind == SequenceEventKind::Par ||
+          e.kind == SequenceEventKind::Else || e.kind == SequenceEventKind::And) {
+        auto display = "[" + e.text + "]";
+        edgeLabels.insert(display);
+        add(display);
+      }
+    }
+    for (const auto* keyword : {"alt", "opt", "loop", "par"})
+      add(keyword);
+  }
   return result;
 }
 } // namespace xfmd

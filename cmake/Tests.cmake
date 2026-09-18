@@ -154,6 +154,7 @@ if(XFMD_SANITIZERS)
 endif()
 
 xfmd_test(DiagramReadingTest tests/application/DiagramReadingTest.cpp xfmd_diagrams xfmd_preview)
+target_compile_definitions(DiagramReadingTest PRIVATE XFMD_SEQUENCE_FIXTURES="${CMAKE_CURRENT_SOURCE_DIR}/docs/design/mermaid")
 add_executable(MermaidPdfFixture tests/acceptance/MermaidPdfFixture.cpp)
 target_include_directories(MermaidPdfFixture PRIVATE tests)
 target_link_libraries(MermaidPdfFixture PRIVATE xfmd_export)

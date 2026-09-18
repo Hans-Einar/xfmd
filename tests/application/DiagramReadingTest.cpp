@@ -1,3 +1,4 @@
+#include "application/adapters/DiagramPainter.h"
 #include "application/adapters/DisplayListPainter.h"
 #include "application/composition/DiagramServices.h"
 #include "application/preview/PreviewSelection.h"
@@ -5,6 +6,8 @@
 #include "renderer/MarkdownRenderer.h"
 #include "support/TestSupport.h"
 #include <cmath>
+#include <cstdlib>
+#include <fstream>
 using namespace xfmd;
 void run() {
   auto parser = DiagramServices::interpreter();
@@ -51,5 +54,64 @@ void run() {
   auto paged = renderer.layout(*model, {595, 2, {LayoutMode::Paged, {}}}, metrics);
   CHECK(paged->pages.slices.size() == 1);
   CHECK(paged->readingText == frame->readingText);
+  for (const auto* name : {"apt-import", "sequence-fragments"}) {
+    std::ifstream file(std::string(XFMD_SEQUENCE_FIXTURES) + "/" + name + ".mmd");
+    SourceSnapshot sequence{{9, 1},
+                            "Before\n\n```mermaid\n" +
+                                std::string((std::istreambuf_iterator<char>(file)), {}) +
+                                "\n```\n\nAfter",
+                            {},
+                            false};
+    auto prepared =
+        DiagramServices::prepare(parser->parse(sequence), sequence, metrics, [] { return false; });
+    std::shared_ptr<const DiagramScene> scene;
+    for (const auto& block : prepared->blocks)
+      if (block.diagramScene)
+        scene = block.diagramScene;
+    CHECK(scene && scene->diagnostics.find("Sequence 1") != std::string::npos);
+    for (const auto width : {320., 900.}) {
+      auto view = renderer.layout(*prepared, {width, 1}, metrics);
+      CHECK(view->readingText.find("Before") != std::string::npos);
+      for (const auto& run : view->runs)
+        if (run.visual) {
+          CHECK(run.visual.get() == scene.get());
+          CHECK(std::abs(run.bounds.width / run.bounds.height - scene->width / scene->height) <
+                .001);
+        }
+    }
+    unsigned long long previousHash = 0;
+    for (bool dark : {false, true}) {
+      const int width = 1000, height = std::ceil(width * scene->height / scene->width);
+      auto* image = cairo_image_surface_create(CAIRO_FORMAT_ARGB32, width, height);
+      auto* canvas = cairo_create(image);
+      auto palette = ReadingPalette::from(ReadingColors::defaults(dark));
+      DiagramPainter::paint(canvas, *scene, {0, 0, double(width), double(height)}, &palette, true);
+      CHECK(cairo_status(canvas) == CAIRO_STATUS_SUCCESS);
+      cairo_surface_flush(image);
+      unsigned long long hash = 1469598103934665603ULL;
+      const auto* bytes = cairo_image_surface_get_data(image);
+      for (int k = 0; k < height * cairo_image_surface_get_stride(image); ++k)
+        hash = (hash ^ bytes[k]) * 1099511628211ULL;
+      CHECK(hash != previousHash);
+      previousHash = hash;
+      if (const auto* directory = std::getenv("XFMD_DIAGRAM_EVIDENCE")) {
+        auto output = std::string(directory) + "/" + name + (dark ? "-dark.png" : "-light.png");
+        CHECK(cairo_surface_write_to_png(image, output.c_str()) == CAIRO_STATUS_SUCCESS);
+      }
+      cairo_destroy(canvas);
+      cairo_surface_destroy(image);
+    }
+  }
+  SourceSnapshot unsupported{{9, 2},
+                             "Before\n\n```mermaid\nsequenceDiagram\nparticipant A\nparticipant "
+                             "B\nA-)B: async\n```\n\nAfter",
+                             {},
+                             false};
+  auto fallback = DiagramServices::prepare(parser->parse(unsupported), unsupported, metrics,
+                                           [] { return false; });
+  auto fallbackFrame = renderer.layout(*fallback, {600, 1}, metrics);
+  CHECK(fallbackFrame->readingText.find("A-)B: async") != std::string::npos);
+  CHECK(fallbackFrame->readingText.find("Mermaid:") != std::string::npos);
+  CHECK(fallbackFrame->readingText.find("After") != std::string::npos);
 }
 TEST_MAIN(run)

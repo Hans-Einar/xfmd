@@ -1,0 +1,17 @@
+sequenceDiagram
+    actor Operator as Operatør
+    participant UI as Operator UI
+    participant Service as APT service
+    Operator->>UI: Import APT
+    UI->>Service: Command import, expected revision
+    activate Service
+    alt valid input
+        Service-->>UI: Accepted draft revision
+    else invalid input
+        Service-->>UI: Rejected input
+    else revision conflict
+        Service-->>UI: Conflict, no overwrite
+    end
+    deactivate Service
+    Note over UI,Service: Import does not activate the draft
+    UI-->>Operator: Report outcome

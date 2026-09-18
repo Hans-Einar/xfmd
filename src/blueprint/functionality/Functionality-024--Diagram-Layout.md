@@ -47,6 +47,9 @@ Layout forberedes i worker. Tekstmåling skjer med samme fontgrunnlag som brødt
 
 | 11 | `layout` | `add_label_leaders` | `src/renderer/diagram/rust/src/lib.rs` | ferdig SVG + immutable Layout → SVG med pekere og antall utelatelser | ingen ruteflytting; blokkerte pekere utelates med diagnostikk | Implemented |
 
+| P36 | `layout` | `graph` | `src/renderer/diagram/rust/src/sequence.rs` | SequenceModel → dedikert sekvens-IR | bare validerte hendelser | Implemented |
+| P36 | `layout` | `measurements::layout` | `src/renderer/diagram/rust/src/lib.rs` | målte sekvensetiketter → layout og SVG | kooperativ frist; ingen flowchart-ruting | Implemented |
+
 ## 6. Gjenbruk og avhengigheter
 
 Konsumenter: FUNC-025, eksisterende MarkdownRenderer og PDF via vanlig frame. ITextMetrics er en ren kontrakt; Application injiserer implementasjonen. Bruker ikke parserens crate, kilde eller skjulte handle. Biblioteket eier SVG-former/piler/etiketter; Application eier SVG-leseren.
@@ -138,4 +141,4 @@ Steget bruker ferdige ruter og mål, uten ny layout. Se
 P35-verifikasjon: [SVG-sammenligning og testbevis](../../../docs/evidence/P35.md).
 
 P36: [Typed dekning og Sequence 1](../../../docs/design/mermaid-coverage.md)
-utvider samme porter. Ny plumbing er Planned inntil implementasjon og testbevis.
+utvider samme porter. Sequence 1 er Implemented; verifikasjon dokumenteres separat.

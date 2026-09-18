@@ -59,7 +59,9 @@ void run() {
   app.initialize(argc, argv);
   app.edits.applyEdit(
       {0, 0,
-       "# Diagram\n\n```mermaid\nflowchart LR\nA[Blåbær] -->|Target| B{Ready}\n```\n\nAfter"});
+       "# Diagram\n\n```mermaid\nflowchart LR\nA[Blåbær] -->|Target| "
+       "B{Ready}\n```\n\n```mermaid\nsequenceDiagram\nparticipant UI\nparticipant "
+       "Service\nUI->>Service: Import APT\nService-->>UI: Accepted draft\n```\n\nAfter"});
   for (int i = 0; i < 8 && (!app.host->interactive() ||
                             app.host->frame()->readingText.find("After") == std::string::npos);
        ++i)
@@ -69,7 +71,7 @@ void run() {
   unsigned diagrams = 0;
   for (const auto& run : frame->runs)
     diagrams += dynamic_cast<const DiagramScene*>(run.visual.get()) != nullptr;
-  CHECK(diagrams == 1 && frame->readingText.find("Blåbær") == std::string::npos);
+  CHECK(diagrams == 2 && frame->readingText.find("Blåbær") == std::string::npos);
   const DrawRun* label = nullptr;
   for (const auto& run : frame->runs)
     if (run.text == "After")

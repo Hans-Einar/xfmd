@@ -14,7 +14,7 @@ MermaidDiagramLayout::layout(const DiagramModel& model, const DiagramLayoutReque
   checkpoint();
   auto texts = DiagramTextLayout::measure(model, metrics);
   diagramWire::Writer w;
-  w.integer(4); // Versioned layout payload; C ABI envelope remains v1.
+  w.integer(5); // Versioned layout payload; C ABI envelope remains v1.
   w.model(model);
   w.integer(diagramLayoutBudgetMilliseconds);
   w.integer(texts.size());
