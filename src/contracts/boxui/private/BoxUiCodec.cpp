@@ -2,6 +2,16 @@
 #include <cmath>
 #include <set>
 namespace xfmd::boxUiCodec {
+namespace {
+const std::pair<const char*, std::optional<std::string> BoxUiNode::*> stringFields[] = {
+    {"label", &BoxUiNode::label},
+    {"text", &BoxUiNode::text},
+    {"valueBinding", &BoxUiNode::valueBinding},
+    {"commandBinding", &BoxUiNode::commandBinding},
+    {"childRef", &BoxUiNode::childRef},
+    {"family", &BoxUiNode::family}};
+}
+
 Json result(XfmdDiagramResult r) {
   struct Owner {
     XfmdDiagramResult& r;
@@ -63,14 +73,9 @@ BoxUiNode node(const Json& j) {
     if (z.contains("grow"))
       n.grow = z.at("grow");
   }
-  for (auto pair : {std::make_pair("label", &n.label),
-                    {"text", &n.text},
-                    {"valueBinding", &n.valueBinding},
-                    {"commandBinding", &n.commandBinding},
-                    {"childRef", &n.childRef},
-                    {"family", &n.family}})
+  for (auto pair : stringFields)
     if (j.contains(pair.first))
-      *pair.second = j.at(pair.first).get<std::string>();
+      n.*pair.second = j.at(pair.first).get<std::string>();
   if (j.contains("children"))
     for (auto& c : j.at("children"))
       n.children.push_back(node(c));
@@ -86,14 +91,9 @@ Json node(const BoxUiNode& n) {
   if (n.grow)
     z["grow"] = *n.grow;
   j["size"] = z;
-  for (auto pair : {std::make_pair("label", &n.label),
-                    {"text", &n.text},
-                    {"valueBinding", &n.valueBinding},
-                    {"commandBinding", &n.commandBinding},
-                    {"childRef", &n.childRef},
-                    {"family", &n.family}})
-    if (*pair.second)
-      j[pair.first] = **pair.second;
+  for (auto pair : stringFields)
+    if (n.*pair.second)
+      j[pair.first] = *(n.*pair.second);
   if (!n.children.empty()) {
     j["children"] = Json::array();
     for (auto& c : n.children)

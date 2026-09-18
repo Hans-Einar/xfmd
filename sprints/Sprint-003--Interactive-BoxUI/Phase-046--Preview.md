@@ -14,3 +14,8 @@ Oppdaget parallelt fork-arbeid i mermaid-rs-renderer-boxui-implementation etter
 oppstart. Vår kjerne er isolert på phase/boxui-045-core, ikke integrert i master.
 Valg av endelig produsentgren avklares før endelig leveranse, uten å endre den
 andre arbeidsmappens filer. Vertens BX-HOST-grense er lik på begge grenene.
+
+Fasekontroll: Release-bygg og seks CTest-tester bestod: BoxUiCoreTest,
+InterpreterTest, RendererTest, DiagramLayoutTest, DiagramPreparationTest og
+DiagramReadingTest. Endelig produsentbytte og full vertakseptanse gjøres i
+fase 048 mot den parallelle, avtalte bibliotekimplementasjonen.
