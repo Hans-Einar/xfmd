@@ -467,3 +467,11 @@ SVG; flowchart-ruter/pekere brukes ikke på sekvenser. Sceneformatets flowchart-
 inspeksjonslister er tomme for sequence, ikke fiktive noder og kanter.
 DiagramPainter utvider bare semantisk palettmapping av notatfarger. Worker,
 cache, librsvg/Cairo, plassering og PDF bruker eksisterende porter.
+
+### P38–P41: typed Mermaid-familier
+
+[Semantisk modell og tekstmåling](docs/design/mermaid-semantic-model.md)
+utvider eksisterende diagramporter. `SemanticDiagram.h` eies av contracts;
+`interpreter/mermaid/rust/src/semantic/` eier profiler og
+`renderer/diagram/rust/src/semantic/` eier oversettelse til layoutbiblioteket.
+`text_metrics.rs` eier den synkrone, lånte målecallbacken, uten FOX-avhengighet.

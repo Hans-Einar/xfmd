@@ -148,3 +148,8 @@ P36: [Faktiske kontroller og grenser](../../../docs/evidence/P36.md).
 P37 Implemented: Sequence 2 bruker samme `parse`/`graph`-innganger, utvidede
 ordnede hendelser, async-piltype og forkens `sequence_events::apply`.
 Se [revisjon 2](../../../docs/design/mermaid-coverage.md).
+
+P38 Planned: `semantic::graph` i `src/renderer/diagram/rust/src/semantic/`
+oversetter domenerekorder til native bibliotektyper. `layout_measured` bruker
+`measureDiagramText` via synkron ABI; forkens `with_measurer` låner konteksten.
+Samme SVG-scene går til preview og PDF; ingen kildeparsing i renderer.

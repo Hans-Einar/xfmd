@@ -65,3 +65,8 @@ P36: [Faktiske kontroller og grenser](../../../docs/evidence/P36.md).
 P37 Implemented: Sequence 2 bruker samme `parse`/`graph`-innganger, utvidede
 ordnede hendelser, async-piltype og forkens `sequence_events::apply`.
 Se [revisjon 2](../../../docs/design/mermaid-coverage.md).
+
+P38 Planned: `semantic::parse` i `src/interpreter/mermaid/rust/src/semantic/`
+produserer egne state/class/requirement/ER-rekorder. `Diagram::validate` i
+`src/contracts/diagram/rust/src/semantic.rs` kontrollerer skjema og referanser.
+[Kontraktbeslutning](../../../docs/design/mermaid-semantic-model.md).
