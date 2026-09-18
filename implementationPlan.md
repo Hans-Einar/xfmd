@@ -482,3 +482,9 @@ profiler legges inn. Bygg `build/xfmd` etter hvert inkrement.
 For hver fase: M1 krav/blueprint/kontrakt, M2 implementasjon, M3 positiv/negativ
 profilkontroll, faktisk SVG/preview/PDF og oppdatering av lesefilen. Ingen
 Mermaid-kilde eller bibliotekeid Graph flyttes inn i layoutkontrakten.
+
+P37–P41 er implementert: M2 `70ab7b0`, `ab5b61d`, `3e46b04`, `7e32a86` og
+`071a876`. P41 samler sluttkontrollen i [P41](docs/evidence/P41.md),
+med 29 praktiske eksempler for 23 eksplisitte delprofiler. Hver fase ligger på
+egen branch; PR-ene er stablet og ikke slått sammen. Ukjente konstruksjoner gir
+synlig kildefallback; bred type-dekning er ikke full syntakskompatibilitet.

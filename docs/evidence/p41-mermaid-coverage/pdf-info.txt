@@ -1,0 +1,16 @@
+Producer:        cairo 1.18.2 (https://cairographics.org)
+CreationDate:    Fri Sep 18 09:26:56 2026 CEST
+Custom Metadata: no
+Metadata Stream: no
+Tagged:          no
+UserProperties:  no
+Suspects:        no
+Form:            none
+JavaScript:      no
+Pages:           22
+Encrypted:       no
+Page size:       595.276 x 841.89 pts (A4)
+Page rot:        0
+File size:       125868 bytes
+Optimized:       no
+PDF version:     1.7

@@ -4,7 +4,10 @@ import pathlib, subprocess, sys, tempfile
 with tempfile.TemporaryDirectory(prefix='xfmd-mermaid-pdf-') as folder:
     pdf=pathlib.Path(folder)/'mermaid.pdf'
     expected=pathlib.Path(folder)/'labels.txt'
-    subprocess.run([sys.argv[1],str(pdf),str(expected)],check=True)
+    fixture=[sys.argv[1],str(pdf),str(expected)]
+    if len(sys.argv)>2:
+        fixture.append(sys.argv[2]) # Optional real Markdown gallery.
+    subprocess.run(fixture,check=True)
     extracted=subprocess.check_output(['pdftotext','-layout',str(pdf),'-'],text=True)
     actual=' '.join(extracted.split())
     # Spatial extraction interleaves wrapped captions in adjacent columns.

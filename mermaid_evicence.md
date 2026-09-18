@@ -14,7 +14,7 @@ flowchart LR
     F -->|produces| D[Validated draft]
 ```
 
-## Sequence 1 — APT-import
+## Sequence — APT-import
 
 Import oppretter et utkast, men aktiverer det ikke. Aktiveringsbaren beskriver
 aktivitet hos tjenesten, ikke aktivering av APT-utkastet eller en implisitt tråd.
@@ -39,7 +39,7 @@ sequenceDiagram
     UI-->>Operator: Report outcome
 ```
 
-## Sequence 1 — valg og samtidige aktiviteter
+## Sequence — valg og samtidige aktiviteter
 
 Parallelle fragmenter fastsetter ingen konkret scheduling.
 
