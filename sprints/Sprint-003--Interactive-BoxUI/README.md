@@ -1,7 +1,15 @@
 # Sprint 003 — Interaktiv BoxUI
 
-Status: planlagt, avventer G-PARALLEL-REVIEW og brukerens neste designiterasjon.
-UR-043 / SR-026 / FTR-011. [Prosjektgrunnlag](../../docs/design/boxui-integration.md).
-Fase 044 registrerer oppgaven; implementasjonsfaser fastlegges etter review.
-Én samlet sprint-PR, ingen PR per fase. Ingen programbygg/installasjon i denne
-rene designfasen. XFMD-implementasjonen er ikke startet.
+Implementasjon autorisert etter gjennomgang av BX-HOST/0.1-draft1.
+UR-043 / SR-026 / FTR-011. Én samlet sprint-PR, én branch per fase.
+
+| Fase | Leveranse |
+| --- | --- |
+| 044 | Designgrunnlag og felles kontrakt (fullført) |
+| 045 | Forkens BoxUI-parser, modell, layout/SVG og kontrakttester |
+| 046 | XFMD typed tolkning, Rust-bro, preview og statisk PDF |
+| 047 | Native input, fokus/drafts, syntetisk session og command ledger |
+| 048 | Mixed Markdown, GUI/PDF, regressjoner, dokumentasjon og review |
+
+Autonom byggmodus: ett planlagt programbygg per fase; nødvendige feilrettinger
+kontrolleres på nytt. Ingen automatisk merge/installasjon før brukerbestilling.

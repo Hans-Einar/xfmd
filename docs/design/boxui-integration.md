@@ -1,8 +1,8 @@
 # BoxUI i Markdown — separat XFMD-prosjekt
 
-Status: Proposed / avventer designgjennomgang. Opprettet 2026-09-18.
-Brukeren har bedt om registrering og et felles designgrunnlag, ikke oppstart av
-XFMD-implementasjonen. Hovedprogrammets kildekode og installasjon endres ikke her.
+Status: Implementasjon autorisert av brukeren; felles kontraktgrunnlag godkjent. Opprettet 2026-09-18.
+Brukeren har godkjent oppstart og hele integrasjonsløpet i én økt.
+Arbeidet følger fasebrancher, milestone-commits og ett planlagt bygg per fase.
 
 ## Formål og felles grunnlag
 
