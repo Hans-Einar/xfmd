@@ -1,10 +1,18 @@
-# Mermaid i XFMD — designrevisjon 1.1
+# Mermaid i XFMD — designrevisjon 1.1 (historisk native baseline)
+
+Gjeldende dekning: [23 familier og eksplisitte delprofiler](../../mermaid_coverage.md).
+Presentasjonsbeslutning: [P31/P32 SVG og libavoid](mermaid-svg-routing.md).
+Teksten nedenfor beskriver P25–P30 der den avviker fra denne beslutningen.
 
 Status: **Implemented**, 2026-09-16. P25 var designfasen; P26–P29 implementerer
 og verifiserer den. [Krav](../../xfmd_requirements.md),
 [feature](../../src/blueprint/feature/Feature-010--Mermaid-Diagrams.md),
 [faseplan](../../implementationPlan.md) og [testbevis](../evidence/P29.md)
 beskriver omfang og faktisk verifikasjon. Ingen full Mermaid-kompatibilitet hevdes.
+
+[Rutestudien](mermaid-routing-study.md) sammenligner brukerens forslag til
+begrenset side-/portsøk med bibliotekets faktiske algoritmer. Den beskriver en
+mulig fork og SVG-retning; dette er forslag, ikke endring av implementert baseline.
 
 ## 1. Beslutning og bibliotek
 

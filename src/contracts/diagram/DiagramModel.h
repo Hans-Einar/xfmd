@@ -1,5 +1,8 @@
 #pragma once
+#include "SequenceModel.h"
+#include "SemanticDiagram.h"
 #include <cstdint>
+#include <optional>
 #include <string>
 #include <vector>
 namespace xfmd {
@@ -20,6 +23,8 @@ struct DiagramGroup {
   std::vector<std::uint32_t> nodes;
 };
 struct DiagramModel {
+  std::optional<SequenceModel> sequence;
+  std::optional<SemanticDiagram> semantic;
   std::uint32_t direction = 0;
   std::vector<DiagramNode> nodes;
   std::vector<DiagramEdge> edges;

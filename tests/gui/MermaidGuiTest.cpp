@@ -59,9 +59,11 @@ void run() {
   app.initialize(argc, argv);
   app.edits.applyEdit(
       {0, 0,
-       "# Diagram\n\n```mermaid\nflowchart LR\nA[Blåbær] -->|Target| B{Ready}\n```\n\nAfter"});
+       "# Diagram\n\n```mermaid\nflowchart LR\nA[Blåbær] -->|Target| "
+       "B{Ready}\n```\n\n```mermaid\nsequenceDiagram\nparticipant UI\nparticipant "
+       "Service\nUI->>Service: Import APT\nService-->>UI: Accepted draft\n```\n\nAfter"});
   for (int i = 0; i < 8 && (!app.host->interactive() ||
-                            app.host->frame()->readingText.find("Target") == std::string::npos);
+                            app.host->frame()->readingText.find("After") == std::string::npos);
        ++i)
     pump(app);
   CHECK(app.host->interactive());
@@ -69,10 +71,10 @@ void run() {
   unsigned diagrams = 0;
   for (const auto& run : frame->runs)
     diagrams += dynamic_cast<const DiagramScene*>(run.visual.get()) != nullptr;
-  CHECK(diagrams == 1 && frame->readingText.find("Blåbær\nReady\nTarget") != std::string::npos);
+  CHECK(diagrams == 2 && frame->readingText.find("Blåbær") == std::string::npos);
   const DrawRun* label = nullptr;
   for (const auto& run : frame->runs)
-    if (run.text == "Blåbær")
+    if (run.text == "After")
       label = &run;
   CHECK(label);
   auto begin =
@@ -82,14 +84,14 @@ void run() {
   pointer(app, ButtonPress, begin);
   pointer(app, MotionNotify, end);
   pointer(app, ButtonRelease, end);
-  CHECK(app.host->selectedText() == "Blåbær");
+  CHECK(app.host->selectedText() == "After");
   auto utf8 = app.app.registerDragType("UTF8_STRING");
   FX::FXString copied;
   CHECK(app.window->editor->getDNDData(FX::FROM_SELECTION, utf8, copied));
-  CHECK(copied == "Blåbær");
+  CHECK(copied == "After");
   key(app, XK_c);
   CHECK(app.window->editor->getDNDData(FX::FROM_CLIPBOARD, utf8, copied));
-  CHECK(copied == "Blåbær");
+  CHECK(copied == "After");
   key(app, XK_a);
   CHECK(app.host->selectedText() == frame->readingText);
   app.execute(CommandRouter::ToggleTheme);
@@ -102,6 +104,16 @@ void run() {
   app.execute(CommandRouter::A4);
   pump(app);
   CHECK(app.host->interactive() && app.host->frame()->pages.slices.size() == 1);
+  const auto unchangedToken = app.session.view().token;
+  for (auto command : {CommandRouter::ActualSize, CommandRouter::FitWidth}) {
+    app.execute(command);
+    pump(app);
+    CHECK(app.host->interactive() && app.session.view().token == unchangedToken);
+    unsigned visibleDiagrams = 0;
+    for (const auto& run : app.host->frame()->runs)
+      visibleDiagrams += dynamic_cast<const DiagramScene*>(run.visual.get()) != nullptr;
+    CHECK(visibleDiagrams == 2);
+  }
   app.edits.applyEdit({0, app.session.snapshot().text.size(),
                        "```mermaid\nflowchart LR\nA-->B\nclick A bad()\n```"});
   for (int i = 0; i < 4; ++i)

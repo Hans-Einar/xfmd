@@ -23,6 +23,39 @@ struct Writer {
     data.insert(data.end(), v.begin(), v.end());
   }
   void model(const DiagramModel& m) {
+    integer(3);
+    integer(m.semantic ? 2 : m.sequence ? 1 : 0);
+    if (m.semantic) {
+      if (m.sequence || !m.nodes.empty() || !m.edges.empty() || !m.groups.empty())
+        throw std::runtime_error("Mixed semantic diagram model");
+      integer(std::uint32_t(m.semantic->family));
+      integer(m.semantic->records.size());
+      for (const auto& r : m.semantic->records) {
+        integer(std::uint32_t(r.tag));
+        integer(r.fields.size());
+        for (const auto& f : r.fields)
+          text(f);
+      }
+      return;
+    }
+    if (m.sequence) {
+      if (!m.nodes.empty() || !m.edges.empty() || !m.groups.empty())
+        throw std::runtime_error("Mixed sequence and flowchart model");
+      integer(m.sequence->participants.size());
+      for (const auto& p : m.sequence->participants) {
+        text(p.id);
+        text(p.label);
+        integer(p.actor);
+      }
+      integer(m.sequence->events.size());
+      for (const auto& e : m.sequence->events) {
+        integer(std::uint32_t(e.kind));
+        integer(e.first);
+        integer(e.second);
+        text(e.text);
+      }
+      return;
+    }
     integer(m.direction);
     integer(m.nodes.size());
     for (const auto& n : m.nodes) {
@@ -89,8 +122,8 @@ struct Reader {
       throw std::runtime_error("Invalid diagram geometry");
     return v;
   }
-  std::string text() {
-    auto n = count(65536);
+  std::string text(std::uint32_t limit = 65536) {
+    auto n = count(limit);
     need(n);
     std::string s(reinterpret_cast<const char*>(data + at), n);
     at += n;
@@ -102,6 +135,45 @@ struct Reader {
   }
   DiagramModel model() {
     DiagramModel m;
+    if (integer() != 3)
+      throw std::runtime_error("Unsupported diagram model version");
+    auto kind = count(2);
+    if (kind == 2) {
+      SemanticDiagram d;
+      auto family = count(22);
+      if (family < 2)
+        throw std::runtime_error("Invalid semantic family");
+      d.family = DiagramFamily(family);
+      auto countRecords = count(512);
+      for (unsigned i = 0; i < countRecords; ++i) {
+        SemanticRecord record{SemanticTag(count(202)), {}};
+        auto fields = count(16);
+        for (unsigned j = 0; j < fields; ++j)
+          record.fields.push_back(text(4096));
+        d.records.push_back(std::move(record));
+      }
+      m.semantic = std::move(d);
+      return m;
+    }
+    if (kind == 1) {
+      SequenceModel s;
+      const auto n = count(16);
+      for (unsigned i = 0; i < n; ++i) {
+        auto id = text(), label = text();
+        auto actor = count(1);
+        s.participants.push_back({id, label, bool(actor)});
+      }
+      const auto events = count(128);
+      for (unsigned i = 0; i < events; ++i) {
+        auto kind = count(15), first = integer(), second = integer();
+        auto value = text();
+        if (first >= n || second >= n)
+          throw std::runtime_error("Invalid sequence reference");
+        s.events.push_back({SequenceEventKind(kind), first, second, value});
+      }
+      m.sequence = std::move(s);
+      return m;
+    }
     m.direction = count(3);
     auto nn = count(128);
     for (unsigned i = 0; i < nn; ++i) {

@@ -12,6 +12,7 @@ find_package(X11 REQUIRED COMPONENTS Xrandr)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(FOX REQUIRED IMPORTED_TARGET fox>=1.6.57)
 pkg_check_modules(PANGO REQUIRED IMPORTED_TARGET pangocairo pangofc)
+pkg_check_modules(RSVG REQUIRED IMPORTED_TARGET librsvg-2.0>=2.46)
 pkg_check_modules(CMARK REQUIRED libcmark-gfm=0.29.0.gfm.13)
 find_library(CMARK_CORE NAMES cmark-gfm HINTS ${CMARK_LIBRARY_DIRS} REQUIRED)
 find_library(CMARK_EXTENSIONS NAMES cmark-gfm-extensions HINTS ${CMARK_LIBRARY_DIRS} REQUIRED)
@@ -67,8 +68,8 @@ target_link_libraries(xfmd_media PUBLIC xfmd_contracts PRIVATE xfmd_navigation x
 target_compile_definitions(xfmd_media PRIVATE XFMD_MATH_RESOURCES="${microtex_SOURCE_DIR}/res")
 add_library(xfmd_typography
   src/application/adapters/FontCatalog.cpp src/application/adapters/SharedTextMetrics.cpp
-  src/application/adapters/DiagramPainter.cpp src/application/adapters/DisplayListPainter.cpp src/application/preferences/ReadingColors.cpp)
-target_link_libraries(xfmd_typography PUBLIC xfmd_contracts PkgConfig::PANGO)
+  src/application/adapters/SvgDiagramCache.cpp src/application/adapters/DiagramPainter.cpp src/application/adapters/DisplayListPainter.cpp src/application/preferences/ReadingColors.cpp)
+target_link_libraries(xfmd_typography PUBLIC xfmd_contracts PkgConfig::PANGO PRIVATE PkgConfig::RSVG)
 add_library(xfmd_diagrams src/application/diagrams/DiagramCache.cpp src/application/diagrams/DiagramPreparation.cpp src/application/composition/DiagramServices.cpp)
 target_link_libraries(xfmd_diagrams PUBLIC xfmd_typography xfmd_media xfmd_renderer xfmd_interpreter)
 add_library(xfmd_export src/application/export/ExportCoordinator.cpp
@@ -120,3 +121,6 @@ endforeach()
 install(FILES LICENSES/mermaid-rs-renderer.txt LICENSES/mermaid-dependencies.md
   DESTINATION ${CMAKE_INSTALL_DOCDIR}/licenses)
 install(DIRECTORY LICENSES/rust/ DESTINATION ${CMAKE_INSTALL_DOCDIR}/licenses/rust)
+
+install(FILES LICENSES/libavoid-LGPL-2.1.txt docs/design/mermaid-libavoid-build.md
+  cmake/mermaid-source.json DESTINATION ${CMAKE_INSTALL_DOCDIR})

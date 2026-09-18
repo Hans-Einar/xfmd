@@ -434,3 +434,59 @@ Branch: `phase/p30-mermaid-layout-performance`. UR-039/SR-022, FUNC-024.
 - M3: verifiser native preview, PDF, Release/sanitizere og CI før merge og atomisk installasjon.
 
 P30 M1 `6217bcb`, M2 `dc17db4`; M3 samler [testbevis](docs/evidence/P30.md).
+
+
+## P31 — Bibliotekets SVG som presentasjonsformat
+
+Branch `phase/p31-mermaid-svg`. M1: revider UR-041/FUNC-024/025 og payload.
+M2: ferdig SVG, librsvg/Cairo og én visual-run; behold gammel ruter/pin.
+M3: CTest, visuell Light/Dark og vektor-PDF. Se
+[beslutningen](docs/design/mermaid-svg-routing.md).
+
+## P32 — Libavoid fra låst bibliotekfork
+
+Branch `phase/p32-libavoid-integration`. M1: forkens måleseam og sammenligningsbevis;
+M2: konkret pin, backendvalg, diagnostikk og bygg/lisens; M3: regresjoner,
+SVG/PNG, tidsmåling, CI/integrasjonskontroll. Bibliotekarbeidet ligger på
+forkens `phase/libavoid-routing`, med separate milestone-commits.
+
+P31/P32 er gjennomført på separate brancher og PR 24/25. P31 består av
+`ae00de1`, `d789d54`, `9a7156e` og livsløpsrettelsen `35e70b7`. P32 integrerer
+fork-pin `6ff5a54ce39d912e399493ec4639a7b8ff8bdc7f` via `59f885f`/`0ec9b2b`;
+P31-rettelsen er tatt inn før sluttesten. Begge faser har grønne CI-jobber
+med og uten sanitizer. Se [samlet bevis, commits og begrensninger](docs/evidence/P32.md).
+
+## P36 — typed dekning og første sekvensprofil
+
+Branch `phase/p36-sequence-foundation`. M1: undersøk pin/upstream og dokumenter
+matrise, semantiske grenser og roadmap. M2: SequenceModel, versjonert wire,
+streng Sequence 1-profil, separat layoutdispatch og SVG. M3: APT-fixture,
+negative syntakstester, mixed Markdown, preview/PDF og dokumentert evidens.
+Videre sekvensutvidelser og typeprioritet følger [matrisen](mermaid_coverage.md).
+
+P36: M1 `2f94be1`, M2 `39a6a14`; M3 samler [sluttbevis](docs/evidence/P36.md).
+Sequence 2 og de prioriterte familiene er senere implementert i P37–P41 nedenfor.
+
+## Sammenhengende dekning P37–P41
+
+Brukerbestilt 2026-09-18. Hver phase har egen branch og milestone-commits.
+`mermaid_evicence.md` i roten er den løpende, praktiske lesefilen; bare støttede
+profiler legges inn. Bygg `build/xfmd` etter hvert inkrement.
+
+- P37 `phase/p37-sequence-events`: ordnet event-layout, async og nested fragmenter.
+- P38 `phase/p38-semantic-diagrams`: state, class, requirement og ER med typed kontrakter.
+- P39 `phase/p39-architecture-diagrams`: C4 context/container/component, architecture og block.
+- P40 `phase/p40-planning-diagrams`: packet, timeline, Gantt og journey.
+- P41 `phase/p41-mermaid-coverage`: øvrige annonserte diagramtyper, samlet evidens/PDF og matrise.
+
+For hver fase: M1 krav/blueprint/kontrakt, M2 implementasjon, M3 positiv/negativ
+profilkontroll, faktisk SVG/preview/PDF og oppdatering av lesefilen. Ingen
+Mermaid-kilde eller bibliotekeid Graph flyttes inn i layoutkontrakten.
+
+P37–P41 er implementert: M2 `70ab7b0`, `ab5b61d`, `3e46b04`, `7e32a86` og
+`071a876`. P41 samler sluttkontrollen i [P41](docs/evidence/P41.md),
+med 29 praktiske eksempler for 23 eksplisitte delprofiler. Hver fase ligger på
+egen branch. Brukeren har godkjent galleriet og bestilt merge/installasjon;
+[gjeldende integrasjonsstatus](docs/evidence/P41-integration.md) beskriver
+faktisk PR-/CI-/installasjonsstatus. Ukjente konstruksjoner gir
+synlig kildefallback; bred type-dekning er ikke full syntakskompatibilitet.

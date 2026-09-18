@@ -4,6 +4,6 @@ exclude = [".deps/mermaid-rs-renderer"]
 members = ["src/contracts/diagram/rust", "src/interpreter/mermaid/rust", "src/renderer/diagram/rust", "src/application/composition/mermaid"]
 [workspace.dependencies]
 xfmd-diagram-contracts = { path = "src/contracts/diagram/rust" }
-mermaid-rs-renderer = { path = ".deps/mermaid-rs-renderer", default-features = false }
+mermaid-rs-renderer = { path = ".deps/mermaid-rs-renderer", default-features = false, features = ["libavoid"] }
 [profile.release]
 panic = "unwind"

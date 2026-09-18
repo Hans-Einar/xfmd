@@ -1,0 +1,13 @@
+stateDiagram-v2
+    state Valid <<choice>>
+    state Fanout <<fork>>
+    state Joined <<join>>
+    [*] --> Valid
+    Valid --> Rejected : invalid
+    Valid --> Fanout : valid
+    Fanout --> Persist
+    Fanout --> Notify
+    Persist --> Joined
+    Notify --> Joined
+    Joined --> [*]
+    Rejected --> [*]

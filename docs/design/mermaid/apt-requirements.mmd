@@ -1,0 +1,25 @@
+requirementDiagram
+    requirement ImportAPT {
+        id: APT-001
+        text: "Import validates input and expected revision"
+        risk: high
+        verifymethod: test
+    }
+    functionalRequirement RejectConflict {
+        id: APT-002
+        text: "Reject stale expected revision without overwriting"
+        risk: high
+        verifymethod: test
+    }
+    element ImportService {
+        type: service responsibility
+        docref: design proposal
+    }
+    element ConflictTest {
+        type: test specification
+        docref: acceptance example
+    }
+    ImportService - satisfies -> ImportAPT
+    ConflictTest - verifies -> RejectConflict
+    RejectConflict - refines -> ImportAPT
+    ImportService - traces -> RejectConflict

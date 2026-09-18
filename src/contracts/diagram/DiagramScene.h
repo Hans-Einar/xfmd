@@ -19,6 +19,9 @@ struct DiagramLabel {
 };
 struct DiagramScene final : VisualResource {
   FontSetId fonts = 0;
+  // Authoritative presentation. Geometry below is inspection/test metadata.
+  std::string svg;
+  std::string diagnostics;
   std::vector<DiagramNodeBox> nodes;
   std::vector<Rect> groups;
   std::vector<DiagramEdgePath> edges;

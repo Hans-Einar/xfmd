@@ -1,0 +1,8 @@
+C4Component
+Container_Boundary(application, "XFMD application") {
+Component(session, "DocumentSession", "C++", "Owns current revision")
+Component(coordinator, "Preview coordinator", "C++", "Rejects stale result")
+Component(adapter, "SVG adapter", "Cairo", "Presents accepted scene")
+}
+Rel(session, coordinator, "Revision changed")
+Rel(coordinator, adapter, "Supplies accepted scene")

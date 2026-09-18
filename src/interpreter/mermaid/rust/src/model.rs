@@ -78,6 +78,8 @@ pub fn map_graph(graph: Graph, profile: &super::profile::Profile) -> Result<Mode
         })
     }
     Ok(Model {
+        sequence: None,
+        semantic: None,
         direction: direction(graph.direction),
         nodes,
         edges,

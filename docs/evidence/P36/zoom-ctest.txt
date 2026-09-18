@@ -1,0 +1,11 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd/build
+Test project /home/warloc/git/xfmd/build
+    Start 14: MermaidGuiTest
+1/1 Test #14: MermaidGuiTest ...................   Passed   11.29 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Label Time Summary:
+GUI    =  11.29 sec*proc (1 test)
+
+Total Test time (real) =  11.30 sec

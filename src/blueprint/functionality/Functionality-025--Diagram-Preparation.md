@@ -37,7 +37,11 @@ Gjenbruk ParserWorker med én aktiv/én ventende jobb og ExportPipeline med egne
 | 3 | `DiagramPreparation::prepare` | `DiagramCache::find` | `src/application/diagrams/DiagramCache.cpp` | innhold + profil + font/backend → treff/miss | begrenset LRU; ingen diskcache | Implemented |
 | 4 | `DiagramPreparation::prepare` | `IDiagramLayout::layout` | `src/contracts/diagram/IDiagramLayout.h` | ren modell → scene | blokkfeil blir fallback | Implemented |
 | 5 | `DiagramPreparation::prepare` | `DiagramCache::insert` | `src/application/diagrams/DiagramCache.cpp` | vellykket scene → worker-lokal cache | ikke cache transient feil | Implemented |
-| 6 | `DisplayListPainter::paint` | `DiagramPainter::paint` | `src/application/adapters/DiagramPainter.cpp` | frame paths + semantisk palett → Cairo | bevar tekst som normale DrawRuns | Implemented |
+| 6 | `DisplayListPainter::paint` | `DiagramPainter::paint` | `src/application/adapters/DiagramPainter.cpp` | SVG + semantisk palett → librsvg/Cairo | ingen separate diagrametikett-runs | Implemented |
+
+| 7 | `DiagramPainter::paint` | `SvgDiagramCache::paint` | `src/application/adapters/SvgDiagramCache.cpp` | bibliotek-SVG + stylesheet → Cairo viewport | trådlokal begrenset handle-cache; ingen rasterisering | Implemented |
+
+| 8 | `DiagramPreparation::prepare` | `SvgDiagramCache::validate` | `src/application/adapters/SvgDiagramCache.cpp` | ferdig SVG → validert handle i worker | ugyldig SVG blir blokklokal kildefallback før publisering | Implemented |
 
 
 ## 6. Gjenbruk og avhengigheter
@@ -50,6 +54,21 @@ DiagramPreparationTest dekker feil, fontidentitet og cachegrense. DiagramWorkerT
 
 ## 8. Status, risiko og endringskonsekvenser
 
+P31/P32: [Gjeldende SVG-/rutebeslutning](../../../docs/design/mermaid-svg-routing.md) erstatter tidligere native etiketttegning. Historiske tester nedenfor gjelder P25–P30; ny atferd er implementert; P31/P32-bevis beskriver faktisk verifikasjon.
+
 Implementert. P26 avdekket dyr kantruting og la til kooperative checkpoints. Ingen hard preemption eller global cache. Hver preview-worker eier egne font-/layout-/cacheobjekter; PDF-jobben har tilsvarende kortlivet prepare-kjede.
 
 Akseptanse: AT-059, AT-060, AT-061, AT-062, AT-063, AT-064.
+
+Gjeldende P31/P32-verifikasjon: [samlet testbevis](../../../docs/evidence/P32.md).
+
+P36: [Typed dekning og Sequence 1](../../../mermaid_coverage.md)
+utvider samme porter. Sequence 1 er Implemented; verifikasjon dokumenteres separat.
+
+P36: [Faktiske kontroller og grenser](../../../docs/evidence/P36.md).
+
+Gjeldende P41-status: 23 familier er implementert gjennom eksplisitte delprofiler,
+inkludert Sequence 2. Galleriet har 29 eksempler; preview og PDF bruker samme SVG.
+Forberedelsen håndhever 64 blokker, 8 MiB per scene og 64 MiB samlet scenesvar.
+Se [samlet bevis](../../../docs/evidence/P41.md) og
+[integrasjonsstatus](../../../docs/evidence/P41-integration.md).

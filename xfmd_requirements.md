@@ -294,7 +294,36 @@ støtte er ikke automatisk XFMD-støtte.
 | --- | --- | --- |
 | UR-039 | Et eksplisitt mermaid-kodegjerde skal vise flowchart/graph etter XFMD Flowchart 1, inkludert brukerens to eksempler. Vanlig kode og .txt forblir bokstavelig. Ugyldig, uferdig eller ustøttet innhold beholder hele kildeblokken med lokal forklaring uten å hindre resten av dokumentet. | AT-059: begge brukerdiagrammer, retninger, former, kanter, subgraphs, Unicode, ugyldig/ustøttet syntaks og vanlige kodeblokker. |
 | UR-040 | Diagrammet skal følge Light/Dark og levende lesefarger uten ny parsing, layout, dirty eller scrollendring. Wrap/A4/zoom skal bevare aspekt og vise hele diagrammet; PDF bruker samme geometri med utskriftspaletten. | AT-060: tema/slider, resize, A4/sidegrense, skalering, flersidet dokument og vektorbasert PDF. |
-| UR-041 | Diagrammets synlige etiketter skal kunne merkes og kopieres som Unicode-tekst. Ctrl+A/C kopierer deterministisk leserekkefølge gjennom vanlig tekst og diagram. Diagrammet beholder kildeanker til kodeblokken; upresis mapping merkes Approximate. | AT-061: delmerking, drag, PRIMARY/clipboard, etikettorden, transform/zoom og kildesynkronisering uten oppdiktede presise offsets. |
+| UR-041 | Diagrammet vises som bibliotekets ferdige SVG, med Approximate kildeanker til kodeblokken. Separate merkbare etikettfelt er utsatt; vanlig Markdown-merking beholdes. | AT-061: én skalerbar SVG-run, ingen dupliserte etiketter, vanlig tekstkopiering og kildesynkronisering. |
 | SR-021 | Mermaid-parser og diagramlayout skal være uavhengig utskiftbare bak XFMD-eide, FOX-/Rust-/bibliotekfrie verdikontrakter. Renderer skal ikke parse Mermaid-kildetekst. C++/Rust-broen skal ha eksplisitt ABI-versjon, eierskap, feil og separate parser-/layoutinnganger. | AT-062: alternativ/falsk parser og layout, roundtrip-modell, C-ABI-livsløp, feil/panic og lag-/dependency-kontroll. |
 | SR-022 | Diagramarbeid skal skje utenfor GUI-tråden med begrenset input, kø og cache. Ny revisjon gjør gamle svar ugyldige. Preview/PDF skal bruke samme forberedelse og fontgrunnlag. Ingen automatisk nettverk, shell, HTML, script eller filressurser fra diagramkilden. | AT-063: raske edits, stale svar, kansellert eksport, ressursgrenser, fontendring og input som forsøker aktive/eksterne konstruksjoner. |
 | SR-023 | mermaid-rs-renderer og Rust-verktøykjeden skal bygges fra låste versjoner med sjekket Cargo.lock, lisensoversikt og dokumentert offline-bygg. Manglende byggavhengigheter skal gi tydelig configure-feil; full støtte må ikke avhenge av installert Node/Chromium eller nettverk ved kjøring. | AT-064: rent Linux-bygg, offline etter bootstrap, installert program, dependency-/lisenskontroll og Rust-/C++-verifikasjon. |
+
+| SR-024 | Flowchart-ruting skal være utskiftbar uavhengig av nodeplassering. Libavoid integreres i bibliotekforken med låst kilde, eksplisitte port-/kantidentiteter, begrensede etikettpass, kooperativt avbrudd og synlig feil/fallback. | AT-065: frosne posisjoner/mål, rute-/kollisjonsmålinger, determinisme, native SVG, Legacy-valg og budsjett. |
+
+P33 presiserer UR-039: lange kantetiketter skal kunne brytes ved ordgrenser før
+layout, med faktiske linjemål brukt både til hindringer og SVG. Eksplisitte
+linjeskift bevares; enkeltord deles ikke. Se [tekstpolicy](docs/design/mermaid-label-wrap.md).
+
+P34 presiserer SR-024: en fremmed forbindelse skal ikke passere mellom en
+kantetikett og segmentet etiketten er tilordnet. Dette valideres på ferdige
+ruter; plassmangel skal gi eksplisitt diagnose.
+
+P35 presiserer UR-039/041: kantetiketter skal om mulig ha en tynn SVG-peker
+med prikk på tilhørende kant. Venstre side prioriteres; pekeren skal ikke
+krysse andre noder, etiketter eller forbindelser. Manglende fri plass oppgis
+som diagnostikk uten å skjule etiketten. Logiske ruter endres ikke.
+
+## P36 — typed Mermaid-dekning
+
+UR-039 og SR-021 presiseres med [versjonert matrise](mermaid_coverage.md):
+diagramtyper bevarer egen semantikk og får eksplisitte profiler. Sequence 1 skal
+vise ordnede Commands/svar, deltakere, notater og avgrensede fragmenter. Ustøttet
+syntaks gir lokal kildefallback; diagrammer evaluerer ikke SDL-regler eller guards.
+AT-059/060/062/063 utvides med APT-importens tre utfall, adskilt fra aktivering,
+modell-roundtrip, Unicode, feilscope, preview og PDF. Senere typer følger matrisen.
+
+P37–P41 utvider UR-039/040 og SR-021/022 med prioriterte typed diagramprofiler,
+ordnet sekvensscope og ett praktisk `mermaid_evicence.md` for løpende lesing.
+AT-059/060/062/063 gjelder hver profil. Dokumentgrensen skal fortsatt være
+avgrenset, men romme minst ett eksempel per implementert diagramtype.

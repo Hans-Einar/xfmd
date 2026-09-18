@@ -6,7 +6,7 @@ role: Workflow
 owner: application
 status: Implemented
 scope: FirstRelease
-requirements: UR-039, UR-040, UR-041, SR-021, SR-022, SR-023
+requirements: UR-039, UR-040, UR-041, SR-021, SR-022, SR-023, SR-024
 uses: FUNC-003, FUNC-004, FUNC-005, FUNC-007, FUNC-016, FUNC-017, FUNC-018, FUNC-021, FUNC-023, FUNC-024, FUNC-025
 ---
 
@@ -14,7 +14,7 @@ uses: FUNC-003, FUNC-004, FUNC-005, FUNC-007, FUNC-016, FUNC-017, FUNC-018, FUNC
 
 ## 1. Hensikt og avgrensning
 
-UC-008: lese, redigere og kopiere diagrammer og publisere dem i PDF. Samlet brukerresultat med syntax-/feilpolicy og akseptanse; ingen egen featureklasse. Første profil er flowchart/graph, ikke alle Mermaid-dialekter.
+UC-008: lese, redigere og kopiere diagramkilde og publisere dem i PDF. Samlet brukerresultat med syntax-/feilpolicy og akseptanse; ingen egen featureklasse. Første profil er flowchart/graph, ikke alle Mermaid-dialekter.
 
 ## 2. Krav og akseptanse
 
@@ -36,8 +36,8 @@ Edit → eksisterende debounce → tolkning → forberedelse → normal dokument
 | 2 | `MermaidBlockBuilder::build` | `IDiagramInterpreter::parse` | `src/contracts/diagram/IDiagramInterpreter.h` | UTF-8 → DiagramModel/diagnostic | lokal fallback | Implemented |
 | 3 | `DiagramServices prepare chain` | `DiagramPreparation::prepare` | `src/application/diagrams/DiagramPreparation.cpp` | modell + request key → forberedt scene | stale/cancel forkastes | Implemented |
 | 4 | `DiagramPreparation::prepare` | `IDiagramLayout::layout` | `src/contracts/diagram/IDiagramLayout.h` | ren modell + målte etiketter → scene | ingen kildeparsing | Implemented |
-| 5 | `BlockLayout::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | scene → frame-paths, tekst og source anchors | bevar aspekt og sidegrenser | Implemented |
-| 6 | `DisplayListPainter::paint` | `DiagramPainter::paint` | `src/application/adapters/DiagramPainter.cpp` | rene stier + palett → Cairo | samme primitive kontrakt for preview/PDF | Implemented |
+| 5 | `BlockLayout::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | SVG-scene → visual-run og source anchor | bevar aspekt og sidegrenser | Implemented |
+| 6 | `DisplayListPainter::paint` | `DiagramPainter::paint` | `src/application/adapters/DiagramPainter.cpp` | bibliotekets SVG + palett → librsvg/Cairo | samme primitive kontrakt for preview/PDF | Implemented |
 
 
 ## 6. Gjenbruk og avhengigheter
@@ -50,6 +50,23 @@ AT-059–064 dekkes av Rust-profil-/ABI-kontroller, DiagramLayoutTest, DiagramPr
 
 ## 8. Status, risiko og endringskonsekvenser
 
+P31/P32: [Gjeldende SVG-/rutebeslutning](../../../docs/design/mermaid-svg-routing.md) erstatter tidligere native etiketttegning. Historiske tester nedenfor gjelder P25–P30; ny atferd er implementert; P31/P32-bevis beskriver faktisk verifikasjon.
+
 Implementert i P26/P27. Commit/toolchain/patch er låst. P28/P29 samler lese-, eksport- og full profilverifikasjon; ikke full Mermaid-kompatibilitet.
 
 Akseptanse: AT-059, AT-060, AT-061, AT-062, AT-063, AT-064.
+
+AT-065 dekkes av P32 og forkens rapport.
+
+Gjeldende P31/P32-verifikasjon: [samlet testbevis](../../../docs/evidence/P32.md).
+
+P36: [Typed dekning og Sequence 1](../../../mermaid_coverage.md)
+utvider samme porter. Sequence 1 er Implemented; verifikasjon dokumenteres separat.
+
+P36: [Faktiske kontroller og grenser](../../../docs/evidence/P36.md).
+
+Gjeldende P41-status: 23 familier er implementert gjennom eksplisitte delprofiler,
+inkludert Sequence 2. Galleriet har 29 eksempler; preview og PDF bruker samme SVG.
+Forberedelsen håndhever 64 blokker, 8 MiB per scene og 64 MiB samlet scenesvar.
+Se [samlet bevis](../../../docs/evidence/P41.md) og
+[integrasjonsstatus](../../../docs/evidence/P41-integration.md).

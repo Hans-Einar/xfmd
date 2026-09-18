@@ -1,0 +1,127 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd/build
+Test project /home/warloc/git/xfmd/build
+      Start 54: MermaidRustTests
+      Start 30: WheelGuiTest
+ 1/59 Test #30: WheelGuiTest .....................   Passed   24.03 sec
+      Start 44: PdfFidelityTest
+ 2/59 Test #44: PdfFidelityTest ..................   Passed   10.91 sec
+      Start 16: PreviewSelectionGuiTest
+ 3/59 Test #16: PreviewSelectionGuiTest ..........   Passed    5.99 sec
+      Start 31: WorkPathGuiTest
+ 4/59 Test #54: MermaidRustTests .................   Passed   50.97 sec
+      Start 19: TreeActionsTest
+ 5/59 Test #31: WorkPathGuiTest ..................   Passed   10.21 sec
+      Start 17: CompactWorkspaceTest
+ 6/59 Test #17: CompactWorkspaceTest .............   Passed    5.09 sec
+      Start 14: MermaidGuiTest
+ 7/59 Test #19: TreeActionsTest ..................   Passed    5.44 sec
+      Start 21: AppearanceGuiTest
+ 8/59 Test #21: AppearanceGuiTest ................   Passed    4.30 sec
+      Start 29: SidebarGuiTest
+ 9/59 Test #29: SidebarGuiTest ...................   Passed    5.77 sec
+      Start 46: FullscreenTest
+10/59 Test #14: MermaidGuiTest ...................   Passed   11.55 sec
+      Start 32: PointerTest
+11/59 Test #46: FullscreenTest ...................   Passed    3.94 sec
+      Start 24: IndexGuiTest
+12/59 Test #32: PointerTest ......................   Passed    3.76 sec
+      Start 56: DiagramReadingTest
+13/59 Test #24: IndexGuiTest .....................   Passed    3.40 sec
+      Start 18: ReadingColorsGuiTest
+14/59 Test #18: ReadingColorsGuiTest .............   Passed    1.84 sec
+      Start 22: UiControlsTest
+15/59 Test #22: UiControlsTest ...................   Passed    1.52 sec
+      Start 49: TableTest
+16/59 Test #56: DiagramReadingTest ...............   Passed    6.58 sec
+      Start 33: TablePreviewTest
+17/59 Test #49: TableTest ........................   Passed    1.44 sec
+      Start 40: PagedPreviewTest
+18/59 Test #33: TablePreviewTest .................   Passed    1.44 sec
+      Start 28: NavigationGuiTest
+19/59 Test #40: PagedPreviewTest .................   Passed    1.69 sec
+      Start 57: MermaidPdfTest
+20/59 Test #57: MermaidPdfTest ...................   Passed    1.45 sec
+      Start 15: RecentFilesGuiTest
+21/59 Test #28: NavigationGuiTest ................   Passed    2.27 sec
+      Start 53: DiagramLayoutTest
+22/59 Test #15: RecentFilesGuiTest ...............   Passed    0.56 sec
+      Start 20: AppearancePreferencesTest
+23/59 Test #20: AppearancePreferencesTest ........   Passed    0.48 sec
+      Start 27: ScrollingTest
+24/59 Test #53: DiagramLayoutTest ................   Passed    1.38 sec
+      Start 26: PresentationTest
+25/59 Test #27: ScrollingTest ....................   Passed    1.19 sec
+      Start 23: BrowserPreferencesTest
+26/59 Test #23: BrowserPreferencesTest ...........   Passed    0.31 sec
+      Start 43: ExportGuiTest
+27/59 Test #43: ExportGuiTest ....................   Passed    0.31 sec
+      Start  7: WorkPathTest
+28/59 Test #26: PresentationTest .................   Passed    1.42 sec
+      Start 48: CanvasTest
+29/59 Test #48: CanvasTest .......................   Passed    0.29 sec
+      Start 47: IconTest
+30/59 Test  #7: WorkPathTest .....................   Passed    0.40 sec
+      Start 12: BlueprintStructure
+31/59 Test #47: IconTest .........................   Passed    0.29 sec
+      Start 37: PreferencesTest
+32/59 Test #37: PreferencesTest ..................   Passed    0.27 sec
+      Start 45: PdfFlushFailure
+33/59 Test #45: PdfFlushFailure ..................   Passed    0.16 sec
+      Start 51: RichPreviewTest
+34/59 Test #51: RichPreviewTest ..................   Passed    0.11 sec
+      Start 38: TypographyTest
+35/59 Test #12: BlueprintStructure ...............   Passed    0.89 sec
+      Start 25: WorkspaceTest
+36/59 Test #38: TypographyTest ...................   Passed    0.21 sec
+      Start 59: MermaidDependencies
+37/59 Test #59: MermaidDependencies ..............   Passed    0.18 sec
+      Start 35: BlueprintSymbols
+38/59 Test #25: WorkspaceTest ....................   Passed    0.29 sec
+      Start 34: DiskFullFailure
+39/59 Test #35: BlueprintSymbols .................   Passed    0.11 sec
+      Start 50: ReadingColorsTest
+40/59 Test #34: DiskFullFailure ..................   Passed    0.08 sec
+      Start 42: PdfExportTest
+41/59 Test #50: ReadingColorsTest ................   Passed    0.06 sec
+      Start 55: DiagramPreparationTest
+42/59 Test #42: PdfExportTest ....................   Passed    0.07 sec
+      Start  8: ExternalBrowserTest
+43/59 Test #55: DiagramPreparationTest ...........   Passed    0.06 sec
+      Start 39: PageLayoutTest
+44/59 Test  #8: ExternalBrowserTest ..............   Passed    0.03 sec
+      Start 52: ThemeProfilesTest
+45/59 Test #52: ThemeProfilesTest ................   Passed    0.02 sec
+      Start 13: LayerBoundaries
+46/59 Test #39: PageLayoutTest ...................   Passed    0.06 sec
+      Start 41: ExportJobTest
+47/59 Test #41: ExportJobTest ....................   Passed    0.01 sec
+      Start 10: ReferenceWorkerTest
+48/59 Test #10: ReferenceWorkerTest ..............   Passed    0.01 sec
+      Start  2: DocumentTest
+49/59 Test  #2: DocumentTest .....................   Passed    0.03 sec
+      Start 58: DiagramWorkerTest
+50/59 Test #13: LayerBoundaries ..................   Passed    0.08 sec
+      Start  9: DocumentIndexTest
+51/59 Test #58: DiagramWorkerTest ................   Passed    0.01 sec
+      Start 11: NavigationTest
+52/59 Test #11: NavigationTest ...................   Passed    0.01 sec
+      Start 36: ScrollMotionTest
+53/59 Test #36: ScrollMotionTest .................   Passed    0.01 sec
+      Start  5: PreviewTest
+54/59 Test  #9: DocumentIndexTest ................   Passed    0.04 sec
+      Start  6: ScrollTest
+55/59 Test  #5: PreviewTest ......................   Passed    0.03 sec
+      Start  3: InterpreterTest
+56/59 Test  #6: ScrollTest .......................   Passed    0.05 sec
+      Start  4: RendererTest
+57/59 Test  #3: InterpreterTest ..................   Passed    0.03 sec
+      Start  1: PortContractTest
+58/59 Test  #4: RendererTest .....................   Passed    0.01 sec
+59/59 Test  #1: PortContractTest .................   Passed    0.01 sec
+
+100% tests passed, 0 tests failed out of 59
+
+Label Time Summary:
+GUI    =  97.40 sec*proc (25 tests)
+
+Total Test time (real) =  86.61 sec

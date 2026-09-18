@@ -411,16 +411,82 @@ innbyrdes avhengighet. FOX forblir applikasjonsteknologien.
 Cmark delegerer eksplisitte mermaid-gjerder via injisert IDiagramInterpreter.
 Application forbereder diagramscener i worker via IDiagramLayout, med trådeide
 fonter og generasjonskontroll. MarkdownRenderer plasserer ferdige scener;
-DisplayListPainter/DiagramPainter tegner native Cairo og vanlig tekst i preview/PDF.
-P25 endrer ikke dagens kjørevei. Filkart, ABI, måleseam, policy, cache og faser
-finnes i designet; alle nye source-filer er Planned.
+DisplayListPainter/DiagramPainter brukte opprinnelig native Cairo-primitiver.
+P31 erstattet dette med bibliotekets SVG via librsvg/Cairo i preview og PDF.
+Filkart, ABI, målesøm, policy og cache er implementert; P36–P41 utvider dette
+med typebevarende modeller. Se [gjeldende dekning](mermaid_coverage.md).
 
 
 Mermaid-filansvar: `application/composition/DiagramServices` registrerer
 parser/prepare-kjeden; `application/diagrams/DiagramPreparation` koordinerer,
 `DiagramCache` eier worker-lokal LRU, og `adapters/DiagramPainter` utfører
-Cairo-primitiver. `interpreter/mermaid/MermaidBlockBuilder` kjenner gjerdet,
+SVG-presentasjon via librsvg/Cairo. `interpreter/mermaid/MermaidBlockBuilder` kjenner gjerdet,
 `MermaidInterpreter` eier parser-ABI-adapteren. `renderer/diagram/DiagramTextLayout`
 måler etiketter, `MermaidDiagramLayout` dekoder layout og `DiagramPlacement`
 plasserer scenen i dokumentet. Rust-algoritmeadaptere ligger i respektive
 interpreter/renderer-undermapper; C-eksporter ligger bare i composition root.
+
+
+## Mermaid-presentasjon og ruting — revisjon P31/P32
+
+[SVG-/rutebeslutningen](docs/design/mermaid-svg-routing.md) erstatter den tidligere
+native form-/etikettmalingen. Renderer leverer bibliotekets SVG som en ren verdi;
+Application eier librsvg/Cairo og palettadapter. Interpreter er uendret.
+Rutemotoren og C++-bindingen til libavoid bor i bibliotekforken. Ingen rutelogikk
+skal legges under XFMDs `.deps` eller vokse i FOX-adapteren. DiagramPainter er
+SVG-presentasjon; DiagramPlacement er kun plassering/kildeanker.
+
+P33: DiagramTextLayout former lange kantetiketter med ordombryting før layout.
+Inputpayload 4 overfører faktiske linjer og mål; sceneformatet forblir 3.
+[Tekstpolicy og framtidig begrenset omplassering](docs/design/mermaid-label-wrap.md)
+beskriver ansvar og avgrensning. Libavoid plasserer fortsatt ikke noder.
+
+P34: [Beskyttet etikettilhørighet](docs/design/mermaid-label-attachment.md)
+eies av rutepipelinen i forken. Soner, hindringer og sluttvalidering deles;
+FOX-/SVG-adapteren endres ikke. Eventuelt portsøk er et separat framtidig steg.
+
+P35: [Etikettpekere](docs/design/mermaid-label-leaders.md) eies av forkens
+render::label_leaders. Rust-adapteren kaller add_label_leaders etter vanlig
+SVG-rendering; returnert utelatelsesantall inngår i scenediagnostikken.
+Layout, portvalg og ruter er immutable i dette presentasjonssteget.
+
+
+## P36 — typebevarende Mermaid-modeller
+
+[Matrisen](mermaid_coverage.md) og
+[Sequence 1](docs/design/mermaid-sequence-authoring.md) definerer første tillegg.
+`contracts/diagram/SequenceModel.h` og `rust/src/sequence.rs` eier ordnede
+interaksjoner, deltakere og hendelsestyper. DiagramModel har en egen sequence-variant;
+flowchart-feltene er tomme for denne. Modellpayload 2 begynner med versjon og type;
+layout-input 5 inneholder denne modellen, mens SVG-scene 3/ABI-envelope 1 beholdes.
+
+`interpreter/mermaid/rust/src/sequence.rs` konsumerer hele Sequence 1-profilen,
+bruker bibliotekparseren og kontrollerer meldingsorden/tekst. `renderer/diagram/rust/src/sequence.rs`
+rekonstruerer dedikert Graph.kind=Sequence fra rene verdier, aldri kildekode.
+DiagramTextLayout måler også fragmentoverskrifter. Biblioteket eier layout og
+SVG; flowchart-ruter/pekere brukes ikke på sekvenser. Sceneformatets flowchart-
+inspeksjonslister er tomme for sequence, ikke fiktive noder og kanter.
+DiagramPainter utvider bare semantisk palettmapping av notatfarger. Worker,
+cache, librsvg/Cairo, plassering og PDF bruker eksisterende porter.
+
+### P38–P41: typed Mermaid-familier
+
+[Semantisk modell og tekstmåling](docs/design/mermaid-semantic-model.md)
+utvider eksisterende diagramporter. `SemanticDiagram.h` eies av contracts;
+`interpreter/mermaid/rust/src/semantic/` eier profiler og
+`renderer/diagram/rust/src/semantic/` eier oversettelse til layoutbiblioteket.
+`text_metrics.rs` eier den synkrone, lånte målecallbacken, uten FOX-avhengighet.
+
+P39: `contracts/diagram/rust/src/semantic_architecture.rs` eier C4-, port- og grid-skjema.
+`interpreter/mermaid/rust/src/semantic/{c4,architecture,block}.rs` konsumerer
+profilene; tilsvarende renderer-filer mapper til native typer uten ny parsing.
+
+P40: `semantic_planning.rs` i contracts eier bit-/tids-/score-skjema.
+`semantic/planning.rs` i interpreter og renderer eier henholdsvis profil og
+native mapping. Packet-bitruter ligger i forkens `layout/packet.rs`.
+
+P41: `semantic_charts.rs` validerer chart-/tre-/commit-records. Parserrollene
+ligger i `semantic/{charts,trees,git,zenuml}.rs`; native konstruksjon ligger i
+rendererens `semantic/{charts,structures}.rs`. Hver fil har én profil-/mappingrolle.
+`semantic.rs` er omtrent 310 linjer fordi basisskjema, referansevalidering og wire
+fortsatt hører sammen; nye familier delegeres til egne valideringsfiler.

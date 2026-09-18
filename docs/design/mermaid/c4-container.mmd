@@ -1,0 +1,10 @@
+C4Container
+Person(operator, "Operator")
+System_Boundary(system, "Documentation workspace") {
+Container(app, "XFMD application", "FOX and C++", "Owns document session")
+Container(preview, "Diagram worker", "Rust", "Bounded offline layout")
+ContainerDb(files, "Markdown files", "Filesystem", "Source of truth")
+}
+Rel(operator, app, "Edits proposals")
+Rel(app, preview, "Requests measured layout", "Typed model")
+Rel(app, files, "Loads and saves")

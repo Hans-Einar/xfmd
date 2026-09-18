@@ -3,7 +3,29 @@
 #include "contracts/diagram/DiagramLimits.h"
 #include "contracts/diagram/DiagramWire.h"
 #include <algorithm>
+#include <cmath>
 namespace xfmd {
+namespace {
+uint32_t measureDiagramText(void* context, const uint8_t* data, uint64_t length, double size,
+                            double* width, double* height) noexcept {
+  try {
+    if (!context || !data || length > 65536 || !width || !height || !std::isfinite(size) ||
+        size <= 0 || size > 512)
+      return 1;
+    FontSpec font;
+    font.points = std::max(1, int(std::round(size * .75)));
+    auto measured = static_cast<ITextMetrics*>(context)->measure(
+        {reinterpret_cast<const char*>(data), std::size_t(length)}, font);
+    auto scale = size / font.points;
+    *width = measured.width * scale;
+    *height = measured.height * scale;
+    return 0;
+  } catch (...) {
+    return 1;
+  }
+}
+} // namespace
+
 std::shared_ptr<const DiagramScene>
 MermaidDiagramLayout::layout(const DiagramModel& model, const DiagramLayoutRequest& request,
                              ITextMetrics& metrics) {
@@ -14,6 +36,7 @@ MermaidDiagramLayout::layout(const DiagramModel& model, const DiagramLayoutReque
   checkpoint();
   auto texts = DiagramTextLayout::measure(model, metrics);
   diagramWire::Writer w;
+  w.integer(5); // Versioned layout payload; C ABI envelope remains v1.
   w.model(model);
   w.integer(diagramLayoutBudgetMilliseconds);
   w.integer(texts.size());
@@ -21,11 +44,17 @@ MermaidDiagramLayout::layout(const DiagramModel& model, const DiagramLayoutReque
     w.text(pair.first);
     w.number(pair.second.width / .75);
     w.number(pair.second.height / .75);
+    w.integer(pair.second.lines.size());
+    for (const auto& line : pair.second.lines)
+      w.text(line.text);
   }
-  diagramWire::ResultOwner result(xfmd_diagram_layout_v1(1, w.data.data(), w.data.size()),
+  diagramWire::ResultOwner result(xfmd_diagram_layout_measured_v1(1, w.data.data(), w.data.size(),
+                                                                  &metrics, measureDiagramText),
                                   xfmd_diagram_layout_free_v1);
   checkpoint();
   diagramWire::Reader r(result.result);
+  if (r.integer() != 3)
+    throw Error(ErrorCode::Layout, "Unsupported diagram layout payload");
   auto scene = std::make_shared<DiagramScene>();
   scene->fonts = metrics.fontSetId();
   scene->width = r.number() * .75;
@@ -88,6 +117,10 @@ MermaidDiagramLayout::layout(const DiagramModel& model, const DiagramLayoutReque
     if (!model.edges[i].label.empty())
       label(model.edges[i].label, x, y, true);
   }
+  scene->svg = r.text(8 * 1024 * 1024);
+  if (scene->svg.rfind("<svg", 0) != 0)
+    throw Error(ErrorCode::Layout, "Missing diagram SVG");
+  scene->diagnostics = r.text();
   r.finish();
   scene->bytes = result.result.size;
   for (const auto& l : scene->labels)

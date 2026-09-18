@@ -34,9 +34,9 @@ lagres i FOX-registry-seksjonen `RecentFiles`, separat fra `WorkPaths`.
 
 Krever Rust/Cargo **1.92.0**, Python ≥3.11, `patch`, C++17-kompilator, CMake ≥3.20, Ninja, pkg-config, FOX ≥1.6.57 (1.6 API),
 libcurl-verktøyet `curl`, X11/RandR, Cairo og PangoCairo/Fontconfig (inkludert utviklingsfiler).
-Bilder/formler krever GdkPixbuf med SVG-loader, cairomm-1.0, pangomm-1.4 og tinyxml2.
-På Debian/Ubuntu: `libgdk-pixbuf-2.0-dev librsvg2-common libcairomm-1.0-dev libpangomm-1.4-dev libtinyxml2-dev`.
-På AlmaLinux/Fedora: `gdk-pixbuf2-devel librsvg2 cairomm-devel pangomm-devel tinyxml2-devel`.
+Diagram-SVG krever librsvg ≥2.46 med utviklingsheaders. Bilder/formler krever GdkPixbuf med SVG-loader, cairomm-1.0, pangomm-1.4 og tinyxml2.
+På Debian/Ubuntu: `libgdk-pixbuf-2.0-dev librsvg2-dev libcairomm-1.0-dev libpangomm-1.4-dev libtinyxml2-dev`.
+På AlmaLinux/Fedora: `gdk-pixbuf2-devel librsvg2-devel cairomm-devel pangomm-devel tinyxml2-devel`.
 PDF-verifikasjon bruker Poppler-verktøyene `pdfinfo`, `pdftotext` og `pdftoppm`. Installer DejaVu Sans/Mono og gjerne Droid Sans
 Fallback eller Noto Sans CJK. Tester krever Python 3 og Xvfb. Fullscreen-testen bruker Window Maker når den er installert.
 
@@ -281,19 +281,23 @@ Installasjonen inkluderer MicroTeX-ressurser og deres opprinnelige lisenser i
 
 ## Mermaid-diagrammer
 
-Gjerder med første infotoken `mermaid` rendres native. Flowchart 1 støtter
+Gjerder med første infotoken `mermaid` vises med bibliotekets SVG via librsvg/Cairo.
+XFMD støtter 23 familier med eksplisitte delprofiler; [støttematrisen](mermaid_coverage.md)
+er gjeldende oversikt. Flowchart 1 støtter
 `flowchart`/`graph` med LR/RL/TD/TB/BT, rektangler, avrundede rektangler,
 beslutningsnoder, sirkler, grupper, kjeder, sykluser og solide/stiplete/tykke
 kanter. Bruk `A[Etikett] -->|Kanttekst| B{Valg}`. Begge brukerdiagrammene
 finnes i `tests/fixtures/markdown/mermaid.md`.
 
-Etiketter kan merkes og kopieres; fargekontrollene virker direkte. A4 og PDF
-bruker samme geometri og ekte tekst. Lange LR-diagrammer skaleres ned til
-visningsbredden. Andre diagramtyper og init/CSS/HTML/click/ressursdirektiver
-vises som kilde med forklaring, uten å ødelegge resten av dokumentet.
+Fargekontrollene virker direkte. Diagrametikettmerking er utsatt; diagramkilden
+kan kopieres fra editoren. A4 og PDF bruker samme SVG og vektorgeometri. Lange LR-diagrammer skaleres ned til
+visningsbredden. Sequence 2 omfatter ordnede hendelser, asynkrone piler og nestede
+fragmenter. De øvrige familiene har egne profiler og modeller. Ustøttede typer,
+konstruksjoner og init/CSS/HTML/click/ressursdirektiver vises som kilde med
+forklaring, uten å ødelegge resten av dokumentet.
 
-Grensene er 64 KiB, 128 noder, 512 kanter, 32 grupper, gruppedybde 8 og
-16 diagrammer per dokument. Dyr layout avbrytes kooperativt etter omtrent
+Flowchart-grensene er 64 KiB, 128 noder, 512 kanter, 32 grupper, gruppedybde 8 og
+64 diagrammer per dokument, med 8 MiB per scene og 64 MiB samlet scenesvar. Dyr layout avbrytes kooperativt etter omtrent
 to sekunder og gir lokal fallback; dette er ingen hard realtime-garanti.
 AddressSanitizer-bygg har ti sekunders budsjett for instrumenteringskostnaden;
 den installerte Release-utgaven beholder to sekunder.
@@ -306,3 +310,34 @@ CMake-byggets `_deps/` (MicroTeX). Deretter kan konfigurering og bygg kjøres
 med `CARGO_NET_OFFLINE=true` og `-DFETCHCONTENT_FULLY_DISCONNECTED=ON`.
 Den installerte applikasjonen trenger verken Cargo, Rust, Node eller nettleser
 for å vise Mermaid. Rust-/Mermaid-lisenser installeres under `share/doc/xfmd/licenses/`.
+
+Mermaid-flowcharts bruker nå Libavoid fra en låst fork. Sett
+`XFMD_MERMAID_ROUTER=legacy` før oppstart for eksplisitt sammenligning med gammel
+ruter. `XFMD_MERMAID_CROSSING_JUMPS=1` viser valgfrie kryssingsbuer. Kryssinger er
+tillatt; etiketter og noder skal være hindringer. Ved plassmangel vises en lokal
+feil ved Mermaid-kilden, uten skjult motorbytte. Se
+[bygg, lisens og relinking](docs/design/mermaid-libavoid-build.md) og
+[SVG-/rutebeslutningen](docs/design/mermaid-svg-routing.md).
+
+Lange Mermaid-kantetiketter brytes automatisk ved ordgrenser rundt 120 pt.
+Eksplisitte linjeskift bevares, og enkeltord deles ikke. Node-/gruppetitler
+beholdes; ved identisk tekst i node/gruppe og kant brukes den felles uombrutte
+målingen. Preview og PDF bruker de samme målte linjene.
+
+Der det er fri plass, får Mermaid-kantetiketter en tynn peker med prikk på
+forbindelsen de tilhører. Venstre side prioriteres, med høyre som alternativ.
+Pekerne følger lesefargene og vises også i PDF; de endrer ikke diagramlayouten.
+
+`sequenceDiagram` bruker den implementerte Sequence 2-profilen. Se
+[forfatterveiledningen](docs/design/mermaid-sequence-authoring.md) og
+[versjonert Mermaid-matrise](mermaid_coverage.md). Bibliotekets
+annonserte diagramtyper er ikke automatisk støttet ende til ende i XFMD.
+
+## Mermaid-galleri (P37–P41)
+
+Start fra build-mappen: `./xfmd ../mermaid_evicence.md`.
+[Det praktiske galleriet](mermaid_evicence.md) har 29 eksempler for de 23 familiene
+i den låste avhengigheten. Dette er dokumenterte delprofiler, ikke full
+JS-Mermaid-kompatibilitet. Ustøttet syntaks gir lokal kildefallback med forklaring.
+[Oppdatert matrise og profilveiledninger](mermaid_coverage.md) skiller
+upstream, fork og faktisk preview/PDF-støtte. Alle familier virker offline.

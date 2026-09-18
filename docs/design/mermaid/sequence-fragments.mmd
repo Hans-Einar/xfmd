@@ -1,0 +1,20 @@
+sequenceDiagram
+    participant UI as Brukergrensesnitt
+    participant Service as Måletjeneste
+    UI->>Service: Start reading
+    opt observation available
+        Service-->>UI: Current observation
+    end
+    UI->>Service: Next operation
+    loop bounded retry
+        UI->>Service: Request accepted revision with provenance
+        Service-->>UI: No newer revision
+    end
+    UI->>Service: Observe activities
+    par sampling
+        Service-->>UI: Measurement available
+    and configuration
+        UI->>Service: Request configuration
+    end
+    UI->>UI: Preserve local state
+    Note right of Service: Åpen dokumentasjon uten implisitt scheduling

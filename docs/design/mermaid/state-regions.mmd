@@ -1,0 +1,12 @@
+stateDiagram-v2
+    [*] --> Session
+    state Session {
+        [*] --> Missing
+        Missing --> Current : observation accepted
+        Current --> Stale : expires
+        --
+        [*] --> Connected
+        Connected --> Reconnecting : link lost
+        Reconnecting --> Connected : session restored
+    }
+    Session --> [*] : reset
