@@ -367,3 +367,7 @@ Valgfritt `--renderer /absolute/mmdr` registrerer SVG-renderer for SDL-verktøye
 Navigatoren og hovedpanelet har separate dokumenter, scroll og historikk.
 SDL-URI-er velger bare registrert prosjekt; de er aldri shellkommandoer.
 Linux-profilen adresserer konkret vindu og panel og beholder siste dokument ved feil.
+
+Med SDL-daemon kan `--broker /private/views.sock` registreres sammen med
+`--sdl-tool /absolute/sdl-view-request` og prosjekt-ID. Parser-/rendererregistrering
+ligger da i daemonen. Leases følger panelene og frigjøres ved bytte/lukking.
