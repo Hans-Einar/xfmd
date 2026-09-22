@@ -8,6 +8,7 @@
 using namespace FX;
 namespace xfmd {
 Application::~Application() {
+  documentViews.reset();
   windowMode.reset();
   exporter.reset();
   references.reset();
@@ -111,7 +112,9 @@ void Application::initialize(int& argc, char** argv) {
   forward = [this] { navigation->goForward(); };
   canNavigate = [this](bool back) { return navigation->history.propose(back).has_value(); };
   host->linkActivated = [this](const std::string& target) {
-    if (ExternalBrowser::accepts(target))
+    if (documentViews && target.rfind("sdl-view:",0)==0)
+      documentViews->follow(target);
+    else if (ExternalBrowser::accepts(target))
       openBrowser(target);
     else
       navigation->followLink(target);

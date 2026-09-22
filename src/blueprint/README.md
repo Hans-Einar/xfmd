@@ -163,3 +163,14 @@ P22: UR-032 → FUNC-010/014; UR-033 → FUNC-010; UR-034 → FUNC-005. AT-052�
 | --- | --- | --- | --- |
 | UR-042 | [FUNC-026](functionality/Functionality-026--Build-Identity.md) | AT-066 | FirstRelease |
 | SR-025 | [FUNC-026](functionality/Functionality-026--Build-Identity.md) | AT-067 | FirstRelease |
+
+## Sprint 004 — genererte dokumenter
+
+| ID | Eier | Status |
+| --- | --- | --- |
+| [FUNC-031](functionality/Functionality-031--Generated-Document-Navigation.md) | application | Implemented |
+
+| Krav | Designobjekter | Akseptanse | Scope |
+| --- | --- | --- | --- |
+| UR-044 | [FUNC-031](functionality/Functionality-031--Generated-Document-Navigation.md) | AT-070 | FirstRelease |
+| SR-027 | [FUNC-031](functionality/Functionality-031--Generated-Document-Navigation.md) | AT-071 | FirstRelease |

@@ -83,6 +83,7 @@ add_library(xfmd_export src/application/export/ExportCoordinator.cpp
   src/application/adapters/PdfOutput.cpp)
 target_link_libraries(xfmd_export PUBLIC xfmd_typography xfmd_media xfmd_diagrams Threads::Threads)
 add_library(xfmd_application
+  src/application/navigation/NavigationPanel.cpp src/application/navigation/DocumentViews.cpp src/application/navigation/WindowEndpoint.cpp
   src/application/ui/controls/CompactToolbar.cpp src/application/ui/controls/PreviewControls.cpp src/application/ui/controls/PreviewColorControls.cpp
   src/application/ui/style/ThemeProfiles.cpp
   src/application/ui/style/IconCatalog.cpp src/application/ui/style/UiContext.cpp

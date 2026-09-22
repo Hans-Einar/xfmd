@@ -172,3 +172,11 @@ set_tests_properties(DiagramWorkerTest PROPERTIES TIMEOUT 10)
 
 add_test(NAME BuildIdentityTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/tests/build/BuildIdentityTest.py)
 add_test(NAME BuildVersionTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/tools/check_build_version.py $<TARGET_FILE:xfmd> ${XFMD_IDENTITY_DIR}/xfmd-build.json)
+
+add_executable(DocumentViewsGuiTest tests/gui/DocumentViewsGuiTest.cpp)
+target_include_directories(DocumentViewsGuiTest PRIVATE tests)
+target_link_libraries(DocumentViewsGuiTest PRIVATE xfmd_application X11::X11)
+if(DEFINED SDL_TOOL_EXECUTABLE)
+  add_test(NAME DocumentViewsGuiTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/run_with_xvfb.py $<TARGET_FILE:DocumentViewsGuiTest>)
+  set_tests_properties(DocumentViewsGuiTest PROPERTIES ENVIRONMENT "SDL_TOOL=${SDL_TOOL_EXECUTABLE}" TIMEOUT 30 LABELS GUI)
+endif()

@@ -14,6 +14,7 @@
 #include "export/ExportCoordinator.h"
 #include "index/ReferenceWorker.h"
 #include "navigation/NavigationCoordinator.h"
+#include "navigation/DocumentViews.h"
 #include "preview/PreviewCoordinator.h"
 #include "scroll/ScrollCoordinator.h"
 #include "ui/IconResources.h"
@@ -53,6 +54,7 @@ public:
   std::function<void()> contentChanged, documentOpened;
   std::function<void()> back, forward;
   std::function<bool(bool)> canNavigate;
+  std::unique_ptr<DocumentViews> documentViews;
   Application() = default;
   ~Application();
   void initialize(int&, char**);

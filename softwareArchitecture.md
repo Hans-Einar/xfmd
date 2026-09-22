@@ -498,3 +498,9 @@ Git-historikk ved eksplisitt bygg; `cmake/BuildIdentity.cmake` genererer header
 og installert JSON. `src/application/build/BuildVersion.h/.cpp` eksponerer
 `buildVersion()` for CLI og Application-vindustittel. Git/Python finnes bare
 i byggsteget, ikke i kjørende applikasjon eller interpreter/renderer.
+
+## Sprint 004 — dokumentnavigasjon
+
+Application/navigation får NavigationPanel (egen eksisterende preview-pipeline),
+DocumentViews (registrert verktøy og panelruting) og WindowEndpoint (privat lokal
+IPC). Renderer/interpreter er uendret; ingen SDL-parser trekkes inn i XFMD.
