@@ -334,3 +334,10 @@ avgrenset, men romme minst ett eksempel per implementert diagramtype.
 | --- | --- | --- |
 | UR-042 | CLI, vindustittel og høyrejustert tekst i nederste statuslinje viser major.minor, branch (PR-nummer på main når kjent) og numerisk commitnummer. | AT-066: samme innbakte identitet i CLI/vindu/statuslinje; dirty og ukjent kilde markeres. |
 | SR-025 | Identiteten beregnes fra full Git-historikk uten nettverk eller en konfliktskapende tellerfil. Et eksplisitt bygg oppdaterer metadata også uten ny CMake-konfigurering; samme commit gir stabil identitet. | AT-067: lineære commits, branches, merge, main etter PR, detached, dirty, shallow og kildearkiv; uendret metadata omskrives ikke. |
+
+## SDL-dokumentnavigasjon (Sprint 004)
+
+| ID | Krav | Akseptanse |
+| --- | --- | --- |
+| UR-044 | To uavhengige Markdown-paneler viser navigator og hoveddokument. En registrert SDL-handling genererer valgt dokument i avsendervinduet. | AT-070: ekte panelklikk, bevart navigator, fokusbytte, flere vinduer og lukket mål. |
+| SR-027 | Lokal XFMD1-protokoll adresserer konkret vindu/panel, har begrenset størrelse og samme bruker som peer. Verktøy registreres med program/argv; Markdown inneholder aldri shellkommando. | AT-071: feil vindu/panel, ugyldig/for stor forespørsel, stale sekvens og disconnect gir ingen feilåpning. |

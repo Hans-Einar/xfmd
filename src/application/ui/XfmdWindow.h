@@ -28,6 +28,7 @@ public:
   SidebarWidget* sidebar = nullptr;
   WorkspacePanel* workspacePanel = nullptr;
   FX::FXSplitter* split = nullptr;
+  FX::FXVerticalFrame* navigationArea = nullptr;
   FX::FXVerticalFrame* previewArea = nullptr;
   FX::FXLabel* status = nullptr;
   FX::FXLabel* versionStatus = nullptr;

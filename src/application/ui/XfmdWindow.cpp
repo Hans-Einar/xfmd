@@ -76,6 +76,8 @@ void XfmdWindow::buildUi() {
   sidebar = workspacePanel->tree;
   split = new FXSplitter(workspace,
                          SPLITTER_HORIZONTAL | SPLITTER_TRACKING | LAYOUT_FILL_X | LAYOUT_FILL_Y);
+  navigationArea = new FXVerticalFrame(split, LAYOUT_FILL_Y, 0,0,330,0,0,0,0,0);
+  navigationArea->hide();
   editor = new EditorWidget(split);
   previewArea = new FXVerticalFrame(split, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0);
 
