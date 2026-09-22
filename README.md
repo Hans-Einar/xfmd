@@ -354,3 +354,16 @@ På main brukes siste PR-nummer når kjent. Major/minor kommer fra `VERSION`;
 commitnummeret teller hele Git-historikken og er ikke en SHA. Full clone er
 nødvendig; shallow clone utvides med `git fetch --unshallow`. Detaljer om
 merge, dirty, kildearkiv og metadata: [versjonering](docs/versioning.md).
+
+## SDL-dokumentnavigator (Sprint 004)
+
+```sh
+xfmd overview.md --navigator navigator.md --sdl-tool /absolute/sdl --sdl-source /absolute/model.design --project demo --window-id design-one
+xfmd --window design-one --pane main /absolute/generated/entry.md
+xfmd --window design-one --info
+```
+
+Valgfritt `--renderer /absolute/mmdr` registrerer SVG-renderer for SDL-verktøyet.
+Navigatoren og hovedpanelet har separate dokumenter, scroll og historikk.
+SDL-URI-er velger bare registrert prosjekt; de er aldri shellkommandoer.
+Linux-profilen adresserer konkret vindu og panel og beholder siste dokument ved feil.
