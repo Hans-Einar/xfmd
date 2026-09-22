@@ -7,6 +7,7 @@
 int main(int argc, char** argv) {
   try {
     xfmd::DocumentViewConfig config;
+    std::string lease;
     std::string target, pane = "main", client = "cli-" + std::to_string(getpid()), request = "1",
                         path;
     bool info = false;
@@ -40,6 +41,10 @@ int main(int argc, char** argv) {
         config.renderer = value();
       else if (a == "--window-id")
         config.window = value();
+      else if (a == "--broker")
+        config.broker = value();
+      else if (a == "--lease")
+        lease = value();
       else if (a == "--window")
         target = value();
       else if (a == "--pane")
@@ -56,9 +61,10 @@ int main(int argc, char** argv) {
         path = a;
     }
     if (!target.empty()) {
-      std::string packet = info ? "XFMD1\tINFO\t" + target + "\n"
-                                : "XFMD1\tOPEN\t" + target + "\t" + client + "\t" + request + "\t" +
-                                      pane + "\t" + path + "\tend\n";
+      std::string packet =
+          info ? "XFMD1\tINFO\t" + target + "\n"
+               : "XFMD1\tOPEN\t" + target + "\t" + client + "\t" + request + "\t" + pane + "\t" +
+                     path + (lease.empty() ? "" : "\t" + lease + "\t" + config.broker) + "\tend\n";
       auto answer = xfmd::WindowEndpoint::request(target, packet);
       std::cout << answer;
       return answer.rfind("OK\t", 0) == 0 ? 0 : 1;

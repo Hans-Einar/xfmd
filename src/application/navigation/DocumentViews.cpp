@@ -1,9 +1,12 @@
 #include "DocumentViews.h"
 #include "application/Application.h"
+#include <cstring>
 #include <fcntl.h>
 #include <filesystem>
 #include <fstream>
 #include <signal.h>
+#include <sys/socket.h>
+#include <sys/un.h>
 #include <sys/wait.h>
 #include <unistd.h>
 namespace xfmd {
@@ -26,6 +29,10 @@ DocumentViews::DocumentViews(Application& a, DocumentViewConfig c)
       navigator->follow(uri);
   };
   endpoint.open = [this](const auto& pane, const auto& path) { return open(pane, path); };
+  navigator->changed = [this] { documentChanged("navigation"); };
+  endpoint.leased = [this](const auto& pane, const auto& lease, const auto& broker) {
+    leases[pane] = {lease, broker};
+  };
   endpoint.info = [this] { return app.session.view().path + "\t" + navigator->path(); };
   app.window->navigationArea->show();
   app.window->navigationArea->setWidth(330);
@@ -36,6 +43,9 @@ DocumentViews::DocumentViews(Application& a, DocumentViewConfig c)
 }
 DocumentViews::~DocumentViews() {
   scheduler.cancelAll();
+  documentChanged("main");
+  documentChanged("navigation");
+  flushReleases();
   cancel();
   navigator.reset();
   std::filesystem::remove_all(temporary);
@@ -49,6 +59,9 @@ void DocumentViews::cancel() {
   }
 }
 bool DocumentViews::open(const std::string& pane, const std::string& path) {
+  flushReleases();
+  if (releases.size() >= 256)
+    return false;
   if (pane == "navigation")
     return navigator->open(path);
   if (pane != "main")
@@ -76,8 +89,8 @@ bool DocumentViews::follow(const std::string& uri) {
     return false;
   };
   const auto prefix = "sdl-view://" + config.project + "/";
-  if (config.tool.empty() || config.source.empty() || config.project.empty() ||
-      uri.rfind(prefix, 0) != 0 || uri.size() > 8192 ||
+  if (config.tool.empty() || (config.source.empty() && config.broker.empty()) ||
+      config.project.empty() || uri.rfind(prefix, 0) != 0 || uri.size() > 8192 ||
       uri.find_first_of("\n\r\t") != std::string::npos)
     return reject("Unregistered SDL project or invalid URI");
   cancel();
@@ -90,6 +103,19 @@ bool DocumentViews::follow(const std::string& uri) {
     args.push_back("--renderer");
     args.push_back(config.renderer);
   }
+  if (!config.broker.empty())
+    args = {config.tool,
+            "--socket",
+            config.broker,
+            "--uri",
+            uri,
+            "--window",
+            config.window,
+            "--client",
+            config.window,
+            "--sequence",
+            std::to_string(sequence),
+            "--open"};
   std::vector<char*> argv;
   for (auto& s : args)
     argv.push_back(s.data());
@@ -114,18 +140,50 @@ bool DocumentViews::follow(const std::string& uri) {
   app.window->status->setText("Generating selected SDL view…");
   return true;
 }
+void DocumentViews::documentChanged(const std::string& pane) {
+  auto it = leases.find(pane);
+  if (it != leases.end()) {
+    releases.push_back(it->second);
+    leases.erase(it);
+  }
+  flushReleases();
+}
+void DocumentViews::flushReleases() {
+  for (auto it = releases.begin(); it != releases.end();) {
+    int fd = socket(AF_UNIX, SOCK_SEQPACKET | SOCK_CLOEXEC | SOCK_NONBLOCK, 0);
+    bool sent = false;
+    if (fd >= 0) {
+      sockaddr_un a{};
+      a.sun_family = AF_UNIX;
+      if (it->second.size() < sizeof(a.sun_path)) {
+        std::memcpy(a.sun_path, it->second.c_str(), it->second.size() + 1);
+        if (connect(fd, reinterpret_cast<sockaddr*>(&a), sizeof(a)) == 0) {
+          auto packet = "SDLVIEW1\tRELEASE\t" + it->first + "\n";
+          sent = send(fd, packet.data(), packet.size(), MSG_NOSIGNAL) ==
+                 static_cast<ssize_t>(packet.size());
+        }
+      }
+      close(fd);
+    }
+    if (sent)
+      it = releases.erase(it);
+    else
+      ++it;
+  }
+}
 void DocumentViews::poll() {
   endpoint.poll();
+  flushReleases();
   if (child > 0) {
     int status = 0;
     auto result = waitpid(child, &status, WNOHANG);
     if (result == child) {
       child = -1;
-      if (WIFEXITED(status) && WEXITSTATUS(status) == 0) {
+      if (WIFEXITED(status) && WEXITSTATUS(status) == 0 && config.broker.empty()) {
         std::ifstream delivery(pendingDirectory + "/delivery.txt");
         std::getline(delivery, pendingPane);
         open(pendingPane, pendingDirectory + "/entry.md");
-      } else {
+      } else if (!WIFEXITED(status) || WEXITSTATUS(status) != 0) {
         std::ifstream in(temporary + "/tool.log");
         std::string message(4096, '\0');
         in.read(message.data(), message.size());

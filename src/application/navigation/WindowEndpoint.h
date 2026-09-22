@@ -20,6 +20,7 @@ public:
   static std::string request(const std::string& window, const std::string& message);
   std::function<bool(const std::string&, const std::string&)> open;
   std::function<std::string()> info;
+  std::function<void(const std::string&, const std::string&, const std::string&)> leased;
   explicit WindowEndpoint(const std::string& id);
   ~WindowEndpoint();
   void poll();

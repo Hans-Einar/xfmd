@@ -21,6 +21,7 @@ class NavigationPanel {
 public:
   FoxRenderHost* host;
   std::function<void(const std::string&)> error;
+  std::function<void()> changed;
   NavigationPanel(FX::FXComposite*, FX::FXApp&);
   ~NavigationPanel();
   bool open(const std::string&);

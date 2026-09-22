@@ -122,6 +122,7 @@ void Application::initialize(int& argc, char** argv) {
   host->linkHovered = [this](const std::string& target) { showLinkTarget(target); };
   wireIndex();
   documentOpened = [this] {
+    if(documentViews)documentViews->documentChanged("main");
     references->cancel();
     pendingHeading.reset();
     navigation->commitVisit();

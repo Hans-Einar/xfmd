@@ -75,9 +75,12 @@ std::string WindowEndpoint::handle(const std::string& message) {
     f.push_back(field);
   if (f.size() == 3 && f[0] == "XFMD1" && f[1] == "INFO" && f[2] == window)
     return "OK\t" + (info ? info() : "") + "\n";
-  if (f.size() != 8 || f[0] != "XFMD1" || f[1] != "OPEN" || f[2] != window || !identity(f[3]) ||
-      (f[5] != "main" && f[5] != "navigation") || f[6].empty() || f[6][0] != '/' || f[7] != "end")
+  if ((f.size() != 8 && f.size() != 10) || f[0] != "XFMD1" || f[1] != "OPEN" || f[2] != window ||
+      !identity(f[3]) || (f[5] != "main" && f[5] != "navigation") || f[6].empty() ||
+      f[6][0] != '/' || f.back() != "end")
     return "ERROR\tinvalid target or request\n";
+  if (f.size() == 10 && (!identity(f[7]) || f[8].empty() || f[8][0] != '/'))
+    return "ERROR\tinvalid lease metadata\n";
   unsigned long long seq = 0;
   try {
     if (f[4].empty() || f[4].find_first_not_of("0123456789") != std::string::npos)
@@ -94,6 +97,8 @@ std::string WindowEndpoint::handle(const std::string& message) {
   sequences[key] = seq;
   if (!open || !open(f[5], f[6]))
     return "ERROR\tdocument not opened\n";
+  if (f.size() == 10 && leased)
+    leased(f[5], f[7], f[8]);
   return "OK\t" + f[4] + "\n";
 }
 void WindowEndpoint::poll() {

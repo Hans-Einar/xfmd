@@ -62,3 +62,8 @@ Faktiske resultater føres i Sprint 004 før leveranse.
 
 Implemented 2026-09-22. Linux lokal IPC er første profil. Vanlig XFMD-oppstart
 har uendret dokumentflyt; navigasjonsmodus velges eksplisitt med CLI.
+
+Fase 050: optional broker-socket registreres ved oppstart. SDL-verktøyets
+leseradapter leverer lease og brokeradresse sammen med OPEN. XFMD frigjør
+forrige lease først etter vellykket dokumentbytte, og aktiv lease ved lukking.
+Feilet release beholder ressursene i tjenesten; ingen tidsbasert sletting.

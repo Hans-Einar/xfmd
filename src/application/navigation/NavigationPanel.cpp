@@ -38,6 +38,8 @@ NavigationPanel::NavigationPanel(FX::FXComposite* parent, FX::FXApp& app)
   documents.opened = [this] {
     navigation.commitVisit();
     preview->refresh();
+    if (changed)
+      changed();
   };
   preview->modelReady = [this](auto model) {
     if (pendingFragment.empty())
