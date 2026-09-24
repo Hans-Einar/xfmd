@@ -135,6 +135,7 @@ long SidebarWidget::onOpen(FXObject*, FXSelector selector, void* data) {
     auto target = std::filesystem::canonical(getItemPathname(item).text(), ec);
     if (!ec && WorkPathHistory::contains(root, target)) {
       pendingOpen = target.string();
+      pendingSystemDefault = pointerSystemDefault;
       getApp()->addTimeout(this, ID_ACTIVATE, 0);
     } else if (status)
       status("File unavailable or outside work path.");
@@ -143,15 +144,18 @@ long SidebarWidget::onOpen(FXObject*, FXSelector selector, void* data) {
 }
 long SidebarWidget::onRelease(FXObject* sender, FXSelector sel, void* data) {
   auto* event = static_cast<FXEvent*>(data);
-  pointerClick = !event->moved && !(event->state & (CONTROLMASK | SHIFTMASK | ALTMASK)) &&
+  pointerSystemDefault = bool(event->state & CONTROLMASK);
+  pointerClick = !event->moved && !(event->state & (SHIFTMASK | ALTMASK)) &&
                  getItemAt(event->win_x, event->win_y) == getCurrentItem();
   auto result = FXTreeList::onLeftBtnRelease(sender, sel, data);
   pointerClick = false;
+  pointerSystemDefault = false;
   return result;
 }
 long SidebarWidget::onKey(FXObject* sender, FXSelector sel, void* data) {
   auto* event = static_cast<FXEvent*>(data);
   if (activatesTreeItem(*event, isItemFile(getCurrentItem()))) {
+    pointerSystemDefault = false;
     pointerClick = true;
     auto* item = getCurrentItem();
     if (item && isItemDirectory(item)) {
@@ -170,7 +174,7 @@ long SidebarWidget::onActivate(FXObject*, FXSelector, void*) {
   auto path = std::move(pendingOpen);
   pendingOpen.clear();
   if (!path.empty() && open)
-    open(path);
+    open(path, pendingSystemDefault);
   return 1;
 }
 long SidebarWidget::onPoll(FXObject*, FXSelector, void*) {

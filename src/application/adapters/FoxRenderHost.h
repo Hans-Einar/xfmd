@@ -23,7 +23,7 @@ class FoxRenderHost : public FX::FXScrollArea {
   double lastWidth = 0, dpiScale = 4.0 / 3, zoom = 1;
   ViewTransform transform;
   unsigned buttons = 0;
-  bool clickCancelled = false;
+  bool clickCancelled = false, pressedSystemDefault = false;
   Point pressPoint;
   std::optional<FrameKey> pressedFrame;
   std::string pressedLink, clipboardText;
@@ -36,7 +36,8 @@ protected:
 
 public:
   std::function<void(double)> resized, viewportChanged;
-  std::function<void(const std::string&)> linkActivated, linkHovered;
+  std::function<void(const std::string&, bool)> linkActivated;
+  std::function<void(const std::string&)> linkHovered;
   ScrollOrigin lastScrollOrigin = ScrollOrigin::UserDrag;
   FoxRenderHost(FX::FXComposite*, IRenderer&, SharedTextMetrics&);
   void setReadingColors(const ReadingColors&);

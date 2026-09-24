@@ -13,8 +13,8 @@
 #include "document/EditController.h"
 #include "export/ExportCoordinator.h"
 #include "index/ReferenceWorker.h"
-#include "navigation/NavigationCoordinator.h"
 #include "navigation/DocumentViews.h"
+#include "navigation/NavigationCoordinator.h"
 #include "preview/PreviewCoordinator.h"
 #include "scroll/ScrollCoordinator.h"
 #include "ui/IconResources.h"
@@ -62,6 +62,10 @@ public:
   void execute(CommandRouter::Command);
   bool startPath(const std::string& path);
   bool open(const std::string& path);
+  bool openTarget(const std::string& path, bool systemDefault = false);
+  bool openDialogPath(const std::string& path);
+  void followLink(const std::string& document, const std::string& target,
+                  bool systemDefault = false);
   bool startExport(const std::string& path);
 
 private:
@@ -73,9 +77,8 @@ private:
   void wireIndex();
   void pollReferences();
   void pollBrowser();
-  void openTreePath(const std::string&);
   void pollDesktopFiles();
-  void openBrowser(const std::string&);
+  void openBrowser(const std::string&, bool systemDefault = false);
   void activateIndex(const IndexAction&);
   std::optional<IndexAction> pendingHeading;
   void chooseExport();

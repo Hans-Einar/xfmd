@@ -1,4 +1,5 @@
 #include "Application.h"
+#include "ui/OpenPathDialog.h"
 #include "ui/PreferencesDialog.h"
 #include <filesystem>
 using namespace FX;
@@ -56,10 +57,9 @@ void Application::execute(CommandRouter::Command command) {
     break;
   }
   case CommandRouter::Open: {
-    auto path = FXFileDialog::getOpenFilename(window, "Open document", session.view().path.c_str(),
-                                              "Markdown and text (*.md,*.txt)");
-    if (!path.empty())
-      open(path.text());
+    OpenPathDialog dialog(window, window->workspacePanel->history.root().string());
+    if (dialog.execute(PLACEMENT_OWNER))
+      openDialogPath(dialog.selectedPath().text());
     break;
   }
   case CommandRouter::Save:

@@ -10,94 +10,110 @@ requirements: UR-032, UR-030, UR-031, UR-025, UR-027, UR-024, UR-015, UR-017, SR
 uses: none
 ---
 
-# Functionality-014: Versjonerte applikasjonspreferanser
+# Functionality-014: Versioned application preferences
 
-## 1. Hensikt og avgrensning
+## 1. Purpose and scope
 
-Eie preferanseskjema, aktiv profil, utkast, validering og lagring. Edit-menyen og FOX-dialogen er konsumenter; dokumenttekst og undo tilhører fortsatt FUNC-001/011.
+Own the preference schema, active profile, drafts, validation and persistence.
+The Edit menu and FOX dialog consume this service; document text and undo remain
+owned by FUNC-001/011.
 
-## 2. Krav og akseptanse
+## 2. Requirements and acceptance
 
-UR-015, UR-017, SR-002, SR-018. Definisjoner: [krav](../../../xfmd_requirements.md).
-Akseptanse: AT-012, AT-029, AT-031, AT-038.
+UR-032, UR-030, UR-031, UR-025, UR-027, UR-024, UR-015, UR-017 and SR-002, SR-018; see the
+[requirements](../../../xfmd_requirements.md). AT-012, AT-029, AT-031, AT-038 cover the original
+service. P16 adds browserProgram and AT-044: absent keys default to xdg-open;
+a value names one executable, without an argument string. Empty/control-byte values
+are rejected; launch errors do not change the document.
 
-P16: UR-024 / AT-044 utvider samme tjeneste med `browserProgram`. Manglende
-nøkkel får xdg-open. Én executable, ingen argumentstreng; tomme verdier og verdier med kontrolltegn avvises. Programfeil ved oppstart vises uten å endre dokumentet.
+## 3. Contracts and ownership
 
-## 3. Kontrakter og eierskap
+PreferencesService::begin/validate/commit/cancel uses PreferencesDraft and immutable
+PreferencesSnapshot, including version, scroll, marginMm and browserProgram.
+PreferencesDialog owns widgets and an isolated sample field. FoxPreferencesStore
+loads/saves through XFMD's existing FXRegistry groups Scroll/Page/Programs while
+preserving WorkPaths. FOX and file-format details stay in application.
 
-`PreferencesService::begin/validate/commit/cancel` bruker `PreferencesDraft` og immutable `PreferencesSnapshot{version, scroll, marginMm, browserProgram}`. `PreferencesDialog` eier widgets og et isolert prøvefelt. `FoxPreferencesStore::load/save` bruker xfmds eksisterende FXRegistry med egne grupper `Scroll`/`Page`/`Programs`; `WorkPaths` bevares. FOX-/filformatdetaljer forblir i application.
+Commit validates, saves, then publishes a new snapshot to live consumers. Callbacks
+carry the preference revision; consumers reset old movement state. One service
+exists per Application. Unknown future keys are preserved; an unsupported newer
+schema is not overwritten.
 
-Commit validerer først, lagrer gjennom store og publiserer nytt snapshot til levende scrollkonsumenter etter suksess. Callback sender preferanserevisjon; hver konsument nullstiller gammel bevegelsestilstand. Det finnes én service per Application. Framtidige ukjente nøkler bevares; nyere uforstått schema skrives ikke over.
+## 4. Behavior, state and failures
 
-## 4. Atferd, tilstand og feil
+OK commits; Cancel/window close discards the draft. The sample field uses the same
+scroll engine with independent state and does not affect editor/preview. Reject
+invalid, nonfinite and out-of-range values; missing files use defaults. A write
+failure keeps the dialog open and old profile intact. P9's original plan required
+checking FXRegistry write/atomicity behavior and staged publication if needed,
+without introducing a competing preference system.
 
-OK er commit; Cancel eller vinduskryss forkaster draft. Prøvefeltet bruker samme scrollmotor med eget state og påvirker ikke editor/preview. Ugyldige, ikke-endelige og out-of-range tall avvises; manglende fil får standarder. Skrivefeil holder dialogen åpen og den gamle aktive profilen intakt. P9 verifiserer FXRegistrys skrivefeil-/atomisitetskontrakt; om den ikke holder, implementeres eksplisitt staged publisering i store-adapteren uten nytt konkurrerende preferences-system.
+P053 browser routing: ordinary HTTP(S) and local HTML use the configured executable;
+Ctrl uses xdg-open. Local paths are canonicalized and encoded as absolute file URLs.
+ExternalBrowser passes a single target argv without a shell, limits outstanding
+children to 16, and reports startup or asynchronous nonzero/signal failure through
+Application. Handoff leaves document/root/history unchanged.
 
 ## 5. Plumbing
 
-| Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
+| Step | Event / caller | Called symbol | Source or contract file | Data / result | Failure / side effect | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `PreferencesDialog constructor` | `PreferencesService::begin` | `src/application/preferences/PreferencesService.h` | aktiv profil → draft | ingen bufferendring | Implemented |
-| 2 | `PreferencesDialog OK` | `PreferencesService::commit` | `src/application/preferences/PreferencesService.cpp` | validerte verdier → snapshot | feil beholder draft | Implemented |
-| 3 | `PreferencesService::commit` | `FoxPreferencesStore::save` | `src/application/adapters/FoxPreferencesStore.cpp` | schema → vedvarende profil | publiser først etter suksess | Implemented |
-| 5 | `PreferencesDialog appearance preview` | `UiContext::setAppearance` | `src/application/ui/style/UiContext.cpp` | draft → levende UI | Cancel/close/lagringsfeil gjenoppretter aktivt utseende | Implemented |
-| 6 | `PreferencesDialog reload style` | `UiContext::reload` | `src/application/ui/style/UiContext.cpp` | validert appearance.ini | gammel profil beholdes ved feil | Implemented |
-| 4 | `Application::openBrowser` | `ExternalBrowser::open` | `src/application/adapters/ExternalBrowser.cpp` | Aktiv browserProgram + URL → prosess | Feil vises; ingen shell | Implemented |
-| 20 | `PreviewColorControls changed callback` | `Application::changeReadingColors` | `src/application/ApplicationAppearance.cpp` | Lesefarger → repaint/profil | Ingen dokumentmutasjon | Implemented |
-| 21 | `Application::applyAppearance` | `PreviewColorControls::sync` | `src/application/ui/controls/PreviewColorControls.cpp` | Lesefarger → repaint/profil | Ingen dokumentmutasjon | Implemented |
-| 22 | `Application::changeReadingColors` | `PreferencesService::commit` | `src/application/preferences/PreferencesService.cpp` | Release/tastatur/reset → aktiv Light- eller Dark-profil | Skrivefeil gjenoppretter lagret palett og sliders | Implemented |
+| 1 | `PreferencesDialog constructor` | `PreferencesService::begin` | `src/application/preferences/PreferencesService.h` | Active profile → draft | No buffer change | Implemented |
+| 2 | `PreferencesDialog OK` | `PreferencesService::commit` | `src/application/preferences/PreferencesService.cpp` | Validated values → snapshot | Failure retains draft | Implemented |
+| 3 | `PreferencesService::commit` | `FoxPreferencesStore::save` | `src/application/adapters/FoxPreferencesStore.cpp` | Schema → stored profile | Publish only after success | Implemented |
+| 4 | `Application::openBrowser` | `ExternalBrowser::open` | `src/application/adapters/ExternalBrowser.cpp` | URL/program → process | Report errors; no shell | Implemented |
+| 5 | `PreferencesDialog appearance preview` | `UiContext::setAppearance` | `src/application/ui/style/UiContext.cpp` | Draft → live UI | Cancel/close/failure restores active appearance | Implemented |
+| 6 | `PreferencesDialog reload style` | `UiContext::reload` | `src/application/ui/style/UiContext.cpp` | Validated appearance.ini → profile | Retain old profile on error | Implemented |
+| 7 | `PreviewColorControls changed callback` | `Application::changeReadingColors` | `src/application/ApplicationAppearance.cpp` | Colors → repaint/profile | No document mutation | Implemented |
+| 8 | `Application::applyAppearance` | `PreviewColorControls::sync` | `src/application/ui/controls/PreviewColorControls.cpp` | Reading colors → controls | No document mutation | Implemented |
+| 9 | `Application::changeReadingColors` | `PreferencesService::commit` | `src/application/preferences/PreferencesService.cpp` | Release/key/reset → Light/Dark profile | Write failure restores palette/sliders | Implemented |
+| 10 | `Application::openTarget` | `ExternalBrowser::openFile` | `src/application/adapters/ExternalBrowser.cpp` | Existing local HTML → encoded file URL | Reject nonregular target; argv launch | Implemented |
+| 11 | `Application::pollBrowser` | `ExternalBrowser::poll` | `src/application/adapters/ExternalBrowser.cpp` | Child status → completion/error callback | Erase completed children before reporting failure | Implemented |
 
-## 6. Gjenbruk og avhengigheter
+## 6. Reuse and dependencies
 
-Konsumenter: FTR-006, FUNC-015 og FUNC-010; papirdefaults deles med FTR-007. Eksisterende WorkPathHistory beholdes med sitt ansvar; ingen setting legges i DocumentSession.
+Consumers: FTR-006, FUNC-015 and FUNC-010; paper defaults are shared with FTR-007.
+WorkPathHistory retains its existing responsibility. No preferences are stored in
+DocumentSession. FTR-003 consumes the browser choice via Application.
 
-## 7. Verifikasjon
+## 7. Verification
 
-Unit: schema, grenser, schema-migrering, feil og cancel. Diskadaptertest: lagre/les med ukjente nøkler og bevart WorkPaths. FOX-test: Edit → Preferences, prøvefelt, OK/Cancel og restart.
+Original unit coverage: schema, bounds, migration, errors and cancel. Store coverage:
+round-trip with unknown keys and WorkPaths retained. FOX coverage: Edit → Preferences,
+sample field, OK/Cancel and restart. AT-012, AT-029, AT-031, AT-038: [P10](../../../docs/evidence/P10.md);
+A4 integration continued in P11. P16's AT-044 uses PreferencesTest,
+ExternalBrowserTest and BrowserPreferencesTest.
 
-AT-012, AT-029, AT-031, AT-038: se [P10-bevis](../../../docs/evidence/P10.md); A4-integrasjonen fullføres i P11.
+P053 adds local HTML, configured/OS distinction and asynchronous errors to native
+routing checks. Evidence: [P053 opening evidence](../../../sprints/Sprint-007--Workspace-UI/evidence/P053.md).
 
-## 8. Status, risiko og endringskonsekvenser
+## 8. Status, risks and change impact
 
-Revisjon 1.1, 2026-09-13. Kallene i kapittel 5 er implementert i P10-M2.
-P9 avklarer lagringsadapter; implementeres i P10. Papirprofil bygges på samme service i P11.
-[Integrasjonsdesign](../../../softwareDesign.md) og [faseplan](../../../implementationPlan.md) gir kontekst.
+Revision 1.1 was recorded 2026-09-13; original plumbing was implemented in P10-M2.
+P9 scoped the store and P11 built the paper profile on this service. See
+[integration design](../../../softwareDesign.md) and [implementation plan](../../../implementationPlan.md).
+P053 revises external opening without changing preference storage.
 
-P16: AT-044 dekkes av PreferencesTest, ExternalBrowserTest og BrowserPreferencesTest.
+P17–P19 extended UR-025, UR-027 and AT-045, AT-046, AT-047 through application/ui/style and controls
+while preserving documents, workflows and FOX input. P17 stored theme/compact/buttons/
+fontSize additively in schema 1. ThemeProfiles validates bounded appearance.ini
+overrides; invalid reload retains the old profile. PreferencesTest, ThemeProfilesTest
+and UiControlsTest covered the foundation; toolbar/dialog integration followed.
 
-P17–P19: UR-025, UR-027 utvider dette ansvaret; se [faseplan](../../../implementationPlan.md).
-Nye UI-klasser er planlagt under application/ui/style og controls. Stilendring
-beholder dokument, arbeidsflyter og FOX-input. AT-045, AT-046, AT-047 får egne testbevis.
+P19: Appearance/Scrolling/Document/Programs share one draft. UiForm and DialogActions
+standardize spacing and actions. UiContext previews appearance; OK persists,
+Cancel/close/write failure restores the active profile. Errors preserve the draft
+for retry. AppearancePreferencesTest covers preview/commit/cancel/close/write failure
+and toolbar changes preserving other choices.
+P17–P19 evidence: [tests/screenshots](../../../docs/evidence/P17-P19.md),
+[UI classes](../../../docs/design/fox-ui-layer.md). Status remains Implemented;
+physical user experience and other DPI were not automatically verified.
 
-P17: Appearance lagres additivt i skjema 1 med theme, compact, buttons og fontSize.
-ThemeProfiles laster validerte, begrensede overrides fra appearance.ini; ugyldig
-reload beholder gammel profil. PreferencesTest, ThemeProfilesTest og UiControlsTest
-dekker første foundation; toolbar/Preferences-integrasjon følger i P18/P19.
+P21: UR-030, UR-031 and AT-050, AT-051 add reading preferences through existing service,
+UiRow and UiContext. Only the FOX screen host supplies colors to DisplayListPainter;
+PDF defaults remain unchanged. DecorationRole survives PageComposer without FOX
+contract types. ReadingLight/ReadingDark store additive profiles. Live changes
+repaint; release commits with rollback on write error. Evidence: [P21](../../../docs/evidence/P21.md).
 
-P19: Preferences har Appearance, Scrolling, Document og Programs med ett draft.
-UiForm og DialogActions standardiserer spacing og OK/Cancel. Appearance forhåndsvises
-gjennom UiContext; OK lagrer, mens Cancel, vinduskryss og lagringsfeil gjenoppretter
-aktiv Appearance. Feil beholder utkastet for nytt forsøk. AppearancePreferencesTest
-dekker preview, commit, cancel, close, lagringsfeil og toolbar som bevarer øvrige valg.
-
-
-P17–P19 er implementert og kontrollert mot AT-045–047. Se
-[testbevis og produksjonsskjermbilder](../../../docs/evidence/P17-P19.md) og
-[konkrete UI-klasser](../../../docs/design/fox-ui-layer.md). Blueprint-status
-beholdes som Implemented; fysisk brukeropplevelse/andre DPI er ikke automatisert verifisert.
-
-P21 utvider samme eier med UR-030/031, AT-050, AT-051. ReadingColors er rene
-lesepreferanser; PreviewColorControls bruker UiRow/UiContext. Bare FOX-host gir
-DisplayListPainter en skjermpalett; PDF beholder standardfargene. DecorationRole
-bevarer semantisk rolle gjennom PageComposer, uten FOX-typer i renderer/kontrakter.
-Profiler lagres additivt i ReadingLight/ReadingDark via eksisterende preferences-service.
-Live endring er repaint; commit ved release, med rollback ved skrivefeil.
-
-P21: [AT-050/051, regresjoner og skjermbilder](../../../docs/evidence/P21.md).
-
-P22: felles kompakt topplinje; UR-032/033/034 beskriver endret scope.
-
-P22 verifikasjon: AT-052, CompactWorkspaceTest og eksisterende regresjoner.
-
-P22: [testbevis og visuell kontroll](../../../docs/evidence/P22.md).
+P22: compact shared toolbar, UR-032, UR-033, UR-034; AT-052, CompactWorkspaceTest and existing
+regressions. Evidence: [P22](../../../docs/evidence/P22.md).

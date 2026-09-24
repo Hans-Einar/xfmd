@@ -2,7 +2,8 @@
 
 Current delivery context, reconciled 2026-09-24: main c245fd9 includes P0–P41
 and Sprints 001–002. This branch additionally includes Sprint 004 through 47a245a;
-see the [sprint register](sprints/README.md). The original P0–P15 file map below
+P053 adds the opening policy described below; see the [sprint register](sprints/README.md).
+The original P0–P15 file map below
 is retained as the baseline description; subsequent sections document extensions.
 Consult the latest relevant section rather than treating the old revision number
 as the current product scope. Implemented does not mean fully Verified.
@@ -340,12 +341,13 @@ dokumentmodell og PDF-tegning er uendret.
 
 ## P20: ekstern filaktivering og panegeometri
 
-ApplicationTree.cpp ruter Files-treets eksplisitte aktivering via InputPolicy:
-.md/.txt til eksisterende dokumentåpning, øvrige regulære filer til
-DesktopFileOpener. Adapteren eier begrensede, ikke-blokkerende xdg-open-jobber,
-argv og exitstatus; Application eier feilmelding og polling via FoxScheduler.
-HTTP(S)-åpning beholder ExternalBrowser og eget programvalg. Renderer og parser
-får ingen ny avhengighet. Ingen ekstern åpning fra automatisk trebygging.
+Historical P20 used ApplicationTree.cpp for Files-tree activation: `.md`/`.txt`
+went to the document transaction and other regular files to DesktopFileOpener.
+P053 replaces that file and suffix-only classification with ApplicationOpening.cpp
+and FileOpenPolicy (current scope below). DesktopFileOpener owns bounded,
+nonblocking xdg-open jobs, argv and exit status; Application owns error reporting
+and FoxScheduler polling. HTTP(S) retains ExternalBrowser and its program preference.
+Renderer/interpreter gain no dependencies. Scanning never opens targets externally.
 
 TreeActivation.h deler tastaturpolicy mellom SidebarWidget og NavigationTree;
 klasse-spesifikk leaf-vurdering bevarer mapper og lazy grener. ViewModeController
@@ -393,7 +395,9 @@ P23-filansvar: `MathSyntax` gjenkjenner matematikk uten I/O og bevarer kildeoffs
 `VisualResource` og `EmbeddedContent` er rene kontrakter. `CairoVisual` eier native
 ressurslevetid; `ImageDecoder` + `GifBudget` begrenser dekoding, `MathTypesetter`
 eier MicroTeX-integrasjonen. `LinkResolver::resourcePath` gjenbruker den lokale
-URI-policyen; `localPath` beholder .md/.txt-valideringen for dokumentnavigasjon.
+URI policy. Historically, `localPath` retained `.md`/`.txt` admission; P053 moves
+content classification to FileOpenPolicy and removes suffix rejection from InputPolicy.
+The local URI/percent-decoding restrictions remain in LinkResolver.
 `RenderFrame.maxRunHeight` avgrenser synlighets-/hit-test-søk også for høye bilder.
 
 ## P24: nylig brukte filer
@@ -527,3 +531,14 @@ for actual calls, wire fields, limits and [P050 evidence](sprints/Sprint-004--SD
 
 SDUI/Fyne is a separate interactive UI host. The historical FOX BoxUI branch is
 not integrated here and is not a prerequisite for this document-navigation path.
+
+
+## Sprint 007 — opening policy
+
+ApplicationOpening.cpp owns user-target dispatch and dialog-origin work-root
+coordination. io/FileOpenPolicy.cpp classifies local content using LocalFileStore
+and InputPolicy; it has no FOX dependency. ui/OpenPathDialog.cpp adapts FOX's
+mixed file/folder selection and current-folder selection, without document I/O.
+Existing browser/desktop adapters own argv launch and child-status reporting.
+Captured Ctrl state crosses native input/deferred-dispatch boundaries as a bool;
+renderer/interpreter contracts are unchanged. All are application-owned files.

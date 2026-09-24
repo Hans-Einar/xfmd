@@ -1,8 +1,8 @@
 #include "Application.h"
-#include "build/BuildVersion.h"
 #include "adapters/FoxWheelScrollBar.h"
-#include "interpreter/CmarkInterpreter.h"
+#include "build/BuildVersion.h"
 #include "composition/DiagramServices.h"
+#include "interpreter/CmarkInterpreter.h"
 #include "renderer/MarkdownRenderer.h"
 #include <filesystem>
 using namespace FX;
@@ -111,18 +111,15 @@ void Application::initialize(int& argc, char** argv) {
   back = [this] { navigation->goBack(); };
   forward = [this] { navigation->goForward(); };
   canNavigate = [this](bool back) { return navigation->history.propose(back).has_value(); };
-  host->linkActivated = [this](const std::string& target) {
-    if (documentViews && target.rfind("sdl-view:",0)==0)
-      documentViews->follow(target);
-    else if (ExternalBrowser::accepts(target))
-      openBrowser(target);
-    else
-      navigation->followLink(target);
+  host->linkActivated = [this](const std::string& target, bool systemDefault) {
+    followLink(session.view().path, target, systemDefault);
   };
+  browser.failed = [this](const std::string& error) { documents.error(error); };
   host->linkHovered = [this](const std::string& target) { showLinkTarget(target); };
   wireIndex();
   documentOpened = [this] {
-    if(documentViews)documentViews->documentChanged("main");
+    if (documentViews)
+      documentViews->documentChanged("main");
     references->cancel();
     pendingHeading.reset();
     navigation->commitVisit();
@@ -210,8 +207,10 @@ void Application::wireDocument() {
       documents.error(e.what());
     }
   };
-  window->workspacePanel->recentFiles->open = [this](const std::string& path) { open(path); };
-  window->sidebar->open = [this](const std::string& path) { openTreePath(path); };
+  window->workspacePanel->recentFiles->open = [this](const std::string& path) { openTarget(path); };
+  window->sidebar->open = [this](const std::string& path, bool systemDefault) {
+    openTarget(path, systemDefault);
+  };
 }
 bool Application::open(const std::string& path) {
   return navigation ? navigation->openTarget(path) : documents.requestOpen(path);

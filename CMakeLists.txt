@@ -46,7 +46,7 @@ add_library(xfmd_renderer
   src/renderer/InlineLayout.cpp src/renderer/HitTester.cpp src/renderer/LinkMarker.cpp)
 target_link_libraries(xfmd_renderer PUBLIC xfmd_contracts PRIVATE xfmd_rust)
 add_library(xfmd_document
-  src/application/io/InputPolicy.cpp src/application/io/LocalFileStore.cpp
+  src/application/io/InputPolicy.cpp src/application/io/FileOpenPolicy.cpp src/application/io/LocalFileStore.cpp
   src/application/document/DocumentSession.cpp src/application/document/DocumentCoordinator.cpp
   src/application/document/TextProjection.cpp src/application/document/EditController.cpp)
 target_link_libraries(xfmd_document PUBLIC xfmd_contracts)
@@ -92,7 +92,7 @@ add_library(xfmd_application
   src/application/preferences/PreferencesService.cpp
   src/application/adapters/ExternalBrowser.cpp
   src/application/adapters/FoxPreferencesStore.cpp src/application/ui/PreferencesDialog.cpp src/application/ui/PreferencesPages.cpp
-  src/application/ApplicationTree.cpp src/application/adapters/DesktopFileOpener.cpp
+  src/application/ApplicationOpening.cpp src/application/ui/OpenPathDialog.cpp src/application/adapters/DesktopFileOpener.cpp
   src/application/ApplicationAppearance.cpp src/application/ui/XfmdToolbar.cpp
   src/application/ApplicationIndex.cpp src/application/Application.cpp src/application/ApplicationCommands.cpp src/application/ApplicationExport.cpp
   src/application/commands/CommandRouter.cpp src/application/ui/XfmdWindow.cpp src/application/ui/IconResources.cpp

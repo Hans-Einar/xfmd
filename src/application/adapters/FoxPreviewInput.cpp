@@ -47,6 +47,7 @@ long FoxRenderHost::onButtonPress(FXObject*, FXSelector sel, void* data) {
                                                            : 4u;
   handle(this, FXSEL(SEL_FOCUS_SELF, 0), data);
   if (!buttons) {
+    pressedSystemDefault = bool(event->state & CONTROLMASK);
     pressedFrame.reset();
     pressedLink.clear();
     clickCancelled = bit != 1 || (event->state & (MIDDLEBUTTONMASK | RIGHTBUTTONMASK));
@@ -93,7 +94,7 @@ long FoxRenderHost::onPointer(FXObject*, FXSelector sel, void* data) {
     if (!hit.link.empty() && hit.link == pressedLink && linkActivated) {
       pressedFrame.reset();
       pressedLink.clear();
-      linkActivated(hit.link);
+      linkActivated(hit.link, pressedSystemDefault);
     }
   }
   if (!buttons) {

@@ -52,7 +52,7 @@ xfw integration remain Future; XFMD's SDL endpoint does not deliver those requir
 
 | Krav | Designobjekter | Akseptanse | Scope |
 | --- | --- | --- | --- |
-| UR-001 | [FTR-001](feature/Feature-001--Markdown-Presentation.md), [FTR-003](feature/Feature-003--Document-Navigation.md), [FUNC-001](functionality/Functionality-001--Document-Session.md), [FUNC-002](functionality/Functionality-002--Local-File-Storage.md), [FUNC-008](functionality/Functionality-008--Navigation-History.md), [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | AT-001 | FirstRelease |
+| UR-001 | [FTR-001](feature/Feature-001--Markdown-Presentation.md), [FTR-003](feature/Feature-003--Document-Navigation.md), [FUNC-001](functionality/Functionality-001--Document-Session.md), [FUNC-002](functionality/Functionality-002--Local-File-Storage.md), [FUNC-008](functionality/Functionality-008--Navigation-History.md), [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FTR-005](feature/Feature-005--Work-Path-Navigation.md) | AT-001 | FirstRelease |
 | UR-002 | [FTR-001](feature/Feature-001--Markdown-Presentation.md), [FUNC-003](functionality/Functionality-003--Markdown-Interpretation.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md), [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md) | AT-002 | FirstRelease |
 | UR-003 | [FTR-002](feature/Feature-002--Live-Preview.md), [FUNC-001](functionality/Functionality-001--Document-Session.md), [FUNC-002](functionality/Functionality-002--Local-File-Storage.md), [FUNC-011](functionality/Functionality-011--Text-Editing.md) | AT-003 | FirstRelease |
 | UR-004 | [FTR-002](feature/Feature-002--Live-Preview.md), [FUNC-006](functionality/Functionality-006--Event-Scheduling.md), [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md), [FUNC-011](functionality/Functionality-011--Text-Editing.md) | AT-004 | FirstRelease |
@@ -95,12 +95,12 @@ xfw integration remain Future; XFMD's SDL endpoint does not deliver those requir
 | UR-022 | [FUNC-020](functionality/Functionality-020--Document-Index.md), [FTR-008](feature/Feature-008--Chapter-Navigation.md) | AT-041 | FirstRelease |
 | UR-023 | [FUNC-020](functionality/Functionality-020--Document-Index.md), [FTR-009](feature/Feature-009--Document-References.md) | AT-042 | FirstRelease |
 | SR-020 | [FUNC-020](functionality/Functionality-020--Document-Index.md), [FTR-009](feature/Feature-009--Document-References.md) | AT-043 | FirstRelease |
-| UR-024 | [FUNC-014](functionality/Functionality-014--Application-Preferences.md) | AT-044 | FirstRelease |
+| UR-024 | [FUNC-014](functionality/Functionality-014--Application-Preferences.md), [FTR-003](feature/Feature-003--Document-Navigation.md) | AT-044 | FirstRelease |
 | UR-025 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FUNC-014](functionality/Functionality-014--Application-Preferences.md) | AT-045 | FirstRelease |
 | UR-026 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | AT-046 | FirstRelease |
 | UR-027 | [FUNC-014](functionality/Functionality-014--Application-Preferences.md) | AT-047 | FirstRelease |
 
-| UR-028 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | AT-048 | FirstRelease |
+| UR-028 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md), [FTR-003](feature/Feature-003--Document-Navigation.md), [FUNC-002](functionality/Functionality-002--Local-File-Storage.md), [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md) | AT-048 | FirstRelease |
 | UR-029 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | AT-049 | FirstRelease |
 
 ## P21 kravdekning

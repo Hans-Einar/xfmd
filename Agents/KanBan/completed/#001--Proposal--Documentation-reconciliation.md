@@ -86,7 +86,7 @@ plan; the note does not promise immediate fixes to every document.
 
 ## Related notes
 
-[BoxUI disposition](../completed/%23002--Study--BoxUI-branch-disposition.md) changes the priority
+[BoxUI disposition](%23002--Study--BoxUI-branch-disposition.md) changes the priority
 and meaning of the BoxUI findings. [Widget ownership](../backlog/%23003--Question--SDUI-widget-ownership.md)
 keeps the remaining SDUI design question separate from XFMD documentation repair.
 
@@ -145,7 +145,7 @@ Board chains, placement and current links are checked after the completion move.
 No application build, new GUI result, commit, push, merge or installation is claimed.
 
 The original audit remains above as dated input. Remaining test work is
-[KB-XFMD-005](../completed/%23005--Study--SDL-acceptance-evidence.md); BoxUI/SDUI choices
+[KB-XFMD-005](%23005--Study--SDL-acceptance-evidence.md); BoxUI/SDUI choices
 remain KB-XFMD-002/003. Existing untranslated baseline prose and old evidence were
 not silently rewritten as current English decisions; revised current material is English.
 

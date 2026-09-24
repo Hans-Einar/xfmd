@@ -45,8 +45,8 @@ void run() {
   std::string path = bin.string() + ":" + getenv("PATH");
   setenv("PATH", path.c_str(), 1);
   auto external = root / "-photo $(touch SENTINEL) 'quoted'.png", document = root / "guide.MD";
-  std::ofstream(external) << "fake image";
-  std::ofstream(root / "failure.pdf") << "fake pdf";
+  std::ofstream(external).write("\0image", 6);
+  std::ofstream(root / "failure.pdf").write("\0pdf", 4);
   std::ofstream(document) << "# Guide\n\n## Child\n";
   std::filesystem::create_directory(root / "empty.md");
   int argc = 1;

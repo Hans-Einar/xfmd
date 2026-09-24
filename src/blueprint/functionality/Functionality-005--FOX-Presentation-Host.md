@@ -6,122 +6,121 @@ role: Adapter
 owner: application
 status: Implemented
 scope: FirstRelease
-requirements: UR-040, UR-041, UR-035, UR-034, UR-030, UR-031, UR-011, UR-002, UR-005, UR-008, SR-001, SR-008, SR-009, SR-010, SR-013, UR-017, SR-016, SR-019
+requirements: UR-040, UR-041, UR-035, UR-034, UR-030, UR-031, UR-011, UR-002, UR-005, UR-008, UR-028, SR-001, SR-008, SR-009, SR-010, SR-013, UR-017, SR-016, SR-019
 uses: FUNC-021, FUNC-004, FUNC-015, FUNC-016
 ---
 
-# Functionality-005: FOX-host for presentasjon
+# Functionality-005: FOX presentation host
 
-## 1. Hensikt og avgrensning
+## 1. Purpose and scope
 
-Koble en uavhengig renderer til FOX-vinduet. Eie FOX-ressurser, viewport, fontmåling, paint og inputoversettelse. Ingen Markdown-semantikk, fil-I/O eller historikk her.
+Connect an independent renderer to the FOX window. Own FOX resources, viewport,
+font measurement, painting and input translation. No Markdown semantics, file I/O
+or history belong here.
 
-## 2. Krav og akseptanse
+## 2. Requirements and acceptance
 
-Krav: UR-011, UR-002, UR-005, UR-008, SR-001, SR-008, SR-009, SR-010, SR-013. Definisjoner og normativ akseptanse finnes i
-[kravspesifikasjonen](../../../xfmd_requirements.md). Kapittel 7 konkretiserer beviset.
+UR-040, UR-041, UR-035, UR-034, UR-030, UR-031, UR-011, UR-002, UR-005, UR-008, UR-017, UR-028 and SR-001, SR-008, SR-009, SR-010, SR-013, SR-016, SR-019;
+see the [requirements](../../../xfmd_requirements.md). Chapter 7 identifies evidence.
 
-## 3. Kontrakter og eierskap
+## 3. Contracts and ownership
 
-FoxRenderHost er FXScrollArea-adapter. present/expect/invalidate styrer frame/interaktivitet. SharedTextMetrics former tekst; DisplayListPainter tegner samme glyphdata gjennom FontCatalog. Host kjenner bare IRenderer for hitTest.
+FoxRenderHost is an FXScrollArea adapter. present/expect/invalidate control the
+frame and interactivity. SharedTextMetrics shapes text; DisplayListPainter draws
+the same glyph data through FontCatalog. The host uses IRenderer only for hit-testing.
 
-**Implementert utvidelse 1.1 (P11):** Behold FOX-host, input-enable og viewportvarsler. Wheelpolicy flyttes til FUNC-015, fontmåling/glyphtegning til FUNC-016. Host eier ViewTransform for points/zoom/DPI og page gaps. present må erstatte frame.width==viewport_w med profilbasert validering.
+P11 retains the FOX host, enabled input and viewport notifications. Wheel policy
+belongs to FUNC-015; font measurement/glyph drawing belongs to FUNC-016. ViewTransform
+owns points/zoom/DPI and page gaps. Frame acceptance uses layout-profile validation
+instead of the original frame-width/viewport-width equality.
 
-## 4. Atferd, tilstand og feil
+P053: linkActivated carries `(target, systemDefault)`. Main and navigator consumers
+receive Ctrl captured on press. linkHovered remains a target-only callback; neither
+callback introduces renderer or interpreter dependencies on FOX input.
 
-Bare riktig dokumenttoken og viewportbredde aksepteres. Nytt dokument fjerner gammel frame. Pending endring gjør preview ikke-interaktiv. Paint clippes og søker synlige runs; CJK/andre glyphs kan bruke installert fallback-font. Ingen Markdown-regler i host.
+## 4. Behavior, state and failures
 
-FoxRenderHost må være enabled for native muse- og tastaturhendelser. Host
-tegner Unicode-markøren ↗ gjennom den vanlige Pango/Cairo-tekstveien; renderer
-bestemmer lenkemarkørens type og plassering.
+Accept only the matching document token and layout width/profile. A new document
+removes the old frame; pending edits disable interaction. Painting clips and visits
+visible runs; installed fonts may provide fallback glyphs. The host has no Markdown
+rules and must be enabled for native mouse and keyboard events. It draws the Unicode
+link marker ↗ through Pango/Cairo; the renderer chooses marker type and placement.
 
-FoxWheelScrollBar er delt FOX-adapter for begge scrollakser. Den bevarer
-fraksjoner mellom små wheel-events og eier en retargetbar timer og
-changed/command-varsler. Konstruktørene bytter barene før create(); widgets eier dem.
+FoxWheelScrollBar is shared by both axes. It retains fractional deltas, owns a
+retargetable timer and emits changed/command notifications. Constructors replace
+bars before create(); parent widgets own the adapters.
 
-Preview eier balanserte press/release og frigjør egen grab før enhver callback.
-Bare venstreklikk på samme mål uten drag/chord aktiverer lenken; andre knapper
-ignoreres i dokumentflaten, men beholder fokus. Stale frame kansellerer klikket.
+Balance press/release and release the host's grab before calling consumers. Only
+a left-click on the same target without dragging or a button chord activates.
+Other buttons retain focus but do not activate links. A stale frame cancels activation.
+Captured Ctrl changes the consumer route; it does not cause another activation.
 
 ## 5. Plumbing
 
-Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiserer tidligere baseline. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
-
-| Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
+| Step | Event / caller | Called symbol | Source or contract file | Data / result | Failure / side effect | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `PreviewCoordinator present callback` | `FoxRenderHost::present` | `src/application/adapters/FoxRenderHost.cpp` | Frame → aktiv visning | Feil token/bredde avvises | Implemented |
-| 2 | `FOX paint` | `FoxRenderHost::onPaint` | `src/application/adapters/FoxRenderHost.cpp` | Display list → native drawing | Clip og ingen parserkall | Implemented |
-| 3 | `InlineLayout::layout` | `SharedTextMetrics::measure` | `src/application/adapters/SharedTextMetrics.cpp` | Text/font → mål | Fallback per segment | Implemented |
-| 4 | `DisplayListPainter::text` | `FontCatalog::font` | `src/application/adapters/FontCatalog.cpp` | Fontidentitet → native font | Endret font avvises | Implemented |
-| 5 | `FOX pointer` | `FoxRenderHost::onPointer` | `src/application/adapters/FoxPreviewInput.cpp` | Punkt → IRenderer::hitTest | Kun aktiv frame sender link callback | Implemented |
-| 6 | `ScrollCoordinator setPreview callback` | `FoxRenderHost::setViewport` | `src/application/adapters/FoxRenderHost.cpp` | Y → clamped viewport | Programmatisk echo undertrykkes | Implemented |
-| 7 | `FoxRenderHost constructor` | `FoxWheelScrollBar::replace` | `src/application/adapters/FoxWheelScrollBar.cpp` | Standard bar → presis wheel-adapter | Parent eier ny bar; før create | Implemented |
-| 8 | `FOX wheel dispatch` | `FoxWheelScrollBar::onMouseWheel` | `src/application/adapters/FoxWheelScrollBar.cpp` | Delta/rest → target og FOX-timer | Clamp, behold delpiksel-rest, standard varsler | Implemented |
-| 9 | `FoxRenderHost::present` | `ViewTransform::configure` | `src/application/adapters/ViewTransform.cpp` | PageLayout + viewport → transform | zoom er ikke reflow | Implemented |
-| 10 | `FoxRenderHost paint` | `DisplayListPainter::paint` | `src/application/adapters/DisplayListPainter.cpp` | frame + target → pixels | felles glyphgrunnlag | Implemented |
+| 1 | `PreviewCoordinator present callback` | `FoxRenderHost::present` | `src/application/adapters/FoxRenderHost.cpp` | Frame → presentation | Reject wrong token/layout width | Implemented |
+| 2 | `FOX paint` | `FoxRenderHost::onPaint` | `src/application/adapters/FoxRenderHost.cpp` | Display list → native drawing | Clip; no parser calls | Implemented |
+| 3 | `InlineLayout::layout` | `SharedTextMetrics::measure` | `src/application/adapters/SharedTextMetrics.cpp` | Text/font → measurements | Fallback per segment | Implemented |
+| 4 | `DisplayListPainter::text` | `FontCatalog::font` | `src/application/adapters/FontCatalog.cpp` | Font identity → native font | Reject changed font identity | Implemented |
+| 5 | `FOX pointer` | `FoxRenderHost::onPointer` | `src/application/adapters/FoxPreviewInput.cpp` | Point → hit-test/callback | Current frame only; captured Ctrl passed once | Implemented |
+| 6 | `ScrollCoordinator setPreview callback` | `FoxRenderHost::setViewport` | `src/application/adapters/FoxRenderHost.cpp` | Y → clamped viewport | Suppress programmatic echo | Implemented |
+| 7 | `FoxRenderHost constructor` | `FoxWheelScrollBar::replace` | `src/application/adapters/FoxWheelScrollBar.cpp` | Standard bar → precise wheel adapter | Parent ownership; before create | Implemented |
+| 8 | `FOX wheel dispatch` | `FoxWheelScrollBar::onMouseWheel` | `src/application/adapters/FoxWheelScrollBar.cpp` | Delta/remainder → target/timer | Clamp; retain fractional remainder | Implemented |
+| 9 | `FoxRenderHost::present` | `ViewTransform::configure` | `src/application/adapters/ViewTransform.cpp` | PageLayout/viewport → transform | Paged zoom is not reflow | Implemented |
+| 10 | `FoxRenderHost paint` | `DisplayListPainter::paint` | `src/application/adapters/DisplayListPainter.cpp` | Frame/target → pixels | Shared glyph basis | Implemented |
+| 11 | `FoxRenderHost::onPaint` | `FoxCairoCanvas::present` | `src/application/adapters/FoxCairoCanvas.cpp` | Cairo buffer → FOX pixmap | Native lifetime; no Cairo Xlib device | Implemented |
+| 12 | `FOX press` | `FoxRenderHost::onButtonPress` | `src/application/adapters/FoxPreviewInput.cpp` | Button/frame/link/Ctrl → click state/grab | Button chord cancels activation | Implemented |
+| 13 | `FOX grab loss` | `FoxRenderHost::onUngrabbed` | `src/application/adapters/FoxPreviewInput.cpp` | Grab loss → clear click | No link callback | Implemented |
+| 14 | `Application::changeReadingColors / applyAppearance` | `FoxRenderHost::setReadingColors` | `src/application/adapters/FoxRenderHost.cpp` | Reading palette → repaint/profile | No document mutation | Implemented |
+| 15 | `FoxRenderHost hover callback` | `Application::showLinkTarget` | `src/application/ApplicationAppearance.cpp` | Link → status text | No activation; invalid paths shown as targets | Implemented |
+| 16 | `DisplayListPainter::paint` | `DiagramPainter::paint` | `src/application/adapters/DiagramPainter.cpp` | Diagram paths/text → pixels | Block errors/stale data follow Mermaid design | Implemented |
 
-| 13 | `FoxRenderHost::onPaint` | `FoxCairoCanvas::present` | `src/application/adapters/FoxCairoCanvas.cpp` | Cairo viewportbuffer → FOX-pixmap | native ressurslevetid; ingen Cairo Xlib-device | Implemented |
+## 6. Reuse and dependencies
 
-| 14 | `FOX press` | `FoxRenderHost::onButtonPress` | `src/application/adapters/FoxPreviewInput.cpp` | Knapp/frame/lenke → klikktilstand og grab | Chord kansellerer aktivering | Implemented |
-| 15 | `FOX grab loss` | `FoxRenderHost::onUngrabbed` | `src/application/adapters/FoxPreviewInput.cpp` | Tap av grab → nullstill klikk | Ingen lenkecallback | Implemented |
-| 20 | `Application::changeReadingColors / applyAppearance` | `FoxRenderHost::setReadingColors` | `src/application/adapters/FoxRenderHost.cpp` | Lesefarger → repaint/profil | Ingen dokumentmutasjon | Implemented |
-| 30 | `FoxRenderHost hover callback` | `Application::showLinkTarget` | `src/application/ApplicationAppearance.cpp` | Lenke → statuslinje | Ingen aktivering; ugyldig sti vises som mål | Implemented |
+[FUNC-004](Functionality-004--Render-Layout.md), FUNC-015, FUNC-016 and FUNC-021.
+Presentation, preview, navigation and synchronization consume this host.
+Application wires callbacks to coordinators; the host knows no feature workflow.
 
+Sprint 004 consumer, reconstructed 2026-09-24: [FUNC-031](Functionality-031--Generated-Document-Navigation.md)
+creates another host for its navigator. Registered SDL actions and ordinary links
+are dispatched by its application callback. P053 extends that callback with Ctrl routing.
 
-P23: FoxPreviewInput eier merking og clipboard-input; PreviewSelection holder logiske tekstposisjoner. Repaint bevarer merking, nytt dokumenttoken nullstiller den.
+## 7. Verification
 
-| 99 | `DisplayListPainter::paint` | `DiagramPainter::paint` | `src/application/adapters/DiagramPainter.cpp` | Implementert diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Implemented |
+AT-025, AT-002, AT-005, AT-008, AT-011, AT-018, AT-019, AT-020, AT-023, plus the P11 extension's AT-031, AT-036, AT-039 and
+P053 AT-048. PresentationTest checks actual font metrics, frame tokens, width and
+stale rejection. The P3 screenshot was visually checked with CJK fallback.
+Evidence: [P3](../../../docs/evidence/P3.md), [native links](../../../docs/evidence/document-links.md),
+[wheel gestures/bounds](../../../docs/evidence/wheel-scrolling.md).
+P7 evaluates aggregate coverage; Implemented is not automatically Verified.
+Older evidence does not automatically verify newer requirements.
 
-## 6. Gjenbruk og avhengigheter
+P053: PointerTest/PreviewSelectionGuiTest retain input/selection regressions and
+FileRoutingGuiTest exercises real Ctrl/ordinary clicks in both hosts. Evidence: [P053 opening evidence](../../../sprints/Sprint-007--Workspace-UI/evidence/P053.md).
 
-[FUNC-004](../functionality/Functionality-004--Render-Layout.md)
+## 8. Status, risks and change impact
 
-Brukes av presentasjon, preview, navigasjon og sync. Application.cpp kobler hendelser til koordinatorer; host kjenner ikke konkrete feature-arbeidsflyter.
+Implemented in P3 with [P11 evidence](../../../docs/evidence/P11.md) for the 1.1
+extension. Keep contracts, calls, consumers and tests together; historical evidence
+retains its original baseline.
 
-Sprint 004 consumer (2026-09-24 reconstruction): FUNC-031 creates a second FoxRenderHost for the navigator. Its link callback dispatches registered SDL actions or ordinary navigator links.
-See [FUNC-031](Functionality-031--Generated-Document-Navigation.md) for the complete call path.
+P21: UR-030, UR-031, AT-050, AT-051. ReadingColors are reading preferences and
+PreviewColorControls uses UiRow/UiContext. Only the screen host supplies a palette
+to DisplayListPainter; PDF retains defaults. DecorationRole survives PageComposer
+without FOX types in renderer/contracts. ReadingLight/ReadingDark profiles persist
+additively through preferences. Live changes repaint, release commits, and save
+failure rolls back. Evidence: [P21](../../../docs/evidence/P21.md).
 
-## 7. Verifikasjon
+P22: compact shared toolbar, revised UR-032, UR-033, UR-034; AT-054, CompactWorkspaceTest
+and regressions. Evidence: [P22](../../../docs/evidence/P22.md).
+Hover/restored status handles `&` literally rather than as a FOX mnemonic.
 
-Relevante akseptanse-ID-er: AT-025, AT-002, AT-005, AT-008, AT-011, AT-018, AT-019, AT-020, AT-023.
+P23: FoxPreviewInput owns selection/clipboard input. PreviewSelection stores logical
+text positions; repaint preserves selection, new document token clears it. AT-055:
+RichPreviewTest and PreviewSelectionGuiTest.
 
-`PresentationTest` kontrollerer ekte fontmål, frame-token, visningsbredde og stale-avvisning. Skjermbildet i P3 er visuelt kontrollert med CJK-fallback.
-
-Evidence: [Fase P3](../../../docs/evidence/P3.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
-
-Ny regresjonskontroll: [Native lenker og markører](../../../docs/evidence/document-links.md).
-
-Regresjonsbevis: [Gesture og scrollgrenser](../../../docs/evidence/wheel-scrolling.md).
-
-Utvidelsen krever AT-031, AT-036, AT-039. Dette er planlagt dekning, ikke nye testbevis.
-
-## 8. Status, risiko og endringskonsekvenser
-
-**Implemented 1.1:** [P11-bevis](../../../docs/evidence/P11.md) beskriver ny kode og kontroller. Historiske bevis nedenfor gjelder baseline, ikke automatisk de nye kravene.
-
-
-Implemented i P3. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
-Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.
-
-P21 utvider samme eier med UR-030/031, AT-050, AT-051. ReadingColors er rene
-lesepreferanser; PreviewColorControls bruker UiRow/UiContext. Bare FOX-host gir
-DisplayListPainter en skjermpalett; PDF beholder standardfargene. DecorationRole
-bevarer semantisk rolle gjennom PageComposer, uten FOX-typer i renderer/kontrakter.
-Profiler lagres additivt i ReadingLight/ReadingDark via eksisterende preferences-service.
-Live endring er repaint; commit ved release, med rollback ved skrivefeil.
-
-P21: [AT-050/051, regresjoner og skjermbilder](../../../docs/evidence/P21.md).
-
-P22: felles kompakt topplinje; UR-032/033/034 beskriver endret scope.
-
-P22 verifikasjon: AT-054, CompactWorkspaceTest og eksisterende regresjoner.
-
-P22: [testbevis og visuell kontroll](../../../docs/evidence/P22.md).
-
-Hover og gjenopprettet statustekst behandler `&` bokstavelig, uten FOX-mnemonic.
-
-P23 akseptanse: AT-055. Tester: RichPreviewTest og PreviewSelectionGuiTest.
-
-P25 (Proposed): Host gjenbruker palett, viewport-transform og PreviewSelection for diagrammets stier/tekst; ingen egen Mermaid-host. Krav: UR-040, UR-041; AT-060, AT-061.
-Se [design](../../../docs/design/mermaid-integration.md). Eksisterende Implemented-rader
-og eldre bevis gjelder baseline; ny plumbing er ikke implementert eller testet.
+P25's proposal for UR-040, UR-041 and AT-060, AT-061 reused palette, transforms and selection
+for diagrams without another host. See the [Mermaid design](../../../docs/design/mermaid-integration.md).
+That dated proposal was not itself implementation evidence; the current implemented
+DiagramPainter row above reflects the subsequently reconstructed call map.

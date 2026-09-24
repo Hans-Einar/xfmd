@@ -18,6 +18,12 @@ the later SDUI direction uses standalone Go/Fyne. Branch disposition and isolate
 reuse remain separate work, not an instruction to merge Sprint 003. Its reserved
 IDs are preserved, and its documentation is not copied here as active product scope.
 
+## Selected UI delivery
+
+[Sprint 007](Sprint-007--Workspace-UI/README.md) implements selected KB-XFMD-006–011
+on phase branches P053–P055. P053 opening/routing is locally complete; P054/P055
+remain selected and queued. SDUI ownership is excluded.
+
 ## Working convention
 
 A sprint is a bounded integration delivery, not mandatory agile ceremonies or SDP.

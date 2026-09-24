@@ -68,7 +68,7 @@ void run() {
       link = &run;
   CHECK(link);
   int activations = 0;
-  app.host->linkActivated = [&](const std::string&) { ++activations; };
+  app.host->linkActivated = [&](const std::string&, bool) { ++activations; };
   auto begin = app.host->documentToView({link->bounds.x, link->bounds.y + 3});
   auto end = app.host->documentToView({link->bounds.x + link->bounds.width, link->bounds.y + 3});
   pointer(app, ButtonPress, begin);
