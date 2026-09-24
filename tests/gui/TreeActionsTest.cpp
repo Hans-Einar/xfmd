@@ -99,7 +99,7 @@ void run() {
   key(app, tree, XK_Return);
   CHECK(error.find("xdg-open could not open") != std::string::npos);
   // Both Index and References use this same tree widget, including lazy branches.
-  app.window->workspacePanel->tabs->setCurrent(1);
+  app.window->workspacePanel->tabs->setCurrent(1, true);
   settle(app);
   for (auto* nav : {app.window->workspacePanel->index->outline,
                     app.window->workspacePanel->index->references}) {

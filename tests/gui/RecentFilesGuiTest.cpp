@@ -43,6 +43,7 @@ void run(bool restart) {
     XSetInputFocus(static_cast<Display*>(app.app.getDisplay()), app.window->id(), RevertToParent,
                    CurrentTime);
     auto* panel = app.window->workspacePanel;
+    panel->recentTabs->setCurrent(1);
     auto* recent = panel->recentFiles;
     CHECK(recent->entries().empty());
     CHECK(app.open(a));

@@ -62,6 +62,11 @@ Known text types retain internal validation errors; bounded unknown UTF-8 text o
 literally in editor mode. HTML uses the configured browser; binary uses OS defaults.
 Ctrl always requests OS association for eligible file/web links.
 
+P054 implementation: the separate path/filter row, compact Files/Index and recent
+layout, active-tab Refresh and theme popup follow the [phase specification](../../../sprints/Sprint-007--Workspace-UI/Phase-054--Workspace-Layout.md).
+Older toolbar/header placement descriptions are historical; persistence and document
+contracts remain. Native acceptance is recorded in the P054 evidence.
+
 ## 5. Plumbing
 
 | Step | Event / caller | Called symbol | Source or contract file | Data / result | Failure / side effect | Status |
@@ -90,6 +95,11 @@ Ctrl always requests OS association for eligible file/web links.
 | 22 | `Application::execute Open` | `OpenPathDialog::OpenPathDialog` | `src/application/ui/OpenPathDialog.cpp` | Work root → mixed chooser | Cancel returns no selection | Implemented |
 | 23 | `accepted Open dialog` | `Application::openDialogPath` | `src/application/ApplicationOpening.cpp` | Selection → document/root/handoff | Validation/dirty failure preserves root | Implemented |
 | 24 | `Application::openTarget` | `FileOpenPolicy::classify` | `src/application/io/FileOpenPolicy.cpp` | Regular path → Markdown/Text/Browser/Desktop | Bounded read; propagate I/O errors | Implemented |
+| 25 | XfmdWindow::buildUi | `DocumentPathField::DocumentPathField` | `src/application/ui/controls/DocumentPathField.cpp` | committed path/edit/filter → field | no document I/O in widget | Implemented |
+| 26 | path submit callback | `Application::openTypedPath` | `src/application/ApplicationWorkspace.cpp` | work-root-relative input → existing target route | report invalid target; retain dirty/document | Implemented |
+| 27 | Refresh button | `WorkspacePanel::onRefresh` | `src/application/ui/WorkspacePanel.cpp` | active tab → file/index refresh | preserve document/root/filter | Implemented |
+| 28 | Files refresh | `SidebarWidget::refresh` | `src/application/ui/SidebarWidget.cpp` | current tree context → rescan/restore | omit disappeared entries | Implemented |
+| 29 | ThemeButton alternate gesture | `ReadingColorPopup::showAt` | `src/application/ui/controls/ReadingColorPopup.cpp` | anchor → existing palette sliders | Escape/outside closes; no theme toggle | Implemented |
 
 ## 6. Reuse and dependencies
 
@@ -163,3 +173,8 @@ Evidence: [P24](../../../docs/evidence/P24.md).
 P053 changes the chooser/routing. Sidebar placement, path/filter row and toolbar
 rearrangement are selected P054 work, not yet delivered by this phase. The second
 Open icon remains required before closing KB-XFMD-006.
+
+P054 local acceptance: [workspace evidence](../../../sprints/Sprint-007--Workspace-UI/evidence/P054.md)
+records native interaction/visual checks, focused ASan/UBSan checks and the final
+source/binary manifest. Earlier phase placement descriptions retain their dated
+scope. Status remains Implemented; this is not blanket physical-display verification.

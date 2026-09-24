@@ -14,6 +14,7 @@ XfmdWindow::XfmdWindow(FXApp* app, CommandRouter& router, UiContext& context)
   buildUi();
 }
 XfmdWindow::~XfmdWindow() {
+  delete colorPopup;
   delete fileMenu;
   delete editMenu;
   delete viewMenu;
@@ -64,10 +65,15 @@ void XfmdWindow::buildUi() {
   add(goMenu, "&Forward\tAlt+Right", CommandRouter::Forward, UiIcon::Forward);
   new FXMenuTitle(bar, "&Go", nullptr, goMenu);
   buildToolbar();
-  auto* statusRow = new FXHorizontalFrame(this, LAYOUT_SIDE_BOTTOM | LAYOUT_FILL_X,
-                                           0, 0, 0, 0, 0, 0, 0, 0);
-  versionStatus = new FXLabel(statusRow, buildVersion(), nullptr,
-                              LAYOUT_RIGHT | JUSTIFY_RIGHT);
+  auto* pathRow =
+      new FXHorizontalFrame(this, LAYOUT_SIDE_TOP | LAYOUT_FILL_X, 0, 0, 0, 0, 6, 6, 3, 3);
+  dirtyLabel = new FXLabel(pathRow, "Path", nullptr, LAYOUT_CENTER_Y);
+  documentPath = new DocumentPathField(pathRow);
+  new FXButton(pathRow, "×\tClear filename filter", nullptr, documentPath,
+               DocumentPathField::ID_CLEAR, BUTTON_NORMAL | LAYOUT_CENTER_Y);
+  auto* statusRow =
+      new FXHorizontalFrame(this, LAYOUT_SIDE_BOTTOM | LAYOUT_FILL_X, 0, 0, 0, 0, 0, 0, 0, 0);
+  versionStatus = new FXLabel(statusRow, buildVersion(), nullptr, LAYOUT_RIGHT | JUSTIFY_RIGHT);
   status = new FXLabel(statusRow, "Open a local Markdown or text file.", nullptr,
                        LAYOUT_FILL_X | JUSTIFY_LEFT);
   auto* workspace =
@@ -76,7 +82,7 @@ void XfmdWindow::buildUi() {
   sidebar = workspacePanel->tree;
   split = new FXSplitter(workspace,
                          SPLITTER_HORIZONTAL | SPLITTER_TRACKING | LAYOUT_FILL_X | LAYOUT_FILL_Y);
-  navigationArea = new FXVerticalFrame(split, LAYOUT_FILL_Y, 0,0,330,0,0,0,0,0);
+  navigationArea = new FXVerticalFrame(split, LAYOUT_FILL_Y, 0, 0, 330, 0, 0, 0, 0, 0);
   navigationArea->hide();
   editor = new EditorWidget(split);
   previewArea = new FXVerticalFrame(split, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -92,6 +98,10 @@ long XfmdWindow::onConfigure(FXObject* sender, FXSelector sel, void* data) {
 }
 long XfmdWindow::onKeyPress(FXObject* sender, FXSelector sel, void* data) {
   auto* event = static_cast<FXEvent*>(data);
+  if (event->code == KEY_F6 && !getApp()->getModalWindow()) {
+    documentPath->beginEditing();
+    return 1;
+  }
   if (event->code == KEY_Escape && !getApp()->getModalWindow() && commands->checked &&
       commands->checked(CommandRouter::FullScreen)) {
     commands->dispatch(this, FXSEL(SEL_COMMAND, CommandRouter::LeaveFullScreen), nullptr);

@@ -86,7 +86,7 @@ Recorded in backlog only. Implementation has not been selected or started by
 this capture. Findings describe the inspected working tree, not the installed
 binary shown in the screenshots; see the [source context](../evidence/2026-09-24-ui-wishlist/README.md).
 
-Related: [KB-XFMD-006](../active/%23006--Change--Open-files-and-folders.md), [KB-XFMD-008](../backlog/%23008--Change--Document-path-and-file-filter.md).
+Related: [KB-XFMD-006](%23006--Change--Open-files-and-folders.md), [KB-XFMD-008](%23008--Change--Document-path-and-file-filter.md).
 
 ## Goal selection — 2026-09-24
 

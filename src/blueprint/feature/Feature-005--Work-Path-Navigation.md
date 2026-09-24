@@ -45,6 +45,13 @@ only the work root. A successfully opened internal file changes the root to its
 parent; loading errors, canceled dirty prompts and external handoff preserve root
 and MRU. Links and recent-file activation retain their existing root.
 
+P054: the sidebar Open icon dispatches the same Open command. Up selects the
+immediate parent and disables at `/`; the older root-double-click shortcut remains.
+The document-path row owns name-filter entry, independent of sidebar visibility.
+Typed exact paths reuse routing but internal files retain the work root. Folders
+and Files recent tabs preserve separate histories; Files Refresh restores available
+tree context without changing the document. See FUNC-010/013 for adapter calls.
+
 ## 5. Plumbing
 
 | Step | Event / caller | Called symbol | Source or contract file | Data / result | Failure / side effect | Status |
@@ -79,5 +86,5 @@ root/document/MRU retention. Evidence: [P053 opening evidence](../../../sprints/
 
 Implemented in P8, extended in P053. Large or slow filesystems may take time;
 progress is visible and old work is canceled. Tree containment is not an OS sandbox.
-The second Open icon belongs to P054; KB-XFMD-006 remains active until that integration
-is checked. P054's selected parent button is not yet implemented by this phase.
+P054 adds the second Open icon, immediate-parent navigation and tabbed histories.
+Native acceptance is recorded in [P054 evidence](../../../sprints/Sprint-007--Workspace-UI/evidence/P054.md).

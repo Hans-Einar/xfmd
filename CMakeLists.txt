@@ -94,6 +94,10 @@ add_library(xfmd_application
   src/application/adapters/FoxPreferencesStore.cpp src/application/ui/PreferencesDialog.cpp src/application/ui/PreferencesPages.cpp
   src/application/ApplicationOpening.cpp src/application/ui/OpenPathDialog.cpp src/application/adapters/DesktopFileOpener.cpp
   src/application/ApplicationAppearance.cpp src/application/ui/XfmdToolbar.cpp
+  src/application/ApplicationWorkspace.cpp
+  src/application/ui/controls/DocumentPathField.cpp
+  src/application/ui/controls/ReadingColorPopup.cpp
+  src/application/ui/controls/ThemeButton.cpp
   src/application/ApplicationIndex.cpp src/application/Application.cpp src/application/ApplicationCommands.cpp src/application/ApplicationExport.cpp
   src/application/commands/CommandRouter.cpp src/application/ui/XfmdWindow.cpp src/application/ui/IconResources.cpp
   src/application/ui/EditorWidget.cpp src/application/ui/EditorPresentation.cpp src/application/ui/SidebarWidget.cpp src/application/ui/WorkspacePanel.cpp src/application/ui/RecentFilesPanel.cpp

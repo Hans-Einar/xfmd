@@ -15,6 +15,10 @@ class SidebarWidget : public FX::FXTreeList {
   std::string contextPath, rootLabel, pendingOpen;
   bool pointerClick = false, pointerSystemDefault = false, pendingSystemDefault = false;
   std::size_t files = 0;
+  std::set<std::string> restoreExpanded;
+  std::string restoreSelected;
+  int restoreX = 0, restoreY = 0;
+  bool restoring = false;
   FX::FXTreeItem* add(const TreeEntry&);
 
 protected:
@@ -31,6 +35,7 @@ public:
   void create() override;
   void setRoot(const std::filesystem::path&, const std::string& label);
   void setFilter(FileNameFilter);
+  void refresh();
   const std::filesystem::path& workRoot() const { return root; }
   bool scanning = false;
   FX::FXTreeItem* getPathnameItem(const FX::FXString&) const;

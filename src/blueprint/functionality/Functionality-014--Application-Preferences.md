@@ -54,6 +54,11 @@ ExternalBrowser passes a single target argv without a shell, limits outstanding
 children to 16, and reports startup or asynchronous nonzero/signal failure through
 Application. Handoff leaves document/root/history unchanged.
 
+P054 implementation: the separate path/filter row, compact Files/Index and recent
+layout, active-tab Refresh and theme popup follow the [phase specification](../../../sprints/Sprint-007--Workspace-UI/Phase-054--Workspace-Layout.md).
+Older toolbar/header placement descriptions are historical; persistence and document
+contracts remain. Native acceptance is recorded in the P054 evidence.
+
 ## 5. Plumbing
 
 | Step | Event / caller | Called symbol | Source or contract file | Data / result | Failure / side effect | Status |
@@ -69,6 +74,7 @@ Application. Handoff leaves document/root/history unchanged.
 | 9 | `Application::changeReadingColors` | `PreferencesService::commit` | `src/application/preferences/PreferencesService.cpp` | Release/key/reset → Light/Dark profile | Write failure restores palette/sliders | Implemented |
 | 10 | `Application::openTarget` | `ExternalBrowser::openFile` | `src/application/adapters/ExternalBrowser.cpp` | Existing local HTML → encoded file URL | Reject nonregular target; argv launch | Implemented |
 | 11 | `Application::pollBrowser` | `ExternalBrowser::poll` | `src/application/adapters/ExternalBrowser.cpp` | Child status → completion/error callback | Erase completed children before reporting failure | Implemented |
+| 12 | ThemeButton alternate gesture | `ReadingColorPopup::showAt` | `src/application/ui/controls/ReadingColorPopup.cpp` | button anchor → palette controls | uses existing commit/rollback callbacks | Implemented |
 
 ## 6. Reuse and dependencies
 
@@ -117,3 +123,8 @@ repaint; release commits with rollback on write error. Evidence: [P21](../../../
 
 P22: compact shared toolbar, UR-032, UR-033, UR-034; AT-052, CompactWorkspaceTest and existing
 regressions. Evidence: [P22](../../../docs/evidence/P22.md).
+
+P054 local acceptance: [workspace evidence](../../../sprints/Sprint-007--Workspace-UI/evidence/P054.md)
+records native interaction/visual checks, focused ASan/UBSan checks and the final
+source/binary manifest. Earlier phase placement descriptions retain their dated
+scope. Status remains Implemented; this is not blanket physical-display verification.

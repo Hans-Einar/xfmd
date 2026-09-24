@@ -7,8 +7,8 @@ are excluded. No merge or installation is implied.
 
 | Phase | Cards / outcome | Branch | Status |
 | --- | --- | --- | --- |
-| [053](Phase-053--File-Opening.md) | KB-XFMD-006/007: unified file/folder opening and target routing | sprint/007/phase/053-file-opening | Locally complete; #006 sidebar integration remains P054 |
-| 054 | KB-XFMD-008/009/011: path/filter row, compact sidebar and toolbar/color popup | sprint/007/phase/054-workspace-layout | Selected, queued |
+| [053](Phase-053--File-Opening.md) | KB-XFMD-006/007: unified file/folder opening and target routing | sprint/007/phase/053-file-opening | Locally complete; #006 integration completed in P054 |
+| [054](Phase-054--Workspace-Layout.md) | KB-XFMD-008/009/011: path/filter row, compact sidebar and toolbar/color popup | sprint/007/phase/054-workspace-layout | Locally complete; [evidence](evidence/P054.md) |
 | 055 | KB-XFMD-010: shared zoom and controls | sprint/007/phase/055-document-zoom | Selected, queued |
 
 One combined sprint PR after phase acceptance. One commit per milestone, with

@@ -19,9 +19,10 @@ FXDEFMAP(RecentFilesPanel)
 recentMap[] = {FXMAPFUNC(SEL_COMMAND, RecentFilesPanel::ID_SELECT, RecentFilesPanel::onSelect),
                FXMAPFUNC(SEL_TIMEOUT, RecentFilesPanel::ID_ACTIVATE, RecentFilesPanel::onActivate)};
 FXIMPLEMENT(RecentFilesPanel, FXVerticalFrame, recentMap, ARRAYNUMBER(recentMap))
-RecentFilesPanel::RecentFilesPanel(FXComposite* parent, UiContext& context)
+RecentFilesPanel::RecentFilesPanel(FXComposite* parent, UiContext&)
     : FXVerticalFrame(parent, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 120, 0, 0, 0, 0) {
-  UiFactory(context).header(this, "Recent files");
+
+  empty = new FXLabel(this, "No recent files", nullptr, LAYOUT_FILL_X | JUSTIFY_LEFT);
   list = new RecentFileList(this, this, ID_SELECT);
   list->setNumVisible(4);
   for (int i = 0; i < 32; ++i) {
@@ -35,6 +36,10 @@ RecentFilesPanel::RecentFilesPanel(FXComposite* parent, UiContext& context)
 }
 RecentFilesPanel::~RecentFilesPanel() { getApp()->removeTimeout(this, ID_ACTIVATE); }
 void RecentFilesPanel::refresh() {
+  if (paths.empty())
+    empty->show();
+  else
+    empty->hide();
   WorkPathHistory labels(FXSystem::getHomeDirectory().text());
   list->clearItems();
   for (const auto& path : paths) {

@@ -121,6 +121,9 @@ void run() {
       CHECK(open);
       CHECK(open->getSelector() == CommandRouter::Open);
       nativeClick(open, open->getWidth() / 2, open->getHeight() / 2);
+    } else if (entry == 4) {
+      auto* open = app.window->workspacePanel->openButton;
+      nativeClick(open, open->getWidth() / 2, open->getHeight() / 2);
     } else if (entry == 3) {
       auto* title =
           findWidget<FXMenuTitle>(app.window, [](auto* t) { return t->getText() == "File"; });
@@ -154,6 +157,7 @@ void run() {
   CHECK(workspace->history.root() == after / "notes.md");
   auto roots = workspace->history.entries();
   choose(before / "first.md", "Cancel", 3);
+  choose(before / "first.md", "Cancel", 4);
   CHECK(workspace->history.entries() == roots && app.session.view().token == dirty.token);
   app.documents.chooseUnsaved = [] { return UnsavedChoice::Cancel; };
   choose(before / "first.md", "OK");

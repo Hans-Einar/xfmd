@@ -1,0 +1,6 @@
+[0/2] Re-checking globbed directories...
+[1/7] cd /home/warloc/git/xfmd-sdl-navigation/build-ui && /usr/bin/python3.12 /home/warloc/git/xfmd-sdl-navigation/tools/build_identity.py --source /home/warloc/git/xfmd-sdl-navigation --output /home/warloc/git/xfmd-sdl-navigation/build-ui/generated
+[2/5] Building CXX object CMakeFiles/ThemePopupGuiTest.dir/tests/gui/ThemePopupGuiTest.cpp.o
+[3/5] Linking CXX executable ThemePopupGuiTest
+[4/5] Building CXX object CMakeFiles/PathWorkspaceGuiTest.dir/tests/gui/PathWorkspaceGuiTest.cpp.o
+[5/5] Linking CXX executable PathWorkspaceGuiTest

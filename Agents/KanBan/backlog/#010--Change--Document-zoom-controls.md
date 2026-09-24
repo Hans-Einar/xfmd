@@ -87,7 +87,7 @@ Recorded in backlog only. Implementation has not been selected or started by
 this capture. Findings describe the inspected working tree, not the installed
 binary shown in the screenshots; see the [source context](../evidence/2026-09-24-ui-wishlist/README.md).
 
-Related: [KB-XFMD-011](%23011--Change--Toolbar-layout-and-color-popup.md).
+Related: [KB-XFMD-011](../completed/%23011--Change--Toolbar-layout-and-color-popup.md).
 
 ## Goal selection — 2026-09-24
 

@@ -63,6 +63,7 @@ public:
   bool startPath(const std::string& path);
   bool open(const std::string& path);
   bool openTarget(const std::string& path, bool systemDefault = false);
+  bool openTypedPath(const std::string&);
   bool openDialogPath(const std::string& path);
   void followLink(const std::string& document, const std::string& target,
                   bool systemDefault = false);
@@ -70,6 +71,7 @@ public:
 
 private:
   void wireDocument();
+  void wireWorkspace();
   void showLinkTarget(const std::string&);
   std::string hoverStatus, beforeHover;
   void changeReadingColors(const ReadingColors&, bool commit);

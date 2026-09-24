@@ -37,6 +37,11 @@ std::uint32_t pixel(Application& app, Point point) {
 }
 void pointer(Application& app, FXSlider* slider, int type, int x) {
   auto* d = static_cast<Display*>(app.app.getDisplay());
+  if (type == ButtonPress) {
+    XWarpPointer(d, None, slider->id(), 0, 0, 0, 0, x, slider->getHeight() / 2);
+    XSync(d, False);
+    events(app);
+  }
   XEvent e{};
   e.type = type;
   e.xbutton.display = d;
@@ -46,6 +51,9 @@ void pointer(Application& app, FXSlider* slider, int type, int x) {
   e.xbutton.x = x;
   e.xbutton.y = slider->getHeight() / 2;
   e.xbutton.button = Button1;
+  Window child;
+  XTranslateCoordinates(d, slider->id(), DefaultRootWindow(d), x, slider->getHeight() / 2,
+                        &e.xbutton.x_root, &e.xbutton.y_root, &child);
   if (type == MotionNotify) {
     e.xmotion.state = Button1Mask;
     e.xmotion.is_hint = NotifyNormal;
@@ -97,6 +105,8 @@ void run(bool restart) {
   CHECK(pixel(app, {3, 3}) == ReadingPalette::from(ReadingColors::defaults(true)).background);
   CHECK(app.host->frame() == frame);
   auto before = app.preferences->active().darkReading;
+  app.window->colorPopup->showAt(app.window->previewControls);
+  events(app);
   auto* slider = controls->textBrightness;
   int start = slider->getHeadSize() / 2 +
               (slider->getWidth() - slider->getHeadSize()) * slider->getValue() / 100;
@@ -108,6 +118,7 @@ void run(bool restart) {
   pointer(app, slider, ButtonRelease, slider->getWidth() / 2);
   CHECK(app.preferences->active().darkReading.textBrightness == slider->getValue());
   CHECK(app.host->frame() == frame && app.session.view().token == token && app.session.dirty());
+  app.window->colorPopup->popdown();
   controls->changed(savedDark, true);
   app.execute(CommandRouter::ToggleTheme);
   controls->changed(savedLight, true);

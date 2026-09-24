@@ -542,3 +542,14 @@ mixed file/folder selection and current-folder selection, without document I/O.
 Existing browser/desktop adapters own argv launch and child-status reporting.
 Captured Ctrl state crosses native input/deferred-dispatch boundaries as a bool;
 renderer/interpreter contracts are unchanged. All are application-owned files.
+
+
+## Sprint 007 — workspace composition (P054)
+
+ApplicationWorkspace.cpp coordinates typed paths and workspace callbacks using
+P053 target routing. DocumentPathField is the FOX editing/clipboard adapter;
+WorkspacePanel remains the owner of filename-filter state, tabs and recent lists.
+ReadingColorPopup composes existing PreviewColorControls; ThemeButton handles the
+alternate gesture without changing the shared theme command. CompactToolbar owns
+wrapping/right-edge placement. IconCatalog owns the new Up glyph. All new files
+are application-owned. P054 implements these adapters and coordination calls.

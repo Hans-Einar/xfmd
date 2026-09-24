@@ -15,6 +15,10 @@ public:
 
 FXDEFMAP(WorkspacePanel)
 panelMap[] = {
+    FXMAPFUNC(SEL_COMMAND, WorkspacePanel::ID_TAB, WorkspacePanel::onTab),
+    FXMAPFUNC(SEL_COMMAND, WorkspacePanel::ID_REFRESH, WorkspacePanel::onRefresh),
+    FXMAPFUNC(SEL_COMMAND, WorkspacePanel::ID_UP, WorkspacePanel::onUp),
+    FXMAPFUNC(SEL_COMMAND, WorkspacePanel::ID_OPEN, WorkspacePanel::onOpen),
     FXMAPFUNC(SEL_COMMAND, WorkspacePanel::ID_HISTORY, WorkspacePanel::onHistory),
     FXMAPFUNC(SEL_COMMAND, WorkspacePanel::ID_FILTER, WorkspacePanel::onFilter),
     FXMAPFUNC(SEL_CHANGED, WorkspacePanel::ID_FILTER, WorkspacePanel::onFilter),
@@ -24,19 +28,18 @@ FXIMPLEMENT(WorkspacePanel, FXVerticalFrame, panelMap, ARRAYNUMBER(panelMap))
 WorkspacePanel::WorkspacePanel(FXComposite* parent, UiContext& context)
     : FXVerticalFrame(parent, LAYOUT_FILL_Y, 0, 0, 260, 0, 2, 2, 2, 2),
       history(FXSystem::getHomeDirectory().text()) {
-  tabs = new FXTabBook(this, nullptr, 0, LAYOUT_FILL_X | LAYOUT_FILL_Y);
-  new FXTabItem(tabs, "Files");
-  auto* filePage = new FXVerticalFrame(tabs, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0);
   UiFactory ui(context);
-  auto* heading = ui.row(filePage);
-  rootLabel =
-      new FXLabel(heading, "Files", nullptr, JUSTIFY_LEFT | LAYOUT_FILL_X | LAYOUT_CENTER_Y);
-  ui.button(heading, "\tRefresh files", this, ID_FILTER, UiIcon::Refresh);
-  auto* filterRow = ui.row(filePage);
-  ui.button(filterRow, "\tApply filename filter (* and ?)", this, ID_FILTER, UiIcon::Search);
-  filterInput = new FXTextField(filterRow, 14, this, ID_FILTER,
-                                TEXTFIELD_NORMAL | LAYOUT_FILL_X | LAYOUT_CENTER_Y);
-  filterInput->setTipText("Filter filenames: text contains; ? one character; * any characters");
+  auto* tabRow = ui.row(this);
+  tabRow->setPadLeft(0);
+  tabRow->setPadRight(0);
+  tabs =
+      new FXTabBar(tabRow, this, ID_TAB, LAYOUT_FILL_X | LAYOUT_CENTER_Y, 0, 0, 0, 0, 0, 0, 0, 0);
+  new FXTabItem(tabs, "Files");
+  new FXTabItem(tabs, "Index");
+  refreshButton = ui.button(tabRow, "\tRefresh Files", this, ID_REFRESH, UiIcon::Refresh);
+  pages = new FXSwitcher(this, LAYOUT_FILL_X | LAYOUT_FILL_Y);
+  auto* filePage =
+      new FXVerticalFrame(pages, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0);
   auto* row = ui.row(filePage);
   markdown =
       new FXToggleButton(row, ".md", ".md", nullptr, nullptr, this, ID_FILTER,
@@ -45,18 +48,24 @@ WorkspacePanel::WorkspacePanel(FXComposite* parent, UiContext& context)
                             TOGGLEBUTTON_NORMAL | TOGGLEBUTTON_TOOLBAR | TOGGLEBUTTON_KEEPSTATE);
   markdown->setTipText("Include Markdown (OR with .txt, then AND name filter)");
   text->setTipText("Include text files (OR with .md, then AND name filter)");
+  new FXFrame(row, LAYOUT_FILL_X);
+  upButton = ui.button(row, "\tUp one folder", this, ID_UP, UiIcon::Up);
+  openButton = ui.button(row, "\tOpen file or folder (Ctrl+O)", this, ID_OPEN, UiIcon::Open);
   auto* split = new FXSplitter(filePage, SPLITTER_VERTICAL | SPLITTER_REVERSED | SPLITTER_TRACKING |
                                              LAYOUT_FILL_X | LAYOUT_FILL_Y);
   auto* upper = new FXVerticalFrame(split, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 450, 0, 0, 0, 0);
   tree = new SidebarWidget(upper);
   searchStatus = new FXLabel(upper, "", nullptr, LAYOUT_FILL_X | JUSTIFY_LEFT);
   auto* lower = new FXVerticalFrame(split, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 240, 0, 0, 0, 0);
-  ui.header(lower, "Recent folders");
-  workPaths = new WorkPathList(lower, this, ID_HISTORY);
+  recentTabs = new FXTabBook(lower, nullptr, 0, LAYOUT_FILL_X | LAYOUT_FILL_Y);
+  new FXTabItem(recentTabs, "Folders\tRecent folders");
+  auto* folders =
+      new FXVerticalFrame(recentTabs, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0);
+  workPaths = new WorkPathList(folders, this, ID_HISTORY);
   workPaths->setNumVisible(4);
-  recentFiles = new RecentFilesPanel(lower, context);
-  new FXTabItem(tabs, "Index");
-  index = new IndexPanel(tabs, context);
+  new FXTabItem(recentTabs, "Files\tRecent files");
+  recentFiles = new RecentFilesPanel(recentTabs, context);
+  index = new IndexPanel(pages, context);
   std::vector<std::string> saved;
   for (int i = 0; i < 32; ++i) {
     auto key = "Path" + std::to_string(i);
@@ -91,13 +100,16 @@ void WorkspacePanel::remember() {
 bool WorkspacePanel::setWorkPath(const std::string& path) {
   try {
     history.activate(path);
-    rootLabel->setText(
-        history.root().filename().empty() ? "/" : history.root().filename().string().c_str());
-    rootLabel->setTipText(history.root().string().c_str());
+    if (history.root() == history.root().root_path())
+      upButton->disable();
+    else
+      upButton->enable();
     pathError = false;
     searchStatus->setTipText("");
     tree->setRoot(history.root(), history.displayPath(history.root()));
     remember();
+    if (rootChanged)
+      rootChanged(history.root().string());
     return true;
   } catch (const std::exception& e) {
     pathError = true;
@@ -120,14 +132,49 @@ long WorkspacePanel::onHistory(FXObject*, FXSelector, void*) {
     requestWorkPath(history.entries()[index]);
   return 1;
 }
+void WorkspacePanel::setNameFilter(const std::string& pattern) {
+  if (namePattern == pattern)
+    return;
+  namePattern = pattern;
+  onFilter(nullptr, 0, nullptr);
+}
+long WorkspacePanel::onTab(FXObject*, FXSelector, void*) {
+  pages->setCurrent(tabs->getCurrent());
+  refreshButton->setTipText(tabs->getCurrent() == 0 ? "Refresh Files"
+                                                    : "Refresh Index from current buffer");
+  return 1;
+}
+long WorkspacePanel::onRefresh(FXObject*, FXSelector, void*) {
+  if (tabs->getCurrent() == 0) {
+    getApp()->removeTimeout(this, ID_FILTER_APPLY);
+    if (filterPending)
+      onApplyFilter(nullptr, 0, nullptr);
+    else
+      tree->refresh();
+  } else if (indexRefresh)
+    indexRefresh();
+  return 1;
+}
+long WorkspacePanel::onUp(FXObject*, FXSelector, void*) {
+  if (history.root() != history.root().root_path())
+    requestWorkPath(history.root().parent_path().string());
+  return 1;
+}
+long WorkspacePanel::onOpen(FXObject*, FXSelector, void*) {
+  if (openRequested)
+    openRequested();
+  return 1;
+}
 long WorkspacePanel::onFilter(FXObject*, FXSelector, void*) {
+  filterPending = true;
   getApp()->addTimeout(this, ID_FILTER_APPLY, 200);
   return 1;
 }
 long WorkspacePanel::onApplyFilter(FXObject*, FXSelector, void*) {
+  filterPending = false;
+  getApp()->removeTimeout(this, ID_FILTER_APPLY);
   pathError = false;
-  tree->setFilter(
-      {bool(markdown->getState()), bool(text->getState()), filterInput->getText().text()});
+  tree->setFilter({bool(markdown->getState()), bool(text->getState()), namePattern});
   return 1;
 }
 } // namespace xfmd

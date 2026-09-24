@@ -117,6 +117,7 @@ void Application::initialize(int& argc, char** argv) {
   browser.failed = [this](const std::string& error) { documents.error(error); };
   host->linkHovered = [this](const std::string& target) { showLinkTarget(target); };
   wireIndex();
+  wireWorkspace();
   documentOpened = [this] {
     if (documentViews)
       documentViews->documentChanged("main");

@@ -66,6 +66,11 @@ void IconCatalog::update(const UiPalette& p, int size) {
         rect(6, 2, 8, 6);
         rect(6, 12, 8, 6);
         break;
+      case UiIcon::Up:
+        line(10, 17, 10, 3);
+        line(10, 3, 4, 9);
+        line(10, 3, 16, 9);
+        break;
       case UiIcon::Back:
         line(3, 10, 9, 4);
         line(3, 10, 9, 16);

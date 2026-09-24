@@ -34,8 +34,9 @@ void run() {
   app.execute(CommandRouter::Split);
   events(app);
   CHECK(std::string(app.window->getTitle().text()).find(buildVersion()) != std::string::npos);
-  auto* toolbar = app.window->previewColors->getParent();
-  CHECK(toolbar == app.window->previewControls->getParent());
+  auto* toolbar = app.window->previewControls->getParent();
+  CHECK(toolbar != app.window->previewColors->getParent());
+  CHECK(!app.window->colorPopup->shown());
   for (int width : {1900, 1100, 640, 450}) {
     app.window->resize(width, 800);
     events(app);
@@ -123,7 +124,7 @@ void run() {
   }
   app.execute(CommandRouter::Editor);
   events(app);
-  CHECK(app.window->previewColors->shown() && app.window->previewControls->shown());
+  CHECK(!app.window->colorPopup->shown() && app.window->previewControls->shown());
   editor->appendText(FXString("\nEdited after layout changes"), true);
   CHECK(app.session.dirty() && app.edits.canUndo());
   app.edits.applyEdit(

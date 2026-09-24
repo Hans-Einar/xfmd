@@ -10,52 +10,72 @@ requirements: UR-021, UR-022, UR-023, SR-020
 uses: FUNC-002, FUNC-003, FUNC-008
 ---
 
-# Functionality-020: Dokumentindeks
+# Functionality-020: Document index
 
-## 1. Hensikt og avgrensning
+## 1. Purpose and scope
 
-Metadata for kapitteltre og referanser, adskilt fra layout.
+Heading/reference metadata, independent of layout.
 
-## 2. Krav og akseptanse
+## 2. Requirements and acceptance
 
-UR-021, UR-022, UR-023, SR-020. Se [kravene](../../../xfmd_requirements.md).
+UR-021, UR-022, UR-023, SR-020; see the [requirements](../../../xfmd_requirements.md).
 
-## 3. Kontrakter og eierskap
+## 3. Contracts and ownership
 
-DocumentIndex er verdi-basert semantisk metadata. ReferenceWorker får IInterpreter
-og LocalFileStore fra composition root, og eier ingen widgets eller aktiv økt.
-UI ligger i FUNC-010; tjenesten returnerer kun eide strenger, nivåer og byteankre.
+DocumentIndex is value-based semantic metadata. ReferenceWorker receives IInterpreter
+and LocalFileStore from the composition root; it owns no widgets or active session.
+FUNC-010 owns UI. The service returns owned strings, levels and byte anchors.
 
-## 4. Atferd, tilstand og feil
+## 4. Behavior, state and failures
 
-Heading-hierarki følger nærmeste grunnere nivå; ingen tomme mellomnivåer.
-References grupperer Markdown og Hyperlinks; filbarn lastes lazy, ett nivå dypt.
-Gamle revisjoner deaktiverer klikk og forkaster jobber; feil vises under filen.
-Enkeltklikk/Enter navigerer, piltaster velger. Dirty-cancel beholder aktiv fil.
+Headings nest under the nearest shallower level without invented intermediate
+levels. References groups Markdown and Hyperlinks; file children load lazily, one
+level deep. Stale revisions disable activation and discard jobs; errors appear
+under the file. Single click/Enter navigates, arrows select, dirty-cancel retains
+the active file.
+
+P054 Index Refresh cancels queued/completed reference work and rebuilds the index
+from the accepted model when its token matches the current buffer. If edits are
+pending, PreviewCoordinator::refresh requests that buffer's model. Neither route
+reads the main file from disk or mutates text/undo. Rebuilding IndexPanel removes
+loaded reference children so subsequent expansion requests fresh headings. Files
+Refresh remains a separate active-tab action.
 
 ## 5. Plumbing
 
-| Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
+| Step | Event / caller | Called symbol | Source or contract file | Data / result | Failure / side effect | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `PreviewCoordinator modelReady` | `DocumentIndex::build` | `src/application/index/DocumentIndex.cpp` | Semantikk → overskrifter/lenker | Ingen ny parsing | Implemented |
-| 2 | `IndexPanel referenceRequested` | `ReferenceWorker::submit` | `src/application/index/ReferenceWorker.cpp` | Sti → lazy lesing | Køgrense og feilresultat | Implemented |
-| 3 | `ReferenceWorker::run` | `LocalFileStore::read` | `src/application/io/LocalFileStore.cpp` | Sti → snapshot | Filtype, lesefeil, 8 MiB-grense | Implemented |
-| 4 | `ReferenceWorker::run` | `IInterpreter::parse` | `src/contracts/IInterpreter.h` | Snapshot → semantikk | Parserfeil som resultat | Implemented |
-| 5 | `Application::pollReferences` | `ReferenceWorker::take` | `src/application/index/ReferenceWorker.cpp` | Resultatkø → eide overskrifter | Generasjon avviser gamle jobber | Implemented |
+| 1 | PreviewCoordinator modelReady | `DocumentIndex::build` | `src/application/index/DocumentIndex.cpp` | Semantics → headings/links | No extra parse | Implemented |
+| 2 | IndexPanel referenceRequested | `ReferenceWorker::submit` | `src/application/index/ReferenceWorker.cpp` | Path → lazy read | Queue bound/error result | Implemented |
+| 3 | ReferenceWorker::run | `LocalFileStore::read` | `src/application/io/LocalFileStore.cpp` | Path → snapshot | Regular file, read/encoding/8 MiB checks | Implemented |
+| 4 | ReferenceWorker::run | `IInterpreter::parse` | `src/contracts/IInterpreter.h` | Snapshot → semantics | Parser error as result | Implemented |
+| 5 | Application::pollReferences | `ReferenceWorker::take` | `src/application/index/ReferenceWorker.cpp` | Result queue → owned headings | Generation rejects stale jobs | Implemented |
+| 6 | Application::wireWorkspace indexRefresh callback | `ReferenceWorker::cancel` | `src/application/index/ReferenceWorker.cpp` | new reference generation → discard stale results | No document read or mutation | Implemented |
+| 7 | Application::wireWorkspace indexRefresh callback | `IndexPanel::present` | `src/application/ui/IndexPanel.cpp` | current accepted model → index | Clear lazy-reference children | Implemented |
+| 8 | indexRefresh with pending buffer model | `PreviewCoordinator::refresh` | `src/application/preview/PreviewCoordinator.cpp` | current snapshot → model request | Existing stale-token rejection | Implemented |
 
-## 6. Gjenbruk og avhengigheter
+## 6. Reuse and dependencies
 
-FUNC-003 leverer parserporten, FUNC-008/009 navigasjon og source mapping,
-FUNC-010 arbeidsflate. FTR-008/009 er konsumentene; ingen feature-internkall.
+FUNC-003 supplies parsing, FUNC-008/009 navigation/source mapping, FUNC-010 workspace.
+FTR-008/009 consume the service; there are no feature-private calls.
 
-## 7. Verifikasjon
+## 7. Verification
 
-AT-040, AT-041, AT-042, AT-043: DocumentIndexTest, ReferenceWorkerTest og IndexGuiTest.
-Test semantiske nivåer, lenker i tabeller, lazy feil/stale og native enkeltklikk.
+AT-040, AT-041, AT-042, AT-043: DocumentIndexTest, ReferenceWorkerTest and IndexGuiTest
+cover semantic levels, table links, lazy failures/stale results and native activation.
+Evidence: [P15](../../../docs/evidence/P15.md).
 
-## 8. Status, risiko og endringskonsekvenser
+P054 adds active-tab Refresh against the dirty buffer and loaded references; acceptance
+is recorded in [P054](../../../sprints/Sprint-007--Workspace-UI/Phase-054--Workspace-Layout.md).
 
-Implemented P15, 2026-09-13. M1-modelltester og M2-GUI-tester er gjennomført; samlet evidens samles i M3. Referanser er øyeblikksbilder;
-utvidelse leser filen igjen. Blokkerende filsystemkall kan ikke avbrytes midt i kall.
+## 8. Status, risks and change impact
 
-Evidence: [P15 — utførte tester, review og skjermbilde](../../../docs/evidence/P15.md).
+Implemented in P15, 2026-09-13. Its M1 model and M2 GUI checks were completed and M3
+collected evidence. Reference headings are snapshots; expansion rereads the file.
+Blocking filesystem calls cannot be interrupted mid-call. P054 refresh reuses
+existing cancellation/model owners and does not reload the main document.
+
+P054 local acceptance: [workspace evidence](../../../sprints/Sprint-007--Workspace-UI/evidence/P054.md)
+records native interaction/visual checks, focused ASan/UBSan checks and the final
+source/binary manifest. Earlier phase placement descriptions retain their dated
+scope. Status remains Implemented; this is not blanket physical-display verification.

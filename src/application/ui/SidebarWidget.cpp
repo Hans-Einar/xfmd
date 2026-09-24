@@ -58,6 +58,9 @@ void SidebarWidget::setRoot(const std::filesystem::path& path, const std::string
   getApp()->removeTimeout(this, ID_ACTIVATE);
   pendingOpen.clear();
   scanner.stop();
+  restoring = false;
+  restoreExpanded.clear();
+  restoreSelected.clear();
   root = path;
   rootLabel = label;
   clearItems();
@@ -72,6 +75,20 @@ void SidebarWidget::setRoot(const std::filesystem::path& path, const std::string
   setPosition(0, 0);
   scanning = true;
   scanner.start(root, filter);
+}
+void SidebarWidget::refresh() {
+  std::set<std::string> expanded;
+  for (const auto& entry : items)
+    if (entry.second->isExpanded())
+      expanded.insert(entry.first);
+  const std::string selected = getItemPathname(getCurrentItem()).text();
+  const int x = getXPosition(), y = getYPosition();
+  setRoot(root, rootLabel);
+  restoreExpanded = std::move(expanded);
+  restoreSelected = selected;
+  restoreX = x;
+  restoreY = y;
+  restoring = true;
 }
 void SidebarWidget::setFilter(FileNameFilter value) {
   filter = std::move(value);
@@ -183,7 +200,28 @@ long SidebarWidget::onPoll(FXObject*, FXSelector, void*) {
     add(entry);
   if (!batch.entries.empty())
     sortItems();
-  scanning = batch.busy;
+  const auto requestsBeforeRestore = requested.size();
+  if (restoring) {
+    for (auto it = restoreExpanded.begin(); it != restoreExpanded.end();) {
+      auto found = items.find(*it);
+      if (found != items.end()) {
+        expandTree(found->second);
+        it = restoreExpanded.erase(it);
+      } else
+        ++it;
+    }
+    if (auto* item = getPathnameItem(restoreSelected.c_str()))
+      setCurrentItem(item);
+    if (!batch.busy && requestsBeforeRestore == requested.size()) {
+      // Recompute scroll ranges after asynchronous inserts/expansion before
+      // restoring offsets; the previous empty tree would clamp them to zero.
+      layout();
+      setPosition(restoreX, restoreY);
+      restoring = false;
+      restoreExpanded.clear();
+    }
+  }
+  scanning = batch.busy || requestsBeforeRestore != requested.size();
   if (status) {
     std::string text = scanning ? "Searching… " : (files ? "" : "No matching files. ");
     text += std::to_string(files) + " files";

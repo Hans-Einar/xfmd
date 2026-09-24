@@ -8,6 +8,7 @@ class RecentFilesPanel : public FX::FXVerticalFrame {
   FXDECLARE(RecentFilesPanel)
   std::vector<std::string> paths;
   std::string pending;
+  FX::FXLabel* empty = nullptr;
   void refresh();
 
 protected:

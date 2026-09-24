@@ -8,8 +8,9 @@ namespace xfmd {
 class WorkspacePanel : public FX::FXVerticalFrame {
   FXDECLARE(WorkspacePanel)
   std::string pendingPath;
-  FX::FXLabel* rootLabel = nullptr;
-  bool pathError = false;
+  std::string namePattern;
+  FX::FXSwitcher* pages = nullptr;
+  bool pathError = false, filterPending = false;
   void remember();
 
 protected:
@@ -21,13 +22,20 @@ public:
     ID_HISTORY,
     ID_ACTIVATE,
     ID_FILTER_APPLY,
+    ID_TAB,
+    ID_REFRESH,
+    ID_UP,
+    ID_OPEN,
     ID_LAST
   };
   WorkPathHistory history;
   SidebarWidget* tree = nullptr;
-  FX::FXTabBook* tabs = nullptr;
+  FX::FXTabBar* tabs = nullptr;
+  FX::FXTabBook* recentTabs = nullptr;
+  UiButton *refreshButton = nullptr, *upButton = nullptr, *openButton = nullptr;
   IndexPanel* index = nullptr;
-  FX::FXTextField* filterInput = nullptr;
+  std::function<void()> openRequested, indexRefresh;
+  std::function<void(const std::string&)> rootChanged;
   FX::FXToggleButton *markdown = nullptr, *text = nullptr;
   FX::FXList* workPaths = nullptr;
   RecentFilesPanel* recentFiles = nullptr;
@@ -35,6 +43,12 @@ public:
   WorkspacePanel(FX::FXComposite*, UiContext&);
   ~WorkspacePanel() override;
   bool setWorkPath(const std::string&);
+  void setNameFilter(const std::string&);
+  const std::string& nameFilter() const { return namePattern; }
+  long onTab(FX::FXObject*, FX::FXSelector, void*);
+  long onRefresh(FX::FXObject*, FX::FXSelector, void*);
+  long onUp(FX::FXObject*, FX::FXSelector, void*);
+  long onOpen(FX::FXObject*, FX::FXSelector, void*);
   void requestWorkPath(const std::string&);
   long onActivate(FX::FXObject*, FX::FXSelector, void*);
   long onHistory(FX::FXObject*, FX::FXSelector, void*);

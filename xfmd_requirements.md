@@ -384,3 +384,39 @@ text. Unknown-suffix regular files failing text validation, or above the interna
 limit, use OS association. Known .md/.txt still report input/size errors internally.
 Errors reading/classifying a file do not silently launch it externally. See
 [P053](sprints/Sprint-007--Workspace-UI/Phase-053--File-Opening.md) for acceptance.
+
+
+## Sprint 007 workspace amendment — P054, 2026-09-24
+
+This selected amendment supersedes earlier placement rules in UR-014, UR-021,
+UR-026, UR-030, UR-032 and UR-038; it retains their underlying document, filtering,
+palette and persistence contracts. Normative interaction details follow
+[P054](sprints/Sprint-007--Workspace-UI/Phase-054--Workspace-Layout.md).
+
+- UR-014 / UR-032: a separate row below the toolbar spans the window. Its expanding
+  field shows the committed absolute document path at rest, permits editing on
+  left-click/keyboard, and copies that committed path on right-click. Typing filters
+  filenames automatically, without a Path/Filter toggle or duplicate sidebar input.
+  Enter opens only an exact existing absolute/work-root-relative target; directory
+  input changes root, typed files retain it. Existing literal wildcard filenames
+  take precedence. Failed/canceled opens preserve document/dirty/undo. Escape
+  restores the preceding filter/path; blur retains filtering and restores path
+  display. Successful path submission restores the preceding name filter. Clear
+  removes the name filter. Unsaved documents have no invented path. Keep the row
+  usable with Sidebar hidden/Index selected. AT-028 / AT-052 cover these native
+  inputs, clipboard, relative bases, Unicode, errors and wide/narrow geometry.
+- UR-021 / UR-013 / UR-038: Refresh shares the Files/Index tab row and targets the
+  active tab. Files retains root/filter and available tree context; Index rebuilds
+  current-buffer headings/references without disk reload or discarded edits.
+  Remove the separate folder heading. Keep tree root/type toggles and add Up to
+  the immediate parent (stop at `/`) plus shared Open. Retain the old root-double-click
+  shortcut. Recent Folders/Files occupy tabs in the resizable lower area, with
+  separate existing 32-entry histories. AT-026, AT-027, AT-040 and AT-058 cover parent,
+  both Refresh targets, sidebar Open, recent tabs/persistence/errors and retained state.
+- UR-026 / UR-030 / UR-031 / UR-032: Sidebar is the first icon action after menus;
+  Editor/Split/Preview form a distinct group, followed by Back/Forward. Theme is at
+  the right edge; retain free space and wrap intact groups at narrow widths. Move
+  the BG/Text sliders into a theme popup opened by right-click or Shift+F10/Menu.
+  Left-click/Space still toggles theme. Popup dragging, Escape/outside dismissal,
+  live screen colors, theme-specific persistence/rollback and unchanged PDF palette
+  are required. AT-046, AT-050, AT-051 and AT-052 cover geometry and native input.

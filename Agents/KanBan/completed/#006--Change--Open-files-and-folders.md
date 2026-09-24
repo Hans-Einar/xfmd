@@ -8,7 +8,6 @@
 | created | 2026-09-24T18:01:41+02:00 |
 | source | Owner conversation, 2026-09-24 Europe/Oslo: XFMD UI wishlist; Owner items 1 and 5 |
 | owner | Codex |
-| next_review | P054 sidebar Open-icon integration |
 
 ## Need and owner direction
 
@@ -66,7 +65,7 @@ Recorded in backlog only. Implementation has not been selected or started by
 this capture. Findings describe the inspected working tree, not the installed
 binary shown in the screenshots; see the [source context](../evidence/2026-09-24-ui-wishlist/README.md).
 
-Related: [KB-XFMD-007](../completed/%23007--Change--File-types-and-external-opening.md), [KB-XFMD-008](../backlog/%23008--Change--Document-path-and-file-filter.md), [KB-XFMD-009](../backlog/%23009--Change--Sidebar-controls-and-recent-tabs.md).
+Related: [KB-XFMD-007](../completed/%23007--Change--File-types-and-external-opening.md), [KB-XFMD-008](%23008--Change--Document-path-and-file-filter.md), [KB-XFMD-009](%23009--Change--Sidebar-controls-and-recent-tabs.md).
 
 ## Goal selection — 2026-09-24
 
@@ -85,3 +84,13 @@ records source/binary identity, native screenshots and the final regression run.
 Remaining selected scope: add the second Open icon above the Files tree in P054
 and check that it invokes this same chooser/policy. This card stays active until
 that integration passes; it is not completed by the P053 partial delivery.
+
+## P054 outcome — 2026-09-24
+
+The sidebar Open button now uses the same command and chooser as menu, toolbar and Ctrl+O. P053 file-parent/root, directory-only, cancellation and failure rules pass through this entry too. This completes the remaining integration scope.
+
+Implemented and locally checked in [P054](../../../sprints/Sprint-007--Workspace-UI/Phase-054--Workspace-Layout.md).
+[Evidence](../../../sprints/Sprint-007--Workspace-UI/evidence/P054.md) records the
+70-check combined acceptance, focused sanitizer checks, inspected native screenshots
+and exact source/binary identities. Physical multi-monitor/high-DPI usability remains
+outside this automated acceptance. No merge or installation performed.
