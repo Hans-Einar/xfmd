@@ -17,6 +17,7 @@
 | KB-XFMD-011 | Change | completed | [Regroup toolbar actions and hide reading-color sliders in the theme popup](completed/%23011--Change--Toolbar-layout-and-color-popup.md) |
 | KB-XFMD-012 | Ref | backlog | [Synchronize XFMD cards with the shared KanBan contract](backlog/%23012--Ref--SDP--014--KanBan-format-sync.md) |
 | KB-XFMD-013 | Change | completed | [Compact Files header and single Markdown filter](completed/%23013--Change--Sidebar-header-markdown-filter.md) |
+| KB-XFMD-014 | Proposal | backlog | [SDP sidebar and on-demand generated navigation](backlog/%23014--Proposal--SDP-sidebar-and-generated-navigation.md) |
 
 This index shows current location; [Ledger.ndjson](Ledger.ndjson) records history.
 Read relevant notes at session start. Review backlog after a topic discussion and
