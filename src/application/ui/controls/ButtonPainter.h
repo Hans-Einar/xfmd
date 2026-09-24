@@ -1,7 +1,7 @@
 #pragma once
 #include "application/ui/style/ThemeProfiles.h"
 namespace xfmd {
-enum class ButtonRole { Toolbar, Normal, Primary };
+enum class ButtonRole { Toolbar, Normal, Primary, Pill };
 struct ButtonVisualState {
   bool enabled, hovered, pressed, checked, focused, defaultButton;
 };

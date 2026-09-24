@@ -18,6 +18,12 @@ public:
     compactControl = value;
     recalc();
   }
+  void setChecked(bool value) {
+    if (checked != value) {
+      checked = value;
+      update();
+    }
+  }
   bool isChecked() const { return checked; }
   long onChecked(FX::FXObject*, FX::FXSelector, void*);
   void create() override;

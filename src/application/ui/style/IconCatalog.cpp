@@ -90,6 +90,17 @@ void IconCatalog::update(const UiPalette& p, int size) {
         line(15, 2, 15, 7);
         line(15, 7, 10, 7);
         break;
+      case UiIcon::Markdown:
+        // Adapted public-domain Markdown Mark: M, downward arrow and enclosure.
+        rect(1, 4, 17, 12);
+        line(4, 13, 4, 7);
+        line(4, 7, 7, 10);
+        line(7, 10, 10, 7);
+        line(10, 7, 10, 13);
+        line(14, 7, 14, 13);
+        line(12, 11, 14, 13);
+        line(14, 13, 16, 11);
+        break;
       case UiIcon::Search:
         circle(8, 8, 6);
         line(12, 12, 18, 18);

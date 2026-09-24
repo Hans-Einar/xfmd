@@ -25,6 +25,9 @@ on phase branches P053–P055. P053 opening/routing, P054 workspace composition
 and P055 shared zoom are locally complete with linked acceptance evidence and a
 [six-card audit](Sprint-007--Workspace-UI/evidence/Completion.md). SDUI ownership is excluded.
 
+[Sprint 008](Sprint-008--Sidebar-Header/README.md) refines the XFMD 0.3 sidebar
+header in P056 following the owner’s local UI trial.
+
 ## Working convention
 
 A sprint is a bounded integration delivery, not mandatory agile ceremonies or SDP.

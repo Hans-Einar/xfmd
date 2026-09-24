@@ -75,7 +75,7 @@ UR-043/SR-026 and AT-068/069 remain separate branch history.
 | UR-011 | Wheel-/gesture-scrolling i sidetre, arbeidsstihistorikk, editor og preview bevarer små delbevegelser og når eksakt topp/bunn eller venstre/høyre. Dragging av scrollbar og standard modifikatortaster beholdes. | AT-025: små og hele wheel-deltaer, begge retninger/akser, endepunkter og reversering testes med ekte FOX-scrollbarer. |
 | UR-012 | Start uten argument med ~ som arbeidsrot; `xfmd .` bruker absolutt PWD, og annet mappeargument brukes som rot. Filargument åpner dokument med foreldre-mappen som arbeidsrot. Treets rot er synlig og utvidet ved oppstart. Vanlig trenavigasjon kan ikke gå utenfor roten. Dobbeltklikk rot utvider eksplisitt til ~, deretter /. | AT-026: oppstart uten argument, relativ/absolutt mappe og fil; rotsekvens, feil sti og avgrensning. |
 | UR-013 | Høyreklikk mappe tilbyr «Set work path». Arbeidsstier vises under treet som klikkbar, unik historikk (nyeste først, maksimum 32), lagret mellom oppstarter. Aktivering av ugyldig historikk bevarer roten og gir forklaring. Dokument, dirty og panelsynlighet bevares ved rotbytte. | AT-027: kontekstmeny, historikkvalg, persistens, slettet mappe og dirty-buffer. |
-| UR-014 | Filtrer filnavn med delstreng, ? (ett Unicode-tegn) og * (null eller flere tegn). Aktive *.md / *.txt-knapper kombineres med OR før AND med navnefeltet. Ingen aktiv typeknapp betyr alle filtyper; tomt navnefelt betyr alle navn. Vis bare matchende filer og deres forfedremapper ved aktivt filter; behold roten også ved null treff. | AT-028: knappkombinasjoner, kjedet filter, wildcard/Unicode, dype treff, null treff, raske filter-/rotbytter og uleselige mapper. |
+| UR-014 | Filter filenames by substring, ? (one Unicode character) and * (zero or more characters). The oval Markdown toggle selects .md when on and all file types when off, then ANDs with the name field. An empty pattern admits all names. Active filtering displays matching files and ancestor folders; retain the root with zero matches. | AT-028: type toggle, chained filter, wildcard/Unicode, deep matches, zero matches, rapid filter/root changes and unreadable folders. |
 
 ### Utvidelse 1.2 (FirstRelease / Implemented)
 
@@ -159,9 +159,9 @@ Open dialog changes it to the file parent; folder selection changes only the roo
 Document links, recent-file activation and external handoff preserve work root. Symlinker til filer utenfor roten og
 symbolske mappelenker traverseres ikke i treet. Skjulte mapper/filer tas med.
 Dobbeltklikk en rot utenfor home går også til home, deretter /; på / beholdes /.
-Begge typeknapper er av som standard, så oppstart viser direkte mappeinnhold uten
-et fullstendig rekursivt søk. Navnefilter uten wildcard er delstreng; med wildcard
-matches hele filnavnet. ASCII-bokstaver matches uten hensyn til store/små bokstaver.
+The Markdown toggle is off by default, so startup lists direct directory contents
+without a full recursive search. A name pattern without wildcards is a substring;
+with wildcards it matches the whole filename. ASCII matching is case-insensitive.
 
 Rekursiv filtrering utføres i separat worker uten FOX-kall og publiserer treff
 fortløpende. Vanlig treutvidelse leser bare den valgte mappen. Rot-/filterbytte
@@ -440,3 +440,15 @@ selection, caret and source reading position; Wrap reflows, while A4 paper/PDF
 geometry stays fixed. AT-025/030/031/039/052/053 must cover the view-mode × layout-mode
 matrix, native inputs, preset/fit menus, resize, bounds and document/PDF invariants.
 Earlier A4-only zoom and Ctrl=page descriptions retain their historical scope.
+
+## Sidebar header refinement — 2026-09-24 (P056)
+
+The owner's follow-up supersedes the two-type-button UI in UR-014 and P054:
+show one oval Markdown icon toggle beside Refresh, Up and Open in the Files/Index
+header. Remove .txt and the separate action row. Hide Markdown/Up/Open on Index;
+Refresh remains and targets the active tab. Returning to Files restores controls
+and the retained filter state. Markdown on selects .md case-insensitively; off
+admits all file types. In either state AND with the existing filename pattern.
+This does not remove plain-text opening. AT-028/040/052 cover native toggle/Space,
+filter retention, tab visibility and header geometry. See
+[P056](sprints/Sprint-008--Sidebar-Header/Phase-056--Sidebar-Header.md).

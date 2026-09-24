@@ -20,6 +20,7 @@ panelMap[] = {
     FXMAPFUNC(SEL_COMMAND, WorkspacePanel::ID_UP, WorkspacePanel::onUp),
     FXMAPFUNC(SEL_COMMAND, WorkspacePanel::ID_OPEN, WorkspacePanel::onOpen),
     FXMAPFUNC(SEL_COMMAND, WorkspacePanel::ID_HISTORY, WorkspacePanel::onHistory),
+    FXMAPFUNC(SEL_COMMAND, WorkspacePanel::ID_MARKDOWN, WorkspacePanel::onMarkdown),
     FXMAPFUNC(SEL_COMMAND, WorkspacePanel::ID_FILTER, WorkspacePanel::onFilter),
     FXMAPFUNC(SEL_CHANGED, WorkspacePanel::ID_FILTER, WorkspacePanel::onFilter),
     FXMAPFUNC(SEL_TIMEOUT, WorkspacePanel::ID_ACTIVATE, WorkspacePanel::onActivate),
@@ -29,28 +30,21 @@ WorkspacePanel::WorkspacePanel(FXComposite* parent, UiContext& context)
     : FXVerticalFrame(parent, LAYOUT_FILL_Y, 0, 0, 260, 0, 2, 2, 2, 2),
       history(FXSystem::getHomeDirectory().text()) {
   UiFactory ui(context);
-  auto* tabRow = ui.row(this);
-  tabRow->setPadLeft(0);
-  tabRow->setPadRight(0);
+  auto* tabRow = new FXHorizontalFrame(this, LAYOUT_FILL_X, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0);
   tabs =
       new FXTabBar(tabRow, this, ID_TAB, LAYOUT_FILL_X | LAYOUT_CENTER_Y, 0, 0, 0, 0, 0, 0, 0, 0);
   new FXTabItem(tabs, "Files");
   new FXTabItem(tabs, "Index");
   refreshButton = ui.button(tabRow, "\tRefresh Files", this, ID_REFRESH, UiIcon::Refresh);
+  markdown = ui.button(tabRow, "\tShow only Markdown files (off: all file types)", this,
+                       ID_MARKDOWN, UiIcon::Markdown, ButtonRole::Pill);
+  upButton = ui.button(tabRow, "\tUp one folder", this, ID_UP, UiIcon::Up);
+  openButton = ui.button(tabRow, "\tOpen file or folder (Ctrl+O)", this, ID_OPEN, UiIcon::Open);
+  for (auto* button : {refreshButton, markdown, upButton, openButton})
+    button->setCompact(true);
   pages = new FXSwitcher(this, LAYOUT_FILL_X | LAYOUT_FILL_Y);
   auto* filePage =
       new FXVerticalFrame(pages, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0);
-  auto* row = ui.row(filePage);
-  markdown =
-      new FXToggleButton(row, ".md", ".md", nullptr, nullptr, this, ID_FILTER,
-                         TOGGLEBUTTON_NORMAL | TOGGLEBUTTON_TOOLBAR | TOGGLEBUTTON_KEEPSTATE);
-  text = new FXToggleButton(row, ".txt", ".txt", nullptr, nullptr, this, ID_FILTER,
-                            TOGGLEBUTTON_NORMAL | TOGGLEBUTTON_TOOLBAR | TOGGLEBUTTON_KEEPSTATE);
-  markdown->setTipText("Include Markdown (OR with .txt, then AND name filter)");
-  text->setTipText("Include text files (OR with .md, then AND name filter)");
-  new FXFrame(row, LAYOUT_FILL_X);
-  upButton = ui.button(row, "\tUp one folder", this, ID_UP, UiIcon::Up);
-  openButton = ui.button(row, "\tOpen file or folder (Ctrl+O)", this, ID_OPEN, UiIcon::Open);
   auto* split = new FXSplitter(filePage, SPLITTER_VERTICAL | SPLITTER_REVERSED | SPLITTER_TRACKING |
                                              LAYOUT_FILL_X | LAYOUT_FILL_Y);
   auto* upper = new FXVerticalFrame(split, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 450, 0, 0, 0, 0);
@@ -140,6 +134,13 @@ void WorkspacePanel::setNameFilter(const std::string& pattern) {
 }
 long WorkspacePanel::onTab(FXObject*, FXSelector, void*) {
   pages->setCurrent(tabs->getCurrent());
+  for (auto* button : {markdown, upButton, openButton}) {
+    if (tabs->getCurrent() == 0)
+      button->show();
+    else
+      button->hide();
+  }
+  refreshButton->getParent()->recalc();
   refreshButton->setTipText(tabs->getCurrent() == 0 ? "Refresh Files"
                                                     : "Refresh Index from current buffer");
   return 1;
@@ -165,6 +166,10 @@ long WorkspacePanel::onOpen(FXObject*, FXSelector, void*) {
     openRequested();
   return 1;
 }
+long WorkspacePanel::onMarkdown(FXObject*, FXSelector, void*) {
+  markdown->setChecked(!markdown->isChecked());
+  return onFilter(nullptr, 0, nullptr);
+}
 long WorkspacePanel::onFilter(FXObject*, FXSelector, void*) {
   filterPending = true;
   getApp()->addTimeout(this, ID_FILTER_APPLY, 200);
@@ -174,7 +179,7 @@ long WorkspacePanel::onApplyFilter(FXObject*, FXSelector, void*) {
   filterPending = false;
   getApp()->removeTimeout(this, ID_FILTER_APPLY);
   pathError = false;
-  tree->setFilter({bool(markdown->getState()), bool(text->getState()), namePattern});
+  tree->setFilter({markdown->isChecked(), false, namePattern});
   return 1;
 }
 } // namespace xfmd
