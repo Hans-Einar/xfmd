@@ -6,6 +6,6 @@ public:
   static double layout(const SemanticBlock&, double x, double y, double width, FontSpec,
                        ITextMetrics&, RenderFrame&, bool wrapCode = false,
                        const std::function<bool()>& cancelled = {},
-                       ColumnAlignment alignment = ColumnAlignment::Left);
+                       ColumnAlignment alignment = ColumnAlignment::Left, double rightPadding = 20);
 };
 } // namespace xfmd

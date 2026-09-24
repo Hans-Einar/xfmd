@@ -24,6 +24,13 @@ public:
     A4,
     FitWidth,
     ActualSize,
+    Zoom25,
+    Zoom50,
+    Zoom200,
+    Zoom300,
+    ZoomIn,
+    ZoomOut,
+    FitHeight,
     ExportPdf,
     CancelExport,
     FullScreen,
@@ -31,6 +38,7 @@ public:
     ToggleTheme,
     Last
   };
+  static double presetPercent(Command);
   std::function<void(Command)> action;
   std::function<bool(Command)> enabled, checked;
   long dispatch(FX::FXObject*, FX::FXSelector, void*);

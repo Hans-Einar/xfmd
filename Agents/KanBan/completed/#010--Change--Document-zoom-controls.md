@@ -7,7 +7,7 @@
 | type | Change |
 | created | 2026-09-24T18:01:41+02:00 |
 | source | Owner conversation, 2026-09-24 Europe/Oslo: XFMD UI wishlist; Owner item 6 |
-| next_review | Before selecting the next XFMD UI work round; resolve this card's named interaction questions during requirements/blueprint planning |
+| owner | Codex, selected P055 delivery |
 
 ## Need and owner direction
 
@@ -95,3 +95,24 @@ The owner selected KB-XFMD-006–011 as six subgoals of the active chat goal.
 KB-XFMD-003 and optional SDUI modeling are excluded. Delivery is tracked in
 [Sprint 007](../../../sprints/Sprint-007--Workspace-UI/README.md).
 Implementation is selected; this card stays queued until its phase starts.
+
+## P055 selection — 2026-09-24
+
+Selected under the existing goal after P054. [P055](../../../sprints/Sprint-007--Workspace-UI/Phase-055--Document-Zoom.md)
+resolves the interaction questions and defines bounds, fit semantics and acceptance.
+Reuse the completed toolbar; no consolidation, SDUI work or KB-XFMD-012 migration.
+
+## P055 outcome — 2026-09-24
+
+Shared session-local zoom now reaches editor and preview in Wrap and A4 through
+one application coordinator. Native Ctrl wheel/keys/keypad, percentage presets,
+current percentage, A4 width/height fit and the distinct View submenu are checked
+at 96/144 DPI. Caret/selection, source anchor, dirty/undo and saved bytes survive;
+actual exported page/word geometry is identical across four zoom modes.
+
+[P055 evidence](../../../sprints/Sprint-007--Workspace-UI/evidence/P055.md) records
+the 73-test regression run, subsequent visual correction and focused acceptance,
+sanitisers, inspected screenshots and identified source/binaries. The
+[six-card audit](../../../sprints/Sprint-007--Workspace-UI/evidence/Completion.md)
+completes the selected UI scope. Physical device/monitor trials remain outside
+this automated acceptance. No merge or installation performed.

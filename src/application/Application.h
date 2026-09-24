@@ -20,6 +20,7 @@
 #include "ui/IconResources.h"
 #include "ui/ViewModeController.h"
 #include "ui/XfmdWindow.h"
+#include "zoom/DocumentZoom.h"
 #include <fx.h>
 #include <memory>
 namespace xfmd {
@@ -37,6 +38,7 @@ public:
   std::unique_ptr<UiContext> ui;
   XfmdWindow* window = nullptr;
   std::unique_ptr<ViewModeController> views;
+  std::unique_ptr<DocumentZoom> zoom;
   std::unique_ptr<FoxWindowMode> windowMode;
   std::unique_ptr<FX::FXFont> editorFont;
   std::unique_ptr<IInterpreter> interpreter, referenceInterpreter;
@@ -72,6 +74,7 @@ public:
 private:
   void wireDocument();
   void wireWorkspace();
+  void wireZoom();
   void showLinkTarget(const std::string&);
   std::string hoverStatus, beforeHover;
   void changeReadingColors(const ReadingColors&, bool commit);

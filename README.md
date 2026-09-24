@@ -379,3 +379,9 @@ registers ThemePopupGuiTest. It uses real X server pointer movement, button grab
 and slider dragging under isolated Xvfb. Confirm it appears in `ctest -N` when
 verifying toolbar/popup changes; builds without XTest omit this conditional test.
 PathWorkspaceGuiTest covers the document-path/filter row and active-tab refresh.
+
+The shared zoom checks are `DocumentZoomGuiTest` and `DocumentZoomDpiTest` (FOX
+screen resolution set to 144 DPI). With Poppler `pdftotext` available,
+`DocumentZoomPdfTest` compares actual exported page/word geometry across four zoom
+modes. These supplement the native workspace tests; see
+[P055 acceptance](sprints/Sprint-007--Workspace-UI/evidence/P055.md).

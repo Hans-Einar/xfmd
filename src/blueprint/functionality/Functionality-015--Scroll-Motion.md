@@ -10,53 +10,81 @@ requirements: UR-011, UR-015, UR-016, SR-002, SR-015, SR-019
 uses: FUNC-014, FUNC-006
 ---
 
-# Functionality-015: Felles scrollinput og bevegelsespolicy
+# Functionality-015: Shared scroll input and motion policy
 
-## 1. Hensikt og avgrensning
+## 1. Purpose and scope
 
-Eie normalisering, hastighet, akselerasjon, rest, mål og avslutning for wheel-scrolling i alle xfmd-flater. Trekk dette ansvaret ut av FUNC-005. Source-anchor-synkronisering forblir i FUNC-009.
+Own normalization, speed, acceleration, remainder, target and termination for wheel
+scrolling. FUNC-009 retains source-anchor synchronization. P055 document zoom consumes
+Ctrl+wheel before scroll motion while other surfaces retain existing policy.
 
-## 2. Krav og akseptanse
+## 2. Requirements and acceptance
 
-UR-011, UR-015, UR-016, SR-002, SR-015, SR-019. Definisjoner: [krav](../../../xfmd_requirements.md).
-Akseptanse: AT-012, AT-025, AT-029, AT-030, AT-035, AT-039.
+UR-011, UR-015, UR-016, SR-002, SR-015, SR-019; [requirements](../../../xfmd_requirements.md).
+AT-012, AT-025, AT-029, AT-030, AT-035, AT-039. P055 narrows the Ctrl=page rule on document surfaces only.
 
-## 3. Kontrakter og eierskap
+## 3. Contracts and ownership
 
-`ScrollInput{axis,delta,timestamp,origin}` (kilde er alltid Unknown) og `ScrollProfile{speed,acceleration,strength,maxGain}` (v0=8 internt) er application-verdier uten FOX. `ScrollDynamics::advance(input,range,now)` og `reset(reason)` er rene og får injisert monoton klokke. `FoxWheelScrollBar` normaliserer `FXEvent.code/120.0` til logiske wheel-enheter, håndterer FOX-target/varsler og har separat dynamikk per bar/akse. Unknown kilde er gyldig; FOXs core-eventvei kan ikke pålitelig identifisere fingerantall eller fingerløft.
+FOX-free ScrollInput carries axis/delta/timestamp/origin (source Unknown); ScrollProfile
+carries speed/acceleration/strength/maxGain, with internal v0=8. ScrollDynamics::advance
+and reset are pure and receive a monotonic clock. FoxWheelScrollBar normalizes
+FXEvent.code/120, owns FOX notifications and separate dynamics per bar/axis. Core
+FOX events cannot reliably identify fingers or lift; Unknown is valid.
 
-Foreslått første profil: speed=1.5 (0.25–4), acceleration=false, k=0.5 (0–2), v0=8 wheel-enheter/s, maxGain=3 (1–5). Dette er tuningforslag; P10 sammenligner med kompatibilitetsprofil speed=1, acceleration=false.
+The original proposed tuning was speed=1.5 (0.25–4), acceleration=false, k=0.5 (0–2),
+v0=8 wheel units/s, maxGain=3 (1–5); P10 compared compatibility speed=1/no acceleration.
+For normalized increment q: g=acceleration ? clamp(1+k*max(0,v/v0-1),1,maxGain) : 1;
+dTarget=-q*baseUnit*speed*g. baseUnit follows FOX line/wheelLines/page content pixels.
+Integrate only new increments, never re-multiply accumulated distance. Sync uses an
+absolute target without gain. Velocity uses absolute input over 80 ms in 8 ms bins;
+coalesced input does not invent physical events. Idle 200 ms, axis/target/sign changes
+and preferences reset velocity/remainder. Same-timestamp events accumulate using
+local monotonic time, not assumed physical gesture timestamps.
 
-For hvert normalisert inkrement q: `g = acceleration ? clamp(1 + k*max(0,v/v0-1),1,maxGain) : 1`; `dTarget = -q * baseUnit * speed * g`. baseUnit er FOXs ordinære line/wheelLines/page-baserte enhet i innholdspiksler. Bare nye inkrementer integreres; tidligere totaldistanse multipliseres aldri på nytt. Mottakerflaten ved Sync setter absolutt mål uten gain.
+## 4. Behavior, state and failures
 
-v estimeres fra summert absolutt input over et 80 ms tidsvindu, med faste 8 ms bokser. Koaleserte mengder fordeles ikke på oppdiktede fingerhendelser. 200 ms inaktivitet, akse/target-skifte, fortegnsskifte og nye preferences resetter hastighet/rest. Samme-timestamp/komprimerte hendelser summeres; monotont lokal tid brukes uten å anta at FOXs tidsstempel er fysisk gesture-tid.
+Alt=line and Ctrl=page bypass personal gain/acceleration. P055's explicit document
+zoom callback overrides Ctrl=page for editor/preview and their bars, cancels pending
+motion and consumes the event once. Trees/MRU/preferences sample have no such callback.
+Keyboard, drag, Sync and Restore retain direct precise commands; respect input sign
+without another natural-scroll inversion.
 
-## 4. Atferd, tilstand og feil
-
-Alt=line og Ctrl=page beholder baseline og bypasser personlig gain/akselerasjon. Tastatur, scrollbar-drag, Sync og Restore bruker eksisterende presise posisjonskommandoer. Sign/natural-scroll respekteres fra input; ingen ny global invertering.
-
-Først flyttes baseline-reglene uendret. Deretter eier adapteren én retargetbar timer, eksempelvis 8 ms ticks og opptil 80 ms settling; arvet onTimeWheel må da ikke kjøre parallelt. Animasjon følger et clamped mål, stopper ved eksakt heltallsmål og lager ingen ekstra kinetisk distanse etter input. Drag/key/nytt range/nytt dokument avbryter gammel wheel-jobb; ingen global inertiamotor. Flytende rest beholdes inne i området, overskytende press forkastes ved begge ender. Grenser, uendelig input og integer-konvertering sjekkes før FOX-kall.
+The adapter owns one retargetable timer (8 ms ticks, up to 80 ms settling), with no
+parallel inherited onTimeWheel. Motion clamps and stops at the exact integer target;
+no added kinetic distance. Drag/key/range/document changes cancel old motion. Preserve
+fractional remainder within bounds, discard excess at endpoints; reject infinite
+input and unsafe integer conversion. No global inertia engine.
 
 ## 5. Plumbing
 
-| Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
+| Step | Event / caller | Called symbol | Source or contract file | Data / result | Failure / side effect | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `FOX SEL_MOUSEWHEEL` | `FoxWheelScrollBar::onMouseWheel` | `src/application/adapters/FoxWheelScrollBar.cpp` | FXEvent → ScrollInput | en inputvei, konsumér én gang | Implemented |
-| 2 | `FoxWheelScrollBar::onMouseWheel` | `ScrollDynamics::advance` | `src/application/scroll/ScrollDynamics.cpp` | input/profil/range → clamped mål | rest og hastighet per bar | Implemented |
-| 3 | `FOX timeout` | `FoxWheelScrollBar::onMotionTick` | `src/application/adapters/FoxWheelScrollBar.cpp` | mål → position + SEL_CHANGED | slutt gir SEL_COMMAND; ingen dobbel timer | Implemented |
+| 1 | `FOX SEL_MOUSEWHEEL` | `FoxWheelScrollBar::onMouseWheel` | `src/application/adapters/FoxWheelScrollBar.cpp` | FXEvent → normalized input | Consume once | Implemented |
+| 2 | `FoxWheelScrollBar::onMouseWheel` | `ScrollDynamics::advance` | `src/application/scroll/ScrollDynamics.cpp` | Input/profile/range → target | Per-bar remainder/velocity | Implemented |
+| 3 | `FOX timeout` | `FoxWheelScrollBar::onMotionTick` | `src/application/adapters/FoxWheelScrollBar.cpp` | Target → position/SEL_CHANGED | Finish SEL_COMMAND; no duplicate timer | Implemented |
+| 4 | `document Ctrl+wheel callback` | `DocumentZoom::step` | `src/application/zoom/DocumentZoom.cpp` | Signed fractional steps → scale | No simultaneous scrolling | Implemented |
 
-## 6. Gjenbruk og avhengigheter
+## 6. Reuse and dependencies
 
-Alle scrollflater bruker samme policyinstans-type og samme profil: SidebarWidget, WorkPathList, EditorWidget, FoxRenderHost og Preferences-prøvefelt. FTR-006 eier brukerresultatet; FTR-004 bruker fortsatt FUNC-009 etter faktisk viewport-endring. Ingen feature-interne kall.
+SidebarWidget, WorkPathList, EditorWidget, FoxRenderHost and preferences sample share
+policy types/profile. FTR-006 owns the user result; FTR-004 still uses FUNC-009 after
+actual viewport movement. P055 zoom is explicit per-document-surface wiring, not a
+new global modifier rule or a feature-private call.
 
-## 7. Verifikasjon
+## 7. Verification
 
-Deterministiske serier tester base uavhengig av gain, små ±1/120, batching innen samme tidsboks, reversering, idle, overflow og endepunkter. Ekte FOX/X11-tester skal teste selve tre-/tekst-/preview-flaten, ikke bare adaptermetoden. Mål physical touchpad separat; syntetisk fin-delta er ikke driverbevis.
+Deterministic series cover base/gain, ±1/120 increments, batching, reversal, idle,
+overflow and endpoints. Native FOX/X11 tests exercise tree/text/preview surfaces,
+not only adapter methods. Physical touchpad measurements remain separate: synthetic
+fine deltas do not prove driver behavior. Historical AT evidence: [P10](../../../docs/evidence/P10.md).
+P055 zoom and unchanged sidebar motion checks follow its [plan](../../../sprints/Sprint-007--Workspace-UI/Phase-055--Document-Zoom.md).
 
-AT-012, AT-025, AT-029, AT-030, AT-035, AT-039: se [P10](../../../docs/evidence/P10.md).
+## 8. Status, risks and change impact
 
-## 8. Status, risiko og endringskonsekvenser
+Revision 1.1, 2026-09-13: P10 implements the original calls. [P9](../../../docs/evidence/P9.md)
+resolved the core-event path; P10-M1 extracted remainder/clamp, M3 added acceleration
+and timer. XI2 remains a later adapter if measurement proves missing resolution;
+it must replace, not duplicate, the same core stream. No libinput/xfw/system-FOX change.
+[Design](../../../softwareDesign.md), [historical plan](../../../implementationPlan.md).
 
-Revisjon 1.1, 2026-09-13. Alle kall i kapittel 5 er implementert i P10.
-P9 har avklart core-eventveien; se [P9](../../../docs/evidence/P9.md). P10-M1 trekker ut rest/clamp til ScrollDynamics; akselerasjon og egen timer følger M3. Første implementasjon bruker FOX-hook. XI2 er en eksplisitt senere adapter dersom målingen viser tapt nødvendig oppløsning; den må erstatte, ikke supplere, den samme core-eventstrømmen. Ingen endring av libinput, xfw eller system-FOX.
-[Integrasjonsdesign](../../../softwareDesign.md) og [faseplan](../../../implementationPlan.md) gir kontekst.
+P055 local zoom acceptance and bounded limits: [evidence](../../../sprints/Sprint-007--Workspace-UI/evidence/P055.md).

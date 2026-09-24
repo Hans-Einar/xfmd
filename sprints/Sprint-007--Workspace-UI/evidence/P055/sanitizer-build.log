@@ -1,0 +1,4 @@
+[0/2] Re-checking globbed directories...
+[1/6] cd /home/warloc/git/xfmd-sdl-navigation/build-ui-sanitize && /usr/bin/python3.12 /home/warloc/git/xfmd-sdl-navigation/tools/build_identity.py --source /home/warloc/git/xfmd-sdl-navigation --output /home/warloc/git/xfmd-sdl-navigation/build-ui-sanitize/generated
+[2/3] Linking CXX executable DocumentZoomPdfFixture
+[3/3] Linking CXX executable ThemePopupGuiTest

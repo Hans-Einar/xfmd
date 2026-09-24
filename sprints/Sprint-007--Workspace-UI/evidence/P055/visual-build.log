@@ -1,0 +1,46 @@
+[0/2] Re-checking globbed directories...
+[1/47] cd /home/warloc/git/xfmd-sdl-navigation/build-ui && /usr/bin/python3.12 /home/warloc/git/xfmd-sdl-navigation/tools/build_identity.py --source /home/warloc/git/xfmd-sdl-navigation --output /home/warloc/git/xfmd-sdl-navigation/build-ui/generated
+[2/45] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/controls/PreviewControls.cpp.o
+[3/45] Linking CXX static library libxfmd_application.a
+[4/45] Linking CXX executable ExternalBrowserTest
+[5/45] Linking CXX executable PathWorkspaceGuiTest
+[6/45] Linking CXX executable xfmd
+[7/45] Linking CXX executable OpenPathDialogGuiTest
+[8/45] Linking CXX executable DocumentZoomGuiTest
+[9/45] Linking CXX executable FileRoutingGuiTest
+[10/45] Linking CXX executable RecentFilesGuiTest
+[11/45] Linking CXX executable MermaidGuiTest
+[12/45] Linking CXX executable PreviewSelectionGuiTest
+[13/45] Linking CXX executable CompactWorkspaceTest
+[14/45] Linking CXX executable ReadingColorsGuiTest
+[15/45] Linking CXX executable TreeActionsTest
+[16/45] Linking CXX executable UiControlsTest
+[17/45] Linking CXX executable AppearancePreferencesTest
+[18/45] Linking CXX executable AppearanceGuiTest
+[19/45] Linking CXX executable WorkspaceTest
+[20/45] Linking CXX executable IndexGuiTest
+[21/45] Linking CXX executable BrowserPreferencesTest
+[22/45] Linking CXX executable PresentationTest
+[23/45] Linking CXX executable NavigationGuiTest
+[24/45] Linking CXX executable ScrollingTest
+[25/45] Linking CXX executable SidebarGuiTest
+[26/45] Linking CXX executable WheelGuiTest
+[27/45] Linking CXX executable WorkPathGuiTest
+[28/45] Linking CXX executable PointerTest
+[29/45] Linking CXX executable PreferencesTest
+[30/45] Linking CXX executable TablePreviewTest
+[31/45] Linking CXX executable CapturePresentation
+[32/45] Linking CXX executable xfmd_cold_start
+[33/45] Linking CXX executable ExportGuiTest
+[34/45] Linking CXX executable PagedPreviewTest
+[35/45] Linking CXX executable CanvasTest
+[36/45] Linking CXX executable ThemeProfilesTest
+[37/45] Linking CXX executable FullscreenTest
+[38/45] Linking CXX executable IconTest
+[39/45] Linking CXX executable WindowEndpointBoundaryTest
+[40/45] Linking CXX executable CapturePreferences
+[41/45] Linking CXX executable CaptureAppearance
+[42/45] Linking CXX executable DocumentViewsGuiTest
+[43/45] Linking CXX executable DocumentLeaseGuiTest
+[44/45] Linking CXX executable ThemePopupGuiTest
+[45/45] Linking CXX executable DocumentZoomPdfFixture

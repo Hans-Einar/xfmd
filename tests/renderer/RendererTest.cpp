@@ -20,6 +20,12 @@ void run() {
                              "`code`.\n\n> quote\n\n- one\n- two\n\n```\nlong code line\n```\n",
                              {},
                              false});
+  auto small =
+      parser.parse({{12, 1}, "## Narrow heading\n\nOrdinary wrapping words.\n", {}, false});
+  auto zoomed = renderer.layout(*small, {75, 1}, metrics);
+  CHECK(zoomed->contentWidth <= 75);
+  auto smaller = renderer.layout(*small, {50, 2}, metrics);
+  CHECK(smaller->contentWidth <= 50);
   auto wide = renderer.layout(*model, {600, 1}, metrics);
   auto narrow = renderer.layout(*model, {140, 2}, metrics);
   CHECK(wide->token == model->token && narrow->generation == 2);

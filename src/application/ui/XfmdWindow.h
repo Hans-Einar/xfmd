@@ -18,7 +18,8 @@ class XfmdWindow : public FX::FXMainWindow {
   FX::FXHorizontalFrame *fileTools = nullptr, *navTools = nullptr, *viewTools = nullptr;
   FX::FXLabel* dirtyLabel = nullptr;
   UiButton* themeButton = nullptr;
-  FX::FXMenuPane *fileMenu = nullptr, *editMenu = nullptr, *viewMenu = nullptr, *goMenu = nullptr;
+  FX::FXMenuPane *fileMenu = nullptr, *editMenu = nullptr, *viewMenu = nullptr, *goMenu = nullptr,
+                 *zoomMenu = nullptr;
 
 protected:
   XfmdWindow() = default;

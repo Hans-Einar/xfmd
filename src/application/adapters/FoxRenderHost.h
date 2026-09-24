@@ -6,6 +6,7 @@
 #include "application/preview/PreviewSelection.h"
 #include "application/scroll/ScrollDynamics.h"
 #include "contracts/IRenderer.h"
+#include <algorithm>
 #include <functional>
 #include <fx.h>
 #include <optional>
@@ -19,7 +20,8 @@ class FoxRenderHost : public FX::FXScrollArea {
   LayoutResult current;
   DocumentToken expected;
   std::optional<FrameKey> requested;
-  bool active = false, programmatic = false, keyboard = false, fit = true;
+  bool active = false, programmatic = false, keyboard = false;
+  int observedWidth = -1, observedHeight = -1;
   double lastWidth = 0, dpiScale = 4.0 / 3, zoom = 1;
   ViewTransform transform;
   unsigned buttons = 0;
@@ -35,13 +37,16 @@ protected:
   void moveContents(FX::FXint, FX::FXint) override;
 
 public:
-  std::function<void(double)> resized, viewportChanged;
+  std::function<void(double)> resized, viewportChanged, zoomRequested;
+  std::function<void()> geometryChanged;
   std::function<void(const std::string&, bool)> linkActivated;
   std::function<void(const std::string&)> linkHovered;
   ScrollOrigin lastScrollOrigin = ScrollOrigin::UserDrag;
   FoxRenderHost(FX::FXComposite*, IRenderer&, SharedTextMetrics&);
   void setReadingColors(const ReadingColors&);
   const ReadingColors& readingColors() const { return reading; }
+  int contentViewportWidth() const { return viewport_w; }
+  int contentViewportHeight() const { return viewport_h; }
   void layout() override;
   bool canFocus() const override { return true; }
   FX::FXint getContentWidth() override;
@@ -59,8 +64,10 @@ public:
   bool interactive() const { return active; }
   const LayoutResult& frame() const { return current; }
   void setViewport(double y, ScrollOrigin = ScrollOrigin::Restore);
-  void setViewScale(bool fitWidth, double factor = 1);
-  bool fitWidth() const { return fit; }
+  void setViewScale(double factor);
+  double viewScale() const { return zoom; }
+  double screenScale() const { return dpiScale; }
+  double flowWidth() const { return std::max(40.0, viewport_w / (dpiScale * zoom)); }
   Point documentToView(Point p) const { return transform.toView(p); }
   Point viewToDocument(Point p) const { return transform.toDocument(p); }
   void copySelection();
@@ -73,6 +80,7 @@ public:
   long onPointer(FX::FXObject*, FX::FXSelector, void*);
   long onLeave(FX::FXObject*, FX::FXSelector, void*);
   long onMotion(FX::FXObject*, FX::FXSelector, void*);
+  long onMouseWheel(FX::FXObject*, FX::FXSelector, void*);
   long onKeyPress(FX::FXObject*, FX::FXSelector, void*);
 };
 } // namespace xfmd

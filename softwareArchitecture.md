@@ -553,3 +553,17 @@ ReadingColorPopup composes existing PreviewColorControls; ThemeButton handles th
 alternate gesture without changing the shared theme command. CompactToolbar owns
 wrapping/right-edge placement. IconCatalog owns the new Up glyph. All new files
 are application-owned. P054 implements these adapters and coordination calls.
+
+## Sprint 007 — shared document zoom (P055)
+
+Application-owned DocumentZoom.{h,cpp} under application/zoom coordinates
+shared manual/fit scale, using existing preview, host, editor and source-anchor
+owners. ZoomMode.h is an application enum; DocumentZoomInput.h under ui normalizes
+FOX key gestures. ApplicationZoom.cpp wires callbacks. PreviewControls and window
+menus remain composition; EditorPresentation and ViewTransform perform presentation.
+Wrap receives a reduced logical layout width at enlarged scale; A4/PDF geometry
+and renderer/interpreter contracts remain unchanged. See the P055 phase plan.
+
+P055 also removes independent host/editor fit calculations: DocumentZoom supplies
+one computed factor. Fit uses the actual laid-out content viewport after scrollbars;
+FOX maximum viewport accessors are not used as available document space.

@@ -420,3 +420,23 @@ palette and persistence contracts. Normative interaction details follow
   Left-click/Space still toggles theme. Popup dragging, Escape/outside dismissal,
   live screen colors, theme-specific persistence/rollback and unchanged PDF palette
   are required. AT-046, AT-050, AT-051 and AT-052 cover geometry and native input.
+
+## P055 amendment — shared document zoom (2026-09-24)
+
+This amendment extends UR-011/017/033 and SR-016/019 for KB-XFMD-010.
+Ctrl+wheel and Ctrl++/Ctrl+- zoom the main editor and preview together in both
+Wrap and A4; keypad equivalents are supported. Manual zoom spans 25–300%, with
+10-percentage-point increments. The toolbar shows the current percentage and
+offers 25/50/100/200/300%, a separator, then Fit page width/height. View → Zoom
+contains those presets and Zoom in/out with shortcuts, without fit actions.
+A4 fit recomputes a shared factor from visible document viewports; fit actions
+are disabled in Wrap. Default/restart is manual 100%; state persists within the
+window across document/view changes. A4 no longer implicitly starts in fit-width.
+
+The [P055 specification](sprints/Sprint-007--Workspace-UI/Phase-055--Document-Zoom.md)
+defines bounds, fractional wheel behavior, fit-to-manual transitions and ownership.
+Ctrl=page remains for sidebar/history/sample controls. Zoom preserves edits, undo,
+selection, caret and source reading position; Wrap reflows, while A4 paper/PDF
+geometry stays fixed. AT-025/030/031/039/052/053 must cover the view-mode × layout-mode
+matrix, native inputs, preset/fit menus, resize, bounds and document/PDF invariants.
+Earlier A4-only zoom and Ctrl=page descriptions retain their historical scope.

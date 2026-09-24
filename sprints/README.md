@@ -21,9 +21,9 @@ IDs are preserved, and its documentation is not copied here as active product sc
 ## Selected UI delivery
 
 [Sprint 007](Sprint-007--Workspace-UI/README.md) implements selected KB-XFMD-006–011
-on phase branches P053–P055. P053 opening/routing and P054 workspace composition
-are locally complete with linked acceptance evidence. P055 shared zoom remains
-selected and queued. SDUI ownership is excluded.
+on phase branches P053–P055. P053 opening/routing, P054 workspace composition
+and P055 shared zoom are locally complete with linked acceptance evidence and a
+[six-card audit](Sprint-007--Workspace-UI/evidence/Completion.md). SDUI ownership is excluded.
 
 ## Working convention
 

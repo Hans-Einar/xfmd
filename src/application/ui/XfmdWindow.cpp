@@ -1,4 +1,5 @@
 #include "XfmdWindow.h"
+#include "DocumentZoomInput.h"
 #include "application/build/BuildVersion.h"
 #include <fxkeys.h>
 using namespace FX;
@@ -18,6 +19,7 @@ XfmdWindow::~XfmdWindow() {
   delete fileMenu;
   delete editMenu;
   delete viewMenu;
+  delete zoomMenu;
   delete goMenu;
 }
 void XfmdWindow::setApplicationIcons(FXIcon* large, FXIcon* small) {
@@ -54,8 +56,11 @@ void XfmdWindow::buildUi() {
   new FXMenuRadio(viewMenu, "Window &wrap", commands, CommandRouter::WindowWrap);
   new FXMenuRadio(viewMenu, "&A4 page preview", commands, CommandRouter::A4);
   new FXMenuSeparator(viewMenu);
-  new FXMenuRadio(viewMenu, "Fit page &width", commands, CommandRouter::FitWidth);
-  new FXMenuRadio(viewMenu, "Actual size (100%)", commands, CommandRouter::ActualSize);
+  zoomMenu = new FXMenuPane(this);
+  PreviewControls::addPresets(zoomMenu, *commands);
+  new FXMenuCommand(zoomMenu, "Zoom &in\tCtrl++", nullptr, commands, CommandRouter::ZoomIn);
+  new FXMenuCommand(zoomMenu, "Zoom &out\tCtrl+-", nullptr, commands, CommandRouter::ZoomOut);
+  new FXMenuCascade(viewMenu, "&Zoom", nullptr, zoomMenu);
   new FXMenuCheck(viewMenu, "Full &Screen\tF11", commands, CommandRouter::FullScreen);
   new FXMenuSeparator(viewMenu);
   new FXMenuCheck(viewMenu, "&Dark appearance", commands, CommandRouter::ToggleTheme);
@@ -98,6 +103,12 @@ long XfmdWindow::onConfigure(FXObject* sender, FXSelector sel, void* data) {
 }
 long XfmdWindow::onKeyPress(FXObject* sender, FXSelector sel, void* data) {
   auto* event = static_cast<FXEvent*>(data);
+  if (auto direction = documentZoomKey(*event); direction && !getApp()->getModalWindow()) {
+    commands->dispatch(
+        this, FXSEL(SEL_COMMAND, direction > 0 ? CommandRouter::ZoomIn : CommandRouter::ZoomOut),
+        nullptr);
+    return 1;
+  }
   if (event->code == KEY_F6 && !getApp()->getModalWindow()) {
     documentPath->beginEditing();
     return 1;

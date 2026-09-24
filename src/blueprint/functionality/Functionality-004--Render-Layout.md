@@ -10,94 +10,90 @@ requirements: UR-040, UR-041, UR-035, UR-036, UR-037, UR-005, UR-002, UR-008, SR
 uses: FUNC-024, FUNC-017
 ---
 
-# Functionality-004: Layout og visuell dokumentmodell
+# Functionality-004: Layout and visual document model
 
-## 1. Hensikt og avgrensning
+## 1. Purpose and scope
 
-Beregn presentasjon fra semantisk modell uten FOX-avhengighet. Eie fontvalg som semantiske FontSpec-verdier, block/inline-layout, hit-regioner og mapping. Ingen Markdown-parsing, filåpning eller dokumenttilstand.
+Compute presentation from semantic models without FOX. Own semantic FontSpec choices,
+block/inline layout, hit regions and mapping; no parsing, opening or document state.
 
-## 2. Krav og akseptanse
+## 2. Requirements and acceptance
 
-Krav: UR-005, UR-002, UR-008, SR-001, SR-003, SR-005, SR-008, SR-009, SR-011, SR-013. Definisjoner og normativ akseptanse finnes i
-[kravspesifikasjonen](../../../xfmd_requirements.md). Kapittel 7 konkretiserer beviset.
+Requirements are listed in metadata and defined in the [requirements](../../../xfmd_requirements.md).
+Baseline acceptance: AT-005, AT-002, AT-008, AT-011, AT-013, AT-015, AT-018, AT-019,
+AT-021, AT-023. P11 added AT-031, AT-032, AT-036, AT-039; P23 added AT-055, AT-056, AT-057.
 
-## 3. Kontrakter og eierskap
+## 3. Contracts and ownership
 
-MarkdownRenderer implementerer IRenderer::layout/hitTest. BlockLayout og InlineLayout eier layout; HitTester eier lenketreff. Bare rene kontrakter konsumeres. DrawRun inneholder FontSpec og dokumentkoordinater, ikke FOX-ressurser.
+MarkdownRenderer implements IRenderer::layout/hitTest; BlockLayout/InlineLayout own
+placement and HitTester owns link hits. DrawRun contains FontSpec/document coordinates,
+not FOX resources. P11's revision 1.1 introduced measured FlowLayout visual lines,
+point units and PageComposer; shaping is injected through pure ports. Renderer owns
+placement, never native font resources.
 
-**Implementert utvidelse 1.1 (P11):** Trekk ut målt FlowLayout med visuelle linjer fra dagens layout. LayoutUnit blir points; PageComposer fordeler flyten over sider. Shaping injiseres via rene porter. Renderer eier plassering, aldri native fontressurser.
+## 4. Behavior, state and failures
 
-## 4. Atferd, tilstand og feil
+Ordinary text wraps at words/shaper clusters; code preserves whitespace and can
+scroll horizontally in Wrap. Heading fonts, nested lists/quotes, inline code and
+inert HTML remain supported. Frames carry run and block ranges for hidden syntax.
+LinkMarker produces #, /# or font-drawn ↗; linkId distinguishes separate links from
+styled fragments. Marker/text share targets; marker anchors are empty/approximate.
+TableLayout owns columns, cell InlineLayout, backgrounds/borders/alignment and whole
+rows at page boundaries. Rows/cells retain anchors; no FXTable/HTML, one frame for
+screen and PDF. P23 logical UTF-8 intervals address RenderFrame.readingText; embedded
+visuals preserve aspect/baseline/height bounds before pagination, retaining anchors/links.
 
-Layout bryter vanlig tekst ved ord/UTF-8-grenser; kode beholder whitespace og kan scrolle horisontalt. Varierende heading-fonter, nested lister/sitater, inline-kode og inert HTML støttes. Frame inneholder både run-ranges og block-ranges for hidden syntax. Ingen parsing, I/O eller utføring av lenker.
-
-LinkMarker lager #, /# eller fonttegnet ↗. InlineRun.linkId skiller
-separate lenker fra stilfragmenter i samme lenke. Markør og tekst har samme
-lenkemål; syntetisk markør har tomt, tilnærmet kildeanker.
-
-TableLayout eier kolonnebredder, cellenes InlineLayout, radbakgrunn/
-rammer, justering og samlet rad ved sideskift. Rader/celler har egne kildeankre.
-Ingen FXTable eller HTML; felles frame brukes uendret av skjerm/PDF.
+P055 narrow Wrap correction: use the actual positive width remaining after gutters,
+not a forced 40-point text column when zoom reduces logical viewport width.
+Continuous gutters shrink below 160 logical points (15% per side, capped at 24);
+InlineLayout receives the corresponding trailing extent padding, capped at the
+existing 20 points. A4 retains its fixed gutters and padding. Existing A4 widths and code/table behavior are unchanged. A single glyph or fixed indentation
+can still exceed an extremely narrow viewport; never clip source or alter font size
+behind the selected zoom. The native zoom test exposed the prior unnecessary overflow.
 
 ## 5. Plumbing
 
-Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiserer tidligere baseline. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
-
-| Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
+| Step | Event / caller | Called symbol | Source or contract file | Data / result | Failure / side effect | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `PreviewCoordinator::relayout` | `MarkdownRenderer::layout` | `src/renderer/MarkdownRenderer.cpp` | Model/request/metrics → frame | Width valideres | Implemented |
-| 2 | `MarkdownRenderer::layout` | `BlockLayout::layout` | `src/renderer/BlockLayout.cpp` | Blocks → vertikal geometri | Ressursgrenser | Implemented |
-| 3 | `BlockLayout::layout` | `InlineLayout::layout` | `src/renderer/InlineLayout.cpp` | Runs → linjer og ankere | UTF-8 splitter aldri inne i tegn | Implemented |
-| 4 | `InlineLayout::layout` | `ITextMetrics::measure` | `src/contracts/ITextMetrics.h` | Tekst/font → extent | Ren port | Implemented |
-| 5 | `MarkdownRenderer::hitTest` | `HitTester::hitTest` | `src/renderer/HitTester.cpp` | Frame/point → HitResult | Ingen navigasjonssideeffekt | Implemented |
-| 6 | `InlineLayout::layout` | `LinkMarker::make` | `src/renderer/LinkMarker.cpp` | Lenke/font → markør-run | Ingen I/O; syntetisk source-range | Implemented |
-| 7 | `MarkdownRenderer::layout` | `PageComposer::compose` | `src/renderer/PageComposer.cpp` | FlowLayout + PaperSpec → PageLayout | begrens store blokker | Implemented |
+| 1 | `PreviewCoordinator::relayout` | `MarkdownRenderer::layout` | `src/renderer/MarkdownRenderer.cpp` | Model/request/metrics → frame | Validate width | Implemented |
+| 2 | `MarkdownRenderer::layout` | `BlockLayout::layout` | `src/renderer/BlockLayout.cpp` | Blocks → vertical geometry | Resource bounds | Implemented |
+| 3 | `BlockLayout::layout` | `InlineLayout::layout` | `src/renderer/InlineLayout.cpp` | Runs → lines/anchors | Never split inside UTF-8 characters | Implemented |
+| 4 | `InlineLayout::layout` | `ITextMetrics::measure` | `src/contracts/ITextMetrics.h` | Text/font → extent | Pure port | Implemented |
+| 5 | `MarkdownRenderer::hitTest` | `HitTester::hitTest` | `src/renderer/HitTester.cpp` | Frame/point → HitResult | No navigation side effect | Implemented |
+| 6 | `InlineLayout::layout` | `LinkMarker::make` | `src/renderer/LinkMarker.cpp` | Link/font → marker run | No I/O; synthetic source range | Implemented |
+| 7 | `MarkdownRenderer::layout` | `PageComposer::compose` | `src/renderer/PageComposer.cpp` | FlowLayout + PaperSpec → PageLayout | Bound oversized blocks | Implemented |
 
-| 8 | `BlockLayout::layout` | `TableLayout::layout` | `src/renderer/TableLayout.cpp` | Tabell/tilgjengelig bredde → celler, rader og dekorasjoner | Smal A4 eller for høy rad gir Error | Implemented |
-
-
-P23: DrawRun får logiske UTF-8-intervaller i RenderFrame.readingText. EmbeddedContent.visual plasseres med aspektbevaring, baseline og høydegrense før PageComposer; kildeankre og lenker bevares.
-
-| 99 | `BlockLayout::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | Implementert diagramutvidelse | Blokkfeil og stale-data følger Mermaid-designet | Implemented |
-
-## 6. Gjenbruk og avhengigheter
-
-Ingen andre functionality-kontrakter konsumeres; delte datatyper følger arkitekturen.
-
-Preview bruker layout; FOX-host bruker hitTest; mappingtjenesten leser RenderFrame. Renderer skal ikke vokse til applikasjonskontroller. Nye primitiver krever kontraktreview.
-
-## 7. Verifikasjon
-
-Relevante akseptanse-ID-er: AT-005, AT-002, AT-008, AT-011, AT-013, AT-015, AT-018, AT-019, AT-021, AT-023.
-
-`RendererTest` bruker deterministiske fontmål og kontrollerer wrapping, fontstiler, UTF-8, dekorasjoner, ankere og lenketreff. PresentationTest bruker ekte FOX-mål.
-
-Evidence: [Fase P3](../../../docs/evidence/P3.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
-
-Ny regresjonskontroll: [Native lenker og markører](../../../docs/evidence/document-links.md).
-
-Utvidelsen krever AT-031, AT-032, AT-036, AT-039. Dette er planlagt dekning, ikke nye testbevis.
-
-P14: TableTest, TablePreviewTest og utvidet PdfFidelityTest dekker tabellutvidelsen;
-se [P14](../../../docs/evidence/P14.md).
-
-## 8. Status, risiko og endringskonsekvenser
-
-**Implemented 1.1:** [P11-bevis](../../../docs/evidence/P11.md) beskriver ny kode og kontroller. Historiske bevis nedenfor gjelder baseline, ikke automatisk de nye kravene.
+| 8 | `BlockLayout::layout` | `TableLayout::layout` | `src/renderer/TableLayout.cpp` | Table/available width → cells, rows, decorations | Narrow A4 or oversized row raises Error | Implemented |
 
 
-Implemented i P3. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
-Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.
+| 99 | `BlockLayout::layout` | `DiagramPlacement::append` | `src/renderer/diagram/DiagramPlacement.cpp` | Implemented diagram extension | Block errors/stale data follow Mermaid design | Implemented |
 
-P21: Decoration har en ren DecorationRole (Border, Surface, Alternate, Background)
-ved siden av den opprinnelige printfargen. BlockLayout og TableLayout angir rolle
-ved opprettelse, slik at skjermadapteren kan bruke lesepalett uten å sammenligne
-magiske RGB-verdier. Geometri, fontdata og FrameKey er uendret. Rollen er ingen
-FOX-/Cairo-type og ingen brukerpreferanse lagres i renderer. ReadingColorsTest
-kontrollerer rolledekning og at utskriftspaletten fortsatt brukes uten skjermoverstyring.
+## 6. Reuse and dependencies
 
-P23 akseptanse: AT-055, AT-056, AT-057. Tester: RichPreviewTest og PreviewSelectionGuiTest.
+Shared data follow the architecture. Preview consumes layout, FOX host consumes
+hitTest, mapping reads RenderFrame; renderer is not an application controller.
+FUNC-017 and FUNC-024 retain page/diagram ownership. New primitives need contract review.
 
-P25 (Proposed): DiagramPlacement setter ferdig scene inn som stier og vanlige DrawRuns; dyr diagramlayout skjer ikke i MarkdownRenderer på GUI-tråden. Krav: UR-040, UR-041; AT-060, AT-061.
-Se [design](../../../docs/design/mermaid-integration.md). Eksisterende Implemented-rader
-og eldre bevis gjelder baseline; ny plumbing er ikke implementert eller testet.
+## 7. Verification
+
+RendererTest uses deterministic metrics for wrapping/styles/UTF-8/decorations/anchors/
+hits; PresentationTest uses native metrics. Historical evidence: [P3](../../../docs/evidence/P3.md),
+[native links](../../../docs/evidence/document-links.md), [P11](../../../docs/evidence/P11.md).
+P7 assessed aggregate coverage. P14 TableTest/TablePreviewTest/PdfFidelityTest cover
+tables; [P14](../../../docs/evidence/P14.md). P23 RichPreviewTest/PreviewSelectionGuiTest
+cover logical selection/embedded visuals. P055 adds narrow flow-width regression and
+native zoom checks under its [plan](../../../sprints/Sprint-007--Workspace-UI/Phase-055--Document-Zoom.md).
+
+## 8. Status, risks and change impact
+
+Implemented in P3, revision 1.1 P11. Update contracts/calls/consumers/tests together;
+old evidence retains dated scope. P21 DecorationRole (Border/Surface/Alternate/Background)
+coexists with print color; BlockLayout/TableLayout assign roles so screen palettes
+need no magic RGB matching. Geometry/font/FrameKey remain unchanged, no native types
+or preferences enter renderer. ReadingColorsTest checks roles and default print colors.
+P25 originally proposed DiagramPlacement for UR-040/041 and AT-060, AT-061; the current
+implemented row reflects later delivery. Expensive diagram layout stays off the GUI
+renderer path; see [design](../../../docs/design/mermaid-integration.md). That dated
+proposal alone was not implementation evidence. P055 does not change those contracts.
+
+P055 local zoom acceptance and bounded limits: [evidence](../../../sprints/Sprint-007--Workspace-UI/evidence/P055.md).

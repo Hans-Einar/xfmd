@@ -1,5 +1,6 @@
 #pragma once
 #include "application/scroll/ScrollDynamics.h"
+#include <functional>
 #include <fx.h>
 namespace xfmd {
 class FoxWheelScrollBar : public FX::FXScrollBar {
@@ -16,6 +17,7 @@ protected:
   FoxWheelScrollBar() = default;
 
 public:
+  std::function<void(double)> zoomRequested;
   enum { ID_MOTION = FX::FXScrollBar::ID_LAST };
   FoxWheelScrollBar(FX::FXComposite*, FX::FXObject*, FX::FXSelector, FX::FXuint);
   ~FoxWheelScrollBar() override;

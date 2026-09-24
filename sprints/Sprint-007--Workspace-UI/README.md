@@ -9,9 +9,14 @@ are excluded. No merge or installation is implied.
 | --- | --- | --- | --- |
 | [053](Phase-053--File-Opening.md) | KB-XFMD-006/007: unified file/folder opening and target routing | sprint/007/phase/053-file-opening | Locally complete; #006 integration completed in P054 |
 | [054](Phase-054--Workspace-Layout.md) | KB-XFMD-008/009/011: path/filter row, compact sidebar and toolbar/color popup | sprint/007/phase/054-workspace-layout | Locally complete; [evidence](evidence/P054.md) |
-| 055 | KB-XFMD-010: shared zoom and controls | sprint/007/phase/055-document-zoom | Selected, queued |
+| [055](Phase-055--Document-Zoom.md) | KB-XFMD-010: shared zoom and controls | sprint/007/phase/055-document-zoom | Locally complete; [evidence](evidence/P055.md) |
 
-One combined sprint PR after phase acceptance. One commit per milestone, with
+One combined [sprint PR](https://github.com/Hans-Einar/xfmd/pulls?q=is%3Apr+head%3Asprint%2F007%2Fphase%2F055-document-zoom) uses head
+`sprint/007/phase/055-document-zoom` and base
+`sprint/006/phase/052-sdl-acceptance`. It is a draft stacked on the pre-UI checkpoint,
+so its diff contains only the three UI phase commits. Integrate the base separately
+before retargeting/merging; do not squash or rebase the published phases. The CI
+workflow skips draft PRs; recorded acceptance is local. One commit per milestone, with
 phase branches preserving history. Base `6703a58` is the explicit checkpoint of
 previously uncommitted reconciliation, tooling, SDL verification and captured UI
 notes. It does not retroactively change those reports' tested source identities.
@@ -43,3 +48,10 @@ notes. It does not retroactively change those reports' tested source identities.
 
 These are implementation decisions within the selected cards, not prior owner
 quotes. Amend them if native verification reveals a better fit to the stated needs.
+
+## Completion audit
+
+All six selected cards are completed with local acceptance and retained historical
+run provenance. See the [owner-requirement audit](evidence/Completion.md). P055 adds
+73-test regression acceptance, focused final native checks and separate sanitizers.
+KB-XFMD-003 and the later KB-XFMD-012 Ref remain backlog scope. No merge or install.

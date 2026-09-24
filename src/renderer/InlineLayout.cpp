@@ -23,7 +23,8 @@ SourceRange slice(const InlineRun& run, std::size_t begin, std::size_t end) {
 } // namespace
 double InlineLayout::layout(const SemanticBlock& block, double left, double top, double width,
                             FontSpec base, ITextMetrics& metrics, RenderFrame& frame, bool wrapCode,
-                            const std::function<bool()>& cancelled, ColumnAlignment alignment) {
+                            const std::function<bool()>& cancelled, ColumnAlignment alignment,
+                            double rightPadding) {
   double x = left, y = top;
   if (!frame.readingText.empty())
     frame.readingText += "\n";
@@ -101,7 +102,7 @@ double InlineLayout::layout(const SemanticBlock& block, double left, double top,
       frame.runs.back().textEnd = textBase + end;
     }
     x += extent.width;
-    frame.contentWidth = std::max(frame.contentWidth, x + 20);
+    frame.contentWidth = std::max(frame.contentWidth, x + rightPadding);
     lineHeight = std::max(lineHeight, extent.height + 4);
     ascent = std::max(ascent, extent.ascent);
   };
@@ -119,7 +120,7 @@ double InlineLayout::layout(const SemanticBlock& block, double left, double top,
         x += marker->bounds.width;
         lineHeight = std::max(lineHeight, marker->bounds.height + 4);
         ascent = std::max(ascent, marker->ascent);
-        frame.contentWidth = std::max(frame.contentWidth, x + 20);
+        frame.contentWidth = std::max(frame.contentWidth, x + rightPadding);
         if (marker->shaped)
           for (const auto& part : marker->shaped->segments)
             frame.glyphCount += part.glyphs.size();
@@ -162,7 +163,7 @@ double InlineLayout::layout(const SemanticBlock& block, double left, double top,
       x += w;
       lineHeight = std::max(lineHeight, h + 4);
       ascent = std::max(ascent, visual->ascent * factor);
-      frame.contentWidth = std::max(frame.contentWidth, x + 20);
+      frame.contentWidth = std::max(frame.contentWidth, x + rightPadding);
       if (run.embedded.display)
         finishLine();
       continue;

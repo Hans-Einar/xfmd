@@ -95,6 +95,7 @@ add_library(xfmd_application
   src/application/ApplicationOpening.cpp src/application/ui/OpenPathDialog.cpp src/application/adapters/DesktopFileOpener.cpp
   src/application/ApplicationAppearance.cpp src/application/ui/XfmdToolbar.cpp
   src/application/ApplicationWorkspace.cpp
+  src/application/ApplicationZoom.cpp src/application/zoom/DocumentZoom.cpp
   src/application/ui/controls/DocumentPathField.cpp
   src/application/ui/controls/ReadingColorPopup.cpp
   src/application/ui/controls/ThemeButton.cpp

@@ -1,0 +1,19 @@
+$ python3 tools/validate_blueprints.py
+OK: 37 blueprints, 70 requirements; metadata, matrix, plumbing and local file links checked.
+Not checked: external links, heading anchors, actual C++ call graph or application behavior.
+Exit: 0
+
+$ python3 tools/check_blueprint_symbols.py
+OK: 277 implemented plumbing callees found; caller semantics require review
+Exit: 0
+
+$ python3 tools/check_layers.py
+PASS: pure-layer include boundaries
+Exit: 0
+
+$ python3 /tmp/xfmd_check_board.py
+PASS: 12 cards, 43 append-only events; replay, metadata, placement and index agree.
+Exit: 0
+
+$ git diff --check
+Exit: 0

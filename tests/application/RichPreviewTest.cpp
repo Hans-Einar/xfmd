@@ -134,7 +134,9 @@ $not_math$
   model = EmbeddedVisuals::prepare(parser.parse(source), source);
   CHECK(model->blocks[0].runs[0].embedded.visual);
   frame = renderer.layout(*model, {100}, metrics);
-  CHECK(frame->runs[0].bounds.width <= 52.01);
+  // Narrow Continuous pages use 15% gutters; the image fills the remaining 70 points.
+  CHECK(std::abs(frame->runs[0].bounds.x - 15) < .01);
+  CHECK(std::abs(frame->runs[0].bounds.width - 70) < .01);
   CHECK(std::abs(frame->runs[0].bounds.width / frame->runs[0].bounds.height - 2) < .01);
   source.text = "# Rich PDF\n\n$$\\frac{a}{b}$$\n\n![Image](test%20image.png)";
   model = EmbeddedVisuals::prepare(parser.parse(source), source);

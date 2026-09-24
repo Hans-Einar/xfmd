@@ -117,7 +117,7 @@ void run() {
   const int center = (bar->getRange() - bar->getPage()) / 2;
   const auto style = bar->getScrollBarStyle();
   bar->setScrollBarStyle(style | FX::SCROLLBAR_WHEELJUMP);
-  for (auto modifier : {FX::ALTMASK, FX::CONTROLMASK}) {
+  for (auto modifier : {FX::ALTMASK}) {
     app.host->setPosition(0, -center);
     FX::FXEvent event{};
     event.code = 120;
@@ -126,6 +126,16 @@ void run() {
     CHECK(bar->getPosition() ==
           center - (modifier == FX::ALTMASK ? bar->getLine() : bar->getPage()));
   }
+  // Ctrl is zoom on document bars; the sidebar retains Ctrl=page.
+  auto* treeBar = tree->verticalScrollBar();
+  treeBar->setScrollBarStyle(treeBar->getScrollBarStyle() | FX::SCROLLBAR_WHEELJUMP);
+  const int treeCenter = (treeBar->getRange() - treeBar->getPage()) / 2;
+  tree->setPosition(tree->getXPosition(), -treeCenter);
+  FX::FXEvent ctrl{};
+  ctrl.code = 120;
+  ctrl.state = FX::CONTROLMASK;
+  treeBar->handle(treeBar, FXSEL(FX::SEL_MOUSEWHEEL, 0), &ctrl);
+  CHECK(treeBar->getPosition() == std::max(0, treeCenter - treeBar->getPage()));
   bar->setScrollBarStyle(style);
   app.host->setViewport(center);
   FX::FXEvent moving{};

@@ -67,6 +67,11 @@ layout, active-tab Refresh and theme popup follow the [phase specification](../.
 Older toolbar/header placement descriptions are historical; persistence and document
 contracts remain. Native acceptance is recorded in the P054 evidence.
 
+P055 implemented zoom behavior follows the [phase plan](../../../sprints/Sprint-007--Workspace-UI/Phase-055--Document-Zoom.md).
+Shared manual scale applies in Wrap/A4; explicit A4 width/height fit uses visible
+viewports. Application owns state; host transforms and editor fonts consume it.
+Native zoom acceptance is recorded in [P055 evidence](../../../sprints/Sprint-007--Workspace-UI/evidence/P055.md); previous evidence retains its dated scope.
+
 ## 5. Plumbing
 
 | Step | Event / caller | Called symbol | Source or contract file | Data / result | Failure / side effect | Status |
@@ -100,6 +105,9 @@ contracts remain. Native acceptance is recorded in the P054 evidence.
 | 27 | Refresh button | `WorkspacePanel::onRefresh` | `src/application/ui/WorkspacePanel.cpp` | active tab → file/index refresh | preserve document/root/filter | Implemented |
 | 28 | Files refresh | `SidebarWidget::refresh` | `src/application/ui/SidebarWidget.cpp` | current tree context → rescan/restore | omit disappeared entries | Implemented |
 | 29 | ThemeButton alternate gesture | `ReadingColorPopup::showAt` | `src/application/ui/controls/ReadingColorPopup.cpp` | anchor → existing palette sliders | Escape/outside closes; no theme toggle | Implemented |
+
+| 55 | commands / normalized input | `DocumentZoom::step` | `src/application/zoom/DocumentZoom.cpp` | signed steps → shared bounded scale | leave fit; cancel scroll; retain document | Implemented |
+| 56 | viewport/profile changes | `DocumentZoom::refresh` | `src/application/zoom/DocumentZoom.cpp` | geometry → editor/host scale and controls | guard reentrancy; preserve anchor | Implemented |
 
 ## 6. Reuse and dependencies
 

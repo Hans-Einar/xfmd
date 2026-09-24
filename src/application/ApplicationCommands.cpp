@@ -45,10 +45,21 @@ void Application::execute(CommandRouter::Command command) {
     break;
   }
   case CommandRouter::FitWidth:
-    host->setViewScale(true);
+    zoom->setMode(ZoomMode::FitWidth);
     break;
+  case CommandRouter::FitHeight:
+    zoom->setMode(ZoomMode::FitHeight);
+    break;
+  case CommandRouter::ZoomIn:
+  case CommandRouter::ZoomOut:
+    zoom->step(command == CommandRouter::ZoomIn ? 1 : -1);
+    break;
+  case CommandRouter::Zoom25:
+  case CommandRouter::Zoom50:
   case CommandRouter::ActualSize:
-    host->setViewScale(false, 1);
+  case CommandRouter::Zoom200:
+  case CommandRouter::Zoom300:
+    zoom->setPercent(CommandRouter::presetPercent(command));
     break;
   case CommandRouter::Preferences: {
     PreferencesDialog dialog(window, *preferences, *ui,
@@ -126,10 +137,7 @@ void Application::execute(CommandRouter::Command command) {
     break;
   }
   app.forceRefresh();
-  if (preview && host) {
-    window->editor->setViewProfile(preview->layoutProfile(), host->fitWidth());
-    window->previewControls->sync(preview->layoutProfile().mode == LayoutMode::Paged,
-                                  host->fitWidth());
-  }
+  if (zoom)
+    zoom->refresh();
 }
 } // namespace xfmd

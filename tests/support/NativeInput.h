@@ -69,7 +69,8 @@ inline void nativeClick(FX::FXWindow* window, int x, int y, unsigned state = 0,
   event.type = ButtonPress;
   CHECK(XSendEvent(display, window->id(), False, ButtonPressMask, &event));
   event.type = ButtonRelease;
-  event.xbutton.state |= button == Button1 ? Button1Mask : Button3Mask;
+  CHECK(button >= Button1 && button <= Button5);
+  event.xbutton.state |= Button1Mask << (button - Button1);
   CHECK(XSendEvent(display, window->id(), False, ButtonReleaseMask, &event));
   XFlush(display);
   if (drain)

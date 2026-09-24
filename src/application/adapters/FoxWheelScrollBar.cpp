@@ -65,6 +65,11 @@ long FoxWheelScrollBar::onMouseWheel(FXObject*, FXSelector, void* data) {
   const auto& event = *static_cast<FXEvent*>(data);
   if (!isEnabled() || (event.state & (LEFTBUTTONMASK | MIDDLEBUTTONMASK | RIGHTBUTTONMASK)))
     return 0;
+  if ((event.state & CONTROLMASK) && !(event.state & ALTMASK) && zoomRequested) {
+    cancelMotion();
+    zoomRequested(event.code / 120.0);
+    return 1;
+  }
   if (std::getenv("XFMD_TRACE_WHEEL"))
     std::fprintf(stderr, "wheel axis=%s code=%d time=%u modifiers=%u source=unknown\n",
                  (getScrollBarStyle() & SCROLLBAR_HORIZONTAL) ? "x" : "y", event.code, event.time,

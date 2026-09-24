@@ -1,5 +1,6 @@
 #include "FoxRenderHost.h"
 #include "FoxWheelScrollBar.h"
+#include "application/ui/DocumentZoomInput.h"
 #include <FX88591Codec.h>
 #include <algorithm>
 #include <cmath>
@@ -142,8 +143,21 @@ long FoxRenderHost::onMotion(FXObject*, FXSelector, void* data) {
   setDefaultCursor(getApp()->getDefaultCursor(link ? DEF_HAND_CURSOR : DEF_TEXT_CURSOR));
   return 1;
 }
+long FoxRenderHost::onMouseWheel(FXObject* sender, FXSelector sel, void* data) {
+  const auto& event = *static_cast<FXEvent*>(data);
+  if ((event.state & CONTROLMASK) && !(event.state & ALTMASK) && zoomRequested) {
+    FoxWheelScrollBar::cancelTree(this);
+    zoomRequested(event.code / 120.0);
+    return 1;
+  }
+  return FXScrollArea::handle(sender, sel, data);
+}
 long FoxRenderHost::onKeyPress(FXObject*, FXSelector, void* data) {
   auto* event = static_cast<FXEvent*>(data);
+  if (auto direction = documentZoomKey(*event); direction && zoomRequested) {
+    zoomRequested(direction);
+    return 1;
+  }
   if (active && current && (event->state & CONTROLMASK)) {
     if (event->code == KEY_a || event->code == KEY_A) {
       selection.all(*current);

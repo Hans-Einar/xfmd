@@ -85,7 +85,7 @@ Recorded in backlog only. Implementation has not been selected or started by
 this capture. Findings describe the inspected working tree, not the installed
 binary shown in the screenshots; see the [source context](../evidence/2026-09-24-ui-wishlist/README.md).
 
-Related: [KB-XFMD-008](%23008--Change--Document-path-and-file-filter.md), [KB-XFMD-010](../backlog/%23010--Change--Document-zoom-controls.md).
+Related: [KB-XFMD-008](%23008--Change--Document-path-and-file-filter.md), [KB-XFMD-010](../completed/%23010--Change--Document-zoom-controls.md).
 
 ## Goal selection — 2026-09-24
 

@@ -66,6 +66,7 @@ void run() {
   editor->setSelection(5, 7);
   const auto baseSize = editor->getFont()->getSize();
   app.execute(CommandRouter::A4);
+  app.execute(CommandRouter::FitWidth);
   events(app);
   CHECK(editor->getTextStyle() & TEXT_FIXEDWRAP);
   CHECK(editor->getWrapColumns() > 20);

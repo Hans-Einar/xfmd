@@ -13,7 +13,7 @@
 | KB-XFMD-007 | Change | completed | [Open plain text internally and route other targets consistently](completed/%23007--Change--File-types-and-external-opening.md) |
 | KB-XFMD-008 | Change | completed | [Move the document path into a full-width navigation and filter row](completed/%23008--Change--Document-path-and-file-filter.md) |
 | KB-XFMD-009 | Change | completed | [Compact the sidebar and tab recent folders and files](completed/%23009--Change--Sidebar-controls-and-recent-tabs.md) |
-| KB-XFMD-010 | Change | backlog | [Provide normal zoom gestures and percentage controls in Wrap and A4](backlog/%23010--Change--Document-zoom-controls.md) |
+| KB-XFMD-010 | Change | completed | [Provide normal zoom gestures and percentage controls in Wrap and A4](completed/%23010--Change--Document-zoom-controls.md) |
 | KB-XFMD-011 | Change | completed | [Regroup toolbar actions and hide reading-color sliders in the theme popup](completed/%23011--Change--Toolbar-layout-and-color-popup.md) |
 | KB-XFMD-012 | Ref | backlog | [Synchronize XFMD cards with the shared KanBan contract](backlog/%23012--Ref--SDP--014--KanBan-format-sync.md) |
 
@@ -22,8 +22,8 @@ Read relevant notes at session start. Review backlog after a topic discussion an
 before selecting the next round. KB-XFMD-001 completed its bounded documentation reconciliation. KB-XFMD-002 completed isolated tooling extraction and branch assessment.
 KB-XFMD-005 completed its identified SDL acceptance evidence and records residual
 limits in P052. KB-XFMD-007 completed P053 target routing. KB-XFMD-006/008/009/011
-completed P054 workspace integration with documented checks. KB-XFMD-010 remains
-selected and queued; KB-XFMD-003 remains deferred. KB-XFMD-012 is the separate
+completed P054 workspace integration with documented checks. KB-XFMD-010 completed
+P055 shared zoom; KB-XFMD-003 remains deferred. KB-XFMD-012 is the separate
 concurrently captured process Ref and does not expand the selected UI goal.
 
 

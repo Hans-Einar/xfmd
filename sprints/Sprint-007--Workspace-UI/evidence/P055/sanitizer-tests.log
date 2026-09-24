@@ -1,0 +1,17 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd-sdl-navigation/build-ui-sanitize
+Test project /home/warloc/git/xfmd-sdl-navigation/build-ui-sanitize
+    Start 70: DocumentZoomDpiTest
+    Start 15: DocumentZoomGuiTest
+1/4 Test #70: DocumentZoomDpiTest ..............   Passed   25.12 sec
+    Start 68: ThemePopupGuiTest
+2/4 Test #15: DocumentZoomGuiTest ..............   Passed   25.13 sec
+    Start 69: DocumentZoomPdfTest
+3/4 Test #69: DocumentZoomPdfTest ..............   Passed    2.84 sec
+4/4 Test #68: ThemePopupGuiTest ................   Passed    4.48 sec
+
+100% tests passed, 0 tests failed out of 4
+
+Label Time Summary:
+GUI    =  57.56 sec*proc (4 tests)
+
+Total Test time (real) =  29.60 sec

@@ -10,7 +10,7 @@ class ViewTransform {
 public:
   double scale = 1;
   int contentWidth = 0, contentHeight = 0;
-  void configure(const RenderFrame&, double viewportWidth, double dpiScale, double zoom, bool fit);
+  void configure(const RenderFrame&, double viewportWidth, double dpiScale, double zoom);
   Point toView(Point) const;
   Point toDocument(Point) const;
   Rect pageRect(std::size_t) const;

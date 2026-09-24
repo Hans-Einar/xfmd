@@ -40,7 +40,7 @@ void Application::initialize(int& argc, char** argv) {
       return !exporter || !exporter->busy();
     if (command == CommandRouter::CancelExport)
       return exporter && exporter->busy();
-    if (command == CommandRouter::FitWidth || command == CommandRouter::ActualSize)
+    if (command == CommandRouter::FitWidth || command == CommandRouter::FitHeight)
       return preview && preview->layoutProfile().mode == LayoutMode::Paged;
     if (command == CommandRouter::Undo)
       return edits.canUndo();
@@ -70,9 +70,11 @@ void Application::initialize(int& argc, char** argv) {
     if (command == CommandRouter::WindowWrap)
       return preview->layoutProfile().mode == LayoutMode::Continuous;
     if (command == CommandRouter::FitWidth)
-      return host->fitWidth();
-    if (command == CommandRouter::ActualSize)
-      return !host->fitWidth();
+      return zoom && zoom->mode() == ZoomMode::FitWidth;
+    if (command == CommandRouter::FitHeight)
+      return zoom && zoom->mode() == ZoomMode::FitHeight;
+    if (auto percent = CommandRouter::presetPercent(command))
+      return zoom && zoom->mode() == ZoomMode::Manual && std::abs(zoom->percent() - percent) < .01;
     return false;
   };
   wireDocument();
@@ -118,6 +120,7 @@ void Application::initialize(int& argc, char** argv) {
   host->linkHovered = [this](const std::string& target) { showLinkTarget(target); };
   wireIndex();
   wireWorkspace();
+  wireZoom();
   documentOpened = [this] {
     if (documentViews)
       documentViews->documentChanged("main");
@@ -147,6 +150,8 @@ void Application::initialize(int& argc, char** argv) {
     if (views->mode() == ViewMode::Preview)
       host->setFocus();
     host->recalc();
+    if (zoom)
+      zoom->refresh();
   };
   preferences->changed = [this](const auto& value) {
     applyAppearance(value.appearance);
@@ -154,7 +159,8 @@ void Application::initialize(int& argc, char** argv) {
     auto profile = preview->layoutProfile();
     profile.paper.margin = value.marginMm * 72 / 25.4;
     preview->setLayoutProfile(profile);
-    window->editor->setViewProfile(profile, host->fitWidth());
+    if (zoom)
+      zoom->refresh();
   };
   preferences->changed(preferences->active());
   app.create();
@@ -218,9 +224,8 @@ bool Application::open(const std::string& path) {
 }
 void Application::updateUi() {
   window->setDocumentLabel(session.view().path, session.dirty());
-  if (preview && host)
-    window->previewControls->sync(preview->layoutProfile().mode == LayoutMode::Paged,
-                                  host->fitWidth());
+  if (zoom)
+    zoom->refresh();
   window->editor->applyProjection(session.view());
   auto title = (session.dirty() ? "* " : "") +
                (session.view().path.empty() ? std::string("Untitled") : session.view().path) +

@@ -55,6 +55,11 @@ a left-click on the same target without dragging or a button chord activates.
 Other buttons retain focus but do not activate links. A stale frame cancels activation.
 Captured Ctrl changes the consumer route; it does not cause another activation.
 
+P055 implemented zoom behavior follows the [phase plan](../../../sprints/Sprint-007--Workspace-UI/Phase-055--Document-Zoom.md).
+Shared manual scale applies in Wrap/A4; explicit A4 width/height fit uses visible
+viewports. Application owns state; host transforms and editor fonts consume it.
+Native zoom acceptance is recorded in [P055 evidence](../../../sprints/Sprint-007--Workspace-UI/evidence/P055.md); previous evidence retains its dated scope.
+
 ## 5. Plumbing
 
 | Step | Event / caller | Called symbol | Source or contract file | Data / result | Failure / side effect | Status |
@@ -75,6 +80,9 @@ Captured Ctrl changes the consumer route; it does not cause another activation.
 | 14 | `Application::changeReadingColors / applyAppearance` | `FoxRenderHost::setReadingColors` | `src/application/adapters/FoxRenderHost.cpp` | Reading palette → repaint/profile | No document mutation | Implemented |
 | 15 | `FoxRenderHost hover callback` | `Application::showLinkTarget` | `src/application/ApplicationAppearance.cpp` | Link → status text | No activation; invalid paths shown as targets | Implemented |
 | 16 | `DisplayListPainter::paint` | `DiagramPainter::paint` | `src/application/adapters/DiagramPainter.cpp` | Diagram paths/text → pixels | Block errors/stale data follow Mermaid design | Implemented |
+
+| 55 | commands / normalized input | `DocumentZoom::step` | `src/application/zoom/DocumentZoom.cpp` | signed steps → shared bounded scale | leave fit; cancel scroll; retain document | Implemented |
+| 56 | viewport/profile changes | `DocumentZoom::refresh` | `src/application/zoom/DocumentZoom.cpp` | geometry → editor/host scale and controls | guard reentrancy; preserve anchor | Implemented |
 
 ## 6. Reuse and dependencies
 

@@ -9,7 +9,8 @@
 using namespace FX;
 namespace xfmd {
 FXDEFMAP(FoxRenderHost)
-renderMap[] = {FXMAPFUNC(SEL_PAINT, 0, FoxRenderHost::onPaint),
+renderMap[] = {FXMAPFUNC(SEL_MOUSEWHEEL, 0, FoxRenderHost::onMouseWheel),
+               FXMAPFUNC(SEL_PAINT, 0, FoxRenderHost::onPaint),
                FXMAPFUNC(SEL_CLIPBOARD_REQUEST, 0, FoxRenderHost::onClipboardRequest),
                FXMAPFUNC(SEL_SELECTION_REQUEST, 0, FoxRenderHost::onClipboardRequest),
                FXMAPFUNC(SEL_SELECTION_LOST, 0, FoxRenderHost::onSelectionLost),
@@ -38,14 +39,22 @@ FXint FoxRenderHost::getContentWidth() { return current ? transform.contentWidth
 FXint FoxRenderHost::getContentHeight() { return current ? transform.contentHeight : 60; }
 void FoxRenderHost::layout() {
   const auto before = transform.toDocument({-double(pos_x), -double(pos_y)});
+  programmatic = true;
   FXScrollArea::layout();
+  programmatic = false;
   if (current) {
-    transform.configure(*current, viewport_w, dpiScale, zoom, fit);
+    transform.configure(*current, viewport_w, dpiScale, zoom);
     programmatic = true;
     FXScrollArea::layout();
     programmatic = false;
   }
-  const double flowWidth = std::max(40.0, viewport_w / dpiScale);
+  if (observedWidth != viewport_w || observedHeight != viewport_h) {
+    observedWidth = viewport_w;
+    observedHeight = viewport_h;
+    if (geometryChanged)
+      geometryChanged();
+  }
+  const double flowWidth = this->flowWidth();
   if (viewport_w > 0 && flowWidth != lastWidth) {
     lastWidth = flowWidth;
     if (current && current->key.profile.mode == LayoutMode::Paged)
@@ -84,13 +93,13 @@ void FoxRenderHost::present(LayoutResult frame) {
   if (!frame || frame->token != expected || (requested && !(frame->key == *requested)))
     return;
   if (frame->key.profile.mode == LayoutMode::Continuous &&
-      std::abs(frame->width - std::max(40.0, viewport_w / dpiScale)) > .01)
+      std::abs(frame->width - flowWidth()) > .01)
     return;
   if (!current || current->token != frame->token)
     selection.clear();
   current = std::move(frame);
   active = true;
-  transform.configure(*current, viewport_w, dpiScale, zoom, fit);
+  transform.configure(*current, viewport_w, dpiScale, zoom);
   programmatic = true;
   FXScrollArea::layout();
   programmatic = false;
@@ -119,20 +128,28 @@ void FoxRenderHost::setViewport(double y, ScrollOrigin origin) {
   setPosition(pos_x, -int(std::lround(transform.toView({0, std::max(0.0, y)}).y)));
   programmatic = false;
 }
-void FoxRenderHost::setViewScale(bool fitWidth, double factor) {
+void FoxRenderHost::setViewScale(double factor) {
   if (linkHovered)
     linkHovered("");
   if (!std::isfinite(factor))
     return;
+  factor = std::clamp(factor, .05, 8.0);
+  if (std::abs(zoom - factor) < .000001)
+    return;
   auto before = transform.toDocument({-double(pos_x), -double(pos_y)});
-  fit = fitWidth;
-  zoom = std::clamp(factor, .25, 4.0);
+  zoom = factor;
   if (current) {
-    transform.configure(*current, viewport_w, dpiScale, zoom, fit);
+    transform.configure(*current, viewport_w, dpiScale, zoom);
     programmatic = true;
     FXScrollArea::layout();
     programmatic = false;
     setViewport(before.y);
+    if (current->key.profile.mode == LayoutMode::Continuous) {
+      active = false;
+      lastWidth = flowWidth();
+      if (resized)
+        resized(lastWidth);
+    }
   }
   recalc();
   update();
