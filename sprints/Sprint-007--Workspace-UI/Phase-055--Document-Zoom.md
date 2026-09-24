@@ -88,3 +88,13 @@ identified P055 sources. [Evidence](evidence/P055.md) distinguishes the full
 the manifest records source/binary hashes. The [six-card audit](evidence/Completion.md)
 closes selected scope; #010 moves to completed with an append-only ledger event.
 No merge, installation or global Verified promotion is implied.
+
+## M2 — Name the UI delivery 0.3
+
+Owner decision on 2026-09-24: the previous navigation milestone is named 0.2 and
+this UI delivery is 0.3. Update VERSION and the English version policy together;
+retain the actual 0.1 identities in historical acceptance records. This is a
+version-only follow-up on the same phase branch, with its own milestone commit.
+BuildVersionTest checks the generated version against metadata; the installation
+receipt records the final clean commit and installed binary. Application behavior
+is unchanged, so the P053–P055 functional evidence remains applicable.

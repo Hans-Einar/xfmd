@@ -1,44 +1,64 @@
-# Versjon og byggidentitet
+# Version and build identity
 
-XFMD viser `major.minor branch:commitnummer`, eksempelvis
-`0.1 sprint/001/phase/042-build-identity:181`. På `main` brukes nummeret til
-siste integrerte PR når dette finnes: `0.1 PR#34:179`.
+XFMD displays `major.minor branch:commit-count`, for example
+`0.3 sprint/007/phase/055-document-zoom:196`. On `main`, the latest integrated
+PR number is used when available, for example `0.3 PR#39:200`; these are format
+examples, not claims that a PR has been merged.
 
-`VERSION` er eneste kilde til major/minor. Major endres ved bevisst større
-produkt-/kompatibilitetsbrudd; minor ved en besluttet funksjonsleveranse.
-Fase, milestone eller bygg øker ikke automatisk major/minor. Nåværende
-produktlinje beholder `0.1`. CPack bruker teknisk pakkeversjon `0.1.0`.
+`VERSION` is the sole source of major/minor. Major changes for a deliberate major
+product or compatibility break; minor changes for an explicitly selected feature
+delivery. A phase, milestone or build does not automatically increment major/minor.
+The current product version is `0.3`; CPack derives package version `0.3.0`.
 
-Commitnummer er `git rev-list --count HEAD`: antall forskjellige commits som
-kan nås fra byggets commit, inkludert merge-commits. Vanlig commit øker tallet
-med én; merge kan øke med flere fordi hele fasens historie kommer inn.
-Fasebrancher arver historikken og teller videre. Parallelle brancher kan ha
-samme tall; branch/PR og produktversjon inngår derfor i identiteten. Dette er
-ikke en global nummerserver som fordeler unike tall mellom parallelle brancher.
-Ingen versjonsfil må endres for hver commit, og en ren clone gir samme nummer.
+## Product milestone decision — 2026-09-24
 
-Publisert historie skal ikke rebases, squash-merges eller amendes: det ville
-endre tellingen. Integrer sprint-PR med merge-commit. På main leses siste
-`Merge pull request #N` langs first-parent-historien; dokumentasjonscommits etter
-mergen beholder PR-navnet og får nytt nummer. Uten kjent PR vises `main`.
-Git-SHA lagres bare som teknisk sporbarhet i byggmetadata, ikke som commitnummer.
+The owner assigned these product names after the Sprint 007 implementation:
 
-## Bygg og særtilfeller
+| Product version | Milestone |
+| --- | --- |
+| 0.2 | The previous navigation delivery. |
+| 0.3 | Sprint 007's new workspace UI: unified opening/routing, path/filter row, compact sidebar/history tabs, toolbar/color popup and shared document zoom. |
 
-Versjonen genereres ved eksplisitt CMake-bygg, ikke ved commit og ikke ved oppstart.
-Den vises av `xfmd --version`, i vindustittelen og høyrejustert i nederste statuslinje. Det tilføyes ingen ekstra
-verktøylinje. Bygget skriver også `build/generated/xfmd-build.json` med full
-kildeidentitet. Et allerede bygget program endrer ikke versjon når Git flyttes.
+This follows the existing minor-version rule. The navigation milestone's `0.2`
+name is retrospective: the inspected Git VERSION history and installed binaries
+still reported `0.1`. Do not relabel historical binaries, amend published commits,
+change old test evidence or invent a 0.2 release/tag. The current VERSION changes
+directly from 0.1 to 0.3. This decision does not itself publish a release or merge
+the sprint PR. See [Sprint 007](../sprints/Sprint-007--Workspace-UI/README.md).
 
-- Lokal branch bruker sitt faktiske navn. Detached checkout vises som `detached`;
-  PR-testcheckout i GitHub Actions som `ci/<head-branch>`.
-- Ucommittede endringer, inkludert uignorerte nye filer, merkes `+dirty`.
-  Slike bygg er lokale prøver, ikke publiserte fasebygg.
-- Shallow Git-historikk avvises med beskjed om `git fetch --unshallow`.
-  CI må hente full historikk. Vi viser aldri et misvisende lavt commitnummer.
-- Kildearkiv uten Git vises som `major.minor source:unknown`. Det får ikke et
-  oppdiktet commitnummer. Distribuerte binærer beholder innbakt identitet.
-- Genererte filer skrives bare når innholdet endres; nytt bygg av samme rene
-  commit skal ikke utløse en ny relink bare på grunn av dato/klokkeslett.
+## Commit count and history
 
-Byggfrekvens og dokumentasjon følger [arbeidsmåten](working-method.md).
+The commit count is `git rev-list --count HEAD`: the number of distinct commits
+reachable from the build's commit, including merge commits. An ordinary commit
+increments it by one; a merge may add several because it imports a phase's history.
+Phase branches inherit their history and continue counting. Parallel branches can
+have the same count; branch/PR and product version are also part of the identity.
+This is not a global allocator across parallel branches. No version file changes
+for each commit, and a full clean clone yields the same count.
+
+Published history must not be rebased, squash-merged or amended: that would change
+the count. Integrate sprint PRs with merge commits. On main, the latest
+`Merge pull request #N` is read along first-parent history; documentation commits
+after the merge retain the PR name and receive a new count. Without a known PR,
+`main` is displayed. The Git SHA is stored as technical provenance in build
+metadata, not used as the displayed commit count.
+
+## Builds and special cases
+
+The version is generated during an explicit CMake build, not at commit or startup.
+It appears in `xfmd --version`, the window title and the right-aligned bottom status
+line; it adds no toolbar. The build writes `build/generated/xfmd-build.json` with
+full source identity. An existing binary does not change version when Git moves.
+
+- Local branches use their actual name. Detached checkout displays `detached`;
+  GitHub Actions PR checkouts display `ci/<head-branch>`.
+- Uncommitted changes, including unignored new files, add `+dirty`. Such builds
+  are local trials, not published phase builds.
+- Shallow history is rejected with instructions to run `git fetch --unshallow`.
+  CI must fetch full history. Never display a misleadingly low count.
+- A source archive without Git displays `major.minor source:unknown`; no invented
+  commit number. Distributed binaries retain their embedded identity.
+- Generated files are written only when their contents change. Rebuilding the
+  same clean commit must not relink merely because the date/time changed.
+
+Build frequency and documentation follow the [working method](working-method.md).
