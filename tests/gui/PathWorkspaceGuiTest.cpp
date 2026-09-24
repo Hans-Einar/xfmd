@@ -45,6 +45,25 @@ void run() {
   app.documents.error = [&](const auto& e) { error = e; };
   auto* panel = app.window->workspacePanel;
   auto* field = app.window->documentPath;
+  auto headerFits = [&] {
+    auto* row = panel->refreshButton->getParent();
+    CHECK(panel->markdown->getText().empty() && panel->markdown->getIcon());
+    CHECK(panel->markdown->getWidth() > panel->markdown->getHeight());
+    int right = 0;
+    for (auto* child = row->getFirst(); child; child = child->getNext()) {
+      if (!child->shown())
+        continue;
+      CHECK(child->getX() >= right && child->getY() >= 0);
+      right = child->getX() + child->getWidth();
+      CHECK(right <= row->getWidth());
+    }
+    for (auto* tab = panel->tabs->getFirst(); tab; tab = tab->getNext())
+      CHECK(tab->getX() >= 0 && tab->getX() + tab->getWidth() <= panel->tabs->getWidth());
+  };
+  auto capture = [&](const char* name) {
+    if (const auto* out = getenv("XFMD_UI_EVIDENCE"))
+      captureDesktop(app.app, (fs::path(out) / name).c_str());
+  };
   CHECK(field->getText() == "Untitled (not saved)");
   settleNative(app.app);
   nativeClick(field, 20, 10, 0, Button3);
@@ -56,6 +75,7 @@ void run() {
   for (int width : {1100, 640, 450}) {
     app.window->resize(width, 760);
     settleNative(app.app);
+    headerFits();
     CHECK(field->getParent()->getWidth() == app.window->getWidth());
     CHECK(field->getWidth() > width - 140);
     CHECK(field->getParent()->getY() >= app.window->previewControls->getParent()->getY() +
@@ -107,6 +127,17 @@ void run() {
   CHECK(!field->isEditing() && field->getText() == (base / "literal*.md").c_str());
   CHECK(panel->tree->getPathnameItem((base / "one.md").c_str()));
   CHECK(!panel->tree->getPathnameItem((base / "one.txt").c_str()));
+  CHECK(panel->markdown->isChecked());
+  panel->markdown->setFocus();
+  nativeKey(panel->markdown, XK_space);
+  settleNative(app.app, 350);
+  CHECK(!panel->markdown->isChecked());
+  CHECK(panel->tree->getPathnameItem((base / "one.txt").c_str()));
+  nativeKey(panel->markdown, XK_space);
+  settleNative(app.app, 350);
+  CHECK(panel->markdown->isChecked());
+  CHECK(!panel->tree->getPathnameItem((base / "one.txt").c_str()));
+  capture("files-header-selected.png");
   // Editing then Escape restores an already active filter.
   paste(app, field, "read*");
   nativeKey(field, XK_Escape);
@@ -120,6 +151,9 @@ void run() {
   // Native Index tab and Refresh rebuild the edited buffer, never disk contents.
   nativeClick(panel->tabs->getLast(), 15, 10);
   CHECK(panel->tabs->getCurrent() == 1 && panel->index->shown());
+  CHECK(!panel->markdown->shown() && !panel->upButton->shown() && !panel->openButton->shown());
+  CHECK(panel->refreshButton->shown() && panel->markdown->isChecked());
+  capture("index-header.png");
   app.edits.applyEdit({0, app.session.view().text.size(),
                        "# Unsaved heading\n\n[Reference](" + (notes / "ref.md").string() + ")\n"});
   auto token = app.session.view().token;
@@ -154,6 +188,9 @@ void run() {
   app.views->toggleSidebar();
   settleNative(app.app);
   nativeClick(panel->tabs->getFirst(), 15, 10);
+  CHECK(panel->markdown->shown() && panel->upButton->shown() && panel->openButton->shown());
+  CHECK(panel->markdown->isChecked());
+  headerFits();
   // Clear the name/type filters, expand a long folder and retain its context on refresh.
   nativeClick(field->getNext(), 10, 10);
   nativeClick(panel->markdown, 10, 10);
@@ -188,6 +225,14 @@ void run() {
   CHECK(panel->setWorkPath(base.string()));
   CHECK(app.session.view().token == token && app.edits.canUndo() && error.empty());
   settleNative(app.app, 350);
+  capture("files-header-light.png");
+  auto draft = app.preferences->begin();
+  draft.appearance.theme = "dark";
+  draft.appearance.buttons = "classic";
+  CHECK(app.preferences->commit(draft, error));
+  settleNative(app.app, 350);
+  headerFits();
+  capture("files-header-dark.png");
   if (const auto* out = getenv("XFMD_UI_EVIDENCE"))
     captureDesktop(app.app, (fs::path(out) / "workspace-wide.png").c_str());
 }

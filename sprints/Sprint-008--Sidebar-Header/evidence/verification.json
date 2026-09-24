@@ -1,0 +1,54 @@
+{
+  "recordedAt": "2026-09-24T20:21:58+00:00",
+  "baseCommit": "a77e08d3d360e021c05e27534a4242499ebb19bf",
+  "buildIdentity": {
+    "version": "0.3",
+    "branch": "sprint/008/phase/056-sidebar-header",
+    "commit_number": 196,
+    "commit": "a77e08d3d360e021c05e27534a4242499ebb19bf",
+    "pull_request": null,
+    "dirty": true,
+    "display": "0.3 sprint/008/phase/056-sidebar-header:196+dirty"
+  },
+  "configuration": "build-ui; Release; sanitizers off; same dependencies as Sprint 007 P055",
+  "sourceSha256": {
+    "src/application/ui/WorkspacePanel.cpp": "78dacf80de5d398718de912c9496aafc2c5a8dc9a75e703e4807b5d8021f2727",
+    "src/application/ui/WorkspacePanel.h": "daa9bc9d74e6d88e5af271a0fb1b1035a2c8c42966140c4c3f013af411d2eb18",
+    "src/application/ui/controls/ButtonPainter.cpp": "5b2b6bc97ce74a5c62bc994833e5862ed7ddf9f81f7e138e15fb0860498f7a4f",
+    "src/application/ui/controls/ButtonPainter.h": "4d980370d8f0d63ed8aa621bae6804f7fc9bff5f2d473b358a1d01c5b293f988",
+    "src/application/ui/controls/UiButton.cpp": "aa0d69a45260ce8e4720e716cbba29e915e0db9d9f903f1d92409894ebbfa129",
+    "src/application/ui/controls/UiButton.h": "1e97377051412253dd321619ee3ff464ccc1904c7b087f5f72468132e02ec546",
+    "src/application/ui/style/IconCatalog.cpp": "878e9f4206e31b6e4d36d21c7d3cd40e2dddabd232a4fecf1232ffdc2e851b1c",
+    "src/application/ui/style/IconCatalog.h": "2ea8aa08f40fc7ab0452a4732c2cb437ee4038a0489e0335b063d4c11a257290",
+    "tests/gui/PathWorkspaceGuiTest.cpp": "676f52cb06cf26e3dc54fe4d48837e9f830ec64a61b2ae498b5bc3a3d5a76fc1",
+    "tests/gui/WorkPathGuiTest.cpp": "6886d5d37c3cde66c24c5e4631d83c1b571558a749e9b9cbc579a4609c455510"
+  },
+  "sourceScope": "Changed C++ files relative to baseCommit; all other implementation files retain that base.",
+  "binarySha256": {
+    "xfmd": "8c1166e9c9bba6645b03b088be8f0e22d3f9a3de1a236bd5bd7ef9efb68d7372",
+    "PathWorkspaceGuiTest": "7460c967d19553e136270b7daebb5c8c97fde594035f306a96c5d1a8b52eea3d",
+    "WorkPathGuiTest": "c476caea28251c821dca97b2ea1ea42330b3e5218cdb1c896e8a685f7bd24864",
+    "UiControlsTest": "b2ac6315bf7fe3737fd5f8eb34141dc089ffd2734eb9e38975b5de134481d525",
+    "OpenPathDialogGuiTest": "c63f301c3a1815203642dc746d31f4f0e3e1caa463fed5ed993eca44dfd52e77",
+    "AppearanceGuiTest": "ce7c2bf7e84b1ff428c48dddca5ec8be44c618ba896a6516a1d1838ce89defa1",
+    "ThemePopupGuiTest": "93adb342eb64d87bf5b342489555ba6b91eef889abb8a8014aca4d29bcc90c51",
+    "IndexGuiTest": "782f42dbf9c149bb0657858802b465e66ad3e14ef36f95e433818f51eeee17df",
+    "WorkPathTest": "11191f513302517fc1ec2af4d9e32b1cea940a7cbb084621f29a023ff82fcc70"
+  },
+  "evidenceSha256": {
+    "files-header-selected.png": "d6d99b1cb7188578c19ff83ca45a1f50307e759bb5f6d4ce262c6cfb7877f009",
+    "open-file-or-folder.png": "f6eedc28ce2c3d571c917355f1bacdba9dc38a7b1d62f62034b8b305b76228f3",
+    "index-header.png": "f1eeb34f5567301391a0ebf871fbaf1e3b4445da07e118a63e5157980872400c",
+    "files-header-light.png": "505e217c66d99bdd04989b51649b4de0bd6d7ec6e05e4116ba326d9e41378767",
+    "files-header-dark.png": "4d47b0888b1bb1aab91e56396e45cb739b45ede7f314016b99f612242a90ed6b",
+    "workspace-wide.png": "4d47b0888b1bb1aab91e56396e45cb739b45ede7f314016b99f612242a90ed6b",
+    "build.log": "79138b7f2832ac34fbaa9626d05b60c312f6b82eb39a372a12d738c39e7c0cd2",
+    "native-tests.log": "5b0608345d0216dc8c357d0443164589726e3f3ff6156e8e4e5cbc110cfe60df",
+    "regression-build.log": "2e953b50c0f7f1564b480cdc1d67375574769c8bdca28c607cd1c327d3cf4f96",
+    "regression-tests.log": "be6d3c914d6eda2132cdeeada0c35ed3aa3797ff42eca313cffb9a5e9615112e",
+    "P056.md": "e09fb66cda1e85a9a68e271ba33194ab90e37b68b7dde91a457285b3aa6943ec",
+    "capture-build.log": "8a64eba359fe9561bb63dfa0c7e4d8478cd338acb977b45b8ecf4666eef86a06",
+    "capture-tests.log": "869d27e0546d67edb21bc1aec9b7543cc4905eab0f88e635fbdff5f851256dc6",
+    "checks.log": "3aa5d6c842dce1104fd5ddff3634f76f7ae4524888f3b60a96e154c24129ae08"
+  }
+}

@@ -12,6 +12,7 @@ enum class UiIcon {
   Forward,
   Sidebar,
   Refresh,
+  Markdown,
   Search,
   Theme,
   Pdf,

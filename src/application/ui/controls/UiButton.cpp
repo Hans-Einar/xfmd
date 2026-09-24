@@ -13,11 +13,7 @@ UiButton::UiButton(FXComposite* parent, UiContext& context, const FXString& text
                BUTTON_TOOLBAR | LAYOUT_CENTER_Y | flags),
       ui(&context), glyph(icon), role(r) {}
 long UiButton::onChecked(FXObject*, FXSelector selector, void*) {
-  bool value = FXSELID(selector) == FXWindow::ID_CHECK;
-  if (value != checked) {
-    checked = value;
-    update();
-  }
+  setChecked(FXSELID(selector) == FXWindow::ID_CHECK);
   return 1;
 }
 void UiButton::create() {
@@ -28,7 +24,7 @@ void UiButton::create() {
 FXint UiButton::getDefaultWidth() {
   const auto m = ui->metrics();
   const int width = getFont()->getTextWidth(getText());
-  return std::max(getDefaultHeight(),
+  return std::max(getDefaultHeight() + (role == ButtonRole::Pill ? m.iconSize / 2 : 0),
                   width + (glyph == UiIcon::NoIcon ? 0 : m.iconSize + (width ? m.gap : 0)) +
                       (compactControl ? 8 : m.inset * 2));
 }

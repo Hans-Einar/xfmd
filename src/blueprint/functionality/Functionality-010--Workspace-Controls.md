@@ -72,6 +72,12 @@ Shared manual scale applies in Wrap/A4; explicit A4 width/height fit uses visibl
 viewports. Application owns state; host transforms and editor fonts consume it.
 Native zoom acceptance is recorded in [P055 evidence](../../../sprints/Sprint-007--Workspace-UI/evidence/P055.md); previous evidence retains its dated scope.
 
+P056 places Markdown/Up/Open beside Refresh in the tab header, hiding those three
+controls on Index. One oval Markdown icon replaces both type text toggles.
+WorkspacePanel owns the checked/filter state; UiButton and ButtonPainter own the
+pill presentation, IconCatalog owns the M/down-arrow/box glyph. Implemented changes
+follow [P056](../../../sprints/Sprint-008--Sidebar-Header/Phase-056--Sidebar-Header.md).
+
 ## 5. Plumbing
 
 | Step | Event / caller | Called symbol | Source or contract file | Data / result | Failure / side effect | Status |
@@ -105,9 +111,10 @@ Native zoom acceptance is recorded in [P055 evidence](../../../sprints/Sprint-00
 | 27 | Refresh button | `WorkspacePanel::onRefresh` | `src/application/ui/WorkspacePanel.cpp` | active tab → file/index refresh | preserve document/root/filter | Implemented |
 | 28 | Files refresh | `SidebarWidget::refresh` | `src/application/ui/SidebarWidget.cpp` | current tree context → rescan/restore | omit disappeared entries | Implemented |
 | 29 | ThemeButton alternate gesture | `ReadingColorPopup::showAt` | `src/application/ui/controls/ReadingColorPopup.cpp` | anchor → existing palette sliders | Escape/outside closes; no theme toggle | Implemented |
-
 | 55 | commands / normalized input | `DocumentZoom::step` | `src/application/zoom/DocumentZoom.cpp` | signed steps → shared bounded scale | leave fit; cancel scroll; retain document | Implemented |
 | 56 | viewport/profile changes | `DocumentZoom::refresh` | `src/application/zoom/DocumentZoom.cpp` | geometry → editor/host scale and controls | guard reentrancy; preserve anchor | Implemented |
+| 57 | Markdown button activation | `WorkspacePanel::onMarkdown` | `src/application/ui/WorkspacePanel.cpp` | toggle checked state → deferred name/type filter | document/root unchanged | Implemented |
+| 58 | Files/Index selection | `WorkspacePanel::onTab` | `src/application/ui/WorkspacePanel.cpp` | active page → Files-only control visibility | retain filter; Refresh remains | Implemented |
 
 ## 6. Reuse and dependencies
 
@@ -186,3 +193,5 @@ P054 local acceptance: [workspace evidence](../../../sprints/Sprint-007--Workspa
 records native interaction/visual checks, focused ASan/UBSan checks and the final
 source/binary manifest. Earlier phase placement descriptions retain their dated
 scope. Status remains Implemented; this is not blanket physical-display verification.
+
+P056 header/filter acceptance: [evidence](../../../sprints/Sprint-008--Sidebar-Header/evidence/P056.md).

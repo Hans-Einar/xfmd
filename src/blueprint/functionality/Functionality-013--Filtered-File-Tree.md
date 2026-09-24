@@ -32,8 +32,9 @@ name pattern; DocumentPathField is its P054 UI consumer, replacing the sidebar i
 
 ## 4. Behavior, state and failures
 
-Selected types combine with OR, then AND with the filename pattern. No types means
-all; a pattern without wildcards matches substrings, otherwise the whole basename.
+The filter contract retains type OR followed by name AND. P056 exposes only its
+Markdown flag in the workspace, with the text flag false. Markdown off admits all
+types, including plain text; on admits .md. Tab switches preserve that choice; a pattern without wildcards matches substrings, otherwise the whole basename.
 `?` counts UTF-8 characters and ASCII letters compare case-insensitively. Empty
 filter loads children on expansion; active filtering searches recursively and emits
 only matching files. GUI adds ancestors and retains the root even without matches.
@@ -92,3 +93,5 @@ P054 local acceptance: [workspace evidence](../../../sprints/Sprint-007--Workspa
 records native interaction/visual checks, focused ASan/UBSan checks and the final
 source/binary manifest. Earlier phase placement descriptions retain their dated
 scope. Status remains Implemented; this is not blanket physical-display verification.
+
+P056 header/filter acceptance: [evidence](../../../sprints/Sprint-008--Sidebar-Header/evidence/P056.md).

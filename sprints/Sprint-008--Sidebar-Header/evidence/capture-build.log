@@ -1,0 +1,4 @@
+[0/2] Re-checking globbed directories...
+[1/5] cd /home/warloc/git/xfmd-sdl-navigation/build-ui && /usr/bin/python3.12 /home/warloc/git/xfmd-sdl-navigation/tools/build_identity.py --source /home/warloc/git/xfmd-sdl-navigation --output /home/warloc/git/xfmd-sdl-navigation/build-ui/generated
+[2/3] Building CXX object CMakeFiles/PathWorkspaceGuiTest.dir/tests/gui/PathWorkspaceGuiTest.cpp.o
+[3/3] Linking CXX executable PathWorkspaceGuiTest

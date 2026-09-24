@@ -567,3 +567,11 @@ and renderer/interpreter contracts remain unchanged. See the P055 phase plan.
 P055 also removes independent host/editor fit calculations: DocumentZoom supplies
 one computed factor. Fit uses the actual laid-out content viewport after scrollbars;
 FOX maximum viewport accessors are not used as available document space.
+
+## Sprint 008 — sidebar header (P056)
+
+WorkspacePanel retains ownership of tabs and filter state, composing Files-only
+controls beside Refresh. Existing UiButton/ButtonPainter gain a pill role for the
+Markdown toggle; IconCatalog owns its M/down-arrow/box glyph. No new files or
+cross-layer contracts are introduced. FileNameFilter keeps its reusable type
+flags; this workspace uses Markdown plus the name pattern, with text flag false.

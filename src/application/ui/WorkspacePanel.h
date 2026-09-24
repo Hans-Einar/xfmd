@@ -19,6 +19,7 @@ protected:
 public:
   enum {
     ID_FILTER = FX::FXVerticalFrame::ID_LAST,
+    ID_MARKDOWN,
     ID_HISTORY,
     ID_ACTIVATE,
     ID_FILTER_APPLY,
@@ -36,7 +37,7 @@ public:
   IndexPanel* index = nullptr;
   std::function<void()> openRequested, indexRefresh;
   std::function<void(const std::string&)> rootChanged;
-  FX::FXToggleButton *markdown = nullptr, *text = nullptr;
+  UiButton* markdown = nullptr;
   FX::FXList* workPaths = nullptr;
   RecentFilesPanel* recentFiles = nullptr;
   FX::FXLabel* searchStatus = nullptr;
@@ -52,6 +53,7 @@ public:
   void requestWorkPath(const std::string&);
   long onActivate(FX::FXObject*, FX::FXSelector, void*);
   long onHistory(FX::FXObject*, FX::FXSelector, void*);
+  long onMarkdown(FX::FXObject*, FX::FXSelector, void*);
   long onFilter(FX::FXObject*, FX::FXSelector, void*);
   long onApplyFilter(FX::FXObject*, FX::FXSelector, void*);
 };

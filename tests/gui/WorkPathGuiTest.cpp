@@ -121,14 +121,14 @@ void run() {
   click(app, panel->workPaths, 20, y, Button1, 3000);
   settle(app);
   CHECK(tree->workRoot() == dir);
-  // Native toggle buttons OR their types; name input then intersects the result.
+  // The single Markdown toggle restricts types; name input intersects the result.
   click(app, panel->markdown, 10, 10, Button1, 4000);
   settle(app);
-  CHECK(panel->markdown->getState());
+  CHECK(panel->markdown->isChecked());
   CHECK(!tree->getPathnameItem((dir / "note.txt").c_str()));
   CHECK(!tree->getPathnameItem((dir / "empty").c_str()));
   CHECK(tree->getPathnameItem((dir / "deep/nested/matchø.md").c_str()));
-  click(app, panel->text, 10, 10, Button1, 5000);
+  click(app, panel->markdown, 10, 10, Button1, 5000);
   settle(app);
   CHECK(tree->getPathnameItem((dir / "note.txt").c_str()));
   panel->setNameFilter("match?.*");
@@ -140,8 +140,7 @@ void run() {
   CHECK(!tree->getFirstItem()->getFirst());
   CHECK(panel->searchStatus->getText().find("No matching") >= 0);
   panel->setNameFilter("");
-  panel->markdown->setState(false);
-  panel->text->setState(false);
+  panel->markdown->setChecked(false);
   panel->onApplyFilter(nullptr, 0, nullptr);
   settle(app);
   // Native root double clicks widen project -> home -> / without stale node access.
@@ -170,7 +169,7 @@ void run() {
   CHECK(tree->workRoot() == dir);
   CHECK(panel->searchStatus->getText().find("Cannot set") >= 0);
   // Pending matches from a previous root must never populate the new tree.
-  panel->markdown->setState(true);
+  panel->markdown->setChecked(true);
   panel->onApplyFilter(nullptr, 0, nullptr);
   CHECK(panel->setWorkPath((dir / "empty").string()));
   settle(app);
