@@ -53,6 +53,9 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 
 CLI, dialog, sidebar og lenker deler dokumentbytte/commit-policy. Source-anchor-functionality deles med scrollsync. HistoryStore er ikke en service som widgets muterer direkte.
 
+Sprint 004 consumer (2026-09-24 reconstruction): FUNC-031 reuses NavigationCoordinator per panel. NavigationPanel handles its restricted heading-fragment profile before delegating file navigation; this does not broaden LinkResolver globally.
+See [FUNC-031](Functionality-031--Generated-Document-Navigation.md) for the complete call path.
+
 ## 7. Verifikasjon
 
 Relevante akseptanse-ID-er: AT-001, AT-005, AT-009, AT-012, AT-015, AT-018, AT-023.

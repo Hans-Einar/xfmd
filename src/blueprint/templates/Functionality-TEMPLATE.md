@@ -7,59 +7,56 @@ owner: <application|interpreter|renderer>
 status: Proposed
 scope: <FirstRelease|Future>
 requirements: <UR-NNN, SR-NNN>
-uses: <FUNC-NNN eller none>
+uses: <FUNC-NNN or none>
 ---
 
-# Functionality-NNN: <Navn>
+# Functionality-NNN: <Name>
 
-## 1. Hensikt og avgrensning
+## 1. Purpose and scope
 
-Beskriv én tjeneste eller mekanisme, ansvar og hvorfor den trenger egen kontrakt. Oppgi eierlag; unngå et dokument per elementær metode.
+Describe the coherent outcome or bounded service, its owner, use cases and limits.
+Do not create an object for each implementation method.
 
-## 2. Krav og akseptanse
+## 2. Requirements and acceptance
 
-Oppgi stabile UR-/SR-ID-er og lenk til kravspesifikasjonen. Beskriv hvilke observerbare
-resultater objektet bidrar til; et use case er kontekst, ikke erstatning for krav.
+List stable UR/SR IDs and link requirements. Explain observable outcomes and AT IDs;
+a use case provides context, not a replacement for requirements.
 
-## 3. Kontrakter og eierskap
+## 3. Contracts and ownership
 
-Oppgi offentlige innganger/signaturer, input/resultater, invariants, sideeffekter,
-levetid og tilstandseier. Features refererer functionality-kontrakter; de dupliserer
-ikke API-er eller krever egen featureklasse. Oppgi enheter, revisjoner og koordinater.
+State public entry points, inputs/results, invariants, side effects, lifetimes,
+units, revisions and state ownership. Features reference functionality contracts
+instead of duplicating APIs or requiring a feature class.
 
-## 4. Atferd, tilstand og feil
+## 4. Behavior, state and failures
 
-Beskriv normalforløp, pre-/postconditions, commit-punkt, cancel/rollback, feil,
-stale data, gjentatte hendelser og relevante ressursgrenser. Skriv «ikke relevant»
-med begrunnelse når en kategori ikke gjelder; ikke la uklarhet stå implisitt.
+Describe normal flow, pre/postconditions, commit point, cancellation/rollback,
+stale data, repeated events and resource limits. Explain inapplicable categories.
 
 ## 5. Plumbing
 
-Vis den faktiske planlagte eller implementerte kallveien, inkludert event-/callback-
-retning. Del i navngitte forløp dersom flere offentlige innganger trenger det.
+Describe actual planned or implemented calls, including callback direction.
+Split into named flows when needed. Validate library calls against the selected version.
 
-| Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
+| Step | Event / caller | Called symbol | Source or contract file | Data / result | Failure / side effect | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `<Caller::method / Event>` | `<Owner::method>` | `src/<owner>/<File>.cpp` | <Input → output> | <Feil/sideeffekt> | Planned |
+| 1 | `<Caller::method / Event>` | `<Owner::method>` | `src/<owner>/<File>.cpp` | <Input → output> | <Failure/side effect> | Planned |
 
-Kall til bibliotek må verifiseres mot valgt versjon. Marker `Implemented` først
-når fil/symbol finnes og kallretningen er kontrollert.
+Mark Implemented only when the file/symbol exists and call direction is reviewed.
 
-## 6. Gjenbruk og avhengigheter
+## 6. Reuse and dependencies
 
-Lenk til konsumerte functionality-objekter. Oppgi hvem som bruker denne kontrakten,
-hva som er offentlig, og hva som forblir internt. Begrunn nye tjenester og hvordan
-duplikasjon fjernes. Feature-til-feature internkall er ikke tillatt.
+Link consumed functionality and identify consumers, public/internal boundaries and
+reuse justification. Do not call another feature's private implementation.
 
-## 7. Verifikasjon
+## 7. Verification
 
-Oppgi AT-ID-er, konkrete scenarioer/fixtures, forventet resultat og planlagte
-unit-/kontrakt-/integrasjons-/GUI-tester. Skill testplan fra utført bevis.
-Ved utført test: kommando, miljø, commit, utfall og lenke til rapport/test.
-Ved Verified kreves en linje `Evidence: <lenke og identifisert testbevis>`.
+List AT IDs, fixtures, expected outcomes and unit/contract/integration/GUI checks.
+Distinguish planned tests from execution. For execution, record command, environment,
+commit and result with evidence links. Verified requires `Evidence: <identified evidence>`.
 
-## 8. Status, risiko og endringskonsekvenser
+## 8. Status, risks and change impact
 
-Oppgi revisjon/dato, åpne beslutninger, avhengige plansteg og konsekvenser for
-konsumenter ved kontraktsendring. Status endres etter arbeidsmåten, ikke fordi
-malen er fylt ut. Skriv hvilken eldre revisjon/bevis en endring erstatter.
+Identify revision/date, open decisions, dependencies and consequences for consumers.
+Use working-method status gates, not template completion. Preserve older evidence
+and identify the scope that the new revision supersedes.

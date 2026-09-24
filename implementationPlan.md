@@ -1,15 +1,18 @@
-# Implementeringsplan: xfmd
+# XFMD implementation history
 
-Nye leveranser følger [sprintregisteret](sprints/README.md) og
-[gjeldende arbeidsmåte](docs/working-method.md). Faseplanene nedenfor er
-historikk; tidligere PR-per-fase-praksis er erstattet av én PR per sprint.
+Current entrypoint: the [sprint register](sprints/README.md) identifies delivery
+branches, integration state and evidence. Follow the [working method](docs/working-method.md)
+for new work: one PR per sprint. Unselected discussion belongs in the
+[conversation board](Agents/KanBan/README.md), not this historical plan.
 
-Status: **P0–P13 implementert og lokalt verifisert**, 2026-09-13.
-Brukeren godkjente designgrunnlaget og autoriserte første leveranse i én sesjon.
-Neste implementeringsløp er konkretisert nedenfor; tekniske kontrakter med
-uavklarte P9-prøver beholder Proposed-status. En phase er en
-avhengighetsstyrt leveranse, ikke en tidsbokset sprint. Hver phase har egen branch,
-commits per milepæl og merge-commit til main; branchene beholdes på GitHub.
+The P0–P41 records below preserve their original planning language and phase-era
+workflow. Statements such as "next", "planned", "pending CI" or earlier parser
+choices describe that phase's record, not current product state. Main `c245fd9`
+contains P0–P41 and Sprints 001–002; Sprint 004 is on a separate branch.
+BoxUI/Sprint 003 is historical parallel work, not a missing continuation of this plan.
+
+Documentation reconciliation on 2026-09-24 restored P33–P35 below from Git and
+existing evidence. It does not invent historical builds, approvals or milestones.
 
 ## 1. Gjennomført plan
 
@@ -459,6 +462,23 @@ P31/P32 er gjennomført på separate brancher og PR 24/25. P31 består av
 fork-pin `6ff5a54ce39d912e399493ec4639a7b8ff8bdc7f` via `59f885f`/`0ec9b2b`;
 P31-rettelsen er tatt inn før sluttesten. Begge faser har grønne CI-jobber
 med og uten sanitizer. Se [samlet bevis, commits og begrensninger](docs/evidence/P32.md).
+
+## P33–P35 — restored phase records
+
+These phases were absent from the plan but their commits, designs and evidence
+were preserved. The rows below reconstruct delivered milestones from that history.
+
+| Phase / branch | Design | Implementation | Evidence commit and report |
+| --- | --- | --- | --- |
+| P33 / phase/p33-mermaid-label-wrap | 34db89e: measured word wrapping for edge labels | b610e6a: line measurements before layout/SVG | 7b6c69b; [P33 evidence](docs/evidence/P33.md) |
+| P34 / phase/p34-label-attachment | 87da84b: protected label attachment zones | 1b2a0bd: pinned fork routing integration | 9ab5b85; [P34 evidence](docs/evidence/P34.md) |
+| P35 / phase/p35-label-leaders | 0885861: collision-safe SVG leaders | 1509dab: enable fork SVG label leaders | 0bdeb4f; [P35 evidence](docs/evidence/P35.md) |
+
+P33 refines UR-039; P34 refines SR-024; P35 refines UR-039/041. Existing owners
+FTR-010/FUNC-024/025 are reused. All three commits are ancestors of local main
+c245fd9. [P41 integration](docs/evidence/P41-integration.md) records the combined
+integration history; per-phase evidence distinguishes focused tests from full-suite
+and sanitizer coverage. No new test result is claimed by restoring these rows.
 
 ## P36 — typed dekning og første sekvensprofil
 

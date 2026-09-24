@@ -1,0 +1,5 @@
+[staticlib (2024)] "/home/warloc/git/xfmd-sdl-navigation/src/application/composition/mermaid/src/lib.rs"
+[lib (2024)] "/home/warloc/git/xfmd-sdl-navigation/src/contracts/diagram/rust/src/lib.rs"
+[lib (2024)] "/home/warloc/git/xfmd-sdl-navigation/src/interpreter/mermaid/rust/src/lib.rs"
+[lib (2024)] "/home/warloc/git/xfmd-sdl-navigation/src/renderer/diagram/rust/src/lib.rs"
+rustfmt --edition 2024 --check /home/warloc/git/xfmd-sdl-navigation/src/application/composition/mermaid/src/lib.rs /home/warloc/git/xfmd-sdl-navigation/src/contracts/diagram/rust/src/lib.rs /home/warloc/git/xfmd-sdl-navigation/src/interpreter/mermaid/rust/src/lib.rs /home/warloc/git/xfmd-sdl-navigation/src/renderer/diagram/rust/src/lib.rs

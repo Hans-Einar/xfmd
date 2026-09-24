@@ -1,0 +1,17 @@
+PASS: valid project fixture
+PASS: dependency-owned broken links excluded
+PASS: project link rejected: docs/probe.md
+PASS: project link rejected: Agents/KanBan/backlog/#099--Study--Fixture.md
+PASS: project link into missing dependency still rejected
+PASS: metadata check retained
+PASS: chapter check retained
+PASS: plumbing source check retained
+PASS: acceptance matrix check retained
+PASS: CI package selection equals all four workspace packages
+PASS: old --all rejects dependency-only format defect
+PASS: selected packages ignore dependency-only format defect
+PASS: selected packages reject XFMD format defect: xfmd-diagram-contracts
+PASS: selected packages reject XFMD format defect: xfmd-mermaid-interpreter
+PASS: selected packages reject XFMD format defect: xfmd-diagram-layout
+PASS: selected packages reject XFMD format defect: xfmd-mermaid-ffi
+All 16 boundary probes passed.

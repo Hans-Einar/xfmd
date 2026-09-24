@@ -1,0 +1,18 @@
+{
+  "recoveredAt": "2026-09-24T14:09:51Z",
+  "sourceCheckout": "/home/warloc/git/xfmd-sdl-navigation",
+  "documentationBaseline": "47a245a49ad6ab839971812f4edf01b4ecfc6a9e",
+  "provenance": "Recovered local artifacts, not newly executed tests. The CTest log itself contains no source SHA; association with the build JSON is corroborative, not a cryptographic test-to-source binding.",
+  "files": [
+    {
+      "source": "build/generated/xfmd-build.json",
+      "copy": "recovered-p050-build.json",
+      "sha256": "46cd76bd751546f34a6fdea72dc946078e4db7bd6c8ef8550e5a7a4e89d9203d"
+    },
+    {
+      "source": "build/Testing/Temporary/LastTest.log",
+      "copy": "recovered-p050-tests.txt",
+      "sha256": "c9de9f8973000918d7488fcbb4625444a6596c062fb3f45db6aa3c81a87a5cdf"
+    }
+  ]
+}

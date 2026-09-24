@@ -1,0 +1,23 @@
+{
+  "recordedAt": "2026-09-24T15:05:47+00:00",
+  "head": "47a245a49ad6ab839971812f4edf01b4ecfc6a9e",
+  "branch": "sprint/005/phase/051-tooling-boundaries",
+  "tree": "Uncommitted working tree including prior KB-XFMD-001 documentation changes; not a clean commit test.",
+  "sourceHunks": {
+    "format": "ffb98e86a386cdc8881f3306e67a905b60fc8889",
+    "links": "c81b50838d66e3107fa289dd43088ce08714dcab"
+  },
+  "sha256": {
+    ".github/workflows/build.yml": "0a63a5288f0eb42ca1d7217249069c971ce4baa2ceb3e1303bad7548b7f945df",
+    "tools/validate_blueprints.py": "d676c6f2b54e18405f7c41b02b93641ca39fa09ed2a704f7c001f3a44e7c02a1",
+    "Cargo.toml": "74b183aae991c6bb61c92c0589e18b2807df206b1d958aef7d60e4937bb737cd",
+    "cmake/mermaid-source.json": "605902edd72541ce7a39b5665e5fdac86288af503168d972610a262b8a5f617d",
+    "sprints/Sprint-005--Tooling-Boundaries/evidence/check-boundaries.py": "ad16b29126880c2f22605c54f43549a7f3657aeae84568b29a375ca72c5f0b17"
+  },
+  "tools": {
+    "python3": "Python 3.12.14",
+    "cargo": "cargo 1.92.0 (344c4567c 2025-10-21) (Red Hat 1.92.0-1.el10.alma.1)",
+    "rustc": "rustc 1.92.0 (ded5c06cf 2025-12-08) (Red Hat 1.92.0-1.el10.alma.1)",
+    "rustfmt": "rustfmt 1.8.0"
+  }
+}

@@ -1,0 +1,249 @@
+[0/2] Re-checking globbed directories...
+[1/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/atom/atom_char.cpp.o
+[2/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/atom/atom_row.cpp.o
+[3/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/atom/atom_impl.cpp.o
+[4/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/atom/atom_basic.cpp.o
+[5/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/atom/atom_matrix.cpp.o
+[6/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/atom/atom_space.cpp.o
+[7/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/atom/colors_def.cpp.o
+[8/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/atom/unit_conversion.cpp.o
+[9/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/box/box.cpp.o
+[10/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/box/box_factory.cpp.o
+[11/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/box/box_group.cpp.o
+[12/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/box/box_single.cpp.o
+[13/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/core/core.cpp.o
+[14/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/core/glue.cpp.o
+[15/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/core/localized_num.cpp.o
+[16/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/core/formula_def.cpp.o
+[17/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/core/formula.cpp.o
+[18/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/core/macro.cpp.o
+[19/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/fonts/alphabet.cpp.o
+[20/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/fonts/font_basic.cpp.o
+[21/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/core/parser.cpp.o
+[22/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/core/macro_impl.cpp.o
+[23/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/fonts/font_info.cpp.o
+[24/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/builtin/symbol_mapping.res.cpp.o
+[25/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/fonts/fonts.cpp.o
+[26/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/builtin/formula_mappings.res.cpp.o
+[27/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/bi10.def.cpp.o
+[28/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/builtin/tex_param.res.cpp.o
+[29/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/bx10.def.cpp.o
+[30/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/cmbsy10.def.cpp.o
+[31/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/cmbx10.def.cpp.o
+[32/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/cmbxti10.def.cpp.o
+[33/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/core/macro_def.cpp.o
+[34/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/cmex10.def.cpp.o
+[35/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/cmmi10.def.cpp.o
+[36/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/cmmi10_unchanged.def.cpp.o
+[37/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/cmmib10.def.cpp.o
+[38/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/cmmib10_unchanged.def.cpp.o
+[39/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/cmr10.def.cpp.o
+[40/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/cmss10.def.cpp.o
+[41/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/cmssbx10.def.cpp.o
+[42/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/cmssi10.def.cpp.o
+[43/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/cmsy10.def.cpp.o
+[44/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/cmti10.def.cpp.o
+[45/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/cmti10_unchanged.def.cpp.o
+[46/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/dsrom10.def.cpp.o
+[47/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/cmtt10.def.cpp.o
+[48/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/eufb10.def.cpp.o
+[49/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/eufm10.def.cpp.o
+[50/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/i10.def.cpp.o
+[51/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/moustache.def.cpp.o
+[52/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/msam10.def.cpp.o
+[53/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/msbm10.def.cpp.o
+[54/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/r10.def.cpp.o
+[55/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/r10_unchanged.def.cpp.o
+[56/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/rsfs10.def.cpp.o
+[57/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/sb10.def.cpp.o
+[58/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/sbi10.def.cpp.o
+[59/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/si10.def.cpp.o
+[60/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/builtin/tex_symbols.res.cpp.o
+[61/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/special.def.cpp.o
+[62/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/stmary10.def.cpp.o
+[63/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/ss10.def.cpp.o
+[64/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/font/tt10.def.cpp.o
+[65/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/reg/builtin_syms_reg.cpp.o
+[66/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/reg/builtin_font_reg.cpp.o
+[67/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/parser/formula_parser.cpp.o
+[68/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/sym/amsfonts.def.cpp.o
+[69/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/sym/amssymb.def.cpp.o
+[70/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/sym/stmaryrd.def.cpp.o
+[71/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/sym/base.def.cpp.o
+[72/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/sym/symspecial.def.cpp.o
+[73/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/utils/utf.cpp.o
+[74/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/utils/utils.cpp.o
+[75/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/res/parser/font_parser.cpp.o
+[76/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/utils/string_utils.cpp.o
+[77/202] Building CXX object CMakeFiles/xfmd_document.dir/src/application/io/InputPolicy.cpp.o
+[78/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/latex.cpp.o
+[79/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/render.cpp.o
+[80/202] Building CXX object CMakeFiles/xfmd_document.dir/src/application/document/DocumentSession.cpp.o
+[81/202] Building CXX object CMakeFiles/xfmd_document.dir/src/application/io/LocalFileStore.cpp.o
+[82/202] Building CXX object CMakeFiles/xfmd_document.dir/src/application/document/DocumentCoordinator.cpp.o
+[83/202] Building CXX object CMakeFiles/xfmd_math_engine.dir/home/warloc/git/xfmd/build/_deps/microtex-src/src/platform/cairo/graphic_cairo.cpp.o
+[84/202] Building CXX object CMakeFiles/xfmd_document.dir/src/application/document/TextProjection.cpp.o
+[85/202] Linking CXX static library libxfmd_math_engine.a
+[86/202] Building CXX object CMakeFiles/xfmd_document.dir/src/application/document/EditController.cpp.o
+[87/202] Linking CXX static library libxfmd_document.a
+[88/202] Building CXX object CMakeFiles/xfmd_preview.dir/src/application/preview/PreviewSelection.cpp.o
+[89/202] Building CXX object CMakeFiles/xfmd_preview.dir/src/application/preview/ParserWorker.cpp.o
+[90/202] Building CXX object CMakeFiles/xfmd_preview.dir/src/application/preview/PreviewCoordinator.cpp.o
+[91/202] Linking CXX static library libxfmd_preview.a
+[92/202] Building CXX object CMakeFiles/xfmd_scroll.dir/src/application/scroll/ScrollDynamics.cpp.o
+[93/202] Building CXX object CMakeFiles/xfmd_scroll.dir/src/application/scroll/AnchorMapper.cpp.o
+[94/202] Building CXX object CMakeFiles/xfmd_scroll.dir/src/application/scroll/ScrollCoordinator.cpp.o
+[95/202] Linking CXX static library libxfmd_scroll.a
+[96/202] Building CXX object CMakeFiles/xfmd_navigation.dir/src/application/navigation/HistoryStore.cpp.o
+[97/202] Building CXX object CMakeFiles/xfmd_navigation.dir/src/application/navigation/LinkResolver.cpp.o
+[98/202] Building CXX object CMakeFiles/xfmd_navigation.dir/src/application/navigation/NavigationCoordinator.cpp.o
+[99/202] Linking CXX static library libxfmd_navigation.a
+[100/202] Building CXX object CMakeFiles/xfmd_index.dir/src/application/index/DocumentIndex.cpp.o
+[101/202] Building CXX object CMakeFiles/xfmd_workspace.dir/src/application/workspace/FileNameFilter.cpp.o
+[102/202] Building CXX object CMakeFiles/xfmd_workspace.dir/src/application/workspace/WorkPathHistory.cpp.o
+[103/202] Building CXX object CMakeFiles/xfmd_index.dir/src/application/index/ReferenceWorker.cpp.o
+[104/202] Linking CXX static library libxfmd_index.a
+[105/202] Building CXX object CMakeFiles/xfmd_media.dir/src/application/media/ImageDecoder.cpp.o
+[106/202] Building CXX object CMakeFiles/xfmd_media.dir/src/application/media/EmbeddedVisuals.cpp.o
+[107/202] Building CXX object CMakeFiles/xfmd_workspace.dir/src/application/workspace/DirectoryScanner.cpp.o
+[108/202] Linking CXX static library libxfmd_workspace.a
+[109/202] Building CXX object CMakeFiles/xfmd_typography.dir/src/application/adapters/SharedTextMetrics.cpp.o
+[110/202] Building CXX object CMakeFiles/xfmd_typography.dir/src/application/adapters/SvgDiagramCache.cpp.o
+[111/202] Building CXX object CMakeFiles/xfmd_typography.dir/src/application/adapters/FontCatalog.cpp.o
+[112/202] Building CXX object CMakeFiles/xfmd_media.dir/src/application/media/MathTypesetter.cpp.o
+[113/202] Linking CXX static library libxfmd_media.a
+[114/202] Building CXX object CMakeFiles/xfmd_typography.dir/src/application/preferences/ReadingColors.cpp.o
+[115/202] Building CXX object CMakeFiles/xfmd_typography.dir/src/application/adapters/DisplayListPainter.cpp.o
+[116/202] cd /home/warloc/git/xfmd-sdl-navigation/build-acceptance && /usr/bin/python3.12 /home/warloc/git/xfmd-sdl-navigation/tools/build_identity.py --source /home/warloc/git/xfmd-sdl-navigation --output /home/warloc/git/xfmd-sdl-navigation/build-acceptance/generated
+[117/202] Building CXX object CMakeFiles/xfmd_version.dir/src/application/build/BuildVersion.cpp.o
+[118/202] Linking CXX static library libxfmd_version.a
+[119/202] Building CXX object CMakeFiles/xfmd_typography.dir/src/application/adapters/DiagramPainter.cpp.o
+[120/202] Linking CXX static library libxfmd_typography.a
+[121/202] Generating cargo/release/libxfmd_mermaid_ffi.a
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.24
+   Compiling serde_core v1.0.229
+   Compiling libm v0.2.16
+   Compiling version_check v0.9.5
+   Compiling memchr v2.8.3
+   Compiling libc v0.2.189
+   Compiling slotmap v1.1.1
+   Compiling syn v3.0.5
+   Compiling find-msvc-tools v0.1.11
+   Compiling shlex v1.3.0
+   Compiling zmij v1.0.23
+   Compiling serde v1.0.229
+   Compiling cc v1.2.54
+   Compiling core_maths v0.1.1
+   Compiling aho-corasick v1.1.5
+   Compiling serde_json v1.0.151
+   Compiling thiserror v2.0.20
+   Compiling serde_derive v1.0.229
+   Compiling anyhow v1.0.104
+   Compiling regex-syntax v0.8.11
+   Compiling roxmltree v0.20.0
+   Compiling regex-automata v0.4.18
+   Compiling fontconfig-parser v0.5.8
+   Compiling memmap2 v0.9.11
+   Compiling thiserror-impl v2.0.20
+   Compiling mermaid-rs-renderer v0.3.1 (/home/warloc/git/xfmd-sdl-navigation/.deps/mermaid-rs-renderer)
+   Compiling ttf-parser v0.25.1
+   Compiling log v0.4.34
+   Compiling itoa v1.0.18
+   Compiling tinyvec v1.13.3
+   Compiling ucd-trie v0.1.7
+   Compiling json5 v1.3.1
+   Compiling fontdb v0.23.0
+   Compiling regex v1.13.1
+   Compiling once_cell v1.21.4
+   Compiling xfmd-diagram-contracts v0.1.0 (/home/warloc/git/xfmd-sdl-navigation/src/contracts/diagram/rust)
+   Compiling xfmd-mermaid-interpreter v0.1.0 (/home/warloc/git/xfmd-sdl-navigation/src/interpreter/mermaid/rust)
+   Compiling xfmd-diagram-layout v0.1.0 (/home/warloc/git/xfmd-sdl-navigation/src/renderer/diagram/rust)
+   Compiling xfmd-mermaid-ffi v0.1.0 (/home/warloc/git/xfmd-sdl-navigation/src/application/composition/mermaid)
+    Finished `release` profile [optimized] target(s) in 2m 50s
+[122/202] Building CXX object CMakeFiles/xfmd_interpreter.dir/src/interpreter/MathSyntax.cpp.o
+[123/202] Building CXX object CMakeFiles/xfmd_interpreter.dir/src/interpreter/CmarkInterpreter.cpp.o
+[124/202] Building CXX object CMakeFiles/xfmd_interpreter.dir/src/interpreter/mermaid/MermaidBlockBuilder.cpp.o
+[125/202] Building CXX object CMakeFiles/xfmd_interpreter.dir/src/interpreter/mermaid/MermaidInterpreter.cpp.o
+[126/202] Building CXX object CMakeFiles/xfmd_interpreter.dir/src/interpreter/SourceMapBuilder.cpp.o
+[127/202] Building CXX object CMakeFiles/xfmd_interpreter.dir/src/interpreter/ModelBuilder.cpp.o
+[128/202] Building CXX object CMakeFiles/xfmd_interpreter.dir/src/interpreter/TableModelBuilder.cpp.o
+[129/202] Linking CXX static library libxfmd_interpreter.a
+[130/202] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/diagram/DiagramPlacement.cpp.o
+[131/202] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/diagram/DiagramTextLayout.cpp.o
+[132/202] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/BlockLayout.cpp.o
+[133/202] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/PageBreaker.cpp.o
+[134/202] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/PageComposer.cpp.o
+[135/202] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/diagram/MermaidDiagramLayout.cpp.o
+[136/202] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/TableLayout.cpp.o
+[137/202] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/PageAnchorIndex.cpp.o
+[138/202] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/MarkdownRenderer.cpp.o
+[139/202] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/HitTester.cpp.o
+[140/202] Building CXX object CMakeFiles/xfmd_diagrams.dir/src/application/diagrams/DiagramCache.cpp.o
+[141/202] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/LinkMarker.cpp.o
+[142/202] Building CXX object CMakeFiles/xfmd_export.dir/src/application/export/ExportCoordinator.cpp.o
+[143/202] Building CXX object CMakeFiles/xfmd_diagrams.dir/src/application/composition/DiagramServices.cpp.o
+[144/202] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/InlineLayout.cpp.o
+[145/202] Linking CXX static library libxfmd_renderer.a
+[146/202] Building CXX object CMakeFiles/xfmd_export.dir/src/application/export/ExportPipeline.cpp.o
+[147/202] Building CXX object CMakeFiles/xfmd_export.dir/src/application/io/PdfFilePublisher.cpp.o
+[148/202] Building CXX object CMakeFiles/xfmd_diagrams.dir/src/application/diagrams/DiagramPreparation.cpp.o
+[149/202] Linking CXX static library libxfmd_diagrams.a
+[150/202] Building CXX object CMakeFiles/xfmd_export.dir/src/application/adapters/PdfOutput.cpp.o
+[151/202] Linking CXX static library libxfmd_export.a
+[152/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/navigation/NavigationPanel.cpp.o
+[153/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/controls/CompactToolbar.cpp.o
+[154/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/navigation/WindowEndpoint.cpp.o
+[155/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/controls/PreviewControls.cpp.o
+[156/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/controls/PreviewColorControls.cpp.o
+[157/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/navigation/DocumentViews.cpp.o
+[158/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/style/ThemeProfiles.cpp.o
+[159/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/style/IconCatalog.cpp.o
+[160/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/style/UiContext.cpp.o
+[161/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/style/UiStyling.cpp.o
+[162/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/controls/ButtonPainter.cpp.o
+[163/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/controls/UiButton.cpp.o
+[164/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/preferences/PreferencesService.cpp.o
+[165/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/adapters/ExternalBrowser.cpp.o
+[166/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/controls/UiLayout.cpp.o
+[167/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/PreferencesDialog.cpp.o
+[168/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/PreferencesPages.cpp.o
+[169/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/adapters/FoxPreferencesStore.cpp.o
+[170/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ApplicationTree.cpp.o
+[171/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/adapters/DesktopFileOpener.cpp.o
+[172/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/XfmdToolbar.cpp.o
+[173/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ApplicationAppearance.cpp.o
+[174/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ApplicationIndex.cpp.o
+[175/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ApplicationCommands.cpp.o
+[176/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/commands/CommandRouter.cpp.o
+[177/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/Application.cpp.o
+[178/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ApplicationExport.cpp.o
+[179/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/IconResources.cpp.o
+[180/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/EditorWidget.cpp.o
+[181/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/EditorPresentation.cpp.o
+[182/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/XfmdWindow.cpp.o
+[183/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/NavigationTree.cpp.o
+[184/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/SidebarWidget.cpp.o
+[185/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/RecentFilesPanel.cpp.o
+[186/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/WorkspacePanel.cpp.o
+[187/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/ViewModeController.cpp.o
+[188/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/adapters/FoxCairoCanvas.cpp.o
+[189/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/adapters/ViewTransform.cpp.o
+[190/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/adapters/FoxWindowMode.cpp.o
+[191/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/IndexPanel.cpp.o
+[192/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/adapters/FoxScheduler.cpp.o
+[193/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/adapters/FoxPreviewInput.cpp.o
+[194/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/adapters/FoxRenderHost.cpp.o
+[195/202] Building CXX object CMakeFiles/xfmd_application.dir/src/application/adapters/FoxWheelScrollBar.cpp.o
+[196/202] Linking CXX static library libxfmd_application.a
+[197/202] Building CXX object CMakeFiles/xfmd.dir/src/application/main.cpp.o
+[198/202] Building CXX object CMakeFiles/NavigationGuiTest.dir/tests/gui/NavigationGuiTest.cpp.o
+[199/202] Building CXX object CMakeFiles/DocumentViewsGuiTest.dir/tests/gui/DocumentViewsGuiTest.cpp.o
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/DocumentViewsGuiTest.cpp: In function ‘void run()’:
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/DocumentViewsGuiTest.cpp:54:88: warning: missing initializer for member ‘xfmd::DocumentViewConfig::broker’ [-Wmissing-field-initializers]
+   54 |   DocumentViewConfig c{nav, tool, source, "demo", "", "gui-" + std::to_string(getpid())};
+      |                                                                                        ^
+[200/202] Linking CXX executable xfmd
+[201/202] Linking CXX executable NavigationGuiTest
+[202/202] Linking CXX executable DocumentViewsGuiTest

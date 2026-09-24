@@ -78,6 +78,9 @@ P23: FoxPreviewInput eier merking og clipboard-input; PreviewSelection holder lo
 
 Brukes av presentasjon, preview, navigasjon og sync. Application.cpp kobler hendelser til koordinatorer; host kjenner ikke konkrete feature-arbeidsflyter.
 
+Sprint 004 consumer (2026-09-24 reconstruction): FUNC-031 creates a second FoxRenderHost for the navigator. Its link callback dispatches registered SDL actions or ordinary navigator links.
+See [FUNC-031](Functionality-031--Generated-Document-Navigation.md) for the complete call path.
+
 ## 7. Verifikasjon
 
 Relevante akseptanse-ID-er: AT-025, AT-002, AT-005, AT-008, AT-011, AT-018, AT-019, AT-020, AT-023.

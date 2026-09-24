@@ -48,6 +48,9 @@ Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callback
 
 Konsumenter: preview, tekstredigering, workspace og navigasjon. Alle må bruke requestOpen; ingen direkte Session::replace utenfor koordinatorens commit. Snapshot er gjenbrukbar data, ikke tilgang til muterbar buffer.
 
+Sprint 004 consumer (2026-09-24 reconstruction): FUNC-031 creates a separate navigator session and retains the existing main session; addressed delivery rejects a dirty main buffer before opening.
+See [FUNC-031](Functionality-031--Generated-Document-Navigation.md) for the complete call path.
+
 ## 7. Verifikasjon
 
 Relevante akseptanse-ID-er: AT-001, AT-003, AT-009, AT-012, AT-016, AT-017, AT-018, AT-023.

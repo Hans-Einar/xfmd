@@ -1,0 +1,29 @@
+-- Checking for module 'libcmark-gfm=0.29.0.gfm.13'
+--   Found libcmark-gfm, version 0.29.0.gfm.13
+CMake Warning (dev) at /usr/share/cmake/Modules/FetchContent.cmake:1373 (message):
+  The DOWNLOAD_EXTRACT_TIMESTAMP option was not given and policy CMP0135 is
+  not set.  The policy's OLD behavior will be used.  When using a URL
+  download, the timestamps of extracted files should preferably be that of
+  the time of extraction, otherwise code that depends on the extracted
+  contents might not be rebuilt if the URL changes.  The OLD behavior
+  preserves the timestamps from the archive instead, but this is usually not
+  what you want.  Update your project to the NEW behavior or specify the
+  DOWNLOAD_EXTRACT_TIMESTAMP option with a value of true to avoid this
+  robustness issue.
+Call Stack (most recent call first):
+  cmake/MicroTeX.cmake:3 (FetchContent_Declare)
+  CMakeLists.txt:31 (include)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Checking for modules 'cairomm-1.0;pangomm-1.4;tinyxml2;fontconfig'
+--   Found cairomm-1.0, version 1.14.5
+--   Found pangomm-1.4, version 2.46.4
+--   Found tinyxml2, version 10.0.0
+--   Found fontconfig, version 2.15.0
+-- Found Python3: /usr/bin/python3.12 (found suitable version "3.12.14", minimum required is "3.11") found components: Interpreter
+-- Checking for module 'gdk-pixbuf-2.0'
+--   Found gdk-pixbuf-2.0, version 2.42.12
+-- Found Python3: /usr/bin/python3.12 (found version "3.12.14") found components: Interpreter
+-- Configuring done (1.9s)
+-- Generating done (0.5s)
+-- Build files have been written to: /home/warloc/git/xfmd-sdl-navigation/build-acceptance

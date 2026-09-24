@@ -51,6 +51,9 @@ Implemented-rader beskriver gjeldende plumbing; historiske fasebevis identifiser
 
 FTR-004 bruker begge retninger; FUNC-008 bruker capture/restore. Renderer eier geometri, interpreter eier source ranges; application kombinerer uten å reparse. Ikke lag separat prosentformel i historikk eller UI.
 
+Sprint 004 consumer (2026-09-24 reconstruction): FUNC-031 reuses source-anchor restoration for navigator heading targets after model acceptance; main and navigator scrolling remain separate.
+See [FUNC-031](Functionality-031--Generated-Document-Navigation.md) for the complete call path.
+
 ## 7. Verifikasjon
 
 Relevante akseptanse-ID-er: AT-005, AT-008, AT-012, AT-018, AT-019, AT-023.

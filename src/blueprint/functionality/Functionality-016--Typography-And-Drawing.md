@@ -49,6 +49,9 @@ P23: DisplayListPainter tegner CairoVisual i samme adapter som tekst. Matematikk
 
 Konsumenter: FUNC-004, FUNC-005 og FUNC-018. Samme shapingkontrakt kan brukes av en erstattet renderer; interpreter påvirkes ikke. Editorens FXText-font forblir separat.
 
+Sprint 004 consumer (2026-09-24 reconstruction): FUNC-031 creates navigator-owned SharedTextMetrics and reuses the same FOX/Cairo presentation pipeline; no new rendering backend is introduced.
+See [FUNC-031](Functionality-031--Generated-Document-Navigation.md) for the complete call path.
+
 ## 7. Verifikasjon
 
 Latin/æøå, CJK-fallback, sammensatte tegn, fet/kursiv og monospace testes. Sammenlign font-id, advances, linjebrudd og PDF-uttrekk; raster sammenlignes med avtalt antialias-toleranse, ikke krav om identiske skjermpiksler.

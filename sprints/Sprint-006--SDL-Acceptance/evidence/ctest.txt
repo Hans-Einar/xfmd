@@ -1,0 +1,76 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd-sdl-navigation/build-acceptance
+UpdateCTestConfiguration  from :/home/warloc/git/xfmd-sdl-navigation/build-acceptance/DartConfiguration.tcl
+Parse Config file:/home/warloc/git/xfmd-sdl-navigation/build-acceptance/DartConfiguration.tcl
+UpdateCTestConfiguration  from :/home/warloc/git/xfmd-sdl-navigation/build-acceptance/DartConfiguration.tcl
+Parse Config file:/home/warloc/git/xfmd-sdl-navigation/build-acceptance/DartConfiguration.tcl
+Test project /home/warloc/git/xfmd-sdl-navigation/build-acceptance
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 28
+    Start 28: NavigationGuiTest
+
+28: Test command: /usr/bin/python3.12 "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py" "/home/warloc/git/xfmd-sdl-navigation/build-acceptance/NavigationGuiTest"
+28: Working Directory: /home/warloc/git/xfmd-sdl-navigation/build-acceptance
+28: Test timeout computed to be: 65
+28: PASS
+1/5 Test #28: NavigationGuiTest ................   Passed    2.19 sec
+test 62
+    Start 62: DocumentViewsGuiTest
+
+62: Test command: /usr/bin/python3.12 "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py" "/home/warloc/git/xfmd-sdl-navigation/build-acceptance/DocumentViewsGuiTest"
+62: Working Directory: /home/warloc/git/xfmd-sdl-navigation/build-acceptance
+62: Environment variables: 
+62:  SDL_TOOL=/home/warloc/git/xfmd-sdl-navigation/build-acceptance/bin/sdl
+62: Test timeout computed to be: 30
+62: PASS
+2/5 Test #62: DocumentViewsGuiTest .............   Passed    3.15 sec
+test 63
+    Start 63: DocumentEndpointTest
+
+63: Test command: /usr/bin/python3.12 "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py" "/usr/bin/python3.12" "/home/warloc/git/xfmd-sdl-navigation/tests/gui/DocumentEndpointTest.py" "/home/warloc/git/xfmd-sdl-navigation/build-acceptance/xfmd"
+63: Working Directory: /home/warloc/git/xfmd-sdl-navigation/build-acceptance
+63: Test timeout computed to be: 30
+63: PASS: two native windows, explicit pane, stale/invalid/oversize requests, retained view, closed target
+3/5 Test #63: DocumentEndpointTest .............   Passed    0.82 sec
+test 64
+    Start 64: WindowEndpointBoundaryTest
+
+64: Test command: /home/warloc/git/xfmd-sdl-navigation/build-acceptance/WindowEndpointBoundaryTest
+64: Working Directory: /home/warloc/git/xfmd-sdl-navigation/build-acceptance
+64: Test timeout computed to be: 1500
+64: PASS: lease metadata, failed-open sequence consumption, 256 keys and existing-key admission
+64: PASS: disconnect before packet is inert; after packet commits once without reply
+64: PASS: 16 pending peers, overflow close, idle expiry and recovered capacity
+64: PASS: foreign UID rejection with injected SO_PEERCRED result (not a cross-UID process)
+64: PASS
+4/5 Test #64: WindowEndpointBoundaryTest .......   Passed    2.12 sec
+test 65
+    Start 65: DocumentLeaseGuiTest
+
+65: Test command: /usr/bin/python3.12 "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py" "/home/warloc/git/xfmd-sdl-navigation/build-acceptance/DocumentLeaseGuiTest"
+65: Working Directory: /home/warloc/git/xfmd-sdl-navigation/build-acceptance
+65: Test timeout computed to be: 45
+65: PASS: dirty main rejected without modal; failed open preserves active lease
+65: PASS: injected EAGAIN send retries; successful send is not retried without acknowledgment
+65: PASS: 256-release admission bound, actual connect retry, recovery and both-panel close
+65: PASS: unavailable-broker shutdown does not replay releases in a new owner
+65: PASS
+5/5 Test #65: DocumentLeaseGuiTest .............   Passed   13.54 sec
+
+The following tests passed:
+	NavigationGuiTest
+	DocumentViewsGuiTest
+	DocumentEndpointTest
+	WindowEndpointBoundaryTest
+	DocumentLeaseGuiTest
+
+100% tests passed, 0 tests failed out of 5
+
+Label Time Summary:
+GUI    =  19.69 sec*proc (4 tests)
+
+Total Test time (real) =  21.82 sec

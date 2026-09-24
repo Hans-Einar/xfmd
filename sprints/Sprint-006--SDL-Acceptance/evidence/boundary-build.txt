@@ -1,0 +1,28 @@
+[0/2] Re-checking globbed directories...
+[1/2] Re-running CMake...
+CMake Warning (dev) at /usr/share/cmake/Modules/FetchContent.cmake:1373 (message):
+  The DOWNLOAD_EXTRACT_TIMESTAMP option was not given and policy CMP0135 is
+  not set.  The policy's OLD behavior will be used.  When using a URL
+  download, the timestamps of extracted files should preferably be that of
+  the time of extraction, otherwise code that depends on the extracted
+  contents might not be rebuilt if the URL changes.  The OLD behavior
+  preserves the timestamps from the archive instead, but this is usually not
+  what you want.  Update your project to the NEW behavior or specify the
+  DOWNLOAD_EXTRACT_TIMESTAMP option with a value of true to avoid this
+  robustness issue.
+Call Stack (most recent call first):
+  cmake/MicroTeX.cmake:3 (FetchContent_Declare)
+  CMakeLists.txt:31 (include)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found Python3: /usr/bin/python3.12 (found suitable version "3.12.14", minimum required is "3.11") found components: Interpreter
+-- Found Python3: /usr/bin/python3.12 (found version "3.12.14") found components: Interpreter
+-- Configuring done (0.8s)
+-- Generating done (0.5s)
+-- Build files have been written to: /home/warloc/git/xfmd-sdl-navigation/build-acceptance
+[0/2] Re-checking globbed directories...
+[1/7] cd /home/warloc/git/xfmd-sdl-navigation/build-acceptance && /usr/bin/python3.12 /home/warloc/git/xfmd-sdl-navigation/tools/build_identity.py --source /home/warloc/git/xfmd-sdl-navigation --output /home/warloc/git/xfmd-sdl-navigation/build-acceptance/generated
+[2/5] Building CXX object CMakeFiles/WindowEndpointBoundaryTest.dir/tests/application/WindowEndpointBoundaryTest.cpp.o
+[3/5] Linking CXX executable WindowEndpointBoundaryTest
+[4/5] Building CXX object CMakeFiles/DocumentLeaseGuiTest.dir/tests/gui/DocumentLeaseGuiTest.cpp.o
+[5/5] Linking CXX executable DocumentLeaseGuiTest

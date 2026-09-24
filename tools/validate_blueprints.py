@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
-HEADINGS = [
+LEGACY_HEADINGS = [
     '## 1. Hensikt og avgrensning',
     '## 2. Krav og akseptanse',
     '## 3. Kontrakter og eierskap',
@@ -20,6 +20,16 @@ HEADINGS = [
     '## 6. Gjenbruk og avhengigheter',
     '## 7. Verifikasjon',
     '## 8. Status, risiko og endringskonsekvenser',
+]
+HEADINGS = [
+    '## 1. Purpose and scope',
+    '## 2. Requirements and acceptance',
+    '## 3. Contracts and ownership',
+    '## 4. Behavior, state and failures',
+    '## 5. Plumbing',
+    '## 6. Reuse and dependencies',
+    '## 7. Verification',
+    '## 8. Status, risks and change impact',
 ]
 ENUMS = {
     'kind': {'Feature', 'Functionality'},
@@ -107,9 +117,9 @@ def check(root):
         if not re.fullmatch(rf'{expected_kind}-{ident.split("-")[1]}--[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*\.md', path.name):
             fail(path, 'filename must match kind/ID and English slug pattern')
         headings = re.findall(r'^## .+$', without_code(text), re.M)
-        if headings != HEADINGS:
+        if headings not in (HEADINGS, LEGACY_HEADINGS):
             fail(path, 'expected the eight fixed headings, with chapter 5 Plumbing')
-        for heading in HEADINGS:
+        for heading in headings:
             if heading in text:
                 section = text.split(heading, 1)[1].split('\n## ', 1)[0].strip()
                 if not section:
@@ -183,7 +193,7 @@ def check(root):
 
     # Only actual Markdown links are checked. Planned paths remain plain code spans.
     for path in root.rglob('*.md'):
-        if any(part in {'.git', 'build', '__pycache__'} or part.startswith('build-') for part in path.relative_to(root).parts):
+        if any(part in {'.git', '.deps', 'third_party', 'build', '__pycache__'} or part.startswith('build-') for part in path.relative_to(root).parts):
             continue
         text = without_code(path.read_text())
         for match in re.finditer(r'!?\[[^\]\n]*\]\(([^)\n]+)\)', text):

@@ -46,6 +46,9 @@ Ingen andre functionality-kontrakter konsumeres; delte datatyper følger arkitek
 
 Preview er første konsument. Andre tidsstyrte funksjoner kan bruke adapteren når de har konkret krav; ikke opprett separate timere direkte inne i featurekode.
 
+Sprint 004 consumer (2026-09-24 reconstruction): FUNC-031 owns a FoxScheduler for endpoint/child/release polling and a separate navigator scheduler; timers stop with their owners.
+See [FUNC-031](Functionality-031--Generated-Document-Navigation.md) for the complete call path.
+
 ## 7. Verifikasjon
 
 Relevante akseptanse-ID-er: AT-004, AT-018, AT-020, AT-023.

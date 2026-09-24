@@ -1,0 +1,54 @@
+Start testing: Sep 22 15:21 CEST
+----------------------------------------------------------
+28/63 Testing: NavigationGuiTest
+28/63 Test: NavigationGuiTest
+Command: "/usr/bin/python3.12" "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py" "/home/warloc/git/xfmd-sdl-navigation/build/NavigationGuiTest"
+Directory: /home/warloc/git/xfmd-sdl-navigation/build
+"NavigationGuiTest" start time: Sep 22 15:21 CEST
+Output:
+----------------------------------------------------------
+PASS
+<end of output>
+Test time =   2.29 sec
+----------------------------------------------------------
+Test Passed.
+"NavigationGuiTest" end time: Sep 22 15:21 CEST
+"NavigationGuiTest" time elapsed: 00:00:02
+----------------------------------------------------------
+
+62/63 Testing: DocumentViewsGuiTest
+62/63 Test: DocumentViewsGuiTest
+Command: "/usr/bin/python3.12" "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py" "/home/warloc/git/xfmd-sdl-navigation/build/DocumentViewsGuiTest"
+Directory: /home/warloc/git/xfmd-sdl-navigation/build
+"DocumentViewsGuiTest" start time: Sep 22 15:21 CEST
+Output:
+----------------------------------------------------------
+PASS
+<end of output>
+Test time =   3.34 sec
+----------------------------------------------------------
+Test Passed.
+"DocumentViewsGuiTest" end time: Sep 22 15:21 CEST
+"DocumentViewsGuiTest" time elapsed: 00:00:03
+----------------------------------------------------------
+
+63/63 Testing: DocumentEndpointTest
+63/63 Test: DocumentEndpointTest
+Command: "/usr/bin/python3.12" "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py" "/usr/bin/python3.12" "/home/warloc/git/xfmd-sdl-navigation/tests/gui/DocumentEndpointTest.py" "/home/warloc/git/xfmd-sdl-navigation/build/xfmd"
+Directory: /home/warloc/git/xfmd-sdl-navigation/build
+"DocumentEndpointTest" start time: Sep 22 15:21 CEST
+Output:
+----------------------------------------------------------
+PASS: two native windows, explicit pane, stale/invalid/oversize requests, retained view, closed target
+<end of output>
+Test time =   0.75 sec
+----------------------------------------------------------
+Test Passed.
+"DocumentEndpointTest" end time: Sep 22 15:21 CEST
+"DocumentEndpointTest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 22 15:21 CEST
+
+GUI =   6.37 sec*proc
+

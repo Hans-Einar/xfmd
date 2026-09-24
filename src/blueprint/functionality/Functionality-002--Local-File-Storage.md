@@ -46,6 +46,9 @@ Ingen andre functionality-kontrakter konsumeres; delte datatyper følger arkitek
 
 Dokumentkoordinatoren er første konsument; framtidig eksport kan bruke lagring hvis samme metadata-/konfliktpolicy passer. Ikke opprett alternative save-metoder inne i features.
 
+Sprint 004 consumer (2026-09-24 reconstruction): FUNC-031 reuses LocalFileStore through its navigator DocumentCoordinator; the broker owns generated bundle storage and lifetime.
+See [FUNC-031](Functionality-031--Generated-Document-Navigation.md) for the complete call path.
+
 ## 7. Verifikasjon
 
 Relevante akseptanse-ID-er: AT-001, AT-003, AT-009, AT-015, AT-016, AT-017, AT-021, AT-023.

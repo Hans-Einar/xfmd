@@ -60,6 +60,9 @@ P23: ParserWorker injiseres med EmbeddedVisuals::prepare fra composition root. R
 
 FTR-001 og FTR-002 bruker denne tjenesten. View mode/resize bruker relayout. Framtidig IPC skal levere nye snapshots gjennom dokumentlaget, ikke omgå pipeline.
 
+Sprint 004 consumer (2026-09-24 reconstruction): FUNC-031 creates an independent navigator PreviewCoordinator through the existing interpreter/renderer/prepare composition; no SDL parser enters preview.
+See [FUNC-031](Functionality-031--Generated-Document-Navigation.md) for the complete call path.
+
 ## 7. Verifikasjon
 
 Relevante akseptanse-ID-er: AT-002, AT-004, AT-011, AT-012, AT-013, AT-018, AT-020, AT-021, AT-023.

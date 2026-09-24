@@ -1,8 +1,11 @@
 # Software Architecture Design: xfmd
 
-Status: **Implemented P0–P15, revisjon 1.4**, 2026-09-13.
-Kapittel 1–13 beskriver implementasjonen. Historiske veivalg og målinger finnes i [P0](docs/evidence/P0.md) og
-[sluttverifikasjonen](docs/evidence/P7.md).
+Current delivery context, reconciled 2026-09-24: main c245fd9 includes P0–P41
+and Sprints 001–002. This branch additionally includes Sprint 004 through 47a245a;
+see the [sprint register](sprints/README.md). The original P0–P15 file map below
+is retained as the baseline description; subsequent sections document extensions.
+Consult the latest relevant section rather than treating the old revision number
+as the current product scope. Implemented does not mean fully Verified.
 
 ## 1. Horisontale lag og avhengigheter
 
@@ -499,8 +502,28 @@ og installert JSON. `src/application/build/BuildVersion.h/.cpp` eksponerer
 `buildVersion()` for CLI og Application-vindustittel. Git/Python finnes bare
 i byggsteget, ikke i kjørende applikasjon eller interpreter/renderer.
 
-## Sprint 004 — dokumentnavigasjon
+## Sprint 004 — generated document navigation and leases
 
-Application/navigation får NavigationPanel (egen eksisterende preview-pipeline),
-DocumentViews (registrert verktøy og panelruting) og WindowEndpoint (privat lokal
-IPC). Renderer/interpreter er uendret; ingen SDL-parser trekkes inn i XFMD.
+Application owns the document host. `main.cpp` reads DocumentViewConfig and creates
+DocumentViews when navigator mode is requested. NavigationPanel owns an independent
+DocumentSession, NavigationCoordinator, preview worker/pipeline, source-anchor
+scrolling, font metrics and FoxRenderHost. Ordinary interpretation/rendering ports
+are reused; SDL parsing and view projection remain outside XFMD.
+
+`application/navigation/DocumentViews.cpp/.h` owns registered-tool invocation,
+process-group cancellation/deadline, direct-generation directories, per-panel broker
+lease state and the release retry queue. `WindowEndpoint.cpp/.h` owns the Linux
+private same-user SOCK_SEQPACKET endpoint and addressed OPEN/INFO protocol. The
+main and navigator successful-open callbacks release the preceding panel lease;
+only successful leased delivery registers a replacement. Application destroys
+DocumentViews before main-window/services teardown.
+
+A dirty main buffer rejects addressed opens without a modal dialog. Direct bundles
+are window-owned; broker bundles and durable leases are SDL-owned. RELEASE is a
+best-effort send, without durable broker acknowledgment or persisted shutdown retry.
+Queue saturation blocks further addressed opens, not all ordinary UI operations.
+See [FUNC-031](src/blueprint/functionality/Functionality-031--Generated-Document-Navigation.md)
+for actual calls, wire fields, limits and [P050 evidence](sprints/Sprint-004--SDL-Navigation/Phase-050--Document-Leases.md).
+
+SDUI/Fyne is a separate interactive UI host. The historical FOX BoxUI branch is
+not integrated here and is not a prerequisite for this document-navigation path.

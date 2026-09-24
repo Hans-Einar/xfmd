@@ -1,63 +1,87 @@
 # Repository Guidelines
 
-## Formål og leserekkefølge
+## Purpose and reading order
 
-xfmd er en lettvekts Markdown-viser/editor og companion til `xfw` og `xfi`.
-Les [kravene](xfmd_requirements.md), [arkitekturen](softwareArchitecture.md),
-[arbeidsmåten](docs/working-method.md) og berørte [blueprints](src/blueprint/README.md)
-før endringer. Baseline P0–P8 er implementert. [Designrevisjon 1.1](softwareDesign.md)
-beskriver Proposed utvidelser; Planned-symboler er ikke eksisterende kode.
+xfmd is a lightweight Markdown viewer/editor and a companion to `xfw` and `xfi`.
+Read the [requirements](xfmd_requirements.md), [architecture](softwareArchitecture.md),
+[working method](docs/working-method.md), [contribution guide](CONTRIBUTING.md),
+[KanBan board](Agents/KanBan/README.md),
+and affected [blueprints](src/blueprint/README.md) before making changes.
+Distinguish dated design proposals from implemented code and current decisions.
+Planned symbols are not existing implementations.
 
-## Arkitektur og plassering
+## Architecture and placement
 
-- `src/application/`: FOX-applikasjon, vinduer, kommandoer, koordinering og adaptere.
-- `src/interpreter/`: Markdown-tolkning; ingen FOX- eller renderer-avhengighet.
-- `src/renderer/`: presentasjon, layout, hit-testing og visuell kildemapping; ingen FOX- eller interpreter-avhengighet.
-- `src/contracts/`: minimale, FOX- og parser-frie grensesnitt og datatyper.
-- `src/blueprint/feature/` og `src/blueprint/functionality/`: designobjekter, ikke kode.
+- `src/application/`: FOX application, windows, commands, coordination and adapters.
+- `src/interpreter/`: Markdown interpretation; no FOX or renderer dependencies.
+- `src/renderer/`: presentation, layout, hit-testing and visual source mapping;
+  no FOX or interpreter dependencies.
+- `src/contracts/`: minimal FOX- and parser-free interfaces and data types.
+- `src/blueprint/feature/` and `src/blueprint/functionality/`: design objects, not code.
 
-FOX er et varig valg. Application eier FOX-integrasjonen; renderer beskriver hva
-som tegnes, og FOX-adapteren utfører tegningen. Bytte av interpreter eller renderer
-skal bare kreve ny implementasjon og registrering i composition root, ikke endring
-i applikasjonens arbeidsflyter.
+FOX remains XFMD's toolkit. Application owns FOX integration; renderer describes
+what to draw, and the FOX adapter draws it. Replacing an interpreter or renderer
+should require an implementation and composition-root registration, not changes
+to application workflows. SDUI's separate Fyne host does not change this boundary.
 
-## Små filer med tydelig ansvar
+## Small files with clear responsibilities
 
-Følg filkartet i arkitekturen. Én hovedrolle per header/implementasjonspar.
-`XfmdWindow` bygger vinduet; den skal ikke parse, lagre eller beregne scrolling.
-`DocumentSession` eier dokumenttilstand; egne koordinatorer håndterer preview,
-navigasjon og scrolling. Unngå `Manager`, `Utils` og samlefiler uten presist ansvar.
-Over omtrent 300 linjer: vurder oppdeling og dokumenter begrunnelsen; ikke del
-mekanisk. Nye filer skal ha dokumentert eier og en naturlig plass i filkartet.
+Follow the architecture's file map. Give each header/implementation pair one main
+role. `XfmdWindow` builds the window; it must not parse, save or calculate scrolling.
+`DocumentSession` owns document state; dedicated coordinators handle preview,
+navigation and scrolling. Avoid `Manager`, `Utils` and unrelated collections.
+Above roughly 300 lines, consider splitting and document the reasoning; do not
+split mechanically. New files need a documented owner and a natural place in the map.
 
-## Arbeidsflyt og sporbarhet
+## Conversation notes and KanBan
 
-Arbeid i rekkefølgen **krav → blueprint → kontrakt/plumbing → kode → verifikasjon**.
-Bruk [malene](src/blueprint/templates/README.md). Behold kapittel 5 som `Plumbing`,
-med konkrete kall, kildefiler, data og feilvei. Merk symboler som planlagte inntil
-de finnes. Oppdater blueprint og kode i samme endring.
+Use `Agents/KanBan/` for ideas, questions, investigations and follow-up notes from
+chat that are not yet agreed product requirements or implementation plans.
+Capture them during the discussion, with sources and a concrete next review.
+Keep owner decisions, agent recommendations and open questions distinct.
 
-Søk etter eksisterende functionality før du lager ny. Features gjenbruker
-functionality; de kaller ikke hverandres interne implementasjon. Eksponer bare
-små, begrunnede kontrakter, og oppgi faktisk eller planlagt konsument.
+After a discussion and before choosing the next round of work, review related
+backlog notes for overlap and later corrections. Consolidate when useful, preserve
+source cards under `superseded`, and record source/successor IDs and rationale in
+the append-only ledger. Partial consolidation must leave unresolved scope visible.
+Move only selected, bounded work to `active`; recording a note is not authorization
+to implement it. Follow the board's rules for moves, links, outcomes and ledger replay.
 
-## Sprinter, faser og bygg
+This imports only the KanBan note workflow. Do not create an `SDP/` directory or
+adopt the rest of the changing SDP process. Product truth stays in requirements,
+blueprints, architecture, sprint plans and evidence, with links from the cards.
 
-Følg [prosjektets arbeidsmåte](docs/working-method.md) og
-[versjonsreglene](docs/versioning.md). Dokumenter nye leveranser under `sprints/`.
-Én branch per fase, én commit per milestone og én samlet PR per sprint.
-Autonom flerfaseøkt bygger ved faseslutt, ikke ved hver commit. I samarbeid
-med brukeren kan hver feilretting bygges. Behold historikken ved merge; ikke
-squash/rebase publiserte commits. Ikke opprett en SDP-mappe som del av dette.
+## Implementation workflow and traceability
 
-## Stil, kontroll og bidrag
+Work in this order: **requirements → blueprint → contracts/plumbing → code → verification**.
+Use the [templates](src/blueprint/templates/README.md). Keep blueprint chapter 5
+named `Plumbing`, with concrete calls, source files, data and error paths. Mark
+symbols as planned until they exist. Update blueprint and code in the same change.
 
-Skriv prosjektprosa på norsk og kodeidentifikatorer på engelsk. C++17-stil:
-to mellomrom, `PascalCase` for typer/filer, `camelCase` for metoder og RAII for
-eierskap. Behold etablerte CMake-/CTest-kontroller.
+Search for existing functionality before adding any. Features reuse functionality;
+they do not call each other's private implementation. Expose only small, justified
+contracts and identify the actual or planned consumer.
 
-Kjør `python3 tools/validate_blueprints.py` og `python3 tools/check_blueprint_symbols.py`
-ved designendringer. Gjeldende bygge-/testkommandoer står i [README](README.md).
-Commits skal ha korte imperative titler. PR-er oppgir krav-/blueprint-ID-er,
-endret plumbing, utførte kontroller og kjente begrensninger; legg ved skjermbilder
-ved synlige GUI-endringer. Ikke marker noe `Verified` uten dokumentert testbevis.
+## Sprints, phases and builds
+
+Follow the [working method](docs/working-method.md) and [versioning](docs/versioning.md).
+Document new implementation deliveries under `sprints/`. Use one branch per phase,
+one commit per milestone and one combined PR per sprint. Autonomous multi-phase
+work builds at phase boundaries, not every commit. In collaboration with the user,
+each fix may be built. Preserve merge history; do not squash/rebase published commits.
+Capturing and reviewing KanBan notes does not itself require a product sprint.
+
+## Style, checks and contributions
+
+Write all new or revised documentation in English, including agent instructions,
+KanBan cards and ledger reasons. Existing Norwegian documents remain authoritative
+where applicable; translate them when revised without silently changing decisions
+or evidence. Historical records retain their dated scope.
+Code identifiers are English. Follow C++17 style: two spaces, `PascalCase` types/files,
+`camelCase` methods and RAII ownership. Preserve established CMake/CTest checks.
+
+Run `python3 tools/validate_blueprints.py` and `python3 tools/check_blueprint_symbols.py`
+for design changes. Current build/test commands are in [README](README.md).
+Use short imperative commit titles. PRs identify requirement/blueprint IDs,
+changed plumbing, checks and known limitations; include screenshots for visible
+GUI changes. Never mark anything `Verified` without documented test evidence.

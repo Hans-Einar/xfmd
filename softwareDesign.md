@@ -1,5 +1,15 @@
 # XFMD: arkitektur- og designrevisjon 1.1
 
+Current reading guide (2026-09-24): this file preserves dated design revisions,
+including their original proposal wording. It is not the current delivery index.
+Use the [sprint register](sprints/README.md), [architecture](softwareArchitecture.md)
+and [blueprint register](src/blueprint/README.md) for implemented scope.
+In particular, the P25 Mermaid proposal below was implemented and extended in
+P26–P41; see [current coverage](mermaid_coverage.md) and
+[integration evidence](docs/evidence/P41-integration.md). Its Proposed heading
+records the historical proposal, not a pending product implementation.
+
+
 Status: **Implementert som revisjon 1.2 i P9–P13**. Den opprinnelige
 arkitekturrevisjonen nedenfor vurderte baseline `0712c29`, P0–P8. Forslagsform
 i de opprinnelige kapitlene bevarer beslutningsgrunnlaget; siste kapittel oppgir

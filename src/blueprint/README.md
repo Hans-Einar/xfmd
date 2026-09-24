@@ -1,14 +1,16 @@
-# Blueprint-register
+# Blueprint register
 
-P0–P29 har 10 implementerte features og 25 functionality-objekter.
-Mermaid Flowchart 1 er implementert; faktisk verifikasjon og begrensninger
-står i [P29-bevis](../../docs/evidence/P29.md).
-Registerstatus speiler metadata i blueprint-filene. Implemented betyr at koden
-finnes; [P15-bevis](../../docs/evidence/P15.md) angir faktisk testdekning og
-begrensninger. UR-010/SR-014 (xfw-IPC) er fortsatt Future.
+Current branch inventory: 10 features and 27 functionality objects (37 total).
+Main `c245fd9` contains P0–P41 and Sprints 001–002; FUNC-031 belongs to the
+separate Sprint 004 branch. FTR-011/FUNC-027–030 and UR-043/SR-026 are reserved
+by historical BoxUI work and are not missing implementations on this branch.
+See the [sprint register](../../sprints/README.md), [working method](../../docs/working-method.md)
+and [templates](templates/README.md). Implemented is not Verified.
 
-Se [designrevisjonen](../../softwareDesign.md), [arbeidsmåten](../../docs/working-method.md),
-[malene](templates/README.md), [P7-bevis](../../docs/evidence/P7.md) og [P8-bevis](../../docs/evidence/P8.md).
+Mermaid's current bounded profiles and evidence are documented in
+[coverage](../../mermaid_coverage.md), [P41](../../docs/evidence/P41.md) and its
+[integration report](../../docs/evidence/P41-integration.md). UR-010/SR-014 for
+xfw integration remain Future; XFMD's SDL endpoint does not deliver those requirements.
 
 ## Designobjekter
 
@@ -144,12 +146,12 @@ P22: UR-032 → FUNC-010/014; UR-033 → FUNC-010; UR-034 → FUNC-005. AT-052�
 
 | Krav | Designobjekter | Akseptanse | Scope |
 | --- | --- | --- | --- |
-| UR-039 | [FTR-010](feature/Feature-010--Mermaid-Diagrams.md), [FUNC-023](functionality/Functionality-023--Mermaid-Interpretation.md), [FUNC-024](functionality/Functionality-024--Diagram-Layout.md), [FUNC-025](functionality/Functionality-025--Diagram-Preparation.md), [FUNC-003](functionality/Functionality-003--Markdown-Interpretation.md) | AT-059 | Future |
-| UR-040 | [FTR-010](feature/Feature-010--Mermaid-Diagrams.md), [FUNC-024](functionality/Functionality-024--Diagram-Layout.md), [FUNC-025](functionality/Functionality-025--Diagram-Preparation.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md), [FUNC-017](functionality/Functionality-017--Page-Composition.md), [FUNC-018](functionality/Functionality-018--PDF-Export.md) | AT-060 | Future |
-| UR-041 | [FTR-010](feature/Feature-010--Mermaid-Diagrams.md), [FUNC-023](functionality/Functionality-023--Mermaid-Interpretation.md), [FUNC-024](functionality/Functionality-024--Diagram-Layout.md), [FUNC-025](functionality/Functionality-025--Diagram-Preparation.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md), [FUNC-021](functionality/Functionality-021--Preview-Text-Selection.md) | AT-061 | Future |
-| SR-021 | [FTR-010](feature/Feature-010--Mermaid-Diagrams.md), [FUNC-023](functionality/Functionality-023--Mermaid-Interpretation.md), [FUNC-024](functionality/Functionality-024--Diagram-Layout.md), [FUNC-025](functionality/Functionality-025--Diagram-Preparation.md) | AT-062 | Future |
-| SR-022 | [FTR-010](feature/Feature-010--Mermaid-Diagrams.md), [FUNC-023](functionality/Functionality-023--Mermaid-Interpretation.md), [FUNC-024](functionality/Functionality-024--Diagram-Layout.md), [FUNC-025](functionality/Functionality-025--Diagram-Preparation.md), [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md), [FUNC-018](functionality/Functionality-018--PDF-Export.md) | AT-063 | Future |
-| SR-023 | [FTR-010](feature/Feature-010--Mermaid-Diagrams.md), [FUNC-023](functionality/Functionality-023--Mermaid-Interpretation.md), [FUNC-024](functionality/Functionality-024--Diagram-Layout.md), [FUNC-025](functionality/Functionality-025--Diagram-Preparation.md) | AT-064 | Future |
+| UR-039 | [FTR-010](feature/Feature-010--Mermaid-Diagrams.md), [FUNC-023](functionality/Functionality-023--Mermaid-Interpretation.md), [FUNC-024](functionality/Functionality-024--Diagram-Layout.md), [FUNC-025](functionality/Functionality-025--Diagram-Preparation.md), [FUNC-003](functionality/Functionality-003--Markdown-Interpretation.md) | AT-059 | FirstRelease |
+| UR-040 | [FTR-010](feature/Feature-010--Mermaid-Diagrams.md), [FUNC-024](functionality/Functionality-024--Diagram-Layout.md), [FUNC-025](functionality/Functionality-025--Diagram-Preparation.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md), [FUNC-017](functionality/Functionality-017--Page-Composition.md), [FUNC-018](functionality/Functionality-018--PDF-Export.md) | AT-060 | FirstRelease |
+| UR-041 | [FTR-010](feature/Feature-010--Mermaid-Diagrams.md), [FUNC-023](functionality/Functionality-023--Mermaid-Interpretation.md), [FUNC-024](functionality/Functionality-024--Diagram-Layout.md), [FUNC-025](functionality/Functionality-025--Diagram-Preparation.md), [FUNC-004](functionality/Functionality-004--Render-Layout.md), [FUNC-005](functionality/Functionality-005--FOX-Presentation-Host.md), [FUNC-016](functionality/Functionality-016--Typography-And-Drawing.md), [FUNC-021](functionality/Functionality-021--Preview-Text-Selection.md) | AT-061 | FirstRelease |
+| SR-021 | [FTR-010](feature/Feature-010--Mermaid-Diagrams.md), [FUNC-023](functionality/Functionality-023--Mermaid-Interpretation.md), [FUNC-024](functionality/Functionality-024--Diagram-Layout.md), [FUNC-025](functionality/Functionality-025--Diagram-Preparation.md) | AT-062 | FirstRelease |
+| SR-022 | [FTR-010](feature/Feature-010--Mermaid-Diagrams.md), [FUNC-023](functionality/Functionality-023--Mermaid-Interpretation.md), [FUNC-024](functionality/Functionality-024--Diagram-Layout.md), [FUNC-025](functionality/Functionality-025--Diagram-Preparation.md), [FUNC-007](functionality/Functionality-007--Preview-Pipeline.md), [FUNC-018](functionality/Functionality-018--PDF-Export.md) | AT-063 | FirstRelease |
+| SR-023 | [FTR-010](feature/Feature-010--Mermaid-Diagrams.md), [FUNC-023](functionality/Functionality-023--Mermaid-Interpretation.md), [FUNC-024](functionality/Functionality-024--Diagram-Layout.md), [FUNC-025](functionality/Functionality-025--Diagram-Preparation.md) | AT-064 | FirstRelease |
 
 | SR-024 | [FTR-010](feature/Feature-010--Mermaid-Diagrams.md), [FUNC-024](functionality/Functionality-024--Diagram-Layout.md) | AT-065 | FirstRelease |
 
@@ -174,3 +176,4 @@ P22: UR-032 → FUNC-010/014; UR-033 → FUNC-010; UR-034 → FUNC-005. AT-052�
 | --- | --- | --- | --- |
 | UR-044 | [FUNC-031](functionality/Functionality-031--Generated-Document-Navigation.md) | AT-070 | FirstRelease |
 | SR-027 | [FUNC-031](functionality/Functionality-031--Generated-Document-Navigation.md) | AT-071 | FirstRelease |
+| SR-028 | [FUNC-031](functionality/Functionality-031--Generated-Document-Navigation.md) | AT-072 | FirstRelease |

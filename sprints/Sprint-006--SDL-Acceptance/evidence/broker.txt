@@ -1,0 +1,1 @@
+PASS: real SDL daemon + FOX, SVG lease, SIGKILL/restart, invalid source, replacement release, native window-close release

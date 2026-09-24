@@ -10,53 +10,56 @@ requirements: UR-042, SR-025
 uses: none
 ---
 
-# Functionality-026: Byggidentitet
+# Functionality-026: Build identity
 
-## 1. Hensikt og avgrensning
+## 1. Purpose and scope
 
-Gi CLI, vindustittel, statuslinje og installasjon én stabil identitet for faktisk bygget kode.
-Byggverktøy eier Git-lesing; applikasjonen bruker kun innbakte verdier. Ingen ny feature.
+Give CLI, window title, status bar and installation one stable identity for the
+actual built code. Build tools read Git; the application uses embedded values.
+This is a service, not a new feature.
 
-## 2. Krav og akseptanse
+## 2. Requirements and acceptance
 
-UR-042, SR-025; AT-066/067 i [kravene](../../../xfmd_requirements.md).
-[Versjonsreglene](../../../docs/versioning.md) definerer telling og særtilfeller.
+UR-042, SR-025; AT-066, AT-067 in the [requirements](../../../xfmd_requirements.md).
+[Versioning](../../../docs/versioning.md) defines counting and special cases.
 
-## 3. Kontrakter og eierskap
+## 3. Contracts and ownership
 
-`VERSION` eier major/minor. `tools/build_identity.py` lager header og JSON i
-build/generated. `application/build/BuildVersion` eksponerer bare `buildVersion()`.
-Ingen Git, Python, nettverk eller mutable teller trengs ved programkjøring.
+VERSION owns major/minor. tools/build_identity.py generates header/JSON under
+build/generated. Application's BuildVersion exposes buildVersion(). No Git,
+Python, network or mutable counter is needed at runtime.
 
-## 4. Atferd, tilstand og feil
+## 4. Behavior, state and failures
 
-Full Git-telling, main-PR fra first-parent merge-tekst, branch ellers. Dirty er
-synlig; shallow historie feiler; kildearkiv gir source:unknown. Samme innhold
-skrives ikke på nytt. JSON har SHA for audit, mens brukeren ser et heltall.
+Count all reachable Git commits; use main's first-parent PR identity when available,
+otherwise branch. Mark dirty state, reject shallow history and label source archives
+source:unknown. Do not rewrite identical generated content. JSON stores SHA for
+audit while the displayed commit component is numeric.
 
 ## 5. Plumbing
 
-| Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
+| Step | Event / caller | Called symbol | Source or contract file | Data / result | Failure / side effect | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | CMake build target | `identity` | `tools/build_identity.py` | VERSION + Git → identitet | shallow/ugyldig versjon feiler | Implemented |
-| 2 | CLI main / Application::updateUi / XfmdWindow::buildUi | `buildVersion` | `src/application/build/BuildVersion.cpp` | innbakt tekst → CLI/vindu/statuslinje | ingen runtime-I/O | Implemented |
+| 1 | CMake build target | `identity` | `tools/build_identity.py` | VERSION/Git → identity | shallow/invalid version fails | Implemented |
+| 2 | CLI main / Application::updateUi / XfmdWindow::buildUi | `buildVersion` | `src/application/build/BuildVersion.cpp` | embedded text → CLI/window/status | no runtime I/O | Implemented |
 
-## 6. Gjenbruk og avhengigheter
+## 6. Reuse and dependencies
 
-CLI, vindustittel og høyrejustert statusfelt bruker samme application-tjeneste. CPack/man-side bruker
-major/minor fra VERSION. Interpreter og renderer får ingen ny avhengighet.
+CLI, title and right-aligned status field share the application service. CPack/man
+use VERSION's major/minor. Interpreter/renderer acquire no dependency.
 
-## 7. Verifikasjon
+## 7. Verification
 
-Sju isolerte Git-fixtures for AT-067 består. CLI-/vindustittelkontroll for AT-066
-består i fasebygget. Blueprint-validatoren støtter nå navngitt Python-plumbing
-under tools/, i tillegg til C++/Rust under src/.
-Faktisk resultat: [Sprint 001 / fase 042](../../../sprints/Sprint-001--Versioning/Phase-042--Build-Identity.md).
+[Sprint 001 / P042](../../../sprints/Sprint-001--Versioning/Phase-042--Build-Identity.md)
+records the seven isolated Git scenarios and CLI/window checks against build 620c7be.
+[Sprint 002 / P043](../../../sprints/Sprint-002--Status-Version/Phase-043--Status-Version.md)
+records build 3bb28f5 and six focused CTests, including CompactWorkspaceTest at
+four window widths. The separate status label preserves link hover/messages.
+These are historical identified results, not new runs in this reconciliation.
 
-Statusfeltet har egen label slik at lenkehover og meldinger ikke overskriver versjonen.
-CompactWorkspaceTest kontrollerer identitet, høyrejustering og plassering ved fire vindusbredder.
+## 8. Status, risks and change impact
 
-## 8. Status, risiko og endringskonsekvenser
-
-Implemented. Merge kan gi tallhopp; parallelle brancher kan dele tall. Historieomskriving
-endrer identiteten og er forbudt for publiserte fasecommits. Ikke full global sekvens.
+Implemented. Merges can increase the count by more than one; parallel branches
+can share counts. Published history must not be rewritten. The number is not a
+global unique sequence. Main includes Sprint 001 via 4e21e99 and Sprint 002 via
+c245fd9; application build metadata remains tied to the binary's actual build.

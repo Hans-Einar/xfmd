@@ -1,9 +1,14 @@
 # Kravspesifikasjon: xfmd
 
-Status: **Implemented P0–P14, revisjon 1.3**, 2026-09-13.
-UR-015–020 og SR-015–019 er implementert i P9–P13; se fasebevis for faktisk dekning. Tidligere designgrunnlag ble
-godkjent før implementasjon. Krav er normative; målinger og begrensninger finnes
-i [P13-verifikasjonen](docs/evidence/P13.md), med P7 som historisk baseline.
+Status, reconciled 2026-09-24: main `c245fd9` contains P0–P41 and Sprints 001–002.
+The current branch also contains Sprint 004 navigation/leases through `47a245a`.
+BoxUI/Sprint 003 is separate historical work, not integrated here. See the
+[sprint register](sprints/README.md) for delivery state and evidence. Implemented
+means code exists; it does not imply complete acceptance or a main merge.
+
+The older requirement sections below retain their established wording. New/current
+amendments are English; dated evidence remains tied to its original scope. UR/SR
+requirements remain normative, while phase reports state actual coverage and limits.
 
 ## 1. Formål og avgrensning
 
@@ -44,6 +49,13 @@ en stub oppfyller ikke i seg selv et funksjonelt krav.
 | UC-007 | Åpne Preferences, juster og prøv scrolling, lagre eller avbryt. | Feil verdier/lagring bevarer aktiv profil. | UR-011, UR-015, UR-016 |
 | UC-008 | Bytt til A4, kontroller sideskift og eksporter PDF fra aktuell buffer. | Cancel/feil bevarer kilde og mål. | UR-017, UR-018 |
 | UC-009 | Les eller rediger i fullscreen og gå tilbake til samme arbeidsflate. | Aktiv dialog bruker Escape først. | UR-019, UR-007 |
+| UC-010 | Read/edit Mermaid blocks and export supported diagram profiles to PDF. | Invalid/unsupported syntax produces local source fallback. | UR-039, UR-040, UR-041 |
+| UC-011 | Select a registered SDL view in a navigator and open the generated document in an explicitly addressed XFMD panel. | Failed generation/delivery or a dirty main buffer preserves the current document; broker-backed resources follow the panel lease lifecycle. | UR-044, SR-027, SR-028 |
+
+UC-008 retains its original A4/PDF identity. The later Mermaid subsection and
+FTR-010 accidentally reused that ID; UC-010 corrects that collision without
+renumbering the original use case. UC-011 identifies Sprint 004; BoxUI's reserved
+UR-043/SR-026 and AT-068/069 remain separate branch history.
 
 ## 4. Brukerkrav
 
@@ -281,8 +293,8 @@ Ressursarbeid skjer utenfor GUI-tråden med avgrenset input og bildestørrelse.
 
 ## P25–P29: Mermaid-diagrammer
 
-UC-008: Brukeren leser og redigerer Mermaid-blokker i et Markdown-dokument,
-merker/kopierer diagrametiketter og eksporterer samme diagram til PDF.
+UC-010: Read and edit Mermaid blocks and export supported diagrams to PDF.
+UR-041 records the later SVG decision: diagram labels are not separately selectable.
 Kravene nedenfor er implementert i P26–P29; [P29-bevis](docs/evidence/P29.md)
 angir faktisk testdekning og begrensninger.
 Første leveranse bruker profil **XFMD Flowchart 1**, definert i
@@ -335,9 +347,22 @@ avgrenset, men romme minst ett eksempel per implementert diagramtype.
 | UR-042 | CLI, vindustittel og høyrejustert tekst i nederste statuslinje viser major.minor, branch (PR-nummer på main når kjent) og numerisk commitnummer. | AT-066: samme innbakte identitet i CLI/vindu/statuslinje; dirty og ukjent kilde markeres. |
 | SR-025 | Identiteten beregnes fra full Git-historikk uten nettverk eller en konfliktskapende tellerfil. Et eksplisitt bygg oppdaterer metadata også uten ny CMake-konfigurering; samme commit gir stabil identitet. | AT-067: lineære commits, branches, merge, main etter PR, detached, dirty, shallow og kildearkiv; uendret metadata omskrives ikke. |
 
-## SDL-dokumentnavigasjon (Sprint 004)
+## Generated document navigation and leases (Sprint 004)
 
-| ID | Krav | Akseptanse |
+UC-011; owner FUNC-031. This section reconstructs the implemented P049/P050
+contract from `47a245a`; it adds no new application behavior. AT-072 gives the
+existing lease behavior an explicit acceptance identity. Status remains Implemented,
+with partial evidence and the limitations in [P050](sprints/Sprint-004--SDL-Navigation/Phase-050--Document-Leases.md).
+
+| ID | Requirement | Acceptance |
 | --- | --- | --- |
-| UR-044 | To uavhengige Markdown-paneler viser navigator og hoveddokument. En registrert SDL-handling genererer valgt dokument i avsendervinduet. | AT-070: ekte panelklikk, bevart navigator, fokusbytte, flere vinduer og lukket mål. |
-| SR-027 | Lokal XFMD1-protokoll adresserer konkret vindu/panel, har begrenset størrelse og samme bruker som peer. Verktøy registreres med program/argv; Markdown inneholder aldri shellkommando. | AT-071: feil vindu/panel, ugyldig/for stor forespørsel, stale sekvens og disconnect gir ingen feilåpning. |
+| UR-044 | Separate navigator and main Markdown panels retain independent document/preview state. A registered SDL action generates a selected document for the captured window and explicit panel. Generation/delivery failures preserve the current document. Addressed delivery to a dirty main buffer is rejected with status, without opening a modal dirty-buffer dialog. | AT-070: real link click, retained navigator, focus change, multiple windows, closed target, generation failure and dirty-buffer rejection. |
+| SR-027 | The Linux XFMD1 local protocol addresses a window and main/navigation panel; private runtime directories and same-UID peers constrain access. Packets are limited to 32 KiB; requests use increasing per-client/panel sequences, at most 256 sequence keys, at most 16 pending peers and a two-second idle-peer deadline. Registered tools use argv without shell commands from Markdown. | AT-071: wrong window/panel, malformed/oversized packets, stale sequence, disconnect, peer identity and bounded client handling; no unintended document replacement. |
+| SR-028 | Optional broker delivery associates lease ID and broker address with a panel only after successful document opening. A later successful open or normal close triggers release of the preceding lease. Failed connect/send is queued for retry while the window lives; 256 pending releases reject further addressed opens. XFMD never deletes broker bundles or expires visible leases by time. The current release operation is best effort: send success removes its queue entry, without waiting for broker acknowledgment; shutdown does not persist the retry queue. | AT-072: leased SVG survives broker restart; invalid generation/open preserves the active document/lease; replacement and normal close release the old/current bundle. Separately verify failed-send retry, queue saturation and crash/shutdown uncertainty. |
+
+The dirty-buffer rule above is the explicit addressed-delivery exception to the
+interactive prompt described by UR-009. Ordinary file operations keep their
+existing behavior. Direct (non-broker) generated bundles remain window-owned and
+are removed on normal DocumentViews destruction. Broker crash recovery and durable
+lease storage belong to SDL, not to XFMD's endpoint. Successful send is not proof
+of durable broker release; do not report it as acknowledged reclamation.

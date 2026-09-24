@@ -1,170 +1,193 @@
-# Arbeidsmåte: krav, features og functionality
+# Working method: requirements, features and functionality
 
-Status: Gjeldende arbeidsmåte for XFMD. Metoden er et praktisk eksperiment for agentarbeid. Den bruker
-stabile designobjekter og eksplisitte endringsregler, uten pålagte sprintseremonier eller
-en foreløpig SDL-kompilator. Det er ikke en implementasjon av SDP, og andre
-repositoryer er ikke brukt som autoritative kilder.
+Status: current XFMD working method. This is a practical method for agent work,
+using stable design objects and explicit change rules. It does not adopt SDP,
+require sprint ceremonies, or depend on an SDL compiler.
 
-## 0. Sprint, fase, milestone og bygg
+The owner added a conversation-note workflow on 2026-09-24. Use the
+[KanBan board](../Agents/KanBan/README.md) for unresolved discussions, findings and
+follow-up ideas. Other projects can supply evidence, but do not become authorities
+for XFMD requirements merely by being referenced. Write new/revised documentation
+in English; preserve the meaning and provenance of older material when translating.
 
-En sprint samler en leveranse og dokumenteres under `sprints/Sprint-NNN--Tema/`.
-Sprintens README angir mål, krav, faser og én samlet PR. Hver fase har eget
-Phase-dokument med milestones, branch, tester og faktisk bygget versjon.
-Se [register og mal](../sprints/README.md).
+## 0. Conversation notes, sprints, phases and builds
 
-- Én branch per fase: `sprint/NNN/phase/NNN-tema`. Fase nummereres videre fra P41.
-  Neste fase starter fra forrige fasebranch, slik at hele sprinten henger sammen.
-- Én commit per milestone; oppdater krav, blueprint og kode samlet. Registrer
-  utførte kontroller, men ikke hev at et fasebygg er kjørt før det finnes.
-- Autonom flerfaseøkt: gjør ett planlagt bygg ved avslutning av hver fase.
-  Mellomliggende commits kan bruke lette dokument-/skriptkontroller uten fullt bygg.
-  Feil ved fasekontrollen rettes og kontrolleres på nytt; byggegrensen er ikke
-  et forbud mot nødvendig feilretting.
-- Samarbeidsmodus: når brukeren prøver underveis, kan hver feilrettingscommit
-  bygges. Oppgi modus i faseplanen; ikke bruk denne hyppigheten som autonom default.
-- Etter fasebygget kan en milestone-commit dokumentere testbevis uten å bygge
-  identisk programkode igjen. Oppgi alltid commitnummeret til det faktiske bygget.
-- Én PR per sprint, fra siste fasebranch til main. Draft brukes ved behov;
-  ferdig sprint settes klar til review. Ingen PR per fase. Bruk merge-commit,
-  ikke squash/rebase av publisert historie. Merge/installasjon krever brukerens
-  bestilling; fasebygg gjør ikke automatisk en installasjon.
+Read the board at session start. Capture unresolved topics during discussion, then
+review related backlog notes for overlap and later corrections before choosing the
+next round of work. Selected work can use an existing card or a new synthesis;
+preserve source cards, successor links and consolidation reasons in the append-only
+ledger. Partial consolidation must retain unresolved scope. Follow the board's
+rules for active scope, moves, closure and link updates.
 
-CI bygger ved klar sprint-PR og integrasjon til main, samt eksplisitt manuell
-kjøring. Vanlige push til fasebrancher og draft-PR-er starter ikke programbygg.
-Dette erstatter tidligere praksis med fase-PR-er; gamle faseplaner er historikk.
-[Versjonering](versioning.md) definerer major/minor, branch/PR og commitnummer.
-Vi oppretter ingen SDP-mappe eller avhengighet til den parallelle SDP-prosessen.
+Cards are working notes, not a second product specification. Recording or reviewing
+one does not authorize its implementation. Once selected work becomes a product
+change, follow requirements → blueprint → contracts/plumbing → code → verification
+and link the resulting sprint plan from the card. Note capture itself needs no sprint.
 
-## 1. Hva som er et designobjekt
+A sprint groups an implementation delivery under `sprints/Sprint-NNN--Topic/`.
+Its README identifies goals, requirements, phases and one combined PR. Each phase
+has a Phase document with milestones, branch, tests and actual built version.
+See the [register and template](../sprints/README.md).
 
-En **feature** gir et sammenhengende resultat med egen akseptanse og livsløp.
-En **functionality** er en avgrenset tjeneste, mekanisme eller arbeidsflyt med ett
-eierlag og eksplisitt offentlig kontrakt. En C++-metode er en implementasjonsdetalj;
-vi oppretter ikke et dokument per metode. Ett use case kan bruke flere features
-og direkte functionality. Ikke lag en tom feature bare for å fylle hierarkiet.
+- One branch per phase: `sprint/NNN/phase/NNN-topic`. Phase numbering continues
+  after P41. Each phase starts from the previous phase branch within its sprint.
+- One commit per milestone; update requirements, blueprint and code together.
+  Record checks without claiming a phase build before one has actually run.
+- Autonomous multi-phase work: one planned build at each phase boundary.
+  Intermediate commits may use lightweight document/script checks. Correct and
+  recheck failures; this boundary does not prohibit necessary corrective builds.
+- Collaborative mode: when the user tries changes during development, each fix
+  may be built. State this mode in the phase plan; it is not the autonomous default.
+- A later milestone commit can record evidence without rebuilding unchanged code.
+  Always identify the commit actually built; code changes require renewed checks.
+- One PR per sprint, from the last phase branch to main. Use draft when useful;
+  mark a finished sprint ready for review. No per-phase PRs. Preserve published
+  history with merge commits, not squash/rebase. Merge and installation require
+  the user's instruction; a phase build does not imply installation.
 
-To uavhengige egenskaper hindrer at «synlig for brukeren» blir eneste kriterium:
+CI builds ready sprint PRs, main integration and explicit manual runs. Ordinary
+phase pushes and draft PRs do not start program builds. This replaces the historical
+per-phase PR practice. [Versioning](versioning.md) defines major/minor, branch/PR
+and commit number. Do not create an SDP directory or adopt its changing process;
+`Agents/KanBan/` is the only note-workflow adaptation.
 
-| Felt | Verdier | Bruk |
+## 1. Design objects
+
+A **feature** provides a coherent result with its own acceptance and lifecycle.
+A **functionality** is a bounded service, mechanism or workflow with one owner
+layer and an explicit public contract. A C++ method is an implementation detail,
+not a reason for a separate document. A use case may use several features and
+functionality directly; do not invent an empty feature to fill a hierarchy.
+
+| Field | Values | Purpose |
 | --- | --- | --- |
-| Kind | Feature, Functionality | Sammenhengende evne eller avgrenset tjeneste. |
-| Audience | User, System, Integration | Hvem som observerer/bruker resultatet. |
-| Role (functionality) | Workflow, Service, Adapter, Mechanism | Orkestrering, lokal tjeneste, teknologikobling eller intern algoritme. |
-| Owner | application, interpreter, renderer | Ett lag som eier objektets kontrakt/atferd. |
-| Scope | FirstRelease, Future | Planlagt leveranse, uavhengig av designstatus. |
+| Kind | Feature, Functionality | Coherent capability or bounded service. |
+| Audience | User, System, Integration | Who observes or consumes the result. |
+| Role (functionality) | Workflow, Service, Adapter, Mechanism | Orchestration, local service, technology connection or internal algorithm. |
+| Owner | application, interpreter, renderer | One layer owns the contract and behavior. |
+| Scope | FirstRelease, Future | Delivery scope, independent of design status. |
 
-En systemfeature er tillatt når den har en samlet, kravfestet evne og egen
-akseptanse. Det er ikke et påskudd for å kalle hver klasse en feature. Kontrakter
-har egne filer, men er ikke funksjonelle eiere.
+A system feature is valid when it has a coherent required capability and its own
+acceptance. Do not use this to label every class a feature. Contracts have their
+own files but are not functional owners.
 
-## 2. Eksempler og grensevalg
+## 2. Examples and boundaries
 
-- Markdown-presentasjon er feature; tolkning, layout og FOX-tegning er functionality.
-- Live preview er feature; debounce og dokumentrevisjoner er delt functionality.
-- Lenker + tilbake/frem + posisjonsgjenoppretting er navigasjonsfeature.
-- Synkronisert scrolling er feature; ankerkonvertering er gjenbrukbar functionality.
-- Load/save er dokument-/lagringstjenester, ikke separate features.
-- Splitter, view mode og sidepanel er workspace-functionality.
-- Encoding-/inputvalidering er delt tjeneste. En framtidig lint-feature må gi
-  brukeren konkrete diagnoser og ha egne krav; tolerant Markdown er ikke en
-  streng grammatikksjekk som skal blokkere lagring.
+- Markdown presentation is a feature; interpretation, layout and FOX drawing are functionality.
+- Live preview is a feature; debounce and document revisions are shared functionality.
+- Links, back/forward and position restoration form the navigation feature.
+- Synchronized scrolling is a feature; anchor conversion is reusable functionality.
+- Load/save are document/storage services, not separate features.
+- Splitter, view mode and sidebar are workspace functionality.
+- Encoding/input validation is shared. A future lint feature needs concrete
+  diagnostics and requirements; tolerant Markdown must not block saving through
+  strict grammar validation.
 
-Fire features og elleve functionality-objekter er implementert første baseline. Tallet er ikke
-et mål. Slå sammen objekter med samme ansvar; splitt bare når eierskap, kontrakt,
-endringsårsak eller selvstendig akseptanse begrunner det.
+The first baseline implemented four features and eleven functionality objects.
+This historical count is not a target. Merge objects with the same responsibility;
+split only for ownership, contract, reason to change or independent acceptance.
 
-## 3. ID-er, filer og sporbarhet
+## 3. IDs, files and traceability
 
-Bruk `UR-001`, `SR-001`, `FTR-001`, `FUNC-001` og `AT-001`. Neste ledige nummer
-reserveres i registeret; omnummerer aldri eksisterende objekter. Filer heter
-`Feature-001--Markdown-Presentation.md` og `Functionality-001--Document-Session.md`.
-Titler/slugs kan endres med oppdaterte lenker; ID-en beholder betydning.
+Use `UR-001`, `SR-001`, `FTR-001`, `FUNC-001` and `AT-001`. Reserve the next free
+number in the register; never renumber existing objects. Example filenames:
+`Feature-001--Markdown-Presentation.md`, `Functionality-001--Document-Session.md`.
+Titles/slugs can change with updated links; an ID retains its meaning.
 
-Sporbarhet går **UC → UR/SR → FTR/FUNC → kontrakt/kall → AT → faktisk testbevis**.
-UR/SR kan gå direkte til functionality. Hvert objekt har maskinlesbar metadata og
-åtte faste kapitler; kapittel 5 heter alltid `Plumbing`. Se [malene](../src/blueprint/templates/README.md).
-Registeret gir motsatt vei fra krav til objekter. Alle funksjonaliteter må ha minst
-ett krav. Cross-cutting krav arves ikke usynlig: oppgi dem eksplisitt der de gjelder.
+Traceability is **UC → UR/SR → FTR/FUNC → contracts/calls → AT → actual evidence**.
+UR/SR can point directly to functionality. Every object has machine-readable
+metadata and eight fixed chapters; chapter 5 remains `Plumbing`. Follow the
+[templates](../src/blueprint/templates/README.md), including their structural labels.
+The register maps requirements back to objects. Each functionality needs at least
+one requirement. List cross-cutting requirements explicitly, not by hidden inheritance.
 
-## 4. Obligatorisk arbeid før og under en endring
+## 4. Required work before and during a change
 
-1. Les krav/arkitektur og søk i registeret etter eksisterende eiere og tjenester.
-2. Identifiser krav, scope, feilvei og observerbar akseptanse; oppdater krav ved ny atferd.
-3. Oppdater berørte blueprints før kode. Tegn faktisk kallretning i kapittel 5.
-4. Beskriv konsekvenser for data, revisjon, eierskap, feil og eksisterende konsumenter.
-5. Implementer i oppgitte kildefiler. Avvik rettes i blueprint i samme commit/PR.
-6. Kjør relevante tester og validator; oppgi kommando, input, utfall og commit.
-7. Kontroller at navngitte symboler finnes og at dokumenterte kall faktisk skjer.
+1. Read requirements/architecture and search the register for existing owners/services.
+2. Identify requirements, scope, error paths and observable acceptance; update
+   requirements when introducing behavior.
+3. Update affected blueprints before code; chapter 5 describes actual call direction.
+4. Explain effects on data, revisions, ownership, errors and existing consumers.
+5. Implement in the identified files; reconcile deviations in the same commit/PR.
+6. Run relevant tests and validators; record commands, input, outcomes and commit.
+7. Check that named symbols exist and documented calls actually happen.
 
-En brukerbestilt avgrenset implementering trenger ikke ny godkjenning for hvert
-steg. Ikke bruk metoden som grunn til å stoppe rutinearbeid. Vesentlige endringer
-i produktomfang eller kontrakters betydning skal derimot beskrives og avklares.
-Designgrunnlaget ble gjennomgått før implementasjon; videre endringer følger samme sporbarhet.
+A bounded user-authorized implementation needs no new permission at every step.
+Do not use this method to stop routine work. Describe and clarify material changes
+to product scope or contract meaning. Initial design was reviewed before
+implementation; later changes retain the same traceability discipline.
 
-## 5. Plumbing som gjenbrukskart
+## 5. Plumbing as a reuse map
 
-Hver rad viser kildehendelse/kaller, kalt offentlig symbol, kildefil, data/resultat
-og feil/sideeffekt. Marker `Planned` eller `Implemented` eksplisitt. FTR-tabeller
-viser ende-til-ende-forløp; FUNC-tabeller viser tjenestens interne vei og offentlige
-innganger. Pek til eierens blueprint fremfor å kopiere hele kontrakten.
+Each row identifies the event/caller, public callee, source file, data/result and
+failure/side effect. Mark `Planned` or `Implemented` explicitly. Feature tables
+show end-to-end flow; functionality tables show public entry points and internal
+service flow. Link the owner's blueprint instead of duplicating its contract.
 
-Eksempel: en framtidig eksportfeature som trenger parsing bruker
-`IInterpreter::parse`; den kaller ikke en privat metode på PreviewCoordinator.
-Ny gjenbruk begrunnes med konsument og krav. Flytt delt semantikk til riktig
-functionality-eier, fjern duplikatet og oppdater begge kallkart. Unngå generell
-service bus, runtime plugin-system og «Utils» som skjuler avhengigheter.
+For example, export uses `IInterpreter::parse`, not private PreviewCoordinator
+methods. Justify reuse with a consumer and requirement. Put shared semantics under
+the correct owner, remove duplication and update both call maps. Avoid generic
+service buses, runtime plugin systems or Utils that hide dependencies.
 
-## 6. Status og bevis
+## 6. Status and evidence
 
-`Proposed → Ready → Implemented → Verified`; `Retired` er avsluttet objekt.
+`Proposed → Ready → Implemented → Verified`; `Retired` means discontinued.
 
-- Proposed: designforslag; ubesvarte spørsmål kan stå eksplisitt.
-- Ready: krav, kontrakter, feilvei og testplan er avklart; gate-bevis er lenket.
-- Implemented: symbolene finnes, men samlet akseptanse er ikke nødvendigvis verifisert.
-- Verified: alle relevante AT-er har testbevis mot identifisert commit/miljø.
+- Proposed: a design proposal; open questions remain explicit.
+- Ready: requirements, contracts, error paths and test plan are settled, with gate evidence.
+- Implemented: symbols exist; full acceptance is not necessarily verified.
+- Verified: every relevant AT has evidence tied to an identified commit/environment.
 
-Status og leveransescope er separate. Future-krav kan stå utsatt i registeret uten
-spekulative stubs. Ved ny atferd settes berørt objekt tilbake til Proposed/Ready;
-eldre bevis beholdes som historikk, ikke som bevis for nye krav. Testfeil blokkerer
-Verified, ikke nødvendigvis uavhengig arbeid.
+Status and delivery scope are separate. Future requirements may be deferred in the
+register without speculative stubs. New behavior returns the affected object to
+Proposed/Ready; old evidence remains history, not evidence for new requirements.
+Test failures block Verified, not necessarily unrelated work.
 
-## 7. Minimumskontroll og videre forbedring
+## 7. Minimum checks and improvement
 
-`python3 tools/validate_blueprints.py` sjekker metadata, ID-er, lokale fillenker,
-kapitler, kravdekning, avhengigheter og planlagt/implementert plumbing-markering.
-Dette er strukturkontroll; den beviser ikke korrekt kode, kravkvalitet eller at
-metoder faktisk kaller hverandre. Semantisk review og relevante tester er obligatorisk.
+`python3 tools/validate_blueprints.py` checks metadata, IDs, local links, chapters,
+requirement coverage, dependencies and planned/implemented plumbing markers.
+It checks structure, not code correctness, requirement quality or actual calls.
+Semantic review and relevant tests remain necessary.
 
-`python3 tools/check_blueprint_symbols.py` kontrollerer at 83 dokumenterte
-Implemented-kall har navngitte callee-symboler i oppgitte filer. Kontrollen leser
-tekst, ikke AST, og beviser ikke at caller faktisk kaller callee. P7 avdekket gamle
-caller-navn fra tidligere faser; disse ble rettet ved manuell gjennomgang.
+Local Markdown link checks cover XFMD-owned documents, including Agents/KanBan.
+They skip dependency documentation under `.deps` and `third_party`, along with
+Git/build/cache directories. Links originating in project documents remain checked,
+including links to dependencies. Blueprint metadata and plumbing checks are unchanged.
+CI runs Rust formatting checks on the four XFMD workspace packages explicitly;
+`cargo fmt --all` also traverses the pinned path dependency despite workspace
+exclusion. Keep that package list in sync when adding an XFMD Rust package.
 
-Videre forbedringer etter første implementasjon:
+`python3 tools/check_blueprint_symbols.py` checks that documented Implemented
+callee names appear in the specified files. It reads text, not an AST, and does
+not prove the caller invokes the callee. The historical P7 check covered 83 calls;
+manual review found and corrected stale caller names. Use current output for
+current counts. KanBan consistency checks are specified in its own README.
 
-- Mål hvor ofte plumbing driver fra kode før vi lager en AST-basert symbolkontroll.
-- Legg bare strukturerte kontraktfelt til malen når de fjerner en konkret tvetydighet.
-- Innfør korte beslutningslogger ved reelle veivalg, ikke et dokument per småvalg.
-- Vurder senere generering fra et lite schema når begrepene har vært prøvd i praksis.
+Further improvement after the initial implementation:
 
-Målet er minst mulig **duplisert** functionality og dokumentasjon, ikke færrest
-mulig nødvendige tjenester. Metoden skal gjøre neste agent i stand til å finne
-riktig vei gjennom systemet uten å måtte gjette eller gjenoppfinne den.
+- Measure plumbing drift before introducing an AST-based symbol checker.
+- Add structured contract fields only when they resolve a concrete ambiguity.
+- Keep short decision records for real choices, not a document for every small choice.
+- Consider schema generation after the concepts have been used in practice.
 
-## Revisjon 1.1
+Minimize duplicated functionality and documentation, not necessary services. The
+method should let the next agent find the right path without guessing or reinventing it.
 
-[Designrevisjonen](../softwareDesign.md) utvider P0–P8-baseline med to features og
-seks functionality-objekter (7 og 19 totalt). Nye objekter har scope Future og
-status Proposed. Berørte eksisterende objekter beholder FirstRelease som opprinnelig
-scope, men får Proposed-status for endret kontrakt. Deres Implemented plumbing og
-eldre bevis gjelder baseline; nye Planned-rader og akseptanse må verifiseres separat.
-Faseplanen P9–P13 beskriver neste leveranse; Future betyr ikke ubestemt utsettelse.
+## Historical revision 1.1
 
-## Revisjon 1.2: gjennomført implementasjon
+The [design revision](../softwareDesign.md) extended P0–P8 with proposed future
+objects and changed contracts. Existing objects retained their original FirstRelease
+scope while returning to Proposed for revised contracts. Implemented plumbing and
+older evidence applied to the baseline; new Planned rows and acceptance needed
+separate verification. P9–P13 described the next delivery; Future did not mean
+indefinite postponement. See the dated design for the original inventory.
 
-P9–P13 brukte phase-brancher, milestone-commits og egne PR-er som planlagt.
-Blueprint-registeret speiler nå Implemented/FirstRelease for de leverte objektene;
-Verified brukes ikke som synonym for fullført kode. Tester/evidence dekker mekanismer,
-native FOX, isolert Window Maker, PDF-leser/raster og feilveier. Fysiske touchpad- og
-monitorforsøk er tydelig avgrenset. Historiske revisjon 1.1-avsnitt over forklarer
-prosessen da objektene fremdeles var planlagt.
+## Historical revision 1.2: implementation completed
+
+P9–P13 used phase branches, milestone commits and individual PRs as then planned.
+The register moved delivered objects to Implemented/FirstRelease; Verified was
+not used as a synonym for implemented code. Tests/evidence covered mechanisms,
+native FOX, isolated Window Maker, PDF reading/raster and failures. Physical
+touchpad and monitor trials remained explicitly bounded. These paragraphs record
+history, not the current sprint-PR workflow or latest product baseline.
