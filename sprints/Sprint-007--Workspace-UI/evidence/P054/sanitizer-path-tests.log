@@ -1,0 +1,11 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd-sdl-navigation/build-ui-sanitize
+Test project /home/warloc/git/xfmd-sdl-navigation/build-ui-sanitize
+    Start 15: PathWorkspaceGuiTest
+1/1 Test #15: PathWorkspaceGuiTest .............   Passed   18.92 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Label Time Summary:
+GUI    =  18.92 sec*proc (1 test)
+
+Total Test time (real) =  18.92 sec

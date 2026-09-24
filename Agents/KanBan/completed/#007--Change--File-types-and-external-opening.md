@@ -7,7 +7,8 @@
 | type | Change |
 | created | 2026-09-24T18:01:41+02:00 |
 | source | Owner conversation, 2026-09-24 Europe/Oslo: XFMD UI wishlist; Owner item 2 |
-| next_review | Before selecting the next XFMD UI work round; resolve this card's named interaction questions during requirements/blueprint planning |
+| owner | Codex |
+| next_review | Reopen if target-routing requirements change |
 
 ## Need and owner direction
 
@@ -27,7 +28,7 @@ default association. HTML files and web links should open in a browser by defaul
 The last row's normal-click rule is an agent recommendation, not an additional
 owner decision. The owner did not request executing files as commands.
 
-## Current evidence and affected scope
+## Evidence at capture and affected scope
 
 `InputPolicy` admits only `.md`/`.txt`, validates UTF-8 and rejects NUL. Files-tree
 activation uses `Application::openTreePath`: those suffixes open internally;
@@ -44,7 +45,7 @@ Review UR-001/005/024/028, SR-005/006/011 and later amendments in
 and [FUNC-014](../../../src/blueprint/functionality/Functionality-014--Application-Preferences.md).
 Inspect [InputPolicy.cpp](../../../src/application/io/InputPolicy.cpp),
 [LinkResolver.cpp](../../../src/application/navigation/LinkResolver.cpp),
-[ApplicationTree.cpp](../../../src/application/ApplicationTree.cpp),
+[ApplicationOpening.cpp](../../../src/application/ApplicationOpening.cpp) (P053 successor to ApplicationTree.cpp),
 [DesktopFileOpener.cpp](../../../src/application/adapters/DesktopFileOpener.cpp)
 and [ExternalBrowser.cpp](../../../src/application/adapters/ExternalBrowser.cpp).
 
@@ -86,3 +87,24 @@ this capture. Findings describe the inspected working tree, not the installed
 binary shown in the screenshots; see the [source context](../evidence/2026-09-24-ui-wishlist/README.md).
 
 Related: [KB-XFMD-006](%23006--Change--Open-files-and-folders.md), [KB-XFMD-008](%23008--Change--Document-path-and-file-filter.md).
+
+## Goal selection — 2026-09-24
+
+The owner selected KB-XFMD-006–011 as six subgoals of the active chat goal.
+KB-XFMD-003 and optional SDUI modeling are excluded. Delivery is tracked in
+[Sprint 007](../../../sprints/Sprint-007--Workspace-UI/README.md).
+This card is active in P053 (file/folder opening and target routing).
+
+## Completion — 2026-09-24
+
+Delivered in P053: bounded content-based text admission, literal editor opening,
+HTML/web configured-browser routing, OS fallback and captured Ctrl dispatch from
+main preview, navigator and tree. The selected defaults and normative behavior
+are in the linked requirements/blueprints and Sprint 007; earlier questions above
+retain their capture-time context.
+
+[P053 evidence](../../../sprints/Sprint-007--Workspace-UI/evidence/P053.md) identifies
+source/binary hashes, 67/67 corrected-build non-Rust checks plus the unchanged Rust
+pass, native route/transaction tests and inspected screenshots. External launcher
+stubs prove argv/error handling; desktop-specific associations are not claimed.
+No merge/installation or overall six-subgoal completion is implied.

@@ -1,8 +1,8 @@
 #include "Application.h"
-#include "build/BuildVersion.h"
 #include "adapters/FoxWheelScrollBar.h"
-#include "interpreter/CmarkInterpreter.h"
+#include "build/BuildVersion.h"
 #include "composition/DiagramServices.h"
+#include "interpreter/CmarkInterpreter.h"
 #include "renderer/MarkdownRenderer.h"
 #include <filesystem>
 using namespace FX;
@@ -40,7 +40,7 @@ void Application::initialize(int& argc, char** argv) {
       return !exporter || !exporter->busy();
     if (command == CommandRouter::CancelExport)
       return exporter && exporter->busy();
-    if (command == CommandRouter::FitWidth || command == CommandRouter::ActualSize)
+    if (command == CommandRouter::FitWidth || command == CommandRouter::FitHeight)
       return preview && preview->layoutProfile().mode == LayoutMode::Paged;
     if (command == CommandRouter::Undo)
       return edits.canUndo();
@@ -70,9 +70,11 @@ void Application::initialize(int& argc, char** argv) {
     if (command == CommandRouter::WindowWrap)
       return preview->layoutProfile().mode == LayoutMode::Continuous;
     if (command == CommandRouter::FitWidth)
-      return host->fitWidth();
-    if (command == CommandRouter::ActualSize)
-      return !host->fitWidth();
+      return zoom && zoom->mode() == ZoomMode::FitWidth;
+    if (command == CommandRouter::FitHeight)
+      return zoom && zoom->mode() == ZoomMode::FitHeight;
+    if (auto percent = CommandRouter::presetPercent(command))
+      return zoom && zoom->mode() == ZoomMode::Manual && std::abs(zoom->percent() - percent) < .01;
     return false;
   };
   wireDocument();
@@ -111,18 +113,17 @@ void Application::initialize(int& argc, char** argv) {
   back = [this] { navigation->goBack(); };
   forward = [this] { navigation->goForward(); };
   canNavigate = [this](bool back) { return navigation->history.propose(back).has_value(); };
-  host->linkActivated = [this](const std::string& target) {
-    if (documentViews && target.rfind("sdl-view:",0)==0)
-      documentViews->follow(target);
-    else if (ExternalBrowser::accepts(target))
-      openBrowser(target);
-    else
-      navigation->followLink(target);
+  host->linkActivated = [this](const std::string& target, bool systemDefault) {
+    followLink(session.view().path, target, systemDefault);
   };
+  browser.failed = [this](const std::string& error) { documents.error(error); };
   host->linkHovered = [this](const std::string& target) { showLinkTarget(target); };
   wireIndex();
+  wireWorkspace();
+  wireZoom();
   documentOpened = [this] {
-    if(documentViews)documentViews->documentChanged("main");
+    if (documentViews)
+      documentViews->documentChanged("main");
     references->cancel();
     pendingHeading.reset();
     navigation->commitVisit();
@@ -149,6 +150,8 @@ void Application::initialize(int& argc, char** argv) {
     if (views->mode() == ViewMode::Preview)
       host->setFocus();
     host->recalc();
+    if (zoom)
+      zoom->refresh();
   };
   preferences->changed = [this](const auto& value) {
     applyAppearance(value.appearance);
@@ -156,7 +159,8 @@ void Application::initialize(int& argc, char** argv) {
     auto profile = preview->layoutProfile();
     profile.paper.margin = value.marginMm * 72 / 25.4;
     preview->setLayoutProfile(profile);
-    window->editor->setViewProfile(profile, host->fitWidth());
+    if (zoom)
+      zoom->refresh();
   };
   preferences->changed(preferences->active());
   app.create();
@@ -210,17 +214,18 @@ void Application::wireDocument() {
       documents.error(e.what());
     }
   };
-  window->workspacePanel->recentFiles->open = [this](const std::string& path) { open(path); };
-  window->sidebar->open = [this](const std::string& path) { openTreePath(path); };
+  window->workspacePanel->recentFiles->open = [this](const std::string& path) { openTarget(path); };
+  window->sidebar->open = [this](const std::string& path, bool systemDefault) {
+    openTarget(path, systemDefault);
+  };
 }
 bool Application::open(const std::string& path) {
   return navigation ? navigation->openTarget(path) : documents.requestOpen(path);
 }
 void Application::updateUi() {
   window->setDocumentLabel(session.view().path, session.dirty());
-  if (preview && host)
-    window->previewControls->sync(preview->layoutProfile().mode == LayoutMode::Paged,
-                                  host->fitWidth());
+  if (zoom)
+    zoom->refresh();
   window->editor->applyProjection(session.view());
   auto title = (session.dirty() ? "* " : "") +
                (session.view().path.empty() ? std::string("Untitled") : session.view().path) +

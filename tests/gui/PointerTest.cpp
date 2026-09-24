@@ -83,7 +83,7 @@ void run() {
   CHECK(link);
   auto point = app.host->documentToView({link->bounds.x + 1, link->bounds.y + 1});
   int x = int(point.x), y = int(point.y), activations = 0;
-  app.host->linkActivated = [&](const std::string&) {
+  app.host->linkActivated = [&](const std::string&, bool) {
     CHECK(!app.host->grabbed());
     ++activations;
   };

@@ -13,13 +13,14 @@
 #include "document/EditController.h"
 #include "export/ExportCoordinator.h"
 #include "index/ReferenceWorker.h"
-#include "navigation/NavigationCoordinator.h"
 #include "navigation/DocumentViews.h"
+#include "navigation/NavigationCoordinator.h"
 #include "preview/PreviewCoordinator.h"
 #include "scroll/ScrollCoordinator.h"
 #include "ui/IconResources.h"
 #include "ui/ViewModeController.h"
 #include "ui/XfmdWindow.h"
+#include "zoom/DocumentZoom.h"
 #include <fx.h>
 #include <memory>
 namespace xfmd {
@@ -37,6 +38,7 @@ public:
   std::unique_ptr<UiContext> ui;
   XfmdWindow* window = nullptr;
   std::unique_ptr<ViewModeController> views;
+  std::unique_ptr<DocumentZoom> zoom;
   std::unique_ptr<FoxWindowMode> windowMode;
   std::unique_ptr<FX::FXFont> editorFont;
   std::unique_ptr<IInterpreter> interpreter, referenceInterpreter;
@@ -62,10 +64,17 @@ public:
   void execute(CommandRouter::Command);
   bool startPath(const std::string& path);
   bool open(const std::string& path);
+  bool openTarget(const std::string& path, bool systemDefault = false);
+  bool openTypedPath(const std::string&);
+  bool openDialogPath(const std::string& path);
+  void followLink(const std::string& document, const std::string& target,
+                  bool systemDefault = false);
   bool startExport(const std::string& path);
 
 private:
   void wireDocument();
+  void wireWorkspace();
+  void wireZoom();
   void showLinkTarget(const std::string&);
   std::string hoverStatus, beforeHover;
   void changeReadingColors(const ReadingColors&, bool commit);
@@ -73,9 +82,8 @@ private:
   void wireIndex();
   void pollReferences();
   void pollBrowser();
-  void openTreePath(const std::string&);
   void pollDesktopFiles();
-  void openBrowser(const std::string&);
+  void openBrowser(const std::string&, bool systemDefault = false);
   void activateIndex(const IndexAction&);
   std::optional<IndexAction> pendingHeading;
   void chooseExport();

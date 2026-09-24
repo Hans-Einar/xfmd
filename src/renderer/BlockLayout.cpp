@@ -22,11 +22,13 @@ void BlockLayout::layout(const SemanticDocument& model, const LayoutRequest& req
       font.mono = true;
       font.points = 11;
     }
-    double left = 24 + block.indent * 24 + block.quoteDepth * 16;
-    double width = std::max(40.0, request.width - left - 24);
+    const double gutter =
+        request.profile.mode == LayoutMode::Continuous ? std::min(24.0, request.width * .15) : 24;
+    double left = gutter + block.indent * 24 + block.quoteDepth * 16;
+    double width = std::max(1.0, request.width - left - gutter);
     double start = y;
     if (block.kind == BlockKind::Diagram && block.diagramScene) {
-      y += DiagramPlacement::append(block,left,y,width,request,metrics,frame);
+      y += DiagramPlacement::append(block, left, y, width, request, metrics, frame);
     } else if (block.kind == BlockKind::Table && block.table) {
       y += TableLayout::layout(*block.table, left, y, width, metrics, frame, request);
     } else if (block.kind == BlockKind::Rule) {
@@ -46,7 +48,8 @@ void BlockLayout::layout(const SemanticDocument& model, const LayoutRequest& req
         frame.runs.back().shaped = size.shaped;
       }
       y += InlineLayout::layout(block, left, y, width, font, metrics, frame,
-                                request.profile.mode == LayoutMode::Paged, request.cancelled);
+                                request.profile.mode == LayoutMode::Paged, request.cancelled,
+                                ColumnAlignment::Left, std::min(20.0, gutter));
       if (block.kind == BlockKind::Code)
         frame.decorations.push_back(
             {{left - 6, start - 4, std::max(width + 12, frame.contentWidth - left), y - start + 8},

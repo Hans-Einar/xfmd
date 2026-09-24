@@ -85,6 +85,13 @@ on shutdown/crash. At 256 pending releases, DocumentViews::open rejects new addr
 opens. Direct UI file operations are not all routed through that admission check.
 Broker recovery/retention policies remain SDL-owned.
 
+P053 (2026-09-24): ordinary navigator Markdown/heading links retain this pane.
+Other text targets use Application's editor route; HTML/web/binary and captured
+Ctrl use the shared opening policy from [FUNC-010](Functionality-010--Workspace-Controls.md).
+Resolve relative targets from the navigator document, independently of the main
+pane and work root. Endpoint/generated delivery remains internal document loading;
+it does not become an external-target launcher.
+
 ## 5. Plumbing
 
 | Step | Event / caller | Called symbol | Source or contract file | Data / result | Failure / side effect | Status |
@@ -102,7 +109,9 @@ Broker recovery/retention policies remain SDL-owned.
 | 11 | main documentOpened / navigator changed / destruction | `DocumentViews::documentChanged` | `src/application/navigation/DocumentViews.cpp` | pane → queue preceding lease | no lease mutation for failed opening | Implemented |
 | 12 | documentChanged / poll / open / destruction | `DocumentViews::flushReleases` | `src/application/navigation/DocumentViews.cpp` | queued lease/broker → SDLVIEW1 RELEASE | failed send retries; no durable acknowledgment | Implemented |
 | 13 | CLI addressed OPEN/INFO | `WindowEndpoint::request` | `src/application/navigation/WindowEndpoint.cpp` | exact window and packet → response | unavailable target or five-second timeout | Implemented |
-| 14 | navigator non-SDL link callback | `NavigationPanel::follow` | `src/application/navigation/NavigationPanel.cpp` | local link/ASCII fragment → open/pending anchor | unsupported or missing heading reports error | Implemented |
+| 14 | navigator normal Markdown/heading callback | `NavigationPanel::follow` | `src/application/navigation/NavigationPanel.cpp` | local link/ASCII fragment → open/pending anchor | unsupported or missing heading reports error | Implemented |
+
+| 15 | navigator other-text/external/Ctrl callback | `Application::followLink` | `src/application/ApplicationOpening.cpp` | navigator origin/target/Ctrl → shared consumer | retain panes for external handoff; report unsupported targets | Implemented |
 
 After row 7 succeeds, WindowEndpoint::handle invokes the injected endpoint.leased
 callback to store the new panel lease. That callback is wired in the DocumentViews
@@ -147,6 +156,11 @@ and failed release send; actual same-UID traffic and connect failures use real s
 No-acknowledgment and shutdown checks confirm best-effort limits rather than durable
 delivery. Real different-UID access and arbitrary crash/commit timing remain untested.
 No full-suite/sanitizer or complete Verified status is claimed from this focused run.
+
+P053 native routing regression: FileRoutingGuiTest checks navigator-relative
+resolution, local Markdown retention, other text in the main editor and external
+Ctrl/browser routing. Evidence: [P053](../../../sprints/Sprint-007--Workspace-UI/evidence/P053.md).
+This does not extend the older lease/crash evidence claims.
 
 ## 8. Status, risks and change impact
 

@@ -10,46 +10,60 @@ requirements: UR-017, UR-018, SR-001, SR-008, SR-016, SR-017, SR-019
 uses: FUNC-001, FUNC-003, FUNC-004, FUNC-005, FUNC-007, FUNC-009, FUNC-010, FUNC-014, FUNC-016, FUNC-017, FUNC-018
 ---
 
-# Feature-007: Sidevisning og trofast PDF-utgivelse
+# Feature-007: Paged preview and faithful PDF publication
 
-## 1. Hensikt og avgrensning
+## 1. Purpose and scope
 
-Gi brukeren en sidevisning som faktisk forutsier den eksporterte PDF-en. Papirpreview og eksport samles som én feature fordi den sentrale akseptansen er samsvar mellom dem. FTR-001 utvides fortsatt med en ny lesemodus.
+Provide page preview that predicts PDF output. Preview/publication share a feature
+because their acceptance is correspondence; FTR-001 also gains a reading mode.
 
-## 2. Krav og akseptanse
+## 2. Requirements and acceptance
 
-UR-017, UR-018, SR-001, SR-008, SR-016, SR-017, SR-019. Definisjoner: [krav](../../../xfmd_requirements.md).
-Akseptanse: AT-011, AT-018, AT-031, AT-032, AT-036, AT-037, AT-039.
+UR-017, UR-018, SR-001, SR-008, SR-016, SR-017, SR-019; [requirements](../../../xfmd_requirements.md).
+AT-011, AT-018, AT-031, AT-032, AT-036, AT-037, AT-039. P055 extends view zoom without changing publication.
 
-## 3. Kontrakter og eierskap
+## 3. Contracts and ownership
 
-Bruker velger Window wrap eller A4. FUNC-004/017 produserer layout, FUNC-016 sikrer felles glyphgrunnlag, FUNC-005 transformerer til viewport og FUNC-018 publiserer PDF. SourceSnapshot, PaperSpec og FontSetId fryses ved eksportstart; ingen ny dokumentøkt eller automatisk lagring.
+User selects Wrap or A4. FUNC-004/017 lay out pages; FUNC-016 shares glyph data;
+FUNC-005 transforms viewports; FUNC-018 exports. Snapshot, PaperSpec and FontSetId
+freeze at export start; no new document session or implicit save.
 
-## 4. Atferd, tilstand og feil
+## 4. Behavior, state and failures
 
-A4-visning har page gap og valg av fit-width/100 %; zoom endrer kun visning. Window wrap reflower ved breddeendring. Eksport fra begge moduser bruker samme A4-profil. Live preview og sync fortsetter å virke; lagret kildeanker overlever formatbytte. Feilet layout/eksport beholder editoren og gir forklaring.
+Historical A4 offered page gaps and fit-width/100%; P055 adds shared manual scale
+in Wrap/A4, explicit width/height fit and defaults to manual 100%. Zoom is display
+state. Wrap reflows at logical viewport width; A4 page geometry stays fixed. Export
+from either mode uses the same A4 profile. Live preview/sync continue; source anchors
+survive format/zoom changes. Failed layout/export leaves the editor usable with feedback.
 
 ## 5. Plumbing
 
-| Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
+| Step | Event / caller | Called symbol | Source or contract file | Data / result | Failure / side effect | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `View A4 / Window wrap` | `PreviewCoordinator::setLayoutProfile` | `src/application/preview/PreviewCoordinator.cpp` | profil → ny FrameKey | gammelt frame gjøres ikke interaktivt | Implemented |
-| 2 | `MarkdownRenderer::layout` | `PageComposer::compose` | `src/renderer/PageComposer.cpp` | flyt/papir → paged frame | A4-constraints og sideankre | Implemented |
-| 3 | `File Export PDF` | `ExportCoordinator::start` | `src/application/export/ExportCoordinator.cpp` | frosset buffer/profil → jobb | eksport endrer ikke dirty | Implemented |
-| 4 | `Page frame + viewport` | `FoxRenderHost::present` | `src/application/adapters/FoxRenderHost.cpp` | FrameKey → view transform | zoom er ikke papir-reflow | Implemented |
+| 1 | `View A4 / Wrap` | `PreviewCoordinator::setLayoutProfile` | `src/application/preview/PreviewCoordinator.cpp` | Profile → FrameKey | Stale frame noninteractive | Implemented |
+| 2 | `MarkdownRenderer::layout` | `PageComposer::compose` | `src/renderer/PageComposer.cpp` | Flow/paper → pages | A4 constraints/anchors | Implemented |
+| 3 | `File Export PDF` | `ExportCoordinator::start` | `src/application/export/ExportCoordinator.cpp` | Frozen buffer/profile → job | No dirty change | Implemented |
+| 4 | `Page frame + viewport` | `FoxRenderHost::present` | `src/application/adapters/FoxRenderHost.cpp` | FrameKey → transform | A4 zoom is not reflow | Implemented |
+| 5 | `zoom command` | `DocumentZoom::setPercent` | `src/application/zoom/DocumentZoom.cpp` | Percentage → shared editor/preview scale | Paper/export unchanged | Implemented |
 
-## 6. Gjenbruk og avhengigheter
+## 6. Reuse and dependencies
 
-Gjenbruk de eksisterende interpreter-/renderer-portene og source mapping. Eksport bruker dokumenttjenester direkte, ikke previewens private parserjobb. FUNC-016/017 er felles for sidevisning og PDF og hindrer to typografi-/pagineringmotorer.
+Reuse interpreter/renderer ports and source mapping. Export consumes document
+services directly, not preview's private parser job. Shared FUNC-016/017 prevent
+separate typography/pagination engines. P055 reuses workspace/host/editor ownership.
 
-## 7. Verifikasjon
+## 7. Verification
 
-WYSIWYG betyr samme sideformat, linje-/sideskift, glyphposisjoner og innhold ved samme profil/token/fontsett. Skjermens antialiasing trenger ikke være pikselidentisk med en PDF-leser. Test hele dokumentet, ikke bare synlig side.
+WYSIWYG means matching format, line/page breaks, glyph positions and contents for
+the same profile/token/font set. Screen antialiasing need not pixel-match a PDF reader.
+Test the entire document, not only the visible page. Historical acceptance:
+[P11](../../../docs/evidence/P11.md), [P12](../../../docs/evidence/P12.md).
+P055 acceptance follows its [plan](../../../sprints/Sprint-007--Workspace-UI/Phase-055--Document-Zoom.md).
 
-AT-011, AT-018, AT-031, AT-032, AT-036, AT-037, AT-039: se [P11](../../../docs/evidence/P11.md) og [P12](../../../docs/evidence/P12.md).
+## 8. Status, risks and change impact
 
-## 8. Status, risiko og endringskonsekvenser
+Revision 1.2 implemented P11/P12, following P9 proof. No Verified status without
+independent PDF-reader and font/layout contract checks. Older evidence retains
+its dated scope. [Design](../../../softwareDesign.md), [historical plan](../../../implementationPlan.md).
 
-Revisjon 1.2: P11/P12 implementert; se [bevis](../../../docs/evidence/P12.md).
-P9 proof, P11 sidevisning, P12 eksport. Ingen Verified-status før uavhengig PDF-leser og font-/layoutkontraktene er testet.
-[Integrasjonsdesign](../../../softwareDesign.md) og [faseplan](../../../implementationPlan.md) gir kontekst.
+P055 local zoom acceptance and bounded limits: [evidence](../../../sprints/Sprint-007--Workspace-UI/evidence/P055.md).

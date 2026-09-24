@@ -46,7 +46,7 @@ void run() {
   CHECK(app.host->interactive() && app.host->frame()->key == key);
   app.execute(CommandRouter::ActualSize);
   events(app);
-  CHECK(app.host->frame()->key == key && !app.host->fitWidth());
+  CHECK(app.host->frame()->key == key && app.host->viewScale() == 1);
   app.host->present(continuous);
   CHECK(app.host->frame()->key == key);
   CHECK(!app.preview->acceptFrame(continuous));

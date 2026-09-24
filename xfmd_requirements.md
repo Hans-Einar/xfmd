@@ -1,7 +1,8 @@
 # Kravspesifikasjon: xfmd
 
 Status, reconciled 2026-09-24: main `c245fd9` contains P0–P41 and Sprints 001–002.
-The current branch also contains Sprint 004 navigation/leases through `47a245a`.
+The current branch also contains Sprint 004 navigation/leases through `47a245a`,
+and the selected Sprint 007 amendments below.
 BoxUI/Sprint 003 is separate historical work, not integrated here. See the
 [sprint register](sprints/README.md) for delivery state and evidence. Implemented
 means code exists; it does not imply complete acceptance or a main merge.
@@ -61,7 +62,7 @@ UR-043/SR-026 and AT-068/069 remain separate branch history.
 
 | ID | Krav | Akseptanse / beviskriterium |
 | --- | --- | --- |
-| UR-001 | Åpne lokale `.md`/`.txt` via CLI, dialog og sidepanel i samme aktive økt. `.txt` vises som ren tekst. | AT-001: mellomrom/Unicode i sti, tom/manglende fil; ingen uønsket ekstra prosess. |
+| UR-001 | Open local Markdown and UTF-8 plain-text documents through shared document transactions. File/Open, Ctrl+O and Open buttons use one file/folder chooser. A successful internal dialog file open sets work root to its parent; folder selection changes only work root. Cancel/error and external handoff preserve the previous root. | AT-001: file/folder/current-folder selection, spaces/Unicode, missing/unreadable input, dirty Cancel, MRU and root retention. |
 | UR-002 | Vis H1–H6, avsnitt, fet/kursiv, lister, sitater, kode og lenketekst. Brødtekst/overskrifter er proporsjonale; kode er monospace; overskriftsnivåer er tydelige. | AT-002: fixtures og visuell kontroll av blandede fonter, nesting og linjebryting. |
 | UR-003 | Tilby tekstredigering, vanlig utklippstavle, angre Ctrl+Z, gjør om Ctrl+Y, søk Ctrl+F og lagring Ctrl+S. | AT-003: lagre–åpne gir samme tekst; undo/redo oppdaterer dirty og preview. |
 | UR-004 | Oppdater preview når det har gått 300 ms uten ny redigering. Behold fokus og editorens markør. | AT-004: simulert klokke bekrefter debounce; GUI-sjekk bekrefter fokus og nyeste revisjon. |
@@ -153,8 +154,9 @@ kravrevisjon. Ingen SDL-kompilator eller avhengighet til SDP innføres nå.
 
 ## 8. Arbeidsrot og filfilter
 
-Arbeidsroten avgrenser sidetreet; eksplisitt Åpne og dokumentlenker beholder sin
-sti-policy og flytter ikke arbeidsroten. Symlinker til filer utenfor roten og
+The work root bounds the file tree. Successful internal file opening from the
+Open dialog changes it to the file parent; folder selection changes only the root.
+Document links, recent-file activation and external handoff preserve work root. Symlinker til filer utenfor roten og
 symbolske mappelenker traverseres ikke i treet. Skjulte mapper/filer tas med.
 Dobbeltklikk en rot utenfor home går også til home, deretter /; på / beholdes /.
 Begge typeknapper er av som standard, så oppstart viser direkte mappeinnhold uten
@@ -218,7 +220,7 @@ fragment åpner filen; kapittelbarn navigerer med byteanker, ikke URL-slug.
 
 | Krav | Normativ atferd | Akseptanse |
 | --- | --- | --- |
-| UR-024 | Edit → Preferences lar brukeren velge programmet som åpner HTTP(S)-lenker fra både preview og referansetreet. `google-chrome-stable` kan velges eller skrives inn, alternativt programnavn/full sti eller systemvalget `xdg-open`. OK lagrer, Cancel forkaster. | AT-044: vedvarende verdi, Cancel, ugyldig verdi, manglende program og samme rute fra begge flater. |
+| UR-024 | Edit → Preferences selects the browser program for ordinary HTTP(S) and local HTML/HTM activation. Use the same preference from preview, navigator and file tree; save on OK, discard on Cancel. Ctrl+click explicitly uses OS defaults instead of this preference. | AT-044: persistence/Cancel, configured versus OS browser, missing program, asynchronous launch failure and identical routing. |
 
 P16 presiserer SR-005 og P15-policy: bare eksplisitt aktivering åpner HTTP(S) i
 valgt eksternt program. Program og URL er separate argv-elementer; ingen shell
@@ -239,7 +241,7 @@ blir ikke eksekvert. Konfigurasjon og analyser av Xfe endrer ikke renderer-arkit
 
 | Krav | Normativ atferd | Akseptanse |
 | --- | --- | --- |
-| UR-028 | Files-treet åpner .md/.txt i XFMD og andre regulære filer med xdg-open. Ekstern åpning endrer ikke buffer, dirty, undo eller dokumenthistorikk. Feil rapporteres; filsti er eget argv-element uten shell. | AT-048: klikk/tastatur, mellomrom/metategn, store suffikser, feil og uendret dokument. |
+| UR-028 | Files tree and document links use the same target policy. Markdown opens internally; other validated UTF-8 plain text opens literally in the editor. HTML/HTM and HTTP(S) open in the configured browser. Other non-text regular files use OS association. Ctrl+click on a file/link uses OS defaults. External opening preserves buffer, dirty, undo, history and work root; no shell evaluation. | AT-048: native normal/Ctrl clicks, unknown/empty/extensionless text, HTML precedence, binary input, uppercase suffixes, Unicode/metacharacters, launch failure and unchanged document. |
 | UR-029 | Enter og Space aktiverer valgt node i sidetrærne. Høyrepil aktiverer leaf-noder; grennoder beholder vanlig utvidelse/barnenavigasjon. Opp/ned/venstre åpner ikke filer. | AT-049: Files, Index og References med native tastetrykk; lazy grener regnes ikke som leaf. |
 
 UR-026 / AT-046 presiseres: knapperekkefølgen er Editor/Split/Preview med
@@ -366,3 +368,75 @@ existing behavior. Direct (non-broker) generated bundles remain window-owned and
 are removed on normal DocumentViews destruction. Broker crash recovery and durable
 lease storage belong to SDL, not to XFMD's endpoint. Successful send is not proof
 of durable broker release; do not report it as acknowledged reclamation.
+
+## Sprint 007 opening-policy amendment — 2026-09-24
+
+UR-001/024/028 above supersede earlier suffix-only and explicit-dialog-root rules.
+SR-005 still prohibits automatic fetching, embedded browser execution and shell
+interpretation; explicit HTML/HTTP(S)/OS handoff is an application launch, not
+in-process web rendering. Other schemes remain unsupported. Local HTML uses an
+absolute file URL in the configured browser. Ctrl+click bypasses that preference.
+
+Internal text validation is UTF-8 with optional BOM, without NUL or binary C0
+controls (TAB/LF/CR/form feed remain allowed); size stays at most 8 MiB. Markdown
+is selected by case-insensitive .md; all other internally opened files are literal
+text. Unknown-suffix regular files failing text validation, or above the internal
+limit, use OS association. Known .md/.txt still report input/size errors internally.
+Errors reading/classifying a file do not silently launch it externally. See
+[P053](sprints/Sprint-007--Workspace-UI/Phase-053--File-Opening.md) for acceptance.
+
+
+## Sprint 007 workspace amendment — P054, 2026-09-24
+
+This selected amendment supersedes earlier placement rules in UR-014, UR-021,
+UR-026, UR-030, UR-032 and UR-038; it retains their underlying document, filtering,
+palette and persistence contracts. Normative interaction details follow
+[P054](sprints/Sprint-007--Workspace-UI/Phase-054--Workspace-Layout.md).
+
+- UR-014 / UR-032: a separate row below the toolbar spans the window. Its expanding
+  field shows the committed absolute document path at rest, permits editing on
+  left-click/keyboard, and copies that committed path on right-click. Typing filters
+  filenames automatically, without a Path/Filter toggle or duplicate sidebar input.
+  Enter opens only an exact existing absolute/work-root-relative target; directory
+  input changes root, typed files retain it. Existing literal wildcard filenames
+  take precedence. Failed/canceled opens preserve document/dirty/undo. Escape
+  restores the preceding filter/path; blur retains filtering and restores path
+  display. Successful path submission restores the preceding name filter. Clear
+  removes the name filter. Unsaved documents have no invented path. Keep the row
+  usable with Sidebar hidden/Index selected. AT-028 / AT-052 cover these native
+  inputs, clipboard, relative bases, Unicode, errors and wide/narrow geometry.
+- UR-021 / UR-013 / UR-038: Refresh shares the Files/Index tab row and targets the
+  active tab. Files retains root/filter and available tree context; Index rebuilds
+  current-buffer headings/references without disk reload or discarded edits.
+  Remove the separate folder heading. Keep tree root/type toggles and add Up to
+  the immediate parent (stop at `/`) plus shared Open. Retain the old root-double-click
+  shortcut. Recent Folders/Files occupy tabs in the resizable lower area, with
+  separate existing 32-entry histories. AT-026, AT-027, AT-040 and AT-058 cover parent,
+  both Refresh targets, sidebar Open, recent tabs/persistence/errors and retained state.
+- UR-026 / UR-030 / UR-031 / UR-032: Sidebar is the first icon action after menus;
+  Editor/Split/Preview form a distinct group, followed by Back/Forward. Theme is at
+  the right edge; retain free space and wrap intact groups at narrow widths. Move
+  the BG/Text sliders into a theme popup opened by right-click or Shift+F10/Menu.
+  Left-click/Space still toggles theme. Popup dragging, Escape/outside dismissal,
+  live screen colors, theme-specific persistence/rollback and unchanged PDF palette
+  are required. AT-046, AT-050, AT-051 and AT-052 cover geometry and native input.
+
+## P055 amendment — shared document zoom (2026-09-24)
+
+This amendment extends UR-011/017/033 and SR-016/019 for KB-XFMD-010.
+Ctrl+wheel and Ctrl++/Ctrl+- zoom the main editor and preview together in both
+Wrap and A4; keypad equivalents are supported. Manual zoom spans 25–300%, with
+10-percentage-point increments. The toolbar shows the current percentage and
+offers 25/50/100/200/300%, a separator, then Fit page width/height. View → Zoom
+contains those presets and Zoom in/out with shortcuts, without fit actions.
+A4 fit recomputes a shared factor from visible document viewports; fit actions
+are disabled in Wrap. Default/restart is manual 100%; state persists within the
+window across document/view changes. A4 no longer implicitly starts in fit-width.
+
+The [P055 specification](sprints/Sprint-007--Workspace-UI/Phase-055--Document-Zoom.md)
+defines bounds, fractional wheel behavior, fit-to-manual transitions and ownership.
+Ctrl=page remains for sidebar/history/sample controls. Zoom preserves edits, undo,
+selection, caret and source reading position; Wrap reflows, while A4 paper/PDF
+geometry stays fixed. AT-025/030/031/039/052/053 must cover the view-mode × layout-mode
+matrix, native inputs, preset/fit menus, resize, bounds and document/PDF invariants.
+Earlier A4-only zoom and Ctrl=page descriptions retain their historical scope.

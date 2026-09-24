@@ -3,8 +3,10 @@
 #include "WorkspacePanel.h"
 #include "application/commands/CommandRouter.h"
 #include "controls/CompactToolbar.h"
+#include "controls/DocumentPathField.h"
 #include "controls/PreviewColorControls.h"
 #include "controls/PreviewControls.h"
+#include "controls/ThemeButton.h"
 #include "controls/UiLayout.h"
 #include <fx.h>
 namespace xfmd {
@@ -14,14 +16,17 @@ class XfmdWindow : public FX::FXMainWindow {
   UiContext* ui = nullptr;
   CompactToolbar* toolbar = nullptr;
   FX::FXHorizontalFrame *fileTools = nullptr, *navTools = nullptr, *viewTools = nullptr;
-  FX::FXLabel* documentTitle = nullptr;
+  FX::FXLabel* dirtyLabel = nullptr;
   UiButton* themeButton = nullptr;
-  FX::FXMenuPane *fileMenu = nullptr, *editMenu = nullptr, *viewMenu = nullptr, *goMenu = nullptr;
+  FX::FXMenuPane *fileMenu = nullptr, *editMenu = nullptr, *viewMenu = nullptr, *goMenu = nullptr,
+                 *zoomMenu = nullptr;
 
 protected:
   XfmdWindow() = default;
 
 public:
+  DocumentPathField* documentPath = nullptr;
+  ReadingColorPopup* colorPopup = nullptr;
   PreviewControls* previewControls = nullptr;
   PreviewColorControls* previewColors = nullptr;
   EditorWidget* editor = nullptr;

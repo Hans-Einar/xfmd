@@ -131,15 +131,15 @@ void run() {
   click(app, panel->text, 10, 10, Button1, 5000);
   settle(app);
   CHECK(tree->getPathnameItem((dir / "note.txt").c_str()));
-  panel->filterInput->setText("match?.*", true);
+  panel->setNameFilter("match?.*");
   settle(app);
   CHECK(tree->getPathnameItem((dir / "deep/nested/matchø.md").c_str()));
   CHECK(!tree->getPathnameItem((dir / "hello.md").c_str()));
-  panel->filterInput->setText("nothing", true);
+  panel->setNameFilter("nothing");
   settle(app);
   CHECK(!tree->getFirstItem()->getFirst());
   CHECK(panel->searchStatus->getText().find("No matching") >= 0);
-  panel->filterInput->setText("", true);
+  panel->setNameFilter("");
   panel->markdown->setState(false);
   panel->text->setState(false);
   panel->onApplyFilter(nullptr, 0, nullptr);

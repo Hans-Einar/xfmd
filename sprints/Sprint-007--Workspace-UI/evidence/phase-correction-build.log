@@ -1,0 +1,37 @@
+[0/2] Re-checking globbed directories...
+[1/41] cd /home/warloc/git/xfmd-sdl-navigation/build-ui && /usr/bin/python3.12 /home/warloc/git/xfmd-sdl-navigation/tools/build_identity.py --source /home/warloc/git/xfmd-sdl-navigation --output /home/warloc/git/xfmd-sdl-navigation/build-ui/generated
+[2/36] Linking CXX executable ExternalBrowserTest
+[3/36] Linking CXX executable MermaidGuiTest
+[4/36] Linking CXX executable PreviewSelectionGuiTest
+[5/36] Linking CXX executable RecentFilesGuiTest
+[6/36] Linking CXX executable CompactWorkspaceTest
+[7/36] Linking CXX executable ReadingColorsGuiTest
+[8/36] Linking CXX executable UiControlsTest
+[9/36] Linking CXX executable TreeActionsTest
+[10/36] Linking CXX executable AppearancePreferencesTest
+[11/36] Linking CXX executable AppearanceGuiTest
+[12/36] Linking CXX executable BrowserPreferencesTest
+[13/36] Linking CXX executable IndexGuiTest
+[14/36] Linking CXX executable WorkspaceTest
+[15/36] Linking CXX executable PresentationTest
+[16/36] Linking CXX executable ScrollingTest
+[17/36] Linking CXX executable SidebarGuiTest
+[18/36] Linking CXX executable NavigationGuiTest
+[19/36] Linking CXX executable WheelGuiTest
+[20/36] Linking CXX executable WorkPathGuiTest
+[21/36] Linking CXX executable PointerTest
+[22/36] Linking CXX executable TablePreviewTest
+[23/36] Linking CXX executable PreferencesTest
+[24/36] Linking CXX executable CapturePresentation
+[25/36] Linking CXX executable xfmd_cold_start
+[26/36] Linking CXX executable PagedPreviewTest
+[27/36] Linking CXX executable CanvasTest
+[28/36] Linking CXX executable ExportGuiTest
+[29/36] Linking CXX executable FullscreenTest
+[30/36] Linking CXX executable ThemeProfilesTest
+[31/36] Linking CXX executable IconTest
+[32/36] Linking CXX executable WindowEndpointBoundaryTest
+[33/36] Linking CXX executable CapturePreferences
+[34/36] Linking CXX executable DocumentViewsGuiTest
+[35/36] Linking CXX executable CaptureAppearance
+[36/36] Linking CXX executable DocumentLeaseGuiTest

@@ -9,19 +9,22 @@
 | KB-XFMD-003 | Question | backlog | [SDUI widget ownership and XFMD's boundary](backlog/%23003--Question--SDUI-widget-ownership.md) |
 | KB-XFMD-004 | Change | completed | [Establish the conversation-note workflow](completed/%23004--Change--Conversation-note-workflow.md) |
 | KB-XFMD-005 | Study | completed | [Remaining SDL acceptance evidence](completed/%23005--Study--SDL-acceptance-evidence.md) |
-| KB-XFMD-006 | Change | backlog | [Open documents and folders from the same dialog](backlog/%23006--Change--Open-files-and-folders.md) |
-| KB-XFMD-007 | Change | backlog | [Open plain text internally and route other targets consistently](backlog/%23007--Change--File-types-and-external-opening.md) |
-| KB-XFMD-008 | Change | backlog | [Move the document path into a full-width navigation and filter row](backlog/%23008--Change--Document-path-and-file-filter.md) |
-| KB-XFMD-009 | Change | backlog | [Compact the sidebar and tab recent folders and files](backlog/%23009--Change--Sidebar-controls-and-recent-tabs.md) |
-| KB-XFMD-010 | Change | backlog | [Provide normal zoom gestures and percentage controls in Wrap and A4](backlog/%23010--Change--Document-zoom-controls.md) |
-| KB-XFMD-011 | Change | backlog | [Regroup toolbar actions and hide reading-color sliders in the theme popup](backlog/%23011--Change--Toolbar-layout-and-color-popup.md) |
+| KB-XFMD-006 | Change | completed | [Open documents and folders from the same dialog](completed/%23006--Change--Open-files-and-folders.md) |
+| KB-XFMD-007 | Change | completed | [Open plain text internally and route other targets consistently](completed/%23007--Change--File-types-and-external-opening.md) |
+| KB-XFMD-008 | Change | completed | [Move the document path into a full-width navigation and filter row](completed/%23008--Change--Document-path-and-file-filter.md) |
+| KB-XFMD-009 | Change | completed | [Compact the sidebar and tab recent folders and files](completed/%23009--Change--Sidebar-controls-and-recent-tabs.md) |
+| KB-XFMD-010 | Change | completed | [Provide normal zoom gestures and percentage controls in Wrap and A4](completed/%23010--Change--Document-zoom-controls.md) |
+| KB-XFMD-011 | Change | completed | [Regroup toolbar actions and hide reading-color sliders in the theme popup](completed/%23011--Change--Toolbar-layout-and-color-popup.md) |
+| KB-XFMD-012 | Ref | backlog | [Synchronize XFMD cards with the shared KanBan contract](backlog/%23012--Ref--SDP--014--KanBan-format-sync.md) |
 
 This index shows current location; [Ledger.ndjson](Ledger.ndjson) records history.
 Read relevant notes at session start. Review backlog after a topic discussion and
 before selecting the next round. KB-XFMD-001 completed its bounded documentation reconciliation. KB-XFMD-002 completed isolated tooling extraction and branch assessment.
 KB-XFMD-005 completed its identified SDL acceptance evidence and records residual
-limits in P052. No card is active. KB-XFMD-003
-and the UI wishlist KB-XFMD-006–011 remain in backlog.
+limits in P052. KB-XFMD-007 completed P053 target routing. KB-XFMD-006/008/009/011
+completed P054 workspace integration with documented checks. KB-XFMD-010 completed
+P055 shared zoom; KB-XFMD-003 remains deferred. KB-XFMD-012 is the separate
+concurrently captured process Ref and does not expand the selected UI goal.
 
 
 ## UI wishlist review — 2026-09-24
@@ -174,3 +177,10 @@ No automation is introduced. For each board change, check JSON parsing, unique I
 predecessor chains, from/to states, metadata, physical placement, successor links
 and current Markdown links. Run `git diff --check`. Do not rewrite historical paths
 or check them as if they were current document links.
+
+## Active goal — 2026-09-24
+
+The owner authorized implementing and verifying all six UI Changes, KB-XFMD-006–011.
+This supersedes the capture-only status in the dated review above. Sprint 007
+tracks the delivery; individual cards keep their identity and completion evidence.
+SDUI widget ownership (KB-XFMD-003) is excluded.

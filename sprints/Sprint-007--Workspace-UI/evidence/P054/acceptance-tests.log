@@ -1,0 +1,15 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd-sdl-navigation/build-ui
+Test project /home/warloc/git/xfmd-sdl-navigation/build-ui
+    Start 13: BlueprintStructure
+    Start 15: PathWorkspaceGuiTest
+1/3 Test #13: BlueprintStructure ...............   Passed    0.42 sec
+    Start 70: ThemePopupGuiTest
+2/3 Test #70: ThemePopupGuiTest ................   Passed    4.38 sec
+3/3 Test #15: PathWorkspaceGuiTest .............   Passed   18.78 sec
+
+100% tests passed, 0 tests failed out of 3
+
+Label Time Summary:
+GUI    =  23.15 sec*proc (2 tests)
+
+Total Test time (real) =  18.78 sec

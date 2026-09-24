@@ -115,7 +115,7 @@ void run() {
   settle(app);
   auto* panel = app.window->workspacePanel;
   auto* index = panel->index;
-  auto* tab = panel->tabs->getLast()->getPrev();
+  auto* tab = panel->tabs->getLast();
   CHECK(dynamic_cast<FXTabItem*>(tab));
   auto token = app.session.view().token;
   click(app, tab, 15, 10, 1000);

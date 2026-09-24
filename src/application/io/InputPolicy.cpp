@@ -14,16 +14,16 @@ bool InputPolicy::supportedPath(const std::string& path) {
   auto ext = extension(path);
   return ext == ".md" || ext == ".txt";
 }
-bool InputPolicy::plainText(const std::string& path) { return extension(path) == ".txt"; }
-void InputPolicy::validate(std::string_view text, const std::string& path) {
-  if (!path.empty() && !supportedPath(path))
-    throw Error(ErrorCode::Unsupported, "Only .md and .txt files are supported.");
+bool InputPolicy::plainText(const std::string& path) { return extension(path) != ".md"; }
+void InputPolicy::validate(std::string_view text, const std::string&) {
   if (text.size() > maxDocumentBytes)
     throw Error(ErrorCode::TooLarge, "File exceeds the 8 MiB limit.");
   for (std::size_t i = 0; i < text.size();) {
     auto c = static_cast<unsigned char>(text[i++]);
     if (c == 0)
       throw Error(ErrorCode::InvalidInput, "NUL bytes cannot be edited.");
+    if ((c < 32 && c != '\t' && c != '\n' && c != '\r' && c != '\f') || c == 127)
+      throw Error(ErrorCode::InvalidInput, "Binary control bytes cannot be edited.");
     if (c < 0x80)
       continue;
     unsigned value = 0, count = 0, minimum = 0;

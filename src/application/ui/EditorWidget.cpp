@@ -1,10 +1,12 @@
 #include "EditorWidget.h"
+#include "DocumentZoomInput.h"
 #include "application/adapters/FoxWheelScrollBar.h"
 #include <algorithm>
 using namespace FX;
 namespace xfmd {
 FXDEFMAP(EditorWidget)
-editorMap[] = {FXMAPFUNC(SEL_KEYPRESS, 0, EditorWidget::onKeyPress),
+editorMap[] = {FXMAPFUNC(SEL_MOUSEWHEEL, 0, EditorWidget::onMouseWheel),
+               FXMAPFUNC(SEL_KEYPRESS, 0, EditorWidget::onKeyPress),
                FXMAPFUNC(SEL_INSERTED, EditorWidget::ID_EDIT, EditorWidget::onChanged),
                FXMAPFUNC(SEL_DELETED, EditorWidget::ID_EDIT, EditorWidget::onChanged),
                FXMAPFUNC(SEL_REPLACED, EditorWidget::ID_EDIT, EditorWidget::onChanged)};
@@ -19,8 +21,21 @@ EditorWidget::EditorWidget(FXComposite* parent)
   setMarginTop(10);
   setMarginBottom(10);
 }
+long EditorWidget::onMouseWheel(FXObject* sender, FXSelector sel, void* data) {
+  const auto& event = *static_cast<FXEvent*>(data);
+  if ((event.state & CONTROLMASK) && !(event.state & ALTMASK) && zoomRequested) {
+    FoxWheelScrollBar::cancelTree(this);
+    zoomRequested(event.code / 120.0);
+    return 1;
+  }
+  return FXText::handle(sender, sel, data);
+}
 long EditorWidget::onKeyPress(FXObject* sender, FXSelector sel, void* data) {
   FoxWheelScrollBar::cancelTree(this);
+  if (auto direction = documentZoomKey(*static_cast<FXEvent*>(data)); direction && zoomRequested) {
+    zoomRequested(direction);
+    return 1;
+  }
   keyboard = true;
   auto result = FXText::onKeyPress(sender, sel, data);
   keyboard = false;

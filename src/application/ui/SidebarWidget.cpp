@@ -58,6 +58,9 @@ void SidebarWidget::setRoot(const std::filesystem::path& path, const std::string
   getApp()->removeTimeout(this, ID_ACTIVATE);
   pendingOpen.clear();
   scanner.stop();
+  restoring = false;
+  restoreExpanded.clear();
+  restoreSelected.clear();
   root = path;
   rootLabel = label;
   clearItems();
@@ -72,6 +75,20 @@ void SidebarWidget::setRoot(const std::filesystem::path& path, const std::string
   setPosition(0, 0);
   scanning = true;
   scanner.start(root, filter);
+}
+void SidebarWidget::refresh() {
+  std::set<std::string> expanded;
+  for (const auto& entry : items)
+    if (entry.second->isExpanded())
+      expanded.insert(entry.first);
+  const std::string selected = getItemPathname(getCurrentItem()).text();
+  const int x = getXPosition(), y = getYPosition();
+  setRoot(root, rootLabel);
+  restoreExpanded = std::move(expanded);
+  restoreSelected = selected;
+  restoreX = x;
+  restoreY = y;
+  restoring = true;
 }
 void SidebarWidget::setFilter(FileNameFilter value) {
   filter = std::move(value);
@@ -135,6 +152,7 @@ long SidebarWidget::onOpen(FXObject*, FXSelector selector, void* data) {
     auto target = std::filesystem::canonical(getItemPathname(item).text(), ec);
     if (!ec && WorkPathHistory::contains(root, target)) {
       pendingOpen = target.string();
+      pendingSystemDefault = pointerSystemDefault;
       getApp()->addTimeout(this, ID_ACTIVATE, 0);
     } else if (status)
       status("File unavailable or outside work path.");
@@ -143,15 +161,18 @@ long SidebarWidget::onOpen(FXObject*, FXSelector selector, void* data) {
 }
 long SidebarWidget::onRelease(FXObject* sender, FXSelector sel, void* data) {
   auto* event = static_cast<FXEvent*>(data);
-  pointerClick = !event->moved && !(event->state & (CONTROLMASK | SHIFTMASK | ALTMASK)) &&
+  pointerSystemDefault = bool(event->state & CONTROLMASK);
+  pointerClick = !event->moved && !(event->state & (SHIFTMASK | ALTMASK)) &&
                  getItemAt(event->win_x, event->win_y) == getCurrentItem();
   auto result = FXTreeList::onLeftBtnRelease(sender, sel, data);
   pointerClick = false;
+  pointerSystemDefault = false;
   return result;
 }
 long SidebarWidget::onKey(FXObject* sender, FXSelector sel, void* data) {
   auto* event = static_cast<FXEvent*>(data);
   if (activatesTreeItem(*event, isItemFile(getCurrentItem()))) {
+    pointerSystemDefault = false;
     pointerClick = true;
     auto* item = getCurrentItem();
     if (item && isItemDirectory(item)) {
@@ -170,7 +191,7 @@ long SidebarWidget::onActivate(FXObject*, FXSelector, void*) {
   auto path = std::move(pendingOpen);
   pendingOpen.clear();
   if (!path.empty() && open)
-    open(path);
+    open(path, pendingSystemDefault);
   return 1;
 }
 long SidebarWidget::onPoll(FXObject*, FXSelector, void*) {
@@ -179,7 +200,28 @@ long SidebarWidget::onPoll(FXObject*, FXSelector, void*) {
     add(entry);
   if (!batch.entries.empty())
     sortItems();
-  scanning = batch.busy;
+  const auto requestsBeforeRestore = requested.size();
+  if (restoring) {
+    for (auto it = restoreExpanded.begin(); it != restoreExpanded.end();) {
+      auto found = items.find(*it);
+      if (found != items.end()) {
+        expandTree(found->second);
+        it = restoreExpanded.erase(it);
+      } else
+        ++it;
+    }
+    if (auto* item = getPathnameItem(restoreSelected.c_str()))
+      setCurrentItem(item);
+    if (!batch.busy && requestsBeforeRestore == requested.size()) {
+      // Recompute scroll ranges after asynchronous inserts/expansion before
+      // restoring offsets; the previous empty tree would clamp them to zero.
+      layout();
+      setPosition(restoreX, restoreY);
+      restoring = false;
+      restoreExpanded.clear();
+    }
+  }
+  scanning = batch.busy || requestsBeforeRestore != requested.size();
   if (status) {
     std::string text = scanning ? "Searching… " : (files ? "" : "No matching files. ");
     text += std::to_string(files) + " files";

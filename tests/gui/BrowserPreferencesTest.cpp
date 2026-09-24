@@ -50,7 +50,7 @@ void run() {
   }
   CHECK(app.host->interactive());
   auto token = app.session.view().token;
-  app.host->linkActivated("https://example.org/from-preview");
+  app.host->linkActivated("https://example.org/from-preview", false);
   IndexAction action;
   action.kind = IndexActionKind::Hyperlink;
   action.target = "https://example.org/from-index";
@@ -69,7 +69,7 @@ void run() {
   std::string error;
   CHECK(app.preferences->commit(draft, error));
   app.documents.error = [&](const std::string& value) { error = value; };
-  app.host->linkActivated("https://example.org/fails");
+  app.host->linkActivated("https://example.org/fails", false);
   CHECK(error.find("missing-program") != std::string::npos && app.session.view().token == token);
 }
 TEST_MAIN(run)

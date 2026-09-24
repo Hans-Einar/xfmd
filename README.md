@@ -371,3 +371,17 @@ Linux-profilen adresserer konkret vindu og panel og beholder siste dokument ved 
 Med SDL-daemon kan `--broker /private/views.sock` registreres sammen med
 `--sdl-tool /absolute/sdl-view-request` og prosjekt-ID. Parser-/rendererregistrering
 ligger da i daemonen. Leases følger panelene og frigjøres ved bytte/lukking.
+
+### Workspace interaction tests
+
+With X11 XTest development files installed (`libxtst-dev` on Debian/Ubuntu), CMake
+registers ThemePopupGuiTest. It uses real X server pointer movement, button grabs
+and slider dragging under isolated Xvfb. Confirm it appears in `ctest -N` when
+verifying toolbar/popup changes; builds without XTest omit this conditional test.
+PathWorkspaceGuiTest covers the document-path/filter row and active-tab refresh.
+
+The shared zoom checks are `DocumentZoomGuiTest` and `DocumentZoomDpiTest` (FOX
+screen resolution set to 144 DPI). With Poppler `pdftotext` available,
+`DocumentZoomPdfTest` compares actual exported page/word geometry across four zoom
+modes. These supplement the native workspace tests; see
+[P055 acceptance](sprints/Sprint-007--Workspace-UI/evidence/P055.md).

@@ -37,7 +37,7 @@ void CompactToolbar::layout() {
       row = 0;
       x = 2;
     }
-    c->position(x, y, w, h);
+    c->position(c == rightAligned ? getWidth() - 2 - w : x, y, w, h);
     x += w + 4;
     row = std::max(row, h);
   }

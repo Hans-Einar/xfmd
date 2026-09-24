@@ -6,6 +6,7 @@ class CompactToolbar : public FX::FXHorizontalFrame {
   FX::FXint rowsHeight(FX::FXint width) const;
 
 public:
+  FX::FXWindow* rightAligned = nullptr;
   explicit CompactToolbar(FX::FXComposite*);
   FX::FXint getDefaultHeight() override;
   void layout() override;

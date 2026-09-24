@@ -6,6 +6,7 @@ namespace xfmd {
 enum class UiIcon {
   NoIcon,
   Open,
+  Up,
   Save,
   Back,
   Forward,

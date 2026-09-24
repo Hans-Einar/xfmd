@@ -10,38 +10,45 @@ requirements: UR-014
 uses: FUNC-012
 ---
 
-# Functionality-013: Filnavnfilter og treinnhold
+# Functionality-013: Filename filtering and tree contents
 
-## 1. Hensikt og avgrensning
+## 1. Purpose and scope
 
-Levere filnavnmatches og treinnhold uten å blokkere FOX med rekursivt søk.
-Root/historikk tilhører FUNC-012; dokumentåpning følger eksisterende tjenester.
+Deliver filename matches and tree contents without blocking FOX on recursive searches.
+FUNC-012 owns root/history; existing document services own opening.
 
-## 2. Krav og akseptanse
+## 2. Requirements and acceptance
 
-UR-014 / AT-028; se [kravspesifikasjonen](../../../xfmd_requirements.md).
+UR-014 / AT-028; see the [requirements](../../../xfmd_requirements.md).
 
-## 3. Kontrakter og eierskap
+## 3. Contracts and ownership
 
-FileNameFilter eier typeflagg og navnemønster, uten FOX eller fil-I/O.
-DirectoryScanner eier én worker, katalogjobber og maks 4096 ventende oppføringer.
-GUI henter maks 512 per poll via take; worker kaller aldri FOX. SidebarWidget
-eier FXTreeList-noder, path→node-register og hvilke mapper som er forespurt.
-setRoot stopper/joiner gammel worker før gamle oppføringer slettes.
+FileNameFilter owns type flags and a name pattern without FOX or I/O.
+DirectoryScanner owns one worker, directory jobs and at most 4096 pending entries.
+GUI take() retrieves at most 512 per poll; the worker never calls FOX. SidebarWidget
+owns FXTreeList nodes, its path-to-node map and requested directories. setRoot stops
+and joins the old worker before deleting entries. WorkspacePanel owns the active
+name pattern; DocumentPathField is its P054 UI consumer, replacing the sidebar input.
 
-## 4. Atferd, tilstand og feil
+## 4. Behavior, state and failures
 
-Valgte typer kombineres med OR, deretter AND med navn. Ingen typer betyr alle;
-uten wildcard matches delstreng, ellers hele navnet. ? teller UTF-8-tegn og
-ASCII-bokstaver matches case-insensitivt. Tomt filter leser direkte barn ved
-utvidelse; aktivt filter søker rekursivt og publiserer bare filer med treff.
-GUI legger til forfedremapper og beholder roten ved null treff. Uleselige mapper
-rapporteres; symlinkmapper traverseres ikke og filsymlinker utenfor rot utelates.
-Køens backpressure vekkes ved kansellering. Refresh starter ny skanning.
+Selected types combine with OR, then AND with the filename pattern. No types means
+all; a pattern without wildcards matches substrings, otherwise the whole basename.
+`?` counts UTF-8 characters and ASCII letters compare case-insensitively. Empty
+filter loads children on expansion; active filtering searches recursively and emits
+only matching files. GUI adds ancestors and retains the root even without matches.
+Unreadable directories are reported; directory symlinks are not followed and file
+symlinks outside the root are omitted. Cancellation wakes producer backpressure.
+
+P054 Files Refresh preserves the root/filter, rescans and restores available expanded
+paths, selection and scroll. Disappeared entries are omitted. Changing a root/filter
+still cancels obsolete restoration and scans. A queued filter edit is applied before
+Refresh instead of being dropped. The path field changes filtering even when Files
+is hidden, without opening targets or silently selecting that tab.
 
 ## 5. Plumbing
 
-| Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
+| Step | Event / caller | Called symbol | Source or contract file | Data / result | Failure / side effect | Status |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | `WorkspacePanel::onApplyFilter` | `SidebarWidget::setFilter` | `src/application/ui/SidebarWidget.cpp` | Toggle states and pattern → rebuild current root | Old scan stopped; document unaffected | Implemented |
 | 2 | `SidebarWidget::setRoot` | `DirectoryScanner::start` | `src/application/workspace/DirectoryScanner.cpp` | Root and filter → one worker with root job | Stop/join old worker and discard old pending entries | Implemented |
@@ -53,24 +60,35 @@ Køens backpressure vekkes ved kansellering. Refresh starter ny skanning.
 
 | 8 | `DirectoryScanner::start / destructor` | `DirectoryScanner::stop` | `src/application/workspace/DirectoryScanner.cpp` | cancellation predicate under mutex → notify → join | prevents lost wakeup between predicate check and wait | Implemented |
 
-## 6. Gjenbruk og avhengigheter
+| 9 | DocumentPathField filter callback | `WorkspacePanel::setNameFilter` | `src/application/ui/WorkspacePanel.cpp` | typed basename → stored pattern/debounce | no document open while typing | Implemented |
+| 10 | WorkspacePanel Files Refresh | `SidebarWidget::refresh` | `src/application/ui/SidebarWidget.cpp` | tree context → rescan/restoration | stale/removed nodes never reused | Implemented |
 
-[FUNC-012](Functionality-012--Work-Path-History.md) eier stigrense-policy.
+## 6. Reuse and dependencies
 
-FileNameFilter og DirectoryScanner brukes av samme tre ved oppstart, filter og rotbytte.
-Ingen avhengighet til interpreter/renderer. Dokumentåpning bruker Application::open.
+[FUNC-012](Functionality-012--Work-Path-History.md) owns path containment policy.
+One FileNameFilter/DirectoryScanner pipeline serves startup, filtering and root
+changes. No interpreter/renderer dependency. File opening reuses Application's
+P053 target routing; filtering does not execute targets.
 
-## 7. Verifikasjon
+## 7. Verification
 
-`WorkPathTest` for matching, historikk og scanner; `WorkPathGuiTest` for
-native input, oppstart, filter og arbeidsrot. Eksisterende SidebarGuiTest og
-WheelGuiTest består. Bevis: [P8-verifikasjon](../../../docs/evidence/P8.md).
+Historical P8: WorkPathTest covered matching/history/scanning; WorkPathGuiTest
+covered native input, startup, filtering and root changes. SidebarGuiTest and
+WheelGuiTest passed. Evidence: [P8](../../../docs/evidence/P8.md).
 
-## 8. Status, risiko og endringskonsekvenser
+P054 adds PathWorkspaceGuiTest for native editing/paste/Enter/Escape/clipboard,
+filter combinations and Refresh. Acceptance is recorded in
+[P054](../../../sprints/Sprint-007--Workspace-UI/Phase-054--Workspace-Layout.md).
 
-Implemented i P8. Store eller langsomme filsystemer kan bruke tid; GUI viser fremdrift
-og kansellerer gammelt arbeid. Dette er treavgrensning, ikke en OS-sandbox.
+## 8. Status, risks and change impact
 
-P27 regresjon avdekket lost wakeup ved stop/join. Predikatendring skjer nå
-under samme mutex som condition-variable-ventingen. WorkPathTest utfører
-100 raske start/stopp i tillegg til backpressure-scenariet.
+Implemented in P8; large/slow filesystems can take time. Progress remains visible
+and obsolete work is canceled. Tree containment is not an OS sandbox.
+P27 found a lost wakeup in stop/join: the predicate now changes under the same mutex
+as the condition-variable wait. WorkPathTest includes 100 rapid start/stops and
+backpressure. P054 changes presentation/context restoration, not scanner ownership.
+
+P054 local acceptance: [workspace evidence](../../../sprints/Sprint-007--Workspace-UI/evidence/P054.md)
+records native interaction/visual checks, focused ASan/UBSan checks and the final
+source/binary manifest. Earlier phase placement descriptions retain their dated
+scope. Status remains Implemented; this is not blanket physical-display verification.

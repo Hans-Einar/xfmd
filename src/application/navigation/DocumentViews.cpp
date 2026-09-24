@@ -1,5 +1,7 @@
 #include "DocumentViews.h"
+#include "LinkResolver.h"
 #include "application/Application.h"
+#include "application/io/FileOpenPolicy.h"
 #include <cstring>
 #include <fcntl.h>
 #include <filesystem>
@@ -22,11 +24,23 @@ DocumentViews::DocumentViews(Application& a, DocumentViewConfig c)
   navigator = std::make_unique<NavigationPanel>(app.window->navigationArea, app.app);
   navigator->host->setReadingColors(app.host->readingColors());
   navigator->error = [this](const auto& e) { app.window->status->setText(e.c_str()); };
-  navigator->host->linkActivated = [this](const auto& uri) {
-    if (uri.rfind("sdl-view:", 0) == 0)
+  navigator->host->linkActivated = [this](const auto& uri, bool systemDefault) {
+    if (!systemDefault && uri.rfind("sdl-view:", 0) == 0)
       follow(uri);
-    else
-      navigator->follow(uri);
+    else if (systemDefault || ExternalBrowser::accepts(uri))
+      app.followLink(navigator->path(), uri, systemDefault);
+    else {
+      try {
+        if (uri.find('#') != std::string::npos ||
+            FileOpenPolicy::classify(LinkResolver::resourcePath(navigator->path(), uri)) ==
+                FileOpenKind::Markdown)
+          navigator->follow(uri);
+        else
+          app.followLink(navigator->path(), uri);
+      } catch (const std::exception& e) {
+        navigator->error(e.what());
+      }
+    }
   };
   endpoint.open = [this](const auto& pane, const auto& path) { return open(pane, path); };
   navigator->changed = [this] { documentChanged("navigation"); };

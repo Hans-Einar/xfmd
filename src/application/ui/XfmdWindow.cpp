@@ -1,4 +1,5 @@
 #include "XfmdWindow.h"
+#include "DocumentZoomInput.h"
 #include "application/build/BuildVersion.h"
 #include <fxkeys.h>
 using namespace FX;
@@ -14,9 +15,11 @@ XfmdWindow::XfmdWindow(FXApp* app, CommandRouter& router, UiContext& context)
   buildUi();
 }
 XfmdWindow::~XfmdWindow() {
+  delete colorPopup;
   delete fileMenu;
   delete editMenu;
   delete viewMenu;
+  delete zoomMenu;
   delete goMenu;
 }
 void XfmdWindow::setApplicationIcons(FXIcon* large, FXIcon* small) {
@@ -53,8 +56,11 @@ void XfmdWindow::buildUi() {
   new FXMenuRadio(viewMenu, "Window &wrap", commands, CommandRouter::WindowWrap);
   new FXMenuRadio(viewMenu, "&A4 page preview", commands, CommandRouter::A4);
   new FXMenuSeparator(viewMenu);
-  new FXMenuRadio(viewMenu, "Fit page &width", commands, CommandRouter::FitWidth);
-  new FXMenuRadio(viewMenu, "Actual size (100%)", commands, CommandRouter::ActualSize);
+  zoomMenu = new FXMenuPane(this);
+  PreviewControls::addPresets(zoomMenu, *commands);
+  new FXMenuCommand(zoomMenu, "Zoom &in\tCtrl++", nullptr, commands, CommandRouter::ZoomIn);
+  new FXMenuCommand(zoomMenu, "Zoom &out\tCtrl+-", nullptr, commands, CommandRouter::ZoomOut);
+  new FXMenuCascade(viewMenu, "&Zoom", nullptr, zoomMenu);
   new FXMenuCheck(viewMenu, "Full &Screen\tF11", commands, CommandRouter::FullScreen);
   new FXMenuSeparator(viewMenu);
   new FXMenuCheck(viewMenu, "&Dark appearance", commands, CommandRouter::ToggleTheme);
@@ -64,10 +70,15 @@ void XfmdWindow::buildUi() {
   add(goMenu, "&Forward\tAlt+Right", CommandRouter::Forward, UiIcon::Forward);
   new FXMenuTitle(bar, "&Go", nullptr, goMenu);
   buildToolbar();
-  auto* statusRow = new FXHorizontalFrame(this, LAYOUT_SIDE_BOTTOM | LAYOUT_FILL_X,
-                                           0, 0, 0, 0, 0, 0, 0, 0);
-  versionStatus = new FXLabel(statusRow, buildVersion(), nullptr,
-                              LAYOUT_RIGHT | JUSTIFY_RIGHT);
+  auto* pathRow =
+      new FXHorizontalFrame(this, LAYOUT_SIDE_TOP | LAYOUT_FILL_X, 0, 0, 0, 0, 6, 6, 3, 3);
+  dirtyLabel = new FXLabel(pathRow, "Path", nullptr, LAYOUT_CENTER_Y);
+  documentPath = new DocumentPathField(pathRow);
+  new FXButton(pathRow, "×\tClear filename filter", nullptr, documentPath,
+               DocumentPathField::ID_CLEAR, BUTTON_NORMAL | LAYOUT_CENTER_Y);
+  auto* statusRow =
+      new FXHorizontalFrame(this, LAYOUT_SIDE_BOTTOM | LAYOUT_FILL_X, 0, 0, 0, 0, 0, 0, 0, 0);
+  versionStatus = new FXLabel(statusRow, buildVersion(), nullptr, LAYOUT_RIGHT | JUSTIFY_RIGHT);
   status = new FXLabel(statusRow, "Open a local Markdown or text file.", nullptr,
                        LAYOUT_FILL_X | JUSTIFY_LEFT);
   auto* workspace =
@@ -76,7 +87,7 @@ void XfmdWindow::buildUi() {
   sidebar = workspacePanel->tree;
   split = new FXSplitter(workspace,
                          SPLITTER_HORIZONTAL | SPLITTER_TRACKING | LAYOUT_FILL_X | LAYOUT_FILL_Y);
-  navigationArea = new FXVerticalFrame(split, LAYOUT_FILL_Y, 0,0,330,0,0,0,0,0);
+  navigationArea = new FXVerticalFrame(split, LAYOUT_FILL_Y, 0, 0, 330, 0, 0, 0, 0, 0);
   navigationArea->hide();
   editor = new EditorWidget(split);
   previewArea = new FXVerticalFrame(split, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -92,6 +103,16 @@ long XfmdWindow::onConfigure(FXObject* sender, FXSelector sel, void* data) {
 }
 long XfmdWindow::onKeyPress(FXObject* sender, FXSelector sel, void* data) {
   auto* event = static_cast<FXEvent*>(data);
+  if (auto direction = documentZoomKey(*event); direction && !getApp()->getModalWindow()) {
+    commands->dispatch(
+        this, FXSEL(SEL_COMMAND, direction > 0 ? CommandRouter::ZoomIn : CommandRouter::ZoomOut),
+        nullptr);
+    return 1;
+  }
+  if (event->code == KEY_F6 && !getApp()->getModalWindow()) {
+    documentPath->beginEditing();
+    return 1;
+  }
   if (event->code == KEY_Escape && !getApp()->getModalWindow() && commands->checked &&
       commands->checked(CommandRouter::FullScreen)) {
     commands->dispatch(this, FXSEL(SEL_COMMAND, CommandRouter::LeaveFullScreen), nullptr);

@@ -7,7 +7,7 @@
 | type | Change |
 | created | 2026-09-24T18:01:41+02:00 |
 | source | Owner conversation, 2026-09-24 Europe/Oslo: XFMD UI wishlist; Owner items 4 and 5; sidebar portion of item 3 |
-| next_review | Before selecting the next XFMD UI work round; resolve this card's named interaction questions during requirements/blueprint planning |
+| owner | Codex, owner-selected P054 delivery |
 
 ## Need and owner direction
 
@@ -80,3 +80,27 @@ this capture. Findings describe the inspected working tree, not the installed
 binary shown in the screenshots; see the [source context](../evidence/2026-09-24-ui-wishlist/README.md).
 
 Related: [KB-XFMD-006](%23006--Change--Open-files-and-folders.md), [KB-XFMD-008](%23008--Change--Document-path-and-file-filter.md).
+
+## Goal selection — 2026-09-24
+
+The owner selected KB-XFMD-006–011 as six subgoals of the active chat goal.
+KB-XFMD-003 and optional SDUI modeling are excluded. Delivery is tracked in
+[Sprint 007](../../../sprints/Sprint-007--Workspace-UI/README.md).
+Implementation is selected; this card stays queued until its phase starts.
+
+## P054 selection — 2026-09-24
+
+Reviewed together with KB-XFMD-006: preserve these separate outcomes while sharing
+the workspace delivery. Opening/routing reuses completed P053; optional SDUI work
+remains excluded. [P054](../../../sprints/Sprint-007--Workspace-UI/Phase-054--Workspace-Layout.md)
+records selected interaction rules, owners and acceptance. This card is now active.
+
+## P054 outcome — 2026-09-24
+
+Files/Index and active-tab Refresh share one row; type filters, immediate-parent Up and shared Open sit above the tree. Separate recent folders/files use tabs. Tests cover dirty-buffer/reference refresh and available expanded tree paths, selection and scroll restoration.
+
+Implemented and locally checked in [P054](../../../sprints/Sprint-007--Workspace-UI/Phase-054--Workspace-Layout.md).
+[Evidence](../../../sprints/Sprint-007--Workspace-UI/evidence/P054.md) records the
+70-check combined acceptance, focused sanitizer checks, inspected native screenshots
+and exact source/binary identities. Physical multi-monitor/high-DPI usability remains
+outside this automated acceptance. No merge or installation performed.

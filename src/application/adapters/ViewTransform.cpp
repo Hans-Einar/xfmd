@@ -3,19 +3,16 @@
 #include <cmath>
 namespace xfmd {
 void ViewTransform::configure(const RenderFrame& frame, double viewportWidth, double dpiScale,
-                              double zoom, bool fit) {
+                              double zoom) {
   paged = frame.key.profile.mode == LayoutMode::Paged;
   pageWidth = frame.key.profile.paper.width;
   pageHeight = frame.key.profile.paper.height;
   pages = std::max<std::size_t>(1, frame.pages.slices.size());
   padding = paged ? 16 : 0;
-  scale = paged && fit ? std::max(.05, (viewportWidth - 2 * padding) / pageWidth) : dpiScale * zoom;
-  if (!paged)
-    scale = dpiScale;
-  scale = std::clamp(scale, .05, 8.0);
+  scale = dpiScale * zoom;
+  scale = std::clamp(scale, .01, 32.0);
   offset = paged ? std::max(padding, (viewportWidth - pageWidth * scale) / 2) : 0;
-  contentWidth =
-      paged && fit ? int(viewportWidth) : int(std::ceil(frame.contentWidth * scale + 2 * padding));
+  contentWidth = int(std::ceil(frame.contentWidth * scale + 2 * padding));
   contentHeight =
       int(std::ceil(frame.height * scale + 2 * padding + (paged ? (pages - 1) * 20 : 0)));
 }

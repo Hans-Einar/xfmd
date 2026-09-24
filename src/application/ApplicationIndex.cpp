@@ -50,9 +50,9 @@ void Application::pollBrowser() {
   if (browser.poll())
     scheduler->restart(5, 250, [this] { pollBrowser(); });
 }
-void Application::openBrowser(const std::string& target) {
+void Application::openBrowser(const std::string& target, bool systemDefault) {
   try {
-    browser.open(target, preferences->active().browserProgram);
+    browser.open(target, systemDefault ? "xdg-open" : preferences->active().browserProgram);
     scheduler->restart(5, 250, [this] { pollBrowser(); });
   } catch (const std::exception& e) {
     documents.error(e.what());

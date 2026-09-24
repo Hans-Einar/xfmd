@@ -13,8 +13,12 @@ class SidebarWidget : public FX::FXTreeList {
   std::map<std::string, FX::FXTreeItem*> items;
   std::set<std::string> requested;
   std::string contextPath, rootLabel, pendingOpen;
-  bool pointerClick = false;
+  bool pointerClick = false, pointerSystemDefault = false, pendingSystemDefault = false;
   std::size_t files = 0;
+  std::set<std::string> restoreExpanded;
+  std::string restoreSelected;
+  int restoreX = 0, restoreY = 0;
+  bool restoring = false;
   FX::FXTreeItem* add(const TreeEntry&);
 
 protected:
@@ -22,7 +26,8 @@ protected:
 
 public:
   enum { ID_TREE_EVENT = FX::FXTreeList::ID_LAST, ID_POLL, ID_ACTIVATE, ID_SET_WORK_PATH, ID_LAST };
-  std::function<void(const std::string&)> open, workPathRequested;
+  std::function<void(const std::string&, bool)> open;
+  std::function<void(const std::string&)> workPathRequested;
   std::function<void()> broadenRoot;
   std::function<void(const std::string&)> status;
   explicit SidebarWidget(FX::FXComposite*);
@@ -30,6 +35,7 @@ public:
   void create() override;
   void setRoot(const std::filesystem::path&, const std::string& label);
   void setFilter(FileNameFilter);
+  void refresh();
   const std::filesystem::path& workRoot() const { return root; }
   bool scanning = false;
   FX::FXTreeItem* getPathnameItem(const FX::FXString&) const;

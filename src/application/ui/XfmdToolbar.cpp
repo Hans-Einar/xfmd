@@ -14,44 +14,36 @@ void XfmdWindow::buildToolbar() {
     row->setHSpacing(1);
     return row;
   };
+  factory.button(toolbar, "\tSidebar (F10)", commands, CommandRouter::Sidebar, UiIcon::Sidebar);
   fileTools = group();
-  factory.button(fileTools, "\tOpen file (Ctrl+O)", commands, CommandRouter::Open, UiIcon::Open);
+  factory.button(fileTools, "\tOpen file or folder (Ctrl+O)", commands, CommandRouter::Open,
+                 UiIcon::Open);
   factory.button(fileTools, "\tSave (Ctrl+S)", commands, CommandRouter::Save, UiIcon::Save);
-  navTools = group();
-  factory.button(navTools, "\tBack (Alt+Left)", commands, CommandRouter::Back, UiIcon::Back);
-  factory.button(navTools, "\tForward (Alt+Right)", commands, CommandRouter::Forward,
-                 UiIcon::Forward);
-  factory.button(navTools, "\tSidebar (F10)", commands, CommandRouter::Sidebar, UiIcon::Sidebar);
-  documentTitle = new FXLabel(toolbar, "", nullptr,
-                              LAYOUT_FIX_WIDTH | LAYOUT_CENTER_Y | JUSTIFY_LEFT, 0, 0, 130);
   viewTools = group();
   factory.button(viewTools, "\tEditor (Ctrl+2)", commands, CommandRouter::Editor, UiIcon::Editor);
   factory.button(viewTools, "\tSplit view (Ctrl+3)", commands, CommandRouter::Split, UiIcon::Split);
   factory.button(viewTools, "\tPreview (Ctrl+1)", commands, CommandRouter::Preview,
                  UiIcon::Preview);
-  themeButton = factory.button(toolbar, "\tToggle Light / Dark appearance", commands,
-                               CommandRouter::ToggleTheme, UiIcon::Theme);
+  viewTools->setPadLeft(8);
+  viewTools->setPadRight(8);
+  navTools = group();
+  factory.button(navTools, "\tBack (Alt+Left)", commands, CommandRouter::Back, UiIcon::Back);
+  factory.button(navTools, "\tForward (Alt+Right)", commands, CommandRouter::Forward,
+                 UiIcon::Forward);
   previewControls = new PreviewControls(toolbar, *ui, *commands);
-  previewColors = new PreviewColorControls(toolbar, *ui);
+  colorPopup = new ReadingColorPopup(this, *ui);
+  previewColors = colorPopup->controls;
+  themeButton = new ThemeButton(toolbar, *ui, commands, CommandRouter::ToggleTheme, colorPopup);
+  toolbar->rightAligned = themeButton;
 }
 void XfmdWindow::layoutToolbar() {
   if (!toolbar)
     return;
-  int required = 4 + documentTitle->getWidth() + 4;
-  for (auto* c = toolbar->getFirst(); c; c = c->getNext())
-    if (c != documentTitle && c->shown())
-      required +=
-          ((c->getLayoutHints() & LAYOUT_FIX_WIDTH) ? c->getWidth() : c->getDefaultWidth()) + 4;
-  if (getWidth() < required)
-    documentTitle->hide();
-  else
-    documentTitle->show();
   toolbar->recalc();
 }
 void XfmdWindow::setDocumentLabel(const std::string& path, bool dirty) {
-  std::string label = path.empty() ? "Untitled" : std::filesystem::path(path).filename().string();
-  documentTitle->setText(((dirty ? "* " : "") + label).c_str());
-  documentTitle->setTipText(path.c_str());
+  documentPath->setDocument(path);
+  dirtyLabel->setText(dirty ? "Path *" : "Path");
 }
 void XfmdWindow::restyle() {
   std::function<void(FXWindow*)> compact = [&](FXWindow* item) {
@@ -61,8 +53,9 @@ void XfmdWindow::restyle() {
       compact(child);
   };
   compact(toolbar);
-  themeButton->setTipText(ui->appearance().theme == "dark" ? "Dark — switch to Light"
-                                                           : "Light — switch to Dark");
+  themeButton->setTipText(ui->appearance().theme == "dark"
+                              ? "Dark — switch to Light; right-click or Shift+F10 for colors"
+                              : "Light — switch to Dark; right-click or Shift+F10 for colors");
   for (auto* group : {fileTools, navTools, viewTools}) {
     group->setPadLeft(0);
     group->setPadRight(0);
@@ -70,6 +63,8 @@ void XfmdWindow::restyle() {
     group->setPadBottom(0);
     group->setHSpacing(1);
   }
+  viewTools->setPadLeft(8);
+  viewTools->setPadRight(8);
   previewControls->compact();
   layoutToolbar();
 }

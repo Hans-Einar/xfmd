@@ -7,7 +7,7 @@
 | type | Change |
 | created | 2026-09-24T18:01:41+02:00 |
 | source | Owner conversation, 2026-09-24 Europe/Oslo: XFMD UI wishlist; Owner items 1 and 5 |
-| next_review | Before selecting the next XFMD UI work round; resolve this card's named interaction questions during requirements/blueprint planning |
+| owner | Codex |
 
 ## Need and owner direction
 
@@ -65,4 +65,32 @@ Recorded in backlog only. Implementation has not been selected or started by
 this capture. Findings describe the inspected working tree, not the installed
 binary shown in the screenshots; see the [source context](../evidence/2026-09-24-ui-wishlist/README.md).
 
-Related: [KB-XFMD-007](%23007--Change--File-types-and-external-opening.md), [KB-XFMD-008](%23008--Change--Document-path-and-file-filter.md), [KB-XFMD-009](%23009--Change--Sidebar-controls-and-recent-tabs.md).
+Related: [KB-XFMD-007](../completed/%23007--Change--File-types-and-external-opening.md), [KB-XFMD-008](%23008--Change--Document-path-and-file-filter.md), [KB-XFMD-009](%23009--Change--Sidebar-controls-and-recent-tabs.md).
+
+## Goal selection — 2026-09-24
+
+The owner selected KB-XFMD-006–011 as six subgoals of the active chat goal.
+KB-XFMD-003 and optional SDUI modeling are excluded. Delivery is tracked in
+[Sprint 007](../../../sprints/Sprint-007--Workspace-UI/README.md).
+This card is active in P053 (file/folder opening and target routing).
+
+## P053 outcome — 2026-09-24
+
+The shared chooser and dialog-origin root policy are implemented and checked.
+Native menu, Ctrl+O, toolbar, file/selected-folder/current-folder/cancel and error
+retention are covered. [P053 evidence](../../../sprints/Sprint-007--Workspace-UI/evidence/P053.md)
+records source/binary identity, native screenshots and the final regression run.
+
+Remaining selected scope: add the second Open icon above the Files tree in P054
+and check that it invokes this same chooser/policy. This card stays active until
+that integration passes; it is not completed by the P053 partial delivery.
+
+## P054 outcome — 2026-09-24
+
+The sidebar Open button now uses the same command and chooser as menu, toolbar and Ctrl+O. P053 file-parent/root, directory-only, cancellation and failure rules pass through this entry too. This completes the remaining integration scope.
+
+Implemented and locally checked in [P054](../../../sprints/Sprint-007--Workspace-UI/Phase-054--Workspace-Layout.md).
+[Evidence](../../../sprints/Sprint-007--Workspace-UI/evidence/P054.md) records the
+70-check combined acceptance, focused sanitizer checks, inspected native screenshots
+and exact source/binary identities. Physical multi-monitor/high-DPI usability remains
+outside this automated acceptance. No merge or installation performed.

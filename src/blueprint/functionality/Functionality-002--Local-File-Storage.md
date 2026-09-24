@@ -6,58 +6,78 @@ role: Service
 owner: application
 status: Implemented
 scope: FirstRelease
-requirements: UR-001, UR-003, UR-009, SR-005, SR-006, SR-007, SR-011, SR-013
+requirements: UR-001, UR-003, UR-009, UR-028, SR-005, SR-006, SR-007, SR-011, SR-013
 uses: none
 ---
 
-# Functionality-002: Lokal lagring og inputpolicy
+# Functionality-002: Local storage and input policy
 
-## 1. Hensikt og avgrensning
+## 1. Purpose and scope
 
-Gjenbrukbar lokal fil-I/O og inputkontroll. Tjenesten kjenner ikke widgets, historikk eller Markdown-layout. Validering her gjelder transport/encoding og filpolicy, ikke om ufullstendig Markdown er grammatisk pent.
+Reusable local file I/O and input validation, independent of widgets, history and Markdown layout. Validation concerns transport, encoding and file policy; incomplete Markdown is not a storage error.
 
-## 2. Krav og akseptanse
+## 2. Requirements and acceptance
 
-Krav: UR-001, UR-003, UR-009, SR-005, SR-006, SR-007, SR-011, SR-013. Definisjoner og normativ akseptanse finnes i
-[kravspesifikasjonen](../../../xfmd_requirements.md). Kapittel 7 konkretiserer beviset.
+UR-001, UR-003, UR-009, UR-028 and SR-005, SR-006, SR-007, SR-011, SR-013. Normative definitions and acceptance are in the [requirements](../../../xfmd_requirements.md).
 
-## 3. Kontrakter og eierskap
+## 3. Contracts and ownership
 
-LocalFileStore::read og writeAtomic returnerer eide data eller kaster Error. InputPolicy::validate kontrollerer størrelse, endelse og UTF-8; supportedPath/plainText deles med sidebar og dokumentøkt.
+`LocalFileStore::read` and `writeAtomic` return owned data or throw `Error`.
+`InputPolicy::validate` checks bounded UTF-8 and control bytes independently of suffix.
+`plainText` is false only for a case-insensitive `.md` suffix; `supportedPath` identifies
+known `.md`/`.txt` types for which invalid content must remain an internal error.
+`FileOpenPolicy::classify` returns Markdown, Text, Browser or Desktop for Application.
+It owns classification, not launchers or document state.
 
-## 4. Atferd, tilstand og feil
+## 4. Behavior, state and failures
 
-Les bare regulære filer med løpende 8 MiB-grense. Skriv temp i målmappen; bevar eier, modusbits og xattrs/ACL. Hardlinks avvises. Kontroll av ekstern identitet gjentas før rename. Ny fil publiseres uten overskriving via link/unlink. Directory-sync-feil returnerer durable=false etter commit. Stat/hash er ikke atomisk CAS.
+Read only regular files with an enforced 8 MiB limit. Write a temporary file in
+the target directory, preserving owner, mode and xattrs/ACL. Reject hardlinks.
+Repeat external-identity checks before rename; stat/hash is not atomic CAS.
+Publish new files without overwrite through link/unlink. A directory-sync failure
+after commit returns `durable=false`.
+
+P053, 2026-09-24, supersedes suffix-only admission: `.html`/`.htm` route to the
+browser; known `.md`/`.txt` use internal loading and report invalid input.
+Other files use bounded content validation: valid UTF-8, including empty files
+and an optional BOM, opens as literal text; NUL, binary control bytes, invalid
+UTF-8 or oversize unknown content routes to OS association. TAB/LF/CR/FF are allowed;
+other C0 bytes and DEL are rejected. I/O failures propagate instead of launching
+an unreadable target. Atomic-save behavior and byte preservation remain unchanged.
 
 ## 5. Plumbing
 
-Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
-
-| Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
+| Step | Event / caller | Called symbol | Source or contract file | Data / result | Failure / side effect | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `DocumentCoordinator::requestOpen` | `LocalFileStore::read` | `src/application/io/LocalFileStore.cpp` | Path → bytes/identity | Bounded read og stat-sjekk | Implemented |
-| 2 | `LocalFileStore::read / writeAtomic` | `InputPolicy::validate` | `src/application/io/InputPolicy.cpp` | Bytes/path → validering | Error ved ugyldig input | Implemented |
-| 3 | `DocumentCoordinator::save` | `LocalFileStore::writeAtomic` | `src/application/io/LocalFileStore.cpp` | Bytes/expected → nytt mål | Temp ryddes ved feil | Implemented |
-| 4 | `LocalFileStore::writeAtomic` | `copyAttributes` | `src/application/io/LocalFileStore.cpp` | Åpne descriptors → bevart metadata | Feil før commit | Implemented |
+| 1 | `DocumentCoordinator::requestOpen` | `LocalFileStore::read` | `src/application/io/LocalFileStore.cpp` | Path → bytes/identity | Bounded read and stat check | Implemented |
+| 2 | `LocalFileStore::read / writeAtomic` | `InputPolicy::validate` | `src/application/io/InputPolicy.cpp` | Bytes → validation | Invalid input throws Error | Implemented |
+| 3 | `DocumentCoordinator::save` | `LocalFileStore::writeAtomic` | `src/application/io/LocalFileStore.cpp` | Bytes/expected identity → saved target | Remove temporary file on failure | Implemented |
+| 4 | `LocalFileStore::writeAtomic` | `copyAttributes` | `src/application/io/LocalFileStore.cpp` | Open descriptors → preserved metadata | Failure before commit | Implemented |
+| 5 | `Application::openTarget / openDialogPath` | `FileOpenPolicy::classify` | `src/application/io/FileOpenPolicy.cpp` | Regular path → selected consumer | Bounded validation; I/O failures preserve document | Implemented |
 
-## 6. Gjenbruk og avhengigheter
+## 6. Reuse and dependencies
 
-Ingen andre functionality-kontrakter konsumeres; delte datatyper følger arkitekturen.
+No other functionality contract is consumed. Shared types follow the architecture.
+DocumentCoordinator is the first consumer; future export may reuse storage if its
+metadata/conflict policy fits. Features must not introduce competing save methods.
 
-Dokumentkoordinatoren er første konsument; framtidig eksport kan bruke lagring hvis samme metadata-/konfliktpolicy passer. Ikke opprett alternative save-metoder inne i features.
+Sprint 004 consumer, reconstructed 2026-09-24: [FUNC-031](Functionality-031--Generated-Document-Navigation.md)
+reuses LocalFileStore through the navigator DocumentCoordinator. The broker owns
+generated bundle storage and lifetime.
 
-Sprint 004 consumer (2026-09-24 reconstruction): FUNC-031 reuses LocalFileStore through its navigator DocumentCoordinator; the broker owns generated bundle storage and lifetime.
-See [FUNC-031](Functionality-031--Generated-Document-Navigation.md) for the complete call path.
+## 7. Verification
 
-## 7. Verifikasjon
+AT-001, AT-003, AT-009, AT-015, AT-016, AT-017, AT-021, AT-023, AT-048. `DocumentTest` injects pre-rename errors and
+checks xattrs, modes, hardlinks, new-file identity, external modification, invalid
+UTF-8 and 8 MiB. Historical evidence: [P2](../../../docs/evidence/P2.md).
+P7 evaluates combined requirement coverage; Implemented is not automatically Verified.
 
-Relevante akseptanse-ID-er: AT-001, AT-003, AT-009, AT-015, AT-016, AT-017, AT-021, AT-023.
+P053 adds FileOpenPolicyTest and native file-routing/dialog checks. Evidence: [P053 opening evidence](../../../sprints/Sprint-007--Workspace-UI/evidence/P053.md).
 
-`DocumentTest` injiserer feil før rename, tester xattr/mode, hardlink, ny-fil-identitet, ekstern endring, invalid UTF-8 og 8 MiB.
+## 8. Status, risks and change impact
 
-Evidence: [Fase P2](../../../docs/evidence/P2.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
-
-## 8. Status, risiko og endringskonsekvenser
-
-Implemented i P2. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
-Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.
+Implemented originally in P2; input admission and classification revised in P053.
+Update contracts, call maps, consumers and tests together. Ports and ownership
+remain explicit. Unknown textual files require a bounded probe and another read
+when the document transaction opens them; the loader revalidates before commit.
+Historical evidence retains its original scope.
