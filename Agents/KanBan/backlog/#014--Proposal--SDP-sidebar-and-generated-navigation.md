@@ -27,7 +27,7 @@ Producer-side companion: **KB-SDP-017** (sdptool, discovery and general navigati
 It fully consolidates the earlier KB-SDP-002 and KB-SDP-016; their old identities
 and history remain in SDP’s superseded cards.
 
-file:///home/warloc/git/SDP-vNow/SDP/Agents/KanBan/backlog/%23017--Proposal--sdptool-and-project-navigation.md
+file:///home/warloc/git/SDP-vNow/SDP/Agents/KanBan/active/%23017--Proposal--sdptool-and-project-navigation.md
 
 ## Bounded investigation — existing behavior
 
@@ -149,3 +149,6 @@ file:///home/warloc/git/SDP-vNow/Toolkit/SDPTool/README.md
 .design source with generated diagram preview. It is a useful earlier delivery
 and reusable adapter, not a prerequisite to adopt all SDP sidebar functionality.
 Native tree/discovery ownership remains here. Recorded 2026-09-25T09:35:14Z, Codex, EVT-KB-XFMD-000049.
+
+Producer link updated 2026-09-25T10:16:50Z, Codex, EVT-KB-XFMD-000050: KB-SDP-017 is now
+active. Its design uses SDP’s own numbered phases; XFMD keeps its existing process.

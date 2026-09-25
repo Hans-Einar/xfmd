@@ -24,7 +24,7 @@ into Mermaid and document bundles. With mmdr it produces SVG, including SDL-spec
 Go symbol drawing for flowcharts using Rust layout. No Python frontend or new Rust
 SDL parser is needed. The producer is KB-SDP-017:
 
-file:///home/warloc/git/SDP-vNow/SDP/Agents/KanBan/backlog/%23017--Proposal--sdptool-and-project-navigation.md
+file:///home/warloc/git/SDP-vNow/SDP/Agents/KanBan/active/%23017--Proposal--sdptool-and-project-navigation.md
 
 Current pipeline and producer proposal:
 
@@ -78,3 +78,6 @@ claim them from a disk-based preview test. Preserve existing Markdown/text workf
 Recorded 2026-09-25T09:35:14Z, Codex, EVT-KB-XFMD-000048. Primary card created in backlog;
 no XFMD code, blueprint or product requirement changed. The direct-preview adapter
 and producer operation remain unimplemented.
+
+Producer link updated 2026-09-25T10:16:50Z, Codex, EVT-KB-XFMD-000051: KB-SDP-017 is now
+active. Its design uses SDP’s own numbered phases; XFMD keeps its existing process.
