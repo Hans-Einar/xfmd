@@ -28,7 +28,7 @@ Producer-side companion: **KB-SDP-017** (sdptool, discovery and general navigati
 It fully consolidates the earlier KB-SDP-002 and KB-SDP-016; their old identities
 and history remain in SDP’s superseded cards.
 
-file:///home/warloc/git/SDP-vNow/SDP/Agents/KanBan/active/%23017--Proposal--sdptool-and-project-navigation.md
+file:///home/warloc/git/SDP-vNow/SDP/KanBan/active/%23017--Proposal--sdptool-and-project-navigation.md
 
 ## Bounded investigation — existing behavior
 
@@ -161,3 +161,8 @@ EVT-KB-XFMD-000054: relocated the board and added visible CardState (backlog).
 Existing lifecycle, IDs, decisions and evidence remain unchanged. The owner now
 authorizes XFMD's SDP process area; earlier instructions to remain note-only
 are historical. [Migration evidence](../../../Maintenance/SDP1/Plan-and-Evidence.md).
+
+## PM1 producer-reference review
+
+2026-09-25T11:54:30Z, EVT-KB-XFMD-000071: producer addresses follow the consolidated
+SDP/KanBan board. XFMD retains the SDP1 pinned workflow and ledger location.

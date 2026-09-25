@@ -25,7 +25,7 @@ into Mermaid and document bundles. With mmdr it produces SVG, including SDL-spec
 Go symbol drawing for flowcharts using Rust layout. No Python frontend or new Rust
 SDL parser is needed. The producer is KB-SDP-017:
 
-file:///home/warloc/git/SDP-vNow/SDP/Agents/KanBan/active/%23017--Proposal--sdptool-and-project-navigation.md
+file:///home/warloc/git/SDP-vNow/SDP/KanBan/active/%23017--Proposal--sdptool-and-project-navigation.md
 
 Current pipeline and producer proposal:
 
@@ -89,3 +89,8 @@ EVT-KB-XFMD-000055: relocated the board and added visible CardState (backlog).
 Existing lifecycle, IDs, decisions and evidence remain unchanged. The owner now
 authorizes XFMD's SDP process area; earlier instructions to remain note-only
 are historical. [Migration evidence](../../../Maintenance/SDP1/Plan-and-Evidence.md).
+
+## PM1 producer-reference review
+
+2026-09-25T11:54:30Z, EVT-KB-XFMD-000072: producer addresses follow the consolidated
+SDP/KanBan board. XFMD retains the SDP1 pinned workflow and ledger location.

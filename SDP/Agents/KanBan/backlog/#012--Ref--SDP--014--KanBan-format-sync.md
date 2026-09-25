@@ -21,7 +21,7 @@ system, not adopting the rest of SDP.
 
 Primary: KB-SDP-014 — KanBan version contract and distribution
 
-file:///home/warloc/git/SDP-vNow/SDP/Agents/KanBan/backlog/%23014--Proposal--KanBan-version-contract-and-distribution.md
+file:///home/warloc/git/SDP-vNow/SDP/KanBan/backlog/%23014--Proposal--KanBan-version-contract-and-distribution.md
 
 This is a
 direct reference to the SDP-owned proposal, with a separate XFMD adaptation outcome.
@@ -32,13 +32,13 @@ Completing this Ref does not complete the shared contract or its migration.
 The current upstream sources are the SDP KanBan workflow, card template,
 history/worklog rules and merge/split lineage:
 
-file:///home/warloc/git/SDP-vNow/SDP/Agents/KanBan/README.md
+file:///home/warloc/git/SDP-vNow/SDP/KanBan/README.md
 
-file:///home/warloc/git/SDP-vNow/SDP/Agents/KanBan/Card-template.md
+file:///home/warloc/git/SDP-vNow/SDP/KanBan/Card-template.md
 
-file:///home/warloc/git/SDP-vNow/SDP/Agents/KanBan/History.md
+file:///home/warloc/git/SDP-vNow/SDP/KanBan/History.md
 
-file:///home/warloc/git/SDP-vNow/SDP/Agents/KanBan/Lineage.md
+file:///home/warloc/git/SDP-vNow/SDP/KanBan/Lineage.md
 
 XFMD's [local template](../Card-template.md) and [workflow](../README.md) use
 visible metadata and payload 0.1, but do not yet provide the same explicit worklog
@@ -109,3 +109,11 @@ SDP1-M1 delivers the local baseline alignment: CardState, worklogs, typed payloa
 the pre-migration state. This Ref remains backlog only for a future published
 shared compatibility/distribution release; do not repeat the delivered migration.
 Next review: when KB-SDP-014 publishes or changes that contract.
+
+## PM1 producer-reference review
+
+2026-09-25T11:54:30Z, EVT-KB-XFMD-000070: producer addresses follow the consolidated
+SDP/KanBan board. XFMD retains the SDP1 pinned workflow and ledger location.
+The producer now has a local project-management ledger with optional Scrum/Sprint
+metadata. Evaluate this in the future shared compatibility/distribution work;
+do not treat link refresh as adoption, or repeat the already completed SDP1 migration.
