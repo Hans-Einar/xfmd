@@ -142,3 +142,10 @@ evidence; no new runtime test or native implementation is claimed. Card stays
 in backlog. Shared producer source home:
 
 file:///home/warloc/git/SDP-vNow/Toolkit/SDPTool/README.md
+
+## Direct-preview dependency review — 2026-09-25
+
+[KB-XFMD-015](%23015--Proposal--SDL-design-file-preview.md) captures opening a
+.design source with generated diagram preview. It is a useful earlier delivery
+and reusable adapter, not a prerequisite to adopt all SDP sidebar functionality.
+Native tree/discovery ownership remains here. Recorded 2026-09-25T09:35:14Z, Codex, EVT-KB-XFMD-000049.
