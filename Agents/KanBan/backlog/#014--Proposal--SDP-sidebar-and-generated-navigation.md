@@ -7,13 +7,15 @@
 | type | Proposal |
 | created | 2026-09-24T20:52:36+00:00 |
 | source | Owner conversation, 2026-09-24: project-aware SDP tab and version/capability marker |
-| next_review | Joint discovery-contract review with the SDP-vNow owner/agent and KB-SDP-016, before selecting implementation |
+| next_review | Align with KB-SDP-017 discovery/navigation producer contract before selecting XFMD implementation |
 
 ## Owner direction
 
 Add a third sidebar tab, SDP, alongside Files and Index. Show it when the current
-project folder contains a valid SDP area. The owner has additional layout ideas;
-this card captures the job now rather than settling that layout or starting code.
+work root is either a valid SDP area itself or a project containing a valid
+SDP child. Owner clarification on 2026-09-25 selects inner **KanBan, SDL and SDUI**
+tabs. This card owns native XFMD implementation; SDP-vNow develops sdptool and
+the shared producer contract, not XFMD application code.
 
 The proposed marker lives inside the project's SDP folder and declares version
 and capabilities: SDL and SDUI language versions used, Agents/KanBan availability,
@@ -21,9 +23,11 @@ SDL navigation support, and configuration XFMD otherwise receives as CLI argumen
 The conversation uses both `SDP_Version.yaml` and `SDL_version.yaml`; exact spelling,
 case and schema are unresolved. SDP owns the contract, XFMD consumes it.
 
-Producer-side companion: **KB-SDP-016** (discovery/version/capability contract).
+Producer-side companion: **KB-SDP-017** (sdptool, discovery and general navigation).
+It fully consolidates the earlier KB-SDP-002 and KB-SDP-016; their old identities
+and history remain in SDP’s superseded cards.
 
-file:///home/warloc/git/SDP-vNow/SDP/Agents/KanBan/backlog/%23016--Proposal--SDP-discovery-and-viewer-capabilities.md
+file:///home/warloc/git/SDP-vNow/SDP/Agents/KanBan/backlog/%23017--Proposal--sdptool-and-project-navigation.md
 
 ## Bounded investigation — existing behavior
 
@@ -76,12 +80,34 @@ contract. Source: [main.cpp](../../../src/application/main.cpp).
 
 ## Sidebar sketch and open questions
 
-Agent suggestion for discussion: a compact project/version header, an explicit
-refresh action and the generated navigator as the main SDP-tab content. Candidate
-links are overview, implementation plan, requirements/design views and KanBan only
-where supported. These are proposed labels, not claims that corresponding SDL
-viewpoints already exist. Keep the selected generated document in XFMD's main pane.
-The owner will supply further layout direction before a blueprint is selected.
+Owner direction, 2026-09-25, superseding the earlier single-panel sketch:
+
+| Inner tab | Native navigation responsibility |
+| --- | --- |
+| KanBan | Tree of lifecycle statuses and card filenames, with CardState where supported; open cards in the main viewer and distinguish Ref cards from primary work. |
+| SDL | Tree of all supported ViewPoints and every useful groupable collection/object/relationship. VP01 → UseCase → individual use cases is one example, not a restriction to UseCases or three levels. |
+| SDUI | Entry point for supported SDUI sources/documentation/preview services; select the initial actions explicitly without assuming an interactive FOX widget host. |
+
+Group features, functionality, capabilities, activities, modes/states, actors,
+containers, channels, contracts and data concepts where the active model/profile
+supports them. Future language candidates must not appear as implemented objects.
+Use stable IDs and selectable generation targets from the producer's versioned
+inventory; do not parse rendered Markdown or copy SDL semantics into XFMD.
+Navigation may have variable depth. Shared objects and cyclic relationships need
+explicit references or bounded expansion, not infinite recursive trees.
+
+Build the initial tree/overview without generating every detail document. Expand
+and select using the producer's supported inventory/actions; generate details on
+selection into the main pane. Define refresh for model edits and card moves, stale
+responses, and empty/unsupported collections. A future KanBan time-axis graph is
+separate from the initial status tree. Preserve ordinary Files/Index behavior.
+
+All native UI, consumer adapters and window lifecycle changes must be selected,
+planned and implemented in this XFMD repository under this card (or linked XFMD
+cards if split later). SDP-vNow may maintain these conversation notes but must not
+implement XFMD code from its workstream. XFMD continues its existing development
+method and standalone `Agents/KanBan`; do not create an SDP directory or require
+XFMD itself to adopt SDP to implement support for other projects.
 
 Agree what valid means: supported marker schema/profile, declared capabilities and
 resolvable sources. Distinguish missing SDP from malformed/unsupported SDP or missing
@@ -91,19 +117,28 @@ Define tab behavior and disposal of pending jobs/leases when work root changes;
 keep ordinary Files/Index and dirty documents usable if SDP setup fails.
 
 SDP already has a release/project manifest and an R3 proposal for SDP/project.json.
-Resolve this overlap in KB-SDP-016 before adding another marker. Preserve CLI
+Resolve this overlap in KB-SDP-017 before adding another marker. Preserve CLI
 usage and document override precedence. Declaring an SDUI language version does
 not make XFMD an SDUI/BoxUI widget renderer; KB-XFMD-003 remains separate/deferred.
 KB-XFMD-012 concerns KanBan format compatibility, not this discovery/UI capability.
 
 ## Next action and acceptance when selected
 
-Review KB-SDP-016 together with SDP's KB-SDP-001/002/014 and the owner's layout
-ideas. Agree a single discovery contract and initial supported viewpoints, then
+Review KB-SDP-017 and its Toolkit/SDPTool plan alongside KB-SDP-014 compatibility. Agree a single discovery contract and initial supported viewpoints, then
 write XFMD requirements/blueprint/plumbing before code. Candidate acceptance:
 valid/missing/invalid/unsupported projects, relative paths from unrelated cwd,
-optional KanBan/SDUI, source edits and navigator refresh, one on-demand view click,
+optional KanBan/SDUI, multiple non-UseCase node collections, variable-depth and
+shared/cyclic model navigation, source edits and navigator/card refresh, one on-demand view click,
 correct window/pane, missing tool/generation errors, and dirty-buffer retention.
 
 Outcome: backlog capture only. No tab, manifest, resolver or runtime behavior is
 implemented or approved by this note; no other agent has been contacted.
+
+## Review — 2026-09-25
+
+Recorded 2026-09-25T09:09:52Z, Codex, EVT-KB-XFMD-000047. Updated producer reference and owner
+layout/ownership direction. The 2026-09-24 code inspection above remains dated
+evidence; no new runtime test or native implementation is claimed. Card stays
+in backlog. Shared producer source home:
+
+file:///home/warloc/git/SDP-vNow/Toolkit/SDPTool/README.md
