@@ -1,7 +1,7 @@
 # Sprint 006 — SDL acceptance evidence
 
 Selected by the owner on 2026-09-24 through
-[KB-XFMD-005](../../Agents/KanBan/completed/%23005--Study--SDL-acceptance-evidence.md).
+[KB-XFMD-005](../../SDP/Agents/KanBan/completed/%23005--Study--SDL-acceptance-evidence.md).
 UR-044/SR-027/SR-028, FUNC-031, AT-070/071/072. This delivery adds focused tests
 and an identified execution record for existing behavior; it does not strengthen
 the best-effort lease-release contract.

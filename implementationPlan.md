@@ -3,7 +3,7 @@
 Current entrypoint: the [sprint register](sprints/README.md) identifies delivery
 branches, integration state and evidence. Follow the [working method](docs/working-method.md)
 for new work: one PR per sprint. Unselected discussion belongs in the
-[conversation board](Agents/KanBan/README.md), not this historical plan.
+[conversation board](SDP/Agents/KanBan/README.md), not this historical plan.
 
 The P0–P41 records below preserve their original planning language and phase-era
 workflow. Statements such as "next", "planned", "pending CI" or earlier parser

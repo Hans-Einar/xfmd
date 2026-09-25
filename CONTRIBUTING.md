@@ -1,13 +1,13 @@
 # Contributing to XFMD
 
 Start with [AGENTS.md](AGENTS.md), the [working method](docs/working-method.md),
-[KanBan board](Agents/KanBan/README.md), [requirements](xfmd_requirements.md),
+[KanBan board](SDP/Agents/KanBan/README.md), [requirements](xfmd_requirements.md),
 [architecture](softwareArchitecture.md) and affected [blueprints](src/blueprint/README.md).
 The working method defines the process; this guide provides contributor entrypoints.
 
 ## Discussions and selected work
 
-Capture unresolved ideas, investigations and chat follow-up in Agents/KanBan.
+Capture unresolved ideas, investigations and chat follow-up in SDP/Agents/KanBan.
 A note is not a requirement or implementation authorization. Review related notes
 before selecting work; preserve later corrections and source/successor links when
 consolidating. Move selected, bounded work to active and record transitions in the

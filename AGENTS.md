@@ -5,7 +5,7 @@
 xfmd is a lightweight Markdown viewer/editor and a companion to `xfw` and `xfi`.
 Read the [requirements](xfmd_requirements.md), [architecture](softwareArchitecture.md),
 [working method](docs/working-method.md), [contribution guide](CONTRIBUTING.md),
-[KanBan board](Agents/KanBan/README.md),
+[KanBan board](SDP/Agents/KanBan/README.md),
 and affected [blueprints](src/blueprint/README.md) before making changes.
 Distinguish dated design proposals from implemented code and current decisions.
 Planned symbols are not existing implementations.
@@ -35,7 +35,7 @@ split mechanically. New files need a documented owner and a natural place in the
 
 ## Conversation notes and KanBan
 
-Use `Agents/KanBan/` for ideas, questions, investigations and follow-up notes from
+Use `SDP/Agents/KanBan/` for ideas, questions, investigations and follow-up notes from
 chat that are not yet agreed product requirements or implementation plans.
 Capture them during the discussion, with sources and a concrete next review.
 Keep owner decisions, agent recommendations and open questions distinct.
@@ -47,9 +47,11 @@ the append-only ledger. Partial consolidation must leave unresolved scope visibl
 Move only selected, bounded work to `active`; recording a note is not authorization
 to implement it. Follow the board's rules for moves, links, outcomes and ledger replay.
 
-This imports only the KanBan note workflow. Do not create an `SDP/` directory or
-adopt the rest of the changing SDP process. Product truth stays in requirements,
-blueprints, architecture, sprint plans and evidence, with links from the cards.
+Owner decision of 2026-09-25 supersedes the earlier note-only restriction:
+use [SDP](SDP/README.md) for XFMD's process and SDP KanBan. KB-XFMD-017 owns
+adoption and SDL design models. Existing requirements, blueprints, architecture,
+sprint plans and evidence remain authoritative until explicitly reconciled.
+Do not generate or maintain viewpoints by hand; use the SDL tools on valid models.
 
 ## Implementation workflow and traceability
 

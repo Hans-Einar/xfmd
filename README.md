@@ -1,5 +1,7 @@
 # xfmd — X File Markdown Viewer/Editor
 
+Project process and current design-adoption work: [SDP](SDP/README.md).
+
 Native Markdown-viser og editor for Linux, bygget på FOX som companion til `xfw`
 og `xfi`. Første leveranse er implementert: typografisk visning, redigering med
 undo/redo, live preview, lokal lenkehistorikk, justerbar scrolling, A4-preview,

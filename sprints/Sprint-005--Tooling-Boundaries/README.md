@@ -1,6 +1,6 @@
 # Sprint 005 — Tooling boundaries
 
-Selected from [KB-XFMD-002](../../Agents/KanBan/completed/%23002--Study--BoxUI-branch-disposition.md)
+Selected from [KB-XFMD-002](../../SDP/Agents/KanBan/completed/%23002--Study--BoxUI-branch-disposition.md)
 on 2026-09-24: preserve two independent tooling fixes from the historical BoxUI
 branch. XFMD owns its Rust formatting and project documentation checks; dependency
 source and documentation have their own maintainers.

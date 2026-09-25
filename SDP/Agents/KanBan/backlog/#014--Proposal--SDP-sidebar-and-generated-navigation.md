@@ -1,0 +1,163 @@
+# Discover SDP projects and expose an SDP sidebar tab
+
+| Field | Value |
+| --- | --- |
+| id | KB-XFMD-014 |
+| project | XFMD |
+| CardState | backlog |
+| type | Proposal |
+| created | 2026-09-24T20:52:36+00:00 |
+| source | Owner conversation, 2026-09-24: project-aware SDP tab and version/capability marker |
+| next_review | Align with KB-SDP-017 discovery/navigation producer contract before selecting XFMD implementation |
+
+## Owner direction
+
+Add a third sidebar tab, SDP, alongside Files and Index. Show it when the current
+work root is either a valid SDP area itself or a project containing a valid
+SDP child. Owner clarification on 2026-09-25 selects inner **KanBan, SDL and SDUI**
+tabs. This card owns native XFMD implementation; SDP-vNow develops sdptool and
+the shared producer contract, not XFMD application code.
+
+The proposed marker lives inside the project's SDP folder and declares version
+and capabilities: SDL and SDUI language versions used, Agents/KanBan availability,
+SDL navigation support, and configuration XFMD otherwise receives as CLI arguments.
+The conversation uses both `SDP_Version.yaml` and `SDL_version.yaml`; exact spelling,
+case and schema are unresolved. SDP owns the contract, XFMD consumes it.
+
+Producer-side companion: **KB-SDP-017** (sdptool, discovery and general navigation).
+It fully consolidates the earlier KB-SDP-002 and KB-SDP-016; their old identities
+and history remain in SDP’s superseded cards.
+
+file:///home/warloc/git/SDP-vNow/SDP/Agents/KanBan/active/%23017--Proposal--sdptool-and-project-navigation.md
+
+## Bounded investigation — existing behavior
+
+Inspected XFMD at 9b93edb and SDP-vNow at afd9edb on 2026-09-24. This is source and
+document review, not a new runtime test.
+
+- [FUNC-031](../../../../src/blueprint/functionality/Functionality-031--Generated-Document-Navigation.md)
+  and [DocumentViews](../../../../src/application/navigation/DocumentViews.cpp) already
+  host independent main/navigation Markdown sessions. SDL owns parsing, projection
+  and generated resources; XFMD owns display, window targeting and input.
+- On an `sdl-view://<registered-project>/...` selection, direct mode runs the
+  registered SDL tool with `view <source> --uri <uri> --output <temporary-directory>`
+  and optional renderer. Delivery metadata selects the target pane and entry.md.
+  A later selection cancels an older child; results stay tied to the originating
+  window. No full static export is needed for each selected detail.
+- The optional broker path uses addressed delivery and per-pane leases; this is
+  not required for direct generation. Preserve current dirty-buffer admission,
+  cancellation/stale-request rules and resource ownership when adding discovery.
+- The existing navigator is a separate navigationArea, not a Files/Index tab.
+  Moving/reusing it inside SDP requires an explicit layout/lifecycle decision;
+  merely adding a tab label does not integrate the current navigator.
+- KB-SDP-002 proposes `sdptool view ip`: open a main plan and navigator, generate
+  selected details from current sources with prebuilt tools, without requiring a
+  full export, startup compilation or daemon. Navigator snapshots need explicit
+  refresh when model structure changes. This sdptool command remains proposed.
+
+Current documented CLI, supplied by the owner and confirmed in main.cpp:
+
+```text
+xfmd [file|directory] [--navigator file.md --sdl-tool program --sdl-source model --project ID --renderer program --window-id ID]
+xfmd --window ID --pane main|navigation [--client ID --request N] file.md
+xfmd --window ID --info
+```
+
+main.cpp also accepts broker/lease options not shown in that short help. Discovery
+must preserve these optional modes rather than assume the help is a complete wire
+contract. Source: [main.cpp](../../../../src/application/main.cpp).
+
+## Metadata boundary to agree with SDP
+
+| Existing input | Candidate discovery/configuration source, not an agreed schema |
+| --- | --- |
+| --project | Stable project identity, distinct from repository name and product release version |
+| --sdl-source | Model entry path, resolved from a specified marker/SDP base |
+| --navigator | Existing navigator path or a supported initial projection/viewpoint; define generation and refresh |
+| --sdl-tool / --renderer | Required capability/version plus host-registered executable resolution; distinguish declarations from permission to execute |
+| --window-id / --window | Runtime window identity/target, normally not a fixed project-manifest value |
+| --pane / --client / --request | Runtime delivery/sequence metadata; preserve existing protocol |
+| optional broker / leases | Host/session configuration and runtime resources; not persistent project facts |
+
+## Sidebar sketch and open questions
+
+Owner direction, 2026-09-25, superseding the earlier single-panel sketch:
+
+| Inner tab | Native navigation responsibility |
+| --- | --- |
+| KanBan | Tree of lifecycle statuses and card filenames, with CardState where supported; open cards in the main viewer and distinguish Ref cards from primary work. |
+| SDL | Tree of all supported ViewPoints and every useful groupable collection/object/relationship. VP01 → UseCase → individual use cases is one example, not a restriction to UseCases or three levels. |
+| SDUI | Entry point for supported SDUI sources/documentation/preview services; select the initial actions explicitly without assuming an interactive FOX widget host. |
+
+Group features, functionality, capabilities, activities, modes/states, actors,
+containers, channels, contracts and data concepts where the active model/profile
+supports them. Future language candidates must not appear as implemented objects.
+Use stable IDs and selectable generation targets from the producer's versioned
+inventory; do not parse rendered Markdown or copy SDL semantics into XFMD.
+Navigation may have variable depth. Shared objects and cyclic relationships need
+explicit references or bounded expansion, not infinite recursive trees.
+
+Build the initial tree/overview without generating every detail document. Expand
+and select using the producer's supported inventory/actions; generate details on
+selection into the main pane. Define refresh for model edits and card moves, stale
+responses, and empty/unsupported collections. A future KanBan time-axis graph is
+separate from the initial status tree. Preserve ordinary Files/Index behavior.
+
+All native UI, consumer adapters and window lifecycle changes must be selected,
+planned and implemented in this XFMD repository under this card (or linked XFMD
+cards if split later). SDP-vNow may maintain these conversation notes but must not
+implement XFMD code from its workstream. XFMD continues its existing development
+method during transition. The owner separately authorized XFMD's own SDP area
+on 2026-09-25; KB-XFMD-017 owns adoption. This native sidebar feature remains
+separate and must also support other projects.
+
+Agree what valid means: supported marker schema/profile, declared capabilities and
+resolvable sources. Distinguish missing SDP from malformed/unsupported SDP or missing
+tools. Specify whether the work root itself may be an SDP area, its SDP child,
+and how nested projects or parent lookup work. Do not silently select a parent.
+Define tab behavior and disposal of pending jobs/leases when work root changes;
+keep ordinary Files/Index and dirty documents usable if SDP setup fails.
+
+SDP already has a release/project manifest and an R3 proposal for SDP/project.json.
+Resolve this overlap in KB-SDP-017 before adding another marker. Preserve CLI
+usage and document override precedence. Declaring an SDUI language version does
+not make XFMD an SDUI/BoxUI widget renderer; KB-XFMD-003 remains separate/deferred.
+KB-XFMD-012 concerns KanBan format compatibility, not this discovery/UI capability.
+
+## Next action and acceptance when selected
+
+Review KB-SDP-017 and its Toolkit/SDPTool plan alongside KB-SDP-014 compatibility. Agree a single discovery contract and initial supported viewpoints, then
+write XFMD requirements/blueprint/plumbing before code. Candidate acceptance:
+valid/missing/invalid/unsupported projects, relative paths from unrelated cwd,
+optional KanBan/SDUI, multiple non-UseCase node collections, variable-depth and
+shared/cyclic model navigation, source edits and navigator/card refresh, one on-demand view click,
+correct window/pane, missing tool/generation errors, and dirty-buffer retention.
+
+Outcome: backlog capture only. No tab, manifest, resolver or runtime behavior is
+implemented or approved by this note; no other agent has been contacted.
+
+## Review — 2026-09-25
+
+Recorded 2026-09-25T09:09:52Z, Codex, EVT-KB-XFMD-000047. Updated producer reference and owner
+layout/ownership direction. The 2026-09-24 code inspection above remains dated
+evidence; no new runtime test or native implementation is claimed. Card stays
+in backlog. Shared producer source home:
+
+file:///home/warloc/git/SDP-vNow/Toolkit/SDPTool/README.md
+
+## Direct-preview dependency review — 2026-09-25
+
+[KB-XFMD-015](%23015--Proposal--SDL-design-file-preview.md) captures opening a
+.design source with generated diagram preview. It is a useful earlier delivery
+and reusable adapter, not a prerequisite to adopt all SDP sidebar functionality.
+Native tree/discovery ownership remains here. Recorded 2026-09-25T09:35:14Z, Codex, EVT-KB-XFMD-000049.
+
+Producer link updated 2026-09-25T10:16:50Z, Codex, EVT-KB-XFMD-000050: KB-SDP-017 is now
+active. Its design uses SDP’s own numbered phases; XFMD keeps its existing process.
+
+## SDP KanBan migration — 2026-09-25
+
+EVT-KB-XFMD-000054: relocated the board and added visible CardState (backlog).
+Existing lifecycle, IDs, decisions and evidence remain unchanged. The owner now
+authorizes XFMD's SDP process area; earlier instructions to remain note-only
+are historical. [Migration evidence](../../../Maintenance/SDP1/Plan-and-Evidence.md).

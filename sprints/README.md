@@ -44,4 +44,4 @@ Numbers are stable. Sprint numbering begins at 001 and phase numbering continues
 from P41 with P042. Do not recast old phase history as invented sprint deliveries.
 [Working method](../docs/working-method.md), [versioning](../docs/versioning.md),
 [phase template](templates/Phase.md). Discussion and reconciliation notes live in
-[KanBan](../Agents/KanBan/README.md); they are not automatically new product sprints.
+[KanBan](../SDP/Agents/KanBan/README.md); they are not automatically new product sprints.

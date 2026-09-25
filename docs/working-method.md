@@ -1,11 +1,13 @@
 # Working method: requirements, features and functionality
 
 Status: current XFMD working method. This is a practical method for agent work,
-using stable design objects and explicit change rules. It does not adopt SDP,
-require sprint ceremonies, or depend on an SDL compiler.
+using stable design objects and explicit change rules. Owner decision of
+2026-09-25 introduces [SDP](../SDP/README.md) and the shared KanBan workflow.
+KB-XFMD-017 owns the subsequent model/process adoption; existing product records
+remain authoritative until reconciled.
 
 The owner added a conversation-note workflow on 2026-09-24. Use the
-[KanBan board](../Agents/KanBan/README.md) for unresolved discussions, findings and
+[KanBan board](../SDP/Agents/KanBan/README.md) for unresolved discussions, findings and
 follow-up ideas. Other projects can supply evidence, but do not become authorities
 for XFMD requirements merely by being referenced. Write new/revised documentation
 in English; preserve the meaning and provenance of older material when translating.
@@ -48,8 +50,9 @@ See the [register and template](../sprints/README.md).
 CI builds ready sprint PRs, main integration and explicit manual runs. Ordinary
 phase pushes and draft PRs do not start program builds. This replaces the historical
 per-phase PR practice. [Versioning](versioning.md) defines major/minor, branch/PR
-and commit number. Do not create an SDP directory or adopt its changing process;
-`Agents/KanBan/` is the only note-workflow adaptation.
+and commit number. The owner has now authorized SDP adoption; see
+[the migration handoff](../SDP/Agents/KanBan/backlog/%23017--Proposal--Adopt-SDP-and-model-XFMD.md).
+Existing sprint/blueprint rules continue during the documented transition.
 
 ## 1. Design objects
 
@@ -150,7 +153,7 @@ requirement coverage, dependencies and planned/implemented plumbing markers.
 It checks structure, not code correctness, requirement quality or actual calls.
 Semantic review and relevant tests remain necessary.
 
-Local Markdown link checks cover XFMD-owned documents, including Agents/KanBan.
+Local Markdown link checks cover XFMD-owned documents, including SDP/Agents/KanBan.
 They skip dependency documentation under `.deps` and `third_party`, along with
 Git/build/cache directories. Links originating in project documents remain checked,
 including links to dependencies. Blueprint metadata and plumbing checks are unchanged.
