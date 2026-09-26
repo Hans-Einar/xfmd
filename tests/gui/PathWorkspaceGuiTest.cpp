@@ -215,7 +215,7 @@ void run() {
   CHECK(tree->getItemPathname(tree->getCurrentItem()) == selected.c_str());
   CHECK(tree->getPathnameItem((base / "deep").c_str())->isExpanded());
   CHECK(tree->getYPosition() == scroll);
-  nativeClick(panel->recentTabs->getLast()->getPrev(), 15, 10);
+  nativeClick(panel->recentTabs->getFirst()->getNext()->getNext(), 15, 10);
   CHECK(panel->recentTabs->getCurrent() == 1 && panel->recentFiles->shown());
   CHECK(panel->recentFiles->entries().size() == 3);
   CHECK(panel->history.entries().front() == base);

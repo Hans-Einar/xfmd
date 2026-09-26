@@ -27,7 +27,7 @@ OpenPathDialog::OpenPathDialog(FXWindow* owner, const std::string& directory)
 long OpenPathDialog::onAccept(FXObject* sender, FXSelector selector, void* data) {
   std::unique_ptr<FXString[]> paths(getFilenames());
   if (!paths || paths[0].empty() || !paths[1].empty()) {
-    feedback->setText("Select one file or folder, or use Open current folder.");
+    feedback->setText("Select one file or folder, or choose the current folder.");
     return 1;
   }
   selected = paths[0];

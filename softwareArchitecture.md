@@ -212,7 +212,8 @@ SidebarWidget, søkestatus og arbeidsstihistorikk i vertikal splitter. F10 styre
 hele panelet. SidebarWidget bygger eget FXTreeList med en eksplisitt rot; arvet
 FXDirList kan ikke avgrense rotnavigasjonen og er erstattet. Egne hendelses-ID-er
 starter ved basens ID_LAST. Begge tree-scrollbarer og begge scrollbarer i historikklisten bruker FoxWheelScrollBar.
-Den lille WorkPathList-adapteren i WorkspacePanel.cpp erstatter bare standardbarene.
+The original WorkPathList adapter replaced the standard scrollbars. P057-M2
+consolidates that role in SidebarPathList, which also handles context gestures.
 
 application/workspace/WorkPathHistory.cpp eier kanoniske stier, rotutvidelse og MRU.
 FileNameFilter.cpp eier wildcard/delstreng og typekombinasjon. DirectoryScanner.cpp
@@ -575,3 +576,17 @@ controls beside Refresh. Existing UiButton/ButtonPainter gain a pill role for th
 Markdown toggle; IconCatalog owns its M/down-arrow/box glyph. No new files or
 cross-layer contracts are introduced. FileNameFilter keeps its reusable type
 flags; this workspace uses Markdown plus the name pattern, with text flag false.
+
+### P057 — Persistent favorites adapter
+
+`application/ui/FavoritesPanel.{h,cpp}` owns the FOX Favorites list,
+canonical folder/file entries, sorting, separator, context actions and registry persistence.
+WorkspacePanel composes it; ApplicationWorkspace injects navigation/feedback through
+existing setWorkPath/openTarget workflows. It owns no document loading or parsing.
+OpenPathDialog remains the shared mixed selector for normal Open actions.
+
+P057-M2 correction removes the Favorites chooser/buttons and hint.
+`application/ui/SidebarPathList.{h,cpp}` owns shared lower-list scrolling and context
+hit testing; `application/ui/PathContextMenu.{h,cpp}` owns the native path popup.
+Tree and history adapters emit copied add paths to WorkspacePanel's composition;
+FavoritesPanel owns removal and unchanged persistence. Menu dismissal never navigates.

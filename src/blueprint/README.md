@@ -177,3 +177,9 @@ P22: UR-032 → FUNC-010/014; UR-033 → FUNC-010; UR-034 → FUNC-005. AT-052�
 | UR-044 | [FUNC-031](functionality/Functionality-031--Generated-Document-Navigation.md) | AT-070 | FirstRelease |
 | SR-027 | [FUNC-031](functionality/Functionality-031--Generated-Document-Navigation.md) | AT-071 | FirstRelease |
 | SR-028 | [FUNC-031](functionality/Functionality-031--Generated-Document-Navigation.md) | AT-072 | FirstRelease |
+
+## Sidebar favorites
+
+| Requirement | Design objects | Acceptance | Scope |
+| --- | --- | --- | --- |
+| UR-045 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | AT-073 | FirstRelease |

@@ -27,10 +27,17 @@ Hovedkapitler er det øverste nivået filen faktisk bruker (H1, ellers H2 osv.).
 Referanser leses ved utvidelse, ett nivå dypt, med samme 8 MiB-grense som filåpning.
 Brutte lenker står synlig med feilmelding; trebygging laster aldri fra nettet.
 
-Sidepanelets **Files**-fane har **Recent files** under **Recent folders**.
-De 32 sist åpnede/lagrede filene huskes mellom omstarter. Klikk eller Enter åpner
-med vanlig kontroll for ulagrede endringer; arbeidsroten beholdes. Fillisten
-lagres i FOX-registry-seksjonen `RecentFiles`, separat fra `WorkPaths`.
+The sidebar's **Files** page has lower **Folders**, **Files** and **Favorites** tabs.
+Folders and Files retain the 32 most recent successful visits separately. Favorites
+is a persistent, manually maintained list. Right-click a file or folder in the Files
+tree or Folders/Files history and choose **Add to Favorites**. Right-click a favorite
+and choose **Remove from Favorites** to forget it without deleting its target.
+Favorites contains only the list, without buttons or an empty-list hint. Folder favorites
+sort alphabetically above a separator, followed by alphabetically sorted files.
+Click or Enter opens a favorite; folder activation changes only the work root,
+while file activation uses the normal opening and unsaved-change policy. Missing
+favorites remain in the list until removed. These lists use separate FOX registry
+sections (`WorkPaths`, `RecentFiles`, `Favorites`).
 
 ## Bygg og kjør
 

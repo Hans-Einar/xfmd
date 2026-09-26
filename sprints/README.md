@@ -28,6 +28,9 @@ and P055 shared zoom are locally complete with linked acceptance evidence and a
 [Sprint 008](Sprint-008--Sidebar-Header/README.md) refines the XFMD 0.3 sidebar
 header in P056 following the owner’s local UI trial.
 
+[Sprint 009](Sprint-009--Favorites/README.md) adds persistent favorites in P057.
+M2 replaces its initial buttons/chooser with path context menus after owner review.
+
 ## Working convention
 
 A sprint is a bounded integration delivery, not mandatory agile ceremonies or SDP.
