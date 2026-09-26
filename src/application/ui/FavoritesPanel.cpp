@@ -1,6 +1,6 @@
 #include "FavoritesPanel.h"
-#include "OpenPathDialog.h"
-#include "application/adapters/FoxWheelScrollBar.h"
+#include "PathContextMenu.h"
+#include "SidebarPathList.h"
 #include "application/workspace/WorkPathHistory.h"
 #include <algorithm>
 #include <filesystem>
@@ -11,14 +11,14 @@ namespace fs = std::filesystem;
 namespace xfmd {
 namespace {
 constexpr int maxFavorites = 512;
-class FavoriteList : public FXList {
+class FavoriteList : public SidebarPathList {
   bool navigating = false;
 
 public:
   bool keyboardNavigation() const { return navigating; }
   long handle(FXObject* sender, FXSelector selector, void* data) override {
     if (FXSELTYPE(selector) != SEL_KEYPRESS)
-      return FXList::handle(sender, selector, data);
+      return SidebarPathList::handle(sender, selector, data);
     const auto* event = static_cast<FXEvent*>(data);
     if (!(event->state & (CONTROLMASK | SHIFTMASK | ALTMASK)) &&
         (event->code == KEY_Return || event->code == KEY_KP_Enter || event->code == KEY_space))
@@ -26,15 +26,12 @@ public:
     // FOX emits SEL_COMMAND for arrow/Home/End selection too. Let those keys
     // select for Remove without opening the target; Enter/Space activate above.
     navigating = true;
-    auto result = FXList::handle(sender, selector, data);
+    auto result = SidebarPathList::handle(sender, selector, data);
     navigating = false;
     return result;
   }
   FavoriteList(FXComposite* parent, FXObject* target, FXSelector selector)
-      : FXList(parent, target, selector, LIST_BROWSESELECT | LAYOUT_FILL_X | LAYOUT_FILL_Y) {
-    horizontal = FoxWheelScrollBar::replace(horizontal);
-    vertical = FoxWheelScrollBar::replace(vertical);
-  }
+      : SidebarPathList(parent, target, selector) {}
 };
 class FavoriteSeparator : public FXListItem {
 public:
@@ -53,21 +50,24 @@ std::string basename(const std::string& path) {
 }
 } // namespace
 FXDEFMAP(FavoritesPanel)
-favoritesMap[] = {FXMAPFUNC(SEL_COMMAND, FavoritesPanel::ID_ADD, FavoritesPanel::onAdd),
-                  FXMAPFUNC(SEL_COMMAND, FavoritesPanel::ID_REMOVE, FavoritesPanel::onRemove),
-                  FXMAPFUNC(SEL_COMMAND, FavoritesPanel::ID_SELECT, FavoritesPanel::onSelect),
-                  FXMAPFUNC(SEL_CHANGED, FavoritesPanel::ID_SELECT, FavoritesPanel::onChanged),
+favoritesMap[] = {FXMAPFUNC(SEL_COMMAND, FavoritesPanel::ID_SELECT, FavoritesPanel::onSelect),
                   FXMAPFUNC(SEL_TIMEOUT, FavoritesPanel::ID_ACTIVATE, FavoritesPanel::onActivate)};
 FXIMPLEMENT(FavoritesPanel, FXVerticalFrame, favoritesMap, ARRAYNUMBER(favoritesMap))
-FavoritesPanel::FavoritesPanel(FXComposite* parent, UiContext& context)
+FavoritesPanel::FavoritesPanel(FXComposite* parent, UiContext&)
     : FXVerticalFrame(parent, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 120, 0, 0, 0, 0) {
-  UiFactory ui(context);
-  auto* actions = new FXHorizontalFrame(this, LAYOUT_FILL_X, 0, 0, 0, 0, 0, 0, 0, 0);
-  addButton = ui.button(actions, "Add…\tAdd a favorite file or folder", this, ID_ADD);
-  removeButton =
-      ui.button(actions, "Remove\tRemove favorite (keep the file or folder)", this, ID_REMOVE);
-  empty = new FXLabel(this, "No favorites — use Add…", nullptr, LAYOUT_FILL_X | JUSTIFY_LEFT);
-  list = new FavoriteList(this, this, ID_SELECT);
+  auto* favorites = new FavoriteList(this, this, ID_SELECT);
+  list = favorites;
+  favorites->contextRequested = [this](int row, const FXEvent& event) {
+    const auto index = row < int(rows.size()) ? rows[row] : -1;
+    if (index < 0)
+      return;
+    const auto path = paths[index].path;
+    getApp()->removeTimeout(this, ID_ACTIVATE);
+    pending = {};
+    if (showPathContextMenu(list, event, PathMenuAction::RemoveFavorite) ==
+        PathMenuAction::RemoveFavorite)
+      remove(path);
+  };
   list->setNumVisible(4);
   auto& reg = getApp()->reg();
   const int count = std::clamp(reg.readIntEntry("Favorites", "Count", 0), 0, maxFavorites);
@@ -111,11 +111,6 @@ void FavoritesPanel::refresh() {
     rows.push_back(i);
   }
   list->setCurrentItem(-1);
-  removeButton->disable();
-  if (paths.empty())
-    empty->show();
-  else
-    empty->hide();
   recalc();
 }
 void FavoritesPanel::save() {
@@ -156,31 +151,16 @@ int FavoritesPanel::selected() const {
   const auto row = list->getCurrentItem();
   return row >= 0 && row < int(rows.size()) ? rows[row] : -1;
 }
-long FavoritesPanel::onAdd(FXObject*, FXSelector, void*) {
-  const auto directory =
-      currentDirectory ? currentDirectory() : FXSystem::getHomeDirectory().text();
-  OpenPathDialog dialog(this, directory, "Add favorite", "Add current &folder");
-  if (dialog.execute(PLACEMENT_OWNER))
-    add(dialog.selectedPath().text());
-  return 1;
-}
-long FavoritesPanel::onRemove(FXObject*, FXSelector, void*) {
-  const auto index = selected();
-  if (index >= 0) {
-    getApp()->removeTimeout(this, ID_ACTIVATE);
-    pending = {};
-    paths.erase(paths.begin() + index);
-    refresh();
-    save();
-  }
-  return 1;
-}
-long FavoritesPanel::onChanged(FXObject*, FXSelector, void*) {
-  if (selected() >= 0)
-    removeButton->enable();
-  else
-    removeButton->disable();
-  return 1;
+void FavoritesPanel::remove(const std::string& path) {
+  const auto found = std::find_if(paths.begin(), paths.end(),
+                                  [&](const auto& entry) { return entry.path == path; });
+  if (found == paths.end())
+    return;
+  getApp()->removeTimeout(this, ID_ACTIVATE);
+  pending = {};
+  paths.erase(found);
+  refresh();
+  save();
 }
 long FavoritesPanel::onSelect(FXObject*, FXSelector, void*) {
   if (static_cast<FavoriteList*>(list)->keyboardNavigation())
@@ -189,12 +169,10 @@ long FavoritesPanel::onSelect(FXObject*, FXSelector, void*) {
   pending = {};
   const auto index = selected();
   if (index >= 0) {
-    removeButton->enable();
     pending = paths[index];
     // Navigation or a dirty prompt must run after native list dispatch finishes.
     getApp()->addTimeout(this, ID_ACTIVATE, 0);
-  } else
-    removeButton->disable();
+  }
   return 1;
 }
 long FavoritesPanel::onActivate(FXObject*, FXSelector, void*) {

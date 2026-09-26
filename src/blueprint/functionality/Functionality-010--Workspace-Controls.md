@@ -33,7 +33,7 @@ dispatch. WorkspacePanel owns root/filter/history controls; FTR-005 owns the wor
 
 P10–P13 delegated preferences, export and display profiles to dedicated services.
 FoxWindowMode owns fullscreen/restore; XfmdWindow builds widgets only. Sidebar and
-WorkPathList share scrolling preferences. Menu actions do not change dirty/undo.
+SidebarPathList share scrolling preferences. Menu actions do not change dirty/undo.
 
 P053: OpenPathDialog adapts the FOX mixed file/folder selector and adds Open current
 folder. Application::openDialogPath preflights a proposed root, opens through the
@@ -78,7 +78,7 @@ WorkspacePanel owns the checked/filter state; UiButton and ButtonPainter own the
 pill presentation, IconCatalog owns the M/down-arrow/box glyph. Implemented changes
 follow [P056](../../../sprints/Sprint-008--Sidebar-Header/Phase-056--Sidebar-Header.md).
 
-P057 implemented: FavoritesPanel owns persistent user-selected folders/files, independent
+P057-M1 implemented (interaction superseded by M2): FavoritesPanel owns persistent user-selected folders/files, independent
 of recent histories. The third lower tab uses alphabetical groups and a disabled
 horizontal separator. Add reuses OpenPathDialog with optional action labels; Remove
 only forgets an entry. Canonical paths deduplicate additions; missing restored paths
@@ -100,7 +100,7 @@ ordering and registry ownership. Application wiring reuses existing dirty policy
 | 6 | `SidebarWidget constructor` | `FoxWheelScrollBar::replace` | `src/application/adapters/FoxWheelScrollBar.cpp` | Standard bar → wheel adapter | Parent ownership; before create | Implemented |
 | 7 | `FOX wheel dispatch` | `FoxWheelScrollBar::onMouseWheel` | `src/application/adapters/FoxWheelScrollBar.cpp` | Delta/remainder → target/timer | Clamp and retain fractional remainder | Implemented |
 | 8 | `XfmdWindow::buildUi` | `WorkspacePanel::WorkspacePanel` | `src/application/ui/WorkspacePanel.cpp` | Filter/tree/history → panel | Parent ownership | Implemented |
-| 9 | `WorkPathList constructor` | `FoxWheelScrollBar::replace` | `src/application/adapters/FoxWheelScrollBar.cpp` | History → shared wheel adapter | Parent ownership; before create | Implemented |
+| 9 | `SidebarPathList constructor` | `FoxWheelScrollBar::replace` | `src/application/adapters/FoxWheelScrollBar.cpp` | History → shared wheel adapter | Parent ownership; before create | Implemented |
 | 10 | `Edit Preferences` | `PreferencesService::begin` | `src/application/preferences/PreferencesService.h` | Profile → draft | Cancel discards | Implemented |
 | 11 | `View Full Screen` | `FoxWindowMode::requestFullscreen` | `src/application/adapters/FoxWindowMode.cpp` | Boolean → WM request | Confirm actual WM state | Implemented |
 | 12 | `File Export PDF` | `ExportCoordinator::start` | `src/application/export/ExportCoordinator.cpp` | Snapshot → job | No markSaved call | Implemented |
@@ -125,10 +125,13 @@ ordering and registry ownership. Application wiring reuses existing dirty policy
 | 56 | viewport/profile changes | `DocumentZoom::refresh` | `src/application/zoom/DocumentZoom.cpp` | geometry → editor/host scale and controls | guard reentrancy; preserve anchor | Implemented |
 | 57 | Markdown button activation | `WorkspacePanel::onMarkdown` | `src/application/ui/WorkspacePanel.cpp` | toggle checked state → deferred name/type filter | document/root unchanged | Implemented |
 | 58 | Files/Index selection | `WorkspacePanel::onTab` | `src/application/ui/WorkspacePanel.cpp` | active page → Files-only control visibility | retain filter; Refresh remains | Implemented |
-| 59 | Favorites Add chooser | `FavoritesPanel::add` | `src/application/ui/FavoritesPanel.cpp` | canonical path/type → sorted persisted entry | invalid/duplicate/limit handled without navigation | Implemented |
+| 59 | tree/history Add to Favorites | `FavoritesPanel::add` | `src/application/ui/FavoritesPanel.cpp` | canonical path/type → sorted persisted entry | invalid/duplicate/limit handled without navigation | Implemented |
 | 60 | Favorites selection / deferred timeout | `FavoritesPanel::onActivate` | `src/application/ui/FavoritesPanel.cpp` | copied path/type → injected opening | missing/type change reports error; destructor cancels timer | Implemented |
 | 61 | application composition | `Application::wireWorkspace` | `src/application/ApplicationWorkspace.cpp` | Favorites callbacks → setWorkPath/openTarget | existing root/document and dirty policy | Implemented |
-| 62 | Favorites Remove | `FavoritesPanel::onRemove` | `src/application/ui/FavoritesPanel.cpp` | selected row → registry/list update | no filesystem deletion; separator ignored | Implemented |
+| 62 | Favorites context menu | `FavoritesPanel::remove` | `src/application/ui/FavoritesPanel.cpp` | copied clicked path → registry/list update | no filesystem deletion; separator ignored | Implemented |
+
+| 63 | lower-list right-click release | `SidebarPathList::handle` | `src/application/ui/SidebarPathList.cpp` | hit row/event → context callback | ignore moved/empty gestures; no normal activation | Implemented |
+| 64 | tree/history/Favorites context callback | `showPathContextMenu` | `src/application/ui/PathContextMenu.cpp` | native popup → selected action | dismissal returns None; copied paths survive modal loop | Implemented |
 
 ## 6. Reuse and dependencies
 
@@ -213,3 +216,11 @@ P056 header/filter acceptance: [evidence](../../../sprints/Sprint-008--Sidebar-H
 P057 adds UR-045/AT-073. FavoritesGuiTest covers native favorites interaction and
 restart persistence; [phase evidence](../../../sprints/Sprint-009--Favorites/evidence/P057.md)
 records actual results and limits.
+
+P057-M2 correction removes buttons/empty help and uses native path context
+menus for tree/history additions and Favorites removal. See the phase's M2 scope;
+M1 chooser screenshots/evidence retain their historical scope.
+
+M2 acceptance: [context-menu evidence](../../../sprints/Sprint-009--Favorites/evidence/M2/README.md).
+PathContextMenu briefly grabs keyboard input so Escape reaches the popup while the
+document retains X focus, and releases it before the returned action executes.

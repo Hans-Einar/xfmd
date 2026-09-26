@@ -4,9 +4,6 @@ namespace xfmd {
 void Application::wireWorkspace() {
   auto* workspace = window->workspacePanel;
   auto* field = window->documentPath;
-  workspace->favorites->currentDirectory = [workspace] {
-    return workspace->history.root().string();
-  };
   workspace->favorites->open = [this, workspace](const auto& entry) {
     if (entry.folder)
       workspace->setWorkPath(entry.path);

@@ -29,8 +29,10 @@ Brutte lenker står synlig med feilmelding; trebygging laster aldri fra nettet.
 
 The sidebar's **Files** page has lower **Folders**, **Files** and **Favorites** tabs.
 Folders and Files retain the 32 most recent successful visits separately. Favorites
-is a persistent, manually maintained list: **Add…** chooses a file or folder, and
-**Remove** forgets the selected favorite without deleting its target. Folder favorites
+is a persistent, manually maintained list. Right-click a file or folder in the Files
+tree or Folders/Files history and choose **Add to Favorites**. Right-click a favorite
+and choose **Remove from Favorites** to forget it without deleting its target.
+Favorites contains only the list, without buttons or an empty-list hint. Folder favorites
 sort alphabetically above a separator, followed by alphabetically sorted files.
 Click or Enter opens a favorite; folder activation changes only the work root,
 while file activation uses the normal opening and unsaved-change policy. Missing

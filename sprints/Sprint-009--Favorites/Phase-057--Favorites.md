@@ -41,3 +41,33 @@ Record actual evidence before completing KB-XFMD-018.
 Locally complete with seven release checks and a dedicated sanitizer check.
 [Evidence](evidence/P057.md) records source hashes, actual results, captures and limits.
 KB-XFMD-018 is completed for the explicitly selected scope.
+
+## M2 — Owner interaction correction (2026-09-27)
+
+Collaborative follow-up on the same phase branch and PR #41, base 456e095.
+The owner's right-click workflow supersedes M1's chooser/buttons and empty hint.
+Favorites is only a list. Tree and both history lists offer Add to Favorites on the
+clicked file/folder; Favorites offers Remove from Favorites on the clicked entry.
+No action on empty space/separator; dismissing the menu preserves state. Adding or
+removing does not navigate, prompt for edits or change histories. Keep tree Set work
+path and existing persisted data. No new chooser/shortcut/drag-and-drop scope.
+
+Application adapters: SidebarPathList owns shared wheel bars and right-click
+hit testing for the three lower lists, suppressing FOX right-drag behavior before
+showing a popup. PathContextMenu owns the short-lived native popup and returns the
+chosen action after it closes. Callers copy paths before entering its modal loop;
+no tree/list item pointer survives into an action. WorkspacePanel wires tree/history
+add requests to FavoritesPanel::add; FavoritesPanel removes by copied path.
+
+Revise FavoritesGuiTest to drive native menus from all four surfaces, including
+clicked-versus-selected rows, dismissal, empty/separator input, dirty preservation,
+normal activation and restart persistence. Retain focused history/tree/Open checks,
+separate sanitizer coverage, screenshots and blueprint/board validators.
+
+The popup owns a temporary keyboard grab for Escape/arrow input and releases it
+before the chosen action runs. OpenPathDialog returns to its original two-argument
+constructor because Favorites no longer needs custom chooser labels.
+
+M2 is locally complete. [Evidence](evidence/M2/README.md) records seven release
+checks, dedicated sanitizer coverage and inspected screenshots. KB-XFMD-018 is
+completed for this owner-selected correction; no merge or version bump.

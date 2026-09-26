@@ -7,9 +7,8 @@ openPathMap[] = {
     FXMAPFUNC(SEL_COMMAND, FXDialogBox::ID_ACCEPT, OpenPathDialog::onAccept),
     FXMAPFUNC(SEL_COMMAND, OpenPathDialog::ID_CURRENT_FOLDER, OpenPathDialog::onCurrentFolder)};
 FXIMPLEMENT(OpenPathDialog, FXFileDialog, openPathMap, ARRAYNUMBER(openPathMap))
-OpenPathDialog::OpenPathDialog(FXWindow* owner, const std::string& directory, const char* title,
-                               const char* folderAction)
-    : FXFileDialog(owner, title) {
+OpenPathDialog::OpenPathDialog(FXWindow* owner, const std::string& directory)
+    : FXFileDialog(owner, "Open file or folder") {
   setSelectMode(SELECTFILE_MULTIPLE_ALL);
   setPatternList("All files (*)\nMarkdown and text (*.md,*.MD,*.txt,*.TXT)");
   setDirectory(directory.c_str());
@@ -20,7 +19,7 @@ OpenPathDialog::OpenPathDialog(FXWindow* owner, const std::string& directory, co
   filebox->setLayoutHints(LAYOUT_FILL_X | LAYOUT_FILL_Y);
   auto* row = new FXHorizontalFrame(body, LAYOUT_FILL_X);
   resize(600, 400);
-  new FXButton(row, folderAction, nullptr, this, ID_CURRENT_FOLDER,
+  new FXButton(row, "Open current &folder", nullptr, this, ID_CURRENT_FOLDER,
                BUTTON_NORMAL | LAYOUT_CENTER_Y);
   feedback = new FXLabel(row, "Select one file or folder.", nullptr,
                          JUSTIFY_LEFT | LAYOUT_FILL_X | LAYOUT_CENTER_Y);

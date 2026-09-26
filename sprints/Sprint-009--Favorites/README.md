@@ -11,3 +11,9 @@ and screenshots. The combined PR is identified by
 It is stacked on `maintenance/phase-sdp1-process-bootstrap` to isolate this delivery
 from earlier unmerged work. Local installation continues the owner's UI trial;
 keep existing application processes running and preserve an installation backup.
+
+P057-M2 completes the owner's context-menu correction: Favorites is a list without
+buttons/hint; tree/history right-clicks add and Favorites right-clicks remove.
+The same [PR #41](https://github.com/Hans-Einar/xfmd/pull/41) carries the follow-up.
+[M2 evidence](evidence/M2/README.md) supersedes M1's interaction acceptance;
+persistence/grouping and the historical M1 record remain intact.

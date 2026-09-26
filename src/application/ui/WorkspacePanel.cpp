@@ -1,18 +1,8 @@
 #include "WorkspacePanel.h"
-#include "application/adapters/FoxWheelScrollBar.h"
+#include "PathContextMenu.h"
+#include "SidebarPathList.h"
 using namespace FX;
 namespace xfmd {
-namespace {
-class WorkPathList : public FXList {
-public:
-  WorkPathList(FXComposite* parent, FXObject* target, FXSelector selector)
-      : FXList(parent, target, selector, LIST_BROWSESELECT | LAYOUT_FILL_X | LAYOUT_FILL_Y) {
-    horizontal = FoxWheelScrollBar::replace(horizontal);
-    vertical = FoxWheelScrollBar::replace(vertical);
-  }
-};
-} // namespace
-
 FXDEFMAP(WorkspacePanel)
 panelMap[] = {
     FXMAPFUNC(SEL_COMMAND, WorkspacePanel::ID_TAB, WorkspacePanel::onTab),
@@ -55,12 +45,25 @@ WorkspacePanel::WorkspacePanel(FXComposite* parent, UiContext& context)
   new FXTabItem(recentTabs, "Folders\tRecent folders");
   auto* folders =
       new FXVerticalFrame(recentTabs, LAYOUT_FILL_X | LAYOUT_FILL_Y, 0, 0, 0, 0, 0, 0, 0, 0);
-  workPaths = new WorkPathList(folders, this, ID_HISTORY);
+  auto* folderHistory = new SidebarPathList(folders, this, ID_HISTORY);
+  workPaths = folderHistory;
+  folderHistory->contextRequested = [this](int row, const FXEvent& event) {
+    if (row >= int(history.entries().size()))
+      return;
+    const auto path = history.entries()[row];
+    getApp()->removeTimeout(this, ID_ACTIVATE);
+    pendingPath.clear();
+    if (showPathContextMenu(workPaths, event, PathMenuAction::AddFavorite) ==
+        PathMenuAction::AddFavorite)
+      favorites->add(path);
+  };
   workPaths->setNumVisible(4);
   new FXTabItem(recentTabs, "Files\tRecent files");
   recentFiles = new RecentFilesPanel(recentTabs, context);
   new FXTabItem(recentTabs, "Favorites\tFavorite folders and files");
   favorites = new FavoritesPanel(recentTabs, context);
+  tree->favoriteRequested = [this](const auto& path) { favorites->add(path); };
+  recentFiles->favoriteRequested = [this](const auto& path) { favorites->add(path); };
   index = new IndexPanel(pages, context);
   std::vector<std::string> saved;
   for (int i = 0; i < 32; ++i) {

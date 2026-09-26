@@ -66,7 +66,7 @@ input and unsafe integer conversion. No global inertia engine.
 
 ## 6. Reuse and dependencies
 
-SidebarWidget, WorkPathList, EditorWidget, FoxRenderHost and preferences sample share
+SidebarWidget, SidebarPathList, EditorWidget, FoxRenderHost and preferences sample share
 policy types/profile. FTR-006 owns the user result; FTR-004 still uses FUNC-009 after
 actual viewport movement. P055 zoom is explicit per-document-surface wiring, not a
 new global modifier rule or a feature-private call.

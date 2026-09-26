@@ -8,9 +8,9 @@
 | CardState | completed |
 | created | 2026-09-26T09:47:11Z |
 | source | owner-conversation-2026-09-26 |
-| next_review | None; selected delivery complete |
+| next_review | None; M2 correction complete |
 
-## Owner direction and selected scope
+## Initial owner direction and M1 scope
 
 Add Favorites beside Folders and Files in the Files sidebar. Support folders and
 files, with alphabetically sorted folders above a horizontal separator and
@@ -47,3 +47,24 @@ reviewable screenshot. Do not expand into drag/drop or a new bookmark format.
   themes. [Evidence](../../../../sprints/Sprint-009--Favorites/evidence/P057.md)
   records source identity, checks and limitations. This closes the explicitly
   selected implementation scope; no global blueprint Verified claim or merge.
+
+## Owner correction — 2026-09-27 / P057-M2
+
+Remove the Add/Remove buttons and their explanatory text. Add favorites through
+right-click menus on files or folders in the Files tree or Folders/Files history.
+Agent implementation choice: right-click an existing favorite to remove it.
+Preserve persisted entries, grouped sorting and normal activation. Context actions
+must target the clicked entry, without opening it or changing document/work root.
+Empty space and the separator offer no favorite action; dismissal changes nothing.
+This refines the same card; unrelated SDP/SDUI backlog remains separate.
+
+Reopened by Codex, EVT-KB-XFMD-000075, for the explicit owner correction.
+
+## M2 outcome — 2026-09-27
+
+Codex, EVT-KB-XFMD-000076: replaced the chooser/buttons/hint with Add to Favorites
+on tree/history context menus and Remove from Favorites on the clicked favorite.
+Persistence and grouping remain unchanged. Seven release checks and the dedicated
+ASan/UBSan test passed; context dismissal and selection independence are covered.
+[Evidence](../../../../sprints/Sprint-009--Favorites/evidence/M2/README.md) records
+native results, popup keyboard-grab correction, screenshots and scope limits.

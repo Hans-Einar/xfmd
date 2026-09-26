@@ -17,7 +17,7 @@ protected:
 public:
   enum { ID_SELECT = FX::FXVerticalFrame::ID_LAST, ID_ACTIVATE, ID_LAST };
   FX::FXList* list = nullptr;
-  std::function<void(const std::string&)> open;
+  std::function<void(const std::string&)> open, favoriteRequested;
   RecentFilesPanel(FX::FXComposite*, UiContext&);
   ~RecentFilesPanel() override;
   void remember(const std::string&);

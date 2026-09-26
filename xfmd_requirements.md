@@ -458,3 +458,14 @@ filter retention, tab visibility and header geometry. See
 | ID | Requirement | Acceptance |
 | --- | --- | --- |
 | UR-045 | The Files sidebar includes a Favorites subpanel beside Folders and Files. Users can add and remove persistent folder/file favorites independently of recent history. Folders are alphabetical above a horizontal separator; files are alphabetical below it. Use case-insensitive basename ordering with path tie-breaks. Show the separator only for mixed groups. Folder activation changes work root; files use existing opening and unsaved-change policy. Missing targets remain removable and failed activation preserves document/root. | AT-073: native Add/Cancel/Remove, folder/file activation, mixed ordering/separator, duplicate prevention, restart persistence and dirty/missing/changed-target preservation. |
+
+### Favorites interaction correction — 2026-09-27 (P057-M2)
+
+UR-045 now uses **Add to Favorites** on right-clicked files/folders in the Files tree
+and Folders/Files history, and **Remove from Favorites** on a right-clicked favorite.
+Remove the Add/Remove buttons and the empty-list explanatory text. A context action
+uses the clicked row, independent of selection, without opening the target or
+changing the document/work root. Dismissal, empty space and separators do nothing.
+AT-073 replaces chooser/button coverage with these native menu paths and retains
+sorting, persistence and document-preservation coverage. The existing tree folder
+menu's Set work path command remains available.

@@ -1,4 +1,5 @@
 #include "SidebarWidget.h"
+#include "PathContextMenu.h"
 #include "TreeActivation.h"
 #include "application/adapters/FoxWheelScrollBar.h"
 #include "application/workspace/WorkPathHistory.h"
@@ -237,14 +238,18 @@ long SidebarWidget::onContext(FXObject*, FXSelector, void* data) {
   FXTreeList::onRightBtnRelease(this, 0, data);
   auto* event = static_cast<FXEvent*>(data);
   auto* item = getItemAt(event->win_x, event->win_y);
-  if (!isItemDirectory(item))
+  if (!item || event->moved)
     return 1;
-  contextPath = getItemPathname(item).text();
-  FXMenuPane menu(this);
-  new FXMenuCommand(&menu, "Set work path", nullptr, this, ID_SET_WORK_PATH);
-  menu.create();
-  menu.popup(nullptr, event->root_x, event->root_y);
-  getApp()->runModalWhileShown(&menu);
+  const std::string path = getItemPathname(item).text();
+  getApp()->removeTimeout(this, ID_ACTIVATE);
+  pendingOpen.clear();
+  const auto action =
+      showPathContextMenu(this, *event, PathMenuAction::AddFavorite, isItemDirectory(item));
+  if (action == PathMenuAction::SetWorkPath) {
+    contextPath = path;
+    onSetWorkPath(nullptr, 0, nullptr);
+  } else if (action == PathMenuAction::AddFavorite && favoriteRequested)
+    favoriteRequested(path);
   return 1;
 }
 long SidebarWidget::onSetWorkPath(FXObject*, FXSelector, void*) {

@@ -1,0 +1,36 @@
+{
+  "base_commit": "456e095baa8a8809c11234a606e19987e4953bca",
+  "source_sha256": {
+    "CMakeLists.txt": "496ccf3f6c75dc5ac61c8de356e0ddee88bbc691fdadd9d888f79571632dc9c9",
+    "src/application/ApplicationWorkspace.cpp": "de7d116e3ba4397929f3e62d4951ea25399b279682783fe10950ff9f39668731",
+    "src/application/ui/FavoritesPanel.cpp": "2df968698b4d9073ddcb83f40e672e1496dca2af07bdbd4d97ac98efd2ebf6ab",
+    "src/application/ui/FavoritesPanel.h": "e2200952aa4caf28727a13bf561f1ca1c05002d8c6956addc4e5604c901ff70a",
+    "src/application/ui/OpenPathDialog.cpp": "4239a13f08f38cda75d099866f9e7f13e272b083f8153d5d7d68bdb3d2bbc42c",
+    "src/application/ui/OpenPathDialog.h": "42a54d52c24f1269789a6cab050664d07b9107cd96df1c27eb1eb1284a7f5944",
+    "src/application/ui/PathContextMenu.cpp": "be24a01081a122ad9953a200e9a2dcae852b573a068c7135b3e20ea91c66cb01",
+    "src/application/ui/PathContextMenu.h": "13c9da3bc119844e4aca9b5698cf5c039bb674cc4f1ce7b0c42e25d6e0fec60a",
+    "src/application/ui/RecentFilesPanel.cpp": "5d8d52e48a122d7f54c6f90441eb7791dffa5bf16213b8675dcd72e3eb3021e8",
+    "src/application/ui/RecentFilesPanel.h": "7527838c22331e69967c9c3ee22bc53fd851e172476c2630fa203653c7c71cd1",
+    "src/application/ui/SidebarPathList.cpp": "f7d3135e0baae7ee97da0cb65b8127c6e5605c5f6e5e092772a765040145c162",
+    "src/application/ui/SidebarPathList.h": "33df527a94b502554c96a98d8282a3b33e5b524e60940302eab9479a8e70502c",
+    "src/application/ui/SidebarWidget.cpp": "0eb3af63a18baeea6bff1685977503c36b58bc5ef305a8e82e41435eace24535",
+    "src/application/ui/SidebarWidget.h": "a80d9db9caab1d94c9bdc75d021cf438eee41a50734f2e1797c0de6b0eb20f27",
+    "src/application/ui/WorkspacePanel.cpp": "b86b2c5ed0e71b7f1d90de07479aab10367ddcf794c6d5e5c7c6dccad92de74e",
+    "tests/gui/FavoritesGuiTest.cpp": "67fb6d35f1e3a4f1e8d97e499b1a59fd55912a9770bab712466e8d25d6388432",
+    "tests/support/PathMenus.h": "ed16b0cff2ed392d7ef913dfab1de2f113d5b0c3224998cd09acdbc1936e3778"
+  },
+  "binary_sha256": {
+    "build-ui/xfmd": "75bf377a06a7030f15a09afe4d1fd1db20bc8a5aaef115b6d8fc740c23be6169",
+    "build-ui/FavoritesGuiTest": "bc4fc2d32afe4372f355155d90c690e986bf89d4d5d03c105229b9c23411eee4",
+    "build-ui-sanitize/FavoritesGuiTest": "8309cf59f095474b5adef6156a91dc99217271892a2a54890d2d8eda231dc976"
+  },
+  "identity": {
+    "version": "0.3",
+    "branch": "sprint/009/phase/057-favorites",
+    "commit_number": 204,
+    "commit": "456e095baa8a8809c11234a606e19987e4953bca",
+    "pull_request": null,
+    "dirty": true,
+    "display": "0.3 sprint/009/phase/057-favorites:204+dirty"
+  }
+}

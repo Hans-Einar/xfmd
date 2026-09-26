@@ -27,7 +27,7 @@ protected:
 public:
   enum { ID_TREE_EVENT = FX::FXTreeList::ID_LAST, ID_POLL, ID_ACTIVATE, ID_SET_WORK_PATH, ID_LAST };
   std::function<void(const std::string&, bool)> open;
-  std::function<void(const std::string&)> workPathRequested;
+  std::function<void(const std::string&)> workPathRequested, favoriteRequested;
   std::function<void()> broadenRoot;
   std::function<void(const std::string&)> status;
   explicit SidebarWidget(FX::FXComposite*);
