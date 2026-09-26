@@ -1,0 +1,10 @@
+$ python3 tools/validate_blueprints.py
+OK: 37 blueprints, 71 requirements; metadata, matrix, plumbing and local file links checked.
+Not checked: external links, heading anchors, actual C++ call graph or application behavior.
+$ python3 tools/check_blueprint_symbols.py
+OK: 283 implemented plumbing callees found; caller semantics require review
+$ python3 tools/check_layers.py
+PASS: pure-layer include boundaries
+$ python3 SDP/Agents/KanBan/verify_board.py
+PASS: 18 cards, 74 events; schemas, replay, CardState, placement and index
+$ git diff --check

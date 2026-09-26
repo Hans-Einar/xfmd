@@ -21,6 +21,7 @@
 | KB-XFMD-015 | Proposal | backlog | [SDL design-file source and diagram preview](backlog/%23015--Proposal--SDL-design-file-preview.md) |
 | KB-XFMD-016 | Change | completed | [Initialize SDP and align KanBan](completed/%23016--Change--SDP-process-bootstrap.md) |
 | KB-XFMD-017 | Proposal | backlog | [Adopt SDP and describe XFMD in SDL](backlog/%23017--Proposal--Adopt-SDP-and-model-XFMD.md) |
+| KB-XFMD-018 | Change | completed | [Sidebar favorites](completed/%23018--Change--Sidebar-favorites.md) |
 
 This index shows current location; [Ledger.ndjson](Ledger.ndjson) records history.
 Read relevant notes at session start. Review backlog after a topic discussion and

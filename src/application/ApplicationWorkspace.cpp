@@ -4,6 +4,18 @@ namespace xfmd {
 void Application::wireWorkspace() {
   auto* workspace = window->workspacePanel;
   auto* field = window->documentPath;
+  workspace->favorites->currentDirectory = [workspace] {
+    return workspace->history.root().string();
+  };
+  workspace->favorites->open = [this, workspace](const auto& entry) {
+    if (entry.folder)
+      workspace->setWorkPath(entry.path);
+    else
+      openTarget(entry.path);
+  };
+  workspace->favorites->feedback = [this](const auto& text) {
+    window->status->setText(text.c_str());
+  };
   workspace->openRequested = [this] { execute(CommandRouter::Open); };
   workspace->rootChanged = [field](const auto& root) { field->setWorkPath(root); };
   field->setWorkPath(workspace->history.root().string());

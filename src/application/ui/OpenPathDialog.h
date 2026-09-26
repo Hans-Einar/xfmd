@@ -12,7 +12,9 @@ protected:
 
 public:
   enum { ID_CURRENT_FOLDER = FX::FXFileDialog::ID_LAST, ID_LAST };
-  OpenPathDialog(FX::FXWindow*, const std::string& directory);
+  OpenPathDialog(FX::FXWindow*, const std::string& directory,
+                 const char* title = "Open file or folder",
+                 const char* folderAction = "Open current &folder");
   const FX::FXString& selectedPath() const { return selected; }
   long onAccept(FX::FXObject*, FX::FXSelector, void*);
   long onCurrentFolder(FX::FXObject*, FX::FXSelector, void*);
