@@ -1,0 +1,30 @@
+{
+  "base_commit": "cf11709e4ec9d6925b0d17d95c71f72fbf011959",
+  "source_sha256": {
+    "CMakeLists.txt": "b32c05fcf20f2664122b0a0a6b460b662aa9fcbdf4cff3eaa63b76b52e72f479",
+    "cmake/Tests.cmake": "900d8cdb42b311c582d59ac0f8b9c0fec8d548a989f19507af3ac8df8e77a110",
+    "src/application/ApplicationWorkspace.cpp": "261df3ab6cc5d822ce103e8b180beb7f538e45aa6fa64bcbc3969e923469605f",
+    "src/application/ui/FavoritesPanel.cpp": "f7925fe9152ee2f85e5771742aa8daff0f78704fd4388eb577f3f5024c4bbc42",
+    "src/application/ui/FavoritesPanel.h": "31541e25cf5ca99542207b8981af33b5203959d20fd998e65d4163f7ec6dcbc3",
+    "src/application/ui/OpenPathDialog.cpp": "ea5cacf53daeb7a055743902a4c1ca7ebe22f6694ddfe446abf84db89da4e5ca",
+    "src/application/ui/OpenPathDialog.h": "4871b8786b9cc148c4f051cef6895bda3cf1ca1fb514e024fb604756ed6e35b5",
+    "src/application/ui/WorkspacePanel.cpp": "c146d451bc7175dd0c6a926ef1055c12e71c702987a967305a394fe3ee523d5d",
+    "src/application/ui/WorkspacePanel.h": "32b445e30b8ccbed7a52ee535fb09d5543569bbf12198062c1bb73debd2f5abb",
+    "tests/gui/FavoritesGuiTest.cpp": "0c66cc590112507116389595eefab9824ff88ec1da6067b56b8e0eb6bad2334b",
+    "tests/gui/PathWorkspaceGuiTest.cpp": "5e2d75ad552b07e4b97193dd310bd4bcbeeca6215451c06edf320844e165bb1f"
+  },
+  "binary_sha256": {
+    "build-ui/xfmd": "3c2c667eefe9b29f4d545a281bc9531d60ebe63c7a2299b98dfddd43e613cde2",
+    "build-ui/FavoritesGuiTest": "97c329461aa34c60957429d1ba1ec03ecd89cb5d911da6828fcd1739c6561e57",
+    "build-ui-sanitize/FavoritesGuiTest": "0212d521b3de6bb2862484082d476452fc2dd88e4cc10b81607e17ffc959ff74"
+  },
+  "identity": {
+    "version": "0.3",
+    "branch": "sprint/009/phase/057-favorites",
+    "commit_number": 203,
+    "commit": "cf11709e4ec9d6925b0d17d95c71f72fbf011959",
+    "pull_request": null,
+    "dirty": true,
+    "display": "0.3 sprint/009/phase/057-favorites:203+dirty"
+  }
+}

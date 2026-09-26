@@ -575,3 +575,11 @@ controls beside Refresh. Existing UiButton/ButtonPainter gain a pill role for th
 Markdown toggle; IconCatalog owns its M/down-arrow/box glyph. No new files or
 cross-layer contracts are introduced. FileNameFilter keeps its reusable type
 flags; this workspace uses Markdown plus the name pattern, with text flag false.
+
+### P057 — Persistent favorites adapter
+
+`application/ui/FavoritesPanel.{h,cpp}` owns the FOX Favorites list,
+canonical folder/file entries, sorting, separator, chooser and registry persistence.
+WorkspacePanel composes it; ApplicationWorkspace injects navigation/feedback through
+existing setWorkPath/openTarget workflows. It owns no document loading or parsing.
+OpenPathDialog remains the shared mixed selector with optional action labels.

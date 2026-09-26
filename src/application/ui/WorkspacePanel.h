@@ -1,4 +1,5 @@
 #pragma once
+#include "FavoritesPanel.h"
 #include "IndexPanel.h"
 #include "RecentFilesPanel.h"
 #include "SidebarWidget.h"
@@ -40,6 +41,7 @@ public:
   UiButton* markdown = nullptr;
   FX::FXList* workPaths = nullptr;
   RecentFilesPanel* recentFiles = nullptr;
+  FavoritesPanel* favorites = nullptr;
   FX::FXLabel* searchStatus = nullptr;
   WorkspacePanel(FX::FXComposite*, UiContext&);
   ~WorkspacePanel() override;

@@ -6,7 +6,7 @@ role: Adapter
 owner: application
 status: Implemented
 scope: FirstRelease
-requirements: UR-038, UR-032, UR-033, UR-028, UR-029, UR-025, UR-026, UR-021, UR-011, UR-001, UR-006, UR-007, SR-002, SR-008, SR-013, UR-015, UR-017, UR-018, UR-019, UR-020, SR-019
+requirements: UR-045, UR-038, UR-032, UR-033, UR-028, UR-029, UR-025, UR-026, UR-021, UR-011, UR-001, UR-006, UR-007, SR-002, SR-008, SR-013, UR-015, UR-017, UR-018, UR-019, UR-020, SR-019
 uses: FUNC-020, FUNC-001, FUNC-002, FUNC-005, FUNC-007, FUNC-012, FUNC-013, FUNC-014, FUNC-015, FUNC-018, FUNC-019
 ---
 
@@ -78,6 +78,16 @@ WorkspacePanel owns the checked/filter state; UiButton and ButtonPainter own the
 pill presentation, IconCatalog owns the M/down-arrow/box glyph. Implemented changes
 follow [P056](../../../sprints/Sprint-008--Sidebar-Header/Phase-056--Sidebar-Header.md).
 
+P057 implemented: FavoritesPanel owns persistent user-selected folders/files, independent
+of recent histories. The third lower tab uses alphabetical groups and a disabled
+horizontal separator. Add reuses OpenPathDialog with optional action labels; Remove
+only forgets an entry. Canonical paths deduplicate additions; missing restored paths
+remain visible. Deferred activation checks saved target type before callbacks.
+Arrow/Home/End select without opening; click, Enter and Space activate.
+The private list adapter distinguishes keyboard selection from activation.
+See [P057](../../../sprints/Sprint-009--Favorites/Phase-057--Favorites.md) for limits,
+ordering and registry ownership. Application wiring reuses existing dirty policy.
+
 ## 5. Plumbing
 
 | Step | Event / caller | Called symbol | Source or contract file | Data / result | Failure / side effect | Status |
@@ -115,6 +125,10 @@ follow [P056](../../../sprints/Sprint-008--Sidebar-Header/Phase-056--Sidebar-Hea
 | 56 | viewport/profile changes | `DocumentZoom::refresh` | `src/application/zoom/DocumentZoom.cpp` | geometry → editor/host scale and controls | guard reentrancy; preserve anchor | Implemented |
 | 57 | Markdown button activation | `WorkspacePanel::onMarkdown` | `src/application/ui/WorkspacePanel.cpp` | toggle checked state → deferred name/type filter | document/root unchanged | Implemented |
 | 58 | Files/Index selection | `WorkspacePanel::onTab` | `src/application/ui/WorkspacePanel.cpp` | active page → Files-only control visibility | retain filter; Refresh remains | Implemented |
+| 59 | Favorites Add chooser | `FavoritesPanel::add` | `src/application/ui/FavoritesPanel.cpp` | canonical path/type → sorted persisted entry | invalid/duplicate/limit handled without navigation | Implemented |
+| 60 | Favorites selection / deferred timeout | `FavoritesPanel::onActivate` | `src/application/ui/FavoritesPanel.cpp` | copied path/type → injected opening | missing/type change reports error; destructor cancels timer | Implemented |
+| 61 | application composition | `Application::wireWorkspace` | `src/application/ApplicationWorkspace.cpp` | Favorites callbacks → setWorkPath/openTarget | existing root/document and dirty policy | Implemented |
+| 62 | Favorites Remove | `FavoritesPanel::onRemove` | `src/application/ui/FavoritesPanel.cpp` | selected row → registry/list update | no filesystem deletion; separator ignored | Implemented |
 
 ## 6. Reuse and dependencies
 
@@ -195,3 +209,7 @@ source/binary manifest. Earlier phase placement descriptions retain their dated
 scope. Status remains Implemented; this is not blanket physical-display verification.
 
 P056 header/filter acceptance: [evidence](../../../sprints/Sprint-008--Sidebar-Header/evidence/P056.md).
+
+P057 adds UR-045/AT-073. FavoritesGuiTest covers native favorites interaction and
+restart persistence; [phase evidence](../../../sprints/Sprint-009--Favorites/evidence/P057.md)
+records actual results and limits.

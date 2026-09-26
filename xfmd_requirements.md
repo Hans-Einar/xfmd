@@ -452,3 +452,9 @@ admits all file types. In either state AND with the existing filename pattern.
 This does not remove plain-text opening. AT-028/040/052 cover native toggle/Space,
 filter retention, tab visibility and header geometry. See
 [P056](sprints/Sprint-008--Sidebar-Header/Phase-056--Sidebar-Header.md).
+
+## Persistent sidebar favorites — 2026-09-26 (P057)
+
+| ID | Requirement | Acceptance |
+| --- | --- | --- |
+| UR-045 | The Files sidebar includes a Favorites subpanel beside Folders and Files. Users can add and remove persistent folder/file favorites independently of recent history. Folders are alphabetical above a horizontal separator; files are alphabetical below it. Use case-insensitive basename ordering with path tie-breaks. Show the separator only for mixed groups. Folder activation changes work root; files use existing opening and unsaved-change policy. Missing targets remain removable and failed activation preserves document/root. | AT-073: native Add/Cancel/Remove, folder/file activation, mixed ordering/separator, duplicate prevention, restart persistence and dirty/missing/changed-target preservation. |

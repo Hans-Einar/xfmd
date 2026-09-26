@@ -59,6 +59,8 @@ WorkspacePanel::WorkspacePanel(FXComposite* parent, UiContext& context)
   workPaths->setNumVisible(4);
   new FXTabItem(recentTabs, "Files\tRecent files");
   recentFiles = new RecentFilesPanel(recentTabs, context);
+  new FXTabItem(recentTabs, "Favorites\tFavorite folders and files");
+  favorites = new FavoritesPanel(recentTabs, context);
   index = new IndexPanel(pages, context);
   std::vector<std::string> saved;
   for (int i = 0; i < 32; ++i) {
