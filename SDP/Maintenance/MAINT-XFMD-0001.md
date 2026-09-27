@@ -1,0 +1,355 @@
+# MAINT-XFMD-0001 — SDP installation
+
+| Field | Value |
+| --- | --- |
+| id | MAINT-XFMD-0001 |
+| project | XFMD |
+| state | completed |
+| operation | install-141ecdb474cd970124926c4e |
+
+Baseline: manual. Target descriptor: edc0c72101a437c6e12c40a081ef59ae41cf0db32bcaedb73824ec48495aaee5. Provenance: signed.
+
+Completion is conditional on the operation journal reporting completed.
+Backups and forward recovery are retained in SDP/.sdp-operations/install-141ecdb474cd970124926c4e.
+
+## Changes
+
+- write .codex/skills/sdp-architect/SKILL.md
+- write .codex/skills/sdp-auditor/SKILL.md
+- write .codex/skills/sdp-change-analysis/SKILL.md
+- write .codex/skills/sdp-master/SKILL.md
+- write .codex/skills/sdp-planning/SKILL.md
+- write .codex/skills/sdp-planning/references/plan-template.md
+- write .codex/skills/sdp-planning/references/plans.md
+- write .codex/skills/sdp-release/SKILL.md
+- write .codex/skills/sdp-reviewer/SKILL.md
+- write .codex/skills/sdp-steering/SKILL.md
+- write .codex/skills/sdp-traceability/SKILL.md
+- write .codex/skills/sdp-verifier/SKILL.md
+- write .codex/skills/sdp-versioning/SKILL.md
+- write .codex/skills/sdp-vertical-refactor/SKILL.md
+- write .codex/skills/sdp-worker/SKILL.md
+- write .codex/skills/sdp/SKILL.md
+- write .codex/skills/sdp/references/document-workflow.md
+- write .codex/skills/sdp/references/source-map.md
+- write AGENTS-project.md
+- write AGENTS.md
+- write CONTRIBUTING.md
+- write SDP/01--Mandate/Mandate.md
+- write SDP/01--Mandate/README.md
+- write SDP/05--Implementation/README.md
+- write SDP/Agents/Scrum/README.md
+- write SDP/CodeReview/README.md
+- write SDP/Framework/README.md
+- write SDP/Framework/planning/Plan-template.md
+- write SDP/Framework/planning/Plans.md
+- write SDP/Framework/templates/FixRecord.yaml
+- write SDP/Framework/templates/RELEASE-NOTES.md
+- write SDP/Framework/templates/ReleaseRecord.yaml
+- write SDP/Framework/templates/SDP-project.manifest.yaml
+- write SDP/KanBan/Card-template.md
+- write SDP/KanBan/History.md
+- write SDP/KanBan/Lineage.md
+- write SDP/KanBan/README.md
+- write SDP/KanBan/Upstream.md
+- write SDP/KanBan/active/.gitkeep
+- write SDP/KanBan/backlog/#003--Question--SDUI-widget-ownership.md
+- write SDP/KanBan/backlog/#012--Ref--SDP--014--KanBan-format-sync.md
+- write SDP/KanBan/backlog/#014--Proposal--SDP-sidebar-and-generated-navigation.md
+- write SDP/KanBan/backlog/#015--Proposal--SDL-design-file-preview.md
+- write SDP/KanBan/backlog/#017--Proposal--Adopt-SDP-and-model-XFMD.md
+- write SDP/KanBan/backlog/.gitkeep
+- write SDP/KanBan/board.json
+- write SDP/KanBan/canceled/.gitkeep
+- write SDP/KanBan/completed/#001--Proposal--Documentation-reconciliation.md
+- write SDP/KanBan/completed/#002--Study--BoxUI-branch-disposition.md
+- write SDP/KanBan/completed/#004--Change--Conversation-note-workflow.md
+- write SDP/KanBan/completed/#005--Study--SDL-acceptance-evidence.md
+- write SDP/KanBan/completed/#006--Change--Open-files-and-folders.md
+- write SDP/KanBan/completed/#007--Change--File-types-and-external-opening.md
+- write SDP/KanBan/completed/#008--Change--Document-path-and-file-filter.md
+- write SDP/KanBan/completed/#009--Change--Sidebar-controls-and-recent-tabs.md
+- write SDP/KanBan/completed/#010--Change--Document-zoom-controls.md
+- write SDP/KanBan/completed/#011--Change--Toolbar-layout-and-color-popup.md
+- write SDP/KanBan/completed/#013--Change--Sidebar-header-markdown-filter.md
+- write SDP/KanBan/completed/#016--Change--SDP-process-bootstrap.md
+- write SDP/KanBan/completed/#018--Change--Sidebar-favorites.md
+- write SDP/KanBan/completed/.gitkeep
+- write SDP/KanBan/evidence/2026-09-24-ui-wishlist/README.md
+- write SDP/KanBan/evidence/2026-09-24-ui-wishlist/sidebar-before.png
+- write SDP/KanBan/evidence/2026-09-24-ui-wishlist/toolbar-before.png
+- write SDP/KanBan/examples/lineage.ndjson
+- write SDP/KanBan/examples/verify_lineage.py
+- write SDP/KanBan/irrelevant/.gitkeep
+- write SDP/KanBan/ledger-event.schema.json
+- write SDP/KanBan/ledger-payload-0.2.schema.json
+- write SDP/KanBan/ledger-payload.schema.json
+- write SDP/KanBan/onHold/.gitkeep
+- write SDP/KanBan/superseded/.gitkeep
+- write SDP/KanBan/verify_board.py
+- write SDP/Maintenance/README.md
+- write SDP/Maintenance/SDP1/Plan-and-Evidence.md
+- write SDP/ProjectManagement/Ledger.ndjson
+- write SDP/ProjectManagement/README.md
+- write SDP/ProjectManagement/kanban-payload-0.1.schema.json
+- write SDP/ProjectManagement/kanban-payload-0.2.schema.json
+- write SDP/ProjectManagement/ledger-event.schema.json
+- write SDP/ProjectManagement/management-payload-0.2.schema.json
+- write SDP/ProjectManagement/management-payload.schema.json
+- write SDP/README.md
+- write SDP/RELEASE-NOTES.md
+- write SDP/Refactors/README.md
+- write SDP/SDP-DOCUMENT-GUIDE.md
+- write SDP/SDP-project.manifest.yaml
+- write SDP/Sprints/README.md
+- write SDP/Traceability/CurrentIndex.yaml
+- write SDP/Traceability/README.md
+- write SDP/Traceability/Relations.yaml
+- write SDP/navigation.json
+- write docs/working-method.md
+- write implementationPlan.md
+- write sprints/README.md
+- write sprints/Sprint-005--Tooling-Boundaries/README.md
+- write sprints/Sprint-006--SDL-Acceptance/README.md
+- delete SDP/Agents/KanBan/Card-template.md
+- delete SDP/Agents/KanBan/History.md
+- delete SDP/Agents/KanBan/Ledger.ndjson
+- delete SDP/Agents/KanBan/Lineage.md
+- delete SDP/Agents/KanBan/README.md
+- delete SDP/Agents/KanBan/Upstream.md
+- delete SDP/Agents/KanBan/active/.gitkeep
+- delete SDP/Agents/KanBan/backlog/#003--Question--SDUI-widget-ownership.md
+- delete SDP/Agents/KanBan/backlog/#012--Ref--SDP--014--KanBan-format-sync.md
+- delete SDP/Agents/KanBan/backlog/#014--Proposal--SDP-sidebar-and-generated-navigation.md
+- delete SDP/Agents/KanBan/backlog/#015--Proposal--SDL-design-file-preview.md
+- delete SDP/Agents/KanBan/backlog/#017--Proposal--Adopt-SDP-and-model-XFMD.md
+- delete SDP/Agents/KanBan/backlog/.gitkeep
+- delete SDP/Agents/KanBan/board.json
+- delete SDP/Agents/KanBan/canceled/.gitkeep
+- delete SDP/Agents/KanBan/completed/#001--Proposal--Documentation-reconciliation.md
+- delete SDP/Agents/KanBan/completed/#002--Study--BoxUI-branch-disposition.md
+- delete SDP/Agents/KanBan/completed/#004--Change--Conversation-note-workflow.md
+- delete SDP/Agents/KanBan/completed/#005--Study--SDL-acceptance-evidence.md
+- delete SDP/Agents/KanBan/completed/#006--Change--Open-files-and-folders.md
+- delete SDP/Agents/KanBan/completed/#007--Change--File-types-and-external-opening.md
+- delete SDP/Agents/KanBan/completed/#008--Change--Document-path-and-file-filter.md
+- delete SDP/Agents/KanBan/completed/#009--Change--Sidebar-controls-and-recent-tabs.md
+- delete SDP/Agents/KanBan/completed/#010--Change--Document-zoom-controls.md
+- delete SDP/Agents/KanBan/completed/#011--Change--Toolbar-layout-and-color-popup.md
+- delete SDP/Agents/KanBan/completed/#013--Change--Sidebar-header-markdown-filter.md
+- delete SDP/Agents/KanBan/completed/#016--Change--SDP-process-bootstrap.md
+- delete SDP/Agents/KanBan/completed/#018--Change--Sidebar-favorites.md
+- delete SDP/Agents/KanBan/completed/.gitkeep
+- delete SDP/Agents/KanBan/evidence/2026-09-24-ui-wishlist/README.md
+- delete SDP/Agents/KanBan/evidence/2026-09-24-ui-wishlist/sidebar-before.png
+- delete SDP/Agents/KanBan/evidence/2026-09-24-ui-wishlist/toolbar-before.png
+- delete SDP/Agents/KanBan/examples/lineage.ndjson
+- delete SDP/Agents/KanBan/examples/verify_lineage.py
+- delete SDP/Agents/KanBan/irrelevant/.gitkeep
+- delete SDP/Agents/KanBan/ledger-event.schema.json
+- delete SDP/Agents/KanBan/ledger-payload-0.2.schema.json
+- delete SDP/Agents/KanBan/ledger-payload.schema.json
+- delete SDP/Agents/KanBan/onHold/.gitkeep
+- delete SDP/Agents/KanBan/superseded/.gitkeep
+- delete SDP/Agents/KanBan/verify_board.py
+
+## Preserved paths
+
+- .deps/mermaid-rs-renderer/CHANGELOG.md
+- .deps/mermaid-rs-renderer/README.md
+- .deps/mermaid-rs-renderer/docs/architecture-beta.md
+- .deps/mermaid-rs-renderer/docs/architecture.md
+- .deps/mermaid-rs-renderer/docs/benchmark-suite-design.md
+- .deps/mermaid-rs-renderer/docs/benchmarks.md
+- .deps/mermaid-rs-renderer/docs/chart-geometry.md
+- .deps/mermaid-rs-renderer/docs/dagre-feedback-loop.md
+- .deps/mermaid-rs-renderer/docs/error_tracking.md
+- .deps/mermaid-rs-renderer/docs/flowchart-layout-redesign.md
+- .deps/mermaid-rs-renderer/docs/flowchart-routing-architecture.md
+- .deps/mermaid-rs-renderer/docs/flowchart_layout_config.md
+- .deps/mermaid-rs-renderer/docs/label-attachment.md
+- .deps/mermaid-rs-renderer/docs/label-leaders.md
+- .deps/mermaid-rs-renderer/docs/layout_objective.md
+- .deps/mermaid-rs-renderer/docs/layout_overhaul_plan.md
+- .deps/mermaid-rs-renderer/docs/libavoid-integration.md
+- .deps/mermaid-rs-renderer/docs/libavoid-review.md
+- .deps/mermaid-rs-renderer/docs/packet-profile.md
+- .deps/mermaid-rs-renderer/docs/release.md
+- .deps/mermaid-rs-renderer/docs/routing-shortcuts-review.md
+- .deps/mermaid-rs-renderer/docs/semantic-profiles.md
+- .deps/mermaid-rs-renderer/docs/unwrap_audit.md
+- .deps/mermaid-rs-renderer/docs/visual-benchmark-matrix.md
+- .deps/mermaid-rs-renderer/tests/fixtures/flowchart/routing-review/traceability-ubuntu-pango.md
+- LICENSES/MicroTeX.md
+- LICENSES/mermaid-dependencies.md
+- LICENSES/rust/tinyvec-1.13.3/LICENSE-APACHE.md
+- LICENSES/rust/tinyvec-1.13.3/LICENSE-MIT.md
+- LICENSES/rust/tinyvec-1.13.3/LICENSE-ZLIB.md
+- README.md
+- RELEASE_NOTES.md
+- SDP/02--Requirements/README.md
+- SDP/03--Architecture/README.md
+- SDP/04--Design/README.md
+- SDP/Traceability/Ledger.ndjson
+- SDP/Verification/README.md
+- build-acceptance/external/SDUI/go/README.md
+- build-acceptance/external/SDUI/go/evidence/G1.md
+- build-acceptance/external/SDUI/go/evidence/G2.md
+- build-acceptance/external/SDUI/go/evidence/G3.md
+- build-acceptance/external/SDUI/go/runtime/README.md
+- build-acceptance/external/SystemDesignLanguage/go/README.md
+- build-acceptance/external/SystemDesignLanguage/go/evidence/G4.md
+- build-acceptance/external/SystemDesignLanguage/go/evidence/G6.md
+- docs/design/fox-ui-lab/README.md
+- docs/design/fox-ui-layer.md
+- docs/design/mermaid-architecture-authoring.md
+- docs/design/mermaid-broad-authoring.md
+- docs/design/mermaid-integration.md
+- docs/design/mermaid-label-attachment.md
+- docs/design/mermaid-label-leaders.md
+- docs/design/mermaid-label-wrap.md
+- docs/design/mermaid-libavoid-build.md
+- docs/design/mermaid-planning-authoring.md
+- docs/design/mermaid-record-schema.md
+- docs/design/mermaid-routing-study.md
+- docs/design/mermaid-semantic-authoring.md
+- docs/design/mermaid-semantic-model.md
+- docs/design/mermaid-sequence-authoring.md
+- docs/design/mermaid-svg-routing.md
+- docs/design/mermaid/README.md
+- docs/design/reading-colors.md
+- docs/evidence/P0.md
+- docs/evidence/P1.md
+- docs/evidence/P10.md
+- docs/evidence/P11.md
+- docs/evidence/P12.md
+- docs/evidence/P13.md
+- docs/evidence/P14.md
+- docs/evidence/P15.md
+- docs/evidence/P16.md
+- docs/evidence/P17-P19.md
+- docs/evidence/P2.md
+- docs/evidence/P20.md
+- docs/evidence/P21.md
+- docs/evidence/P22.md
+- docs/evidence/P23.md
+- docs/evidence/P24.md
+- docs/evidence/P25.md
+- docs/evidence/P26.md
+- docs/evidence/P27.md
+- docs/evidence/P28.md
+- docs/evidence/P29.md
+- docs/evidence/P3.md
+- docs/evidence/P30.md
+- docs/evidence/P31-lifecycle.md
+- docs/evidence/P32.md
+- docs/evidence/P32/traceability.md
+- docs/evidence/P33.md
+- docs/evidence/P34.md
+- docs/evidence/P35.md
+- docs/evidence/P36.md
+- docs/evidence/P37.md
+- docs/evidence/P38.md
+- docs/evidence/P39.md
+- docs/evidence/P4.md
+- docs/evidence/P40.md
+- docs/evidence/P41-integration.md
+- docs/evidence/P41.md
+- docs/evidence/P5.md
+- docs/evidence/P6.md
+- docs/evidence/P7.md
+- docs/evidence/P8.md
+- docs/evidence/P9.md
+- docs/evidence/document-links.md
+- docs/evidence/sidebar-tree.md
+- docs/evidence/wheel-scrolling.md
+- docs/versioning.md
+- docs/xfe-integration-study.md
+- fox_ui_improvements.md
+- fox_ux_improvements.md
+- mermaid_coverage.md
+- mermaid_evicence.md
+- softwareArchitecture.md
+- softwareDesign.md
+- sprints/Sprint-001--Versioning/Phase-042--Build-Identity.md
+- sprints/Sprint-001--Versioning/README.md
+- sprints/Sprint-002--Status-Version/Phase-043--Status-Version.md
+- sprints/Sprint-002--Status-Version/README.md
+- sprints/Sprint-004--SDL-Navigation/Phase-049--SDL-Navigation.md
+- sprints/Sprint-004--SDL-Navigation/Phase-050--Document-Leases.md
+- sprints/Sprint-004--SDL-Navigation/README.md
+- sprints/Sprint-005--Tooling-Boundaries/Phase-051--Tooling-Boundaries.md
+- sprints/Sprint-006--SDL-Acceptance/Phase-052--SDL-Acceptance.md
+- sprints/Sprint-007--Workspace-UI/Phase-053--File-Opening.md
+- sprints/Sprint-007--Workspace-UI/Phase-054--Workspace-Layout.md
+- sprints/Sprint-007--Workspace-UI/Phase-055--Document-Zoom.md
+- sprints/Sprint-007--Workspace-UI/README.md
+- sprints/Sprint-007--Workspace-UI/evidence/Completion.md
+- sprints/Sprint-007--Workspace-UI/evidence/P053.md
+- sprints/Sprint-007--Workspace-UI/evidence/P054.md
+- sprints/Sprint-007--Workspace-UI/evidence/P055.md
+- sprints/Sprint-008--Sidebar-Header/Phase-056--Sidebar-Header.md
+- sprints/Sprint-008--Sidebar-Header/README.md
+- sprints/Sprint-008--Sidebar-Header/evidence/P056.md
+- sprints/Sprint-009--Favorites/Phase-057--Favorites.md
+- sprints/Sprint-009--Favorites/README.md
+- sprints/Sprint-009--Favorites/evidence/M2/README.md
+- sprints/Sprint-009--Favorites/evidence/P057.md
+- sprints/templates/Phase.md
+- src/application/README.md
+- src/blueprint/README.md
+- src/blueprint/feature/Feature-001--Markdown-Presentation.md
+- src/blueprint/feature/Feature-002--Live-Preview.md
+- src/blueprint/feature/Feature-003--Document-Navigation.md
+- src/blueprint/feature/Feature-004--Synchronized-Scrolling.md
+- src/blueprint/feature/Feature-005--Work-Path-Navigation.md
+- src/blueprint/feature/Feature-006--Configurable-Scrolling.md
+- src/blueprint/feature/Feature-007--Paged-Publication.md
+- src/blueprint/feature/Feature-008--Chapter-Navigation.md
+- src/blueprint/feature/Feature-009--Document-References.md
+- src/blueprint/feature/Feature-010--Mermaid-Diagrams.md
+- src/blueprint/functionality/Functionality-001--Document-Session.md
+- src/blueprint/functionality/Functionality-002--Local-File-Storage.md
+- src/blueprint/functionality/Functionality-003--Markdown-Interpretation.md
+- src/blueprint/functionality/Functionality-004--Render-Layout.md
+- src/blueprint/functionality/Functionality-005--FOX-Presentation-Host.md
+- src/blueprint/functionality/Functionality-006--Event-Scheduling.md
+- src/blueprint/functionality/Functionality-007--Preview-Pipeline.md
+- src/blueprint/functionality/Functionality-008--Navigation-History.md
+- src/blueprint/functionality/Functionality-009--Source-Anchor-Mapping.md
+- src/blueprint/functionality/Functionality-010--Workspace-Controls.md
+- src/blueprint/functionality/Functionality-011--Text-Editing.md
+- src/blueprint/functionality/Functionality-012--Work-Path-History.md
+- src/blueprint/functionality/Functionality-013--Filtered-File-Tree.md
+- src/blueprint/functionality/Functionality-014--Application-Preferences.md
+- src/blueprint/functionality/Functionality-015--Scroll-Motion.md
+- src/blueprint/functionality/Functionality-016--Typography-And-Drawing.md
+- src/blueprint/functionality/Functionality-017--Page-Composition.md
+- src/blueprint/functionality/Functionality-018--PDF-Export.md
+- src/blueprint/functionality/Functionality-019--Application-Identity.md
+- src/blueprint/functionality/Functionality-020--Document-Index.md
+- src/blueprint/functionality/Functionality-021--Preview-Text-Selection.md
+- src/blueprint/functionality/Functionality-022--Embedded-Visuals.md
+- src/blueprint/functionality/Functionality-023--Mermaid-Interpretation.md
+- src/blueprint/functionality/Functionality-024--Diagram-Layout.md
+- src/blueprint/functionality/Functionality-025--Diagram-Preparation.md
+- src/blueprint/functionality/Functionality-026--Build-Identity.md
+- src/blueprint/functionality/Functionality-031--Generated-Document-Navigation.md
+- src/blueprint/templates/Feature-TEMPLATE.md
+- src/blueprint/templates/Functionality-TEMPLATE.md
+- src/blueprint/templates/README.md
+- src/contracts/README.md
+- src/interpreter/README.md
+- src/renderer/README.md
+- tests/fixtures/markdown/basics.md
+- tests/fixtures/markdown/mermaid-sequence.md
+- tests/fixtures/markdown/mermaid-traceability.md
+- tests/fixtures/markdown/mermaid.md
+- tests/fixtures/markdown/next.md
+- tests/fixtures/markdown/rich-preview.md
+- tests/fixtures/markdown/tables.md
+- xfmd_requirements.md
+
+## Warnings
+
+- Scan excludes .git, node_modules, .venv, vendor, build and .cache; non-Markdown references are not rewritten.

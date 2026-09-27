@@ -7,7 +7,7 @@ KB-XFMD-017 owns the subsequent model/process adoption; existing product records
 remain authoritative until reconciled.
 
 The owner added a conversation-note workflow on 2026-09-24. Use the
-[KanBan board](../SDP/Agents/KanBan/README.md) for unresolved discussions, findings and
+[KanBan board](../SDP/KanBan/README.md) for unresolved discussions, findings and
 follow-up ideas. Other projects can supply evidence, but do not become authorities
 for XFMD requirements merely by being referenced. Write new/revised documentation
 in English; preserve the meaning and provenance of older material when translating.
@@ -51,7 +51,7 @@ CI builds ready sprint PRs, main integration and explicit manual runs. Ordinary
 phase pushes and draft PRs do not start program builds. This replaces the historical
 per-phase PR practice. [Versioning](versioning.md) defines major/minor, branch/PR
 and commit number. The owner has now authorized SDP adoption; see
-[the migration handoff](../SDP/Agents/KanBan/backlog/%23017--Proposal--Adopt-SDP-and-model-XFMD.md).
+[the migration handoff](../SDP/KanBan/backlog/%23017--Proposal--Adopt-SDP-and-model-XFMD.md).
 Existing sprint/blueprint rules continue during the documented transition.
 
 ## 1. Design objects

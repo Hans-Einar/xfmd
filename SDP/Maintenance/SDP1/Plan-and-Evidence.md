@@ -2,7 +2,7 @@
 
 Base: f3c2c31; branch: maintenance/phase-sdp1-process-bootstrap.
 Owner authorization: 2026-09-25. Primary:
-[KB-XFMD-016](../../Agents/KanBan/completed/%23016--Change--SDP-process-bootstrap.md).
+[KB-XFMD-016](../../KanBan/completed/%23016--Change--SDP-process-bootstrap.md).
 
 | Milestone | Scope | State |
 | --- | --- | --- |
@@ -17,7 +17,7 @@ Git retains earlier content at the old root. Each existing card gains a current
 CardState and an appended review event; no past event bytes are rewritten.
 Evidence images and other binary records are preserved byte-for-byte.
 
-[Upstream](../../Agents/KanBan/Upstream.md) pins SDP commit `1a3f5e88364ee219b063dd4615fac19ced33d89b`.
+[Upstream](../../KanBan/Upstream.md) pins SDP commit `1a3f5e88364ee219b063dd4615fac19ced33d89b`.
 The new-event payload is 0.2; board metadata stays 0.1 and the envelope 1.0.
 Current definitions are local and usable without the SDP checkout. A globally
 released overall KanBan version remains upstream work in KB-SDP-014.
@@ -32,7 +32,7 @@ verification or build is claimed for this documentation/process delivery.
 
 ## Handoff
 
-[KB-XFMD-017](../../Agents/KanBan/backlog/%23017--Proposal--Adopt-SDP-and-model-XFMD.md)
+[KB-XFMD-017](../../KanBan/backlog/%23017--Proposal--Adopt-SDP-and-model-XFMD.md)
 owns full process adoption and .design models. Requirements/architecture/blueprints
 and sprint evidence stay authoritative during that work. Native sidebar/preview
 features remain separately tracked. No runtime discovery metadata is invented.

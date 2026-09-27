@@ -6,3 +6,7 @@ __pycache__/
 /.deps/
 
 /target/
+
+# Local SDP recovery journals/backups; installed facts and reports remain tracked.
+/SDP/.sdp-operations/
+/SDP/.sdp-backups/

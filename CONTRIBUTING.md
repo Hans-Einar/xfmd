@@ -1,7 +1,7 @@
 # Contributing to XFMD
 
 Start with [AGENTS.md](AGENTS.md), the [working method](docs/working-method.md),
-[KanBan board](SDP/Agents/KanBan/README.md), [requirements](xfmd_requirements.md),
+[KanBan board](SDP/KanBan/README.md), [requirements](xfmd_requirements.md),
 [architecture](softwareArchitecture.md) and affected [blueprints](src/blueprint/README.md).
 The working method defines the process; this guide provides contributor entrypoints.
 

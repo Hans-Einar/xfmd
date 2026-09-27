@@ -6,7 +6,7 @@ for another agent. This is a process assignment, not a new set of product featur
 
 XFMD's existing purpose is a lightweight Markdown viewer/editor and companion to
 xfw/xfi. [Product requirements](../../xfmd_requirements.md) retain current needs
-and acceptance. [KB-XFMD-017](../Agents/KanBan/backlog/%23017--Proposal--Adopt-SDP-and-model-XFMD.md)
+and acceptance. [KB-XFMD-017](../KanBan/backlog/%23017--Proposal--Adopt-SDP-and-model-XFMD.md)
 will inventory stakeholders/actors from actual sources and distinguish owner
 requirements from reconstructed design. Do not infer an exhaustive stakeholder
 list from this bootstrap.
