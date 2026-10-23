@@ -1,0 +1,6 @@
+flowchart LR
+    n_ExternalViewGenerator["ExternalViewGenerator (unit)"]
+    n_GeneratedViews["GeneratedViews (unit)"]
+    n_GenerationLifecycle["GenerationLifecycle (channel)"]
+    n_GenerationLifecycle -->|receiver| n_ExternalViewGenerator
+    n_GeneratedViews -->|sender| n_GenerationLifecycle

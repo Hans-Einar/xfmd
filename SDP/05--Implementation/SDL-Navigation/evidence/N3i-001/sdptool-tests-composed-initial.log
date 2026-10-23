@@ -1,0 +1,5 @@
+--- FAIL: TestOverviewTargetsPreserveComposedSourceProvenance (0.01s)
+    overview_test.go:207: UNSUPPORTED_SYNTAX at 11:1: Expected an ASCII identifier matching [A-Z][A-Za-z0-9]*
+FAIL
+FAIL	github.com/Hans-Einar/SDP/SDPTool	4.779s
+FAIL

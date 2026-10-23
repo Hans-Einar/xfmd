@@ -1,0 +1,11 @@
+=== RUN   TestDeferredCLIAndJSONActions
+--- PASS: TestDeferredCLIAndJSONActions (0.02s)
+=== RUN   TestDeferredDiscoveryPreservesSourcesAndOtherTabs
+--- PASS: TestDeferredDiscoveryPreservesSourcesAndOtherTabs (0.01s)
+=== RUN   TestDeferredProjectExceedsOldCombinedNodeLimit
+    deferred_navigation_test.go:147: all 12 models reachable: 22236 expanded nodes, 31 initial nodes
+--- PASS: TestDeferredProjectExceedsOldCombinedNodeLimit (26.49s)
+=== RUN   TestDeferredComposedFreshnessAndMissingSelectors
+--- PASS: TestDeferredComposedFreshnessAndMissingSelectors (0.01s)
+PASS
+ok  	github.com/Hans-Einar/SDP/SDPTool	26.545s

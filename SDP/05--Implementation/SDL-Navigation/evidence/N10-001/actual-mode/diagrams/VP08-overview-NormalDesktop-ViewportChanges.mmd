@@ -1,0 +1,8 @@
+flowchart LR
+    n_NativeShell["NativeShell (unit)"]
+    n_Viewport["Viewport (unit)"]
+    n_ViewportChanges["ViewportChanges (channel)"]
+    n_ViewportChanges -->|receiver| n_NativeShell
+    n_NativeShell -->|sender| n_ViewportChanges
+    n_ViewportChanges -->|receiver| n_Viewport
+    n_Viewport -->|sender| n_ViewportChanges

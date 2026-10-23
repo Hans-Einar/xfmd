@@ -149,7 +149,7 @@ void run() {
   CHECK(panel->tree->getPathnameItem((base / "one-new.md").c_str()));
   CHECK(panel->history.root() == base && panel->nameFilter() == "one*");
   // Native Index tab and Refresh rebuild the edited buffer, never disk contents.
-  nativeClick(panel->tabs->getLast(), 15, 10);
+  nativeClick(panel->tabs->getFirst()->getNext(), 15, 10);
   CHECK(panel->tabs->getCurrent() == 1 && panel->index->shown());
   CHECK(!panel->markdown->shown() && !panel->upButton->shown() && !panel->openButton->shown());
   CHECK(panel->refreshButton->shown() && panel->markdown->isChecked());

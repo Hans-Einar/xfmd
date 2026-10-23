@@ -6,74 +6,86 @@ role: Workflow
 owner: application
 status: Implemented
 scope: FirstRelease
-requirements: UR-001, UR-005, UR-009, SR-002, SR-005, SR-008, SR-013
+requirements: UR-001, UR-005, UR-009, UR-048, SR-002, SR-005, SR-008, SR-013
 uses: FUNC-001, FUNC-009
 ---
 
-# Functionality-008: Dokumentnavigasjon og historikk
+# Functionality-008: Document navigation and history
 
-## 1. Hensikt og avgrensning
+## 1. Purpose and scope
 
-Gi dokumentbytte med lokale lenker og back/forward én historikkpolicy. LinkResolver og HistoryStore er små interne roller; offentlige innganger eies av NavigationCoordinator. Ikke legg fillasting i renderer.
+Give local document switching and Back/Forward one history policy. Application
+coordinates link routing; renderer only supplies targets. NavigationCoordinator
+owns document transactions, LinkResolver URI/path policy, HeadingAnchor heading
+IDs and HistoryStore the bounded visit list.
 
-## 2. Krav og akseptanse
+## 2. Requirements and acceptance
 
-Krav: UR-001, UR-005, UR-009, SR-002, SR-005, SR-008, SR-013. Definisjoner og normativ akseptanse finnes i
-[kravspesifikasjonen](../../../xfmd_requirements.md). Kapittel 7 konkretiserer beviset.
+UR-001, UR-005, UR-009, UR-048; SR-002, SR-005, SR-008, SR-013.
+AT-001, AT-005, AT-009, AT-012, AT-015, AT-018, AT-023, AT-077.
+See [requirements](../../../xfmd_requirements.md), including AT-077.
 
-## 3. Kontrakter og eierskap
+## 3. Contracts and ownership
 
-NavigationCoordinator::openTarget/followLink/goBack/goForward er offentlige innganger. HistoryStore eier in-memory liste/cursor (maks 100), LinkResolver eier lokal sti-/URI-policy. Pending request bevarer forrige anker og eventuell historikkindeks. DocumentCoordinator opened-callback er eneste commitVisit-inngang.
+NavigationCoordinator exposes openTarget, openAt, followLink, goBack/goForward.
+Only the committed document callback commits history. Relative paths are resolved
+against the source document's directory, never the process working directory.
+LinkResolver::resourcePath remains a path-only interface. documentLink
+splits a literal # before decoding each component, preserving encoded filename #.
+HeadingAnchor::find maps an exact heading title or unique generated slug
+to its original byte anchor; it performs no I/O and uses no renderer state.
 
-Relative lenker bruker det åpne dokumentets absolutte foreldremappe som base.
-Prosessens arbeidsmappe brukes ikke. Absolute stier beholdes før canonicalisering.
+## 4. Behavior, state and failures
 
-## 4. Atferd, tilstand og feil
+Document load and unsaved-change resolution must succeed before history commit.
+A new visit after Back truncates the forward branch; same-file navigation does not
+duplicate visits. History retains up to 100 entries and restores source anchors.
+Save As renames the current entry. Schemes/network paths, query syntax, malformed
+escapes and control bytes remain rejected by local resolution.
 
-CLI/dialog/sidebar går via Application::open til samme navigation→document-vei. resolveUnsaved og lasting må lykkes før history.commit. Ny visit etter back trunkerer frem-gren; samme fil dupliseres ikke. Back/forward leser fil på nytt og gjenoppretter anker når frame er klart. Percent-encoding dekodes én gang; schemes/network/fragment/query/control-byte avvises. SaveAs oppdaterer aktuell poststi.
+Selected T003 extension: Application and NavigationPanel resolve heading links.
+Exact displayed titles and lowercase ASCII slugs are supported; spaces become
+hyphens, punctuation is removed, duplicate IDs receive -1, -2. Unicode bytes are
+preserved; explicit HTML IDs and full Unicode case folding are not selected.
+Empty fragments mean start. Missing headings report an error in the opened file.
+Same-document jumps retain the live dirty buffer. Cross-file Cancel preserves
+buffer, history and viewport. Pending main anchors apply only to the accepted
+document token, and another open/edit invalidates them.
 
 ## 5. Plumbing
 
-Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
-
-| Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
+| Step | Event / caller | Called symbol | Source or contract file | Data / result | Failure / side effect | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `Application::open` | `NavigationCoordinator::openTarget` | `src/application/navigation/NavigationCoordinator.cpp` | Path → pending request | Reentrant request avvises | Implemented |
-| 2 | `FoxRenderHost link callback` | `NavigationCoordinator::followLink` | `src/application/navigation/NavigationCoordinator.cpp` | LinkTarget → lokal navigasjon | Feil gir status/dialog | Implemented |
-| 3 | `NavigationCoordinator::followLink` | `LinkResolver::resolve` | `src/application/navigation/LinkResolver.cpp` | Basepath/target → canonical local path | Ingen shell/network | Implemented |
-| 4 | `NavigationCoordinator::goBack / goForward` | `HistoryStore::propose` | `src/application/navigation/HistoryStore.cpp` | Retning → indeks | NoOp ved endepunkt | Implemented |
-| 5 | `NavigationCoordinator::openTarget` | `DocumentCoordinator::requestOpen` | `src/application/document/DocumentCoordinator.cpp` | Path → success/failure | Failed/cancel muterer ikke history | Implemented |
-| 6 | `DocumentCoordinator opened callback` | `NavigationCoordinator::commitVisit` | `src/application/navigation/NavigationCoordinator.cpp` | Committed dokument → history | Én callback per commit | Implemented |
-| 7 | `NavigationCoordinator::commitVisit` | `HistoryStore::commit` | `src/application/navigation/HistoryStore.cpp` | Path/forrige anker/target → cursor | Ny visit trunkerer frem-gren | Implemented |
-| 8 | `NavigationCoordinator::commitVisit` | `ScrollCoordinator::restoreAnchor` | `src/application/scroll/ScrollCoordinator.cpp` | Historikkanker → pending restore | Venter på gyldig FrameReady | Implemented |
+| 1 | `Application::open` | `NavigationCoordinator::openTarget` | `src/application/navigation/NavigationCoordinator.cpp` | Path to transaction | Reentrant request rejected | Implemented |
+| 2 | `Application::followLink` | `LinkResolver::documentLink` | `src/application/navigation/LinkResolver.cpp` | URI to path/optional fragment | Invalid local URI rejected | Implemented |
+| 3 | `Application::followLink` | `NavigationCoordinator::openAt` | `src/application/navigation/NavigationCoordinator.cpp` | Same-file anchor | Preserves live edits | Implemented |
+| 4 | `NavigationCoordinator::goBack / goForward` | `HistoryStore::propose` | `src/application/navigation/HistoryStore.cpp` | Direction to visit | No-op at boundary | Implemented |
+| 5 | `NavigationCoordinator::openTarget` | `DocumentCoordinator::requestOpen` | `src/application/document/DocumentCoordinator.cpp` | Path to committed document | Cancel/failure preserves history | Implemented |
+| 6 | `DocumentCoordinator opened callback` | `NavigationCoordinator::commitVisit` | `src/application/navigation/NavigationCoordinator.cpp` | Document to visit | Exactly one commit | Implemented |
+| 7 | `NavigationCoordinator::commitVisit` | `HistoryStore::commit` | `src/application/navigation/HistoryStore.cpp` | Previous anchor to history | Truncates forward branch | Implemented |
+| 8 | `NavigationCoordinator::commitVisit` | `ScrollCoordinator::restoreAnchor` | `src/application/scroll/ScrollCoordinator.cpp` | Byte anchor to deferred viewport | Waits for current frame | Implemented |
+| 9 | `Application::applyLinkAnchor / NavigationPanel model callback` | `HeadingAnchor::find` | `src/application/navigation/HeadingAnchor.cpp` | Parsed headings to source anchor | Missing heading diagnostic | Implemented |
 
-## 6. Gjenbruk og avhengigheter
+## 6. Reuse and dependencies
 
-[FUNC-001](../functionality/Functionality-001--Document-Session.md), [FUNC-009](../functionality/Functionality-009--Source-Anchor-Mapping.md)
+[FUNC-001](Functionality-001--Document-Session.md) owns document state;
+[FUNC-009](Functionality-009--Source-Anchor-Mapping.md) maps anchors to viewports.
+CLI/dialog/sidebar/links share the document transaction. FUNC-031 reuses navigation
+per panel. T003 replaces its restricted fragment matcher with the same heading-ID
+policy as the main panel. External HTTP(S) remains an argv-based browser adapter.
 
-CLI, dialog, sidebar og lenker deler dokumentbytte/commit-policy. Source-anchor-functionality deles med scrollsync. HistoryStore er ikke en service som widgets muterer direkte.
+## 7. Verification
 
-Sprint 004 consumer (2026-09-24 reconstruction): FUNC-031 reuses NavigationCoordinator per panel. NavigationPanel handles its restricted heading-fragment profile before delegating file navigation; this does not broaden LinkResolver globally.
-See [FUNC-031](Functionality-031--Generated-Document-Navigation.md) for the complete call path.
+NavigationTest covers branching history, dirty cancellation, broken paths, bounds,
+escapes/schemes and same-buffer openAt. Native tests exercise actual link hits.
+Historical evidence: [P6](../../../docs/evidence/P6.md) and
+[native links](../../../docs/evidence/document-links.md). T003 acceptance and
+candidate evidence belong to PLAN-XFMD-0007 / MM-001; not yet verified here.
 
-## 7. Verifikasjon
+## 8. Status, risks and change impact
 
-Relevante akseptanse-ID-er: AT-001, AT-005, AT-009, AT-012, AT-015, AT-018, AT-023.
-
-`NavigationTest` tester A/B/C/back/D, avbrudd, brutt lenke, 100-grense, encoding/schemes og ingen dobbel commit. NavigationGuiTest klikker et ekte renderer-hit og kontrollerer back/forward i FOX.
-
-Evidence: [Fase P6](../../../docs/evidence/P6.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
-
-Ny regresjonskontroll: [Native lenker og markører](../../../docs/evidence/document-links.md).
-
-## 8. Status, risiko og endringskonsekvenser
-
-Implemented i P6. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
-Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.
-
-P15-presisering: `NavigationCoordinator::openAt` tar eksplisitt SourceAnchor.
-Samme fil hopper i aktiv buffer, uten ny lesing/dirty-dialog. Annen fil bruker
-samme DocumentCoordinator og committer historikk før pending ankerrestore.
-Refererte kapitler finnes på nytt ved modellaksept etter filåpning; fjernet kapittel
-faller tilbake til start. HTTP(S) i referansetreet går via separat argv-adapter;
-previewens eksisterende link-policy gjelder fortsatt.
+Navigation implemented in P6; source-anchor navigation added in P15. T003 heading
+links implement the design selected before code. Index reference groups retain their
+existing file/source-location semantics and are not an HTML anchor engine.
+Model sources remain under the owner's hold. Update current textual contracts,
+plumbing and evidence with this change; historical evidence keeps its dated scope.

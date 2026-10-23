@@ -1,0 +1,14 @@
+language design-core version 0.5.
+usecase Browse.
+unit Desktop.
+functionality Display.
+usecase Export.
+actor Guest.
+usecase Isolated.
+feature Navigation.
+actor Reader.
+Desktop owns Display.
+Display contributes-to Navigation.
+Navigation supports Browse.
+Reader pursues Browse.
+Reader pursues Export.

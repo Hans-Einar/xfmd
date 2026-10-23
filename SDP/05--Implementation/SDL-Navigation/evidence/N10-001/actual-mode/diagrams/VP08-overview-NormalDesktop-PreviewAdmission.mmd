@@ -1,0 +1,5 @@
+flowchart LR
+    n_Preview["Preview (unit)"]
+    n_PreviewAdmission["PreviewAdmission (channel)"]
+    n_PreviewAdmission -->|receiver| n_Preview
+    n_Preview -->|sender| n_PreviewAdmission

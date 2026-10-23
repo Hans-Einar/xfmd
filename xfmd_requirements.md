@@ -52,6 +52,7 @@ en stub oppfyller ikke i seg selv et funksjonelt krav.
 | UC-009 | Les eller rediger i fullscreen og gå tilbake til samme arbeidsflate. | Aktiv dialog bruker Escape først. | UR-019, UR-007 |
 | UC-010 | Read/edit Mermaid blocks and export supported diagram profiles to PDF. | Invalid/unsupported syntax produces local source fallback. | UR-039, UR-040, UR-041 |
 | UC-011 | Select a registered SDL view in a navigator and open the generated document in an explicitly addressed XFMD panel. | Failed generation/delivery or a dirty main buffer preserves the current document; broker-backed resources follow the panel lease lifecycle. | UR-044, SR-027, SR-028 |
+| UC-012 | Browse the selected SDP project and open cards or producer-generated SDL/SDUI views. | Invalid projects, source changes and late results preserve the current document and edits. | UR-046, SR-029 |
 
 UC-008 retains its original A4/PDF identity. The later Mermaid subsection and
 FTR-010 accidentally reused that ID; UC-010 corrects that collision without
@@ -469,3 +470,125 @@ changing the document/work root. Dismissal, empty space and separators do nothin
 AT-073 replaces chooser/button coverage with these native menu paths and retains
 sorting, persistence and document-preservation coverage. The existing tree folder
 menu's Set work path command remains available.
+
+## Native SDP project navigation — 2026-10-01
+
+UC-012: select a project or its immediate SDP directory, browse process cards and
+model structure, and generate the selected view in the current XFMD window.
+Owner selection: KB-XFMD-014; PLAN-XFMD-0006 / SESSION-XFMD-0001.
+
+| ID | Requirement | Acceptance |
+| --- | --- | --- |
+| UR-046 | Offer an SDP sidebar with KanBan, SDL and SDUI tabs when the selected work root contains an immediate real SDP directory or is that directory. Derive sub-tabs and their order from discovered root nodes of kind tab, retaining selected tab IDs across refresh. Use canonical viewpoint names and producer abstraction labels with code fallback. Offer View source on unambiguously associated .design (SDL) and .sdui (SDUI) nodes, opening original text with ordinary dirty-buffer handling. Consume producer discovery, show source diagnostics and card Ref identity, and expose variable-depth model navigation. Open cards and generate only selected model/frame views in the main pane; Files/Index remain usable. Refresh reloads the selected project. Coalesced source/card changes refresh navigation automatically while retaining surviving expansion/selection identities; generated documents remain explicit snapshots. Watch failures expose manual Refresh. | AT-074: native detection, tabs, tree expansion, card activation and real producer-generated view. |
+| SR-029 | Application owns the sdptool/0.2 adapter and host-selected executable; SDL/SDUI semantics stay producer-owned. Bound processes, JSON and graph expansion. Cancel obsolete selections/root changes and reject late delivery after document changes or into a dirty buffer. Generation errors preserve the last document; retain generated resources while history/rendering can refer to them. | AT-075: schema/size/process errors, cancel/timeout, cyclic/deep graph, root/selection/document races and dirty-buffer retention. |
+
+The first increment uses manual Refresh; automatic source watching remains a
+tracked acceptance extension. Existing explicit navigator/IPC behavior is retained.
+SDUI previews use producer documents/images; this does not select a native widget
+runtime. Standalone .design editing/preview remains the separate #015 increment.
+
+## Standalone Mermaid files — 2026-10-04
+
+| ID | Requirement | Acceptance |
+| --- | --- | --- |
+| UR-047 | Open case-insensitive .mmd files as standalone Mermaid in native Preview, retaining the original raw file identity and source for Editor/Split/save. Reuse current Mermaid profiles, source fallback and preview/PDF pipeline. Keep .txt literal and ordinary fenced Markdown unchanged. Save As must invalidate parsing when document format changes. | AT-076: captured VP01 through CLI/dialog/sidebar/history/favorite/link/SDP opening; actual diagram scene, edit/save/reopen byte preservation, dirty Cancel, BOM/Unicode, malformed source, format-changing Save As, preview/PDF and Markdown/text regressions. |
+
+Owned by KB-XFMD-023 / PLAN-XFMD-0007. The .md-only filter remains literal; use
+all-files mode for .mmd. Additional suffixes and broader Mermaid grammar are not
+selected. The prior explicit-fence restriction in UR-039 applies to Mermaid
+embedded in Markdown; UR-047 adds a separate explicit file-format entry point.
+
+### Local heading links — Session 0002 T003
+
+| ID | Requirement | Acceptance |
+| --- | --- | --- |
+| UR-048 | Follow local Markdown links with a heading fragment, including absolute/relative paths and same-document # links. Resolve heading titles or generated slugs after parsing; retain live edits for same-file jumps and the dirty/history policy for cross-file navigation. Report missing anchors without interpreting the fragment as a filename. | AT-077: native preview click, absolute/relative and percent-escaped paths/fragments, CamelCase and spaced titles, duplicate slugs, same-file dirty preservation, cross-file Cancel, missing anchor/file, Back/Forward and no stale asynchronous jump. |
+
+This owner-selected extension supersedes the earlier main-view fragment exclusion.
+HTML explicit IDs and full Unicode case folding are outside the selected profile.
+
+### SDP runtime and demand-driven selection — Session 0002 T007
+
+UR-046/AT-074 refinement: discovery and parent viewpoint activation must not
+generate all child diagrams. Parent viewpoints with children expand navigation;
+selecting a concrete diagram/frame generates it. Store generated resources in
+private user runtime storage (XDG_RUNTIME_DIR, otherwise /run/user/<uid>), never
+silently in /tmp. Unavailable runtime storage reports an error without replacing
+the document. UID 1000 is this owner's instance, not a portable constant.
+
+SR-029/AT-075 refinement: no stop after 64 successful selections or accumulated
+256 MiB. Retain live/history-referenced generated snapshots, reclaim unreachable
+bundles when asynchronous consumers are idle, and clean the window workspace on
+close. Existing per-bundle/protocol/producer limits remain pending #025; this
+increment does not declare them desired permanent product restrictions.
+
+### SDL viewpoint refinement — Session 0003 T001/T002
+
+UR-046/AT-074 refinement selected in #028: default SDL navigation preserves the
+producer's System/source context and shows each viewpoint once, without phase or
+A-level presentation wrappers. Keep valid reference actions and real diagnostics;
+remove inert cycle/depth placeholder rows. Preserve reference-specific targets,
+source association and surviving selection/expansion across refresh.
+
+A viewpoint label opens its explicitly advertised aggregate overview; expansion
+alone generates nothing. Detail nodes keep their contextual producer targets.
+This supersedes T007's parent-activation-as-expansion as the final desired behavior;
+the planned N2 compatibility stage keeps expansion and reports overview unavailable
+until a producer advertises one. Do not treat bulk detail selection as an overview.
+
+SR-029/AT-075 refinement: retain cycle/stale/dirty protections without confusing
+cycle references with unavailable content. Expose true truncation separately;
+never silently claim a complete tree when resource guards stopped expansion.
+Semantic overview generation remains producer-owned; typed target validation and
+unknown capability behavior must be tested with old/new producer replies.
+
+PLAN-XFMD-0009 and SDP/04--Design/SDL-Navigation/Design.md select the implementation
+boundary. N2/N3/N4 evidence identifies the delivered tree, selected overviews
+and exact-source workflow; installed and development producer capabilities differ.
+#021 owns source spans; #020 owns native notation compatibility.
+
+### SDUI workflow refinement — XFMD 0.7 / Session 0004 T002
+
+UR-046 / SR-029: on explicit SDUI frame selection, show a producer-generated
+composition diagram, source/binding provenance and the existing static text
+prototype together. Distinguish hidden source structure from visible UI content.
+Source links select exact UTF-8 byte spans only when original source still matches
+the generated snapshot. No callbacks execute during preview.
+
+In SDP sidebar mode, keep SDP, KanBan, SDUI and Sessions tool groups visible.
+Unavailable tools have disabled grey icons and explanatory tips. Explicit Launch
+uses producer validation plus the bundled Fyne host, in its own window. The host
+rechecks source revision; unbound SDL callbacks are labelled, never represented
+as working SDL execution. Navigation and closing XFMD do not close the prototype.
+KanBan mutation actions remain unavailable until their separate service contract.
+
+## N3h amendment — large-diagram reading (2026-10-10)
+
+UR-040 / AT-060: retain whole-diagram fit as the default. Offer an explicit
+full-size diagram view in Window wrap, where measured labels can be read using
+normal document zoom and horizontal scrolling. Surrounding text still wraps.
+A4/PDF retain whole-diagram page fitting; this increment does not establish
+large-overview print readability. View-only changes preserve buffer, undo, source
+anchor and selection and reuse prepared scene geometry. See
+[reading design](SDP/04--Design/SDL-Navigation/N3h-Reading.md).
+
+### SDL detail/source refinement — Session0005 N4
+
+UR-046 / AT-074: selected use cases use actor/ellipse notation with realization
+kept separate. Include ordered sequences only for explicitly associated scenarios;
+report missing condition semantics as not specified. Source references in generated
+SDL pages open the original source and select the exact UTF-8 byte range.
+
+SR-029 / AT-075: source links require the retained project/bundle binding and
+unchanged bytes for every composed source. Reject stale graphs, invalid ranges,
+unsafe paths and unrelated contexts; preserve the ordinary Save/Discard/Cancel
+transaction. Producers without this optional contract retain whole-file View source.
+
+### UR-046 / SR-029 deferred discovery refinement (2026-10-21)
+
+When the producer advertises deferred SDL navigation, retain all source entries
+and diagnostics while requesting model graphs only when their source is expanded.
+A failed/stale request must preserve the current document and prior navigation;
+refresh/project changes must invalidate pending requests. Older explicit producer
+command contracts retain eager compatibility. An unavailable/malformed producer
+must surface its diagnostic rather than silently changing discovery modes.

@@ -36,6 +36,10 @@ public:
     FullScreen,
     LeaveFullScreen,
     ToggleTheme,
+    SduiLaunch,
+    KanbanAdd,
+    KanbanMove,
+    FullSizeDiagrams,
     Last
   };
   static double presetPercent(Command);

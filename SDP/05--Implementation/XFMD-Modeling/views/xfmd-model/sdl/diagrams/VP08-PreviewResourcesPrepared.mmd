@@ -1,0 +1,14 @@
+sequenceDiagram
+    participant n_Preview as Preview
+    participant n_Interpreter as Interpreter
+    participant n_VisualResources as Visual Resources
+    participant n_Renderer as Renderer
+    participant n_NativeShell as Native Shell
+    n_Preview->>n_Interpreter: 1: Parse Snapshot (Interpretation Calls)
+    n_Interpreter-->>n_Preview: 2: Parsed Snapshot (Interpretation Calls) reply-to 1
+    n_Preview->>n_VisualResources: 3: Prepare Embedded Resources (Resource Preparation)
+    n_Preview->>n_VisualResources: 4: Prepare Diagram Scenes (Resource Preparation)
+    n_Preview->>n_Preview: 5: Accept Worker Ticket (Preview Admission)
+    n_Preview->>n_Renderer: 6: Layout Model (Layout Calls)
+    n_Renderer-->>n_Preview: 7: Model Laid Out (Layout Calls) reply-to 6
+    n_Preview->>n_NativeShell: 8: Present Frame (Presentation Events)

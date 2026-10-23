@@ -1,0 +1,6 @@
+flowchart LR
+    n_BrowseWorkspace["BrowseWorkspace (usecase)"]
+    n_ReaderAuthor["ReaderAuthor (actor)"]
+    n_WorkPathNavigation["WorkPathNavigation (feature)"]
+    n_ReaderAuthor -->|pursues| n_BrowseWorkspace
+    n_WorkPathNavigation -->|supports| n_BrowseWorkspace

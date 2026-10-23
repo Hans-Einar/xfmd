@@ -1,0 +1,262 @@
+{
+  "scope": "Partial structural and static-state pilot; no native bindings or whole-model claim",
+  "producerCommit": "3b4cff695ecab36a0e897052e3f096bbeb9f3ea0",
+  "sources": {
+    "SDP/SDL/XFMD/Navigation.design": "3002709d67729fd3595ab27c484794d77b675ed28f927db0aec1e23234d288e2",
+    "SDP/SDL/XFMD/SDUI/XfmdDesktop/Navigation.sdui": "710d8167646b3555f292763a00b96223990354908957fc8695f8736c0571fea0"
+  },
+  "tools": {
+    "sdl": {
+      "path": "/tmp/xfmd-modeling-0xt1ad54/bin/sdl",
+      "sha256": "48a096f0203d427c8ff43d082cadc068b14417c4a35dd0712fe5725cab9cd150"
+    },
+    "sdui": {
+      "path": "/tmp/xfmd-modeling-0xt1ad54/bin/sdui",
+      "sha256": "db80acbd86aa5acd1c8eccee6b1ca099f459fb4c3a4d50adc6e2878f81a5407c"
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "/tmp/xfmd-modeling-0xt1ad54/bin/sdl",
+        "check",
+        "/home/warloc/git/xfmd-sdl-navigation/SDP/SDL/XFMD/Navigation.design"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/xfmd-modeling-0xt1ad54/bin/sdl",
+        "format",
+        "/home/warloc/git/xfmd-sdl-navigation/SDP/SDL/XFMD/Navigation.design"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/xfmd-modeling-0xt1ad54/bin/sdl",
+        "ast",
+        "/home/warloc/git/xfmd-sdl-navigation/SDP/SDL/XFMD/Navigation.design"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/xfmd-modeling-0xt1ad54/bin/sdl",
+        "viewpoints",
+        "/home/warloc/git/xfmd-sdl-navigation/SDP/SDL/XFMD/Navigation.design",
+        "--output",
+        "/home/warloc/git/xfmd-sdl-navigation/SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl",
+        "--project",
+        "xfmd-pilot",
+        "--format",
+        "static",
+        "--viewpoint",
+        "VP01,VP02,VP07"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/xfmd-modeling-0xt1ad54/bin/sdui",
+        "/home/warloc/git/xfmd-sdl-navigation/SDP/SDL/XFMD/SDUI/XfmdDesktop/Navigation.sdui",
+        "--entry",
+        "FilesClean",
+        "--format",
+        "ast",
+        "--width",
+        "1440",
+        "--height",
+        "900"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/xfmd-modeling-0xt1ad54/bin/sdui",
+        "/home/warloc/git/xfmd-sdl-navigation/SDP/SDL/XFMD/SDUI/XfmdDesktop/Navigation.sdui",
+        "--entry",
+        "FilesClean",
+        "--format",
+        "dump",
+        "--width",
+        "1440",
+        "--height",
+        "900"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/xfmd-modeling-0xt1ad54/bin/sdui",
+        "/home/warloc/git/xfmd-sdl-navigation/SDP/SDL/XFMD/SDUI/XfmdDesktop/Navigation.sdui",
+        "--entry",
+        "FilesClean",
+        "--format",
+        "svg",
+        "--width",
+        "1440",
+        "--height",
+        "900"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/xfmd-modeling-0xt1ad54/bin/sdui",
+        "/home/warloc/git/xfmd-sdl-navigation/SDP/SDL/XFMD/SDUI/XfmdDesktop/Navigation.sdui",
+        "--entry",
+        "FilesDirtyRejected",
+        "--format",
+        "ast",
+        "--width",
+        "1440",
+        "--height",
+        "900"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/xfmd-modeling-0xt1ad54/bin/sdui",
+        "/home/warloc/git/xfmd-sdl-navigation/SDP/SDL/XFMD/SDUI/XfmdDesktop/Navigation.sdui",
+        "--entry",
+        "FilesDirtyRejected",
+        "--format",
+        "dump",
+        "--width",
+        "1440",
+        "--height",
+        "900"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/xfmd-modeling-0xt1ad54/bin/sdui",
+        "/home/warloc/git/xfmd-sdl-navigation/SDP/SDL/XFMD/SDUI/XfmdDesktop/Navigation.sdui",
+        "--entry",
+        "FilesDirtyRejected",
+        "--format",
+        "svg",
+        "--width",
+        "1440",
+        "--height",
+        "900"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/xfmd-modeling-0xt1ad54/bin/sdui",
+        "/home/warloc/git/xfmd-sdl-navigation/SDP/SDL/XFMD/SDUI/XfmdDesktop/Navigation.sdui",
+        "--entry",
+        "IndexClean",
+        "--format",
+        "ast",
+        "--width",
+        "1440",
+        "--height",
+        "900"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/xfmd-modeling-0xt1ad54/bin/sdui",
+        "/home/warloc/git/xfmd-sdl-navigation/SDP/SDL/XFMD/SDUI/XfmdDesktop/Navigation.sdui",
+        "--entry",
+        "IndexClean",
+        "--format",
+        "dump",
+        "--width",
+        "1440",
+        "--height",
+        "900"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/tmp/xfmd-modeling-0xt1ad54/bin/sdui",
+        "/home/warloc/git/xfmd-sdl-navigation/SDP/SDL/XFMD/SDUI/XfmdDesktop/Navigation.sdui",
+        "--entry",
+        "IndexClean",
+        "--format",
+        "svg",
+        "--width",
+        "1440",
+        "--height",
+        "900"
+      ],
+      "exitCode": 0,
+      "stderr": ""
+    }
+  ],
+  "outputs": {
+    "FilesClean.json": "41300639838fb8fc7a7a1b5794b7f2011b7731259f9e0ecee9bec57701097bc5",
+    "FilesClean.svg": "7f3ab5688bae4671205e8c465660dcf71d9536655750cbf6e7bbbe72d47146fd",
+    "FilesClean.txt": "9d823d851dab5eac8583e32d133e95d737e185392fea98df65fc9db1bf2c274e",
+    "FilesDirtyRejected.json": "41300639838fb8fc7a7a1b5794b7f2011b7731259f9e0ecee9bec57701097bc5",
+    "FilesDirtyRejected.svg": "11e91deacbe344b2551924e50d1d9c55da2a4953d5eb13012e9cdb9b21b1625c",
+    "FilesDirtyRejected.txt": "574b97f4ea85e7d9b2ceae9b36f959e0003ba3717a24916aadca065b47020aac",
+    "IndexClean.json": "41300639838fb8fc7a7a1b5794b7f2011b7731259f9e0ecee9bec57701097bc5",
+    "IndexClean.svg": "c1f62b0e2534ecf4cb85197acff2dfae238e12c6f10e935e6aad96a24e1ca50c",
+    "IndexClean.txt": "4c9ea0ecc7e094e9d4d8716af7ab48d0f0d846a5965f65fc74b6e9b6c6abc108",
+    "sdl/A0/index.md": "cf30b9082b44038f424e60e93b808fcd543a07d0b33c25a60cb0d3a70bf79e75",
+    "sdl/A0/inventory.md": "f025977b0452146d3c50f404dc8199ea94d189b8fb64a5e52149301ec3e67273",
+    "sdl/A1/index.md": "48269d4420c8ea65435cb2415284397bf3ba62f40ece6a45584863fee05c076b",
+    "sdl/A1/inventory.md": "fbe04002c0fb6571e7b771a1de6ac98c8c4e2654c513dfe73038519ea67e5ae2",
+    "sdl/A2/index.md": "fd50f68a7c138d9699d1086b7311116ab349f8fadb61abd5be73f2a8fcbc258e",
+    "sdl/A2/inventory.md": "bbb8c500cecc4c4382e44ebd38b83fe2e02ee7891dac0875b776dc725d40a624",
+    "sdl/A3/index.md": "b083f75057b345dc0f31e33090c4fbda6af4939014887573e315f97215d4c69a",
+    "sdl/A3/inventory.md": "c40d33cd2a23e0e171703b29f5020b7abf5911d93fb764d8a7344e5d87139531",
+    "sdl/A4/index.md": "5e841741b3454e514b8982dc5adde77cf219cba6e732d0666f8676e668433365",
+    "sdl/A4/inventory.md": "afb2b8705c4da6af2f2dcc55f2ac37bd80c677a3c579e44ad9d321349e951b9d",
+    "sdl/A5/index.md": "3ddb326ea6dae1125db900cff3f8eae4aad0b6dd6373d528be21a7b82c4a43c8",
+    "sdl/A5/inventory.md": "7150675018f0b820be7551672f9a8435bb4e4f93038e1a16400ab09c5a93df94",
+    "sdl/diagrams/VP01-EditDocuments.mmd": "4cd63133b62f185fe14ad62405e074528c39731ef8938afc25ac3f017f6e754b",
+    "sdl/diagrams/VP01-ReadDocuments.mmd": "8fb1e89592140c9163c18644792b8127070ed7302ab9316dcc33dd116d7fac92",
+    "sdl/diagrams/VP01-SelectGeneratedView.mmd": "1e21a890b86a4c64920925d688ac91ad71368e641aa2f44f55fe39b9b61a9123",
+    "sdl/diagrams/VP01-feature-DocumentNavigation.mmd": "ca5e1976bcbe20a6f236e5ea884c0671bd963b01d5cab9e185032b4256d686d1",
+    "sdl/diagrams/VP01-feature-LivePreview.mmd": "7010a5c686cb97875ab9d0333f8b59980d9686f10deaef5e742c40a3f02234ac",
+    "sdl/diagrams/VP01-feature-WorkPathNavigation.mmd": "46aa5c576630a6781eb3382552130c9289db07109c2423e5181a0854bad0fbad",
+    "sdl/diagrams/VP02-XfmdDesktop.mmd": "71c410ef41b97268ef810e668cbc939703f637fcb476fbc60a25e78dce1f9263",
+    "sdl/diagrams/VP02-roots.mmd": "b367a90bd1e74015b5b65a688af8395c2cc3a5c8880f5cf9e290e9755b5588a1",
+    "sdl/diagrams/VP07-DocumentNavigation-NormalDesktop.mmd": "047df4b79e893a47e6301cda77ea4c43914f375c7aae7384f528ad50cda24888",
+    "sdl/diagrams/VP07-LivePreview-NormalDesktop.mmd": "7a7e80c1d420138cc4da5152082c4bdf44804afb5ef999d53886e093500cda2e",
+    "sdl/diagrams/VP07-WorkPathNavigation-NormalDesktop.mmd": "b80c63798acc51617c647126ba70a4c2b84a80d97f7c07be64c2f05a47dfffc1",
+    "sdl/index.md": "297ffb67f305fd24b7cfb5ada5bc9304bd30c0d0d25a055f9d131b69f2d29bc5",
+    "sdl/manifest.json": "13d668010bdcb62786d8b9c9119354658265d0934ce9db9b8e118d316201df61",
+    "sdl/navigator.md": "74d7aede8a877e84ebde08f4ef0398384556a71417b33bd74484273763333fcc",
+    "sdl/viewpoints/VP01/VP01-EditDocuments.md": "35be2dbd756c0b8609afde0c0686a7ab7d71f77c36e56c716623bf1fada360ea",
+    "sdl/viewpoints/VP01/VP01-ReadDocuments.md": "6e786b74774871f4178210abe5cc54911ab935b313b73014629a12ab4ae72f09",
+    "sdl/viewpoints/VP01/VP01-SelectGeneratedView.md": "e48acc05aa1eb263b7b710f6dea4d63eb85b04d5ecd75fdf5c03de8832dc1277",
+    "sdl/viewpoints/VP01/VP01-feature-DocumentNavigation.md": "8aa1e56c70f62c4a7af4035b6e1134556910e62b87abe57c1cc91eaebea8c5dd",
+    "sdl/viewpoints/VP01/VP01-feature-LivePreview.md": "6ba5c3662194e6c053e8dc3c2172585cd53a394a51f86dccb7849b1b2d1f2461",
+    "sdl/viewpoints/VP01/VP01-feature-WorkPathNavigation.md": "7d975b5e101cf0200319a8abf2f698f355fb55d50176037eae938bc48109ef1e",
+    "sdl/viewpoints/VP01/index.md": "0e0698bba2cf7cafd493ab6a1abea1552319c4ff85ea4a30aa5f9683254f5170",
+    "sdl/viewpoints/VP02/VP02-XfmdDesktop.md": "49b63fed5b117ef0828c96134cfce1108d209293b77b5261eb1575ad5c92b640",
+    "sdl/viewpoints/VP02/VP02-roots.md": "4ebe54e13c1b16a413df4f0ca3a41dd75a120f6388650625b62dcae3f70cbc20",
+    "sdl/viewpoints/VP02/index.md": "d0ee1c65a8077e52d39ea362295308a5562e4ba6414047e3c1d711ab3d0e0b03",
+    "sdl/viewpoints/VP07/VP07-DocumentNavigation-NormalDesktop.md": "21c9779dc23c3dd34c384fe6d3df367eddad60dbabdab04246997d30a80d7dd8",
+    "sdl/viewpoints/VP07/VP07-LivePreview-NormalDesktop.md": "2500a40b98e5780b38c9452bdda87e4a020d9d4327c4bd781dd20c447c9ff903",
+    "sdl/viewpoints/VP07/VP07-WorkPathNavigation-NormalDesktop.md": "fe53c1ec15fde01aacbbef2511218493b5f5738ccc6b672474a48a9f75dbc2c0",
+    "sdl/viewpoints/VP07/index.md": "d3c3fb77f47dfdef24b4cea9faecfda923653c5d188b8ba11cee6ce0ef1bbf71",
+    "sdl-ast.json": "7961425180b0bc286d88a8e7ef071517ac33a6a7ee39b88d20e9826b1af360a3",
+    "sdl-check.json": "d8e93e18c4f7a9a08e33c48e6e3d47ccb94fcc8a5e2b43d4e4a856058b2644c7",
+    "sdl-generation.json": "692a7c0680ceba2e615e79a4f41626e8bed962b796ffa606c5fcf3c4646cced1"
+  }
+}

@@ -47,3 +47,20 @@ Preserve protected target branches, existing commitments and publication authori
 Planning alone leaves execution cards in backlog/queued; activate them when the
 authorized plan executes. Scrum and Sprint remain optional. Read installed facts
 before writing new profile records; never silently migrate a legacy workflow.
+
+## System source organization
+
+When SDP/SDL/README.md exists, read it and applicable SDL/AGENTS.md before model
+work. Group authored SDL by System and actual container responsibility; keep SDUI
+screens under their owning System. Numbered phases hold process documentation and
+derived views. Existing source homes remain authoritative until a selected migration.
+Folder names do not implement grammar, imports or runtime capabilities.
+
+## Working Sessions and releases
+
+When SDP/Sessions/README.md exists, read it for work spanning multiple turns/plans.
+Recover the current goal and step, keep the roadmap first, and update turn outcomes
+and card/plan links. Manual Session records do not implement automatic capture.
+For each release, instantiate SDP/Framework/ReleaseChecklist.md in the release work
+area and record evidence for every applicable check. Never claim manifest/signature,
+upgrade or publication gates passed without checking the exact candidate.

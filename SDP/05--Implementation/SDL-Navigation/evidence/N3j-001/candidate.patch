@@ -1,0 +1,1002 @@
+diff --git a/SDL/go/documents/selection.go b/SDL/go/documents/selection.go
+index d046106..addf8ca 100644
+--- a/SDL/go/documents/selection.go
++++ b/SDL/go/documents/selection.go
+@@ -20,7 +20,9 @@ func Selected(ctx context.Context, v *viewpoint.Views, q viewpoint.Query, r Rend
+ 	}
+ 	text := "# " + q.Viewpoint + " — " + spec.Title + "\n\nRevision: `" + v.Revision + "`.\n\n" + spec.Note + "\n\n"
+ 	j, _ := json.Marshal(q.Canonical())
+-	text += "Selection: `" + string(j) + "`.\n\n"
++	if q.Projection != "overview" {
++		text += "Selection: `" + string(j) + "`.\n\n"
++	}
+ 	b.Files["selection.json"] = append(j, '\n')
+ 	if len(s.Diagrams) == 0 {
+ 		text += "No diagrams match this selection. This does not imply the concept is impossible or absent from the system.\n\n"
+@@ -39,6 +41,13 @@ func Selected(ctx context.Context, v *viewpoint.Views, q viewpoint.Query, r Rend
+ 	if r != nil {
+ 		text += "\nSymbol profile: SDL 1. Actor/ellipse use UML shapes; labeled SDL relations retain their language semantics. consumes is a dashed dependency; realizes is a contribution.\n\n"
+ 	}
++	if q.Projection == "overview" {
++		if q.Viewpoint == "VP07" {
++			text += s.FeatureOverviewContext(q.Mode)
++		} else {
++			text += s.OverviewContext()
++		}
++	}
+ 	text += s.Tables(q.Viewpoint)
+ 	b.Put("entry.md", text)
+ 	b.Seal()
+diff --git a/SDL/go/viewpoint/feature_overview.go b/SDL/go/viewpoint/feature_overview.go
+new file mode 100644
+index 0000000..d829751
+--- /dev/null
++++ b/SDL/go/viewpoint/feature_overview.go
+@@ -0,0 +1,155 @@
++package viewpoint
++
++import (
++	"fmt"
++	"sort"
++	"strings"
++)
++
++// featureOverview keeps complete logical decomposition and only the requested
++// mode's explicit allocation. The empty mode is logical, never a union of modes.
++func (v *Views) featureOverview(q Query) (*Views, error) {
++	out := *v
++	out.Diagrams = []Diagram{}
++	out.MessageSets = []Fact{}
++	out.Facts = []Fact{}
++	out.Relations = map[string][]Fact{}
++	out.Gaps = filter(v.Gaps, func(f Fact) bool { return f.S("viewpoint") == "VP07" && f.S("code") != "UNSPECIFIED_ALLOCATION" })
++	contributions := filter(v.Relations["contributes-to"], func(f Fact) bool { return v.Kinds[f.S("object")] == "feature" })
++	functions := values(contributions, "subject")
++	names := append(append(append(append(v.names("system"), v.names("container")...), v.names("unit")...), v.names("feature")...), functions...)
++	for _, f := range v.Facts {
++		a, b, verb := f.S("subject"), f.S("object"), f.S("verb")
++		keep := verb == "contains" && has(names, a) && has(names, b)
++		keep = keep || verb == "owns" && has(functions, b)
++		keep = keep || verb == "contributes-to" && v.Kinds[b] == "feature"
++		keep = keep || verb == "allocated-to" && q.Mode != "" && f.S("mode") == q.Mode && has(functions, a)
++		if keep {
++			out.Facts = append(out.Facts, f)
++			out.Relations[verb] = append(out.Relations[verb], f)
++		}
++	}
++	if q.Mode != "" {
++		for _, f := range contributions {
++			if len(eq(out.Relations["allocated-to"], "subject", f.S("subject"))) == 0 {
++				out.goalGap("VP07", f.S("subject"), "UNSPECIFIED_ALLOCATION", "Container allocation is unspecified for contributions to "+f.S("object")+".", q.Mode, f.S("object"))
++			}
++		}
++	}
++	title := "Complete logical architecture and feature realization"
++	if q.Mode != "" {
++		title += " — mode " + q.Mode
++	}
++	// The complete structural base stays readable: feature keys annotate actual
++	// owners/allocations; function paths and their proof remain in the companion table.
++	structural := append(append(v.names("system"), v.names("container")...), v.names("unit")...)
++	features := v.names("feature")
++	elements := []Fact{}
++	for i, feature := range features {
++		placed := false
++		for _, c := range eq(out.Relations["contributes-to"], "object", feature) {
++			for _, role := range []string{"owns", "allocated-to"} {
++				for _, f := range out.Relations[role] {
++					endpoint := f.S("subject")
++					matches := role == "owns" && f.S("object") == c.S("subject")
++					if role == "allocated-to" {
++						matches = f.S("subject") == c.S("subject")
++						endpoint = f.S("object")
++					}
++					if matches {
++						placed = true
++						elements = append(elements, Fact{"feature": feature, "key": fmt.Sprintf("F%02d", i+1), "node": "n_" + endpoint, "role": role, "source_facts": []string{c.S("id"), f.S("id")}})
++					}
++				}
++			}
++		}
++		if !placed {
++			structural = append(structural, feature)
++		}
++	}
++	out.diagram("VP07-overview", title, out.Relations["contains"], structural...)
++	if len(out.Diagrams) == 0 {
++		return &out, nil
++	}
++	d := &out.Diagrams[0]
++	d.Elements = elements
++	d.SourceFacts = values(out.Facts, "id")
++	if len(d.Nodes) > 128 || len(d.Edges) > 320 {
++		return nil, fmt.Errorf("overview-limit: complete VP07 exceeds flowchart profile; no partial overview generated")
++	}
++	d.Syntax = featureSyntax(*d)
++	return &out, nil
++}
++
++func featureSyntax(d Diagram) string {
++	var b strings.Builder
++	b.WriteString("flowchart LR\n")
++	ids := []string{}
++	for id := range d.Nodes {
++		ids = append(ids, id)
++	}
++	sort.Strings(ids)
++	for _, id := range ids {
++		data := d.Nodes[id].(map[string]any)
++		label := fmt.Sprintf("%s (%s)", data["model_id"], data["kind"])
++		for _, role := range []string{"owns", "allocated-to"} {
++			keys := []string{}
++			for _, e := range d.Elements {
++				if e.S("node") == id && e.S("role") == role {
++					keys = append(keys, e.S("key"))
++				}
++			}
++			if len(keys) > 0 {
++				label += " | " + role + ": " + strings.Join(unique(keys), " ")
++			}
++		}
++		switch data["kind"] {
++		case "feature":
++			fmt.Fprintf(&b, "    %s(\"%s\")\n", id, label)
++		default:
++			fmt.Fprintf(&b, "    %s[\"%s\"]\n", id, label)
++		}
++	}
++	for _, e := range d.Edges {
++		fmt.Fprintf(&b, "    %s -->|%s| %s\n", e.Source, e.Relation, e.Target)
++	}
++	return b.String()
++}
++
++func (v *Views) FeatureOverviewContext(mode string) string {
++	var b strings.Builder
++	b.WriteString("## Scope and notation\n\nAll declared Systems, containers and units form the logical architecture base, including isolated declarations. Rectangles show the complete structural base with contains edges. Feature keys annotate logical owners (owns) and selected-mode containers (allocated-to), derived only through explicit Functionality contribution paths. Rounded standalone Features have no represented placement. These annotations are not new direct SDL relations. This is decomposition and responsibility, not an inferred deployment or call graph.\n\n")
++	if mode == "" {
++		b.WriteString("Logical scope: allocation annotations are intentionally absent. Select a named mode under VP07 in the navigation tree to inspect its explicit placement. No allocations from different modes are combined.\n\n")
++	} else {
++		fmt.Fprintf(&b, "Selected mode: **%s**. Only this mode's explicit allocated-to facts inform placement annotations. Ownership does not imply allocation; missing placement is reported below.\n\n", mode)
++	}
++	b.WriteString("## Feature legend\n\n| Key | Feature |\n| --- | --- |\n")
++	for i, f := range v.names("feature") {
++		fmt.Fprintf(&b, "| F%02d | %s |\n", i+1, f)
++	}
++	b.WriteString("\n")
++	b.WriteString("## Feature contributions\n\n| Feature | Functionality | Logical owner | Allocation in selected scope | Source facts |\n| --- | --- | --- | --- | --- |\n")
++	for _, feature := range v.names("feature") {
++		cs := eq(v.Relations["contributes-to"], "object", feature)
++		if len(cs) == 0 {
++			fmt.Fprintf(&b, "| %s | Not specified | — | — | — |\n", feature)
++		}
++		for _, c := range cs {
++			fn := c.S("subject")
++			owners := strings.Join(values(eq(v.Relations["owns"], "object", fn), "subject"), ", ")
++			placed := "Not selected (logical scope)"
++			if mode != "" {
++				placed = strings.Join(values(eq(v.Relations["allocated-to"], "subject", fn), "object"), ", ")
++				if placed == "" {
++					placed = "Unspecified"
++				}
++			}
++			proof := []string{c.S("id")}
++			proof = append(proof, values(eq(v.Relations["owns"], "object", fn), "id")...)
++			proof = append(proof, values(eq(v.Relations["allocated-to"], "subject", fn), "id")...)
++			fmt.Fprintf(&b, "| %s | %s | %s | %s | %s |\n", feature, fn, owners, placed, strings.Join(proof, ", "))
++		}
++	}
++	return b.String() + "\n"
++}
+diff --git a/SDL/go/viewpoint/feature_overview_test.go b/SDL/go/viewpoint/feature_overview_test.go
+new file mode 100644
+index 0000000..995f132
+--- /dev/null
++++ b/SDL/go/viewpoint/feature_overview_test.go
+@@ -0,0 +1,134 @@
++package viewpoint
++
++import (
++	"strings"
++	"testing"
++)
++
++func TestVP07OverviewArchitectureAndModeIsolation(t *testing.T) {
++	source := `language design-core version 0.5.
++unit Root.
++unit Owner.
++unit Unrelated.
++container Local.
++container Remote.
++functionality Work.
++functionality Missing.
++feature Feature.
++feature Isolated.
++mode Online.
++mode Offline.
++Root contains Owner.
++Owner owns Work.
++Owner owns Missing.
++Work contributes-to Feature.
++Missing contributes-to Feature.
++Work allocated-to Local in mode Offline.
++Work allocated-to Remote in mode Online.
++`
++	v, e := New(canonicalOverview(t, source))
++	if e != nil {
++		t.Fatal(e)
++	}
++	for _, mode := range []string{"", "Offline", "Online"} {
++		s, e := v.Select(Query{Viewpoint: "VP07", Projection: "overview", Mode: mode})
++		if e != nil {
++			t.Fatal(e)
++		}
++		if len(s.Diagrams) != 1 || len(s.Diagrams[0].Nodes) != 6 {
++			t.Fatalf("incomplete architecture: %#v", s.Diagrams)
++		}
++		d := s.Diagrams[0]
++		syntax := d.Mermaid()
++		for _, part := range []string{"Unrelated", "Isolated", "n_Isolated(\"", "owns: F01", "-->|contains|"} {
++			if !strings.Contains(syntax, part) {
++				t.Fatal(part, syntax)
++			}
++		}
++		alloc := s.Relations["allocated-to"]
++		if mode == "" {
++			if len(alloc) != 0 || strings.Contains(syntax, "allocated-to") {
++				t.Fatal("logical view mixed allocations")
++			}
++		} else {
++			if len(alloc) != 1 || alloc[0].S("mode") != mode {
++				t.Fatal("cross-mode allocation", alloc)
++			}
++			found := false
++			for _, g := range s.Gaps {
++				if g.S("code") == "UNSPECIFIED_ALLOCATION" {
++					if g.S("model_id") != "Missing" || g.S("mode") != mode {
++						t.Fatal(g)
++					}
++					found = true
++				}
++			}
++			if !found {
++				t.Fatal("missing unallocated contribution gap")
++			}
++		}
++		for _, annotation := range d.Elements {
++			if annotation.S("role") == "allocated-to" {
++				expected := "n_Local"
++				if mode == "Online" {
++					expected = "n_Remote"
++				}
++				if mode == "" || annotation.S("node") != expected {
++					t.Fatal("cross-mode annotation", annotation)
++				}
++			}
++		}
++		proof := map[string]bool{}
++		for _, f := range s.Facts {
++			proof[f.S("id")] = true
++		}
++		for _, annotation := range d.Elements {
++			for _, id := range annotation["source_facts"].([]string) {
++				if !proof[id] {
++					t.Fatal("unproven annotation", annotation)
++				}
++			}
++		}
++		for _, edge := range d.Edges {
++			if !proof[edge.Fact] {
++				t.Fatal("invented edge", edge)
++			}
++		}
++		if !strings.Contains(s.FeatureOverviewContext(mode), "Isolated | Not specified") {
++			t.Fatal("isolated feature lost")
++		}
++	}
++	if _, e = v.Select(Query{Viewpoint: "VP07", Projection: "overview", Mode: "NoSuchMode"}); e == nil {
++		t.Fatal("unknown mode accepted")
++	}
++	if _, e = v.Select(Query{Viewpoint: "VP01", Projection: "overview", Mode: "Online"}); e == nil {
++		t.Fatal("VP01 mode ignored")
++	}
++	for _, d := range v.Diagrams {
++		if d.ID == "VP07-overview" {
++			t.Fatal("overview generated eagerly")
++		}
++	}
++}
++
++func TestVP07OverviewEmptyAndNoModes(t *testing.T) {
++	for _, source := range []string{"language design-core version 0.5.\nactor Alone.\n", "language design-core version 0.5.\nfeature Alone.\n"} {
++		v, e := New(source)
++		if e != nil {
++			t.Fatal(e)
++		}
++		s, e := v.Select(Query{Viewpoint: "VP07", Projection: "overview"})
++		if e != nil {
++			t.Fatal(e)
++		}
++		if len(s.Gaps) == 0 {
++			t.Fatal("missing truthful empty-model gap")
++		}
++		if v.Kinds["Alone"] == "actor" && len(s.Diagrams) != 0 {
++			t.Fatal("invented architecture")
++		}
++		if v.Kinds["Alone"] == "feature" && (len(s.Diagrams) != 1 || len(s.Diagrams[0].Nodes) != 1) {
++			t.Fatal("isolated feature omitted")
++		}
++	}
++}
+diff --git a/SDL/go/viewpoint/overview.go b/SDL/go/viewpoint/overview.go
+new file mode 100644
+index 0000000..fa42b8a
+--- /dev/null
++++ b/SDL/go/viewpoint/overview.go
+@@ -0,0 +1,80 @@
++package viewpoint
++
++import (
++	"fmt"
++	"strings"
++)
++
++// HasOverview advertises implemented projections only. It never generates output.
++func HasOverview(vp string) bool { return vp == "VP01" || vp == "VP07" }
++
++// overview selects the complete validated inventory, not a union of detail views.
++func (v *Views) overview(q Query) (*Views, error) {
++	if q.Viewpoint == "VP07" {
++		return v.featureOverview(q)
++	}
++	out := *v
++	out.Diagrams = []Diagram{}
++	out.MessageSets = []Fact{}
++	out.Facts = filter(v.Facts, func(f Fact) bool { return has([]string{"pursues", "supports", "contributes-to"}, f.S("verb")) })
++	out.Relations = map[string][]Fact{}
++	for _, f := range out.Facts {
++		out.Relations[f.S("verb")] = append(out.Relations[f.S("verb")], f)
++	}
++	out.Gaps = filter(v.Gaps, func(f Fact) bool { return f.S("viewpoint") == q.Viewpoint })
++	names := append(v.names("actor"), v.names("usecase")...)
++	if len(names) == 0 {
++		return &out, nil
++	}
++	// Match the documented native profile's total record/identity boundaries.
++	// Reject the whole projection rather than silently omitting declarations.
++	if len(names) > 128 || len(names)+len(v.Relations["pursues"])+1 > 512 {
++		return nil, fmt.Errorf("overview-limit: complete VP01 exceeds native profile; no partial overview generated")
++	}
++	d := Diagram{ID: "VP01-overview", Title: "All declared actors and use cases", Kind: "usecase", Nodes: map[string]any{}, Edges: []Edge{}, SourceFacts: []string{}, Elements: []Fact{}}
++	ids := map[string]string{}
++	sourceNodes := v.nodes(names)
++	var syntax strings.Builder
++	syntax.WriteString("usecase-beta\ndirection LR\n")
++	for i, name := range names {
++		id := fmt.Sprintf("u%d", i)
++		ids[name] = id
++		d.Nodes[id] = sourceNodes["n_"+name]
++		if v.Kinds[name] == "actor" {
++			syntax.WriteString("actor ")
++		}
++		fmt.Fprintf(&syntax, "%s(\"%s\")\n", id, name)
++	}
++	for _, f := range v.Relations["pursues"] {
++		a, b := ids[f.S("subject")], ids[f.S("object")]
++		if a == "" || b == "" {
++			return nil, fmt.Errorf("invalid checked pursues endpoints")
++		}
++		fmt.Fprintf(&syntax, "%s -- %s\n", a, b)
++		d.Edges = append(d.Edges, Edge{a, "pursues", b, f.S("id")})
++		d.SourceFacts = append(d.SourceFacts, f.S("id"))
++	}
++	d.Syntax = syntax.String()
++	out.Diagrams = append(out.Diagrams, d)
++	return &out, nil
++}
++
++// OverviewContext keeps realization separate from use-case notation. Fact IDs
++// and the bundle's full declaration/source registry preserve traceability.
++func (v *Views) OverviewContext() string {
++	var b strings.Builder
++	b.WriteString("## Scope and notation\n\nComplete declared actor/use-case inventory in this source snapshot, including isolated declarations. An association means SDL pursues; no System boundary or UML include/extend is inferred.\n\n")
++	b.WriteString("## Functionality realization\n\nFeatures and Functionality are not use cases. Only modeled supports and contributes-to relations are listed.\n\n| Source | Relation | Target | Fact |\n| --- | --- | --- | --- |\n")
++	count := 0
++	for _, f := range v.Facts {
++		if has([]string{"supports", "contributes-to"}, f.S("verb")) {
++			fmt.Fprintf(&b, "| %s | %s | %s | %s |\n", f.S("subject"), f.S("verb"), f.S("object"), f.S("id"))
++			count++
++		}
++	}
++	if count == 0 {
++		b.WriteString("\nNo functionality realization relations are specified.\n")
++	}
++	b.WriteString("\nScenario sequences and pre/postconditions are not part of this overview; they are not inferred from static relations.\n\n")
++	return b.String()
++}
+diff --git a/SDL/go/viewpoint/overview_test.go b/SDL/go/viewpoint/overview_test.go
+new file mode 100644
+index 0000000..e146f8c
+--- /dev/null
++++ b/SDL/go/viewpoint/overview_test.go
+@@ -0,0 +1,104 @@
++package viewpoint
++
++import (
++	"fmt"
++	"github.com/Hans-Einar/SDP/SystemDesignLanguage/go/parser"
++	"strings"
++	"testing"
++)
++
++func TestVP01OverviewCompleteAndSeparate(t *testing.T) {
++	source := "language design-core version 0.5.\nactor User.\nactor IsolatedActor.\nfeature Feature.\nfunctionality Function.\nunit Owner.\n"
++	for i := 0; i < 30; i++ {
++		source += fmt.Sprintf("usecase Goal%d.\n", i)
++	}
++	source += "Owner owns Function.\nUser pursues Goal0.\nFeature supports Goal0.\nFunction contributes-to Feature.\n"
++	v, e := New(canonicalOverview(t, source))
++	if e != nil {
++		t.Fatal(e)
++	}
++	s, e := v.Select(Query{Viewpoint: "VP01", Projection: "overview"})
++	if e != nil {
++		t.Fatal(e)
++	}
++	if len(s.Diagrams) != 1 || len(s.Diagrams[0].Nodes) != 32 || len(s.Diagrams[0].Edges) != 1 {
++		t.Fatalf("incomplete: %#v", s.Diagrams)
++	}
++	seen := map[string]bool{}
++	for _, data := range s.Diagrams[0].Nodes {
++		seen[data.(map[string]any)["model_id"].(string)] = true
++	}
++	for name, kind := range v.Kinds {
++		if (kind == "actor" || kind == "usecase") && !seen[name] {
++			t.Fatal("missing", name)
++		}
++	}
++	syntax := s.Diagrams[0].Mermaid()
++	if !strings.HasPrefix(syntax, "usecase-beta") || strings.Contains(syntax, "Feature") || strings.Contains(syntax, "include") || strings.Contains(syntax, "systemBoundary") {
++		t.Fatal(syntax)
++	}
++	context := s.OverviewContext()
++	for _, text := range []string{"Feature | supports | Goal0", "Function | contributes-to | Feature", "not inferred"} {
++		if !strings.Contains(context, text) {
++			t.Fatal(context)
++		}
++	}
++	for _, d := range v.Diagrams {
++		if d.Kind == "usecase" {
++			t.Fatal("overview generated eagerly")
++		}
++	}
++	for _, q := range []Query{{Viewpoint: "VP02", Projection: "overview"}, {Viewpoint: "VP01", Projection: "bad"}, {Viewpoint: "VP01", Projection: "overview", Focus: "Goal0"}, {Viewpoint: "VP01", Projection: "overview", Relations: []string{"pursues"}}, {Viewpoint: "VP01", Projection: "overview", Depth: 1}, {Viewpoint: "VP01", Projection: "overview", Direction: "out"}, {Viewpoint: "VP01", Projection: "overview", Diagram: "VP01-Goal0"}} {
++		if _, e := v.Select(q); e == nil {
++			t.Fatal("ignored overview filter", q)
++		}
++	}
++	q, e := ParseURI("sdl-view://trial/VP01?projection=overview&target=main&consumer=xfmd")
++	if e != nil {
++		t.Fatal(e)
++	}
++	if _, e = v.Select(q.Query); e != nil {
++		t.Fatal(e)
++	}
++	// Existing diagram identity is not captured by the new projection query.
++	existing, e := v.Select(Query{Viewpoint: "VP01", Diagram: "VP01-Goal0"})
++	if e != nil || len(existing.Diagrams) != 1 || existing.Diagrams[0].Kind != "flowchart" {
++		t.Fatal(e)
++	}
++}
++func TestVP01OverviewEmptyAndLimit(t *testing.T) {
++	v, e := New("language design-core version 0.5.\nunit Internal.\n")
++	if e != nil {
++		t.Fatal(e)
++	}
++	s, e := v.Select(Query{Viewpoint: "VP01", Projection: "overview"})
++	if e != nil || len(s.Diagrams) != 0 || len(s.Gaps) == 0 {
++		t.Fatal(e, s)
++	}
++	source := "language design-core version 0.5.\n"
++	for i := 0; i < 129; i++ {
++		source += fmt.Sprintf("usecase Goal%d.\n", i)
++	}
++	v, e = New(canonicalOverview(t, source))
++	if e != nil {
++		t.Fatal(e)
++	}
++	if _, e = v.Select(Query{Viewpoint: "VP01", Projection: "overview"}); e == nil || !strings.Contains(e.Error(), "no partial") {
++		t.Fatal(e)
++	}
++}
++
++func canonicalOverview(t *testing.T, source string) string {
++	t.Helper()
++	m, e := parser.Parse(source)
++	if e != nil {
++		t.Fatal(e)
++	}
++	return parser.FormatFile(m)
++}
++
++func TestOverviewURIRejectsExplicitTraversal(t *testing.T) {
++	if _, e := ParseURI("sdl-view://trial/VP01?projection=overview&depth=0"); e == nil {
++		t.Fatal("explicit depth silently ignored")
++	}
++}
+diff --git a/SDL/go/viewpoint/query.go b/SDL/go/viewpoint/query.go
+index 0c35ab1..c0e721e 100644
+--- a/SDL/go/viewpoint/query.go
++++ b/SDL/go/viewpoint/query.go
+@@ -9,14 +9,15 @@ import (
+ )
+ 
+ type Query struct {
+-	Viewpoint string   `json:"viewpoint"`
+-	Focus     string   `json:"focus,omitempty"`
+-	Relations []string `json:"relations,omitempty"`
+-	Direction string   `json:"direction,omitempty"`
+-	Depth     int      `json:"depth,omitempty"`
+-	Level     string   `json:"level,omitempty"`
+-	Mode      string   `json:"mode,omitempty"`
+-	Diagram   string   `json:"diagram,omitempty"`
++	Projection string   `json:"projection,omitempty"`
++	Viewpoint  string   `json:"viewpoint"`
++	Focus      string   `json:"focus,omitempty"`
++	Relations  []string `json:"relations,omitempty"`
++	Direction  string   `json:"direction,omitempty"`
++	Depth      int      `json:"depth,omitempty"`
++	Level      string   `json:"level,omitempty"`
++	Mode       string   `json:"mode,omitempty"`
++	Diagram    string   `json:"diagram,omitempty"`
+ }
+ type Selection struct {
+ 	Project          string
+@@ -43,6 +44,8 @@ func ParseURI(raw string) (Selection, error) {
+ 		}
+ 		value := vs[0]
+ 		switch k {
++		case "projection":
++			s.Query.Projection = value
+ 		case "focus":
+ 			s.Query.Focus = value
+ 		case "relations":
+@@ -70,12 +73,19 @@ func ParseURI(raw string) (Selection, error) {
+ 			return s, fmt.Errorf("unknown query parameter %s", k)
+ 		}
+ 	}
++	if s.Query.Projection != "" && q.Has("depth") && s.Query.Depth != 2 {
++		return s, fmt.Errorf("unsupported-overview-depth")
++	}
+ 	if (s.Target != "main" && s.Target != "navigation") || s.Consumer != "xfmd" {
+ 		return s, fmt.Errorf("unregistered target or consumer")
+ 	}
+ 	return s, nil
+ }
+ func (q Query) Validate(v *Views) error {
++	if q.Projection != "" && (q.Projection != "overview" || !HasOverview(q.Viewpoint) || q.Focus != "" || q.Diagram != "" || (q.Mode != "" && q.Viewpoint != "VP07") || q.Level != "" || len(q.Relations) > 0 || (q.Direction != "" && q.Direction != "both") || (q.Depth != 0 && q.Depth != 2)) {
++		return fmt.Errorf("unsupported-overview-selection")
++	}
++
+ 	s, ok := SpecFor(q.Viewpoint)
+ 	if !ok {
+ 		return fmt.Errorf("unknown-viewpoint: %s", q.Viewpoint)
+@@ -121,6 +131,9 @@ func (v *Views) Select(q Query) (*Views, error) {
+ 	if e := q.Validate(v); e != nil {
+ 		return nil, e
+ 	}
++	if q.Projection == "overview" {
++		return v.overview(q)
++	}
+ 	out := *v
+ 	out.Diagrams = []Diagram{}
+ 	out.Gaps = []Fact{}
+diff --git a/SDPTool/Contract.md b/SDPTool/Contract.md
+index 93eb3a5..06fc061 100644
+--- a/SDPTool/Contract.md
++++ b/SDPTool/Contract.md
+@@ -381,3 +381,40 @@ envelope, preserving domain results and meaningful nonzero exits. The same typed
+ handlers serve included human commands. [Actions.md](Actions.md) owns the public
+ protocol detail and first five supported operations. This is an additive local
+ subprocess/Go interface, not an HTTP/MCP endpoint or new caller authentication.
++
++## Viewpoint overview targets — VP01 and VP07
++
++A viewpoint node may carry `overviewTarget` with the same Target shape as `target`.
++Its presence advertises an implemented aggregate projection, not bulk detail
++selection. VP01 and VP07 provide select targets whose producer-owned URI contains
++`projection=overview`, with the existing exact project/model/revision. Consumers
++pass that URI unchanged. Expansion never selects or renders it. Absence means
++overview unavailable; older consumers may ignore the optional field. Existing
++viewpoint and detail targets retain their original semantics.
++
++VP01 emits the complete declared actor/use-case inventory, including isolated
++declarations, as usecase-beta notation. Associations mean modeled `pursues`.
++Functionality/Feature realization stays in a companion table; no System boundary,
++UML include/extend, scenario order or pre/postcondition is inferred.
++
++VP07 retains every declared System/container/unit and structural contains edge.
++Feature keys annotate actual owners and selected-mode containers through explicit
++Functionality contributions. The legend covers every Feature, and the companion
++table and Diagram.Elements retain contribution/proof IDs. Features without a
++represented placement remain standalone rounded nodes. Annotations are derived
++views of source facts, not invented direct SDL relations.
++
++The VP07 parent target is logical and excludes allocations. Discovery adds a lazy
++child target for each declared mode; only its explicit allocated-to facts appear
++in that mode's projection. Missing allocation is reported as a gap. Never combine
++modes or infer allocation from ownership. Feature keys are local to the snapshot.
++
++SDL rejects unsupported projections/viewpoints and combinations with focus,
++diagram, relations, level or non-default traversal filters. Only VP07 accepts a
++mode, and that mode must be declared. Snapshot freshness, cancellation, publication
++and resource ownership rules still apply. Native-profile limits reject a complete
++oversized projection explicitly rather than truncating it. Discovery advertises
++capability without generating output. Renderers must support the emitted notation;
++this contract does not claim compatibility with every external Mermaid executable.
++
++Implementation/integration record: [ViewpointNavigation](../SDP/05--Implementation/SDL/ViewpointNavigation/Plan.md).
+diff --git a/SDPTool/overview_actions_test.go b/SDPTool/overview_actions_test.go
+new file mode 100644
+index 0000000..136e5f6
+--- /dev/null
++++ b/SDPTool/overview_actions_test.go
+@@ -0,0 +1,98 @@
++package sdptool
++
++import (
++	"bytes"
++	"context"
++	"encoding/json"
++	"os"
++	"path/filepath"
++	"reflect"
++	"strings"
++	"testing"
++
++	"github.com/Hans-Einar/SDP/SystemDesignLanguage/go/parser"
++)
++
++// The merged Actions producer must expose executable overview targets through
++// both discovery interfaces without dropping the existing detail targets.
++func TestInvokedDiscoveryPreservesOverviewTargets(t *testing.T) {
++	root, _ := projectFixture(t)
++	m, err := parser.Parse(`language design-core version 0.5.
++actor Reader.
++usecase Browse.
++unit Documents.
++container Desktop.
++feature Navigation.
++functionality Display.
++mode Online.
++Reader pursues Browse.
++Documents owns Display.
++Display contributes-to Navigation.
++Display allocated-to Desktop in mode Online.
++`)
++	if err != nil {
++		t.Fatal(err)
++	}
++	if err = os.WriteFile(filepath.Join(root, "SDP", "overview.design"), []byte(parser.FormatFile(m)), 0600); err != nil {
++		t.Fatal(err)
++	}
++	ctx := context.Background()
++	var direct, invoked, diagnostics bytes.Buffer
++	if code := Run(ctx, []string{root, "discover", "--json"}, &direct, &diagnostics); code != 0 {
++		t.Fatal(code, diagnostics.String())
++	}
++	request := requestBytes(t, root, "project.discover", map[string]any{})
++	if code := RunWithInput(ctx, []string{"invoke", "--request", "-"}, bytes.NewReader(request), &invoked, &diagnostics); code != 0 {
++		t.Fatal(code, invoked.String(), diagnostics.String())
++	}
++	var envelope struct {
++		Result json.RawMessage `json:"result"`
++	}
++	if err = json.Unmarshal(invoked.Bytes(), &envelope); err != nil {
++		t.Fatal(err)
++	}
++	var a, b any
++	if err = json.Unmarshal(direct.Bytes(), &a); err != nil {
++		t.Fatal(err)
++	}
++	if err = json.Unmarshal(envelope.Result, &b); err != nil {
++		t.Fatal(err)
++	}
++	if !reflect.DeepEqual(a, b) {
++		t.Fatal("invoke altered the discovery payload")
++	}
++	var discovery struct {
++		Navigation Tree `json:"navigation"`
++	}
++	if err = json.Unmarshal(envelope.Result, &discovery); err != nil {
++		t.Fatal(err)
++	}
++	p, err := Discover(root)
++	if err != nil {
++		t.Fatal(err)
++	}
++	count := 0
++	for _, node := range discovery.Navigation.Nodes {
++		target := node.OverviewTarget
++		if target == nil && strings.Contains(node.ID, "/overview-mode/") {
++			target = node.Target
++		}
++		if target == nil {
++			continue
++		}
++		if node.OverviewTarget != nil && (node.Target == nil || node.Target.URI == target.URI) {
++			t.Fatal("lost original detail target", node)
++		}
++		result, err := SelectProject(ctx, p, target.Model, PreviewOptions{URI: target.URI, Revision: target.Revision, Output: filepath.Join(t.TempDir(), "selected")})
++		if err != nil {
++			t.Fatal(target, err)
++		}
++		if _, err = os.Stat(result.Entry); err != nil {
++			t.Fatal(err)
++		}
++		count++
++	}
++	if count != 3 {
++		t.Fatalf("want VP01, VP07 logical and Online targets, got %d", count)
++	}
++}
+diff --git a/SDPTool/overview_test.go b/SDPTool/overview_test.go
+new file mode 100644
+index 0000000..77038d7
+--- /dev/null
++++ b/SDPTool/overview_test.go
+@@ -0,0 +1,219 @@
++package sdptool
++
++import (
++	"context"
++	"github.com/Hans-Einar/SDP/SystemDesignLanguage/go/parser"
++	"os"
++	"path/filepath"
++	"strings"
++	"testing"
++)
++
++func TestOverviewTargetGenerationAndFreshness(t *testing.T) {
++	root, r := projectFixture(t)
++	r.Models = []Model{{"model", "System", "model.design", "design-core/0.5"}}
++	saveInventory(t, root, r)
++	source := "language design-core version 0.5.\nactor User.\nusecase Browse.\nusecase Isolated.\nUser pursues Browse.\n"
++	m, err := parser.Parse(source)
++	if err != nil {
++		t.Fatal(err)
++	}
++	source = parser.FormatFile(m)
++	path := filepath.Join(root, "model.design")
++	os.WriteFile(path, []byte(source), 0600)
++	p, _ := Discover(root)
++	p.Inventory = r
++	tree, e := ModelTree(p, "model")
++	if e != nil {
++		t.Fatal(e)
++	}
++	var overview *Target
++	for _, n := range tree.Nodes {
++		if n.OverviewTarget != nil {
++			if (!strings.HasSuffix(n.ID, "/VP01") && !strings.HasSuffix(n.ID, "/VP07")) || n.Target.URI == n.OverviewTarget.URI {
++				t.Fatal(n)
++			}
++			if strings.HasSuffix(n.ID, "/VP01") {
++				overview = n.OverviewTarget
++			}
++		}
++	}
++	if overview == nil {
++		t.Fatal("missing capability")
++	}
++	o := PreviewOptions{URI: overview.URI, Revision: overview.Revision, Output: filepath.Join(t.TempDir(), "selected")}
++	result, e := SelectProject(context.Background(), p, "model", o)
++	if e != nil {
++		t.Fatal(e)
++	}
++	b, e := os.ReadFile(result.Entry)
++	if e != nil {
++		t.Fatal(e)
++	}
++	for _, s := range []string{"usecase-beta", "Isolated", "Functionality realization", "pursues"} {
++		if !strings.Contains(string(b), s) {
++			t.Fatal(s, string(b))
++		}
++	}
++	if strings.Count(string(b), "```mermaid") != 1 {
++		t.Fatal("not one overview")
++	}
++	o.Output = filepath.Join(t.TempDir(), "foreign")
++	o.URI = strings.Replace(overview.URI, "sdl-view://trial/", "sdl-view://foreign/", 1)
++	if _, e = SelectProject(context.Background(), p, "model", o); e == nil {
++		t.Fatal("foreign accepted")
++	}
++	o.URI = overview.URI
++	m, err = parser.Parse(strings.Replace(source, "version 0.5.\n", "version 0.5.\nactor NewActor.\n", 1))
++	if err != nil {
++		t.Fatal(err)
++	}
++	os.WriteFile(path, []byte(parser.FormatFile(m)), 0600)
++	if _, e = SelectProject(context.Background(), p, "model", o); e == nil || !strings.Contains(e.Error(), "stale") {
++		t.Fatal(e)
++	}
++	if _, e = os.Stat(o.Output); !os.IsNotExist(e) {
++		t.Fatal("invalid request published output", e)
++	}
++}
++
++func TestFeatureOverviewTargetsGenerateOnlySelectedMode(t *testing.T) {
++	root, r := projectFixture(t)
++	r.Models = []Model{{"model", "System", "model.design", "design-core/0.5"}}
++	saveInventory(t, root, r)
++	m, e := parser.Parse(`language design-core version 0.5.
++unit Owner.
++container Local.
++container Remote.
++functionality Work.
++feature Feature.
++mode Online.
++mode Offline.
++Owner owns Work.
++Work contributes-to Feature.
++Work allocated-to Local in mode Offline.
++Work allocated-to Remote in mode Online.
++`)
++	if e != nil {
++		t.Fatal(e)
++	}
++	os.WriteFile(filepath.Join(root, "model.design"), []byte(parser.FormatFile(m)), 0600)
++	p, _ := Discover(root)
++	p.Inventory = r
++	tree, e := ModelTree(p, "model")
++	if e != nil {
++		t.Fatal(e)
++	}
++	modes := 0
++	logical := false
++	for _, n := range tree.Nodes {
++		var action *Target
++		if strings.HasSuffix(n.ID, "/VP07") {
++			action = n.OverviewTarget
++			logical = action != nil
++		}
++		if strings.Contains(n.ID, "/overview-mode/") {
++			action = n.Target
++			modes++
++		}
++		if action == nil {
++			continue
++		}
++		result, e := SelectProject(context.Background(), p, "model", PreviewOptions{URI: action.URI, Revision: action.Revision, Output: filepath.Join(t.TempDir(), "view")})
++		if e != nil {
++			t.Fatal(e)
++		}
++		b, e := os.ReadFile(result.Entry)
++		if e != nil {
++			t.Fatal(e)
++		}
++		text := string(b)
++		if strings.Count(text, "```mermaid") != 1 || !strings.Contains(text, "Feature contributions") {
++			t.Fatal(text)
++		}
++		if strings.Contains(action.URI, "mode=Offline") && (!strings.Contains(text, "n_Local[\"Local (container) | allocated-to: F01") || strings.Contains(text, "n_Remote[\"Remote (container) | allocated-to: F01")) {
++			t.Fatal("mixed mode", text)
++		}
++		if strings.Contains(action.URI, "mode=Online") && (!strings.Contains(text, "n_Remote[\"Remote (container) | allocated-to: F01") || strings.Contains(text, "n_Local[\"Local (container) | allocated-to: F01")) {
++			t.Fatal("mixed mode", text)
++		}
++	}
++	if !logical || modes != 2 {
++		t.Fatal("missing lazy targets", logical, modes)
++	}
++}
++
++// A composed model's overview target binds the complete source graph, not just
++// its entry file. Mutating an included file must leave existing output intact.
++func TestOverviewTargetsPreserveComposedSourceProvenance(t *testing.T) {
++	root, r := projectFixture(t)
++	r.Models = []Model{{"model", "Demo", "System.design", "design-core/0.6"}}
++	saveInventory(t, root, r)
++	write := func(name, source string) {
++		t.Helper()
++		m, e := parser.Parse(source)
++		if e != nil {
++			t.Fatal(e)
++		}
++		if e = os.WriteFile(filepath.Join(root, name), []byte(parser.FormatFile(m)), 0600); e != nil {
++			t.Fatal(e)
++		}
++	}
++	const header = "language design-core version 0.6.\n"
++	write("System.design", header+"system Demo.\nincludes \"Child.design\".\nDemo contains Child.\n")
++	child := header + "unit Child.\nactor Reader.\nusecase Browse.\nfeature Navigation.\nfunctionality Display.\nChild owns Display.\nDisplay contributes-to Navigation.\nNavigation supports Browse.\nReader pursues Browse.\n"
++	write("Child.design", child)
++	p, e := Discover(root)
++	if e != nil {
++		t.Fatal(e)
++	}
++	p.Inventory = r
++	tree, e := ModelTree(p, "model")
++	if e != nil {
++		t.Fatal(e)
++	}
++	targets := map[string]*Target{}
++	for _, n := range tree.Nodes {
++		if n.OverviewTarget != nil {
++			targets[n.OverviewTarget.URI] = n.OverviewTarget
++		}
++	}
++	if len(targets) != 2 {
++		t.Fatal("missing composed overview targets", targets)
++	}
++	outputs := map[string][]byte{}
++	for uri, target := range targets {
++		out := filepath.Join(t.TempDir(), "overview")
++		result, e := SelectProject(context.Background(), p, "model", PreviewOptions{URI: uri, Revision: target.Revision, Output: out})
++		if e != nil {
++			t.Fatal(e)
++		}
++		text, e := os.ReadFile(result.Entry)
++		if e != nil {
++			t.Fatal(e)
++		}
++		if strings.Contains(uri, "/VP01?") && (!strings.Contains(string(text), "Reader") || !strings.Contains(string(text), "Browse")) {
++			t.Fatal("missing included goals", string(text))
++		}
++		if strings.Contains(uri, "/VP07?") && (!strings.Contains(string(text), "Demo (system)") || !strings.Contains(string(text), "Child (unit) | owns: F01")) {
++			t.Fatal("missing composed structure", string(text))
++		}
++		provenance, e := os.ReadFile(filepath.Join(out, "sources.json"))
++		if e != nil || !strings.Contains(string(provenance), "Child.design") || !strings.Contains(string(provenance), target.Revision) {
++			t.Fatal("missing source graph", string(provenance), e)
++		}
++		outputs[out] = text
++	}
++	write("Child.design", strings.Replace(child, header, header+"usecase Later.\n", 1))
++	for out, before := range outputs {
++		for uri, target := range targets {
++			if _, e = SelectProject(context.Background(), p, "model", PreviewOptions{URI: uri, Revision: target.Revision, Output: out}); e == nil || !strings.Contains(e.Error(), "stale") {
++				t.Fatal("included-source change accepted", e)
++			}
++		}
++		after, e := os.ReadFile(filepath.Join(out, "entry.md"))
++		if e != nil || string(before) != string(after) {
++			t.Fatal("stale selection replaced view", e)
++		}
++	}
++}
+diff --git a/SDPTool/tree.go b/SDPTool/tree.go
+index 4cd1896..6142b6b 100644
+--- a/SDPTool/tree.go
++++ b/SDPTool/tree.go
+@@ -20,6 +20,7 @@ type Target struct {
+ 	Revision  string `json:"revision,omitempty"`
+ }
+ type Node struct {
++	OverviewTarget     *Target  `json:"overviewTarget,omitempty"`
+ 	AssignmentID       string   `json:"assignmentId,omitempty"`
+ 	AssignmentRevision string   `json:"assignmentRevision,omitempty"`
+ 	SourceFreshness    string   `json:"sourceFreshness,omitempty"`
+@@ -122,6 +123,22 @@ func modelTree(p Project, m Model, v *viewpoint.Views) (Tree, error) {
+ 	for _, spec := range viewpoint.Catalog {
+ 		vpID := prefix + spec.ID
+ 		n := Node{ID: vpID, Kind: "viewpoint", Label: spec.ID + " — " + spec.Title, State: "empty", Target: target(spec.ID, "", "")}
++		if viewpoint.HasOverview(spec.ID) {
++			n.OverviewTarget = target(spec.ID, "", "")
++			n.OverviewTarget.URI += "&projection=overview"
++		}
++		if spec.ID == "VP07" {
++			for _, name := range names {
++				if v.Kinds[name] != "mode" {
++					continue
++				}
++				key := vpID + "/overview-mode/" + url.PathEscape(name)
++				action := target(spec.ID, "", "")
++				action.URI += "&projection=overview&mode=" + url.QueryEscape(name)
++				n.Children = append(n.Children, key)
++				add(Node{ID: key, Kind: "diagram", Label: "Architecture and features — mode " + name, State: "available", Target: action})
++			}
++		}
+ 		levels := spec.Levels
+ 		if len(levels) == 0 {
+ 			levels = []string{"delivery"}

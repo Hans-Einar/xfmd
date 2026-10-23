@@ -1,0 +1,77 @@
+[0/2] Re-checking globbed directories...
+[1/2] Re-running CMake...
+CMake Warning (dev) at /usr/share/cmake/Modules/FetchContent.cmake:1373 (message):
+  The DOWNLOAD_EXTRACT_TIMESTAMP option was not given and policy CMP0135 is
+  not set.  The policy's OLD behavior will be used.  When using a URL
+  download, the timestamps of extracted files should preferably be that of
+  the time of extraction, otherwise code that depends on the extracted
+  contents might not be rebuilt if the URL changes.  The OLD behavior
+  preserves the timestamps from the archive instead, but this is usually not
+  what you want.  Update your project to the NEW behavior or specify the
+  DOWNLOAD_EXTRACT_TIMESTAMP option with a value of true to avoid this
+  robustness issue.
+Call Stack (most recent call first):
+  cmake/MicroTeX.cmake:3 (FetchContent_Declare)
+  CMakeLists.txt:31 (include)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found Python3: /usr/bin/python3.12 (found suitable version "3.12.14", minimum required is "3.11") found components: Interpreter
+-- Found Python3: /usr/bin/python3.12 (found version "3.12.14") found components: Interpreter
+-- Configuring done (1.1s)
+-- Generating done (0.9s)
+-- Build files have been written to: /home/warloc/git/xfmd-sdl-navigation/build-ui
+[0/2] Re-checking globbed directories...
+[1/54] cd /home/warloc/git/xfmd-sdl-navigation/build-ui && /usr/bin/python3.12 /home/warloc/git/xfmd-sdl-navigation/tools/build_identity.py --source /home/warloc/git/xfmd-sdl-navigation --output /home/warloc/git/xfmd-sdl-navigation/build-ui/generated
+[2/54] Building CXX object CMakeFiles/xfmd_version.dir/src/application/build/BuildVersion.cpp.o
+[3/54] Linking CXX static library libxfmd_version.a
+[4/54] Linking CXX executable ExternalBrowserTest
+[5/54] Linking CXX executable FavoritesGuiTest
+[6/54] Linking CXX executable SdpPanelGuiTest
+[7/54] Linking CXX executable xfmd
+[8/54] Linking CXX executable SdpDynamicGuiTest
+[9/54] Linking CXX executable DocumentZoomGuiTest
+[10/54] Linking CXX executable FileRoutingGuiTest
+[11/54] Linking CXX executable OpenPathDialogGuiTest
+[12/54] Linking CXX executable PathWorkspaceGuiTest
+[13/54] Linking CXX executable RecentFilesGuiTest
+[14/54] Linking CXX executable MermaidGuiTest
+[15/54] Linking CXX executable PreviewSelectionGuiTest
+[16/54] Linking CXX executable CompactWorkspaceTest
+[17/54] Linking CXX executable ReadingColorsGuiTest
+[18/54] Linking CXX executable AppearancePreferencesTest
+[19/54] Linking CXX executable AppearanceGuiTest
+[20/54] Linking CXX executable TreeActionsTest
+[21/54] Linking CXX executable UiControlsTest
+[22/54] Linking CXX executable BrowserPreferencesTest
+[23/54] Linking CXX executable IndexGuiTest
+[24/54] Linking CXX executable WorkspaceTest
+[25/54] Linking CXX executable PresentationTest
+[26/54] Linking CXX executable ScrollingTest
+[27/54] Linking CXX executable NavigationGuiTest
+[28/54] Linking CXX executable SidebarGuiTest
+[29/54] Linking CXX executable WheelGuiTest
+[30/54] Linking CXX executable WorkPathGuiTest
+[31/54] Linking CXX executable PointerTest
+[32/54] Linking CXX executable TablePreviewTest
+[33/54] Linking CXX executable PreferencesTest
+[34/54] Linking CXX executable CapturePresentation
+[35/54] Linking CXX executable xfmd_cold_start
+[36/54] Linking CXX executable ExportGuiTest
+[37/54] Linking CXX executable PagedPreviewTest
+[38/54] Linking CXX executable FullscreenTest
+[39/54] Linking CXX executable CanvasTest
+[40/54] Linking CXX executable ThemeProfilesTest
+[41/54] Linking CXX executable IconTest
+[42/54] Linking CXX executable WindowEndpointBoundaryTest
+[43/54] Linking CXX executable CapturePreferences
+[44/54] Linking CXX executable DocumentViewsGuiTest
+[45/54] Linking CXX executable CaptureAppearance
+[46/54] Linking CXX executable DocumentLeaseGuiTest
+[47/54] Linking CXX executable ThemePopupGuiTest
+[48/54] Linking CXX executable DocumentZoomPdfFixture
+[49/54] Linking CXX executable SdpNavigationGuiTest
+[50/54] Linking CXX executable HeadingLinkTest
+[51/54] Linking CXX executable StandaloneMermaidTest
+[52/54] Linking CXX executable StandaloneMermaidGuiTest
+[53/54] Linking CXX executable HeadingLinkGuiTest
+[54/54] Linking CXX executable SdpRuntimeGuiTest

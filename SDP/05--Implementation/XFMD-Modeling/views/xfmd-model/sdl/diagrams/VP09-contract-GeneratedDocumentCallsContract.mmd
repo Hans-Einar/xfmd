@@ -1,0 +1,6 @@
+flowchart LR
+    n_AdmitGeneratedDocument["AdmitGeneratedDocument (message)"]
+    n_GeneratedDocumentCallsContract["GeneratedDocumentCallsContract (contract)"]
+    n_GeneratedDocumentOpened["GeneratedDocumentOpened (message)"]
+    n_GeneratedDocumentCallsContract -->|permits| n_AdmitGeneratedDocument
+    n_GeneratedDocumentCallsContract -->|permits| n_GeneratedDocumentOpened

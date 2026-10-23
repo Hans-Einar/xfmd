@@ -1,0 +1,8 @@
+flowchart LR
+    n_InterpretationCalls["InterpretationCalls (channel)"]
+    n_Interpreter["Interpreter (unit)"]
+    n_Preview["Preview (unit)"]
+    n_InterpretationCalls -->|receiver| n_Interpreter
+    n_Interpreter -->|sender| n_InterpretationCalls
+    n_InterpretationCalls -->|receiver| n_Preview
+    n_Preview -->|sender| n_InterpretationCalls

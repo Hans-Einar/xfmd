@@ -1,0 +1,11 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd-sdl-navigation/build-ui
+Test project /home/warloc/git/xfmd-sdl-navigation/build-ui
+    Start 87: SdpRuntimeGuiTest
+1/1 Test #87: SdpRuntimeGuiTest ................   Passed   14.80 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Label Time Summary:
+GUI    =  14.80 sec*proc (1 test)
+
+Total Test time (real) =  14.80 sec

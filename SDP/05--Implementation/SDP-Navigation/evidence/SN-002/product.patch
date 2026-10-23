@@ -1,0 +1,405 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 1ea9ddf..a089c20 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -82,7 +82,9 @@ add_library(xfmd_export src/application/export/ExportCoordinator.cpp
+   src/application/export/ExportPipeline.cpp src/application/io/PdfFilePublisher.cpp
+   src/application/adapters/PdfOutput.cpp)
+ target_link_libraries(xfmd_export PUBLIC xfmd_typography xfmd_media xfmd_diagrams Threads::Threads)
++include(cmake/Sdp.cmake)
+ add_library(xfmd_application
++  src/application/sdp/SdpNavigation.cpp src/application/ui/SdpPanel.cpp
+   src/application/navigation/NavigationPanel.cpp src/application/navigation/DocumentViews.cpp src/application/navigation/WindowEndpoint.cpp
+   src/application/ui/controls/CompactToolbar.cpp src/application/ui/controls/PreviewControls.cpp src/application/ui/controls/PreviewColorControls.cpp
+   src/application/ui/style/ThemeProfiles.cpp
+@@ -111,7 +113,7 @@ add_library(xfmd_application
+   src/application/adapters/FoxPreviewInput.cpp src/application/adapters/FoxRenderHost.cpp src/application/adapters/FoxScheduler.cpp
+   src/application/adapters/FoxWheelScrollBar.cpp)
+ target_link_libraries(xfmd_application PUBLIC
+-  xfmd_version
++  xfmd_version xfmd_sdp
+   xfmd_index xfmd_export xfmd_typography xfmd_workspace xfmd_document xfmd_preview xfmd_scroll xfmd_navigation xfmd_interpreter xfmd_renderer PkgConfig::FOX X11::X11 X11::Xrandr)
+ add_executable(xfmd src/application/main.cpp)
+ target_link_libraries(xfmd PRIVATE xfmd_application)
+diff --git a/Cargo.lock b/Cargo.lock
+index 1992441..69b11d6 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -340,6 +340,13 @@ dependencies = [
+  "xfmd-diagram-contracts",
+ ]
+ 
++[[package]]
++name = "xfmd-sdp-json"
++version = "0.1.0"
++dependencies = [
++ "serde_json",
++]
++
+ [[package]]
+ name = "zmij"
+ version = "1.0.23"
+diff --git a/Cargo.toml b/Cargo.toml
+index 485d639..dd183a4 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -1,7 +1,7 @@
+ [workspace]
+ resolver = "2"
+ exclude = [".deps/mermaid-rs-renderer"]
+-members = ["src/contracts/diagram/rust", "src/interpreter/mermaid/rust", "src/renderer/diagram/rust", "src/application/composition/mermaid"]
++members = ["src/application/sdp/rust", "src/contracts/diagram/rust", "src/interpreter/mermaid/rust", "src/renderer/diagram/rust", "src/application/composition/mermaid"]
+ [workspace.dependencies]
+ xfmd-diagram-contracts = { path = "src/contracts/diagram/rust" }
+ mermaid-rs-renderer = { path = ".deps/mermaid-rs-renderer", default-features = false, features = ["libavoid"] }
+diff --git a/README.md b/README.md
+index f689f0c..0ac97af 100644
+--- a/README.md
++++ b/README.md
+@@ -394,3 +394,30 @@ screen resolution set to 144 DPI). With Poppler `pdftotext` available,
+ `DocumentZoomPdfTest` compares actual exported page/word geometry across four zoom
+ modes. These supplement the native workspace tests; see
+ [P055 acceptance](sprints/Sprint-007--Workspace-UI/evidence/P055.md).
++
++### SDP project sidebar (development)
++
++Open a project folder with an immediate `SDP` directory, or open the SDP directory
++itself. The SDP sidebar contains KanBan, SDL and SDUI. Expand branches to inspect
++models, select a card to open it, or select a diagram/frame to generate its view.
++Project/card/source changes refresh navigation automatically, preserving surviving
++expanded branches and the selected row. Refresh retries immediately. Invalid
++sources and watch limits display diagnostics; generated documents remain snapshots
++until you select the view again.
++
++The host must provide a compatible **SDPTool 2.x, sdptool/0.2** producer. XFMD uses
++`gh sdp` by default. To use a standalone binary, set `XFMD_SDP_TOOL` to its executable
++path (one executable, not a shell command). Project files cannot configure commands.
++The producer's normal cache/offline environment applies, including `SDP_OFFLINE=true`
++when using an already verified gh-sdp cache. Older sdptool/0.1 binaries are rejected.
++
++Generated views use the existing Markdown preview. Save or discard current edits
++before choosing one; late results never replace a changed document. Generated
++resources stay available for this window's history, bounded to 64 accepted bundles
++and 256 MiB. This is a document preview, not a native SDUI widget runtime.
++Standalone `.design` source/preview integration remains queued as KB-XFMD-015.
++
++Build/CLI integration checks are recorded in PLAN-XFMD-0006. Native GUI acceptance
++is pending because the current sandbox cannot start Xvfb; this is not a release or
++installation claim. Configure `SDP_TOOL_EXECUTABLE=/absolute/path/to/sdptool` in
++CMake to enable the real-producer tests, including SdpNavigationGuiTest.
+diff --git a/cmake/Tests.cmake b/cmake/Tests.cmake
+index 3222f66..307f148 100644
+--- a/cmake/Tests.cmake
++++ b/cmake/Tests.cmake
+@@ -22,7 +22,7 @@ xfmd_test(ReferenceWorkerTest tests/application/ReferenceWorkerTest.cpp xfmd_ind
+ xfmd_test(NavigationTest tests/application/NavigationTest.cpp xfmd_navigation)
+ add_test(NAME BlueprintStructure COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/validate_blueprints.py)
+ add_test(NAME LayerBoundaries COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/check_layers.py)
+-foreach(name FavoritesGuiTest DocumentZoomGuiTest PathWorkspaceGuiTest OpenPathDialogGuiTest FileRoutingGuiTest MermaidGuiTest RecentFilesGuiTest PreviewSelectionGuiTest CompactWorkspaceTest ReadingColorsGuiTest TreeActionsTest AppearancePreferencesTest AppearanceGuiTest UiControlsTest BrowserPreferencesTest IndexGuiTest WorkspaceTest PresentationTest ScrollingTest NavigationGuiTest SidebarGuiTest WheelGuiTest WorkPathGuiTest PointerTest TablePreviewTest)
++foreach(name SdpPanelGuiTest FavoritesGuiTest DocumentZoomGuiTest PathWorkspaceGuiTest OpenPathDialogGuiTest FileRoutingGuiTest MermaidGuiTest RecentFilesGuiTest PreviewSelectionGuiTest CompactWorkspaceTest ReadingColorsGuiTest TreeActionsTest AppearancePreferencesTest AppearanceGuiTest UiControlsTest BrowserPreferencesTest IndexGuiTest WorkspaceTest PresentationTest ScrollingTest NavigationGuiTest SidebarGuiTest WheelGuiTest WorkPathGuiTest PointerTest TablePreviewTest)
+   add_executable(${name} tests/gui/${name}.cpp)
+   target_include_directories(${name} PRIVATE tests)
+   target_link_libraries(${name} PRIVATE xfmd_application)
+@@ -229,3 +229,25 @@ set_tests_properties(DocumentZoomDpiTest PROPERTIES TIMEOUT 65 LABELS GUI ENVIRO
+ if(XFMD_SANITIZERS)
+   set_property(TEST DocumentZoomDpiTest APPEND PROPERTY ENVIRONMENT "LSAN_OPTIONS=suppressions=${CMAKE_CURRENT_SOURCE_DIR}/tests/support/lsan.supp;ASAN_OPTIONS=detect_leaks=1:halt_on_error=1;UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1")
+ endif()
++
++xfmd_test(SdpWatchTest tests/application/SdpWatchTest.cpp xfmd_sdp)
++set_tests_properties(SdpWatchTest PROPERTIES TIMEOUT 20)
++target_link_libraries(SdpPanelGuiTest PRIVATE X11::X11)
++xfmd_test(SdpProtocolTest tests/application/SdpProtocolTest.cpp xfmd_sdp)
++target_compile_definitions(SdpProtocolTest PRIVATE XFMD_SDP_FAKE_TOOL="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/sdp/tool.py")
++set_tests_properties(SdpProtocolTest PROPERTIES TIMEOUT 20)
++add_executable(SdpNavigationGuiTest tests/gui/SdpNavigationGuiTest.cpp)
++target_include_directories(SdpNavigationGuiTest PRIVATE tests)
++target_link_libraries(SdpNavigationGuiTest PRIVATE xfmd_application X11::X11)
++set(SDP_TOOL_EXECUTABLE "" CACHE FILEPATH "Compatible standalone SDPTool for real producer GUI acceptance")
++if(SDP_TOOL_EXECUTABLE)
++  add_test(NAME SdpNavigationGuiTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/run_with_xvfb.py $<TARGET_FILE:SdpNavigationGuiTest>)
++  set_tests_properties(SdpNavigationGuiTest PROPERTIES ENVIRONMENT "XFMD_SDP_TOOL=${SDP_TOOL_EXECUTABLE}" TIMEOUT 65 LABELS GUI)
++endif()
++add_executable(SdpIntegrationTest tests/application/SdpIntegrationTest.cpp)
++target_include_directories(SdpIntegrationTest PRIVATE tests)
++target_link_libraries(SdpIntegrationTest PRIVATE xfmd_sdp)
++if(SDP_TOOL_EXECUTABLE)
++  add_test(NAME SdpIntegrationTest COMMAND SdpIntegrationTest)
++  set_tests_properties(SdpIntegrationTest PROPERTIES ENVIRONMENT "XFMD_SDP_TOOL=${SDP_TOOL_EXECUTABLE}" TIMEOUT 30)
++endif()
+diff --git a/src/application/Application.cpp b/src/application/Application.cpp
+index 3ee8c2f..f0060a7 100644
+--- a/src/application/Application.cpp
++++ b/src/application/Application.cpp
+@@ -8,11 +8,14 @@
+ using namespace FX;
+ namespace xfmd {
+ Application::~Application() {
++  if (sdpNavigation)
++    sdpNavigation->stop();
+   documentViews.reset();
+   windowMode.reset();
+   exporter.reset();
+   references.reset();
+   preview.reset();
++  sdpNavigation.reset();
+   scheduler.reset();
+   delete window;
+ }
+@@ -119,6 +122,7 @@ void Application::initialize(int& argc, char** argv) {
+   browser.failed = [this](const std::string& error) { documents.error(error); };
+   host->linkHovered = [this](const std::string& target) { showLinkTarget(target); };
+   wireIndex();
++  sdpNavigation = std::make_unique<SdpNavigation>(*this);
+   wireWorkspace();
+   wireZoom();
+   documentOpened = [this] {
+diff --git a/src/application/Application.h b/src/application/Application.h
+index 790a8dc..477f435 100644
+--- a/src/application/Application.h
++++ b/src/application/Application.h
+@@ -17,6 +17,7 @@
+ #include "navigation/NavigationCoordinator.h"
+ #include "preview/PreviewCoordinator.h"
+ #include "scroll/ScrollCoordinator.h"
++#include "sdp/SdpNavigation.h"
+ #include "ui/IconResources.h"
+ #include "ui/ViewModeController.h"
+ #include "ui/XfmdWindow.h"
+@@ -57,6 +58,7 @@ public:
+   std::function<void()> back, forward;
+   std::function<bool(bool)> canNavigate;
+   std::unique_ptr<DocumentViews> documentViews;
++  std::unique_ptr<SdpNavigation> sdpNavigation;
+   Application() = default;
+   ~Application();
+   void initialize(int&, char**);
+diff --git a/src/application/ApplicationOpening.cpp b/src/application/ApplicationOpening.cpp
+index 45d6bfe..4327955 100644
+--- a/src/application/ApplicationOpening.cpp
++++ b/src/application/ApplicationOpening.cpp
+@@ -47,6 +47,8 @@ bool Application::openDialogPath(const std::string& path) {
+ }
+ void Application::followLink(const std::string& document, const std::string& target,
+                              bool systemDefault) {
++  if (!systemDefault && sdpNavigation && sdpNavigation->follow(document, target))
++    return;
+   if (!systemDefault && documentViews && target.rfind("sdl-view:", 0) == 0) {
+     documentViews->follow(target);
+     return;
+diff --git a/src/application/ApplicationWorkspace.cpp b/src/application/ApplicationWorkspace.cpp
+index d650b26..f833554 100644
+--- a/src/application/ApplicationWorkspace.cpp
++++ b/src/application/ApplicationWorkspace.cpp
+@@ -14,7 +14,14 @@ void Application::wireWorkspace() {
+     window->status->setText(text.c_str());
+   };
+   workspace->openRequested = [this] { execute(CommandRouter::Open); };
+-  workspace->rootChanged = [field](const auto& root) { field->setWorkPath(root); };
++  workspace->rootChanged = [this, field](const auto& root) {
++    field->setWorkPath(root);
++    sdpNavigation->refresh(root);
++  };
++  workspace->sdpRefresh = [this, workspace] {
++    sdpNavigation->refresh(workspace->history.root().string());
++  };
++  workspace->sdp->activated = [this](const auto& target) { sdpNavigation->activate(target); };
+   field->setWorkPath(workspace->history.root().string());
+   field->filterChanged = [workspace](const auto& pattern) { workspace->setNameFilter(pattern); };
+   field->submitted = [this](const auto& target) { return openTypedPath(target); };
+diff --git a/src/application/ui/NavigationTree.h b/src/application/ui/NavigationTree.h
+index 39a43b3..14b15e7 100644
+--- a/src/application/ui/NavigationTree.h
++++ b/src/application/ui/NavigationTree.h
+@@ -4,7 +4,7 @@
+ #include <fx.h>
+ #include <optional>
+ namespace xfmd {
+-enum class IndexActionKind { None, Heading, File, Hyperlink };
++enum class IndexActionKind { None, Heading, File, Hyperlink, Command };
+ struct IndexAction {
+   IndexActionKind kind = IndexActionKind::None;
+   std::string path, target, error;
+diff --git a/src/application/ui/WorkspacePanel.cpp b/src/application/ui/WorkspacePanel.cpp
+index f8fe12d..90e3072 100644
+--- a/src/application/ui/WorkspacePanel.cpp
++++ b/src/application/ui/WorkspacePanel.cpp
+@@ -25,6 +25,8 @@ WorkspacePanel::WorkspacePanel(FXComposite* parent, UiContext& context)
+       new FXTabBar(tabRow, this, ID_TAB, LAYOUT_FILL_X | LAYOUT_CENTER_Y, 0, 0, 0, 0, 0, 0, 0, 0);
+   new FXTabItem(tabs, "Files");
+   new FXTabItem(tabs, "Index");
++  sdpTab = new FXTabItem(tabs, "SDP");
++  sdpTab->hide();
+   refreshButton = ui.button(tabRow, "\tRefresh Files", this, ID_REFRESH, UiIcon::Refresh);
+   markdown = ui.button(tabRow, "\tShow only Markdown files (off: all file types)", this,
+                        ID_MARKDOWN, UiIcon::Markdown, ButtonRole::Pill);
+@@ -65,6 +67,7 @@ WorkspacePanel::WorkspacePanel(FXComposite* parent, UiContext& context)
+   tree->favoriteRequested = [this](const auto& path) { favorites->add(path); };
+   recentFiles->favoriteRequested = [this](const auto& path) { favorites->add(path); };
+   index = new IndexPanel(pages, context);
++  sdp = new SdpPanel(pages);
+   std::vector<std::string> saved;
+   for (int i = 0; i < 32; ++i) {
+     auto key = "Path" + std::to_string(i);
+@@ -137,6 +140,30 @@ void WorkspacePanel::setNameFilter(const std::string& pattern) {
+   namePattern = pattern;
+   onFilter(nullptr, 0, nullptr);
+ }
++void WorkspacePanel::fitHeader() {
++  if (!sdpTab->shown())
++    return;
++  // Keep every tab reachable when Files controls reappear after another tab.
++  const auto minimum = tabs->getParent()->getDefaultWidth() + 4;
++  if (getWidth() < minimum) {
++    setWidth(minimum);
++    getParent()->recalc();
++  }
++}
++void WorkspacePanel::showSdp(bool show) {
++  if (show) {
++    sdpTab->show();
++    fitHeader();
++  } else {
++    sdpTab->hide();
++    if (tabs->getCurrent() == 2) {
++      tabs->setCurrent(0);
++      onTab(nullptr, 0, nullptr);
++    }
++  }
++  tabs->recalc();
++  recalc();
++}
+ long WorkspacePanel::onTab(FXObject*, FXSelector, void*) {
+   pages->setCurrent(tabs->getCurrent());
+   for (auto* button : {markdown, upButton, openButton}) {
+@@ -145,9 +172,11 @@ long WorkspacePanel::onTab(FXObject*, FXSelector, void*) {
+     else
+       button->hide();
+   }
++  fitHeader();
+   refreshButton->getParent()->recalc();
+-  refreshButton->setTipText(tabs->getCurrent() == 0 ? "Refresh Files"
+-                                                    : "Refresh Index from current buffer");
++  refreshButton->setTipText(tabs->getCurrent() == 0   ? "Refresh Files"
++                            : tabs->getCurrent() == 1 ? "Refresh Index from current buffer"
++                                                      : "Refresh SDP project");
+   return 1;
+ }
+ long WorkspacePanel::onRefresh(FXObject*, FXSelector, void*) {
+@@ -157,8 +186,10 @@ long WorkspacePanel::onRefresh(FXObject*, FXSelector, void*) {
+       onApplyFilter(nullptr, 0, nullptr);
+     else
+       tree->refresh();
+-  } else if (indexRefresh)
++  } else if (tabs->getCurrent() == 1 && indexRefresh)
+     indexRefresh();
++  else if (tabs->getCurrent() == 2 && sdpRefresh)
++    sdpRefresh();
+   return 1;
+ }
+ long WorkspacePanel::onUp(FXObject*, FXSelector, void*) {
+diff --git a/src/application/ui/WorkspacePanel.h b/src/application/ui/WorkspacePanel.h
+index 9818539..6513f84 100644
+--- a/src/application/ui/WorkspacePanel.h
++++ b/src/application/ui/WorkspacePanel.h
+@@ -2,6 +2,7 @@
+ #include "FavoritesPanel.h"
+ #include "IndexPanel.h"
+ #include "RecentFilesPanel.h"
++#include "SdpPanel.h"
+ #include "SidebarWidget.h"
+ #include "application/workspace/WorkPathHistory.h"
+ #include "controls/UiLayout.h"
+@@ -11,8 +12,10 @@ class WorkspacePanel : public FX::FXVerticalFrame {
+   std::string pendingPath;
+   std::string namePattern;
+   FX::FXSwitcher* pages = nullptr;
++  FX::FXTabItem* sdpTab = nullptr;
+   bool pathError = false, filterPending = false;
+   void remember();
++  void fitHeader();
+ 
+ protected:
+   WorkspacePanel() : history("/") {}
+@@ -36,7 +39,9 @@ public:
+   FX::FXTabBook* recentTabs = nullptr;
+   UiButton *refreshButton = nullptr, *upButton = nullptr, *openButton = nullptr;
+   IndexPanel* index = nullptr;
+-  std::function<void()> openRequested, indexRefresh;
++  SdpPanel* sdp = nullptr;
++  void showSdp(bool);
++  std::function<void()> openRequested, indexRefresh, sdpRefresh;
+   std::function<void(const std::string&)> rootChanged;
+   UiButton* markdown = nullptr;
+   FX::FXList* workPaths = nullptr;
+diff --git a/src/blueprint/README.md b/src/blueprint/README.md
+index de5c610..e8b86f1 100644
+--- a/src/blueprint/README.md
++++ b/src/blueprint/README.md
+@@ -1,6 +1,6 @@
+ # Blueprint register
+ 
+-Current branch inventory: 10 features and 27 functionality objects (37 total).
++Current branch inventory: 10 features and 28 functionality objects (38 total).
+ Main `c245fd9` contains P0–P41 and Sprints 001–002; FUNC-031 belongs to the
+ separate Sprint 004 branch. FTR-011/FUNC-027–030 and UR-043/SR-026 are reserved
+ by historical BoxUI work and are not missing implementations on this branch.
+@@ -183,3 +183,17 @@ P22: UR-032 → FUNC-010/014; UR-033 → FUNC-010; UR-034 → FUNC-005. AT-052
+ | Requirement | Design objects | Acceptance | Scope |
+ | --- | --- | --- | --- |
+ | UR-045 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | AT-073 | FirstRelease |
++
++## SDP project navigation — 2026-10-01
++
++| ID | Owner | Status |
++| --- | --- | --- |
++| [FUNC-032](functionality/Functionality-032--SDP-Project-Navigation.md) | application | Implemented |
++
++| Requirement | Object | Acceptance | Scope |
++| --- | --- | --- | --- |
++| UR-046 | FUNC-032 | AT-074 | FirstRelease |
++| SR-029 | FUNC-032 | AT-075 | FirstRelease |
++
++The previous 37-object SDL baseline needs a FUNC-032 delta under #017; its
++historical structural evidence is preserved rather than silently regenerated.
+diff --git a/src/blueprint/functionality/Functionality-010--Workspace-Controls.md b/src/blueprint/functionality/Functionality-010--Workspace-Controls.md
+index f7d173f..cbb4c46 100644
+--- a/src/blueprint/functionality/Functionality-010--Workspace-Controls.md
++++ b/src/blueprint/functionality/Functionality-010--Workspace-Controls.md
+@@ -224,3 +224,11 @@ M1 chooser screenshots/evidence retain their historical scope.
+ M2 acceptance: [context-menu evidence](../../../sprints/Sprint-009--Favorites/evidence/M2/README.md).
+ PathContextMenu briefly grabs keyboard input so Escape reaches the popup while the
+ document retains X focus, and releases it before the returned action executes.
++
++### 2026-10-01 — SDP workspace composition
++
++WorkspacePanel composes SdpPanel as a third page, conditionally exposed for an
++immediate SDP candidate. ApplicationWorkspace forwards work-root and active SDP
++Refresh events to FUNC-032. Files-only header controls are hidden on both Index
++and SDP. Hiding SDP while it is selected restores Files. Document parsing and
++producer execution remain outside the widget; see FUNC-032 for its call map.
+diff --git a/tests/gui/IndexGuiTest.cpp b/tests/gui/IndexGuiTest.cpp
+index 95eca2f..17f64b6 100644
+--- a/tests/gui/IndexGuiTest.cpp
++++ b/tests/gui/IndexGuiTest.cpp
+@@ -115,7 +115,7 @@ void run() {
+   settle(app);
+   auto* panel = app.window->workspacePanel;
+   auto* index = panel->index;
+-  auto* tab = panel->tabs->getLast();
++  auto* tab = panel->tabs->getFirst()->getNext();
+   CHECK(dynamic_cast<FXTabItem*>(tab));
+   auto token = app.session.view().token;
+   click(app, tab, 15, 10, 1000);
+diff --git a/tests/gui/PathWorkspaceGuiTest.cpp b/tests/gui/PathWorkspaceGuiTest.cpp
+index 6bce20f..ab674d4 100644
+--- a/tests/gui/PathWorkspaceGuiTest.cpp
++++ b/tests/gui/PathWorkspaceGuiTest.cpp
+@@ -149,7 +149,7 @@ void run() {
+   CHECK(panel->tree->getPathnameItem((base / "one-new.md").c_str()));
+   CHECK(panel->history.root() == base && panel->nameFilter() == "one*");
+   // Native Index tab and Refresh rebuild the edited buffer, never disk contents.
+-  nativeClick(panel->tabs->getLast(), 15, 10);
++  nativeClick(panel->tabs->getFirst()->getNext(), 15, 10);
+   CHECK(panel->tabs->getCurrent() == 1 && panel->index->shown());
+   CHECK(!panel->markdown->shown() && !panel->upButton->shown() && !panel->openButton->shown());
+   CHECK(panel->refreshButton->shown() && panel->markdown->isChecked());

@@ -3,7 +3,7 @@
 xfmd \- native FOX Markdown viewer and editor
 .SH SYNOPSIS
 .B xfmd
-.RI [ directory | file.md | file.txt ]
+.RI [ directory | file.md | file.txt | file.mmd ]
 .SH DESCRIPTION
 Read and edit local UTF-8 Markdown and text files using FOX.
 Markdown is rendered natively without a browser engine or network resource loading.
@@ -15,15 +15,23 @@ Double-click the root to widen to home, then to /. Right-click a directory and
 choose Set work path. Click a historic work path below the tree to reactivate it.
 The 32 most recent distinct work paths persist between runs.
 .PP
-The *.md and *.txt toggles are ORed, then intersected with the filename filter.
-Both toggles are initially off (all file types). Plain text matches a substring;
-? matches one Unicode character and * zero or more characters in the full filename.
+The .md filter restricts the tree to Markdown. Disable it to see Mermaid files.
+The filename filter matches a substring; ? and * act as wildcards.
 Matching ignores ASCII case. Filtering searches descendants in the background,
-showing matching files and their ancestor directories. Refresh rescans the tree.
+showing matching files and ancestor directories. Refresh rescans the tree.
 Directory symlinks are not traversed. File symlinks outside the root are omitted.
-Regular files with .md/.txt extensions open in XFMD (case-insensitive).
-Other file types selected in the Files tree open with xdg-open and leave the
-current buffer and undo history unchanged. Launcher errors are reported.
+Markdown and raw .mmd Mermaid files open internally (case-insensitive suffixes).
+Mermaid opens in Preview; Editor/Split and Save preserve the original raw source.
+Unsupported Mermaid shows source and a diagnostic. PDF shares the diagram renderer.
+Other valid UTF-8 text opens in Editor; HTML opens in the configured browser,
+and binary files use OS association. Ctrl+click requests OS association.
+.SH HEADING LINKS
+Local Markdown links support absolute or relative paths followed by #heading,
+or a same-document #heading. Headings match their displayed title or a lowercase
+slug with spaces changed to hyphens and punctuation removed. Repeated slugs use
+-1, -2 suffixes. Percent-encode spaces and literal # characters in filenames.
+Same-file jumps preserve unsaved edits. Missing headings report a diagnostic.
+Explicit HTML IDs and full Unicode case folding are not supported.
 .SH KEYS
 Ctrl+O opens a file. Ctrl+S saves. Ctrl+Shift+S saves under another name.
 Ctrl+Z and Ctrl+Y undo and redo. Ctrl+F searches.

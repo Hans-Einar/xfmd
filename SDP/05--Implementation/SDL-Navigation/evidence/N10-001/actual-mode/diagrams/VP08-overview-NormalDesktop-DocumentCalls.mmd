@@ -1,0 +1,8 @@
+flowchart LR
+    n_DocumentCalls["DocumentCalls (channel)"]
+    n_Documents["Documents (unit)"]
+    n_Navigation["Navigation (unit)"]
+    n_DocumentCalls -->|receiver| n_Documents
+    n_Documents -->|sender| n_DocumentCalls
+    n_DocumentCalls -->|receiver| n_Navigation
+    n_Navigation -->|sender| n_DocumentCalls

@@ -5,6 +5,8 @@ mod architecture;
 mod charts;
 #[path = "semantic_planning.rs"]
 mod planning;
+#[path = "semantic_usecase.rs"]
+pub mod usecase;
 use crate::wire::{Reader, Writer};
 #[derive(Clone, Debug, PartialEq)]
 pub struct Record {
@@ -39,6 +41,9 @@ impl Diagram {
         });
     }
     pub fn validate(&self) -> Result<(), String> {
+        if self.family == 23 {
+            return usecase::validate(self);
+        }
         if self.family >= 13 {
             return charts::validate(self);
         }

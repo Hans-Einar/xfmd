@@ -1,0 +1,490 @@
+VP09 — Dataset, Datagram and
+persistent Database
+Revision:
+e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007.
+
+Explicit holders, sources, contracts, variants, fields and projections.
+
+
+Data origin and holder:
+FrozenExportSnapshot
+                           holds                                            upholds
+
+
+   Publication (unit)                 FrozenExportSnapshot (dataset)                    ExportSnapshotShape (contract)
+
+
+
+
+Source facts: f0361, f0746.
+
+Declarations: ExportSnapshotShape, FrozenExportSnapshot, Publication.
+
+
+Data origin and holder:
+GeneratedSelectionState
+                              holds                                           upholds
+
+
+   GeneratedViews (unit)                GeneratedSelectionState (dataset)                GenerationStateShape (contract)
+
+
+
+
+Source facts: f0410, f0423.
+
+Declarations: GeneratedSelectionState, GeneratedViews, GenerationStateShape.
+Data origin and holder:
+MainDocumentState
+                      holds                                 upholds
+
+
+   Documents (unit)           MainDocumentState (dataset)             DocumentStateShape (contract)
+
+
+
+
+Source facts: f0231, f0526.
+
+Declarations: DocumentStateShape, Documents, MainDocumentState.
+
+
+Scope and notation
+Dataset neighborhoods retain explicit from, holds, owns and upholds relations.
+Database means a persistent data source, not SQL tables, keys, transactions, a
+storage engine or deployment. Unit-held data has no declared persistence. These are
+definitions, not runtime instances. Contract completeness is a source assertion, not
+execution evidence. Optional fields do not imply null, empty, false or zero. Projections
+do not specify executable transformations. Encoding and bit positions belong to VP10.
+
+
+Data definitions
+  • FrozenExportSnapshot (Dataset): holder Publication; contract
+    ExportSnapshotShape; Unit-held; persistence unspecified. Source facts: f0361,
+    f0746.
+
+  • GeneratedSelectionState (Dataset): holder GeneratedViews; contract
+    GenerationStateShape; Unit-held; persistence unspecified. Source facts: f0410,
+    f0423.
+
+  • MainDocumentState (Dataset): holder Documents; contract DocumentStateShape
+    ; Unit-held; persistence unspecified. Source facts: f0231, f0526.
+
+No datagram declarations.
+Database register
+No Databases are declared; no persistent store is inferred.
+
+
+Contract register
+All Contracts are included, even unused/open definitions. Open a Contract in the
+navigation tree for its structure diagram. Counts describe explicit shape membership
+(fields / variants / permitted messages), not runtime coverage.
+
+Contract                      Completeness Fields / variants /            Source fact
+                                               messages
+
+ContextInteractionContract closed              0/0/3                      f0109
+
+DiagramInterpretationCon      closed           0/0/1                      f0127
+tract
+
+DiagramLayoutCallsContra closed                0/0/2                      f0132
+ct
+
+DocumentCallsContract         closed           0/0/3                      f0168
+
+DocumentNotificationsCon closed                0/0/3                      f0192
+tract
+
+DocumentStateChangesCo closed                  0/0/2                      f0213
+ntract
+
+DocumentStateShape            closed           5/0/0                      f0216
+
+EditIntentsContract           closed           0/0/1                      f0258
+
+ExportInterpretationContra closed              0/0/2                      f0289
+ct
+
+ExportLayoutContract          closed           0/0/2                      f0293
+
+ExportSnapshotShape           closed           4/0/0                      f0306
+
+ExternalOpeningContract       closed           0/0/1                      f0313
+GeneratedAdmissionContr      closed   0/0/4   f0368
+act
+
+GeneratedDeliveryContrac     closed   0/0/3   f0374
+t
+
+GeneratedDocumentCalls       closed   0/0/2   f0379
+Contract
+
+GeneratedIntentsContract     closed   0/0/2   f0390
+
+GenerationLifecycleContra    closed   0/0/2   f0454
+ct
+
+GenerationStateShape         closed   4/0/0   f0459
+
+IndexChangesContract         closed   0/0/2   f0467
+
+IndexIntentsContract         closed   0/0/1   f0471
+
+InteractionObservationSha    closed   1/0/0   f0477
+pe
+
+InterpretationCallsContrac   closed   0/0/2   f0480
+t
+
+LayoutCallsContract          closed   0/0/2   f0504
+
+LeaseLifecycleContract       closed   0/0/4   f0514
+
+LeaseNotificationsContract closed     0/0/1   f0520
+
+NavigationCallsContract      closed   0/0/2   f0584
+
+OpeningPolicyContract        closed   0/0/1   f0598
+
+PreferenceChangesContra      closed   0/0/5   f0645
+ct
+
+PresentationEventsContrac closed      0/0/2   f0680
+t
+
+PreviewAdmissionContract closed       0/0/5   f0711
+PublicationDrawingContrac closed      0/0/1   f0764
+t
+
+PublicationInputsContract    closed   0/0/1   f0767
+
+PublicationIntentsContract   closed   0/0/2   f0770
+
+PublicationStateContract     closed   0/0/3   f0774
+
+ReferenceInterpretationCo    closed   0/0/2   f0808
+ntract
+
+ReferenceStorageContract     closed   0/0/2   f0818
+
+ResourcePreparationContr     closed   0/0/5   f0860
+act
+
+ScheduledWorkContract        closed   0/0/3   f0885
+
+StorageCallsContract         closed   0/0/5   f0922
+
+UnsavedAdmissionContrac closed        0/0/3   f0951
+t
+
+ViewportChangesContract      closed   0/0/5   f0975
+
+WindowPresentationContr      closed   0/0/1   f0994
+act
+
+WorkspaceChangesContra       closed   0/0/4   f1008
+ct
+
+WorkspaceIntentsContract     closed   0/0/4   f1024
+
+
+
+Variant register
+No Variants are declared.
+Field register
+Field           Shape owner             Value type Presence Source facts
+
+DocumentByt     DocumentStateShape      bytes      required   f0165, f0166,
+es                                                            f0217
+
+DocumentIde     DocumentStateShape      unsigned   required   f0174, f0175,
+ntity                                                         f0218
+
+DocumentPat     DocumentStateShape      text       required   f0199, f0200,
+h                                                             f0219
+
+DocumentRev DocumentStateShape          unsigned   required   f0205, f0206,
+ision                                                         f0220
+
+ExportBytes     ExportSnapshotShape     bytes      required   f0284, f0285,
+                                                              f0307
+
+ExportDocum     ExportSnapshotShape     unsigned   required   f0286, f0287,
+ent                                                           f0308
+
+ExportPath      ExportSnapshotShape     text       required   f0299, f0300,
+                                                              f0309
+
+ExportRevisio   ExportSnapshotShape     unsigned   required   f0301, f0302,
+n                                                             f0310
+
+GenerationSe    GenerationStateShap     unsigned   required   f0457, f0458,
+quence          e                                             f0460
+
+ObservationC    InteractionObservatio   text       required   f0478, f0593,
+ontext          nShape                                        f0594
+
+RegisteredPro GenerationStateShap       text       required   f0461, f0821,
+ject            e                                             f0822
+
+SavedBaselin    DocumentStateShape      bytes      required   f0221, f0882,
+eBytes                                                        f0883
+TargetPane     GenerationStateShap      text       required    f0462, f0932,
+               e                                               f0933
+
+TargetWindo    GenerationStateShap      text       required    f0463, f0934,
+w              e                                               f0935
+
+
+
+Shape membership
+Shape                         Relation Member                          Source fact
+
+ContextInteractionContract    permits     CaptureContextTarget         f0110
+
+ContextInteractionContract    permits     DismissContextMenu           f0111
+
+ContextInteractionContract    permits     ReleaseKeyboardGrab          f0112
+
+DiagramInterpretationContrac permits      ParseMermaidBlock            f0128
+t
+
+DiagramLayoutCallsContract    permits     LayoutTypedDiagram           f0133
+
+DiagramLayoutCallsContract    permits     TypedDiagramLaidOut          f0134
+
+DocumentCallsContract         permits     AdmitDocument                f0169
+
+DocumentCallsContract         permits     DocumentOpened               f0170
+
+DocumentCallsContract         permits     DocumentRejected             f0171
+
+DocumentNotificationsContra   permits     CommitVisit                  f0193
+ct
+
+DocumentNotificationsContra   permits     DocumentChanged              f0194
+ct
+
+DocumentNotificationsContra   permits     GeneratedDocumentChang f0195
+ct                                        ed
+
+DocumentStateChangesContr     permits     MarkCurrentSaved             f0214
+act
+DocumentStateChangesContr      permits   ReplaceDocument           f0215
+act
+
+DocumentStateShape             has-field DocumentBytes             f0217
+
+DocumentStateShape             has-field DocumentIdentity          f0218
+
+DocumentStateShape             has-field DocumentPath              f0219
+
+DocumentStateShape             has-field DocumentRevision          f0220
+
+DocumentStateShape             has-field SavedBaselineBytes        f0221
+
+EditIntentsContract            permits   ApplyTextEdit             f0259
+
+ExportInterpretationContract   permits   ExportSnapshotParsed      f0290
+
+ExportInterpretationContract   permits   ParseExportSnapshot       f0291
+
+ExportLayoutContract           permits   ExportPagesLaidOut        f0294
+
+ExportLayoutContract           permits   LayoutExportPages         f0295
+
+ExportSnapshotShape            has-field ExportBytes               f0307
+
+ExportSnapshotShape            has-field ExportDocument            f0308
+
+ExportSnapshotShape            has-field ExportPath                f0309
+
+ExportSnapshotShape            has-field ExportRevision            f0310
+
+ExternalOpeningContract        permits   LaunchConfiguredProgram   f0314
+
+GeneratedAdmissionContract     permits   AdvanceGenerationSequen f0369
+                                         ce
+
+GeneratedAdmissionContract     permits   InspectDirtyMain          f0370
+
+GeneratedAdmissionContract     permits   RejectInvalidSelection    f0371
+
+GeneratedAdmissionContract     permits   ValidateSelection         f0372
+
+GeneratedDeliveryContract      permits   DeliverGeneratedMain      f0375
+
+GeneratedDeliveryContract      permits   GeneratedMainAccepted     f0376
+GeneratedDeliveryContract     permits   GeneratedMainRejected      f0377
+
+GeneratedDocumentCallsCont permits      AdmitGeneratedDocument     f0380
+ract
+
+GeneratedDocumentCallsCont permits      GeneratedDocumentOpen      f0381
+ract                                    ed
+
+GeneratedIntentsContract      permits   SelectInvalidView          f0391
+
+GeneratedIntentsContract      permits   SelectRegisteredView       f0392
+
+GenerationLifecycleContract   permits   CancelPreviousChild        f0455
+
+GenerationLifecycleContract   permits   StartGeneration            f0456
+
+GenerationStateShape          has-field GenerationSequence         f0460
+
+GenerationStateShape          has-field RegisteredProject          f0461
+
+GenerationStateShape          has-field TargetPane                 f0462
+
+GenerationStateShape          has-field TargetWindow               f0463
+
+IndexChangesContract          permits   CheckReferenceGeneration f0468
+
+IndexChangesContract          permits   PublishReferenceHeadings   f0469
+
+IndexIntentsContract          permits   ExpandReference            f0472
+
+InteractionObservationShape   has-field ObservationContext         f0478
+
+InterpretationCallsContract   permits   ParseSnapshot              f0481
+
+InterpretationCallsContract   permits   ParsedSnapshot             f0482
+
+LayoutCallsContract           permits   LayoutModel                f0505
+
+LayoutCallsContract           permits   ModelLaidOut               f0506
+
+LeaseLifecycleContract        permits   InstallNewLease            f0515
+
+LeaseLifecycleContract        permits   KeepUnsentRelease          f0516
+
+LeaseLifecycleContract        permits   QueuePreviousLease         f0517
+LeaseLifecycleContract       permits   RemoveSentRelease          f0518
+
+LeaseNotificationsContract   permits   AttemptRelease             f0521
+
+NavigationCallsContract      permits   OpenTarget                 f0585
+
+NavigationCallsContract      permits   TargetOpened               f0586
+
+OpeningPolicyContract        permits   ClassifyExternalTarget     f0599
+
+PreferenceChangesContract    permits   AdoptPreferencesDraft      f0646
+
+PreferenceChangesContract    permits   BeginPreferencesDraft      f0647
+
+PreferenceChangesContract    permits   NotifyPreferenceChange     f0648
+
+PreferenceChangesContract    permits   PersistPreferencesDraft    f0649
+
+PreferenceChangesContract    permits   ValidatePreferencesDraft   f0650
+
+PresentationEventsContract   permits   PresentFrame               f0681
+
+PresentationEventsContract   permits   ShowDirtyRejection         f0682
+
+PreviewAdmissionContract     permits   AcceptCurrentFrame         f0712
+
+PreviewAdmissionContract     permits   AcceptCurrentModel         f0713
+
+PreviewAdmissionContract     permits   AcceptWorkerTicket         f0714
+
+PreviewAdmissionContract     permits   CompleteObsoleteWorker     f0715
+
+PreviewAdmissionContract     permits   DiscardObsoleteCompletio   f0716
+                                       n
+
+PublicationDrawingContract   permits   PaintPdfCandidate          f0765
+
+PublicationInputsContract    permits   FreezeExportSnapshot       f0768
+
+PublicationIntentsContract   permits   CancelPdfRequest           f0771
+
+PublicationIntentsContract   permits   RequestPdfExport           f0772
+
+PublicationStateContract     permits   CancelUnpublishedJob       f0775
+
+PublicationStateContract     permits   CommitPdfCandidate         f0776
+PublicationStateContract       permits   DiscardPdfCandidate      f0777
+
+ReferenceInterpretationContr   permits   ParseReference           f0809
+act
+
+ReferenceInterpretationContr   permits   ReferenceParsed          f0810
+act
+
+ReferenceStorageContract       permits   ReadReference            f0819
+
+ReferenceStorageContract       permits   ReferenceRead            f0820
+
+ResourcePreparationContract    permits   CacheCompatibleScene     f0861
+
+ResourcePreparationContract    permits   PrepareDiagramScenes     f0862
+
+ResourcePreparationContract    permits   PrepareEmbeddedResourc   f0863
+                                         es
+
+ResourcePreparationContract    permits   PrepareExportResources   f0864
+
+ResourcePreparationContract    permits   PrepareTypedDiagram      f0865
+
+ScheduledWorkContract          permits   DebounceElapsed          f0886
+
+ScheduledWorkContract          permits   PollReleaseQueue         f0887
+
+ScheduledWorkContract          permits   RestartDebounce          f0888
+
+StorageCallsContract           permits   CandidateRead            f0923
+
+StorageCallsContract           permits   CandidateReadFailed      f0924
+
+StorageCallsContract           permits   CurrentWritten           f0925
+
+StorageCallsContract           permits   ReadCandidate            f0926
+
+StorageCallsContract           permits   WriteCurrent             f0927
+
+UnsavedAdmissionContract       permits   ChooseCancel             f0952
+
+UnsavedAdmissionContract       permits   ChooseSave               f0953
+
+UnsavedAdmissionContract       permits   ChooseUnsaved            f0954
+ViewportChangesContract           permits   CheckCurrentMapping           f0976
+
+ViewportChangesContract           permits   MapSourceAnchor               f0977
+
+ViewportChangesContract           permits   RetainDocumentAndAncho        f0978
+                                            r
+
+ViewportChangesContract           permits   SetEditorAnchor               f0979
+
+ViewportChangesContract           permits   UserPreviewScroll             f0980
+
+WindowPresentationContract        permits   ToggleFullscreen              f0995
+
+WorkspaceChangesContract          permits   ActivateRootAndHistory        f1009
+
+WorkspaceChangesContract          permits   RequestTreeRefresh            f1010
+
+WorkspaceChangesContract          permits   SetChosenParentRoot           f1011
+
+WorkspaceChangesContract          permits   ValidateProposedRoot          f1012
+
+WorkspaceIntentsContract          permits   ActivateExternalTarget        f1025
+
+WorkspaceIntentsContract          permits   ChooseInternalFile            f1026
+
+WorkspaceIntentsContract          permits   FavoriteFileChosen            f1027
+
+WorkspaceIntentsContract          permits   FavoriteFolderChosen          f1028
+
+
+
+Projection responsibilities
+Projects relates Functionality, Dataset and Datagram together; it does not imply a
+lossless conversion or a runtime call.
+
+No projections are declared.
+

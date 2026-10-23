@@ -1,0 +1,8 @@
+flowchart LR
+    n_ExportLayout["ExportLayout (channel)"]
+    n_Publication["Publication (unit)"]
+    n_Renderer["Renderer (unit)"]
+    n_ExportLayout -->|receiver| n_Publication
+    n_Publication -->|sender| n_ExportLayout
+    n_ExportLayout -->|receiver| n_Renderer
+    n_Renderer -->|sender| n_ExportLayout

@@ -1,0 +1,16 @@
+{
+  "sha256": {
+    "/home/warloc/git/xfmd-sdl-navigation/build-ui/xfmd": "0d2a8a41b964188afc6345104ef9ecd95b2b5383c18a03432448f2b6d162a1b7",
+    "/tmp/xfmd-n3e-sdptool": "6e3f2bf0757c3d626b7ddc337567f414dfd359a5cb1f086c19a39b23e778fdf7",
+    "/tmp/xfmd-n3e-native-probe": "5cd7aace6ce8470d645c73801554e24c6f9489fca1c75bf73290414f5fdf608d",
+    "/home/warloc/git/xfmd-sdl-navigation/SDP/SDL/XFMD/XfmdDesktop.design": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007",
+    "/home/warloc/git/xfmd-sdl-navigation/SDP/05--Implementation/SDL-Navigation/evidence/N3f-001/generated/diagrams/VP07-DocumentReferences-NormalDesktop.mmd": "945e33beb0907f60b7b7eac8d4a385e4ff432bb7032c26de8599ba4a87b7b1c1"
+  },
+  "xfmd_head": "41fa4948c5377edd792ba3f503e6b92b0fd4717a",
+  "mermaid_pin": {
+    "repository": "Hans-Einar/mermaid-rs-renderer",
+    "commit": "1db800b8c2fca5d65c16acc87f55c3d65265095e",
+    "sha256": "1d627d579fd6d9acb5226544d1843fb9a0b1dd80a33f7ce1f755ae2e75163d07",
+    "archive": "third_party/mermaid-rs-renderer-1db800b8c2fca5d65c16acc87f55c3d65265095e.tar.xz"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "recordedAt": "2026-10-01T02:17:23.894636+00:00",
+  "head": "41fa4948c5377edd792ba3f503e6b92b0fd4717a",
+  "branch": "sprint/009/phase/057-favorites",
+  "candidate": "HEAD plus uncommitted working tree; selected input hashes, not a clean-commit claim",
+  "sources": {
+    "CMakeLists.txt": "d15280afc6076558975d3f65afb9ae2afe10fd845db9801d837c37eac99a3595",
+    "Cargo.lock": "72fef6570d0350c3362768ba19a5852d78422043081ea0fc136eb46e0aae1948",
+    "Cargo.toml": "b51159a6ce203b5286612353f76fe8bea47c24851946a705d5b8723c7e4379b0",
+    "SDP/05--Implementation/XFMD-Modeling/views/xfmd-model/provenance.json": "ad23d512aecf8fb81b2ae6b7cf9b6045b4dbf3049483cf2913f1ba7653207b77",
+    "SDP/SDL/XFMD/SDUI/XfmdDesktop/Desktop.sdui": "b13ecbc642c01ceb6b7a45d8ffa5113ddb99b909e7e98396d32cc1e4732fb9a8",
+    "SDP/SDL/XFMD/XfmdDesktop.design": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007",
+    "SDP/SDL/XFMD/model-map.json": "1fcd776e2a5e5e6a4d926b356219be1c5bacc29a3a6802fd9c891c6a92bff76c",
+    "cmake/Sdp.cmake": "b22f85b771846904eaca3d914b963c791ba991ae679ea3a4933d6222aad9bd1d",
+    "cmake/Tests.cmake": "9af0fb835d72a893267c481a764088a7ea6acbfb79616d96fc68121efc0ce8e0",
+    "softwareArchitecture.md": "5a12af8546716959a86b6e0652f28491137731692dec45cc1058bfd458a7200b",
+    "src/application/Application.cpp": "f3d1d23f6eede4c08255687f122ce57c8e013c4735debbef718ff4e865d02f19",
+    "src/application/Application.h": "a53bd097353d4c28146f9076723d4732ae939ff751531e6c7f25d59fd023f1dc",
+    "src/application/ApplicationOpening.cpp": "16a06fce76c190b51aae7ca223900e2a4f973669f6b35a93f13c160e12142354",
+    "src/application/ApplicationWorkspace.cpp": "566b7a79fedd611a50a368bc6244d6f82735e495ead74524836bac928ac12282",
+    "src/application/sdp/SdpNavigation.cpp": "1e2677d7417e9d6cec76011bcd9cb099ffdf5059ad09511e7aa26f88716083cc",
+    "src/application/sdp/SdpNavigation.h": "0e8609ba15750b4ac86afadf19f5daf9cb388527df58ad18c74cb53e0a4d61ca",
+    "src/application/sdp/SdpProtocol.cpp": "cb49ed7f8de808a15f3d4f3b80fc467830ef822fb5d351d3c070a4656333f517",
+    "src/application/sdp/SdpProtocol.h": "f7dcc1215cd3e5264d30f174d02315ca81e9eefb3cc7938f6870d078d8b87334",
+    "src/application/sdp/SdpToolJob.cpp": "a6a2a3ea68627f6bfd5e2c27c806dfb9547de8d681262489d858825525e478ad",
+    "src/application/sdp/SdpToolJob.h": "2516cea1c862afdd09102484b03c15919de9348265090f6915ad7ad1e714b922",
+    "src/application/sdp/rust/Cargo.toml": "0c5eca1cac942321e3c15cf4b65cbf38177ecba441c12a1595c3ed6acf5b5518",
+    "src/application/sdp/rust/src/lib.rs": "cfdbc2226d9d969b92cf6178f00b9687e5af0e51fe7696072c55d46d1609729c",
+    "src/application/ui/NavigationTree.h": "8fb72e8b47d215a5d1b1943086786bddb1cc08f8de9a327d3521f2e709aa74b6",
+    "src/application/ui/SdpPanel.cpp": "9307eed36b06770be8e513e4f89e623cd31cd62ede3707b92454cd761dbff622",
+    "src/application/ui/SdpPanel.h": "8e73ee78f36519402b37c1edad4de20c4fee5888b1ff1e3e9ec87024a7324184",
+    "src/application/ui/WorkspacePanel.cpp": "0ff1900248521eaf75beb2bb8ba3e9ad1029a049a205901727139d9d055ec838",
+    "src/application/ui/WorkspacePanel.h": "89fb4a7ee91c056f42cf240ab5e057cb8ff1588c9ff2f312589fb939389895e1",
+    "src/blueprint/functionality/Functionality-032--SDP-Project-Navigation.md": "50d4f6a1f78edd095c8003da16f020a6e5bcd21bd3f9dea4f99625b0b6574d21",
+    "tests/application/SdpIntegrationTest.cpp": "75ba82096f2eeb50d5fb04aceebe3098ff7a619fc7fbf8bac78af0c0dcde193e",
+    "tests/application/SdpProtocolTest.cpp": "e936365a056a132ea7469af1ec1aa84bd76b0cab2f8cfb50235f9a1fb5c8e98f",
+    "tests/fixtures/sdp/tool.py": "957e89f39e8068947c1c3926bed69adb388ca95c74933949ab3dd7e1bc2f223b",
+    "tests/gui/SdpNavigationGuiTest.cpp": "22f070ca0498c5beae3fceada3b679eddd0998ce5c580393a4c5a2837109ae0c",
+    "xfmd_requirements.md": "72e67f5f94d9f53363b53ff7226101b963ad27553ef63dbea31a7ac701c3b921"
+  },
+  "binaries": {
+    "build-ui/xfmd": "750cd0ede301a65abfecb41857e30060dbaa1e2cde97566a8b57030683d9d840",
+    "build-ui/SdpProtocolTest": "1f66d453fd392cb5faccd935f245d9382f496e5a9229123fbf4274f4e4c07795",
+    "build-ui/SdpIntegrationTest": "8534a2a7ec1b0a347f174dc485024a80f72323adad72b5c18cb8a1341e018eb8",
+    "build-ui/SdpNavigationGuiTest": "b623ffdcf521c9b5bc99a61cc71e8d3c3de8289f76b3b21115e44131a4ea0159"
+  },
+  "producer": {
+    "path": "/home/warloc/.cache/sdptool/distribution/193f5fe8c1c6d15455561c00ce10ab39a3302a4ed320e25e870a73a904a61715-sdptool",
+    "sha256": "193f5fe8c1c6d15455561c00ce10ab39a3302a4ed320e25e870a73a904a61715",
+    "version": "SDPTool 2.0.0\nRevision: d304261c90066a86b2d8ffcaa2115517ea339b05\nInstallation protocol: sdp-install-command/1"
+  },
+  "results": {
+    "nonGuiPassed": 36,
+    "nonGuiHostBlocked": [
+      "DiskFullFailure",
+      "PdfFlushFailure"
+    ],
+    "gui": "compiled; Xvfb listener creation blocked",
+    "adapterSanitizers": "ASan/UBSan passed; Rust archive uninstrumented, leak detection disabled",
+    "model": "38 blueprints, 11 use cases, 73 requirement IDs, 22 declared scenarios, six SDUI concepts, 248 generated outputs",
+    "defaultGh": "Passed real integration with SDP_OFFLINE=true; current project snapshot 3435 nodes"
+  },
+  "sanitizerBinaries": {
+    "/tmp/xfmd-sdp-asan/SdpProtocolTest": "312e222eedb75057e5eab2448bd7433826dcae16454af5370d3a345a790d127d",
+    "/tmp/xfmd-sdp-asan/SdpIntegrationTest": "228f04dd58dfb99862126251079e41cc97a1686c5ad33951b99dc0b486a3fc0c"
+  }
+}

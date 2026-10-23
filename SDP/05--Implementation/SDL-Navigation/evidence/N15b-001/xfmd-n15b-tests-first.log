@@ -1,0 +1,52 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd-sdl-navigation/build-ui
+Test project /home/warloc/git/xfmd-sdl-navigation/build-ui
+      Start 89: SdpRuntimeGuiTest
+      Start 92: SdpOverviewGuiTest
+      Start 79: SdpWatchTest
+ 1/13 Test #79: SdpWatchTest .....................   Passed    6.84 sec
+      Start 81: SdpNavigationGuiTest
+ 2/13 Test #81: SdpNavigationGuiTest .............***Failed    1.42 sec
+Traceback (most recent call last):
+  File "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py", line 21, in <module>
+    result = subprocess.run(sys.argv[1:], env=env, timeout=60)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.12/subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.12/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib64/python3.12/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+PermissionError: [Errno 13] Permission denied: '/home/warloc/git/xfmd-sdl-navigation/build-ui/SdpNavigationGuiTest'
+
+      Start 93: SdlSourceGuiTest
+ 3/13 Test #93: SdlSourceGuiTest .................   Passed    5.55 sec
+      Start 16: SdpDynamicGuiTest
+ 4/13 Test #16: SdpDynamicGuiTest ................   Passed    6.18 sec
+      Start 80: SdpProtocolTest
+ 5/13 Test #80: SdpProtocolTest ..................   Passed    4.51 sec
+      Start 17: SdpPanelGuiTest
+ 6/13 Test #17: SdpPanelGuiTest ..................   Passed    2.83 sec
+      Start 82: SdpIntegrationTest
+ 7/13 Test #82: SdpIntegrationTest ...............   Passed    0.72 sec
+      Start 83: SdpDiscoveryTest
+ 8/13 Test #83: SdpDiscoveryTest .................   Passed    0.03 sec
+      Start 88: SdpRuntimeTest
+ 9/13 Test #88: SdpRuntimeTest ...................   Passed    0.03 sec
+      Start 90: SdpDisplayTest
+10/13 Test #90: SdpDisplayTest ...................   Passed    0.02 sec
+      Start 94: SdpDeferredGuiTest
+11/13 Test #92: SdpOverviewGuiTest ...............   Passed   30.55 sec
+12/13 Test #94: SdpDeferredGuiTest ...............   Passed    6.34 sec
+13/13 Test #89: SdpRuntimeGuiTest ................   Passed   43.90 sec
+
+92% tests passed, 1 tests failed out of 13
+
+Label Time Summary:
+GUI    =  96.76 sec*proc (7 tests)
+
+Total Test time (real) =  43.93 sec
+
+The following tests FAILED:
+	 81 - SdpNavigationGuiTest (Failed)                     GUI
+Errors while running CTest

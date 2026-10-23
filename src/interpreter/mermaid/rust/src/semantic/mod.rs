@@ -9,6 +9,7 @@ mod requirements;
 mod state;
 mod trees;
 mod types;
+mod usecase;
 mod zenuml;
 use xfmd_diagram_contracts::{
     Model,
@@ -40,6 +41,7 @@ pub fn parse(source: &str, header: &str) -> Result<Model, String> {
         "radar-beta" => 20,
         "treemap-beta" => 21,
         "xychart-beta" => 22,
+        "usecase-beta" => 23,
         _ => return Err(format!("Unsupported diagram family: {header}")),
     };
     let mut d = Diagram {
@@ -64,6 +66,7 @@ pub fn parse(source: &str, header: &str) -> Result<Model, String> {
         14 | 19 | 21 => trees::parse(source, &mut d)?,
         15 => git::parse(&lines, &mut d)?,
         18 => zenuml::parse(&lines, &mut d)?,
+        23 => usecase::parse(&lines, &mut d)?,
         _ => unreachable!(),
     }
     d.validate()?;
@@ -207,3 +210,6 @@ mod planning_tests;
 
 #[cfg(test)]
 mod chart_tests;
+
+#[cfg(test)]
+mod usecase_tests;

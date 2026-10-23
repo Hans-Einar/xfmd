@@ -1,0 +1,206 @@
+[0/2] Re-checking globbed directories...
+[1/2] Re-running CMake...
+CMake Warning (dev) at /usr/share/cmake/Modules/FetchContent.cmake:1373 (message):
+  The DOWNLOAD_EXTRACT_TIMESTAMP option was not given and policy CMP0135 is
+  not set.  The policy's OLD behavior will be used.  When using a URL
+  download, the timestamps of extracted files should preferably be that of
+  the time of extraction, otherwise code that depends on the extracted
+  contents might not be rebuilt if the URL changes.  The OLD behavior
+  preserves the timestamps from the archive instead, but this is usually not
+  what you want.  Update your project to the NEW behavior or specify the
+  DOWNLOAD_EXTRACT_TIMESTAMP option with a value of true to avoid this
+  robustness issue.
+Call Stack (most recent call first):
+  cmake/MicroTeX.cmake:3 (FetchContent_Declare)
+  CMakeLists.txt:31 (include)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found Python3: /usr/bin/python3.12 (found suitable version "3.12.14", minimum required is "3.11") found components: Interpreter
+-- Found Python3: /usr/bin/python3.12 (found version "3.12.14") found components: Interpreter
+-- Configuring done (1.2s)
+-- Generating done (1.1s)
+-- Build files have been written to: /home/warloc/git/xfmd-sdl-navigation/build-ui
+[0/2] Re-checking globbed directories...
+[1/166] cd /home/warloc/git/xfmd-sdl-navigation/build-ui && /usr/bin/python3.12 /home/warloc/git/xfmd-sdl-navigation/tools/build_identity.py --source /home/warloc/git/xfmd-sdl-navigation --output /home/warloc/git/xfmd-sdl-navigation/build-ui/generated
+[2/164] Generating /home/warloc/git/xfmd-sdl-navigation/build-acceptance/cargo/release/libxfmd_sdp_json.a
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+   Compiling xfmd-sdp-json v0.1.0 (/home/warloc/git/xfmd-sdl-navigation/src/application/sdp/rust)
+    Finished `release` profile [optimized] target(s) in 1.03s
+[3/164] Generating /home/warloc/git/xfmd-sdl-navigation/build-acceptance/cargo/release/libxfmd_mermaid_ffi.a
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on build directory
+    Finished `release` profile [optimized] target(s) in 1.25s
+[4/142] Building CXX object CMakeFiles/xfmd_sdp.dir/src/application/sdp/SdpSources.cpp.o
+[5/142] Building CXX object CMakeFiles/xfmd_sdp.dir/src/application/sdp/SdpDisplay.cpp.o
+[6/142] Building CXX object CMakeFiles/xfmd_sdp.dir/src/application/sdp/SdpExpansion.cpp.o
+[7/142] Building CXX object CMakeFiles/xfmd_sdp.dir/src/application/sdp/SdpWatch.cpp.o
+[8/142] Building CXX object CMakeFiles/xfmd_sdp.dir/src/application/sdp/SdpProtocol.cpp.o
+[9/142] Building CXX object CMakeFiles/xfmd_sdp.dir/src/application/sdp/SdpToolJob.cpp.o
+[10/142] Linking CXX static library libxfmd_sdp.a
+[11/142] Building CXX object CMakeFiles/xfmd_application.dir/src/application/sdp/SduiSource.cpp.o
+[12/142] Building CXX object CMakeFiles/xfmd_application.dir/src/application/sdp/SduiWorkflow.cpp.o
+[13/142] Building CXX object CMakeFiles/xfmd_application.dir/src/application/sdp/SdlSource.cpp.o
+[14/142] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/SdpPanelContext.cpp.o
+[15/142] Building CXX object CMakeFiles/xfmd_application.dir/src/application/sdp/SdpNavigation.cpp.o
+[16/142] Building CXX object CMakeFiles/xfmd_application.dir/src/application/sdp/SdpDiscovery.cpp.o
+[17/142] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/SdpPanel.cpp.o
+[18/142] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ApplicationOpening.cpp.o
+[19/142] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ApplicationAppearance.cpp.o
+[20/142] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/XfmdToolbar.cpp.o
+[21/142] Building CXX object CMakeFiles/xfmd_application.dir/src/application/navigation/DocumentViews.cpp.o
+[22/142] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ApplicationZoom.cpp.o
+[23/142] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ApplicationWorkspace.cpp.o
+[24/142] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ApplicationIndex.cpp.o
+[25/142] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ApplicationCommands.cpp.o
+[26/142] Building CXX object CMakeFiles/xfmd_application.dir/src/application/Application.cpp.o
+[27/142] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ApplicationExport.cpp.o
+[28/142] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/XfmdWindow.cpp.o
+[29/142] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/WorkspacePanel.cpp.o
+[30/142] Linking CXX static library libxfmd_application.a
+[31/142] Linking CXX executable ExternalBrowserTest
+[32/142] Building CXX object CMakeFiles/xfmd.dir/src/application/main.cpp.o
+[33/142] Building CXX object CMakeFiles/DiagramReadingGuiTest.dir/tests/gui/DiagramReadingGuiTest.cpp.o
+[34/142] Linking CXX executable xfmd
+[35/142] Linking CXX executable DiagramReadingGuiTest
+[36/142] Building CXX object CMakeFiles/SdpDynamicGuiTest.dir/tests/gui/SdpDynamicGuiTest.cpp.o
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/SdpDynamicGuiTest.cpp: In function ‘xfmd::SdpReply graph()’:
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/SdpDynamicGuiTest.cpp:43:55: warning: missing initializer for member ‘xfmd::SdpTarget::path’ [-Wmissing-field-initializers]
+   43 |   vp.target = {"select", "TEST", "model", "bulk", "r1"};
+      |                                                       ^
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/SdpDynamicGuiTest.cpp:43:55: warning: missing initializer for member ‘xfmd::SdpTarget::entry’ [-Wmissing-field-initializers]
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/SdpDynamicGuiTest.cpp:47:67: warning: missing initializer for member ‘xfmd::SdpTarget::path’ [-Wmissing-field-initializers]
+   47 |   object.target = {"select", "TEST", "model", "VP11-generic", "r1"};
+      |                                                                   ^
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/SdpDynamicGuiTest.cpp:47:67: warning: missing initializer for member ‘xfmd::SdpTarget::entry’ [-Wmissing-field-initializers]
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/SdpDynamicGuiTest.cpp:52:68: warning: missing initializer for member ‘xfmd::SdpTarget::path’ [-Wmissing-field-initializers]
+   52 |   focused.target = {"select", "TEST", "model", "VP02-focused", "r1"};
+      |                                                                    ^
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/SdpDynamicGuiTest.cpp:52:68: warning: missing initializer for member ‘xfmd::SdpTarget::entry’ [-Wmissing-field-initializers]
+[37/142] Building CXX object CMakeFiles/SdpPanelGuiTest.dir/tests/gui/SdpPanelGuiTest.cpp.o
+[38/142] Linking CXX executable SdpDynamicGuiTest
+[39/142] Linking CXX executable SdpPanelGuiTest
+[40/142] Building CXX object CMakeFiles/FavoritesGuiTest.dir/tests/gui/FavoritesGuiTest.cpp.o
+[41/142] Building CXX object CMakeFiles/DocumentZoomGuiTest.dir/tests/gui/DocumentZoomGuiTest.cpp.o
+[42/142] Linking CXX executable FavoritesGuiTest
+[43/142] Linking CXX executable DocumentZoomGuiTest
+[44/142] Building CXX object CMakeFiles/OpenPathDialogGuiTest.dir/tests/gui/OpenPathDialogGuiTest.cpp.o
+[45/142] Building CXX object CMakeFiles/PathWorkspaceGuiTest.dir/tests/gui/PathWorkspaceGuiTest.cpp.o
+[46/142] Linking CXX executable OpenPathDialogGuiTest
+[47/142] Linking CXX executable PathWorkspaceGuiTest
+[48/142] Building CXX object CMakeFiles/MermaidGuiTest.dir/tests/gui/MermaidGuiTest.cpp.o
+[49/142] Linking CXX executable MermaidGuiTest
+[50/142] Building CXX object CMakeFiles/FileRoutingGuiTest.dir/tests/gui/FileRoutingGuiTest.cpp.o
+[51/142] Building CXX object CMakeFiles/RecentFilesGuiTest.dir/tests/gui/RecentFilesGuiTest.cpp.o
+[52/142] Building CXX object CMakeFiles/PreviewSelectionGuiTest.dir/tests/gui/PreviewSelectionGuiTest.cpp.o
+[53/142] Linking CXX executable FileRoutingGuiTest
+[54/142] Linking CXX executable RecentFilesGuiTest
+[55/142] Linking CXX executable PreviewSelectionGuiTest
+[56/142] Building CXX object CMakeFiles/CompactWorkspaceTest.dir/tests/gui/CompactWorkspaceTest.cpp.o
+[57/142] Linking CXX executable CompactWorkspaceTest
+[58/142] Building CXX object CMakeFiles/ReadingColorsGuiTest.dir/tests/gui/ReadingColorsGuiTest.cpp.o
+[59/142] Building CXX object CMakeFiles/AppearancePreferencesTest.dir/tests/gui/AppearancePreferencesTest.cpp.o
+[60/142] Linking CXX executable ReadingColorsGuiTest
+[61/142] Building CXX object CMakeFiles/TreeActionsTest.dir/tests/gui/TreeActionsTest.cpp.o
+[62/142] Linking CXX executable UiControlsTest
+[63/142] Linking CXX executable AppearancePreferencesTest
+[64/142] Linking CXX executable TreeActionsTest
+[65/142] Building CXX object CMakeFiles/AppearanceGuiTest.dir/tests/gui/AppearanceGuiTest.cpp.o
+[66/142] Linking CXX executable AppearanceGuiTest
+[67/142] Building CXX object CMakeFiles/BrowserPreferencesTest.dir/tests/gui/BrowserPreferencesTest.cpp.o
+[68/142] Building CXX object CMakeFiles/IndexGuiTest.dir/tests/gui/IndexGuiTest.cpp.o
+[69/142] Building CXX object CMakeFiles/WorkspaceTest.dir/tests/gui/WorkspaceTest.cpp.o
+[70/142] Linking CXX executable BrowserPreferencesTest
+[71/142] Linking CXX executable IndexGuiTest
+[72/142] Linking CXX executable WorkspaceTest
+[73/142] Building CXX object CMakeFiles/PresentationTest.dir/tests/gui/PresentationTest.cpp.o
+[74/142] Linking CXX executable PresentationTest
+[75/142] Building CXX object CMakeFiles/ScrollingTest.dir/tests/gui/ScrollingTest.cpp.o
+[76/142] Linking CXX executable ScrollingTest
+[77/142] Building CXX object CMakeFiles/NavigationGuiTest.dir/tests/gui/NavigationGuiTest.cpp.o
+[78/142] Building CXX object CMakeFiles/SidebarGuiTest.dir/tests/gui/SidebarGuiTest.cpp.o
+[79/142] Linking CXX executable NavigationGuiTest
+[80/142] Linking CXX executable SidebarGuiTest
+[81/142] Building CXX object CMakeFiles/WheelGuiTest.dir/tests/gui/WheelGuiTest.cpp.o
+[82/142] Linking CXX executable WheelGuiTest
+[83/142] Building CXX object CMakeFiles/PointerTest.dir/tests/gui/PointerTest.cpp.o
+[84/142] Building CXX object CMakeFiles/TablePreviewTest.dir/tests/gui/TablePreviewTest.cpp.o
+[85/142] Building CXX object CMakeFiles/WorkPathGuiTest.dir/tests/gui/WorkPathGuiTest.cpp.o
+[86/142] Linking CXX executable TablePreviewTest
+[87/142] Linking CXX executable PointerTest
+[88/142] Building CXX object CMakeFiles/CapturePresentation.dir/tests/gui/CapturePresentation.cpp.o
+[89/142] Linking CXX executable PreferencesTest
+[90/142] Linking CXX executable WorkPathGuiTest
+[91/142] Linking CXX executable CapturePresentation
+[92/142] Building CXX object CMakeFiles/xfmd_cold_start.dir/tests/acceptance/ColdStart.cpp.o
+[93/142] Building CXX object CMakeFiles/ExportGuiTest.dir/tests/gui/ExportGuiTest.cpp.o
+[94/142] Building CXX object CMakeFiles/PagedPreviewTest.dir/tests/gui/PagedPreviewTest.cpp.o
+[95/142] Linking CXX executable xfmd_cold_start
+[96/142] Building CXX object CMakeFiles/FullscreenTest.dir/tests/gui/FullscreenTest.cpp.o
+[97/142] Linking CXX executable ExportGuiTest
+[98/142] Linking CXX executable PagedPreviewTest
+[99/142] Linking CXX executable CanvasTest
+[100/142] Linking CXX executable ThemeProfilesTest
+[101/142] Linking CXX executable FullscreenTest
+[102/142] Building CXX object CMakeFiles/IconTest.dir/tests/gui/IconTest.cpp.o
+[103/142] Linking CXX executable IconTest
+[104/142] Building CXX object CMakeFiles/CapturePreferences.dir/tests/gui/CapturePreferences.cpp.o
+[105/142] Linking CXX executable WindowEndpointBoundaryTest
+[106/142] Building CXX object CMakeFiles/CaptureAppearance.dir/tests/gui/CaptureAppearance.cpp.o
+[107/142] Linking CXX executable CapturePreferences
+[108/142] Linking CXX executable CaptureAppearance
+[109/142] Building CXX object CMakeFiles/DocumentViewsGuiTest.dir/tests/gui/DocumentViewsGuiTest.cpp.o
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/DocumentViewsGuiTest.cpp: In function ‘void run()’:
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/DocumentViewsGuiTest.cpp:54:88: warning: missing initializer for member ‘xfmd::DocumentViewConfig::broker’ [-Wmissing-field-initializers]
+   54 |   DocumentViewConfig c{nav, tool, source, "demo", "", "gui-" + std::to_string(getpid())};
+      |                                                                                        ^
+[110/142] Linking CXX executable DocumentViewsGuiTest
+[111/142] Linking CXX executable SdpWatchTest
+[112/142] Building CXX object CMakeFiles/ThemePopupGuiTest.dir/tests/gui/ThemePopupGuiTest.cpp.o
+[113/142] Building CXX object CMakeFiles/DocumentZoomPdfFixture.dir/tests/gui/DocumentZoomPdfFixture.cpp.o
+[114/142] Building CXX object CMakeFiles/DocumentLeaseGuiTest.dir/tests/gui/DocumentLeaseGuiTest.cpp.o
+[115/142] Building CXX object CMakeFiles/SdpProtocolTest.dir/tests/application/SdpProtocolTest.cpp.o
+[116/142] Linking CXX executable ThemePopupGuiTest
+[117/142] Linking CXX executable DocumentZoomPdfFixture
+[118/142] Linking CXX executable SdpProtocolTest
+[119/142] Linking CXX executable DocumentLeaseGuiTest
+[120/142] Linking CXX executable StandaloneMermaidTest
+[121/142] Building CXX object CMakeFiles/SdpDiscoveryTest.dir/tests/application/SdpDiscoveryTest.cpp.o
+[122/142] Linking CXX executable SdpDiscoveryTest
+[123/142] Linking CXX executable HeadingLinkTest
+[124/142] Building CXX object CMakeFiles/SdpIntegrationTest.dir/tests/application/SdpIntegrationTest.cpp.o
+/home/warloc/git/xfmd-sdl-navigation/tests/application/SdpIntegrationTest.cpp: In function ‘void run()’:
+/home/warloc/git/xfmd-sdl-navigation/tests/application/SdpIntegrationTest.cpp:69:110: warning: missing initializer for member ‘xfmd::SdpTarget::entry’ [-Wmissing-field-initializers]
+   69 |     if (change == 4) invalid.nodes.at("sdl").target = {"open", deferred.project, "", "", "", "/tmp/unrelated"};
+      |                                                                                                              ^
+[125/142] Linking CXX executable SdpIntegrationTest
+[126/142] Linking CXX executable SdpRuntimeTest
+[127/142] Building CXX object CMakeFiles/StandaloneMermaidGuiTest.dir/tests/gui/StandaloneMermaidGuiTest.cpp.o
+[128/142] Linking CXX executable StandaloneMermaidGuiTest
+[129/142] Building CXX object CMakeFiles/HeadingLinkGuiTest.dir/tests/gui/HeadingLinkGuiTest.cpp.o
+[130/142] Building CXX object CMakeFiles/SdpNavigationGuiTest.dir/tests/gui/SdpNavigationGuiTest.cpp.o
+[131/142] Linking CXX executable HeadingLinkGuiTest
+[132/142] Linking CXX executable SdpNavigationGuiTest
+[133/142] Building CXX object CMakeFiles/SdpRuntimeGuiTest.dir/tests/gui/SdpRuntimeGuiTest.cpp.o
+[134/142] Building CXX object CMakeFiles/SdpDisplayTest.dir/tests/application/SdpDisplayTest.cpp.o
+/home/warloc/git/xfmd-sdl-navigation/tests/application/SdpDisplayTest.cpp: In function ‘void run()’:
+/home/warloc/git/xfmd-sdl-navigation/tests/application/SdpDisplayTest.cpp:31:60: warning: missing initializer for member ‘xfmd::SdpTarget::path’ [-Wmissing-field-initializers]
+   31 |   target.target = {"select", "p", "m", "generic-VP11", "r1"};
+      |                                                            ^
+/home/warloc/git/xfmd-sdl-navigation/tests/application/SdpDisplayTest.cpp:31:60: warning: missing initializer for member ‘xfmd::SdpTarget::entry’ [-Wmissing-field-initializers]
+/home/warloc/git/xfmd-sdl-navigation/tests/application/SdpDisplayTest.cpp:34:57: warning: missing initializer for member ‘xfmd::SdpTarget::path’ [-Wmissing-field-initializers]
+   34 |   ref.target = {"select", "p", "m", "focused-VP01", "r1"};
+      |                                                         ^
+/home/warloc/git/xfmd-sdl-navigation/tests/application/SdpDisplayTest.cpp:34:57: warning: missing initializer for member ‘xfmd::SdpTarget::entry’ [-Wmissing-field-initializers]
+/home/warloc/git/xfmd-sdl-navigation/tests/application/SdpDisplayTest.cpp:46:59: warning: missing initializer for member ‘xfmd::SdpTarget::entry’ [-Wmissing-field-initializers]
+   46 |   card.target = {"open", "p", "", "", "", "/board/card.md"};
+      |                                                           ^
+[135/142] Linking CXX executable SdpDisplayTest
+[136/142] Linking CXX executable SdpRuntimeGuiTest
+[137/142] Building CXX object CMakeFiles/SduiWorkflowGuiTest.dir/tests/gui/SduiWorkflowGuiTest.cpp.o
+[138/142] Building CXX object CMakeFiles/SdlSourceGuiTest.dir/tests/gui/SdlSourceGuiTest.cpp.o
+[139/142] Building CXX object CMakeFiles/SdpOverviewGuiTest.dir/tests/gui/SdpOverviewGuiTest.cpp.o
+[140/142] Linking CXX executable SduiWorkflowGuiTest
+[141/142] Linking CXX executable SdlSourceGuiTest
+[142/142] Linking CXX executable SdpOverviewGuiTest

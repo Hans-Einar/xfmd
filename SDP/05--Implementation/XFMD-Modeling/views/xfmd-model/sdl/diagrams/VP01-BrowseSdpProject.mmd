@@ -1,0 +1,6 @@
+flowchart LR
+    n_BrowseSdpProject["BrowseSdpProject (usecase)"]
+    n_ReaderAuthor["ReaderAuthor (actor)"]
+    n_SdpProjectNavigation["SdpProjectNavigation (functionality)"]
+    n_ReaderAuthor -->|pursues| n_BrowseSdpProject
+    n_SdpProjectNavigation -->|contributes-to| n_BrowseSdpProject

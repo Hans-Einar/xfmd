@@ -1,0 +1,19 @@
+{
+  "time": "2026-10-20T23:27:47.490604+00:00",
+  "producerHead": "f1c334218c00cb6ca20f8dce19880cb65536cea4",
+  "producerBranch": "sdp/xfmd-vp11-overview",
+  "main": "5ca0e90f82c5da449d529906b4f753f39a907cb4",
+  "worktrees": {
+    "SDP-project-governance": {
+      "head": "6dfde97f2b0f01f6735fdd6344e88e2ffb4d5362",
+      "status": "",
+      "overlap": []
+    },
+    "SDP-coordination": {
+      "head": "684b1f8952f2f5ff2dc9fb32c7592340d8aff60f",
+      "status": "",
+      "overlap": []
+    }
+  },
+  "verdict": "Green for scoped producer milestone. Current PG/coordination committed and dirty paths have no overlap; shared SDP-vNow receives KB032/Integration handoff only. No history import or merge/release/install."
+}

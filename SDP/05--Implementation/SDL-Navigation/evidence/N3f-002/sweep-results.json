@@ -1,0 +1,52 @@
+[
+  {
+    "diagram": "vp07-sweep/VP07-ChapterNavigation-NormalDesktop/diagrams/VP07-ChapterNavigation-NormalDesktop.mmd",
+    "exit": 1,
+    "output": "Parsed nodes=10 edges=12 groups=0\nLAYOUT: Libavoid: NoSpace(\"ambiguous label on edge 7: own distance 38.0, other Some((10, 14.961568832397461))\")\n"
+  },
+  {
+    "diagram": "vp07-sweep/VP07-ConfigurableScrolling-NormalDesktop/diagrams/VP07-ConfigurableScrolling-NormalDesktop.mmd",
+    "exit": 0,
+    "output": "Parsed nodes=12 edges=18 groups=0\nScene nodes=12 edges=18 groups=0\nLibavoid; one spacing retry after non-orthogonal edge 11 [(477.0104064941406, 403.30827713012695), (913.8437194824219, 211.26335525512695)]; failed routing/labels attempt 56.598558ms, included in total time; libavoid transaction 1: 10.733759ms; label leaders omitted: 1\n"
+  },
+  {
+    "diagram": "vp07-sweep/VP07-DocumentNavigation-NormalDesktop/diagrams/VP07-DocumentNavigation-NormalDesktop.mmd",
+    "exit": 0,
+    "output": "Parsed nodes=15 edges=21 groups=0\nScene nodes=15 edges=21 groups=0\nLibavoid; one spacing retry after non-orthogonal edge 0 [(533.1649932861328, 35.35617446899414), (949.4149551391602, 380.60161209106445)]; failed routing/labels attempt 49.415012ms, included in total time; libavoid transaction 1: 11.11551ms; label leaders omitted: 1\n"
+  },
+  {
+    "diagram": "vp07-sweep/VP07-DocumentReferences-NormalDesktop/diagrams/VP07-DocumentReferences-NormalDesktop.mmd",
+    "exit": 0,
+    "output": "Parsed nodes=12 edges=15 groups=0\nScene nodes=12 edges=15 groups=0\nLibavoid; one spacing retry after non-orthogonal edge 1 [(552.6454010009766, 33.89583206176758), (995.6871032714844, 170.18555068969727)]; failed routing/labels attempt 42.40438ms, included in total time; libavoid transaction 1: 6.056033ms; libavoid transaction 2: 4.588116ms; libavoid transaction 3: 3.388479ms; final label-only placement on completed routes; constrained parallel separation: Quality { length: 6906.22688293457, bends: 20, crossings: 19, parallel_overlaps: 0, close_parallel_segments: 6, node_traversals: 0, label_collisions: 0, attachment_intrusions: 0 }; label leaders omitted: 0\n"
+  },
+  {
+    "diagram": "vp07-sweep/VP07-LivePreview-NormalDesktop/diagrams/VP07-LivePreview-NormalDesktop.mmd",
+    "exit": 0,
+    "output": "Parsed nodes=15 edges=21 groups=0\nScene nodes=15 edges=21 groups=0\nLibavoid; one spacing retry after non-orthogonal edge 1 [(463.1650085449219, 33.89583206176758), (894.0817031860352, 257.18368911743164)]; failed routing/labels attempt 42.28131ms, included in total time; libavoid transaction 1: 9.310441ms; libavoid transaction 2: 7.967271ms; libavoid transaction 3: 11.543086ms; label leaders omitted: 0\n"
+  },
+  {
+    "diagram": "vp07-sweep/VP07-MarkdownPresentation-NormalDesktop/diagrams/VP07-MarkdownPresentation-NormalDesktop.mmd",
+    "exit": 0,
+    "output": "Parsed nodes=21 edges=33 groups=0\nScene nodes=21 edges=33 groups=0\nLibavoid; one spacing retry after non-orthogonal edge 28 [(538.202392578125, 951.3891181945801), (956.4047622680664, 557.0310859680176)]; failed routing/labels attempt 121.324337ms, included in total time; libavoid transaction 1: 46.036991ms; constrained parallel separation: Quality { length: 23455.838150024414, bends: 43, crossings: 87, parallel_overlaps: 0, close_parallel_segments: 18, node_traversals: 0, label_collisions: 0, attachment_intrusions: 0 }; label leaders omitted: 0\n"
+  },
+  {
+    "diagram": "vp07-sweep/VP07-MermaidDiagrams-NormalDesktop/diagrams/VP07-MermaidDiagrams-NormalDesktop.mmd",
+    "exit": 0,
+    "output": "Parsed nodes=20 edges=33 groups=0\nScene nodes=20 edges=33 groups=0\nLibavoid; one spacing retry after non-orthogonal edge 30 [(521.375, 944.9356269836426), (937.4166641235352, 554.4241523742676)]; failed routing/labels attempt 127.444183ms, included in total time; libavoid transaction 1: 50.127211ms; constrained parallel separation: Quality { length: 23535.596313476563, bends: 43, crossings: 82, parallel_overlaps: 0, close_parallel_segments: 18, node_traversals: 0, label_collisions: 0, attachment_intrusions: 0 }; label leaders omitted: 0\n"
+  },
+  {
+    "diagram": "vp07-sweep/VP07-PagedPublication-NormalDesktop/diagrams/VP07-PagedPublication-NormalDesktop.mmd",
+    "exit": 0,
+    "output": "Parsed nodes=22 edges=33 groups=0\nScene nodes=22 edges=33 groups=0\nLibavoid; one spacing retry after non-orthogonal edge 6 [(465.4999694824219, 311.4984321594238), (920.9999694824219, 441.8314094543457)]; failed routing/labels attempt 290.171726ms, included in total time; libavoid transaction 1: 71.133476ms; constrained parallel separation: Quality { length: 22731.921783447266, bends: 40, crossings: 81, parallel_overlaps: 0, close_parallel_segments: 18, node_traversals: 0, label_collisions: 0, attachment_intrusions: 0 }; label leaders omitted: 1\n"
+  },
+  {
+    "diagram": "vp07-sweep/VP07-SynchronizedScrolling-NormalDesktop/diagrams/VP07-SynchronizedScrolling-NormalDesktop.mmd",
+    "exit": 0,
+    "output": "Parsed nodes=10 edges=15 groups=0\nScene nodes=10 edges=15 groups=0\nLibavoid; one spacing retry after non-orthogonal edge 5 [(427.1766357421875, 218.4791603088379), (897.3432922363281, 166.82825088500977)]; failed routing/labels attempt 22.291696ms, included in total time; libavoid transaction 1: 7.491653ms; label leaders omitted: 0\n"
+  },
+  {
+    "diagram": "vp07-sweep/VP07-WorkPathNavigation-NormalDesktop/diagrams/VP07-WorkPathNavigation-NormalDesktop.mmd",
+    "exit": 0,
+    "output": "Parsed nodes=7 edges=9 groups=0\nScene nodes=7 edges=9 groups=0\nLibavoid; one spacing retry after ambiguous label on edge 1: own distance 30.0, other Some((0, 1.20001220703125)); failed routing/labels attempt 23.24877ms, included in total time; libavoid transaction 1: 3.657684ms; label leaders omitted: 0\n"
+  }
+]

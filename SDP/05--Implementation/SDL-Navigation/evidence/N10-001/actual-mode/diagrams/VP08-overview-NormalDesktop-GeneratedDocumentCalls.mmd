@@ -1,0 +1,8 @@
+flowchart LR
+    n_Documents["Documents (unit)"]
+    n_GeneratedDocumentCalls["GeneratedDocumentCalls (channel)"]
+    n_GeneratedViews["GeneratedViews (unit)"]
+    n_GeneratedDocumentCalls -->|receiver| n_Documents
+    n_Documents -->|sender| n_GeneratedDocumentCalls
+    n_GeneratedDocumentCalls -->|receiver| n_GeneratedViews
+    n_GeneratedViews -->|sender| n_GeneratedDocumentCalls

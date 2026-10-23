@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd-sdl-navigation/build-ui
+Test project /home/warloc/git/xfmd-sdl-navigation/build-ui
+    Start 61: DiagramLayoutTest
+1/1 Test #61: DiagramLayoutTest ................   Passed    2.07 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   2.07 sec

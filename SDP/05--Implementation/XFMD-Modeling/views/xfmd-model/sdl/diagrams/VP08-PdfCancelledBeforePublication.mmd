@@ -1,0 +1,6 @@
+sequenceDiagram
+    participant n_NativeShell as Native Shell
+    participant n_Publication as Publication
+    n_NativeShell->>n_Publication: 1: Cancel Pdf Request (Publication Intents)
+    n_Publication->>n_Publication: 2: Cancel Unpublished Job (Publication State)
+    n_Publication->>n_Publication: 3: Discard Pdf Candidate (Publication State)

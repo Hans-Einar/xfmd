@@ -1,0 +1,5 @@
+flowchart LR
+    n_DocumentStateChanges["DocumentStateChanges (channel)"]
+    n_Documents["Documents (unit)"]
+    n_DocumentStateChanges -->|receiver| n_Documents
+    n_Documents -->|sender| n_DocumentStateChanges

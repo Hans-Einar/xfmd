@@ -1,0 +1,12 @@
+flowchart LR
+    n_FoxPresentation["FoxPresentation (functionality)"]
+    n_RenderLayout["RenderLayout (functionality)"]
+    n_ScrollMotion["ScrollMotion (functionality)"]
+    n_SourceAnchorMapping["SourceAnchorMapping (functionality)"]
+    n_SynchronizedScrolling["SynchronizedScrolling (feature)"]
+    n_WorkspaceControls["WorkspaceControls (functionality)"]
+    n_FoxPresentation -->|contributes-to| n_SynchronizedScrolling
+    n_RenderLayout -->|contributes-to| n_SynchronizedScrolling
+    n_ScrollMotion -->|contributes-to| n_SynchronizedScrolling
+    n_SourceAnchorMapping -->|contributes-to| n_SynchronizedScrolling
+    n_WorkspaceControls -->|contributes-to| n_SynchronizedScrolling

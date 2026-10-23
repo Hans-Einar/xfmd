@@ -1,0 +1,10 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd-sdl-navigation/build-ui
+Test project /home/warloc/git/xfmd-sdl-navigation/build-ui
+    Start 75: SdpProtocolTest
+1/2 Test #75: SdpProtocolTest ..................   Passed    1.80 sec
+    Start 77: SdpIntegrationTest
+2/2 Test #77: SdpIntegrationTest ...............   Passed    0.96 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   2.76 sec

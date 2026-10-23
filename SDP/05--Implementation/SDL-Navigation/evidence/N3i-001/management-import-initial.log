@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/warloc/git/SDP-xfmd-viewpoint-overviews/SDP/ProjectManagement/validate.py", line 176, in <module>
+    main()
+  File "/home/warloc/git/SDP-xfmd-viewpoint-overviews/SDP/ProjectManagement/validate.py", line 171, in main
+    c, m, o = validate_current(events)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/warloc/git/SDP-xfmd-viewpoint-overviews/SDP/ProjectManagement/validate.py", line 118, in validate_current
+    cards, management, operations = history(events)
+                                    ^^^^^^^^^^^^^^^
+  File "/home/warloc/git/SDP-xfmd-viewpoint-overviews/SDP/ProjectManagement/validate.py", line 58, in history
+    require(number > last_numbers.get(prefix, -1), 'non-increasing namespace event ID')
+  File "/home/warloc/git/SDP-xfmd-viewpoint-overviews/SDP/ProjectManagement/validate.py", line 23, in require
+    raise ValueError(message)
+ValueError: non-increasing namespace event ID

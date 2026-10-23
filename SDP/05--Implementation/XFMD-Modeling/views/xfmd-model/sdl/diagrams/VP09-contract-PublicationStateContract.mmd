@@ -1,0 +1,8 @@
+flowchart LR
+    n_CancelUnpublishedJob["CancelUnpublishedJob (message)"]
+    n_CommitPdfCandidate["CommitPdfCandidate (message)"]
+    n_DiscardPdfCandidate["DiscardPdfCandidate (message)"]
+    n_PublicationStateContract["PublicationStateContract (contract)"]
+    n_PublicationStateContract -->|permits| n_CancelUnpublishedJob
+    n_PublicationStateContract -->|permits| n_CommitPdfCandidate
+    n_PublicationStateContract -->|permits| n_DiscardPdfCandidate

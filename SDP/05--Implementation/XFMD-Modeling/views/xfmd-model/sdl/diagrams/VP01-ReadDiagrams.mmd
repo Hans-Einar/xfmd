@@ -1,0 +1,6 @@
+flowchart LR
+    n_MermaidDiagrams["MermaidDiagrams (feature)"]
+    n_ReadDiagrams["ReadDiagrams (usecase)"]
+    n_ReaderAuthor["ReaderAuthor (actor)"]
+    n_MermaidDiagrams -->|supports| n_ReadDiagrams
+    n_ReaderAuthor -->|pursues| n_ReadDiagrams

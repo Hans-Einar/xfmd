@@ -33,8 +33,9 @@ FXbool NavigationTree::expandTree(FXTreeItem* item, FXbool notify) {
 }
 long NavigationTree::onRelease(FXObject* sender, FXSelector sel, void* data) {
   auto* event = static_cast<FXEvent*>(data);
-  pointerClick = !event->moved && !(event->state & (CONTROLMASK | SHIFTMASK | ALTMASK)) &&
-                 getItemAt(event->win_x, event->win_y) == getCurrentItem();
+  pointerClick = getCurrentItem() && !event->moved && !(event->state & (CONTROLMASK | SHIFTMASK | ALTMASK)) &&
+                 getItemAt(event->win_x, event->win_y) == getCurrentItem() &&
+                 hitItem(getCurrentItem(), event->win_x, event->win_y) != 3;
   auto result = FXTreeList::onLeftBtnRelease(sender, sel, data);
   pointerClick = false;
   return result;

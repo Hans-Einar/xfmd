@@ -1,0 +1,6 @@
+flowchart LR
+    n_ExportLayoutContract["ExportLayoutContract (contract)"]
+    n_ExportPagesLaidOut["ExportPagesLaidOut (message)"]
+    n_LayoutExportPages["LayoutExportPages (message)"]
+    n_ExportLayoutContract -->|permits| n_ExportPagesLaidOut
+    n_ExportLayoutContract -->|permits| n_LayoutExportPages

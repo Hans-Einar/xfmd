@@ -1,0 +1,9 @@
+{
+  "nodes": 26,
+  "interfaces": 14,
+  "consumers": 12,
+  "edges": 24,
+  "sourceFacts": 24,
+  "sourceLinksChecked": 136,
+  "allNodeLabelsInPdf": true
+}

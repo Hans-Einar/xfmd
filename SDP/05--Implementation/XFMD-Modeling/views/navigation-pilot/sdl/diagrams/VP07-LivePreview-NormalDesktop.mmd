@@ -1,0 +1,34 @@
+flowchart LR
+    n_Application["Application (unit)"]
+    n_DocumentSession["DocumentSession (functionality)"]
+    n_EventScheduling["EventScheduling (functionality)"]
+    n_FoxPresentation["FoxPresentation (functionality)"]
+    n_Interpreter["Interpreter (unit)"]
+    n_LivePreview["LivePreview (feature)"]
+    n_MarkdownInterpretation["MarkdownInterpretation (functionality)"]
+    n_PreviewPipeline["PreviewPipeline (functionality)"]
+    n_RenderLayout["RenderLayout (functionality)"]
+    n_Renderer["Renderer (unit)"]
+    n_TextEditing["TextEditing (functionality)"]
+    n_XfmdDesktop["XfmdDesktop (container)"]
+    n_Application -->|owns| n_DocumentSession
+    n_Application -->|owns| n_EventScheduling
+    n_Application -->|owns| n_FoxPresentation
+    n_Application -->|owns| n_PreviewPipeline
+    n_Application -->|owns| n_TextEditing
+    n_DocumentSession -->|allocated-to| n_XfmdDesktop
+    n_DocumentSession -->|contributes-to| n_LivePreview
+    n_EventScheduling -->|allocated-to| n_XfmdDesktop
+    n_EventScheduling -->|contributes-to| n_LivePreview
+    n_FoxPresentation -->|allocated-to| n_XfmdDesktop
+    n_FoxPresentation -->|contributes-to| n_LivePreview
+    n_Interpreter -->|owns| n_MarkdownInterpretation
+    n_MarkdownInterpretation -->|allocated-to| n_XfmdDesktop
+    n_MarkdownInterpretation -->|contributes-to| n_LivePreview
+    n_PreviewPipeline -->|allocated-to| n_XfmdDesktop
+    n_PreviewPipeline -->|contributes-to| n_LivePreview
+    n_RenderLayout -->|allocated-to| n_XfmdDesktop
+    n_RenderLayout -->|contributes-to| n_LivePreview
+    n_Renderer -->|owns| n_RenderLayout
+    n_TextEditing -->|allocated-to| n_XfmdDesktop
+    n_TextEditing -->|contributes-to| n_LivePreview

@@ -1,0 +1,30 @@
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/blueprint	(cached)
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/bridge	(cached)
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/broker	(cached)
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/cmd/sdl	(cached)
+?   	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/cmd/sdl-compiled	[no test files]
+?   	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/cmd/sdl-dev	[no test files]
+?   	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/cmd/sdl-document	[no test files]
+?   	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/cmd/sdl-gen	[no test files]
+?   	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/cmd/sdl-simulate	[no test files]
+?   	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/cmd/sdl-view-request	[no test files]
+?   	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/cmd/sdl-viewsd	[no test files]
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/codegen	2.570s
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/devhost	(cached)
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/documents	3.523s
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/examples/application	(cached)
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/examples/collections	2.560s
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/examples/commands	4.806s
+?   	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/examples/generatedmodel	[no test files]
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/examples/panes	8.743s
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/examples/previews	25.918s
+?   	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/examples/simulation	[no test files]
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/examples/text	57.672s
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/examples/values	17.434s
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/parser	(cached)
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/reader	(cached)
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/reload	(cached)
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/runtime	(cached)
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/snapshot	(cached)
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/sourcegraph	(cached)
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/viewpoint	(cached)

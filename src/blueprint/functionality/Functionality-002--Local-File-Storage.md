@@ -6,7 +6,7 @@ role: Service
 owner: application
 status: Implemented
 scope: FirstRelease
-requirements: UR-001, UR-003, UR-009, UR-028, SR-005, SR-006, SR-007, SR-011, SR-013
+requirements: UR-047, UR-001, UR-003, UR-009, UR-028, SR-005, SR-006, SR-007, SR-011, SR-013
 uses: none
 ---
 
@@ -18,15 +18,15 @@ Reusable local file I/O and input validation, independent of widgets, history an
 
 ## 2. Requirements and acceptance
 
-UR-001, UR-003, UR-009, UR-028 and SR-005, SR-006, SR-007, SR-011, SR-013. Normative definitions and acceptance are in the [requirements](../../../xfmd_requirements.md).
+UR-001, UR-003, UR-009, UR-028, UR-047 and SR-005, SR-006, SR-007, SR-011, SR-013. Normative definitions and acceptance are in the [requirements](../../../xfmd_requirements.md).
 
 ## 3. Contracts and ownership
 
 `LocalFileStore::read` and `writeAtomic` return owned data or throw `Error`.
 `InputPolicy::validate` checks bounded UTF-8 and control bytes independently of suffix.
-`plainText` is false only for a case-insensitive `.md` suffix; `supportedPath` identifies
-known `.md`/`.txt` types for which invalid content must remain an internal error.
-`FileOpenPolicy::classify` returns Markdown, Text, Browser or Desktop for Application.
+`plainText` is false for case-insensitive `.md` and `.mmd` suffixes; `supportedPath` identifies
+known `.md`/`.txt`/`.mmd` types for which invalid content must remain an internal error.
+`FileOpenPolicy::classify` returns Markdown, Mermaid, Text, Browser or Desktop for Application.
 It owns classification, not launchers or document state.
 
 ## 4. Behavior, state and failures
@@ -38,7 +38,7 @@ Publish new files without overwrite through link/unlink. A directory-sync failur
 after commit returns `durable=false`.
 
 P053, 2026-09-24, supersedes suffix-only admission: `.html`/`.htm` route to the
-browser; known `.md`/`.txt` use internal loading and report invalid input.
+browser; known `.md`/`.txt` (and MM-001 `.mmd`) use internal loading and report invalid input.
 Other files use bounded content validation: valid UTF-8, including empty files
 and an optional BOM, opens as literal text; NUL, binary control bytes, invalid
 UTF-8 or oversize unknown content routes to OS association. TAB/LF/CR/FF are allowed;
@@ -54,6 +54,9 @@ an unreadable target. Atomic-save behavior and byte preservation remain unchange
 | 3 | `DocumentCoordinator::save` | `LocalFileStore::writeAtomic` | `src/application/io/LocalFileStore.cpp` | Bytes/expected identity → saved target | Remove temporary file on failure | Implemented |
 | 4 | `LocalFileStore::writeAtomic` | `copyAttributes` | `src/application/io/LocalFileStore.cpp` | Open descriptors → preserved metadata | Failure before commit | Implemented |
 | 5 | `Application::openTarget / openDialogPath` | `FileOpenPolicy::classify` | `src/application/io/FileOpenPolicy.cpp` | Regular path → selected consumer | Bounded validation; I/O failures preserve document | Implemented |
+
+| MM-001 | `LocalFileStore::read` | `InputPolicy::mermaid` | `src/application/io/InputPolicy.cpp` | Suffix to standaloneMermaid flag | Case-insensitive .mmd only | Implemented |
+| MM-001 | `DocumentCoordinator::save` | `DocumentSession::markSaved` | `src/application/document/DocumentSession.cpp` | Saved path to format flags/revision | Format change invalidates preview token | Implemented |
 
 ## 6. Reuse and dependencies
 
@@ -81,3 +84,16 @@ Update contracts, call maps, consumers and tests together. Ports and ownership
 remain explicit. Unknown textual files require a bounded probe and another read
 when the document transaction opens them; the loader revalidates before commit.
 Historical evidence retains its original scope.
+
+### Standalone Mermaid input — MM-001
+
+UR-047/AT-076 adds .mmd recognition to InputPolicy. LoadedDocument and
+SourceSnapshot carry standaloneMermaid alongside the existing plainText field;
+application-produced flags are mutually exclusive. InputPolicy::mermaid
+owns extension classification. LocalFileStore and DocumentSession preserve it;
+markSaved compares both format flags to invalidate a format-changing Save As.
+FileOpenPolicy distinguishes Mermaid from Markdown/Text. The shared document-open
+callback selects Preview after a successful .mmd transaction; dirty Cancel cannot
+change the active document or view. The editor/save path stores original bytes.
+OpenPathDialog adds a Mermaid filter; the existing .md-only sidebar filter retains
+its meaning. See PLAN-XFMD-0007; SDL/SDUI source updates remain held by the owner.

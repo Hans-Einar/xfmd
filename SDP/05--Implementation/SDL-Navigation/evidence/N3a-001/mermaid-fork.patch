@@ -1,0 +1,272 @@
+From e79d8f9caf649995a5db5e54b0ea5d6b7fab8221 Mon Sep 17 00:00:00 2001
+From: Hans-Einar <36501395+Hans-Einar@users.noreply.github.com>
+Date: Thu, 8 Oct 2026 00:13:52 +0200
+Subject: [PATCH] N3a Retry placement when libavoid cannot find a route
+
+---
+ docs/xfmd-vp07-routing.md             | 46 +++++++++++++++++++
+ src/routing_backend/validation.rs     | 13 ++++--
+ tests/fixtures/xfmd/vp07-metrics.json | 66 +++++++++++++++++++++++++++
+ tests/fixtures/xfmd/vp07.mmd          | 31 +++++++++++++
+ tests/xfmd_vp07.rs                    | 61 +++++++++++++++++++++++++
+ 5 files changed, 213 insertions(+), 4 deletions(-)
+ create mode 100644 docs/xfmd-vp07-routing.md
+ create mode 100644 tests/fixtures/xfmd/vp07-metrics.json
+ create mode 100644 tests/fixtures/xfmd/vp07.mmd
+ create mode 100644 tests/xfmd_vp07.rs
+
+diff --git a/docs/xfmd-vp07-routing.md b/docs/xfmd-vp07-routing.md
+new file mode 100644
+index 0000000..f5a167c
+--- /dev/null
++++ b/docs/xfmd-vp07-routing.md
+@@ -0,0 +1,46 @@
++# XFMD VP07 routing reproduction and bounded correction candidate
++
++Owner authorizes XFMD Session0005 diagram investigation. Isolated worktree starts
++at XFMD's pinned commit 589517a7107ab95ee7dfa5ae88c2f339c0a284dc; no shared fork
++branch or XFMD .deps bytes are edited. Initial artifact is a reproduction test,
++not an adopted fix or a published release.
++
++XFMD native parser accepts 12 nodes/18 edges for ConfigurableScrolling. Its
++measured native layout fails with a two-point diagonal at edge11. Preserve source,
++labels, shapes and all relations. Exact XFMD native geometry/error and PDF are
++recorded in external N3a-001. Captured Pango label measurements feed the library
++reproducer, using XFMD's 0.75 point/pixel conversion and 16px DejaVu Sans theme.
++
++Libavoid connector.cpp explicitly constructs a two-point path and marks reroute
++when no path is found. The bridge currently reports the diagonal as generic
++Backend(non-orthogonal), while flowchart compute only retries NoSpace. Semantic
++layout already retries this error category. Investigate classifying only a
++non-orthogonal two-point failure as NoSpace: fixed-position callers still fail,
++while fresh-placement callers can use the existing single spacing retry with the
++same Libavoid engine and deadline. Keep multi-segment corruption as Backend,
++retain complete geometric/obstacle checks and never accept the diagonal itself.
++
++Required evidence before adoption: reproduce the old failure, pass all18 edges
++with valid routes on retry, keep fixed geometry/rejection/cancellation tests,
++inspect actual XFMD preview/PDF and measure within its production budget. This
++candidate does not address the independent nested-group containment problem.
++Publishing, dependency pin update and consumer release remain distinct actions.
++
++## Verified candidate — 2026-10-08
++
++Two-point diagonal failure is classified as NoSpace; longer malformed paths remain
++Backend failures. The existing one-shot placement retry succeeds with all12 nodes
++and18 edges; no Legacy fallback or relaxed geometry validation. Captured exact
++Pango metrics reproduce the owner's edge11/coordinates before retry. Twelve
++existing libavoid integration tests plus the new VP07 regression pass.
++
++An isolated XFMD C++ consumer linked to a debug FFI build of this candidate renders
++one scene and exports one PDF page within the unchanged production2-second layout
++budget. Preview and PDF were inspected; all labels and relationships remain.
++One optional label leader is omitted with the existing diagnostic; no relation
++is dropped. This is not general readability/optimal-layout acceptance.
++
++The temporary consumer workspace uses its recorded candidate Cargo.lock; native
++source pin and installed XFMD remain unchanged. Dependency adoption/release and
++independent review are still pending. No public push, tag or release performed.
++External evidence: XFMD SDP/05--Implementation/SDL-Navigation/evidence/N3a-001.
+diff --git a/src/routing_backend/validation.rs b/src/routing_backend/validation.rs
+index 68e775c..fad34c5 100644
+--- a/src/routing_backend/validation.rs
++++ b/src/routing_backend/validation.rs
+@@ -62,10 +62,15 @@ pub(super) fn routes(input: &RoutingInput, routes: &[Route]) -> Result<(), Routi
+             .windows(2)
+             .any(|s| (s[0].0 - s[1].0).abs() > 0.01 && (s[0].1 - s[1].1).abs() > 0.01)
+         {
+-            return Err(RoutingError::Backend(format!(
+-                "non-orthogonal edge {} {:?}",
+-                r.id, r.points
+-            )));
++            let message = format!("non-orthogonal edge {} {:?}", r.id, r.points);
++            // Libavoid emits a direct endpoint-to-endpoint path when no route
++            // exists. It is still invalid geometry: frozen-position callers
++            // fail, while fresh placement may use its one bounded space retry.
++            return Err(if r.points.len() == 2 {
++                RoutingError::NoSpace(message)
++            } else {
++                RoutingError::Backend(message)
++            });
+         }
+         let e = input.connections.iter().find(|e| e.id == r.id).unwrap();
+         let source = input.obstacles.iter().find(|o| o.id == e.source).unwrap();
+diff --git a/tests/fixtures/xfmd/vp07-metrics.json b/tests/fixtures/xfmd/vp07-metrics.json
+new file mode 100644
+index 0000000..9964bea
+--- /dev/null
++++ b/tests/fixtures/xfmd/vp07-metrics.json
+@@ -0,0 +1,66 @@
++{
++  "": [
++    0.0,
++    21.791666666666668
++  ],
++  "ApplicationPreferences (functionality)": [
++    278.6666666666667,
++    21.791666666666668
++  ],
++  "ConfigurableScrolling (feature)": [
++    229.33333333333334,
++    21.791666666666668
++  ],
++  "Documents (unit)": [
++    128.0,
++    21.791666666666668
++  ],
++  "FoxPresentation (functionality)": [
++    225.33333333333334,
++    21.791666666666668
++  ],
++  "NativeShell (unit)": [
++    126.66666666666667,
++    21.791666666666668
++  ],
++  "Preferences (unit)": [
++    133.33333333333334,
++    21.791666666666668
++  ],
++  "ScrollMotion (functionality)": [
++    198.66666666666666,
++    21.791666666666668
++  ],
++  "SourceAnchorMapping (functionality)": [
++    276.0,
++    21.791666666666668
++  ],
++  "TextEditing (functionality)": [
++    186.66666666666666,
++    21.791666666666668
++  ],
++  "Viewport (unit)": [
++    108.0,
++    21.791666666666668
++  ],
++  "WorkspaceControls (functionality)": [
++    250.66666666666666,
++    21.791666666666668
++  ],
++  "XfmdDesktop (container)": [
++    185.33333333333334,
++    21.791666666666668
++  ],
++  "allocated-to": [
++    88.0,
++    21.791666666666668
++  ],
++  "contributes-to": [
++    104.0,
++    21.791666666666668
++  ],
++  "owns": [
++    38.666666666666664,
++    21.791666666666668
++  ]
++}
+diff --git a/tests/fixtures/xfmd/vp07.mmd b/tests/fixtures/xfmd/vp07.mmd
+new file mode 100644
+index 0000000..a8dc2c6
+--- /dev/null
++++ b/tests/fixtures/xfmd/vp07.mmd
+@@ -0,0 +1,31 @@
++flowchart LR
++    n_ApplicationPreferences["ApplicationPreferences (functionality)"]
++    n_ConfigurableScrolling["ConfigurableScrolling (feature)"]
++    n_Documents["Documents (unit)"]
++    n_FoxPresentation["FoxPresentation (functionality)"]
++    n_NativeShell["NativeShell (unit)"]
++    n_Preferences["Preferences (unit)"]
++    n_ScrollMotion["ScrollMotion (functionality)"]
++    n_SourceAnchorMapping["SourceAnchorMapping (functionality)"]
++    n_TextEditing["TextEditing (functionality)"]
++    n_Viewport["Viewport (unit)"]
++    n_WorkspaceControls["WorkspaceControls (functionality)"]
++    n_XfmdDesktop["XfmdDesktop (container)"]
++    n_ApplicationPreferences -->|allocated-to| n_XfmdDesktop
++    n_ApplicationPreferences -->|contributes-to| n_ConfigurableScrolling
++    n_Documents -->|owns| n_TextEditing
++    n_FoxPresentation -->|allocated-to| n_XfmdDesktop
++    n_FoxPresentation -->|contributes-to| n_ConfigurableScrolling
++    n_NativeShell -->|owns| n_FoxPresentation
++    n_NativeShell -->|owns| n_WorkspaceControls
++    n_Preferences -->|owns| n_ApplicationPreferences
++    n_ScrollMotion -->|allocated-to| n_XfmdDesktop
++    n_ScrollMotion -->|contributes-to| n_ConfigurableScrolling
++    n_SourceAnchorMapping -->|allocated-to| n_XfmdDesktop
++    n_SourceAnchorMapping -->|contributes-to| n_ConfigurableScrolling
++    n_TextEditing -->|allocated-to| n_XfmdDesktop
++    n_TextEditing -->|contributes-to| n_ConfigurableScrolling
++    n_Viewport -->|owns| n_ScrollMotion
++    n_Viewport -->|owns| n_SourceAnchorMapping
++    n_WorkspaceControls -->|allocated-to| n_XfmdDesktop
++    n_WorkspaceControls -->|contributes-to| n_ConfigurableScrolling
+diff --git a/tests/xfmd_vp07.rs b/tests/xfmd_vp07.rs
+new file mode 100644
+index 0000000..7587b17
+--- /dev/null
++++ b/tests/xfmd_vp07.rs
+@@ -0,0 +1,61 @@
++#![cfg(feature = "libavoid")]
++use mermaid_rs_renderer::layout::{TextBlock, measurements, routed};
++use mermaid_rs_renderer::routing_backend::RoutingControl;
++use mermaid_rs_renderer::{LayoutConfig, Theme, parse_mermaid_strict};
++use std::{
++    collections::HashMap,
++    time::{Duration, Instant},
++};
++#[test]
++fn xfmd_vp07_preserves_all_nodes_and_orthogonal_edges() {
++    let graph = parse_mermaid_strict(include_str!("fixtures/xfmd/vp07.mmd"))
++        .unwrap()
++        .graph;
++    let values: HashMap<String, [f32; 2]> =
++        serde_json::from_str(include_str!("fixtures/xfmd/vp07-metrics.json")).unwrap();
++    let labels = values
++        .into_iter()
++        .map(|(label, size)| {
++            (
++                label.clone(),
++                TextBlock {
++                    lines: vec![label],
++                    width: size[0],
++                    height: size[1],
++                },
++            )
++        })
++        .collect();
++    let mut theme = Theme::modern();
++    theme.font_size = 16.;
++    theme.font_family = "DejaVu Sans".into();
++    let budget = Duration::from_secs(2);
++    let result = measurements::with_measurements(labels, budget, || {
++        routed::compute(
++            &graph,
++            &theme,
++            &LayoutConfig::default(),
++            routed::Engine::Libavoid,
++            &RoutingControl {
++                deadline: Instant::now() + budget,
++                cancelled: &|| false,
++            },
++        )
++    })
++    .unwrap();
++    assert!(
++        result
++            .diagnostics
++            .iter()
++            .any(|d| d.contains("one spacing retry"))
++    );
++    assert_eq!(result.layout.nodes.len(), 12);
++    assert_eq!(result.layout.edges.len(), 18);
++    for edge in &result.layout.edges {
++        assert!(edge.points.len() >= 2);
++        for p in edge.points.windows(2) {
++            assert!((p[0].0 - p[1].0).abs() < 0.01 || (p[0].1 - p[1].1).abs() < 0.01);
++        }
++    }
++    eprintln!("{:?}", result.diagnostics);
++}
+-- 
+2.52.0
+

@@ -1,0 +1,10 @@
+flowchart LR
+    n_ActivateExternalTarget["ActivateExternalTarget (message)"]
+    n_ChooseInternalFile["ChooseInternalFile (message)"]
+    n_FavoriteFileChosen["FavoriteFileChosen (message)"]
+    n_FavoriteFolderChosen["FavoriteFolderChosen (message)"]
+    n_WorkspaceIntentsContract["WorkspaceIntentsContract (contract)"]
+    n_WorkspaceIntentsContract -->|permits| n_ActivateExternalTarget
+    n_WorkspaceIntentsContract -->|permits| n_ChooseInternalFile
+    n_WorkspaceIntentsContract -->|permits| n_FavoriteFileChosen
+    n_WorkspaceIntentsContract -->|permits| n_FavoriteFolderChosen

@@ -1,0 +1,52 @@
+[
+  {
+    "test": "SdpProtocolTest",
+    "compileArgv": [
+      "g++",
+      "tests/application/SdpProtocolTest.cpp",
+      "-std=c++17",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "-Isrc",
+      "-Itests",
+      "src/application/sdp/SdpProtocol.cpp",
+      "src/application/sdp/SdpToolJob.cpp",
+      "build-acceptance/cargo/release/libxfmd_sdp_json.a",
+      "-pthread",
+      "-ldl",
+      "-lm",
+      "-DXFMD_SDP_FAKE_TOOL=\"/home/warloc/git/xfmd-sdl-navigation/tests/fixtures/sdp/tool.py\"",
+      "-o",
+      "/tmp/xfmd-sdp-asan/SdpProtocolTest"
+    ],
+    "runExitCode": 0,
+    "asan": "detect_leaks=0:halt_on_error=1",
+    "ubsan": "halt_on_error=1:print_stacktrace=1"
+  },
+  {
+    "test": "SdpIntegrationTest",
+    "compileArgv": [
+      "g++",
+      "tests/application/SdpIntegrationTest.cpp",
+      "-std=c++17",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "-Isrc",
+      "-Itests",
+      "src/application/sdp/SdpProtocol.cpp",
+      "src/application/sdp/SdpToolJob.cpp",
+      "build-acceptance/cargo/release/libxfmd_sdp_json.a",
+      "-pthread",
+      "-ldl",
+      "-lm",
+      "-DXFMD_SDP_FAKE_TOOL=\"/home/warloc/git/xfmd-sdl-navigation/tests/fixtures/sdp/tool.py\"",
+      "-o",
+      "/tmp/xfmd-sdp-asan/SdpIntegrationTest"
+    ],
+    "runExitCode": 0,
+    "asan": "detect_leaks=0:halt_on_error=1",
+    "ubsan": "halt_on_error=1:print_stacktrace=1"
+  }
+]

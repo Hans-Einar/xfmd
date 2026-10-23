@@ -1,0 +1,47 @@
+   Compiling proc-macro2 v1.0.106
+   Compiling unicode-ident v1.0.22
+   Compiling quote v1.0.45
+   Compiling serde_core v1.0.228
+   Compiling libm v0.2.15
+   Compiling version_check v0.9.5
+   Compiling memchr v2.7.6
+   Compiling libc v0.2.180
+   Compiling slotmap v1.1.1
+   Compiling syn v2.0.117
+   Compiling serde v1.0.228
+   Compiling shlex v1.3.0
+   Compiling zmij v1.0.16
+   Compiling find-msvc-tools v0.1.8
+   Compiling cc v1.2.54
+   Compiling core_maths v0.1.1
+   Compiling aho-corasick v1.1.4
+   Compiling anyhow v1.0.103
+   Compiling serde_derive v1.0.228
+   Compiling tinyvec_macros v0.1.1
+   Compiling regex-syntax v0.8.8
+   Compiling serde_json v1.0.149
+   Compiling roxmltree v0.20.0
+   Compiling thiserror v2.0.18
+   Compiling regex-automata v0.4.13
+   Compiling fontconfig-parser v0.5.8
+   Compiling memmap2 v0.9.11
+   Compiling tinyvec v1.10.0
+   Compiling thiserror-impl v2.0.18
+   Compiling mermaid-rs-renderer v0.3.1 (/home/warloc/git/mermaid-rs-renderer-xfmd-diagrams)
+   Compiling ttf-parser v0.25.1
+   Compiling log v0.4.29
+   Compiling ucd-trie v0.1.7
+   Compiling itoa v1.0.17
+   Compiling json5 v1.3.1
+   Compiling regex v1.12.3
+   Compiling fontdb v0.23.0
+   Compiling once_cell v1.21.4
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1m 32s
+     Running tests/xfmd_document_references.rs (/home/warloc/git/xfmd-sdl-navigation/build-diagram-fork/debug/deps/xfmd_document_references-67c1dc5caba2aea9)
+
+running 1 test
+["one spacing retry after non-orthogonal edge 3 [(426.0184020996094, 120.30737495422363), (825.8934326171875, 160.31167030334473)]; failed routing/labels attempt 111.856649ms, included in total time", "libavoid transaction 1: 24.629038ms", "libavoid transaction 2: 13.87458ms", "constrained parallel separation: Quality { length: 5469.187942504883, bends: 22, crossings: 19, parallel_overlaps: 0, close_parallel_segments: 1, node_traversals: 0, label_collisions: 0, attachment_intrusions: 0 }"]
+test xfmd_document_references_preserves_routes_and_caption_attachments ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.44s
+

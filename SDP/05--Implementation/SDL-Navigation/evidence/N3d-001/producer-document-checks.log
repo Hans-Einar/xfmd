@@ -1,0 +1,2 @@
+Command: python3 Toolkit/scripts/validate_sdp.py --mode toolkit --repo .
+SDP Toolkit validation passed

@@ -1,0 +1,42 @@
+# VP07 — Features across the architecture
+
+Revision: `e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007`.
+
+contributes-to, owns and explicit allocated-to per mode. Unspecified allocation is reported as a gap.
+
+Selection: `{"viewpoint":"VP07","direction":"both","depth":2,"diagram":"VP07-SynchronizedScrolling-NormalDesktop"}`.
+
+## Feature: SynchronizedScrolling — mode NormalDesktop
+
+```mermaid
+flowchart LR
+    n_FoxPresentation["FoxPresentation (functionality)"]
+    n_NativeShell["NativeShell (unit)"]
+    n_RenderLayout["RenderLayout (functionality)"]
+    n_Renderer["Renderer (unit)"]
+    n_ScrollMotion["ScrollMotion (functionality)"]
+    n_SourceAnchorMapping["SourceAnchorMapping (functionality)"]
+    n_SynchronizedScrolling["SynchronizedScrolling (feature)"]
+    n_Viewport["Viewport (unit)"]
+    n_WorkspaceControls["WorkspaceControls (functionality)"]
+    n_XfmdDesktop["XfmdDesktop (container)"]
+    n_FoxPresentation -->|allocated-to| n_XfmdDesktop
+    n_FoxPresentation -->|contributes-to| n_SynchronizedScrolling
+    n_NativeShell -->|owns| n_FoxPresentation
+    n_NativeShell -->|owns| n_WorkspaceControls
+    n_RenderLayout -->|allocated-to| n_XfmdDesktop
+    n_RenderLayout -->|contributes-to| n_SynchronizedScrolling
+    n_Renderer -->|owns| n_RenderLayout
+    n_ScrollMotion -->|allocated-to| n_XfmdDesktop
+    n_ScrollMotion -->|contributes-to| n_SynchronizedScrolling
+    n_SourceAnchorMapping -->|allocated-to| n_XfmdDesktop
+    n_SourceAnchorMapping -->|contributes-to| n_SynchronizedScrolling
+    n_Viewport -->|owns| n_ScrollMotion
+    n_Viewport -->|owns| n_SourceAnchorMapping
+    n_WorkspaceControls -->|allocated-to| n_XfmdDesktop
+    n_WorkspaceControls -->|contributes-to| n_SynchronizedScrolling
+```
+
+Source facts: f0351, f0358, f0544, f0545, f0837, f0842, f0846, f0889, f0891, f0907, f0913, f0965, f0966, f1013, f1020.
+
+

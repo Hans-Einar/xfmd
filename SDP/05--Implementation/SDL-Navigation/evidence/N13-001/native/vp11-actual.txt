@@ -1,0 +1,4165 @@
+VP11 — Properties, traceability and
+model gaps
+Revision:
+e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007.
+
+Declarations and all facts with source positions; support boundaries are retained.
+
+
+Snapshot coverage
+Counts describe this checked source snapshot, not implementation coverage or
+verification evidence. This inspection index contains no combined architecture
+diagram.
+
+Inventory                                                                        Count
+
+Declarations                                                                     312
+
+Facts                                                                            1034
+
+Explicit properties                                                              195
+
+Reported model gaps                                                              1
+
+
+
+Declaration kinds
+Kind / verb                                                                      Count
+
+actor                                                                            1
+
+channel                                                                          40
+
+container                                                                        1
+
+contract                                                                         44
+
+dataset                                                                          3
+
+feature                                                                          10
+field            14
+
+functionality    28
+
+interface        14
+
+message          101
+
+mode             1
+
+scenario         22
+
+unit             22
+
+usecase          11
+
+
+
+Fact verbs
+Kind / verb      Count
+
+allocated-to     28
+
+consumes         24
+
+contains         19
+
+contributes-to   74
+
+exercises        22
+
+has              195
+
+has-field        14
+
+holds            3
+
+owns             28
+
+permits          101
+
+pursues          11
+
+replies-to       18
+
+runs-in          22
+step                                                                        116
+
+supports                                                                    13
+
+upholds                                                                     144
+
+uses                                                                        202
+
+
+
+Explicit properties
+Property values, completeness and implementation-status are source assertions, not
+proof of implemented behavior or owner acceptance. Missing properties are
+unspecified, with no inferred defaults.
+
+  • AcceptCurrentFrame: message-kind = event. Source fact: f0000.
+
+  • AcceptCurrentModel: message-kind = event. Source fact: f0002.
+
+  • AcceptWorkerTicket: message-kind = event. Source fact: f0004.
+
+  • ActivateExternalTarget: message-kind = event. Source fact: f0006.
+
+  • ActivateRootAndHistory: message-kind = event. Source fact: f0008.
+
+  • AdmitDocument: message-kind = request. Source fact: f0010.
+
+  • AdmitGeneratedDocument: message-kind = request. Source fact: f0012.
+
+  • AdoptPreferencesDraft: message-kind = event. Source fact: f0014.
+
+  • AdvanceGenerationSequence: message-kind = event. Source fact: f0016.
+
+  • ApplyTextEdit: message-kind = event. Source fact: f0052.
+
+  • AttemptRelease: message-kind = event. Source fact: f0054.
+
+  • BeginPreferencesDraft: message-kind = event. Source fact: f0056.
+
+  • CacheCompatibleScene: message-kind = event. Source fact: f0059.
+
+  • CancelPdfRequest: message-kind = event. Source fact: f0061.
+
+  • CancelPreviousChild: message-kind = event. Source fact: f0063.
+
+  • CancelUnpublishedJob: message-kind = event. Source fact: f0065.
+
+  • CandidateRead: message-kind = result. Source fact: f0067.
+
+  • CandidateReadFailed: message-kind = result. Source fact: f0070.
+• CaptureContextTarget: message-kind = event. Source fact: f0073.
+
+• CheckCurrentMapping: message-kind = event. Source fact: f0076.
+
+• CheckReferenceGeneration: message-kind = event. Source fact: f0078.
+
+• ChooseCancel: message-kind = result. Source fact: f0080.
+
+• ChooseInternalFile: message-kind = event. Source fact: f0083.
+
+• ChooseSave: message-kind = result. Source fact: f0085.
+
+• ChooseUnsaved: message-kind = request. Source fact: f0088.
+
+• ChooserOpensThenChangesRoot: completeness = closed. Source fact: f0091.
+
+• ClassifyExternalTarget: message-kind = event. Source fact: f0098.
+
+• CommitPdfCandidate: message-kind = event. Source fact: f0100.
+
+• CommitVisit: message-kind = event. Source fact: f0102.
+
+• CompleteObsoleteWorker: message-kind = event. Source fact: f0104.
+
+• ContextInteractionContract: completeness = closed. Source fact: f0109.
+
+• ContextMenuDismissed: completeness = closed. Source fact: f0114.
+
+• CurrentWritten: message-kind = result. Source fact: f0119.
+
+• DebounceElapsed: message-kind = event. Source fact: f0122.
+
+• DeliverGeneratedMain: message-kind = request. Source fact: f0124.
+
+• DiagramInterpretationContract: completeness = closed. Source fact: f0127.
+
+• DiagramLayoutCallsContract: completeness = closed. Source fact: f0132.
+
+• DiagramScenePrepared: completeness = closed. Source fact: f0138.
+
+• DirtyGeneratedDeliveryRejected: completeness = closed. Source fact: f0146.
+
+• DirtyOpenCancelled: completeness = closed. Source fact: f0153.
+
+• DiscardObsoleteCompletion: message-kind = event. Source fact: f0159.
+
+• DiscardPdfCandidate: message-kind = event. Source fact: f0161.
+
+• DismissContextMenu: message-kind = event. Source fact: f0163.
+
+• DocumentBytes: presence = required. Source fact: f0165.
+
+• DocumentBytes: value-type = bytes. Source fact: f0166.
+
+• DocumentCallsContract: completeness = closed. Source fact: f0168.
+• DocumentChanged: message-kind = event. Source fact: f0172.
+
+• DocumentIdentity: presence = required. Source fact: f0174.
+
+• DocumentIdentity: value-type = unsigned. Source fact: f0175.
+
+• DocumentNotificationsContract: completeness = closed. Source fact: f0192.
+
+• DocumentOpened: message-kind = result. Source fact: f0196.
+
+• DocumentPath: presence = required. Source fact: f0199.
+
+• DocumentPath: value-type = text. Source fact: f0200.
+
+• DocumentRejected: message-kind = result. Source fact: f0202.
+
+• DocumentRevision: presence = required. Source fact: f0205.
+
+• DocumentRevision: value-type = unsigned. Source fact: f0206.
+
+• DocumentStateChangesContract: completeness = closed. Source fact: f0213.
+
+• DocumentStateShape: completeness = closed. Source fact: f0216.
+
+• EditIntentsContract: completeness = closed. Source fact: f0258.
+
+• EditedPreviewPublished: completeness = closed. Source fact: f0261.
+
+• ExpandReference: message-kind = event. Source fact: f0282.
+
+• ExportBytes: presence = required. Source fact: f0284.
+
+• ExportBytes: value-type = bytes. Source fact: f0285.
+
+• ExportDocument: presence = required. Source fact: f0286.
+
+• ExportDocument: value-type = unsigned. Source fact: f0287.
+
+• ExportInterpretationContract: completeness = closed. Source fact: f0289.
+
+• ExportLayoutContract: completeness = closed. Source fact: f0293.
+
+• ExportPagesLaidOut: message-kind = result. Source fact: f0296.
+
+• ExportPath: presence = required. Source fact: f0299.
+
+• ExportPath: value-type = text. Source fact: f0300.
+
+• ExportRevision: presence = required. Source fact: f0301.
+
+• ExportRevision: value-type = unsigned. Source fact: f0302.
+
+• ExportSnapshotParsed: message-kind = result. Source fact: f0303.
+
+• ExportSnapshotShape: completeness = closed. Source fact: f0306.
+• ExternalOpeningContract: completeness = closed. Source fact: f0313.
+
+• ExternalTargetHandedOff: completeness = closed. Source fact: f0316.
+
+• FavoriteFileChosen: message-kind = event. Source fact: f0327.
+
+• FavoriteFileOpens: completeness = closed. Source fact: f0330.
+
+• FavoriteFolderChangesRoot: completeness = closed. Source fact: f0342.
+
+• FavoriteFolderChosen: message-kind = event. Source fact: f0347.
+
+• FreezeExportSnapshot: message-kind = event. Source fact: f0359.
+
+• FullscreenChangesPresentation: completeness = closed. Source fact: f0363.
+
+• GeneratedAdmissionContract: completeness = closed. Source fact: f0368.
+
+• GeneratedDeliveryContract: completeness = closed. Source fact: f0374.
+
+• GeneratedDocumentCallsContract: completeness = closed. Source fact: f0379.
+
+• GeneratedDocumentChanged: message-kind = event. Source fact: f0382.
+
+• GeneratedDocumentOpened: message-kind = result. Source fact: f0386.
+
+• GeneratedIntentsContract: completeness = closed. Source fact: f0390.
+
+• GeneratedMainAccepted: message-kind = result. Source fact: f0393.
+
+• GeneratedMainRejected: message-kind = result. Source fact: f0396.
+
+• GeneratedReplacementReleasesOldLease: completeness = closed. Source fact:
+  f0400.
+
+• GeneratedSelectionSupersedes: completeness = closed. Source fact: f0412.
+
+• GenerationLifecycleContract: completeness = closed. Source fact: f0454.
+
+• GenerationSequence: presence = required. Source fact: f0457.
+
+• GenerationSequence: value-type = unsigned. Source fact: f0458.
+
+• GenerationStateShape: completeness = closed. Source fact: f0459.
+
+• IndexChangesContract: completeness = closed. Source fact: f0467.
+
+• IndexIntentsContract: completeness = closed. Source fact: f0471.
+
+• InspectDirtyMain: message-kind = event. Source fact: f0473.
+
+• InstallNewLease: message-kind = event. Source fact: f0475.
+
+• InteractionObservationShape: completeness = closed. Source fact: f0477.
+
+• InterpretationCallsContract: completeness = closed. Source fact: f0480.
+• InvalidSelectionRetainsChild: completeness = closed. Source fact: f0495.
+
+• KeepUnsentRelease: message-kind = event. Source fact: f0499.
+
+• LaunchConfiguredProgram: message-kind = event. Source fact: f0501.
+
+• LayoutCallsContract: completeness = closed. Source fact: f0504.
+
+• LayoutExportPages: message-kind = request. Source fact: f0507.
+
+• LayoutModel: message-kind = request. Source fact: f0509.
+
+• LayoutTypedDiagram: message-kind = request. Source fact: f0511.
+
+• LeaseLifecycleContract: completeness = closed. Source fact: f0514.
+
+• LeaseNotificationsContract: completeness = closed. Source fact: f0520.
+
+• MapSourceAnchor: message-kind = event. Source fact: f0527.
+
+• MarkCurrentSaved: message-kind = event. Source fact: f0529.
+
+• ModelLaidOut: message-kind = result. Source fact: f0541.
+
+• NavigationCallsContract: completeness = closed. Source fact: f0584.
+
+• NotifyPreferenceChange: message-kind = event. Source fact: f0591.
+
+• ObservationContext: presence = required. Source fact: f0593.
+
+• ObservationContext: value-type = text. Source fact: f0594.
+
+• OpenTarget: message-kind = request. Source fact: f0595.
+
+• OpeningPolicyContract: completeness = closed. Source fact: f0598.
+
+• PaintPdfCandidate: message-kind = event. Source fact: f0606.
+
+• ParseExportSnapshot: message-kind = request. Source fact: f0608.
+
+• ParseMermaidBlock: message-kind = event. Source fact: f0610.
+
+• ParseReference: message-kind = request. Source fact: f0612.
+
+• ParseSnapshot: message-kind = request. Source fact: f0614.
+
+• ParsedSnapshot: message-kind = result. Source fact: f0616.
+
+• PdfCancelledBeforePublication: completeness = closed. Source fact: f0620.
+
+• PdfSnapshotPublished: completeness = closed. Source fact: f0629.
+
+• PersistPreferencesDraft: message-kind = event. Source fact: f0640.
+
+• PollReleaseQueue: message-kind = event. Source fact: f0642.
+• PreferenceChangesContract: completeness = closed. Source fact: f0645.
+
+• PreferencesPersistBeforeAdoption: completeness = closed. Source fact: f0662.
+
+• PrepareDiagramScenes: message-kind = event. Source fact: f0669.
+
+• PrepareEmbeddedResources: message-kind = event. Source fact: f0671.
+
+• PrepareExportResources: message-kind = event. Source fact: f0673.
+
+• PrepareTypedDiagram: message-kind = event. Source fact: f0675.
+
+• PresentFrame: message-kind = event. Source fact: f0677.
+
+• PresentationEventsContract: completeness = closed. Source fact: f0680.
+
+• PreviewAdmissionContract: completeness = closed. Source fact: f0711.
+
+• PreviewResourcesPrepared: completeness = closed. Source fact: f0723.
+
+• PreviewScrollSynchronizesEditor: completeness = closed. Source fact: f0734.
+
+• PublicationDrawingContract: completeness = closed. Source fact: f0764.
+
+• PublicationInputsContract: completeness = closed. Source fact: f0767.
+
+• PublicationIntentsContract: completeness = closed. Source fact: f0770.
+
+• PublicationStateContract: completeness = closed. Source fact: f0774.
+
+• PublishReferenceHeadings: message-kind = event. Source fact: f0778.
+
+• QueuePreviousLease: message-kind = event. Source fact: f0780.
+
+• ReadCandidate: message-kind = request. Source fact: f0782.
+
+• ReadReference: message-kind = request. Source fact: f0784.
+
+• ReferenceHeadingsLoaded: completeness = closed. Source fact: f0798.
+
+• ReferenceInterpretationContract: completeness = closed. Source fact: f0808.
+
+• ReferenceParsed: message-kind = result. Source fact: f0811.
+
+• ReferenceRead: message-kind = result. Source fact: f0814.
+
+• ReferenceStorageContract: completeness = closed. Source fact: f0818.
+
+• RegisteredProject: presence = required. Source fact: f0821.
+
+• RegisteredProject: value-type = text. Source fact: f0822.
+
+• RejectInvalidSelection: message-kind = event. Source fact: f0823.
+
+• ReleaseKeyboardGrab: message-kind = event. Source fact: f0825.
+• ReleaseRetryAfterSendFailure: completeness = closed. Source fact: f0828.
+
+• RemoveSentRelease: message-kind = event. Source fact: f0835.
+
+• ReplaceDocument: message-kind = event. Source fact: f0853.
+
+• RequestPdfExport: message-kind = event. Source fact: f0855.
+
+• RequestTreeRefresh: message-kind = event. Source fact: f0857.
+
+• ResourcePreparationContract: completeness = closed. Source fact: f0860.
+
+• RestartDebounce: message-kind = event. Source fact: f0866.
+
+• RetainDocumentAndAnchor: message-kind = event. Source fact: f0868.
+
+• SaveThenReadFails: completeness = closed. Source fact: f0871.
+
+• SavedBaselineBytes: presence = required. Source fact: f0882.
+
+• SavedBaselineBytes: value-type = bytes. Source fact: f0883.
+
+• ScheduledWorkContract: completeness = closed. Source fact: f0885.
+
+• SelectInvalidView: message-kind = event. Source fact: f0897.
+
+• SelectRegisteredView: message-kind = event. Source fact: f0899.
+
+• SetChosenParentRoot: message-kind = event. Source fact: f0901.
+
+• SetEditorAnchor: message-kind = event. Source fact: f0903.
+
+• ShowDirtyRejection: message-kind = event. Source fact: f0905.
+
+• StalePreviewDiscarded: completeness = closed. Source fact: f0915.
+
+• StartGeneration: message-kind = event. Source fact: f0919.
+
+• StorageCallsContract: completeness = closed. Source fact: f0922.
+
+• TargetOpened: message-kind = result. Source fact: f0929.
+
+• TargetPane: presence = required. Source fact: f0932.
+
+• TargetPane: value-type = text. Source fact: f0933.
+
+• TargetWindow: presence = required. Source fact: f0934.
+
+• TargetWindow: value-type = text. Source fact: f0935.
+
+• ToggleFullscreen: message-kind = event. Source fact: f0939.
+
+• TypedDiagramLaidOut: message-kind = result. Source fact: f0941.
+
+• UnsavedAdmissionContract: completeness = closed. Source fact: f0951.
+  • UserPreviewScroll: message-kind = event. Source fact: f0955.
+
+  • ValidatePreferencesDraft: message-kind = event. Source fact: f0957.
+
+  • ValidateProposedRoot: message-kind = event. Source fact: f0959.
+
+  • ValidateSelection: message-kind = event. Source fact: f0961.
+
+  • ViewportChangesContract: completeness = closed. Source fact: f0975.
+
+  • WindowPresentationContract: completeness = closed. Source fact: f0994.
+
+  • WorkspaceChangesContract: completeness = closed. Source fact: f1008.
+
+  • WorkspaceIntentsContract: completeness = closed. Source fact: f1024.
+
+  • WriteCurrent: message-kind = request. Source fact: f1029.
+
+
+Reported model gaps
+These are observations from the producer's current gap rules across viewpoints, not
+an exhaustive requirements audit. A missing modeled relation need not be a missing
+implementation or a required feature. An absence has no source statement; links
+identify declared context only. No reported gaps does not establish model
+completeness.
+
+
+VP10 — Datagram encoding and packets
+  • NO_ENCODINGS — snapshot (no declared subject): No Encoding declared.
+
+
+Declaration register
+Every declaration is retained, including isolated definitions. Source links identify exact
+spans in the original checked files.
+
+  • AcceptCurrentFrame (message) — XfmdDesktop.design, line 2.
+
+  • AcceptCurrentModel (message) — XfmdDesktop.design, line 3.
+
+  • AcceptWorkerTicket (message) — XfmdDesktop.design, line 4.
+
+  • ActivateExternalTarget (message) — XfmdDesktop.design, line 5.
+
+  • ActivateRootAndHistory (message) — XfmdDesktop.design, line 6.
+
+  • AdmitDocument (message) — XfmdDesktop.design, line 7.
+• AdmitGeneratedDocument (message) — XfmdDesktop.design, line 8.
+
+• AdoptPreferencesDraft (message) — XfmdDesktop.design, line 9.
+
+• AdvanceGenerationSequence (message) — XfmdDesktop.design, line 10.
+
+• Application (unit) — XfmdDesktop.design, line 11.
+
+• ApplicationIdentity (functionality) — XfmdDesktop.design, line 12.
+
+• ApplicationPreferences (functionality) — XfmdDesktop.design, line 13.
+
+• ApplyTextEdit (message) — XfmdDesktop.design, line 14.
+
+• AttemptRelease (message) — XfmdDesktop.design, line 15.
+
+• BeginPreferencesDraft (message) — XfmdDesktop.design, line 16.
+
+• BrowseSdpProject (usecase) — XfmdDesktop.design, line 17.
+
+• BrowseWorkspace (usecase) — XfmdDesktop.design, line 18.
+
+• BuildIdentity (functionality) — XfmdDesktop.design, line 19.
+
+• CacheCompatibleScene (message) — XfmdDesktop.design, line 20.
+
+• CancelPdfRequest (message) — XfmdDesktop.design, line 21.
+
+• CancelPreviousChild (message) — XfmdDesktop.design, line 22.
+
+• CancelUnpublishedJob (message) — XfmdDesktop.design, line 23.
+
+• CandidateRead (message) — XfmdDesktop.design, line 24.
+
+• CandidateReadFailed (message) — XfmdDesktop.design, line 25.
+
+• CaptureContextTarget (message) — XfmdDesktop.design, line 26.
+
+• ChapterNavigation (feature) — XfmdDesktop.design, line 27.
+
+• CheckCurrentMapping (message) — XfmdDesktop.design, line 28.
+
+• CheckReferenceGeneration (message) — XfmdDesktop.design, line 29.
+
+• ChooseCancel (message) — XfmdDesktop.design, line 30.
+
+• ChooseInternalFile (message) — XfmdDesktop.design, line 31.
+
+• ChooseSave (message) — XfmdDesktop.design, line 32.
+
+• ChooseUnsaved (message) — XfmdDesktop.design, line 33.
+
+• ChooserOpensThenChangesRoot (scenario) — XfmdDesktop.design, line 34.
+
+• ClassifyExternalTarget (message) — XfmdDesktop.design, line 35.
+• CommitPdfCandidate (message) — XfmdDesktop.design, line 36.
+
+• CommitVisit (message) — XfmdDesktop.design, line 37.
+
+• CompleteObsoleteWorker (message) — XfmdDesktop.design, line 38.
+
+• ConfigurableScrolling (feature) — XfmdDesktop.design, line 39.
+
+• ConfigurePreferences (usecase) — XfmdDesktop.design, line 40.
+
+• ContextInteraction (channel) — XfmdDesktop.design, line 41.
+
+• ContextInteractionContract (contract) — XfmdDesktop.design, line 42.
+
+• ContextMenuDismissed (scenario) — XfmdDesktop.design, line 43.
+
+• CurrentWritten (message) — XfmdDesktop.design, line 44.
+
+• DebounceElapsed (message) — XfmdDesktop.design, line 45.
+
+• DeliverGeneratedMain (message) — XfmdDesktop.design, line 46.
+
+• DiagramInterpretation (channel) — XfmdDesktop.design, line 47.
+
+• DiagramInterpretationContract (contract) — XfmdDesktop.design, line 48.
+
+• DiagramInterpreterPort (interface) — XfmdDesktop.design, line 49.
+
+• DiagramLayout (functionality) — XfmdDesktop.design, line 50.
+
+• DiagramLayoutCalls (channel) — XfmdDesktop.design, line 51.
+
+• DiagramLayoutCallsContract (contract) — XfmdDesktop.design, line 52.
+
+• DiagramLayoutPort (interface) — XfmdDesktop.design, line 53.
+
+• DiagramPreparation (functionality) — XfmdDesktop.design, line 54.
+
+• DiagramScenePrepared (scenario) — XfmdDesktop.design, line 55.
+
+• DirtyGeneratedDeliveryRejected (scenario) — XfmdDesktop.design, line 56.
+
+• DirtyOpenCancelled (scenario) — XfmdDesktop.design, line 57.
+
+• DiscardObsoleteCompletion (message) — XfmdDesktop.design, line 58.
+
+• DiscardPdfCandidate (message) — XfmdDesktop.design, line 59.
+
+• DismissContextMenu (message) — XfmdDesktop.design, line 60.
+
+• DocumentBytes (field) — XfmdDesktop.design, line 61.
+
+• DocumentCalls (channel) — XfmdDesktop.design, line 62.
+
+• DocumentCallsContract (contract) — XfmdDesktop.design, line 63.
+• DocumentChanged (message) — XfmdDesktop.design, line 64.
+
+• DocumentIdentity (field) — XfmdDesktop.design, line 65.
+
+• DocumentIndex (functionality) — XfmdDesktop.design, line 66.
+
+• DocumentIndexService (unit) — XfmdDesktop.design, line 67.
+
+• DocumentNavigation (feature) — XfmdDesktop.design, line 68.
+
+• DocumentNotifications (channel) — XfmdDesktop.design, line 69.
+
+• DocumentNotificationsContract (contract) — XfmdDesktop.design, line 70.
+
+• DocumentOpened (message) — XfmdDesktop.design, line 71.
+
+• DocumentPath (field) — XfmdDesktop.design, line 72.
+
+• DocumentReferences (feature) — XfmdDesktop.design, line 73.
+
+• DocumentRejected (message) — XfmdDesktop.design, line 74.
+
+• DocumentRevision (field) — XfmdDesktop.design, line 75.
+
+• DocumentSession (functionality) — XfmdDesktop.design, line 76.
+
+• DocumentStateChanges (channel) — XfmdDesktop.design, line 77.
+
+• DocumentStateChangesContract (contract) — XfmdDesktop.design, line 78.
+
+• DocumentStateShape (contract) — XfmdDesktop.design, line 79.
+
+• DocumentStorage (unit) — XfmdDesktop.design, line 80.
+
+• Documents (unit) — XfmdDesktop.design, line 81.
+
+• EditDocuments (usecase) — XfmdDesktop.design, line 82.
+
+• EditIntents (channel) — XfmdDesktop.design, line 83.
+
+• EditIntentsContract (contract) — XfmdDesktop.design, line 84.
+
+• EditedPreviewPublished (scenario) — XfmdDesktop.design, line 85.
+
+• EmbeddedVisuals (functionality) — XfmdDesktop.design, line 86.
+
+• EventLoop (unit) — XfmdDesktop.design, line 87.
+
+• EventScheduling (functionality) — XfmdDesktop.design, line 88.
+
+• ExpandReference (message) — XfmdDesktop.design, line 89.
+
+• ExportBytes (field) — XfmdDesktop.design, line 90.
+
+• ExportDocument (field) — XfmdDesktop.design, line 91.
+• ExportInterpretation (channel) — XfmdDesktop.design, line 92.
+
+• ExportInterpretationContract (contract) — XfmdDesktop.design, line 93.
+
+• ExportLayout (channel) — XfmdDesktop.design, line 94.
+
+• ExportLayoutContract (contract) — XfmdDesktop.design, line 95.
+
+• ExportPagesLaidOut (message) — XfmdDesktop.design, line 96.
+
+• ExportPath (field) — XfmdDesktop.design, line 97.
+
+• ExportRevision (field) — XfmdDesktop.design, line 98.
+
+• ExportSnapshotParsed (message) — XfmdDesktop.design, line 99.
+
+• ExportSnapshotShape (contract) — XfmdDesktop.design, line 100.
+
+• ExternalLauncher (unit) — XfmdDesktop.design, line 101.
+
+• ExternalOpenProtocol (interface) — XfmdDesktop.design, line 102.
+
+• ExternalOpening (channel) — XfmdDesktop.design, line 103.
+
+• ExternalOpeningContract (contract) — XfmdDesktop.design, line 104.
+
+• ExternalTargetHandedOff (scenario) — XfmdDesktop.design, line 105.
+
+• ExternalViewBroker (unit) — XfmdDesktop.design, line 106.
+
+• ExternalViewGenerator (unit) — XfmdDesktop.design, line 107.
+
+• FavoriteFileChosen (message) — XfmdDesktop.design, line 108.
+
+• FavoriteFileOpens (scenario) — XfmdDesktop.design, line 109.
+
+• FavoriteFolderChangesRoot (scenario) — XfmdDesktop.design, line 110.
+
+• FavoriteFolderChosen (message) — XfmdDesktop.design, line 111.
+
+• FileStorePort (interface) — XfmdDesktop.design, line 112.
+
+• FilteredFileTree (functionality) — XfmdDesktop.design, line 113.
+
+• FoxPresentation (functionality) — XfmdDesktop.design, line 114.
+
+• FreezeExportSnapshot (message) — XfmdDesktop.design, line 115.
+
+• FrozenExportSnapshot (dataset) — XfmdDesktop.design, line 116.
+
+• FullscreenChangesPresentation (scenario) — XfmdDesktop.design, line 117.
+
+• GeneratedAdmission (channel) — XfmdDesktop.design, line 118.
+
+• GeneratedAdmissionContract (contract) — XfmdDesktop.design, line 119.
+• GeneratedDelivery (channel) — XfmdDesktop.design, line 120.
+
+• GeneratedDeliveryContract (contract) — XfmdDesktop.design, line 121.
+
+• GeneratedDocumentCalls (channel) — XfmdDesktop.design, line 122.
+
+• GeneratedDocumentCallsContract (contract) — XfmdDesktop.design, line 123.
+
+• GeneratedDocumentChanged (message) — XfmdDesktop.design, line 124.
+
+• GeneratedDocumentNavigation (functionality) — XfmdDesktop.design, line 125.
+
+• GeneratedDocumentOpened (message) — XfmdDesktop.design, line 126.
+
+• GeneratedIntents (channel) — XfmdDesktop.design, line 127.
+
+• GeneratedIntentsContract (contract) — XfmdDesktop.design, line 128.
+
+• GeneratedMainAccepted (message) — XfmdDesktop.design, line 129.
+
+• GeneratedMainRejected (message) — XfmdDesktop.design, line 130.
+
+• GeneratedReplacementReleasesOldLease (scenario) — XfmdDesktop.design, line
+  131.
+
+• GeneratedSelectionState (dataset) — XfmdDesktop.design, line 132.
+
+• GeneratedSelectionSupersedes (scenario) — XfmdDesktop.design, line 133.
+
+• GeneratedViews (unit) — XfmdDesktop.design, line 134.
+
+• GenerationLifecycle (channel) — XfmdDesktop.design, line 135.
+
+• GenerationLifecycleContract (contract) — XfmdDesktop.design, line 136.
+
+• GenerationSequence (field) — XfmdDesktop.design, line 137.
+
+• GenerationStateShape (contract) — XfmdDesktop.design, line 138.
+
+• Identity (unit) — XfmdDesktop.design, line 139.
+
+• IndexChanges (channel) — XfmdDesktop.design, line 140.
+
+• IndexChangesContract (contract) — XfmdDesktop.design, line 141.
+
+• IndexIntents (channel) — XfmdDesktop.design, line 142.
+
+• IndexIntentsContract (contract) — XfmdDesktop.design, line 143.
+
+• InspectDirtyMain (message) — XfmdDesktop.design, line 144.
+
+• InstallNewLease (message) — XfmdDesktop.design, line 145.
+
+• InteractionObservationShape (contract) — XfmdDesktop.design, line 146.
+
+• InterpretationCalls (channel) — XfmdDesktop.design, line 147.
+• InterpretationCallsContract (contract) — XfmdDesktop.design, line 148.
+
+• Interpreter (unit) — XfmdDesktop.design, line 149.
+
+• InterpreterPort (interface) — XfmdDesktop.design, line 150.
+
+• InvalidSelectionRetainsChild (scenario) — XfmdDesktop.design, line 151.
+
+• KeepUnsentRelease (message) — XfmdDesktop.design, line 152.
+
+• LaunchConfiguredProgram (message) — XfmdDesktop.design, line 153.
+
+• LayoutCalls (channel) — XfmdDesktop.design, line 154.
+
+• LayoutCallsContract (contract) — XfmdDesktop.design, line 155.
+
+• LayoutExportPages (message) — XfmdDesktop.design, line 156.
+
+• LayoutModel (message) — XfmdDesktop.design, line 157.
+
+• LayoutTypedDiagram (message) — XfmdDesktop.design, line 158.
+
+• LeaseLifecycle (channel) — XfmdDesktop.design, line 159.
+
+• LeaseLifecycleContract (contract) — XfmdDesktop.design, line 160.
+
+• LeaseNotifications (channel) — XfmdDesktop.design, line 161.
+
+• LeaseNotificationsContract (contract) — XfmdDesktop.design, line 162.
+
+• LeaseReleaseProtocol (interface) — XfmdDesktop.design, line 163.
+
+• LivePreview (feature) — XfmdDesktop.design, line 164.
+
+• LocalFileStorage (functionality) — XfmdDesktop.design, line 165.
+
+• MainDocumentState (dataset) — XfmdDesktop.design, line 166.
+
+• MapSourceAnchor (message) — XfmdDesktop.design, line 167.
+
+• MarkCurrentSaved (message) — XfmdDesktop.design, line 168.
+
+• MarkdownInterpretation (functionality) — XfmdDesktop.design, line 169.
+
+• MarkdownPresentation (feature) — XfmdDesktop.design, line 170.
+
+• MermaidDiagrams (feature) — XfmdDesktop.design, line 171.
+
+• MermaidInterpretation (functionality) — XfmdDesktop.design, line 172.
+
+• ModelLaidOut (message) — XfmdDesktop.design, line 173.
+
+• NativeShell (unit) — XfmdDesktop.design, line 174.
+
+• NavigateDocuments (usecase) — XfmdDesktop.design, line 175.
+• Navigation (unit) — XfmdDesktop.design, line 176.
+
+• NavigationCalls (channel) — XfmdDesktop.design, line 177.
+
+• NavigationCallsContract (contract) — XfmdDesktop.design, line 178.
+
+• NavigationHistory (functionality) — XfmdDesktop.design, line 179.
+
+• NormalDesktop (mode) — XfmdDesktop.design, line 180.
+
+• NotifyPreferenceChange (message) — XfmdDesktop.design, line 181.
+
+• ObservationContext (field) — XfmdDesktop.design, line 182.
+
+• OpenTarget (message) — XfmdDesktop.design, line 183.
+
+• OpeningPolicy (channel) — XfmdDesktop.design, line 184.
+
+• OpeningPolicyContract (contract) — XfmdDesktop.design, line 185.
+
+• PageComposition (functionality) — XfmdDesktop.design, line 186.
+
+• PagedPublication (feature) — XfmdDesktop.design, line 187.
+
+• PaintPdfCandidate (message) — XfmdDesktop.design, line 188.
+
+• ParseExportSnapshot (message) — XfmdDesktop.design, line 189.
+
+• ParseMermaidBlock (message) — XfmdDesktop.design, line 190.
+
+• ParseReference (message) — XfmdDesktop.design, line 191.
+
+• ParseSnapshot (message) — XfmdDesktop.design, line 192.
+
+• ParsedSnapshot (message) — XfmdDesktop.design, line 193.
+
+• PdfCancelledBeforePublication (scenario) — XfmdDesktop.design, line 194.
+
+• PdfExport (functionality) — XfmdDesktop.design, line 195.
+
+• PdfSnapshotPublished (scenario) — XfmdDesktop.design, line 196.
+
+• PersistPreferencesDraft (message) — XfmdDesktop.design, line 197.
+
+• PollReleaseQueue (message) — XfmdDesktop.design, line 198.
+
+• PreferenceChanges (channel) — XfmdDesktop.design, line 199.
+
+• PreferenceChangesContract (contract) — XfmdDesktop.design, line 200.
+
+• Preferences (unit) — XfmdDesktop.design, line 201.
+
+• PreferencesPersistBeforeAdoption (scenario) — XfmdDesktop.design, line 202.
+
+• PreferencesStorePort (interface) — XfmdDesktop.design, line 203.
+• PrepareDiagramScenes (message) — XfmdDesktop.design, line 204.
+
+• PrepareEmbeddedResources (message) — XfmdDesktop.design, line 205.
+
+• PrepareExportResources (message) — XfmdDesktop.design, line 206.
+
+• PrepareTypedDiagram (message) — XfmdDesktop.design, line 207.
+
+• PresentFrame (message) — XfmdDesktop.design, line 208.
+
+• PresentationEvents (channel) — XfmdDesktop.design, line 209.
+
+• PresentationEventsContract (contract) — XfmdDesktop.design, line 210.
+
+• Preview (unit) — XfmdDesktop.design, line 211.
+
+• PreviewAdmission (channel) — XfmdDesktop.design, line 212.
+
+• PreviewAdmissionContract (contract) — XfmdDesktop.design, line 213.
+
+• PreviewPipeline (functionality) — XfmdDesktop.design, line 214.
+
+• PreviewResourcesPrepared (scenario) — XfmdDesktop.design, line 215.
+
+• PreviewScrollSynchronizesEditor (scenario) — XfmdDesktop.design, line 216.
+
+• PreviewTextSelection (functionality) — XfmdDesktop.design, line 217.
+
+• Publication (unit) — XfmdDesktop.design, line 218.
+
+• PublicationDrawing (channel) — XfmdDesktop.design, line 219.
+
+• PublicationDrawingContract (contract) — XfmdDesktop.design, line 220.
+
+• PublicationInputs (channel) — XfmdDesktop.design, line 221.
+
+• PublicationInputsContract (contract) — XfmdDesktop.design, line 222.
+
+• PublicationIntents (channel) — XfmdDesktop.design, line 223.
+
+• PublicationIntentsContract (contract) — XfmdDesktop.design, line 224.
+
+• PublicationState (channel) — XfmdDesktop.design, line 225.
+
+• PublicationStateContract (contract) — XfmdDesktop.design, line 226.
+
+• PublishPages (usecase) — XfmdDesktop.design, line 227.
+
+• PublishReferenceHeadings (message) — XfmdDesktop.design, line 228.
+
+• QueuePreviousLease (message) — XfmdDesktop.design, line 229.
+
+• ReadCandidate (message) — XfmdDesktop.design, line 230.
+
+• ReadDiagrams (usecase) — XfmdDesktop.design, line 231.
+• ReadDocuments (usecase) — XfmdDesktop.design, line 232.
+
+• ReadReference (message) — XfmdDesktop.design, line 233.
+
+• ReaderAuthor (actor) — XfmdDesktop.design, line 234.
+
+• ReferenceHeadingsLoaded (scenario) — XfmdDesktop.design, line 235.
+
+• ReferenceInterpretation (channel) — XfmdDesktop.design, line 236.
+
+• ReferenceInterpretationContract (contract) — XfmdDesktop.design, line 237.
+
+• ReferenceParsed (message) — XfmdDesktop.design, line 238.
+
+• ReferenceRead (message) — XfmdDesktop.design, line 239.
+
+• ReferenceStorage (channel) — XfmdDesktop.design, line 240.
+
+• ReferenceStorageContract (contract) — XfmdDesktop.design, line 241.
+
+• RegisteredProject (field) — XfmdDesktop.design, line 242.
+
+• RejectInvalidSelection (message) — XfmdDesktop.design, line 243.
+
+• ReleaseKeyboardGrab (message) — XfmdDesktop.design, line 244.
+
+• ReleaseRetryAfterSendFailure (scenario) — XfmdDesktop.design, line 245.
+
+• RemoveSentRelease (message) — XfmdDesktop.design, line 246.
+
+• RenderHostPort (interface) — XfmdDesktop.design, line 247.
+
+• RenderLayout (functionality) — XfmdDesktop.design, line 248.
+
+• Renderer (unit) — XfmdDesktop.design, line 249.
+
+• RendererPort (interface) — XfmdDesktop.design, line 250.
+
+• ReplaceDocument (message) — XfmdDesktop.design, line 251.
+
+• RequestPdfExport (message) — XfmdDesktop.design, line 252.
+
+• RequestTreeRefresh (message) — XfmdDesktop.design, line 253.
+
+• ResourcePreparation (channel) — XfmdDesktop.design, line 254.
+
+• ResourcePreparationContract (contract) — XfmdDesktop.design, line 255.
+
+• RestartDebounce (message) — XfmdDesktop.design, line 256.
+
+• RetainDocumentAndAnchor (message) — XfmdDesktop.design, line 257.
+
+• SaveThenReadFails (scenario) — XfmdDesktop.design, line 258.
+
+• SavedBaselineBytes (field) — XfmdDesktop.design, line 259.
+• ScheduledWork (channel) — XfmdDesktop.design, line 260.
+
+• ScheduledWorkContract (contract) — XfmdDesktop.design, line 261.
+
+• SchedulerPort (interface) — XfmdDesktop.design, line 262.
+
+• ScrollDocuments (usecase) — XfmdDesktop.design, line 263.
+
+• ScrollMotion (functionality) — XfmdDesktop.design, line 264.
+
+• SdpProjectNavigation (functionality) — XfmdDesktop.design, line 265.
+
+• SdpProjects (unit) — XfmdDesktop.design, line 266.
+
+• SdpToolProtocol (interface) — XfmdDesktop.design, line 267.
+
+• SelectGeneratedView (usecase) — XfmdDesktop.design, line 268.
+
+• SelectInvalidView (message) — XfmdDesktop.design, line 269.
+
+• SelectRegisteredView (message) — XfmdDesktop.design, line 270.
+
+• SetChosenParentRoot (message) — XfmdDesktop.design, line 271.
+
+• SetEditorAnchor (message) — XfmdDesktop.design, line 272.
+
+• ShowDirtyRejection (message) — XfmdDesktop.design, line 273.
+
+• SourceAnchorMapping (functionality) — XfmdDesktop.design, line 274.
+
+• StalePreviewDiscarded (scenario) — XfmdDesktop.design, line 275.
+
+• StartGeneration (message) — XfmdDesktop.design, line 276.
+
+• StorageCalls (channel) — XfmdDesktop.design, line 277.
+
+• StorageCallsContract (contract) — XfmdDesktop.design, line 278.
+
+• SynchronizedScrolling (feature) — XfmdDesktop.design, line 279.
+
+• TargetOpened (message) — XfmdDesktop.design, line 280.
+
+• TargetPane (field) — XfmdDesktop.design, line 281.
+
+• TargetWindow (field) — XfmdDesktop.design, line 282.
+
+• TextEditing (functionality) — XfmdDesktop.design, line 283.
+
+• TextMetricsPort (interface) — XfmdDesktop.design, line 284.
+
+• ToggleFullscreen (message) — XfmdDesktop.design, line 285.
+
+• TypedDiagramLaidOut (message) — XfmdDesktop.design, line 286.
+
+• Typography (unit) — XfmdDesktop.design, line 287.
+• TypographyAndDrawing (functionality) — XfmdDesktop.design, line 288.
+
+• UnsavedAdmission (channel) — XfmdDesktop.design, line 289.
+
+• UnsavedAdmissionContract (contract) — XfmdDesktop.design, line 290.
+
+• UseFullscreen (usecase) — XfmdDesktop.design, line 291.
+
+• UserPreviewScroll (message) — XfmdDesktop.design, line 292.
+
+• ValidatePreferencesDraft (message) — XfmdDesktop.design, line 293.
+
+• ValidateProposedRoot (message) — XfmdDesktop.design, line 294.
+
+• ValidateSelection (message) — XfmdDesktop.design, line 295.
+
+• ViewGenerationProtocol (interface) — XfmdDesktop.design, line 296.
+
+• Viewport (unit) — XfmdDesktop.design, line 297.
+
+• ViewportChanges (channel) — XfmdDesktop.design, line 298.
+
+• ViewportChangesContract (contract) — XfmdDesktop.design, line 299.
+
+• VisualResources (unit) — XfmdDesktop.design, line 300.
+
+• WindowDeliveryProtocol (interface) — XfmdDesktop.design, line 301.
+
+• WindowPresentation (channel) — XfmdDesktop.design, line 302.
+
+• WindowPresentationContract (contract) — XfmdDesktop.design, line 303.
+
+• WorkPathHistory (functionality) — XfmdDesktop.design, line 304.
+
+• WorkPathNavigation (feature) — XfmdDesktop.design, line 305.
+
+• Workspace (unit) — XfmdDesktop.design, line 306.
+
+• WorkspaceChanges (channel) — XfmdDesktop.design, line 307.
+
+• WorkspaceChangesContract (contract) — XfmdDesktop.design, line 308.
+
+• WorkspaceControls (functionality) — XfmdDesktop.design, line 309.
+
+• WorkspaceIntents (channel) — XfmdDesktop.design, line 310.
+
+• WorkspaceIntentsContract (contract) — XfmdDesktop.design, line 311.
+
+• WriteCurrent (message) — XfmdDesktop.design, line 312.
+
+• XfmdDesktop (container) — XfmdDesktop.design, line 313.
+Complete fact registry
+All statements are preserved, including mode, ternary relation, sequence and
+placement arguments. Source traceability does not prove native code conformance.
+
+ • f0000 — AcceptCurrentFrame has message-kind = event. (XfmdDesktop.design,
+    line 314).
+
+ • f0001 — AcceptCurrentFrame upholds InteractionObservationShape.
+    (XfmdDesktop.design, line 315).
+
+ • f0002 — AcceptCurrentModel has message-kind = event. (XfmdDesktop.design,
+    line 316).
+
+ • f0003 — AcceptCurrentModel upholds InteractionObservationShape.
+    (XfmdDesktop.design, line 317).
+
+ • f0004 — AcceptWorkerTicket has message-kind = event. (XfmdDesktop.design,
+    line 318).
+
+ • f0005 — AcceptWorkerTicket upholds InteractionObservationShape.
+    (XfmdDesktop.design, line 319).
+
+ • f0006 — ActivateExternalTarget has message-kind = event. (XfmdDesktop.design,
+    line 320).
+
+ • f0007 — ActivateExternalTarget upholds InteractionObservationShape.
+    (XfmdDesktop.design, line 321).
+
+ • f0008 — ActivateRootAndHistory has message-kind = event.
+    (XfmdDesktop.design, line 322).
+
+ • f0009 — ActivateRootAndHistory upholds InteractionObservationShape.
+    (XfmdDesktop.design, line 323).
+
+ • f0010 — AdmitDocument has message-kind = request. (XfmdDesktop.design, line
+    324).
+
+ • f0011 — AdmitDocument upholds InteractionObservationShape.
+    (XfmdDesktop.design, line 325).
+
+ • f0012 — AdmitGeneratedDocument has message-kind = request.
+    (XfmdDesktop.design, line 326).
+• f0013 — AdmitGeneratedDocument upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 327).
+
+• f0014 — AdoptPreferencesDraft has message-kind = event. (XfmdDesktop.design,
+  line 328).
+
+• f0015 — AdoptPreferencesDraft upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 329).
+
+• f0016 — AdvanceGenerationSequence has message-kind = event.
+  (XfmdDesktop.design, line 330).
+
+• f0017 — AdvanceGenerationSequence upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 331).
+
+• f0018 — Application consumes ExternalOpenProtocol. (XfmdDesktop.design, line
+  332).
+
+• f0019 — Application contains DocumentIndexService. (XfmdDesktop.design, line
+  333).
+
+• f0020 — Application contains DocumentStorage. (XfmdDesktop.design, line 334).
+
+• f0021 — Application contains Documents. (XfmdDesktop.design, line 335).
+
+• f0022 — Application contains EventLoop. (XfmdDesktop.design, line 336).
+
+• f0023 — Application contains GeneratedViews. (XfmdDesktop.design, line 337).
+
+• f0024 — Application contains Identity. (XfmdDesktop.design, line 338).
+
+• f0025 — Application contains NativeShell. (XfmdDesktop.design, line 339).
+
+• f0026 — Application contains Navigation. (XfmdDesktop.design, line 340).
+
+• f0027 — Application contains Preferences. (XfmdDesktop.design, line 341).
+
+• f0028 — Application contains Preview. (XfmdDesktop.design, line 342).
+
+• f0029 — Application contains Publication. (XfmdDesktop.design, line 343).
+
+• f0030 — Application contains SdpProjects. (XfmdDesktop.design, line 344).
+
+• f0031 — Application contains Typography. (XfmdDesktop.design, line 345).
+
+• f0032 — Application contains Viewport. (XfmdDesktop.design, line 346).
+
+• f0033 — Application contains VisualResources. (XfmdDesktop.design, line 347).
+
+• f0034 — Application contains Workspace. (XfmdDesktop.design, line 348).
+• f0035 — Application uses ExternalOpening as sender of
+  LaunchConfiguredProgram in mode NormalDesktop. (XfmdDesktop.design, line
+  349).
+
+• f0036 — Application uses NavigationCalls as receiver of TargetOpened in mode
+  NormalDesktop. (XfmdDesktop.design, line 350).
+
+• f0037 — Application uses NavigationCalls as sender of OpenTarget in mode
+  NormalDesktop. (XfmdDesktop.design, line 351).
+
+• f0038 — Application uses OpeningPolicy as receiver of ClassifyExternalTarget in
+  mode NormalDesktop. (XfmdDesktop.design, line 352).
+
+• f0039 — Application uses OpeningPolicy as sender of ClassifyExternalTarget in
+  mode NormalDesktop. (XfmdDesktop.design, line 353).
+
+• f0040 — Application uses WorkspaceChanges as sender of SetChosenParentRoot
+  in mode NormalDesktop. (XfmdDesktop.design, line 354).
+
+• f0041 — Application uses WorkspaceChanges as sender of ValidateProposedRoot
+  in mode NormalDesktop. (XfmdDesktop.design, line 355).
+
+• f0042 — Application uses WorkspaceIntents as receiver of ActivateExternalTarget
+  in mode NormalDesktop. (XfmdDesktop.design, line 356).
+
+• f0043 — Application uses WorkspaceIntents as receiver of ChooseInternalFile in
+  mode NormalDesktop. (XfmdDesktop.design, line 357).
+
+• f0044 — Application uses WorkspaceIntents as receiver of FavoriteFileChosen in
+  mode NormalDesktop. (XfmdDesktop.design, line 358).
+
+• f0045 — ApplicationIdentity allocated-to XfmdDesktop in mode NormalDesktop.
+  (XfmdDesktop.design, line 359).
+
+• f0046 — ApplicationPreferences allocated-to XfmdDesktop in mode
+  NormalDesktop. (XfmdDesktop.design, line 360).
+
+• f0047 — ApplicationPreferences contributes-to ConfigurableScrolling.
+  (XfmdDesktop.design, line 361).
+
+• f0048 — ApplicationPreferences contributes-to ConfigurePreferences.
+  (XfmdDesktop.design, line 362).
+
+• f0049 — ApplicationPreferences contributes-to DocumentNavigation.
+  (XfmdDesktop.design, line 363).
+• f0050 — ApplicationPreferences contributes-to DocumentReferences.
+  (XfmdDesktop.design, line 364).
+
+• f0051 — ApplicationPreferences contributes-to PagedPublication.
+  (XfmdDesktop.design, line 365).
+
+• f0052 — ApplyTextEdit has message-kind = event. (XfmdDesktop.design, line 366).
+
+• f0053 — ApplyTextEdit upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 367).
+
+• f0054 — AttemptRelease has message-kind = event. (XfmdDesktop.design, line
+  368).
+
+• f0055 — AttemptRelease upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 369).
+
+• f0056 — BeginPreferencesDraft has message-kind = event. (XfmdDesktop.design,
+  line 370).
+
+• f0057 — BeginPreferencesDraft upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 371).
+
+• f0058 — BuildIdentity allocated-to XfmdDesktop in mode NormalDesktop.
+  (XfmdDesktop.design, line 372).
+
+• f0059 — CacheCompatibleScene has message-kind = event.
+  (XfmdDesktop.design, line 373).
+
+• f0060 — CacheCompatibleScene upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 374).
+
+• f0061 — CancelPdfRequest has message-kind = event. (XfmdDesktop.design, line
+  375).
+
+• f0062 — CancelPdfRequest upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 376).
+
+• f0063 — CancelPreviousChild has message-kind = event. (XfmdDesktop.design,
+  line 377).
+
+• f0064 — CancelPreviousChild upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 378).
+
+• f0065 — CancelUnpublishedJob has message-kind = event. (XfmdDesktop.design,
+  line 379).
+• f0066 — CancelUnpublishedJob upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 380).
+
+• f0067 — CandidateRead has message-kind = result. (XfmdDesktop.design, line
+  381).
+
+• f0068 — CandidateRead replies-to ReadCandidate. (XfmdDesktop.design, line
+  382).
+
+• f0069 — CandidateRead upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 383).
+
+• f0070 — CandidateReadFailed has message-kind = result. (XfmdDesktop.design,
+  line 384).
+
+• f0071 — CandidateReadFailed replies-to ReadCandidate. (XfmdDesktop.design,
+  line 385).
+
+• f0072 — CandidateReadFailed upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 386).
+
+• f0073 — CaptureContextTarget has message-kind = event. (XfmdDesktop.design,
+  line 387).
+
+• f0074 — CaptureContextTarget upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 388).
+
+• f0075 — ChapterNavigation supports NavigateDocuments. (XfmdDesktop.design,
+  line 389).
+
+• f0076 — CheckCurrentMapping has message-kind = event. (XfmdDesktop.design,
+  line 390).
+
+• f0077 — CheckCurrentMapping upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 391).
+
+• f0078 — CheckReferenceGeneration has message-kind = event.
+  (XfmdDesktop.design, line 392).
+
+• f0079 — CheckReferenceGeneration upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 393).
+
+• f0080 — ChooseCancel has message-kind = result. (XfmdDesktop.design, line
+  394).
+
+• f0081 — ChooseCancel replies-to ChooseUnsaved. (XfmdDesktop.design, line
+  395).
+• f0082 — ChooseCancel upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 396).
+
+• f0083 — ChooseInternalFile has message-kind = event. (XfmdDesktop.design, line
+  397).
+
+• f0084 — ChooseInternalFile upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 398).
+
+• f0085 — ChooseSave has message-kind = result. (XfmdDesktop.design, line 399).
+
+• f0086 — ChooseSave replies-to ChooseUnsaved. (XfmdDesktop.design, line 400).
+
+• f0087 — ChooseSave upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 401).
+
+• f0088 — ChooseUnsaved has message-kind = request. (XfmdDesktop.design, line
+  402).
+
+• f0089 — ChooseUnsaved upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 403).
+
+• f0090 — ChooserOpensThenChangesRoot exercises BrowseWorkspace.
+  (XfmdDesktop.design, line 404).
+
+• f0091 — ChooserOpensThenChangesRoot has completeness = closed.
+  (XfmdDesktop.design, line 405).
+
+• f0092 — ChooserOpensThenChangesRoot runs-in NormalDesktop.
+  (XfmdDesktop.design, line 406).
+
+• f0093 — ChooserOpensThenChangesRoot step 1 sends ChooseInternalFile from
+  NativeShell to Application via WorkspaceIntents. (XfmdDesktop.design, line 407).
+
+• f0094 — ChooserOpensThenChangesRoot step 2 sends ValidateProposedRoot
+  from Application to Workspace via WorkspaceChanges. (XfmdDesktop.design, line
+  408).
+
+• f0095 — ChooserOpensThenChangesRoot step 3 sends OpenTarget from
+  Application to Navigation via NavigationCalls. (XfmdDesktop.design, line 409).
+
+• f0096 — ChooserOpensThenChangesRoot step 4 sends TargetOpened from
+  Navigation to Application via NavigationCalls reply-to 3. (XfmdDesktop.design, line
+  410).
+
+• f0097 — ChooserOpensThenChangesRoot step 5 sends SetChosenParentRoot
+  from Application to Workspace via WorkspaceChanges. (XfmdDesktop.design, line
+  411).
+
+• f0098 — ClassifyExternalTarget has message-kind = event. (XfmdDesktop.design,
+  line 412).
+
+• f0099 — ClassifyExternalTarget upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 413).
+
+• f0100 — CommitPdfCandidate has message-kind = event. (XfmdDesktop.design,
+  line 414).
+
+• f0101 — CommitPdfCandidate upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 415).
+
+• f0102 — CommitVisit has message-kind = event. (XfmdDesktop.design, line 416).
+
+• f0103 — CommitVisit upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 417).
+
+• f0104 — CompleteObsoleteWorker has message-kind = event.
+  (XfmdDesktop.design, line 418).
+
+• f0105 — CompleteObsoleteWorker upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 419).
+
+• f0106 — ConfigurableScrolling supports ConfigurePreferences.
+  (XfmdDesktop.design, line 420).
+
+• f0107 — ConfigurableScrolling supports ScrollDocuments. (XfmdDesktop.design,
+  line 421).
+
+• f0108 — ContextInteraction upholds ContextInteractionContract.
+  (XfmdDesktop.design, line 422).
+
+• f0109 — ContextInteractionContract has completeness = closed.
+  (XfmdDesktop.design, line 423).
+
+• f0110 — ContextInteractionContract permits CaptureContextTarget.
+  (XfmdDesktop.design, line 424).
+
+• f0111 — ContextInteractionContract permits DismissContextMenu.
+  (XfmdDesktop.design, line 425).
+
+• f0112 — ContextInteractionContract permits ReleaseKeyboardGrab.
+  (XfmdDesktop.design, line 426).
+• f0113 — ContextMenuDismissed exercises BrowseWorkspace.
+  (XfmdDesktop.design, line 427).
+
+• f0114 — ContextMenuDismissed has completeness = closed.
+  (XfmdDesktop.design, line 428).
+
+• f0115 — ContextMenuDismissed runs-in NormalDesktop. (XfmdDesktop.design,
+  line 429).
+
+• f0116 — ContextMenuDismissed step 1 sends CaptureContextTarget from
+  NativeShell to NativeShell via ContextInteraction. (XfmdDesktop.design, line 430).
+
+• f0117 — ContextMenuDismissed step 2 sends DismissContextMenu from
+  NativeShell to NativeShell via ContextInteraction. (XfmdDesktop.design, line 431).
+
+• f0118 — ContextMenuDismissed step 3 sends ReleaseKeyboardGrab from
+  NativeShell to NativeShell via ContextInteraction. (XfmdDesktop.design, line 432).
+
+• f0119 — CurrentWritten has message-kind = result. (XfmdDesktop.design, line
+  433).
+
+• f0120 — CurrentWritten replies-to WriteCurrent. (XfmdDesktop.design, line 434).
+
+• f0121 — CurrentWritten upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 435).
+
+• f0122 — DebounceElapsed has message-kind = event. (XfmdDesktop.design, line
+  436).
+
+• f0123 — DebounceElapsed upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 437).
+
+• f0124 — DeliverGeneratedMain has message-kind = request.
+  (XfmdDesktop.design, line 438).
+
+• f0125 — DeliverGeneratedMain upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 439).
+
+• f0126 — DiagramInterpretation upholds DiagramInterpretationContract.
+  (XfmdDesktop.design, line 440).
+
+• f0127 — DiagramInterpretationContract has completeness = closed.
+  (XfmdDesktop.design, line 441).
+
+• f0128 — DiagramInterpretationContract permits ParseMermaidBlock.
+  (XfmdDesktop.design, line 442).
+• f0129 — DiagramLayout allocated-to XfmdDesktop in mode NormalDesktop.
+  (XfmdDesktop.design, line 443).
+
+• f0130 — DiagramLayout contributes-to MermaidDiagrams. (XfmdDesktop.design,
+  line 444).
+
+• f0131 — DiagramLayoutCalls upholds DiagramLayoutCallsContract.
+  (XfmdDesktop.design, line 445).
+
+• f0132 — DiagramLayoutCallsContract has completeness = closed.
+  (XfmdDesktop.design, line 446).
+
+• f0133 — DiagramLayoutCallsContract permits LayoutTypedDiagram.
+  (XfmdDesktop.design, line 447).
+
+• f0134 — DiagramLayoutCallsContract permits TypedDiagramLaidOut.
+  (XfmdDesktop.design, line 448).
+
+• f0135 — DiagramPreparation allocated-to XfmdDesktop in mode NormalDesktop.
+  (XfmdDesktop.design, line 449).
+
+• f0136 — DiagramPreparation contributes-to MermaidDiagrams.
+  (XfmdDesktop.design, line 450).
+
+• f0137 — DiagramScenePrepared exercises ReadDiagrams. (XfmdDesktop.design,
+  line 451).
+
+• f0138 — DiagramScenePrepared has completeness = closed.
+  (XfmdDesktop.design, line 452).
+
+• f0139 — DiagramScenePrepared runs-in NormalDesktop. (XfmdDesktop.design,
+  line 453).
+
+• f0140 — DiagramScenePrepared step 1 sends ParseMermaidBlock from
+  Interpreter to Interpreter via DiagramInterpretation. (XfmdDesktop.design, line
+  454).
+
+• f0141 — DiagramScenePrepared step 2 sends PrepareTypedDiagram from
+  Preview to VisualResources via ResourcePreparation. (XfmdDesktop.design, line
+  455).
+
+• f0142 — DiagramScenePrepared step 3 sends LayoutTypedDiagram from
+  VisualResources to Renderer via DiagramLayoutCalls. (XfmdDesktop.design, line
+  456).
+• f0143 — DiagramScenePrepared step 4 sends TypedDiagramLaidOut from
+  Renderer to VisualResources via DiagramLayoutCalls reply-to 3.
+  (XfmdDesktop.design, line 457).
+
+• f0144 — DiagramScenePrepared step 5 sends CacheCompatibleScene from
+  VisualResources to VisualResources via ResourcePreparation.
+  (XfmdDesktop.design, line 458).
+
+• f0145 — DirtyGeneratedDeliveryRejected exercises SelectGeneratedView.
+  (XfmdDesktop.design, line 459).
+
+• f0146 — DirtyGeneratedDeliveryRejected has completeness = closed.
+  (XfmdDesktop.design, line 460).
+
+• f0147 — DirtyGeneratedDeliveryRejected runs-in NormalDesktop.
+  (XfmdDesktop.design, line 461).
+
+• f0148 — DirtyGeneratedDeliveryRejected step 1 sends DeliverGeneratedMain
+  from ExternalViewGenerator to GeneratedViews via GeneratedDelivery.
+  (XfmdDesktop.design, line 462).
+
+• f0149 — DirtyGeneratedDeliveryRejected step 2 sends InspectDirtyMain from
+  GeneratedViews to Documents via GeneratedAdmission. (XfmdDesktop.design,
+  line 463).
+
+• f0150 — DirtyGeneratedDeliveryRejected step 3 sends ShowDirtyRejection from
+  GeneratedViews to NativeShell via PresentationEvents. (XfmdDesktop.design, line
+  464).
+
+• f0151 — DirtyGeneratedDeliveryRejected step 4 sends GeneratedMainRejected
+  from GeneratedViews to ExternalViewGenerator via GeneratedDelivery reply-to 1.
+  (XfmdDesktop.design, line 465).
+
+• f0152 — DirtyOpenCancelled exercises NavigateDocuments.
+  (XfmdDesktop.design, line 466).
+
+• f0153 — DirtyOpenCancelled has completeness = closed. (XfmdDesktop.design,
+  line 467).
+
+• f0154 — DirtyOpenCancelled runs-in NormalDesktop. (XfmdDesktop.design, line
+  468).
+
+• f0155 — DirtyOpenCancelled step 1 sends AdmitDocument from Navigation to
+  Documents via DocumentCalls. (XfmdDesktop.design, line 469).
+• f0156 — DirtyOpenCancelled step 2 sends ChooseUnsaved from Documents to
+  NativeShell via UnsavedAdmission. (XfmdDesktop.design, line 470).
+
+• f0157 — DirtyOpenCancelled step 3 sends ChooseCancel from NativeShell to
+  Documents via UnsavedAdmission reply-to 2. (XfmdDesktop.design, line 471).
+
+• f0158 — DirtyOpenCancelled step 4 sends DocumentRejected from Documents to
+  Navigation via DocumentCalls reply-to 1. (XfmdDesktop.design, line 472).
+
+• f0159 — DiscardObsoleteCompletion has message-kind = event.
+  (XfmdDesktop.design, line 473).
+
+• f0160 — DiscardObsoleteCompletion upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 474).
+
+• f0161 — DiscardPdfCandidate has message-kind = event. (XfmdDesktop.design,
+  line 475).
+
+• f0162 — DiscardPdfCandidate upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 476).
+
+• f0163 — DismissContextMenu has message-kind = event. (XfmdDesktop.design,
+  line 477).
+
+• f0164 — DismissContextMenu upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 478).
+
+• f0165 — DocumentBytes has presence = required. (XfmdDesktop.design, line
+  479).
+
+• f0166 — DocumentBytes has value-type = bytes. (XfmdDesktop.design, line 480).
+
+• f0167 — DocumentCalls upholds DocumentCallsContract. (XfmdDesktop.design,
+  line 481).
+
+• f0168 — DocumentCallsContract has completeness = closed.
+  (XfmdDesktop.design, line 482).
+
+• f0169 — DocumentCallsContract permits AdmitDocument. (XfmdDesktop.design,
+  line 483).
+
+• f0170 — DocumentCallsContract permits DocumentOpened.
+  (XfmdDesktop.design, line 484).
+
+• f0171 — DocumentCallsContract permits DocumentRejected.
+  (XfmdDesktop.design, line 485).
+• f0172 — DocumentChanged has message-kind = event. (XfmdDesktop.design, line
+  486).
+
+• f0173 — DocumentChanged upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 487).
+
+• f0174 — DocumentIdentity has presence = required. (XfmdDesktop.design, line
+  488).
+
+• f0175 — DocumentIdentity has value-type = unsigned. (XfmdDesktop.design, line
+  489).
+
+• f0176 — DocumentIndex allocated-to XfmdDesktop in mode NormalDesktop.
+  (XfmdDesktop.design, line 490).
+
+• f0177 — DocumentIndex contributes-to ChapterNavigation. (XfmdDesktop.design,
+  line 491).
+
+• f0178 — DocumentIndex contributes-to DocumentReferences.
+  (XfmdDesktop.design, line 492).
+
+• f0179 — DocumentIndexService consumes FileStorePort. (XfmdDesktop.design,
+  line 493).
+
+• f0180 — DocumentIndexService consumes InterpreterPort. (XfmdDesktop.design,
+  line 494).
+
+• f0181 — DocumentIndexService owns DocumentIndex. (XfmdDesktop.design, line
+  495).
+
+• f0182 — DocumentIndexService uses IndexChanges as receiver of
+  CheckReferenceGeneration in mode NormalDesktop. (XfmdDesktop.design, line
+  496).
+
+• f0183 — DocumentIndexService uses IndexChanges as sender of
+  CheckReferenceGeneration in mode NormalDesktop. (XfmdDesktop.design, line
+  497).
+
+• f0184 — DocumentIndexService uses IndexChanges as sender of
+  PublishReferenceHeadings in mode NormalDesktop. (XfmdDesktop.design, line
+  498).
+
+• f0185 — DocumentIndexService uses IndexIntents as receiver of
+  ExpandReference in mode NormalDesktop. (XfmdDesktop.design, line 499).
+• f0186 — DocumentIndexService uses ReferenceInterpretation as receiver of
+  ReferenceParsed in mode NormalDesktop. (XfmdDesktop.design, line 500).
+
+• f0187 — DocumentIndexService uses ReferenceInterpretation as sender of
+  ParseReference in mode NormalDesktop. (XfmdDesktop.design, line 501).
+
+• f0188 — DocumentIndexService uses ReferenceStorage as receiver of
+  ReferenceRead in mode NormalDesktop. (XfmdDesktop.design, line 502).
+
+• f0189 — DocumentIndexService uses ReferenceStorage as sender of
+  ReadReference in mode NormalDesktop. (XfmdDesktop.design, line 503).
+
+• f0190 — DocumentNavigation supports NavigateDocuments.
+  (XfmdDesktop.design, line 504).
+
+• f0191 — DocumentNotifications upholds DocumentNotificationsContract.
+  (XfmdDesktop.design, line 505).
+
+• f0192 — DocumentNotificationsContract has completeness = closed.
+  (XfmdDesktop.design, line 506).
+
+• f0193 — DocumentNotificationsContract permits CommitVisit.
+  (XfmdDesktop.design, line 507).
+
+• f0194 — DocumentNotificationsContract permits DocumentChanged.
+  (XfmdDesktop.design, line 508).
+
+• f0195 — DocumentNotificationsContract permits GeneratedDocumentChanged.
+  (XfmdDesktop.design, line 509).
+
+• f0196 — DocumentOpened has message-kind = result. (XfmdDesktop.design, line
+  510).
+
+• f0197 — DocumentOpened replies-to AdmitDocument. (XfmdDesktop.design, line
+  511).
+
+• f0198 — DocumentOpened upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 512).
+
+• f0199 — DocumentPath has presence = required. (XfmdDesktop.design, line 513).
+
+• f0200 — DocumentPath has value-type = text. (XfmdDesktop.design, line 514).
+
+• f0201 — DocumentReferences supports NavigateDocuments.
+  (XfmdDesktop.design, line 515).
+• f0202 — DocumentRejected has message-kind = result. (XfmdDesktop.design, line
+  516).
+
+• f0203 — DocumentRejected replies-to AdmitDocument. (XfmdDesktop.design, line
+  517).
+
+• f0204 — DocumentRejected upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 518).
+
+• f0205 — DocumentRevision has presence = required. (XfmdDesktop.design, line
+  519).
+
+• f0206 — DocumentRevision has value-type = unsigned. (XfmdDesktop.design, line
+  520).
+
+• f0207 — DocumentSession allocated-to XfmdDesktop in mode NormalDesktop.
+  (XfmdDesktop.design, line 521).
+
+• f0208 — DocumentSession contributes-to DocumentNavigation.
+  (XfmdDesktop.design, line 522).
+
+• f0209 — DocumentSession contributes-to LivePreview. (XfmdDesktop.design, line
+  523).
+
+• f0210 — DocumentSession contributes-to MarkdownPresentation.
+  (XfmdDesktop.design, line 524).
+
+• f0211 — DocumentSession contributes-to PagedPublication.
+  (XfmdDesktop.design, line 525).
+
+• f0212 — DocumentStateChanges upholds DocumentStateChangesContract.
+  (XfmdDesktop.design, line 526).
+
+• f0213 — DocumentStateChangesContract has completeness = closed.
+  (XfmdDesktop.design, line 527).
+
+• f0214 — DocumentStateChangesContract permits MarkCurrentSaved.
+  (XfmdDesktop.design, line 528).
+
+• f0215 — DocumentStateChangesContract permits ReplaceDocument.
+  (XfmdDesktop.design, line 529).
+
+• f0216 — DocumentStateShape has completeness = closed. (XfmdDesktop.design,
+  line 530).
+
+• f0217 — DocumentStateShape has-field DocumentBytes. (XfmdDesktop.design,
+  line 531).
+• f0218 — DocumentStateShape has-field DocumentIdentity. (XfmdDesktop.design,
+  line 532).
+
+• f0219 — DocumentStateShape has-field DocumentPath. (XfmdDesktop.design,
+  line 533).
+
+• f0220 — DocumentStateShape has-field DocumentRevision.
+  (XfmdDesktop.design, line 534).
+
+• f0221 — DocumentStateShape has-field SavedBaselineBytes.
+  (XfmdDesktop.design, line 535).
+
+• f0222 — DocumentStorage owns LocalFileStorage. (XfmdDesktop.design, line
+  536).
+
+• f0223 — DocumentStorage uses ReferenceStorage as receiver of ReadReference
+  in mode NormalDesktop. (XfmdDesktop.design, line 537).
+
+• f0224 — DocumentStorage uses ReferenceStorage as sender of ReferenceRead
+  in mode NormalDesktop. (XfmdDesktop.design, line 538).
+
+• f0225 — DocumentStorage uses StorageCalls as receiver of ReadCandidate in
+  mode NormalDesktop. (XfmdDesktop.design, line 539).
+
+• f0226 — DocumentStorage uses StorageCalls as receiver of WriteCurrent in
+  mode NormalDesktop. (XfmdDesktop.design, line 540).
+
+• f0227 — DocumentStorage uses StorageCalls as sender of CandidateRead in
+  mode NormalDesktop. (XfmdDesktop.design, line 541).
+
+• f0228 — DocumentStorage uses StorageCalls as sender of CandidateReadFailed
+  in mode NormalDesktop. (XfmdDesktop.design, line 542).
+
+• f0229 — DocumentStorage uses StorageCalls as sender of CurrentWritten in
+  mode NormalDesktop. (XfmdDesktop.design, line 543).
+
+• f0230 — Documents consumes FileStorePort. (XfmdDesktop.design, line 544).
+
+• f0231 — Documents holds MainDocumentState. (XfmdDesktop.design, line 545).
+
+• f0232 — Documents owns DocumentSession. (XfmdDesktop.design, line 546).
+
+• f0233 — Documents owns TextEditing. (XfmdDesktop.design, line 547).
+
+• f0234 — Documents uses DocumentCalls as receiver of AdmitDocument in mode
+  NormalDesktop. (XfmdDesktop.design, line 548).
+• f0235 — Documents uses DocumentCalls as sender of DocumentOpened in mode
+  NormalDesktop. (XfmdDesktop.design, line 549).
+
+• f0236 — Documents uses DocumentCalls as sender of DocumentRejected in
+  mode NormalDesktop. (XfmdDesktop.design, line 550).
+
+• f0237 — Documents uses DocumentNotifications as sender of CommitVisit in
+  mode NormalDesktop. (XfmdDesktop.design, line 551).
+
+• f0238 — Documents uses DocumentNotifications as sender of DocumentChanged
+  in mode NormalDesktop. (XfmdDesktop.design, line 552).
+
+• f0239 — Documents uses DocumentNotifications as sender of
+  GeneratedDocumentChanged in mode NormalDesktop. (XfmdDesktop.design,
+  line 553).
+
+• f0240 — Documents uses DocumentStateChanges as receiver of
+  MarkCurrentSaved in mode NormalDesktop. (XfmdDesktop.design, line 554).
+
+• f0241 — Documents uses DocumentStateChanges as receiver of
+  ReplaceDocument in mode NormalDesktop. (XfmdDesktop.design, line 555).
+
+• f0242 — Documents uses DocumentStateChanges as sender of
+  MarkCurrentSaved in mode NormalDesktop. (XfmdDesktop.design, line 556).
+
+• f0243 — Documents uses DocumentStateChanges as sender of
+  ReplaceDocument in mode NormalDesktop. (XfmdDesktop.design, line 557).
+
+• f0244 — Documents uses EditIntents as receiver of ApplyTextEdit in mode
+  NormalDesktop. (XfmdDesktop.design, line 558).
+
+• f0245 — Documents uses GeneratedAdmission as receiver of InspectDirtyMain in
+  mode NormalDesktop. (XfmdDesktop.design, line 559).
+
+• f0246 — Documents uses GeneratedDocumentCalls as receiver of
+  AdmitGeneratedDocument in mode NormalDesktop. (XfmdDesktop.design, line
+  560).
+
+• f0247 — Documents uses GeneratedDocumentCalls as sender of
+  GeneratedDocumentOpened in mode NormalDesktop. (XfmdDesktop.design, line
+  561).
+
+• f0248 — Documents uses PublicationInputs as sender of FreezeExportSnapshot in
+  mode NormalDesktop. (XfmdDesktop.design, line 562).
+• f0249 — Documents uses StorageCalls as receiver of CandidateRead in mode
+  NormalDesktop. (XfmdDesktop.design, line 563).
+
+• f0250 — Documents uses StorageCalls as receiver of CandidateReadFailed in
+  mode NormalDesktop. (XfmdDesktop.design, line 564).
+
+• f0251 — Documents uses StorageCalls as receiver of CurrentWritten in mode
+  NormalDesktop. (XfmdDesktop.design, line 565).
+
+• f0252 — Documents uses StorageCalls as sender of ReadCandidate in mode
+  NormalDesktop. (XfmdDesktop.design, line 566).
+
+• f0253 — Documents uses StorageCalls as sender of WriteCurrent in mode
+  NormalDesktop. (XfmdDesktop.design, line 567).
+
+• f0254 — Documents uses UnsavedAdmission as receiver of ChooseCancel in
+  mode NormalDesktop. (XfmdDesktop.design, line 568).
+
+• f0255 — Documents uses UnsavedAdmission as receiver of ChooseSave in mode
+  NormalDesktop. (XfmdDesktop.design, line 569).
+
+• f0256 — Documents uses UnsavedAdmission as sender of ChooseUnsaved in
+  mode NormalDesktop. (XfmdDesktop.design, line 570).
+
+• f0257 — EditIntents upholds EditIntentsContract. (XfmdDesktop.design, line 571).
+
+• f0258 — EditIntentsContract has completeness = closed. (XfmdDesktop.design,
+  line 572).
+
+• f0259 — EditIntentsContract permits ApplyTextEdit. (XfmdDesktop.design, line
+  573).
+
+• f0260 — EditedPreviewPublished exercises EditDocuments. (XfmdDesktop.design,
+  line 574).
+
+• f0261 — EditedPreviewPublished has completeness = closed.
+  (XfmdDesktop.design, line 575).
+
+• f0262 — EditedPreviewPublished runs-in NormalDesktop. (XfmdDesktop.design,
+  line 576).
+
+• f0263 — EditedPreviewPublished step 1 sends ApplyTextEdit from NativeShell to
+  Documents via EditIntents. (XfmdDesktop.design, line 577).
+
+• f0264 — EditedPreviewPublished step 10 sends AcceptCurrentFrame from
+  Preview to Preview via PreviewAdmission. (XfmdDesktop.design, line 578).
+• f0265 — EditedPreviewPublished step 11 sends PresentFrame from Preview to
+  NativeShell via PresentationEvents. (XfmdDesktop.design, line 579).
+
+• f0266 — EditedPreviewPublished step 2 sends DocumentChanged from
+  Documents to Preview via DocumentNotifications. (XfmdDesktop.design, line 580).
+
+• f0267 — EditedPreviewPublished step 3 sends RestartDebounce from Preview to
+  EventLoop via ScheduledWork. (XfmdDesktop.design, line 581).
+
+• f0268 — EditedPreviewPublished step 4 sends DebounceElapsed from EventLoop
+  to Preview via ScheduledWork. (XfmdDesktop.design, line 582).
+
+• f0269 — EditedPreviewPublished step 5 sends ParseSnapshot from Preview to
+  Interpreter via InterpretationCalls. (XfmdDesktop.design, line 583).
+
+• f0270 — EditedPreviewPublished step 6 sends ParsedSnapshot from Interpreter
+  to Preview via InterpretationCalls reply-to 5. (XfmdDesktop.design, line 584).
+
+• f0271 — EditedPreviewPublished step 7 sends AcceptCurrentModel from Preview
+  to Preview via PreviewAdmission. (XfmdDesktop.design, line 585).
+
+• f0272 — EditedPreviewPublished step 8 sends LayoutModel from Preview to
+  Renderer via LayoutCalls. (XfmdDesktop.design, line 586).
+
+• f0273 — EditedPreviewPublished step 9 sends ModelLaidOut from Renderer to
+  Preview via LayoutCalls reply-to 8. (XfmdDesktop.design, line 587).
+
+• f0274 — EmbeddedVisuals allocated-to XfmdDesktop in mode NormalDesktop.
+  (XfmdDesktop.design, line 588).
+
+• f0275 — EmbeddedVisuals contributes-to MarkdownPresentation.
+  (XfmdDesktop.design, line 589).
+
+• f0276 — EventLoop owns EventScheduling. (XfmdDesktop.design, line 590).
+
+• f0277 — EventLoop uses ScheduledWork as receiver of RestartDebounce in mode
+  NormalDesktop. (XfmdDesktop.design, line 591).
+
+• f0278 — EventLoop uses ScheduledWork as sender of DebounceElapsed in mode
+  NormalDesktop. (XfmdDesktop.design, line 592).
+
+• f0279 — EventLoop uses ScheduledWork as sender of PollReleaseQueue in mode
+  NormalDesktop. (XfmdDesktop.design, line 593).
+
+• f0280 — EventScheduling allocated-to XfmdDesktop in mode NormalDesktop.
+  (XfmdDesktop.design, line 594).
+• f0281 — EventScheduling contributes-to LivePreview. (XfmdDesktop.design, line
+  595).
+
+• f0282 — ExpandReference has message-kind = event. (XfmdDesktop.design, line
+  596).
+
+• f0283 — ExpandReference upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 597).
+
+• f0284 — ExportBytes has presence = required. (XfmdDesktop.design, line 598).
+
+• f0285 — ExportBytes has value-type = bytes. (XfmdDesktop.design, line 599).
+
+• f0286 — ExportDocument has presence = required. (XfmdDesktop.design, line
+  600).
+
+• f0287 — ExportDocument has value-type = unsigned. (XfmdDesktop.design, line
+  601).
+
+• f0288 — ExportInterpretation upholds ExportInterpretationContract.
+  (XfmdDesktop.design, line 602).
+
+• f0289 — ExportInterpretationContract has completeness = closed.
+  (XfmdDesktop.design, line 603).
+
+• f0290 — ExportInterpretationContract permits ExportSnapshotParsed.
+  (XfmdDesktop.design, line 604).
+
+• f0291 — ExportInterpretationContract permits ParseExportSnapshot.
+  (XfmdDesktop.design, line 605).
+
+• f0292 — ExportLayout upholds ExportLayoutContract. (XfmdDesktop.design, line
+  606).
+
+• f0293 — ExportLayoutContract has completeness = closed. (XfmdDesktop.design,
+  line 607).
+
+• f0294 — ExportLayoutContract permits ExportPagesLaidOut.
+  (XfmdDesktop.design, line 608).
+
+• f0295 — ExportLayoutContract permits LayoutExportPages. (XfmdDesktop.design,
+  line 609).
+
+• f0296 — ExportPagesLaidOut has message-kind = result. (XfmdDesktop.design,
+  line 610).
+• f0297 — ExportPagesLaidOut replies-to LayoutExportPages. (XfmdDesktop.design,
+  line 611).
+
+• f0298 — ExportPagesLaidOut upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 612).
+
+• f0299 — ExportPath has presence = required. (XfmdDesktop.design, line 613).
+
+• f0300 — ExportPath has value-type = text. (XfmdDesktop.design, line 614).
+
+• f0301 — ExportRevision has presence = required. (XfmdDesktop.design, line 615).
+
+• f0302 — ExportRevision has value-type = unsigned. (XfmdDesktop.design, line
+  616).
+
+• f0303 — ExportSnapshotParsed has message-kind = result. (XfmdDesktop.design,
+  line 617).
+
+• f0304 — ExportSnapshotParsed replies-to ParseExportSnapshot.
+  (XfmdDesktop.design, line 618).
+
+• f0305 — ExportSnapshotParsed upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 619).
+
+• f0306 — ExportSnapshotShape has completeness = closed. (XfmdDesktop.design,
+  line 620).
+
+• f0307 — ExportSnapshotShape has-field ExportBytes. (XfmdDesktop.design, line
+  621).
+
+• f0308 — ExportSnapshotShape has-field ExportDocument. (XfmdDesktop.design,
+  line 622).
+
+• f0309 — ExportSnapshotShape has-field ExportPath. (XfmdDesktop.design, line
+  623).
+
+• f0310 — ExportSnapshotShape has-field ExportRevision. (XfmdDesktop.design,
+  line 624).
+
+• f0311 — ExternalLauncher uses ExternalOpening as receiver of
+  LaunchConfiguredProgram in mode NormalDesktop. (XfmdDesktop.design, line
+  625).
+
+• f0312 — ExternalOpening upholds ExternalOpeningContract.
+  (XfmdDesktop.design, line 626).
+• f0313 — ExternalOpeningContract has completeness = closed.
+  (XfmdDesktop.design, line 627).
+
+• f0314 — ExternalOpeningContract permits LaunchConfiguredProgram.
+  (XfmdDesktop.design, line 628).
+
+• f0315 — ExternalTargetHandedOff exercises NavigateDocuments.
+  (XfmdDesktop.design, line 629).
+
+• f0316 — ExternalTargetHandedOff has completeness = closed.
+  (XfmdDesktop.design, line 630).
+
+• f0317 — ExternalTargetHandedOff runs-in NormalDesktop. (XfmdDesktop.design,
+  line 631).
+
+• f0318 — ExternalTargetHandedOff step 1 sends ActivateExternalTarget from
+  NativeShell to Application via WorkspaceIntents. (XfmdDesktop.design, line 632).
+
+• f0319 — ExternalTargetHandedOff step 2 sends ClassifyExternalTarget from
+  Application to Application via OpeningPolicy. (XfmdDesktop.design, line 633).
+
+• f0320 — ExternalTargetHandedOff step 3 sends LaunchConfiguredProgram from
+  Application to ExternalLauncher via ExternalOpening. (XfmdDesktop.design, line
+  634).
+
+• f0321 — ExternalViewBroker uses LeaseNotifications as receiver of
+  AttemptRelease in mode NormalDesktop. (XfmdDesktop.design, line 635).
+
+• f0322 — ExternalViewGenerator uses GeneratedDelivery as receiver of
+  GeneratedMainAccepted in mode NormalDesktop. (XfmdDesktop.design, line
+  636).
+
+• f0323 — ExternalViewGenerator uses GeneratedDelivery as receiver of
+  GeneratedMainRejected in mode NormalDesktop. (XfmdDesktop.design, line 637).
+
+• f0324 — ExternalViewGenerator uses GeneratedDelivery as sender of
+  DeliverGeneratedMain in mode NormalDesktop. (XfmdDesktop.design, line 638).
+
+• f0325 — ExternalViewGenerator uses GenerationLifecycle as receiver of
+  CancelPreviousChild in mode NormalDesktop. (XfmdDesktop.design, line 639).
+
+• f0326 — ExternalViewGenerator uses GenerationLifecycle as receiver of
+  StartGeneration in mode NormalDesktop. (XfmdDesktop.design, line 640).
+
+• f0327 — FavoriteFileChosen has message-kind = event. (XfmdDesktop.design, line
+  641).
+• f0328 — FavoriteFileChosen upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 642).
+
+• f0329 — FavoriteFileOpens exercises NavigateDocuments. (XfmdDesktop.design,
+  line 643).
+
+• f0330 — FavoriteFileOpens has completeness = closed. (XfmdDesktop.design, line
+  644).
+
+• f0331 — FavoriteFileOpens runs-in NormalDesktop. (XfmdDesktop.design, line
+  645).
+
+• f0332 — FavoriteFileOpens step 1 sends FavoriteFileChosen from NativeShell to
+  Application via WorkspaceIntents. (XfmdDesktop.design, line 646).
+
+• f0333 — FavoriteFileOpens step 2 sends OpenTarget from Application to
+  Navigation via NavigationCalls. (XfmdDesktop.design, line 647).
+
+• f0334 — FavoriteFileOpens step 3 sends AdmitDocument from Navigation to
+  Documents via DocumentCalls. (XfmdDesktop.design, line 648).
+
+• f0335 — FavoriteFileOpens step 4 sends ReadCandidate from Documents to
+  DocumentStorage via StorageCalls. (XfmdDesktop.design, line 649).
+
+• f0336 — FavoriteFileOpens step 5 sends CandidateRead from DocumentStorage
+  to Documents via StorageCalls reply-to 4. (XfmdDesktop.design, line 650).
+
+• f0337 — FavoriteFileOpens step 6 sends ReplaceDocument from Documents to
+  Documents via DocumentStateChanges. (XfmdDesktop.design, line 651).
+
+• f0338 — FavoriteFileOpens step 7 sends CommitVisit from Documents to
+  Navigation via DocumentNotifications. (XfmdDesktop.design, line 652).
+
+• f0339 — FavoriteFileOpens step 8 sends DocumentOpened from Documents to
+  Navigation via DocumentCalls reply-to 3. (XfmdDesktop.design, line 653).
+
+• f0340 — FavoriteFileOpens step 9 sends TargetOpened from Navigation to
+  Application via NavigationCalls reply-to 2. (XfmdDesktop.design, line 654).
+
+• f0341 — FavoriteFolderChangesRoot exercises BrowseWorkspace.
+  (XfmdDesktop.design, line 655).
+
+• f0342 — FavoriteFolderChangesRoot has completeness = closed.
+  (XfmdDesktop.design, line 656).
+
+• f0343 — FavoriteFolderChangesRoot runs-in NormalDesktop.
+  (XfmdDesktop.design, line 657).
+• f0344 — FavoriteFolderChangesRoot step 1 sends FavoriteFolderChosen from
+  NativeShell to Workspace via WorkspaceIntents. (XfmdDesktop.design, line 658).
+
+• f0345 — FavoriteFolderChangesRoot step 2 sends ActivateRootAndHistory from
+  Workspace to Workspace via WorkspaceChanges. (XfmdDesktop.design, line 659).
+
+• f0346 — FavoriteFolderChangesRoot step 3 sends RequestTreeRefresh from
+  Workspace to NativeShell via WorkspaceChanges. (XfmdDesktop.design, line 660).
+
+• f0347 — FavoriteFolderChosen has message-kind = event. (XfmdDesktop.design,
+  line 661).
+
+• f0348 — FavoriteFolderChosen upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 662).
+
+• f0349 — FilteredFileTree allocated-to XfmdDesktop in mode NormalDesktop.
+  (XfmdDesktop.design, line 663).
+
+• f0350 — FilteredFileTree contributes-to WorkPathNavigation.
+  (XfmdDesktop.design, line 664).
+
+• f0351 — FoxPresentation allocated-to XfmdDesktop in mode NormalDesktop.
+  (XfmdDesktop.design, line 665).
+
+• f0352 — FoxPresentation contributes-to ConfigurableScrolling.
+  (XfmdDesktop.design, line 666).
+
+• f0353 — FoxPresentation contributes-to DocumentNavigation.
+  (XfmdDesktop.design, line 667).
+
+• f0354 — FoxPresentation contributes-to LivePreview. (XfmdDesktop.design, line
+  668).
+
+• f0355 — FoxPresentation contributes-to MarkdownPresentation.
+  (XfmdDesktop.design, line 669).
+
+• f0356 — FoxPresentation contributes-to MermaidDiagrams.
+  (XfmdDesktop.design, line 670).
+
+• f0357 — FoxPresentation contributes-to PagedPublication. (XfmdDesktop.design,
+  line 671).
+
+• f0358 — FoxPresentation contributes-to SynchronizedScrolling.
+  (XfmdDesktop.design, line 672).
+
+• f0359 — FreezeExportSnapshot has message-kind = event. (XfmdDesktop.design,
+  line 673).
+• f0360 — FreezeExportSnapshot upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 674).
+
+• f0361 — FrozenExportSnapshot upholds ExportSnapshotShape.
+  (XfmdDesktop.design, line 675).
+
+• f0362 — FullscreenChangesPresentation exercises UseFullscreen.
+  (XfmdDesktop.design, line 676).
+
+• f0363 — FullscreenChangesPresentation has completeness = closed.
+  (XfmdDesktop.design, line 677).
+
+• f0364 — FullscreenChangesPresentation runs-in NormalDesktop.
+  (XfmdDesktop.design, line 678).
+
+• f0365 — FullscreenChangesPresentation step 1 sends ToggleFullscreen from
+  NativeShell to NativeShell via WindowPresentation. (XfmdDesktop.design, line
+  679).
+
+• f0366 — FullscreenChangesPresentation step 2 sends
+  RetainDocumentAndAnchor from NativeShell to Viewport via ViewportChanges.
+  (XfmdDesktop.design, line 680).
+
+• f0367 — GeneratedAdmission upholds GeneratedAdmissionContract.
+  (XfmdDesktop.design, line 681).
+
+• f0368 — GeneratedAdmissionContract has completeness = closed.
+  (XfmdDesktop.design, line 682).
+
+• f0369 — GeneratedAdmissionContract permits AdvanceGenerationSequence.
+  (XfmdDesktop.design, line 683).
+
+• f0370 — GeneratedAdmissionContract permits InspectDirtyMain.
+  (XfmdDesktop.design, line 684).
+
+• f0371 — GeneratedAdmissionContract permits RejectInvalidSelection.
+  (XfmdDesktop.design, line 685).
+
+• f0372 — GeneratedAdmissionContract permits ValidateSelection.
+  (XfmdDesktop.design, line 686).
+
+• f0373 — GeneratedDelivery upholds GeneratedDeliveryContract.
+  (XfmdDesktop.design, line 687).
+
+• f0374 — GeneratedDeliveryContract has completeness = closed.
+  (XfmdDesktop.design, line 688).
+• f0375 — GeneratedDeliveryContract permits DeliverGeneratedMain.
+  (XfmdDesktop.design, line 689).
+
+• f0376 — GeneratedDeliveryContract permits GeneratedMainAccepted.
+  (XfmdDesktop.design, line 690).
+
+• f0377 — GeneratedDeliveryContract permits GeneratedMainRejected.
+  (XfmdDesktop.design, line 691).
+
+• f0378 — GeneratedDocumentCalls upholds GeneratedDocumentCallsContract.
+  (XfmdDesktop.design, line 692).
+
+• f0379 — GeneratedDocumentCallsContract has completeness = closed.
+  (XfmdDesktop.design, line 693).
+
+• f0380 — GeneratedDocumentCallsContract permits AdmitGeneratedDocument.
+  (XfmdDesktop.design, line 694).
+
+• f0381 — GeneratedDocumentCallsContract permits GeneratedDocumentOpened.
+  (XfmdDesktop.design, line 695).
+
+• f0382 — GeneratedDocumentChanged has message-kind = event.
+  (XfmdDesktop.design, line 696).
+
+• f0383 — GeneratedDocumentChanged upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 697).
+
+• f0384 — GeneratedDocumentNavigation allocated-to XfmdDesktop in mode
+  NormalDesktop. (XfmdDesktop.design, line 698).
+
+• f0385 — GeneratedDocumentNavigation contributes-to SelectGeneratedView.
+  (XfmdDesktop.design, line 699).
+
+• f0386 — GeneratedDocumentOpened has message-kind = result.
+  (XfmdDesktop.design, line 700).
+
+• f0387 — GeneratedDocumentOpened replies-to AdmitGeneratedDocument.
+  (XfmdDesktop.design, line 701).
+
+• f0388 — GeneratedDocumentOpened upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 702).
+
+• f0389 — GeneratedIntents upholds GeneratedIntentsContract.
+  (XfmdDesktop.design, line 703).
+
+• f0390 — GeneratedIntentsContract has completeness = closed.
+  (XfmdDesktop.design, line 704).
+• f0391 — GeneratedIntentsContract permits SelectInvalidView.
+  (XfmdDesktop.design, line 705).
+
+• f0392 — GeneratedIntentsContract permits SelectRegisteredView.
+  (XfmdDesktop.design, line 706).
+
+• f0393 — GeneratedMainAccepted has message-kind = result.
+  (XfmdDesktop.design, line 707).
+
+• f0394 — GeneratedMainAccepted replies-to DeliverGeneratedMain.
+  (XfmdDesktop.design, line 708).
+
+• f0395 — GeneratedMainAccepted upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 709).
+
+• f0396 — GeneratedMainRejected has message-kind = result.
+  (XfmdDesktop.design, line 710).
+
+• f0397 — GeneratedMainRejected replies-to DeliverGeneratedMain.
+  (XfmdDesktop.design, line 711).
+
+• f0398 — GeneratedMainRejected upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 712).
+
+• f0399 — GeneratedReplacementReleasesOldLease exercises
+  SelectGeneratedView. (XfmdDesktop.design, line 713).
+
+• f0400 — GeneratedReplacementReleasesOldLease has completeness = closed.
+  (XfmdDesktop.design, line 714).
+
+• f0401 — GeneratedReplacementReleasesOldLease runs-in NormalDesktop.
+  (XfmdDesktop.design, line 715).
+
+• f0402 — GeneratedReplacementReleasesOldLease step 1 sends
+  DeliverGeneratedMain from ExternalViewGenerator to GeneratedViews via
+  GeneratedDelivery. (XfmdDesktop.design, line 716).
+
+• f0403 — GeneratedReplacementReleasesOldLease step 2 sends
+  AdmitGeneratedDocument from GeneratedViews to Documents via
+  GeneratedDocumentCalls. (XfmdDesktop.design, line 717).
+
+• f0404 — GeneratedReplacementReleasesOldLease step 3 sends
+  GeneratedDocumentChanged from Documents to GeneratedViews via
+  DocumentNotifications. (XfmdDesktop.design, line 718).
+• f0405 — GeneratedReplacementReleasesOldLease step 4 sends
+  QueuePreviousLease from GeneratedViews to GeneratedViews via
+  LeaseLifecycle. (XfmdDesktop.design, line 719).
+
+• f0406 — GeneratedReplacementReleasesOldLease step 5 sends AttemptRelease
+  from GeneratedViews to ExternalViewBroker via LeaseNotifications.
+  (XfmdDesktop.design, line 720).
+
+• f0407 — GeneratedReplacementReleasesOldLease step 6 sends
+  GeneratedDocumentOpened from Documents to GeneratedViews via
+  GeneratedDocumentCalls reply-to 2. (XfmdDesktop.design, line 721).
+
+• f0408 — GeneratedReplacementReleasesOldLease step 7 sends InstallNewLease
+  from GeneratedViews to GeneratedViews via LeaseLifecycle.
+  (XfmdDesktop.design, line 722).
+
+• f0409 — GeneratedReplacementReleasesOldLease step 8 sends
+  GeneratedMainAccepted from GeneratedViews to ExternalViewGenerator via
+  GeneratedDelivery reply-to 1. (XfmdDesktop.design, line 723).
+
+• f0410 — GeneratedSelectionState upholds GenerationStateShape.
+  (XfmdDesktop.design, line 724).
+
+• f0411 — GeneratedSelectionSupersedes exercises SelectGeneratedView.
+  (XfmdDesktop.design, line 725).
+
+• f0412 — GeneratedSelectionSupersedes has completeness = closed.
+  (XfmdDesktop.design, line 726).
+
+• f0413 — GeneratedSelectionSupersedes runs-in NormalDesktop.
+  (XfmdDesktop.design, line 727).
+
+• f0414 — GeneratedSelectionSupersedes step 1 sends SelectRegisteredView from
+  NativeShell to GeneratedViews via GeneratedIntents. (XfmdDesktop.design, line
+  728).
+
+• f0415 — GeneratedSelectionSupersedes step 2 sends ValidateSelection from
+  GeneratedViews to GeneratedViews via GeneratedAdmission.
+  (XfmdDesktop.design, line 729).
+
+• f0416 — GeneratedSelectionSupersedes step 3 sends CancelPreviousChild from
+  GeneratedViews to ExternalViewGenerator via GenerationLifecycle.
+  (XfmdDesktop.design, line 730).
+• f0417 — GeneratedSelectionSupersedes step 4 sends
+  AdvanceGenerationSequence from GeneratedViews to GeneratedViews via
+  GeneratedAdmission. (XfmdDesktop.design, line 731).
+
+• f0418 — GeneratedSelectionSupersedes step 5 sends StartGeneration from
+  GeneratedViews to ExternalViewGenerator via GenerationLifecycle.
+  (XfmdDesktop.design, line 732).
+
+• f0419 — GeneratedViews consumes LeaseReleaseProtocol. (XfmdDesktop.design,
+  line 733).
+
+• f0420 — GeneratedViews consumes SchedulerPort. (XfmdDesktop.design, line
+  734).
+
+• f0421 — GeneratedViews consumes ViewGenerationProtocol.
+  (XfmdDesktop.design, line 735).
+
+• f0422 — GeneratedViews consumes WindowDeliveryProtocol.
+  (XfmdDesktop.design, line 736).
+
+• f0423 — GeneratedViews holds GeneratedSelectionState. (XfmdDesktop.design,
+  line 737).
+
+• f0424 — GeneratedViews owns GeneratedDocumentNavigation.
+  (XfmdDesktop.design, line 738).
+
+• f0425 — GeneratedViews uses DocumentNotifications as receiver of
+  GeneratedDocumentChanged in mode NormalDesktop. (XfmdDesktop.design,
+  line 739).
+
+• f0426 — GeneratedViews uses GeneratedAdmission as receiver of
+  AdvanceGenerationSequence in mode NormalDesktop. (XfmdDesktop.design, line
+  740).
+
+• f0427 — GeneratedViews uses GeneratedAdmission as receiver of
+  RejectInvalidSelection in mode NormalDesktop. (XfmdDesktop.design, line 741).
+
+• f0428 — GeneratedViews uses GeneratedAdmission as receiver of
+  ValidateSelection in mode NormalDesktop. (XfmdDesktop.design, line 742).
+
+• f0429 — GeneratedViews uses GeneratedAdmission as sender of
+  AdvanceGenerationSequence in mode NormalDesktop. (XfmdDesktop.design, line
+  743).
+• f0430 — GeneratedViews uses GeneratedAdmission as sender of
+  InspectDirtyMain in mode NormalDesktop. (XfmdDesktop.design, line 744).
+
+• f0431 — GeneratedViews uses GeneratedAdmission as sender of
+  RejectInvalidSelection in mode NormalDesktop. (XfmdDesktop.design, line 745).
+
+• f0432 — GeneratedViews uses GeneratedAdmission as sender of
+  ValidateSelection in mode NormalDesktop. (XfmdDesktop.design, line 746).
+
+• f0433 — GeneratedViews uses GeneratedDelivery as receiver of
+  DeliverGeneratedMain in mode NormalDesktop. (XfmdDesktop.design, line 747).
+
+• f0434 — GeneratedViews uses GeneratedDelivery as sender of
+  GeneratedMainAccepted in mode NormalDesktop. (XfmdDesktop.design, line
+  748).
+
+• f0435 — GeneratedViews uses GeneratedDelivery as sender of
+  GeneratedMainRejected in mode NormalDesktop. (XfmdDesktop.design, line 749).
+
+• f0436 — GeneratedViews uses GeneratedDocumentCalls as receiver of
+  GeneratedDocumentOpened in mode NormalDesktop. (XfmdDesktop.design, line
+  750).
+
+• f0437 — GeneratedViews uses GeneratedDocumentCalls as sender of
+  AdmitGeneratedDocument in mode NormalDesktop. (XfmdDesktop.design, line
+  751).
+
+• f0438 — GeneratedViews uses GeneratedIntents as receiver of SelectInvalidView
+  in mode NormalDesktop. (XfmdDesktop.design, line 752).
+
+• f0439 — GeneratedViews uses GeneratedIntents as receiver of
+  SelectRegisteredView in mode NormalDesktop. (XfmdDesktop.design, line 753).
+
+• f0440 — GeneratedViews uses GenerationLifecycle as sender of
+  CancelPreviousChild in mode NormalDesktop. (XfmdDesktop.design, line 754).
+
+• f0441 — GeneratedViews uses GenerationLifecycle as sender of StartGeneration
+  in mode NormalDesktop. (XfmdDesktop.design, line 755).
+
+• f0442 — GeneratedViews uses LeaseLifecycle as receiver of InstallNewLease in
+  mode NormalDesktop. (XfmdDesktop.design, line 756).
+
+• f0443 — GeneratedViews uses LeaseLifecycle as receiver of KeepUnsentRelease
+  in mode NormalDesktop. (XfmdDesktop.design, line 757).
+• f0444 — GeneratedViews uses LeaseLifecycle as receiver of QueuePreviousLease
+  in mode NormalDesktop. (XfmdDesktop.design, line 758).
+
+• f0445 — GeneratedViews uses LeaseLifecycle as receiver of RemoveSentRelease
+  in mode NormalDesktop. (XfmdDesktop.design, line 759).
+
+• f0446 — GeneratedViews uses LeaseLifecycle as sender of InstallNewLease in
+  mode NormalDesktop. (XfmdDesktop.design, line 760).
+
+• f0447 — GeneratedViews uses LeaseLifecycle as sender of KeepUnsentRelease in
+  mode NormalDesktop. (XfmdDesktop.design, line 761).
+
+• f0448 — GeneratedViews uses LeaseLifecycle as sender of QueuePreviousLease
+  in mode NormalDesktop. (XfmdDesktop.design, line 762).
+
+• f0449 — GeneratedViews uses LeaseLifecycle as sender of RemoveSentRelease in
+  mode NormalDesktop. (XfmdDesktop.design, line 763).
+
+• f0450 — GeneratedViews uses LeaseNotifications as sender of AttemptRelease in
+  mode NormalDesktop. (XfmdDesktop.design, line 764).
+
+• f0451 — GeneratedViews uses PresentationEvents as sender of
+  ShowDirtyRejection in mode NormalDesktop. (XfmdDesktop.design, line 765).
+
+• f0452 — GeneratedViews uses ScheduledWork as receiver of PollReleaseQueue in
+  mode NormalDesktop. (XfmdDesktop.design, line 766).
+
+• f0453 — GenerationLifecycle upholds GenerationLifecycleContract.
+  (XfmdDesktop.design, line 767).
+
+• f0454 — GenerationLifecycleContract has completeness = closed.
+  (XfmdDesktop.design, line 768).
+
+• f0455 — GenerationLifecycleContract permits CancelPreviousChild.
+  (XfmdDesktop.design, line 769).
+
+• f0456 — GenerationLifecycleContract permits StartGeneration.
+  (XfmdDesktop.design, line 770).
+
+• f0457 — GenerationSequence has presence = required. (XfmdDesktop.design,
+  line 771).
+
+• f0458 — GenerationSequence has value-type = unsigned. (XfmdDesktop.design,
+  line 772).
+
+• f0459 — GenerationStateShape has completeness = closed.
+  (XfmdDesktop.design, line 773).
+• f0460 — GenerationStateShape has-field GenerationSequence.
+  (XfmdDesktop.design, line 774).
+
+• f0461 — GenerationStateShape has-field RegisteredProject.
+  (XfmdDesktop.design, line 775).
+
+• f0462 — GenerationStateShape has-field TargetPane. (XfmdDesktop.design, line
+  776).
+
+• f0463 — GenerationStateShape has-field TargetWindow. (XfmdDesktop.design,
+  line 777).
+
+• f0464 — Identity owns ApplicationIdentity. (XfmdDesktop.design, line 778).
+
+• f0465 — Identity owns BuildIdentity. (XfmdDesktop.design, line 779).
+
+• f0466 — IndexChanges upholds IndexChangesContract. (XfmdDesktop.design,
+  line 780).
+
+• f0467 — IndexChangesContract has completeness = closed.
+  (XfmdDesktop.design, line 781).
+
+• f0468 — IndexChangesContract permits CheckReferenceGeneration.
+  (XfmdDesktop.design, line 782).
+
+• f0469 — IndexChangesContract permits PublishReferenceHeadings.
+  (XfmdDesktop.design, line 783).
+
+• f0470 — IndexIntents upholds IndexIntentsContract. (XfmdDesktop.design, line
+  784).
+
+• f0471 — IndexIntentsContract has completeness = closed. (XfmdDesktop.design,
+  line 785).
+
+• f0472 — IndexIntentsContract permits ExpandReference. (XfmdDesktop.design,
+  line 786).
+
+• f0473 — InspectDirtyMain has message-kind = event. (XfmdDesktop.design, line
+  787).
+
+• f0474 — InspectDirtyMain upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 788).
+
+• f0475 — InstallNewLease has message-kind = event. (XfmdDesktop.design, line
+  789).
+• f0476 — InstallNewLease upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 790).
+
+• f0477 — InteractionObservationShape has completeness = closed.
+  (XfmdDesktop.design, line 791).
+
+• f0478 — InteractionObservationShape has-field ObservationContext.
+  (XfmdDesktop.design, line 792).
+
+• f0479 — InterpretationCalls upholds InterpretationCallsContract.
+  (XfmdDesktop.design, line 793).
+
+• f0480 — InterpretationCallsContract has completeness = closed.
+  (XfmdDesktop.design, line 794).
+
+• f0481 — InterpretationCallsContract permits ParseSnapshot.
+  (XfmdDesktop.design, line 795).
+
+• f0482 — InterpretationCallsContract permits ParsedSnapshot.
+  (XfmdDesktop.design, line 796).
+
+• f0483 — Interpreter consumes DiagramInterpreterPort. (XfmdDesktop.design,
+  line 797).
+
+• f0484 — Interpreter owns MarkdownInterpretation. (XfmdDesktop.design, line
+  798).
+
+• f0485 — Interpreter owns MermaidInterpretation. (XfmdDesktop.design, line
+  799).
+
+• f0486 — Interpreter uses DiagramInterpretation as receiver of
+  ParseMermaidBlock in mode NormalDesktop. (XfmdDesktop.design, line 800).
+
+• f0487 — Interpreter uses DiagramInterpretation as sender of
+  ParseMermaidBlock in mode NormalDesktop. (XfmdDesktop.design, line 801).
+
+• f0488 — Interpreter uses ExportInterpretation as receiver of
+  ParseExportSnapshot in mode NormalDesktop. (XfmdDesktop.design, line 802).
+
+• f0489 — Interpreter uses ExportInterpretation as sender of
+  ExportSnapshotParsed in mode NormalDesktop. (XfmdDesktop.design, line 803).
+
+• f0490 — Interpreter uses InterpretationCalls as receiver of ParseSnapshot in
+  mode NormalDesktop. (XfmdDesktop.design, line 804).
+
+• f0491 — Interpreter uses InterpretationCalls as sender of ParsedSnapshot in
+  mode NormalDesktop. (XfmdDesktop.design, line 805).
+• f0492 — Interpreter uses ReferenceInterpretation as receiver of ParseReference
+  in mode NormalDesktop. (XfmdDesktop.design, line 806).
+
+• f0493 — Interpreter uses ReferenceInterpretation as sender of ReferenceParsed
+  in mode NormalDesktop. (XfmdDesktop.design, line 807).
+
+• f0494 — InvalidSelectionRetainsChild exercises SelectGeneratedView.
+  (XfmdDesktop.design, line 808).
+
+• f0495 — InvalidSelectionRetainsChild has completeness = closed.
+  (XfmdDesktop.design, line 809).
+
+• f0496 — InvalidSelectionRetainsChild runs-in NormalDesktop.
+  (XfmdDesktop.design, line 810).
+
+• f0497 — InvalidSelectionRetainsChild step 1 sends SelectInvalidView from
+  NativeShell to GeneratedViews via GeneratedIntents. (XfmdDesktop.design, line
+  811).
+
+• f0498 — InvalidSelectionRetainsChild step 2 sends RejectInvalidSelection from
+  GeneratedViews to GeneratedViews via GeneratedAdmission.
+  (XfmdDesktop.design, line 812).
+
+• f0499 — KeepUnsentRelease has message-kind = event. (XfmdDesktop.design,
+  line 813).
+
+• f0500 — KeepUnsentRelease upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 814).
+
+• f0501 — LaunchConfiguredProgram has message-kind = event.
+  (XfmdDesktop.design, line 815).
+
+• f0502 — LaunchConfiguredProgram upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 816).
+
+• f0503 — LayoutCalls upholds LayoutCallsContract. (XfmdDesktop.design, line
+  817).
+
+• f0504 — LayoutCallsContract has completeness = closed. (XfmdDesktop.design,
+  line 818).
+
+• f0505 — LayoutCallsContract permits LayoutModel. (XfmdDesktop.design, line
+  819).
+
+• f0506 — LayoutCallsContract permits ModelLaidOut. (XfmdDesktop.design, line
+  820).
+• f0507 — LayoutExportPages has message-kind = request. (XfmdDesktop.design,
+  line 821).
+
+• f0508 — LayoutExportPages upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 822).
+
+• f0509 — LayoutModel has message-kind = request. (XfmdDesktop.design, line
+  823).
+
+• f0510 — LayoutModel upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 824).
+
+• f0511 — LayoutTypedDiagram has message-kind = request. (XfmdDesktop.design,
+  line 825).
+
+• f0512 — LayoutTypedDiagram upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 826).
+
+• f0513 — LeaseLifecycle upholds LeaseLifecycleContract. (XfmdDesktop.design,
+  line 827).
+
+• f0514 — LeaseLifecycleContract has completeness = closed.
+  (XfmdDesktop.design, line 828).
+
+• f0515 — LeaseLifecycleContract permits InstallNewLease. (XfmdDesktop.design,
+  line 829).
+
+• f0516 — LeaseLifecycleContract permits KeepUnsentRelease.
+  (XfmdDesktop.design, line 830).
+
+• f0517 — LeaseLifecycleContract permits QueuePreviousLease.
+  (XfmdDesktop.design, line 831).
+
+• f0518 — LeaseLifecycleContract permits RemoveSentRelease.
+  (XfmdDesktop.design, line 832).
+
+• f0519 — LeaseNotifications upholds LeaseNotificationsContract.
+  (XfmdDesktop.design, line 833).
+
+• f0520 — LeaseNotificationsContract has completeness = closed.
+  (XfmdDesktop.design, line 834).
+
+• f0521 — LeaseNotificationsContract permits AttemptRelease.
+  (XfmdDesktop.design, line 835).
+
+• f0522 — LivePreview supports EditDocuments. (XfmdDesktop.design, line 836).
+• f0523 — LocalFileStorage allocated-to XfmdDesktop in mode NormalDesktop.
+  (XfmdDesktop.design, line 837).
+
+• f0524 — LocalFileStorage contributes-to DocumentNavigation.
+  (XfmdDesktop.design, line 838).
+
+• f0525 — LocalFileStorage contributes-to MarkdownPresentation.
+  (XfmdDesktop.design, line 839).
+
+• f0526 — MainDocumentState upholds DocumentStateShape.
+  (XfmdDesktop.design, line 840).
+
+• f0527 — MapSourceAnchor has message-kind = event. (XfmdDesktop.design, line
+  841).
+
+• f0528 — MapSourceAnchor upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 842).
+
+• f0529 — MarkCurrentSaved has message-kind = event. (XfmdDesktop.design, line
+  843).
+
+• f0530 — MarkCurrentSaved upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 844).
+
+• f0531 — MarkdownInterpretation allocated-to XfmdDesktop in mode
+  NormalDesktop. (XfmdDesktop.design, line 845).
+
+• f0532 — MarkdownInterpretation contributes-to LivePreview.
+  (XfmdDesktop.design, line 846).
+
+• f0533 — MarkdownInterpretation contributes-to MarkdownPresentation.
+  (XfmdDesktop.design, line 847).
+
+• f0534 — MarkdownInterpretation contributes-to MermaidDiagrams.
+  (XfmdDesktop.design, line 848).
+
+• f0535 — MarkdownInterpretation contributes-to PagedPublication.
+  (XfmdDesktop.design, line 849).
+
+• f0536 — MarkdownPresentation supports ReadDocuments. (XfmdDesktop.design,
+  line 850).
+
+• f0537 — MermaidDiagrams supports ReadDiagrams. (XfmdDesktop.design, line
+  851).
+
+• f0538 — MermaidDiagrams supports ReadDocuments. (XfmdDesktop.design, line
+  852).
+• f0539 — MermaidInterpretation allocated-to XfmdDesktop in mode
+  NormalDesktop. (XfmdDesktop.design, line 853).
+
+• f0540 — MermaidInterpretation contributes-to MermaidDiagrams.
+  (XfmdDesktop.design, line 854).
+
+• f0541 — ModelLaidOut has message-kind = result. (XfmdDesktop.design, line
+  855).
+
+• f0542 — ModelLaidOut replies-to LayoutModel. (XfmdDesktop.design, line 856).
+
+• f0543 — ModelLaidOut upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 857).
+
+• f0544 — NativeShell owns FoxPresentation. (XfmdDesktop.design, line 858).
+
+• f0545 — NativeShell owns WorkspaceControls. (XfmdDesktop.design, line 859).
+
+• f0546 — NativeShell uses ContextInteraction as receiver of CaptureContextTarget
+  in mode NormalDesktop. (XfmdDesktop.design, line 860).
+
+• f0547 — NativeShell uses ContextInteraction as receiver of DismissContextMenu
+  in mode NormalDesktop. (XfmdDesktop.design, line 861).
+
+• f0548 — NativeShell uses ContextInteraction as receiver of ReleaseKeyboardGrab
+  in mode NormalDesktop. (XfmdDesktop.design, line 862).
+
+• f0549 — NativeShell uses ContextInteraction as sender of CaptureContextTarget
+  in mode NormalDesktop. (XfmdDesktop.design, line 863).
+
+• f0550 — NativeShell uses ContextInteraction as sender of DismissContextMenu in
+  mode NormalDesktop. (XfmdDesktop.design, line 864).
+
+• f0551 — NativeShell uses ContextInteraction as sender of ReleaseKeyboardGrab
+  in mode NormalDesktop. (XfmdDesktop.design, line 865).
+
+• f0552 — NativeShell uses EditIntents as sender of ApplyTextEdit in mode
+  NormalDesktop. (XfmdDesktop.design, line 866).
+
+• f0553 — NativeShell uses GeneratedIntents as sender of SelectInvalidView in
+  mode NormalDesktop. (XfmdDesktop.design, line 867).
+
+• f0554 — NativeShell uses GeneratedIntents as sender of SelectRegisteredView in
+  mode NormalDesktop. (XfmdDesktop.design, line 868).
+
+• f0555 — NativeShell uses IndexChanges as receiver of PublishReferenceHeadings
+  in mode NormalDesktop. (XfmdDesktop.design, line 869).
+• f0556 — NativeShell uses IndexIntents as sender of ExpandReference in mode
+  NormalDesktop. (XfmdDesktop.design, line 870).
+
+• f0557 — NativeShell uses PreferenceChanges as receiver of
+  NotifyPreferenceChange in mode NormalDesktop. (XfmdDesktop.design, line
+  871).
+
+• f0558 — NativeShell uses PreferenceChanges as sender of
+  BeginPreferencesDraft in mode NormalDesktop. (XfmdDesktop.design, line 872).
+
+• f0559 — NativeShell uses PresentationEvents as receiver of PresentFrame in
+  mode NormalDesktop. (XfmdDesktop.design, line 873).
+
+• f0560 — NativeShell uses PresentationEvents as receiver of ShowDirtyRejection in
+  mode NormalDesktop. (XfmdDesktop.design, line 874).
+
+• f0561 — NativeShell uses PublicationIntents as sender of CancelPdfRequest in
+  mode NormalDesktop. (XfmdDesktop.design, line 875).
+
+• f0562 — NativeShell uses PublicationIntents as sender of RequestPdfExport in
+  mode NormalDesktop. (XfmdDesktop.design, line 876).
+
+• f0563 — NativeShell uses UnsavedAdmission as receiver of ChooseUnsaved in
+  mode NormalDesktop. (XfmdDesktop.design, line 877).
+
+• f0564 — NativeShell uses UnsavedAdmission as sender of ChooseCancel in mode
+  NormalDesktop. (XfmdDesktop.design, line 878).
+
+• f0565 — NativeShell uses UnsavedAdmission as sender of ChooseSave in mode
+  NormalDesktop. (XfmdDesktop.design, line 879).
+
+• f0566 — NativeShell uses ViewportChanges as receiver of SetEditorAnchor in
+  mode NormalDesktop. (XfmdDesktop.design, line 880).
+
+• f0567 — NativeShell uses ViewportChanges as sender of
+  RetainDocumentAndAnchor in mode NormalDesktop. (XfmdDesktop.design, line
+  881).
+
+• f0568 — NativeShell uses ViewportChanges as sender of UserPreviewScroll in
+  mode NormalDesktop. (XfmdDesktop.design, line 882).
+
+• f0569 — NativeShell uses WindowPresentation as receiver of ToggleFullscreen in
+  mode NormalDesktop. (XfmdDesktop.design, line 883).
+
+• f0570 — NativeShell uses WindowPresentation as sender of ToggleFullscreen in
+  mode NormalDesktop. (XfmdDesktop.design, line 884).
+• f0571 — NativeShell uses WorkspaceChanges as receiver of RequestTreeRefresh
+  in mode NormalDesktop. (XfmdDesktop.design, line 885).
+
+• f0572 — NativeShell uses WorkspaceIntents as sender of ActivateExternalTarget
+  in mode NormalDesktop. (XfmdDesktop.design, line 886).
+
+• f0573 — NativeShell uses WorkspaceIntents as sender of ChooseInternalFile in
+  mode NormalDesktop. (XfmdDesktop.design, line 887).
+
+• f0574 — NativeShell uses WorkspaceIntents as sender of FavoriteFileChosen in
+  mode NormalDesktop. (XfmdDesktop.design, line 888).
+
+• f0575 — NativeShell uses WorkspaceIntents as sender of FavoriteFolderChosen in
+  mode NormalDesktop. (XfmdDesktop.design, line 889).
+
+• f0576 — Navigation owns NavigationHistory. (XfmdDesktop.design, line 890).
+
+• f0577 — Navigation uses DocumentCalls as receiver of DocumentOpened in
+  mode NormalDesktop. (XfmdDesktop.design, line 891).
+
+• f0578 — Navigation uses DocumentCalls as receiver of DocumentRejected in
+  mode NormalDesktop. (XfmdDesktop.design, line 892).
+
+• f0579 — Navigation uses DocumentCalls as sender of AdmitDocument in mode
+  NormalDesktop. (XfmdDesktop.design, line 893).
+
+• f0580 — Navigation uses DocumentNotifications as receiver of CommitVisit in
+  mode NormalDesktop. (XfmdDesktop.design, line 894).
+
+• f0581 — Navigation uses NavigationCalls as receiver of OpenTarget in mode
+  NormalDesktop. (XfmdDesktop.design, line 895).
+
+• f0582 — Navigation uses NavigationCalls as sender of TargetOpened in mode
+  NormalDesktop. (XfmdDesktop.design, line 896).
+
+• f0583 — NavigationCalls upholds NavigationCallsContract. (XfmdDesktop.design,
+  line 897).
+
+• f0584 — NavigationCallsContract has completeness = closed.
+  (XfmdDesktop.design, line 898).
+
+• f0585 — NavigationCallsContract permits OpenTarget. (XfmdDesktop.design, line
+  899).
+
+• f0586 — NavigationCallsContract permits TargetOpened. (XfmdDesktop.design,
+  line 900).
+• f0587 — NavigationHistory allocated-to XfmdDesktop in mode NormalDesktop.
+  (XfmdDesktop.design, line 901).
+
+• f0588 — NavigationHistory contributes-to ChapterNavigation.
+  (XfmdDesktop.design, line 902).
+
+• f0589 — NavigationHistory contributes-to DocumentNavigation.
+  (XfmdDesktop.design, line 903).
+
+• f0590 — NavigationHistory contributes-to DocumentReferences.
+  (XfmdDesktop.design, line 904).
+
+• f0591 — NotifyPreferenceChange has message-kind = event.
+  (XfmdDesktop.design, line 905).
+
+• f0592 — NotifyPreferenceChange upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 906).
+
+• f0593 — ObservationContext has presence = required. (XfmdDesktop.design, line
+  907).
+
+• f0594 — ObservationContext has value-type = text. (XfmdDesktop.design, line
+  908).
+
+• f0595 — OpenTarget has message-kind = request. (XfmdDesktop.design, line
+  909).
+
+• f0596 — OpenTarget upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 910).
+
+• f0597 — OpeningPolicy upholds OpeningPolicyContract. (XfmdDesktop.design, line
+  911).
+
+• f0598 — OpeningPolicyContract has completeness = closed.
+  (XfmdDesktop.design, line 912).
+
+• f0599 — OpeningPolicyContract permits ClassifyExternalTarget.
+  (XfmdDesktop.design, line 913).
+
+• f0600 — PageComposition allocated-to XfmdDesktop in mode NormalDesktop.
+  (XfmdDesktop.design, line 914).
+
+• f0601 — PageComposition contributes-to MarkdownPresentation.
+  (XfmdDesktop.design, line 915).
+
+• f0602 — PageComposition contributes-to MermaidDiagrams.
+  (XfmdDesktop.design, line 916).
+• f0603 — PageComposition contributes-to PagedPublication. (XfmdDesktop.design,
+  line 917).
+
+• f0604 — PagedPublication supports PublishPages. (XfmdDesktop.design, line 918).
+
+• f0605 — PagedPublication supports ReadDocuments. (XfmdDesktop.design, line
+  919).
+
+• f0606 — PaintPdfCandidate has message-kind = event. (XfmdDesktop.design, line
+  920).
+
+• f0607 — PaintPdfCandidate upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 921).
+
+• f0608 — ParseExportSnapshot has message-kind = request.
+  (XfmdDesktop.design, line 922).
+
+• f0609 — ParseExportSnapshot upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 923).
+
+• f0610 — ParseMermaidBlock has message-kind = event. (XfmdDesktop.design,
+  line 924).
+
+• f0611 — ParseMermaidBlock upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 925).
+
+• f0612 — ParseReference has message-kind = request. (XfmdDesktop.design, line
+  926).
+
+• f0613 — ParseReference upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 927).
+
+• f0614 — ParseSnapshot has message-kind = request. (XfmdDesktop.design, line
+  928).
+
+• f0615 — ParseSnapshot upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 929).
+
+• f0616 — ParsedSnapshot has message-kind = result. (XfmdDesktop.design, line
+  930).
+
+• f0617 — ParsedSnapshot replies-to ParseSnapshot. (XfmdDesktop.design, line
+  931).
+
+• f0618 — ParsedSnapshot upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 932).
+• f0619 — PdfCancelledBeforePublication exercises PublishPages.
+  (XfmdDesktop.design, line 933).
+
+• f0620 — PdfCancelledBeforePublication has completeness = closed.
+  (XfmdDesktop.design, line 934).
+
+• f0621 — PdfCancelledBeforePublication runs-in NormalDesktop.
+  (XfmdDesktop.design, line 935).
+
+• f0622 — PdfCancelledBeforePublication step 1 sends CancelPdfRequest from
+  NativeShell to Publication via PublicationIntents. (XfmdDesktop.design, line 936).
+
+• f0623 — PdfCancelledBeforePublication step 2 sends CancelUnpublishedJob from
+  Publication to Publication via PublicationState. (XfmdDesktop.design, line 937).
+
+• f0624 — PdfCancelledBeforePublication step 3 sends DiscardPdfCandidate from
+  Publication to Publication via PublicationState. (XfmdDesktop.design, line 938).
+
+• f0625 — PdfExport allocated-to XfmdDesktop in mode NormalDesktop.
+  (XfmdDesktop.design, line 939).
+
+• f0626 — PdfExport contributes-to MermaidDiagrams. (XfmdDesktop.design, line
+  940).
+
+• f0627 — PdfExport contributes-to PagedPublication. (XfmdDesktop.design, line
+  941).
+
+• f0628 — PdfSnapshotPublished exercises PublishPages. (XfmdDesktop.design,
+  line 942).
+
+• f0629 — PdfSnapshotPublished has completeness = closed. (XfmdDesktop.design,
+  line 943).
+
+• f0630 — PdfSnapshotPublished runs-in NormalDesktop. (XfmdDesktop.design,
+  line 944).
+
+• f0631 — PdfSnapshotPublished step 1 sends RequestPdfExport from NativeShell
+  to Publication via PublicationIntents. (XfmdDesktop.design, line 945).
+
+• f0632 — PdfSnapshotPublished step 2 sends FreezeExportSnapshot from
+  Documents to Publication via PublicationInputs. (XfmdDesktop.design, line 946).
+
+• f0633 — PdfSnapshotPublished step 3 sends ParseExportSnapshot from
+  Publication to Interpreter via ExportInterpretation. (XfmdDesktop.design, line
+  947).
+• f0634 — PdfSnapshotPublished step 4 sends ExportSnapshotParsed from
+  Interpreter to Publication via ExportInterpretation reply-to 3.
+  (XfmdDesktop.design, line 948).
+
+• f0635 — PdfSnapshotPublished step 5 sends PrepareExportResources from
+  Publication to VisualResources via ResourcePreparation. (XfmdDesktop.design,
+  line 949).
+
+• f0636 — PdfSnapshotPublished step 6 sends LayoutExportPages from Publication
+  to Renderer via ExportLayout. (XfmdDesktop.design, line 950).
+
+• f0637 — PdfSnapshotPublished step 7 sends ExportPagesLaidOut from Renderer
+  to Publication via ExportLayout reply-to 6. (XfmdDesktop.design, line 951).
+
+• f0638 — PdfSnapshotPublished step 8 sends PaintPdfCandidate from Publication
+  to Typography via PublicationDrawing. (XfmdDesktop.design, line 952).
+
+• f0639 — PdfSnapshotPublished step 9 sends CommitPdfCandidate from
+  Publication to Publication via PublicationState. (XfmdDesktop.design, line 953).
+
+• f0640 — PersistPreferencesDraft has message-kind = event.
+  (XfmdDesktop.design, line 954).
+
+• f0641 — PersistPreferencesDraft upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 955).
+
+• f0642 — PollReleaseQueue has message-kind = event. (XfmdDesktop.design, line
+  956).
+
+• f0643 — PollReleaseQueue upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 957).
+
+• f0644 — PreferenceChanges upholds PreferenceChangesContract.
+  (XfmdDesktop.design, line 958).
+
+• f0645 — PreferenceChangesContract has completeness = closed.
+  (XfmdDesktop.design, line 959).
+
+• f0646 — PreferenceChangesContract permits AdoptPreferencesDraft.
+  (XfmdDesktop.design, line 960).
+
+• f0647 — PreferenceChangesContract permits BeginPreferencesDraft.
+  (XfmdDesktop.design, line 961).
+
+• f0648 — PreferenceChangesContract permits NotifyPreferenceChange.
+  (XfmdDesktop.design, line 962).
+• f0649 — PreferenceChangesContract permits PersistPreferencesDraft.
+  (XfmdDesktop.design, line 963).
+
+• f0650 — PreferenceChangesContract permits ValidatePreferencesDraft.
+  (XfmdDesktop.design, line 964).
+
+• f0651 — Preferences consumes PreferencesStorePort. (XfmdDesktop.design, line
+  965).
+
+• f0652 — Preferences owns ApplicationPreferences. (XfmdDesktop.design, line
+  966).
+
+• f0653 — Preferences uses PreferenceChanges as receiver of
+  AdoptPreferencesDraft in mode NormalDesktop. (XfmdDesktop.design, line 967).
+
+• f0654 — Preferences uses PreferenceChanges as receiver of
+  BeginPreferencesDraft in mode NormalDesktop. (XfmdDesktop.design, line 968).
+
+• f0655 — Preferences uses PreferenceChanges as receiver of
+  PersistPreferencesDraft in mode NormalDesktop. (XfmdDesktop.design, line 969).
+
+• f0656 — Preferences uses PreferenceChanges as receiver of
+  ValidatePreferencesDraft in mode NormalDesktop. (XfmdDesktop.design, line
+  970).
+
+• f0657 — Preferences uses PreferenceChanges as sender of
+  AdoptPreferencesDraft in mode NormalDesktop. (XfmdDesktop.design, line 971).
+
+• f0658 — Preferences uses PreferenceChanges as sender of
+  NotifyPreferenceChange in mode NormalDesktop. (XfmdDesktop.design, line
+  972).
+
+• f0659 — Preferences uses PreferenceChanges as sender of
+  PersistPreferencesDraft in mode NormalDesktop. (XfmdDesktop.design, line 973).
+
+• f0660 — Preferences uses PreferenceChanges as sender of
+  ValidatePreferencesDraft in mode NormalDesktop. (XfmdDesktop.design, line
+  974).
+
+• f0661 — PreferencesPersistBeforeAdoption exercises ConfigurePreferences.
+  (XfmdDesktop.design, line 975).
+
+• f0662 — PreferencesPersistBeforeAdoption has completeness = closed.
+  (XfmdDesktop.design, line 976).
+• f0663 — PreferencesPersistBeforeAdoption runs-in NormalDesktop.
+  (XfmdDesktop.design, line 977).
+
+• f0664 — PreferencesPersistBeforeAdoption step 1 sends BeginPreferencesDraft
+  from NativeShell to Preferences via PreferenceChanges. (XfmdDesktop.design,
+  line 978).
+
+• f0665 — PreferencesPersistBeforeAdoption step 2 sends
+  ValidatePreferencesDraft from Preferences to Preferences via
+  PreferenceChanges. (XfmdDesktop.design, line 979).
+
+• f0666 — PreferencesPersistBeforeAdoption step 3 sends PersistPreferencesDraft
+  from Preferences to Preferences via PreferenceChanges. (XfmdDesktop.design,
+  line 980).
+
+• f0667 — PreferencesPersistBeforeAdoption step 4 sends AdoptPreferencesDraft
+  from Preferences to Preferences via PreferenceChanges. (XfmdDesktop.design,
+  line 981).
+
+• f0668 — PreferencesPersistBeforeAdoption step 5 sends
+  NotifyPreferenceChange from Preferences to NativeShell via PreferenceChanges.
+  (XfmdDesktop.design, line 982).
+
+• f0669 — PrepareDiagramScenes has message-kind = event.
+  (XfmdDesktop.design, line 983).
+
+• f0670 — PrepareDiagramScenes upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 984).
+
+• f0671 — PrepareEmbeddedResources has message-kind = event.
+  (XfmdDesktop.design, line 985).
+
+• f0672 — PrepareEmbeddedResources upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 986).
+
+• f0673 — PrepareExportResources has message-kind = event.
+  (XfmdDesktop.design, line 987).
+
+• f0674 — PrepareExportResources upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 988).
+
+• f0675 — PrepareTypedDiagram has message-kind = event. (XfmdDesktop.design,
+  line 989).
+• f0676 — PrepareTypedDiagram upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 990).
+
+• f0677 — PresentFrame has message-kind = event. (XfmdDesktop.design, line
+  991).
+
+• f0678 — PresentFrame upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 992).
+
+• f0679 — PresentationEvents upholds PresentationEventsContract.
+  (XfmdDesktop.design, line 993).
+
+• f0680 — PresentationEventsContract has completeness = closed.
+  (XfmdDesktop.design, line 994).
+
+• f0681 — PresentationEventsContract permits PresentFrame.
+  (XfmdDesktop.design, line 995).
+
+• f0682 — PresentationEventsContract permits ShowDirtyRejection.
+  (XfmdDesktop.design, line 996).
+
+• f0683 — Preview consumes InterpreterPort. (XfmdDesktop.design, line 997).
+
+• f0684 — Preview consumes RenderHostPort. (XfmdDesktop.design, line 998).
+
+• f0685 — Preview consumes RendererPort. (XfmdDesktop.design, line 999).
+
+• f0686 — Preview consumes SchedulerPort. (XfmdDesktop.design, line 1000).
+
+• f0687 — Preview owns PreviewPipeline. (XfmdDesktop.design, line 1001).
+
+• f0688 — Preview owns PreviewTextSelection. (XfmdDesktop.design, line 1002).
+
+• f0689 — Preview uses DocumentNotifications as receiver of DocumentChanged in
+  mode NormalDesktop. (XfmdDesktop.design, line 1003).
+
+• f0690 — Preview uses InterpretationCalls as receiver of ParsedSnapshot in mode
+  NormalDesktop. (XfmdDesktop.design, line 1004).
+
+• f0691 — Preview uses InterpretationCalls as sender of ParseSnapshot in mode
+  NormalDesktop. (XfmdDesktop.design, line 1005).
+
+• f0692 — Preview uses LayoutCalls as receiver of ModelLaidOut in mode
+  NormalDesktop. (XfmdDesktop.design, line 1006).
+
+• f0693 — Preview uses LayoutCalls as sender of LayoutModel in mode
+  NormalDesktop. (XfmdDesktop.design, line 1007).
+• f0694 — Preview uses PresentationEvents as sender of PresentFrame in mode
+  NormalDesktop. (XfmdDesktop.design, line 1008).
+
+• f0695 — Preview uses PreviewAdmission as receiver of AcceptCurrentFrame in
+  mode NormalDesktop. (XfmdDesktop.design, line 1009).
+
+• f0696 — Preview uses PreviewAdmission as receiver of AcceptCurrentModel in
+  mode NormalDesktop. (XfmdDesktop.design, line 1010).
+
+• f0697 — Preview uses PreviewAdmission as receiver of AcceptWorkerTicket in
+  mode NormalDesktop. (XfmdDesktop.design, line 1011).
+
+• f0698 — Preview uses PreviewAdmission as receiver of CompleteObsoleteWorker
+  in mode NormalDesktop. (XfmdDesktop.design, line 1012).
+
+• f0699 — Preview uses PreviewAdmission as receiver of
+  DiscardObsoleteCompletion in mode NormalDesktop. (XfmdDesktop.design, line
+  1013).
+
+• f0700 — Preview uses PreviewAdmission as sender of AcceptCurrentFrame in
+  mode NormalDesktop. (XfmdDesktop.design, line 1014).
+
+• f0701 — Preview uses PreviewAdmission as sender of AcceptCurrentModel in
+  mode NormalDesktop. (XfmdDesktop.design, line 1015).
+
+• f0702 — Preview uses PreviewAdmission as sender of AcceptWorkerTicket in
+  mode NormalDesktop. (XfmdDesktop.design, line 1016).
+
+• f0703 — Preview uses PreviewAdmission as sender of CompleteObsoleteWorker
+  in mode NormalDesktop. (XfmdDesktop.design, line 1017).
+
+• f0704 — Preview uses PreviewAdmission as sender of
+  DiscardObsoleteCompletion in mode NormalDesktop. (XfmdDesktop.design, line
+  1018).
+
+• f0705 — Preview uses ResourcePreparation as sender of PrepareDiagramScenes
+  in mode NormalDesktop. (XfmdDesktop.design, line 1019).
+
+• f0706 — Preview uses ResourcePreparation as sender of
+  PrepareEmbeddedResources in mode NormalDesktop. (XfmdDesktop.design, line
+  1020).
+
+• f0707 — Preview uses ResourcePreparation as sender of PrepareTypedDiagram
+  in mode NormalDesktop. (XfmdDesktop.design, line 1021).
+• f0708 — Preview uses ScheduledWork as receiver of DebounceElapsed in mode
+  NormalDesktop. (XfmdDesktop.design, line 1022).
+
+• f0709 — Preview uses ScheduledWork as sender of RestartDebounce in mode
+  NormalDesktop. (XfmdDesktop.design, line 1023).
+
+• f0710 — PreviewAdmission upholds PreviewAdmissionContract.
+  (XfmdDesktop.design, line 1024).
+
+• f0711 — PreviewAdmissionContract has completeness = closed.
+  (XfmdDesktop.design, line 1025).
+
+• f0712 — PreviewAdmissionContract permits AcceptCurrentFrame.
+  (XfmdDesktop.design, line 1026).
+
+• f0713 — PreviewAdmissionContract permits AcceptCurrentModel.
+  (XfmdDesktop.design, line 1027).
+
+• f0714 — PreviewAdmissionContract permits AcceptWorkerTicket.
+  (XfmdDesktop.design, line 1028).
+
+• f0715 — PreviewAdmissionContract permits CompleteObsoleteWorker.
+  (XfmdDesktop.design, line 1029).
+
+• f0716 — PreviewAdmissionContract permits DiscardObsoleteCompletion.
+  (XfmdDesktop.design, line 1030).
+
+• f0717 — PreviewPipeline allocated-to XfmdDesktop in mode NormalDesktop.
+  (XfmdDesktop.design, line 1031).
+
+• f0718 — PreviewPipeline contributes-to LivePreview. (XfmdDesktop.design, line
+  1032).
+
+• f0719 — PreviewPipeline contributes-to MarkdownPresentation.
+  (XfmdDesktop.design, line 1033).
+
+• f0720 — PreviewPipeline contributes-to MermaidDiagrams. (XfmdDesktop.design,
+  line 1034).
+
+• f0721 — PreviewPipeline contributes-to PagedPublication. (XfmdDesktop.design,
+  line 1035).
+
+• f0722 — PreviewResourcesPrepared exercises ReadDocuments.
+  (XfmdDesktop.design, line 1036).
+
+• f0723 — PreviewResourcesPrepared has completeness = closed.
+  (XfmdDesktop.design, line 1037).
+• f0724 — PreviewResourcesPrepared runs-in NormalDesktop.
+  (XfmdDesktop.design, line 1038).
+
+• f0725 — PreviewResourcesPrepared step 1 sends ParseSnapshot from Preview to
+  Interpreter via InterpretationCalls. (XfmdDesktop.design, line 1039).
+
+• f0726 — PreviewResourcesPrepared step 2 sends ParsedSnapshot from
+  Interpreter to Preview via InterpretationCalls reply-to 1. (XfmdDesktop.design, line
+  1040).
+
+• f0727 — PreviewResourcesPrepared step 3 sends PrepareEmbeddedResources
+  from Preview to VisualResources via ResourcePreparation. (XfmdDesktop.design,
+  line 1041).
+
+• f0728 — PreviewResourcesPrepared step 4 sends PrepareDiagramScenes from
+  Preview to VisualResources via ResourcePreparation. (XfmdDesktop.design, line
+  1042).
+
+• f0729 — PreviewResourcesPrepared step 5 sends AcceptWorkerTicket from
+  Preview to Preview via PreviewAdmission. (XfmdDesktop.design, line 1043).
+
+• f0730 — PreviewResourcesPrepared step 6 sends LayoutModel from Preview to
+  Renderer via LayoutCalls. (XfmdDesktop.design, line 1044).
+
+• f0731 — PreviewResourcesPrepared step 7 sends ModelLaidOut from Renderer to
+  Preview via LayoutCalls reply-to 6. (XfmdDesktop.design, line 1045).
+
+• f0732 — PreviewResourcesPrepared step 8 sends PresentFrame from Preview to
+  NativeShell via PresentationEvents. (XfmdDesktop.design, line 1046).
+
+• f0733 — PreviewScrollSynchronizesEditor exercises ScrollDocuments.
+  (XfmdDesktop.design, line 1047).
+
+• f0734 — PreviewScrollSynchronizesEditor has completeness = closed.
+  (XfmdDesktop.design, line 1048).
+
+• f0735 — PreviewScrollSynchronizesEditor runs-in NormalDesktop.
+  (XfmdDesktop.design, line 1049).
+
+• f0736 — PreviewScrollSynchronizesEditor step 1 sends UserPreviewScroll from
+  NativeShell to Viewport via ViewportChanges. (XfmdDesktop.design, line 1050).
+
+• f0737 — PreviewScrollSynchronizesEditor step 2 sends CheckCurrentMapping
+  from Viewport to Viewport via ViewportChanges. (XfmdDesktop.design, line 1051).
+• f0738 — PreviewScrollSynchronizesEditor step 3 sends MapSourceAnchor from
+  Viewport to Viewport via ViewportChanges. (XfmdDesktop.design, line 1052).
+
+• f0739 — PreviewScrollSynchronizesEditor step 4 sends SetEditorAnchor from
+  Viewport to NativeShell via ViewportChanges. (XfmdDesktop.design, line 1053).
+
+• f0740 — PreviewTextSelection allocated-to XfmdDesktop in mode NormalDesktop.
+  (XfmdDesktop.design, line 1054).
+
+• f0741 — PreviewTextSelection contributes-to MarkdownPresentation.
+  (XfmdDesktop.design, line 1055).
+
+• f0742 — PreviewTextSelection contributes-to MermaidDiagrams.
+  (XfmdDesktop.design, line 1056).
+
+• f0743 — Publication consumes InterpreterPort. (XfmdDesktop.design, line 1057).
+
+• f0744 — Publication consumes RendererPort. (XfmdDesktop.design, line 1058).
+
+• f0745 — Publication consumes TextMetricsPort. (XfmdDesktop.design, line 1059).
+
+• f0746 — Publication holds FrozenExportSnapshot. (XfmdDesktop.design, line
+  1060).
+
+• f0747 — Publication owns PdfExport. (XfmdDesktop.design, line 1061).
+
+• f0748 — Publication uses ExportInterpretation as receiver of
+  ExportSnapshotParsed in mode NormalDesktop. (XfmdDesktop.design, line 1062).
+
+• f0749 — Publication uses ExportInterpretation as sender of ParseExportSnapshot
+  in mode NormalDesktop. (XfmdDesktop.design, line 1063).
+
+• f0750 — Publication uses ExportLayout as receiver of ExportPagesLaidOut in
+  mode NormalDesktop. (XfmdDesktop.design, line 1064).
+
+• f0751 — Publication uses ExportLayout as sender of LayoutExportPages in mode
+  NormalDesktop. (XfmdDesktop.design, line 1065).
+
+• f0752 — Publication uses PublicationDrawing as sender of PaintPdfCandidate in
+  mode NormalDesktop. (XfmdDesktop.design, line 1066).
+
+• f0753 — Publication uses PublicationInputs as receiver of FreezeExportSnapshot
+  in mode NormalDesktop. (XfmdDesktop.design, line 1067).
+
+• f0754 — Publication uses PublicationIntents as receiver of CancelPdfRequest in
+  mode NormalDesktop. (XfmdDesktop.design, line 1068).
+• f0755 — Publication uses PublicationIntents as receiver of RequestPdfExport in
+  mode NormalDesktop. (XfmdDesktop.design, line 1069).
+
+• f0756 — Publication uses PublicationState as receiver of CancelUnpublishedJob in
+  mode NormalDesktop. (XfmdDesktop.design, line 1070).
+
+• f0757 — Publication uses PublicationState as receiver of CommitPdfCandidate in
+  mode NormalDesktop. (XfmdDesktop.design, line 1071).
+
+• f0758 — Publication uses PublicationState as receiver of DiscardPdfCandidate in
+  mode NormalDesktop. (XfmdDesktop.design, line 1072).
+
+• f0759 — Publication uses PublicationState as sender of CancelUnpublishedJob in
+  mode NormalDesktop. (XfmdDesktop.design, line 1073).
+
+• f0760 — Publication uses PublicationState as sender of CommitPdfCandidate in
+  mode NormalDesktop. (XfmdDesktop.design, line 1074).
+
+• f0761 — Publication uses PublicationState as sender of DiscardPdfCandidate in
+  mode NormalDesktop. (XfmdDesktop.design, line 1075).
+
+• f0762 — Publication uses ResourcePreparation as sender of
+  PrepareExportResources in mode NormalDesktop. (XfmdDesktop.design, line
+  1076).
+
+• f0763 — PublicationDrawing upholds PublicationDrawingContract.
+  (XfmdDesktop.design, line 1077).
+
+• f0764 — PublicationDrawingContract has completeness = closed.
+  (XfmdDesktop.design, line 1078).
+
+• f0765 — PublicationDrawingContract permits PaintPdfCandidate.
+  (XfmdDesktop.design, line 1079).
+
+• f0766 — PublicationInputs upholds PublicationInputsContract.
+  (XfmdDesktop.design, line 1080).
+
+• f0767 — PublicationInputsContract has completeness = closed.
+  (XfmdDesktop.design, line 1081).
+
+• f0768 — PublicationInputsContract permits FreezeExportSnapshot.
+  (XfmdDesktop.design, line 1082).
+
+• f0769 — PublicationIntents upholds PublicationIntentsContract.
+  (XfmdDesktop.design, line 1083).
+• f0770 — PublicationIntentsContract has completeness = closed.
+  (XfmdDesktop.design, line 1084).
+
+• f0771 — PublicationIntentsContract permits CancelPdfRequest.
+  (XfmdDesktop.design, line 1085).
+
+• f0772 — PublicationIntentsContract permits RequestPdfExport.
+  (XfmdDesktop.design, line 1086).
+
+• f0773 — PublicationState upholds PublicationStateContract. (XfmdDesktop.design,
+  line 1087).
+
+• f0774 — PublicationStateContract has completeness = closed.
+  (XfmdDesktop.design, line 1088).
+
+• f0775 — PublicationStateContract permits CancelUnpublishedJob.
+  (XfmdDesktop.design, line 1089).
+
+• f0776 — PublicationStateContract permits CommitPdfCandidate.
+  (XfmdDesktop.design, line 1090).
+
+• f0777 — PublicationStateContract permits DiscardPdfCandidate.
+  (XfmdDesktop.design, line 1091).
+
+• f0778 — PublishReferenceHeadings has message-kind = event.
+  (XfmdDesktop.design, line 1092).
+
+• f0779 — PublishReferenceHeadings upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1093).
+
+• f0780 — QueuePreviousLease has message-kind = event. (XfmdDesktop.design,
+  line 1094).
+
+• f0781 — QueuePreviousLease upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1095).
+
+• f0782 — ReadCandidate has message-kind = request. (XfmdDesktop.design, line
+  1096).
+
+• f0783 — ReadCandidate upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1097).
+
+• f0784 — ReadReference has message-kind = request. (XfmdDesktop.design, line
+  1098).
+
+• f0785 — ReadReference upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1099).
+• f0786 — ReaderAuthor pursues BrowseSdpProject. (XfmdDesktop.design, line
+  1100).
+
+• f0787 — ReaderAuthor pursues BrowseWorkspace. (XfmdDesktop.design, line
+  1101).
+
+• f0788 — ReaderAuthor pursues ConfigurePreferences. (XfmdDesktop.design, line
+  1102).
+
+• f0789 — ReaderAuthor pursues EditDocuments. (XfmdDesktop.design, line 1103).
+
+• f0790 — ReaderAuthor pursues NavigateDocuments. (XfmdDesktop.design, line
+  1104).
+
+• f0791 — ReaderAuthor pursues PublishPages. (XfmdDesktop.design, line 1105).
+
+• f0792 — ReaderAuthor pursues ReadDiagrams. (XfmdDesktop.design, line 1106).
+
+• f0793 — ReaderAuthor pursues ReadDocuments. (XfmdDesktop.design, line
+  1107).
+
+• f0794 — ReaderAuthor pursues ScrollDocuments. (XfmdDesktop.design, line
+  1108).
+
+• f0795 — ReaderAuthor pursues SelectGeneratedView. (XfmdDesktop.design, line
+  1109).
+
+• f0796 — ReaderAuthor pursues UseFullscreen. (XfmdDesktop.design, line 1110).
+
+• f0797 — ReferenceHeadingsLoaded exercises NavigateDocuments.
+  (XfmdDesktop.design, line 1111).
+
+• f0798 — ReferenceHeadingsLoaded has completeness = closed.
+  (XfmdDesktop.design, line 1112).
+
+• f0799 — ReferenceHeadingsLoaded runs-in NormalDesktop.
+  (XfmdDesktop.design, line 1113).
+
+• f0800 — ReferenceHeadingsLoaded step 1 sends ExpandReference from
+  NativeShell to DocumentIndexService via IndexIntents. (XfmdDesktop.design, line
+  1114).
+
+• f0801 — ReferenceHeadingsLoaded step 2 sends ReadReference from
+  DocumentIndexService to DocumentStorage via ReferenceStorage.
+  (XfmdDesktop.design, line 1115).
+• f0802 — ReferenceHeadingsLoaded step 3 sends ReferenceRead from
+  DocumentStorage to DocumentIndexService via ReferenceStorage reply-to 2.
+  (XfmdDesktop.design, line 1116).
+
+• f0803 — ReferenceHeadingsLoaded step 4 sends ParseReference from
+  DocumentIndexService to Interpreter via ReferenceInterpretation.
+  (XfmdDesktop.design, line 1117).
+
+• f0804 — ReferenceHeadingsLoaded step 5 sends ReferenceParsed from
+  Interpreter to DocumentIndexService via ReferenceInterpretation reply-to 4.
+  (XfmdDesktop.design, line 1118).
+
+• f0805 — ReferenceHeadingsLoaded step 6 sends CheckReferenceGeneration
+  from DocumentIndexService to DocumentIndexService via IndexChanges.
+  (XfmdDesktop.design, line 1119).
+
+• f0806 — ReferenceHeadingsLoaded step 7 sends PublishReferenceHeadings from
+  DocumentIndexService to NativeShell via IndexChanges. (XfmdDesktop.design,
+  line 1120).
+
+• f0807 — ReferenceInterpretation upholds ReferenceInterpretationContract.
+  (XfmdDesktop.design, line 1121).
+
+• f0808 — ReferenceInterpretationContract has completeness = closed.
+  (XfmdDesktop.design, line 1122).
+
+• f0809 — ReferenceInterpretationContract permits ParseReference.
+  (XfmdDesktop.design, line 1123).
+
+• f0810 — ReferenceInterpretationContract permits ReferenceParsed.
+  (XfmdDesktop.design, line 1124).
+
+• f0811 — ReferenceParsed has message-kind = result. (XfmdDesktop.design, line
+  1125).
+
+• f0812 — ReferenceParsed replies-to ParseReference. (XfmdDesktop.design, line
+  1126).
+
+• f0813 — ReferenceParsed upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1127).
+
+• f0814 — ReferenceRead has message-kind = result. (XfmdDesktop.design, line
+  1128).
+• f0815 — ReferenceRead replies-to ReadReference. (XfmdDesktop.design, line
+  1129).
+
+• f0816 — ReferenceRead upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1130).
+
+• f0817 — ReferenceStorage upholds ReferenceStorageContract.
+  (XfmdDesktop.design, line 1131).
+
+• f0818 — ReferenceStorageContract has completeness = closed.
+  (XfmdDesktop.design, line 1132).
+
+• f0819 — ReferenceStorageContract permits ReadReference.
+  (XfmdDesktop.design, line 1133).
+
+• f0820 — ReferenceStorageContract permits ReferenceRead.
+  (XfmdDesktop.design, line 1134).
+
+• f0821 — RegisteredProject has presence = required. (XfmdDesktop.design, line
+  1135).
+
+• f0822 — RegisteredProject has value-type = text. (XfmdDesktop.design, line 1136).
+
+• f0823 — RejectInvalidSelection has message-kind = event. (XfmdDesktop.design,
+  line 1137).
+
+• f0824 — RejectInvalidSelection upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1138).
+
+• f0825 — ReleaseKeyboardGrab has message-kind = event. (XfmdDesktop.design,
+  line 1139).
+
+• f0826 — ReleaseKeyboardGrab upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1140).
+
+• f0827 — ReleaseRetryAfterSendFailure exercises SelectGeneratedView.
+  (XfmdDesktop.design, line 1141).
+
+• f0828 — ReleaseRetryAfterSendFailure has completeness = closed.
+  (XfmdDesktop.design, line 1142).
+
+• f0829 — ReleaseRetryAfterSendFailure runs-in NormalDesktop.
+  (XfmdDesktop.design, line 1143).
+
+• f0830 — ReleaseRetryAfterSendFailure step 1 sends AttemptRelease from
+  GeneratedViews to ExternalViewBroker via LeaseNotifications.
+  (XfmdDesktop.design, line 1144).
+• f0831 — ReleaseRetryAfterSendFailure step 2 sends KeepUnsentRelease from
+  GeneratedViews to GeneratedViews via LeaseLifecycle. (XfmdDesktop.design, line
+  1145).
+
+• f0832 — ReleaseRetryAfterSendFailure step 3 sends PollReleaseQueue from
+  EventLoop to GeneratedViews via ScheduledWork. (XfmdDesktop.design, line
+  1146).
+
+• f0833 — ReleaseRetryAfterSendFailure step 4 sends AttemptRelease from
+  GeneratedViews to ExternalViewBroker via LeaseNotifications.
+  (XfmdDesktop.design, line 1147).
+
+• f0834 — ReleaseRetryAfterSendFailure step 5 sends RemoveSentRelease from
+  GeneratedViews to GeneratedViews via LeaseLifecycle. (XfmdDesktop.design, line
+  1148).
+
+• f0835 — RemoveSentRelease has message-kind = event. (XfmdDesktop.design,
+  line 1149).
+
+• f0836 — RemoveSentRelease upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1150).
+
+• f0837 — RenderLayout allocated-to XfmdDesktop in mode NormalDesktop.
+  (XfmdDesktop.design, line 1151).
+
+• f0838 — RenderLayout contributes-to LivePreview. (XfmdDesktop.design, line
+  1152).
+
+• f0839 — RenderLayout contributes-to MarkdownPresentation.
+  (XfmdDesktop.design, line 1153).
+
+• f0840 — RenderLayout contributes-to MermaidDiagrams. (XfmdDesktop.design,
+  line 1154).
+
+• f0841 — RenderLayout contributes-to PagedPublication. (XfmdDesktop.design,
+  line 1155).
+
+• f0842 — RenderLayout contributes-to SynchronizedScrolling.
+  (XfmdDesktop.design, line 1156).
+
+• f0843 — Renderer consumes TextMetricsPort. (XfmdDesktop.design, line 1157).
+
+• f0844 — Renderer owns DiagramLayout. (XfmdDesktop.design, line 1158).
+
+• f0845 — Renderer owns PageComposition. (XfmdDesktop.design, line 1159).
+
+• f0846 — Renderer owns RenderLayout. (XfmdDesktop.design, line 1160).
+• f0847 — Renderer uses DiagramLayoutCalls as receiver of LayoutTypedDiagram
+  in mode NormalDesktop. (XfmdDesktop.design, line 1161).
+
+• f0848 — Renderer uses DiagramLayoutCalls as sender of TypedDiagramLaidOut
+  in mode NormalDesktop. (XfmdDesktop.design, line 1162).
+
+• f0849 — Renderer uses ExportLayout as receiver of LayoutExportPages in mode
+  NormalDesktop. (XfmdDesktop.design, line 1163).
+
+• f0850 — Renderer uses ExportLayout as sender of ExportPagesLaidOut in mode
+  NormalDesktop. (XfmdDesktop.design, line 1164).
+
+• f0851 — Renderer uses LayoutCalls as receiver of LayoutModel in mode
+  NormalDesktop. (XfmdDesktop.design, line 1165).
+
+• f0852 — Renderer uses LayoutCalls as sender of ModelLaidOut in mode
+  NormalDesktop. (XfmdDesktop.design, line 1166).
+
+• f0853 — ReplaceDocument has message-kind = event. (XfmdDesktop.design, line
+  1167).
+
+• f0854 — ReplaceDocument upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1168).
+
+• f0855 — RequestPdfExport has message-kind = event. (XfmdDesktop.design, line
+  1169).
+
+• f0856 — RequestPdfExport upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1170).
+
+• f0857 — RequestTreeRefresh has message-kind = event. (XfmdDesktop.design,
+  line 1171).
+
+• f0858 — RequestTreeRefresh upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1172).
+
+• f0859 — ResourcePreparation upholds ResourcePreparationContract.
+  (XfmdDesktop.design, line 1173).
+
+• f0860 — ResourcePreparationContract has completeness = closed.
+  (XfmdDesktop.design, line 1174).
+
+• f0861 — ResourcePreparationContract permits CacheCompatibleScene.
+  (XfmdDesktop.design, line 1175).
+
+• f0862 — ResourcePreparationContract permits PrepareDiagramScenes.
+  (XfmdDesktop.design, line 1176).
+• f0863 — ResourcePreparationContract permits PrepareEmbeddedResources.
+  (XfmdDesktop.design, line 1177).
+
+• f0864 — ResourcePreparationContract permits PrepareExportResources.
+  (XfmdDesktop.design, line 1178).
+
+• f0865 — ResourcePreparationContract permits PrepareTypedDiagram.
+  (XfmdDesktop.design, line 1179).
+
+• f0866 — RestartDebounce has message-kind = event. (XfmdDesktop.design, line
+  1180).
+
+• f0867 — RestartDebounce upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1181).
+
+• f0868 — RetainDocumentAndAnchor has message-kind = event.
+  (XfmdDesktop.design, line 1182).
+
+• f0869 — RetainDocumentAndAnchor upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1183).
+
+• f0870 — SaveThenReadFails exercises NavigateDocuments.
+  (XfmdDesktop.design, line 1184).
+
+• f0871 — SaveThenReadFails has completeness = closed. (XfmdDesktop.design,
+  line 1185).
+
+• f0872 — SaveThenReadFails runs-in NormalDesktop. (XfmdDesktop.design, line
+  1186).
+
+• f0873 — SaveThenReadFails step 1 sends AdmitDocument from Navigation to
+  Documents via DocumentCalls. (XfmdDesktop.design, line 1187).
+
+• f0874 — SaveThenReadFails step 2 sends ChooseUnsaved from Documents to
+  NativeShell via UnsavedAdmission. (XfmdDesktop.design, line 1188).
+
+• f0875 — SaveThenReadFails step 3 sends ChooseSave from NativeShell to
+  Documents via UnsavedAdmission reply-to 2. (XfmdDesktop.design, line 1189).
+
+• f0876 — SaveThenReadFails step 4 sends WriteCurrent from Documents to
+  DocumentStorage via StorageCalls. (XfmdDesktop.design, line 1190).
+
+• f0877 — SaveThenReadFails step 5 sends CurrentWritten from DocumentStorage
+  to Documents via StorageCalls reply-to 4. (XfmdDesktop.design, line 1191).
+
+• f0878 — SaveThenReadFails step 6 sends MarkCurrentSaved from Documents to
+  Documents via DocumentStateChanges. (XfmdDesktop.design, line 1192).
+• f0879 — SaveThenReadFails step 7 sends ReadCandidate from Documents to
+  DocumentStorage via StorageCalls. (XfmdDesktop.design, line 1193).
+
+• f0880 — SaveThenReadFails step 8 sends CandidateReadFailed from
+  DocumentStorage to Documents via StorageCalls reply-to 7.
+  (XfmdDesktop.design, line 1194).
+
+• f0881 — SaveThenReadFails step 9 sends DocumentRejected from Documents to
+  Navigation via DocumentCalls reply-to 1. (XfmdDesktop.design, line 1195).
+
+• f0882 — SavedBaselineBytes has presence = required. (XfmdDesktop.design, line
+  1196).
+
+• f0883 — SavedBaselineBytes has value-type = bytes. (XfmdDesktop.design, line
+  1197).
+
+• f0884 — ScheduledWork upholds ScheduledWorkContract. (XfmdDesktop.design,
+  line 1198).
+
+• f0885 — ScheduledWorkContract has completeness = closed.
+  (XfmdDesktop.design, line 1199).
+
+• f0886 — ScheduledWorkContract permits DebounceElapsed.
+  (XfmdDesktop.design, line 1200).
+
+• f0887 — ScheduledWorkContract permits PollReleaseQueue.
+  (XfmdDesktop.design, line 1201).
+
+• f0888 — ScheduledWorkContract permits RestartDebounce.
+  (XfmdDesktop.design, line 1202).
+
+• f0889 — ScrollMotion allocated-to XfmdDesktop in mode NormalDesktop.
+  (XfmdDesktop.design, line 1203).
+
+• f0890 — ScrollMotion contributes-to ConfigurableScrolling. (XfmdDesktop.design,
+  line 1204).
+
+• f0891 — ScrollMotion contributes-to SynchronizedScrolling. (XfmdDesktop.design,
+  line 1205).
+
+• f0892 — SdpProjectNavigation allocated-to XfmdDesktop in mode
+  NormalDesktop. (XfmdDesktop.design, line 1206).
+
+• f0893 — SdpProjectNavigation contributes-to BrowseSdpProject.
+  (XfmdDesktop.design, line 1207).
+
+• f0894 — SdpProjects consumes SchedulerPort. (XfmdDesktop.design, line 1208).
+• f0895 — SdpProjects consumes SdpToolProtocol. (XfmdDesktop.design, line
+  1209).
+
+• f0896 — SdpProjects owns SdpProjectNavigation. (XfmdDesktop.design, line
+  1210).
+
+• f0897 — SelectInvalidView has message-kind = event. (XfmdDesktop.design, line
+  1211).
+
+• f0898 — SelectInvalidView upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1212).
+
+• f0899 — SelectRegisteredView has message-kind = event. (XfmdDesktop.design,
+  line 1213).
+
+• f0900 — SelectRegisteredView upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1214).
+
+• f0901 — SetChosenParentRoot has message-kind = event. (XfmdDesktop.design,
+  line 1215).
+
+• f0902 — SetChosenParentRoot upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1216).
+
+• f0903 — SetEditorAnchor has message-kind = event. (XfmdDesktop.design, line
+  1217).
+
+• f0904 — SetEditorAnchor upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1218).
+
+• f0905 — ShowDirtyRejection has message-kind = event. (XfmdDesktop.design, line
+  1219).
+
+• f0906 — ShowDirtyRejection upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1220).
+
+• f0907 — SourceAnchorMapping allocated-to XfmdDesktop in mode
+  NormalDesktop. (XfmdDesktop.design, line 1221).
+
+• f0908 — SourceAnchorMapping contributes-to ChapterNavigation.
+  (XfmdDesktop.design, line 1222).
+
+• f0909 — SourceAnchorMapping contributes-to ConfigurableScrolling.
+  (XfmdDesktop.design, line 1223).
+
+• f0910 — SourceAnchorMapping contributes-to DocumentNavigation.
+  (XfmdDesktop.design, line 1224).
+• f0911 — SourceAnchorMapping contributes-to DocumentReferences.
+  (XfmdDesktop.design, line 1225).
+
+• f0912 — SourceAnchorMapping contributes-to PagedPublication.
+  (XfmdDesktop.design, line 1226).
+
+• f0913 — SourceAnchorMapping contributes-to SynchronizedScrolling.
+  (XfmdDesktop.design, line 1227).
+
+• f0914 — StalePreviewDiscarded exercises EditDocuments. (XfmdDesktop.design,
+  line 1228).
+
+• f0915 — StalePreviewDiscarded has completeness = closed.
+  (XfmdDesktop.design, line 1229).
+
+• f0916 — StalePreviewDiscarded runs-in NormalDesktop. (XfmdDesktop.design,
+  line 1230).
+
+• f0917 — StalePreviewDiscarded step 1 sends CompleteObsoleteWorker from
+  Preview to Preview via PreviewAdmission. (XfmdDesktop.design, line 1231).
+
+• f0918 — StalePreviewDiscarded step 2 sends DiscardObsoleteCompletion from
+  Preview to Preview via PreviewAdmission. (XfmdDesktop.design, line 1232).
+
+• f0919 — StartGeneration has message-kind = event. (XfmdDesktop.design, line
+  1233).
+
+• f0920 — StartGeneration upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1234).
+
+• f0921 — StorageCalls upholds StorageCallsContract. (XfmdDesktop.design, line
+  1235).
+
+• f0922 — StorageCallsContract has completeness = closed. (XfmdDesktop.design,
+  line 1236).
+
+• f0923 — StorageCallsContract permits CandidateRead. (XfmdDesktop.design, line
+  1237).
+
+• f0924 — StorageCallsContract permits CandidateReadFailed.
+  (XfmdDesktop.design, line 1238).
+
+• f0925 — StorageCallsContract permits CurrentWritten. (XfmdDesktop.design, line
+  1239).
+
+• f0926 — StorageCallsContract permits ReadCandidate. (XfmdDesktop.design, line
+  1240).
+• f0927 — StorageCallsContract permits WriteCurrent. (XfmdDesktop.design, line
+  1241).
+
+• f0928 — SynchronizedScrolling supports ScrollDocuments. (XfmdDesktop.design,
+  line 1242).
+
+• f0929 — TargetOpened has message-kind = result. (XfmdDesktop.design, line
+  1243).
+
+• f0930 — TargetOpened replies-to OpenTarget. (XfmdDesktop.design, line 1244).
+
+• f0931 — TargetOpened upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1245).
+
+• f0932 — TargetPane has presence = required. (XfmdDesktop.design, line 1246).
+
+• f0933 — TargetPane has value-type = text. (XfmdDesktop.design, line 1247).
+
+• f0934 — TargetWindow has presence = required. (XfmdDesktop.design, line
+  1248).
+
+• f0935 — TargetWindow has value-type = text. (XfmdDesktop.design, line 1249).
+
+• f0936 — TextEditing allocated-to XfmdDesktop in mode NormalDesktop.
+  (XfmdDesktop.design, line 1250).
+
+• f0937 — TextEditing contributes-to ConfigurableScrolling. (XfmdDesktop.design,
+  line 1251).
+
+• f0938 — TextEditing contributes-to LivePreview. (XfmdDesktop.design, line 1252).
+
+• f0939 — ToggleFullscreen has message-kind = event. (XfmdDesktop.design, line
+  1253).
+
+• f0940 — ToggleFullscreen upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1254).
+
+• f0941 — TypedDiagramLaidOut has message-kind = result. (XfmdDesktop.design,
+  line 1255).
+
+• f0942 — TypedDiagramLaidOut replies-to LayoutTypedDiagram.
+  (XfmdDesktop.design, line 1256).
+
+• f0943 — TypedDiagramLaidOut upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1257).
+
+• f0944 — Typography owns TypographyAndDrawing. (XfmdDesktop.design, line
+  1258).
+• f0945 — Typography uses PublicationDrawing as receiver of PaintPdfCandidate in
+  mode NormalDesktop. (XfmdDesktop.design, line 1259).
+
+• f0946 — TypographyAndDrawing allocated-to XfmdDesktop in mode
+  NormalDesktop. (XfmdDesktop.design, line 1260).
+
+• f0947 — TypographyAndDrawing contributes-to MarkdownPresentation.
+  (XfmdDesktop.design, line 1261).
+
+• f0948 — TypographyAndDrawing contributes-to MermaidDiagrams.
+  (XfmdDesktop.design, line 1262).
+
+• f0949 — TypographyAndDrawing contributes-to PagedPublication.
+  (XfmdDesktop.design, line 1263).
+
+• f0950 — UnsavedAdmission upholds UnsavedAdmissionContract.
+  (XfmdDesktop.design, line 1264).
+
+• f0951 — UnsavedAdmissionContract has completeness = closed.
+  (XfmdDesktop.design, line 1265).
+
+• f0952 — UnsavedAdmissionContract permits ChooseCancel.
+  (XfmdDesktop.design, line 1266).
+
+• f0953 — UnsavedAdmissionContract permits ChooseSave. (XfmdDesktop.design,
+  line 1267).
+
+• f0954 — UnsavedAdmissionContract permits ChooseUnsaved.
+  (XfmdDesktop.design, line 1268).
+
+• f0955 — UserPreviewScroll has message-kind = event. (XfmdDesktop.design, line
+  1269).
+
+• f0956 — UserPreviewScroll upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1270).
+
+• f0957 — ValidatePreferencesDraft has message-kind = event.
+  (XfmdDesktop.design, line 1271).
+
+• f0958 — ValidatePreferencesDraft upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1272).
+
+• f0959 — ValidateProposedRoot has message-kind = event. (XfmdDesktop.design,
+  line 1273).
+
+• f0960 — ValidateProposedRoot upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1274).
+• f0961 — ValidateSelection has message-kind = event. (XfmdDesktop.design, line
+  1275).
+
+• f0962 — ValidateSelection upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1276).
+
+• f0963 — Viewport consumes RenderHostPort. (XfmdDesktop.design, line 1277).
+
+• f0964 — Viewport consumes SchedulerPort. (XfmdDesktop.design, line 1278).
+
+• f0965 — Viewport owns ScrollMotion. (XfmdDesktop.design, line 1279).
+
+• f0966 — Viewport owns SourceAnchorMapping. (XfmdDesktop.design, line 1280).
+
+• f0967 — Viewport uses ViewportChanges as receiver of CheckCurrentMapping in
+  mode NormalDesktop. (XfmdDesktop.design, line 1281).
+
+• f0968 — Viewport uses ViewportChanges as receiver of MapSourceAnchor in
+  mode NormalDesktop. (XfmdDesktop.design, line 1282).
+
+• f0969 — Viewport uses ViewportChanges as receiver of
+  RetainDocumentAndAnchor in mode NormalDesktop. (XfmdDesktop.design, line
+  1283).
+
+• f0970 — Viewport uses ViewportChanges as receiver of UserPreviewScroll in
+  mode NormalDesktop. (XfmdDesktop.design, line 1284).
+
+• f0971 — Viewport uses ViewportChanges as sender of CheckCurrentMapping in
+  mode NormalDesktop. (XfmdDesktop.design, line 1285).
+
+• f0972 — Viewport uses ViewportChanges as sender of MapSourceAnchor in mode
+  NormalDesktop. (XfmdDesktop.design, line 1286).
+
+• f0973 — Viewport uses ViewportChanges as sender of SetEditorAnchor in mode
+  NormalDesktop. (XfmdDesktop.design, line 1287).
+
+• f0974 — ViewportChanges upholds ViewportChangesContract.
+  (XfmdDesktop.design, line 1288).
+
+• f0975 — ViewportChangesContract has completeness = closed.
+  (XfmdDesktop.design, line 1289).
+
+• f0976 — ViewportChangesContract permits CheckCurrentMapping.
+  (XfmdDesktop.design, line 1290).
+
+• f0977 — ViewportChangesContract permits MapSourceAnchor.
+  (XfmdDesktop.design, line 1291).
+• f0978 — ViewportChangesContract permits RetainDocumentAndAnchor.
+  (XfmdDesktop.design, line 1292).
+
+• f0979 — ViewportChangesContract permits SetEditorAnchor.
+  (XfmdDesktop.design, line 1293).
+
+• f0980 — ViewportChangesContract permits UserPreviewScroll.
+  (XfmdDesktop.design, line 1294).
+
+• f0981 — VisualResources consumes DiagramLayoutPort. (XfmdDesktop.design,
+  line 1295).
+
+• f0982 — VisualResources consumes TextMetricsPort. (XfmdDesktop.design, line
+  1296).
+
+• f0983 — VisualResources owns DiagramPreparation. (XfmdDesktop.design, line
+  1297).
+
+• f0984 — VisualResources owns EmbeddedVisuals. (XfmdDesktop.design, line
+  1298).
+
+• f0985 — VisualResources uses DiagramLayoutCalls as receiver of
+  TypedDiagramLaidOut in mode NormalDesktop. (XfmdDesktop.design, line 1299).
+
+• f0986 — VisualResources uses DiagramLayoutCalls as sender of
+  LayoutTypedDiagram in mode NormalDesktop. (XfmdDesktop.design, line 1300).
+
+• f0987 — VisualResources uses ResourcePreparation as receiver of
+  CacheCompatibleScene in mode NormalDesktop. (XfmdDesktop.design, line
+  1301).
+
+• f0988 — VisualResources uses ResourcePreparation as receiver of
+  PrepareDiagramScenes in mode NormalDesktop. (XfmdDesktop.design, line
+  1302).
+
+• f0989 — VisualResources uses ResourcePreparation as receiver of
+  PrepareEmbeddedResources in mode NormalDesktop. (XfmdDesktop.design, line
+  1303).
+
+• f0990 — VisualResources uses ResourcePreparation as receiver of
+  PrepareExportResources in mode NormalDesktop. (XfmdDesktop.design, line
+  1304).
+
+• f0991 — VisualResources uses ResourcePreparation as receiver of
+  PrepareTypedDiagram in mode NormalDesktop. (XfmdDesktop.design, line 1305).
+• f0992 — VisualResources uses ResourcePreparation as sender of
+  CacheCompatibleScene in mode NormalDesktop. (XfmdDesktop.design, line
+  1306).
+
+• f0993 — WindowPresentation upholds WindowPresentationContract.
+  (XfmdDesktop.design, line 1307).
+
+• f0994 — WindowPresentationContract has completeness = closed.
+  (XfmdDesktop.design, line 1308).
+
+• f0995 — WindowPresentationContract permits ToggleFullscreen.
+  (XfmdDesktop.design, line 1309).
+
+• f0996 — WorkPathHistory allocated-to XfmdDesktop in mode NormalDesktop.
+  (XfmdDesktop.design, line 1310).
+
+• f0997 — WorkPathHistory contributes-to WorkPathNavigation.
+  (XfmdDesktop.design, line 1311).
+
+• f0998 — WorkPathNavigation supports BrowseWorkspace. (XfmdDesktop.design,
+  line 1312).
+
+• f0999 — Workspace owns FilteredFileTree. (XfmdDesktop.design, line 1313).
+
+• f1000 — Workspace owns WorkPathHistory. (XfmdDesktop.design, line 1314).
+
+• f1001 — Workspace uses WorkspaceChanges as receiver of
+  ActivateRootAndHistory in mode NormalDesktop. (XfmdDesktop.design, line
+  1315).
+
+• f1002 — Workspace uses WorkspaceChanges as receiver of
+  SetChosenParentRoot in mode NormalDesktop. (XfmdDesktop.design, line 1316).
+
+• f1003 — Workspace uses WorkspaceChanges as receiver of
+  ValidateProposedRoot in mode NormalDesktop. (XfmdDesktop.design, line 1317).
+
+• f1004 — Workspace uses WorkspaceChanges as sender of
+  ActivateRootAndHistory in mode NormalDesktop. (XfmdDesktop.design, line
+  1318).
+
+• f1005 — Workspace uses WorkspaceChanges as sender of RequestTreeRefresh in
+  mode NormalDesktop. (XfmdDesktop.design, line 1319).
+
+• f1006 — Workspace uses WorkspaceIntents as receiver of FavoriteFolderChosen
+  in mode NormalDesktop. (XfmdDesktop.design, line 1320).
+• f1007 — WorkspaceChanges upholds WorkspaceChangesContract.
+  (XfmdDesktop.design, line 1321).
+
+• f1008 — WorkspaceChangesContract has completeness = closed.
+  (XfmdDesktop.design, line 1322).
+
+• f1009 — WorkspaceChangesContract permits ActivateRootAndHistory.
+  (XfmdDesktop.design, line 1323).
+
+• f1010 — WorkspaceChangesContract permits RequestTreeRefresh.
+  (XfmdDesktop.design, line 1324).
+
+• f1011 — WorkspaceChangesContract permits SetChosenParentRoot.
+  (XfmdDesktop.design, line 1325).
+
+• f1012 — WorkspaceChangesContract permits ValidateProposedRoot.
+  (XfmdDesktop.design, line 1326).
+
+• f1013 — WorkspaceControls allocated-to XfmdDesktop in mode NormalDesktop.
+  (XfmdDesktop.design, line 1327).
+
+• f1014 — WorkspaceControls contributes-to ChapterNavigation.
+  (XfmdDesktop.design, line 1328).
+
+• f1015 — WorkspaceControls contributes-to ConfigurableScrolling.
+  (XfmdDesktop.design, line 1329).
+
+• f1016 — WorkspaceControls contributes-to DocumentNavigation.
+  (XfmdDesktop.design, line 1330).
+
+• f1017 — WorkspaceControls contributes-to DocumentReferences.
+  (XfmdDesktop.design, line 1331).
+
+• f1018 — WorkspaceControls contributes-to MarkdownPresentation.
+  (XfmdDesktop.design, line 1332).
+
+• f1019 — WorkspaceControls contributes-to PagedPublication.
+  (XfmdDesktop.design, line 1333).
+
+• f1020 — WorkspaceControls contributes-to SynchronizedScrolling.
+  (XfmdDesktop.design, line 1334).
+
+• f1021 — WorkspaceControls contributes-to UseFullscreen. (XfmdDesktop.design,
+  line 1335).
+
+• f1022 — WorkspaceControls contributes-to WorkPathNavigation.
+  (XfmdDesktop.design, line 1336).
+• f1023 — WorkspaceIntents upholds WorkspaceIntentsContract.
+  (XfmdDesktop.design, line 1337).
+
+• f1024 — WorkspaceIntentsContract has completeness = closed.
+  (XfmdDesktop.design, line 1338).
+
+• f1025 — WorkspaceIntentsContract permits ActivateExternalTarget.
+  (XfmdDesktop.design, line 1339).
+
+• f1026 — WorkspaceIntentsContract permits ChooseInternalFile.
+  (XfmdDesktop.design, line 1340).
+
+• f1027 — WorkspaceIntentsContract permits FavoriteFileChosen.
+  (XfmdDesktop.design, line 1341).
+
+• f1028 — WorkspaceIntentsContract permits FavoriteFolderChosen.
+  (XfmdDesktop.design, line 1342).
+
+• f1029 — WriteCurrent has message-kind = request. (XfmdDesktop.design, line
+  1343).
+
+• f1030 — WriteCurrent upholds InteractionObservationShape.
+  (XfmdDesktop.design, line 1344).
+
+• f1031 — XfmdDesktop contains Application. (XfmdDesktop.design, line 1345).
+
+• f1032 — XfmdDesktop contains Interpreter. (XfmdDesktop.design, line 1346).
+
+• f1033 — XfmdDesktop contains Renderer. (XfmdDesktop.design, line 1347).
+

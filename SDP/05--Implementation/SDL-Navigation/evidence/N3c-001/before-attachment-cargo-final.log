@@ -1,0 +1,5 @@
+   Compiling xfmd-diagram-contracts v0.1.0 (/home/warloc/git/xfmd-sdl-navigation/src/contracts/diagram/rust)
+   Compiling xfmd-mermaid-interpreter v0.1.0 (/home/warloc/git/xfmd-sdl-navigation/src/interpreter/mermaid/rust)
+   Compiling xfmd-diagram-layout v0.1.0 (/home/warloc/git/xfmd-sdl-navigation/src/renderer/diagram/rust)
+   Compiling xfmd-mermaid-ffi v0.1.0 (/home/warloc/git/xfmd-sdl-navigation/src/application/composition/mermaid)
+    Finished `release` profile [optimized] target(s) in 23.48s

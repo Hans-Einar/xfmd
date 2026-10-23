@@ -1,0 +1,41 @@
+   Compiling mermaid-rs-renderer v0.3.1 (/home/warloc/git/mermaid-rs-renderer-xfmd-diagrams)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 10.39s
+     Running tests/libavoid_suite.rs (/home/warloc/git/xfmd-sdl-navigation/build-diagram-fork/debug/deps/libavoid_suite-148970c4af2af0fe)
+
+running 12 tests
+test cancellation_and_expired_deadline_publish_no_routes ... ok
+test avoids_obstacle_and_is_deterministic ... ok
+test cooperative_callback_abort_and_narrow_corridor ... ok
+test placement_selection_is_independent_and_routes_repeat ... ok
+test rejects_degenerate_polygons_and_impossible_ports ... ok
+test rejects_dense_work_before_native_nudging ... ok
+test rejects_duplicate_ids_and_nonfinite_input ... ok
+test parallel_opposite_and_self_loop_have_distinct_ids ... ok
+test visible_shape_ports_groups_and_cycles ... ok
+test labelled_review_graphs_complete_with_bounded_spacing_retry ... ok
+test traceability_labels_are_validated ... ok
+test fixed_positions_and_text_are_preserved_and_quality_is_measured ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 8.62s
+
+     Running tests/xfmd_document_references.rs (/home/warloc/git/xfmd-sdl-navigation/build-diagram-fork/debug/deps/xfmd_document_references-67c1dc5caba2aea9)
+
+running 1 test
+test xfmd_document_references_preserves_routes_and_caption_attachments ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.27s
+
+     Running tests/xfmd_usecase.rs (/home/warloc/git/xfmd-sdl-navigation/build-diagram-fork/debug/deps/xfmd_usecase-2662b32518ce1ea6)
+
+running 1 test
+test native_usecase_glyphs_relations_and_isolated_elements ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.40s
+
+     Running tests/xfmd_vp07.rs (/home/warloc/git/xfmd-sdl-navigation/build-diagram-fork/debug/deps/xfmd_vp07-74b8eb28019a1829)
+
+running 1 test
+test xfmd_vp07_preserves_all_nodes_and_orthogonal_edges ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.48s
+

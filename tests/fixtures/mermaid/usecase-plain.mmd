@@ -1,0 +1,8 @@
+usecase-beta
+direction LR
+actor Reviewer("Reviewer – Åse")
+Inspect("Inspect model")
+Summary["Read summary"]
+Unused("Independent behavior")
+Inspect <-- Reviewer
+Inspect ..> : include Summary

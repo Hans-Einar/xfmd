@@ -1,0 +1,287 @@
+#include "application/Application.h"
+#include "application/composition/DiagramServices.h"
+#include "application/export/ExportPipeline.h"
+#include "application/ui/SdpTree.h"
+#include "contracts/diagram/DiagramScene.h"
+#include "renderer/MarkdownRenderer.h"
+#include "support/NativeInput.h"
+#include "support/Capture.h"
+#include <X11/keysym.h>
+#include <filesystem>
+#include <fstream>
+using namespace xfmd;
+using namespace FX;
+namespace fs = std::filesystem;
+void until(Application& app, const std::function<bool()>& done) {
+  for (int i=0;i<1500;++i) { settleNative(app.app,5); if(done()) return; }
+  throw std::runtime_error("Overview timeout: " + std::string(app.window->workspacePanel->sdp->status->getText().text()));
+}
+NavigationItem* viewpoint(NavigationTree* tree, FXTreeItem* first, const std::string& suffix="/VP01") {
+  for(auto* item=first;item;item=item->getNext()) {
+    auto* row=static_cast<NavigationItem*>(item);
+    if(row->action.target.size()>suffix.size() && row->action.target.substr(row->action.target.size()-suffix.size())==suffix) return row;
+    tree->expandTree(item);
+    if(auto* found=viewpoint(tree,item->getFirst(),suffix)) return found;
+  }
+  return nullptr;
+}
+#include "OverviewFixture.h"
+#include "SdpChannelOverviewChecks.h"
+#include "SdpDataOverviewChecks.h"
+void run() {
+  CHECK(getenv("XFMD_SDP_TOOL"));
+  const auto root=fs::path(FXSystem::getHomeDirectory().text())/"overview project";
+  fs::create_directories(root/"SDP/SDL");
+  const auto source=root/"SDP/SDL/Overview.design";
+  // Canonical declaration and statement ordering is part of the SDL contract.
+  std::ofstream(source) << overviewFixture;
+  int argc=1;char name[]="sdp-overview-test";char* argv[]{name,nullptr};
+  Application app;app.initialize(argc,argv);app.window->position(10,10,1250,850);
+  XSetInputFocus(static_cast<Display*>(app.app.getDisplay()),app.window->id(),RevertToParent,CurrentTime);
+  CHECK(app.startPath(root.string()));
+  auto* workspace=app.window->workspacePanel;auto* panel=workspace->sdp;
+  until(app,[&]{return panel->tree("sdl") && panel->tree("sdl")->getFirstItem();});
+  settleNative(app.app,1000);
+  nativeClick(workspace->tabs->getLast(),15,8);
+  auto* tree=panel->tree("sdl");
+  auto* row=viewpoint(tree,tree->getFirstItem());CHECK(row);
+  int activations=0;SdpTarget actual;const auto callback=panel->activated;
+  panel->activated=[&](const SdpTarget& t){++activations;actual=t;callback(t);};
+  tree->setCurrentItem(row);tree->makeItemVisible(row);tree->setFocus();settleNative(app.app,50);
+  const auto before=app.session.view().path;
+  nativeKey(tree,XK_Right);settleNative(app.app,120);
+  CHECK(activations==0 && app.session.view().path==before);
+  tree->setCurrentItem(row);
+  nativeKey(tree,XK_Return);
+  until(app,[&]{return app.session.view().path!=before && app.host->interactive();});
+  CHECK(activations==1 && actual.uri.find("projection=overview")!=std::string::npos);
+  CHECK(actual.operation=="select" && !actual.model.empty() && !actual.revision.empty());
+  const auto text=app.session.view().text;
+  for(const auto* label:{"usecase-beta","Guest","Isolated","Functionality realization","Display | contributes-to | Navigation"}) CHECK(text.find(label)!=std::string::npos);
+  int scenes=0;
+  for(const auto& run:app.host->frame()->runs) if(auto* scene=dynamic_cast<const DiagramScene*>(run.visual.get())) {
+    ++scenes;CHECK(scene->svg.find("usecase-actor")!=std::string::npos);CHECK(scene->svg.find("Isolated")!=std::string::npos);
+  }
+  CHECK(scenes==1);
+  if(const char* evidence=getenv("XFMD_UI_EVIDENCE")) {
+    const fs::path out=evidence;settleNative(app.app,150);captureDesktop(app.app,(out/"vp01-native.png").c_str());
+    auto target=PdfTarget::inspect((out/"vp01-native.pdf").string());SharedTextMetrics metrics;
+    auto parser=DiagramServices::interpreter();MarkdownRenderer renderer;ExportControl control;
+    ExportRequest request{app.session.snapshot(),{},metrics.fontSetId(),target.path,{}};
+    CHECK(ExportPipeline::run(request,target,control,*parser,renderer,metrics)>0);
+    fs::copy_file(source,out/"native-input.design",fs::copy_options::overwrite_existing);
+    fs::create_directories(out/"generated");
+    for(const auto& entry:fs::directory_iterator(fs::path(app.session.view().path).parent_path()))
+      fs::copy(entry.path(),out/"generated"/entry.path().filename(),fs::copy_options::recursive|fs::copy_options::overwrite_existing);
+  }
+  // Native label click activates the same exact overview target.
+  row=viewpoint(tree,tree->getFirstItem());CHECK(row);tree->makeItemVisible(row);settleNative(app.app,50);
+  bool clicked=false;
+  for(int y=0;y<tree->getViewportHeight();++y) if(tree->getItemAt(150,y)==row) {nativeClick(tree,150,y+5);clicked=true;break;}
+  CHECK(clicked);until(app,[&]{return activations==2;});CHECK(actual.uri.find("projection=overview")!=std::string::npos);
+  // VP07 uses the same generic target contract; mode rows stay on demand.
+  row=viewpoint(tree,tree->getFirstItem(),"/VP07");CHECK(row);
+  tree->setCurrentItem(row);tree->makeItemVisible(row);tree->setFocus();
+  nativeKey(tree,XK_Return);
+  until(app,[&]{return activations==3 && app.host->interactive() && app.session.view().text.find("Feature contributions")!=std::string::npos;});
+  CHECK(app.session.view().text.find("-->|allocated-to|")==std::string::npos);
+  for(const auto* mode:{"Offline","Online"}) {
+    const auto previous=activations;
+    row=viewpoint(tree,tree->getFirstItem(),std::string("/VP07/overview-mode/")+mode);CHECK(row);
+    tree->setCurrentItem(row);tree->makeItemVisible(row);tree->setFocus();nativeKey(tree,XK_Return);
+    until(app,[&]{return activations==previous+1 && app.host->interactive() && app.session.view().text.find(std::string("Selected mode: **")+mode)!=std::string::npos;});
+    CHECK(actual.uri.find(std::string("mode=")+mode)!=std::string::npos);
+    const auto wanted=std::string(mode)=="Offline"?"Local":"Remote";
+    const auto absent=std::string(mode)=="Offline"?"Remote":"Local";
+    CHECK(app.session.view().text.find(std::string("n_")+wanted+"[\""+wanted+" (container) | allocated-to: F01")!=std::string::npos);
+    CHECK(app.session.view().text.find(std::string("n_")+absent+"[\""+absent+" (container) | allocated-to: F01")==std::string::npos);
+    int featureScenes=0;for(const auto& run:app.host->frame()->runs) if(auto* scene=dynamic_cast<const DiagramScene*>(run.visual.get())) {++featureScenes;CHECK(scene->svg.find("F01")!=std::string::npos);}
+    CHECK(featureScenes==1);
+  }
+  if(const char* evidence=getenv("XFMD_UI_EVIDENCE")) {
+    const fs::path out=evidence;captureDesktop(app.app,(out/"vp07-native.png").c_str());
+    auto target=PdfTarget::inspect((out/"vp07-native.pdf").string());SharedTextMetrics metrics;
+    auto parser=DiagramServices::interpreter();MarkdownRenderer renderer;ExportControl control;
+    ExportRequest request{app.session.snapshot(),{},metrics.fontSetId(),target.path,{}};
+    CHECK(ExportPipeline::run(request,target,control,*parser,renderer,metrics)>0);
+  }
+  // VP02 advertises the same generic overview contract: expansion is inert,
+  // while Enter generates complete structure, including isolated declarations.
+  row=viewpoint(tree,tree->getFirstItem(),"/VP02");CHECK(row);
+  tree->setCurrentItem(row);tree->makeItemVisible(row);tree->setFocus();
+  const auto architectureBefore=activations;
+  nativeKey(tree,XK_Right);settleNative(app.app,120);CHECK(activations==architectureBefore);
+  tree->setCurrentItem(row);nativeKey(tree,XK_Return);
+  until(app,[&]{return activations==architectureBefore+1 && app.host->interactive() && app.session.view().text.find("Structural register")!=std::string::npos;});
+  CHECK(actual.uri.find("/VP02?")!=std::string::npos && actual.uri.find("projection=overview")!=std::string::npos);
+  const auto architecture=app.session.view().text;
+  for(const auto* label:{"Desktop (unit)","Local (container)","Remote (container)","Standalone (unit)","n_Local -->|contains| n_Desktop","Root (no declared parent)","sdl-source://"}) CHECK(architecture.find(label)!=std::string::npos);
+  CHECK(architecture.find("allocated-to")==std::string::npos);
+  int architectureScenes=0;
+  for(const auto& run:app.host->frame()->runs) if(auto* scene=dynamic_cast<const DiagramScene*>(run.visual.get())) {
+    ++architectureScenes;CHECK(scene->svg.find("Standalone")!=std::string::npos);
+    CHECK(scene->svg.find("contains")!=std::string::npos);
+  }
+  CHECK(architectureScenes==1);
+  if(const char* evidence=getenv("XFMD_UI_EVIDENCE")) {
+    const fs::path out=evidence;settleNative(app.app,200);captureDesktop(app.app,(out/"vp02-native.png").c_str());
+    auto target=PdfTarget::inspect((out/"vp02-native.pdf").string());SharedTextMetrics metrics;
+    auto parser=DiagramServices::interpreter();MarkdownRenderer renderer;ExportControl control;
+    ExportRequest request{app.session.snapshot(),{},metrics.fontSetId(),target.path,{}};
+    CHECK(ExportPipeline::run(request,target,control,*parser,renderer,metrics)>0);
+    std::ofstream(out/"vp02-generated.md") << architecture;
+  }
+  // VP03 is discovered and selected through the same native path. Responsibilities,
+  // explicit offers and contribution summaries remain distinct, with exact links.
+  row=viewpoint(tree,tree->getFirstItem(),"/VP03");CHECK(row);
+  tree->setCurrentItem(row);tree->makeItemVisible(row);tree->setFocus();
+  const auto responsibilityBefore=activations;
+  nativeKey(tree,XK_Right);settleNative(app.app,120);CHECK(activations==responsibilityBefore);
+  tree->setCurrentItem(row);nativeKey(tree,XK_Return);
+  until(app,[&]{return activations==responsibilityBefore+1 && app.host->interactive() && app.session.view().text.find("Responsibility register")!=std::string::npos;});
+  CHECK(actual.uri.find("/VP03?")!=std::string::npos && actual.uri.find("projection=overview")!=std::string::npos);
+  const auto responsibilities=app.session.view().text;
+  for(const auto* label:{"owns: R01", "contributes: C01", "provides: C01", "Unconnected (capability)", "Capability register", "sdl-source://"}) CHECK(responsibilities.find(label)!=std::string::npos);
+  int responsibilityScenes=0;
+  for(const auto& run:app.host->frame()->runs) if(auto* scene=dynamic_cast<const DiagramScene*>(run.visual.get())) {
+    ++responsibilityScenes;CHECK(scene->nodes.size()==5 && scene->edges.size()==1);
+    CHECK(scene->svg.find("Unconnected")!=std::string::npos);CHECK(scene->svg.find("R01")!=std::string::npos);
+  }
+  CHECK(responsibilityScenes==1);
+  if(const char* evidence=getenv("XFMD_UI_EVIDENCE")) {
+    const fs::path out=evidence;settleNative(app.app,200);captureDesktop(app.app,(out/"vp03-native.png").c_str());
+    auto target=PdfTarget::inspect((out/"vp03-native.pdf").string());SharedTextMetrics metrics;
+    auto parser=DiagramServices::interpreter();MarkdownRenderer renderer;ExportControl control;
+    ExportRequest request{app.session.snapshot(),{},metrics.fontSetId(),target.path,{}};
+    CHECK(ExportPipeline::run(request,target,control,*parser,renderer,metrics)>0);
+    std::ofstream(out/"vp03-generated.md") << responsibilities;
+  }
+  // VP04 includes declared interfaces and actual consumers, never providers.
+  row=viewpoint(tree,tree->getFirstItem(),"/VP04");CHECK(row);
+  tree->setCurrentItem(row);tree->makeItemVisible(row);tree->setFocus();
+  const auto interfaceBefore=activations;
+  // VP04 has no legacy diagram children: preserve Right-on-leaf activation.
+  CHECK(!row->getFirst() && !row->hasItems());
+  nativeKey(tree,XK_Right);
+  until(app,[&]{return activations==interfaceBefore+1 && app.host->interactive() && app.session.view().text.find("Interface register")!=std::string::npos;});
+  const auto interfaceRightPath=app.session.view().path;
+  row=viewpoint(tree,tree->getFirstItem(),"/VP04");CHECK(row);
+  tree->setCurrentItem(row);tree->setFocus();nativeKey(tree,XK_Return);
+  until(app,[&]{return activations==interfaceBefore+2 && app.host->interactive() && app.session.view().path!=interfaceRightPath && app.session.view().text.find("Interface register")!=std::string::npos;});
+  CHECK(actual.uri.find("/VP04?")!=std::string::npos && actual.uri.find("projection=overview")!=std::string::npos);
+  const auto interfaces=app.session.view().text;
+  for(const auto* label:{"Api (interface)", "SparePort (interface)", "-.->|consumes|", "No declared consumer", "Interface use", "sdl-source://"}) CHECK(interfaces.find(label)!=std::string::npos);
+  CHECK(interfaces.find("provides")==std::string::npos && interfaces.find("Standalone (unit)")==std::string::npos);
+  int interfaceScenes=0;
+  for(const auto& run:app.host->frame()->runs) if(auto* scene=dynamic_cast<const DiagramScene*>(run.visual.get())) {
+    ++interfaceScenes;CHECK(scene->nodes.size()==4 && scene->edges.size()==2);
+    CHECK(scene->svg.find("SparePort")!=std::string::npos);CHECK(scene->svg.find("consumes")!=std::string::npos);
+    CHECK(scene->svg.find("stroke-dasharray")!=std::string::npos);
+  }
+  CHECK(interfaceScenes==1);
+  if(const char* evidence=getenv("XFMD_UI_EVIDENCE")) {
+    const fs::path out=evidence;settleNative(app.app,200);captureDesktop(app.app,(out/"vp04-native.png").c_str());
+    auto target=PdfTarget::inspect((out/"vp04-native.pdf").string());SharedTextMetrics metrics;
+    auto parser=DiagramServices::interpreter();MarkdownRenderer renderer;ExportControl control;
+    ExportRequest request{app.session.snapshot(),{},metrics.fontSetId(),target.path,{}};
+    CHECK(ExportPipeline::run(request,target,control,*parser,renderer,metrics)>0);
+    std::ofstream(out/"vp04-generated.md") << interfaces;
+  }
+  // VP05 requires explicit mode selection: the top row generates an index only.
+  row=viewpoint(tree,tree->getFirstItem(),"/VP05");CHECK(row);
+  tree->setCurrentItem(row);tree->makeItemVisible(row);tree->setFocus();
+  const auto modeBefore=activations;
+  nativeKey(tree,XK_Right);settleNative(app.app,120);CHECK(activations==modeBefore);
+  tree->setCurrentItem(row);nativeKey(tree,XK_Return);
+  until(app,[&]{return activations==modeBefore+1 && app.host->interactive() && app.session.view().text.find("Choose a mode")!=std::string::npos;});
+  CHECK(actual.uri.find("/VP05?")!=std::string::npos && actual.uri.find("mode=")==std::string::npos);
+  CHECK(app.session.view().text.find("```mermaid")==std::string::npos);
+  for(const auto* mode:{"Offline","Online","Quiet"}) {
+    const auto previous=activations;
+    row=viewpoint(tree,tree->getFirstItem(),std::string("/VP05/overview-mode/")+mode);CHECK(row);
+    tree->setCurrentItem(row);tree->makeItemVisible(row);tree->setFocus();nativeKey(tree,XK_Return);
+    until(app,[&]{return activations==previous+1 && app.host->interactive() && app.session.view().text.find(std::string("Selected mode: **")+mode)!=std::string::npos;});
+    CHECK(actual.uri.find("/VP05?")!=std::string::npos && actual.uri.find(std::string("mode=")+mode)!=std::string::npos);
+    const auto modeText=app.session.view().text;
+    const bool quiet=std::string(mode)=="Quiet";
+    const char* absent=std::string(mode)=="Online"?"Api (interface)":"SparePort (interface)";
+    CHECK(modeText.find(absent)==std::string::npos);
+    CHECK(modeText.find("No declared requirement")!=std::string::npos && modeText.find("sdl-source://")!=std::string::npos);
+    int modeScenes=0;
+    for(const auto& run:app.host->frame()->runs) if(auto* scene=dynamic_cast<const DiagramScene*>(run.visual.get())) {
+      ++modeScenes;CHECK(scene->nodes.size()==(quiet?2:3) && scene->edges.size()==(quiet?0:1));
+      if(!quiet)CHECK(scene->svg.find("stroke-dasharray")!=std::string::npos);
+    }
+    CHECK(modeScenes==1);
+    if(const char* evidence=getenv("XFMD_UI_EVIDENCE")) {
+      const fs::path out=evidence;const std::string prefix=std::string("vp05-")+mode;
+      captureDesktop(app.app,(out/(prefix+".png")).c_str());
+      auto target=PdfTarget::inspect((out/(prefix+".pdf")).string());SharedTextMetrics metrics;
+      auto parser=DiagramServices::interpreter();MarkdownRenderer renderer;ExportControl control;
+      ExportRequest request{app.session.snapshot(),{},metrics.fontSetId(),target.path,{}};
+      CHECK(ExportPipeline::run(request,target,control,*parser,renderer,metrics)>0);
+      std::ofstream(out/(prefix+".md")) << modeText;
+    }
+  }
+  // VP06 keeps decomposition, prerequisites and source-claimed status separate.
+  row=viewpoint(tree,tree->getFirstItem(),"/VP06");CHECK(row);
+  tree->setCurrentItem(row);tree->makeItemVisible(row);tree->setFocus();
+  const auto activityBefore=activations;
+  nativeKey(tree,XK_Right);settleNative(app.app,120);CHECK(activations==activityBefore);
+  tree->setCurrentItem(row);nativeKey(tree,XK_Return);
+  until(app,[&]{return activations==activityBefore+1 && app.host->interactive() && app.session.view().text.find("Activity register")!=std::string::npos;});
+  CHECK(actual.uri.find("/VP06?")!=std::string::npos && actual.uri.find("projection=overview")!=std::string::npos);
+  const auto activities=app.session.view().text;
+  for(const auto* label:{"All activities and explicit refinement", "Explicit activity prerequisites", "Source-claimed status", "implemented", "verified", "Unspecified", "Addressed responsibilities", "Planned Feature contributions", "not test evidence or owner acceptance", "sdl-source://"}) CHECK(activities.find(label)!=std::string::npos);
+  int activityScenes=0;
+  for(const auto& run:app.host->frame()->runs) if(auto* scene=dynamic_cast<const DiagramScene*>(run.visual.get())) {
+    ++activityScenes;CHECK(scene->nodes.size()==4);
+    CHECK(scene->svg.find("AIsolated")!=std::string::npos);
+    if(scene->edges.size()==1) CHECK(scene->svg.find("stroke-dasharray")!=std::string::npos);
+    else CHECK(scene->edges.size()==2);
+  }
+  CHECK(activityScenes==2);
+  if(const char* evidence=getenv("XFMD_UI_EVIDENCE")) {
+    const fs::path out=evidence;captureDesktop(app.app,(out/"vp06-native.png").c_str());
+    auto target=PdfTarget::inspect((out/"vp06-native.pdf").string());SharedTextMetrics metrics;
+    auto parser=DiagramServices::interpreter();MarkdownRenderer renderer;ExportControl control;
+    ExportRequest request{app.session.snapshot(),{},metrics.fontSetId(),target.path,{}};
+    CHECK(ExportPipeline::run(request,target,control,*parser,renderer,metrics)>0);
+    std::ofstream(out/"vp06-generated.md") << activities;
+  }
+  checkChannelOverview(app,tree,activations,actual);
+  checkDataOverview(app,tree,activations,actual);
+  if(const char* actualSource=getenv("XFMD_OVERVIEW_ACTUAL_SOURCE")) {
+    CHECK(app.open(actualSource));
+    until(app,[&]{return app.host->interactive() && app.host->frame()->token==app.session.view().token;});
+    int actualScenes=0;std::size_t actualNodes=0,actualEdges=0;
+    for(const auto& run:app.host->frame()->runs) if(auto* scene=dynamic_cast<const DiagramScene*>(run.visual.get())) {
+      ++actualScenes;
+      actualNodes+=scene->nodes.size();actualEdges+=scene->edges.size();
+      if(const char* nodes=getenv("XFMD_OVERVIEW_EXPECTED_NODES")) CHECK(scene->nodes.size()==std::stoul(nodes));
+      if(const char* edges=getenv("XFMD_OVERVIEW_EXPECTED_EDGES")) CHECK(scene->edges.size()==std::stoul(edges));
+    }
+    const int expectedScenes=getenv("XFMD_OVERVIEW_EXPECTED_SCENES")?std::stoi(getenv("XFMD_OVERVIEW_EXPECTED_SCENES")):1;
+    if(actualScenes!=expectedScenes) if(const char* evidence=getenv("XFMD_UI_EVIDENCE")) {
+      const fs::path out=evidence;
+      std::ofstream(out/"actual-render-failure.txt") << app.host->frame()->readingText;
+      for(const auto& run:app.host->frame()->runs) std::ofstream(out/"actual-runs.txt",std::ios::app) << run.text << "\n";
+      captureDesktop(app.app,(out/"actual-render-failure.png").c_str());
+    }
+    CHECK(actualScenes==expectedScenes);
+    if(const char* nodes=getenv("XFMD_OVERVIEW_EXPECTED_TOTAL_NODES")) CHECK(actualNodes==std::stoul(nodes));
+    if(const char* edges=getenv("XFMD_OVERVIEW_EXPECTED_TOTAL_EDGES")) CHECK(actualEdges==std::stoul(edges));
+    if(const char* expectedText=getenv("XFMD_OVERVIEW_EXPECTED_TEXT")) CHECK(app.session.view().text.find(expectedText)!=std::string::npos);
+    if(const char* evidence=getenv("XFMD_UI_EVIDENCE")) {
+      const fs::path out=evidence;
+      const std::string prefix=getenv("XFMD_OVERVIEW_ACTUAL_PREFIX")?getenv("XFMD_OVERVIEW_ACTUAL_PREFIX"):"vp02";
+      settleNative(app.app,200);captureDesktop(app.app,(out/(prefix+"-actual.png")).c_str());
+      auto target=PdfTarget::inspect((out/(prefix+"-actual.pdf")).string());SharedTextMetrics metrics;
+      auto parser=DiagramServices::interpreter();MarkdownRenderer renderer;ExportControl control;
+      ExportRequest request{app.session.snapshot(),{},metrics.fontSetId(),target.path,{}};
+      CHECK(ExportPipeline::run(request,target,control,*parser,renderer,metrics)>0);
+    }
+  }
+  app.sdpNavigation->stop();
+}
+TEST_MAIN(run)

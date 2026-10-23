@@ -1,0 +1,17 @@
+SDUI GUI dump | PublicationConcept | 160 columns | structural preview
+# Page preview and PDF publication
+### Markdown preview area
+Rendered Markdown area.
+
+Static representation.
+
+Images, formulas and diagrams
+
+are represented by this region.
+Export uses a frozen source snapshot, paper profile and font identity.
+
+Preview and PDF reuse layout and typography. Display zoom does not change paper geometry.
+
+Export success does not mark the Markdown document saved.
+[ Export PDF ]                                                                   [ Cancel export ]
+Concept only: no PDF is written by this prototype.

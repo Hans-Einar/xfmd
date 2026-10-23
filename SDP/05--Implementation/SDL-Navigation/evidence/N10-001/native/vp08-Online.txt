@@ -1,0 +1,97 @@
+VP08 — Channel contracts and
+sequences
+Revision:
+0d032e724dc923219596fc5a1cc304cef87aa7d6d0f91f52c5ce2b274bd742e8.
+
+Explicit scenario steps validated against permits, participation, mode and
+request/result correlation.
+
+
+Channel Bus — mode Online
+                         sender                     receiver
+
+
+    Desktop (unit)                Bus (channel)                 Remote (container)
+
+
+
+Source facts: f0026, f0027, f0041, f0042.
+
+Declarations: Bus, Desktop, Remote.
+
+
+Channel IdleBus — mode Online
+
+     IdleBus (channel)
+
+
+
+Source facts: .
+
+Declarations only.
+
+Declarations: IdleBus.
+
+
+Scope and notation
+Channel topology is partitioned into one diagram per declared Channel, retaining
+every participant and binding. Repeated participants refer to the same source
+declarations. The diagrams show explicit participation in one Mode, not runtime
+delivery, transport or execution order. Sender arrows point from participant to
+Channel; receiver arrows point from Channel to participant. Each arrow groups all
+messages for that participant/channel/role; the register retains every binding and
+source proof. Modes have no implicit inheritance.
+
+Selected mode: Online. Mode source: Online.
+
+
+Participation register
+Participant Channel Role                 Message                           Source fact
+
+Desktop        Bus         sender        ChannelNotice                     f0026
+
+Desktop        Bus         sender        ChannelUpdate                     f0027
+
+Remote         Bus         receiver      ChannelNotice                     f0041
+
+Remote         Bus         receiver      ChannelUpdate                     f0042
+
+
+
+Channel register
+All declared Channels are retained, including those without participants in the selected
+mode. Contracts and permitted messages are global model declarations, not evidence
+of delivery in any mode.
+
+Channel     Contract          Permitted messages               Source facts
+
+Bus         ChannelEvents     ChannelNotice,                   f0008, f0012, f0013
+                              ChannelUpdate
+
+IdleBus     ChannelEvents     ChannelNotice,                   f0035, f0012, f0013
+                              ChannelUpdate
+
+
+
+Scenario index
+Open an individual Scenario in the navigation tree for its validated sequence. Source
+links below open declarations; steps are not concatenated across Scenarios.
+Completeness is a source assertion, not evidence of execution or test coverage.
+Preconditions and postconditions are not inferred.
+Scenario       Mode      Completeness Steps Source facts
+
+Example        Online    open             1        f0032, f0033, f0034
+
+
+
+Derived MessageSet
+Channel Mode Datagram             Sender Receiver Source IDs
+
+Bus        Onlin   ChannelNotic Deskto        Remote   f0008, f0012, f0015, f0026,
+           e       e              p                    f0041
+
+Bus        Onlin   ChannelUpda Deskto         Remote   f0008, f0013, f0017, f0027,
+           e       te             p                    f0042
+
+Model gap NO_PARTICIPANTS: No explicit participation. (IdleBus; mode=).
+

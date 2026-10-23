@@ -1,0 +1,6 @@
+flowchart LR
+    n_GeneratedSelectionState["GeneratedSelectionState (dataset)"]
+    n_GeneratedViews["GeneratedViews (unit)"]
+    n_GenerationStateShape["GenerationStateShape (contract)"]
+    n_GeneratedSelectionState -->|upholds| n_GenerationStateShape
+    n_GeneratedViews -->|holds| n_GeneratedSelectionState

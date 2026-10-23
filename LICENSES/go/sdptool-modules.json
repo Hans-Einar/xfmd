@@ -1,0 +1,42 @@
+[
+  {
+    "module": "github.com/Hans-Einar/SDP/SDPTool",
+    "version": "local",
+    "licenses": [],
+    "source": "/home/warloc/git/SDP-xfmd-viewpoint-main/SDPTool"
+  },
+  {
+    "module": "github.com/Hans-Einar/SDP/SDPTool/bootstrap",
+    "version": "v0.0.0",
+    "licenses": [],
+    "source": "/home/warloc/git/SDP-xfmd-viewpoint-main/SDPTool/bootstrap"
+  },
+  {
+    "module": "github.com/Hans-Einar/SDP/SDUI/go",
+    "version": "v0.0.0",
+    "licenses": [],
+    "source": "/home/warloc/git/SDP-xfmd-viewpoint-main/SDUI/go"
+  },
+  {
+    "module": "github.com/Hans-Einar/SDP/SystemDesignLanguage/go",
+    "version": "v0.0.0",
+    "licenses": [],
+    "source": "/home/warloc/git/SDP-xfmd-viewpoint-main/SDL/go"
+  },
+  {
+    "module": "golang.org/x/text",
+    "version": "v0.42.0",
+    "licenses": [
+      "golang.org_x_text@v0.42.0/LICENSE"
+    ],
+    "source": "/home/warloc/go/pkg/mod/golang.org/x/text@v0.42.0"
+  },
+  {
+    "module": "gopkg.in/yaml.v3",
+    "version": "v3.0.1",
+    "licenses": [
+      "gopkg.in_yaml.v3@v3.0.1/LICENSE"
+    ],
+    "source": "/home/warloc/go/pkg/mod/gopkg.in/yaml.v3@v3.0.1"
+  }
+]

@@ -1,0 +1,30 @@
+language design-core version 0.5.
+interface Api.
+usecase Browse.
+capability Delivery.
+unit Desktop.
+functionality Display.
+usecase Export.
+actor Guest.
+usecase Isolated.
+container Local.
+feature Navigation.
+mode Offline.
+mode Online.
+actor Reader.
+container Remote.
+interface SparePort.
+unit Standalone.
+capability Unconnected.
+Desktop consumes Api.
+Desktop owns Display.
+Desktop provides Delivery.
+Display allocated-to Local in mode Offline.
+Display allocated-to Remote in mode Online.
+Display contributes-to Navigation.
+Display realizes Delivery.
+Local contains Desktop.
+Navigation supports Browse.
+Reader pursues Browse.
+Reader pursues Export.
+Remote consumes Api.

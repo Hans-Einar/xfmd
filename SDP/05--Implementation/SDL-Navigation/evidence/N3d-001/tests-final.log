@@ -1,0 +1,37 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd-sdl-navigation/build-ui
+Test project /home/warloc/git/xfmd-sdl-navigation/build-ui
+      Start 15: SdpDynamicGuiTest
+ 1/14 Test #15: SdpDynamicGuiTest ................   Passed    4.26 sec
+      Start 16: SdpPanelGuiTest
+ 2/14 Test #16: SdpPanelGuiTest ..................   Passed    1.19 sec
+      Start 61: DiagramLayoutTest
+ 3/14 Test #61: DiagramLayoutTest ................   Passed    1.24 sec
+      Start 65: DiagramReadingTest
+ 4/14 Test #65: DiagramReadingTest ...............   Passed    5.77 sec
+      Start 66: MermaidPdfTest
+ 5/14 Test #66: MermaidPdfTest ...................   Passed    1.13 sec
+      Start 79: SdpProtocolTest
+ 6/14 Test #79: SdpProtocolTest ..................   Passed    1.93 sec
+      Start 80: SdpNavigationGuiTest
+ 7/14 Test #80: SdpNavigationGuiTest .............   Passed   12.19 sec
+      Start 81: SdpIntegrationTest
+ 8/14 Test #81: SdpIntegrationTest ...............   Passed    0.20 sec
+      Start 82: SdpDiscoveryTest
+ 9/14 Test #82: SdpDiscoveryTest .................   Passed    0.02 sec
+      Start 87: SdpRuntimeTest
+10/14 Test #87: SdpRuntimeTest ...................   Passed    0.01 sec
+      Start 88: SdpRuntimeGuiTest
+11/14 Test #88: SdpRuntimeGuiTest ................   Passed   13.45 sec
+      Start 89: SdpDisplayTest
+12/14 Test #89: SdpDisplayTest ...................   Passed    0.01 sec
+      Start 90: SduiWorkflowGuiTest
+13/14 Test #90: SduiWorkflowGuiTest ..............   Passed    5.20 sec
+      Start 91: SdpOverviewGuiTest
+14/14 Test #91: SdpOverviewGuiTest ...............   Passed    2.59 sec
+
+100% tests passed, 0 tests failed out of 14
+
+Label Time Summary:
+GUI    =  38.89 sec*proc (6 tests)
+
+Total Test time (real) =  49.20 sec

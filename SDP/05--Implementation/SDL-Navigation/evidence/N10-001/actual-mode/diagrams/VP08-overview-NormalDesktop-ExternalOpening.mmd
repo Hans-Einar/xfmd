@@ -1,0 +1,6 @@
+flowchart LR
+    n_Application["Application (unit)"]
+    n_ExternalLauncher["ExternalLauncher (unit)"]
+    n_ExternalOpening["ExternalOpening (channel)"]
+    n_Application -->|sender| n_ExternalOpening
+    n_ExternalOpening -->|receiver| n_ExternalLauncher

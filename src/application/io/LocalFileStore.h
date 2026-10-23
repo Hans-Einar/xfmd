@@ -13,6 +13,7 @@ struct LoadedDocument {
   std::string path, text;
   FileIdentity identity;
   bool plainText = false;
+  bool standaloneMermaid = false; // Mutually exclusive with plainText.
 };
 struct SavedDocument {
   FileIdentity identity;

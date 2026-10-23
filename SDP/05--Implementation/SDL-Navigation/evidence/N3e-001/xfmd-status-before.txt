@@ -1,0 +1,171 @@
+ M AGENTS-project.md
+ M AGENTS.md
+ M CMakeLists.txt
+ M Cargo.lock
+ M Cargo.toml
+ M README.md
+ M SDP/01--Mandate/Mandate.md
+ M SDP/02--Requirements/README.md
+ M SDP/03--Architecture/README.md
+ M SDP/04--Design/README.md
+ M SDP/05--Implementation/README.md
+ M SDP/Framework/README.md
+ M SDP/Framework/installed-toolkit.manifest.yaml
+ M SDP/KanBan/History.md
+ M SDP/KanBan/README.md
+ D SDP/KanBan/backlog/#003--Question--SDUI-widget-ownership.md
+ D SDP/KanBan/backlog/#014--Proposal--SDP-sidebar-and-generated-navigation.md
+ M SDP/KanBan/backlog/#015--Proposal--SDL-design-file-preview.md
+ D SDP/KanBan/backlog/#017--Proposal--Adopt-SDP-and-model-XFMD.md
+AD SDP/KanBan/backlog/#020--Proposal--Mermaid-compatibility-across-pipeline.md
+ M SDP/KanBan/completed/#001--Proposal--Documentation-reconciliation.md
+ M SDP/KanBan/completed/#002--Study--BoxUI-branch-disposition.md
+ M SDP/KanBan/completed/#011--Change--Toolbar-layout-and-color-popup.md
+ M SDP/KanBan/completed/#016--Change--SDP-process-bootstrap.md
+ M SDP/Maintenance/README.md
+ M SDP/Maintenance/SDP1/Plan-and-Evidence.md
+ M SDP/ProjectManagement/Ledger.ndjson
+ M SDP/README.md
+ M SDP/RELEASE-NOTES.md
+ M SDP/Traceability/README.md
+ D SDP/navigation.json
+ M VERSION
+ M cmake/Mermaid.cmake
+ M cmake/Tests.cmake
+ M cmake/mermaid-source.json
+ M docs/design/mermaid-libavoid-build.md
+ M docs/design/mermaid-record-schema.md
+ M docs/versioning.md
+ M docs/working-method.md
+ M mermaid_coverage.md
+ M packaging/xfmd.1.in
+ M softwareArchitecture.md
+ M sprints/README.md
+ M src/application/Application.cpp
+ M src/application/Application.h
+ M src/application/ApplicationCommands.cpp
+ M src/application/ApplicationIndex.cpp
+ M src/application/ApplicationOpening.cpp
+ M src/application/ApplicationWorkspace.cpp
+ M src/application/commands/CommandRouter.h
+ M src/application/document/DocumentSession.cpp
+ M src/application/index/ReferenceWorker.cpp
+ M src/application/io/FileOpenPolicy.cpp
+ M src/application/io/FileOpenPolicy.h
+ M src/application/io/InputPolicy.cpp
+ M src/application/io/InputPolicy.h
+ M src/application/io/LocalFileStore.cpp
+ M src/application/io/LocalFileStore.h
+ M src/application/navigation/LinkResolver.cpp
+ M src/application/navigation/LinkResolver.h
+ M src/application/navigation/NavigationPanel.cpp
+ M src/application/navigation/NavigationPanel.h
+ M src/application/ui/NavigationTree.cpp
+ M src/application/ui/NavigationTree.h
+ M src/application/ui/OpenPathDialog.cpp
+ M src/application/ui/WorkspacePanel.cpp
+ M src/application/ui/WorkspacePanel.h
+ M src/application/ui/XfmdWindow.cpp
+ M src/application/ui/XfmdWindow.h
+ M src/blueprint/README.md
+ M src/blueprint/functionality/Functionality-002--Local-File-Storage.md
+ M src/blueprint/functionality/Functionality-008--Navigation-History.md
+ M src/blueprint/functionality/Functionality-010--Workspace-Controls.md
+ M src/blueprint/functionality/Functionality-023--Mermaid-Interpretation.md
+ M src/blueprint/functionality/Functionality-024--Diagram-Layout.md
+ M src/blueprint/functionality/Functionality-031--Generated-Document-Navigation.md
+ M src/contracts/DocumentTypes.h
+ M src/contracts/diagram/DiagramWire.h
+ M src/contracts/diagram/SemanticDiagram.h
+ M src/contracts/diagram/rust/src/semantic.rs
+ M src/interpreter/CmarkInterpreter.cpp
+ M src/interpreter/mermaid/rust/src/lib.rs
+ M src/interpreter/mermaid/rust/src/semantic/chart_tests.rs
+ M src/interpreter/mermaid/rust/src/semantic/mod.rs
+ M src/interpreter/mermaid/rust/src/semantic/trees.rs
+ M src/renderer/diagram/DiagramPlacement.cpp
+ M src/renderer/diagram/MermaidDiagramLayout.cpp
+ M src/renderer/diagram/rust/src/lib.rs
+ M src/renderer/diagram/rust/src/semantic/mod.rs
+ M tests/application/DiagramReadingTest.cpp
+ M tests/gui/IndexGuiTest.cpp
+ M tests/gui/PathWorkspaceGuiTest.cpp
+ M tests/renderer/DiagramLayoutTest.cpp
+ M tools/bootstrap_mermaid.py
+ M tools/run_with_xvfb.py
+ M xfmd_requirements.md
+?? LICENSES/go/
+?? SDP/02--Requirements/XFMD-Modeling/
+?? SDP/03--Architecture/XFMD-Modeling/
+?? SDP/04--Design/SDL-Navigation/
+?? SDP/04--Design/XFMD-Modeling/
+?? SDP/05--Implementation/SDL-Navigation/
+?? SDP/05--Implementation/SDP-Navigation/
+?? SDP/05--Implementation/SDP-Runtime/
+?? SDP/05--Implementation/SDUI/
+?? SDP/05--Implementation/Standalone-Mermaid/
+?? SDP/05--Implementation/XFMD-Modeling/
+?? SDP/Framework/ReleaseChecklist.md
+?? SDP/KanBan/active/#014--Proposal--SDP-sidebar-and-generated-navigation.md
+?? SDP/KanBan/active/#017--Proposal--Adopt-SDP-and-model-XFMD.md
+?? SDP/KanBan/active/#020--Proposal--Mermaid-compatibility-across-pipeline.md
+?? SDP/KanBan/active/#021--Change--Dynamic-SDP-tabs-labels-and-source-opening.md
+?? SDP/KanBan/active/#023--Proposal--Standalone-Mermaid-file-preview.md
+?? SDP/KanBan/active/#024--Change--Local-file-heading-links.md
+?? SDP/KanBan/active/#025--Change--On-demand-SDP-without-fixed-content-caps.md
+?? SDP/KanBan/active/#027--Proposal--SDUI-preview-and-launch-workflow.md
+?? SDP/KanBan/active/#028--Change--SDL-viewpoints-and-navigation.md
+?? SDP/KanBan/active/#029--Change--Contextual-SDP-toolbar.md
+?? SDP/KanBan/backlog/#019--Proposal--Shared-rendering-and-Kitty-output.md
+?? SDP/KanBan/backlog/#022--Idea--Git-based-design-baselines-and-change-blueprints.md
+?? SDP/KanBan/evidence/2026-10-01-sdp-navigation-discovery/
+?? SDP/KanBan/evidence/2026-10-03-standalone-mermaid/
+?? SDP/KanBan/evidence/2026-10-06-sdui-navigation/
+?? SDP/KanBan/evidence/2026-10-06-session3/
+?? SDP/KanBan/evidence/2026-10-07-sdui-widget-scope/
+?? SDP/KanBan/evidence/2026-10-07-widget-discovery/
+?? SDP/KanBan/superseded/#003--Question--SDUI-widget-ownership.md
+?? SDP/KanBan/superseded/#026--Proposal--SDUI-navigation-and-source-structure-views.md
+?? SDP/Maintenance/MAINT-XFMD-0003.md
+?? SDP/Maintenance/MAINT-XFMD-0004.md
+?? SDP/Maintenance/MAINT-XFMD-0005.md
+?? SDP/SDL/
+?? SDP/Sessions/
+?? SDP/Sprints/SPR-XFMD-0010.md
+?? cmake/Sdp.cmake
+?? docs/design/mermaid-usecase-authoring.md
+?? sprints/Sprint-010--SDP-Navigation/
+?? src/application/navigation/HeadingAnchor.cpp
+?? src/application/navigation/HeadingAnchor.h
+?? src/application/sdp/
+?? src/application/ui/SdpPanel.cpp
+?? src/application/ui/SdpPanel.h
+?? src/application/ui/SdpPanelContext.cpp
+?? src/application/ui/SdpTree.cpp
+?? src/application/ui/SdpTree.h
+?? src/blueprint/functionality/Functionality-032--SDP-Project-Navigation.md
+?? src/contracts/diagram/rust/src/semantic_usecase.rs
+?? src/interpreter/mermaid/rust/src/semantic/usecase.rs
+?? src/interpreter/mermaid/rust/src/semantic/usecase_tests.rs
+?? src/renderer/diagram/rust/src/semantic/usecase.rs
+?? tests/application/HeadingLinkTest.cpp
+?? tests/application/SdpDiscoveryTest.cpp
+?? tests/application/SdpDisplayTest.cpp
+?? tests/application/SdpIntegrationTest.cpp
+?? tests/application/SdpProtocolTest.cpp
+?? tests/application/SdpRuntimeTest.cpp
+?? tests/application/SdpWatchTest.cpp
+?? tests/application/StandaloneMermaidTest.cpp
+?? tests/build/MermaidBootstrapTest.py
+?? tests/fixtures/mermaid/
+?? tests/fixtures/sdp/
+?? tests/gui/HeadingLinkGuiTest.cpp
+?? tests/gui/SdpDynamicGuiTest.cpp
+?? tests/gui/SdpNavigationGuiTest.cpp
+?? tests/gui/SdpOverviewGuiTest.cpp
+?? tests/gui/SdpPanelGuiTest.cpp
+?? tests/gui/SdpRuntimeGuiTest.cpp
+?? tests/gui/SduiWorkflowGuiTest.cpp
+?? tests/gui/StandaloneMermaidGuiTest.cpp
+?? third_party/
+?? tools/build_sdui_tools.py

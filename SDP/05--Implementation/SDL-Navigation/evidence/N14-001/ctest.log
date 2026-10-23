@@ -1,0 +1,57 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd-sdl-navigation/build-ui
+Test project /home/warloc/git/xfmd-sdl-navigation/build-ui
+      Start 89: SdpRuntimeGuiTest
+      Start 79: SdpWatchTest
+      Start 92: SdpOverviewGuiTest
+      Start 81: SdpNavigationGuiTest
+ 1/24 Test #79: SdpWatchTest .....................   Passed    6.78 sec
+      Start 93: SdlSourceGuiTest
+ 2/24 Test #93: SdlSourceGuiTest .................   Passed    2.59 sec
+      Start 16: SdpDynamicGuiTest
+ 3/24 Test #81: SdpNavigationGuiTest .............   Passed   12.23 sec
+      Start 64: MermaidRustTests
+ 4/24 Test #16: SdpDynamicGuiTest ................   Passed    4.39 sec
+      Start 15: DiagramReadingGuiTest
+ 5/24 Test #92: SdpOverviewGuiTest ...............   Passed   14.63 sec
+      Start 80: SdpProtocolTest
+ 6/24 Test #80: SdpProtocolTest ..................   Passed    2.45 sec
+      Start 23: MermaidGuiTest
+ 7/24 Test #89: SdpRuntimeGuiTest ................   Passed   17.53 sec
+      Start 17: SdpPanelGuiTest
+ 8/24 Test #15: DiagramReadingGuiTest ............   Passed    3.79 sec
+      Start 66: DiagramReadingTest
+ 9/24 Test #17: SdpPanelGuiTest ..................   Passed    1.49 sec
+      Start 63: MermaidBootstrapTest
+10/24 Test #63: MermaidBootstrapTest .............   Passed    2.36 sec
+      Start 85: StandaloneMermaidGuiTest
+11/24 Test #85: StandaloneMermaidGuiTest .........   Passed    2.15 sec
+      Start 62: DiagramLayoutTest
+12/24 Test #62: DiagramLayoutTest ................   Passed    2.72 sec
+      Start 67: MermaidPdfTest
+13/24 Test #66: DiagramReadingTest ...............   Passed   10.58 sec
+      Start 82: SdpIntegrationTest
+14/24 Test #67: MermaidPdfTest ...................   Passed    2.09 sec
+      Start 84: StandaloneMermaidTest
+15/24 Test #82: SdpIntegrationTest ...............   Passed    0.24 sec
+      Start 69: MermaidDependencies
+16/24 Test #84: StandaloneMermaidTest ............   Passed    0.14 sec
+      Start 65: DiagramPreparationTest
+17/24 Test #65: DiagramPreparationTest ...........   Passed    0.08 sec
+      Start 83: SdpDiscoveryTest
+18/24 Test #83: SdpDiscoveryTest .................   Passed    0.01 sec
+      Start 88: SdpRuntimeTest
+19/24 Test #88: SdpRuntimeTest ...................   Passed    0.01 sec
+      Start 90: SdpDisplayTest
+20/24 Test #90: SdpDisplayTest ...................   Passed    0.00 sec
+      Start 68: DiagramWorkerTest
+21/24 Test #68: DiagramWorkerTest ................   Passed    0.01 sec
+22/24 Test #69: MermaidDependencies ..............   Passed    0.23 sec
+23/24 Test #23: MermaidGuiTest ...................   Passed   11.61 sec
+24/24 Test #64: MermaidRustTests .................   Passed   62.29 sec
+
+100% tests passed, 0 tests failed out of 24
+
+Label Time Summary:
+GUI    =  70.40 sec*proc (9 tests)
+
+Total Test time (real) =  74.53 sec

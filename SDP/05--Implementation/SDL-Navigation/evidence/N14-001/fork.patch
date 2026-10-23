@@ -1,0 +1,390 @@
+diff --git a/docs/packet-profile.md b/docs/packet-profile.md
+index d08b5f7..66cf862 100644
+--- a/docs/packet-profile.md
++++ b/docs/packet-profile.md
+@@ -7,3 +7,14 @@ width represents bit count. Explicit bit endpoints are shown. No flowchart edges
+ or implicit scheduling. Input is bounded to 4096 bits and 128 fields, no overlap.
+ The initial profile accepts explicit ranges and +count, not init configuration.
+ SVG remains the presentation format. Measured wrapped labels determine row height.
++
++## XFMD N14 readability correction
++
++Bit pitch is shared across the diagram and reserves the actual rendered font
++width of endpoint numbers and bracketed ordinal markers. Endpoints are centered
++on their first/last bit cells, with only one number for a single-bit field.
++Field widths remain proportional. Wrapped names that still exceed a segment's
++padded width become `[n]`, with a full per-row legend containing that ordinal,
++segment bit range and name. Row-spanning fields retain their ordinal. Legend
++text expands the scene if an unbreakable word cannot wrap; it is never clipped
++inside the bit cell. The normal SVG path serves both preview and PDF.
+diff --git a/src/layout/packet.rs b/src/layout/packet.rs
+index a95d86a..f1beb2e 100644
+--- a/src/layout/packet.rs
++++ b/src/layout/packet.rs
+@@ -1,18 +1,41 @@
+ use super::*;
+-/// Fixed bit grid; text influences row height, never the encoded field width.
++
++/// Proportional bit grid with measured endpoints and per-row overflow legends.
+ pub(super) fn compute(graph: &Graph, theme: &Theme, config: &LayoutConfig) -> Layout {
+     let mut nodes = BTreeMap::new();
+-    let rows = graph
+-        .packet_fields
+-        .iter()
+-        .map(|f| f.end / 32 + 1)
+-        .max()
+-        .unwrap_or(1);
+-    let bit = 26.;
++    let last_bit = graph.packet_fields.iter().map(|f| f.end).max().unwrap_or(0);
++    let measure = |text: &str| {
++        measure_label_with_font_size(text, theme.font_size, config, false, &theme.font_family)
++    };
++    // SVG uses the theme font for these Text nodes too. Reserve the widest actual
++    // endpoint/marker, not a smaller-font approximation or an arbitrary 20px box.
++    let mut bit = 26f32;
++    let mut endpoint_height = 0f32;
++    for field in &graph.packet_fields {
++        for value in [field.start, field.end] {
++            let block = measure(&value.to_string());
++            bit = bit.max(block.width + 8.);
++            endpoint_height = endpoint_height.max(block.height);
++        }
++    }
++    // Row splits introduce endpoints not explicitly present in the input.
++    for row in 0..=last_bit / 32 {
++        for value in [row * 32, row * 32 + 31] {
++            let block = measure(&value.to_string());
++            bit = bit.max(block.width + 8.);
++            endpoint_height = endpoint_height.max(block.height);
++        }
++    }
++    for index in 0..graph.packet_fields.len() {
++        bit = bit.max(measure(&format!("[{}]", index + 1)).width + 10.);
++    }
++    let grid_width = 32. * bit;
++    let mut scene_width = grid_width + 48.;
+     let mut y = 24.;
+-    for row in 0..rows {
++    for row in 0..=last_bit / 32 {
+         measurements::checkpoint();
+         let mut cells = vec![];
++        let mut legends = vec![];
+         let mut height = 48f32;
+         for (index, f) in graph.packet_fields.iter().enumerate() {
+             let start = f.start.max(row * 32);
+@@ -21,83 +44,138 @@ pub(super) fn compute(graph: &Graph, theme: &Theme, config: &LayoutConfig) -> La
+                 continue;
+             }
+             let width = (end - start + 1) as f32 * bit;
+-            let block = measure_label_with_max_width(
++            let mut block = measure_label_with_max_width(
+                 &f.label,
+                 theme.font_size,
+-                (width - 10.).max(8.),
++                width - 10.,
+                 config,
+                 true,
+-                theme.font_family.as_str(),
++                &theme.font_family,
+             );
++            if block.width > width - 10. {
++                let marker = format!("[{}]", index + 1);
++                let range = if start == end {
++                    start.to_string()
++                } else {
++                    format!("{start}-{end}")
++                };
++                let text = format!("{marker} Bits {range}: {}", f.label);
++                let label = measure_label_with_max_width(
++                    &text,
++                    theme.font_size,
++                    grid_width,
++                    config,
++                    true,
++                    &theme.font_family,
++                );
++                legends.push((index, label));
++                block = measure(&marker);
++            }
+             height = height.max(block.height + 16.);
+             cells.push((index, start, end, width, block));
+         }
++        let cell_y = y + endpoint_height + 8.;
+         for (index, start, end, width, label) in cells {
+             let x = 24. + (start % 32) as f32 * bit;
+-            let id = format!("packet_{index}_{row}");
+-            nodes.insert(
+-                id.clone(),
+-                NodeLayout {
+-                    id,
+-                    x,
+-                    y: y + 20.,
+-                    width,
+-                    height,
+-                    label,
+-                    shape: crate::ir::NodeShape::Rectangle,
+-                    style: Default::default(),
+-                    link: None,
+-                    anchor_subgraph: None,
+-                    hidden: false,
+-                    icon: None,
+-                },
++            insert_node(
++                &mut nodes,
++                format!("packet_{index}_{row}"),
++                x,
++                cell_y,
++                width,
++                height,
++                label,
++                crate::ir::NodeShape::Rectangle,
+             );
+-            for (suffix, value, x) in [("start", start, x), ("end", end, x + width - 20.)] {
++            for (suffix, value, center) in [
++                ("start", start, x + bit / 2.),
++                ("end", end, x + width - bit / 2.),
++            ] {
+                 if suffix == "end" && start == end {
+                     continue;
+                 }
+-                let id = format!("bit_{index}_{row}_{suffix}");
+-                let label = measure_label_with_font_size(
+-                    &value.to_string(),
+-                    theme.font_size * 0.7,
+-                    config,
+-                    false,
+-                    theme.font_family.as_str(),
+-                );
+-                nodes.insert(
+-                    id.clone(),
+-                    NodeLayout {
+-                        id,
+-                        x,
+-                        y,
+-                        width: 20.,
+-                        height: 18.,
+-                        label,
+-                        shape: crate::ir::NodeShape::Text,
+-                        style: crate::ir::NodeStyle {
+-                            fill: Some("none".into()),
+-                            stroke: Some("none".into()),
+-                            ..Default::default()
+-                        },
+-                        link: None,
+-                        anchor_subgraph: None,
+-                        hidden: false,
+-                        icon: None,
+-                    },
++                let label = measure(&value.to_string());
++                insert_node(
++                    &mut nodes,
++                    format!("bit_{index}_{row}_{suffix}"),
++                    center - label.width / 2.,
++                    y,
++                    label.width,
++                    endpoint_height,
++                    label,
++                    crate::ir::NodeShape::Text,
+                 );
+             }
+         }
+-        y += height + 40.;
++        y = cell_y + height + 8.;
++        for (index, label) in legends {
++            // Generic SVG text is centered in its node. Size the node to the
++            // measured text so all legends have the same left edge, unclipped.
++            let width = label.width;
++            let height = label.height;
++            scene_width = scene_width.max(width + 48.);
++            insert_node(
++                &mut nodes,
++                format!("packet_legend_{index}_{row}"),
++                24.,
++                y,
++                width,
++                height,
++                label,
++                crate::ir::NodeShape::Text,
++            );
++            y += height + 8.;
++        }
++        y += 16.;
+     }
+     Layout {
+         kind: graph.kind,
+         nodes,
+         edges: vec![],
+         subgraphs: vec![],
+-        width: 32. * bit + 48.,
++        width: scene_width,
+         height: y,
+         diagram: DiagramData::Graph {
+             state_notes: vec![],
+         },
+     }
+ }
++
++#[allow(clippy::too_many_arguments)]
++fn insert_node(
++    nodes: &mut BTreeMap<String, NodeLayout>,
++    id: String,
++    x: f32,
++    y: f32,
++    width: f32,
++    height: f32,
++    label: TextBlock,
++    shape: crate::ir::NodeShape,
++) {
++    let style = if shape == crate::ir::NodeShape::Text {
++        crate::ir::NodeStyle {
++            fill: Some("none".into()),
++            stroke: Some("none".into()),
++            ..Default::default()
++        }
++    } else {
++        Default::default()
++    };
++    nodes.insert(
++        id.clone(),
++        NodeLayout {
++            id,
++            x,
++            y,
++            width,
++            height,
++            label,
++            shape,
++            style,
++            link: None,
++            anchor_subgraph: None,
++            hidden: false,
++            icon: None,
++        },
++    );
++}
+diff --git a/tests/packet_readability_suite.rs b/tests/packet_readability_suite.rs
+new file mode 100644
+index 0000000..76411b7
+--- /dev/null
++++ b/tests/packet_readability_suite.rs
+@@ -0,0 +1,120 @@
++use mermaid_rs_renderer::layout::{TextBlock, measurements};
++use mermaid_rs_renderer::{
++    Layout, LayoutConfig, Theme, compute_layout, parse_mermaid_strict, render_svg,
++};
++use std::time::Duration;
++
++// Word-wrap measurer models XFMD's important contract: an unbreakable word may
++// exceed the requested width. Layout must inspect returned dimensions.
++fn measure(_: usize, text: &str, size: f32, _: f32, _: bool) -> TextBlock {
++    TextBlock {
++        lines: vec![text.into()],
++        width: text.chars().count() as f32 * size * 0.6,
++        height: size * 1.4,
++    }
++}
++fn layout(source: &str, size: f32) -> Layout {
++    let graph = parse_mermaid_strict(source).unwrap().graph;
++    let mut theme = Theme::modern();
++    theme.font_size = size;
++    measurements::with_measurer(0, measure, Duration::from_secs(2), || {
++        compute_layout(&graph, &theme, &LayoutConfig::default())
++    })
++}
++fn assert_readable(l: &Layout) {
++    for n in l.nodes.values() {
++        assert!(n.label.width <= n.width + 0.01, "{} text exceeds box", n.id);
++        assert!(
++            n.label.height <= n.height + 0.01,
++            "{} text exceeds height",
++            n.id
++        );
++        assert!(
++            n.x >= 0.
++                && n.y >= 0.
++                && n.x + n.width <= l.width + 0.01
++                && n.y + n.height <= l.height + 0.01,
++            "{} outside scene",
++            n.id
++        );
++    }
++    let numbers: Vec<_> = l
++        .nodes
++        .values()
++        .filter(|n| n.id.starts_with("bit_"))
++        .collect();
++    for (i, a) in numbers.iter().enumerate() {
++        for b in &numbers[i + 1..] {
++            if (a.y - b.y).abs() < 0.01 {
++                assert!(
++                    a.x + a.width + 7.9 <= b.x || b.x + b.width + 7.9 <= a.x,
++                    "{} overlaps {}",
++                    a.id,
++                    b.id
++                );
++            }
++        }
++    }
++}
++#[test]
++fn n12_labels_and_boundaries_are_readable_without_changing_bit_ratios() {
++    for size in [12., 16., 28.] {
++        let l = layout(
++            "packet\n0: \"PacketFlag\"\n1-12: \"PacketNumber\"\n13-28: \"PacketPayload\"",
++            size,
++        );
++        assert_readable(&l);
++        let flag = &l.nodes["packet_0_0"];
++        assert_eq!(flag.label.lines, vec!["[1]"]);
++        assert_eq!(
++            l.nodes["packet_legend_0_0"].label.lines,
++            vec!["[1] Bits 0: PacketFlag"]
++        );
++        assert!((l.nodes["packet_1_0"].width / flag.width - 12.).abs() < 0.001);
++        assert!((l.nodes["packet_2_0"].width / flag.width - 16.).abs() < 0.001);
++        assert!(
++            l.nodes["bit_1_0_end"].x + l.nodes["bit_1_0_end"].width < l.nodes["bit_2_0_start"].x
++        );
++    }
++}
++#[test]
++fn adjacent_single_bits_and_row_splits_keep_exact_ranges() {
++    let l = layout(
++        "packet\n+1: \"FirstLongFlag\"\n+1: \"SecondLongFlag\"\n+29: \"Body\"\n+2: \"CrossingLongName\"\n+1: \"LastFlag\"",
++        16.,
++    );
++    assert_readable(&l);
++    for (id, text) in [
++        ("packet_legend_0_0", "[1] Bits 0: FirstLongFlag"),
++        ("packet_legend_1_0", "[2] Bits 1: SecondLongFlag"),
++        ("packet_legend_3_0", "[4] Bits 31: CrossingLongName"),
++        ("packet_legend_3_1", "[4] Bits 32: CrossingLongName"),
++    ] {
++        assert_eq!(l.nodes[id].label.lines, vec![text]);
++    }
++    assert!(!l.nodes.contains_key("bit_0_0_end"));
++    assert!(
++        l.nodes["packet_3_1"].y
++            > l.nodes["packet_legend_3_0"].y + l.nodes["packet_legend_3_0"].height
++    );
++}
++#[test]
++fn high_offsets_and_unbreakable_legend_expand_bounds() {
++    let name = "Long".repeat(400);
++    let source = format!("packet\n4093: \"{}\"\n4094: \"B\"\n4095: \"C\"", name);
++    let l = layout(&source, 24.);
++    assert_readable(&l);
++    assert!(l.nodes["packet_legend_0_127"].label.lines[0].contains(&name));
++    let svg = render_svg(&l, &Theme::modern(), &LayoutConfig::default());
++    assert!(svg.contains(&name));
++    assert!(!svg.contains("NaN"));
++}
++#[test]
++fn default_font_measurement_preserves_regular_packet() {
++    let g = parse_mermaid_strict("packet\n0-7: \"Type\"\n8-31: \"Revision\"\n+40: \"Payload\"")
++        .unwrap()
++        .graph;
++    let l = compute_layout(&g, &Theme::modern(), &LayoutConfig::default());
++    assert_readable(&l);
++    assert!(l.nodes.contains_key("packet_2_2"));
++}

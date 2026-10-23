@@ -1,0 +1,31 @@
+{
+  "main": "5ca0e90f82c5da449d529906b4f753f39a907cb4",
+  "participants": [
+    {
+      "path": "/home/warloc/git/SDP-project-governance",
+      "head": "3e407d698e8d0349c632947e085dd6c3c7470b05",
+      "status": "M SDP/03--Architecture/ProjectGovernance/Attention-and-Remote-Coordination.md\n M SDP/04--Design/SDPTool/ProjectGovernance/Orchestration.md\n M SDP/04--Design/SDPTool/ProjectGovernance/Owner-Walkthrough.md\n M SDP/05--Implementation/SDPTool/ProjectGovernance/Plan.md\n M SDP/KanBan/README.md\n M SDP/KanBan/backlog/#054--Proposal--PG-attention-and-remote-coordination.md\n M SDP/Sessions/session-#0007--Project_governance.md\n M SDPTool/cmd/sdp-controller/main.go\n M SDPTool/cmd/sdp-controller/session.go\n M SDPTool/governance/run.go\n M SDPTool/governancecontroller/README.md\n M SDPTool/governancecontroller/controller.go\n M SDPTool/labs/project-governance/README.md\n M SDPTool/labs/project-governance/activation_trial.py\n?? SDP/05--Implementation/SDPTool/ProjectGovernance/preflight-PGL3-C2.json\n?? SDP/05--Implementation/SDPTool/ProjectGovernance/trial-PGL3-C2-failed.json\n?? SDPTool/cmd/sdp-controller/inbox.go\n?? SDPTool/cmd/sdp-controller/inbox_test.go\n?? SDPTool/governance/inbox.go\n?? SDPTool/governance/inbox.schema.json\n?? SDPTool/governance/inbox_test.go\n?? SDPTool/governance/report_revision.go\n?? SDPTool/governancecontroller/reporting_test.go",
+      "overlap": []
+    },
+    {
+      "path": "/home/warloc/git/SDP-coordination",
+      "head": "684b1f8952f2f5ff2dc9fb32c7592340d8aff60f",
+      "status": "",
+      "overlap": []
+    }
+  ],
+  "changed": [
+    "SDL/go/documents/selection.go",
+    "SDL/go/viewpoint/interface_overview.go",
+    "SDL/go/viewpoint/interface_overview_test.go",
+    "SDL/go/viewpoint/overview.go",
+    "SDL/go/viewpoint/overview_test.go",
+    "SDP/02--Requirements/SDPTool.md",
+    "SDP/05--Implementation/SDL/ViewpointNavigation/N7.md",
+    "SDP/05--Implementation/SDL/ViewpointNavigation/Plan.md",
+    "SDPTool/Contract.md",
+    "SDPTool/interface_overview_test.go",
+    "SDPTool/overview_actions_test.go",
+    "SDPTool/overview_test.go"
+  ]
+}

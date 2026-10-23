@@ -1,0 +1,12 @@
+flowchart LR
+    n_CandidateRead["CandidateRead (message)"]
+    n_CandidateReadFailed["CandidateReadFailed (message)"]
+    n_CurrentWritten["CurrentWritten (message)"]
+    n_ReadCandidate["ReadCandidate (message)"]
+    n_StorageCallsContract["StorageCallsContract (contract)"]
+    n_WriteCurrent["WriteCurrent (message)"]
+    n_StorageCallsContract -->|permits| n_CandidateRead
+    n_StorageCallsContract -->|permits| n_CandidateReadFailed
+    n_StorageCallsContract -->|permits| n_CurrentWritten
+    n_StorageCallsContract -->|permits| n_ReadCandidate
+    n_StorageCallsContract -->|permits| n_WriteCurrent

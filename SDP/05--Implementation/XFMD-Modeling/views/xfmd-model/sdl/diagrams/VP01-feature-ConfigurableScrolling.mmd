@@ -1,0 +1,14 @@
+flowchart LR
+    n_ApplicationPreferences["ApplicationPreferences (functionality)"]
+    n_ConfigurableScrolling["ConfigurableScrolling (feature)"]
+    n_FoxPresentation["FoxPresentation (functionality)"]
+    n_ScrollMotion["ScrollMotion (functionality)"]
+    n_SourceAnchorMapping["SourceAnchorMapping (functionality)"]
+    n_TextEditing["TextEditing (functionality)"]
+    n_WorkspaceControls["WorkspaceControls (functionality)"]
+    n_ApplicationPreferences -->|contributes-to| n_ConfigurableScrolling
+    n_FoxPresentation -->|contributes-to| n_ConfigurableScrolling
+    n_ScrollMotion -->|contributes-to| n_ConfigurableScrolling
+    n_SourceAnchorMapping -->|contributes-to| n_ConfigurableScrolling
+    n_TextEditing -->|contributes-to| n_ConfigurableScrolling
+    n_WorkspaceControls -->|contributes-to| n_ConfigurableScrolling

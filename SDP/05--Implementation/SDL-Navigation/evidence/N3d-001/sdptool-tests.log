@@ -1,0 +1,5 @@
+--- FAIL: TestSDUIAllFamilyDiscoveryAndSourceDelegation (0.01s)
+    sdui_preview_families_test.go:56: SDPTool diverged from SDUI-owned source preview <nil>
+FAIL
+FAIL	github.com/Hans-Einar/SDP/SDPTool	7.994s
+FAIL

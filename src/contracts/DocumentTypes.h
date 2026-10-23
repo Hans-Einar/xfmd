@@ -20,6 +20,7 @@ struct SourceSnapshot {
   std::string text;
   std::string path;
   bool plainText = false;
+  bool standaloneMermaid = false; // Mutually exclusive with plainText.
 };
 enum class MappingQuality { Exact, Approximate, Unavailable };
 struct SourceRange {

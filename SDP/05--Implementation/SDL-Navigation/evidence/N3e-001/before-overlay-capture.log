@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/home/warloc/git/xfmd-sdl-navigation/SDP/05--Implementation/SDL-Navigation/evidence/N3e-001/capture_native.py", line 18, in <module>
+    subprocess.run(['python3',str(r/'tools/run_with_xvfb.py'),'/tmp/xfmd-n3e-native-probe',str(e/'live-mode/entry.md'),str(e/'live-vp07')],stdout=out,stderr=subprocess.STDOUT,check=True)
+  File "/usr/lib64/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python3', '/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py', '/tmp/xfmd-n3e-native-probe', '/home/warloc/git/xfmd-sdl-navigation/SDP/05--Implementation/SDL-Navigation/evidence/N3e-001/live-mode/entry.md', '/home/warloc/git/xfmd-sdl-navigation/SDP/05--Implementation/SDL-Navigation/evidence/N3e-001/live-vp07']' returned non-zero exit status 1.

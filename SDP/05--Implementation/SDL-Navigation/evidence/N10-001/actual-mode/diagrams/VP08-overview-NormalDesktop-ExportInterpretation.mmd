@@ -1,0 +1,8 @@
+flowchart LR
+    n_ExportInterpretation["ExportInterpretation (channel)"]
+    n_Interpreter["Interpreter (unit)"]
+    n_Publication["Publication (unit)"]
+    n_ExportInterpretation -->|receiver| n_Interpreter
+    n_Interpreter -->|sender| n_ExportInterpretation
+    n_ExportInterpretation -->|receiver| n_Publication
+    n_Publication -->|sender| n_ExportInterpretation

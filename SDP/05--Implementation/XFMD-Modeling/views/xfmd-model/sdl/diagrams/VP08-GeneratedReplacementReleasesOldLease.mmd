@@ -1,0 +1,13 @@
+sequenceDiagram
+    participant n_ExternalViewGenerator as External View Generator
+    participant n_GeneratedViews as Generated Views
+    participant n_Documents as Documents
+    participant n_ExternalViewBroker as External View Broker
+    n_ExternalViewGenerator->>n_GeneratedViews: 1: Deliver Generated Main (Generated Delivery)
+    n_GeneratedViews->>n_Documents: 2: Admit Generated Document (Generated Document Calls)
+    n_Documents->>n_GeneratedViews: 3: Generated Document Changed (Document Notifications)
+    n_GeneratedViews->>n_GeneratedViews: 4: Queue Previous Lease (Lease Lifecycle)
+    n_GeneratedViews->>n_ExternalViewBroker: 5: Attempt Release (Lease Notifications)
+    n_Documents-->>n_GeneratedViews: 6: Generated Document Opened (Generated Document Calls) reply-to 2
+    n_GeneratedViews->>n_GeneratedViews: 7: Install New Lease (Lease Lifecycle)
+    n_GeneratedViews-->>n_ExternalViewGenerator: 8: Generated Main Accepted (Generated Delivery) reply-to 1

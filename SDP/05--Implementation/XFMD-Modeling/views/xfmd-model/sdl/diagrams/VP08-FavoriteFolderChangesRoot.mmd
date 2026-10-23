@@ -1,0 +1,6 @@
+sequenceDiagram
+    participant n_NativeShell as Native Shell
+    participant n_Workspace as Workspace
+    n_NativeShell->>n_Workspace: 1: Favorite Folder Chosen (Workspace Intents)
+    n_Workspace->>n_Workspace: 2: Activate Root And History (Workspace Changes)
+    n_Workspace->>n_NativeShell: 3: Request Tree Refresh (Workspace Changes)

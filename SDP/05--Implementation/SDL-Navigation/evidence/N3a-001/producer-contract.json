@@ -1,0 +1,635 @@
+{
+  "command": "gh sdp . discover --json",
+  "schema": "sdptool/0.2",
+  "snapshot_sha256": "d5b842d4a7793cfc14fd55dd287f90d85bb3577327c85720c5e449337c391f0f",
+  "viewpoint_count": 33,
+  "explicit_overview_targets": 0,
+  "viewpoints": [
+    {
+      "id": "sdl/sdl-core-0442339cc9497720/VP01",
+      "kind": "viewpoint",
+      "label": "VP01 \u2014 Use cases and traceability",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "sdl-core-0442339cc9497720",
+        "uri": "sdl-view://xfmd/VP01?consumer=xfmd&target=main",
+        "revision": "8c3af91f47a684084eccefae60abb88f31781d9e12dc4889f350e8c89ff0a453"
+      }
+    },
+    {
+      "id": "sdl/sdl-core-0442339cc9497720/VP02",
+      "kind": "viewpoint",
+      "label": "VP02 \u2014 Architecture and logical decomposition",
+      "state": "available",
+      "children": [
+        "sdl/sdl-core-0442339cc9497720/VP02/diagram/VP02-roots",
+        "sdl/sdl-core-0442339cc9497720/VP02/kind/container"
+      ],
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "sdl-core-0442339cc9497720",
+        "uri": "sdl-view://xfmd/VP02?consumer=xfmd&target=main",
+        "revision": "8c3af91f47a684084eccefae60abb88f31781d9e12dc4889f350e8c89ff0a453"
+      }
+    },
+    {
+      "id": "sdl/sdl-core-0442339cc9497720/VP03",
+      "kind": "viewpoint",
+      "label": "VP03 \u2014 Responsibilities and capabilities across the architecture",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "sdl-core-0442339cc9497720",
+        "uri": "sdl-view://xfmd/VP03?consumer=xfmd&target=main",
+        "revision": "8c3af91f47a684084eccefae60abb88f31781d9e12dc4889f350e8c89ff0a453"
+      }
+    },
+    {
+      "id": "sdl/sdl-core-0442339cc9497720/VP04",
+      "kind": "viewpoint",
+      "label": "VP04 \u2014 Interfaces and collaboration",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "sdl-core-0442339cc9497720",
+        "uri": "sdl-view://xfmd/VP04?consumer=xfmd&target=main",
+        "revision": "8c3af91f47a684084eccefae60abb88f31781d9e12dc4889f350e8c89ff0a453"
+      }
+    },
+    {
+      "id": "sdl/sdl-core-0442339cc9497720/VP05",
+      "kind": "viewpoint",
+      "label": "VP05 \u2014 Dependencies by mode",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "sdl-core-0442339cc9497720",
+        "uri": "sdl-view://xfmd/VP05?consumer=xfmd&target=main",
+        "revision": "8c3af91f47a684084eccefae60abb88f31781d9e12dc4889f350e8c89ff0a453"
+      }
+    },
+    {
+      "id": "sdl/sdl-core-0442339cc9497720/VP06",
+      "kind": "viewpoint",
+      "label": "VP06 \u2014 Activities and delivery plan",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "sdl-core-0442339cc9497720",
+        "uri": "sdl-view://xfmd/VP06?consumer=xfmd&target=main",
+        "revision": "8c3af91f47a684084eccefae60abb88f31781d9e12dc4889f350e8c89ff0a453"
+      }
+    },
+    {
+      "id": "sdl/sdl-core-0442339cc9497720/VP07",
+      "kind": "viewpoint",
+      "label": "VP07 \u2014 Features across the architecture",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "sdl-core-0442339cc9497720",
+        "uri": "sdl-view://xfmd/VP07?consumer=xfmd&target=main",
+        "revision": "8c3af91f47a684084eccefae60abb88f31781d9e12dc4889f350e8c89ff0a453"
+      }
+    },
+    {
+      "id": "sdl/sdl-core-0442339cc9497720/VP08",
+      "kind": "viewpoint",
+      "label": "VP08 \u2014 Channel contracts and sequences",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "sdl-core-0442339cc9497720",
+        "uri": "sdl-view://xfmd/VP08?consumer=xfmd&target=main",
+        "revision": "8c3af91f47a684084eccefae60abb88f31781d9e12dc4889f350e8c89ff0a453"
+      }
+    },
+    {
+      "id": "sdl/sdl-core-0442339cc9497720/VP09",
+      "kind": "viewpoint",
+      "label": "VP09 \u2014 Dataset, Datagram and persistent Database",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "sdl-core-0442339cc9497720",
+        "uri": "sdl-view://xfmd/VP09?consumer=xfmd&target=main",
+        "revision": "8c3af91f47a684084eccefae60abb88f31781d9e12dc4889f350e8c89ff0a453"
+      }
+    },
+    {
+      "id": "sdl/sdl-core-0442339cc9497720/VP10",
+      "kind": "viewpoint",
+      "label": "VP10 \u2014 Datagram encoding and packets",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "sdl-core-0442339cc9497720",
+        "uri": "sdl-view://xfmd/VP10?consumer=xfmd&target=main",
+        "revision": "8c3af91f47a684084eccefae60abb88f31781d9e12dc4889f350e8c89ff0a453"
+      }
+    },
+    {
+      "id": "sdl/sdl-core-0442339cc9497720/VP11",
+      "kind": "viewpoint",
+      "label": "VP11 \u2014 Properties, traceability and model gaps",
+      "state": "available",
+      "children": [
+        "sdl/sdl-core-0442339cc9497720/VP11/kind/container"
+      ],
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "sdl-core-0442339cc9497720",
+        "uri": "sdl-view://xfmd/VP11?consumer=xfmd&target=main",
+        "revision": "8c3af91f47a684084eccefae60abb88f31781d9e12dc4889f350e8c89ff0a453"
+      }
+    },
+    {
+      "id": "sdl/navigation-70f0593e03655d5c/VP01",
+      "kind": "viewpoint",
+      "label": "VP01 \u2014 Use cases and traceability",
+      "state": "available",
+      "children": [
+        "sdl/navigation-70f0593e03655d5c/VP01/diagram/VP01-EditDocuments",
+        "sdl/navigation-70f0593e03655d5c/VP01/diagram/VP01-ReadDocuments",
+        "sdl/navigation-70f0593e03655d5c/VP01/diagram/VP01-SelectGeneratedView",
+        "sdl/navigation-70f0593e03655d5c/VP01/diagram/VP01-feature-DocumentNavigation",
+        "sdl/navigation-70f0593e03655d5c/VP01/diagram/VP01-feature-LivePreview",
+        "sdl/navigation-70f0593e03655d5c/VP01/diagram/VP01-feature-WorkPathNavigation",
+        "sdl/navigation-70f0593e03655d5c/VP01/kind/actor",
+        "sdl/navigation-70f0593e03655d5c/VP01/kind/feature",
+        "sdl/navigation-70f0593e03655d5c/VP01/kind/functionality",
+        "sdl/navigation-70f0593e03655d5c/VP01/kind/usecase"
+      ],
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "navigation-70f0593e03655d5c",
+        "uri": "sdl-view://xfmd/VP01?consumer=xfmd&target=main",
+        "revision": "3002709d67729fd3595ab27c484794d77b675ed28f927db0aec1e23234d288e2"
+      }
+    },
+    {
+      "id": "sdl/navigation-70f0593e03655d5c/VP02",
+      "kind": "viewpoint",
+      "label": "VP02 \u2014 Architecture and logical decomposition",
+      "state": "available",
+      "children": [
+        "sdl/navigation-70f0593e03655d5c/VP02/diagram/VP02-roots",
+        "sdl/navigation-70f0593e03655d5c/VP02/diagram/VP02-XfmdDesktop",
+        "sdl/navigation-70f0593e03655d5c/VP02/kind/container",
+        "sdl/navigation-70f0593e03655d5c/VP02/kind/unit"
+      ],
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "navigation-70f0593e03655d5c",
+        "uri": "sdl-view://xfmd/VP02?consumer=xfmd&target=main",
+        "revision": "3002709d67729fd3595ab27c484794d77b675ed28f927db0aec1e23234d288e2"
+      }
+    },
+    {
+      "id": "sdl/navigation-70f0593e03655d5c/VP03",
+      "kind": "viewpoint",
+      "label": "VP03 \u2014 Responsibilities and capabilities across the architecture",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "navigation-70f0593e03655d5c",
+        "uri": "sdl-view://xfmd/VP03?consumer=xfmd&target=main",
+        "revision": "3002709d67729fd3595ab27c484794d77b675ed28f927db0aec1e23234d288e2"
+      }
+    },
+    {
+      "id": "sdl/navigation-70f0593e03655d5c/VP04",
+      "kind": "viewpoint",
+      "label": "VP04 \u2014 Interfaces and collaboration",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "navigation-70f0593e03655d5c",
+        "uri": "sdl-view://xfmd/VP04?consumer=xfmd&target=main",
+        "revision": "3002709d67729fd3595ab27c484794d77b675ed28f927db0aec1e23234d288e2"
+      }
+    },
+    {
+      "id": "sdl/navigation-70f0593e03655d5c/VP05",
+      "kind": "viewpoint",
+      "label": "VP05 \u2014 Dependencies by mode",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "navigation-70f0593e03655d5c",
+        "uri": "sdl-view://xfmd/VP05?consumer=xfmd&target=main",
+        "revision": "3002709d67729fd3595ab27c484794d77b675ed28f927db0aec1e23234d288e2"
+      }
+    },
+    {
+      "id": "sdl/navigation-70f0593e03655d5c/VP06",
+      "kind": "viewpoint",
+      "label": "VP06 \u2014 Activities and delivery plan",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "navigation-70f0593e03655d5c",
+        "uri": "sdl-view://xfmd/VP06?consumer=xfmd&target=main",
+        "revision": "3002709d67729fd3595ab27c484794d77b675ed28f927db0aec1e23234d288e2"
+      }
+    },
+    {
+      "id": "sdl/navigation-70f0593e03655d5c/VP07",
+      "kind": "viewpoint",
+      "label": "VP07 \u2014 Features across the architecture",
+      "state": "available",
+      "children": [
+        "sdl/navigation-70f0593e03655d5c/VP07/diagram/VP07-DocumentNavigation-NormalDesktop",
+        "sdl/navigation-70f0593e03655d5c/VP07/diagram/VP07-LivePreview-NormalDesktop",
+        "sdl/navigation-70f0593e03655d5c/VP07/diagram/VP07-WorkPathNavigation-NormalDesktop",
+        "sdl/navigation-70f0593e03655d5c/VP07/kind/container",
+        "sdl/navigation-70f0593e03655d5c/VP07/kind/feature",
+        "sdl/navigation-70f0593e03655d5c/VP07/kind/functionality",
+        "sdl/navigation-70f0593e03655d5c/VP07/kind/mode",
+        "sdl/navigation-70f0593e03655d5c/VP07/kind/unit"
+      ],
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "navigation-70f0593e03655d5c",
+        "uri": "sdl-view://xfmd/VP07?consumer=xfmd&target=main",
+        "revision": "3002709d67729fd3595ab27c484794d77b675ed28f927db0aec1e23234d288e2"
+      }
+    },
+    {
+      "id": "sdl/navigation-70f0593e03655d5c/VP08",
+      "kind": "viewpoint",
+      "label": "VP08 \u2014 Channel contracts and sequences",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "navigation-70f0593e03655d5c",
+        "uri": "sdl-view://xfmd/VP08?consumer=xfmd&target=main",
+        "revision": "3002709d67729fd3595ab27c484794d77b675ed28f927db0aec1e23234d288e2"
+      }
+    },
+    {
+      "id": "sdl/navigation-70f0593e03655d5c/VP09",
+      "kind": "viewpoint",
+      "label": "VP09 \u2014 Dataset, Datagram and persistent Database",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "navigation-70f0593e03655d5c",
+        "uri": "sdl-view://xfmd/VP09?consumer=xfmd&target=main",
+        "revision": "3002709d67729fd3595ab27c484794d77b675ed28f927db0aec1e23234d288e2"
+      }
+    },
+    {
+      "id": "sdl/navigation-70f0593e03655d5c/VP10",
+      "kind": "viewpoint",
+      "label": "VP10 \u2014 Datagram encoding and packets",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "navigation-70f0593e03655d5c",
+        "uri": "sdl-view://xfmd/VP10?consumer=xfmd&target=main",
+        "revision": "3002709d67729fd3595ab27c484794d77b675ed28f927db0aec1e23234d288e2"
+      }
+    },
+    {
+      "id": "sdl/navigation-70f0593e03655d5c/VP11",
+      "kind": "viewpoint",
+      "label": "VP11 \u2014 Properties, traceability and model gaps",
+      "state": "available",
+      "children": [
+        "sdl/navigation-70f0593e03655d5c/VP11/kind/actor",
+        "sdl/navigation-70f0593e03655d5c/VP11/kind/container",
+        "sdl/navigation-70f0593e03655d5c/VP11/kind/feature",
+        "sdl/navigation-70f0593e03655d5c/VP11/kind/functionality",
+        "sdl/navigation-70f0593e03655d5c/VP11/kind/mode",
+        "sdl/navigation-70f0593e03655d5c/VP11/kind/unit",
+        "sdl/navigation-70f0593e03655d5c/VP11/kind/usecase"
+      ],
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "navigation-70f0593e03655d5c",
+        "uri": "sdl-view://xfmd/VP11?consumer=xfmd&target=main",
+        "revision": "3002709d67729fd3595ab27c484794d77b675ed28f927db0aec1e23234d288e2"
+      }
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP01",
+      "kind": "viewpoint",
+      "label": "VP01 \u2014 Use cases and traceability",
+      "state": "available",
+      "children": [
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-BrowseSdpProject",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-BrowseWorkspace",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-ConfigurePreferences",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-EditDocuments",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-NavigateDocuments",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-PublishPages",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-ReadDiagrams",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-ReadDocuments",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-ScrollDocuments",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-SelectGeneratedView",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-UseFullscreen",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-feature-ChapterNavigation",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-feature-ConfigurableScrolling",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-feature-DocumentNavigation",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-feature-DocumentReferences",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-feature-LivePreview",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-feature-MarkdownPresentation",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-feature-MermaidDiagrams",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-feature-PagedPublication",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-feature-SynchronizedScrolling",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-feature-WorkPathNavigation",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/kind/actor",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/kind/feature",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/kind/functionality",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/kind/usecase"
+      ],
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP01?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP02",
+      "kind": "viewpoint",
+      "label": "VP02 \u2014 Architecture and logical decomposition",
+      "state": "available",
+      "children": [
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP02/diagram/VP02-roots",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP02/diagram/VP02-Application",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP02/diagram/VP02-XfmdDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP02/kind/container",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP02/kind/unit"
+      ],
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP02?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP03",
+      "kind": "viewpoint",
+      "label": "VP03 \u2014 Responsibilities and capabilities across the architecture",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP03?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP04",
+      "kind": "viewpoint",
+      "label": "VP04 \u2014 Interfaces and collaboration",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP04?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP05",
+      "kind": "viewpoint",
+      "label": "VP05 \u2014 Dependencies by mode",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP05?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP06",
+      "kind": "viewpoint",
+      "label": "VP06 \u2014 Activities and delivery plan",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP06?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP07",
+      "kind": "viewpoint",
+      "label": "VP07 \u2014 Features across the architecture",
+      "state": "available",
+      "children": [
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/diagram/VP07-ChapterNavigation-NormalDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/diagram/VP07-ConfigurableScrolling-NormalDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/diagram/VP07-DocumentNavigation-NormalDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/diagram/VP07-DocumentReferences-NormalDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/diagram/VP07-LivePreview-NormalDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/diagram/VP07-MarkdownPresentation-NormalDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/diagram/VP07-MermaidDiagrams-NormalDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/diagram/VP07-PagedPublication-NormalDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/diagram/VP07-SynchronizedScrolling-NormalDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/diagram/VP07-WorkPathNavigation-NormalDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/kind/container",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/kind/feature",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/kind/functionality",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/kind/mode",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/kind/unit"
+      ],
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP07?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP08",
+      "kind": "viewpoint",
+      "label": "VP08 \u2014 Channel contracts and sequences",
+      "state": "available",
+      "children": [
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-ChooserOpensThenChangesRoot",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-ContextMenuDismissed",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-DiagramScenePrepared",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-DirtyGeneratedDeliveryRejected",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-DirtyOpenCancelled",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-EditedPreviewPublished",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-ExternalTargetHandedOff",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-FavoriteFileOpens",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-FavoriteFolderChangesRoot",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-FullscreenChangesPresentation",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-GeneratedReplacementReleasesOldLease",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-GeneratedSelectionSupersedes",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-InvalidSelectionRetainsChild",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-PdfCancelledBeforePublication",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-PdfSnapshotPublished",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-PreferencesPersistBeforeAdoption",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-PreviewResourcesPrepared",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-PreviewScrollSynchronizesEditor",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-ReferenceHeadingsLoaded",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-ReleaseRetryAfterSendFailure",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-SaveThenReadFails",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-StalePreviewDiscarded",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/kind/channel",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/kind/contract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/kind/message",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/kind/mode",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/kind/scenario",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/kind/unit",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/kind/usecase"
+      ],
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP08?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP09",
+      "kind": "viewpoint",
+      "label": "VP09 \u2014 Dataset, Datagram and persistent Database",
+      "state": "available",
+      "children": [
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-data-FrozenExportSnapshot",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-data-GeneratedSelectionState",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-data-MainDocumentState",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-ContextInteractionContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-DiagramInterpretationContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-DiagramLayoutCallsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-DocumentCallsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-DocumentNotificationsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-DocumentStateChangesContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-DocumentStateShape",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-EditIntentsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-ExportInterpretationContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-ExportLayoutContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-ExportSnapshotShape",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-ExternalOpeningContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-GeneratedAdmissionContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-GeneratedDeliveryContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-GeneratedDocumentCallsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-GeneratedIntentsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-GenerationLifecycleContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-GenerationStateShape",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-IndexChangesContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-IndexIntentsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-InteractionObservationShape",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-InterpretationCallsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-LayoutCallsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-LeaseLifecycleContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-LeaseNotificationsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-NavigationCallsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-OpeningPolicyContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-PreferenceChangesContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-PresentationEventsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-PreviewAdmissionContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-PublicationDrawingContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-PublicationInputsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-PublicationIntentsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-PublicationStateContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-ReferenceInterpretationContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-ReferenceStorageContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-ResourcePreparationContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-ScheduledWorkContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-StorageCallsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-UnsavedAdmissionContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-ViewportChangesContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-WindowPresentationContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-WorkspaceChangesContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-WorkspaceIntentsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/kind/contract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/kind/dataset",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/kind/field",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/kind/message",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/kind/unit"
+      ],
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP09?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP10",
+      "kind": "viewpoint",
+      "label": "VP10 \u2014 Datagram encoding and packets",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP10?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP11",
+      "kind": "viewpoint",
+      "label": "VP11 \u2014 Properties, traceability and model gaps",
+      "state": "available",
+      "children": [
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/actor",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/channel",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/container",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/contract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/dataset",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/feature",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/field",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/functionality",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/interface",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/message",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/mode",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/scenario",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/unit",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/usecase"
+      ],
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP11?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    }
+  ],
+  "producer_source_head": "3d265d1ef74181da92dc104f65a33b49bd7b7b1c"
+}

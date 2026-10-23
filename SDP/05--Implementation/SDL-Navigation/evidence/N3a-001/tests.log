@@ -1,0 +1,33 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd-sdl-navigation/build-ui
+Test project /home/warloc/git/xfmd-sdl-navigation/build-ui
+      Start 22: MermaidGuiTest
+      Start 62: MermaidRustTests
+      Start 64: DiagramReadingTest
+ 1/12 Test #22: MermaidGuiTest ...................   Passed   17.69 sec
+      Start 89: SduiWorkflowGuiTest
+ 2/12 Test #62: MermaidRustTests .................   Passed   20.90 sec
+      Start 79: SdpNavigationGuiTest
+ 3/12 Test #64: DiagramReadingTest ...............   Passed   22.55 sec
+      Start 65: MermaidPdfTest
+ 4/12 Test #89: SduiWorkflowGuiTest ..............   Passed    7.89 sec
+      Start 83: StandaloneMermaidGuiTest
+ 5/12 Test #65: MermaidPdfTest ...................   Passed    3.89 sec
+      Start 61: DiagramLayoutTest
+ 6/12 Test #83: StandaloneMermaidGuiTest .........   Passed    1.97 sec
+      Start 67: MermaidDependencies
+ 7/12 Test #67: MermaidDependencies ..............   Passed    0.40 sec
+      Start 63: DiagramPreparationTest
+ 8/12 Test #63: DiagramPreparationTest ...........   Passed    0.11 sec
+      Start 82: StandaloneMermaidTest
+ 9/12 Test #82: StandaloneMermaidTest ............   Passed    0.27 sec
+      Start 66: DiagramWorkerTest
+10/12 Test #66: DiagramWorkerTest ................   Passed    0.01 sec
+11/12 Test #61: DiagramLayoutTest ................   Passed    2.64 sec
+12/12 Test #79: SdpNavigationGuiTest .............   Passed   12.40 sec
+
+100% tests passed, 0 tests failed out of 12
+
+Label Time Summary:
+GUI    =  39.95 sec*proc (4 tests)
+
+Total Test time (real) =  33.31 sec

@@ -1,0 +1,83 @@
+Start testing: Oct 06 10:05 CEST
+----------------------------------------------------------
+69/87 Testing: BuildVersionTest
+69/87 Test: BuildVersionTest
+Command: "/usr/bin/python3.12" "/home/warloc/git/xfmd-sdl-navigation/tools/check_build_version.py" "/home/warloc/git/xfmd-sdl-navigation/build-ui/xfmd" "/home/warloc/git/xfmd-sdl-navigation/build-ui/generated/xfmd-build.json"
+Directory: /home/warloc/git/xfmd-sdl-navigation/build-ui
+"BuildVersionTest" start time: Oct 06 10:05 CEST
+Output:
+----------------------------------------------------------
+xfmd 0.5 sprint/009/phase/057-favorites:206+dirty
+<end of output>
+Test time =   0.09 sec
+----------------------------------------------------------
+Test Passed.
+"BuildVersionTest" end time: Oct 06 10:05 CEST
+"BuildVersionTest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+80/87 Testing: SdpIntegrationTest
+80/87 Test: SdpIntegrationTest
+Command: "/home/warloc/git/xfmd-sdl-navigation/build-ui/SdpIntegrationTest"
+Directory: /home/warloc/git/xfmd-sdl-navigation/build-ui
+"SdpIntegrationTest" start time: Oct 06 10:05 CEST
+Output:
+----------------------------------------------------------
+PASS
+<end of output>
+Test time =   0.15 sec
+----------------------------------------------------------
+Test Passed.
+"SdpIntegrationTest" end time: Oct 06 10:05 CEST
+"SdpIntegrationTest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+82/87 Testing: StandaloneMermaidTest
+82/87 Test: StandaloneMermaidTest
+Command: "/home/warloc/git/xfmd-sdl-navigation/build-ui/StandaloneMermaidTest"
+Directory: /home/warloc/git/xfmd-sdl-navigation/build-ui
+"StandaloneMermaidTest" start time: Oct 06 10:05 CEST
+Output:
+----------------------------------------------------------
+PASS
+<end of output>
+Test time =   0.12 sec
+----------------------------------------------------------
+Test Passed.
+"StandaloneMermaidTest" end time: Oct 06 10:05 CEST
+"StandaloneMermaidTest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+84/87 Testing: HeadingLinkTest
+84/87 Test: HeadingLinkTest
+Command: "/home/warloc/git/xfmd-sdl-navigation/build-ui/HeadingLinkTest"
+Directory: /home/warloc/git/xfmd-sdl-navigation/build-ui
+"HeadingLinkTest" start time: Oct 06 10:05 CEST
+Output:
+----------------------------------------------------------
+PASS
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"HeadingLinkTest" end time: Oct 06 10:05 CEST
+"HeadingLinkTest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+86/87 Testing: SdpRuntimeTest
+86/87 Test: SdpRuntimeTest
+Command: "/home/warloc/git/xfmd-sdl-navigation/build-ui/SdpRuntimeTest"
+Directory: /home/warloc/git/xfmd-sdl-navigation/build-ui
+"SdpRuntimeTest" start time: Oct 06 10:05 CEST
+Output:
+----------------------------------------------------------
+PASS
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"SdpRuntimeTest" end time: Oct 06 10:05 CEST
+"SdpRuntimeTest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 06 10:05 CEST

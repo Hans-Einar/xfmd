@@ -1,0 +1,6 @@
+flowchart LR
+    n_Documents["Documents (unit)"]
+    n_Publication["Publication (unit)"]
+    n_PublicationInputs["PublicationInputs (channel)"]
+    n_Documents -->|sender| n_PublicationInputs
+    n_PublicationInputs -->|receiver| n_Publication

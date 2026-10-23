@@ -1,0 +1,191 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd-sdl-navigation/build-ui
+Test project /home/warloc/git/xfmd-sdl-navigation/build-ui
+      Start  1: PortContractTest
+ 1/91 Test  #1: PortContractTest .................   Passed    0.02 sec
+      Start  2: DocumentTest
+ 2/91 Test  #2: DocumentTest .....................   Passed    0.16 sec
+      Start  3: FileOpenPolicyTest
+ 3/91 Test  #3: FileOpenPolicyTest ...............   Passed    0.03 sec
+      Start  4: InterpreterTest
+ 4/91 Test  #4: InterpreterTest ..................   Passed    0.01 sec
+      Start  5: RendererTest
+ 5/91 Test  #5: RendererTest .....................   Passed    0.01 sec
+      Start  6: PreviewTest
+ 6/91 Test  #6: PreviewTest ......................   Passed    0.01 sec
+      Start  7: ScrollTest
+ 7/91 Test  #7: ScrollTest .......................   Passed    0.01 sec
+      Start  8: WorkPathTest
+ 8/91 Test  #8: WorkPathTest .....................   Passed    0.34 sec
+      Start  9: ExternalBrowserTest
+ 9/91 Test  #9: ExternalBrowserTest ..............   Passed    0.04 sec
+      Start 10: DocumentIndexTest
+10/91 Test #10: DocumentIndexTest ................   Passed    0.01 sec
+      Start 11: ReferenceWorkerTest
+11/91 Test #11: ReferenceWorkerTest ..............   Passed    0.01 sec
+      Start 12: NavigationTest
+12/91 Test #12: NavigationTest ...................   Passed    0.00 sec
+      Start 13: BlueprintStructure
+13/91 Test #13: BlueprintStructure ...............   Passed    0.87 sec
+      Start 14: LayerBoundaries
+14/91 Test #14: LayerBoundaries ..................   Passed    0.04 sec
+      Start 15: SdpDynamicGuiTest
+15/91 Test #15: SdpDynamicGuiTest ................   Passed    3.93 sec
+      Start 16: SdpPanelGuiTest
+16/91 Test #16: SdpPanelGuiTest ..................   Passed    1.24 sec
+      Start 17: FavoritesGuiTest
+17/91 Test #17: FavoritesGuiTest .................   Passed    9.21 sec
+      Start 18: DocumentZoomGuiTest
+18/91 Test #18: DocumentZoomGuiTest ..............   Passed   24.21 sec
+      Start 19: PathWorkspaceGuiTest
+19/91 Test #19: PathWorkspaceGuiTest .............   Passed   20.35 sec
+      Start 20: OpenPathDialogGuiTest
+20/91 Test #20: OpenPathDialogGuiTest ............   Passed    6.96 sec
+      Start 21: FileRoutingGuiTest
+21/91 Test #21: FileRoutingGuiTest ...............   Passed   14.99 sec
+      Start 22: MermaidGuiTest
+22/91 Test #22: MermaidGuiTest ...................   Passed   12.21 sec
+      Start 23: RecentFilesGuiTest
+23/91 Test #23: RecentFilesGuiTest ...............   Passed    0.42 sec
+      Start 24: PreviewSelectionGuiTest
+24/91 Test #24: PreviewSelectionGuiTest ..........   Passed    8.67 sec
+      Start 25: CompactWorkspaceTest
+25/91 Test #25: CompactWorkspaceTest .............   Passed    4.83 sec
+      Start 26: ReadingColorsGuiTest
+26/91 Test #26: ReadingColorsGuiTest .............   Passed    2.14 sec
+      Start 27: TreeActionsTest
+27/91 Test #27: TreeActionsTest ..................   Passed    5.88 sec
+      Start 28: AppearancePreferencesTest
+28/91 Test #28: AppearancePreferencesTest ........   Passed    0.42 sec
+      Start 29: AppearanceGuiTest
+29/91 Test #29: AppearanceGuiTest ................   Passed    4.07 sec
+      Start 30: UiControlsTest
+30/91 Test #30: UiControlsTest ...................   Passed    1.61 sec
+      Start 31: BrowserPreferencesTest
+31/91 Test #31: BrowserPreferencesTest ...........   Passed    0.30 sec
+      Start 32: IndexGuiTest
+32/91 Test #32: IndexGuiTest .....................   Passed    3.47 sec
+      Start 33: WorkspaceTest
+33/91 Test #33: WorkspaceTest ....................   Passed    0.25 sec
+      Start 34: PresentationTest
+34/91 Test #34: PresentationTest .................   Passed    1.51 sec
+      Start 35: ScrollingTest
+35/91 Test #35: ScrollingTest ....................   Passed    1.21 sec
+      Start 36: NavigationGuiTest
+36/91 Test #36: NavigationGuiTest ................   Passed    2.50 sec
+      Start 37: SidebarGuiTest
+37/91 Test #37: SidebarGuiTest ...................   Passed    5.77 sec
+      Start 38: WheelGuiTest
+38/91 Test #38: WheelGuiTest .....................   Passed   28.82 sec
+      Start 39: WorkPathGuiTest
+39/91 Test #39: WorkPathGuiTest ..................   Passed   10.35 sec
+      Start 40: PointerTest
+40/91 Test #40: PointerTest ......................   Passed    3.71 sec
+      Start 41: TablePreviewTest
+41/91 Test #41: TablePreviewTest .................   Passed    1.46 sec
+      Start 42: DiskFullFailure
+42/91 Test #42: DiskFullFailure ..................   Passed    0.08 sec
+      Start 43: BlueprintSymbols
+43/91 Test #43: BlueprintSymbols .................   Passed    0.11 sec
+      Start 44: ScrollMotionTest
+44/91 Test #44: ScrollMotionTest .................   Passed    0.01 sec
+      Start 45: PreferencesTest
+45/91 Test #45: PreferencesTest ..................   Passed    0.22 sec
+      Start 46: TypographyTest
+46/91 Test #46: TypographyTest ...................   Passed    0.20 sec
+      Start 47: PageLayoutTest
+47/91 Test #47: PageLayoutTest ...................   Passed    0.04 sec
+      Start 48: PagedPreviewTest
+48/91 Test #48: PagedPreviewTest .................   Passed    1.71 sec
+      Start 49: ExportJobTest
+49/91 Test #49: ExportJobTest ....................   Passed    0.01 sec
+      Start 50: PdfExportTest
+50/91 Test #50: PdfExportTest ....................   Passed    0.08 sec
+      Start 51: ExportGuiTest
+51/91 Test #51: ExportGuiTest ....................   Passed    0.29 sec
+      Start 52: PdfFidelityTest
+52/91 Test #52: PdfFidelityTest ..................   Passed    8.01 sec
+      Start 53: PdfFlushFailure
+53/91 Test #53: PdfFlushFailure ..................   Passed    0.15 sec
+      Start 54: FullscreenTest
+54/91 Test #54: FullscreenTest ...................   Passed    3.86 sec
+      Start 55: IconTest
+55/91 Test #55: IconTest .........................   Passed    0.29 sec
+      Start 56: CanvasTest
+56/91 Test #56: CanvasTest .......................   Passed    0.21 sec
+      Start 57: TableTest
+57/91 Test #57: TableTest ........................   Passed    1.19 sec
+      Start 58: ReadingColorsTest
+58/91 Test #58: ReadingColorsTest ................   Passed    0.05 sec
+      Start 59: RichPreviewTest
+59/91 Test #59: RichPreviewTest ..................   Passed    0.11 sec
+      Start 60: ThemeProfilesTest
+60/91 Test #60: ThemeProfilesTest ................   Passed    0.02 sec
+      Start 61: DiagramLayoutTest
+61/91 Test #61: DiagramLayoutTest ................   Passed    1.50 sec
+      Start 62: MermaidBootstrapTest
+62/91 Test #62: MermaidBootstrapTest .............   Passed    1.10 sec
+      Start 63: MermaidRustTests
+63/91 Test #63: MermaidRustTests .................   Passed   47.23 sec
+      Start 64: DiagramPreparationTest
+64/91 Test #64: DiagramPreparationTest ...........   Passed    0.08 sec
+      Start 65: DiagramReadingTest
+65/91 Test #65: DiagramReadingTest ...............   Passed    5.64 sec
+      Start 66: MermaidPdfTest
+66/91 Test #66: MermaidPdfTest ...................   Passed    1.21 sec
+      Start 67: DiagramWorkerTest
+67/91 Test #67: DiagramWorkerTest ................   Passed    0.01 sec
+      Start 68: MermaidDependencies
+68/91 Test #68: MermaidDependencies ..............   Passed    0.11 sec
+      Start 69: BuildIdentityTest
+69/91 Test #69: BuildIdentityTest ................   Passed    0.84 sec
+      Start 70: BuildVersionTest
+70/91 Test #70: BuildVersionTest .................   Passed    0.07 sec
+      Start 71: DocumentViewsGuiTest
+71/91 Test #71: DocumentViewsGuiTest .............   Passed    3.30 sec
+      Start 72: DocumentEndpointTest
+72/91 Test #72: DocumentEndpointTest .............   Passed    0.88 sec
+      Start 73: WindowEndpointBoundaryTest
+73/91 Test #73: WindowEndpointBoundaryTest .......   Passed    2.12 sec
+      Start 74: DocumentLeaseGuiTest
+74/91 Test #74: DocumentLeaseGuiTest .............   Passed   14.31 sec
+      Start 75: ThemePopupGuiTest
+75/91 Test #75: ThemePopupGuiTest ................   Passed    4.24 sec
+      Start 76: DocumentZoomPdfTest
+76/91 Test #76: DocumentZoomPdfTest ..............   Passed    2.43 sec
+      Start 77: DocumentZoomDpiTest
+77/91 Test #77: DocumentZoomDpiTest ..............   Passed   24.29 sec
+      Start 78: SdpWatchTest
+78/91 Test #78: SdpWatchTest .....................   Passed    6.74 sec
+      Start 79: SdpProtocolTest
+79/91 Test #79: SdpProtocolTest ..................   Passed    2.37 sec
+      Start 80: SdpNavigationGuiTest
+80/91 Test #80: SdpNavigationGuiTest .............   Passed   11.84 sec
+      Start 81: SdpIntegrationTest
+81/91 Test #81: SdpIntegrationTest ...............   Passed    0.27 sec
+      Start 82: SdpDiscoveryTest
+82/91 Test #82: SdpDiscoveryTest .................   Passed    0.01 sec
+      Start 83: StandaloneMermaidTest
+83/91 Test #83: StandaloneMermaidTest ............   Passed    0.18 sec
+      Start 84: StandaloneMermaidGuiTest
+84/91 Test #84: StandaloneMermaidGuiTest .........   Passed    1.65 sec
+      Start 85: HeadingLinkTest
+85/91 Test #85: HeadingLinkTest ..................   Passed    0.02 sec
+      Start 86: HeadingLinkGuiTest
+86/91 Test #86: HeadingLinkGuiTest ...............   Passed    1.09 sec
+      Start 87: SdpRuntimeTest
+87/91 Test #87: SdpRuntimeTest ...................   Passed    0.01 sec
+      Start 88: SdpRuntimeGuiTest
+88/91 Test #88: SdpRuntimeGuiTest ................   Passed   16.61 sec
+      Start 89: SdpDisplayTest
+89/91 Test #89: SdpDisplayTest ...................   Passed    0.00 sec
+      Start 90: SduiWorkflowGuiTest
+90/91 Test #90: SduiWorkflowGuiTest ..............   Passed    5.22 sec
+      Start 91: SdpOverviewGuiTest
+91/91 Test #91: SdpOverviewGuiTest ...............   Passed    3.01 sec
+
+100% tests passed, 0 tests failed out of 91
+
+Label Time Summary:
+GUI    = 275.75 sec*proc (44 tests)
+
+Total Test time (real) = 357.16 sec

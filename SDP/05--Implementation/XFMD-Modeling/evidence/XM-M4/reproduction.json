@@ -1,0 +1,19 @@
+{
+  "command": [
+    "python3",
+    "SDP/05--Implementation/XFMD-Modeling/render_model.py",
+    "--sdl",
+    "/tmp/xfmd-modeling-0xt1ad54/bin/sdl",
+    "--sdui",
+    "/tmp/xfmd-modeling-0xt1ad54/bin/sdui",
+    "--output",
+    "/tmp/xfmd-model-reproduction-e8zbj79g"
+  ],
+  "exitCode": 0,
+  "matchingOutputs": 243,
+  "originalSources": {
+    "SDP/SDL/XFMD/XfmdDesktop.design": "e43bc3acf38de1a89d5c6358d3c2fc989ca8d6aa30e4f8b6ed775e41ccfe7f31",
+    "SDP/SDL/XFMD/SDUI/XfmdDesktop/Desktop.sdui": "b58de16b3d04fddac8592674dfab43f8264ccf53f286502f034f62665bdaf214"
+  },
+  "note": "Output file hashes match; command/output-directory paths in provenance differ intentionally."
+}

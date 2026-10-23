@@ -1,0 +1,58 @@
+   Compiling proc-macro2 v1.0.106
+   Compiling unicode-ident v1.0.22
+   Compiling quote v1.0.45
+   Compiling libm v0.2.15
+   Compiling serde_core v1.0.228
+   Compiling libc v0.2.180
+   Compiling memchr v2.7.6
+   Compiling version_check v0.9.5
+   Compiling slotmap v1.1.1
+   Compiling syn v2.0.117
+   Compiling zmij v1.0.16
+   Compiling find-msvc-tools v0.1.8
+   Compiling shlex v1.3.0
+   Compiling serde v1.0.228
+   Compiling cc v1.2.54
+   Compiling core_maths v0.1.1
+   Compiling aho-corasick v1.1.4
+   Compiling regex-syntax v0.8.8
+   Compiling serde_derive v1.0.228
+   Compiling anyhow v1.0.103
+   Compiling tinyvec_macros v0.1.1
+   Compiling roxmltree v0.20.0
+   Compiling thiserror v2.0.18
+   Compiling serde_json v1.0.149
+   Compiling regex-automata v0.4.13
+   Compiling fontconfig-parser v0.5.8
+   Compiling tinyvec v1.10.0
+   Compiling memmap2 v0.9.11
+   Compiling thiserror-impl v2.0.18
+   Compiling mermaid-rs-renderer v0.3.1 (/home/warloc/git/mermaid-rs-renderer-xfmd-diagrams)
+   Compiling ttf-parser v0.25.1
+   Compiling ucd-trie v0.1.7
+   Compiling itoa v1.0.17
+   Compiling log v0.4.29
+   Compiling json5 v1.3.1
+   Compiling regex v1.12.3
+   Compiling fontdb v0.23.0
+   Compiling once_cell v1.21.4
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1m 32s
+     Running tests/packet_readability_suite.rs (target/debug/deps/packet_readability_suite-996c678397657111)
+
+running 4 tests
+test adjacent_single_bits_and_row_splits_keep_exact_ranges ... ok
+test default_font_measurement_preserves_regular_packet ... ok
+test n12_labels_and_boundaries_are_readable_without_changing_bit_ratios ... ok
+test high_offsets_and_unbreakable_legend_expand_bounds ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/planning_profile_suite.rs (target/debug/deps/planning_profile_suite-978f20bbc4c0d34f)
+
+running 3 tests
+test packet_rejects_overlapping_fields ... ok
+test packet_uses_bits_and_splits_rows ... ok
+test block_connectors_end_at_boundaries ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+

@@ -1,0 +1,2 @@
+CMAKE_BUILD_TYPE:STRING=Release
+SDP_TOOL_EXECUTABLE:FILEPATH=/home/warloc/.cache/sdptool/distribution/193f5fe8c1c6d15455561c00ce10ab39a3302a4ed320e25e870a73a904a61715-sdptool

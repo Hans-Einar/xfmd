@@ -1,0 +1,17 @@
+SDUI GUI dump | PreviewWorkspace | 160 columns | structural preview
+[ Sidebar ]       [ Open ]          [ Save ]          [ Editor ]        [ Split ]         [ Preview ]       [ Back ]          [ Forward ]       [ Light / Dark ]
+Document                                                                         Document path: [/project/README.md]
+### Files / Index                                                     ### Markdown preview area
+[ Reload ]        [ Markdown ]      [ Up ]           [ Open ]         Rendered Markdown area.
+**Folder tree**
+                                                                      Static representation.
+/project/docs
+                                                                      Images, formulas and diagrams
+/project/README.md
+                                                                      are represented by this region.
+**Folders / Files / Favorites**
+
+Favorites selected: docs; README.md.
+
+Right-click actions belong to the native UI.
+Concept: preview mode. The native document remains editable through its editor mode.

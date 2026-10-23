@@ -1,0 +1,24 @@
+flowchart LR
+    n_ApplicationPreferences["ApplicationPreferences (functionality)"]
+    n_DocumentSession["DocumentSession (functionality)"]
+    n_FoxPresentation["FoxPresentation (functionality)"]
+    n_MarkdownInterpretation["MarkdownInterpretation (functionality)"]
+    n_PageComposition["PageComposition (functionality)"]
+    n_PagedPublication["PagedPublication (feature)"]
+    n_PdfExport["PdfExport (functionality)"]
+    n_PreviewPipeline["PreviewPipeline (functionality)"]
+    n_RenderLayout["RenderLayout (functionality)"]
+    n_SourceAnchorMapping["SourceAnchorMapping (functionality)"]
+    n_TypographyAndDrawing["TypographyAndDrawing (functionality)"]
+    n_WorkspaceControls["WorkspaceControls (functionality)"]
+    n_ApplicationPreferences -->|contributes-to| n_PagedPublication
+    n_DocumentSession -->|contributes-to| n_PagedPublication
+    n_FoxPresentation -->|contributes-to| n_PagedPublication
+    n_MarkdownInterpretation -->|contributes-to| n_PagedPublication
+    n_PageComposition -->|contributes-to| n_PagedPublication
+    n_PdfExport -->|contributes-to| n_PagedPublication
+    n_PreviewPipeline -->|contributes-to| n_PagedPublication
+    n_RenderLayout -->|contributes-to| n_PagedPublication
+    n_SourceAnchorMapping -->|contributes-to| n_PagedPublication
+    n_TypographyAndDrawing -->|contributes-to| n_PagedPublication
+    n_WorkspaceControls -->|contributes-to| n_PagedPublication

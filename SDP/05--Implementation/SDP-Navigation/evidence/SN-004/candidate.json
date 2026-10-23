@@ -1,0 +1,22 @@
+{
+  "recordedAt": "2026-10-01T19:43:06.587128+00:00",
+  "identity": {
+    "version": "0.4",
+    "branch": "sprint/009/phase/057-favorites",
+    "commit_number": 206,
+    "commit": "41fa4948c5377edd792ba3f503e6b92b0fd4717a",
+    "pull_request": null,
+    "dirty": true,
+    "display": "0.4 sprint/009/phase/057-favorites:206+dirty"
+  },
+  "productBaseline": "SN-003/candidate.json plus SN-003/product.patch and new-product-sources.tar.gz; apply SN-004/version.patch",
+  "baselineManifestSha256": "5f19403a22ba97cdb7c811945e36789e6f9bcdecb530c277bd2aa22835016f94",
+  "versionFileSha256": "c36fdbcf57ed3348e59da37beebc5c3696b3e451b7ffe16f2ebb6c9b5ee5916b",
+  "versionPatchSha256": "756f50bd1ec7622d48adc0992ffd5869e8225a508c003749d8c3ac237da8b615",
+  "productSourcesUnchangedFromSN003": true,
+  "modelSourcesUnchangedFromSN003": true,
+  "installedBinarySha256": "1cfb20cf177c91d35c7b66d41f890349a4ee9c11de3cf135b72950bd3be15eab",
+  "installationReceipt": "/home/warloc/.local/state/xfmd/installations/20261001T194155Z/receipt.json",
+  "previousBinarySha256": "485e236a927d4da95d1ca24c5885bfd7f65f50f91ebac336c6559903e32626bb",
+  "publicRelease": null
+}

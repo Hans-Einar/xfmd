@@ -55,6 +55,8 @@ void XfmdWindow::buildUi() {
   new FXMenuSeparator(viewMenu);
   new FXMenuRadio(viewMenu, "Window &wrap", commands, CommandRouter::WindowWrap);
   new FXMenuRadio(viewMenu, "&A4 page preview", commands, CommandRouter::A4);
+  new FXMenuCheck(viewMenu, "Full-size &diagrams (Wrap)", commands,
+                  CommandRouter::FullSizeDiagrams);
   new FXMenuSeparator(viewMenu);
   zoomMenu = new FXMenuPane(this);
   PreviewControls::addPresets(zoomMenu, *commands);
@@ -70,6 +72,18 @@ void XfmdWindow::buildUi() {
   add(goMenu, "&Forward\tAlt+Right", CommandRouter::Forward, UiIcon::Forward);
   new FXMenuTitle(bar, "&Go", nullptr, goMenu);
   buildToolbar();
+  sdpTools = new FXHorizontalFrame(this, LAYOUT_SIDE_TOP | LAYOUT_FILL_X, 0,0,0,0,6,6,0,0);
+  UiFactory factory(*ui);
+  new FXLabel(sdpTools, "SDP:", nullptr, LAYOUT_CENTER_Y);
+  new FXLabel(sdpTools, "KanBan:", nullptr, LAYOUT_CENTER_Y);
+  auto* addCard = factory.button(sdpTools, "Add\tKanBan create service is not yet available", commands, CommandRouter::KanbanAdd, UiIcon::Open);
+  auto* moveCard = factory.button(sdpTools, "Move\tKanBan move service is not yet available", commands, CommandRouter::KanbanMove, UiIcon::Forward);
+  addCard->disable(); moveCard->disable();
+  new FXLabel(sdpTools, "SDUI:", nullptr, LAYOUT_CENTER_Y);
+  sduiLaunch = factory.button(sdpTools, "Launch\tOpen a generated SDUI frame preview", commands, CommandRouter::SduiLaunch, UiIcon::Forward);
+  sduiLaunch->disable();
+  new FXLabel(sdpTools, "Sessions:", nullptr, LAYOUT_CENTER_Y);
+  sdpTools->hide();
   auto* pathRow =
       new FXHorizontalFrame(this, LAYOUT_SIDE_TOP | LAYOUT_FILL_X, 0, 0, 0, 0, 6, 6, 3, 3);
   dirtyLabel = new FXLabel(pathRow, "Path", nullptr, LAYOUT_CENTER_Y);

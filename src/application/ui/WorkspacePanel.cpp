@@ -25,6 +25,8 @@ WorkspacePanel::WorkspacePanel(FXComposite* parent, UiContext& context)
       new FXTabBar(tabRow, this, ID_TAB, LAYOUT_FILL_X | LAYOUT_CENTER_Y, 0, 0, 0, 0, 0, 0, 0, 0);
   new FXTabItem(tabs, "Files");
   new FXTabItem(tabs, "Index");
+  sdpTab = new FXTabItem(tabs, "SDP");
+  sdpTab->hide();
   refreshButton = ui.button(tabRow, "\tRefresh Files", this, ID_REFRESH, UiIcon::Refresh);
   markdown = ui.button(tabRow, "\tShow only Markdown files (off: all file types)", this,
                        ID_MARKDOWN, UiIcon::Markdown, ButtonRole::Pill);
@@ -65,6 +67,7 @@ WorkspacePanel::WorkspacePanel(FXComposite* parent, UiContext& context)
   tree->favoriteRequested = [this](const auto& path) { favorites->add(path); };
   recentFiles->favoriteRequested = [this](const auto& path) { favorites->add(path); };
   index = new IndexPanel(pages, context);
+  sdp = new SdpPanel(pages);
   std::vector<std::string> saved;
   for (int i = 0; i < 32; ++i) {
     auto key = "Path" + std::to_string(i);
@@ -137,6 +140,30 @@ void WorkspacePanel::setNameFilter(const std::string& pattern) {
   namePattern = pattern;
   onFilter(nullptr, 0, nullptr);
 }
+void WorkspacePanel::fitHeader() {
+  if (!sdpTab->shown())
+    return;
+  // Keep every tab reachable when Files controls reappear after another tab.
+  const auto minimum = tabs->getParent()->getDefaultWidth() + 4;
+  if (getWidth() < minimum) {
+    setWidth(minimum);
+    getParent()->recalc();
+  }
+}
+void WorkspacePanel::showSdp(bool show) {
+  if (show) {
+    sdpTab->show();
+    fitHeader();
+  } else {
+    sdpTab->hide();
+    if (tabs->getCurrent() == 2) {
+      tabs->setCurrent(0);
+      onTab(nullptr, 0, nullptr);
+    }
+  }
+  tabs->recalc();
+  recalc();
+}
 long WorkspacePanel::onTab(FXObject*, FXSelector, void*) {
   pages->setCurrent(tabs->getCurrent());
   for (auto* button : {markdown, upButton, openButton}) {
@@ -145,9 +172,11 @@ long WorkspacePanel::onTab(FXObject*, FXSelector, void*) {
     else
       button->hide();
   }
+  fitHeader();
   refreshButton->getParent()->recalc();
-  refreshButton->setTipText(tabs->getCurrent() == 0 ? "Refresh Files"
-                                                    : "Refresh Index from current buffer");
+  refreshButton->setTipText(tabs->getCurrent() == 0   ? "Refresh Files"
+                            : tabs->getCurrent() == 1 ? "Refresh Index from current buffer"
+                                                      : "Refresh SDP project");
   return 1;
 }
 long WorkspacePanel::onRefresh(FXObject*, FXSelector, void*) {
@@ -157,8 +186,10 @@ long WorkspacePanel::onRefresh(FXObject*, FXSelector, void*) {
       onApplyFilter(nullptr, 0, nullptr);
     else
       tree->refresh();
-  } else if (indexRefresh)
+  } else if (tabs->getCurrent() == 1 && indexRefresh)
     indexRefresh();
+  else if (tabs->getCurrent() == 2 && sdpRefresh)
+    sdpRefresh();
   return 1;
 }
 long WorkspacePanel::onUp(FXObject*, FXSelector, void*) {

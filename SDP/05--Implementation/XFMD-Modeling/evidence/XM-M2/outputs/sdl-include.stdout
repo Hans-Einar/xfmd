@@ -1,0 +1,19 @@
+{
+  "diagnostics": [
+    {
+      "code": "UNSUPPORTED_SYNTAX",
+      "message": "Unsupported character",
+      "node": "Diagnostic",
+      "span": {
+        "column": 9,
+        "end": 43,
+        "end_column": 10,
+        "end_line": 2,
+        "line": 2,
+        "node": "Span",
+        "start": 42
+      }
+    }
+  ],
+  "valid": false
+}

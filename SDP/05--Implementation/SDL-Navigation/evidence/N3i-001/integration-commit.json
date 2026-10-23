@@ -1,0 +1,11 @@
+{
+  "commit": "cc7b52f84f05fdef63efc1a305023a12347026ad",
+  "base": "48c919fda7cf18568df1397753fc10f0696bb6ca",
+  "branch": "sdp/xfmd-viewpoint-overviews",
+  "worktree": "/home/warloc/git/SDP-xfmd-viewpoint-overviews",
+  "sharedHeadAtCloseout": "0918098d572bc70be46cc8c72f711e3e2325078f",
+  "sharedProductInputsUnchanged": true,
+  "note": "Shared HEAD/index advanced concurrently through a Session0010 documentation commit. Captured product/work-unit files remain byte-identical before our closeout notes; shared index was never staged or restored by this workstream.",
+  "merged": false,
+  "published": false
+}

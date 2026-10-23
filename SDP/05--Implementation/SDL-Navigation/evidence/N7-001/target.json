@@ -1,0 +1,7 @@
+{
+  "operation": "select",
+  "project": "xfmd",
+  "model": "xfmddesktop-47e40bf52e14c5d8",
+  "uri": "sdl-view://xfmd/VP04?consumer=xfmd&target=main&projection=overview",
+  "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+}

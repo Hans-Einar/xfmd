@@ -1,0 +1,298 @@
+commit 55eff5da93e99420e110a1dce2568423578dbd58
+Author:     Hans-Einar <36501395+Hans-Einar@users.noreply.github.com>
+AuthorDate: Fri Oct 9 04:47:10 2026 +0200
+Commit:     Hans-Einar <36501395+Hans-Einar@users.noreply.github.com>
+CommitDate: Fri Oct 9 04:47:10 2026 +0200
+
+    Preserve caption ownership during obstacle rerouting
+
+diff --git a/src/layout/routed/labels.rs b/src/layout/routed/labels.rs
+index 2497258..3059c5f 100644
+--- a/src/layout/routed/labels.rs
++++ b/src/layout/routed/labels.rs
+@@ -221,23 +221,46 @@ fn place_order(layout: &mut Layout, variant: usize) -> Result<(), RoutingError>
+     }
+     Ok(())
+ }
++// A Manhattan-distance exclusion area around the padded caption. Subtract the
++// router's shape buffer so its effective boundary keeps the owner admissible.
++fn ambiguity_polygon(points: &[(f32, f32)], r: Rect, clearance: f64) -> Vec<(f64, f64)> {
++    let pad = (distance_to_rect(points, r) - 3. - clearance).max(0.);
++    let (x, y, right, bottom) = (r.0, r.1, r.0 + r.2, r.1 + r.3);
++    if pad == 0. {
++        return rectangle(r.0, r.1, r.2, r.3);
++    }
++    vec![
++        (x - pad, y),
++        (x, y - pad),
++        (right, y - pad),
++        (right + pad, y),
++        (right + pad, bottom),
++        (right, bottom + pad),
++        (x, bottom + pad),
++        (x - pad, bottom),
++    ]
++}
+ pub(super) fn obstacles(layout: &Layout, first: u32, clearance: f64) -> Vec<Obstacle> {
+-    layout
+-        .edges
+-        .iter()
+-        .filter_map(|e| Some((e, e.label.as_ref()?, e.label_anchor?)))
+-        .enumerate()
+-        .map(|(i, (e, l, a))| {
+-            let r = rect(a, l.width, l.height);
+-            let r =
+-                attachment::zone(&e.points, r).map_or(r, |z| attachment::obstacle(r, z, clearance));
+-            Obstacle {
+-                id: first + i as u32,
+-                polygon: rectangle(r.0, r.1, r.2, r.3),
++    let mut obstacles = Vec::new();
++    for e in &layout.edges {
++        let Some((l, a)) = e.label.as_ref().zip(e.label_anchor) else {
++            continue;
++        };
++        let r = rect(a, l.width, l.height);
++        let attached =
++            attachment::zone(&e.points, r).map_or(r, |z| attachment::obstacle(r, z, clearance));
++        for polygon in [
++            rectangle(attached.0, attached.1, attached.2, attached.3),
++            ambiguity_polygon(&e.points, r, clearance),
++        ] {
++            obstacles.push(Obstacle {
++                id: first + obstacles.len() as u32,
++                polygon,
+                 ports: vec![],
+-            }
+-        })
+-        .collect()
++            });
++        }
++    }
++    obstacles
+ }
+ pub(super) fn validate(layout: &Layout) -> Result<(), RoutingError> {
+     let mut occupied = node_rects(layout);
+@@ -312,3 +335,41 @@ pub(super) fn collisions(layout: &Layout) -> usize {
+     }
+     count
+ }
++
++#[cfg(test)]
++mod tests {
++    use super::*;
++    fn contains(polygon: &[(f64, f64)], p: (f64, f64)) -> bool {
++        polygon
++            .iter()
++            .zip(polygon.iter().cycle().skip(1))
++            .all(|(a, b)| (b.0 - a.0) * (p.1 - a.1) - (b.1 - a.1) * (p.0 - a.0) >= -1e-6)
++    }
++    #[test]
++    fn ambiguity_obstacle_protects_opposite_side_without_blocking_owner() {
++        let r = (20., 20., 10., 10.);
++        let owner = [(0., 0.), (0., 100.)];
++        let polygon = ambiguity_polygon(&owner, r, 4.);
++        assert!(contains(&polygon, (40., 25.))); // competing route, opposite side
++        assert!(!contains(&polygon, (0., 25.))); // owner remains admissible
++        assert!(!contains(&polygon, (50., 25.))); // equally distant route
++        assert_eq!(polygon.len(), 8);
++        // Every halo vertex lies at owner distance minus tolerance and buffer.
++        for p in polygon {
++            let distance = distance_to_rect(&[(p.0 as f32, p.1 as f32); 2], r);
++            assert!((distance - 13.).abs() < 1e-6);
++        }
++    }
++    #[test]
++    fn ambiguity_obstacle_keeps_diagonal_owner_outside_and_handles_zero_radius() {
++        let r = (20., 20., 10., 10.);
++        let owner = [(0., 0.), (0., 5.)];
++        let polygon = ambiguity_polygon(&owner, r, 4.);
++        assert!(!contains(&polygon, (0., 5.))); // square dilation would block it
++        assert!(contains(&polygon, (10., 10.)));
++        assert_eq!(
++            ambiguity_polygon(&[(15., 0.), (15., 100.)], r, 4.),
++            rectangle(20., 20., 10., 10.)
++        );
++    }
++}
+diff --git a/tests/fixtures/xfmd/chapter-navigation-metrics.json b/tests/fixtures/xfmd/chapter-navigation-metrics.json
+new file mode 100644
+index 0000000..e3dd1d2
+--- /dev/null
++++ b/tests/fixtures/xfmd/chapter-navigation-metrics.json
+@@ -0,0 +1,58 @@
++{
++  "": [
++    0.0,
++    21.791666666666668
++  ],
++  "ChapterNavigation (feature)": [
++    209.33333333333334,
++    21.791666666666668
++  ],
++  "DocumentIndex (functionality)": [
++    224.0,
++    21.791666666666668
++  ],
++  "DocumentIndexService (unit)": [
++    216.0,
++    21.791666666666668
++  ],
++  "NativeShell (unit)": [
++    126.66666666666667,
++    21.791666666666668
++  ],
++  "Navigation (unit)": [
++    122.66666666666667,
++    21.791666666666668
++  ],
++  "NavigationHistory (functionality)": [
++    238.66666666666666,
++    21.791666666666668
++  ],
++  "SourceAnchorMapping (functionality)": [
++    276.0,
++    21.791666666666668
++  ],
++  "Viewport (unit)": [
++    108.0,
++    21.791666666666668
++  ],
++  "WorkspaceControls (functionality)": [
++    250.66666666666666,
++    21.791666666666668
++  ],
++  "XfmdDesktop (container)": [
++    185.33333333333334,
++    21.791666666666668
++  ],
++  "allocated-to": [
++    88.0,
++    21.791666666666668
++  ],
++  "contributes-to": [
++    104.0,
++    21.791666666666668
++  ],
++  "owns": [
++    38.666666666666664,
++    21.791666666666668
++  ]
++}
+diff --git a/tests/fixtures/xfmd/chapter-navigation.mmd b/tests/fixtures/xfmd/chapter-navigation.mmd
+new file mode 100644
+index 0000000..5ff7f79
+--- /dev/null
++++ b/tests/fixtures/xfmd/chapter-navigation.mmd
+@@ -0,0 +1,23 @@
++flowchart LR
++    n_ChapterNavigation["ChapterNavigation (feature)"]
++    n_DocumentIndex["DocumentIndex (functionality)"]
++    n_DocumentIndexService["DocumentIndexService (unit)"]
++    n_NativeShell["NativeShell (unit)"]
++    n_Navigation["Navigation (unit)"]
++    n_NavigationHistory["NavigationHistory (functionality)"]
++    n_SourceAnchorMapping["SourceAnchorMapping (functionality)"]
++    n_Viewport["Viewport (unit)"]
++    n_WorkspaceControls["WorkspaceControls (functionality)"]
++    n_XfmdDesktop["XfmdDesktop (container)"]
++    n_DocumentIndex -->|allocated-to| n_XfmdDesktop
++    n_DocumentIndex -->|contributes-to| n_ChapterNavigation
++    n_DocumentIndexService -->|owns| n_DocumentIndex
++    n_NativeShell -->|owns| n_WorkspaceControls
++    n_Navigation -->|owns| n_NavigationHistory
++    n_NavigationHistory -->|allocated-to| n_XfmdDesktop
++    n_NavigationHistory -->|contributes-to| n_ChapterNavigation
++    n_SourceAnchorMapping -->|allocated-to| n_XfmdDesktop
++    n_SourceAnchorMapping -->|contributes-to| n_ChapterNavigation
++    n_Viewport -->|owns| n_SourceAnchorMapping
++    n_WorkspaceControls -->|allocated-to| n_XfmdDesktop
++    n_WorkspaceControls -->|contributes-to| n_ChapterNavigation
+diff --git a/tests/xfmd_chapter_navigation.rs b/tests/xfmd_chapter_navigation.rs
+new file mode 100644
+index 0000000..2b70991
+--- /dev/null
++++ b/tests/xfmd_chapter_navigation.rs
+@@ -0,0 +1,83 @@
++#![cfg(feature = "libavoid")]
++use mermaid_rs_renderer::layout::{TextBlock, measurements, routed};
++use mermaid_rs_renderer::routing_backend::RoutingControl;
++use mermaid_rs_renderer::{LayoutConfig, Theme, parse_mermaid_strict};
++use std::{
++    collections::HashMap,
++    time::{Duration, Instant},
++};
++#[test]
++fn xfmd_chapter_navigation_preserves_routes_and_caption_attachments() {
++    let parsed = parse_mermaid_strict(include_str!("fixtures/xfmd/chapter-navigation.mmd"))
++        .unwrap()
++        .graph;
++    // Reproduce XFMD's typed-contract round trip, including contiguous node
++    // order and absent optional arrow decorations, not only direct parser layout.
++    let mut graph = mermaid_rs_renderer::Graph::new();
++    graph.direction = parsed.direction;
++    let mut nodes: Vec<_> = parsed.nodes.values().cloned().collect();
++    nodes.sort_by_key(|n| {
++        (
++            parsed.node_order.get(&n.id).copied().unwrap_or(usize::MAX),
++            n.id.clone(),
++        )
++    });
++    for (i, node) in nodes.into_iter().enumerate() {
++        graph.node_order.insert(node.id.clone(), i);
++        graph.nodes.insert(node.id.clone(), node);
++    }
++    graph.edges = parsed.edges;
++    for e in &mut graph.edges {
++        e.arrow_start_kind = None;
++        e.arrow_end_kind = None;
++        e.start_decoration = None;
++        e.end_decoration = None;
++    }
++    let values: HashMap<String, [f32; 2]> = serde_json::from_str(include_str!(
++        "fixtures/xfmd/chapter-navigation-metrics.json"
++    ))
++    .unwrap();
++    let labels = values
++        .into_iter()
++        .map(|(label, size)| {
++            (
++                label.clone(),
++                TextBlock {
++                    lines: vec![label],
++                    width: size[0],
++                    height: size[1],
++                },
++            )
++        })
++        .collect();
++    let mut theme = Theme::modern();
++    theme.font_size = 16.;
++    theme.font_family = "DejaVu Sans".into();
++    let budget = Duration::from_secs(2);
++    let result = measurements::with_measurements(labels, budget, || {
++        routed::compute(
++            &graph,
++            &theme,
++            &LayoutConfig::default(),
++            routed::Engine::Libavoid,
++            &RoutingControl {
++                deadline: Instant::now() + budget,
++                cancelled: &|| false,
++            },
++        )
++    })
++    .unwrap();
++    let quality = routed::quality::measure(&result.layout, 8.);
++    assert_eq!(quality.node_traversals, 0);
++    assert_eq!(quality.label_collisions, 0);
++    assert_eq!(quality.attachment_intrusions, 0);
++    assert_eq!(result.layout.nodes.len(), 10);
++    assert_eq!(result.layout.edges.len(), 12);
++    for edge in &result.layout.edges {
++        assert!(edge.points.len() >= 2);
++        for p in edge.points.windows(2) {
++            assert!((p[0].0 - p[1].0).abs() < 0.01 || (p[0].1 - p[1].1).abs() < 0.01);
++        }
++    }
++    eprintln!("{:?}", result.diagnostics);
++}

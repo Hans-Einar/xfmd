@@ -1,0 +1,91 @@
+/home/warloc/git/xfmd-sdl-navigation/build-ui/libexec/xfmd/sdui-preview: go1.27.1
+	path	github.com/Hans-Einar/SDP/SDUI/go/cmd/sdui-preview
+	mod	github.com/Hans-Einar/SDP/SDUI/go	(devel)	
+	dep	golang.org/x/image	v0.46.0	h1:b1+oYj0Jbp6K5MDT4i4/eZpYlk3V8SJhhDKh6LBHAyQ=
+	dep	golang.org/x/sys	v0.48.0	h1:bbX/i/6MgT9BVLM9RT1thmxL04yeTAhbEz4SyadbXoo=
+	dep	golang.org/x/text	v0.42.0	h1:JbOZXgfeCPU9gacVtYliJqOhD+zhrEqK4LfdpmlUZqI=
+	build	-buildmode=exe
+	build	-compiler=gc
+	build	DefaultGODEBUG=tracebacklabels=0,x509sslcertoverrideplatform=0
+	build	CGO_ENABLED=1
+	build	CGO_CFLAGS=
+	build	CGO_CPPFLAGS=
+	build	CGO_CXXFLAGS=
+	build	CGO_LDFLAGS=
+	build	GOARCH=amd64
+	build	GOOS=linux
+	build	GOAMD64=v1
+	build	vcs=git
+	build	vcs.revision=d7aa3e581db0210eee0977f8f5fd33ccf8db189b
+	build	vcs.time=2026-10-06T22:08:44Z
+	build	vcs.modified=true
+	not a dynamic executable
+/home/warloc/git/xfmd-sdl-navigation/build-ui/libexec/xfmd/sdui-fyne: go1.27.1
+	path	github.com/Hans-Einar/SDP/SDUI/go/cmd/sdui-fyne
+	mod	github.com/Hans-Einar/SDP/SDUI/go	(devel)	
+	dep	fyne.io/fyne/v2	v2.8.1	h1:EztGuE2W3Qhd0cWVmU+h5rkzNezUD1To6UqsoLQYUIM=
+	dep	fyne.io/systray	v1.12.3-0.20260810170012-af4e8e793ec4	h1:149/+Wa5EsLLXfyj2pdTmvnQf2VIlgCIwSjcCTHYhIo=
+	dep	github.com/BurntSushi/toml	v1.6.0	h1:dRaEfpa2VI55EwlIW72hMRHdWouJeRF7TPYhI+AUQjk=
+	dep	github.com/anthonynsimon/bild	v0.14.0	h1:IFRkmKdNdqmexXHfEU7rPlAmdUZ8BDZEGtGHDnGWync=
+	dep	github.com/clipperhouse/uax29/v2	v2.2.0	h1:ChwIKnQN3kcZteTXMgb1wztSgaU+ZemkgWdohwgs8tY=
+	dep	github.com/fsnotify/fsnotify	v1.9.0	h1:2Ml+OJNzbYCTzsxtv8vKSFD9PbJjmhYF14k/jKC7S9k=
+	dep	github.com/fyne-io/image	v0.1.1	h1:WH0z4H7qfvNUw5l4p3bC1q70sa5+YWVt6HCj7y4VNyA=
+	dep	github.com/fyne-io/oksvg	v0.2.0	h1:mxcGU2dx6nwjJsSA9PCYZDuoAcsZ/OuJlvg/Q9Njfo8=
+	dep	github.com/go-gl/gl	v0.0.0-20260331235117-4566fea9a276	h1:IO5P06Pcj9K04d+l4nrf3c2U56+dAotIFG6u4P1wAHI=
+	dep	github.com/go-gl/glfw/v3.4/glfw	v0.1.0-pre.1.0.20260707082822-2a407d02d01a	h1:HWK0MBggT/T6YH7VffE10xBIhqeTq8JzIUPJXrRy87g=
+	dep	github.com/go-text/render	v0.2.1	h1:qwHhxqGUjjg4L0XyJWj7M7bpY75NZM+kBpv2Yfw5mcg=
+	dep	github.com/go-text/typesetting	v0.3.4	h1:YYurUOtEb9kGSOz4uE3k4OpBGsp1dDL8+fjCeaFamAU=
+	dep	github.com/godbus/dbus/v5	v5.2.2	h1:TUR3TgtSVDmjiXOgAAyaZbYmIeP3DPkld3jgKGV8mXQ=
+	dep	github.com/jeandeaual/go-locale	v0.0.0-20250612000132-0ef82f21eade	h1:FmusiCI1wHw+XQbvL9M+1r/C3SPqKrmBaIOYwVfQoDE=
+	dep	github.com/jsummers/gobmp	v0.0.0-20230614200233-a9de23ed2e25	h1:YLvr1eE6cdCqjOe972w/cYF+FjW34v27+9Vo5106B4M=
+	dep	github.com/mattn/go-runewidth	v0.0.24	h1:cpokDiIn0MGnhdHwuWnJBITySJ20QyNGnY2kR/ay2DU=
+	dep	github.com/nfnt/resize	v0.0.0-20180221191011-83c6a9932646	h1:zYyBkD/k9seD2A7fsi6Oo2LfFZAehjjQMERAvZLEDnQ=
+	dep	github.com/nicksnyder/go-i18n/v2	v2.5.1	h1:IxtPxYsR9Gp60cGXjfuR/llTqV8aYMsC472zD0D1vHk=
+	dep	github.com/rymdport/portal	v0.4.2	h1:7jKRSemwlTyVHHrTGgQg7gmNPJs88xkbKcIL3NlcmSU=
+	dep	github.com/srwiley/oksvg	v0.0.0-20221011165216-be6e8873101c	h1:km8GpoQut05eY3GiYWEedbTT0qnSxrCjsVbb7yKY1KE=
+	dep	github.com/srwiley/rasterx	v0.0.0-20220730225603-2ab79fcdd4ef	h1:Ch6Q+AZUxDBCVqdkI8FSpFyZDtCVBc2VmejdNrm5rRQ=
+	dep	github.com/yuin/goldmark	v1.8.2	h1:kEGpgqJXdgbkhcOgBxkC0X0PmoPG1ZyoZ117rDVp4zE=
+	dep	golang.org/x/image	v0.46.0	h1:b1+oYj0Jbp6K5MDT4i4/eZpYlk3V8SJhhDKh6LBHAyQ=
+	dep	golang.org/x/net	v0.35.0	h1:T5GQRQb2y08kTAByq9L4/bz8cipCdA8FbRTXewonqY8=
+	dep	golang.org/x/sys	v0.48.0	h1:bbX/i/6MgT9BVLM9RT1thmxL04yeTAhbEz4SyadbXoo=
+	dep	golang.org/x/text	v0.42.0	h1:JbOZXgfeCPU9gacVtYliJqOhD+zhrEqK4LfdpmlUZqI=
+	build	-buildmode=exe
+	build	-compiler=gc
+	build	-tags=desktop
+	build	DefaultGODEBUG=tracebacklabels=0,x509sslcertoverrideplatform=0
+	build	CGO_ENABLED=1
+	build	CGO_CFLAGS=
+	build	CGO_CPPFLAGS=
+	build	CGO_CXXFLAGS=
+	build	CGO_LDFLAGS=
+	build	GOARCH=amd64
+	build	GOOS=linux
+	build	GOAMD64=v1
+	build	vcs=git
+	build	vcs.revision=d7aa3e581db0210eee0977f8f5fd33ccf8db189b
+	build	vcs.time=2026-10-06T22:08:44Z
+	build	vcs.modified=true
+	linux-vdso.so.1 (0x00007f3b274d5000)
+	libwayland-client.so.0 => /lib64/libwayland-client.so.0 (0x00007f3b274ad000)
+	libm.so.6 => /lib64/libm.so.6 (0x00007f3b27401000)
+	libresolv.so.2 => /lib64/libresolv.so.2 (0x00007f3b273ef000)
+	libGL.so.1 => /lib64/libGL.so.1 (0x00007f3b2737b000)
+	libX11.so.6 => /lib64/libX11.so.6 (0x00007f3b27234000)
+	libXrandr.so.2 => /lib64/libXrandr.so.2 (0x00007f3b27227000)
+	libXxf86vm.so.1 => /lib64/libXxf86vm.so.1 (0x00007f3b27220000)
+	libXi.so.6 => /lib64/libXi.so.6 (0x00007f3b2720d000)
+	libXcursor.so.1 => /lib64/libXcursor.so.1 (0x00007f3b27200000)
+	libXinerama.so.1 => /lib64/libXinerama.so.1 (0x00007f3b271fb000)
+	libwayland-cursor.so.0 => /lib64/libwayland-cursor.so.0 (0x00007f3b271ef000)
+	libwayland-egl.so.1 => /lib64/libwayland-egl.so.1 (0x00007f3b271ea000)
+	libxkbcommon.so.0 => /lib64/libxkbcommon.so.0 (0x00007f3b271a0000)
+	libc.so.6 => /lib64/libc.so.6 (0x00007f3b26fc6000)
+	libffi.so.8 => /lib64/libffi.so.8 (0x00007f3b26fb5000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007f3b274d7000)
+	libGLX.so.0 => /lib64/libGLX.so.0 (0x00007f3b26f84000)
+	libXext.so.6 => /lib64/libXext.so.6 (0x00007f3b26f6e000)
+	libGLdispatch.so.0 => /lib64/libGLdispatch.so.0 (0x00007f3b26ef5000)
+	libxcb.so.1 => /lib64/libxcb.so.1 (0x00007f3b26eca000)
+	libXrender.so.1 => /lib64/libXrender.so.1 (0x00007f3b26ebe000)
+	libXfixes.so.3 => /lib64/libXfixes.so.3 (0x00007f3b26eb6000)
+	libXau.so.6 => /lib64/libXau.so.6 (0x00007f3b26eae000)

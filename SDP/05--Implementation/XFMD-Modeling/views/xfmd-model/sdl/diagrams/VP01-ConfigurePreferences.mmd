@@ -1,0 +1,8 @@
+flowchart LR
+    n_ApplicationPreferences["ApplicationPreferences (functionality)"]
+    n_ConfigurableScrolling["ConfigurableScrolling (feature)"]
+    n_ConfigurePreferences["ConfigurePreferences (usecase)"]
+    n_ReaderAuthor["ReaderAuthor (actor)"]
+    n_ApplicationPreferences -->|contributes-to| n_ConfigurePreferences
+    n_ConfigurableScrolling -->|supports| n_ConfigurePreferences
+    n_ReaderAuthor -->|pursues| n_ConfigurePreferences

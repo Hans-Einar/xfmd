@@ -1,0 +1,6 @@
+flowchart LR
+    n_LayoutCallsContract["LayoutCallsContract (contract)"]
+    n_LayoutModel["LayoutModel (message)"]
+    n_ModelLaidOut["ModelLaidOut (message)"]
+    n_LayoutCallsContract -->|permits| n_LayoutModel
+    n_LayoutCallsContract -->|permits| n_ModelLaidOut

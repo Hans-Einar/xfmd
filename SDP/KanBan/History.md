@@ -76,5 +76,5 @@ Git history. Rebase/squash may change commit identities; preserve the owner's
 phase/milestone commits. Card/event IDs remain stable.
 
 Integrated native KanBan navigation remains in
-[KB-XFMD-014](backlog/%23014--Proposal--SDP-sidebar-and-generated-navigation.md).
+[KB-XFMD-014](active/%23014--Proposal--SDP-sidebar-and-generated-navigation.md).
 This bootstrap does not implement a history/diff UI.

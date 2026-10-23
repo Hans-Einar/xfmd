@@ -1,0 +1,6 @@
+CPack: Create package using TGZ
+CPack: Install projects
+CPack: - Install project: xfmd []
+CPack: Create package
+CPack: - package: /home/warloc/git/xfmd-sdl-navigation/build-ui/release-mmd/xfmd-0.4.0-Linux-e361fdf1ae59.tar.gz generated.
+CPack: - checksum file: /home/warloc/git/xfmd-sdl-navigation/build-ui/release-mmd/xfmd-0.4.0-Linux-e361fdf1ae59.tar.gz.sha256 generated.

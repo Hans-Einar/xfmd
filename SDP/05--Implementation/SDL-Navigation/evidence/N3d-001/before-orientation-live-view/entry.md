@@ -1,0 +1,141 @@
+# VP01 — Use cases and traceability
+
+Revision: `e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007`.
+
+pursues, supports and contributes-to; modeled scope without an invented System boundary.
+
+Selection: `{"projection":"overview","viewpoint":"VP01","direction":"both","depth":2}`.
+
+## All declared actors and use cases
+
+```mermaid
+usecase-beta
+direction TB
+actor u0("ReaderAuthor")
+u1("BrowseSdpProject")
+u2("BrowseWorkspace")
+u3("ConfigurePreferences")
+u4("EditDocuments")
+u5("NavigateDocuments")
+u6("PublishPages")
+u7("ReadDiagrams")
+u8("ReadDocuments")
+u9("ScrollDocuments")
+u10("SelectGeneratedView")
+u11("UseFullscreen")
+u0 -- u1
+u0 -- u2
+u0 -- u3
+u0 -- u4
+u0 -- u5
+u0 -- u6
+u0 -- u7
+u0 -- u8
+u0 -- u9
+u0 -- u10
+u0 -- u11
+```
+
+Source facts: f0786, f0787, f0788, f0789, f0790, f0791, f0792, f0793, f0794, f0795, f0796.
+
+## Scope and notation
+
+Complete declared actor/use-case inventory in this source snapshot, including isolated declarations. An association means SDL pursues; no System boundary or UML include/extend is inferred.
+
+## Functionality realization
+
+Features and Functionality are not use cases. Only modeled supports and contributes-to relations are listed.
+
+| Source | Relation | Target | Fact |
+| --- | --- | --- | --- |
+| ApplicationPreferences | contributes-to | ConfigurableScrolling | f0047 |
+| ApplicationPreferences | contributes-to | ConfigurePreferences | f0048 |
+| ApplicationPreferences | contributes-to | DocumentNavigation | f0049 |
+| ApplicationPreferences | contributes-to | DocumentReferences | f0050 |
+| ApplicationPreferences | contributes-to | PagedPublication | f0051 |
+| ChapterNavigation | supports | NavigateDocuments | f0075 |
+| ConfigurableScrolling | supports | ConfigurePreferences | f0106 |
+| ConfigurableScrolling | supports | ScrollDocuments | f0107 |
+| DiagramLayout | contributes-to | MermaidDiagrams | f0130 |
+| DiagramPreparation | contributes-to | MermaidDiagrams | f0136 |
+| DocumentIndex | contributes-to | ChapterNavigation | f0177 |
+| DocumentIndex | contributes-to | DocumentReferences | f0178 |
+| DocumentNavigation | supports | NavigateDocuments | f0190 |
+| DocumentReferences | supports | NavigateDocuments | f0201 |
+| DocumentSession | contributes-to | DocumentNavigation | f0208 |
+| DocumentSession | contributes-to | LivePreview | f0209 |
+| DocumentSession | contributes-to | MarkdownPresentation | f0210 |
+| DocumentSession | contributes-to | PagedPublication | f0211 |
+| EmbeddedVisuals | contributes-to | MarkdownPresentation | f0275 |
+| EventScheduling | contributes-to | LivePreview | f0281 |
+| FilteredFileTree | contributes-to | WorkPathNavigation | f0350 |
+| FoxPresentation | contributes-to | ConfigurableScrolling | f0352 |
+| FoxPresentation | contributes-to | DocumentNavigation | f0353 |
+| FoxPresentation | contributes-to | LivePreview | f0354 |
+| FoxPresentation | contributes-to | MarkdownPresentation | f0355 |
+| FoxPresentation | contributes-to | MermaidDiagrams | f0356 |
+| FoxPresentation | contributes-to | PagedPublication | f0357 |
+| FoxPresentation | contributes-to | SynchronizedScrolling | f0358 |
+| GeneratedDocumentNavigation | contributes-to | SelectGeneratedView | f0385 |
+| LivePreview | supports | EditDocuments | f0522 |
+| LocalFileStorage | contributes-to | DocumentNavigation | f0524 |
+| LocalFileStorage | contributes-to | MarkdownPresentation | f0525 |
+| MarkdownInterpretation | contributes-to | LivePreview | f0532 |
+| MarkdownInterpretation | contributes-to | MarkdownPresentation | f0533 |
+| MarkdownInterpretation | contributes-to | MermaidDiagrams | f0534 |
+| MarkdownInterpretation | contributes-to | PagedPublication | f0535 |
+| MarkdownPresentation | supports | ReadDocuments | f0536 |
+| MermaidDiagrams | supports | ReadDiagrams | f0537 |
+| MermaidDiagrams | supports | ReadDocuments | f0538 |
+| MermaidInterpretation | contributes-to | MermaidDiagrams | f0540 |
+| NavigationHistory | contributes-to | ChapterNavigation | f0588 |
+| NavigationHistory | contributes-to | DocumentNavigation | f0589 |
+| NavigationHistory | contributes-to | DocumentReferences | f0590 |
+| PageComposition | contributes-to | MarkdownPresentation | f0601 |
+| PageComposition | contributes-to | MermaidDiagrams | f0602 |
+| PageComposition | contributes-to | PagedPublication | f0603 |
+| PagedPublication | supports | PublishPages | f0604 |
+| PagedPublication | supports | ReadDocuments | f0605 |
+| PdfExport | contributes-to | MermaidDiagrams | f0626 |
+| PdfExport | contributes-to | PagedPublication | f0627 |
+| PreviewPipeline | contributes-to | LivePreview | f0718 |
+| PreviewPipeline | contributes-to | MarkdownPresentation | f0719 |
+| PreviewPipeline | contributes-to | MermaidDiagrams | f0720 |
+| PreviewPipeline | contributes-to | PagedPublication | f0721 |
+| PreviewTextSelection | contributes-to | MarkdownPresentation | f0741 |
+| PreviewTextSelection | contributes-to | MermaidDiagrams | f0742 |
+| RenderLayout | contributes-to | LivePreview | f0838 |
+| RenderLayout | contributes-to | MarkdownPresentation | f0839 |
+| RenderLayout | contributes-to | MermaidDiagrams | f0840 |
+| RenderLayout | contributes-to | PagedPublication | f0841 |
+| RenderLayout | contributes-to | SynchronizedScrolling | f0842 |
+| ScrollMotion | contributes-to | ConfigurableScrolling | f0890 |
+| ScrollMotion | contributes-to | SynchronizedScrolling | f0891 |
+| SdpProjectNavigation | contributes-to | BrowseSdpProject | f0893 |
+| SourceAnchorMapping | contributes-to | ChapterNavigation | f0908 |
+| SourceAnchorMapping | contributes-to | ConfigurableScrolling | f0909 |
+| SourceAnchorMapping | contributes-to | DocumentNavigation | f0910 |
+| SourceAnchorMapping | contributes-to | DocumentReferences | f0911 |
+| SourceAnchorMapping | contributes-to | PagedPublication | f0912 |
+| SourceAnchorMapping | contributes-to | SynchronizedScrolling | f0913 |
+| SynchronizedScrolling | supports | ScrollDocuments | f0928 |
+| TextEditing | contributes-to | ConfigurableScrolling | f0937 |
+| TextEditing | contributes-to | LivePreview | f0938 |
+| TypographyAndDrawing | contributes-to | MarkdownPresentation | f0947 |
+| TypographyAndDrawing | contributes-to | MermaidDiagrams | f0948 |
+| TypographyAndDrawing | contributes-to | PagedPublication | f0949 |
+| WorkPathHistory | contributes-to | WorkPathNavigation | f0997 |
+| WorkPathNavigation | supports | BrowseWorkspace | f0998 |
+| WorkspaceControls | contributes-to | ChapterNavigation | f1014 |
+| WorkspaceControls | contributes-to | ConfigurableScrolling | f1015 |
+| WorkspaceControls | contributes-to | DocumentNavigation | f1016 |
+| WorkspaceControls | contributes-to | DocumentReferences | f1017 |
+| WorkspaceControls | contributes-to | MarkdownPresentation | f1018 |
+| WorkspaceControls | contributes-to | PagedPublication | f1019 |
+| WorkspaceControls | contributes-to | SynchronizedScrolling | f1020 |
+| WorkspaceControls | contributes-to | UseFullscreen | f1021 |
+| WorkspaceControls | contributes-to | WorkPathNavigation | f1022 |
+
+Scenario sequences and pre/postconditions are not part of this overview; they are not inferred from static relations.
+
+

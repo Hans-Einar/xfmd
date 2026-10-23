@@ -1,0 +1,6 @@
+--- FAIL: TestChannelOverviewEmptyAndLarge (0.00s)
+    channel_overview_test.go:175: UNSUPPORTED_SYNTAX at 43:1: Expected an ASCII identifier matching [A-Z][A-Za-z0-9]*
+FAIL
+FAIL	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/viewpoint	0.930s
+ok  	github.com/Hans-Einar/SDP/SystemDesignLanguage/go/documents	1.916s
+FAIL

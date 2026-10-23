@@ -1,0 +1,128 @@
+--- a/src/application/sdp/SdpProtocol.h
++++ b/src/application/sdp/SdpProtocol.h
+@@ -9,7 +9,7 @@
+ struct SdpNode {
+   std::string id, kind, label, state, diagnostic, reference, cardType;
+   std::vector<std::string> children;
+-  SdpTarget target;
++  SdpTarget target, overviewTarget;
+ };
+ struct SdpSource {
+   std::string id, kind, path, revision;
+--- a/src/application/sdp/SdpProtocol.cpp
++++ b/src/application/sdp/SdpProtocol.cpp
+@@ -121,6 +121,20 @@
+         if (node.target.project != result.project)
+           throw std::runtime_error("SDP target belongs to another project");
+       }
++      if (auto overview = item.get("overviewTarget"); overview.value) {
++        node.overviewTarget = {overview.get("operation").text(true), overview.get("project").text(true),
++                              overview.get("model").text(true), overview.get("uri").text(true),
++                              overview.get("revision").text(true), overview.get("path").text(),
++                              overview.get("entry").text()};
++        const auto& t = node.overviewTarget;
++        auto source = result.sources.find(t.model);
++        if (node.kind != "viewpoint" || t.operation != "select" || t.project != result.project ||
++            t.uri.rfind("sdl-view://" + result.project + "/", 0) != 0 ||
++            !t.path.empty() || !t.entry.empty() || source == result.sources.end() ||
++            source->second.kind != "sdl" || source->second.revision != t.revision ||
++            (!node.target.model.empty() && node.target.model != t.model))
++          throw std::runtime_error("Invalid or stale SDP overview target; Refresh");
++      }
+       if (!result.nodes.emplace(node.id, std::move(node)).second)
+         throw std::runtime_error("Duplicate SDP node identity");
+     }
+--- a/src/application/ui/SdpPanel.cpp
++++ b/src/application/ui/SdpPanel.cpp
+@@ -50,7 +50,11 @@
+         if (!row)
+           return;
+         const auto& node = snapshot.nodes.at(row->node);
+-        if (node.kind == "viewpoint" && !node.children.empty()) {
++        if (node.kind == "viewpoint") {
++          if (!node.overviewTarget.operation.empty()) {
++            if (activated) activated(node.overviewTarget);
++            return;
++          }
+           if (auto* item = dynamic_cast<SdpItem*>(tree->getCurrentItem());
+               item && item->id == action.target)
+             tree->expandTree(item);
+--- a/src/renderer/diagram/DiagramPlacement.cpp
++++ b/src/renderer/diagram/DiagramPlacement.cpp
+@@ -9,18 +9,25 @@
+   if (scene.fonts != metrics.fontSetId())
+     throw Error(ErrorCode::Conflict, "Diagram font set changed; refresh preview");
+   double scale = std::min(1.0, width / scene.width);
+-  if (request.profile.mode == LayoutMode::Paged)
+-    scale = std::min(scale, (request.profile.paper.height - 2 * request.profile.paper.margin) /
+-                                scene.height);
++  double height = scene.height * scale;
++  if (request.profile.mode == LayoutMode::Paged) {
++    // Multiplying the limited scale back by scene.height can exceed the exact
++    // page boundary by one ULP. Keep drawing and pagination on that boundary.
++    const double available = request.profile.paper.height - 2 * request.profile.paper.margin;
++    if (height > available) {
++      height = available;
++      scale = height / scene.height;
++    }
++  }
+   auto source = block.source;
+   source.quality = MappingQuality::Approximate;
+   DrawRun visual;
+-  visual.bounds = {x, y, scene.width * scale, scene.height * scale};
++  visual.bounds = {x, y, scene.width * scale, height};
+   visual.visual = block.diagramScene;
+   visual.source = source;
+   frame.runs.push_back(std::move(visual));
+-  frame.maxRunHeight = std::max(frame.maxRunHeight, scene.height * scale);
+-  frame.flow.lines.push_back({y, scene.height * scale, 0});
+-  return scene.height * scale;
++  frame.maxRunHeight = std::max(frame.maxRunHeight, height);
++  frame.flow.lines.push_back({y, height, 0});
++  return height;
+ }
+ } // namespace xfmd
+--- a/tests/application/SdpProtocolTest.cpp
++++ b/tests/application/SdpProtocolTest.cpp
+@@ -56,6 +56,21 @@
+   CHECK(decodeSdpReply(prefix + tabs +
+                        R"(,{"id":"a","label":"A","kind":"reference","reference":"a"}]}})")
+             .nodes.size() == 4);
++  const std::string overviewPrefix = R"({"schema":"sdptool/0.2","operation":"discover","status":"valid","root":"/p","area":"/p/SDP","sources":[{"id":"model","kind":"sdl","source":"SDP/model.design","revision":"r1"}],"navigation":{"schema":"sdptool/0.2","operation":"tree","project":"test","roots":["vp"],"nodes":[{"id":"vp","kind":"viewpoint","label":"VP01","overviewTarget":)";
++  const std::string validOverview = R"({"operation":"select","project":"test","model":"model","revision":"r1","uri":"sdl-view://test/VP01?projection=overview"})";
++  CHECK(decodeSdpReply(overviewPrefix + validOverview + "}]}}").nodes.at("vp").overviewTarget.revision == "r1");
++  for (const auto& change : std::vector<std::pair<std::string,std::string>>{
++      {"select","open"},{"\"project\":\"test\"","\"project\":\"other\""},
++      {"\"model\":\"model\"","\"model\":\"missing\""},{"r1","r0"},
++      {"sdl-view://test/","sdl-view://foreign/"},{"\"revision\":\"r1\",",""}}) {
++    auto malformed = validOverview;
++    const auto at = malformed.find(change.first); CHECK(at != std::string::npos);
++    malformed.replace(at, change.first.size(), change.second);
++    bool rejected = false;
++    try { decodeSdpReply(overviewPrefix + malformed + "}]}}"); }
++    catch (const std::exception&) { rejected = true; }
++    CHECK(rejected);
++  }
+   SdpToolJob job;
+   const std::string fixture = XFMD_SDP_FAKE_TOOL;
+   int inherited[2];
+--- a/tests/application/DiagramReadingTest.cpp
++++ b/tests/application/DiagramReadingTest.cpp
+@@ -13,6 +13,17 @@
+   auto parser = DiagramServices::interpreter();
+   SharedTextMetrics metrics;
+   MarkdownRenderer renderer;
++  // The page-height scale roundtrip can overshoot by one ULP (2065.6 on A4).
++  auto tallScene = std::make_shared<DiagramScene>();
++  tallScene->width = 400; tallScene->height = 2065.6; tallScene->fonts = metrics.fontSetId();
++  SemanticDocument tallDocument; SemanticBlock tallBlock; tallBlock.kind = BlockKind::Diagram;
++  tallBlock.diagramScene = tallScene; tallDocument.blocks.push_back(tallBlock);
++  PaperSpec paper;
++  auto tallFrame = renderer.layout(tallDocument, {paper.width, 0, {LayoutMode::Paged, paper}}, metrics);
++  CHECK(tallFrame->pages.slices.size() == 1);
++  CHECK(tallFrame->flow.lines.front().height <= paper.height - 2 * paper.margin);
++  CHECK(tallFrame->runs.front().bounds.height <= paper.height - 2 * paper.margin);
++
+   SourceSnapshot source{
+       {4, 1}, "```mermaid\nflowchart LR\nA[Blåbær] -->|Ready| B{Ærlig}\n```", {}, false};
+   auto model =

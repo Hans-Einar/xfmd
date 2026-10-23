@@ -1,0 +1,97 @@
+VP10 — Datagram encoding and
+packets
+Revision:
+799b274252245be2ac5258510067da66a08bb45276538bcbb6482b3189e898c3.
+
+Only closed contracts with validated Encoding and explicit bit positions.
+
+
+Packet: PacketBig / PacketBody —
+big-endian, most-significant-first
+    0   1                         12 13                                     28
+
+PacketFlag     PacketNumber                         PacketPayload
+
+
+
+
+Source facts: f0047, f0048, f0049, f0050, f0051, f0052, f0053, f0054, f0055, f0056,
+f0063, f0064, f0065, f0066, f0078, f0079, f0080, f0081.
+
+Declarations: PacketFlag, PacketNumber, PacketPayload.
+
+
+Packet: PacketLittle / PacketBody —
+little-endian, least-significant-first
+    0   1                         12 13                                     28
+
+PacketFlag     PacketNumber                         PacketPayload
+
+
+
+
+Source facts: f0053, f0054, f0055, f0056, f0057, f0058, f0059, f0060, f0061, f0062,
+f0063, f0064, f0065, f0066, f0078, f0079, f0080, f0081.
+
+Declarations: PacketFlag, PacketNumber, PacketPayload.
+Scope and notation
+Each packet is one validated fixed Encoding of a Variant in a closed Contract. Bit
+offsets are logical contract positions; byte-order and bit-order are explicit source
+declarations. The view does not implement serialization or infer padding, variable
+lengths, optional-field layout or an executable codec. Header fields belong to the
+Contract; variant fields belong to the Variant. Independent Encodings are never
+concatenated.
+
+
+Encoding register
+
+Encoding PacketBig
+Variant PacketBody; Contract WireShape (closed); big-endian, most-significant-first; 29
+bits. Source facts: f0047, f0048, f0049, f0078, f0080.
+
+Datagram family: WireFamily. Source facts: f0077.
+
+Field      Shape owner        Bit range /        Value type /        Source facts
+                              width              presence
+
+PacketFl Header:              0–0 / 1            boolean /           f0050, f0055,
+ag         WireShape                             required            f0056, f0081
+
+PacketN Variant:              1–12 / 12          signed / required   f0051, f0053,
+umber      PacketBody                                                f0063, f0064
+
+PacketP    Variant:           13–28 / 16         bytes / required    f0052, f0054,
+ayload     PacketBody                                                f0065, f0066
+
+
+
+Encoding PacketLittle
+Variant PacketBody; Contract WireShape (closed); little-endian, least-significant-first;
+29 bits. Source facts: f0057, f0058, f0059, f0078, f0080.
+
+Datagram family: WireFamily. Source facts: f0077.
+Field      Shape owner       Bit range /        Value type /          Source facts
+                             width              presence
+
+PacketFl Header:             0–0 / 1            boolean /             f0055, f0056,
+ag         WireShape                            required              f0060, f0081
+
+PacketN Variant:             1–12 / 12          signed / required     f0053, f0061,
+umber      PacketBody                                                 f0063, f0064
+
+PacketP    Variant:          13–28 / 16         bytes / required      f0054, f0062,
+ayload     PacketBody                                                 f0065, f0066
+
+
+
+Variant coverage
+A logical Variant does not define a wire layout. Missing Encoding is a modeling gap, not
+evidence about native codec implementation.
+
+Variant        Contract      Encodings                             Source facts
+
+PacketBody     WireShape     PacketBig, PacketLittle               f0047, f0057, f0078
+
+WireVariant    WireShape     No Encoding declared; no fixed        f0079
+                             wire layout
+

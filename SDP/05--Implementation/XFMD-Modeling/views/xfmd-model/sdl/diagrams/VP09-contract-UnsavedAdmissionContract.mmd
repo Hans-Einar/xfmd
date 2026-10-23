@@ -1,0 +1,8 @@
+flowchart LR
+    n_ChooseCancel["ChooseCancel (message)"]
+    n_ChooseSave["ChooseSave (message)"]
+    n_ChooseUnsaved["ChooseUnsaved (message)"]
+    n_UnsavedAdmissionContract["UnsavedAdmissionContract (contract)"]
+    n_UnsavedAdmissionContract -->|permits| n_ChooseCancel
+    n_UnsavedAdmissionContract -->|permits| n_ChooseSave
+    n_UnsavedAdmissionContract -->|permits| n_ChooseUnsaved

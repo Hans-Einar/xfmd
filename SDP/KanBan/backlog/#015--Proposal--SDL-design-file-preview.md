@@ -59,7 +59,7 @@ behavior. SDP-vNow owns the sdptool producer operation and existing SDL service
 reuse. Native implementation happens in XFMD under its own requirements → blueprint
 → plumbing → code → verification process; this is only a backlog capture.
 
-[KB-XFMD-014](%23014--Proposal--SDP-sidebar-and-generated-navigation.md) owns the
+[KB-XFMD-014](../active/%23014--Proposal--SDP-sidebar-and-generated-navigation.md) owns the
 separate native SDP tree and project discovery integration. It may reuse this
 adapter; direct preview need not wait for all its subtabs. Neither card turns XFMD
 into an SDUI widget runtime or adopts SDP as XFMD's development process.
@@ -94,3 +94,19 @@ are historical. [Migration evidence](../../Maintenance/SDP1/Plan-and-Evidence.md
 
 2026-09-25T11:54:30Z, EVT-KB-XFMD-000072: producer addresses follow the consolidated
 SDP/KanBan board. XFMD retains the SDP1 pinned workflow and ledger location.
+
+## Continuing navigation Session — 2026-10-01
+
+[SESSION-XFMD-0001](../../Sessions/session-%230001--SDP-project-navigation.md)
+links this work to native SDP navigation. See
+[PLAN-XFMD-0006](../../05--Implementation/SDP-Navigation/Plan.md) for the selected
+increments. Existing unfinished scope and evidence remain open.
+
+## T003 queue refinement — 2026-10-01
+
+The owner requested dynamic SDP tabs, readable node names and source context
+opening. [KB-XFMD-021](../active/%23021--Change--Dynamic-SDP-tabs-labels-and-source-opening.md)
+is now the next queued increment in Session S2 / PLAN-XFMD-0006 M3a. This card
+returns from queued to backlog, without losing its selected later M4 scope.
+View source in #021 opens ordinary editable text; it does not complete this
+card's separate source/derived-preview workflow. Review for queueing after S2.

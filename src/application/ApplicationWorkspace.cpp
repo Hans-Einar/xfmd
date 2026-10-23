@@ -14,7 +14,18 @@ void Application::wireWorkspace() {
     window->status->setText(text.c_str());
   };
   workspace->openRequested = [this] { execute(CommandRouter::Open); };
-  workspace->rootChanged = [field](const auto& root) { field->setWorkPath(root); };
+  workspace->rootChanged = [this, field](const auto& root) {
+    field->setWorkPath(root);
+    sdpNavigation->refresh(root);
+  };
+  workspace->sdpRefresh = [this, workspace] {
+    sdpNavigation->refresh(workspace->history.root().string());
+  };
+  workspace->sdp->activated = [this](const auto& target) { sdpNavigation->activate(target); };
+  workspace->sdp->modelRequested = [this](const auto& target) { sdpNavigation->expandModel(target); };
+  workspace->sdp->sourceRequested = [this](const auto& target) {
+    sdpNavigation->openSource(target);
+  };
   field->setWorkPath(workspace->history.root().string());
   field->filterChanged = [workspace](const auto& pattern) { workspace->setNameFilter(pattern); };
   field->submitted = [this](const auto& target) { return openTypedPath(target); };

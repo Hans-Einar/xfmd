@@ -1,0 +1,28 @@
+{
+  "actualMode": "NormalDesktop",
+  "actualCapabilities": 0,
+  "actualDependencies": 0,
+  "actualDiagrams": 0,
+  "actualEmptyStateInPdf": true,
+  "fixtureModes": [
+    "Offline",
+    "Online",
+    "Quiet"
+  ],
+  "fixtureDiagrams": {
+    "Offline": {
+      "nodes": 3,
+      "edges": 1
+    },
+    "Online": {
+      "nodes": 3,
+      "edges": 1
+    },
+    "Quiet": {
+      "nodes": 2,
+      "edges": 0
+    }
+  },
+  "onlinePdfLabelsPresent": true,
+  "sourceSpansInBounds": true
+}

@@ -1,0 +1,3 @@
+Parsed nodes=12 edges=15 groups=0
+Scene nodes=12 edges=15 groups=0
+Libavoid; one spacing retry after non-orthogonal edge 1 [(552.6454010009766, 33.89583206176758), (995.6871032714844, 170.18555068969727)]; failed routing/labels attempt 42.40438ms, included in total time; libavoid transaction 1: 6.056033ms; libavoid transaction 2: 4.588116ms; libavoid transaction 3: 3.388479ms; final label-only placement on completed routes; constrained parallel separation: Quality { length: 6906.22688293457, bends: 20, crossings: 19, parallel_overlaps: 0, close_parallel_segments: 6, node_traversals: 0, label_collisions: 0, attachment_intrusions: 0 }; label leaders omitted: 0

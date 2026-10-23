@@ -1,0 +1,18 @@
+SDUI GUI dump | SdpProjectWorkspace | 160 columns | structural preview
+[ Sidebar ]       [ Open ]          [ Save ]          [ Editor ]        [ Split ]         [ Preview ]       [ Back ]          [ Forward ]       [ Light / Dark ]
+Document                                                                         Document path: [/project/README.md]
+### Files / Index / SDP                                               ### Markdown preview area
+[ Refresh ]                                                           Rendered Markdown area.
+**KanBan / SDL / SDUI**
+                                                                      Static representation.
+KanBan: status folders, cards and Ref notes.
+                                                                      Images, formulas and diagrams
+SDL: source models, collections, viewpoints and selected diagrams.
+                                                                      are represented by this region.
+SDUI: source files and explicit frame previews.
+
+Expand a branch to inspect it. Select a view to generate its document
+.
+
+Invalid sources remain visible with diagnostics.
+Concept: producer-derived navigation; late results must preserve changed/dirty documents.

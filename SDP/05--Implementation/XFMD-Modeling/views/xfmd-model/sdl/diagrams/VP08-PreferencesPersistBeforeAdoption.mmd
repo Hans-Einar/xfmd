@@ -1,0 +1,8 @@
+sequenceDiagram
+    participant n_NativeShell as Native Shell
+    participant n_Preferences as Preferences
+    n_NativeShell->>n_Preferences: 1: Begin Preferences Draft (Preference Changes)
+    n_Preferences->>n_Preferences: 2: Validate Preferences Draft (Preference Changes)
+    n_Preferences->>n_Preferences: 3: Persist Preferences Draft (Preference Changes)
+    n_Preferences->>n_Preferences: 4: Adopt Preferences Draft (Preference Changes)
+    n_Preferences->>n_NativeShell: 5: Notify Preference Change (Preference Changes)

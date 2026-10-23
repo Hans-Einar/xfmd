@@ -1,0 +1,10 @@
+sequenceDiagram
+    participant n_Interpreter as Interpreter
+    participant n_Preview as Preview
+    participant n_VisualResources as Visual Resources
+    participant n_Renderer as Renderer
+    n_Interpreter->>n_Interpreter: 1: Parse Mermaid Block (Diagram Interpretation)
+    n_Preview->>n_VisualResources: 2: Prepare Typed Diagram (Resource Preparation)
+    n_VisualResources->>n_Renderer: 3: Layout Typed Diagram (Diagram Layout Calls)
+    n_Renderer-->>n_VisualResources: 4: Typed Diagram Laid Out (Diagram Layout Calls) reply-to 3
+    n_VisualResources->>n_VisualResources: 5: Cache Compatible Scene (Resource Preparation)

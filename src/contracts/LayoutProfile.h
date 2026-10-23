@@ -20,7 +20,10 @@ struct PaperSpec {
 struct LayoutProfile {
   LayoutMode mode = LayoutMode::Continuous;
   PaperSpec paper;
-  bool operator==(const LayoutProfile& p) const { return mode == p.mode && paper == p.paper; }
+  bool fullSizeDiagrams = false;
+  bool operator==(const LayoutProfile& p) const {
+    return mode == p.mode && paper == p.paper && fullSizeDiagrams == p.fullSizeDiagrams;
+  }
 };
 struct FrameKey {
   DocumentToken token;

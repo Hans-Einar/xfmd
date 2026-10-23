@@ -133,6 +133,8 @@ ordering and registry ownership. Application wiring reuses existing dirty policy
 | 63 | lower-list right-click release | `SidebarPathList::handle` | `src/application/ui/SidebarPathList.cpp` | hit row/event → context callback | ignore moved/empty gestures; no normal activation | Implemented |
 | 64 | tree/history/Favorites context callback | `showPathContextMenu` | `src/application/ui/PathContextMenu.cpp` | native popup → selected action | dismissal returns None; copied paths survive modal loop | Implemented |
 
+| N3h | `Application::execute` | `PreviewCoordinator::setLayoutProfile` | `src/application/preview/PreviewCoordinator.cpp` | full-size diagram flag → new placement/frame key | capture/restore source anchor; no document edit or parse | Implemented |
+
 ## 6. Reuse and dependencies
 
 [FUNC-001](Functionality-001--Document-Session.md),
@@ -224,3 +226,16 @@ M1 chooser screenshots/evidence retain their historical scope.
 M2 acceptance: [context-menu evidence](../../../sprints/Sprint-009--Favorites/evidence/M2/README.md).
 PathContextMenu briefly grabs keyboard input so Escape reaches the popup while the
 document retains X focus, and releases it before the returned action executes.
+
+### 2026-10-01 — SDP workspace composition
+
+WorkspacePanel composes SdpPanel as a third page, conditionally exposed for an
+immediate SDP candidate. ApplicationWorkspace forwards work-root and active SDP
+Refresh events to FUNC-032. Files-only header controls are hidden on both Index
+and SDP. Hiding SDP while it is selected restores Files. Document parsing and
+producer execution remain outside the widget; see FUNC-032 for its call map.
+
+### N3h — full-size diagram reading
+
+View exposes Full-size diagrams (Wrap), checked from LayoutProfile and disabled in A4. Application::execute toggles the profile through PreviewCoordinator::setLayoutProfile and captures/restores the source anchor; document and selection are unchanged.
+See [selected design](../../../SDP/04--Design/SDL-Navigation/N3h-Reading.md).

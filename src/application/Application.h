@@ -17,6 +17,8 @@
 #include "navigation/NavigationCoordinator.h"
 #include "preview/PreviewCoordinator.h"
 #include "scroll/ScrollCoordinator.h"
+#include "sdp/SdpNavigation.h"
+#include "sdp/SduiWorkflow.h"
 #include "ui/IconResources.h"
 #include "ui/ViewModeController.h"
 #include "ui/XfmdWindow.h"
@@ -57,6 +59,8 @@ public:
   std::function<void()> back, forward;
   std::function<bool(bool)> canNavigate;
   std::unique_ptr<DocumentViews> documentViews;
+  std::unique_ptr<SdpNavigation> sdpNavigation;
+  std::unique_ptr<SduiWorkflow> sdui;
   Application() = default;
   ~Application();
   void initialize(int&, char**);
@@ -86,6 +90,12 @@ private:
   void openBrowser(const std::string&, bool systemDefault = false);
   void activateIndex(const IndexAction&);
   std::optional<IndexAction> pendingHeading;
+  struct PendingLinkAnchor {
+    DocumentToken token;
+    std::string fragment;
+  };
+  std::optional<PendingLinkAnchor> pendingLinkAnchor;
+  void applyLinkAnchor(const SemanticDocument&);
   void chooseExport();
   void pollExport();
   std::string savePath();

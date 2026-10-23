@@ -1,0 +1,9 @@
+flowchart LR
+    n_Application["Application (unit)"]
+    n_NativeShell["NativeShell (unit)"]
+    n_Workspace["Workspace (unit)"]
+    n_WorkspaceChanges["WorkspaceChanges (channel)"]
+    n_Application -->|sender| n_WorkspaceChanges
+    n_WorkspaceChanges -->|receiver| n_NativeShell
+    n_WorkspaceChanges -->|receiver| n_Workspace
+    n_Workspace -->|sender| n_WorkspaceChanges

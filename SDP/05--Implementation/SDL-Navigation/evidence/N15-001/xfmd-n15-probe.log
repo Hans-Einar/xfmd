@@ -1,0 +1,32 @@
+{
+  "eager": {
+    "code": 1,
+    "seconds": 10.866606069990667,
+    "bytes": 0
+  },
+  "lazy": {
+    "code": 0,
+    "seconds": 5.353539125004318,
+    "bytes": 1495872,
+    "sources": 63,
+    "sdlModels": 44,
+    "nodes": 3246,
+    "deferred": 41
+  },
+  "expansion": {
+    "code": 0,
+    "seconds": 7.75927056701039,
+    "bytes": 1402293,
+    "model": {
+      "id": "xfmddesktop-47e40bf52e14c5d8",
+      "system": "XFMD",
+      "source": "SDP/SDL/XFMD/XfmdDesktop.design",
+      "profile": "design-core/0.5",
+      "kind": "sdl",
+      "state": "validated",
+      "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+    },
+    "nodes": 2466,
+    "overviews": 11
+  }
+}

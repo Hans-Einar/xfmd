@@ -1,0 +1,5 @@
+flowchart LR
+    n_Publication["Publication (unit)"]
+    n_PublicationState["PublicationState (channel)"]
+    n_PublicationState -->|receiver| n_Publication
+    n_Publication -->|sender| n_PublicationState

@@ -1,0 +1,45 @@
+language design-core version 0.5.
+activity ABuild.
+activity AIsolated.
+activity APlan.
+activity AVerify.
+interface Api.
+usecase Browse.
+capability Delivery.
+unit Desktop.
+functionality Display.
+usecase Export.
+actor Guest.
+usecase Isolated.
+container Local.
+feature Navigation.
+mode Offline.
+mode Online.
+mode Quiet.
+actor Reader.
+container Remote.
+interface SparePort.
+unit Standalone.
+capability Unconnected.
+ABuild addresses Display.
+ABuild delivers Navigation.
+ABuild has implementation-status = implemented.
+ABuild refines APlan.
+APlan has implementation-status = planned.
+AVerify depends-on ABuild.
+AVerify has implementation-status = verified.
+AVerify refines APlan.
+Delivery requires Api in mode Offline.
+Delivery requires SparePort in mode Online.
+Desktop consumes Api.
+Desktop owns Display.
+Desktop provides Delivery.
+Display allocated-to Local in mode Offline.
+Display allocated-to Remote in mode Online.
+Display contributes-to Navigation.
+Display realizes Delivery.
+Local contains Desktop.
+Navigation supports Browse.
+Reader pursues Browse.
+Reader pursues Export.
+Remote consumes Api.

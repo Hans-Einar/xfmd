@@ -1,0 +1,2 @@
+PASS: all 10 declaration labels present in PDF text.
+PASS: inspected native preview and one-page PDF raster: all nodes, captions and routes visible without caption collision or ambiguous attachment.

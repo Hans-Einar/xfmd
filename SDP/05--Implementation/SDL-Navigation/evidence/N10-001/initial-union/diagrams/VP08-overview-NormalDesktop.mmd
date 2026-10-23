@@ -1,0 +1,184 @@
+flowchart LR
+    n_Application["Application (unit)"]
+    n_ContextInteraction["ContextInteraction (channel)"]
+    n_DiagramInterpretation["DiagramInterpretation (channel)"]
+    n_DiagramLayoutCalls["DiagramLayoutCalls (channel)"]
+    n_DocumentCalls["DocumentCalls (channel)"]
+    n_DocumentIndexService["DocumentIndexService (unit)"]
+    n_DocumentNotifications["DocumentNotifications (channel)"]
+    n_DocumentStateChanges["DocumentStateChanges (channel)"]
+    n_DocumentStorage["DocumentStorage (unit)"]
+    n_Documents["Documents (unit)"]
+    n_EditIntents["EditIntents (channel)"]
+    n_EventLoop["EventLoop (unit)"]
+    n_ExportInterpretation["ExportInterpretation (channel)"]
+    n_ExportLayout["ExportLayout (channel)"]
+    n_ExternalLauncher["ExternalLauncher (unit)"]
+    n_ExternalOpening["ExternalOpening (channel)"]
+    n_ExternalViewBroker["ExternalViewBroker (unit)"]
+    n_ExternalViewGenerator["ExternalViewGenerator (unit)"]
+    n_GeneratedAdmission["GeneratedAdmission (channel)"]
+    n_GeneratedDelivery["GeneratedDelivery (channel)"]
+    n_GeneratedDocumentCalls["GeneratedDocumentCalls (channel)"]
+    n_GeneratedIntents["GeneratedIntents (channel)"]
+    n_GeneratedViews["GeneratedViews (unit)"]
+    n_GenerationLifecycle["GenerationLifecycle (channel)"]
+    n_IndexChanges["IndexChanges (channel)"]
+    n_IndexIntents["IndexIntents (channel)"]
+    n_InterpretationCalls["InterpretationCalls (channel)"]
+    n_Interpreter["Interpreter (unit)"]
+    n_LayoutCalls["LayoutCalls (channel)"]
+    n_LeaseLifecycle["LeaseLifecycle (channel)"]
+    n_LeaseNotifications["LeaseNotifications (channel)"]
+    n_NativeShell["NativeShell (unit)"]
+    n_Navigation["Navigation (unit)"]
+    n_NavigationCalls["NavigationCalls (channel)"]
+    n_OpeningPolicy["OpeningPolicy (channel)"]
+    n_PreferenceChanges["PreferenceChanges (channel)"]
+    n_Preferences["Preferences (unit)"]
+    n_PresentationEvents["PresentationEvents (channel)"]
+    n_Preview["Preview (unit)"]
+    n_PreviewAdmission["PreviewAdmission (channel)"]
+    n_Publication["Publication (unit)"]
+    n_PublicationDrawing["PublicationDrawing (channel)"]
+    n_PublicationInputs["PublicationInputs (channel)"]
+    n_PublicationIntents["PublicationIntents (channel)"]
+    n_PublicationState["PublicationState (channel)"]
+    n_ReferenceInterpretation["ReferenceInterpretation (channel)"]
+    n_ReferenceStorage["ReferenceStorage (channel)"]
+    n_Renderer["Renderer (unit)"]
+    n_ResourcePreparation["ResourcePreparation (channel)"]
+    n_ScheduledWork["ScheduledWork (channel)"]
+    n_StorageCalls["StorageCalls (channel)"]
+    n_Typography["Typography (unit)"]
+    n_UnsavedAdmission["UnsavedAdmission (channel)"]
+    n_Viewport["Viewport (unit)"]
+    n_ViewportChanges["ViewportChanges (channel)"]
+    n_VisualResources["VisualResources (unit)"]
+    n_WindowPresentation["WindowPresentation (channel)"]
+    n_Workspace["Workspace (unit)"]
+    n_WorkspaceChanges["WorkspaceChanges (channel)"]
+    n_WorkspaceIntents["WorkspaceIntents (channel)"]
+    n_ContextInteraction -->|receiver| n_NativeShell
+    n_NativeShell -->|sender| n_ContextInteraction
+    n_DiagramInterpretation -->|receiver| n_Interpreter
+    n_Interpreter -->|sender| n_DiagramInterpretation
+    n_DiagramLayoutCalls -->|receiver| n_Renderer
+    n_Renderer -->|sender| n_DiagramLayoutCalls
+    n_DiagramLayoutCalls -->|receiver| n_VisualResources
+    n_VisualResources -->|sender| n_DiagramLayoutCalls
+    n_DocumentCalls -->|receiver| n_Documents
+    n_Documents -->|sender| n_DocumentCalls
+    n_DocumentCalls -->|receiver| n_Navigation
+    n_Navigation -->|sender| n_DocumentCalls
+    n_Documents -->|sender| n_DocumentNotifications
+    n_DocumentNotifications -->|receiver| n_GeneratedViews
+    n_DocumentNotifications -->|receiver| n_Navigation
+    n_DocumentNotifications -->|receiver| n_Preview
+    n_DocumentStateChanges -->|receiver| n_Documents
+    n_Documents -->|sender| n_DocumentStateChanges
+    n_EditIntents -->|receiver| n_Documents
+    n_NativeShell -->|sender| n_EditIntents
+    n_ExportInterpretation -->|receiver| n_Interpreter
+    n_Interpreter -->|sender| n_ExportInterpretation
+    n_ExportInterpretation -->|receiver| n_Publication
+    n_Publication -->|sender| n_ExportInterpretation
+    n_ExportLayout -->|receiver| n_Publication
+    n_Publication -->|sender| n_ExportLayout
+    n_ExportLayout -->|receiver| n_Renderer
+    n_Renderer -->|sender| n_ExportLayout
+    n_Application -->|sender| n_ExternalOpening
+    n_ExternalOpening -->|receiver| n_ExternalLauncher
+    n_GeneratedAdmission -->|receiver| n_Documents
+    n_GeneratedAdmission -->|receiver| n_GeneratedViews
+    n_GeneratedViews -->|sender| n_GeneratedAdmission
+    n_GeneratedDelivery -->|receiver| n_ExternalViewGenerator
+    n_ExternalViewGenerator -->|sender| n_GeneratedDelivery
+    n_GeneratedDelivery -->|receiver| n_GeneratedViews
+    n_GeneratedViews -->|sender| n_GeneratedDelivery
+    n_GeneratedDocumentCalls -->|receiver| n_Documents
+    n_Documents -->|sender| n_GeneratedDocumentCalls
+    n_GeneratedDocumentCalls -->|receiver| n_GeneratedViews
+    n_GeneratedViews -->|sender| n_GeneratedDocumentCalls
+    n_GeneratedIntents -->|receiver| n_GeneratedViews
+    n_NativeShell -->|sender| n_GeneratedIntents
+    n_GenerationLifecycle -->|receiver| n_ExternalViewGenerator
+    n_GeneratedViews -->|sender| n_GenerationLifecycle
+    n_IndexChanges -->|receiver| n_DocumentIndexService
+    n_DocumentIndexService -->|sender| n_IndexChanges
+    n_IndexChanges -->|receiver| n_NativeShell
+    n_IndexIntents -->|receiver| n_DocumentIndexService
+    n_NativeShell -->|sender| n_IndexIntents
+    n_InterpretationCalls -->|receiver| n_Interpreter
+    n_Interpreter -->|sender| n_InterpretationCalls
+    n_InterpretationCalls -->|receiver| n_Preview
+    n_Preview -->|sender| n_InterpretationCalls
+    n_LayoutCalls -->|receiver| n_Preview
+    n_Preview -->|sender| n_LayoutCalls
+    n_LayoutCalls -->|receiver| n_Renderer
+    n_Renderer -->|sender| n_LayoutCalls
+    n_LeaseLifecycle -->|receiver| n_GeneratedViews
+    n_GeneratedViews -->|sender| n_LeaseLifecycle
+    n_LeaseNotifications -->|receiver| n_ExternalViewBroker
+    n_GeneratedViews -->|sender| n_LeaseNotifications
+    n_NavigationCalls -->|receiver| n_Application
+    n_Application -->|sender| n_NavigationCalls
+    n_NavigationCalls -->|receiver| n_Navigation
+    n_Navigation -->|sender| n_NavigationCalls
+    n_OpeningPolicy -->|receiver| n_Application
+    n_Application -->|sender| n_OpeningPolicy
+    n_PreferenceChanges -->|receiver| n_NativeShell
+    n_NativeShell -->|sender| n_PreferenceChanges
+    n_PreferenceChanges -->|receiver| n_Preferences
+    n_Preferences -->|sender| n_PreferenceChanges
+    n_GeneratedViews -->|sender| n_PresentationEvents
+    n_PresentationEvents -->|receiver| n_NativeShell
+    n_Preview -->|sender| n_PresentationEvents
+    n_PreviewAdmission -->|receiver| n_Preview
+    n_Preview -->|sender| n_PreviewAdmission
+    n_Publication -->|sender| n_PublicationDrawing
+    n_PublicationDrawing -->|receiver| n_Typography
+    n_Documents -->|sender| n_PublicationInputs
+    n_PublicationInputs -->|receiver| n_Publication
+    n_NativeShell -->|sender| n_PublicationIntents
+    n_PublicationIntents -->|receiver| n_Publication
+    n_PublicationState -->|receiver| n_Publication
+    n_Publication -->|sender| n_PublicationState
+    n_ReferenceInterpretation -->|receiver| n_DocumentIndexService
+    n_DocumentIndexService -->|sender| n_ReferenceInterpretation
+    n_ReferenceInterpretation -->|receiver| n_Interpreter
+    n_Interpreter -->|sender| n_ReferenceInterpretation
+    n_ReferenceStorage -->|receiver| n_DocumentIndexService
+    n_DocumentIndexService -->|sender| n_ReferenceStorage
+    n_ReferenceStorage -->|receiver| n_DocumentStorage
+    n_DocumentStorage -->|sender| n_ReferenceStorage
+    n_Preview -->|sender| n_ResourcePreparation
+    n_Publication -->|sender| n_ResourcePreparation
+    n_ResourcePreparation -->|receiver| n_VisualResources
+    n_VisualResources -->|sender| n_ResourcePreparation
+    n_ScheduledWork -->|receiver| n_EventLoop
+    n_EventLoop -->|sender| n_ScheduledWork
+    n_ScheduledWork -->|receiver| n_GeneratedViews
+    n_ScheduledWork -->|receiver| n_Preview
+    n_Preview -->|sender| n_ScheduledWork
+    n_StorageCalls -->|receiver| n_DocumentStorage
+    n_DocumentStorage -->|sender| n_StorageCalls
+    n_StorageCalls -->|receiver| n_Documents
+    n_Documents -->|sender| n_StorageCalls
+    n_UnsavedAdmission -->|receiver| n_Documents
+    n_Documents -->|sender| n_UnsavedAdmission
+    n_UnsavedAdmission -->|receiver| n_NativeShell
+    n_NativeShell -->|sender| n_UnsavedAdmission
+    n_ViewportChanges -->|receiver| n_NativeShell
+    n_NativeShell -->|sender| n_ViewportChanges
+    n_ViewportChanges -->|receiver| n_Viewport
+    n_Viewport -->|sender| n_ViewportChanges
+    n_WindowPresentation -->|receiver| n_NativeShell
+    n_NativeShell -->|sender| n_WindowPresentation
+    n_Application -->|sender| n_WorkspaceChanges
+    n_WorkspaceChanges -->|receiver| n_NativeShell
+    n_WorkspaceChanges -->|receiver| n_Workspace
+    n_Workspace -->|sender| n_WorkspaceChanges
+    n_WorkspaceIntents -->|receiver| n_Application
+    n_NativeShell -->|sender| n_WorkspaceIntents
+    n_WorkspaceIntents -->|receiver| n_Workspace

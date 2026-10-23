@@ -1,0 +1,6 @@
+flowchart LR
+    n_DocumentStateChangesContract["DocumentStateChangesContract (contract)"]
+    n_MarkCurrentSaved["MarkCurrentSaved (message)"]
+    n_ReplaceDocument["ReplaceDocument (message)"]
+    n_DocumentStateChangesContract -->|permits| n_MarkCurrentSaved
+    n_DocumentStateChangesContract -->|permits| n_ReplaceDocument

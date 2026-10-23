@@ -1,39 +1,57 @@
-# P34: Beskyttet etikettilhørighet
+# P34: Protected caption attachment
 
-Krav: SR-024. Eier: FUNC-024 / bibliotekforkens etikettsteg. DiagramPainter
-viser fortsatt bare ferdig SVG; ingen ny rutelogikk i XFMD eller `.deps`.
+Requirement: SR-024. Owner: FUNC-024 / the renderer fork's caption stage.
+DiagramPainter still consumes finished SVG; XFMD and `.deps` own no routing fixes.
 
-Etiketten knyttes til nærmeste ortogonale segment med overlappende projeksjon.
-Det åpne rektangelet mellom tekstboksen (inkludert tekstmargin) og segmentet
-er beskyttet mot alle andre kanter. Identiteten er kantindeks, ikke kilde/mål.
-Plassering, hindringsregistrering og sluttvalidering bruker samme geometri.
+A caption attaches to the nearest orthogonal segment with overlapping projection.
+The open rectangle between the padded caption and that segment is protected
+against other edges. Identity is the edge index, not source/target identity.
+Placement, obstacle registration and final validation share this geometry.
 
-Forkens `routed::attachment` eier sonen og hindringsutvidelsen. `labels::place`
-prioriterer fri tilhørighet; inntil fire faste etikettordener kan prøves.
-`labels::obstacles` utvider teksthindringen mot eiersegmentet, fratrukket
-nøyaktig libavoids globale hindringsmargin. Dermed blokkeres mellomrommet uten
-å blokkere eiersegmentet. `labels::validate` kontrollerer faktiske sluttruter;
-`quality::measure` rapporterer `attachment_intrusions`. Eksisterende grense på
-tre rutetransaksjoner og siste etikettpass beholdes. Feil gir NoSpace og vanlig
-synlig fallback; ingen skjult motorendring. Manglende gyldig portretning
-etter hindringsruting klassifiseres som NoSpace og kan bruke eksisterende, ene
-omplasseringsretry. Portkontrollen slakkes ikke.
+The fork's `routed::attachment` owns the zone and obstacle extension.
+`labels::place` prioritizes unambiguous attachment and tries up to four fixed
+caption orders. `labels::obstacles` extends the caption obstacle towards its
+owner, subtracting exactly Libavoid's global shape buffer so the owner's segment
+remains usable. `labels::validate` checks actual final routes, while
+`quality::measure` reports `attachment_intrusions`. Three routing transactions
+and the final caption-only pass remain the limit. Failure returns NoSpace and
+the visible diagnostic fallback; there is no hidden engine change. Invalid
+port directions after obstacle routing are classified as NoSpace and can use
+the existing single fresh-placement retry. Port validation is not relaxed.
 
-Sammenfallende ruter på sonegrensen og minste parallellavstand er separate
-begrensninger. Denne endringen lover ikke å løse alle parallelle overlapp.
-Nøyaktig hindringsbuffer er viktig: et ekstra toleransegap lot libavoid legge
-en fremmed forbindelse i åpningen; regresjonen avviser dette.
+Coincident routes on zone boundaries and minimum parallel separation remain
+separate constraints. This does not promise to solve every parallel overlap.
+Exact buffer subtraction matters: an extra tolerance gap previously admitted
+a foreign connection into the protected zone; regression checks reject it.
 
-## Mulig portsøk senere
+## N3g: Preserve the nearest-owner rule during rerouting
 
-Libavoid mottar plasserte noder og kilde-/målforbindelser med kandidater eller
-låste porter, og finner rutepunktene. Første pass velger porter; senere pass i
-adapteren låser valgte koordinater i kantspesifikke pin-klasser. En annen kant
-kan ikke velge den klassen, men ulike pin-objekter kan ligge fysisk samme sted.
-Et portsøk må derfor føre fysisk belegg og sjekke klaring eksplisitt.
+Attachment exclusion alone allowed a competing route to approach the opposite
+side of a caption. The existing ambiguity guard then rejected ChapterNavigation.
+In addition to the attachment rectangle, register a caption exclusion polygon
+with radius `max(0, ownerDistance - 3 - routerClearance)`. Distance is the same
+Manhattan rectangle-to-route metric used by validation; chamfered corners avoid
+the unnecessary corner blocking of a square expansion. The two overlapping
+obstacles represent the union and have distinct IDs.
 
-Et mulig separat steg prøver et begrenset kandidatsett, kjører libavoid på nytt
-og godtar bare streng samlet forbedring etter tilhørighets-/kollisjonskontroll.
-Bruk besøkte konfigurasjoner, maksimal forsøksmengde og tidsbudsjett. Kortere
-geometrisk portavstand alene beviser ikke kortere rute eller bedre totalresultat.
-Stabilitet betyr et lokalt resultat, ikke globalt optimum. Ikke implementert her.
+The owner can move in later routing passes, so this radius is a routing aid,
+not proof of validity. Strict final validation, caption orders, transaction count,
+placement retry and deadlines remain unchanged. Geometry stays in the fork.
+See [N3g design](../../SDP/04--Design/SDL-Navigation/N3g-Routing.md) and its
+exact measured/native/PDF acceptance. The local helper and geometry unit tests
+remain together in labels.rs because they share private caption geometry; no
+unrelated file split or new public API is required.
+
+## Possible later port search
+
+Libavoid receives positioned nodes and source/target connections with candidate
+or fixed ports, then finds route points. The first pass selects ports; later
+passes lock coordinates in edge-specific pin classes. Another edge cannot select
+that class, but distinct pins can occupy the same physical point. A future port
+search must therefore track physical occupancy and clearance explicitly.
+
+A separate bounded search could try candidates, rerun Libavoid and accept only
+strict overall improvement after attachment/collision checks. It would require
+visited configurations, an attempt bound and the time budget. Shorter geometric
+port distance alone proves neither a shorter route nor a better overall result.
+Stability means a local result, not a global optimum. This is not implemented.

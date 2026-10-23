@@ -1,0 +1,1390 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 1ea9ddf..40e6a43 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -58,7 +58,7 @@ add_library(xfmd_scroll
+   src/application/scroll/ScrollDynamics.cpp)
+ target_link_libraries(xfmd_scroll PUBLIC xfmd_contracts)
+ add_library(xfmd_navigation
+-  src/application/navigation/LinkResolver.cpp src/application/navigation/HistoryStore.cpp
++  src/application/navigation/LinkResolver.cpp src/application/navigation/HeadingAnchor.cpp src/application/navigation/HistoryStore.cpp
+   src/application/navigation/NavigationCoordinator.cpp)
+ target_link_libraries(xfmd_navigation PUBLIC xfmd_document xfmd_scroll)
+ add_library(xfmd_index src/application/index/DocumentIndex.cpp src/application/index/ReferenceWorker.cpp)
+@@ -82,7 +82,10 @@ add_library(xfmd_export src/application/export/ExportCoordinator.cpp
+   src/application/export/ExportPipeline.cpp src/application/io/PdfFilePublisher.cpp
+   src/application/adapters/PdfOutput.cpp)
+ target_link_libraries(xfmd_export PUBLIC xfmd_typography xfmd_media xfmd_diagrams Threads::Threads)
++include(cmake/Sdp.cmake)
+ add_library(xfmd_application
++  src/application/sdp/SdpNavigation.cpp src/application/ui/SdpPanel.cpp
++  src/application/ui/SdpPanelContext.cpp src/application/ui/SdpTree.cpp
+   src/application/navigation/NavigationPanel.cpp src/application/navigation/DocumentViews.cpp src/application/navigation/WindowEndpoint.cpp
+   src/application/ui/controls/CompactToolbar.cpp src/application/ui/controls/PreviewControls.cpp src/application/ui/controls/PreviewColorControls.cpp
+   src/application/ui/style/ThemeProfiles.cpp
+@@ -111,7 +114,7 @@ add_library(xfmd_application
+   src/application/adapters/FoxPreviewInput.cpp src/application/adapters/FoxRenderHost.cpp src/application/adapters/FoxScheduler.cpp
+   src/application/adapters/FoxWheelScrollBar.cpp)
+ target_link_libraries(xfmd_application PUBLIC
+-  xfmd_version
++  xfmd_version xfmd_sdp
+   xfmd_index xfmd_export xfmd_typography xfmd_workspace xfmd_document xfmd_preview xfmd_scroll xfmd_navigation xfmd_interpreter xfmd_renderer PkgConfig::FOX X11::X11 X11::Xrandr)
+ add_executable(xfmd src/application/main.cpp)
+ target_link_libraries(xfmd PRIVATE xfmd_application)
+diff --git a/Cargo.lock b/Cargo.lock
+index 1992441..69b11d6 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -340,6 +340,13 @@ dependencies = [
+  "xfmd-diagram-contracts",
+ ]
+ 
++[[package]]
++name = "xfmd-sdp-json"
++version = "0.1.0"
++dependencies = [
++ "serde_json",
++]
++
+ [[package]]
+ name = "zmij"
+ version = "1.0.23"
+diff --git a/Cargo.toml b/Cargo.toml
+index 485d639..dd183a4 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -1,7 +1,7 @@
+ [workspace]
+ resolver = "2"
+ exclude = [".deps/mermaid-rs-renderer"]
+-members = ["src/contracts/diagram/rust", "src/interpreter/mermaid/rust", "src/renderer/diagram/rust", "src/application/composition/mermaid"]
++members = ["src/application/sdp/rust", "src/contracts/diagram/rust", "src/interpreter/mermaid/rust", "src/renderer/diagram/rust", "src/application/composition/mermaid"]
+ [workspace.dependencies]
+ xfmd-diagram-contracts = { path = "src/contracts/diagram/rust" }
+ mermaid-rs-renderer = { path = ".deps/mermaid-rs-renderer", default-features = false, features = ["libavoid"] }
+diff --git a/README.md b/README.md
+index f689f0c..fd777a2 100644
+--- a/README.md
++++ b/README.md
+@@ -394,3 +394,51 @@ screen resolution set to 144 DPI). With Poppler `pdftotext` available,
+ `DocumentZoomPdfTest` compares actual exported page/word geometry across four zoom
+ modes. These supplement the native workspace tests; see
+ [P055 acceptance](sprints/Sprint-007--Workspace-UI/evidence/P055.md).
++
++### SDP project sidebar (development)
++
++Open a project folder with an immediate `SDP` directory, or open the SDP directory
++itself. SDP sub-tabs follow the producer's ordered `kind: "tab"` roots (currently
++SDL, KanBan and SDUI). New producer-declared tabs require no XFMD tab-name update.
++Expand branches to inspect
++models, select a card to open it, or select a diagram/frame to generate its view.
++Viewpoint references show canonical names; abstraction nodes use producer labels.
++Right-click a model or associated descendant and choose **View source** to open
++its original `.design` in the editor, with normal Save/Discard/Cancel handling.
++This is separate from generating a view or pairing source and preview.
++Project/card/source changes refresh navigation automatically, preserving surviving
++expanded branches and the selected row. Refresh retries immediately. Invalid
++sources and watch limits display diagnostics; generated documents remain snapshots
++until you select the view again.
++
++The host must provide a compatible **SDPTool 2.x, sdptool/0.2** producer. XFMD uses
++`gh sdp` by default. To use a standalone binary, set `XFMD_SDP_TOOL` to its executable
++path (one executable, not a shell command). Project files cannot configure commands.
++The producer's normal cache/offline environment applies, including `SDP_OFFLINE=true`
++when using an already verified gh-sdp cache. Older sdptool/0.1 binaries are rejected.
++
++Generated views use the existing Markdown preview. Save or discard current edits
++before choosing one; late results never replace a changed document. Generated
++resources stay available for this window's history, bounded to 64 accepted bundles
++and 256 MiB. This is a document preview, not a native SDUI widget runtime.
++Standalone `.design` source/preview integration remains queued as KB-XFMD-015.
++
++Build/CLI and isolated native GUI evidence is recorded in PLAN-XFMD-0006,
++including SN-002 and SN-003. Remaining Session acceptance and independent review
++are explicit; a local build is not a release. Configure `SDP_TOOL_EXECUTABLE=/absolute/path/to/sdptool` in
++CMake to enable the real-producer tests, including SdpNavigationGuiTest.
++
++### Standalone Mermaid and heading links
++
++Open `xfmd diagram.mmd` to preview a raw Mermaid file (extension is case-insensitive).
++Editor/Split edit the original source, and Save retains raw Mermaid without added
++Markdown fences. Preview and PDF use the existing supported Mermaid profiles;
++unsupported input shows source with a diagnostic. Turn off the sidebar's `.md`
++filter to see `.mmd` files. The Open dialog includes a Mermaid file filter.
++
++Local Markdown links may include a heading: `/path/file.md#SomeLocationInTheFile`,
++`../file.md#some-heading` or `#some-heading`. Exact heading titles and lowercase
++slugs are supported; spaces become hyphens, punctuation is removed and repeated
++slugs receive `-1`, `-2`. Percent-encode spaces and literal `#` in filenames.
++Same-file jumps preserve unsaved edits. Missing headings report an error; explicit
++HTML IDs and full Unicode case folding are not implemented.
+diff --git a/VERSION b/VERSION
+index be58634..bd73f47 100644
+--- a/VERSION
++++ b/VERSION
+@@ -1 +1 @@
+-0.3
++0.4
+diff --git a/cmake/Tests.cmake b/cmake/Tests.cmake
+index 3222f66..45a700d 100644
+--- a/cmake/Tests.cmake
++++ b/cmake/Tests.cmake
+@@ -22,7 +22,7 @@ xfmd_test(ReferenceWorkerTest tests/application/ReferenceWorkerTest.cpp xfmd_ind
+ xfmd_test(NavigationTest tests/application/NavigationTest.cpp xfmd_navigation)
+ add_test(NAME BlueprintStructure COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/validate_blueprints.py)
+ add_test(NAME LayerBoundaries COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/check_layers.py)
+-foreach(name FavoritesGuiTest DocumentZoomGuiTest PathWorkspaceGuiTest OpenPathDialogGuiTest FileRoutingGuiTest MermaidGuiTest RecentFilesGuiTest PreviewSelectionGuiTest CompactWorkspaceTest ReadingColorsGuiTest TreeActionsTest AppearancePreferencesTest AppearanceGuiTest UiControlsTest BrowserPreferencesTest IndexGuiTest WorkspaceTest PresentationTest ScrollingTest NavigationGuiTest SidebarGuiTest WheelGuiTest WorkPathGuiTest PointerTest TablePreviewTest)
++foreach(name SdpDynamicGuiTest SdpPanelGuiTest FavoritesGuiTest DocumentZoomGuiTest PathWorkspaceGuiTest OpenPathDialogGuiTest FileRoutingGuiTest MermaidGuiTest RecentFilesGuiTest PreviewSelectionGuiTest CompactWorkspaceTest ReadingColorsGuiTest TreeActionsTest AppearancePreferencesTest AppearanceGuiTest UiControlsTest BrowserPreferencesTest IndexGuiTest WorkspaceTest PresentationTest ScrollingTest NavigationGuiTest SidebarGuiTest WheelGuiTest WorkPathGuiTest PointerTest TablePreviewTest)
+   add_executable(${name} tests/gui/${name}.cpp)
+   target_include_directories(${name} PRIVATE tests)
+   target_link_libraries(${name} PRIVATE xfmd_application)
+@@ -229,3 +229,44 @@ set_tests_properties(DocumentZoomDpiTest PROPERTIES TIMEOUT 65 LABELS GUI ENVIRO
+ if(XFMD_SANITIZERS)
+   set_property(TEST DocumentZoomDpiTest APPEND PROPERTY ENVIRONMENT "LSAN_OPTIONS=suppressions=${CMAKE_CURRENT_SOURCE_DIR}/tests/support/lsan.supp;ASAN_OPTIONS=detect_leaks=1:halt_on_error=1;UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1")
+ endif()
++
++xfmd_test(SdpWatchTest tests/application/SdpWatchTest.cpp xfmd_sdp)
++set_tests_properties(SdpWatchTest PROPERTIES TIMEOUT 20)
++target_link_libraries(SdpPanelGuiTest PRIVATE X11::X11)
++xfmd_test(SdpProtocolTest tests/application/SdpProtocolTest.cpp xfmd_sdp)
++target_compile_definitions(SdpProtocolTest PRIVATE XFMD_SDP_FAKE_TOOL="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/sdp/tool.py")
++set_tests_properties(SdpProtocolTest PROPERTIES TIMEOUT 20)
++add_executable(SdpNavigationGuiTest tests/gui/SdpNavigationGuiTest.cpp)
++target_include_directories(SdpNavigationGuiTest PRIVATE tests)
++target_link_libraries(SdpNavigationGuiTest PRIVATE xfmd_application X11::X11)
++set(SDP_TOOL_EXECUTABLE "" CACHE FILEPATH "Compatible standalone SDPTool for real producer GUI acceptance")
++if(SDP_TOOL_EXECUTABLE)
++  add_test(NAME SdpNavigationGuiTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/run_with_xvfb.py $<TARGET_FILE:SdpNavigationGuiTest>)
++  set_tests_properties(SdpNavigationGuiTest PROPERTIES ENVIRONMENT "XFMD_SDP_TOOL=${SDP_TOOL_EXECUTABLE}" TIMEOUT 65 LABELS GUI)
++endif()
++add_executable(SdpIntegrationTest tests/application/SdpIntegrationTest.cpp)
++target_include_directories(SdpIntegrationTest PRIVATE tests)
++target_link_libraries(SdpIntegrationTest PRIVATE xfmd_sdp)
++if(SDP_TOOL_EXECUTABLE)
++  add_test(NAME SdpIntegrationTest COMMAND SdpIntegrationTest)
++  set_tests_properties(SdpIntegrationTest PROPERTIES ENVIRONMENT "XFMD_SDP_TOOL=${SDP_TOOL_EXECUTABLE}" TIMEOUT 30)
++endif()
++
++xfmd_test(SdpDiscoveryTest tests/application/SdpDiscoveryTest.cpp xfmd_sdp)
++target_link_libraries(SdpDynamicGuiTest PRIVATE X11::X11)
++
++xfmd_test(StandaloneMermaidTest tests/application/StandaloneMermaidTest.cpp xfmd_application)
++target_compile_definitions(StandaloneMermaidTest PRIVATE XFMD_MMD_FIXTURE="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/mermaid/standalone.mmd")
++add_executable(StandaloneMermaidGuiTest tests/gui/StandaloneMermaidGuiTest.cpp)
++target_include_directories(StandaloneMermaidGuiTest PRIVATE tests)
++target_link_libraries(StandaloneMermaidGuiTest PRIVATE xfmd_application X11::X11)
++target_compile_definitions(StandaloneMermaidGuiTest PRIVATE XFMD_MMD_FIXTURE="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/mermaid/standalone.mmd")
++add_test(NAME StandaloneMermaidGuiTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/run_with_xvfb.py $<TARGET_FILE:StandaloneMermaidGuiTest>)
++set_tests_properties(StandaloneMermaidGuiTest PROPERTIES TIMEOUT 65 LABELS GUI)
++
++xfmd_test(HeadingLinkTest tests/application/HeadingLinkTest.cpp xfmd_application)
++add_executable(HeadingLinkGuiTest tests/gui/HeadingLinkGuiTest.cpp)
++target_include_directories(HeadingLinkGuiTest PRIVATE tests)
++target_link_libraries(HeadingLinkGuiTest PRIVATE xfmd_application X11::X11)
++add_test(NAME HeadingLinkGuiTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/run_with_xvfb.py $<TARGET_FILE:HeadingLinkGuiTest>)
++set_tests_properties(HeadingLinkGuiTest PROPERTIES TIMEOUT 65 LABELS GUI)
+diff --git a/packaging/xfmd.1.in b/packaging/xfmd.1.in
+index 5460d7a..820f78c 100644
+--- a/packaging/xfmd.1.in
++++ b/packaging/xfmd.1.in
+@@ -3,7 +3,7 @@
+ xfmd \- native FOX Markdown viewer and editor
+ .SH SYNOPSIS
+ .B xfmd
+-.RI [ directory | file.md | file.txt ]
++.RI [ directory | file.md | file.txt | file.mmd ]
+ .SH DESCRIPTION
+ Read and edit local UTF-8 Markdown and text files using FOX.
+ Markdown is rendered natively without a browser engine or network resource loading.
+@@ -15,15 +15,23 @@ Double-click the root to widen to home, then to /. Right-click a directory and
+ choose Set work path. Click a historic work path below the tree to reactivate it.
+ The 32 most recent distinct work paths persist between runs.
+ .PP
+-The *.md and *.txt toggles are ORed, then intersected with the filename filter.
+-Both toggles are initially off (all file types). Plain text matches a substring;
+-? matches one Unicode character and * zero or more characters in the full filename.
++The .md filter restricts the tree to Markdown. Disable it to see Mermaid files.
++The filename filter matches a substring; ? and * act as wildcards.
+ Matching ignores ASCII case. Filtering searches descendants in the background,
+-showing matching files and their ancestor directories. Refresh rescans the tree.
++showing matching files and ancestor directories. Refresh rescans the tree.
+ Directory symlinks are not traversed. File symlinks outside the root are omitted.
+-Regular files with .md/.txt extensions open in XFMD (case-insensitive).
+-Other file types selected in the Files tree open with xdg-open and leave the
+-current buffer and undo history unchanged. Launcher errors are reported.
++Markdown and raw .mmd Mermaid files open internally (case-insensitive suffixes).
++Mermaid opens in Preview; Editor/Split and Save preserve the original raw source.
++Unsupported Mermaid shows source and a diagnostic. PDF shares the diagram renderer.
++Other valid UTF-8 text opens in Editor; HTML opens in the configured browser,
++and binary files use OS association. Ctrl+click requests OS association.
++.SH HEADING LINKS
++Local Markdown links support absolute or relative paths followed by #heading,
++or a same-document #heading. Headings match their displayed title or a lowercase
++slug with spaces changed to hyphens and punctuation removed. Repeated slugs use
++-1, -2 suffixes. Percent-encode spaces and literal # characters in filenames.
++Same-file jumps preserve unsaved edits. Missing headings report a diagnostic.
++Explicit HTML IDs and full Unicode case folding are not supported.
+ .SH KEYS
+ Ctrl+O opens a file. Ctrl+S saves. Ctrl+Shift+S saves under another name.
+ Ctrl+Z and Ctrl+Y undo and redo. Ctrl+F searches.
+diff --git a/src/application/Application.cpp b/src/application/Application.cpp
+index 3ee8c2f..978820e 100644
+--- a/src/application/Application.cpp
++++ b/src/application/Application.cpp
+@@ -8,11 +8,14 @@
+ using namespace FX;
+ namespace xfmd {
+ Application::~Application() {
++  if (sdpNavigation)
++    sdpNavigation->stop();
+   documentViews.reset();
+   windowMode.reset();
+   exporter.reset();
+   references.reset();
+   preview.reset();
++  sdpNavigation.reset();
+   scheduler.reset();
+   delete window;
+ }
+@@ -119,6 +122,7 @@ void Application::initialize(int& argc, char** argv) {
+   browser.failed = [this](const std::string& error) { documents.error(error); };
+   host->linkHovered = [this](const std::string& target) { showLinkTarget(target); };
+   wireIndex();
++  sdpNavigation = std::make_unique<SdpNavigation>(*this);
+   wireWorkspace();
+   wireZoom();
+   documentOpened = [this] {
+@@ -126,11 +130,13 @@ void Application::initialize(int& argc, char** argv) {
+       documentViews->documentChanged("main");
+     references->cancel();
+     pendingHeading.reset();
++    pendingLinkAnchor.reset();
+     navigation->commitVisit();
+     preview->refresh();
+   };
+   contentChanged = [this] {
+     pendingHeading.reset();
++    pendingLinkAnchor.reset();
+     references->cancel();
+     preview->schedule();
+   };
+@@ -185,6 +191,8 @@ void Application::wireDocument() {
+     FXMessageBox::error(window, MBOX_OK, "xfmd", "%s", message.c_str());
+   };
+   documents.opened = [this] {
++    if (session.view().standaloneMermaid)
++      views->setMode(ViewMode::Preview);
+     window->workspacePanel->recentFiles->remember(session.view().path);
+     edits.reset();
+     updateUi();
+diff --git a/src/application/Application.h b/src/application/Application.h
+index 790a8dc..70ef4f9 100644
+--- a/src/application/Application.h
++++ b/src/application/Application.h
+@@ -17,6 +17,7 @@
+ #include "navigation/NavigationCoordinator.h"
+ #include "preview/PreviewCoordinator.h"
+ #include "scroll/ScrollCoordinator.h"
++#include "sdp/SdpNavigation.h"
+ #include "ui/IconResources.h"
+ #include "ui/ViewModeController.h"
+ #include "ui/XfmdWindow.h"
+@@ -57,6 +58,7 @@ public:
+   std::function<void()> back, forward;
+   std::function<bool(bool)> canNavigate;
+   std::unique_ptr<DocumentViews> documentViews;
++  std::unique_ptr<SdpNavigation> sdpNavigation;
+   Application() = default;
+   ~Application();
+   void initialize(int&, char**);
+@@ -86,6 +88,12 @@ private:
+   void openBrowser(const std::string&, bool systemDefault = false);
+   void activateIndex(const IndexAction&);
+   std::optional<IndexAction> pendingHeading;
++  struct PendingLinkAnchor {
++    DocumentToken token;
++    std::string fragment;
++  };
++  std::optional<PendingLinkAnchor> pendingLinkAnchor;
++  void applyLinkAnchor(const SemanticDocument&);
+   void chooseExport();
+   void pollExport();
+   std::string savePath();
+diff --git a/src/application/ApplicationIndex.cpp b/src/application/ApplicationIndex.cpp
+index dcc9409..350299e 100644
+--- a/src/application/ApplicationIndex.cpp
++++ b/src/application/ApplicationIndex.cpp
+@@ -1,5 +1,6 @@
+ #include "Application.h"
+ #include "interpreter/CmarkInterpreter.h"
++#include "navigation/HeadingAnchor.h"
+ #include <algorithm>
+ namespace xfmd {
+ namespace {
+@@ -29,6 +30,7 @@ void Application::wireIndex() {
+       scheduler->restart(4, 20, [this] { pollReferences(); });
+   };
+   preview->modelReady = [this, panel](ParseResult model) {
++    applyLinkAnchor(*model);
+     references->cancel();
+     panel->present(DocumentIndex::build(*model, session.view().path), session.view().path);
+     if (pendingHeading) {
+@@ -40,6 +42,17 @@ void Application::wireIndex() {
+     }
+   };
+ }
++void Application::applyLinkAnchor(const SemanticDocument& model) {
++  if (!pendingLinkAnchor || !(pendingLinkAnchor->token == model.token))
++    return;
++  const auto fragment = std::move(pendingLinkAnchor->fragment);
++  pendingLinkAnchor.reset();
++  if (auto anchor = HeadingAnchor::find(model, fragment)) {
++    scrolling.restoreAnchor(*anchor);
++    window->editor->setSourceAnchor(*anchor);
++  } else
++    documents.error("Heading anchor not found: " + fragment);
++}
+ void Application::pollReferences() {
+   while (auto result = references->take())
+     window->workspacePanel->index->presentReference(*result);
+@@ -59,6 +72,7 @@ void Application::openBrowser(const std::string& target, bool systemDefault) {
+   }
+ }
+ void Application::activateIndex(const IndexAction& action) {
++  pendingLinkAnchor.reset();
+   if (!action.error.empty()) {
+     documents.error(action.error);
+     return;
+diff --git a/src/application/ApplicationOpening.cpp b/src/application/ApplicationOpening.cpp
+index 45d6bfe..518b95c 100644
+--- a/src/application/ApplicationOpening.cpp
++++ b/src/application/ApplicationOpening.cpp
+@@ -47,6 +47,8 @@ bool Application::openDialogPath(const std::string& path) {
+ }
+ void Application::followLink(const std::string& document, const std::string& target,
+                              bool systemDefault) {
++  if (!systemDefault && sdpNavigation && sdpNavigation->follow(document, target))
++    return;
+   if (!systemDefault && documentViews && target.rfind("sdl-view:", 0) == 0) {
+     documentViews->follow(target);
+     return;
+@@ -56,7 +58,25 @@ void Application::followLink(const std::string& document, const std::string& tar
+     return;
+   }
+   try {
+-    openTarget(LinkResolver::resourcePath(document, target), systemDefault);
++    const auto link = LinkResolver::documentLink(document, target);
++    if (!link.fragment || systemDefault) {
++      openTarget(link.path, systemDefault);
++      return;
++    }
++    // Same-buffer links must not reload or discard unsaved edits (including untitled files).
++    std::error_code ec;
++    const auto path = link.path.empty() ? std::string{}
++                                        : std::filesystem::weakly_canonical(link.path, ec).string();
++    if (ec)
++      throw std::filesystem::filesystem_error("Resolve link", link.path, ec);
++    if (path != session.view().path && !openTarget(path))
++      return;
++    if (path != session.view().path)
++      return; // Browser/desktop routing did not open an internal document.
++    pendingHeading.reset();
++    pendingLinkAnchor = PendingLinkAnchor{session.view().token, *link.fragment};
++    if (auto model = preview->currentModel(); model && model->token == session.view().token)
++      applyLinkAnchor(*model);
+   } catch (const std::exception& e) {
+     documents.error(e.what());
+   }
+diff --git a/src/application/ApplicationWorkspace.cpp b/src/application/ApplicationWorkspace.cpp
+index d650b26..f4672bf 100644
+--- a/src/application/ApplicationWorkspace.cpp
++++ b/src/application/ApplicationWorkspace.cpp
+@@ -14,7 +14,17 @@ void Application::wireWorkspace() {
+     window->status->setText(text.c_str());
+   };
+   workspace->openRequested = [this] { execute(CommandRouter::Open); };
+-  workspace->rootChanged = [field](const auto& root) { field->setWorkPath(root); };
++  workspace->rootChanged = [this, field](const auto& root) {
++    field->setWorkPath(root);
++    sdpNavigation->refresh(root);
++  };
++  workspace->sdpRefresh = [this, workspace] {
++    sdpNavigation->refresh(workspace->history.root().string());
++  };
++  workspace->sdp->activated = [this](const auto& target) { sdpNavigation->activate(target); };
++  workspace->sdp->sourceRequested = [this](const auto& target) {
++    sdpNavigation->openSource(target);
++  };
+   field->setWorkPath(workspace->history.root().string());
+   field->filterChanged = [workspace](const auto& pattern) { workspace->setNameFilter(pattern); };
+   field->submitted = [this](const auto& target) { return openTypedPath(target); };
+diff --git a/src/application/document/DocumentSession.cpp b/src/application/document/DocumentSession.cpp
+index 6488a25..11e7141 100644
+--- a/src/application/document/DocumentSession.cpp
++++ b/src/application/document/DocumentSession.cpp
+@@ -5,7 +5,8 @@ void DocumentSession::replace(LoadedDocument loaded) {
+   current = {{current.token.document + 1, 0},
+              std::move(loaded.text),
+              std::move(loaded.path),
+-             loaded.plainText};
++             loaded.plainText,
++             loaded.standaloneMermaid};
+   baseline = current.text;
+   file = loaded.identity;
+ }
+@@ -25,10 +26,12 @@ void DocumentSession::markSaved(const SourceSnapshot& saved, const SavedDocument
+   if (saved.token.document != current.token.document)
+     return;
+   baseline = saved.text;
+-  if (current.plainText != InputPolicy::plainText(result.path))
++  if (current.plainText != InputPolicy::plainText(result.path) ||
++      current.standaloneMermaid != InputPolicy::mermaid(result.path))
+     ++current.token.revision;
+   current.path = result.path;
+   current.plainText = InputPolicy::plainText(result.path);
++  current.standaloneMermaid = InputPolicy::mermaid(result.path);
+   file = result.identity;
+ }
+ } // namespace xfmd
+diff --git a/src/application/index/ReferenceWorker.cpp b/src/application/index/ReferenceWorker.cpp
+index 4ed6f0f..6c25527 100644
+--- a/src/application/index/ReferenceWorker.cpp
++++ b/src/application/index/ReferenceWorker.cpp
+@@ -62,7 +62,8 @@ void ReferenceWorker::run() {
+         obsolete = stopping || current != generation;
+       }
+       if (!obsolete) {
+-        auto model = interpreter.parse({{}, std::move(loaded.text), loaded.path, loaded.plainText});
++        auto model = interpreter.parse(
++            {{}, std::move(loaded.text), loaded.path, loaded.plainText, loaded.standaloneMermaid});
+         if (!model)
+           throw Error(ErrorCode::Parse, "No document model returned.");
+         result.headings = DocumentIndex::topLevel(*model);
+diff --git a/src/application/io/FileOpenPolicy.cpp b/src/application/io/FileOpenPolicy.cpp
+index 38bfdbd..c7ef131 100644
+--- a/src/application/io/FileOpenPolicy.cpp
++++ b/src/application/io/FileOpenPolicy.cpp
+@@ -13,6 +13,8 @@ FileOpenKind FileOpenPolicy::classify(const std::string& path) {
+                  [](unsigned char c) { return char(std::tolower(c)); });
+   if (extension == ".html" || extension == ".htm")
+     return FileOpenKind::Browser;
++  if (InputPolicy::mermaid(path))
++    return FileOpenKind::Mermaid;
+   if (InputPolicy::supportedPath(path))
+     return InputPolicy::plainText(path) ? FileOpenKind::Text : FileOpenKind::Markdown;
+   try {
+diff --git a/src/application/io/FileOpenPolicy.h b/src/application/io/FileOpenPolicy.h
+index 08c9027..0467cfe 100644
+--- a/src/application/io/FileOpenPolicy.h
++++ b/src/application/io/FileOpenPolicy.h
+@@ -1,7 +1,7 @@
+ #pragma once
+ #include <string>
+ namespace xfmd {
+-enum class FileOpenKind { Markdown, Text, Browser, Desktop };
++enum class FileOpenKind { Markdown, Text, Browser, Desktop, Mermaid };
+ class FileOpenPolicy {
+ public:
+   static FileOpenKind classify(const std::string&);
+diff --git a/src/application/io/InputPolicy.cpp b/src/application/io/InputPolicy.cpp
+index aed29f6..f4d66c4 100644
+--- a/src/application/io/InputPolicy.cpp
++++ b/src/application/io/InputPolicy.cpp
+@@ -12,9 +12,13 @@ std::string extension(const std::string& path) {
+ } // namespace
+ bool InputPolicy::supportedPath(const std::string& path) {
+   auto ext = extension(path);
+-  return ext == ".md" || ext == ".txt";
++  return ext == ".md" || ext == ".txt" || ext == ".mmd";
++}
++bool InputPolicy::mermaid(const std::string& path) { return extension(path) == ".mmd"; }
++bool InputPolicy::plainText(const std::string& path) {
++  const auto ext = extension(path);
++  return ext != ".md" && ext != ".mmd";
+ }
+-bool InputPolicy::plainText(const std::string& path) { return extension(path) != ".md"; }
+ void InputPolicy::validate(std::string_view text, const std::string&) {
+   if (text.size() > maxDocumentBytes)
+     throw Error(ErrorCode::TooLarge, "File exceeds the 8 MiB limit.");
+diff --git a/src/application/io/InputPolicy.h b/src/application/io/InputPolicy.h
+index c8fd7a0..92257fb 100644
+--- a/src/application/io/InputPolicy.h
++++ b/src/application/io/InputPolicy.h
+@@ -5,6 +5,7 @@ namespace xfmd {
+ class InputPolicy {
+ public:
+   static bool supportedPath(const std::string&);
++  static bool mermaid(const std::string&);
+   static bool plainText(const std::string&);
+   static void validate(std::string_view text, const std::string& path = {});
+ };
+diff --git a/src/application/io/LocalFileStore.cpp b/src/application/io/LocalFileStore.cpp
+index 41b42f9..daa1f12 100644
+--- a/src/application/io/LocalFileStore.cpp
++++ b/src/application/io/LocalFileStore.cpp
+@@ -104,7 +104,8 @@ LoadedDocument LocalFileStore::read(const std::string& name) const {
+   if (!(identity(before, bytes) == identity(after, bytes)))
+     throw Error(ErrorCode::Conflict, "File changed while it was being read. Try again.");
+   InputPolicy::validate(bytes, name);
+-  return {path, bytes, identity(after, bytes), InputPolicy::plainText(name)};
++  return {path, bytes, identity(after, bytes), InputPolicy::plainText(name),
++          InputPolicy::mermaid(name)};
+ }
+ SavedDocument LocalFileStore::writeAtomic(const SourceSnapshot& source, const std::string& name,
+                                           const std::optional<FileIdentity>& expected) const {
+diff --git a/src/application/io/LocalFileStore.h b/src/application/io/LocalFileStore.h
+index 45eb8f7..f0a6d7c 100644
+--- a/src/application/io/LocalFileStore.h
++++ b/src/application/io/LocalFileStore.h
+@@ -13,6 +13,7 @@ struct LoadedDocument {
+   std::string path, text;
+   FileIdentity identity;
+   bool plainText = false;
++  bool standaloneMermaid = false; // Mutually exclusive with plainText.
+ };
+ struct SavedDocument {
+   FileIdentity identity;
+diff --git a/src/application/navigation/LinkResolver.cpp b/src/application/navigation/LinkResolver.cpp
+index 948d39f..8ee36a6 100644
+--- a/src/application/navigation/LinkResolver.cpp
++++ b/src/application/navigation/LinkResolver.cpp
+@@ -23,12 +23,7 @@ int hex(unsigned char c) {
+     return c - 'A' + 10;
+   return -1;
+ }
+-} // namespace
+-std::string LinkResolver::resourcePath(const std::string& document, const std::string& target) {
+-  localOnly(target);
+-  if (target.find('#') != std::string::npos || target.find('?') != std::string::npos)
+-    throw Error(ErrorCode::Unsupported,
+-                "Fragment and query links are not supported in this version.");
++std::string decode(const std::string& target) {
+   std::string decoded;
+   for (std::size_t i = 0; i < target.size(); ++i) {
+     if (target[i] != '%') {
+@@ -40,6 +35,28 @@ std::string LinkResolver::resourcePath(const std::string& document, const std::s
+     decoded += char(hex(target[i + 1]) * 16 + hex(target[i + 2]));
+     i += 2;
+   }
++  return decoded;
++}
++} // namespace
++DocumentLink LinkResolver::documentLink(const std::string& document, const std::string& target) {
++  const auto hash = target.find('#');
++  if (hash == std::string::npos)
++    return {resourcePath(document, target), {}};
++  auto fragment = decode(target.substr(hash + 1));
++  InputPolicy::validate(fragment);
++  for (unsigned char c : fragment)
++    if (c < 32 || c == 127)
++      throw Error(ErrorCode::InvalidInput, "Control character in heading anchor.");
++  if (hash == 0)
++    return {document, std::move(fragment)};
++  return {resourcePath(document, target.substr(0, hash)), std::move(fragment)};
++}
++std::string LinkResolver::resourcePath(const std::string& document, const std::string& target) {
++  localOnly(target);
++  if (target.find('#') != std::string::npos || target.find('?') != std::string::npos)
++    throw Error(ErrorCode::Unsupported,
++                "Fragment and query links are not supported in this version.");
++  auto decoded = decode(target);
+   localOnly(decoded);
+   InputPolicy::validate(decoded);
+   std::filesystem::path path(decoded);
+diff --git a/src/application/navigation/LinkResolver.h b/src/application/navigation/LinkResolver.h
+index 653b62f..61d1c44 100644
+--- a/src/application/navigation/LinkResolver.h
++++ b/src/application/navigation/LinkResolver.h
+@@ -1,8 +1,14 @@
+ #pragma once
++#include <optional>
+ #include <string>
+ namespace xfmd {
++struct DocumentLink {
++  std::string path;
++  std::optional<std::string> fragment;
++};
+ class LinkResolver {
+ public:
++  static DocumentLink documentLink(const std::string& document, const std::string& target);
+   static std::string resourcePath(const std::string& document, const std::string& target);
+   static std::string localPath(const std::string& document, const std::string& target);
+   static std::string resolve(const std::string& document, const std::string& target);
+diff --git a/src/application/navigation/NavigationPanel.cpp b/src/application/navigation/NavigationPanel.cpp
+index 1b0b719..9dc76bc 100644
+--- a/src/application/navigation/NavigationPanel.cpp
++++ b/src/application/navigation/NavigationPanel.cpp
+@@ -1,4 +1,6 @@
+ #include "NavigationPanel.h"
++#include "HeadingAnchor.h"
++#include "LinkResolver.h"
+ #include "application/composition/DiagramServices.h"
+ #include "renderer/MarkdownRenderer.h"
+ #include <algorithm>
+@@ -41,27 +43,7 @@ NavigationPanel::NavigationPanel(FX::FXComposite* parent, FX::FXApp& app)
+     if (changed)
+       changed();
+   };
+-  preview->modelReady = [this](auto model) {
+-    if (pendingFragment.empty())
+-      return;
+-    for (const auto& block : model->blocks) {
+-      if (block.kind != BlockKind::Heading)
+-        continue;
+-      std::string id;
+-      for (const auto& run : block.runs)
+-        id += run.text;
+-      std::transform(id.begin(), id.end(), id.begin(),
+-                     [](unsigned char c) { return char(std::tolower(c)); });
+-      if (id == pendingFragment) {
+-        scrolling.restoreAnchor({block.source.begin});
+-        pendingFragment.clear();
+-        return;
+-      }
+-    }
+-    if (error)
+-      error("Heading anchor not found: " + pendingFragment);
+-    pendingFragment.clear();
+-  };
++  preview->modelReady = [this](auto model) { applyFragment(*model); };
+   host->create();
+ }
+ NavigationPanel::~NavigationPanel() {
+@@ -69,24 +51,36 @@ NavigationPanel::~NavigationPanel() {
+   scheduler.cancelAll();
+   delete host;
+ }
++void NavigationPanel::applyFragment(const SemanticDocument& model) {
++  if (!pendingFragment)
++    return;
++  const auto fragment = std::move(*pendingFragment);
++  pendingFragment.reset();
++  if (auto anchor = HeadingAnchor::find(model, fragment))
++    scrolling.restoreAnchor(*anchor);
++  else if (error)
++    error("Heading anchor not found: " + fragment);
++}
+ bool NavigationPanel::follow(const std::string& link) {
+-  auto pos = link.find('#');
+-  if (pos == std::string::npos)
+-    return navigation.followLink(link);
+-  auto fragment = link.substr(pos + 1);
+-  if (fragment.empty() || fragment.find_first_not_of(
+-                              "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_") !=
+-                              std::string::npos) {
++  try {
++    const auto target = LinkResolver::documentLink(session.view().path, link);
++    pendingFragment.reset();
++    if (!target.fragment)
++      return navigation.openTarget(target.path);
++    if (!navigation.openAt(target.path, scrolling.captureAnchor()))
++      return false;
++    pendingFragment = target.fragment;
++    if (auto model = preview->currentModel(); model && model->token == session.view().token)
++      applyFragment(*model);
++    return true;
++  } catch (const std::exception& e) {
+     if (error)
+-      error("Unsupported heading anchor");
++      error(e.what());
+     return false;
+   }
+-  pendingFragment = fragment;
+-  bool result = pos == 0 ? navigation.openTarget(session.view().path)
+-                         : navigation.followLink(link.substr(0, pos));
+-  if (!result)
+-    pendingFragment.clear();
+-  return result;
+ }
+-bool NavigationPanel::open(const std::string& path) { return navigation.openTarget(path); }
++bool NavigationPanel::open(const std::string& path) {
++  pendingFragment.reset();
++  return navigation.openTarget(path);
++}
+ } // namespace xfmd
+diff --git a/src/application/navigation/NavigationPanel.h b/src/application/navigation/NavigationPanel.h
+index 9a2e56e..d6be6e3 100644
+--- a/src/application/navigation/NavigationPanel.h
++++ b/src/application/navigation/NavigationPanel.h
+@@ -6,7 +6,8 @@
+ #include "application/preview/PreviewCoordinator.h"
+ namespace xfmd {
+ class NavigationPanel {
+-  std::string pendingFragment;
++  std::optional<std::string> pendingFragment;
++  void applyFragment(const SemanticDocument&);
+   DocumentSession session;
+   LocalFileStore files;
+   DocumentCoordinator documents{session, files};
+diff --git a/src/application/ui/NavigationTree.h b/src/application/ui/NavigationTree.h
+index 39a43b3..14b15e7 100644
+--- a/src/application/ui/NavigationTree.h
++++ b/src/application/ui/NavigationTree.h
+@@ -4,7 +4,7 @@
+ #include <fx.h>
+ #include <optional>
+ namespace xfmd {
+-enum class IndexActionKind { None, Heading, File, Hyperlink };
++enum class IndexActionKind { None, Heading, File, Hyperlink, Command };
+ struct IndexAction {
+   IndexActionKind kind = IndexActionKind::None;
+   std::string path, target, error;
+diff --git a/src/application/ui/OpenPathDialog.cpp b/src/application/ui/OpenPathDialog.cpp
+index d34925c..4c60a0d 100644
+--- a/src/application/ui/OpenPathDialog.cpp
++++ b/src/application/ui/OpenPathDialog.cpp
+@@ -10,7 +10,8 @@ FXIMPLEMENT(OpenPathDialog, FXFileDialog, openPathMap, ARRAYNUMBER(openPathMap))
+ OpenPathDialog::OpenPathDialog(FXWindow* owner, const std::string& directory)
+     : FXFileDialog(owner, "Open file or folder") {
+   setSelectMode(SELECTFILE_MULTIPLE_ALL);
+-  setPatternList("All files (*)\nMarkdown and text (*.md,*.MD,*.txt,*.TXT)");
++  setPatternList(
++      "All files (*)\nMarkdown and text (*.md,*.MD,*.txt,*.TXT)\nMermaid diagrams (*.mmd,*.MMD)");
+   setDirectory(directory.c_str());
+   // FXFileSelector's acceptButton is a hidden forwarding button. Keep its native
+   // visible OK button and put the selector and our footer in one vertical packer.
+diff --git a/src/application/ui/WorkspacePanel.cpp b/src/application/ui/WorkspacePanel.cpp
+index f8fe12d..90e3072 100644
+--- a/src/application/ui/WorkspacePanel.cpp
++++ b/src/application/ui/WorkspacePanel.cpp
+@@ -25,6 +25,8 @@ WorkspacePanel::WorkspacePanel(FXComposite* parent, UiContext& context)
+       new FXTabBar(tabRow, this, ID_TAB, LAYOUT_FILL_X | LAYOUT_CENTER_Y, 0, 0, 0, 0, 0, 0, 0, 0);
+   new FXTabItem(tabs, "Files");
+   new FXTabItem(tabs, "Index");
++  sdpTab = new FXTabItem(tabs, "SDP");
++  sdpTab->hide();
+   refreshButton = ui.button(tabRow, "\tRefresh Files", this, ID_REFRESH, UiIcon::Refresh);
+   markdown = ui.button(tabRow, "\tShow only Markdown files (off: all file types)", this,
+                        ID_MARKDOWN, UiIcon::Markdown, ButtonRole::Pill);
+@@ -65,6 +67,7 @@ WorkspacePanel::WorkspacePanel(FXComposite* parent, UiContext& context)
+   tree->favoriteRequested = [this](const auto& path) { favorites->add(path); };
+   recentFiles->favoriteRequested = [this](const auto& path) { favorites->add(path); };
+   index = new IndexPanel(pages, context);
++  sdp = new SdpPanel(pages);
+   std::vector<std::string> saved;
+   for (int i = 0; i < 32; ++i) {
+     auto key = "Path" + std::to_string(i);
+@@ -137,6 +140,30 @@ void WorkspacePanel::setNameFilter(const std::string& pattern) {
+   namePattern = pattern;
+   onFilter(nullptr, 0, nullptr);
+ }
++void WorkspacePanel::fitHeader() {
++  if (!sdpTab->shown())
++    return;
++  // Keep every tab reachable when Files controls reappear after another tab.
++  const auto minimum = tabs->getParent()->getDefaultWidth() + 4;
++  if (getWidth() < minimum) {
++    setWidth(minimum);
++    getParent()->recalc();
++  }
++}
++void WorkspacePanel::showSdp(bool show) {
++  if (show) {
++    sdpTab->show();
++    fitHeader();
++  } else {
++    sdpTab->hide();
++    if (tabs->getCurrent() == 2) {
++      tabs->setCurrent(0);
++      onTab(nullptr, 0, nullptr);
++    }
++  }
++  tabs->recalc();
++  recalc();
++}
+ long WorkspacePanel::onTab(FXObject*, FXSelector, void*) {
+   pages->setCurrent(tabs->getCurrent());
+   for (auto* button : {markdown, upButton, openButton}) {
+@@ -145,9 +172,11 @@ long WorkspacePanel::onTab(FXObject*, FXSelector, void*) {
+     else
+       button->hide();
+   }
++  fitHeader();
+   refreshButton->getParent()->recalc();
+-  refreshButton->setTipText(tabs->getCurrent() == 0 ? "Refresh Files"
+-                                                    : "Refresh Index from current buffer");
++  refreshButton->setTipText(tabs->getCurrent() == 0   ? "Refresh Files"
++                            : tabs->getCurrent() == 1 ? "Refresh Index from current buffer"
++                                                      : "Refresh SDP project");
+   return 1;
+ }
+ long WorkspacePanel::onRefresh(FXObject*, FXSelector, void*) {
+@@ -157,8 +186,10 @@ long WorkspacePanel::onRefresh(FXObject*, FXSelector, void*) {
+       onApplyFilter(nullptr, 0, nullptr);
+     else
+       tree->refresh();
+-  } else if (indexRefresh)
++  } else if (tabs->getCurrent() == 1 && indexRefresh)
+     indexRefresh();
++  else if (tabs->getCurrent() == 2 && sdpRefresh)
++    sdpRefresh();
+   return 1;
+ }
+ long WorkspacePanel::onUp(FXObject*, FXSelector, void*) {
+diff --git a/src/application/ui/WorkspacePanel.h b/src/application/ui/WorkspacePanel.h
+index 9818539..6513f84 100644
+--- a/src/application/ui/WorkspacePanel.h
++++ b/src/application/ui/WorkspacePanel.h
+@@ -2,6 +2,7 @@
+ #include "FavoritesPanel.h"
+ #include "IndexPanel.h"
+ #include "RecentFilesPanel.h"
++#include "SdpPanel.h"
+ #include "SidebarWidget.h"
+ #include "application/workspace/WorkPathHistory.h"
+ #include "controls/UiLayout.h"
+@@ -11,8 +12,10 @@ class WorkspacePanel : public FX::FXVerticalFrame {
+   std::string pendingPath;
+   std::string namePattern;
+   FX::FXSwitcher* pages = nullptr;
++  FX::FXTabItem* sdpTab = nullptr;
+   bool pathError = false, filterPending = false;
+   void remember();
++  void fitHeader();
+ 
+ protected:
+   WorkspacePanel() : history("/") {}
+@@ -36,7 +39,9 @@ public:
+   FX::FXTabBook* recentTabs = nullptr;
+   UiButton *refreshButton = nullptr, *upButton = nullptr, *openButton = nullptr;
+   IndexPanel* index = nullptr;
+-  std::function<void()> openRequested, indexRefresh;
++  SdpPanel* sdp = nullptr;
++  void showSdp(bool);
++  std::function<void()> openRequested, indexRefresh, sdpRefresh;
+   std::function<void(const std::string&)> rootChanged;
+   UiButton* markdown = nullptr;
+   FX::FXList* workPaths = nullptr;
+diff --git a/src/blueprint/README.md b/src/blueprint/README.md
+index de5c610..be98b6c 100644
+--- a/src/blueprint/README.md
++++ b/src/blueprint/README.md
+@@ -1,6 +1,6 @@
+ # Blueprint register
+ 
+-Current branch inventory: 10 features and 27 functionality objects (37 total).
++Current branch inventory: 10 features and 28 functionality objects (38 total).
+ Main `c245fd9` contains P0–P41 and Sprints 001–002; FUNC-031 belongs to the
+ separate Sprint 004 branch. FTR-011/FUNC-027–030 and UR-043/SR-026 are reserved
+ by historical BoxUI work and are not missing implementations on this branch.
+@@ -183,3 +183,26 @@ P22: UR-032 → FUNC-010/014; UR-033 → FUNC-010; UR-034 → FUNC-005. AT-052
+ | Requirement | Design objects | Acceptance | Scope |
+ | --- | --- | --- | --- |
+ | UR-045 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | AT-073 | FirstRelease |
++
++## SDP project navigation — 2026-10-01
++
++| ID | Owner | Status |
++| --- | --- | --- |
++| [FUNC-032](functionality/Functionality-032--SDP-Project-Navigation.md) | application | Implemented |
++
++| Requirement | Object | Acceptance | Scope |
++| --- | --- | --- | --- |
++| UR-046 | FUNC-032 | AT-074 | FirstRelease |
++| SR-029 | FUNC-032 | AT-075 | FirstRelease |
++
++The previous 37-object SDL baseline needs a FUNC-032 delta under #017; its
++historical structural evidence is preserved rather than silently regenerated.
++
++## Standalone Mermaid input — 2026-10-04
++
++| Requirement | Design objects | Acceptance | Scope |
++| --- | --- | --- | --- |
++| UR-047 | FUNC-002, FUNC-023 | AT-076 | FirstRelease |
++| UR-048 | FUNC-008 | AT-077 | FirstRelease |
++
++UR-048 / AT-077: FUNC-008 owns local heading-link resolution and transactional navigation.
+diff --git a/src/blueprint/functionality/Functionality-002--Local-File-Storage.md b/src/blueprint/functionality/Functionality-002--Local-File-Storage.md
+index 94cf45a..93036cd 100644
+--- a/src/blueprint/functionality/Functionality-002--Local-File-Storage.md
++++ b/src/blueprint/functionality/Functionality-002--Local-File-Storage.md
+@@ -6,7 +6,7 @@ role: Service
+ owner: application
+ status: Implemented
+ scope: FirstRelease
+-requirements: UR-001, UR-003, UR-009, UR-028, SR-005, SR-006, SR-007, SR-011, SR-013
++requirements: UR-047, UR-001, UR-003, UR-009, UR-028, SR-005, SR-006, SR-007, SR-011, SR-013
+ uses: none
+ ---
+ 
+@@ -18,15 +18,15 @@ Reusable local file I/O and input validation, independent of widgets, history an
+ 
+ ## 2. Requirements and acceptance
+ 
+-UR-001, UR-003, UR-009, UR-028 and SR-005, SR-006, SR-007, SR-011, SR-013. Normative definitions and acceptance are in the [requirements](../../../xfmd_requirements.md).
++UR-001, UR-003, UR-009, UR-028, UR-047 and SR-005, SR-006, SR-007, SR-011, SR-013. Normative definitions and acceptance are in the [requirements](../../../xfmd_requirements.md).
+ 
+ ## 3. Contracts and ownership
+ 
+ `LocalFileStore::read` and `writeAtomic` return owned data or throw `Error`.
+ `InputPolicy::validate` checks bounded UTF-8 and control bytes independently of suffix.
+-`plainText` is false only for a case-insensitive `.md` suffix; `supportedPath` identifies
+-known `.md`/`.txt` types for which invalid content must remain an internal error.
+-`FileOpenPolicy::classify` returns Markdown, Text, Browser or Desktop for Application.
++`plainText` is false for case-insensitive `.md` and `.mmd` suffixes; `supportedPath` identifies
++known `.md`/`.txt`/`.mmd` types for which invalid content must remain an internal error.
++`FileOpenPolicy::classify` returns Markdown, Mermaid, Text, Browser or Desktop for Application.
+ It owns classification, not launchers or document state.
+ 
+ ## 4. Behavior, state and failures
+@@ -38,7 +38,7 @@ Publish new files without overwrite through link/unlink. A directory-sync failur
+ after commit returns `durable=false`.
+ 
+ P053, 2026-09-24, supersedes suffix-only admission: `.html`/`.htm` route to the
+-browser; known `.md`/`.txt` use internal loading and report invalid input.
++browser; known `.md`/`.txt` (and MM-001 `.mmd`) use internal loading and report invalid input.
+ Other files use bounded content validation: valid UTF-8, including empty files
+ and an optional BOM, opens as literal text; NUL, binary control bytes, invalid
+ UTF-8 or oversize unknown content routes to OS association. TAB/LF/CR/FF are allowed;
+@@ -55,6 +55,9 @@ an unreadable target. Atomic-save behavior and byte preservation remain unchange
+ | 4 | `LocalFileStore::writeAtomic` | `copyAttributes` | `src/application/io/LocalFileStore.cpp` | Open descriptors → preserved metadata | Failure before commit | Implemented |
+ | 5 | `Application::openTarget / openDialogPath` | `FileOpenPolicy::classify` | `src/application/io/FileOpenPolicy.cpp` | Regular path → selected consumer | Bounded validation; I/O failures preserve document | Implemented |
+ 
++| MM-001 | `LocalFileStore::read` | `InputPolicy::mermaid` | `src/application/io/InputPolicy.cpp` | Suffix to standaloneMermaid flag | Case-insensitive .mmd only | Implemented |
++| MM-001 | `DocumentCoordinator::save` | `DocumentSession::markSaved` | `src/application/document/DocumentSession.cpp` | Saved path to format flags/revision | Format change invalidates preview token | Implemented |
++
+ ## 6. Reuse and dependencies
+ 
+ No other functionality contract is consumed. Shared types follow the architecture.
+@@ -81,3 +84,16 @@ Update contracts, call maps, consumers and tests together. Ports and ownership
+ remain explicit. Unknown textual files require a bounded probe and another read
+ when the document transaction opens them; the loader revalidates before commit.
+ Historical evidence retains its original scope.
++
++### Standalone Mermaid input — MM-001
++
++UR-047/AT-076 adds .mmd recognition to InputPolicy. LoadedDocument and
++SourceSnapshot carry standaloneMermaid alongside the existing plainText field;
++application-produced flags are mutually exclusive. InputPolicy::mermaid
++owns extension classification. LocalFileStore and DocumentSession preserve it;
++markSaved compares both format flags to invalidate a format-changing Save As.
++FileOpenPolicy distinguishes Mermaid from Markdown/Text. The shared document-open
++callback selects Preview after a successful .mmd transaction; dirty Cancel cannot
++change the active document or view. The editor/save path stores original bytes.
++OpenPathDialog adds a Mermaid filter; the existing .md-only sidebar filter retains
++its meaning. See PLAN-XFMD-0007; SDL/SDUI source updates remain held by the owner.
+diff --git a/src/blueprint/functionality/Functionality-008--Navigation-History.md b/src/blueprint/functionality/Functionality-008--Navigation-History.md
+index 9ec6626..e7ce76b 100644
+--- a/src/blueprint/functionality/Functionality-008--Navigation-History.md
++++ b/src/blueprint/functionality/Functionality-008--Navigation-History.md
+@@ -6,74 +6,86 @@ role: Workflow
+ owner: application
+ status: Implemented
+ scope: FirstRelease
+-requirements: UR-001, UR-005, UR-009, SR-002, SR-005, SR-008, SR-013
++requirements: UR-001, UR-005, UR-009, UR-048, SR-002, SR-005, SR-008, SR-013
+ uses: FUNC-001, FUNC-009
+ ---
+ 
+-# Functionality-008: Dokumentnavigasjon og historikk
++# Functionality-008: Document navigation and history
+ 
+-## 1. Hensikt og avgrensning
++## 1. Purpose and scope
+ 
+-Gi dokumentbytte med lokale lenker og back/forward én historikkpolicy. LinkResolver og HistoryStore er små interne roller; offentlige innganger eies av NavigationCoordinator. Ikke legg fillasting i renderer.
++Give local document switching and Back/Forward one history policy. Application
++coordinates link routing; renderer only supplies targets. NavigationCoordinator
++owns document transactions, LinkResolver URI/path policy, HeadingAnchor heading
++IDs and HistoryStore the bounded visit list.
+ 
+-## 2. Krav og akseptanse
++## 2. Requirements and acceptance
+ 
+-Krav: UR-001, UR-005, UR-009, SR-002, SR-005, SR-008, SR-013. Definisjoner og normativ akseptanse finnes i
+-[kravspesifikasjonen](../../../xfmd_requirements.md). Kapittel 7 konkretiserer beviset.
++UR-001, UR-005, UR-009, UR-048; SR-002, SR-005, SR-008, SR-013.
++AT-001, AT-005, AT-009, AT-012, AT-015, AT-018, AT-023, AT-077.
++See [requirements](../../../xfmd_requirements.md), including AT-077.
+ 
+-## 3. Kontrakter og eierskap
++## 3. Contracts and ownership
+ 
+-NavigationCoordinator::openTarget/followLink/goBack/goForward er offentlige innganger. HistoryStore eier in-memory liste/cursor (maks 100), LinkResolver eier lokal sti-/URI-policy. Pending request bevarer forrige anker og eventuell historikkindeks. DocumentCoordinator opened-callback er eneste commitVisit-inngang.
++NavigationCoordinator exposes openTarget, openAt, followLink, goBack/goForward.
++Only the committed document callback commits history. Relative paths are resolved
++against the source document's directory, never the process working directory.
++LinkResolver::resourcePath remains a path-only interface. documentLink
++splits a literal # before decoding each component, preserving encoded filename #.
++HeadingAnchor::find maps an exact heading title or unique generated slug
++to its original byte anchor; it performs no I/O and uses no renderer state.
+ 
+-Relative lenker bruker det åpne dokumentets absolutte foreldremappe som base.
+-Prosessens arbeidsmappe brukes ikke. Absolute stier beholdes før canonicalisering.
++## 4. Behavior, state and failures
+ 
+-## 4. Atferd, tilstand og feil
++Document load and unsaved-change resolution must succeed before history commit.
++A new visit after Back truncates the forward branch; same-file navigation does not
++duplicate visits. History retains up to 100 entries and restores source anchors.
++Save As renames the current entry. Schemes/network paths, query syntax, malformed
++escapes and control bytes remain rejected by local resolution.
+ 
+-CLI/dialog/sidebar går via Application::open til samme navigation→document-vei. resolveUnsaved og lasting må lykkes før history.commit. Ny visit etter back trunkerer frem-gren; samme fil dupliseres ikke. Back/forward leser fil på nytt og gjenoppretter anker når frame er klart. Percent-encoding dekodes én gang; schemes/network/fragment/query/control-byte avvises. SaveAs oppdaterer aktuell poststi.
++Selected T003 extension: Application and NavigationPanel resolve heading links.
++Exact displayed titles and lowercase ASCII slugs are supported; spaces become
++hyphens, punctuation is removed, duplicate IDs receive -1, -2. Unicode bytes are
++preserved; explicit HTML IDs and full Unicode case folding are not selected.
++Empty fragments mean start. Missing headings report an error in the opened file.
++Same-document jumps retain the live dirty buffer. Cross-file Cancel preserves
++buffer, history and viewport. Pending main anchors apply only to the accepted
++document token, and another open/edit invalidates them.
+ 
+ ## 5. Plumbing
+ 
+-Tabellen beskriver implementerte kall. Navngitte hendelser er injiserte callbacks, ikke en global event bus.
+-
+-| Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
++| Step | Event / caller | Called symbol | Source or contract file | Data / result | Failure / side effect | Status |
+ | --- | --- | --- | --- | --- | --- | --- |
+-| 1 | `Application::open` | `NavigationCoordinator::openTarget` | `src/application/navigation/NavigationCoordinator.cpp` | Path → pending request | Reentrant request avvises | Implemented |
+-| 2 | `FoxRenderHost link callback` | `NavigationCoordinator::followLink` | `src/application/navigation/NavigationCoordinator.cpp` | LinkTarget → lokal navigasjon | Feil gir status/dialog | Implemented |
+-| 3 | `NavigationCoordinator::followLink` | `LinkResolver::resolve` | `src/application/navigation/LinkResolver.cpp` | Basepath/target → canonical local path | Ingen shell/network | Implemented |
+-| 4 | `NavigationCoordinator::goBack / goForward` | `HistoryStore::propose` | `src/application/navigation/HistoryStore.cpp` | Retning → indeks | NoOp ved endepunkt | Implemented |
+-| 5 | `NavigationCoordinator::openTarget` | `DocumentCoordinator::requestOpen` | `src/application/document/DocumentCoordinator.cpp` | Path → success/failure | Failed/cancel muterer ikke history | Implemented |
+-| 6 | `DocumentCoordinator opened callback` | `NavigationCoordinator::commitVisit` | `src/application/navigation/NavigationCoordinator.cpp` | Committed dokument → history | Én callback per commit | Implemented |
+-| 7 | `NavigationCoordinator::commitVisit` | `HistoryStore::commit` | `src/application/navigation/HistoryStore.cpp` | Path/forrige anker/target → cursor | Ny visit trunkerer frem-gren | Implemented |
+-| 8 | `NavigationCoordinator::commitVisit` | `ScrollCoordinator::restoreAnchor` | `src/application/scroll/ScrollCoordinator.cpp` | Historikkanker → pending restore | Venter på gyldig FrameReady | Implemented |
+-
+-## 6. Gjenbruk og avhengigheter
+-
+-[FUNC-001](../functionality/Functionality-001--Document-Session.md), [FUNC-009](../functionality/Functionality-009--Source-Anchor-Mapping.md)
+-
+-CLI, dialog, sidebar og lenker deler dokumentbytte/commit-policy. Source-anchor-functionality deles med scrollsync. HistoryStore er ikke en service som widgets muterer direkte.
+-
+-Sprint 004 consumer (2026-09-24 reconstruction): FUNC-031 reuses NavigationCoordinator per panel. NavigationPanel handles its restricted heading-fragment profile before delegating file navigation; this does not broaden LinkResolver globally.
+-See [FUNC-031](Functionality-031--Generated-Document-Navigation.md) for the complete call path.
+-
+-## 7. Verifikasjon
+-
+-Relevante akseptanse-ID-er: AT-001, AT-005, AT-009, AT-012, AT-015, AT-018, AT-023.
+-
+-`NavigationTest` tester A/B/C/back/D, avbrudd, brutt lenke, 100-grense, encoding/schemes og ingen dobbel commit. NavigationGuiTest klikker et ekte renderer-hit og kontrollerer back/forward i FOX.
+-
+-Evidence: [Fase P6](../../../docs/evidence/P6.md). Samlet kravdekning og eventuelle gjenstående begrensninger kontrolleres i P7; Implemented er ikke automatisk Verified.
+-
+-Ny regresjonskontroll: [Native lenker og markører](../../../docs/evidence/document-links.md).
+-
+-## 8. Status, risiko og endringskonsekvenser
+-
+-Implemented i P6. Oppdater kontrakter, kallkart, konsumenter og tester i samme endring.
+-Rene porter og tydelig rolleeierskap er obligatorisk. Eventuelle senere avvik står i fasens bevisrapport.
+-
+-P15-presisering: `NavigationCoordinator::openAt` tar eksplisitt SourceAnchor.
+-Samme fil hopper i aktiv buffer, uten ny lesing/dirty-dialog. Annen fil bruker
+-samme DocumentCoordinator og committer historikk før pending ankerrestore.
+-Refererte kapitler finnes på nytt ved modellaksept etter filåpning; fjernet kapittel
+-faller tilbake til start. HTTP(S) i referansetreet går via separat argv-adapter;
+-previewens eksisterende link-policy gjelder fortsatt.
++| 1 | `Application::open` | `NavigationCoordinator::openTarget` | `src/application/navigation/NavigationCoordinator.cpp` | Path to transaction | Reentrant request rejected | Implemented |
++| 2 | `Application::followLink` | `LinkResolver::documentLink` | `src/application/navigation/LinkResolver.cpp` | URI to path/optional fragment | Invalid local URI rejected | Implemented |
++| 3 | `Application::followLink` | `NavigationCoordinator::openAt` | `src/application/navigation/NavigationCoordinator.cpp` | Same-file anchor | Preserves live edits | Implemented |
++| 4 | `NavigationCoordinator::goBack / goForward` | `HistoryStore::propose` | `src/application/navigation/HistoryStore.cpp` | Direction to visit | No-op at boundary | Implemented |
++| 5 | `NavigationCoordinator::openTarget` | `DocumentCoordinator::requestOpen` | `src/application/document/DocumentCoordinator.cpp` | Path to committed document | Cancel/failure preserves history | Implemented |
++| 6 | `DocumentCoordinator opened callback` | `NavigationCoordinator::commitVisit` | `src/application/navigation/NavigationCoordinator.cpp` | Document to visit | Exactly one commit | Implemented |
++| 7 | `NavigationCoordinator::commitVisit` | `HistoryStore::commit` | `src/application/navigation/HistoryStore.cpp` | Previous anchor to history | Truncates forward branch | Implemented |
++| 8 | `NavigationCoordinator::commitVisit` | `ScrollCoordinator::restoreAnchor` | `src/application/scroll/ScrollCoordinator.cpp` | Byte anchor to deferred viewport | Waits for current frame | Implemented |
++| 9 | `Application::applyLinkAnchor / NavigationPanel model callback` | `HeadingAnchor::find` | `src/application/navigation/HeadingAnchor.cpp` | Parsed headings to source anchor | Missing heading diagnostic | Implemented |
++
++## 6. Reuse and dependencies
++
++[FUNC-001](Functionality-001--Document-Session.md) owns document state;
++[FUNC-009](Functionality-009--Source-Anchor-Mapping.md) maps anchors to viewports.
++CLI/dialog/sidebar/links share the document transaction. FUNC-031 reuses navigation
++per panel. T003 replaces its restricted fragment matcher with the same heading-ID
++policy as the main panel. External HTTP(S) remains an argv-based browser adapter.
++
++## 7. Verification
++
++NavigationTest covers branching history, dirty cancellation, broken paths, bounds,
++escapes/schemes and same-buffer openAt. Native tests exercise actual link hits.
++Historical evidence: [P6](../../../docs/evidence/P6.md) and
++[native links](../../../docs/evidence/document-links.md). T003 acceptance and
++candidate evidence belong to PLAN-XFMD-0007 / MM-001; not yet verified here.
++
++## 8. Status, risks and change impact
++
++Navigation implemented in P6; source-anchor navigation added in P15. T003 heading
++links implement the design selected before code. Index reference groups retain their
++existing file/source-location semantics and are not an HTML anchor engine.
++Model sources remain under the owner's hold. Update current textual contracts,
++plumbing and evidence with this change; historical evidence keeps its dated scope.
+diff --git a/src/blueprint/functionality/Functionality-010--Workspace-Controls.md b/src/blueprint/functionality/Functionality-010--Workspace-Controls.md
+index f7d173f..cbb4c46 100644
+--- a/src/blueprint/functionality/Functionality-010--Workspace-Controls.md
++++ b/src/blueprint/functionality/Functionality-010--Workspace-Controls.md
+@@ -224,3 +224,11 @@ M1 chooser screenshots/evidence retain their historical scope.
+ M2 acceptance: [context-menu evidence](../../../sprints/Sprint-009--Favorites/evidence/M2/README.md).
+ PathContextMenu briefly grabs keyboard input so Escape reaches the popup while the
+ document retains X focus, and releases it before the returned action executes.
++
++### 2026-10-01 — SDP workspace composition
++
++WorkspacePanel composes SdpPanel as a third page, conditionally exposed for an
++immediate SDP candidate. ApplicationWorkspace forwards work-root and active SDP
++Refresh events to FUNC-032. Files-only header controls are hidden on both Index
++and SDP. Hiding SDP while it is selected restores Files. Document parsing and
++producer execution remain outside the widget; see FUNC-032 for its call map.
+diff --git a/src/blueprint/functionality/Functionality-023--Mermaid-Interpretation.md b/src/blueprint/functionality/Functionality-023--Mermaid-Interpretation.md
+index 6a66b02..66761f2 100644
+--- a/src/blueprint/functionality/Functionality-023--Mermaid-Interpretation.md
++++ b/src/blueprint/functionality/Functionality-023--Mermaid-Interpretation.md
+@@ -6,89 +6,95 @@ role: Service
+ owner: interpreter
+ status: Implemented
+ scope: FirstRelease
+-requirements: UR-039, UR-041, SR-021, SR-022, SR-023
++requirements: UR-047, UR-039, UR-041, SR-021, SR-022, SR-023
+ uses: none
+ ---
+ 
+-# Functionality-023: Mermaid-tolkning
++# Functionality-023: Mermaid interpretation
+ 
+-## 1. Hensikt og avgrensning
++## 1. Purpose and scope
+ 
+-Avgrenset interpreter-tjeneste som konverterer støttet Mermaid til XFMDs diagrammodell. Kjenner ingen font, layout, FOX, Cairo, filsystem eller renderer.
++Convert supported Mermaid into XFMD's diagram model. This interpreter service
++knows no fonts, layout, FOX, Cairo, filesystem or renderer.
+ 
+-## 2. Krav og akseptanse
++## 2. Requirements and acceptance
+ 
+-UR-039/041, SR-021/022/023; AT-059/061/062/063/064. Se [design og kontrakter](../../../docs/design/mermaid-integration.md) og [krav](../../../xfmd_requirements.md).
++UR-039, UR-041, UR-047; SR-021, SR-022, SR-023; AT-059, AT-061, AT-062, AT-063, AT-064, AT-076.
++See [design/contracts](../../../docs/design/mermaid-integration.md) and
++[requirements](../../../xfmd_requirements.md).
+ 
+-## 3. Kontrakter og eierskap
++## 3. Contracts and ownership
+ 
+-IDiagramInterpreter::parse(DiagramSource) → DiagramParseResult. DiagramModel inneholder ordnede noder, kanter, grupper og retning. Flowchart 1 er fast adapter-/cacheprofil. SemanticBlock beholder kilde og spans for diagnostikk; layout mottar ingen kilde. C++ eier kopierte verdier; Rust-eide FFI-resultater frigjøres med tilhørende free-funksjon.
++IDiagramInterpreter::parse consumes DiagramSource and returns DiagramParseResult.
++DiagramModel owns ordered nodes, edges, groups and direction. SemanticBlock keeps
++source/spans for diagnostics; layout receives no original source. C++ copies
++owned values; Rust ABI results are released by their matching free functions.
++Flowchart 1 remains the adapter/cache profile; typed profiles extend the model.
+ 
+-## 4. Atferd, tilstand og feil
++## 4. Behavior, state and failures
+ 
+-Gjenkjenn bare eksplisitt mermaid-gjerde. Rust bruker parse_mermaid_strict, men XFMD-profilvalidering må i tillegg sikre at ingen konstruksjon er stille ignorert. Init/CSS/HTML/callbacks/ressurser er utenfor første profil. Feil dekorerer blokken med original kilde. Nøyaktige node-/edge-spans er ikke eksponert av undersøkt IR; blokkankre er Approximate.
++Markdown recognizes explicit Mermaid fences. Standalone Mermaid snapshots are
++classified by Application and parsed directly as one source-anchored block.
++CmarkInterpreter skips an optional BOM only for parser input; original bytes and
++identity remain in the snapshot. No synthetic fence or offset translation is
++written to the document. Valid input becomes a Diagram; unsupported/invalid input
++retains source and local diagnostics. This extends input admission, not grammar.
++
++Rust uses parse_mermaid_strict plus XFMD profile checks to reject silent loss.
++Init/CSS/HTML/callback/resource support is outside the initial profile. Precise
++node/edge source spans are unavailable; whole-block mapping is Approximate.
+ 
+ ## 5. Plumbing
+ 
+-| Steg | Hendelse / kaller | Kalt symbol | Kilde eller kontraktfil | Data / resultat | Feil / sideeffekt | Status |
++| Step | Event / caller | Called symbol | Source or contract file | Data / result | Failure / side effect | Status |
+ | --- | --- | --- | --- | --- | --- | --- |
+-| 1 | `ModelBuilder::appendNode` | `MermaidBlockBuilder::build` | `src/interpreter/mermaid/MermaidBlockBuilder.cpp` | fence info + literal + SourceRange → DiagramSource | bevar original fallback | Implemented |
+-| 2 | `IDiagramInterpreter virtual dispatch` | `MermaidInterpreter::parse` | `src/interpreter/mermaid/MermaidInterpreter.cpp` | DiagramSource → DiagramParseResult | grense og profil sjekkes | Implemented |
+-| 3 | `MermaidInterpreter::parse` | `xfmd_mermaid_parse_v1` | `src/application/composition/mermaid/src/lib.rs` | lånt UTF-8 → eid ABI-resultat | panic/feil blir status | Implemented |
+-| 4 | `xfmd_mermaid_parse_v1` | `parse` | `src/interpreter/mermaid/rust/src/lib.rs` | UTF-8 → profil, upstream og modell | Result/feil returneres til ABI | Implemented |
+-| 5 | `parse` | `inspect` | `src/interpreter/mermaid/rust/src/profile.rs` | kilde → tillatt Flowchart 1 | ikke godta uavklart syntaks | Implemented |
+-| 6 | `parse` | `map_graph` | `src/interpreter/mermaid/rust/src/model.rs` | upstream Graph → ren modell | kontroller enums og bevarte noder/kanter | Implemented |
+-| P36 | `parse` | `parse` | `src/interpreter/mermaid/rust/src/sequence.rs` | Sequence 1 → ordnede hendelser + kontroll mot bibliotekparser | ukjent syntaks/scope gir feil | Implemented |
+-| P36 | `Sequence::read` | `validate` | `src/contracts/diagram/rust/src/sequence.rs` | typed wire → grenser, referanser og balanserte fragmenter | ugyldige verdier avvises | Implemented |
+-| P38 | `parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/mod.rs` | standard Mermaid → typed State/Class/Requirement/ER-rekorder | full profilkonsum; ukjent syntaks avvises | Implemented |
+-| P38 | `Diagram::read` | `validate` | `src/contracts/diagram/rust/src/semantic.rs` | model wire 3 → skjema, identiteter, scope og enumerasjoner | lokal feil før layout | Implemented |
+-| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/c4.rs` | standard profil → grenser og ansvar | avvis tap/ukjent syntaks | Implemented |
+-| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/architecture.rs` | standard profil → grupper og portretninger | avvis tap/ukjent syntaks | Implemented |
+-| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/block.rs` | standard profil → grid og spans | avvis tap/ukjent syntaks | Implemented |
+-| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/planning.rs` | standard profil → bitfelt, tid og score | avvis tap/ukjent syntaks | Implemented |
+-| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/charts.rs` | standard profil → vekt, akser og kurver | avvis tap/ukjent syntaks | Implemented |
+-| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/trees.rs` | standard profil → innrykk og foreldre | avvis tap/ukjent syntaks | Implemented |
+-| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/git.rs` | standard profil → branch og commit-foreldre | avvis tap/ukjent syntaks | Implemented |
+-| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/zenuml.rs` | standard profil → asynkrone meldinger | avvis tap/ukjent syntaks | Implemented |
+-
+-## 6. Gjenbruk og avhengigheter
+-
+-Konsument: FUNC-003 via injisert port. Bibliotek og Rust-typer er private. Ingen dependency til FUNC-024. Et alternativ kan produsere samme modell uten å endre Application eller diagramlayout.
+-
+-## 7. Verifikasjon
+-
+-Rust-profil-/FFI-tester, DiagramLayoutTest og DiagramPreparationTest dekker brukerfixtures, retninger/former/grupper, avvist syntaks, grenser, panic og eierskap. Native/PDF-dekning og avgrensninger står i [P29](../../../docs/evidence/P29.md).
+-
+-## 8. Status, risiko og endringskonsekvenser
+-
+-Implementert i P26/P27. Hele kildeprofilen kontrolleres før upstream, og node-/kant-/gruppetap avvises. Kildemapping er Approximate for den komplette blokken.
+-
+-Akseptanse: AT-059, AT-061, AT-062, AT-063, AT-064.
+-
+-P36: [Typed dekning og Sequence 1](../../../mermaid_coverage.md)
+-utvider samme porter. Sequence 1 er Implemented; verifikasjon dokumenteres separat.
+-
+-P36: [Faktiske kontroller og grenser](../../../docs/evidence/P36.md).
+-
+-P37 Implemented: Sequence 2 bruker samme `parse`/`graph`-innganger, utvidede
+-ordnede hendelser, async-piltype og forkens `sequence_events::apply`.
+-Se [gjeldende dekning](../../../mermaid_coverage.md).
+-
+-P38 Implemented: `semantic::parse` i `src/interpreter/mermaid/rust/src/semantic/`
+-produserer egne state/class/requirement/ER-rekorder. `Diagram::validate` i
+-`src/contracts/diagram/rust/src/semantic.rs` kontrollerer skjema og referanser.
+-[Kontraktbeslutning](../../../docs/design/mermaid-semantic-model.md).
+-
+-P39 Implemented: C4/Architecture/Block utvider SemanticDiagram med egne elementer,
+-grenser, portretninger og grid. Parserprofiler og native mapping ligger i
+-`semantic/{c4,architecture,block}.rs`; felles SVG/PDF-port gjenbrukes.
+-Se [profil og kontrakt](../../../docs/design/mermaid-architecture-authoring.md).
+-
+-P40 Implemented: `semantic/planning.rs` parser og native adapter bevarer bitfelt,
+-perioder, tidsavhengighet og score. `semantic_planning.rs` i contracts validerer
+-typed records før layout. Native packet-geometri implementeres i forken.
+-
+-P41 Implemented: chart/tree/git/ZenUML-profiler bruker egne records.
+-`semantic_charts.rs` validerer koordinater, hierarki og referencer; parserfiler
+-`charts`, `trees`, `git`, `zenuml` og rendererfiler `charts`, `structures`
+-bevarer semantikk uten original kilde over layoutgrensen.
++| 1 | `ModelBuilder::appendNode` | `MermaidBlockBuilder::build` | `src/interpreter/mermaid/MermaidBlockBuilder.cpp` | Fence metadata/literal/range to diagram source | Keep original fallback | Implemented |
++| 2 | `IDiagramInterpreter virtual dispatch` | `MermaidInterpreter::parse` | `src/interpreter/mermaid/MermaidInterpreter.cpp` | DiagramSource to DiagramParseResult | Check limits and profile | Implemented |
++| 3 | `MermaidInterpreter::parse` | `xfmd_mermaid_parse_v1` | `src/application/composition/mermaid/src/lib.rs` | Borrowed UTF-8 to owned ABI result | Panic/error becomes status | Implemented |
++| 4 | `xfmd_mermaid_parse_v1` | `parse` | `src/interpreter/mermaid/rust/src/lib.rs` | UTF-8 to profile/upstream/model | Return result to ABI | Implemented |
++| 5 | `parse` | `inspect` | `src/interpreter/mermaid/rust/src/profile.rs` | Source to admitted Flowchart 1 | Reject unknown syntax | Implemented |
++| 6 | `parse` | `map_graph` | `src/interpreter/mermaid/rust/src/model.rs` | Upstream Graph to pure model | Validate enums and retained nodes/edges | Implemented |
++| P36 | `parse` | `parse` | `src/interpreter/mermaid/rust/src/sequence.rs` | Sequence 1 to ordered events | Reject unknown syntax/scope | Implemented |
++| P36 | `Sequence::read` | `validate` | `src/contracts/diagram/rust/src/sequence.rs` | Typed wire to validated sequence | Reject invalid values | Implemented |
++| P38 | `parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/mod.rs` | Source to typed state/class/requirement/ER | Reject unconsumed syntax | Implemented |
++| P38 | `Diagram::read` | `validate` | `src/contracts/diagram/rust/src/semantic.rs` | Wire model to schema/identity/scope checks | Fail before layout | Implemented |
++| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/c4.rs` | Source to typed semantic records | Reject loss or unknown syntax | Implemented |
++| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/architecture.rs` | Source to typed semantic records | Reject loss or unknown syntax | Implemented |
++| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/block.rs` | Source to typed semantic records | Reject loss or unknown syntax | Implemented |
++| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/planning.rs` | Source to typed semantic records | Reject loss or unknown syntax | Implemented |
++| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/charts.rs` | Source to typed semantic records | Reject loss or unknown syntax | Implemented |
++| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/trees.rs` | Source to typed semantic records | Reject loss or unknown syntax | Implemented |
++| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/git.rs` | Source to typed semantic records | Reject loss or unknown syntax | Implemented |
++| P39–41 | `semantic::parse` | `parse` | `src/interpreter/mermaid/rust/src/semantic/zenuml.rs` | Source to typed semantic records | Reject loss or unknown syntax | Implemented |
++| MM-001 | `CmarkInterpreter::parse` | `MermaidBlockBuilder::build` | `src/interpreter/mermaid/MermaidBlockBuilder.cpp` | Raw standalone source and original range | Shared profile validation and source fallback | Implemented |
++
++## 6. Reuse and dependencies
++
++FUNC-003 consumes the injected port. Library and Rust types are private. There is
++no dependency on FUNC-024; another parser can produce the same model without
++changing Application or diagram layout. Native preview and PDF share preparation.
++
++## 7. Verification
++
++Rust profile/FFI, DiagramLayoutTest and DiagramPreparationTest cover fixtures,
++directions/shapes/groups, rejected syntax, bounds, panic and ownership. Historical
++native/PDF evidence and limits: [P29](../../../docs/evidence/P29.md),
++[P36](../../../docs/evidence/P36.md). StandaloneMermaidTest and the native test
++cover raw input, source preservation, format invalidation and actual rendering;
++current results belong to PLAN-XFMD-0007 / MM-001.
++
++## 8. Status, risks and change impact
++
++Implemented in P26/P27; full profile validation rejects lost nodes/edges/groups.
++P36/P37 add ordered Sequence events, asynchronous arrows and sequence_events::apply.
++P38 adds typed state/class/requirement/ER and schema/reference validation:
++[semantic contract](../../../docs/design/mermaid-semantic-model.md).
++P39 adds C4/Architecture/Block boundaries, ports and grid:
++[authoring profile](../../../docs/design/mermaid-architecture-authoring.md).
++P40 preserves bitfields, periods, dependencies and scores through typed planning
++records. P41 adds chart/tree/git/ZenUML records with coordinate/hierarchy/reference
++validation. [Current coverage](../../../mermaid_coverage.md) retains profile limits.
++
++MM-001 adds standalone input through the same port. It makes no broader grammar
++or fidelity claim; #020 retains that separate study. Model sources remain held
++by the owner. Implemented is not an independent acceptance disposition.
+diff --git a/src/blueprint/functionality/Functionality-031--Generated-Document-Navigation.md b/src/blueprint/functionality/Functionality-031--Generated-Document-Navigation.md
+index ff7e5d2..922a12a 100644
+--- a/src/blueprint/functionality/Functionality-031--Generated-Document-Navigation.md
++++ b/src/blueprint/functionality/Functionality-031--Generated-Document-Navigation.md
+@@ -69,7 +69,7 @@ The endpoint uses private 0700 same-owner directories, same-UID peer credentials
+ The CLI request helper waits up to five seconds for a window response. Wrong targets,
+ stale/malformed requests and failed reads do not replace the current document.
+ Addressed opens reject a dirty main buffer without a modal dialog. Navigation-panel
+-heading links support the current restricted ASCII fragment profile only.
++heading links use the shared HeadingAnchor title/slug policy (Session 0002 T003).
+ 
+ A successful main or navigator document-open callback calls documentChanged(pane).
+ The old lease is moved into the release queue; successful leased OPEN then installs
+@@ -109,7 +109,7 @@ it does not become an external-target launcher.
+ | 11 | main documentOpened / navigator changed / destruction | `DocumentViews::documentChanged` | `src/application/navigation/DocumentViews.cpp` | pane → queue preceding lease | no lease mutation for failed opening | Implemented |
+ | 12 | documentChanged / poll / open / destruction | `DocumentViews::flushReleases` | `src/application/navigation/DocumentViews.cpp` | queued lease/broker → SDLVIEW1 RELEASE | failed send retries; no durable acknowledgment | Implemented |
+ | 13 | CLI addressed OPEN/INFO | `WindowEndpoint::request` | `src/application/navigation/WindowEndpoint.cpp` | exact window and packet → response | unavailable target or five-second timeout | Implemented |
+-| 14 | navigator normal Markdown/heading callback | `NavigationPanel::follow` | `src/application/navigation/NavigationPanel.cpp` | local link/ASCII fragment → open/pending anchor | unsupported or missing heading reports error | Implemented |
++| 14 | navigator normal Markdown/heading callback | `NavigationPanel::follow` | `src/application/navigation/NavigationPanel.cpp` | local link/heading fragment → open/pending anchor | unsupported or missing heading reports error | Implemented |
+ 
+ | 15 | navigator other-text/external/Ctrl callback | `Application::followLink` | `src/application/ApplicationOpening.cpp` | navigator origin/target/Ctrl → shared consumer | retain panes for external handoff; report unsupported targets | Implemented |
+ 
+diff --git a/src/contracts/DocumentTypes.h b/src/contracts/DocumentTypes.h
+index f6e4e8f..32d4bc2 100644
+--- a/src/contracts/DocumentTypes.h
++++ b/src/contracts/DocumentTypes.h
+@@ -20,6 +20,7 @@ struct SourceSnapshot {
+   std::string text;
+   std::string path;
+   bool plainText = false;
++  bool standaloneMermaid = false; // Mutually exclusive with plainText.
+ };
+ enum class MappingQuality { Exact, Approximate, Unavailable };
+ struct SourceRange {
+diff --git a/src/interpreter/CmarkInterpreter.cpp b/src/interpreter/CmarkInterpreter.cpp
+index 57d8f7d..ce9a82f 100644
+--- a/src/interpreter/CmarkInterpreter.cpp
++++ b/src/interpreter/CmarkInterpreter.cpp
+@@ -1,5 +1,6 @@
+ #include "CmarkInterpreter.h"
+ #include "ModelBuilder.h"
++#include "mermaid/MermaidBlockBuilder.h"
+ #include <cmark-gfm-core-extensions.h>
+ #include <cmark-gfm-extension_api.h>
+ #include <cmark-gfm.h>
+@@ -8,6 +9,20 @@ namespace xfmd {
+ ParseResult CmarkInterpreter::parse(const SourceSnapshot& source, const ParseOptions& options) {
+   if (source.text.size() > options.maxBytes)
+     throw Error(ErrorCode::TooLarge, "Input exceeds parser size limit.");
++  if (source.standaloneMermaid) {
++    auto result = std::make_shared<SemanticDocument>();
++    result->token = source.token;
++    result->sourceSize = source.text.size();
++    const auto begin = source.text.compare(0, 3, "\xef\xbb\xbf") == 0 ? 3u : 0u;
++    SemanticBlock block;
++    block.kind = BlockKind::Code;
++    block.source = {begin, source.text.size()};
++    std::size_t count = 0;
++    MermaidBlockBuilder::build(block, "mermaid", source.text.c_str() + begin, diagrams.get(),
++                               count);
++    result->blocks.push_back(std::move(block));
++    return result;
++  }
+   if (source.plainText) {
+     auto result = std::make_shared<SemanticDocument>();
+     result->token = source.token;
+diff --git a/tests/gui/IndexGuiTest.cpp b/tests/gui/IndexGuiTest.cpp
+index 95eca2f..17f64b6 100644
+--- a/tests/gui/IndexGuiTest.cpp
++++ b/tests/gui/IndexGuiTest.cpp
+@@ -115,7 +115,7 @@ void run() {
+   settle(app);
+   auto* panel = app.window->workspacePanel;
+   auto* index = panel->index;
+-  auto* tab = panel->tabs->getLast();
++  auto* tab = panel->tabs->getFirst()->getNext();
+   CHECK(dynamic_cast<FXTabItem*>(tab));
+   auto token = app.session.view().token;
+   click(app, tab, 15, 10, 1000);
+diff --git a/tests/gui/PathWorkspaceGuiTest.cpp b/tests/gui/PathWorkspaceGuiTest.cpp
+index 6bce20f..ab674d4 100644
+--- a/tests/gui/PathWorkspaceGuiTest.cpp
++++ b/tests/gui/PathWorkspaceGuiTest.cpp
+@@ -149,7 +149,7 @@ void run() {
+   CHECK(panel->tree->getPathnameItem((base / "one-new.md").c_str()));
+   CHECK(panel->history.root() == base && panel->nameFilter() == "one*");
+   // Native Index tab and Refresh rebuild the edited buffer, never disk contents.
+-  nativeClick(panel->tabs->getLast(), 15, 10);
++  nativeClick(panel->tabs->getFirst()->getNext(), 15, 10);
+   CHECK(panel->tabs->getCurrent() == 1 && panel->index->shown());
+   CHECK(!panel->markdown->shown() && !panel->upButton->shown() && !panel->openButton->shown());
+   CHECK(panel->refreshButton->shown() && panel->markdown->isChecked());

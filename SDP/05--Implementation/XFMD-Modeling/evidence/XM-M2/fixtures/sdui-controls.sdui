@@ -1,0 +1,1 @@
+sdui 0.2; page=[go=button("Open"), path=input("Path",value="README.md")];

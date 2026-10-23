@@ -1,0 +1,72 @@
+[0/2] Re-checking globbed directories...
+[1/2] Re-running CMake...
+CMake Warning (dev) at /usr/share/cmake/Modules/FetchContent.cmake:1373 (message):
+  The DOWNLOAD_EXTRACT_TIMESTAMP option was not given and policy CMP0135 is
+  not set.  The policy's OLD behavior will be used.  When using a URL
+  download, the timestamps of extracted files should preferably be that of
+  the time of extraction, otherwise code that depends on the extracted
+  contents might not be rebuilt if the URL changes.  The OLD behavior
+  preserves the timestamps from the archive instead, but this is usually not
+  what you want.  Update your project to the NEW behavior or specify the
+  DOWNLOAD_EXTRACT_TIMESTAMP option with a value of true to avoid this
+  robustness issue.
+Call Stack (most recent call first):
+  cmake/MicroTeX.cmake:3 (FetchContent_Declare)
+  CMakeLists.txt:31 (include)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found Python3: /usr/bin/python3.12 (found suitable version "3.12.14", minimum required is "3.11") found components: Interpreter
+-- Found Python3: /usr/bin/python3.12 (found version "3.12.14") found components: Interpreter
+-- Configuring done (0.7s)
+-- Generating done (0.6s)
+-- Build files have been written to: /home/warloc/git/xfmd-sdl-navigation/build-ui
+[0/2] Re-checking globbed directories...
+[1/49] cd /home/warloc/git/xfmd-sdl-navigation/build-ui && /usr/bin/python3.12 /home/warloc/git/xfmd-sdl-navigation/tools/build_identity.py --source /home/warloc/git/xfmd-sdl-navigation --output /home/warloc/git/xfmd-sdl-navigation/build-ui/generated
+[2/49] Building CXX object CMakeFiles/xfmd_version.dir/src/application/build/BuildVersion.cpp.o
+[3/49] Linking CXX static library libxfmd_version.a
+[4/49] Linking CXX executable ExternalBrowserTest
+[5/49] Linking CXX executable SdpDynamicGuiTest
+[6/49] Linking CXX executable SdpPanelGuiTest
+[7/49] Linking CXX executable FavoritesGuiTest
+[8/49] Linking CXX executable xfmd
+[9/49] Linking CXX executable OpenPathDialogGuiTest
+[10/49] Linking CXX executable DocumentZoomGuiTest
+[11/49] Linking CXX executable FileRoutingGuiTest
+[12/49] Linking CXX executable PathWorkspaceGuiTest
+[13/49] Linking CXX executable MermaidGuiTest
+[14/49] Linking CXX executable RecentFilesGuiTest
+[15/49] Linking CXX executable PreviewSelectionGuiTest
+[16/49] Linking CXX executable CompactWorkspaceTest
+[17/49] Linking CXX executable ReadingColorsGuiTest
+[18/49] Linking CXX executable TreeActionsTest
+[19/49] Linking CXX executable UiControlsTest
+[20/49] Linking CXX executable AppearancePreferencesTest
+[21/49] Linking CXX executable AppearanceGuiTest
+[22/49] Linking CXX executable BrowserPreferencesTest
+[23/49] Linking CXX executable IndexGuiTest
+[24/49] Linking CXX executable WorkspaceTest
+[25/49] Linking CXX executable PresentationTest
+[26/49] Linking CXX executable ScrollingTest
+[27/49] Linking CXX executable NavigationGuiTest
+[28/49] Linking CXX executable SidebarGuiTest
+[29/49] Linking CXX executable WheelGuiTest
+[30/49] Linking CXX executable TablePreviewTest
+[31/49] Linking CXX executable WorkPathGuiTest
+[32/49] Linking CXX executable PointerTest
+[33/49] Linking CXX executable CapturePresentation
+[34/49] Linking CXX executable PreferencesTest
+[35/49] Linking CXX executable xfmd_cold_start
+[36/49] Linking CXX executable PagedPreviewTest
+[37/49] Linking CXX executable ExportGuiTest
+[38/49] Linking CXX executable FullscreenTest
+[39/49] Linking CXX executable CanvasTest
+[40/49] Linking CXX executable ThemeProfilesTest
+[41/49] Linking CXX executable IconTest
+[42/49] Linking CXX executable CaptureAppearance
+[43/49] Linking CXX executable CapturePreferences
+[44/49] Linking CXX executable WindowEndpointBoundaryTest
+[45/49] Linking CXX executable DocumentViewsGuiTest
+[46/49] Linking CXX executable DocumentZoomPdfFixture
+[47/49] Linking CXX executable DocumentLeaseGuiTest
+[48/49] Linking CXX executable ThemePopupGuiTest
+[49/49] Linking CXX executable SdpNavigationGuiTest

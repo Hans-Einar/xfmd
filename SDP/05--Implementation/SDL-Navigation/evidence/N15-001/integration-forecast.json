@@ -1,0 +1,15 @@
+{
+  "candidate": "e194721bbad9eaba4713ffb3d692c9734de739ee",
+  "main": {
+    "ref": "origin/main",
+    "exit": 0,
+    "stdout": "d3834adba421a73d0241e3670af3b22f59333d9e\n",
+    "stderr": ""
+  },
+  "projectGovernance": {
+    "ref": "6dfde97f2b0f01f6735fdd6344e88e2ffb4d5362",
+    "exit": 0,
+    "stdout": "905cad3ee3553c340dfd5bde5d88a0e8d5bc82ba\n",
+    "stderr": ""
+  }
+}

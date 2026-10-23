@@ -1,0 +1,1 @@
+PASS: both bundled SDUI helpers are byte-identical to the previously installed and verified 0.7 helpers.

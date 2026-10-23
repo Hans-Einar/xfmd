@@ -1,0 +1,393 @@
+{
+  "scope": "Complete existing blueprint structural inventory; bounded declared navigation examples, not complete executable behavior",
+  "entry": "SDP/SDL/XFMD/XfmdDesktop.design",
+  "profile": "design-core 0.5",
+  "identities": {
+    "FUNC-001": {
+      "symbol": "DocumentSession",
+      "owner": "Documents"
+    },
+    "FUNC-002": {
+      "symbol": "LocalFileStorage",
+      "owner": "DocumentStorage"
+    },
+    "FUNC-003": {
+      "symbol": "MarkdownInterpretation",
+      "owner": "Interpreter"
+    },
+    "FUNC-004": {
+      "symbol": "RenderLayout",
+      "owner": "Renderer"
+    },
+    "FUNC-005": {
+      "symbol": "FoxPresentation",
+      "owner": "NativeShell"
+    },
+    "FUNC-006": {
+      "symbol": "EventScheduling",
+      "owner": "EventLoop"
+    },
+    "FUNC-007": {
+      "symbol": "PreviewPipeline",
+      "owner": "Preview"
+    },
+    "FUNC-008": {
+      "symbol": "NavigationHistory",
+      "owner": "Navigation"
+    },
+    "FUNC-009": {
+      "symbol": "SourceAnchorMapping",
+      "owner": "Viewport"
+    },
+    "FUNC-010": {
+      "symbol": "WorkspaceControls",
+      "owner": "NativeShell"
+    },
+    "FUNC-011": {
+      "symbol": "TextEditing",
+      "owner": "Documents"
+    },
+    "FUNC-012": {
+      "symbol": "WorkPathHistory",
+      "owner": "Workspace"
+    },
+    "FUNC-013": {
+      "symbol": "FilteredFileTree",
+      "owner": "Workspace"
+    },
+    "FUNC-014": {
+      "symbol": "ApplicationPreferences",
+      "owner": "Preferences"
+    },
+    "FUNC-015": {
+      "symbol": "ScrollMotion",
+      "owner": "Viewport"
+    },
+    "FUNC-016": {
+      "symbol": "TypographyAndDrawing",
+      "owner": "Typography"
+    },
+    "FUNC-017": {
+      "symbol": "PageComposition",
+      "owner": "Renderer"
+    },
+    "FUNC-018": {
+      "symbol": "PdfExport",
+      "owner": "Publication"
+    },
+    "FUNC-019": {
+      "symbol": "ApplicationIdentity",
+      "owner": "Identity"
+    },
+    "FUNC-020": {
+      "symbol": "DocumentIndex",
+      "owner": "DocumentIndexService"
+    },
+    "FUNC-021": {
+      "symbol": "PreviewTextSelection",
+      "owner": "Preview"
+    },
+    "FUNC-022": {
+      "symbol": "EmbeddedVisuals",
+      "owner": "VisualResources"
+    },
+    "FUNC-023": {
+      "symbol": "MermaidInterpretation",
+      "owner": "Interpreter"
+    },
+    "FUNC-024": {
+      "symbol": "DiagramLayout",
+      "owner": "Renderer"
+    },
+    "FUNC-025": {
+      "symbol": "DiagramPreparation",
+      "owner": "VisualResources"
+    },
+    "FUNC-026": {
+      "symbol": "BuildIdentity",
+      "owner": "Identity"
+    },
+    "FUNC-031": {
+      "symbol": "GeneratedDocumentNavigation",
+      "owner": "GeneratedViews"
+    },
+    "FTR-001": {
+      "symbol": "MarkdownPresentation"
+    },
+    "FTR-002": {
+      "symbol": "LivePreview"
+    },
+    "FTR-003": {
+      "symbol": "DocumentNavigation"
+    },
+    "FTR-004": {
+      "symbol": "SynchronizedScrolling"
+    },
+    "FTR-005": {
+      "symbol": "WorkPathNavigation"
+    },
+    "FTR-006": {
+      "symbol": "ConfigurableScrolling"
+    },
+    "FTR-007": {
+      "symbol": "PagedPublication"
+    },
+    "FTR-008": {
+      "symbol": "ChapterNavigation"
+    },
+    "FTR-009": {
+      "symbol": "DocumentReferences"
+    },
+    "FTR-010": {
+      "symbol": "MermaidDiagrams"
+    },
+    "UC-001": {
+      "symbol": "ReadDocuments"
+    },
+    "UC-002": {
+      "symbol": "NavigateDocuments"
+    },
+    "UC-003": {
+      "symbol": "BrowseWorkspace"
+    },
+    "UC-004": {
+      "symbol": "EditDocuments"
+    },
+    "UC-005": {
+      "symbol": "ScrollDocuments"
+    },
+    "UC-007": {
+      "symbol": "ConfigurePreferences"
+    },
+    "UC-008": {
+      "symbol": "PublishPages"
+    },
+    "UC-009": {
+      "symbol": "UseFullscreen"
+    },
+    "UC-010": {
+      "symbol": "ReadDiagrams"
+    },
+    "UC-011": {
+      "symbol": "SelectGeneratedView"
+    },
+    "FUNC-032": {
+      "symbol": "SdpProjectNavigation",
+      "owner": "SdpProjects"
+    },
+    "UC-012": {
+      "symbol": "BrowseSdpProject"
+    }
+  },
+  "scenarios": [
+    {
+      "symbol": "FavoriteFileOpens",
+      "navigationCase": "NAV-01",
+      "useCase": "NavigateDocuments",
+      "steps": 9,
+      "scope": "Clean internal favorite-file example; the work root is unchanged. Classification precedes internal opening."
+    },
+    {
+      "symbol": "FavoriteFolderChangesRoot",
+      "navigationCase": "NAV-02",
+      "useCase": "BrowseWorkspace",
+      "steps": 3,
+      "scope": "Root/tree/history change without opening a document."
+    },
+    {
+      "symbol": "ContextMenuDismissed",
+      "navigationCase": "NAV-03",
+      "useCase": "BrowseWorkspace",
+      "steps": 3,
+      "scope": "Dismissal ends here; absence of open in this example is not a universal no-open proof."
+    },
+    {
+      "symbol": "DirtyOpenCancelled",
+      "navigationCase": "NAV-04",
+      "useCase": "NavigateDocuments",
+      "steps": 4,
+      "scope": "No read or history commit on Cancel."
+    },
+    {
+      "symbol": "SaveThenReadFails",
+      "navigationCase": "NAV-05",
+      "useCase": "NavigateDocuments",
+      "steps": 9,
+      "scope": "Successful save survives later read failure; old document may now be clean."
+    },
+    {
+      "symbol": "ChooserOpensThenChangesRoot",
+      "navigationCase": "NAV-06",
+      "useCase": "BrowseWorkspace",
+      "steps": 5,
+      "scope": "Successful internal chooser case only; folder-only and external handoff have separate rules in the workflow."
+    },
+    {
+      "symbol": "EditedPreviewPublished",
+      "navigationCase": "NAV-07",
+      "useCase": "EditDocuments",
+      "steps": 11,
+      "scope": "Abstracts worker/resource preparation; document token, worker ticket and FrameKey checks remain distinct. Does not prove scheduling/timing."
+    },
+    {
+      "symbol": "GeneratedSelectionSupersedes",
+      "navigationCase": "NAV-08",
+      "useCase": "SelectGeneratedView",
+      "steps": 5,
+      "scope": "Accepted selection with an existing child; validation precedes cancellation. Start is not a successful-delivery claim."
+    },
+    {
+      "symbol": "DirtyGeneratedDeliveryRejected",
+      "navigationCase": "NAV-09",
+      "useCase": "SelectGeneratedView",
+      "steps": 4,
+      "scope": "Logical addressed-delivery interaction; dirty main rejection has no unsaved dialog. Events do not encode a guard predicate."
+    },
+    {
+      "symbol": "InvalidSelectionRetainsChild",
+      "navigationCase": "NAV-10",
+      "useCase": "SelectGeneratedView",
+      "steps": 2,
+      "scope": "Validation failure ends before cancellation; cannot itself prove absence of later effects."
+    },
+    {
+      "symbol": "GeneratedReplacementReleasesOldLease",
+      "navigationCase": "NAV-11",
+      "useCase": "SelectGeneratedView",
+      "steps": 8,
+      "scope": "Clean successful leased delivery; read/replace is abstracted. Release is a notification, not broker acknowledgement."
+    },
+    {
+      "symbol": "ReleaseRetryAfterSendFailure",
+      "navigationCase": "NAV-12",
+      "useCase": "SelectGeneratedView",
+      "steps": 5,
+      "scope": "First send fails, later send succeeds. No durable ACK, crash recovery or exactly-once guarantee."
+    },
+    {
+      "symbol": "PreviewResourcesPrepared",
+      "navigationCase": "FLOW-13",
+      "useCase": "ReadDocuments",
+      "steps": 8,
+      "scope": "Pipeline collaborator abstraction: application worker prepares resources before current-ticket publication. No FOX work occurs in the parser thread."
+    },
+    {
+      "symbol": "StalePreviewDiscarded",
+      "navigationCase": "FLOW-14",
+      "useCase": "EditDocuments",
+      "steps": 2,
+      "scope": "ParserWorker checks ticket/stopping and PreviewCoordinator checks DocumentToken; conditions and interleavings are not executable SDL predicates."
+    },
+    {
+      "symbol": "PreviewScrollSynchronizesEditor",
+      "navigationCase": "FLOW-15",
+      "useCase": "ScrollDocuments",
+      "steps": 4,
+      "scope": "Valid split-view case; programmatic, stale, unavailable and feedback events are rejected by ScrollCoordinator."
+    },
+    {
+      "symbol": "PreferencesPersistBeforeAdoption",
+      "navigationCase": "FLOW-16",
+      "useCase": "ConfigurePreferences",
+      "steps": 5,
+      "scope": "Successful commit ordering; validate/save failure leaves PreferencesService.current unchanged. UI appearance preview/cancel restoration is a separate host path."
+    },
+    {
+      "symbol": "PdfSnapshotPublished",
+      "navigationCase": "FLOW-17",
+      "useCase": "PublishPages",
+      "steps": 9,
+      "scope": "Uncached success case. Frozen token/paper/fonts, separate contexts and atomic publication; export never marks DocumentSession saved."
+    },
+    {
+      "symbol": "PdfCancelledBeforePublication",
+      "navigationCase": "FLOW-18",
+      "useCase": "PublishPages",
+      "steps": 3,
+      "scope": "Before-commit case only; a completed commit cannot be reported as cancelled. The locking/cleanup contract requires native evidence."
+    },
+    {
+      "symbol": "ReferenceHeadingsLoaded",
+      "navigationCase": "FLOW-19",
+      "useCase": "NavigateDocuments",
+      "steps": 7,
+      "scope": "Bounded lazy reference load; current-generation results only. No active-buffer reload."
+    },
+    {
+      "symbol": "DiagramScenePrepared",
+      "navigationCase": "FLOW-20",
+      "useCase": "ReadDiagrams",
+      "steps": 5,
+      "scope": "Typed parse/layout separation, no renderer source parsing. Per-worker cache, font identity and block-local fallback remain governing contracts."
+    },
+    {
+      "symbol": "ExternalTargetHandedOff",
+      "navigationCase": "FLOW-21",
+      "useCase": "NavigateDocuments",
+      "steps": 3,
+      "scope": "Configured browser/OS handoff; no shell interpretation or implicit work-root replacement."
+    },
+    {
+      "symbol": "FullscreenChangesPresentation",
+      "navigationCase": "FLOW-22",
+      "useCase": "UseFullscreen",
+      "steps": 2,
+      "scope": "Native presentation change does not own document parsing or persistence; resize may request normal relayout."
+    }
+  ],
+  "excluded": {
+    "UC-006": "Future xfw integration",
+    "FTR-011": "Historical BoxUI reservation",
+    "FUNC-027..030": "Historical BoxUI reservations"
+  },
+  "interfaces": {
+    "InterpreterPort": [
+      "Preview",
+      "Publication",
+      "DocumentIndexService"
+    ],
+    "RendererPort": [
+      "Preview",
+      "Publication"
+    ],
+    "TextMetricsPort": [
+      "Renderer",
+      "VisualResources",
+      "Publication"
+    ],
+    "RenderHostPort": [
+      "Preview",
+      "Viewport"
+    ],
+    "SchedulerPort": [
+      "Preview",
+      "GeneratedViews",
+      "Viewport"
+    ],
+    "FileStorePort": [
+      "Documents",
+      "DocumentIndexService"
+    ],
+    "DiagramInterpreterPort": [
+      "Interpreter"
+    ],
+    "DiagramLayoutPort": [
+      "VisualResources"
+    ],
+    "PreferencesStorePort": [
+      "Preferences"
+    ],
+    "ViewGenerationProtocol": [
+      "GeneratedViews"
+    ],
+    "WindowDeliveryProtocol": [
+      "GeneratedViews"
+    ],
+    "LeaseReleaseProtocol": [
+      "GeneratedViews"
+    ],
+    "ExternalOpenProtocol": [
+      "Application"
+    ]
+  }
+}

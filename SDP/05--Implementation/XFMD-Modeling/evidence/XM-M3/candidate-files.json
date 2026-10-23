@@ -1,0 +1,590 @@
+{
+  "head": "41fa4948c5377edd792ba3f503e6b92b0fd4717a",
+  "scope": "Uncommitted current model/plan/checkpoint artifacts; historical candidate manifests excluded",
+  "files": [
+    {
+      "path": "SDP/02--Requirements/XFMD-Modeling/Baseline.md",
+      "sha256": "64d1395d8286cee2984c3665c6e6f8f5d72a0ba5127896c629f68df9b0745eed"
+    },
+    {
+      "path": "SDP/02--Requirements/XFMD-Modeling/Coverage.md",
+      "sha256": "54a1524ef1564f84c23943e1e10e3574631b373c0bb64b2a995a4bed1573c078"
+    },
+    {
+      "path": "SDP/02--Requirements/XFMD-Modeling/Gaps.md",
+      "sha256": "6bb59190e2a35ccd8034137009e2fbf044c3793680eab2fbf24ea754ba169f6b"
+    },
+    {
+      "path": "SDP/02--Requirements/XFMD-Modeling/Inventory.md",
+      "sha256": "6d6ded1422c6f76731eba5c9d8e526b7ff028b4f65837f7fb448a1f8b49d58a2"
+    },
+    {
+      "path": "SDP/02--Requirements/XFMD-Modeling/Plan.md",
+      "sha256": "002d4d6c80e776962cb0b316730a28961a9e3c578f5d749569c34cc3d2b02e7a"
+    },
+    {
+      "path": "SDP/02--Requirements/XFMD-Modeling/build_inventory.py",
+      "sha256": "245615eaa5013f0236c5e15ef2836d2a7c8a81b203c86e5a4c49509c104d8554"
+    },
+    {
+      "path": "SDP/02--Requirements/XFMD-Modeling/inventory.json",
+      "sha256": "44daaf889b7d9669c1799ac3711a14fb04397a8d754c4e38e4c4e7e2f19f6d7e"
+    },
+    {
+      "path": "SDP/03--Architecture/XFMD-Modeling/Decisions.md",
+      "sha256": "2f605d5f5819825a1baa98f022184e9c93f55ce35f60567b3d3367d8f4c969a0"
+    },
+    {
+      "path": "SDP/03--Architecture/XFMD-Modeling/Plan.md",
+      "sha256": "09e884bc87e15e97d714e6c3e696b774fa57817f6c3ed85ec94f23413773b36c"
+    },
+    {
+      "path": "SDP/04--Design/XFMD-Modeling/Navigation-Workflow.md",
+      "sha256": "83500ebd4346588647fac368ef56aa79136c16955add3d51d4bccc5c2137e573"
+    },
+    {
+      "path": "SDP/04--Design/XFMD-Modeling/Plan.md",
+      "sha256": "1944b244fe4ceaa04917cebc8a9dbe59920b5073d2745f4b731367b907549833"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/Plan.md",
+      "sha256": "c72fec0249c73254a0069cf763bb8342fcdf4ab5c8a9d7fb23f7df3e83127f8e"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/VerificationPlan.md",
+      "sha256": "bcf751f70c0ed7f0eac872f6cdc9615314d00b3570f10b977b903c8b5b3863e8"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/README.md",
+      "sha256": "8cb46176b4df1bfa7af1a8cd4bc7130c081279e8f1a315ae93187a74c3ffe05a"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdl-core.design",
+      "sha256": "8c3af91f47a684084eccefae60abb88f31781d9e12dc4889f350e8c89ff0a453"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdl-include.design",
+      "sha256": "0bbb771b1e0905d021a94c3717f8e717139778351ba138cb873ef8c6d578e644"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdl-requirement.design",
+      "sha256": "8896bd47d213c6a2b8278123d0c14dc25b6dd02c735df41dced51739d9ca069f"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdl-system.design",
+      "sha256": "1bca283ad53d256a1127c5be9413f002738f718c4affa0dda19a8cef0643fa5e"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-checked.sdui",
+      "sha256": "737ca4337138ba8f86bc84dca88592eaf0f8e9f000d79eea78462d2964364444"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-context-event.sdui",
+      "sha256": "433dc3e5beb4890470fc713b3bb61902ae32fb2a9a99016ed07d4483ca3a0e58"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-controls.sdui",
+      "sha256": "642fd8bb073e6a9beb6a1b6daf5e0242fd66735c74db0f26fa9844ee7938ed40"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-icon.sdui",
+      "sha256": "3cbed931ad86c03bf7c9e7f2d0a3b19bba508143c2436c2aef18902bf0a6029c"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-missing-binding.sdui",
+      "sha256": "8c558c67315e57422dee2f636048db84c529534b34c18f8cd4dd975e651b60a3"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-scroll-ast.sdui",
+      "sha256": "3398c846b7a184cc01adbcd79356bc85136881780c2e1fe745d57c2a8b9aa01e"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-scroll-svg.sdui",
+      "sha256": "3398c846b7a184cc01adbcd79356bc85136881780c2e1fe745d57c2a8b9aa01e"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-widget-checkbox.sdui",
+      "sha256": "b27d28d193aaa8b8fff5c140e58fcc5d501bb90bf23cdc0f133b662426e38220"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-widget-dialog.sdui",
+      "sha256": "67f647b413a94ddb99b95ab19b4d3370ec311793c2ec9a47620dd4ff4e79bce4"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-widget-list.sdui",
+      "sha256": "e233d1e8b283c5f4940739d23af36860657a665528f4dc5bb144041b78c3248f"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-widget-menu.sdui",
+      "sha256": "3f62983e3e4060baf740b82014905406411cefa7836ec914be2e017702852cdc"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-widget-select.sdui",
+      "sha256": "307d2f379a3594a035ebc25f167777079efd2105b44ab2dda64a7edfd0e40261"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-widget-slider.sdui",
+      "sha256": "97e94859eb8f98d852b57f5fc905cfa9fa9e50aaf4ab76e0bfe9147fb4d58a1a"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-widget-splitter.sdui",
+      "sha256": "828e140cedae79a93f74306db65e0ffbc0f064e5645614b4f2a120ba721ff3d7"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-widget-tabs.sdui",
+      "sha256": "5cab3547138bbdea6e3aa9732dc984945cc1034790d411e64f4403716594e7d8"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-widget-textarea.sdui",
+      "sha256": "cf12b6cb71074f3eb5eb0b6629aa657196a469ed192f2f4d1d76423b38fbc9c1"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-widget-tree.sdui",
+      "sha256": "c2cd99cfcc28d3cc846cddb39f1539b3c81675e573a1fea6f3b91f3fe6d5f8d8"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/initial-probe-results.json",
+      "sha256": "358f273ac95f7e49075d9ecca1a2e1c2e42581c8a24a1561e0d0cde5f68dddf1"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdl-core.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdl-core.stdout",
+      "sha256": "d8e93e18c4f7a9a08e33c48e6e3d47ccb94fcc8a5e2b43d4e4a856058b2644c7"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdl-include.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdl-include.stdout",
+      "sha256": "89d745bb69ac4d5dbdf49ae7a3e0947824a6736810dd36b04862d4a6359f5be7"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdl-requirement.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdl-requirement.stdout",
+      "sha256": "4c7f6aa19c79c3ea80527a069a4cc683309cc35963b29934371d80674552e4d5"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdl-system.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdl-system.stdout",
+      "sha256": "ccfc4f6a3d89dc73dbf69b71f882d92b3df060153d3f4cd1c4d9614135d70992"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-checked.stderr",
+      "sha256": "4b19783e77227e2dac883707a11112128750229687c7a92b27c9309fb7a01975"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-checked.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-context-event.stderr",
+      "sha256": "f0e263ff4f2ec2549d5d1989188fb4df6655ab145d8c70e8917a6274ed3f416c"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-context-event.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-controls.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-controls.stdout",
+      "sha256": "c4e7dbdbe0e2d0edb4337c800e12ace2e6676bcac5c7254d442f3c71ddea4d17"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-icon.stderr",
+      "sha256": "051e687d635c3a4d97142eb8d4280ed046a5922398e76be9311ddb24148e547f"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-icon.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-missing-binding.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-missing-binding.stdout",
+      "sha256": "b6cec38f048ae288d414c813772dd08e00b06b325fbc0eb970d2da62183ad61c"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-scroll-ast.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-scroll-ast.stdout",
+      "sha256": "b04b33d290872aa99f4f62f840c87b6b1ffc0100cc05bafc1174b84fd98023e5"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-scroll-svg.stderr",
+      "sha256": "4ba60538cf81532a73c9e74a688bfc64248a42913b3752315a2e14e97824f1f1"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-scroll-svg.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-widget-checkbox.stderr",
+      "sha256": "3be10479a01d4a45f479a9417b976243758b2ea82a64d07cdd8b265150ea4449"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-widget-checkbox.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-widget-dialog.stderr",
+      "sha256": "2ba6de58324345f6e758d6581c0964143d866278aa26ccba130252257fa5d7aa"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-widget-dialog.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-widget-list.stderr",
+      "sha256": "77e68e184f815362f3b29a174dc6879f45ade971f7142031be61350925263ac1"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-widget-list.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-widget-menu.stderr",
+      "sha256": "6feec74c4ea4b928258d7da5f43f7764d6268fa660e5121749ca0b3086372b51"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-widget-menu.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-widget-select.stderr",
+      "sha256": "29b65f3613180019f87c6cd435c7afcef34cc1f2e1421d0d86f1661f41a7e542"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-widget-select.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-widget-slider.stderr",
+      "sha256": "a9710885b88c2a53fb96be08881149c0ba439006fa2b68b34aca155d823da364"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-widget-slider.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-widget-splitter.stderr",
+      "sha256": "519e345b2f652a0d8bf0a5c8cfa8961bb0cc3d5febcdbbae192171485c8bb8df"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-widget-splitter.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-widget-tabs.stderr",
+      "sha256": "d398277062f8528a266d4556ddb02d53c05d9ec56d2770eba4d4d8ba73f4db70"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-widget-tabs.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-widget-textarea.stderr",
+      "sha256": "a9c433e4ec4216470f70f4c5bae3825c756f52319c656315da3c1d3a71486874"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-widget-textarea.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-widget-tree.stderr",
+      "sha256": "5efc0e51c6a99f47e538cc61e1d9ca1cf50eb34f0bbd9ba2dedda40bdb9fe8ee"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/outputs/sdui-widget-tree.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/probe-results.json",
+      "sha256": "090b9530ebef8f9a18482c036442b4ffd59360f5028db5fdd0d8933dbf61c890"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/run_probes.py",
+      "sha256": "63e896ce46163520e47175b711a075fe2059a0bf5089fcbfbc99669569627277"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M3/FilesClean.png",
+      "sha256": "6760eba71dce396e3cce8bb3c8dd4f7f22e29d4da82306ed26a63f682b86e8ea"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M3/FilesDirtyRejected.png",
+      "sha256": "17d50b8f8d9f6feb5be65f3480b1846dd6e689ea7842bbf5f60a1c00aaa4ba19"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M3/IndexClean.png",
+      "sha256": "fa3401e3ebb29117d457367ae6bcaf0782a7e7492295c1eb11c1b9bb84efcc14"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M3/README.md",
+      "sha256": "c17163720c60df3b9e7925b5a88af511be0c501f8ee5e4db77480c4d641b9c39"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/render_pilot.py",
+      "sha256": "7aab350f69b5a9f7c065ba3faf493d446182bfd541a970757e5ef5ef181d78c6"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/verify_pilot.py",
+      "sha256": "7e32334f6f2fa6645c03d123556aeb669da20a6c646d67b25ace595e7be5ea9f"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/FilesClean.json",
+      "sha256": "41300639838fb8fc7a7a1b5794b7f2011b7731259f9e0ecee9bec57701097bc5"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/FilesClean.svg",
+      "sha256": "7f3ab5688bae4671205e8c465660dcf71d9536655750cbf6e7bbbe72d47146fd"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/FilesClean.txt",
+      "sha256": "9d823d851dab5eac8583e32d133e95d737e185392fea98df65fc9db1bf2c274e"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/FilesDirtyRejected.json",
+      "sha256": "41300639838fb8fc7a7a1b5794b7f2011b7731259f9e0ecee9bec57701097bc5"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/FilesDirtyRejected.svg",
+      "sha256": "11e91deacbe344b2551924e50d1d9c55da2a4953d5eb13012e9cdb9b21b1625c"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/FilesDirtyRejected.txt",
+      "sha256": "574b97f4ea85e7d9b2ceae9b36f959e0003ba3717a24916aadca065b47020aac"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/IndexClean.json",
+      "sha256": "41300639838fb8fc7a7a1b5794b7f2011b7731259f9e0ecee9bec57701097bc5"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/IndexClean.svg",
+      "sha256": "c1f62b0e2534ecf4cb85197acff2dfae238e12c6f10e935e6aad96a24e1ca50c"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/IndexClean.txt",
+      "sha256": "4c9ea0ecc7e094e9d4d8716af7ab48d0f0d846a5965f65fc74b6e9b6c6abc108"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/provenance.json",
+      "sha256": "795c6c58f971c713de198c908dfe3357be48bb69e7ada5feeda3e7b8fe3cf5c7"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/A0/index.md",
+      "sha256": "cf30b9082b44038f424e60e93b808fcd543a07d0b33c25a60cb0d3a70bf79e75"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/A0/inventory.md",
+      "sha256": "f025977b0452146d3c50f404dc8199ea94d189b8fb64a5e52149301ec3e67273"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/A1/index.md",
+      "sha256": "48269d4420c8ea65435cb2415284397bf3ba62f40ece6a45584863fee05c076b"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/A1/inventory.md",
+      "sha256": "fbe04002c0fb6571e7b771a1de6ac98c8c4e2654c513dfe73038519ea67e5ae2"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/A2/index.md",
+      "sha256": "fd50f68a7c138d9699d1086b7311116ab349f8fadb61abd5be73f2a8fcbc258e"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/A2/inventory.md",
+      "sha256": "bbb8c500cecc4c4382e44ebd38b83fe2e02ee7891dac0875b776dc725d40a624"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/A3/index.md",
+      "sha256": "b083f75057b345dc0f31e33090c4fbda6af4939014887573e315f97215d4c69a"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/A3/inventory.md",
+      "sha256": "c40d33cd2a23e0e171703b29f5020b7abf5911d93fb764d8a7344e5d87139531"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/A4/index.md",
+      "sha256": "5e841741b3454e514b8982dc5adde77cf219cba6e732d0666f8676e668433365"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/A4/inventory.md",
+      "sha256": "afb2b8705c4da6af2f2dcc55f2ac37bd80c677a3c579e44ad9d321349e951b9d"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/A5/index.md",
+      "sha256": "3ddb326ea6dae1125db900cff3f8eae4aad0b6dd6373d528be21a7b82c4a43c8"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/A5/inventory.md",
+      "sha256": "7150675018f0b820be7551672f9a8435bb4e4f93038e1a16400ab09c5a93df94"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/diagrams/VP01-EditDocuments.mmd",
+      "sha256": "4cd63133b62f185fe14ad62405e074528c39731ef8938afc25ac3f017f6e754b"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/diagrams/VP01-ReadDocuments.mmd",
+      "sha256": "8fb1e89592140c9163c18644792b8127070ed7302ab9316dcc33dd116d7fac92"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/diagrams/VP01-SelectGeneratedView.mmd",
+      "sha256": "1e21a890b86a4c64920925d688ac91ad71368e641aa2f44f55fe39b9b61a9123"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/diagrams/VP01-feature-DocumentNavigation.mmd",
+      "sha256": "ca5e1976bcbe20a6f236e5ea884c0671bd963b01d5cab9e185032b4256d686d1"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/diagrams/VP01-feature-LivePreview.mmd",
+      "sha256": "7010a5c686cb97875ab9d0333f8b59980d9686f10deaef5e742c40a3f02234ac"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/diagrams/VP01-feature-WorkPathNavigation.mmd",
+      "sha256": "46aa5c576630a6781eb3382552130c9289db07109c2423e5181a0854bad0fbad"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/diagrams/VP02-XfmdDesktop.mmd",
+      "sha256": "71c410ef41b97268ef810e668cbc939703f637fcb476fbc60a25e78dce1f9263"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/diagrams/VP02-roots.mmd",
+      "sha256": "b367a90bd1e74015b5b65a688af8395c2cc3a5c8880f5cf9e290e9755b5588a1"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/diagrams/VP07-DocumentNavigation-NormalDesktop.mmd",
+      "sha256": "047df4b79e893a47e6301cda77ea4c43914f375c7aae7384f528ad50cda24888"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/diagrams/VP07-LivePreview-NormalDesktop.mmd",
+      "sha256": "7a7e80c1d420138cc4da5152082c4bdf44804afb5ef999d53886e093500cda2e"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/diagrams/VP07-WorkPathNavigation-NormalDesktop.mmd",
+      "sha256": "b80c63798acc51617c647126ba70a4c2b84a80d97f7c07be64c2f05a47dfffc1"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/index.md",
+      "sha256": "297ffb67f305fd24b7cfb5ada5bc9304bd30c0d0d25a055f9d131b69f2d29bc5"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/manifest.json",
+      "sha256": "13d668010bdcb62786d8b9c9119354658265d0934ce9db9b8e118d316201df61"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/navigator.md",
+      "sha256": "74d7aede8a877e84ebde08f4ef0398384556a71417b33bd74484273763333fcc"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/viewpoints/VP01/VP01-EditDocuments.md",
+      "sha256": "35be2dbd756c0b8609afde0c0686a7ab7d71f77c36e56c716623bf1fada360ea"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/viewpoints/VP01/VP01-ReadDocuments.md",
+      "sha256": "6e786b74774871f4178210abe5cc54911ab935b313b73014629a12ab4ae72f09"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/viewpoints/VP01/VP01-SelectGeneratedView.md",
+      "sha256": "e48acc05aa1eb263b7b710f6dea4d63eb85b04d5ecd75fdf5c03de8832dc1277"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/viewpoints/VP01/VP01-feature-DocumentNavigation.md",
+      "sha256": "8aa1e56c70f62c4a7af4035b6e1134556910e62b87abe57c1cc91eaebea8c5dd"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/viewpoints/VP01/VP01-feature-LivePreview.md",
+      "sha256": "6ba5c3662194e6c053e8dc3c2172585cd53a394a51f86dccb7849b1b2d1f2461"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/viewpoints/VP01/VP01-feature-WorkPathNavigation.md",
+      "sha256": "7d975b5e101cf0200319a8abf2f698f355fb55d50176037eae938bc48109ef1e"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/viewpoints/VP01/index.md",
+      "sha256": "0e0698bba2cf7cafd493ab6a1abea1552319c4ff85ea4a30aa5f9683254f5170"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/viewpoints/VP02/VP02-XfmdDesktop.md",
+      "sha256": "49b63fed5b117ef0828c96134cfce1108d209293b77b5261eb1575ad5c92b640"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/viewpoints/VP02/VP02-roots.md",
+      "sha256": "4ebe54e13c1b16a413df4f0ca3a41dd75a120f6388650625b62dcae3f70cbc20"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/viewpoints/VP02/index.md",
+      "sha256": "d0ee1c65a8077e52d39ea362295308a5562e4ba6414047e3c1d711ab3d0e0b03"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/viewpoints/VP07/VP07-DocumentNavigation-NormalDesktop.md",
+      "sha256": "21c9779dc23c3dd34c384fe6d3df367eddad60dbabdab04246997d30a80d7dd8"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/viewpoints/VP07/VP07-LivePreview-NormalDesktop.md",
+      "sha256": "2500a40b98e5780b38c9452bdda87e4a020d9d4327c4bd781dd20c447c9ff903"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/viewpoints/VP07/VP07-WorkPathNavigation-NormalDesktop.md",
+      "sha256": "fe53c1ec15fde01aacbbef2511218493b5f5738ccc6b672474a48a9f75dbc2c0"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl/viewpoints/VP07/index.md",
+      "sha256": "d3c3fb77f47dfdef24b4cea9faecfda923653c5d188b8ba11cee6ce0ef1bbf71"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl-ast.json",
+      "sha256": "7961425180b0bc286d88a8e7ef071517ac33a6a7ee39b88d20e9826b1af360a3"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl-check.json",
+      "sha256": "d8e93e18c4f7a9a08e33c48e6e3d47ccb94fcc8a5e2b43d4e4a856058b2644c7"
+    },
+    {
+      "path": "SDP/05--Implementation/XFMD-Modeling/views/navigation-pilot/sdl-generation.json",
+      "sha256": "692a7c0680ceba2e615e79a4f41626e8bed962b796ffa606c5fcf3c4646cced1"
+    },
+    {
+      "path": "SDP/SDL/XFMD/Navigation.design",
+      "sha256": "3002709d67729fd3595ab27c484794d77b675ed28f927db0aec1e23234d288e2"
+    },
+    {
+      "path": "SDP/SDL/XFMD/README.md",
+      "sha256": "11b51f9cf0881c4b5ad0c312159e687872fe5601020bdc0ccd5d6279b33e4972"
+    },
+    {
+      "path": "SDP/SDL/XFMD/SDUI/XfmdDesktop/Navigation.sdui",
+      "sha256": "710d8167646b3555f292763a00b96223990354908957fc8695f8736c0571fea0"
+    },
+    {
+      "path": "SDP/README.md",
+      "sha256": "7e77bb50562afda705e7ac801a61c9d090ca36a6704ed4d4f89aa26bcee7c5b0"
+    },
+    {
+      "path": "SDP/Maintenance/MAINT-XFMD-0004.md",
+      "sha256": "ee251df21d721ef61e008ad805e03d9747d1311780dc3331d6f562d06b4732f6"
+    },
+    {
+      "path": "SDP/KanBan/active/#017--Proposal--Adopt-SDP-and-model-XFMD.md",
+      "sha256": "abecf3170432052c14518de11d4c9ef90e7cc4105312ed07baedabf6230b8504"
+    },
+    {
+      "path": "SDP/ProjectManagement/Ledger.ndjson",
+      "sha256": "8d564e1867f694c2192a6ce89c72f4d504d46841ce0447432e29904bac426554"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+flowchart LR
+    n_EditDocuments["EditDocuments (usecase)"]
+    n_LivePreview["LivePreview (feature)"]
+    n_ReaderAuthor["ReaderAuthor (actor)"]
+    n_LivePreview -->|supports| n_EditDocuments
+    n_ReaderAuthor -->|pursues| n_EditDocuments

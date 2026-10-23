@@ -1,0 +1,287 @@
+VP02 — Architecture and logical
+decomposition
+Revision:
+e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007.
+Container/Unit and contains; library structure is not deployment allocation.
+
+Complete logical architecture
+contains
+
+DocumentIndexService (unit)
+
+contains
+
+DocumentStorage (unit)
+
+contains
+
+Documents (unit)
+
+contains
+
+EventLoop (unit)
+
+contains
+
+GeneratedViews (unit)
+
+contains
+
+Identity (unit)
+
+contains
+
+NativeShell (unit)
+
+contains
+
+Navigation (unit)
+
+ExternalLauncher (unit)
+
+ExternalViewBroker (unit)
+
+ExternalViewGenerator (unit)
+
+Application (unit)
+contains
+contains
+Preferences (unit)
+
+XfmdDesktop (container)
+
+contains
+
+Interpreter (unit)
+contains
+Preview (unit)
+
+contains
+Renderer (unit)
+contains
+Publication (unit)
+
+contains
+SdpProjects (unit)
+
+contains
+Typography (unit)
+
+contains
+Viewport (unit)
+
+contains
+VisualResources (unit)
+
+contains
+Workspace (unit)
+
+Source facts: f0019, f0020, f0021, f0022, f0023, f0024, f0025, f0026, f0027, f0028,
+f0029, f0030, f0031, f0032, f0033, f0034, f1031, f1032, f1033.
+Declarations: Application, DocumentIndexService, DocumentStorage, Documents,
+EventLoop, ExternalLauncher, ExternalViewBroker, ExternalViewGenerator,
+
+GeneratedViews, Identity, Interpreter, NativeShell, Navigation, Preferences, Preview,
+Publication, Renderer, SdpProjects, Typography, Viewport, VisualResources,
+Workspace, XfmdDesktop.
+
+Scope and notation
+All declared Systems, Containers and Units in the checked model are shown, including
+isolated roots. Arrows mean explicit contains. This is logical decomposition, not
+deployment, Functionality ownership or runtime communication. No parent or
+connection is inferred.
+
+Structural register
+Component
+
+Kind
+
+Explicit parent
+
+Contains facts
+
+XfmdDesktop
+
+container
+
+Root (no declared parent)
+
+—
+
+Application
+
+unit
+
+XfmdDesktop
+
+f1031
+
+DocumentIndexService
+
+unit
+
+Application
+
+f0019
+
+DocumentStorage
+
+unit
+
+Application
+
+f0020
+
+Documents
+
+unit
+
+Application
+
+f0021
+
+EventLoop
+
+unit
+
+Application
+
+f0022
+
+ExternalLauncher
+
+unit
+
+Root (no declared parent)
+
+—
+
+ExternalViewBroker
+
+unit
+
+Root (no declared parent)
+
+—
+
+ExternalViewGenerator
+
+unit
+
+Root (no declared parent)
+
+—
+
+GeneratedViews
+
+unit
+
+Application
+
+f0023
+
+Identity
+
+unit
+
+Application
+
+f0024
+
+Interpreter
+
+unit
+
+XfmdDesktop
+
+f1032
+
+NativeShell
+
+unit
+
+Application
+
+f0025
+
+Navigation
+
+unit
+
+Application
+
+f0026
+
+Preferences
+
+unit
+
+Application
+
+f0027
+
+Preview
+
+unit
+
+Application
+
+f0028
+
+Publication
+
+unit
+
+Application
+
+f0029
+
+Renderer
+
+unit
+
+XfmdDesktop
+
+f1033
+
+SdpProjects
+
+unit
+
+Application
+
+f0030
+
+Typography
+
+unit
+
+Application
+
+f0031
+
+Viewport
+
+unit
+
+Application
+
+f0032
+
+VisualResources
+
+unit
+
+Application
+
+f0033
+
+Workspace
+
+unit
+
+Application
+
+f0034
+
+

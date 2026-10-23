@@ -1,0 +1,6 @@
+flowchart LR
+    n_NavigationCallsContract["NavigationCallsContract (contract)"]
+    n_OpenTarget["OpenTarget (message)"]
+    n_TargetOpened["TargetOpened (message)"]
+    n_NavigationCallsContract -->|permits| n_OpenTarget
+    n_NavigationCallsContract -->|permits| n_TargetOpened

@@ -1,0 +1,10 @@
+flowchart LR
+    n_ChapterNavigation["ChapterNavigation (feature)"]
+    n_DocumentNavigation["DocumentNavigation (feature)"]
+    n_DocumentReferences["DocumentReferences (feature)"]
+    n_NavigateDocuments["NavigateDocuments (usecase)"]
+    n_ReaderAuthor["ReaderAuthor (actor)"]
+    n_ChapterNavigation -->|supports| n_NavigateDocuments
+    n_DocumentNavigation -->|supports| n_NavigateDocuments
+    n_DocumentReferences -->|supports| n_NavigateDocuments
+    n_ReaderAuthor -->|pursues| n_NavigateDocuments

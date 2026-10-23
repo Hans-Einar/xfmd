@@ -1,0 +1,9 @@
+sequenceDiagram
+    participant n_GeneratedViews as Generated Views
+    participant n_ExternalViewBroker as External View Broker
+    participant n_EventLoop as Event Loop
+    n_GeneratedViews->>n_ExternalViewBroker: 1: Attempt Release (Lease Notifications)
+    n_GeneratedViews->>n_GeneratedViews: 2: Keep Unsent Release (Lease Lifecycle)
+    n_EventLoop->>n_GeneratedViews: 3: Poll Release Queue (Scheduled Work)
+    n_GeneratedViews->>n_ExternalViewBroker: 4: Attempt Release (Lease Notifications)
+    n_GeneratedViews->>n_GeneratedViews: 5: Remove Sent Release (Lease Lifecycle)

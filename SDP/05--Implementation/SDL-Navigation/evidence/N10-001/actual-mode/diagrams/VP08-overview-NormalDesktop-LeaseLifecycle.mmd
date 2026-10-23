@@ -1,0 +1,5 @@
+flowchart LR
+    n_GeneratedViews["GeneratedViews (unit)"]
+    n_LeaseLifecycle["LeaseLifecycle (channel)"]
+    n_LeaseLifecycle -->|receiver| n_GeneratedViews
+    n_GeneratedViews -->|sender| n_LeaseLifecycle

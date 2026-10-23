@@ -1,0 +1,35 @@
+{
+  "xfmd_head": "41fa4948c5377edd792ba3f503e6b92b0fd4717a",
+  "xfmd_dirty": true,
+  "mermaid_baseline": {
+    "repository": "Hans-Einar/mermaid-rs-renderer",
+    "commit": "589517a7107ab95ee7dfa5ae88c2f339c0a284dc",
+    "sha256": "e081da327340e05efebef869cb97c8e90246d5dc8f04162279729907c8ff5243"
+  },
+  "sources_sha256": {
+    "xfmd/src/interpreter/mermaid/rust/src/semantic/trees.rs": "e48f42b05c6395d7e71291b1054287480d1a5a1bf9c6a276c6c44dd8de47d3a9",
+    "xfmd/src/interpreter/mermaid/rust/src/semantic/chart_tests.rs": "13d60cbfddf9823a31f60e996a43bd3ac43cfc8f71550f8115ddd088a8552a9d",
+    "xfmd/tests/fixtures/mermaid/mindmap-quoted.mmd": "5dff21ebdb8eb62052c2c56aa04b001a8e36267aee2864503925a3fcc57c65d4",
+    "fork/src/routing_backend/validation.rs": "a1363f732e521cfa8783d80cea21d37218931f3e54abfefd428c45b0d21860d8",
+    "fork/tests/xfmd_vp07.rs": "96c14f5487e319c56055107493bb351eb125eea867fbfa5062e093a2f21c039f",
+    "fork/tests/fixtures/xfmd/vp07.mmd": "7f6e9ad20319fa6d6ffeb6e13394e0fb7d83b20f09295bbf4139ca1830539405",
+    "fork/tests/fixtures/xfmd/vp07-metrics.json": "cd5a16bc2209f62c75286082ce6b6ecc488e28822cc22ce78f51791494a24f2d",
+    "fork/docs/xfmd-vp07-routing.md": "b0489920df7205b273268ce997913871b4518b4b61e591846c78e9ec3af92e7a"
+  },
+  "binaries_sha256": {
+    "/home/warloc/git/xfmd-sdl-navigation/build-ui/xfmd": "7bd6d9eee530be0110b53a846fe7b72c63ed8471fc1e87d6924bdee588cf3c78",
+    "/tmp/xfmd-diagram-probe": "c7377a472013909176508a655c730a77d2cef320f21094422a3103aa42face73",
+    "/tmp/xfmd-native-probe": "214b46062c8f8efe6fb9ff27995706e28b94080eb293564d543ef755b3ed7775",
+    "/tmp/xfmd-diagram-probe-after": "6e7175d60abe7d04444225c90ff13ba8463ba1750055902d7f9f0b4bff7a4900",
+    "/tmp/xfmd-native-probe-after": "a3eea166ef470df8838e5abad730cc846c46bda63e8f1914732aa03520367558",
+    "/tmp/xfmd-vp07-native-candidate": "5b6cc442c8d6f237642b865e149483b2fa3fdfa775205e7c3267457b4cb35d6f",
+    "/tmp/xfmd-vp07-geometry-candidate": "b461df8c9fbcd5ec5079786eaa9920c651766025e9fbefa5a77543ed1ceab241",
+    "/tmp/xfmd-diagram-fork-target/debug/libxfmd_mermaid_ffi.a": "9f2d346b912fe235d2e80eae63fe2c795bfcdfe2cf2623b8809509c8895266d8"
+  },
+  "candidate_build": "isolated Rust debug FFI against fork; candidate-Cargo.lock records dependencies separately from the normal XFMD build",
+  "installed_unchanged": true,
+  "publication": null,
+  "fork_candidate_commit": "e79d8f9caf649995a5db5e54b0ea5d6b7fab8221",
+  "fork_branch": "fix/xfmd-vp07-routing",
+  "fork_patch_sha256": "32dfbc8a796d1235634a9a160c82a5ac6830c384893d4ae3d8eb620c6de9459b"
+}

@@ -104,7 +104,8 @@ LoadedDocument LocalFileStore::read(const std::string& name) const {
   if (!(identity(before, bytes) == identity(after, bytes)))
     throw Error(ErrorCode::Conflict, "File changed while it was being read. Try again.");
   InputPolicy::validate(bytes, name);
-  return {path, bytes, identity(after, bytes), InputPolicy::plainText(name)};
+  return {path, bytes, identity(after, bytes), InputPolicy::plainText(name),
+          InputPolicy::mermaid(name)};
 }
 SavedDocument LocalFileStore::writeAtomic(const SourceSnapshot& source, const std::string& name,
                                           const std::optional<FileIdentity>& expected) const {

@@ -1,0 +1,12 @@
+flowchart LR
+    n_AdoptPreferencesDraft["AdoptPreferencesDraft (message)"]
+    n_BeginPreferencesDraft["BeginPreferencesDraft (message)"]
+    n_NotifyPreferenceChange["NotifyPreferenceChange (message)"]
+    n_PersistPreferencesDraft["PersistPreferencesDraft (message)"]
+    n_PreferenceChangesContract["PreferenceChangesContract (contract)"]
+    n_ValidatePreferencesDraft["ValidatePreferencesDraft (message)"]
+    n_PreferenceChangesContract -->|permits| n_AdoptPreferencesDraft
+    n_PreferenceChangesContract -->|permits| n_BeginPreferencesDraft
+    n_PreferenceChangesContract -->|permits| n_NotifyPreferenceChange
+    n_PreferenceChangesContract -->|permits| n_PersistPreferencesDraft
+    n_PreferenceChangesContract -->|permits| n_ValidatePreferencesDraft

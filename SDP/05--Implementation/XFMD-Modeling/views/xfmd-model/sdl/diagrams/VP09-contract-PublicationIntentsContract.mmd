@@ -1,0 +1,6 @@
+flowchart LR
+    n_CancelPdfRequest["CancelPdfRequest (message)"]
+    n_PublicationIntentsContract["PublicationIntentsContract (contract)"]
+    n_RequestPdfExport["RequestPdfExport (message)"]
+    n_PublicationIntentsContract -->|permits| n_CancelPdfRequest
+    n_PublicationIntentsContract -->|permits| n_RequestPdfExport

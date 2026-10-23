@@ -1,0 +1,14 @@
+{
+  "producerHead": "f1c334218c00cb6ca20f8dce19880cb65536cea4",
+  "producerBranch": "sdp/xfmd-vp10-overview",
+  "producerClean": true,
+  "remote": {
+    "refs/heads/main": "5ca0e90f82c5da449d529906b4f753f39a907cb4",
+    "refs/heads/sdp/xfmd-vp10-overview": "f1c334218c00cb6ca20f8dce19880cb65536cea4"
+  },
+  "candidateHashesMatch": true,
+  "ledgerEventsValid": 241,
+  "mergeReleaseInstall": false,
+  "nativeProductChangedByN12": false,
+  "visualResidual": "KB020 packet label clipping and crowded bit numbers remains open"
+}

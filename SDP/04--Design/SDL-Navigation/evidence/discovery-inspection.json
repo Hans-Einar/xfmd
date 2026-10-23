@@ -1,0 +1,63 @@
+{
+  "source": "Installed discovery captured Session 0003 T001; inspected in T002",
+  "snapshotSha256": "5abfc75d9a9e3a819bfed507bbda4d48f4f4342edfb99ecc7039a25428e33fe7",
+  "viewpointCount": 33,
+  "distinctReferenceActions": 1765,
+  "examples": [
+    {
+      "originId": "sdl/sdl-core-0442339cc9497720/VP02/kind/container/XfmdDesktop",
+      "canonicalId": "sdl/sdl-core-0442339cc9497720/object/container/XfmdDesktop",
+      "originTarget": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "sdl-core-0442339cc9497720",
+        "uri": "sdl-view://xfmd/VP02?consumer=xfmd&focus=XfmdDesktop&target=main",
+        "revision": "8c3af91f47a684084eccefae60abb88f31781d9e12dc4889f350e8c89ff0a453"
+      },
+      "canonicalTarget": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "sdl-core-0442339cc9497720",
+        "uri": "sdl-view://xfmd/VP11?consumer=xfmd&focus=XfmdDesktop&target=main",
+        "revision": "8c3af91f47a684084eccefae60abb88f31781d9e12dc4889f350e8c89ff0a453"
+      }
+    },
+    {
+      "originId": "sdl/navigation-70f0593e03655d5c/VP01/kind/actor/ReaderAuthor",
+      "canonicalId": "sdl/navigation-70f0593e03655d5c/object/actor/ReaderAuthor",
+      "originTarget": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "navigation-70f0593e03655d5c",
+        "uri": "sdl-view://xfmd/VP01?consumer=xfmd&focus=ReaderAuthor&target=main",
+        "revision": "3002709d67729fd3595ab27c484794d77b675ed28f927db0aec1e23234d288e2"
+      },
+      "canonicalTarget": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "navigation-70f0593e03655d5c",
+        "uri": "sdl-view://xfmd/VP11?consumer=xfmd&focus=ReaderAuthor&target=main",
+        "revision": "3002709d67729fd3595ab27c484794d77b675ed28f927db0aec1e23234d288e2"
+      }
+    },
+    {
+      "originId": "sdl/navigation-70f0593e03655d5c/VP01/kind/feature/DocumentNavigation",
+      "canonicalId": "sdl/navigation-70f0593e03655d5c/object/feature/DocumentNavigation",
+      "originTarget": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "navigation-70f0593e03655d5c",
+        "uri": "sdl-view://xfmd/VP01?consumer=xfmd&focus=DocumentNavigation&target=main",
+        "revision": "3002709d67729fd3595ab27c484794d77b675ed28f927db0aec1e23234d288e2"
+      },
+      "canonicalTarget": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "navigation-70f0593e03655d5c",
+        "uri": "sdl-view://xfmd/VP11?consumer=xfmd&focus=DocumentNavigation&target=main",
+        "revision": "3002709d67729fd3595ab27c484794d77b675ed28f927db0aec1e23234d288e2"
+      }
+    }
+  ],
+  "claim": "Inspection only; native reproduction pending N2"
+}

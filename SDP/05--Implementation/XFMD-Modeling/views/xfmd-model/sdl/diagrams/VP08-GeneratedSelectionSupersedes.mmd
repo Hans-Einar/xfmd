@@ -1,0 +1,9 @@
+sequenceDiagram
+    participant n_NativeShell as Native Shell
+    participant n_GeneratedViews as Generated Views
+    participant n_ExternalViewGenerator as External View Generator
+    n_NativeShell->>n_GeneratedViews: 1: Select Registered View (Generated Intents)
+    n_GeneratedViews->>n_GeneratedViews: 2: Validate Selection (Generated Admission)
+    n_GeneratedViews->>n_ExternalViewGenerator: 3: Cancel Previous Child (Generation Lifecycle)
+    n_GeneratedViews->>n_GeneratedViews: 4: Advance Generation Sequence (Generated Admission)
+    n_GeneratedViews->>n_ExternalViewGenerator: 5: Start Generation (Generation Lifecycle)

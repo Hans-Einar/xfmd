@@ -88,7 +88,7 @@ plan; the note does not promise immediate fixes to every document.
 ## Related notes
 
 [BoxUI disposition](%23002--Study--BoxUI-branch-disposition.md) changes the priority
-and meaning of the BoxUI findings. [Widget ownership](../backlog/%23003--Question--SDUI-widget-ownership.md)
+and meaning of the BoxUI findings. [Widget ownership](../superseded/%23003--Question--SDUI-widget-ownership.md)
 keeps the remaining SDUI design question separate from XFMD documentation repair.
 
 ## Discussion review — 2026-09-24

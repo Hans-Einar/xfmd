@@ -1,0 +1,46 @@
+{
+  "head": "41fa4948c5377edd792ba3f503e6b92b0fd4717a",
+  "identity": "shared dirty working tree; not a commit attestation",
+  "files": [
+    {
+      "path": "src/application/sdp/SdpSources.h",
+      "sha256": "5832c8aecebbc2e2508c5e193799b93e5abe3956645192d575967403438e61e7"
+    },
+    {
+      "path": "src/application/sdp/SdpSources.cpp",
+      "sha256": "eb246e68510e56ae3405907034f2d6fbecf2903701617cc93fefd22d5961f3c3"
+    },
+    {
+      "path": "src/application/sdp/SdpDisplay.cpp",
+      "sha256": "75fca6ed0a8bcd2529156ae41dcafbb6cd9e35355182e91cd4e318e1d157a921"
+    },
+    {
+      "path": "src/application/sdp/SdpNavigation.cpp",
+      "sha256": "e93c5b2e36ff8826b925f024c3ad295cd265ea44d10e86adf3332e49cd700c3b"
+    },
+    {
+      "path": "tests/application/SdpDiscoveryTest.cpp",
+      "sha256": "0f934d0fb7fe93bdecb2a209cfa2284808fe418cb6598f27cd799f9259f52c33"
+    },
+    {
+      "path": "tests/application/SdpDisplayTest.cpp",
+      "sha256": "5a1ada00453ef0e7ee3ea59b70643903dbab3c5a0f0c0343287b8f00e1750f9b"
+    },
+    {
+      "path": "tests/gui/SdpNavigationGuiTest.cpp",
+      "sha256": "e3565b52d10389a46e0c7753a25282f1cdb138a22c0414bb0844718a2ccef1c8"
+    },
+    {
+      "path": "build-ui/SdpDiscoveryTest",
+      "sha256": "d1ff6cecd56eb4981b4469a815a8a0450a61eb410f07a5820dd4709077d2e9d8"
+    },
+    {
+      "path": "build-ui/SdpDisplayTest",
+      "sha256": "d8a782c2fd35783157a2b7f55dd99bfbc7e4c2fcd633c1c532db6bcb87fb3cbc"
+    },
+    {
+      "path": "build-ui/SdpNavigationGuiTest",
+      "sha256": "d7a43b29ff252be784008dcedd9382ebc713ace1ec89075e25764d93d75cfcf3"
+    }
+  ]
+}

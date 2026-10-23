@@ -47,6 +47,8 @@ bool Application::openDialogPath(const std::string& path) {
 }
 void Application::followLink(const std::string& document, const std::string& target,
                              bool systemDefault) {
+  if (!systemDefault && sdpNavigation && sdpNavigation->follow(document, target))
+    return;
   if (!systemDefault && documentViews && target.rfind("sdl-view:", 0) == 0) {
     documentViews->follow(target);
     return;
@@ -56,7 +58,25 @@ void Application::followLink(const std::string& document, const std::string& tar
     return;
   }
   try {
-    openTarget(LinkResolver::resourcePath(document, target), systemDefault);
+    const auto link = LinkResolver::documentLink(document, target);
+    if (!link.fragment || systemDefault) {
+      openTarget(link.path, systemDefault);
+      return;
+    }
+    // Same-buffer links must not reload or discard unsaved edits (including untitled files).
+    std::error_code ec;
+    const auto path = link.path.empty() ? std::string{}
+                                        : std::filesystem::weakly_canonical(link.path, ec).string();
+    if (ec)
+      throw std::filesystem::filesystem_error("Resolve link", link.path, ec);
+    if (path != session.view().path && !openTarget(path))
+      return;
+    if (path != session.view().path)
+      return; // Browser/desktop routing did not open an internal document.
+    pendingHeading.reset();
+    pendingLinkAnchor = PendingLinkAnchor{session.view().token, *link.fragment};
+    if (auto model = preview->currentModel(); model && model->token == session.view().token)
+      applyLinkAnchor(*model);
   } catch (const std::exception& e) {
     documents.error(e.what());
   }

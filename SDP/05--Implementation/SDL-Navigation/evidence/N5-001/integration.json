@@ -1,0 +1,13 @@
+{
+  "mergeCommit": "5ca0e90f82c5da449d529906b4f753f39a907cb4",
+  "parents": "e8760d331933361ab631ef0d52c20e87268a22b3 fde2239f0cd8202f6221394d2a3dae84828edb10",
+  "mergedTree": "d3b9a1fd8a0e42f53edadeb489ffda12cdab78e4",
+  "testedTree": "d3b9a1fd8a0e42f53edadeb489ffda12cdab78e4",
+  "originMain": "5ca0e90f82c5da449d529906b4f753f39a907cb4",
+  "status": "",
+  "verification": {
+    "command": "go -C SDPTool test . -run 'Test.*Overview|TestFocusedUseCase|TestSingleFileSourceLinks|TestSelectionHasNoArbitrary' -count=1",
+    "result": "PASS (observed tool output, manually recorded)"
+  },
+  "push": "origin/main updated from e8760d3 to 5ca0e90; no release/tag"
+}

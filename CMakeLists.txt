@@ -58,7 +58,7 @@ add_library(xfmd_scroll
   src/application/scroll/ScrollDynamics.cpp)
 target_link_libraries(xfmd_scroll PUBLIC xfmd_contracts)
 add_library(xfmd_navigation
-  src/application/navigation/LinkResolver.cpp src/application/navigation/HistoryStore.cpp
+  src/application/navigation/LinkResolver.cpp src/application/navigation/HeadingAnchor.cpp src/application/navigation/HistoryStore.cpp
   src/application/navigation/NavigationCoordinator.cpp)
 target_link_libraries(xfmd_navigation PUBLIC xfmd_document xfmd_scroll)
 add_library(xfmd_index src/application/index/DocumentIndex.cpp src/application/index/ReferenceWorker.cpp)
@@ -82,7 +82,11 @@ add_library(xfmd_export src/application/export/ExportCoordinator.cpp
   src/application/export/ExportPipeline.cpp src/application/io/PdfFilePublisher.cpp
   src/application/adapters/PdfOutput.cpp)
 target_link_libraries(xfmd_export PUBLIC xfmd_typography xfmd_media xfmd_diagrams Threads::Threads)
+include(cmake/Sdp.cmake)
 add_library(xfmd_application
+  src/application/sdp/SduiWorkflow.cpp src/application/sdp/SduiSource.cpp src/application/sdp/SdlSource.cpp
+  src/application/sdp/SdpNavigation.cpp src/application/sdp/SdpDiscovery.cpp src/application/ui/SdpPanel.cpp
+  src/application/ui/SdpPanelContext.cpp src/application/ui/SdpTree.cpp
   src/application/navigation/NavigationPanel.cpp src/application/navigation/DocumentViews.cpp src/application/navigation/WindowEndpoint.cpp
   src/application/ui/controls/CompactToolbar.cpp src/application/ui/controls/PreviewControls.cpp src/application/ui/controls/PreviewColorControls.cpp
   src/application/ui/style/ThemeProfiles.cpp
@@ -111,7 +115,7 @@ add_library(xfmd_application
   src/application/adapters/FoxPreviewInput.cpp src/application/adapters/FoxRenderHost.cpp src/application/adapters/FoxScheduler.cpp
   src/application/adapters/FoxWheelScrollBar.cpp)
 target_link_libraries(xfmd_application PUBLIC
-  xfmd_version
+  xfmd_version xfmd_sdp
   xfmd_index xfmd_export xfmd_typography xfmd_workspace xfmd_document xfmd_preview xfmd_scroll xfmd_navigation xfmd_interpreter xfmd_renderer PkgConfig::FOX X11::X11 X11::Xrandr)
 add_executable(xfmd src/application/main.cpp)
 target_link_libraries(xfmd PRIVATE xfmd_application)

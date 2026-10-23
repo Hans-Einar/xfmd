@@ -1,0 +1,19 @@
+   Compiling mermaid-rs-renderer v0.3.1 (/home/warloc/git/mermaid-rs-renderer-xfmd-diagrams)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.76s
+     Running tests/xfmd_chapter_navigation.rs (build-diagram-fork/debug/deps/xfmd_chapter_navigation-c72eec7fb1e05521)
+
+running 1 test
+
+thread 'xfmd_chapter_navigation_preserves_routes_and_caption_attachments' (390237) panicked at tests/xfmd_chapter_navigation.rs:69:6:
+called `Result::unwrap()` on an `Err` value: NoSpace("ambiguous label on edge 7: own distance 38.0, other Some((10, 14.961568832397461))")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test xfmd_chapter_navigation_preserves_routes_and_caption_attachments ... FAILED
+
+failures:
+
+failures:
+    xfmd_chapter_navigation_preserves_routes_and_caption_attachments
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.72s
+
+error: test failed, to rerun pass `--test xfmd_chapter_navigation`

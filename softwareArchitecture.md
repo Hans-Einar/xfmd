@@ -590,3 +590,104 @@ P057-M2 correction removes the Favorites chooser/buttons and hint.
 hit testing; `application/ui/PathContextMenu.{h,cpp}` owns the native path popup.
 Tree and history adapters emit copied add paths to WorkspacePanel's composition;
 FavoritesPanel owns removal and unchanged persistence. Menu dismissal never navigates.
+
+## Native SDP project navigation — PLAN-XFMD-0006
+
+Application-owned FUNC-032 adds `application/sdp` for the producer protocol,
+bounded process job and per-window navigation coordinator. `ui/SdpPanel` projects
+the returned graph through the existing NavigationTree; WorkspacePanel composes
+it beside Files/Index. SdpNavigation sends only host-selected executable/argv,
+consumes sdptool/0.2 and admits generated files through Application::open.
+SDL/SDUI parsing remains in SDPTool, Markdown interpretation in interpreter, and
+layout/drawing in renderer. A separate application-local Rust crate reuses locked
+serde_json; no SDP dependency enters Mermaid interpretation/layout.
+
+A worker process is canceled/reaped before its pending output is removed. Accepted
+bundles remain private while referenced by this window or its navigation history;
+idle reclamation replaces the former cumulative count/byte ceiling. Rendering
+workers stop before final bundle cleanup. The legacy
+DocumentViews IPC/broker consumer retains its independent contract. No SDP
+manifest, source registry or project-side executable is created/read for launching.
+
+Automatic SDP navigation refresh is owned by SdpNavigation and its SdpWatch
+metadata worker. Bounded background scans coalesce source/card changes; FOX only
+consumes change notifications and producer snapshots. Rediscovery waits behind
+generation, restores surviving tree identities and leaves the document/edits
+untouched. Watch errors retain explicit Refresh as recovery. No SDL parsing is
+added to the native application. Generated documents remain explicit snapshots.
+
+Dynamic SDP presentation retains ordered roots, sources and producer depth limits
+in SdpProtocol DTOs. SdpSources resolves catalog associations, without parsing SDL
+or guessing paths from labels. SdpPanel owns tab IDs, graph state and refresh;
+SdpTree owns native right-click dispatch and full-label tooltips. SdpPanelContext
+owns the modal source menu and defers tree deletion until event dispatch returns.
+SdpNavigation revalidates source identity, revision and contained path, then uses
+the existing document transaction and Editor mode. These are application concerns;
+the producer retains language catalogs and future tab definitions. See FUNC-032
+and SN-003. Model-source reconciliation is explicitly held by owner T005/#022.
+
+### MM-001 input and heading-link boundaries
+
+Application classifies `.mmd` using InputPolicy and carries standaloneMermaid in
+LoadedDocument/SourceSnapshot. DocumentSession advances the token for either format
+flag change during Save As. CmarkInterpreter calls the existing MermaidBlockBuilder
+on raw source; preview/layout/PDF share their established contracts. No renderer
+opens files or interprets extensions.
+
+LinkResolver splits local link path and fragment before percent-decoding.
+HeadingAnchor (application/navigation) maps parsed heading titles/slugs to byte
+anchors without filesystem access. Application holds a token-bound pending link
+anchor until its model arrives; open/edit invalidates that pending request.
+NavigationPanel reuses the same heading matcher. Existing NavigationCoordinator
+and DocumentCoordinator retain document transaction/history ownership.
+
+### SDP runtime resources — Session 0002 T007
+
+SdpRuntime (application/sdp) validates the user runtime root and allocates a private
+per-window workspace on the first generated-detail request. It has no /tmp
+fallback and does not change the older WindowEndpoint IPC policy. SdpPanel expands
+non-leaf viewpoint selections; leaf generation remains producer-owned.
+SdpNavigation tracks the actual bundle directory with its origin/revision context.
+Idle reclamation retains bundles referenced by the current document or history
+and waits for preview, reference and export consumers. It replaces the former
+cumulative retention admission ceiling, while per-result validation remains.
+
+### SDL display projection — Session 0003 N2
+
+SdpDisplay in application/sdp provides sdpDisplayChildren and sdpDisplayRow over
+immutable protocol DTOs. It removes healthy phase/abstraction presentation wrappers
+inside SDL source context and deduplicates canonical viewpoints. Original reference
+identity/action and resolved graph identity remain separate; no SDL interpretation
+is introduced. SdpPanel owns lazy FOX rows and stable parent/occurrence keys for
+refresh restoration. Graph depth/cycle guards terminate expansion without disabling
+valid typed actions; genuine diagnostics/truncation remain visible. NavigationTree
+ignores activation for expansion-box clicks while retaining normal expansion.
+
+### SDUI integration (XFMD 0.7)
+
+Application/sdp/SduiTools locates private SDUI executables. SduiSource owns
+contextual snapshot-to-original source selection. SduiWorkflow owns prototype
+readiness and independent Fyne process lifetime; XfmdWindow only constructs its
+SDP toolbar. SDUI's Go presentation/parser remain in SDP-vNow; release tooling
+bundles producer binaries, not language logic in XFMD. The 0.9 private SDPTool handles project discovery and SDL view generation;
+gh sdp remains the fallback, with its installed signed default unchanged.
+
+### SDL exact-source navigation — Session0005 N4
+
+Application/sdp/SdlSource.cpp owns SdpNavigation::followSdlSource. SdpProtocol
+validates optional sourceLinks; retained generated Context stores the binding of
+bundle-local source identity to original .design path and saved source bytes.
+Every source in a composed graph must still match before and after normal document
+opening. The handler validates containment, symlinks and UTF-8 byte boundaries,
+then selects the original text through the existing editor. SDL owns syntax/spans
+and SDPTool owns checked snapshots. No parsing or ProjectGovernance logic moves
+into XFMD. Existing whole-file source opening remains the compatibility path.
+
+### Deferred model discovery (N15b)
+
+SdpDiscovery implements the SdpNavigation request lifecycle for read-only action
+negotiation, compact discovery and serialized revision-bound model expansion.
+SdpExpansion validates complete incoming graph identity/namespace before returning
+an atomically merged snapshot. SdpPanel retains native tab/selection state and
+requests deferred models on expansion; no SDL parsing moves into XFMD. The private
+installed SDPTool supplies this contract without modifying gh-sdp's signed cache.

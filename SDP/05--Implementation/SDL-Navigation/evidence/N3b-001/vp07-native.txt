@@ -1,0 +1,52 @@
+Preferences (unit)
+
+owns
+
+contributes-to
+
+ApplicationPreferences (functionality)
+
+allocated-to
+
+contributes-to
+
+FoxPresentation (functionality)
+owns
+
+allocated-to
+
+NativeShell (unit)
+contributes-to
+
+owns
+WorkspaceControls (functionality)
+
+ConfigurableScrolling (feature)
+
+allocated-to
+contributes-to
+ScrollMotion (functionality)
+owns
+
+XfmdDesktop (container)
+
+allocated-to
+
+allocated-to
+
+Viewport (unit)
+
+contributes-to
+owns
+SourceAnchorMapping (functionality)
+
+contributes-to
+
+owns
+Documents (unit)
+
+TextEditing (functionality)
+
+allocated-to
+
+

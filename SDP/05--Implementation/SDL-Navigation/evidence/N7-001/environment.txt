@@ -1,0 +1,5 @@
+go version go1.27.1 linux/amd64
+cmake version 3.31.8
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+Linux 6.12.0-211.53.1.el10_2.x86_64 x86_64 GNU/Linux

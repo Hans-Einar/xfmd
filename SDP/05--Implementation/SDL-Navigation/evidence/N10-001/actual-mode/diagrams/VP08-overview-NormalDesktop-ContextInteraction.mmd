@@ -1,0 +1,5 @@
+flowchart LR
+    n_ContextInteraction["ContextInteraction (channel)"]
+    n_NativeShell["NativeShell (unit)"]
+    n_ContextInteraction -->|receiver| n_NativeShell
+    n_NativeShell -->|sender| n_ContextInteraction

@@ -1,0 +1,18 @@
+SDUI GUI dump | SplitWorkspace | 160 columns | structural preview
+[ Sidebar ]       [ Open ]          [ Save ]          [ Editor ]        [ Split ]         [ Preview ]       [ Back ]          [ Forward ]       [ Light / Dark ]
+Document                                                                         Document path: [/project/README.md]
+### Files / Index                            ### Markdown source area                                  ### Markdown preview area
+[ Reload ]  [ Markdown [ Up ]     [ Open ]   README.md                                                 Rendered Markdown area.
+             ]
+**Folder tree**                              Text editing area.                                        Static representation.
+
+/project/docs                                Static representation.                                    Images, formulas and diagrams
+
+/project/README.md                           Open, edit and save belong to native XFMD.                are represented by this region.
+
+**Folders / Files / Favorites**
+
+Favorites selected: docs; README.md.
+
+Right-click actions belong to the native UI.
+Concept: split mode. Document areas and toolbar actions are illustrative.

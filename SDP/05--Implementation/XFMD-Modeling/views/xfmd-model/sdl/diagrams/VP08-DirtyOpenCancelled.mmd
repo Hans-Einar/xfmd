@@ -1,0 +1,8 @@
+sequenceDiagram
+    participant n_Navigation as Navigation
+    participant n_Documents as Documents
+    participant n_NativeShell as Native Shell
+    n_Navigation->>n_Documents: 1: Admit Document (Document Calls)
+    n_Documents->>n_NativeShell: 2: Choose Unsaved (Unsaved Admission)
+    n_NativeShell-->>n_Documents: 3: Choose Cancel (Unsaved Admission) reply-to 2
+    n_Documents-->>n_Navigation: 4: Document Rejected (Document Calls) reply-to 1

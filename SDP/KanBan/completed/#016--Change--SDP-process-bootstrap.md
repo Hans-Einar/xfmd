@@ -19,7 +19,7 @@ bytes. Update current instructions and links. Owner: Project Owner; executor: Co
 Plan and acceptance: [SDP1-M1](../../Maintenance/SDP1/Plan-and-Evidence.md).
 Product code, existing requirements/design, GUI behavior and model generation
 are outside the bootstrap. A separate agent owns
-[KB-XFMD-017](../backlog/%23017--Proposal--Adopt-SDP-and-model-XFMD.md).
+[KB-XFMD-017](../active/%23017--Proposal--Adopt-SDP-and-model-XFMD.md).
 
 ## Outcome and verification
 

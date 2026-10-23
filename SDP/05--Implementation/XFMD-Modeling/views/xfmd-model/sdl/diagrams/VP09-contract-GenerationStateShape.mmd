@@ -1,0 +1,10 @@
+flowchart LR
+    n_GenerationSequence["GenerationSequence (field)"]
+    n_GenerationStateShape["GenerationStateShape (contract)"]
+    n_RegisteredProject["RegisteredProject (field)"]
+    n_TargetPane["TargetPane (field)"]
+    n_TargetWindow["TargetWindow (field)"]
+    n_GenerationStateShape -->|has-field| n_GenerationSequence
+    n_GenerationStateShape -->|has-field| n_RegisteredProject
+    n_GenerationStateShape -->|has-field| n_TargetPane
+    n_GenerationStateShape -->|has-field| n_TargetWindow

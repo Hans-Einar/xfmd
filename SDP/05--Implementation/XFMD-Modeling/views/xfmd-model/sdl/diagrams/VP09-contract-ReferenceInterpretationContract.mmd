@@ -1,0 +1,6 @@
+flowchart LR
+    n_ParseReference["ParseReference (message)"]
+    n_ReferenceInterpretationContract["ReferenceInterpretationContract (contract)"]
+    n_ReferenceParsed["ReferenceParsed (message)"]
+    n_ReferenceInterpretationContract -->|permits| n_ParseReference
+    n_ReferenceInterpretationContract -->|permits| n_ReferenceParsed

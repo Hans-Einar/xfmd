@@ -1,0 +1,10 @@
+flowchart LR
+    n_AdvanceGenerationSequence["AdvanceGenerationSequence (message)"]
+    n_GeneratedAdmissionContract["GeneratedAdmissionContract (contract)"]
+    n_InspectDirtyMain["InspectDirtyMain (message)"]
+    n_RejectInvalidSelection["RejectInvalidSelection (message)"]
+    n_ValidateSelection["ValidateSelection (message)"]
+    n_GeneratedAdmissionContract -->|permits| n_AdvanceGenerationSequence
+    n_GeneratedAdmissionContract -->|permits| n_InspectDirtyMain
+    n_GeneratedAdmissionContract -->|permits| n_RejectInvalidSelection
+    n_GeneratedAdmissionContract -->|permits| n_ValidateSelection

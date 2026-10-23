@@ -1,0 +1,6 @@
+flowchart LR
+    n_CancelPreviousChild["CancelPreviousChild (message)"]
+    n_GenerationLifecycleContract["GenerationLifecycleContract (contract)"]
+    n_StartGeneration["StartGeneration (message)"]
+    n_GenerationLifecycleContract -->|permits| n_CancelPreviousChild
+    n_GenerationLifecycleContract -->|permits| n_StartGeneration

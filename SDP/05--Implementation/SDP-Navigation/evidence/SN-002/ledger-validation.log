@@ -1,0 +1,49 @@
+PASS: two new events validate against installed envelope/payload schemas; previous bytes preserved.
+[
+  {
+    "schemaVersion": "1.0",
+    "eventId": "EVT-PM-XFMD-000039",
+    "eventType": "x-management:updated",
+    "occurredAt": "2026-10-01T08:50:32.289975+00:00",
+    "actor": "codex",
+    "commit": null,
+    "subjectId": "PLAN-XFMD-0006",
+    "payload": {
+      "schemaVersion": "0.2",
+      "previousEventId": "EVT-PM-XFMD-000037",
+      "from": "active",
+      "to": "active",
+      "fromPath": "05--Implementation/SDP-Navigation/Plan.md",
+      "toPath": "05--Implementation/SDP-Navigation/Plan.md",
+      "reason": "SN-002: complete M2 native acceptance and implement coalesced automatic refresh with stable tree identities. Record regression, focused sanitizer and owner-authorized XFMD 0.3 development installation; retain M3 boundary checks, M4 source-preview, M5 semantics and independent review.",
+      "links": [
+        "KB-XFMD-014",
+        "SPR-XFMD-0010"
+      ],
+      "kind": "Plan",
+      "planType": "ImplementationPlan"
+    }
+  },
+  {
+    "schemaVersion": "1.0",
+    "eventId": "EVT-KB-XFMD-000090",
+    "eventType": "x-kanban:reviewed",
+    "occurredAt": "2026-10-01T08:50:32.289975+00:00",
+    "actor": "codex",
+    "commit": null,
+    "subjectId": "KB-XFMD-014",
+    "payload": {
+      "schemaVersion": "0.2",
+      "previousEventId": "EVT-KB-XFMD-000088",
+      "from": "active",
+      "to": "active",
+      "fromPath": "active/#014--Proposal--SDP-sidebar-and-generated-navigation.md",
+      "toPath": "active/#014--Proposal--SDP-sidebar-and-generated-navigation.md",
+      "reason": "SN-002: native SDL/SDUI workflow, dirty-buffer retention, automatic card-move refresh, graph bounds and generated Back/Forward pass. Latest development candidate installed under T002 owner authority. Card remains in-progress pending remaining boundary evidence and independent review.",
+      "links": [
+        "PLAN-XFMD-0006"
+      ],
+      "projectId": "XFMD"
+    }
+  }
+]

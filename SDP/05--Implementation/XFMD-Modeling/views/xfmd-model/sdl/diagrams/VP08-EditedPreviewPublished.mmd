@@ -1,0 +1,18 @@
+sequenceDiagram
+    participant n_NativeShell as Native Shell
+    participant n_Documents as Documents
+    participant n_Preview as Preview
+    participant n_EventLoop as Event Loop
+    participant n_Interpreter as Interpreter
+    participant n_Renderer as Renderer
+    n_NativeShell->>n_Documents: 1: Apply Text Edit (Edit Intents)
+    n_Documents->>n_Preview: 2: Document Changed (Document Notifications)
+    n_Preview->>n_EventLoop: 3: Restart Debounce (Scheduled Work)
+    n_EventLoop->>n_Preview: 4: Debounce Elapsed (Scheduled Work)
+    n_Preview->>n_Interpreter: 5: Parse Snapshot (Interpretation Calls)
+    n_Interpreter-->>n_Preview: 6: Parsed Snapshot (Interpretation Calls) reply-to 5
+    n_Preview->>n_Preview: 7: Accept Current Model (Preview Admission)
+    n_Preview->>n_Renderer: 8: Layout Model (Layout Calls)
+    n_Renderer-->>n_Preview: 9: Model Laid Out (Layout Calls) reply-to 8
+    n_Preview->>n_Preview: 10: Accept Current Frame (Preview Admission)
+    n_Preview->>n_NativeShell: 11: Present Frame (Presentation Events)

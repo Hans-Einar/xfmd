@@ -1,0 +1,6 @@
+python3 SDP/KanBan/verify_board.py
+PASS: 30 cards, 141 card events, 16 management records; schemas, replay, CardState, placement and index
+
+git diff --check
+
+PASS: new release evidence links exist; preserved backup executable matches prior installed 0.7 hash.

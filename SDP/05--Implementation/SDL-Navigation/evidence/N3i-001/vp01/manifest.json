@@ -1,0 +1,2026 @@
+{
+  "version": "sdl-viewpoints-go-1.3",
+  "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007",
+  "renderer": "",
+  "diagrams": [
+    {
+      "id": "VP01-overview",
+      "title": "All declared actors and use cases",
+      "kind": "usecase",
+      "nodes": {
+        "u0": {
+          "kind": "actor",
+          "model_id": "ReaderAuthor",
+          "span": {
+            "column": 1,
+            "end": 6764,
+            "end_column": 20,
+            "end_line": 234,
+            "line": 234,
+            "node": "Span",
+            "start": 6745
+          }
+        },
+        "u1": {
+          "kind": "usecase",
+          "model_id": "BrowseSdpProject",
+          "span": {
+            "column": 1,
+            "end": 497,
+            "end_column": 26,
+            "end_line": 17,
+            "line": 17,
+            "node": "Span",
+            "start": 472
+          }
+        },
+        "u10": {
+          "kind": "usecase",
+          "model_id": "SelectGeneratedView",
+          "span": {
+            "column": 1,
+            "end": 7728,
+            "end_column": 29,
+            "end_line": 268,
+            "line": 268,
+            "node": "Span",
+            "start": 7700
+          }
+        },
+        "u11": {
+          "kind": "usecase",
+          "model_id": "UseFullscreen",
+          "span": {
+            "column": 1,
+            "end": 8349,
+            "end_column": 23,
+            "end_line": 291,
+            "line": 291,
+            "node": "Span",
+            "start": 8327
+          }
+        },
+        "u2": {
+          "kind": "usecase",
+          "model_id": "BrowseWorkspace",
+          "span": {
+            "column": 1,
+            "end": 522,
+            "end_column": 25,
+            "end_line": 18,
+            "line": 18,
+            "node": "Span",
+            "start": 498
+          }
+        },
+        "u3": {
+          "kind": "usecase",
+          "model_id": "ConfigurePreferences",
+          "span": {
+            "column": 1,
+            "end": 1143,
+            "end_column": 30,
+            "end_line": 40,
+            "line": 40,
+            "node": "Span",
+            "start": 1114
+          }
+        },
+        "u4": {
+          "kind": "usecase",
+          "model_id": "EditDocuments",
+          "span": {
+            "column": 1,
+            "end": 2365,
+            "end_column": 23,
+            "end_line": 82,
+            "line": 82,
+            "node": "Span",
+            "start": 2343
+          }
+        },
+        "u5": {
+          "kind": "usecase",
+          "model_id": "NavigateDocuments",
+          "span": {
+            "column": 1,
+            "end": 5082,
+            "end_column": 27,
+            "end_line": 175,
+            "line": 175,
+            "node": "Span",
+            "start": 5056
+          }
+        },
+        "u6": {
+          "kind": "usecase",
+          "model_id": "PublishPages",
+          "span": {
+            "column": 1,
+            "end": 6591,
+            "end_column": 22,
+            "end_line": 227,
+            "line": 227,
+            "node": "Span",
+            "start": 6570
+          }
+        },
+        "u7": {
+          "kind": "usecase",
+          "model_id": "ReadDiagrams",
+          "span": {
+            "column": 1,
+            "end": 6698,
+            "end_column": 22,
+            "end_line": 231,
+            "line": 231,
+            "node": "Span",
+            "start": 6677
+          }
+        },
+        "u8": {
+          "kind": "usecase",
+          "model_id": "ReadDocuments",
+          "span": {
+            "column": 1,
+            "end": 6721,
+            "end_column": 23,
+            "end_line": 232,
+            "line": 232,
+            "node": "Span",
+            "start": 6699
+          }
+        },
+        "u9": {
+          "kind": "usecase",
+          "model_id": "ScrollDocuments",
+          "span": {
+            "column": 1,
+            "end": 7590,
+            "end_column": 25,
+            "end_line": 263,
+            "line": 263,
+            "node": "Span",
+            "start": 7566
+          }
+        }
+      },
+      "edges": [
+        {
+          "source": "u0",
+          "relation": "pursues",
+          "target": "u1",
+          "fact": "f0786"
+        },
+        {
+          "source": "u0",
+          "relation": "pursues",
+          "target": "u2",
+          "fact": "f0787"
+        },
+        {
+          "source": "u0",
+          "relation": "pursues",
+          "target": "u3",
+          "fact": "f0788"
+        },
+        {
+          "source": "u0",
+          "relation": "pursues",
+          "target": "u4",
+          "fact": "f0789"
+        },
+        {
+          "source": "u0",
+          "relation": "pursues",
+          "target": "u5",
+          "fact": "f0790"
+        },
+        {
+          "source": "u0",
+          "relation": "pursues",
+          "target": "u6",
+          "fact": "f0791"
+        },
+        {
+          "source": "u0",
+          "relation": "pursues",
+          "target": "u7",
+          "fact": "f0792"
+        },
+        {
+          "source": "u0",
+          "relation": "pursues",
+          "target": "u8",
+          "fact": "f0793"
+        },
+        {
+          "source": "u0",
+          "relation": "pursues",
+          "target": "u9",
+          "fact": "f0794"
+        },
+        {
+          "source": "u0",
+          "relation": "pursues",
+          "target": "u10",
+          "fact": "f0795"
+        },
+        {
+          "source": "u0",
+          "relation": "pursues",
+          "target": "u11",
+          "fact": "f0796"
+        }
+      ],
+      "source_facts": [
+        "f0786",
+        "f0787",
+        "f0788",
+        "f0789",
+        "f0790",
+        "f0791",
+        "f0792",
+        "f0793",
+        "f0794",
+        "f0795",
+        "f0796"
+      ],
+      "elements": []
+    }
+  ],
+  "facts": [
+    {
+      "id": "f0047",
+      "line": 361,
+      "node": "Relation",
+      "object": "ConfigurableScrolling",
+      "span": {
+        "column": 1,
+        "end": 11604,
+        "end_column": 61,
+        "end_line": 361,
+        "line": 361,
+        "node": "Span",
+        "start": 11544
+      },
+      "subject": "ApplicationPreferences",
+      "text": "ApplicationPreferences contributes-to ConfigurableScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0048",
+      "line": 362,
+      "node": "Relation",
+      "object": "ConfigurePreferences",
+      "span": {
+        "column": 1,
+        "end": 11664,
+        "end_column": 60,
+        "end_line": 362,
+        "line": 362,
+        "node": "Span",
+        "start": 11605
+      },
+      "subject": "ApplicationPreferences",
+      "text": "ApplicationPreferences contributes-to ConfigurePreferences.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0049",
+      "line": 363,
+      "node": "Relation",
+      "object": "DocumentNavigation",
+      "span": {
+        "column": 1,
+        "end": 11722,
+        "end_column": 58,
+        "end_line": 363,
+        "line": 363,
+        "node": "Span",
+        "start": 11665
+      },
+      "subject": "ApplicationPreferences",
+      "text": "ApplicationPreferences contributes-to DocumentNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0050",
+      "line": 364,
+      "node": "Relation",
+      "object": "DocumentReferences",
+      "span": {
+        "column": 1,
+        "end": 11780,
+        "end_column": 58,
+        "end_line": 364,
+        "line": 364,
+        "node": "Span",
+        "start": 11723
+      },
+      "subject": "ApplicationPreferences",
+      "text": "ApplicationPreferences contributes-to DocumentReferences.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0051",
+      "line": 365,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 11836,
+        "end_column": 56,
+        "end_line": 365,
+        "line": 365,
+        "node": "Span",
+        "start": 11781
+      },
+      "subject": "ApplicationPreferences",
+      "text": "ApplicationPreferences contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0075",
+      "line": 389,
+      "node": "Relation",
+      "object": "NavigateDocuments",
+      "span": {
+        "column": 1,
+        "end": 13032,
+        "end_column": 46,
+        "end_line": 389,
+        "line": 389,
+        "node": "Span",
+        "start": 12987
+      },
+      "subject": "ChapterNavigation",
+      "text": "ChapterNavigation supports NavigateDocuments.",
+      "verb": "supports"
+    },
+    {
+      "id": "f0106",
+      "line": 420,
+      "node": "Relation",
+      "object": "ConfigurePreferences",
+      "span": {
+        "column": 1,
+        "end": 14876,
+        "end_column": 53,
+        "end_line": 420,
+        "line": 420,
+        "node": "Span",
+        "start": 14824
+      },
+      "subject": "ConfigurableScrolling",
+      "text": "ConfigurableScrolling supports ConfigurePreferences.",
+      "verb": "supports"
+    },
+    {
+      "id": "f0107",
+      "line": 421,
+      "node": "Relation",
+      "object": "ScrollDocuments",
+      "span": {
+        "column": 1,
+        "end": 14924,
+        "end_column": 48,
+        "end_line": 421,
+        "line": 421,
+        "node": "Span",
+        "start": 14877
+      },
+      "subject": "ConfigurableScrolling",
+      "text": "ConfigurableScrolling supports ScrollDocuments.",
+      "verb": "supports"
+    },
+    {
+      "id": "f0130",
+      "line": 444,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 16290,
+        "end_column": 46,
+        "end_line": 444,
+        "line": 444,
+        "node": "Span",
+        "start": 16245
+      },
+      "subject": "DiagramLayout",
+      "text": "DiagramLayout contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0136",
+      "line": 450,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 16628,
+        "end_column": 51,
+        "end_line": 450,
+        "line": 450,
+        "node": "Span",
+        "start": 16578
+      },
+      "subject": "DiagramPreparation",
+      "text": "DiagramPreparation contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0177",
+      "line": 491,
+      "node": "Relation",
+      "object": "ChapterNavigation",
+      "span": {
+        "column": 1,
+        "end": 19495,
+        "end_column": 48,
+        "end_line": 491,
+        "line": 491,
+        "node": "Span",
+        "start": 19448
+      },
+      "subject": "DocumentIndex",
+      "text": "DocumentIndex contributes-to ChapterNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0178",
+      "line": 492,
+      "node": "Relation",
+      "object": "DocumentReferences",
+      "span": {
+        "column": 1,
+        "end": 19544,
+        "end_column": 49,
+        "end_line": 492,
+        "line": 492,
+        "node": "Span",
+        "start": 19496
+      },
+      "subject": "DocumentIndex",
+      "text": "DocumentIndex contributes-to DocumentReferences.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0190",
+      "line": 504,
+      "node": "Relation",
+      "object": "NavigateDocuments",
+      "span": {
+        "column": 1,
+        "end": 20512,
+        "end_column": 47,
+        "end_line": 504,
+        "line": 504,
+        "node": "Span",
+        "start": 20466
+      },
+      "subject": "DocumentNavigation",
+      "text": "DocumentNavigation supports NavigateDocuments.",
+      "verb": "supports"
+    },
+    {
+      "id": "f0201",
+      "line": 515,
+      "node": "Relation",
+      "object": "NavigateDocuments",
+      "span": {
+        "column": 1,
+        "end": 21056,
+        "end_column": 47,
+        "end_line": 515,
+        "line": 515,
+        "node": "Span",
+        "start": 21010
+      },
+      "subject": "DocumentReferences",
+      "text": "DocumentReferences supports NavigateDocuments.",
+      "verb": "supports"
+    },
+    {
+      "id": "f0208",
+      "line": 522,
+      "node": "Relation",
+      "object": "DocumentNavigation",
+      "span": {
+        "column": 1,
+        "end": 21398,
+        "end_column": 51,
+        "end_line": 522,
+        "line": 522,
+        "node": "Span",
+        "start": 21348
+      },
+      "subject": "DocumentSession",
+      "text": "DocumentSession contributes-to DocumentNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0209",
+      "line": 523,
+      "node": "Relation",
+      "object": "LivePreview",
+      "span": {
+        "column": 1,
+        "end": 21442,
+        "end_column": 44,
+        "end_line": 523,
+        "line": 523,
+        "node": "Span",
+        "start": 21399
+      },
+      "subject": "DocumentSession",
+      "text": "DocumentSession contributes-to LivePreview.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0210",
+      "line": 524,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 21495,
+        "end_column": 53,
+        "end_line": 524,
+        "line": 524,
+        "node": "Span",
+        "start": 21443
+      },
+      "subject": "DocumentSession",
+      "text": "DocumentSession contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0211",
+      "line": 525,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 21544,
+        "end_column": 49,
+        "end_line": 525,
+        "line": 525,
+        "node": "Span",
+        "start": 21496
+      },
+      "subject": "DocumentSession",
+      "text": "DocumentSession contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0275",
+      "line": 589,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 26299,
+        "end_column": 53,
+        "end_line": 589,
+        "line": 589,
+        "node": "Span",
+        "start": 26247
+      },
+      "subject": "EmbeddedVisuals",
+      "text": "EmbeddedVisuals contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0281",
+      "line": 595,
+      "node": "Relation",
+      "object": "LivePreview",
+      "span": {
+        "column": 1,
+        "end": 26685,
+        "end_column": 44,
+        "end_line": 595,
+        "line": 595,
+        "node": "Span",
+        "start": 26642
+      },
+      "subject": "EventScheduling",
+      "text": "EventScheduling contributes-to LivePreview.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0350",
+      "line": 664,
+      "node": "Relation",
+      "object": "WorkPathNavigation",
+      "span": {
+        "column": 1,
+        "end": 31260,
+        "end_column": 52,
+        "end_line": 664,
+        "line": 664,
+        "node": "Span",
+        "start": 31209
+      },
+      "subject": "FilteredFileTree",
+      "text": "FilteredFileTree contributes-to WorkPathNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0352",
+      "line": 666,
+      "node": "Relation",
+      "object": "ConfigurableScrolling",
+      "span": {
+        "column": 1,
+        "end": 31378,
+        "end_column": 54,
+        "end_line": 666,
+        "line": 666,
+        "node": "Span",
+        "start": 31325
+      },
+      "subject": "FoxPresentation",
+      "text": "FoxPresentation contributes-to ConfigurableScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0353",
+      "line": 667,
+      "node": "Relation",
+      "object": "DocumentNavigation",
+      "span": {
+        "column": 1,
+        "end": 31429,
+        "end_column": 51,
+        "end_line": 667,
+        "line": 667,
+        "node": "Span",
+        "start": 31379
+      },
+      "subject": "FoxPresentation",
+      "text": "FoxPresentation contributes-to DocumentNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0354",
+      "line": 668,
+      "node": "Relation",
+      "object": "LivePreview",
+      "span": {
+        "column": 1,
+        "end": 31473,
+        "end_column": 44,
+        "end_line": 668,
+        "line": 668,
+        "node": "Span",
+        "start": 31430
+      },
+      "subject": "FoxPresentation",
+      "text": "FoxPresentation contributes-to LivePreview.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0355",
+      "line": 669,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 31526,
+        "end_column": 53,
+        "end_line": 669,
+        "line": 669,
+        "node": "Span",
+        "start": 31474
+      },
+      "subject": "FoxPresentation",
+      "text": "FoxPresentation contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0356",
+      "line": 670,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 31574,
+        "end_column": 48,
+        "end_line": 670,
+        "line": 670,
+        "node": "Span",
+        "start": 31527
+      },
+      "subject": "FoxPresentation",
+      "text": "FoxPresentation contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0357",
+      "line": 671,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 31623,
+        "end_column": 49,
+        "end_line": 671,
+        "line": 671,
+        "node": "Span",
+        "start": 31575
+      },
+      "subject": "FoxPresentation",
+      "text": "FoxPresentation contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0358",
+      "line": 672,
+      "node": "Relation",
+      "object": "SynchronizedScrolling",
+      "span": {
+        "column": 1,
+        "end": 31677,
+        "end_column": 54,
+        "end_line": 672,
+        "line": 672,
+        "node": "Span",
+        "start": 31624
+      },
+      "subject": "FoxPresentation",
+      "text": "FoxPresentation contributes-to SynchronizedScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0385",
+      "line": 699,
+      "node": "Relation",
+      "object": "SelectGeneratedView",
+      "span": {
+        "column": 1,
+        "end": 33344,
+        "end_column": 64,
+        "end_line": 699,
+        "line": 699,
+        "node": "Span",
+        "start": 33281
+      },
+      "subject": "GeneratedDocumentNavigation",
+      "text": "GeneratedDocumentNavigation contributes-to SelectGeneratedView.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0522",
+      "line": 836,
+      "node": "Relation",
+      "object": "EditDocuments",
+      "span": {
+        "column": 1,
+        "end": 43029,
+        "end_column": 36,
+        "end_line": 836,
+        "line": 836,
+        "node": "Span",
+        "start": 42994
+      },
+      "subject": "LivePreview",
+      "text": "LivePreview supports EditDocuments.",
+      "verb": "supports"
+    },
+    {
+      "id": "f0524",
+      "line": 838,
+      "node": "Relation",
+      "object": "DocumentNavigation",
+      "span": {
+        "column": 1,
+        "end": 43146,
+        "end_column": 52,
+        "end_line": 838,
+        "line": 838,
+        "node": "Span",
+        "start": 43095
+      },
+      "subject": "LocalFileStorage",
+      "text": "LocalFileStorage contributes-to DocumentNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0525",
+      "line": 839,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 43200,
+        "end_column": 54,
+        "end_line": 839,
+        "line": 839,
+        "node": "Span",
+        "start": 43147
+      },
+      "subject": "LocalFileStorage",
+      "text": "LocalFileStorage contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0532",
+      "line": 846,
+      "node": "Relation",
+      "object": "LivePreview",
+      "span": {
+        "column": 1,
+        "end": 43560,
+        "end_column": 51,
+        "end_line": 846,
+        "line": 846,
+        "node": "Span",
+        "start": 43510
+      },
+      "subject": "MarkdownInterpretation",
+      "text": "MarkdownInterpretation contributes-to LivePreview.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0533",
+      "line": 847,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 43620,
+        "end_column": 60,
+        "end_line": 847,
+        "line": 847,
+        "node": "Span",
+        "start": 43561
+      },
+      "subject": "MarkdownInterpretation",
+      "text": "MarkdownInterpretation contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0534",
+      "line": 848,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 43675,
+        "end_column": 55,
+        "end_line": 848,
+        "line": 848,
+        "node": "Span",
+        "start": 43621
+      },
+      "subject": "MarkdownInterpretation",
+      "text": "MarkdownInterpretation contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0535",
+      "line": 849,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 43731,
+        "end_column": 56,
+        "end_line": 849,
+        "line": 849,
+        "node": "Span",
+        "start": 43676
+      },
+      "subject": "MarkdownInterpretation",
+      "text": "MarkdownInterpretation contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0536",
+      "line": 850,
+      "node": "Relation",
+      "object": "ReadDocuments",
+      "span": {
+        "column": 1,
+        "end": 43776,
+        "end_column": 45,
+        "end_line": 850,
+        "line": 850,
+        "node": "Span",
+        "start": 43732
+      },
+      "subject": "MarkdownPresentation",
+      "text": "MarkdownPresentation supports ReadDocuments.",
+      "verb": "supports"
+    },
+    {
+      "id": "f0537",
+      "line": 851,
+      "node": "Relation",
+      "object": "ReadDiagrams",
+      "span": {
+        "column": 1,
+        "end": 43815,
+        "end_column": 39,
+        "end_line": 851,
+        "line": 851,
+        "node": "Span",
+        "start": 43777
+      },
+      "subject": "MermaidDiagrams",
+      "text": "MermaidDiagrams supports ReadDiagrams.",
+      "verb": "supports"
+    },
+    {
+      "id": "f0538",
+      "line": 852,
+      "node": "Relation",
+      "object": "ReadDocuments",
+      "span": {
+        "column": 1,
+        "end": 43855,
+        "end_column": 40,
+        "end_line": 852,
+        "line": 852,
+        "node": "Span",
+        "start": 43816
+      },
+      "subject": "MermaidDiagrams",
+      "text": "MermaidDiagrams supports ReadDocuments.",
+      "verb": "supports"
+    },
+    {
+      "id": "f0540",
+      "line": 854,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 43979,
+        "end_column": 54,
+        "end_line": 854,
+        "line": 854,
+        "node": "Span",
+        "start": 43926
+      },
+      "subject": "MermaidInterpretation",
+      "text": "MermaidInterpretation contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0588",
+      "line": 902,
+      "node": "Relation",
+      "object": "ChapterNavigation",
+      "span": {
+        "column": 1,
+        "end": 47705,
+        "end_column": 52,
+        "end_line": 902,
+        "line": 902,
+        "node": "Span",
+        "start": 47654
+      },
+      "subject": "NavigationHistory",
+      "text": "NavigationHistory contributes-to ChapterNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0589",
+      "line": 903,
+      "node": "Relation",
+      "object": "DocumentNavigation",
+      "span": {
+        "column": 1,
+        "end": 47758,
+        "end_column": 53,
+        "end_line": 903,
+        "line": 903,
+        "node": "Span",
+        "start": 47706
+      },
+      "subject": "NavigationHistory",
+      "text": "NavigationHistory contributes-to DocumentNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0590",
+      "line": 904,
+      "node": "Relation",
+      "object": "DocumentReferences",
+      "span": {
+        "column": 1,
+        "end": 47811,
+        "end_column": 53,
+        "end_line": 904,
+        "line": 904,
+        "node": "Span",
+        "start": 47759
+      },
+      "subject": "NavigationHistory",
+      "text": "NavigationHistory contributes-to DocumentReferences.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0601",
+      "line": 915,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 48358,
+        "end_column": 53,
+        "end_line": 915,
+        "line": 915,
+        "node": "Span",
+        "start": 48306
+      },
+      "subject": "PageComposition",
+      "text": "PageComposition contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0602",
+      "line": 916,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 48406,
+        "end_column": 48,
+        "end_line": 916,
+        "line": 916,
+        "node": "Span",
+        "start": 48359
+      },
+      "subject": "PageComposition",
+      "text": "PageComposition contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0603",
+      "line": 917,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 48455,
+        "end_column": 49,
+        "end_line": 917,
+        "line": 917,
+        "node": "Span",
+        "start": 48407
+      },
+      "subject": "PageComposition",
+      "text": "PageComposition contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0604",
+      "line": 918,
+      "node": "Relation",
+      "object": "PublishPages",
+      "span": {
+        "column": 1,
+        "end": 48495,
+        "end_column": 40,
+        "end_line": 918,
+        "line": 918,
+        "node": "Span",
+        "start": 48456
+      },
+      "subject": "PagedPublication",
+      "text": "PagedPublication supports PublishPages.",
+      "verb": "supports"
+    },
+    {
+      "id": "f0605",
+      "line": 919,
+      "node": "Relation",
+      "object": "ReadDocuments",
+      "span": {
+        "column": 1,
+        "end": 48536,
+        "end_column": 41,
+        "end_line": 919,
+        "line": 919,
+        "node": "Span",
+        "start": 48496
+      },
+      "subject": "PagedPublication",
+      "text": "PagedPublication supports ReadDocuments.",
+      "verb": "supports"
+    },
+    {
+      "id": "f0626",
+      "line": 940,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 49777,
+        "end_column": 42,
+        "end_line": 940,
+        "line": 940,
+        "node": "Span",
+        "start": 49736
+      },
+      "subject": "PdfExport",
+      "text": "PdfExport contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0627",
+      "line": 941,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 49820,
+        "end_column": 43,
+        "end_line": 941,
+        "line": 941,
+        "node": "Span",
+        "start": 49778
+      },
+      "subject": "PdfExport",
+      "text": "PdfExport contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0718",
+      "line": 1032,
+      "node": "Relation",
+      "object": "LivePreview",
+      "span": {
+        "column": 1,
+        "end": 56421,
+        "end_column": 44,
+        "end_line": 1032,
+        "line": 1032,
+        "node": "Span",
+        "start": 56378
+      },
+      "subject": "PreviewPipeline",
+      "text": "PreviewPipeline contributes-to LivePreview.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0719",
+      "line": 1033,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 56474,
+        "end_column": 53,
+        "end_line": 1033,
+        "line": 1033,
+        "node": "Span",
+        "start": 56422
+      },
+      "subject": "PreviewPipeline",
+      "text": "PreviewPipeline contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0720",
+      "line": 1034,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 56522,
+        "end_column": 48,
+        "end_line": 1034,
+        "line": 1034,
+        "node": "Span",
+        "start": 56475
+      },
+      "subject": "PreviewPipeline",
+      "text": "PreviewPipeline contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0721",
+      "line": 1035,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 56571,
+        "end_column": 49,
+        "end_line": 1035,
+        "line": 1035,
+        "node": "Span",
+        "start": 56523
+      },
+      "subject": "PreviewPipeline",
+      "text": "PreviewPipeline contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0741",
+      "line": 1055,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 58325,
+        "end_column": 58,
+        "end_line": 1055,
+        "line": 1055,
+        "node": "Span",
+        "start": 58268
+      },
+      "subject": "PreviewTextSelection",
+      "text": "PreviewTextSelection contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0742",
+      "line": 1056,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 58378,
+        "end_column": 53,
+        "end_line": 1056,
+        "line": 1056,
+        "node": "Span",
+        "start": 58326
+      },
+      "subject": "PreviewTextSelection",
+      "text": "PreviewTextSelection contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0786",
+      "line": 1100,
+      "node": "Relation",
+      "object": "BrowseSdpProject",
+      "span": {
+        "column": 1,
+        "end": 61171,
+        "end_column": 39,
+        "end_line": 1100,
+        "line": 1100,
+        "node": "Span",
+        "start": 61133
+      },
+      "subject": "ReaderAuthor",
+      "text": "ReaderAuthor pursues BrowseSdpProject.",
+      "verb": "pursues"
+    },
+    {
+      "id": "f0787",
+      "line": 1101,
+      "node": "Relation",
+      "object": "BrowseWorkspace",
+      "span": {
+        "column": 1,
+        "end": 61209,
+        "end_column": 38,
+        "end_line": 1101,
+        "line": 1101,
+        "node": "Span",
+        "start": 61172
+      },
+      "subject": "ReaderAuthor",
+      "text": "ReaderAuthor pursues BrowseWorkspace.",
+      "verb": "pursues"
+    },
+    {
+      "id": "f0788",
+      "line": 1102,
+      "node": "Relation",
+      "object": "ConfigurePreferences",
+      "span": {
+        "column": 1,
+        "end": 61252,
+        "end_column": 43,
+        "end_line": 1102,
+        "line": 1102,
+        "node": "Span",
+        "start": 61210
+      },
+      "subject": "ReaderAuthor",
+      "text": "ReaderAuthor pursues ConfigurePreferences.",
+      "verb": "pursues"
+    },
+    {
+      "id": "f0789",
+      "line": 1103,
+      "node": "Relation",
+      "object": "EditDocuments",
+      "span": {
+        "column": 1,
+        "end": 61288,
+        "end_column": 36,
+        "end_line": 1103,
+        "line": 1103,
+        "node": "Span",
+        "start": 61253
+      },
+      "subject": "ReaderAuthor",
+      "text": "ReaderAuthor pursues EditDocuments.",
+      "verb": "pursues"
+    },
+    {
+      "id": "f0790",
+      "line": 1104,
+      "node": "Relation",
+      "object": "NavigateDocuments",
+      "span": {
+        "column": 1,
+        "end": 61328,
+        "end_column": 40,
+        "end_line": 1104,
+        "line": 1104,
+        "node": "Span",
+        "start": 61289
+      },
+      "subject": "ReaderAuthor",
+      "text": "ReaderAuthor pursues NavigateDocuments.",
+      "verb": "pursues"
+    },
+    {
+      "id": "f0791",
+      "line": 1105,
+      "node": "Relation",
+      "object": "PublishPages",
+      "span": {
+        "column": 1,
+        "end": 61363,
+        "end_column": 35,
+        "end_line": 1105,
+        "line": 1105,
+        "node": "Span",
+        "start": 61329
+      },
+      "subject": "ReaderAuthor",
+      "text": "ReaderAuthor pursues PublishPages.",
+      "verb": "pursues"
+    },
+    {
+      "id": "f0792",
+      "line": 1106,
+      "node": "Relation",
+      "object": "ReadDiagrams",
+      "span": {
+        "column": 1,
+        "end": 61398,
+        "end_column": 35,
+        "end_line": 1106,
+        "line": 1106,
+        "node": "Span",
+        "start": 61364
+      },
+      "subject": "ReaderAuthor",
+      "text": "ReaderAuthor pursues ReadDiagrams.",
+      "verb": "pursues"
+    },
+    {
+      "id": "f0793",
+      "line": 1107,
+      "node": "Relation",
+      "object": "ReadDocuments",
+      "span": {
+        "column": 1,
+        "end": 61434,
+        "end_column": 36,
+        "end_line": 1107,
+        "line": 1107,
+        "node": "Span",
+        "start": 61399
+      },
+      "subject": "ReaderAuthor",
+      "text": "ReaderAuthor pursues ReadDocuments.",
+      "verb": "pursues"
+    },
+    {
+      "id": "f0794",
+      "line": 1108,
+      "node": "Relation",
+      "object": "ScrollDocuments",
+      "span": {
+        "column": 1,
+        "end": 61472,
+        "end_column": 38,
+        "end_line": 1108,
+        "line": 1108,
+        "node": "Span",
+        "start": 61435
+      },
+      "subject": "ReaderAuthor",
+      "text": "ReaderAuthor pursues ScrollDocuments.",
+      "verb": "pursues"
+    },
+    {
+      "id": "f0795",
+      "line": 1109,
+      "node": "Relation",
+      "object": "SelectGeneratedView",
+      "span": {
+        "column": 1,
+        "end": 61514,
+        "end_column": 42,
+        "end_line": 1109,
+        "line": 1109,
+        "node": "Span",
+        "start": 61473
+      },
+      "subject": "ReaderAuthor",
+      "text": "ReaderAuthor pursues SelectGeneratedView.",
+      "verb": "pursues"
+    },
+    {
+      "id": "f0796",
+      "line": 1110,
+      "node": "Relation",
+      "object": "UseFullscreen",
+      "span": {
+        "column": 1,
+        "end": 61550,
+        "end_column": 36,
+        "end_line": 1110,
+        "line": 1110,
+        "node": "Span",
+        "start": 61515
+      },
+      "subject": "ReaderAuthor",
+      "text": "ReaderAuthor pursues UseFullscreen.",
+      "verb": "pursues"
+    },
+    {
+      "id": "f0838",
+      "line": 1152,
+      "node": "Relation",
+      "object": "LivePreview",
+      "span": {
+        "column": 1,
+        "end": 64532,
+        "end_column": 41,
+        "end_line": 1152,
+        "line": 1152,
+        "node": "Span",
+        "start": 64492
+      },
+      "subject": "RenderLayout",
+      "text": "RenderLayout contributes-to LivePreview.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0839",
+      "line": 1153,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 64582,
+        "end_column": 50,
+        "end_line": 1153,
+        "line": 1153,
+        "node": "Span",
+        "start": 64533
+      },
+      "subject": "RenderLayout",
+      "text": "RenderLayout contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0840",
+      "line": 1154,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 64627,
+        "end_column": 45,
+        "end_line": 1154,
+        "line": 1154,
+        "node": "Span",
+        "start": 64583
+      },
+      "subject": "RenderLayout",
+      "text": "RenderLayout contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0841",
+      "line": 1155,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 64673,
+        "end_column": 46,
+        "end_line": 1155,
+        "line": 1155,
+        "node": "Span",
+        "start": 64628
+      },
+      "subject": "RenderLayout",
+      "text": "RenderLayout contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0842",
+      "line": 1156,
+      "node": "Relation",
+      "object": "SynchronizedScrolling",
+      "span": {
+        "column": 1,
+        "end": 64724,
+        "end_column": 51,
+        "end_line": 1156,
+        "line": 1156,
+        "node": "Span",
+        "start": 64674
+      },
+      "subject": "RenderLayout",
+      "text": "RenderLayout contributes-to SynchronizedScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0890",
+      "line": 1204,
+      "node": "Relation",
+      "object": "ConfigurableScrolling",
+      "span": {
+        "column": 1,
+        "end": 67736,
+        "end_column": 51,
+        "end_line": 1204,
+        "line": 1204,
+        "node": "Span",
+        "start": 67686
+      },
+      "subject": "ScrollMotion",
+      "text": "ScrollMotion contributes-to ConfigurableScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0891",
+      "line": 1205,
+      "node": "Relation",
+      "object": "SynchronizedScrolling",
+      "span": {
+        "column": 1,
+        "end": 67787,
+        "end_column": 51,
+        "end_line": 1205,
+        "line": 1205,
+        "node": "Span",
+        "start": 67737
+      },
+      "subject": "ScrollMotion",
+      "text": "ScrollMotion contributes-to SynchronizedScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0893",
+      "line": 1207,
+      "node": "Relation",
+      "object": "BrowseSdpProject",
+      "span": {
+        "column": 1,
+        "end": 67910,
+        "end_column": 54,
+        "end_line": 1207,
+        "line": 1207,
+        "node": "Span",
+        "start": 67857
+      },
+      "subject": "SdpProjectNavigation",
+      "text": "SdpProjectNavigation contributes-to BrowseSdpProject.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0908",
+      "line": 1222,
+      "node": "Relation",
+      "object": "ChapterNavigation",
+      "span": {
+        "column": 1,
+        "end": 68648,
+        "end_column": 54,
+        "end_line": 1222,
+        "line": 1222,
+        "node": "Span",
+        "start": 68595
+      },
+      "subject": "SourceAnchorMapping",
+      "text": "SourceAnchorMapping contributes-to ChapterNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0909",
+      "line": 1223,
+      "node": "Relation",
+      "object": "ConfigurableScrolling",
+      "span": {
+        "column": 1,
+        "end": 68706,
+        "end_column": 58,
+        "end_line": 1223,
+        "line": 1223,
+        "node": "Span",
+        "start": 68649
+      },
+      "subject": "SourceAnchorMapping",
+      "text": "SourceAnchorMapping contributes-to ConfigurableScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0910",
+      "line": 1224,
+      "node": "Relation",
+      "object": "DocumentNavigation",
+      "span": {
+        "column": 1,
+        "end": 68761,
+        "end_column": 55,
+        "end_line": 1224,
+        "line": 1224,
+        "node": "Span",
+        "start": 68707
+      },
+      "subject": "SourceAnchorMapping",
+      "text": "SourceAnchorMapping contributes-to DocumentNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0911",
+      "line": 1225,
+      "node": "Relation",
+      "object": "DocumentReferences",
+      "span": {
+        "column": 1,
+        "end": 68816,
+        "end_column": 55,
+        "end_line": 1225,
+        "line": 1225,
+        "node": "Span",
+        "start": 68762
+      },
+      "subject": "SourceAnchorMapping",
+      "text": "SourceAnchorMapping contributes-to DocumentReferences.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0912",
+      "line": 1226,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 68869,
+        "end_column": 53,
+        "end_line": 1226,
+        "line": 1226,
+        "node": "Span",
+        "start": 68817
+      },
+      "subject": "SourceAnchorMapping",
+      "text": "SourceAnchorMapping contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0913",
+      "line": 1227,
+      "node": "Relation",
+      "object": "SynchronizedScrolling",
+      "span": {
+        "column": 1,
+        "end": 68927,
+        "end_column": 58,
+        "end_line": 1227,
+        "line": 1227,
+        "node": "Span",
+        "start": 68870
+      },
+      "subject": "SourceAnchorMapping",
+      "text": "SourceAnchorMapping contributes-to SynchronizedScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0928",
+      "line": 1242,
+      "node": "Relation",
+      "object": "ScrollDocuments",
+      "span": {
+        "column": 1,
+        "end": 69739,
+        "end_column": 48,
+        "end_line": 1242,
+        "line": 1242,
+        "node": "Span",
+        "start": 69692
+      },
+      "subject": "SynchronizedScrolling",
+      "text": "SynchronizedScrolling supports ScrollDocuments.",
+      "verb": "supports"
+    },
+    {
+      "id": "f0937",
+      "line": 1251,
+      "node": "Relation",
+      "object": "ConfigurableScrolling",
+      "span": {
+        "column": 1,
+        "end": 70119,
+        "end_column": 50,
+        "end_line": 1251,
+        "line": 1251,
+        "node": "Span",
+        "start": 70070
+      },
+      "subject": "TextEditing",
+      "text": "TextEditing contributes-to ConfigurableScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0938",
+      "line": 1252,
+      "node": "Relation",
+      "object": "LivePreview",
+      "span": {
+        "column": 1,
+        "end": 70159,
+        "end_column": 40,
+        "end_line": 1252,
+        "line": 1252,
+        "node": "Span",
+        "start": 70120
+      },
+      "subject": "TextEditing",
+      "text": "TextEditing contributes-to LivePreview.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0947",
+      "line": 1261,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 70667,
+        "end_column": 58,
+        "end_line": 1261,
+        "line": 1261,
+        "node": "Span",
+        "start": 70610
+      },
+      "subject": "TypographyAndDrawing",
+      "text": "TypographyAndDrawing contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0948",
+      "line": 1262,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 70720,
+        "end_column": 53,
+        "end_line": 1262,
+        "line": 1262,
+        "node": "Span",
+        "start": 70668
+      },
+      "subject": "TypographyAndDrawing",
+      "text": "TypographyAndDrawing contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0949",
+      "line": 1263,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 70774,
+        "end_column": 54,
+        "end_line": 1263,
+        "line": 1263,
+        "node": "Span",
+        "start": 70721
+      },
+      "subject": "TypographyAndDrawing",
+      "text": "TypographyAndDrawing contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0997",
+      "line": 1311,
+      "node": "Relation",
+      "object": "WorkPathNavigation",
+      "span": {
+        "column": 1,
+        "end": 73760,
+        "end_column": 51,
+        "end_line": 1311,
+        "line": 1311,
+        "node": "Span",
+        "start": 73710
+      },
+      "subject": "WorkPathHistory",
+      "text": "WorkPathHistory contributes-to WorkPathNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0998",
+      "line": 1312,
+      "node": "Relation",
+      "object": "BrowseWorkspace",
+      "span": {
+        "column": 1,
+        "end": 73805,
+        "end_column": 45,
+        "end_line": 1312,
+        "line": 1312,
+        "node": "Span",
+        "start": 73761
+      },
+      "subject": "WorkPathNavigation",
+      "text": "WorkPathNavigation supports BrowseWorkspace.",
+      "verb": "supports"
+    },
+    {
+      "id": "f1014",
+      "line": 1328,
+      "node": "Relation",
+      "object": "ChapterNavigation",
+      "span": {
+        "column": 1,
+        "end": 74853,
+        "end_column": 52,
+        "end_line": 1328,
+        "line": 1328,
+        "node": "Span",
+        "start": 74802
+      },
+      "subject": "WorkspaceControls",
+      "text": "WorkspaceControls contributes-to ChapterNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f1015",
+      "line": 1329,
+      "node": "Relation",
+      "object": "ConfigurableScrolling",
+      "span": {
+        "column": 1,
+        "end": 74909,
+        "end_column": 56,
+        "end_line": 1329,
+        "line": 1329,
+        "node": "Span",
+        "start": 74854
+      },
+      "subject": "WorkspaceControls",
+      "text": "WorkspaceControls contributes-to ConfigurableScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f1016",
+      "line": 1330,
+      "node": "Relation",
+      "object": "DocumentNavigation",
+      "span": {
+        "column": 1,
+        "end": 74962,
+        "end_column": 53,
+        "end_line": 1330,
+        "line": 1330,
+        "node": "Span",
+        "start": 74910
+      },
+      "subject": "WorkspaceControls",
+      "text": "WorkspaceControls contributes-to DocumentNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f1017",
+      "line": 1331,
+      "node": "Relation",
+      "object": "DocumentReferences",
+      "span": {
+        "column": 1,
+        "end": 75015,
+        "end_column": 53,
+        "end_line": 1331,
+        "line": 1331,
+        "node": "Span",
+        "start": 74963
+      },
+      "subject": "WorkspaceControls",
+      "text": "WorkspaceControls contributes-to DocumentReferences.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f1018",
+      "line": 1332,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 75070,
+        "end_column": 55,
+        "end_line": 1332,
+        "line": 1332,
+        "node": "Span",
+        "start": 75016
+      },
+      "subject": "WorkspaceControls",
+      "text": "WorkspaceControls contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f1019",
+      "line": 1333,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 75121,
+        "end_column": 51,
+        "end_line": 1333,
+        "line": 1333,
+        "node": "Span",
+        "start": 75071
+      },
+      "subject": "WorkspaceControls",
+      "text": "WorkspaceControls contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f1020",
+      "line": 1334,
+      "node": "Relation",
+      "object": "SynchronizedScrolling",
+      "span": {
+        "column": 1,
+        "end": 75177,
+        "end_column": 56,
+        "end_line": 1334,
+        "line": 1334,
+        "node": "Span",
+        "start": 75122
+      },
+      "subject": "WorkspaceControls",
+      "text": "WorkspaceControls contributes-to SynchronizedScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f1021",
+      "line": 1335,
+      "node": "Relation",
+      "object": "UseFullscreen",
+      "span": {
+        "column": 1,
+        "end": 75225,
+        "end_column": 48,
+        "end_line": 1335,
+        "line": 1335,
+        "node": "Span",
+        "start": 75178
+      },
+      "subject": "WorkspaceControls",
+      "text": "WorkspaceControls contributes-to UseFullscreen.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f1022",
+      "line": 1336,
+      "node": "Relation",
+      "object": "WorkPathNavigation",
+      "span": {
+        "column": 1,
+        "end": 75278,
+        "end_column": 53,
+        "end_line": 1336,
+        "line": 1336,
+        "node": "Span",
+        "start": 75226
+      },
+      "subject": "WorkspaceControls",
+      "text": "WorkspaceControls contributes-to WorkPathNavigation.",
+      "verb": "contributes-to"
+    }
+  ],
+  "model_gaps": [],
+  "outputs": {
+    "delivery.txt": "6403203dd5a0867eb14d104ee8a73730bd72dd9ad92e78d996a6dba0a5dcfc01",
+    "diagrams/VP01-overview.mmd": "6acd1aad0d26f248e102b6776740ca7df12f93596dc032ad98ef7fa082c3a476",
+    "entry.md": "019e4227dc7b0b7525ab47399776b479ded51c77fe9418ebaa24b7db3dbf0f71",
+    "sdptool.json": "d4dbb8f53c00b668b533e8715e367332c80a5e9a88debe8929761b8fa7fc5689",
+    "selection.json": "84a9de31a28a3e4eb887359d60361894f4e7f55ae434460fd05fcb8ad6db87de"
+  }
+}

@@ -1,0 +1,51 @@
+flowchart LR
+    n_Application["Application (unit)"]
+    n_DiagramInterpreterPort("DiagramInterpreterPort (interface)")
+    n_DiagramLayoutPort("DiagramLayoutPort (interface)")
+    n_DocumentIndexService["DocumentIndexService (unit)"]
+    n_Documents["Documents (unit)"]
+    n_ExternalOpenProtocol("ExternalOpenProtocol (interface)")
+    n_FileStorePort("FileStorePort (interface)")
+    n_GeneratedViews["GeneratedViews (unit)"]
+    n_Interpreter["Interpreter (unit)"]
+    n_InterpreterPort("InterpreterPort (interface)")
+    n_LeaseReleaseProtocol("LeaseReleaseProtocol (interface)")
+    n_Preferences["Preferences (unit)"]
+    n_PreferencesStorePort("PreferencesStorePort (interface)")
+    n_Preview["Preview (unit)"]
+    n_Publication["Publication (unit)"]
+    n_RenderHostPort("RenderHostPort (interface)")
+    n_Renderer["Renderer (unit)"]
+    n_RendererPort("RendererPort (interface)")
+    n_SchedulerPort("SchedulerPort (interface)")
+    n_SdpProjects["SdpProjects (unit)"]
+    n_SdpToolProtocol("SdpToolProtocol (interface)")
+    n_TextMetricsPort("TextMetricsPort (interface)")
+    n_ViewGenerationProtocol("ViewGenerationProtocol (interface)")
+    n_Viewport["Viewport (unit)"]
+    n_VisualResources["VisualResources (unit)"]
+    n_WindowDeliveryProtocol("WindowDeliveryProtocol (interface)")
+    n_Application -.->|consumes| n_ExternalOpenProtocol
+    n_DocumentIndexService -.->|consumes| n_FileStorePort
+    n_DocumentIndexService -.->|consumes| n_InterpreterPort
+    n_Documents -.->|consumes| n_FileStorePort
+    n_GeneratedViews -.->|consumes| n_LeaseReleaseProtocol
+    n_GeneratedViews -.->|consumes| n_SchedulerPort
+    n_GeneratedViews -.->|consumes| n_ViewGenerationProtocol
+    n_GeneratedViews -.->|consumes| n_WindowDeliveryProtocol
+    n_Interpreter -.->|consumes| n_DiagramInterpreterPort
+    n_Preferences -.->|consumes| n_PreferencesStorePort
+    n_Preview -.->|consumes| n_InterpreterPort
+    n_Preview -.->|consumes| n_RenderHostPort
+    n_Preview -.->|consumes| n_RendererPort
+    n_Preview -.->|consumes| n_SchedulerPort
+    n_Publication -.->|consumes| n_InterpreterPort
+    n_Publication -.->|consumes| n_RendererPort
+    n_Publication -.->|consumes| n_TextMetricsPort
+    n_Renderer -.->|consumes| n_TextMetricsPort
+    n_SdpProjects -.->|consumes| n_SchedulerPort
+    n_SdpProjects -.->|consumes| n_SdpToolProtocol
+    n_Viewport -.->|consumes| n_RenderHostPort
+    n_Viewport -.->|consumes| n_SchedulerPort
+    n_VisualResources -.->|consumes| n_DiagramLayoutPort
+    n_VisualResources -.->|consumes| n_TextMetricsPort

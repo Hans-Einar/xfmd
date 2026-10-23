@@ -1,0 +1,57 @@
+[
+  {
+    "command": [
+      "python3",
+      "/home/warloc/git/xfmd-sdl-navigation/SDP/05--Implementation/XFMD-Modeling/verify_model.py"
+    ],
+    "exitCode": 0,
+    "stdout": "PASS: 37 blueprint mappings/owners/contributions, 10 current use cases,\n71 requirement IDs, 22 declared scenarios, five SVG compositions,\n281 source hashes and 243 generated outputs; no runtime or independent-review claim.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "/home/warloc/git/xfmd-sdl-navigation/SDP/05--Implementation/XFMD-Modeling/verify_pilot.py"
+    ],
+    "exitCode": 0,
+    "stdout": "PASS: 71 requirement IDs assigned, 17 blueprint identities linked;\nthree well-formed SVG states and current source/output hashes; no behavioral-completeness claim\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "SDP/KanBan/verify_board.py"
+    ],
+    "exitCode": 0,
+    "stdout": "PASS: 20 cards, 85 card events, 9 management records; schemas, replay, CardState, placement and index\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "tools/validate_blueprints.py"
+    ],
+    "exitCode": 1,
+    "stdout": "",
+    "stderr": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M4/README.md: broken/outside local link: checks.json\nFAILED: 1 error(s)\n"
+  },
+  {
+    "command": [
+      "python3",
+      "tools/check_blueprint_symbols.py"
+    ],
+    "exitCode": 0,
+    "stdout": "OK: 285 implemented plumbing callees found; caller semantics require review\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+]

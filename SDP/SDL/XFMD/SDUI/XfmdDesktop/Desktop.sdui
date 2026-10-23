@@ -1,0 +1,60 @@
+sdui 0.2;
+# Conceptual native XFMD composition. Buttons are unbound; document areas are illustrative.
+toolbar = <button("Sidebar"), button("Open"), button("Save"), button("Editor"), button("Split"), button("Preview"), button("Back"), button("Forward"), button("Light / Dark")> {gap=0.01};
+path = <"Document", input("Document path", value="/project/README.md") {x=1fr}> {x=fill};
+sidebar = ["### Files / Index"; <button("Reload"), button("Markdown"), button("Up"), button("Open")>; """**Folder tree**
+
+/project/docs
+
+/project/README.md
+
+**Folders / Files / Favorites**
+
+Favorites selected: docs; README.md.
+
+Right-click actions belong to the native UI.
+"""] {x=1.5fr, padding=0.015};
+editor = ["### Markdown source area"; """README.md
+
+Text editing area.
+
+Static representation.
+
+Open, edit and save belong to native XFMD.
+"""] {x=2fr, y=1fr, padding=0.015};
+preview = ["### Markdown preview area"; """Rendered Markdown area.
+
+Static representation.
+
+Images, formulas and diagrams
+
+are represented by this region.
+"""] {x=2fr, y=1fr, padding=0.015};
+SplitWorkspace = [toolbar; path; [sidebar, editor, preview] {x=fill, y=1fr}; "Concept: split mode. Document areas and toolbar actions are illustrative."] {x=fill, y=fill, font=14, padding=0.015, gap=0.01};
+EditorWorkspace = [toolbar; path; [sidebar, editor] {x=fill, y=1fr}; "Concept: editor mode. Source ownership remains in DocumentSession."] {x=fill, y=fill, font=14, padding=0.015, gap=0.01};
+PreviewWorkspace = [toolbar; path; [sidebar, preview] {x=fill, y=1fr}; "Concept: preview mode. The native document remains editable through its editor mode."] {x=fill, y=fill, font=14, padding=0.015, gap=0.01};
+PreferencesConcept = ["# Preferences - conceptual responsibility view"; """The native dialog contains appearance, reading, scrolling, page and browser settings.
+
+Controls below illustrate typed values using today's input widget. They are not a working native dialog or validation binding.
+"""; <"Browser program", input("Program", value="firefox") {x=1fr}> {x=fill}; <"Page margin (mm)", input("Margin", value="20") {x=1fr}> {x=fill}; <"Scroll speed", input("Speed", value="1.0") {x=1fr}> {x=fill}; <button("Apply"), button("Cancel")>; "Preferences owns draft validation and persistence; the UI restores live appearance on cancellation."] {x=fill, y=fill, font=14, padding=0.02, gap=0.02};
+PublicationConcept = ["# Page preview and PDF publication"; preview; """Export uses a frozen source snapshot, paper profile and font identity.
+
+Preview and PDF reuse layout and typography. Display zoom does not change paper geometry.
+
+Export success does not mark the Markdown document saved.
+"""; <button("Export PDF"), button("Cancel export")>; "Concept only: no PDF is written by this prototype."] {x=fill, y=fill, font=14, padding=0.02, gap=0.02};
+
+# SDP increment: descriptive regions, not native bindings or executable tool requests.
+sdpSidebar = ["### Files / Index / SDP"; button("Refresh"); """**KanBan / SDL / SDUI**
+
+KanBan: status folders, cards and Ref notes.
+
+SDL: source models, collections, viewpoints and selected diagrams.
+
+SDUI: source files and explicit frame previews.
+
+Expand a branch to inspect it. Select a view to generate its document.
+
+Invalid sources remain visible with diagnostics.
+"""] {x=1.5fr, padding=0.015};
+SdpProjectWorkspace = [toolbar; path; [sdpSidebar, preview] {x=fill, y=1fr}; "Concept: producer-derived navigation; late results must preserve changed/dirty documents."] {x=fill, y=fill, font=14, padding=0.015, gap=0.01};

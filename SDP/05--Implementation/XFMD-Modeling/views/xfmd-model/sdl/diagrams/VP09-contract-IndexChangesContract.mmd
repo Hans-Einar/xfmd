@@ -1,0 +1,6 @@
+flowchart LR
+    n_CheckReferenceGeneration["CheckReferenceGeneration (message)"]
+    n_IndexChangesContract["IndexChangesContract (contract)"]
+    n_PublishReferenceHeadings["PublishReferenceHeadings (message)"]
+    n_IndexChangesContract -->|permits| n_CheckReferenceGeneration
+    n_IndexChangesContract -->|permits| n_PublishReferenceHeadings

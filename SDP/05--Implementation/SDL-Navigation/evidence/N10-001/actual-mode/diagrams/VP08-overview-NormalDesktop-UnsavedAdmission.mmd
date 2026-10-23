@@ -1,0 +1,8 @@
+flowchart LR
+    n_Documents["Documents (unit)"]
+    n_NativeShell["NativeShell (unit)"]
+    n_UnsavedAdmission["UnsavedAdmission (channel)"]
+    n_UnsavedAdmission -->|receiver| n_Documents
+    n_Documents -->|sender| n_UnsavedAdmission
+    n_UnsavedAdmission -->|receiver| n_NativeShell
+    n_NativeShell -->|sender| n_UnsavedAdmission

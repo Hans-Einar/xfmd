@@ -1,0 +1,1 @@
+sdui 0.2; ref: domain "missing.sdl"; page=[go=button("Open",callback=domain.document.@open)];

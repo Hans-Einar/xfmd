@@ -1,0 +1,8 @@
+flowchart LR
+    n_Application["Application (unit)"]
+    n_Navigation["Navigation (unit)"]
+    n_NavigationCalls["NavigationCalls (channel)"]
+    n_NavigationCalls -->|receiver| n_Application
+    n_Application -->|sender| n_NavigationCalls
+    n_NavigationCalls -->|receiver| n_Navigation
+    n_Navigation -->|sender| n_NavigationCalls

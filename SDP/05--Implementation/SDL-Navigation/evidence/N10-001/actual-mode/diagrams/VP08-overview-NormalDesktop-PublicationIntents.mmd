@@ -1,0 +1,6 @@
+flowchart LR
+    n_NativeShell["NativeShell (unit)"]
+    n_Publication["Publication (unit)"]
+    n_PublicationIntents["PublicationIntents (channel)"]
+    n_NativeShell -->|sender| n_PublicationIntents
+    n_PublicationIntents -->|receiver| n_Publication

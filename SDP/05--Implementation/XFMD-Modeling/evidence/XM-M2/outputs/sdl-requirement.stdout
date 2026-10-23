@@ -1,0 +1,19 @@
+{
+  "diagnostics": [
+    {
+      "code": "UNSUPPORTED_SYNTAX",
+      "message": "Expected an ASCII identifier matching [A-Z][A-Za-z0-9]*",
+      "node": "Diagnostic",
+      "span": {
+        "column": 1,
+        "end": 45,
+        "end_column": 12,
+        "end_line": 2,
+        "line": 2,
+        "node": "Span",
+        "start": 34
+      }
+    }
+  ],
+  "valid": false
+}

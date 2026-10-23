@@ -1,0 +1,12 @@
+flowchart LR
+    n_ApplicationPreferences["ApplicationPreferences (functionality)"]
+    n_DocumentIndex["DocumentIndex (functionality)"]
+    n_DocumentReferences["DocumentReferences (feature)"]
+    n_NavigationHistory["NavigationHistory (functionality)"]
+    n_SourceAnchorMapping["SourceAnchorMapping (functionality)"]
+    n_WorkspaceControls["WorkspaceControls (functionality)"]
+    n_ApplicationPreferences -->|contributes-to| n_DocumentReferences
+    n_DocumentIndex -->|contributes-to| n_DocumentReferences
+    n_NavigationHistory -->|contributes-to| n_DocumentReferences
+    n_SourceAnchorMapping -->|contributes-to| n_DocumentReferences
+    n_WorkspaceControls -->|contributes-to| n_DocumentReferences

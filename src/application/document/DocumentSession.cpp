@@ -5,7 +5,8 @@ void DocumentSession::replace(LoadedDocument loaded) {
   current = {{current.token.document + 1, 0},
              std::move(loaded.text),
              std::move(loaded.path),
-             loaded.plainText};
+             loaded.plainText,
+             loaded.standaloneMermaid};
   baseline = current.text;
   file = loaded.identity;
 }
@@ -25,10 +26,12 @@ void DocumentSession::markSaved(const SourceSnapshot& saved, const SavedDocument
   if (saved.token.document != current.token.document)
     return;
   baseline = saved.text;
-  if (current.plainText != InputPolicy::plainText(result.path))
+  if (current.plainText != InputPolicy::plainText(result.path) ||
+      current.standaloneMermaid != InputPolicy::mermaid(result.path))
     ++current.token.revision;
   current.path = result.path;
   current.plainText = InputPolicy::plainText(result.path);
+  current.standaloneMermaid = InputPolicy::mermaid(result.path);
   file = result.identity;
 }
 } // namespace xfmd

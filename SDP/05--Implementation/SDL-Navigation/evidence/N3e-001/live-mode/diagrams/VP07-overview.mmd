@@ -1,0 +1,43 @@
+flowchart LR
+    n_Application["Application (unit)"]
+    n_DocumentIndexService["DocumentIndexService (unit) | owns: F01 F04"]
+    n_DocumentStorage["DocumentStorage (unit) | owns: F03 F06"]
+    n_Documents["Documents (unit) | owns: F02 F03 F05 F06 F08"]
+    n_EventLoop["EventLoop (unit) | owns: F05"]
+    n_ExternalLauncher["ExternalLauncher (unit)"]
+    n_ExternalViewBroker["ExternalViewBroker (unit)"]
+    n_ExternalViewGenerator["ExternalViewGenerator (unit)"]
+    n_GeneratedViews["GeneratedViews (unit)"]
+    n_Identity["Identity (unit)"]
+    n_Interpreter["Interpreter (unit) | owns: F05 F06 F07 F08"]
+    n_NativeShell["NativeShell (unit) | owns: F01 F02 F03 F04 F05 F06 F07 F08 F09 F10"]
+    n_Navigation["Navigation (unit) | owns: F01 F03 F04"]
+    n_Preferences["Preferences (unit) | owns: F02 F03 F04 F08"]
+    n_Preview["Preview (unit) | owns: F05 F06 F07 F08"]
+    n_Publication["Publication (unit) | owns: F07 F08"]
+    n_Renderer["Renderer (unit) | owns: F05 F06 F07 F08 F09"]
+    n_SdpProjects["SdpProjects (unit)"]
+    n_Typography["Typography (unit) | owns: F06 F07 F08"]
+    n_Viewport["Viewport (unit) | owns: F01 F02 F03 F04 F08 F09"]
+    n_VisualResources["VisualResources (unit) | owns: F06 F07"]
+    n_Workspace["Workspace (unit) | owns: F10"]
+    n_XfmdDesktop["XfmdDesktop (container) | allocated-to: F01 F02 F03 F04 F05 F06 F07 F08 F09 F10"]
+    n_Application -->|contains| n_DocumentIndexService
+    n_Application -->|contains| n_DocumentStorage
+    n_Application -->|contains| n_Documents
+    n_Application -->|contains| n_EventLoop
+    n_Application -->|contains| n_GeneratedViews
+    n_Application -->|contains| n_Identity
+    n_Application -->|contains| n_NativeShell
+    n_Application -->|contains| n_Navigation
+    n_Application -->|contains| n_Preferences
+    n_Application -->|contains| n_Preview
+    n_Application -->|contains| n_Publication
+    n_Application -->|contains| n_SdpProjects
+    n_Application -->|contains| n_Typography
+    n_Application -->|contains| n_Viewport
+    n_Application -->|contains| n_VisualResources
+    n_Application -->|contains| n_Workspace
+    n_XfmdDesktop -->|contains| n_Application
+    n_XfmdDesktop -->|contains| n_Interpreter
+    n_XfmdDesktop -->|contains| n_Renderer

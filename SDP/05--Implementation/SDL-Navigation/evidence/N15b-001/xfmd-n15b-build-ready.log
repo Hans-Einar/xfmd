@@ -1,0 +1,11 @@
+[0/2] Re-checking globbed directories...
+[1/62] cd /home/warloc/git/xfmd-sdl-navigation/build-ui && /usr/bin/python3.12 /home/warloc/git/xfmd-sdl-navigation/tools/build_identity.py --source /home/warloc/git/xfmd-sdl-navigation --output /home/warloc/git/xfmd-sdl-navigation/build-ui/generated
+[2/60] Building CXX object CMakeFiles/SdpDeferredGuiTest.dir/tests/gui/SdpDeferredGuiTest.cpp.o
+FAILED: CMakeFiles/SdpDeferredGuiTest.dir/tests/gui/SdpDeferredGuiTest.cpp.o 
+/usr/bin/c++  -I/home/warloc/git/xfmd-sdl-navigation/tests -I/home/warloc/git/xfmd-sdl-navigation/src -isystem /usr/include/pango-1.0 -isystem /usr/include/cairo -isystem /usr/include/freetype2 -isystem /usr/include/harfbuzz -isystem /usr/include/glib-2.0 -isystem /usr/lib64/glib-2.0/include -isystem /usr/include/libmount -isystem /usr/include/blkid -isystem /usr/include/fribidi -isystem /usr/include/libxml2 -isystem /usr/include/pixman-1 -isystem /usr/include/libpng16 -isystem /usr/include/sysprof-6 -isystem /usr/include/fox-1.6 -O3 -DNDEBUG -std=c++17 -Wall -Wextra -Wpedantic -DWITH_GZFILEOP -pthread -MD -MT CMakeFiles/SdpDeferredGuiTest.dir/tests/gui/SdpDeferredGuiTest.cpp.o -MF CMakeFiles/SdpDeferredGuiTest.dir/tests/gui/SdpDeferredGuiTest.cpp.o.d -o CMakeFiles/SdpDeferredGuiTest.dir/tests/gui/SdpDeferredGuiTest.cpp.o -c /home/warloc/git/xfmd-sdl-navigation/tests/gui/SdpDeferredGuiTest.cpp
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/SdpDeferredGuiTest.cpp: In function ‘void run()’:
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/SdpDeferredGuiTest.cpp:86:20: error: ‘XK_Return’ was not declared in this scope
+   86 |     nativeKey(tree,XK_Return);
+      |                    ^~~~~~~~~
+[3/60] Building CXX object CMakeFiles/xfmd_application.dir/src/application/sdp/SdpNavigation.cpp.o
+ninja: build stopped: subcommand failed.

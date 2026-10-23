@@ -1,0 +1,8 @@
+flowchart LR
+    n_GeneratedViews["GeneratedViews (unit)"]
+    n_NativeShell["NativeShell (unit)"]
+    n_PresentationEvents["PresentationEvents (channel)"]
+    n_Preview["Preview (unit)"]
+    n_GeneratedViews -->|sender| n_PresentationEvents
+    n_PresentationEvents -->|receiver| n_NativeShell
+    n_Preview -->|sender| n_PresentationEvents

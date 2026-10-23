@@ -1,0 +1,6 @@
+flowchart LR
+    n_Documents["Documents (unit)"]
+    n_EditIntents["EditIntents (channel)"]
+    n_NativeShell["NativeShell (unit)"]
+    n_EditIntents -->|receiver| n_Documents
+    n_NativeShell -->|sender| n_EditIntents

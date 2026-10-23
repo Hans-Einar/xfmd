@@ -18,9 +18,15 @@ if DEST.exists():
     if not marker.exists() or marker.read_text() != stamp:
         raise SystemExit('Mermaid pin changed: preserve/move existing .deps/mermaid-rs-renderer before bootstrap')
 else:
-    data = urllib.request.urlopen(
-        'https://codeload.github.com/' + source['repository'] + '/tar.gz/' + PIN,
-        timeout=60).read()
+    if 'archive' in source:
+        archive_path = (ROOT / source['archive']).resolve()
+        if not archive_path.is_relative_to(ROOT):
+            raise SystemExit('Mermaid archive must be inside the repository')
+        data = archive_path.read_bytes()
+    else:
+        data = urllib.request.urlopen(
+            'https://codeload.github.com/' + source['repository'] + '/tar.gz/' + PIN,
+            timeout=60).read()
     if hashlib.sha256(data).hexdigest() != source['sha256']:
         raise SystemExit('Mermaid source checksum mismatch')
     DEST.parent.mkdir(exist_ok=True)

@@ -1,0 +1,8 @@
+python3 tools/validate_blueprints.py
+PASS: 38 blueprints, 75 requirements; metadata, matrix, plumbing and local file links checked.
+python3 tools/check_blueprint_symbols.py
+PASS: 307 implemented plumbing callees found; caller semantics require review.
+python3 tools/check_layers.py
+PASS: pure-layer include boundaries.
+PASS: 29 cards, 138 card events, 16 management records; schemas, replay, CardState, placement and index
+PASS: git diff --check; new evidence/design local links exist; final source hashes match candidate capture.

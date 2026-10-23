@@ -1,0 +1,9 @@
+flowchart LR
+    n_Preview["Preview (unit)"]
+    n_Publication["Publication (unit)"]
+    n_ResourcePreparation["ResourcePreparation (channel)"]
+    n_VisualResources["VisualResources (unit)"]
+    n_Preview -->|sender| n_ResourcePreparation
+    n_Publication -->|sender| n_ResourcePreparation
+    n_ResourcePreparation -->|receiver| n_VisualResources
+    n_VisualResources -->|sender| n_ResourcePreparation

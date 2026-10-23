@@ -1,0 +1,10 @@
+flowchart LR
+    n_EventLoop["EventLoop (unit)"]
+    n_GeneratedViews["GeneratedViews (unit)"]
+    n_Preview["Preview (unit)"]
+    n_ScheduledWork["ScheduledWork (channel)"]
+    n_ScheduledWork -->|receiver| n_EventLoop
+    n_EventLoop -->|sender| n_ScheduledWork
+    n_ScheduledWork -->|receiver| n_GeneratedViews
+    n_ScheduledWork -->|receiver| n_Preview
+    n_Preview -->|sender| n_ScheduledWork

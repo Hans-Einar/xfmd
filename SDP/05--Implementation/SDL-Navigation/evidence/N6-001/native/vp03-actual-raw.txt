@@ -1,0 +1,105 @@
+VP03 — Responsibilities and
+capabilities across the architecture
+Revision:
+e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007.
+owns, realizes and provides. Capability is not Feature.
+Responsibilities and capabilities across the
+architecture
+contains
+contains
+contains
+contains
+contains
+contains
+contains
+contains
+contains contains
+contains
+contains
+contains
+contains
+contains
+contains
+contains
+contains
+contains
+Application (unit)
+DocumentIndexService (unit) | owns: R06
+DocumentStorage (unit) | owns: R13
+Documents (unit) | owns: R07 R25
+EventLoop (unit) | owns: R09
+ExternalLauncher (unit) ExternalViewBroker (unit) ExternalViewGenerator (unit)
+GeneratedViews (unit) | owns: R12
+Identity (unit) | owns: R01 R03
+Interpreter (unit) | owns: R14 R15
+NativeShell (unit) | owns: R11 R28
+Navigation (unit) | owns: R16
+Preferences (unit) | owns: R02
+Preview (unit) | owns: R19 R20
+Publication (unit) | owns: R18
+Renderer (unit) | owns: R04 R17 R21
+SdpProjects (unit) | owns: R23
+Typography (unit) | owns: R26
+Viewport (unit) | owns: R22 R24
+VisualResources (unit) | owns: R05 R08
+Workspace (unit) | owns: R10 R27
+XfmdDesktop (container)
+Source facts: f0019, f0020, f0021, f0022, f0023, f0024, f0025, f0026, f0027, f0028,
+f0029, f0030, f0031, f0032, f0033, f0034, f0181, f0222, f0232, f0233, f0276, f0424,
+f0464, f0465, f0484, f0485, f0544, f0545, f0576, f0652, f0687, f0688, f0747, f0844,
+f0845, f0846, f0896, f0944, f0965, f0966, f0983, f0984, f0999, f1000, f1031, f1032,
+f1033.
+Declarations: Application, DocumentIndexService, DocumentStorage, Documents,
+EventLoop, ExternalLauncher, ExternalViewBroker, ExternalViewGenerator,
+GeneratedViews, Identity, Interpreter, NativeShell, Navigation, Preferences, Preview,
+Publication, Renderer, SdpProjects, Typography, Viewport, VisualResources,
+Workspace, XfmdDesktop.
+Scope and notation
+The complete logical architecture uses contains edges, including isolated components.
+R keys identify responsibilities on their immediate owners (owns). C keys identify
+capabilities: contributes summarizes an owns + realizes path; provides records an
+explicit offered capability. These annotations are not new SDL relations. Realizes is a
+contribution, not proof of complete or verified realization. Ownership does not imply
+provision, and provision does not imply realization. Rounded standalone capabilities
+have neither a represented contributor nor provider. Keys are sorted within this
+snapshot. Features and runtime allocation belong to other viewpoints.
+Responsibility register
+Key Functionality Immediate Capability Source facts
+owner contributions
+R01 ApplicationIdentity Identity Not specified f0464
+R02 ApplicationPreferenc Preferences Not specified f0652
+es
+R03 BuildIdentity Identity Not specified f0465
+R04 DiagramLayout Renderer Not specified f0844
+R05 DiagramPreparation VisualResources Not specified f0983
+R06 DocumentIndex DocumentIndexSe Not specified f0181
+rvice
+R07 DocumentSession Documents Not specified f0232
+R08 EmbeddedVisuals VisualResources Not specified f0984
+R09 EventScheduling EventLoop Not specified f0276
+R10 FilteredFileTree Workspace Not specified f0999
+R11 FoxPresentation NativeShell Not specified f0544
+R12 GeneratedDocument GeneratedViews Not specified f0424
+Navigation
+R13 LocalFileStorage DocumentStorage Not specified f0222
+R14 MarkdownInterpretat Interpreter Not specified f0484
+ion
+R15 MermaidInterpretati Interpreter Not specified f0485
+on
+R16 NavigationHistory Navigation Not specified f0576
+R17 PageComposition Renderer Not specified f0845
+R18 PdfExport Publication Not specified f0747
+R19 PreviewPipeline Preview Not specified f0687
+R20 PreviewTextSelection Preview Not specified f0688
+R21 RenderLayout Renderer Not specified f0846
+R22 ScrollMotion Viewport Not specified f0965
+R23 SdpProjectNavigation SdpProjects Not specified f0896
+R24 SourceAnchorMappi Viewport Not specified f0966
+ng
+R25 TextEditing Documents Not specified f0233
+R26 TypographyAndDrawi Typography Not specified f0944
+ng
+R27 WorkPathHistory Workspace Not specified f1000
+R28 WorkspaceControls NativeShell Not specified f0545
+No Capabilities are declared. No capability realization or provision is inferred.
+

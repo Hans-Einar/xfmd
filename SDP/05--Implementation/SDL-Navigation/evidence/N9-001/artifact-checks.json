@@ -1,0 +1,23 @@
+{
+  "actualActivities": 0,
+  "actualDiagrams": 0,
+  "unaddressedFunctionality": 28,
+  "allUnaddressedNamesInPdf": true,
+  "fixtureDiagrams": [
+    {
+      "nodes": 4,
+      "edges": 2
+    },
+    {
+      "nodes": 4,
+      "edges": 1
+    }
+  ],
+  "fixtureStatusesInPdf": [
+    "planned",
+    "implemented",
+    "verified",
+    "Unspecified"
+  ],
+  "sourceSpansInBounds": 28
+}

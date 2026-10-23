@@ -5,6 +5,9 @@ execute_process(COMMAND ${RUSTC_EXECUTABLE} --version OUTPUT_VARIABLE XFMD_RUST_
 if(NOT XFMD_RUST_VERSION MATCHES "^rustc 1\\.92\\.0 ")
   message(FATAL_ERROR "xfmd requires Rust 1.92.0 (see rust-toolchain.toml); found ${XFMD_RUST_VERSION}")
 endif()
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+  "${CMAKE_SOURCE_DIR}/cmake/mermaid-source.json"
+  "${CMAKE_SOURCE_DIR}/tools/bootstrap_mermaid.py")
 execute_process(COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/tools/bootstrap_mermaid.py COMMAND_ERROR_IS_FATAL ANY)
 set(XFMD_CARGO_TARGET "${CMAKE_BINARY_DIR}/cargo" CACHE PATH "Cargo build artifacts")
 file(GLOB_RECURSE XFMD_RUST_SOURCES CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/src/*.rs" "${CMAKE_SOURCE_DIR}/src/*/Cargo.toml")

@@ -1,0 +1,9 @@
+Isolated copy of shared source with N3e edits reverted to captured before bytes; new VP07 files removed.
+/tmp/xfmd-n3e-baseline-ppldda4p
+go test . -run ^TestSDUIAllFamilyDiscoveryAndSourceDelegation$ -count=1
+--- FAIL: TestSDUIAllFamilyDiscoveryAndSourceDelegation (0.01s)
+    sdui_preview_families_test.go:56: SDPTool diverged from SDUI-owned source preview <nil>
+FAIL
+FAIL	github.com/Hans-Einar/SDP/SDPTool	0.014s
+FAIL
+Exit: 1

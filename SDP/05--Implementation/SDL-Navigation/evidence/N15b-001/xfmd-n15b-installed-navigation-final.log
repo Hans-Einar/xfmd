@@ -1,0 +1,20 @@
+{
+  "result": "pass",
+  "observedPrivateProducerCommands": [
+    [
+      "/home/warloc/.local/libexec/xfmd/sdptool",
+      "/home/warloc/git/xfmd-sdl-navigation",
+      "actions",
+      "--json"
+    ],
+    [
+      "/home/warloc/.local/libexec/xfmd/sdptool",
+      "/home/warloc/git/xfmd-sdl-navigation",
+      "discover",
+      "--navigation",
+      "lazy-sdl",
+      "--json"
+    ]
+  ],
+  "version": "xfmd 0.9 sprint/009/phase/057-favorites:206+dirty"
+}

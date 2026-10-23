@@ -1,0 +1,22 @@
+   Compiling mermaid-rs-renderer v0.3.1 (/home/warloc/git/mermaid-rs-renderer-xfmd-diagrams)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.16s
+     Running tests/xfmd_vp07.rs (/tmp/xfmd-diagram-fork-target/debug/deps/xfmd_vp07-74b8eb28019a1829)
+
+running 1 test
+test xfmd_vp07_preserves_all_nodes_and_orthogonal_edges ... FAILED
+
+failures:
+
+---- xfmd_vp07_preserves_all_nodes_and_orthogonal_edges stdout ----
+
+thread 'xfmd_vp07_preserves_all_nodes_and_orthogonal_edges' (1898546) panicked at tests/xfmd_vp07.rs:13:214:
+called `Result::unwrap()` on an `Err` value: Backend("non-orthogonal edge 11 [(477.0105285644531, 403.99556732177734), (913.8438415527344, 320.6292953491211)]")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    xfmd_vp07_preserves_all_nodes_and_orthogonal_edges
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.34s
+
+error: test failed, to rerun pass `--test xfmd_vp07`

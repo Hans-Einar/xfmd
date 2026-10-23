@@ -1,0 +1,1 @@
+PASS: installed helper readiness and combined preview; installed XFMD and separate Fyne host stayed running in isolated Xvfb/temp HOME

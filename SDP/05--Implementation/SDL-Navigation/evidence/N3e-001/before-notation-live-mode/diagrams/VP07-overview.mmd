@@ -1,0 +1,195 @@
+flowchart LR
+    n_Application["Application (unit)"]
+    n_ApplicationPreferences(["ApplicationPreferences (functionality)"])
+    n_ChapterNavigation{{"ChapterNavigation (feature)"}}
+    n_ConfigurableScrolling{{"ConfigurableScrolling (feature)"}}
+    n_DiagramLayout(["DiagramLayout (functionality)"])
+    n_DiagramPreparation(["DiagramPreparation (functionality)"])
+    n_DocumentIndex(["DocumentIndex (functionality)"])
+    n_DocumentIndexService["DocumentIndexService (unit)"]
+    n_DocumentNavigation{{"DocumentNavigation (feature)"}}
+    n_DocumentReferences{{"DocumentReferences (feature)"}}
+    n_DocumentSession(["DocumentSession (functionality)"])
+    n_DocumentStorage["DocumentStorage (unit)"]
+    n_Documents["Documents (unit)"]
+    n_EmbeddedVisuals(["EmbeddedVisuals (functionality)"])
+    n_EventLoop["EventLoop (unit)"]
+    n_EventScheduling(["EventScheduling (functionality)"])
+    n_ExternalLauncher["ExternalLauncher (unit)"]
+    n_ExternalViewBroker["ExternalViewBroker (unit)"]
+    n_ExternalViewGenerator["ExternalViewGenerator (unit)"]
+    n_FilteredFileTree(["FilteredFileTree (functionality)"])
+    n_FoxPresentation(["FoxPresentation (functionality)"])
+    n_GeneratedViews["GeneratedViews (unit)"]
+    n_Identity["Identity (unit)"]
+    n_Interpreter["Interpreter (unit)"]
+    n_LivePreview{{"LivePreview (feature)"}}
+    n_LocalFileStorage(["LocalFileStorage (functionality)"])
+    n_MarkdownInterpretation(["MarkdownInterpretation (functionality)"])
+    n_MarkdownPresentation{{"MarkdownPresentation (feature)"}}
+    n_MermaidDiagrams{{"MermaidDiagrams (feature)"}}
+    n_MermaidInterpretation(["MermaidInterpretation (functionality)"])
+    n_NativeShell["NativeShell (unit)"]
+    n_Navigation["Navigation (unit)"]
+    n_NavigationHistory(["NavigationHistory (functionality)"])
+    n_PageComposition(["PageComposition (functionality)"])
+    n_PagedPublication{{"PagedPublication (feature)"}}
+    n_PdfExport(["PdfExport (functionality)"])
+    n_Preferences["Preferences (unit)"]
+    n_Preview["Preview (unit)"]
+    n_PreviewPipeline(["PreviewPipeline (functionality)"])
+    n_PreviewTextSelection(["PreviewTextSelection (functionality)"])
+    n_Publication["Publication (unit)"]
+    n_RenderLayout(["RenderLayout (functionality)"])
+    n_Renderer["Renderer (unit)"]
+    n_ScrollMotion(["ScrollMotion (functionality)"])
+    n_SdpProjects["SdpProjects (unit)"]
+    n_SourceAnchorMapping(["SourceAnchorMapping (functionality)"])
+    n_SynchronizedScrolling{{"SynchronizedScrolling (feature)"}}
+    n_TextEditing(["TextEditing (functionality)"])
+    n_Typography["Typography (unit)"]
+    n_TypographyAndDrawing(["TypographyAndDrawing (functionality)"])
+    n_Viewport["Viewport (unit)"]
+    n_VisualResources["VisualResources (unit)"]
+    n_WorkPathHistory(["WorkPathHistory (functionality)"])
+    n_WorkPathNavigation{{"WorkPathNavigation (feature)"}}
+    n_Workspace["Workspace (unit)"]
+    n_WorkspaceControls(["WorkspaceControls (functionality)"])
+    n_XfmdDesktop["XfmdDesktop (container)"]
+    n_Application -->|contains| n_DocumentIndexService
+    n_Application -->|contains| n_DocumentStorage
+    n_Application -->|contains| n_Documents
+    n_Application -->|contains| n_EventLoop
+    n_Application -->|contains| n_GeneratedViews
+    n_Application -->|contains| n_Identity
+    n_Application -->|contains| n_NativeShell
+    n_Application -->|contains| n_Navigation
+    n_Application -->|contains| n_Preferences
+    n_Application -->|contains| n_Preview
+    n_Application -->|contains| n_Publication
+    n_Application -->|contains| n_SdpProjects
+    n_Application -->|contains| n_Typography
+    n_Application -->|contains| n_Viewport
+    n_Application -->|contains| n_VisualResources
+    n_Application -->|contains| n_Workspace
+    n_ApplicationPreferences -->|allocated-to| n_XfmdDesktop
+    n_ApplicationPreferences -.->|contributes-to| n_ConfigurableScrolling
+    n_ApplicationPreferences -.->|contributes-to| n_DocumentNavigation
+    n_ApplicationPreferences -.->|contributes-to| n_DocumentReferences
+    n_ApplicationPreferences -.->|contributes-to| n_PagedPublication
+    n_DiagramLayout -->|allocated-to| n_XfmdDesktop
+    n_DiagramLayout -.->|contributes-to| n_MermaidDiagrams
+    n_DiagramPreparation -->|allocated-to| n_XfmdDesktop
+    n_DiagramPreparation -.->|contributes-to| n_MermaidDiagrams
+    n_DocumentIndex -->|allocated-to| n_XfmdDesktop
+    n_DocumentIndex -.->|contributes-to| n_ChapterNavigation
+    n_DocumentIndex -.->|contributes-to| n_DocumentReferences
+    n_DocumentIndexService -->|owns| n_DocumentIndex
+    n_DocumentSession -->|allocated-to| n_XfmdDesktop
+    n_DocumentSession -.->|contributes-to| n_DocumentNavigation
+    n_DocumentSession -.->|contributes-to| n_LivePreview
+    n_DocumentSession -.->|contributes-to| n_MarkdownPresentation
+    n_DocumentSession -.->|contributes-to| n_PagedPublication
+    n_DocumentStorage -->|owns| n_LocalFileStorage
+    n_Documents -->|owns| n_DocumentSession
+    n_Documents -->|owns| n_TextEditing
+    n_EmbeddedVisuals -->|allocated-to| n_XfmdDesktop
+    n_EmbeddedVisuals -.->|contributes-to| n_MarkdownPresentation
+    n_EventLoop -->|owns| n_EventScheduling
+    n_EventScheduling -->|allocated-to| n_XfmdDesktop
+    n_EventScheduling -.->|contributes-to| n_LivePreview
+    n_FilteredFileTree -->|allocated-to| n_XfmdDesktop
+    n_FilteredFileTree -.->|contributes-to| n_WorkPathNavigation
+    n_FoxPresentation -->|allocated-to| n_XfmdDesktop
+    n_FoxPresentation -.->|contributes-to| n_ConfigurableScrolling
+    n_FoxPresentation -.->|contributes-to| n_DocumentNavigation
+    n_FoxPresentation -.->|contributes-to| n_LivePreview
+    n_FoxPresentation -.->|contributes-to| n_MarkdownPresentation
+    n_FoxPresentation -.->|contributes-to| n_MermaidDiagrams
+    n_FoxPresentation -.->|contributes-to| n_PagedPublication
+    n_FoxPresentation -.->|contributes-to| n_SynchronizedScrolling
+    n_Interpreter -->|owns| n_MarkdownInterpretation
+    n_Interpreter -->|owns| n_MermaidInterpretation
+    n_LocalFileStorage -->|allocated-to| n_XfmdDesktop
+    n_LocalFileStorage -.->|contributes-to| n_DocumentNavigation
+    n_LocalFileStorage -.->|contributes-to| n_MarkdownPresentation
+    n_MarkdownInterpretation -->|allocated-to| n_XfmdDesktop
+    n_MarkdownInterpretation -.->|contributes-to| n_LivePreview
+    n_MarkdownInterpretation -.->|contributes-to| n_MarkdownPresentation
+    n_MarkdownInterpretation -.->|contributes-to| n_MermaidDiagrams
+    n_MarkdownInterpretation -.->|contributes-to| n_PagedPublication
+    n_MermaidInterpretation -->|allocated-to| n_XfmdDesktop
+    n_MermaidInterpretation -.->|contributes-to| n_MermaidDiagrams
+    n_NativeShell -->|owns| n_FoxPresentation
+    n_NativeShell -->|owns| n_WorkspaceControls
+    n_Navigation -->|owns| n_NavigationHistory
+    n_NavigationHistory -->|allocated-to| n_XfmdDesktop
+    n_NavigationHistory -.->|contributes-to| n_ChapterNavigation
+    n_NavigationHistory -.->|contributes-to| n_DocumentNavigation
+    n_NavigationHistory -.->|contributes-to| n_DocumentReferences
+    n_PageComposition -->|allocated-to| n_XfmdDesktop
+    n_PageComposition -.->|contributes-to| n_MarkdownPresentation
+    n_PageComposition -.->|contributes-to| n_MermaidDiagrams
+    n_PageComposition -.->|contributes-to| n_PagedPublication
+    n_PdfExport -->|allocated-to| n_XfmdDesktop
+    n_PdfExport -.->|contributes-to| n_MermaidDiagrams
+    n_PdfExport -.->|contributes-to| n_PagedPublication
+    n_Preferences -->|owns| n_ApplicationPreferences
+    n_Preview -->|owns| n_PreviewPipeline
+    n_Preview -->|owns| n_PreviewTextSelection
+    n_PreviewPipeline -->|allocated-to| n_XfmdDesktop
+    n_PreviewPipeline -.->|contributes-to| n_LivePreview
+    n_PreviewPipeline -.->|contributes-to| n_MarkdownPresentation
+    n_PreviewPipeline -.->|contributes-to| n_MermaidDiagrams
+    n_PreviewPipeline -.->|contributes-to| n_PagedPublication
+    n_PreviewTextSelection -->|allocated-to| n_XfmdDesktop
+    n_PreviewTextSelection -.->|contributes-to| n_MarkdownPresentation
+    n_PreviewTextSelection -.->|contributes-to| n_MermaidDiagrams
+    n_Publication -->|owns| n_PdfExport
+    n_RenderLayout -->|allocated-to| n_XfmdDesktop
+    n_RenderLayout -.->|contributes-to| n_LivePreview
+    n_RenderLayout -.->|contributes-to| n_MarkdownPresentation
+    n_RenderLayout -.->|contributes-to| n_MermaidDiagrams
+    n_RenderLayout -.->|contributes-to| n_PagedPublication
+    n_RenderLayout -.->|contributes-to| n_SynchronizedScrolling
+    n_Renderer -->|owns| n_DiagramLayout
+    n_Renderer -->|owns| n_PageComposition
+    n_Renderer -->|owns| n_RenderLayout
+    n_ScrollMotion -->|allocated-to| n_XfmdDesktop
+    n_ScrollMotion -.->|contributes-to| n_ConfigurableScrolling
+    n_ScrollMotion -.->|contributes-to| n_SynchronizedScrolling
+    n_SourceAnchorMapping -->|allocated-to| n_XfmdDesktop
+    n_SourceAnchorMapping -.->|contributes-to| n_ChapterNavigation
+    n_SourceAnchorMapping -.->|contributes-to| n_ConfigurableScrolling
+    n_SourceAnchorMapping -.->|contributes-to| n_DocumentNavigation
+    n_SourceAnchorMapping -.->|contributes-to| n_DocumentReferences
+    n_SourceAnchorMapping -.->|contributes-to| n_PagedPublication
+    n_SourceAnchorMapping -.->|contributes-to| n_SynchronizedScrolling
+    n_TextEditing -->|allocated-to| n_XfmdDesktop
+    n_TextEditing -.->|contributes-to| n_ConfigurableScrolling
+    n_TextEditing -.->|contributes-to| n_LivePreview
+    n_Typography -->|owns| n_TypographyAndDrawing
+    n_TypographyAndDrawing -->|allocated-to| n_XfmdDesktop
+    n_TypographyAndDrawing -.->|contributes-to| n_MarkdownPresentation
+    n_TypographyAndDrawing -.->|contributes-to| n_MermaidDiagrams
+    n_TypographyAndDrawing -.->|contributes-to| n_PagedPublication
+    n_Viewport -->|owns| n_ScrollMotion
+    n_Viewport -->|owns| n_SourceAnchorMapping
+    n_VisualResources -->|owns| n_DiagramPreparation
+    n_VisualResources -->|owns| n_EmbeddedVisuals
+    n_WorkPathHistory -->|allocated-to| n_XfmdDesktop
+    n_WorkPathHistory -.->|contributes-to| n_WorkPathNavigation
+    n_Workspace -->|owns| n_FilteredFileTree
+    n_Workspace -->|owns| n_WorkPathHistory
+    n_WorkspaceControls -->|allocated-to| n_XfmdDesktop
+    n_WorkspaceControls -.->|contributes-to| n_ChapterNavigation
+    n_WorkspaceControls -.->|contributes-to| n_ConfigurableScrolling
+    n_WorkspaceControls -.->|contributes-to| n_DocumentNavigation
+    n_WorkspaceControls -.->|contributes-to| n_DocumentReferences
+    n_WorkspaceControls -.->|contributes-to| n_MarkdownPresentation
+    n_WorkspaceControls -.->|contributes-to| n_PagedPublication
+    n_WorkspaceControls -.->|contributes-to| n_SynchronizedScrolling
+    n_WorkspaceControls -.->|contributes-to| n_WorkPathNavigation
+    n_XfmdDesktop -->|contains| n_Application
+    n_XfmdDesktop -->|contains| n_Interpreter
+    n_XfmdDesktop -->|contains| n_Renderer

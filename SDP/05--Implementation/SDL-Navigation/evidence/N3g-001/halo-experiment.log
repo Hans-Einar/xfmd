@@ -1,0 +1,10 @@
+   Compiling mermaid-rs-renderer v0.3.1 (/home/warloc/git/mermaid-rs-renderer-xfmd-diagrams)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 22.89s
+     Running tests/xfmd_chapter_navigation.rs (build-diagram-fork/debug/deps/xfmd_chapter_navigation-c72eec7fb1e05521)
+
+running 1 test
+["one spacing retry after non-orthogonal edge 0 [(516.305419921875, 33.89583206176758), (962.7220840454102, 233.9061164855957)]; failed routing/labels attempt 209.001692ms, included in total time", "libavoid transaction 1: 65.173674ms", "libavoid transaction 2: 43.914643ms", "libavoid transaction 3: 17.401869ms"]
+test xfmd_chapter_navigation_preserves_routes_and_caption_attachments ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.17s
+

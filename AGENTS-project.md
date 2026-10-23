@@ -24,6 +24,17 @@ what to draw, and the FOX adapter draws it. Replacing an interpreter or renderer
 should require an implementation and composition-root registration, not changes
 to application workflows. SDUI's separate Fyne host does not change this boundary.
 
+Owner clarification of 2026-09-29: use SDL modeling to keep functionality,
+responsibilities, contracts and dependencies reviewable as XFMD grows. Before
+native feature changes, reconcile affected model/blueprint boundaries and then
+check implementation against them; diagrams alone do not establish conformance.
+The latest refinement requests complete SDL coverage and SDUI where feasible.
+SDUI is an early requirements/prototyping aid; for existing XFMD, labeled editor
+and preview regions suffice. Working text editing, saving, rich rendering and
+native widget parity are not completion gates. Preserve the distinction between
+conceptual composition, supported bindings and verified product behavior.
+See SDP/Maintenance/MAINT-XFMD-0004.md for the current modeling scope.
+
 ## Small files with clear responsibilities
 
 Follow the architecture's file map. Give each header/implementation pair one main

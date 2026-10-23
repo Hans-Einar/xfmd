@@ -1,15 +1,25 @@
-# Bygg og distribusjon av Libavoid-integrasjonen
+# Building and distributing the Libavoid integration
 
-Gjeldende commit/SHA-256 står i [pin-manifestet](../../cmake/mermaid-source.json);
-[støttematrisen](../../mermaid_coverage.md) beskriver profilene og integrasjonsstatusen.
+The current commit/SHA-256 is in the [source manifest](../../cmake/mermaid-source.json).
+The [support matrix](../../mermaid_coverage.md) describes profiles and integration status.
 
-## Bygg
+## Build
 
-XFMD bruker Rust 1.92.0, Cargo.lock, C++17, CMake/Ninja, FOX, Cairo/Pango og
-librsvg ≥ 2.46. Mermaid-kilden hentes som SHA-256-kontrollert arkiv fra en
-konkret commit i Hans-Einar/mermaid-rs-renderer. Ingen Node, nettleser eller
-ekstern rutetjeneste inngår. Libavoid-kildene ligger i forkens `vendor/libavoid`,
-låst til Adaptagrams `840ebcff20dbba36ad03a2160edf7cbaf9859984` med filmanifest.
+XFMD uses Rust 1.92.0, Cargo.lock, C++17, CMake/Ninja, FOX, Cairo/Pango and
+librsvg >= 2.46. Mermaid source is an exact, checksummed archive of a commit in
+Hans-Einar/mermaid-rs-renderer. An optional repository-relative `archive` field
+selects bundled source; otherwise bootstrap downloads the GitHub archive. Both
+transports check SHA-256 and the Libavoid source manifest before installation.
+See [bundled source provenance](../../third_party/README.md).
+
+Session0005 N3b adopts the local VP07 correction through a bundled archive. It
+does not publish the fork. Existing mismatched `.deps/mermaid-rs-renderer` must
+be preserved/moved before bootstrap; no source is patched or overwritten.
+CMake reconfigures when the source manifest or bootstrap script changes.
+
+No Node, browser or external routing service participates. The fork vendors
+Libavoid at `vendor/libavoid`, pinned to Adaptagrams
+`840ebcff20dbba36ad03a2160edf7cbaf9859984` with a file manifest.
 
 ```sh
 python3 tools/bootstrap_mermaid.py
@@ -19,36 +29,34 @@ cmake --build build -j2
 ctest --test-dir build --output-on-failure -j1
 ```
 
-Etter første kilde-/Cargo-nedlasting kan samme bygg kjøres offline. Rust-build.rs
-kompilerer de medfølgende C++-kildene og den lille C-ABI-wrapperen. Hvert kall eier
-sin egen Router; ingen muterbar router deles mellom tråder. Exceptions fanges i
-C++, og Rust-panic stopper ved eksisterende FFI-barriere.
+After source/Cargo dependencies have been acquired, the build can run offline.
+Rust build.rs compiles the bundled C++ sources and the small C ABI wrapper.
+Each call owns its Router; threads do not share a mutable router. C++ catches
+exceptions and Rust panics stop at the existing FFI boundary.
 
-## Lisens og relinking
+## License and relinking
 
-Libavoid er LGPL-2.1-or-later, ikke MIT. Forkens øvrige kode er MIT.
-`vendor/libavoid/LICENSE.LGPL` skal følge en binærdistribusjon sammen med
-opphavsrettsmerknadene. Dette bygget lenker Libavoid statisk inn i Rust-arkivet.
-En distributør må derfor også levere materialet som gjør det mulig å bygge om
-og relinke med modifisert Libavoid; bare et ferdig XFMD-program og MIT-lisens er
-ikke nok. Lever komplette tilhørende XFMD-/fork-kilder og byggeavhengigheter,
-eller nødvendige objektfiler/arkiver og relink-oppskrift i samsvar med LGPL §6.
-Ikke pålegg restriksjoner som forbyr modifisering eller reverse engineering for
-feilsøking av slike modifikasjoner.
+Libavoid is LGPL-2.1-or-later; the remaining fork code is MIT.
+`vendor/libavoid/LICENSE.LGPL` and copyright notices accompany binary distribution.
+The build links Libavoid statically into the Rust archive. Distribution must
+therefore include materials for rebuilding and relinking with modified Libavoid;
+a finished XFMD executable and MIT license alone are insufficient. Supply complete
+corresponding XFMD/fork source and build dependencies, or the necessary objects,
+archives and relinking instructions under LGPL section 6. Do not impose restrictions
+on modification or reverse engineering for debugging those modifications.
 
-Rebuild fra tilsvarende kilde: behold `.xfmd-pin`, endre Libavoid under forkens
-vendor-mappe i en separat checkout, bygg fork/crate på nytt og lenk XFMD på nytt.
-For et XFMD-kildearkiv må den samme fork-kilden inkluderes under `.deps` med
-pin-stempel; det er ikke nok å vise til en tilfeldig nyere upstream-versjon.
-Slett Cargo-buildartefakter hvis bibliotekobjekter gjenbrukes fra et eldre bygg.
-Det vanlige bootstrap-byggløpet endrer aldri eksisterende kilder automatisk.
+To rebuild corresponding source, preserve `.xfmd-pin`, modify Libavoid in the
+fork's vendor directory in a separate checkout, rebuild the fork/crate and relink
+XFMD. An XFMD source distribution must include the exact fork source, either in
+`.deps` with its pin stamp or as the selected bundled archive that bootstrap
+verifies and extracts. A reference to an arbitrary newer upstream is insufficient.
+Remove Cargo build artifacts if library objects from an older build are reused.
+Normal bootstrap never changes existing sources automatically.
 
-Denne endringen publiserer kildebranches, ikke en ferdig binærdistribusjon.
+## Runtime limits
 
-## Arbeidsgrenser
-
-Libavoid-strategien avviser mer enn 256 forbindelser eller 2048 kandidatporter
-før native arbeid. Dette er strengere enn parserens modellgrense. Feilen vises
-ved kilden og bytter ikke automatisk til Legacy. Native nudging kan overskride
-den kooperative fristen mellom progresjonspunkter; en hard frist krever en annen
-prosessmodell og er ikke implementert her.
+Libavoid admission rejects more than 256 edges or 2048 candidate ports before
+native work. This is stricter than the parser model limit. Errors are displayed
+with source and do not switch automatically to Legacy. Native nudging can exceed
+the cooperative deadline between progress checkpoints; a hard deadline requires
+a different process model and is not implemented here.

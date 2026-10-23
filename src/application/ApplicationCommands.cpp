@@ -13,6 +13,9 @@ std::string Application::savePath() {
 }
 void Application::execute(CommandRouter::Command command) {
   switch (command) {
+  case CommandRouter::SduiLaunch:
+    if (sdui) sdui->launch();
+    break;
   case CommandRouter::ToggleTheme: {
     auto draft = preferences->begin();
     draft.appearance.theme = draft.appearance.theme == "dark" ? "light" : "dark";
@@ -42,6 +45,16 @@ void Application::execute(CommandRouter::Command command) {
     auto profile = preview->layoutProfile();
     profile.mode = command == CommandRouter::A4 ? LayoutMode::Paged : LayoutMode::Continuous;
     preview->setLayoutProfile(profile);
+    break;
+  }
+  case CommandRouter::FullSizeDiagrams: {
+    auto profile = preview->layoutProfile();
+    if (profile.mode != LayoutMode::Continuous)
+      break;
+    const auto anchor = scrolling.captureAnchor();
+    profile.fullSizeDiagrams = !profile.fullSizeDiagrams;
+    preview->setLayoutProfile(profile);
+    scrolling.restoreAnchor(anchor);
     break;
   }
   case CommandRouter::FitWidth:

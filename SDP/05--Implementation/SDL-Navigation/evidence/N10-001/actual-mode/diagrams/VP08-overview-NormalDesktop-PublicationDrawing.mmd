@@ -1,0 +1,6 @@
+flowchart LR
+    n_Publication["Publication (unit)"]
+    n_PublicationDrawing["PublicationDrawing (channel)"]
+    n_Typography["Typography (unit)"]
+    n_Publication -->|sender| n_PublicationDrawing
+    n_PublicationDrawing -->|receiver| n_Typography

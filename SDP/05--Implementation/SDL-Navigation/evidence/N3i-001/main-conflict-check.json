@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-18",
+  "remoteFetched": true,
+  "main": "e8760d331933361ab631ef0d52c20e87268a22b3",
+  "candidate": "cc7b52f84f05fdef63efc1a305023a12347026ad",
+  "branchMerge": {
+    "command": [
+      "git",
+      "merge-tree",
+      "--write-tree",
+      "--name-only",
+      "e8760d331933361ab631ef0d52c20e87268a22b3",
+      "cc7b52f84f05fdef63efc1a305023a12347026ad"
+    ],
+    "exitCode": 1,
+    "stdout": "f69723ea528726736fb01c554122a6fdf286f4a3\nSDP/KanBan/README.md\nSDP/ProjectManagement/Ledger.ndjson\nSDP/Traceability/Ledger.ndjson\nSDP/Traceability/Relations.yaml\nSDPTool/Contract.md\nSDPTool/Programs.md\nSDPTool/tree.go\nSDUI/docs/architecture.md\nSDUI/docs/requirements.md\nSDUI/go/host/fynehost/admission/admission.go\nSDUI/go/preparation/capabilities.go\nSDUI/go/preparation/prepare.go\nSDUI/go/preparation/prepare_test.go\nSDUI/go/prototype/check.go\n\nAuto-merging SDP/KanBan/README.md\nCONFLICT (content): Merge conflict in SDP/KanBan/README.md\nAuto-merging SDP/ProjectManagement/Ledger.ndjson\nCONFLICT (content): Merge conflict in SDP/ProjectManagement/Ledger.ndjson\nAuto-merging SDP/Traceability/Ledger.ndjson\nCONFLICT (content): Merge conflict in SDP/Traceability/Ledger.ndjson\nAuto-merging SDP/Traceability/Relations.yaml\nCONFLICT (content): Merge conflict in SDP/Traceability/Relations.yaml\nAuto-merging SDPTool/Contract.md\nCONFLICT (content): Merge conflict in SDPTool/Contract.md\nAuto-merging SDPTool/Programs.md\nCONFLICT (add/add): Merge conflict in SDPTool/Programs.md\nAuto-merging SDPTool/tree.go\nCONFLICT (content): Merge conflict in SDPTool/tree.go\nAuto-merging SDUI/docs/architecture.md\nCONFLICT (content): Merge conflict in SDUI/docs/architecture.md\nAuto-merging SDUI/docs/requirements.md\nCONFLICT (content): Merge conflict in SDUI/docs/requirements.md\nAuto-merging SDUI/go/host/fynehost/admission/admission.go\nCONFLICT (add/add): Merge conflict in SDUI/go/host/fynehost/admission/admission.go\nAuto-merging SDUI/go/host/fynehost/runtime_test.go\nAuto-merging SDUI/go/preparation/capabilities.go\nCONFLICT (add/add): Merge conflict in SDUI/go/preparation/capabilities.go\nAuto-merging SDUI/go/preparation/prepare.go\nCONFLICT (add/add): Merge conflict in SDUI/go/preparation/prepare.go\nAuto-merging SDUI/go/preparation/prepare_test.go\nCONFLICT (add/add): Merge conflict in SDUI/go/preparation/prepare_test.go\nAuto-merging SDUI/go/prototype/check.go\nCONFLICT (add/add): Merge conflict in SDUI/go/prototype/check.go\nAuto-merging SDUI/go/runtime/session.go\n",
+    "stderr": ""
+  },
+  "scopedCommitMerge": {
+    "command": [
+      "git",
+      "merge-tree",
+      "--write-tree",
+      "--name-only",
+      "--merge-base=cc7b52f84f05fdef63efc1a305023a12347026ad^",
+      "e8760d331933361ab631ef0d52c20e87268a22b3",
+      "cc7b52f84f05fdef63efc1a305023a12347026ad"
+    ],
+    "exitCode": 1,
+    "stdout": "76bf12ff54fdf40142e0176084e123a2652205e6\nSDPTool/Contract.md\nSDPTool/tree.go\n\nAuto-merging SDPTool/Contract.md\nCONFLICT (content): Merge conflict in SDPTool/Contract.md\nAuto-merging SDPTool/tree.go\nCONFLICT (content): Merge conflict in SDPTool/tree.go\n",
+    "stderr": ""
+  },
+  "worktreeStatus": {
+    "command": [
+      "git",
+      "status",
+      "--porcelain"
+    ],
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "note": "Non-mutating merge-tree checks; scoped check uses candidate parent as explicit merge base. No integration or runtime compatibility claim."
+}

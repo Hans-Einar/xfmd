@@ -1,0 +1,8 @@
+flowchart LR
+    n_DiagramLayoutCalls["DiagramLayoutCalls (channel)"]
+    n_Renderer["Renderer (unit)"]
+    n_VisualResources["VisualResources (unit)"]
+    n_DiagramLayoutCalls -->|receiver| n_Renderer
+    n_Renderer -->|sender| n_DiagramLayoutCalls
+    n_DiagramLayoutCalls -->|receiver| n_VisualResources
+    n_VisualResources -->|sender| n_DiagramLayoutCalls

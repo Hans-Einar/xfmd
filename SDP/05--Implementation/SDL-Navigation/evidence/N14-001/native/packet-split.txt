@@ -1,0 +1,22 @@
+Adjacent flags and row crossing
+0
+
+1
+
+2
+
+[1] [2]
+[1] Bits 0: FirstLongFlag
+[2] Bits 1: SecondLongFlag
+[4] Bits 31: CrossingLongName
+32 33
+[4] [5]
+[4] Bits 32: CrossingLongName
+[5] Bits 33: LastFlag
+
+30 31
+Body
+
+[4]
+
+

@@ -1,0 +1,13 @@
+{
+  "frozenInputs": 701,
+  "binaryHashes": 8,
+  "installedFilesMatch": 226,
+  "ledgerCounts": {
+    "ProjectManagement": 228,
+    "Traceability": 21
+  },
+  "uniqueEventIds": true,
+  "newManagementPredecessorResolves": true,
+  "prior08LogUnchanged": true,
+  "limits": "Targeted integrity checks; no independent approval or whole-project process migration claimed."
+}

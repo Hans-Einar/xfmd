@@ -12,9 +12,12 @@ with tempfile.TemporaryFile() as log, tempfile.TemporaryDirectory(prefix="xfmd-g
         with os.fdopen(read_fd) as pipe:
             display = pipe.readline().strip()
         if not display:
-            raise RuntimeError('Xvfb failed to start')
+            log.seek(0)
+            raise RuntimeError('Xvfb failed to start: ' + log.read(8192).decode(errors='replace'))
+        runtime = test_home + '/runtime'
+        os.mkdir(runtime, 0o700)
         env = dict(os.environ, DISPLAY=':' + display, HOME=test_home,
-                   XDG_CONFIG_HOME=test_home + '/.config')
+                   XDG_CONFIG_HOME=test_home + '/.config', XDG_RUNTIME_DIR=runtime)
         result = subprocess.run(sys.argv[1:], env=env, timeout=60)
         sys.exit(result.returncode)
     finally:

@@ -1,0 +1,21 @@
+{
+  "vp11-actual": {
+    "declarations": 312,
+    "facts": 1034,
+    "explicitProperties": 195,
+    "exactSourceSpans": 1346,
+    "allFactStatementsAndDeclarationNamesInPdf": true,
+    "pdfPages": 88,
+    "reportedGaps": 1
+  },
+  "vp11-native": {
+    "declarations": 47,
+    "facts": 87,
+    "explicitProperties": 29,
+    "exactSourceSpans": 134,
+    "allFactStatementsAndDeclarationNamesInPdf": true,
+    "pdfPages": 11,
+    "reportedGaps": null
+  },
+  "limits": "Counts describe checked sources only; reported gap rules are not exhaustive. Same-context verification; no independent or general large-print acceptance. Existing KB020/025 residuals unchanged."
+}

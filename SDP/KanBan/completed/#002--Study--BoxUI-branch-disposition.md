@@ -84,7 +84,7 @@ IDs, branch commits and evidence. Closing/deleting/publishing is a separate acti
 
 [Documentation reconciliation](%23001--Proposal--Documentation-reconciliation.md)
 contains the older audit and its updated priority. The question of entirely custom
-SDUI widgets remains [separate](../backlog/%23003--Question--SDUI-widget-ownership.md).
+SDUI widgets remains [separate](../superseded/%23003--Question--SDUI-widget-ownership.md).
 
 ## Discussion review — 2026-09-24
 

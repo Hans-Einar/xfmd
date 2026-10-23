@@ -1,0 +1,10 @@
+{
+  "producerHead": "6b80b40fb269e29a03dc9761c4facb8473a54f3e",
+  "remoteRefs": [
+    "5ca0e90f82c5da449d529906b4f753f39a907cb4\trefs/heads/main",
+    "6b80b40fb269e29a03dc9761c4facb8473a54f3e\trefs/heads/sdp/xfmd-vp09-overview"
+  ],
+  "producerClean": true,
+  "candidateHashesVerified": true,
+  "ledgerEventsValidated": 239
+}

@@ -62,7 +62,8 @@ void ReferenceWorker::run() {
         obsolete = stopping || current != generation;
       }
       if (!obsolete) {
-        auto model = interpreter.parse({{}, std::move(loaded.text), loaded.path, loaded.plainText});
+        auto model = interpreter.parse(
+            {{}, std::move(loaded.text), loaded.path, loaded.plainText, loaded.standaloneMermaid});
         if (!model)
           throw Error(ErrorCode::Parse, "No document model returned.");
         result.headings = DocumentIndex::topLevel(*model);

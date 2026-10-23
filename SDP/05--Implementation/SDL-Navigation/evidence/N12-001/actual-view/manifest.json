@@ -1,0 +1,22 @@
+{
+  "version": "sdl-viewpoints-go-1.3",
+  "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007",
+  "renderer": "",
+  "diagrams": [],
+  "facts": [],
+  "model_gaps": [
+    {
+      "code": "NO_ENCODINGS",
+      "message": "No Encoding declared.",
+      "model_id": "—",
+      "viewpoint": "VP10"
+    }
+  ],
+  "outputs": {
+    "delivery.txt": "6403203dd5a0867eb14d104ee8a73730bd72dd9ad92e78d996a6dba0a5dcfc01",
+    "entry.md": "863d9e4c5876707e17c577443d6d14a9f8c20e1d28a6228dbde13736084103cf",
+    "sdptool.json": "8dd7e098d05127b360fec92c2f01b11337650449df4657fcd761620574a1adbb",
+    "selection.json": "dd01409d7bdc34743be0bf2612d05f5856a33900699612fcf77f2c943675dbfe",
+    "source-inputs/s0.design": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+  }
+}

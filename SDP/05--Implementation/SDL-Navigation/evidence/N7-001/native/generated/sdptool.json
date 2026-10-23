@@ -1,0 +1,18 @@
+{
+  "sourceLinks": [
+    {
+      "id": "s0",
+      "path": "/tmp/xfmd-gui-home-oa01q5bp/overview project/SDP/SDL/Overview.design",
+      "snapshot": "source-inputs/s0.design",
+      "revision": "ec80ff038b0bcea3e58e88f4162e0b83ae754cc5b8539413cb615f948cd61699"
+    }
+  ],
+  "schema": "sdptool/0.2",
+  "operation": "select",
+  "source": "/tmp/xfmd-gui-home-oa01q5bp/overview project/SDP/SDL/Overview.design",
+  "profile": "design-core/0.5",
+  "revision": "ec80ff038b0bcea3e58e88f4162e0b83ae754cc5b8539413cb615f948cd61699",
+  "entry": "/tmp/xfmd-gui-home-oa01q5bp/runtime/xfmd/xfmd-sdp-jEVyVV/1/entry.md",
+  "directory": "/tmp/xfmd-gui-home-oa01q5bp/runtime/xfmd/xfmd-sdp-jEVyVV/1",
+  "ownership": "caller-owned; remove directory after consumer release"
+}

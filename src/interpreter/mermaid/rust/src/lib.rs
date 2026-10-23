@@ -48,6 +48,7 @@ pub fn parse(source: &[u8]) -> Result<Vec<u8>, String> {
         "radar-beta",
         "treemap-beta",
         "xychart-beta",
+        "usecase-beta",
     ]
     .contains(&header)
     {

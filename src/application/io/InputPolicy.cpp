@@ -12,9 +12,13 @@ std::string extension(const std::string& path) {
 } // namespace
 bool InputPolicy::supportedPath(const std::string& path) {
   auto ext = extension(path);
-  return ext == ".md" || ext == ".txt";
+  return ext == ".md" || ext == ".txt" || ext == ".mmd";
 }
-bool InputPolicy::plainText(const std::string& path) { return extension(path) != ".md"; }
+bool InputPolicy::mermaid(const std::string& path) { return extension(path) == ".mmd"; }
+bool InputPolicy::plainText(const std::string& path) {
+  const auto ext = extension(path);
+  return ext != ".md" && ext != ".mmd";
+}
 void InputPolicy::validate(std::string_view text, const std::string&) {
   if (text.size() > maxDocumentBytes)
     throw Error(ErrorCode::TooLarge, "File exceeds the 8 MiB limit.");

@@ -1,0 +1,14 @@
+{
+  "producerHead": "486b29df14d22e8fdc77ee5e5002d6ee22ba9abe",
+  "producerBranch": "sdp/xfmd-vp11-overview",
+  "producerClean": true,
+  "remote": {
+    "refs/heads/main": "5ca0e90f82c5da449d529906b4f753f39a907cb4",
+    "refs/heads/sdp/xfmd-vp11-overview": "486b29df14d22e8fdc77ee5e5002d6ee22ba9abe"
+  },
+  "candidateHashesMatch": true,
+  "ledgerEventsValid": 243,
+  "mergeReleaseInstall": false,
+  "nativeProductChangedByN13": false,
+  "residuals": "KB020 renderer/large-print, KB025 root discovery, KB032 legacy eager export, integration/publication remain open"
+}

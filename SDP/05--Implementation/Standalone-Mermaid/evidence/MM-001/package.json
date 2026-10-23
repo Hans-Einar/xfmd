@@ -1,0 +1,8 @@
+{
+  "package": "/home/warloc/git/xfmd-sdl-navigation/build-ui/release-mmd/xfmd-0.4.0-Linux-e361fdf1ae59.tar.gz",
+  "package_sha256": "e7cfa978cb4dfebd22396ae2f382be69069d4151b55837ff81de4bbe5fbe66de",
+  "binary_sha256": "e361fdf1ae5972eedf1af8ffd6e20fade6e15387a79828bea9ca130771aeb371",
+  "extracted_binary": "/tmp/xfmd-mmd-package-o1k5bm8a/xfmd-0.4.0-Linux-e361fdf1ae59/bin/xfmd",
+  "smoke": "passed",
+  "system_libraries": "dynamically linked; resolved on build host"
+}

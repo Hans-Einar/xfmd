@@ -1,0 +1,10 @@
+SDUI GUI dump | PreferencesConcept | 160 columns | structural preview
+# Preferences - conceptual responsibility view
+The native dialog contains appearance, reading, scrolling, page and browser settings.
+
+Controls below illustrate typed values using today's input widget. They are not a working native dialog or validation binding.
+Browser program                                                                  Program: [firefox]
+Page margin (mm)                                                                 Margin: [20]
+Scroll speed                                                                     Speed: [1.0]
+[ Apply ]                                                                        [ Cancel ]
+Preferences owns draft validation and persistence; the UI restores live appearance on cancellation.

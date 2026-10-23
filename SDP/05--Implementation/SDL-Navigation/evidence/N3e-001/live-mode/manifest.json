@@ -1,0 +1,4470 @@
+{
+  "version": "sdl-viewpoints-go-1.3",
+  "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007",
+  "renderer": "",
+  "diagrams": [
+    {
+      "id": "VP07-overview",
+      "title": "Complete logical architecture and feature realization — mode NormalDesktop",
+      "kind": "flowchart",
+      "nodes": {
+        "n_Application": {
+          "kind": "unit",
+          "model_id": "Application",
+          "span": {
+            "column": 1,
+            "end": 320,
+            "end_column": 18,
+            "end_line": 11,
+            "line": 11,
+            "node": "Span",
+            "start": 303
+          }
+        },
+        "n_DocumentIndexService": {
+          "kind": "unit",
+          "model_id": "DocumentIndexService",
+          "span": {
+            "column": 1,
+            "end": 1954,
+            "end_column": 27,
+            "end_line": 67,
+            "line": 67,
+            "node": "Span",
+            "start": 1928
+          }
+        },
+        "n_DocumentStorage": {
+          "kind": "unit",
+          "model_id": "DocumentStorage",
+          "span": {
+            "column": 1,
+            "end": 2326,
+            "end_column": 22,
+            "end_line": 80,
+            "line": 80,
+            "node": "Span",
+            "start": 2305
+          }
+        },
+        "n_Documents": {
+          "kind": "unit",
+          "model_id": "Documents",
+          "span": {
+            "column": 1,
+            "end": 2342,
+            "end_column": 16,
+            "end_line": 81,
+            "line": 81,
+            "node": "Span",
+            "start": 2327
+          }
+        },
+        "n_EventLoop": {
+          "kind": "unit",
+          "model_id": "EventLoop",
+          "span": {
+            "column": 1,
+            "end": 2496,
+            "end_column": 16,
+            "end_line": 87,
+            "line": 87,
+            "node": "Span",
+            "start": 2481
+          }
+        },
+        "n_ExternalLauncher": {
+          "kind": "unit",
+          "model_id": "ExternalLauncher",
+          "span": {
+            "column": 1,
+            "end": 2866,
+            "end_column": 23,
+            "end_line": 101,
+            "line": 101,
+            "node": "Span",
+            "start": 2844
+          }
+        },
+        "n_ExternalViewBroker": {
+          "kind": "unit",
+          "model_id": "ExternalViewBroker",
+          "span": {
+            "column": 1,
+            "end": 3016,
+            "end_column": 25,
+            "end_line": 106,
+            "line": 106,
+            "node": "Span",
+            "start": 2992
+          }
+        },
+        "n_ExternalViewGenerator": {
+          "kind": "unit",
+          "model_id": "ExternalViewGenerator",
+          "span": {
+            "column": 1,
+            "end": 3044,
+            "end_column": 28,
+            "end_line": 107,
+            "line": 107,
+            "node": "Span",
+            "start": 3017
+          }
+        },
+        "n_GeneratedViews": {
+          "kind": "unit",
+          "model_id": "GeneratedViews",
+          "span": {
+            "column": 1,
+            "end": 3928,
+            "end_column": 21,
+            "end_line": 134,
+            "line": 134,
+            "node": "Span",
+            "start": 3908
+          }
+        },
+        "n_Identity": {
+          "kind": "unit",
+          "model_id": "Identity",
+          "span": {
+            "column": 1,
+            "end": 4067,
+            "end_column": 15,
+            "end_line": 139,
+            "line": 139,
+            "node": "Span",
+            "start": 4053
+          }
+        },
+        "n_Interpreter": {
+          "kind": "unit",
+          "model_id": "Interpreter",
+          "span": {
+            "column": 1,
+            "end": 4347,
+            "end_column": 18,
+            "end_line": 149,
+            "line": 149,
+            "node": "Span",
+            "start": 4330
+          }
+        },
+        "n_NativeShell": {
+          "kind": "unit",
+          "model_id": "NativeShell",
+          "span": {
+            "column": 1,
+            "end": 5055,
+            "end_column": 18,
+            "end_line": 174,
+            "line": 174,
+            "node": "Span",
+            "start": 5038
+          }
+        },
+        "n_Navigation": {
+          "kind": "unit",
+          "model_id": "Navigation",
+          "span": {
+            "column": 1,
+            "end": 5099,
+            "end_column": 17,
+            "end_line": 176,
+            "line": 176,
+            "node": "Span",
+            "start": 5083
+          }
+        },
+        "n_Preferences": {
+          "kind": "unit",
+          "model_id": "Preferences",
+          "span": {
+            "column": 1,
+            "end": 5791,
+            "end_column": 18,
+            "end_line": 201,
+            "line": 201,
+            "node": "Span",
+            "start": 5774
+          }
+        },
+        "n_Preview": {
+          "kind": "unit",
+          "model_id": "Preview",
+          "span": {
+            "column": 1,
+            "end": 6092,
+            "end_column": 14,
+            "end_line": 211,
+            "line": 211,
+            "node": "Span",
+            "start": 6079
+          }
+        },
+        "n_Publication": {
+          "kind": "unit",
+          "model_id": "Publication",
+          "span": {
+            "column": 1,
+            "end": 6315,
+            "end_column": 18,
+            "end_line": 218,
+            "line": 218,
+            "node": "Span",
+            "start": 6298
+          }
+        },
+        "n_Renderer": {
+          "kind": "unit",
+          "model_id": "Renderer",
+          "span": {
+            "column": 1,
+            "end": 7203,
+            "end_column": 15,
+            "end_line": 249,
+            "line": 249,
+            "node": "Span",
+            "start": 7189
+          }
+        },
+        "n_SdpProjects": {
+          "kind": "unit",
+          "model_id": "SdpProjects",
+          "span": {
+            "column": 1,
+            "end": 7672,
+            "end_column": 18,
+            "end_line": 266,
+            "line": 266,
+            "node": "Span",
+            "start": 7655
+          }
+        },
+        "n_Typography": {
+          "kind": "unit",
+          "model_id": "Typography",
+          "span": {
+            "column": 1,
+            "end": 8229,
+            "end_column": 17,
+            "end_line": 287,
+            "line": 287,
+            "node": "Span",
+            "start": 8213
+          }
+        },
+        "n_Viewport": {
+          "kind": "unit",
+          "model_id": "Viewport",
+          "span": {
+            "column": 1,
+            "end": 8516,
+            "end_column": 15,
+            "end_line": 297,
+            "line": 297,
+            "node": "Span",
+            "start": 8502
+          }
+        },
+        "n_VisualResources": {
+          "kind": "unit",
+          "model_id": "VisualResources",
+          "span": {
+            "column": 1,
+            "end": 8597,
+            "end_column": 22,
+            "end_line": 300,
+            "line": 300,
+            "node": "Span",
+            "start": 8576
+          }
+        },
+        "n_Workspace": {
+          "kind": "unit",
+          "model_id": "Workspace",
+          "span": {
+            "column": 1,
+            "end": 8771,
+            "end_column": 16,
+            "end_line": 306,
+            "line": 306,
+            "node": "Span",
+            "start": 8756
+          }
+        },
+        "n_XfmdDesktop": {
+          "kind": "container",
+          "model_id": "XfmdDesktop",
+          "span": {
+            "column": 1,
+            "end": 8971,
+            "end_column": 23,
+            "end_line": 313,
+            "line": 313,
+            "node": "Span",
+            "start": 8949
+          }
+        }
+      },
+      "edges": [
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_DocumentIndexService",
+          "fact": "f0019"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_DocumentStorage",
+          "fact": "f0020"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_Documents",
+          "fact": "f0021"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_EventLoop",
+          "fact": "f0022"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_GeneratedViews",
+          "fact": "f0023"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_Identity",
+          "fact": "f0024"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_NativeShell",
+          "fact": "f0025"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_Navigation",
+          "fact": "f0026"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_Preferences",
+          "fact": "f0027"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_Preview",
+          "fact": "f0028"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_Publication",
+          "fact": "f0029"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_SdpProjects",
+          "fact": "f0030"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_Typography",
+          "fact": "f0031"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_Viewport",
+          "fact": "f0032"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_VisualResources",
+          "fact": "f0033"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_Workspace",
+          "fact": "f0034"
+        },
+        {
+          "source": "n_XfmdDesktop",
+          "relation": "contains",
+          "target": "n_Application",
+          "fact": "f1031"
+        },
+        {
+          "source": "n_XfmdDesktop",
+          "relation": "contains",
+          "target": "n_Interpreter",
+          "fact": "f1032"
+        },
+        {
+          "source": "n_XfmdDesktop",
+          "relation": "contains",
+          "target": "n_Renderer",
+          "fact": "f1033"
+        }
+      ],
+      "source_facts": [
+        "f0019",
+        "f0020",
+        "f0021",
+        "f0022",
+        "f0023",
+        "f0024",
+        "f0025",
+        "f0026",
+        "f0027",
+        "f0028",
+        "f0029",
+        "f0030",
+        "f0031",
+        "f0032",
+        "f0033",
+        "f0034",
+        "f0046",
+        "f0047",
+        "f0049",
+        "f0050",
+        "f0051",
+        "f0129",
+        "f0130",
+        "f0135",
+        "f0136",
+        "f0176",
+        "f0177",
+        "f0178",
+        "f0181",
+        "f0207",
+        "f0208",
+        "f0209",
+        "f0210",
+        "f0211",
+        "f0222",
+        "f0232",
+        "f0233",
+        "f0274",
+        "f0275",
+        "f0276",
+        "f0280",
+        "f0281",
+        "f0349",
+        "f0350",
+        "f0351",
+        "f0352",
+        "f0353",
+        "f0354",
+        "f0355",
+        "f0356",
+        "f0357",
+        "f0358",
+        "f0484",
+        "f0485",
+        "f0523",
+        "f0524",
+        "f0525",
+        "f0531",
+        "f0532",
+        "f0533",
+        "f0534",
+        "f0535",
+        "f0539",
+        "f0540",
+        "f0544",
+        "f0545",
+        "f0576",
+        "f0587",
+        "f0588",
+        "f0589",
+        "f0590",
+        "f0600",
+        "f0601",
+        "f0602",
+        "f0603",
+        "f0625",
+        "f0626",
+        "f0627",
+        "f0652",
+        "f0687",
+        "f0688",
+        "f0717",
+        "f0718",
+        "f0719",
+        "f0720",
+        "f0721",
+        "f0740",
+        "f0741",
+        "f0742",
+        "f0747",
+        "f0837",
+        "f0838",
+        "f0839",
+        "f0840",
+        "f0841",
+        "f0842",
+        "f0844",
+        "f0845",
+        "f0846",
+        "f0889",
+        "f0890",
+        "f0891",
+        "f0907",
+        "f0908",
+        "f0909",
+        "f0910",
+        "f0911",
+        "f0912",
+        "f0913",
+        "f0936",
+        "f0937",
+        "f0938",
+        "f0944",
+        "f0946",
+        "f0947",
+        "f0948",
+        "f0949",
+        "f0965",
+        "f0966",
+        "f0983",
+        "f0984",
+        "f0996",
+        "f0997",
+        "f0999",
+        "f1000",
+        "f1013",
+        "f1014",
+        "f1015",
+        "f1016",
+        "f1017",
+        "f1018",
+        "f1019",
+        "f1020",
+        "f1022",
+        "f1031",
+        "f1032",
+        "f1033"
+      ],
+      "elements": [
+        {
+          "feature": "ChapterNavigation",
+          "key": "F01",
+          "node": "n_DocumentIndexService",
+          "role": "owns",
+          "source_facts": [
+            "f0177",
+            "f0181"
+          ]
+        },
+        {
+          "feature": "ChapterNavigation",
+          "key": "F01",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0177",
+            "f0176"
+          ]
+        },
+        {
+          "feature": "ChapterNavigation",
+          "key": "F01",
+          "node": "n_Navigation",
+          "role": "owns",
+          "source_facts": [
+            "f0588",
+            "f0576"
+          ]
+        },
+        {
+          "feature": "ChapterNavigation",
+          "key": "F01",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0588",
+            "f0587"
+          ]
+        },
+        {
+          "feature": "ChapterNavigation",
+          "key": "F01",
+          "node": "n_Viewport",
+          "role": "owns",
+          "source_facts": [
+            "f0908",
+            "f0966"
+          ]
+        },
+        {
+          "feature": "ChapterNavigation",
+          "key": "F01",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0908",
+            "f0907"
+          ]
+        },
+        {
+          "feature": "ChapterNavigation",
+          "key": "F01",
+          "node": "n_NativeShell",
+          "role": "owns",
+          "source_facts": [
+            "f1014",
+            "f0545"
+          ]
+        },
+        {
+          "feature": "ChapterNavigation",
+          "key": "F01",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f1014",
+            "f1013"
+          ]
+        },
+        {
+          "feature": "ConfigurableScrolling",
+          "key": "F02",
+          "node": "n_Preferences",
+          "role": "owns",
+          "source_facts": [
+            "f0047",
+            "f0652"
+          ]
+        },
+        {
+          "feature": "ConfigurableScrolling",
+          "key": "F02",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0047",
+            "f0046"
+          ]
+        },
+        {
+          "feature": "ConfigurableScrolling",
+          "key": "F02",
+          "node": "n_NativeShell",
+          "role": "owns",
+          "source_facts": [
+            "f0352",
+            "f0544"
+          ]
+        },
+        {
+          "feature": "ConfigurableScrolling",
+          "key": "F02",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0352",
+            "f0351"
+          ]
+        },
+        {
+          "feature": "ConfigurableScrolling",
+          "key": "F02",
+          "node": "n_Viewport",
+          "role": "owns",
+          "source_facts": [
+            "f0890",
+            "f0965"
+          ]
+        },
+        {
+          "feature": "ConfigurableScrolling",
+          "key": "F02",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0890",
+            "f0889"
+          ]
+        },
+        {
+          "feature": "ConfigurableScrolling",
+          "key": "F02",
+          "node": "n_Viewport",
+          "role": "owns",
+          "source_facts": [
+            "f0909",
+            "f0966"
+          ]
+        },
+        {
+          "feature": "ConfigurableScrolling",
+          "key": "F02",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0909",
+            "f0907"
+          ]
+        },
+        {
+          "feature": "ConfigurableScrolling",
+          "key": "F02",
+          "node": "n_Documents",
+          "role": "owns",
+          "source_facts": [
+            "f0937",
+            "f0233"
+          ]
+        },
+        {
+          "feature": "ConfigurableScrolling",
+          "key": "F02",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0937",
+            "f0936"
+          ]
+        },
+        {
+          "feature": "ConfigurableScrolling",
+          "key": "F02",
+          "node": "n_NativeShell",
+          "role": "owns",
+          "source_facts": [
+            "f1015",
+            "f0545"
+          ]
+        },
+        {
+          "feature": "ConfigurableScrolling",
+          "key": "F02",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f1015",
+            "f1013"
+          ]
+        },
+        {
+          "feature": "DocumentNavigation",
+          "key": "F03",
+          "node": "n_Preferences",
+          "role": "owns",
+          "source_facts": [
+            "f0049",
+            "f0652"
+          ]
+        },
+        {
+          "feature": "DocumentNavigation",
+          "key": "F03",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0049",
+            "f0046"
+          ]
+        },
+        {
+          "feature": "DocumentNavigation",
+          "key": "F03",
+          "node": "n_Documents",
+          "role": "owns",
+          "source_facts": [
+            "f0208",
+            "f0232"
+          ]
+        },
+        {
+          "feature": "DocumentNavigation",
+          "key": "F03",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0208",
+            "f0207"
+          ]
+        },
+        {
+          "feature": "DocumentNavigation",
+          "key": "F03",
+          "node": "n_NativeShell",
+          "role": "owns",
+          "source_facts": [
+            "f0353",
+            "f0544"
+          ]
+        },
+        {
+          "feature": "DocumentNavigation",
+          "key": "F03",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0353",
+            "f0351"
+          ]
+        },
+        {
+          "feature": "DocumentNavigation",
+          "key": "F03",
+          "node": "n_DocumentStorage",
+          "role": "owns",
+          "source_facts": [
+            "f0524",
+            "f0222"
+          ]
+        },
+        {
+          "feature": "DocumentNavigation",
+          "key": "F03",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0524",
+            "f0523"
+          ]
+        },
+        {
+          "feature": "DocumentNavigation",
+          "key": "F03",
+          "node": "n_Navigation",
+          "role": "owns",
+          "source_facts": [
+            "f0589",
+            "f0576"
+          ]
+        },
+        {
+          "feature": "DocumentNavigation",
+          "key": "F03",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0589",
+            "f0587"
+          ]
+        },
+        {
+          "feature": "DocumentNavigation",
+          "key": "F03",
+          "node": "n_Viewport",
+          "role": "owns",
+          "source_facts": [
+            "f0910",
+            "f0966"
+          ]
+        },
+        {
+          "feature": "DocumentNavigation",
+          "key": "F03",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0910",
+            "f0907"
+          ]
+        },
+        {
+          "feature": "DocumentNavigation",
+          "key": "F03",
+          "node": "n_NativeShell",
+          "role": "owns",
+          "source_facts": [
+            "f1016",
+            "f0545"
+          ]
+        },
+        {
+          "feature": "DocumentNavigation",
+          "key": "F03",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f1016",
+            "f1013"
+          ]
+        },
+        {
+          "feature": "DocumentReferences",
+          "key": "F04",
+          "node": "n_Preferences",
+          "role": "owns",
+          "source_facts": [
+            "f0050",
+            "f0652"
+          ]
+        },
+        {
+          "feature": "DocumentReferences",
+          "key": "F04",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0050",
+            "f0046"
+          ]
+        },
+        {
+          "feature": "DocumentReferences",
+          "key": "F04",
+          "node": "n_DocumentIndexService",
+          "role": "owns",
+          "source_facts": [
+            "f0178",
+            "f0181"
+          ]
+        },
+        {
+          "feature": "DocumentReferences",
+          "key": "F04",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0178",
+            "f0176"
+          ]
+        },
+        {
+          "feature": "DocumentReferences",
+          "key": "F04",
+          "node": "n_Navigation",
+          "role": "owns",
+          "source_facts": [
+            "f0590",
+            "f0576"
+          ]
+        },
+        {
+          "feature": "DocumentReferences",
+          "key": "F04",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0590",
+            "f0587"
+          ]
+        },
+        {
+          "feature": "DocumentReferences",
+          "key": "F04",
+          "node": "n_Viewport",
+          "role": "owns",
+          "source_facts": [
+            "f0911",
+            "f0966"
+          ]
+        },
+        {
+          "feature": "DocumentReferences",
+          "key": "F04",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0911",
+            "f0907"
+          ]
+        },
+        {
+          "feature": "DocumentReferences",
+          "key": "F04",
+          "node": "n_NativeShell",
+          "role": "owns",
+          "source_facts": [
+            "f1017",
+            "f0545"
+          ]
+        },
+        {
+          "feature": "DocumentReferences",
+          "key": "F04",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f1017",
+            "f1013"
+          ]
+        },
+        {
+          "feature": "LivePreview",
+          "key": "F05",
+          "node": "n_Documents",
+          "role": "owns",
+          "source_facts": [
+            "f0209",
+            "f0232"
+          ]
+        },
+        {
+          "feature": "LivePreview",
+          "key": "F05",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0209",
+            "f0207"
+          ]
+        },
+        {
+          "feature": "LivePreview",
+          "key": "F05",
+          "node": "n_EventLoop",
+          "role": "owns",
+          "source_facts": [
+            "f0281",
+            "f0276"
+          ]
+        },
+        {
+          "feature": "LivePreview",
+          "key": "F05",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0281",
+            "f0280"
+          ]
+        },
+        {
+          "feature": "LivePreview",
+          "key": "F05",
+          "node": "n_NativeShell",
+          "role": "owns",
+          "source_facts": [
+            "f0354",
+            "f0544"
+          ]
+        },
+        {
+          "feature": "LivePreview",
+          "key": "F05",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0354",
+            "f0351"
+          ]
+        },
+        {
+          "feature": "LivePreview",
+          "key": "F05",
+          "node": "n_Interpreter",
+          "role": "owns",
+          "source_facts": [
+            "f0532",
+            "f0484"
+          ]
+        },
+        {
+          "feature": "LivePreview",
+          "key": "F05",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0532",
+            "f0531"
+          ]
+        },
+        {
+          "feature": "LivePreview",
+          "key": "F05",
+          "node": "n_Preview",
+          "role": "owns",
+          "source_facts": [
+            "f0718",
+            "f0687"
+          ]
+        },
+        {
+          "feature": "LivePreview",
+          "key": "F05",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0718",
+            "f0717"
+          ]
+        },
+        {
+          "feature": "LivePreview",
+          "key": "F05",
+          "node": "n_Renderer",
+          "role": "owns",
+          "source_facts": [
+            "f0838",
+            "f0846"
+          ]
+        },
+        {
+          "feature": "LivePreview",
+          "key": "F05",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0838",
+            "f0837"
+          ]
+        },
+        {
+          "feature": "LivePreview",
+          "key": "F05",
+          "node": "n_Documents",
+          "role": "owns",
+          "source_facts": [
+            "f0938",
+            "f0233"
+          ]
+        },
+        {
+          "feature": "LivePreview",
+          "key": "F05",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0938",
+            "f0936"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_Documents",
+          "role": "owns",
+          "source_facts": [
+            "f0210",
+            "f0232"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0210",
+            "f0207"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_VisualResources",
+          "role": "owns",
+          "source_facts": [
+            "f0275",
+            "f0984"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0275",
+            "f0274"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_NativeShell",
+          "role": "owns",
+          "source_facts": [
+            "f0355",
+            "f0544"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0355",
+            "f0351"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_DocumentStorage",
+          "role": "owns",
+          "source_facts": [
+            "f0525",
+            "f0222"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0525",
+            "f0523"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_Interpreter",
+          "role": "owns",
+          "source_facts": [
+            "f0533",
+            "f0484"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0533",
+            "f0531"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_Renderer",
+          "role": "owns",
+          "source_facts": [
+            "f0601",
+            "f0845"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0601",
+            "f0600"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_Preview",
+          "role": "owns",
+          "source_facts": [
+            "f0719",
+            "f0687"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0719",
+            "f0717"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_Preview",
+          "role": "owns",
+          "source_facts": [
+            "f0741",
+            "f0688"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0741",
+            "f0740"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_Renderer",
+          "role": "owns",
+          "source_facts": [
+            "f0839",
+            "f0846"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0839",
+            "f0837"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_Typography",
+          "role": "owns",
+          "source_facts": [
+            "f0947",
+            "f0944"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0947",
+            "f0946"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_NativeShell",
+          "role": "owns",
+          "source_facts": [
+            "f1018",
+            "f0545"
+          ]
+        },
+        {
+          "feature": "MarkdownPresentation",
+          "key": "F06",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f1018",
+            "f1013"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_Renderer",
+          "role": "owns",
+          "source_facts": [
+            "f0130",
+            "f0844"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0130",
+            "f0129"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_VisualResources",
+          "role": "owns",
+          "source_facts": [
+            "f0136",
+            "f0983"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0136",
+            "f0135"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_NativeShell",
+          "role": "owns",
+          "source_facts": [
+            "f0356",
+            "f0544"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0356",
+            "f0351"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_Interpreter",
+          "role": "owns",
+          "source_facts": [
+            "f0534",
+            "f0484"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0534",
+            "f0531"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_Interpreter",
+          "role": "owns",
+          "source_facts": [
+            "f0540",
+            "f0485"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0540",
+            "f0539"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_Renderer",
+          "role": "owns",
+          "source_facts": [
+            "f0602",
+            "f0845"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0602",
+            "f0600"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_Publication",
+          "role": "owns",
+          "source_facts": [
+            "f0626",
+            "f0747"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0626",
+            "f0625"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_Preview",
+          "role": "owns",
+          "source_facts": [
+            "f0720",
+            "f0687"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0720",
+            "f0717"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_Preview",
+          "role": "owns",
+          "source_facts": [
+            "f0742",
+            "f0688"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0742",
+            "f0740"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_Renderer",
+          "role": "owns",
+          "source_facts": [
+            "f0840",
+            "f0846"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0840",
+            "f0837"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_Typography",
+          "role": "owns",
+          "source_facts": [
+            "f0948",
+            "f0944"
+          ]
+        },
+        {
+          "feature": "MermaidDiagrams",
+          "key": "F07",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0948",
+            "f0946"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_Preferences",
+          "role": "owns",
+          "source_facts": [
+            "f0051",
+            "f0652"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0051",
+            "f0046"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_Documents",
+          "role": "owns",
+          "source_facts": [
+            "f0211",
+            "f0232"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0211",
+            "f0207"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_NativeShell",
+          "role": "owns",
+          "source_facts": [
+            "f0357",
+            "f0544"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0357",
+            "f0351"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_Interpreter",
+          "role": "owns",
+          "source_facts": [
+            "f0535",
+            "f0484"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0535",
+            "f0531"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_Renderer",
+          "role": "owns",
+          "source_facts": [
+            "f0603",
+            "f0845"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0603",
+            "f0600"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_Publication",
+          "role": "owns",
+          "source_facts": [
+            "f0627",
+            "f0747"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0627",
+            "f0625"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_Preview",
+          "role": "owns",
+          "source_facts": [
+            "f0721",
+            "f0687"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0721",
+            "f0717"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_Renderer",
+          "role": "owns",
+          "source_facts": [
+            "f0841",
+            "f0846"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0841",
+            "f0837"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_Viewport",
+          "role": "owns",
+          "source_facts": [
+            "f0912",
+            "f0966"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0912",
+            "f0907"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_Typography",
+          "role": "owns",
+          "source_facts": [
+            "f0949",
+            "f0944"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0949",
+            "f0946"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_NativeShell",
+          "role": "owns",
+          "source_facts": [
+            "f1019",
+            "f0545"
+          ]
+        },
+        {
+          "feature": "PagedPublication",
+          "key": "F08",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f1019",
+            "f1013"
+          ]
+        },
+        {
+          "feature": "SynchronizedScrolling",
+          "key": "F09",
+          "node": "n_NativeShell",
+          "role": "owns",
+          "source_facts": [
+            "f0358",
+            "f0544"
+          ]
+        },
+        {
+          "feature": "SynchronizedScrolling",
+          "key": "F09",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0358",
+            "f0351"
+          ]
+        },
+        {
+          "feature": "SynchronizedScrolling",
+          "key": "F09",
+          "node": "n_Renderer",
+          "role": "owns",
+          "source_facts": [
+            "f0842",
+            "f0846"
+          ]
+        },
+        {
+          "feature": "SynchronizedScrolling",
+          "key": "F09",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0842",
+            "f0837"
+          ]
+        },
+        {
+          "feature": "SynchronizedScrolling",
+          "key": "F09",
+          "node": "n_Viewport",
+          "role": "owns",
+          "source_facts": [
+            "f0891",
+            "f0965"
+          ]
+        },
+        {
+          "feature": "SynchronizedScrolling",
+          "key": "F09",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0891",
+            "f0889"
+          ]
+        },
+        {
+          "feature": "SynchronizedScrolling",
+          "key": "F09",
+          "node": "n_Viewport",
+          "role": "owns",
+          "source_facts": [
+            "f0913",
+            "f0966"
+          ]
+        },
+        {
+          "feature": "SynchronizedScrolling",
+          "key": "F09",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0913",
+            "f0907"
+          ]
+        },
+        {
+          "feature": "SynchronizedScrolling",
+          "key": "F09",
+          "node": "n_NativeShell",
+          "role": "owns",
+          "source_facts": [
+            "f1020",
+            "f0545"
+          ]
+        },
+        {
+          "feature": "SynchronizedScrolling",
+          "key": "F09",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f1020",
+            "f1013"
+          ]
+        },
+        {
+          "feature": "WorkPathNavigation",
+          "key": "F10",
+          "node": "n_Workspace",
+          "role": "owns",
+          "source_facts": [
+            "f0350",
+            "f0999"
+          ]
+        },
+        {
+          "feature": "WorkPathNavigation",
+          "key": "F10",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0350",
+            "f0349"
+          ]
+        },
+        {
+          "feature": "WorkPathNavigation",
+          "key": "F10",
+          "node": "n_Workspace",
+          "role": "owns",
+          "source_facts": [
+            "f0997",
+            "f1000"
+          ]
+        },
+        {
+          "feature": "WorkPathNavigation",
+          "key": "F10",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f0997",
+            "f0996"
+          ]
+        },
+        {
+          "feature": "WorkPathNavigation",
+          "key": "F10",
+          "node": "n_NativeShell",
+          "role": "owns",
+          "source_facts": [
+            "f1022",
+            "f0545"
+          ]
+        },
+        {
+          "feature": "WorkPathNavigation",
+          "key": "F10",
+          "node": "n_XfmdDesktop",
+          "role": "allocated-to",
+          "source_facts": [
+            "f1022",
+            "f1013"
+          ]
+        }
+      ]
+    }
+  ],
+  "facts": [
+    {
+      "id": "f0019",
+      "line": 333,
+      "node": "Relation",
+      "object": "DocumentIndexService",
+      "span": {
+        "column": 1,
+        "end": 10004,
+        "end_column": 43,
+        "end_line": 333,
+        "line": 333,
+        "node": "Span",
+        "start": 9962
+      },
+      "subject": "Application",
+      "text": "Application contains DocumentIndexService.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0020",
+      "line": 334,
+      "node": "Relation",
+      "object": "DocumentStorage",
+      "span": {
+        "column": 1,
+        "end": 10042,
+        "end_column": 38,
+        "end_line": 334,
+        "line": 334,
+        "node": "Span",
+        "start": 10005
+      },
+      "subject": "Application",
+      "text": "Application contains DocumentStorage.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0021",
+      "line": 335,
+      "node": "Relation",
+      "object": "Documents",
+      "span": {
+        "column": 1,
+        "end": 10074,
+        "end_column": 32,
+        "end_line": 335,
+        "line": 335,
+        "node": "Span",
+        "start": 10043
+      },
+      "subject": "Application",
+      "text": "Application contains Documents.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0022",
+      "line": 336,
+      "node": "Relation",
+      "object": "EventLoop",
+      "span": {
+        "column": 1,
+        "end": 10106,
+        "end_column": 32,
+        "end_line": 336,
+        "line": 336,
+        "node": "Span",
+        "start": 10075
+      },
+      "subject": "Application",
+      "text": "Application contains EventLoop.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0023",
+      "line": 337,
+      "node": "Relation",
+      "object": "GeneratedViews",
+      "span": {
+        "column": 1,
+        "end": 10143,
+        "end_column": 37,
+        "end_line": 337,
+        "line": 337,
+        "node": "Span",
+        "start": 10107
+      },
+      "subject": "Application",
+      "text": "Application contains GeneratedViews.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0024",
+      "line": 338,
+      "node": "Relation",
+      "object": "Identity",
+      "span": {
+        "column": 1,
+        "end": 10174,
+        "end_column": 31,
+        "end_line": 338,
+        "line": 338,
+        "node": "Span",
+        "start": 10144
+      },
+      "subject": "Application",
+      "text": "Application contains Identity.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0025",
+      "line": 339,
+      "node": "Relation",
+      "object": "NativeShell",
+      "span": {
+        "column": 1,
+        "end": 10208,
+        "end_column": 34,
+        "end_line": 339,
+        "line": 339,
+        "node": "Span",
+        "start": 10175
+      },
+      "subject": "Application",
+      "text": "Application contains NativeShell.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0026",
+      "line": 340,
+      "node": "Relation",
+      "object": "Navigation",
+      "span": {
+        "column": 1,
+        "end": 10241,
+        "end_column": 33,
+        "end_line": 340,
+        "line": 340,
+        "node": "Span",
+        "start": 10209
+      },
+      "subject": "Application",
+      "text": "Application contains Navigation.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0027",
+      "line": 341,
+      "node": "Relation",
+      "object": "Preferences",
+      "span": {
+        "column": 1,
+        "end": 10275,
+        "end_column": 34,
+        "end_line": 341,
+        "line": 341,
+        "node": "Span",
+        "start": 10242
+      },
+      "subject": "Application",
+      "text": "Application contains Preferences.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0028",
+      "line": 342,
+      "node": "Relation",
+      "object": "Preview",
+      "span": {
+        "column": 1,
+        "end": 10305,
+        "end_column": 30,
+        "end_line": 342,
+        "line": 342,
+        "node": "Span",
+        "start": 10276
+      },
+      "subject": "Application",
+      "text": "Application contains Preview.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0029",
+      "line": 343,
+      "node": "Relation",
+      "object": "Publication",
+      "span": {
+        "column": 1,
+        "end": 10339,
+        "end_column": 34,
+        "end_line": 343,
+        "line": 343,
+        "node": "Span",
+        "start": 10306
+      },
+      "subject": "Application",
+      "text": "Application contains Publication.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0030",
+      "line": 344,
+      "node": "Relation",
+      "object": "SdpProjects",
+      "span": {
+        "column": 1,
+        "end": 10373,
+        "end_column": 34,
+        "end_line": 344,
+        "line": 344,
+        "node": "Span",
+        "start": 10340
+      },
+      "subject": "Application",
+      "text": "Application contains SdpProjects.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0031",
+      "line": 345,
+      "node": "Relation",
+      "object": "Typography",
+      "span": {
+        "column": 1,
+        "end": 10406,
+        "end_column": 33,
+        "end_line": 345,
+        "line": 345,
+        "node": "Span",
+        "start": 10374
+      },
+      "subject": "Application",
+      "text": "Application contains Typography.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0032",
+      "line": 346,
+      "node": "Relation",
+      "object": "Viewport",
+      "span": {
+        "column": 1,
+        "end": 10437,
+        "end_column": 31,
+        "end_line": 346,
+        "line": 346,
+        "node": "Span",
+        "start": 10407
+      },
+      "subject": "Application",
+      "text": "Application contains Viewport.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0033",
+      "line": 347,
+      "node": "Relation",
+      "object": "VisualResources",
+      "span": {
+        "column": 1,
+        "end": 10475,
+        "end_column": 38,
+        "end_line": 347,
+        "line": 347,
+        "node": "Span",
+        "start": 10438
+      },
+      "subject": "Application",
+      "text": "Application contains VisualResources.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0034",
+      "line": 348,
+      "node": "Relation",
+      "object": "Workspace",
+      "span": {
+        "column": 1,
+        "end": 10507,
+        "end_column": 32,
+        "end_line": 348,
+        "line": 348,
+        "node": "Span",
+        "start": 10476
+      },
+      "subject": "Application",
+      "text": "Application contains Workspace.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0046",
+      "line": 360,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 11543,
+        "end_column": 71,
+        "end_line": 360,
+        "line": 360,
+        "node": "Span",
+        "start": 11473
+      },
+      "subject": "ApplicationPreferences",
+      "text": "ApplicationPreferences allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0047",
+      "line": 361,
+      "node": "Relation",
+      "object": "ConfigurableScrolling",
+      "span": {
+        "column": 1,
+        "end": 11604,
+        "end_column": 61,
+        "end_line": 361,
+        "line": 361,
+        "node": "Span",
+        "start": 11544
+      },
+      "subject": "ApplicationPreferences",
+      "text": "ApplicationPreferences contributes-to ConfigurableScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0049",
+      "line": 363,
+      "node": "Relation",
+      "object": "DocumentNavigation",
+      "span": {
+        "column": 1,
+        "end": 11722,
+        "end_column": 58,
+        "end_line": 363,
+        "line": 363,
+        "node": "Span",
+        "start": 11665
+      },
+      "subject": "ApplicationPreferences",
+      "text": "ApplicationPreferences contributes-to DocumentNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0050",
+      "line": 364,
+      "node": "Relation",
+      "object": "DocumentReferences",
+      "span": {
+        "column": 1,
+        "end": 11780,
+        "end_column": 58,
+        "end_line": 364,
+        "line": 364,
+        "node": "Span",
+        "start": 11723
+      },
+      "subject": "ApplicationPreferences",
+      "text": "ApplicationPreferences contributes-to DocumentReferences.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0051",
+      "line": 365,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 11836,
+        "end_column": 56,
+        "end_line": 365,
+        "line": 365,
+        "node": "Span",
+        "start": 11781
+      },
+      "subject": "ApplicationPreferences",
+      "text": "ApplicationPreferences contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0129",
+      "line": 443,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 16244,
+        "end_column": 62,
+        "end_line": 443,
+        "line": 443,
+        "node": "Span",
+        "start": 16183
+      },
+      "subject": "DiagramLayout",
+      "text": "DiagramLayout allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0130",
+      "line": 444,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 16290,
+        "end_column": 46,
+        "end_line": 444,
+        "line": 444,
+        "node": "Span",
+        "start": 16245
+      },
+      "subject": "DiagramLayout",
+      "text": "DiagramLayout contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0135",
+      "line": 449,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 16577,
+        "end_column": 67,
+        "end_line": 449,
+        "line": 449,
+        "node": "Span",
+        "start": 16511
+      },
+      "subject": "DiagramPreparation",
+      "text": "DiagramPreparation allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0136",
+      "line": 450,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 16628,
+        "end_column": 51,
+        "end_line": 450,
+        "line": 450,
+        "node": "Span",
+        "start": 16578
+      },
+      "subject": "DiagramPreparation",
+      "text": "DiagramPreparation contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0176",
+      "line": 490,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 19447,
+        "end_column": 62,
+        "end_line": 490,
+        "line": 490,
+        "node": "Span",
+        "start": 19386
+      },
+      "subject": "DocumentIndex",
+      "text": "DocumentIndex allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0177",
+      "line": 491,
+      "node": "Relation",
+      "object": "ChapterNavigation",
+      "span": {
+        "column": 1,
+        "end": 19495,
+        "end_column": 48,
+        "end_line": 491,
+        "line": 491,
+        "node": "Span",
+        "start": 19448
+      },
+      "subject": "DocumentIndex",
+      "text": "DocumentIndex contributes-to ChapterNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0178",
+      "line": 492,
+      "node": "Relation",
+      "object": "DocumentReferences",
+      "span": {
+        "column": 1,
+        "end": 19544,
+        "end_column": 49,
+        "end_line": 492,
+        "line": 492,
+        "node": "Span",
+        "start": 19496
+      },
+      "subject": "DocumentIndex",
+      "text": "DocumentIndex contributes-to DocumentReferences.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0181",
+      "line": 495,
+      "node": "Relation",
+      "object": "DocumentIndex",
+      "span": {
+        "column": 1,
+        "end": 19677,
+        "end_column": 41,
+        "end_line": 495,
+        "line": 495,
+        "node": "Span",
+        "start": 19637
+      },
+      "subject": "DocumentIndexService",
+      "text": "DocumentIndexService owns DocumentIndex.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0207",
+      "line": 521,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 21347,
+        "end_column": 64,
+        "end_line": 521,
+        "line": 521,
+        "node": "Span",
+        "start": 21284
+      },
+      "subject": "DocumentSession",
+      "text": "DocumentSession allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0208",
+      "line": 522,
+      "node": "Relation",
+      "object": "DocumentNavigation",
+      "span": {
+        "column": 1,
+        "end": 21398,
+        "end_column": 51,
+        "end_line": 522,
+        "line": 522,
+        "node": "Span",
+        "start": 21348
+      },
+      "subject": "DocumentSession",
+      "text": "DocumentSession contributes-to DocumentNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0209",
+      "line": 523,
+      "node": "Relation",
+      "object": "LivePreview",
+      "span": {
+        "column": 1,
+        "end": 21442,
+        "end_column": 44,
+        "end_line": 523,
+        "line": 523,
+        "node": "Span",
+        "start": 21399
+      },
+      "subject": "DocumentSession",
+      "text": "DocumentSession contributes-to LivePreview.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0210",
+      "line": 524,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 21495,
+        "end_column": 53,
+        "end_line": 524,
+        "line": 524,
+        "node": "Span",
+        "start": 21443
+      },
+      "subject": "DocumentSession",
+      "text": "DocumentSession contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0211",
+      "line": 525,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 21544,
+        "end_column": 49,
+        "end_line": 525,
+        "line": 525,
+        "node": "Span",
+        "start": 21496
+      },
+      "subject": "DocumentSession",
+      "text": "DocumentSession contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0222",
+      "line": 536,
+      "node": "Relation",
+      "object": "LocalFileStorage",
+      "span": {
+        "column": 1,
+        "end": 22083,
+        "end_column": 39,
+        "end_line": 536,
+        "line": 536,
+        "node": "Span",
+        "start": 22045
+      },
+      "subject": "DocumentStorage",
+      "text": "DocumentStorage owns LocalFileStorage.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0232",
+      "line": 546,
+      "node": "Relation",
+      "object": "DocumentSession",
+      "span": {
+        "column": 1,
+        "end": 22792,
+        "end_column": 32,
+        "end_line": 546,
+        "line": 546,
+        "node": "Span",
+        "start": 22761
+      },
+      "subject": "Documents",
+      "text": "Documents owns DocumentSession.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0233",
+      "line": 547,
+      "node": "Relation",
+      "object": "TextEditing",
+      "span": {
+        "column": 1,
+        "end": 22820,
+        "end_column": 28,
+        "end_line": 547,
+        "line": 547,
+        "node": "Span",
+        "start": 22793
+      },
+      "subject": "Documents",
+      "text": "Documents owns TextEditing.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0274",
+      "line": 588,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 26246,
+        "end_column": 64,
+        "end_line": 588,
+        "line": 588,
+        "node": "Span",
+        "start": 26183
+      },
+      "subject": "EmbeddedVisuals",
+      "text": "EmbeddedVisuals allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0275",
+      "line": 589,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 26299,
+        "end_column": 53,
+        "end_line": 589,
+        "line": 589,
+        "node": "Span",
+        "start": 26247
+      },
+      "subject": "EmbeddedVisuals",
+      "text": "EmbeddedVisuals contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0276",
+      "line": 590,
+      "node": "Relation",
+      "object": "EventScheduling",
+      "span": {
+        "column": 1,
+        "end": 26331,
+        "end_column": 32,
+        "end_line": 590,
+        "line": 590,
+        "node": "Span",
+        "start": 26300
+      },
+      "subject": "EventLoop",
+      "text": "EventLoop owns EventScheduling.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0280",
+      "line": 594,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 26641,
+        "end_column": 64,
+        "end_line": 594,
+        "line": 594,
+        "node": "Span",
+        "start": 26578
+      },
+      "subject": "EventScheduling",
+      "text": "EventScheduling allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0281",
+      "line": 595,
+      "node": "Relation",
+      "object": "LivePreview",
+      "span": {
+        "column": 1,
+        "end": 26685,
+        "end_column": 44,
+        "end_line": 595,
+        "line": 595,
+        "node": "Span",
+        "start": 26642
+      },
+      "subject": "EventScheduling",
+      "text": "EventScheduling contributes-to LivePreview.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0349",
+      "line": 663,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 31208,
+        "end_column": 65,
+        "end_line": 663,
+        "line": 663,
+        "node": "Span",
+        "start": 31144
+      },
+      "subject": "FilteredFileTree",
+      "text": "FilteredFileTree allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0350",
+      "line": 664,
+      "node": "Relation",
+      "object": "WorkPathNavigation",
+      "span": {
+        "column": 1,
+        "end": 31260,
+        "end_column": 52,
+        "end_line": 664,
+        "line": 664,
+        "node": "Span",
+        "start": 31209
+      },
+      "subject": "FilteredFileTree",
+      "text": "FilteredFileTree contributes-to WorkPathNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0351",
+      "line": 665,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 31324,
+        "end_column": 64,
+        "end_line": 665,
+        "line": 665,
+        "node": "Span",
+        "start": 31261
+      },
+      "subject": "FoxPresentation",
+      "text": "FoxPresentation allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0352",
+      "line": 666,
+      "node": "Relation",
+      "object": "ConfigurableScrolling",
+      "span": {
+        "column": 1,
+        "end": 31378,
+        "end_column": 54,
+        "end_line": 666,
+        "line": 666,
+        "node": "Span",
+        "start": 31325
+      },
+      "subject": "FoxPresentation",
+      "text": "FoxPresentation contributes-to ConfigurableScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0353",
+      "line": 667,
+      "node": "Relation",
+      "object": "DocumentNavigation",
+      "span": {
+        "column": 1,
+        "end": 31429,
+        "end_column": 51,
+        "end_line": 667,
+        "line": 667,
+        "node": "Span",
+        "start": 31379
+      },
+      "subject": "FoxPresentation",
+      "text": "FoxPresentation contributes-to DocumentNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0354",
+      "line": 668,
+      "node": "Relation",
+      "object": "LivePreview",
+      "span": {
+        "column": 1,
+        "end": 31473,
+        "end_column": 44,
+        "end_line": 668,
+        "line": 668,
+        "node": "Span",
+        "start": 31430
+      },
+      "subject": "FoxPresentation",
+      "text": "FoxPresentation contributes-to LivePreview.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0355",
+      "line": 669,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 31526,
+        "end_column": 53,
+        "end_line": 669,
+        "line": 669,
+        "node": "Span",
+        "start": 31474
+      },
+      "subject": "FoxPresentation",
+      "text": "FoxPresentation contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0356",
+      "line": 670,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 31574,
+        "end_column": 48,
+        "end_line": 670,
+        "line": 670,
+        "node": "Span",
+        "start": 31527
+      },
+      "subject": "FoxPresentation",
+      "text": "FoxPresentation contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0357",
+      "line": 671,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 31623,
+        "end_column": 49,
+        "end_line": 671,
+        "line": 671,
+        "node": "Span",
+        "start": 31575
+      },
+      "subject": "FoxPresentation",
+      "text": "FoxPresentation contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0358",
+      "line": 672,
+      "node": "Relation",
+      "object": "SynchronizedScrolling",
+      "span": {
+        "column": 1,
+        "end": 31677,
+        "end_column": 54,
+        "end_line": 672,
+        "line": 672,
+        "node": "Span",
+        "start": 31624
+      },
+      "subject": "FoxPresentation",
+      "text": "FoxPresentation contributes-to SynchronizedScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0484",
+      "line": 798,
+      "node": "Relation",
+      "object": "MarkdownInterpretation",
+      "span": {
+        "column": 1,
+        "end": 40668,
+        "end_column": 41,
+        "end_line": 798,
+        "line": 798,
+        "node": "Span",
+        "start": 40628
+      },
+      "subject": "Interpreter",
+      "text": "Interpreter owns MarkdownInterpretation.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0485",
+      "line": 799,
+      "node": "Relation",
+      "object": "MermaidInterpretation",
+      "span": {
+        "column": 1,
+        "end": 40708,
+        "end_column": 40,
+        "end_line": 799,
+        "line": 799,
+        "node": "Span",
+        "start": 40669
+      },
+      "subject": "Interpreter",
+      "text": "Interpreter owns MermaidInterpretation.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0523",
+      "line": 837,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 43094,
+        "end_column": 65,
+        "end_line": 837,
+        "line": 837,
+        "node": "Span",
+        "start": 43030
+      },
+      "subject": "LocalFileStorage",
+      "text": "LocalFileStorage allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0524",
+      "line": 838,
+      "node": "Relation",
+      "object": "DocumentNavigation",
+      "span": {
+        "column": 1,
+        "end": 43146,
+        "end_column": 52,
+        "end_line": 838,
+        "line": 838,
+        "node": "Span",
+        "start": 43095
+      },
+      "subject": "LocalFileStorage",
+      "text": "LocalFileStorage contributes-to DocumentNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0525",
+      "line": 839,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 43200,
+        "end_column": 54,
+        "end_line": 839,
+        "line": 839,
+        "node": "Span",
+        "start": 43147
+      },
+      "subject": "LocalFileStorage",
+      "text": "LocalFileStorage contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0531",
+      "line": 845,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 43509,
+        "end_column": 71,
+        "end_line": 845,
+        "line": 845,
+        "node": "Span",
+        "start": 43439
+      },
+      "subject": "MarkdownInterpretation",
+      "text": "MarkdownInterpretation allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0532",
+      "line": 846,
+      "node": "Relation",
+      "object": "LivePreview",
+      "span": {
+        "column": 1,
+        "end": 43560,
+        "end_column": 51,
+        "end_line": 846,
+        "line": 846,
+        "node": "Span",
+        "start": 43510
+      },
+      "subject": "MarkdownInterpretation",
+      "text": "MarkdownInterpretation contributes-to LivePreview.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0533",
+      "line": 847,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 43620,
+        "end_column": 60,
+        "end_line": 847,
+        "line": 847,
+        "node": "Span",
+        "start": 43561
+      },
+      "subject": "MarkdownInterpretation",
+      "text": "MarkdownInterpretation contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0534",
+      "line": 848,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 43675,
+        "end_column": 55,
+        "end_line": 848,
+        "line": 848,
+        "node": "Span",
+        "start": 43621
+      },
+      "subject": "MarkdownInterpretation",
+      "text": "MarkdownInterpretation contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0535",
+      "line": 849,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 43731,
+        "end_column": 56,
+        "end_line": 849,
+        "line": 849,
+        "node": "Span",
+        "start": 43676
+      },
+      "subject": "MarkdownInterpretation",
+      "text": "MarkdownInterpretation contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0539",
+      "line": 853,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 43925,
+        "end_column": 70,
+        "end_line": 853,
+        "line": 853,
+        "node": "Span",
+        "start": 43856
+      },
+      "subject": "MermaidInterpretation",
+      "text": "MermaidInterpretation allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0540",
+      "line": 854,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 43979,
+        "end_column": 54,
+        "end_line": 854,
+        "line": 854,
+        "node": "Span",
+        "start": 43926
+      },
+      "subject": "MermaidInterpretation",
+      "text": "MermaidInterpretation contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0544",
+      "line": 858,
+      "node": "Relation",
+      "object": "FoxPresentation",
+      "span": {
+        "column": 1,
+        "end": 44140,
+        "end_column": 34,
+        "end_line": 858,
+        "line": 858,
+        "node": "Span",
+        "start": 44107
+      },
+      "subject": "NativeShell",
+      "text": "NativeShell owns FoxPresentation.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0545",
+      "line": 859,
+      "node": "Relation",
+      "object": "WorkspaceControls",
+      "span": {
+        "column": 1,
+        "end": 44176,
+        "end_column": 36,
+        "end_line": 859,
+        "line": 859,
+        "node": "Span",
+        "start": 44141
+      },
+      "subject": "NativeShell",
+      "text": "NativeShell owns WorkspaceControls.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0576",
+      "line": 890,
+      "node": "Relation",
+      "object": "NavigationHistory",
+      "span": {
+        "column": 1,
+        "end": 46899,
+        "end_column": 35,
+        "end_line": 890,
+        "line": 890,
+        "node": "Span",
+        "start": 46865
+      },
+      "subject": "Navigation",
+      "text": "Navigation owns NavigationHistory.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0587",
+      "line": 901,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 47653,
+        "end_column": 66,
+        "end_line": 901,
+        "line": 901,
+        "node": "Span",
+        "start": 47588
+      },
+      "subject": "NavigationHistory",
+      "text": "NavigationHistory allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0588",
+      "line": 902,
+      "node": "Relation",
+      "object": "ChapterNavigation",
+      "span": {
+        "column": 1,
+        "end": 47705,
+        "end_column": 52,
+        "end_line": 902,
+        "line": 902,
+        "node": "Span",
+        "start": 47654
+      },
+      "subject": "NavigationHistory",
+      "text": "NavigationHistory contributes-to ChapterNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0589",
+      "line": 903,
+      "node": "Relation",
+      "object": "DocumentNavigation",
+      "span": {
+        "column": 1,
+        "end": 47758,
+        "end_column": 53,
+        "end_line": 903,
+        "line": 903,
+        "node": "Span",
+        "start": 47706
+      },
+      "subject": "NavigationHistory",
+      "text": "NavigationHistory contributes-to DocumentNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0590",
+      "line": 904,
+      "node": "Relation",
+      "object": "DocumentReferences",
+      "span": {
+        "column": 1,
+        "end": 47811,
+        "end_column": 53,
+        "end_line": 904,
+        "line": 904,
+        "node": "Span",
+        "start": 47759
+      },
+      "subject": "NavigationHistory",
+      "text": "NavigationHistory contributes-to DocumentReferences.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0600",
+      "line": 914,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 48305,
+        "end_column": 64,
+        "end_line": 914,
+        "line": 914,
+        "node": "Span",
+        "start": 48242
+      },
+      "subject": "PageComposition",
+      "text": "PageComposition allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0601",
+      "line": 915,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 48358,
+        "end_column": 53,
+        "end_line": 915,
+        "line": 915,
+        "node": "Span",
+        "start": 48306
+      },
+      "subject": "PageComposition",
+      "text": "PageComposition contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0602",
+      "line": 916,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 48406,
+        "end_column": 48,
+        "end_line": 916,
+        "line": 916,
+        "node": "Span",
+        "start": 48359
+      },
+      "subject": "PageComposition",
+      "text": "PageComposition contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0603",
+      "line": 917,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 48455,
+        "end_column": 49,
+        "end_line": 917,
+        "line": 917,
+        "node": "Span",
+        "start": 48407
+      },
+      "subject": "PageComposition",
+      "text": "PageComposition contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0625",
+      "line": 939,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 49735,
+        "end_column": 58,
+        "end_line": 939,
+        "line": 939,
+        "node": "Span",
+        "start": 49678
+      },
+      "subject": "PdfExport",
+      "text": "PdfExport allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0626",
+      "line": 940,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 49777,
+        "end_column": 42,
+        "end_line": 940,
+        "line": 940,
+        "node": "Span",
+        "start": 49736
+      },
+      "subject": "PdfExport",
+      "text": "PdfExport contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0627",
+      "line": 941,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 49820,
+        "end_column": 43,
+        "end_line": 941,
+        "line": 941,
+        "node": "Span",
+        "start": 49778
+      },
+      "subject": "PdfExport",
+      "text": "PdfExport contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0652",
+      "line": 966,
+      "node": "Relation",
+      "object": "ApplicationPreferences",
+      "span": {
+        "column": 1,
+        "end": 51639,
+        "end_column": 41,
+        "end_line": 966,
+        "line": 966,
+        "node": "Span",
+        "start": 51599
+      },
+      "subject": "Preferences",
+      "text": "Preferences owns ApplicationPreferences.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0687",
+      "line": 1001,
+      "node": "Relation",
+      "object": "PreviewPipeline",
+      "span": {
+        "column": 1,
+        "end": 54096,
+        "end_column": 30,
+        "end_line": 1001,
+        "line": 1001,
+        "node": "Span",
+        "start": 54067
+      },
+      "subject": "Preview",
+      "text": "Preview owns PreviewPipeline.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0688",
+      "line": 1002,
+      "node": "Relation",
+      "object": "PreviewTextSelection",
+      "span": {
+        "column": 1,
+        "end": 54131,
+        "end_column": 35,
+        "end_line": 1002,
+        "line": 1002,
+        "node": "Span",
+        "start": 54097
+      },
+      "subject": "Preview",
+      "text": "Preview owns PreviewTextSelection.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0717",
+      "line": 1031,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 56377,
+        "end_column": 64,
+        "end_line": 1031,
+        "line": 1031,
+        "node": "Span",
+        "start": 56314
+      },
+      "subject": "PreviewPipeline",
+      "text": "PreviewPipeline allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0718",
+      "line": 1032,
+      "node": "Relation",
+      "object": "LivePreview",
+      "span": {
+        "column": 1,
+        "end": 56421,
+        "end_column": 44,
+        "end_line": 1032,
+        "line": 1032,
+        "node": "Span",
+        "start": 56378
+      },
+      "subject": "PreviewPipeline",
+      "text": "PreviewPipeline contributes-to LivePreview.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0719",
+      "line": 1033,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 56474,
+        "end_column": 53,
+        "end_line": 1033,
+        "line": 1033,
+        "node": "Span",
+        "start": 56422
+      },
+      "subject": "PreviewPipeline",
+      "text": "PreviewPipeline contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0720",
+      "line": 1034,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 56522,
+        "end_column": 48,
+        "end_line": 1034,
+        "line": 1034,
+        "node": "Span",
+        "start": 56475
+      },
+      "subject": "PreviewPipeline",
+      "text": "PreviewPipeline contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0721",
+      "line": 1035,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 56571,
+        "end_column": 49,
+        "end_line": 1035,
+        "line": 1035,
+        "node": "Span",
+        "start": 56523
+      },
+      "subject": "PreviewPipeline",
+      "text": "PreviewPipeline contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0740",
+      "line": 1054,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 58267,
+        "end_column": 69,
+        "end_line": 1054,
+        "line": 1054,
+        "node": "Span",
+        "start": 58199
+      },
+      "subject": "PreviewTextSelection",
+      "text": "PreviewTextSelection allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0741",
+      "line": 1055,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 58325,
+        "end_column": 58,
+        "end_line": 1055,
+        "line": 1055,
+        "node": "Span",
+        "start": 58268
+      },
+      "subject": "PreviewTextSelection",
+      "text": "PreviewTextSelection contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0742",
+      "line": 1056,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 58378,
+        "end_column": 53,
+        "end_line": 1056,
+        "line": 1056,
+        "node": "Span",
+        "start": 58326
+      },
+      "subject": "PreviewTextSelection",
+      "text": "PreviewTextSelection contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0747",
+      "line": 1061,
+      "node": "Relation",
+      "object": "PdfExport",
+      "span": {
+        "column": 1,
+        "end": 58557,
+        "end_column": 28,
+        "end_line": 1061,
+        "line": 1061,
+        "node": "Span",
+        "start": 58530
+      },
+      "subject": "Publication",
+      "text": "Publication owns PdfExport.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0837",
+      "line": 1151,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 64491,
+        "end_column": 61,
+        "end_line": 1151,
+        "line": 1151,
+        "node": "Span",
+        "start": 64431
+      },
+      "subject": "RenderLayout",
+      "text": "RenderLayout allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0838",
+      "line": 1152,
+      "node": "Relation",
+      "object": "LivePreview",
+      "span": {
+        "column": 1,
+        "end": 64532,
+        "end_column": 41,
+        "end_line": 1152,
+        "line": 1152,
+        "node": "Span",
+        "start": 64492
+      },
+      "subject": "RenderLayout",
+      "text": "RenderLayout contributes-to LivePreview.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0839",
+      "line": 1153,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 64582,
+        "end_column": 50,
+        "end_line": 1153,
+        "line": 1153,
+        "node": "Span",
+        "start": 64533
+      },
+      "subject": "RenderLayout",
+      "text": "RenderLayout contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0840",
+      "line": 1154,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 64627,
+        "end_column": 45,
+        "end_line": 1154,
+        "line": 1154,
+        "node": "Span",
+        "start": 64583
+      },
+      "subject": "RenderLayout",
+      "text": "RenderLayout contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0841",
+      "line": 1155,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 64673,
+        "end_column": 46,
+        "end_line": 1155,
+        "line": 1155,
+        "node": "Span",
+        "start": 64628
+      },
+      "subject": "RenderLayout",
+      "text": "RenderLayout contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0842",
+      "line": 1156,
+      "node": "Relation",
+      "object": "SynchronizedScrolling",
+      "span": {
+        "column": 1,
+        "end": 64724,
+        "end_column": 51,
+        "end_line": 1156,
+        "line": 1156,
+        "node": "Span",
+        "start": 64674
+      },
+      "subject": "RenderLayout",
+      "text": "RenderLayout contributes-to SynchronizedScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0844",
+      "line": 1158,
+      "node": "Relation",
+      "object": "DiagramLayout",
+      "span": {
+        "column": 1,
+        "end": 64788,
+        "end_column": 29,
+        "end_line": 1158,
+        "line": 1158,
+        "node": "Span",
+        "start": 64760
+      },
+      "subject": "Renderer",
+      "text": "Renderer owns DiagramLayout.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0845",
+      "line": 1159,
+      "node": "Relation",
+      "object": "PageComposition",
+      "span": {
+        "column": 1,
+        "end": 64819,
+        "end_column": 31,
+        "end_line": 1159,
+        "line": 1159,
+        "node": "Span",
+        "start": 64789
+      },
+      "subject": "Renderer",
+      "text": "Renderer owns PageComposition.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0846",
+      "line": 1160,
+      "node": "Relation",
+      "object": "RenderLayout",
+      "span": {
+        "column": 1,
+        "end": 64847,
+        "end_column": 28,
+        "end_line": 1160,
+        "line": 1160,
+        "node": "Span",
+        "start": 64820
+      },
+      "subject": "Renderer",
+      "text": "Renderer owns RenderLayout.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0889",
+      "line": 1203,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 67685,
+        "end_column": 61,
+        "end_line": 1203,
+        "line": 1203,
+        "node": "Span",
+        "start": 67625
+      },
+      "subject": "ScrollMotion",
+      "text": "ScrollMotion allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0890",
+      "line": 1204,
+      "node": "Relation",
+      "object": "ConfigurableScrolling",
+      "span": {
+        "column": 1,
+        "end": 67736,
+        "end_column": 51,
+        "end_line": 1204,
+        "line": 1204,
+        "node": "Span",
+        "start": 67686
+      },
+      "subject": "ScrollMotion",
+      "text": "ScrollMotion contributes-to ConfigurableScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0891",
+      "line": 1205,
+      "node": "Relation",
+      "object": "SynchronizedScrolling",
+      "span": {
+        "column": 1,
+        "end": 67787,
+        "end_column": 51,
+        "end_line": 1205,
+        "line": 1205,
+        "node": "Span",
+        "start": 67737
+      },
+      "subject": "ScrollMotion",
+      "text": "ScrollMotion contributes-to SynchronizedScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0907",
+      "line": 1221,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 68594,
+        "end_column": 68,
+        "end_line": 1221,
+        "line": 1221,
+        "node": "Span",
+        "start": 68527
+      },
+      "subject": "SourceAnchorMapping",
+      "text": "SourceAnchorMapping allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0908",
+      "line": 1222,
+      "node": "Relation",
+      "object": "ChapterNavigation",
+      "span": {
+        "column": 1,
+        "end": 68648,
+        "end_column": 54,
+        "end_line": 1222,
+        "line": 1222,
+        "node": "Span",
+        "start": 68595
+      },
+      "subject": "SourceAnchorMapping",
+      "text": "SourceAnchorMapping contributes-to ChapterNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0909",
+      "line": 1223,
+      "node": "Relation",
+      "object": "ConfigurableScrolling",
+      "span": {
+        "column": 1,
+        "end": 68706,
+        "end_column": 58,
+        "end_line": 1223,
+        "line": 1223,
+        "node": "Span",
+        "start": 68649
+      },
+      "subject": "SourceAnchorMapping",
+      "text": "SourceAnchorMapping contributes-to ConfigurableScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0910",
+      "line": 1224,
+      "node": "Relation",
+      "object": "DocumentNavigation",
+      "span": {
+        "column": 1,
+        "end": 68761,
+        "end_column": 55,
+        "end_line": 1224,
+        "line": 1224,
+        "node": "Span",
+        "start": 68707
+      },
+      "subject": "SourceAnchorMapping",
+      "text": "SourceAnchorMapping contributes-to DocumentNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0911",
+      "line": 1225,
+      "node": "Relation",
+      "object": "DocumentReferences",
+      "span": {
+        "column": 1,
+        "end": 68816,
+        "end_column": 55,
+        "end_line": 1225,
+        "line": 1225,
+        "node": "Span",
+        "start": 68762
+      },
+      "subject": "SourceAnchorMapping",
+      "text": "SourceAnchorMapping contributes-to DocumentReferences.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0912",
+      "line": 1226,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 68869,
+        "end_column": 53,
+        "end_line": 1226,
+        "line": 1226,
+        "node": "Span",
+        "start": 68817
+      },
+      "subject": "SourceAnchorMapping",
+      "text": "SourceAnchorMapping contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0913",
+      "line": 1227,
+      "node": "Relation",
+      "object": "SynchronizedScrolling",
+      "span": {
+        "column": 1,
+        "end": 68927,
+        "end_column": 58,
+        "end_line": 1227,
+        "line": 1227,
+        "node": "Span",
+        "start": 68870
+      },
+      "subject": "SourceAnchorMapping",
+      "text": "SourceAnchorMapping contributes-to SynchronizedScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0936",
+      "line": 1250,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 70069,
+        "end_column": 60,
+        "end_line": 1250,
+        "line": 1250,
+        "node": "Span",
+        "start": 70010
+      },
+      "subject": "TextEditing",
+      "text": "TextEditing allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0937",
+      "line": 1251,
+      "node": "Relation",
+      "object": "ConfigurableScrolling",
+      "span": {
+        "column": 1,
+        "end": 70119,
+        "end_column": 50,
+        "end_line": 1251,
+        "line": 1251,
+        "node": "Span",
+        "start": 70070
+      },
+      "subject": "TextEditing",
+      "text": "TextEditing contributes-to ConfigurableScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0938",
+      "line": 1252,
+      "node": "Relation",
+      "object": "LivePreview",
+      "span": {
+        "column": 1,
+        "end": 70159,
+        "end_column": 40,
+        "end_line": 1252,
+        "line": 1252,
+        "node": "Span",
+        "start": 70120
+      },
+      "subject": "TextEditing",
+      "text": "TextEditing contributes-to LivePreview.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0944",
+      "line": 1258,
+      "node": "Relation",
+      "object": "TypographyAndDrawing",
+      "span": {
+        "column": 1,
+        "end": 70449,
+        "end_column": 38,
+        "end_line": 1258,
+        "line": 1258,
+        "node": "Span",
+        "start": 70412
+      },
+      "subject": "Typography",
+      "text": "Typography owns TypographyAndDrawing.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0946",
+      "line": 1260,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 70609,
+        "end_column": 69,
+        "end_line": 1260,
+        "line": 1260,
+        "node": "Span",
+        "start": 70541
+      },
+      "subject": "TypographyAndDrawing",
+      "text": "TypographyAndDrawing allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0947",
+      "line": 1261,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 70667,
+        "end_column": 58,
+        "end_line": 1261,
+        "line": 1261,
+        "node": "Span",
+        "start": 70610
+      },
+      "subject": "TypographyAndDrawing",
+      "text": "TypographyAndDrawing contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0948",
+      "line": 1262,
+      "node": "Relation",
+      "object": "MermaidDiagrams",
+      "span": {
+        "column": 1,
+        "end": 70720,
+        "end_column": 53,
+        "end_line": 1262,
+        "line": 1262,
+        "node": "Span",
+        "start": 70668
+      },
+      "subject": "TypographyAndDrawing",
+      "text": "TypographyAndDrawing contributes-to MermaidDiagrams.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0949",
+      "line": 1263,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 70774,
+        "end_column": 54,
+        "end_line": 1263,
+        "line": 1263,
+        "node": "Span",
+        "start": 70721
+      },
+      "subject": "TypographyAndDrawing",
+      "text": "TypographyAndDrawing contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0965",
+      "line": 1279,
+      "node": "Relation",
+      "object": "ScrollMotion",
+      "span": {
+        "column": 1,
+        "end": 71528,
+        "end_column": 28,
+        "end_line": 1279,
+        "line": 1279,
+        "node": "Span",
+        "start": 71501
+      },
+      "subject": "Viewport",
+      "text": "Viewport owns ScrollMotion.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0966",
+      "line": 1280,
+      "node": "Relation",
+      "object": "SourceAnchorMapping",
+      "span": {
+        "column": 1,
+        "end": 71563,
+        "end_column": 35,
+        "end_line": 1280,
+        "line": 1280,
+        "node": "Span",
+        "start": 71529
+      },
+      "subject": "Viewport",
+      "text": "Viewport owns SourceAnchorMapping.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0983",
+      "line": 1297,
+      "node": "Relation",
+      "object": "DiagramPreparation",
+      "span": {
+        "column": 1,
+        "end": 72649,
+        "end_column": 41,
+        "end_line": 1297,
+        "line": 1297,
+        "node": "Span",
+        "start": 72609
+      },
+      "subject": "VisualResources",
+      "text": "VisualResources owns DiagramPreparation.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0984",
+      "line": 1298,
+      "node": "Relation",
+      "object": "EmbeddedVisuals",
+      "span": {
+        "column": 1,
+        "end": 72687,
+        "end_column": 38,
+        "end_line": 1298,
+        "line": 1298,
+        "node": "Span",
+        "start": 72650
+      },
+      "subject": "VisualResources",
+      "text": "VisualResources owns EmbeddedVisuals.",
+      "verb": "owns"
+    },
+    {
+      "id": "f0996",
+      "line": 1310,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 73709,
+        "end_column": 64,
+        "end_line": 1310,
+        "line": 1310,
+        "node": "Span",
+        "start": 73646
+      },
+      "subject": "WorkPathHistory",
+      "text": "WorkPathHistory allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f0997",
+      "line": 1311,
+      "node": "Relation",
+      "object": "WorkPathNavigation",
+      "span": {
+        "column": 1,
+        "end": 73760,
+        "end_column": 51,
+        "end_line": 1311,
+        "line": 1311,
+        "node": "Span",
+        "start": 73710
+      },
+      "subject": "WorkPathHistory",
+      "text": "WorkPathHistory contributes-to WorkPathNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0999",
+      "line": 1313,
+      "node": "Relation",
+      "object": "FilteredFileTree",
+      "span": {
+        "column": 1,
+        "end": 73838,
+        "end_column": 33,
+        "end_line": 1313,
+        "line": 1313,
+        "node": "Span",
+        "start": 73806
+      },
+      "subject": "Workspace",
+      "text": "Workspace owns FilteredFileTree.",
+      "verb": "owns"
+    },
+    {
+      "id": "f1000",
+      "line": 1314,
+      "node": "Relation",
+      "object": "WorkPathHistory",
+      "span": {
+        "column": 1,
+        "end": 73870,
+        "end_column": 32,
+        "end_line": 1314,
+        "line": 1314,
+        "node": "Span",
+        "start": 73839
+      },
+      "subject": "Workspace",
+      "text": "Workspace owns WorkPathHistory.",
+      "verb": "owns"
+    },
+    {
+      "id": "f1013",
+      "line": 1327,
+      "mode": "NormalDesktop",
+      "node": "Allocation",
+      "object": "XfmdDesktop",
+      "span": {
+        "column": 1,
+        "end": 74801,
+        "end_column": 66,
+        "end_line": 1327,
+        "line": 1327,
+        "node": "Span",
+        "start": 74736
+      },
+      "subject": "WorkspaceControls",
+      "text": "WorkspaceControls allocated-to XfmdDesktop in mode NormalDesktop.",
+      "verb": "allocated-to"
+    },
+    {
+      "id": "f1014",
+      "line": 1328,
+      "node": "Relation",
+      "object": "ChapterNavigation",
+      "span": {
+        "column": 1,
+        "end": 74853,
+        "end_column": 52,
+        "end_line": 1328,
+        "line": 1328,
+        "node": "Span",
+        "start": 74802
+      },
+      "subject": "WorkspaceControls",
+      "text": "WorkspaceControls contributes-to ChapterNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f1015",
+      "line": 1329,
+      "node": "Relation",
+      "object": "ConfigurableScrolling",
+      "span": {
+        "column": 1,
+        "end": 74909,
+        "end_column": 56,
+        "end_line": 1329,
+        "line": 1329,
+        "node": "Span",
+        "start": 74854
+      },
+      "subject": "WorkspaceControls",
+      "text": "WorkspaceControls contributes-to ConfigurableScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f1016",
+      "line": 1330,
+      "node": "Relation",
+      "object": "DocumentNavigation",
+      "span": {
+        "column": 1,
+        "end": 74962,
+        "end_column": 53,
+        "end_line": 1330,
+        "line": 1330,
+        "node": "Span",
+        "start": 74910
+      },
+      "subject": "WorkspaceControls",
+      "text": "WorkspaceControls contributes-to DocumentNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f1017",
+      "line": 1331,
+      "node": "Relation",
+      "object": "DocumentReferences",
+      "span": {
+        "column": 1,
+        "end": 75015,
+        "end_column": 53,
+        "end_line": 1331,
+        "line": 1331,
+        "node": "Span",
+        "start": 74963
+      },
+      "subject": "WorkspaceControls",
+      "text": "WorkspaceControls contributes-to DocumentReferences.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f1018",
+      "line": 1332,
+      "node": "Relation",
+      "object": "MarkdownPresentation",
+      "span": {
+        "column": 1,
+        "end": 75070,
+        "end_column": 55,
+        "end_line": 1332,
+        "line": 1332,
+        "node": "Span",
+        "start": 75016
+      },
+      "subject": "WorkspaceControls",
+      "text": "WorkspaceControls contributes-to MarkdownPresentation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f1019",
+      "line": 1333,
+      "node": "Relation",
+      "object": "PagedPublication",
+      "span": {
+        "column": 1,
+        "end": 75121,
+        "end_column": 51,
+        "end_line": 1333,
+        "line": 1333,
+        "node": "Span",
+        "start": 75071
+      },
+      "subject": "WorkspaceControls",
+      "text": "WorkspaceControls contributes-to PagedPublication.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f1020",
+      "line": 1334,
+      "node": "Relation",
+      "object": "SynchronizedScrolling",
+      "span": {
+        "column": 1,
+        "end": 75177,
+        "end_column": 56,
+        "end_line": 1334,
+        "line": 1334,
+        "node": "Span",
+        "start": 75122
+      },
+      "subject": "WorkspaceControls",
+      "text": "WorkspaceControls contributes-to SynchronizedScrolling.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f1022",
+      "line": 1336,
+      "node": "Relation",
+      "object": "WorkPathNavigation",
+      "span": {
+        "column": 1,
+        "end": 75278,
+        "end_column": 53,
+        "end_line": 1336,
+        "line": 1336,
+        "node": "Span",
+        "start": 75226
+      },
+      "subject": "WorkspaceControls",
+      "text": "WorkspaceControls contributes-to WorkPathNavigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f1031",
+      "line": 1345,
+      "node": "Relation",
+      "object": "Application",
+      "span": {
+        "column": 1,
+        "end": 75724,
+        "end_column": 34,
+        "end_line": 1345,
+        "line": 1345,
+        "node": "Span",
+        "start": 75691
+      },
+      "subject": "XfmdDesktop",
+      "text": "XfmdDesktop contains Application.",
+      "verb": "contains"
+    },
+    {
+      "id": "f1032",
+      "line": 1346,
+      "node": "Relation",
+      "object": "Interpreter",
+      "span": {
+        "column": 1,
+        "end": 75758,
+        "end_column": 34,
+        "end_line": 1346,
+        "line": 1346,
+        "node": "Span",
+        "start": 75725
+      },
+      "subject": "XfmdDesktop",
+      "text": "XfmdDesktop contains Interpreter.",
+      "verb": "contains"
+    },
+    {
+      "id": "f1033",
+      "line": 1347,
+      "node": "Relation",
+      "object": "Renderer",
+      "span": {
+        "column": 1,
+        "end": 75789,
+        "end_column": 31,
+        "end_line": 1347,
+        "line": 1347,
+        "node": "Span",
+        "start": 75759
+      },
+      "subject": "XfmdDesktop",
+      "text": "XfmdDesktop contains Renderer.",
+      "verb": "contains"
+    }
+  ],
+  "model_gaps": [],
+  "outputs": {
+    "delivery.txt": "6403203dd5a0867eb14d104ee8a73730bd72dd9ad92e78d996a6dba0a5dcfc01",
+    "diagrams/VP07-overview.mmd": "b4dacf5516d35d1aa81874ba752051186f5c909b0d3663ca31513e7b615970d8",
+    "entry.md": "a96d15579dd30373d491c2a0e940b0d280dc88a017d665353d6a959a3524533b",
+    "sdptool.json": "3a447bb39a5c18bfaf71ec9677efd1cc7b422ba58805e71ca3b12eb669e4c7f0",
+    "selection.json": "0fc81c9abd375e51b786666c4ba6230f987fa4e763f218ee9df31a58e8dc342f"
+  }
+}

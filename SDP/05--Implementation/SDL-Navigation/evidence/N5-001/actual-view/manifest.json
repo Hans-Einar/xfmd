@@ -1,0 +1,804 @@
+{
+  "version": "sdl-viewpoints-go-1.3",
+  "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007",
+  "renderer": "",
+  "diagrams": [
+    {
+      "id": "VP02-overview",
+      "title": "Complete logical architecture",
+      "kind": "flowchart",
+      "nodes": {
+        "n_Application": {
+          "kind": "unit",
+          "model_id": "Application",
+          "span": {
+            "column": 1,
+            "end": 320,
+            "end_column": 18,
+            "end_line": 11,
+            "line": 11,
+            "node": "Span",
+            "start": 303
+          }
+        },
+        "n_DocumentIndexService": {
+          "kind": "unit",
+          "model_id": "DocumentIndexService",
+          "span": {
+            "column": 1,
+            "end": 1954,
+            "end_column": 27,
+            "end_line": 67,
+            "line": 67,
+            "node": "Span",
+            "start": 1928
+          }
+        },
+        "n_DocumentStorage": {
+          "kind": "unit",
+          "model_id": "DocumentStorage",
+          "span": {
+            "column": 1,
+            "end": 2326,
+            "end_column": 22,
+            "end_line": 80,
+            "line": 80,
+            "node": "Span",
+            "start": 2305
+          }
+        },
+        "n_Documents": {
+          "kind": "unit",
+          "model_id": "Documents",
+          "span": {
+            "column": 1,
+            "end": 2342,
+            "end_column": 16,
+            "end_line": 81,
+            "line": 81,
+            "node": "Span",
+            "start": 2327
+          }
+        },
+        "n_EventLoop": {
+          "kind": "unit",
+          "model_id": "EventLoop",
+          "span": {
+            "column": 1,
+            "end": 2496,
+            "end_column": 16,
+            "end_line": 87,
+            "line": 87,
+            "node": "Span",
+            "start": 2481
+          }
+        },
+        "n_ExternalLauncher": {
+          "kind": "unit",
+          "model_id": "ExternalLauncher",
+          "span": {
+            "column": 1,
+            "end": 2866,
+            "end_column": 23,
+            "end_line": 101,
+            "line": 101,
+            "node": "Span",
+            "start": 2844
+          }
+        },
+        "n_ExternalViewBroker": {
+          "kind": "unit",
+          "model_id": "ExternalViewBroker",
+          "span": {
+            "column": 1,
+            "end": 3016,
+            "end_column": 25,
+            "end_line": 106,
+            "line": 106,
+            "node": "Span",
+            "start": 2992
+          }
+        },
+        "n_ExternalViewGenerator": {
+          "kind": "unit",
+          "model_id": "ExternalViewGenerator",
+          "span": {
+            "column": 1,
+            "end": 3044,
+            "end_column": 28,
+            "end_line": 107,
+            "line": 107,
+            "node": "Span",
+            "start": 3017
+          }
+        },
+        "n_GeneratedViews": {
+          "kind": "unit",
+          "model_id": "GeneratedViews",
+          "span": {
+            "column": 1,
+            "end": 3928,
+            "end_column": 21,
+            "end_line": 134,
+            "line": 134,
+            "node": "Span",
+            "start": 3908
+          }
+        },
+        "n_Identity": {
+          "kind": "unit",
+          "model_id": "Identity",
+          "span": {
+            "column": 1,
+            "end": 4067,
+            "end_column": 15,
+            "end_line": 139,
+            "line": 139,
+            "node": "Span",
+            "start": 4053
+          }
+        },
+        "n_Interpreter": {
+          "kind": "unit",
+          "model_id": "Interpreter",
+          "span": {
+            "column": 1,
+            "end": 4347,
+            "end_column": 18,
+            "end_line": 149,
+            "line": 149,
+            "node": "Span",
+            "start": 4330
+          }
+        },
+        "n_NativeShell": {
+          "kind": "unit",
+          "model_id": "NativeShell",
+          "span": {
+            "column": 1,
+            "end": 5055,
+            "end_column": 18,
+            "end_line": 174,
+            "line": 174,
+            "node": "Span",
+            "start": 5038
+          }
+        },
+        "n_Navigation": {
+          "kind": "unit",
+          "model_id": "Navigation",
+          "span": {
+            "column": 1,
+            "end": 5099,
+            "end_column": 17,
+            "end_line": 176,
+            "line": 176,
+            "node": "Span",
+            "start": 5083
+          }
+        },
+        "n_Preferences": {
+          "kind": "unit",
+          "model_id": "Preferences",
+          "span": {
+            "column": 1,
+            "end": 5791,
+            "end_column": 18,
+            "end_line": 201,
+            "line": 201,
+            "node": "Span",
+            "start": 5774
+          }
+        },
+        "n_Preview": {
+          "kind": "unit",
+          "model_id": "Preview",
+          "span": {
+            "column": 1,
+            "end": 6092,
+            "end_column": 14,
+            "end_line": 211,
+            "line": 211,
+            "node": "Span",
+            "start": 6079
+          }
+        },
+        "n_Publication": {
+          "kind": "unit",
+          "model_id": "Publication",
+          "span": {
+            "column": 1,
+            "end": 6315,
+            "end_column": 18,
+            "end_line": 218,
+            "line": 218,
+            "node": "Span",
+            "start": 6298
+          }
+        },
+        "n_Renderer": {
+          "kind": "unit",
+          "model_id": "Renderer",
+          "span": {
+            "column": 1,
+            "end": 7203,
+            "end_column": 15,
+            "end_line": 249,
+            "line": 249,
+            "node": "Span",
+            "start": 7189
+          }
+        },
+        "n_SdpProjects": {
+          "kind": "unit",
+          "model_id": "SdpProjects",
+          "span": {
+            "column": 1,
+            "end": 7672,
+            "end_column": 18,
+            "end_line": 266,
+            "line": 266,
+            "node": "Span",
+            "start": 7655
+          }
+        },
+        "n_Typography": {
+          "kind": "unit",
+          "model_id": "Typography",
+          "span": {
+            "column": 1,
+            "end": 8229,
+            "end_column": 17,
+            "end_line": 287,
+            "line": 287,
+            "node": "Span",
+            "start": 8213
+          }
+        },
+        "n_Viewport": {
+          "kind": "unit",
+          "model_id": "Viewport",
+          "span": {
+            "column": 1,
+            "end": 8516,
+            "end_column": 15,
+            "end_line": 297,
+            "line": 297,
+            "node": "Span",
+            "start": 8502
+          }
+        },
+        "n_VisualResources": {
+          "kind": "unit",
+          "model_id": "VisualResources",
+          "span": {
+            "column": 1,
+            "end": 8597,
+            "end_column": 22,
+            "end_line": 300,
+            "line": 300,
+            "node": "Span",
+            "start": 8576
+          }
+        },
+        "n_Workspace": {
+          "kind": "unit",
+          "model_id": "Workspace",
+          "span": {
+            "column": 1,
+            "end": 8771,
+            "end_column": 16,
+            "end_line": 306,
+            "line": 306,
+            "node": "Span",
+            "start": 8756
+          }
+        },
+        "n_XfmdDesktop": {
+          "kind": "container",
+          "model_id": "XfmdDesktop",
+          "span": {
+            "column": 1,
+            "end": 8971,
+            "end_column": 23,
+            "end_line": 313,
+            "line": 313,
+            "node": "Span",
+            "start": 8949
+          }
+        }
+      },
+      "edges": [
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_DocumentIndexService",
+          "fact": "f0019"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_DocumentStorage",
+          "fact": "f0020"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_Documents",
+          "fact": "f0021"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_EventLoop",
+          "fact": "f0022"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_GeneratedViews",
+          "fact": "f0023"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_Identity",
+          "fact": "f0024"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_NativeShell",
+          "fact": "f0025"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_Navigation",
+          "fact": "f0026"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_Preferences",
+          "fact": "f0027"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_Preview",
+          "fact": "f0028"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_Publication",
+          "fact": "f0029"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_SdpProjects",
+          "fact": "f0030"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_Typography",
+          "fact": "f0031"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_Viewport",
+          "fact": "f0032"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_VisualResources",
+          "fact": "f0033"
+        },
+        {
+          "source": "n_Application",
+          "relation": "contains",
+          "target": "n_Workspace",
+          "fact": "f0034"
+        },
+        {
+          "source": "n_XfmdDesktop",
+          "relation": "contains",
+          "target": "n_Application",
+          "fact": "f1031"
+        },
+        {
+          "source": "n_XfmdDesktop",
+          "relation": "contains",
+          "target": "n_Interpreter",
+          "fact": "f1032"
+        },
+        {
+          "source": "n_XfmdDesktop",
+          "relation": "contains",
+          "target": "n_Renderer",
+          "fact": "f1033"
+        }
+      ],
+      "source_facts": [
+        "f0019",
+        "f0020",
+        "f0021",
+        "f0022",
+        "f0023",
+        "f0024",
+        "f0025",
+        "f0026",
+        "f0027",
+        "f0028",
+        "f0029",
+        "f0030",
+        "f0031",
+        "f0032",
+        "f0033",
+        "f0034",
+        "f1031",
+        "f1032",
+        "f1033"
+      ],
+      "elements": []
+    }
+  ],
+  "facts": [
+    {
+      "id": "f0019",
+      "line": 333,
+      "node": "Relation",
+      "object": "DocumentIndexService",
+      "span": {
+        "column": 1,
+        "end": 10004,
+        "end_column": 43,
+        "end_line": 333,
+        "line": 333,
+        "node": "Span",
+        "start": 9962
+      },
+      "subject": "Application",
+      "text": "Application contains DocumentIndexService.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0020",
+      "line": 334,
+      "node": "Relation",
+      "object": "DocumentStorage",
+      "span": {
+        "column": 1,
+        "end": 10042,
+        "end_column": 38,
+        "end_line": 334,
+        "line": 334,
+        "node": "Span",
+        "start": 10005
+      },
+      "subject": "Application",
+      "text": "Application contains DocumentStorage.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0021",
+      "line": 335,
+      "node": "Relation",
+      "object": "Documents",
+      "span": {
+        "column": 1,
+        "end": 10074,
+        "end_column": 32,
+        "end_line": 335,
+        "line": 335,
+        "node": "Span",
+        "start": 10043
+      },
+      "subject": "Application",
+      "text": "Application contains Documents.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0022",
+      "line": 336,
+      "node": "Relation",
+      "object": "EventLoop",
+      "span": {
+        "column": 1,
+        "end": 10106,
+        "end_column": 32,
+        "end_line": 336,
+        "line": 336,
+        "node": "Span",
+        "start": 10075
+      },
+      "subject": "Application",
+      "text": "Application contains EventLoop.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0023",
+      "line": 337,
+      "node": "Relation",
+      "object": "GeneratedViews",
+      "span": {
+        "column": 1,
+        "end": 10143,
+        "end_column": 37,
+        "end_line": 337,
+        "line": 337,
+        "node": "Span",
+        "start": 10107
+      },
+      "subject": "Application",
+      "text": "Application contains GeneratedViews.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0024",
+      "line": 338,
+      "node": "Relation",
+      "object": "Identity",
+      "span": {
+        "column": 1,
+        "end": 10174,
+        "end_column": 31,
+        "end_line": 338,
+        "line": 338,
+        "node": "Span",
+        "start": 10144
+      },
+      "subject": "Application",
+      "text": "Application contains Identity.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0025",
+      "line": 339,
+      "node": "Relation",
+      "object": "NativeShell",
+      "span": {
+        "column": 1,
+        "end": 10208,
+        "end_column": 34,
+        "end_line": 339,
+        "line": 339,
+        "node": "Span",
+        "start": 10175
+      },
+      "subject": "Application",
+      "text": "Application contains NativeShell.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0026",
+      "line": 340,
+      "node": "Relation",
+      "object": "Navigation",
+      "span": {
+        "column": 1,
+        "end": 10241,
+        "end_column": 33,
+        "end_line": 340,
+        "line": 340,
+        "node": "Span",
+        "start": 10209
+      },
+      "subject": "Application",
+      "text": "Application contains Navigation.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0027",
+      "line": 341,
+      "node": "Relation",
+      "object": "Preferences",
+      "span": {
+        "column": 1,
+        "end": 10275,
+        "end_column": 34,
+        "end_line": 341,
+        "line": 341,
+        "node": "Span",
+        "start": 10242
+      },
+      "subject": "Application",
+      "text": "Application contains Preferences.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0028",
+      "line": 342,
+      "node": "Relation",
+      "object": "Preview",
+      "span": {
+        "column": 1,
+        "end": 10305,
+        "end_column": 30,
+        "end_line": 342,
+        "line": 342,
+        "node": "Span",
+        "start": 10276
+      },
+      "subject": "Application",
+      "text": "Application contains Preview.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0029",
+      "line": 343,
+      "node": "Relation",
+      "object": "Publication",
+      "span": {
+        "column": 1,
+        "end": 10339,
+        "end_column": 34,
+        "end_line": 343,
+        "line": 343,
+        "node": "Span",
+        "start": 10306
+      },
+      "subject": "Application",
+      "text": "Application contains Publication.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0030",
+      "line": 344,
+      "node": "Relation",
+      "object": "SdpProjects",
+      "span": {
+        "column": 1,
+        "end": 10373,
+        "end_column": 34,
+        "end_line": 344,
+        "line": 344,
+        "node": "Span",
+        "start": 10340
+      },
+      "subject": "Application",
+      "text": "Application contains SdpProjects.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0031",
+      "line": 345,
+      "node": "Relation",
+      "object": "Typography",
+      "span": {
+        "column": 1,
+        "end": 10406,
+        "end_column": 33,
+        "end_line": 345,
+        "line": 345,
+        "node": "Span",
+        "start": 10374
+      },
+      "subject": "Application",
+      "text": "Application contains Typography.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0032",
+      "line": 346,
+      "node": "Relation",
+      "object": "Viewport",
+      "span": {
+        "column": 1,
+        "end": 10437,
+        "end_column": 31,
+        "end_line": 346,
+        "line": 346,
+        "node": "Span",
+        "start": 10407
+      },
+      "subject": "Application",
+      "text": "Application contains Viewport.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0033",
+      "line": 347,
+      "node": "Relation",
+      "object": "VisualResources",
+      "span": {
+        "column": 1,
+        "end": 10475,
+        "end_column": 38,
+        "end_line": 347,
+        "line": 347,
+        "node": "Span",
+        "start": 10438
+      },
+      "subject": "Application",
+      "text": "Application contains VisualResources.",
+      "verb": "contains"
+    },
+    {
+      "id": "f0034",
+      "line": 348,
+      "node": "Relation",
+      "object": "Workspace",
+      "span": {
+        "column": 1,
+        "end": 10507,
+        "end_column": 32,
+        "end_line": 348,
+        "line": 348,
+        "node": "Span",
+        "start": 10476
+      },
+      "subject": "Application",
+      "text": "Application contains Workspace.",
+      "verb": "contains"
+    },
+    {
+      "id": "f1031",
+      "line": 1345,
+      "node": "Relation",
+      "object": "Application",
+      "span": {
+        "column": 1,
+        "end": 75724,
+        "end_column": 34,
+        "end_line": 1345,
+        "line": 1345,
+        "node": "Span",
+        "start": 75691
+      },
+      "subject": "XfmdDesktop",
+      "text": "XfmdDesktop contains Application.",
+      "verb": "contains"
+    },
+    {
+      "id": "f1032",
+      "line": 1346,
+      "node": "Relation",
+      "object": "Interpreter",
+      "span": {
+        "column": 1,
+        "end": 75758,
+        "end_column": 34,
+        "end_line": 1346,
+        "line": 1346,
+        "node": "Span",
+        "start": 75725
+      },
+      "subject": "XfmdDesktop",
+      "text": "XfmdDesktop contains Interpreter.",
+      "verb": "contains"
+    },
+    {
+      "id": "f1033",
+      "line": 1347,
+      "node": "Relation",
+      "object": "Renderer",
+      "span": {
+        "column": 1,
+        "end": 75789,
+        "end_column": 31,
+        "end_line": 1347,
+        "line": 1347,
+        "node": "Span",
+        "start": 75759
+      },
+      "subject": "XfmdDesktop",
+      "text": "XfmdDesktop contains Renderer.",
+      "verb": "contains"
+    }
+  ],
+  "model_gaps": [],
+  "outputs": {
+    "delivery.txt": "6403203dd5a0867eb14d104ee8a73730bd72dd9ad92e78d996a6dba0a5dcfc01",
+    "diagrams/VP02-overview.mmd": "f1adaf7e513620452de210ae142cf5761815391188f89a42699b0bddd324b482",
+    "entry.md": "6b061af775adce2eabc05c714dba77cdcd058a948643cb21ff5fbbd83026d18a",
+    "sdptool.json": "72b993eff7275aad98c24ed208302a08b960935a93b83c2a55c4cdea54a8c18b",
+    "selection.json": "2d5bb78d97f301a531b75f9080a5891b6e1a5e054723b751116140e23ca83939",
+    "source-inputs/s0.design": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+  }
+}

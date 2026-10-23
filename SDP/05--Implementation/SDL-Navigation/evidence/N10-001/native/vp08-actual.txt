@@ -1,0 +1,1891 @@
+VP08 — Channel contracts and
+sequences
+Revision:
+e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007.
+
+Explicit scenario steps validated against permits, participation, mode and
+request/result correlation.
+
+
+Channel ContextInteraction — mode
+NormalDesktop
+                                        receiver
+
+
+     ContextInteraction (channel)                      NativeShell (unit)
+                                        sender
+
+Source facts: f0546, f0547, f0548, f0549, f0550, f0551.
+
+Declarations: ContextInteraction, NativeShell.
+
+
+Channel DiagramInterpretation — mode
+NormalDesktop
+                                            receiver
+
+
+     DiagramInterpretation (channel)                       Interpreter (unit)
+                                             sender
+
+Source facts: f0486, f0487.
+
+Declarations: DiagramInterpretation, Interpreter.
+Channel DiagramLayoutCalls — mode
+NormalDesktop
+
+                                                              Renderer (unit)
+                    receiver
+                                                    sender
+    DiagramLayoutCalls (channel)
+                                                     sender
+                    receiver
+                                                              VisualResources (unit)
+
+
+
+Source facts: f0847, f0848, f0985, f0986.
+
+Declarations: DiagramLayoutCalls, Renderer, VisualResources.
+
+
+Channel DocumentCalls — mode
+NormalDesktop
+
+                                                              Documents (unit)
+                   receiver
+                                                              sender
+     DocumentCalls (channel)
+                                                    sender
+                   receiver
+                                                              Navigation (unit)
+
+
+
+Source facts: f0234, f0235, f0236, f0577, f0578, f0579.
+
+Declarations: DocumentCalls, Documents, Navigation.
+Channel DocumentNotifications — mode
+NormalDesktop
+                                                                            GeneratedViews (unit)
+                                               receiver
+                      sender
+                                                                 receiver
+   Documents (unit)            DocumentNotifications (channel)              Navigation (unit)
+
+
+
+                                               receiver
+                                                                            Preview (unit)
+
+
+
+
+Source facts: f0237, f0238, f0239, f0425, f0580, f0689.
+
+Declarations: DocumentNotifications, Documents, GeneratedViews, Navigation,
+Preview.
+
+
+Channel DocumentStateChanges — mode
+NormalDesktop
+                                                     receiver
+
+
+     DocumentStateChanges (channel)                                  Documents (unit)
+                                                      sender
+
+Source facts: f0240, f0241, f0242, f0243.
+
+Declarations: DocumentStateChanges, Documents.
+
+
+Channel EditIntents — mode
+NormalDesktop
+                          sender                            receiver
+
+
+    NativeShell (unit)              EditIntents (channel)                 Documents (unit)
+
+
+
+Source facts: f0244, f0552.
+
+Declarations: Documents, EditIntents, NativeShell.
+
+
+Channel ExportInterpretation — mode
+NormalDesktop
+
+                                                                       Interpreter (unit)
+                         receiver
+                                                            sender
+    ExportInterpretation (channel)
+                                                            sender
+                         receiver
+                                                                       Publication (unit)
+
+
+
+Source facts: f0488, f0489, f0748, f0749.
+
+Declarations: ExportInterpretation, Interpreter, Publication.
+Channel ExportLayout — mode
+NormalDesktop
+
+                                                                   Publication (unit)
+                        receiver
+                                                                    sender
+     ExportLayout (channel)
+                                                                  sender
+                        receiver
+                                                                   Renderer (unit)
+
+
+
+Source facts: f0750, f0751, f0849, f0850.
+
+Declarations: ExportLayout, Publication, Renderer.
+
+
+Channel ExternalOpening — mode
+NormalDesktop
+                          sender                               receiver
+
+
+   Application (unit)              ExternalOpening (channel)               ExternalLauncher (unit)
+
+
+
+Source facts: f0035, f0311.
+
+Declarations: Application, ExternalLauncher, ExternalOpening.
+Channel GeneratedAdmission — mode
+NormalDesktop
+                                                receiver                      Documents (unit)
+
+                                                         sender
+     GeneratedAdmission (channel)
+
+                                                                              GeneratedViews (unit)
+                                                receiver
+
+Source facts: f0245, f0426, f0427, f0428, f0429, f0430, f0431, f0432.
+
+Declarations: Documents, GeneratedAdmission, GeneratedViews.
+
+
+Channel GeneratedDelivery — mode
+NormalDesktop
+                                     receiver                                  receiver
+
+
+   ExternalViewGenerator (unit)                 GeneratedDelivery (channel)               GeneratedViews (unit)
+                                     sender                                     sender
+
+
+Source facts: f0322, f0323, f0324, f0433, f0434, f0435.
+
+Declarations: ExternalViewGenerator, GeneratedDelivery, GeneratedViews.
+
+
+Channel GeneratedDocumentCalls — mode
+NormalDesktop
+                          receiver                                            receiver
+
+
+   Documents (unit)                     GeneratedDocumentCalls (channel)                  GeneratedViews (unit)
+                          sender                                              sender
+
+
+Source facts: f0246, f0247, f0436, f0437.
+
+Declarations: Documents, GeneratedDocumentCalls, GeneratedViews.
+Channel GeneratedIntents — mode
+NormalDesktop
+                           sender                                       receiver
+
+
+   NativeShell (unit)                  GeneratedIntents (channel)                        GeneratedViews (unit)
+
+
+
+Source facts: f0438, f0439, f0553, f0554.
+
+Declarations: GeneratedIntents, GeneratedViews, NativeShell.
+
+
+Channel GenerationLifecycle — mode
+NormalDesktop
+                            sender                                     receiver
+
+
+   GeneratedViews (unit)               GenerationLifecycle (channel)                  ExternalViewGenerator (unit)
+
+
+
+
+Source facts: f0325, f0326, f0440, f0441.
+
+Declarations: ExternalViewGenerator, GeneratedViews, GenerationLifecycle.
+
+
+Channel IndexChanges — mode
+NormalDesktop
+                                                                                  receiver
+                                     sender
+
+   DocumentIndexService (unit)                    IndexChanges (channel)                       NativeShell (unit)
+
+
+                                     receiver
+
+
+Source facts: f0182, f0183, f0184, f0555.
+
+Declarations: DocumentIndexService, IndexChanges, NativeShell.
+Channel IndexIntents — mode
+NormalDesktop
+                        sender                              receiver
+
+
+   NativeShell (unit)              IndexIntents (channel)              DocumentIndexService (unit)
+
+
+
+Source facts: f0185, f0556.
+
+Declarations: DocumentIndexService, IndexIntents, NativeShell.
+
+
+Channel InterpretationCalls — mode
+NormalDesktop
+
+                                                                          Interpreter (unit)
+                        receiver
+                                                                 sender
+     InterpretationCalls (channel)
+                                                                sender
+                        receiver
+                                                                          Preview (unit)
+
+
+
+Source facts: f0490, f0491, f0690, f0691.
+
+Declarations: InterpretationCalls, Interpreter, Preview.
+Channel LayoutCalls — mode
+NormalDesktop
+                                      sender
+                  receiver                                    Preview (unit)
+
+
+     LayoutCalls (channel)              sender
+
+
+
+                                 receiver                     Renderer (unit)
+
+
+
+Source facts: f0692, f0693, f0851, f0852.
+
+Declarations: LayoutCalls, Preview, Renderer.
+
+
+Channel LeaseLifecycle — mode
+NormalDesktop
+                                        receiver
+
+
+     GeneratedViews (unit)                                  LeaseLifecycle (channel)
+                                         sender
+
+Source facts: f0442, f0443, f0444, f0445, f0446, f0447, f0448, f0449.
+
+Declarations: GeneratedViews, LeaseLifecycle.
+
+
+Channel LeaseNotifications — mode
+NormalDesktop
+                             sender                                  receiver
+
+
+   GeneratedViews (unit)              LeaseNotifications (channel)              ExternalViewBroker (unit)
+
+
+
+
+Source facts: f0321, f0450.
+Declarations: ExternalViewBroker, GeneratedViews, LeaseNotifications.
+
+
+Channel NavigationCalls — mode
+NormalDesktop
+
+     Application (unit)
+                                            receiver
+               sender
+                                                       NavigationCalls (channel)
+               sender
+                                            receiver
+     Navigation (unit)
+
+
+
+Source facts: f0036, f0037, f0581, f0582.
+
+Declarations: Application, NavigationCalls, Navigation.
+
+
+Channel OpeningPolicy — mode
+NormalDesktop
+                              receiver
+
+
+     Application (unit)                     OpeningPolicy (channel)
+                              sender
+
+Source facts: f0038, f0039.
+
+Declarations: Application, OpeningPolicy.
+Channel PreferenceChanges — mode
+NormalDesktop
+                           receiver                                         receiver
+
+
+   NativeShell (unit)                    PreferenceChanges (channel)                     Preferences (unit)
+                           sender                                           sender
+
+
+Source facts: f0557, f0558, f0653, f0654, f0655, f0656, f0657, f0658, f0659, f0660.
+
+Declarations: NativeShell, PreferenceChanges, Preferences.
+
+
+Channel PresentationEvents — mode
+NormalDesktop
+                                    sender                                    receiver
+   GeneratedViews (unit)
+
+
+                                             PresentationEvents (channel)                 NativeShell (unit)
+
+                             sender
+   Preview (unit)
+
+
+
+Source facts: f0451, f0559, f0560, f0694.
+
+Declarations: GeneratedViews, NativeShell, PresentationEvents, Preview.
+
+
+Channel PreviewAdmission — mode
+NormalDesktop
+                               receiver
+
+
+     Preview (unit)                               PreviewAdmission (channel)
+                                sender
+
+Source facts: f0695, f0696, f0697, f0698, f0699, f0700, f0701, f0702, f0703, f0704.
+
+Declarations: PreviewAdmission, Preview.
+Channel PublicationDrawing — mode
+NormalDesktop
+                         sender                                  receiver
+
+
+   Publication (unit)             PublicationDrawing (channel)              Typography (unit)
+
+
+
+Source facts: f0752, f0945.
+
+Declarations: PublicationDrawing, Publication, Typography.
+
+
+Channel PublicationInputs — mode
+NormalDesktop
+                         sender                                  receiver
+
+
+    Documents (unit)               PublicationInputs (channel)              Publication (unit)
+
+
+
+Source facts: f0248, f0753.
+
+Declarations: Documents, PublicationInputs, Publication.
+
+
+Channel PublicationIntents — mode
+NormalDesktop
+                         sender                                  receiver
+
+
+    NativeShell (unit)            PublicationIntents (channel)              Publication (unit)
+
+
+
+Source facts: f0561, f0562, f0754, f0755.
+
+Declarations: NativeShell, PublicationIntents, Publication.
+Channel PublicationState — mode
+NormalDesktop
+                              receiver
+
+
+     Publication (unit)                     PublicationState (channel)
+                              sender
+
+Source facts: f0756, f0757, f0758, f0759, f0760, f0761.
+
+Declarations: PublicationState, Publication.
+
+
+Channel ReferenceInterpretation — mode
+NormalDesktop
+    DocumentIndexService (unit)
+                                                              receiver
+                    sender
+                                                       ReferenceInterpretation (channel)
+              sender
+                                                              receiver
+    Interpreter (unit)
+
+
+
+Source facts: f0186, f0187, f0492, f0493.
+
+Declarations: DocumentIndexService, Interpreter, ReferenceInterpretation.
+Channel ReferenceStorage — mode
+NormalDesktop
+
+    DocumentIndexService (unit)
+                                                            receiver
+                          sender
+                                                                       ReferenceStorage (channel)
+                        sender
+                                                            receiver
+    DocumentStorage (unit)
+
+
+
+Source facts: f0188, f0189, f0223, f0224.
+
+Declarations: DocumentIndexService, DocumentStorage, ReferenceStorage.
+
+
+Channel ResourcePreparation — mode
+NormalDesktop
+                                                                       receiver
+   Preview (unit)
+                           sender
+
+                                    ResourcePreparation (channel)                 VisualResources (unit)
+                                                                       sender
+                           sender
+   Publication (unit)
+
+
+
+
+Source facts: f0705, f0706, f0707, f0762, f0987, f0988, f0989, f0990, f0991, f0992.
+
+Declarations: Preview, Publication, ResourcePreparation, VisualResources.
+Channel ScheduledWork — mode
+NormalDesktop
+   EventLoop (unit)
+                                 receiver
+            sender                                                    receiver
+
+                                            ScheduledWork (channel)                   GeneratedViews (unit)
+           sender
+                                 receiver
+   Preview (unit)
+
+
+
+
+Source facts: f0277, f0278, f0279, f0452, f0708, f0709.
+
+Declarations: EventLoop, GeneratedViews, Preview, ScheduledWork.
+
+
+Channel StorageCalls — mode
+NormalDesktop
+
+     DocumentStorage (unit)
+                                                                           receiver
+                        sender
+                                                                         StorageCalls (channel)
+                      sender
+                                                                           receiver
+     Documents (unit)
+
+
+
+Source facts: f0225, f0226, f0227, f0228, f0229, f0249, f0250, f0251, f0252, f0253.
+
+Declarations: DocumentStorage, Documents, StorageCalls.
+Channel UnsavedAdmission — mode
+NormalDesktop
+
+     Documents (unit)
+                                                          receiver
+               sender
+                                                    UnsavedAdmission (channel)
+               sender
+                                                          receiver
+     NativeShell (unit)
+
+
+
+Source facts: f0254, f0255, f0256, f0563, f0564, f0565.
+
+Declarations: Documents, NativeShell, UnsavedAdmission.
+
+
+Channel ViewportChanges — mode
+NormalDesktop
+
+     NativeShell (unit)
+                                                          receiver
+               sender
+                                                     ViewportChanges (channel)
+              sender
+                                                          receiver
+     Viewport (unit)
+
+
+
+Source facts: f0566, f0567, f0568, f0967, f0968, f0969, f0970, f0971, f0972, f0973.
+
+Declarations: NativeShell, ViewportChanges, Viewport.
+Channel WindowPresentation — mode
+NormalDesktop
+                                          receiver
+
+
+      NativeShell (unit)                                    WindowPresentation (channel)
+                                          sender
+
+Source facts: f0569, f0570.
+
+Declarations: NativeShell, WindowPresentation.
+
+
+Channel WorkspaceChanges — mode
+NormalDesktop
+   Application (unit)
+
+                                                                              receiver
+                        sender                                                           NativeShell (unit)
+
+                                                 WorkspaceChanges (channel)
+
+                                 sender
+
+   Workspace (unit)                   receiver
+
+
+
+Source facts: f0040, f0041, f0571, f1001, f1002, f1003, f1004, f1005.
+
+Declarations: Application, NativeShell, WorkspaceChanges, Workspace.
+
+
+Channel WorkspaceIntents — mode
+NormalDesktop
+                        sender                             receiver     Application (unit)
+
+
+   NativeShell (unit)             WorkspaceIntents (channel)
+
+
+                                                           receiver     Workspace (unit)
+
+
+
+Source facts: f0042, f0043, f0044, f0572, f0573, f0574, f0575, f1006.
+
+Declarations: Application, NativeShell, WorkspaceIntents, Workspace.
+
+
+Scope and notation
+Channel topology is partitioned into one diagram per declared Channel, retaining
+every participant and binding. Repeated participants refer to the same source
+declarations. The diagrams show explicit participation in one Mode, not runtime
+delivery, transport or execution order. Sender arrows point from participant to
+Channel; receiver arrows point from Channel to participant. Each arrow groups all
+messages for that participant/channel/role; the register retains every binding and
+source proof. Modes have no implicit inheritance.
+
+Selected mode: NormalDesktop. Mode source: NormalDesktop.
+
+
+Participation register
+Participant             Channel                Role      Message              Source fact
+
+Application             ExternalOpening        sende     LaunchConfiguredPr   f0035
+                                               r         ogram
+
+Application             NavigationCalls        receiv    TargetOpened         f0036
+                                               er
+
+Application             NavigationCalls        sende     OpenTarget           f0037
+                                               r
+Application       OpeningPolicy       receiv   ClassifyExternalTarg   f0038
+                                      er       et
+
+Application       OpeningPolicy       sende    ClassifyExternalTarg   f0039
+                                      r        et
+
+Application       WorkspaceChange sende        SetChosenParentRoo f0040
+                  s                   r        t
+
+Application       WorkspaceChange sende        ValidateProposedRo     f0041
+                  s                   r        ot
+
+Application       WorkspaceIntents    receiv   ActivateExternalTarg f0042
+                                      er       et
+
+Application       WorkspaceIntents    receiv   ChooseInternalFile     f0043
+                                      er
+
+Application       WorkspaceIntents    receiv   FavoriteFileChosen     f0044
+                                      er
+
+DocumentIndexSe   IndexChanges        receiv   CheckReferenceGen      f0182
+rvice                                 er       eration
+
+DocumentIndexSe   IndexChanges        sende    CheckReferenceGen      f0183
+rvice                                 r        eration
+
+DocumentIndexSe   IndexChanges        sende    PublishReferenceHe     f0184
+rvice                                 r        adings
+
+DocumentIndexSe   IndexIntents        receiv   ExpandReference        f0185
+rvice                                 er
+
+DocumentIndexSe   ReferenceInterpre   receiv   ReferenceParsed        f0186
+rvice             tation              er
+
+DocumentIndexSe   ReferenceInterpre   sende    ParseReference         f0187
+rvice             tation              r
+
+DocumentIndexSe   ReferenceStorage    receiv   ReferenceRead          f0188
+rvice                                 er
+DocumentIndexSe   ReferenceStorage   sende    ReadReference       f0189
+rvice                                r
+
+DocumentStorage   ReferenceStorage   receiv   ReadReference       f0223
+                                     er
+
+DocumentStorage   ReferenceStorage   sende    ReferenceRead       f0224
+                                     r
+
+DocumentStorage   StorageCalls       receiv   ReadCandidate       f0225
+                                     er
+
+DocumentStorage   StorageCalls       receiv   WriteCurrent        f0226
+                                     er
+
+DocumentStorage   StorageCalls       sende    CandidateRead       f0227
+                                     r
+
+DocumentStorage   StorageCalls       sende    CandidateReadFailed f0228
+                                     r
+
+DocumentStorage   StorageCalls       sende    CurrentWritten      f0229
+                                     r
+
+Documents         DocumentCalls      receiv   AdmitDocument       f0234
+                                     er
+
+Documents         DocumentCalls      sende    DocumentOpened      f0235
+                                     r
+
+Documents         DocumentCalls      sende    DocumentRejected    f0236
+                                     r
+
+Documents         DocumentNotificat sende     CommitVisit         f0237
+                  ions               r
+
+Documents         DocumentNotificat sende     DocumentChanged     f0238
+                  ions               r
+
+Documents         DocumentNotificat sende     GeneratedDocument f0239
+                  ions               r        Changed
+Documents   DocumentStateCh     receiv   MarkCurrentSaved     f0240
+            anges               er
+
+Documents   DocumentStateCh     receiv   ReplaceDocument      f0241
+            anges               er
+
+Documents   DocumentStateCh     sende    MarkCurrentSaved     f0242
+            anges               r
+
+Documents   DocumentStateCh     sende    ReplaceDocument      f0243
+            anges               r
+
+Documents   EditIntents         receiv   ApplyTextEdit        f0244
+                                er
+
+Documents   GeneratedAdmissi receiv      InspectDirtyMain     f0245
+            on                  er
+
+Documents   GeneratedDocum      receiv   AdmitGeneratedDoc    f0246
+            entCalls            er       ument
+
+Documents   GeneratedDocum      sende    GeneratedDocument f0247
+            entCalls            r        Opened
+
+Documents   PublicationInputs   sende    FreezeExportSnapsh   f0248
+                                r        ot
+
+Documents   StorageCalls        receiv   CandidateRead        f0249
+                                er
+
+Documents   StorageCalls        receiv   CandidateReadFailed f0250
+                                er
+
+Documents   StorageCalls        receiv   CurrentWritten       f0251
+                                er
+
+Documents   StorageCalls        sende    ReadCandidate        f0252
+                                r
+
+Documents   StorageCalls        sende    WriteCurrent         f0253
+                                r
+Documents          UnsavedAdmissio     receiv   ChooseCancel          f0254
+                   n                   er
+
+Documents          UnsavedAdmissio     receiv   ChooseSave            f0255
+                   n                   er
+
+Documents          UnsavedAdmissio     sende    ChooseUnsaved         f0256
+                   n                   r
+
+EventLoop          ScheduledWork       receiv   RestartDebounce       f0277
+                                       er
+
+EventLoop          ScheduledWork       sende    DebounceElapsed       f0278
+                                       r
+
+EventLoop          ScheduledWork       sende    PollReleaseQueue      f0279
+                                       r
+
+ExternalLauncher   ExternalOpening     receiv   LaunchConfiguredPr    f0311
+                                       er       ogram
+
+ExternalViewBroke LeaseNotifications   receiv   AttemptRelease        f0321
+r                                      er
+
+ExternalViewGene   GeneratedDeliver    receiv   GeneratedMainAcce     f0322
+rator              y                   er       pted
+
+ExternalViewGene   GeneratedDeliver    receiv   GeneratedMainRejec f0323
+rator              y                   er       ted
+
+ExternalViewGene   GeneratedDeliver    sende    DeliverGeneratedMa f0324
+rator              y                   r        in
+
+ExternalViewGene   GenerationLifecycl receiv    CancelPreviousChild   f0325
+rator              e                   er
+
+ExternalViewGene   GenerationLifecycl receiv    StartGeneration       f0326
+rator              e                   er
+
+GeneratedViews     DocumentNotificat receiv     GeneratedDocument f0425
+                   ions                er       Changed
+GeneratedViews   GeneratedAdmissi receiv     AdvanceGenerationS f0426
+                 on                 er       equence
+
+GeneratedViews   GeneratedAdmissi receiv     RejectInvalidSelectio   f0427
+                 on                 er       n
+
+GeneratedViews   GeneratedAdmissi receiv     ValidateSelection       f0428
+                 on                 er
+
+GeneratedViews   GeneratedAdmissi sende      AdvanceGenerationS f0429
+                 on                 r        equence
+
+GeneratedViews   GeneratedAdmissi sende      InspectDirtyMain        f0430
+                 on                 r
+
+GeneratedViews   GeneratedAdmissi sende      RejectInvalidSelectio   f0431
+                 on                 r        n
+
+GeneratedViews   GeneratedAdmissi sende      ValidateSelection       f0432
+                 on                 r
+
+GeneratedViews   GeneratedDeliver   receiv   DeliverGeneratedMa f0433
+                 y                  er       in
+
+GeneratedViews   GeneratedDeliver   sende    GeneratedMainAcce       f0434
+                 y                  r        pted
+
+GeneratedViews   GeneratedDeliver   sende    GeneratedMainRejec f0435
+                 y                  r        ted
+
+GeneratedViews   GeneratedDocum     receiv   GeneratedDocument f0436
+                 entCalls           er       Opened
+
+GeneratedViews   GeneratedDocum     sende    AdmitGeneratedDoc       f0437
+                 entCalls           r        ument
+
+GeneratedViews   GeneratedIntents   receiv   SelectInvalidView       f0438
+                                    er
+
+GeneratedViews   GeneratedIntents   receiv   SelectRegisteredVie     f0439
+                                    er       w
+GeneratedViews   GenerationLifecycl sende      CancelPreviousChild   f0440
+                 e                    r
+
+GeneratedViews   GenerationLifecycl sende      StartGeneration       f0441
+                 e                    r
+
+GeneratedViews   LeaseLifecycle       receiv   InstallNewLease       f0442
+                                      er
+
+GeneratedViews   LeaseLifecycle       receiv   KeepUnsentRelease     f0443
+                                      er
+
+GeneratedViews   LeaseLifecycle       receiv   QueuePreviousLease f0444
+                                      er
+
+GeneratedViews   LeaseLifecycle       receiv   RemoveSentRelease     f0445
+                                      er
+
+GeneratedViews   LeaseLifecycle       sende    InstallNewLease       f0446
+                                      r
+
+GeneratedViews   LeaseLifecycle       sende    KeepUnsentRelease     f0447
+                                      r
+
+GeneratedViews   LeaseLifecycle       sende    QueuePreviousLease f0448
+                                      r
+
+GeneratedViews   LeaseLifecycle       sende    RemoveSentRelease     f0449
+                                      r
+
+GeneratedViews   LeaseNotifications   sende    AttemptRelease        f0450
+                                      r
+
+GeneratedViews   PresentationEvent    sende    ShowDirtyRejection    f0451
+                 s                    r
+
+GeneratedViews   ScheduledWork        receiv   PollReleaseQueue      f0452
+                                      er
+
+Interpreter      DiagramInterpret     receiv   ParseMermaidBlock     f0486
+                 ation                er
+Interpreter   DiagramInterpret     sende    ParseMermaidBlock    f0487
+              ation                r
+
+Interpreter   ExportInterpretati   receiv   ParseExportSnapsho   f0488
+              on                   er       t
+
+Interpreter   ExportInterpretati   sende    ExportSnapshotPars   f0489
+              on                   r        ed
+
+Interpreter   InterpretationCalls receiv    ParseSnapshot        f0490
+                                   er
+
+Interpreter   InterpretationCalls sende     ParsedSnapshot       f0491
+                                   r
+
+Interpreter   ReferenceInterpre    receiv   ParseReference       f0492
+              tation               er
+
+Interpreter   ReferenceInterpre    sende    ReferenceParsed      f0493
+              tation               r
+
+NativeShell   ContextInteraction receiv     CaptureContextTarg   f0546
+                                   er       et
+
+NativeShell   ContextInteraction receiv     DismissContextMen    f0547
+                                   er       u
+
+NativeShell   ContextInteraction receiv     ReleaseKeyboardGra f0548
+                                   er       b
+
+NativeShell   ContextInteraction sende      CaptureContextTarg   f0549
+                                   r        et
+
+NativeShell   ContextInteraction sende      DismissContextMen    f0550
+                                   r        u
+
+NativeShell   ContextInteraction sende      ReleaseKeyboardGra f0551
+                                   r        b
+
+NativeShell   EditIntents          sende    ApplyTextEdit        f0552
+                                   r
+NativeShell   GeneratedIntents     sende    SelectInvalidView     f0553
+                                   r
+
+NativeShell   GeneratedIntents     sende    SelectRegisteredVie   f0554
+                                   r        w
+
+NativeShell   IndexChanges         receiv   PublishReferenceHe    f0555
+                                   er       adings
+
+NativeShell   IndexIntents         sende    ExpandReference       f0556
+                                   r
+
+NativeShell   PreferenceChange receiv       NotifyPreferenceCha f0557
+              s                    er       nge
+
+NativeShell   PreferenceChange sende        BeginPreferencesDr    f0558
+              s                    r        aft
+
+NativeShell   PresentationEvent    receiv   PresentFrame          f0559
+              s                    er
+
+NativeShell   PresentationEvent    receiv   ShowDirtyRejection    f0560
+              s                    er
+
+NativeShell   PublicationIntents   sende    CancelPdfRequest      f0561
+                                   r
+
+NativeShell   PublicationIntents   sende    RequestPdfExport      f0562
+                                   r
+
+NativeShell   UnsavedAdmissio      receiv   ChooseUnsaved         f0563
+              n                    er
+
+NativeShell   UnsavedAdmissio      sende    ChooseCancel          f0564
+              n                    r
+
+NativeShell   UnsavedAdmissio      sende    ChooseSave            f0565
+              n                    r
+
+NativeShell   ViewportChanges      receiv   SetEditorAnchor       f0566
+                                   er
+NativeShell   ViewportChanges    sende    RetainDocumentAnd     f0567
+                                 r        Anchor
+
+NativeShell   ViewportChanges    sende    UserPreviewScroll     f0568
+                                 r
+
+NativeShell   WindowPresentati   receiv   ToggleFullscreen      f0569
+              on                 er
+
+NativeShell   WindowPresentati   sende    ToggleFullscreen      f0570
+              on                 r
+
+NativeShell   WorkspaceChange receiv      RequestTreeRefresh    f0571
+              s                  er
+
+NativeShell   WorkspaceIntents   sende    ActivateExternalTarg f0572
+                                 r        et
+
+NativeShell   WorkspaceIntents   sende    ChooseInternalFile    f0573
+                                 r
+
+NativeShell   WorkspaceIntents   sende    FavoriteFileChosen    f0574
+                                 r
+
+NativeShell   WorkspaceIntents   sende    FavoriteFolderChose   f0575
+                                 r        n
+
+Navigation    DocumentCalls      receiv   DocumentOpened        f0577
+                                 er
+
+Navigation    DocumentCalls      receiv   DocumentRejected      f0578
+                                 er
+
+Navigation    DocumentCalls      sende    AdmitDocument         f0579
+                                 r
+
+Navigation    DocumentNotificat receiv    CommitVisit           f0580
+              ions               er
+
+Navigation    NavigationCalls    receiv   OpenTarget            f0581
+                                 er
+Navigation    NavigationCalls     sende    TargetOpened          f0582
+                                  r
+
+Preferences   PreferenceChange receiv      AdoptPreferencesDr    f0653
+              s                   er       aft
+
+Preferences   PreferenceChange receiv      BeginPreferencesDr    f0654
+              s                   er       aft
+
+Preferences   PreferenceChange receiv      PersistPreferencesD   f0655
+              s                   er       raft
+
+Preferences   PreferenceChange receiv      ValidatePreferences   f0656
+              s                   er       Draft
+
+Preferences   PreferenceChange sende       AdoptPreferencesDr    f0657
+              s                   r        aft
+
+Preferences   PreferenceChange sende       NotifyPreferenceCha f0658
+              s                   r        nge
+
+Preferences   PreferenceChange sende       PersistPreferencesD   f0659
+              s                   r        raft
+
+Preferences   PreferenceChange sende       ValidatePreferences   f0660
+              s                   r        Draft
+
+Preview       DocumentNotificat receiv     DocumentChanged       f0689
+              ions                er
+
+Preview       InterpretationCalls receiv   ParsedSnapshot        f0690
+                                  er
+
+Preview       InterpretationCalls sende    ParseSnapshot         f0691
+                                  r
+
+Preview       LayoutCalls         receiv   ModelLaidOut          f0692
+                                  er
+
+Preview       LayoutCalls         sende    LayoutModel           f0693
+                                  r
+Preview   PresentationEvent   sende    PresentFrame         f0694
+          s                   r
+
+Preview   PreviewAdmission    receiv   AcceptCurrentFrame f0695
+                              er
+
+Preview   PreviewAdmission    receiv   AcceptCurrentModel   f0696
+                              er
+
+Preview   PreviewAdmission    receiv   AcceptWorkerTicket   f0697
+                              er
+
+Preview   PreviewAdmission    receiv   CompleteObsoleteW    f0698
+                              er       orker
+
+Preview   PreviewAdmission    receiv   DiscardObsoleteCo    f0699
+                              er       mpletion
+
+Preview   PreviewAdmission    sende    AcceptCurrentFrame f0700
+                              r
+
+Preview   PreviewAdmission    sende    AcceptCurrentModel   f0701
+                              r
+
+Preview   PreviewAdmission    sende    AcceptWorkerTicket   f0702
+                              r
+
+Preview   PreviewAdmission    sende    CompleteObsoleteW    f0703
+                              r        orker
+
+Preview   PreviewAdmission    sende    DiscardObsoleteCo    f0704
+                              r        mpletion
+
+Preview   ResourcePreparati sende      PrepareDiagramSce    f0705
+          on                  r        nes
+
+Preview   ResourcePreparati sende      PrepareEmbeddedR     f0706
+          on                  r        esources
+
+Preview   ResourcePreparati sende      PrepareTypedDiagra   f0707
+          on                  r        m
+Preview       ScheduledWork        receiv   DebounceElapsed      f0708
+                                   er
+
+Preview       ScheduledWork        sende    RestartDebounce      f0709
+                                   r
+
+Publication   ExportInterpretati   receiv   ExportSnapshotPars   f0748
+              on                   er       ed
+
+Publication   ExportInterpretati   sende    ParseExportSnapsho   f0749
+              on                   r        t
+
+Publication   ExportLayout         receiv   ExportPagesLaidOut   f0750
+                                   er
+
+Publication   ExportLayout         sende    LayoutExportPages    f0751
+                                   r
+
+Publication   PublicationDrawin    sende    PaintPdfCandidate    f0752
+              g                    r
+
+Publication   PublicationInputs    receiv   FreezeExportSnapsh   f0753
+                                   er       ot
+
+Publication   PublicationIntents   receiv   CancelPdfRequest     f0754
+                                   er
+
+Publication   PublicationIntents   receiv   RequestPdfExport     f0755
+                                   er
+
+Publication   PublicationState     receiv   CancelUnpublishedJo f0756
+                                   er       b
+
+Publication   PublicationState     receiv   CommitPdfCandidat    f0757
+                                   er       e
+
+Publication   PublicationState     receiv   DiscardPdfCandidate f0758
+                                   er
+
+Publication   PublicationState     sende    CancelUnpublishedJo f0759
+                                   r        b
+Publication   PublicationState    sende    CommitPdfCandidat    f0760
+                                  r        e
+
+Publication   PublicationState    sende    DiscardPdfCandidate f0761
+                                  r
+
+Publication   ResourcePreparati sende      PrepareExportResou   f0762
+              on                  r        rces
+
+Renderer      DiagramLayoutCal receiv      LayoutTypedDiagra    f0847
+              ls                  er       m
+
+Renderer      DiagramLayoutCal sende       TypedDiagramLaidO    f0848
+              ls                  r        ut
+
+Renderer      ExportLayout        receiv   LayoutExportPages    f0849
+                                  er
+
+Renderer      ExportLayout        sende    ExportPagesLaidOut   f0850
+                                  r
+
+Renderer      LayoutCalls         receiv   LayoutModel          f0851
+                                  er
+
+Renderer      LayoutCalls         sende    ModelLaidOut         f0852
+                                  r
+
+Typography    PublicationDrawin   receiv   PaintPdfCandidate    f0945
+              g                   er
+
+Viewport      ViewportChanges     receiv   CheckCurrentMappi    f0967
+                                  er       ng
+
+Viewport      ViewportChanges     receiv   MapSourceAnchor      f0968
+                                  er
+
+Viewport      ViewportChanges     receiv   RetainDocumentAnd    f0969
+                                  er       Anchor
+
+Viewport      ViewportChanges     receiv   UserPreviewScroll    f0970
+                                  er
+Viewport          ViewportChanges   sende    CheckCurrentMappi     f0971
+                                    r        ng
+
+Viewport          ViewportChanges   sende    MapSourceAnchor       f0972
+                                    r
+
+Viewport          ViewportChanges   sende    SetEditorAnchor       f0973
+                                    r
+
+VisualResources   DiagramLayoutCal receiv    TypedDiagramLaidO     f0985
+                  ls                er       ut
+
+VisualResources   DiagramLayoutCal sende     LayoutTypedDiagra     f0986
+                  ls                r        m
+
+VisualResources   ResourcePreparati receiv   CacheCompatibleSc     f0987
+                  on                er       ene
+
+VisualResources   ResourcePreparati receiv   PrepareDiagramSce     f0988
+                  on                er       nes
+
+VisualResources   ResourcePreparati receiv   PrepareEmbeddedR      f0989
+                  on                er       esources
+
+VisualResources   ResourcePreparati receiv   PrepareExportResou    f0990
+                  on                er       rces
+
+VisualResources   ResourcePreparati receiv   PrepareTypedDiagra    f0991
+                  on                er       m
+
+VisualResources   ResourcePreparati sende    CacheCompatibleSc     f0992
+                  on                r        ene
+
+Workspace         WorkspaceChange receiv     ActivateRootAndHist   f1001
+                  s                 er       ory
+
+Workspace         WorkspaceChange receiv     SetChosenParentRoo f1002
+                  s                 er       t
+
+Workspace         WorkspaceChange receiv     ValidateProposedRo    f1003
+                  s                 er       ot
+Workspace             WorkspaceChange sende         ActivateRootAndHist    f1004
+                      s                    r        ory
+
+Workspace             WorkspaceChange sende         RequestTreeRefresh     f1005
+                      s                    r
+
+Workspace             WorkspaceIntents     receiv   FavoriteFolderChose    f1006
+                                           er       n
+
+
+
+Channel register
+All declared Channels are retained, including those without participants in the selected
+mode. Contracts and permitted messages are global model declarations, not evidence
+of delivery in any mode.
+
+Channel           Contract            Permitted messages        Source facts
+
+ContextInterac ContextInteractio      CaptureContextTarget,     f0108, f0110, f0111,
+tion              nContract           DismissContextMenu,       f0112
+                                      ReleaseKeyboardGrab
+
+DiagramInterp DiagramInterpret ParseMermaidBlock                f0126, f0128
+retation          ationContract
+
+DiagramLayou      DiagramLayoutCa LayoutTypedDiagram,           f0131, f0133, f0134
+tCalls            llsContract         TypedDiagramLaidOut
+
+DocumentCall      DocumentCallsCo AdmitDocument,                f0167, f0169, f0170,
+s                 ntract              DocumentOpened,           f0171
+                                      DocumentRejected
+
+DocumentNoti      DocumentNotifica CommitVisit,                 f0191, f0193, f0194,
+fications         tionsContract       DocumentChanged,          f0195
+                                      GeneratedDocumentC
+                                      hanged
+
+DocumentStat      DocumentStateC      MarkCurrentSaved,         f0212, f0214, f0215
+eChanges          hangesContract      ReplaceDocument
+EditIntents      EditIntentsContra   ApplyTextEdit             f0257, f0259
+                 ct
+
+ExportInterpre   ExportInterpretati ExportSnapshotParsed,      f0288, f0290, f0291
+tation           onContract          ParseExportSnapshot
+
+ExportLayout     ExportLayoutCont ExportPagesLaidOut,          f0292, f0294, f0295
+                 ract                LayoutExportPages
+
+ExternalOpeni    ExternalOpeningC LaunchConfiguredProg         f0312, f0314
+ng               ontract             ram
+
+GeneratedAd      GeneratedAdmiss AdvanceGenerationSeq f0367, f0369, f0370,
+mission          ionContract         uence,                    f0371, f0372
+                                     InspectDirtyMain,
+                                     RejectInvalidSelection,
+                                     ValidateSelection
+
+GeneratedDeli    GeneratedDeliver DeliverGeneratedMain, f0373, f0375, f0376,
+very             yContract           GeneratedMainAccept       f0377
+                                     ed,
+                                     GeneratedMainRejecte
+                                     d
+
+GeneratedDoc     GeneratedDocum AdmitGeneratedDocu             f0378, f0380, f0381
+umentCalls       entCallsContract    ment,
+                                     GeneratedDocumentO
+                                     pened
+
+GeneratedInte    GeneratedIntents    SelectInvalidView,        f0389, f0391, f0392
+nts              Contract            SelectRegisteredView
+
+GenerationLife GenerationLifecyc CancelPreviousChild,          f0453, f0455, f0456
+cycle            leContract          StartGeneration
+
+IndexChanges     IndexChangesCo      CheckReferenceGener       f0466, f0468, f0469
+                 ntract              ation,
+                                     PublishReferenceHeadi
+                                     ngs
+IndexIntents     IndexIntentsContr ExpandReference           f0470, f0472
+                 act
+
+Interpretation   InterpretationCall ParseSnapshot,           f0479, f0481, f0482
+Calls            sContract          ParsedSnapshot
+
+LayoutCalls      LayoutCallsContr   LayoutModel,             f0503, f0505, f0506
+                 act                ModelLaidOut
+
+LeaseLifecycle   LeaseLifecycleCo   InstallNewLease,         f0513, f0515, f0516,
+                 ntract             KeepUnsentRelease,       f0517, f0518
+                                    QueuePreviousLease,
+                                    RemoveSentRelease
+
+LeaseNotificati LeaseNotification   AttemptRelease           f0519, f0521
+ons              sContract
+
+NavigationCall   NavigationCallsC   OpenTarget,              f0583, f0585, f0586
+s                ontract            TargetOpened
+
+OpeningPolicy    OpeningPolicyCon ClassifyExternalTarget     f0597, f0599
+                 tract
+
+PreferenceCha PreferenceChang       AdoptPreferencesDraft    f0644, f0646, f0647,
+nges             esContract         ,                        f0648, f0649, f0650
+                                    BeginPreferencesDraft,
+                                    NotifyPreferenceChang
+                                    e,
+                                    PersistPreferencesDraf
+                                    t,
+                                    ValidatePreferencesDr
+                                    aft
+
+PresentationEv PresentationEven     PresentFrame,            f0679, f0681, f0682
+ents             tsContract         ShowDirtyRejection
+PreviewAdmis     PreviewAdmissio     AcceptCurrentFrame,     f0710, f0712, f0713,
+sion             nContract           AcceptCurrentModel,     f0714, f0715, f0716
+                                     AcceptWorkerTicket,
+                                     CompleteObsoleteWor
+                                     ker,
+                                     DiscardObsoleteCompl
+                                     etion
+
+PublicationDra   PublicationDrawin PaintPdfCandidate         f0763, f0765
+wing             gContract
+
+PublicationInp   PublicationInputs   FreezeExportSnapshot    f0766, f0768
+uts              Contract
+
+PublicationInte PublicationIntents CancelPdfRequest,         f0769, f0771, f0772
+nts              Contract            RequestPdfExport
+
+PublicationStat PublicationStateC    CancelUnpublishedJob,   f0773, f0775, f0776,
+e                ontract             CommitPdfCandidate,     f0777
+                                     DiscardPdfCandidate
+
+ReferenceInter ReferenceInterpr      ParseReference,         f0807, f0809, f0810
+pretation        etationContract     ReferenceParsed
+
+ReferenceStor    ReferenceStorage ReadReference,             f0817, f0819, f0820
+age              Contract            ReferenceRead
+
+ResourcePrep     ResourcePreparat CacheCompatibleScen        f0859, f0861, f0862,
+aration          ionContract         e,                      f0863, f0864, f0865
+                                     PrepareDiagramScene
+                                     s,
+                                     PrepareEmbeddedReso
+                                     urces,
+                                     PrepareExportResourc
+                                     es,
+                                     PrepareTypedDiagram
+ScheduledWor      ScheduledWorkC      DebounceElapsed,          f0884, f0886, f0887,
+k                 ontract             PollReleaseQueue,         f0888
+                                      RestartDebounce
+
+StorageCalls      StorageCallsCont    CandidateRead,            f0921, f0923, f0924,
+                  ract                CandidateReadFailed,      f0925, f0926, f0927
+                                      CurrentWritten,
+                                      ReadCandidate,
+                                      WriteCurrent
+
+UnsavedAdmis UnsavedAdmissio ChooseCancel,                      f0950, f0952, f0953,
+sion              nContract           ChooseSave,               f0954
+                                      ChooseUnsaved
+
+ViewportChan      ViewportChanges     CheckCurrentMapping,      f0974, f0976, f0977,
+ges               Contract            MapSourceAnchor,          f0978, f0979, f0980
+                                      RetainDocumentAndAn
+                                      chor, SetEditorAnchor,
+                                      UserPreviewScroll
+
+WindowPresen WindowPresentati ToggleFullscreen                  f0993, f0995
+tation            onContract
+
+WorkspaceCha WorkspaceChang           ActivateRootAndHistory f1007, f1009, f1010,
+nges              esContract          , RequestTreeRefresh,     f1011, f1012
+                                      SetChosenParentRoot,
+                                      ValidateProposedRoot
+
+WorkspaceInte WorkspaceIntents ActivateExternalTarget,          f1023, f1025, f1026,
+nts               Contract            ChooseInternalFile,       f1027, f1028
+                                      FavoriteFileChosen,
+                                      FavoriteFolderChosen
+
+
+
+Scenario index
+Open an individual Scenario in the navigation tree for its validated sequence. Source
+links below open declarations; steps are not concatenated across Scenarios.
+Completeness is a source assertion, not evidence of execution or test coverage.
+Preconditions and postconditions are not inferred.
+
+Scenario                Mode        Completeness Steps Source facts
+
+ChooserOpensThenC       NormalDe closed              5       f0090, f0091, f0092,
+hangesRoot              sktop                                f0093, f0094, f0095,
+                                                             f0096, f0097
+
+ContextMenuDismiss      NormalDe closed              3       f0113, f0114, f0115,
+ed                      sktop                                f0116, f0117, f0118
+
+DiagramScenePrepa       NormalDe closed              5       f0137, f0138, f0139,
+red                     sktop                                f0140, f0141, f0142,
+                                                             f0143, f0144
+
+DirtyGeneratedDeliv     NormalDe closed              4       f0145, f0146, f0147,
+eryRejected             sktop                                f0148, f0149, f0150,
+                                                             f0151
+
+DirtyOpenCancelled      NormalDe closed              4       f0152, f0153, f0154,
+                        sktop                                f0155, f0156, f0157,
+                                                             f0158
+
+EditedPreviewPublish NormalDe closed                 11      f0260, f0261, f0262,
+ed                      sktop                                f0263, f0264, f0265,
+                                                             f0266, f0267, f0268,
+                                                             f0269, f0270, f0271,
+                                                             f0272, f0273
+
+ExternalTargetHande     NormalDe closed              3       f0315, f0316, f0317,
+dOff                    sktop                                f0318, f0319, f0320
+
+FavoriteFileOpens       NormalDe closed              9       f0329, f0330, f0331,
+                        sktop                                f0332, f0333, f0334,
+                                                             f0335, f0336, f0337,
+                                                             f0338, f0339, f0340
+
+FavoriteFolderChang     NormalDe closed              3       f0341, f0342, f0343,
+esRoot                  sktop                                f0344, f0345, f0346
+FullscreenChangesPr     NormalDe closed   2   f0362, f0363, f0364,
+esentation              sktop                 f0365, f0366
+
+GeneratedReplacem       NormalDe closed   8   f0399, f0400, f0401,
+entReleasesOldLease sktop                     f0402, f0403, f0404,
+                                              f0405, f0406, f0407,
+                                              f0408, f0409
+
+GeneratedSelectionS     NormalDe closed   5   f0411, f0412, f0413,
+upersedes               sktop                 f0414, f0415, f0416,
+                                              f0417, f0418
+
+InvalidSelectionRetai   NormalDe closed   2   f0494, f0495, f0496,
+nsChild                 sktop                 f0497, f0498
+
+PdfCancelledBeforeP     NormalDe closed   3   f0619, f0620, f0621,
+ublication              sktop                 f0622, f0623, f0624
+
+PdfSnapshotPublishe     NormalDe closed   9   f0628, f0629, f0630,
+d                       sktop                 f0631, f0632, f0633,
+                                              f0634, f0635, f0636,
+                                              f0637, f0638, f0639
+
+PreferencesPersistB     NormalDe closed   5   f0661, f0662, f0663,
+eforeAdoption           sktop                 f0664, f0665, f0666,
+                                              f0667, f0668
+
+PreviewResourcesPr      NormalDe closed   8   f0722, f0723, f0724,
+epared                  sktop                 f0725, f0726, f0727,
+                                              f0728, f0729, f0730,
+                                              f0731, f0732
+
+PreviewScrollSynchro NormalDe closed      4   f0733, f0734, f0735,
+nizesEditor             sktop                 f0736, f0737, f0738,
+                                              f0739
+ReferenceHeadingsL     NormalDe closed             7      f0797, f0798, f0799,
+oaded                  sktop                              f0800, f0801, f0802,
+                                                          f0803, f0804, f0805,
+                                                          f0806
+
+ReleaseRetryAfterSe    NormalDe closed             5      f0827, f0828, f0829,
+ndFailure              sktop                              f0830, f0831, f0832,
+                                                          f0833, f0834
+
+SaveThenReadFails      NormalDe closed             9      f0870, f0871, f0872,
+                       sktop                              f0873, f0874, f0875,
+                                                          f0876, f0877, f0878,
+                                                          f0879, f0880, f0881
+
+StalePreviewDiscard    NormalDe closed             2      f0914, f0915, f0916,
+ed                     sktop                              f0917, f0918
+
+
+
+Derived MessageSet
+Channel       Mode     Datagram       Sender       Receiver       Source IDs
+
+ContextInte   Normal   CaptureConte   NativeShel NativeShell      f0074, f0108,
+raction       Deskto   xtTarget       l                           f0110, f0546,
+              p                                                   f0549
+
+ContextInte   Normal   DismissConte   NativeShel NativeShell      f0108, f0111,
+raction       Deskto   xtMenu         l                           f0164, f0547,
+              p                                                   f0550
+
+ContextInte   Normal   ReleaseKeybo   NativeShel NativeShell      f0108, f0112,
+raction       Deskto   ardGrab        l                           f0548, f0551,
+              p                                                   f0826
+
+DiagramInt    Normal   ParseMermai    Interprete   Interpreter    f0126, f0128,
+erpretation   Deskto   dBlock         r                           f0486, f0487,
+              p                                                   f0611
+DiagramLay Normal       LayoutTypedDi VisualReso Renderer     f0131, f0133,
+outCalls       Deskto   agram          urces                  f0512, f0847,
+               p                                              f0986
+
+DiagramLay Normal       TypedDiagram Renderer    VisualResou f0131, f0134,
+outCalls       Deskto   LaidOut                  rces         f0848, f0943,
+               p                                              f0985
+
+DocumentC      Normal   AdmitDocume    Navigation Documents   f0011, f0167,
+alls           Deskto   nt                                    f0169, f0234,
+               p                                              f0579
+
+DocumentC      Normal   DocumentOpe Document Navigation       f0167, f0170,
+alls           Deskto   ned            s                      f0198, f0235,
+               p                                              f0577
+
+DocumentC      Normal   DocumentReje Document Navigation      f0167, f0171,
+alls           Deskto   cted           s                      f0204, f0236,
+               p                                              f0578
+
+DocumentN      Normal   CommitVisit    Document Navigation    f0103, f0191,
+otifications   Deskto                  s                      f0193, f0237,
+               p                                              f0580
+
+DocumentN      Normal   DocumentCha    Document Preview       f0173, f0191,
+otifications   Deskto   nged           s                      f0194, f0238,
+               p                                              f0689
+
+DocumentN      Normal   GeneratedDoc Document GeneratedV f0191, f0195,
+otifications   Deskto   umentChange    s         iews         f0239, f0383,
+               p        d                                     f0425
+
+DocumentSt Normal       MarkCurrentS   Document Documents     f0212, f0214,
+ateChanges     Deskto   aved           s                      f0240, f0242,
+               p                                              f0530
+
+DocumentSt Normal       ReplaceDocu    Document Documents     f0212, f0215,
+ateChanges     Deskto   ment           s                      f0241, f0243,
+               p                                              f0854
+EditIntents   Normal   ApplyTextEdit    NativeShel Documents       f0053, f0244,
+              Deskto                    l                          f0257, f0259,
+              p                                                    f0552
+
+ExportInter   Normal   ExportSnapsh     Interprete   Publication   f0288, f0290,
+pretation     Deskto   otParsed         r                          f0305, f0489,
+              p                                                    f0748
+
+ExportInter   Normal   ParseExportSn Publicatio      Interpreter   f0288, f0291,
+pretation     Deskto   apshot           n                          f0488, f0609,
+              p                                                    f0749
+
+ExportLayou Normal     ExportPagesL     Renderer     Publication   f0292, f0294,
+t             Deskto   aidOut                                      f0298, f0750,
+              p                                                    f0850
+
+ExportLayou Normal     LayoutExportP    Publicatio   Renderer      f0292, f0295,
+t             Deskto   ages             n                          f0508, f0751,
+              p                                                    f0849
+
+ExternalOpe Normal     LaunchConfig     Applicatio   ExternalLau f0035, f0311,
+ning          Deskto   uredProgram      n            ncher         f0312, f0314,
+              p                                                    f0502
+
+GeneratedA    Normal   AdvanceGene      Generated GeneratedV f0017, f0367,
+dmission      Deskto   rationSequenc Views           iews          f0369, f0426,
+              p        e                                           f0429
+
+GeneratedA    Normal   InspectDirtyM    Generated Documents        f0245, f0367,
+dmission      Deskto   ain              Views                      f0370, f0430,
+              p                                                    f0474
+
+GeneratedA    Normal   RejectInvalidS   Generated GeneratedV f0367, f0371,
+dmission      Deskto   election         Views        iews          f0427, f0431,
+              p                                                    f0824
+
+GeneratedA    Normal   ValidateSelecti Generated GeneratedV f0367, f0372,
+dmission      Deskto   on               Views        iews          f0428, f0432,
+              p                                                    f0962
+GeneratedD Normal     DeliverGenera ExternalVi    GeneratedV f0125, f0324,
+elivery      Deskto   tedMain          ewGenera   iews         f0373, f0375,
+             p                         tor                     f0433
+
+GeneratedD Normal     GeneratedMai Generated ExternalVie       f0322, f0373,
+elivery      Deskto   nAccepted        Views      wGenerator f0376, f0395,
+             p                                                 f0434
+
+GeneratedD Normal     GeneratedMai Generated ExternalVie       f0323, f0373,
+elivery      Deskto   nRejected        Views      wGenerator f0377, f0398,
+             p                                                 f0435
+
+GeneratedD Normal     AdmitGenerat     Generated Documents     f0013, f0246,
+ocumentCal   Deskto   edDocument       Views                   f0378, f0380,
+ls           p                                                 f0437
+
+GeneratedD Normal     GeneratedDoc Document GeneratedV f0247, f0378,
+ocumentCal   Deskto   umentOpened      s          iews         f0381, f0388,
+ls           p                                                 f0436
+
+GeneratedI   Normal   SelectInvalidVi NativeShel GeneratedV f0389, f0391,
+ntents       Deskto   ew               l          iews         f0438, f0553,
+             p                                                 f0898
+
+GeneratedI   Normal   SelectRegister   NativeShel GeneratedV f0389, f0392,
+ntents       Deskto   edView           l          iews         f0439, f0554,
+             p                                                 f0900
+
+GenerationL Normal    CancelPreviou    Generated ExternalVie   f0064, f0325,
+ifecycle     Deskto   sChild           Views      wGenerator f0440, f0453,
+             p                                                 f0455
+
+GenerationL Normal    StartGenerati    Generated ExternalVie   f0326, f0441,
+ifecycle     Deskto   on               Views      wGenerator f0453, f0456,
+             p                                                 f0920
+
+IndexChang   Normal   CheckReferen     Document DocumentI      f0079, f0182,
+es           Deskto   ceGeneration     IndexServi ndexServic   f0183, f0466,
+             p                         ce         e            f0468
+IndexChang     Normal   PublishRefere   Document NativeShell       f0184, f0466,
+es             Deskto   nceHeadings     IndexServi                 f0469, f0555,
+               p                        ce                         f0779
+
+IndexIntent    Normal   ExpandRefere    NativeShel DocumentI       f0185, f0283,
+s              Deskto   nce             l            ndexServic    f0470, f0472,
+               p                                     e             f0556
+
+Interpretati   Normal   ParseSnapsho    Preview      Interpreter   f0479, f0481,
+onCalls        Deskto   t                                          f0490, f0615,
+               p                                                   f0691
+
+Interpretati   Normal   ParsedSnapsh    Interprete   Preview       f0479, f0482,
+onCalls        Deskto   ot              r                          f0491, f0618,
+               p                                                   f0690
+
+LayoutCalls    Normal   LayoutModel     Preview      Renderer      f0503, f0505,
+               Deskto                                              f0510, f0693,
+               p                                                   f0851
+
+LayoutCalls    Normal   ModelLaidOut    Renderer     Preview       f0503, f0506,
+               Deskto                                              f0543, f0692,
+               p                                                   f0852
+
+LeaseLifecy    Normal   InstallNewLea   Generated GeneratedV f0442, f0446,
+cle            Deskto   se              Views        iews          f0476, f0513,
+               p                                                   f0515
+
+LeaseLifecy    Normal   KeepUnsentRe Generated GeneratedV f0443, f0447,
+cle            Deskto   lease           Views        iews          f0500, f0513,
+               p                                                   f0516
+
+LeaseLifecy    Normal   QueuePreviou    Generated GeneratedV f0444, f0448,
+cle            Deskto   sLease          Views        iews          f0513, f0517,
+               p                                                   f0781
+
+LeaseLifecy    Normal   RemoveSentR     Generated GeneratedV f0445, f0449,
+cle            Deskto   elease          Views        iews          f0513, f0518,
+               p                                                   f0836
+LeaseNotific Normal    AttemptReleas Generated ExternalVie         f0055, f0321,
+ations        Deskto   e                Views        wBroker       f0450, f0519,
+              p                                                    f0521
+
+NavigationC   Normal   OpenTarget       Applicatio   Navigation    f0037, f0581,
+alls          Deskto                    n                          f0583, f0585,
+              p                                                    f0596
+
+NavigationC   Normal   TargetOpened     Navigation Application     f0036, f0582,
+alls          Deskto                                               f0583, f0586,
+              p                                                    f0931
+
+OpeningPoli   Normal   ClassifyExtern   Applicatio   Application   f0038, f0039,
+cy            Deskto   alTarget         n                          f0099, f0597,
+              p                                                    f0599
+
+Preference    Normal   AdoptPreferen Preferenc       Preference    f0015, f0644,
+Changes       Deskto   cesDraft         es           s             f0646, f0653,
+              p                                                    f0657
+
+Preference    Normal   BeginPreferen NativeShel Preference         f0057, f0558,
+Changes       Deskto   cesDraft         l            s             f0644, f0647,
+              p                                                    f0654
+
+Preference    Normal   NotifyPreferen Preferenc      NativeShell   f0557, f0592,
+Changes       Deskto   ceChange         es                         f0644, f0648,
+              p                                                    f0658
+
+Preference    Normal   PersistPrefere   Preferenc    Preference    f0641, f0644,
+Changes       Deskto   ncesDraft        es           s             f0649, f0655,
+              p                                                    f0659
+
+Preference    Normal   ValidatePrefer   Preferenc    Preference    f0644, f0650,
+Changes       Deskto   encesDraft       es           s             f0656, f0660,
+              p                                                    f0958
+
+Presentatio   Normal   PresentFrame     Preview      NativeShell   f0559, f0678,
+nEvents       Deskto                                               f0679, f0681,
+              p                                                    f0694
+Presentatio    Normal   ShowDirtyReje Generated NativeShell       f0451, f0560,
+nEvents        Deskto   ction           Views                     f0679, f0682,
+               p                                                  f0906
+
+PreviewAd      Normal   AcceptCurrent Preview        Preview      f0001, f0695,
+mission        Deskto   Frame                                     f0700, f0710,
+               p                                                  f0712
+
+PreviewAd      Normal   AcceptCurrent Preview        Preview      f0003, f0696,
+mission        Deskto   Model                                     f0701, f0710,
+               p                                                  f0713
+
+PreviewAd      Normal   AcceptWorker    Preview      Preview      f0005, f0697,
+mission        Deskto   Ticket                                    f0702, f0710,
+               p                                                  f0714
+
+PreviewAd      Normal   CompleteObs     Preview      Preview      f0105, f0698,
+mission        Deskto   oleteWorker                               f0703, f0710,
+               p                                                  f0715
+
+PreviewAd      Normal   DiscardObsole Preview        Preview      f0160, f0699,
+mission        Deskto   teCompletion                              f0704, f0710,
+               p                                                  f0716
+
+Publication    Normal   PaintPdfCandi   Publicatio   Typography   f0607, f0752,
+Drawing        Deskto   date            n                         f0763, f0765,
+               p                                                  f0945
+
+PublicationI   Normal   FreezeExportS Document Publication        f0248, f0360,
+nputs          Deskto   napshot         s                         f0753, f0766,
+               p                                                  f0768
+
+PublicationI   Normal   CancelPdfReq    NativeShel Publication    f0062, f0561,
+ntents         Deskto   uest            l                         f0754, f0769,
+               p                                                  f0771
+
+PublicationI   Normal   RequestPdfEx    NativeShel Publication    f0562, f0755,
+ntents         Deskto   port            l                         f0769, f0772,
+               p                                                  f0856
+PublicationS   Normal   CancelUnpubli Publicatio    Publication   f0066, f0756,
+tate           Deskto   shedJob        n                          f0759, f0773,
+               p                                                  f0775
+
+PublicationS   Normal   CommitPdfCa    Publicatio   Publication   f0101, f0757,
+tate           Deskto   ndidate        n                          f0760, f0773,
+               p                                                  f0776
+
+PublicationS   Normal   DiscardPdfCa   Publicatio   Publication   f0162, f0758,
+tate           Deskto   ndidate        n                          f0761, f0773,
+               p                                                  f0777
+
+ReferenceIn Normal      ParseReferenc Document Interpreter        f0187, f0492,
+terpretation   Deskto   e              IndexServi                 f0613, f0807,
+               p                       ce                         f0809
+
+ReferenceIn Normal      ReferencePars Interprete    DocumentI     f0186, f0493,
+terpretation   Deskto   ed             r            ndexServic    f0807, f0810,
+               p                                    e             f0813
+
+ReferenceSt Normal      ReadReferenc   Document DocumentS         f0189, f0223,
+orage          Deskto   e              IndexServi torage          f0785, f0817,
+               p                       ce                         f0819
+
+ReferenceSt Normal      ReferenceRea   Document DocumentI         f0188, f0224,
+orage          Deskto   d              Storage      ndexServic    f0816, f0817,
+               p                                    e             f0820
+
+ResourcePr     Normal   CacheCompati VisualReso VisualResou f0060, f0859,
+eparation      Deskto   bleScene       urces        rces          f0861, f0987,
+               p                                                  f0992
+
+ResourcePr     Normal   PrepareDiagr   Preview      VisualResou f0670, f0705,
+eparation      Deskto   amScenes                    rces          f0859, f0862,
+               p                                                  f0988
+
+ResourcePr     Normal   PrepareEmbe    Preview      VisualResou f0672, f0706,
+eparation      Deskto   ddedResource                rces          f0859, f0863,
+               p        s                                         f0989
+ResourcePr    Normal   PrepareExport Publicatio   VisualResou f0674, f0762,
+eparation     Deskto   Resources       n          rces        f0859, f0864,
+              p                                               f0990
+
+ResourcePr    Normal   PrepareTyped    Preview    VisualResou f0676, f0707,
+eparation     Deskto   Diagram                    rces        f0859, f0865,
+              p                                               f0991
+
+ScheduledW Normal      DebounceElap EventLoop Preview         f0123, f0278,
+ork           Deskto   sed                                    f0708, f0884,
+              p                                               f0886
+
+ScheduledW Normal      PollReleaseQu   EventLoop GeneratedV f0279, f0452,
+ork           Deskto   eue                        iews        f0643, f0884,
+              p                                               f0887
+
+ScheduledW Normal      RestartDebou    Preview    EventLoop   f0277, f0709,
+ork           Deskto   nce                                    f0867, f0884,
+              p                                               f0888
+
+StorageCall   Normal   CandidateRea    Document Documents     f0069, f0227,
+s             Deskto   d               Storage                f0249, f0921,
+              p                                               f0923
+
+StorageCall   Normal   CandidateRea    Document Documents     f0072, f0228,
+s             Deskto   dFailed         Storage                f0250, f0921,
+              p                                               f0924
+
+StorageCall   Normal   CurrentWritte   Document Documents     f0121, f0229,
+s             Deskto   n               Storage                f0251, f0921,
+              p                                               f0925
+
+StorageCall   Normal   ReadCandidat    Document DocumentS     f0225, f0252,
+s             Deskto   e               s          torage      f0783, f0921,
+              p                                               f0926
+
+StorageCall   Normal   WriteCurrent    Document DocumentS     f0226, f0253,
+s             Deskto                   s          torage      f0921, f0927,
+              p                                               f1030
+UnsavedAd    Normal   ChooseCancel     NativeShel Documents     f0082, f0254,
+mission      Deskto                    l                        f0564, f0950,
+             p                                                  f0952
+
+UnsavedAd    Normal   ChooseSave       NativeShel Documents     f0087, f0255,
+mission      Deskto                    l                        f0565, f0950,
+             p                                                  f0953
+
+UnsavedAd    Normal   ChooseUnsav      Document NativeShell     f0089, f0256,
+mission      Deskto   ed               s                        f0563, f0950,
+             p                                                  f0954
+
+ViewportCh   Normal   CheckCurrent     Viewport   Viewport      f0077, f0967,
+anges        Deskto   Mapping                                   f0971, f0974,
+             p                                                  f0976
+
+ViewportCh   Normal   MapSourceAn      Viewport   Viewport      f0528, f0968,
+anges        Deskto   chor                                      f0972, f0974,
+             p                                                  f0977
+
+ViewportCh   Normal   RetainDocume NativeShel Viewport          f0567, f0869,
+anges        Deskto   ntAndAnchor      l                        f0969, f0974,
+             p                                                  f0978
+
+ViewportCh   Normal   SetEditorAnch    Viewport   NativeShell   f0566, f0904,
+anges        Deskto   or                                        f0973, f0974,
+             p                                                  f0979
+
+ViewportCh   Normal   UserPreviewS     NativeShel Viewport      f0568, f0956,
+anges        Deskto   croll            l                        f0970, f0974,
+             p                                                  f0980
+
+WindowPres Normal     ToggleFullscre   NativeShel NativeShell   f0569, f0570,
+entation     Deskto   en               l                        f0940, f0993,
+             p                                                  f0995
+
+Workspace    Normal   ActivateRootA    Workspac   Workspace     f0009, f1001,
+Changes      Deskto   ndHistory        e                        f1004, f1007,
+             p                                                  f1009
+Workspace    Normal   RequestTreeR     Workspac     NativeShell   f0571, f0858,
+Changes      Deskto   efresh           e                          f1005, f1007,
+             p                                                    f1010
+
+Workspace    Normal   SetChosenPar     Applicatio   Workspace     f0040, f0902,
+Changes      Deskto   entRoot          n                          f1002, f1007,
+             p                                                    f1011
+
+Workspace    Normal   ValidatePropo    Applicatio   Workspace     f0041, f0960,
+Changes      Deskto   sedRoot          n                          f1003, f1007,
+             p                                                    f1012
+
+WorkspaceI   Normal   ActivateExtern NativeShel Application       f0007, f0042,
+ntents       Deskto   alTarget         l                          f0572, f1023,
+             p                                                    f1025
+
+WorkspaceI   Normal   ChooseIntern     NativeShel Application     f0043, f0084,
+ntents       Deskto   alFile           l                          f0573, f1023,
+             p                                                    f1026
+
+WorkspaceI   Normal   FavoriteFileCh   NativeShel Application     f0044, f0328,
+ntents       Deskto   osen             l                          f0574, f1023,
+             p                                                    f1027
+
+WorkspaceI   Normal   FavoriteFolder   NativeShel Workspace       f0348, f0575,
+ntents       Deskto   Chosen           l                          f1006, f1023,
+             p                                                    f1028
+

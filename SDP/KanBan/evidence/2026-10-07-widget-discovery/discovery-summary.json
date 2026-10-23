@@ -1,0 +1,215 @@
+{
+  "observedAt": "2026-10-07T06:46:51.823437+00:00",
+  "command": "gh sdp . discover --json",
+  "root": "/home/warloc/git/xfmd-sdl-navigation",
+  "schema": "sdptool/0.2",
+  "operation": "discover",
+  "sources": [
+    {
+      "id": "sdl-core-0442339cc9497720",
+      "system": "fixtures",
+      "source": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdl-core.design",
+      "profile": "design-core/0.5",
+      "kind": "sdl",
+      "state": "validated",
+      "revision": "8c3af91f47a684084eccefae60abb88f31781d9e12dc4889f350e8c89ff0a453"
+    },
+    {
+      "id": "sdl-include-5b67fbf15373f7e2",
+      "system": "fixtures",
+      "source": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdl-include.design",
+      "profile": "design-core/0.5",
+      "kind": "sdl",
+      "state": "invalid",
+      "revision": "0bbb771b1e0905d021a94c3717f8e717139778351ba138cb873ef8c6d578e644",
+      "diagnostic": "UNSUPPORTED_SYNTAX at 2:1: Expected an ASCII identifier matching [A-Z][A-Za-z0-9]*"
+    },
+    {
+      "id": "sdl-requirement-5e24377bc143435b",
+      "system": "fixtures",
+      "source": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdl-requirement.design",
+      "profile": "design-core/0.5",
+      "kind": "sdl",
+      "state": "invalid",
+      "revision": "8896bd47d213c6a2b8278123d0c14dc25b6dd02c735df41dced51739d9ca069f",
+      "diagnostic": "UNSUPPORTED_SYNTAX at 2:1: Expected an ASCII identifier matching [A-Z][A-Za-z0-9]*"
+    },
+    {
+      "id": "sdl-system-5123ce1e5bbdb60c",
+      "system": "fixtures",
+      "source": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdl-system.design",
+      "profile": "design-core/0.5",
+      "kind": "sdl",
+      "state": "invalid",
+      "revision": "1bca283ad53d256a1127c5be9413f002738f718c4affa0dda19a8cef0643fa5e",
+      "diagnostic": "UNSUPPORTED_SYNTAX at 2:1: Expected an ASCII identifier matching [A-Z][A-Za-z0-9]*"
+    },
+    {
+      "id": "sdui-checked-631c6b8774088b62",
+      "system": "fixtures",
+      "source": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-checked.sdui",
+      "profile": "sdui/0.2",
+      "kind": "sdui",
+      "state": "invalid",
+      "revision": "737ca4337138ba8f86bc84dca88592eaf0f8e9f000d79eea78462d2964364444",
+      "diagnostic": "widget-property at 1:35: Unknown widget property checked"
+    },
+    {
+      "id": "sdui-context-event-a6904e3095964bb0",
+      "system": "fixtures",
+      "source": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-context-event.sdui",
+      "profile": "sdui/0.2",
+      "kind": "sdui",
+      "state": "invalid",
+      "revision": "433dc3e5beb4890470fc713b3bb61902ae32fb2a9a99016ed07d4483ca3a0e58",
+      "diagnostic": "widget-property at 1:61: Unknown widget property onContext"
+    },
+    {
+      "id": "sdui-controls-e143ef96798aca54",
+      "system": "fixtures",
+      "source": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-controls.sdui",
+      "profile": "sdui/0.2",
+      "kind": "sdui",
+      "state": "validated",
+      "revision": "642fd8bb073e6a9beb6a1b6daf5e0242fd66735c74db0f26fa9844ee7938ed40"
+    },
+    {
+      "id": "sdui-icon-53113522f11fbc6b",
+      "system": "fixtures",
+      "source": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-icon.sdui",
+      "profile": "sdui/0.2",
+      "kind": "sdui",
+      "state": "invalid",
+      "revision": "3cbed931ad86c03bf7c9e7f2d0a3b19bba508143c2436c2aef18902bf0a6029c",
+      "diagnostic": "widget-property at 1:31: Unknown widget property icon"
+    },
+    {
+      "id": "sdui-missing-binding-6424cdf403635cc9",
+      "system": "fixtures",
+      "source": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-missing-binding.sdui",
+      "profile": "sdui/0.2",
+      "kind": "sdui",
+      "state": "validated",
+      "revision": "8c558c67315e57422dee2f636048db84c529534b34c18f8cd4dd975e651b60a3"
+    },
+    {
+      "id": "sdui-scroll-ast-2a76e92edbf104ab",
+      "system": "fixtures",
+      "source": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-scroll-ast.sdui",
+      "profile": "sdui/0.2",
+      "kind": "sdui",
+      "state": "validated",
+      "revision": "3398c846b7a184cc01adbcd79356bc85136881780c2e1fe745d57c2a8b9aa01e"
+    },
+    {
+      "id": "sdui-scroll-svg-bbd6fd37bfd0f327",
+      "system": "fixtures",
+      "source": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-scroll-svg.sdui",
+      "profile": "sdui/0.2",
+      "kind": "sdui",
+      "state": "validated",
+      "revision": "3398c846b7a184cc01adbcd79356bc85136881780c2e1fe745d57c2a8b9aa01e"
+    },
+    {
+      "id": "sdui-widget-checkbox-c21d0157a2defb0d",
+      "system": "fixtures",
+      "source": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-widget-checkbox.sdui",
+      "profile": "sdui/0.2",
+      "kind": "sdui",
+      "state": "invalid",
+      "revision": "b27d28d193aaa8b8fff5c140e58fcc5d501bb90bf23cdc0f133b662426e38220",
+      "diagnostic": "widget-kind at 1:17: Unsupported widget checkbox"
+    },
+    {
+      "id": "sdui-widget-dialog-0127682f97819e0d",
+      "system": "fixtures",
+      "source": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-widget-dialog.sdui",
+      "profile": "sdui/0.2",
+      "kind": "sdui",
+      "state": "invalid",
+      "revision": "67f647b413a94ddb99b95ab19b4d3370ec311793c2ec9a47620dd4ff4e79bce4",
+      "diagnostic": "widget-kind at 1:17: Unsupported widget dialog"
+    },
+    {
+      "id": "sdui-widget-list-7dde6e8d7b38a091",
+      "system": "fixtures",
+      "source": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-widget-list.sdui",
+      "profile": "sdui/0.2",
+      "kind": "sdui",
+      "state": "invalid",
+      "revision": "e233d1e8b283c5f4940739d23af36860657a665528f4dc5bb144041b78c3248f",
+      "diagnostic": "widget-kind at 1:17: Unsupported widget list"
+    },
+    {
+      "id": "sdui-widget-menu-8583fb7289a0e125",
+      "system": "fixtures",
+      "source": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-widget-menu.sdui",
+      "profile": "sdui/0.2",
+      "kind": "sdui",
+      "state": "invalid",
+      "revision": "3f62983e3e4060baf740b82014905406411cefa7836ec914be2e017702852cdc",
+      "diagnostic": "widget-kind at 1:17: Unsupported widget menu"
+    },
+    {
+      "id": "sdui-widget-select-9909c18c5b99a1ee",
+      "system": "fixtures",
+      "source": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-widget-select.sdui",
+      "profile": "sdui/0.2",
+      "kind": "sdui",
+      "state": "invalid",
+      "revision": "307d2f379a3594a035ebc25f167777079efd2105b44ab2dda64a7edfd0e40261",
+      "diagnostic": "widget-kind at 1:17: Unsupported widget select"
+    },
+    {
+      "id": "sdui-widget-slider-46eaa8f070d5ecd1",
+      "system": "fixtures",
+      "source": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-widget-slider.sdui",
+      "profile": "sdui/0.2",
+      "kind": "sdui",
+      "state": "invalid",
+      "revision": "97e94859eb8f98d852b57f5fc905cfa9fa9e50aaf4ab76e0bfe9147fb4d58a1a",
+      "diagnostic": "widget-kind at 1:17: Unsupported widget slider"
+    },
+    {
+      "id": "sdui-widget-splitter-fc158c670feeaa48",
+      "system": "fixtures",
+      "source": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-widget-splitter.sdui",
+      "profile": "sdui/0.2",
+      "kind": "sdui",
+      "state": "invalid",
+      "revision": "828e140cedae79a93f74306db65e0ffbc0f064e5645614b4f2a120ba721ff3d7",
+      "diagnostic": "widget-kind at 1:17: Unsupported widget splitter"
+    },
+    {
+      "id": "sdui-widget-tabs-e5585e585a697878",
+      "system": "fixtures",
+      "source": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-widget-tabs.sdui",
+      "profile": "sdui/0.2",
+      "kind": "sdui",
+      "state": "invalid",
+      "revision": "5cab3547138bbdea6e3aa9732dc984945cc1034790d411e64f4403716594e7d8",
+      "diagnostic": "widget-kind at 1:17: Unsupported widget tabs"
+    },
+    {
+      "id": "sdui-widget-textarea-b01d3c5b838b655f",
+      "system": "fixtures",
+      "source": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-widget-textarea.sdui",
+      "profile": "sdui/0.2",
+      "kind": "sdui",
+      "state": "invalid",
+      "revision": "cf12b6cb71074f3eb5eb0b6629aa657196a469ed192f2f4d1d76423b38fbc9c1",
+      "diagnostic": "widget-kind at 1:17: Unsupported widget textarea"
+    },
+    {
+      "id": "sdui-widget-tree-744733ac86bcba54",
+      "system": "fixtures",
+      "source": "SDP/05--Implementation/XFMD-Modeling/evidence/XM-M2/fixtures/sdui-widget-tree.sdui",
+      "profile": "sdui/0.2",
+      "kind": "sdui",
+      "state": "invalid",
+      "revision": "c2cd99cfcc28d3cc846cddb39f1539b3c81675e573a1fea6f3b91f3fe6d5f8d8",
+      "diagnostic": "widget-kind at 1:17: Unsupported widget tree"
+    }
+  ],
+  "discovery_sha256": "c107f69a70617b57bc741728b3ca234f8c91661759bdaf7ed1ac509e33834794"
+}

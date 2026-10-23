@@ -1,0 +1,25 @@
+""	0	16.34375
+"DocumentSession (functionality)"	180	16.34375
+"DocumentStorage (unit)"	134	16.34375
+"Documents (unit)"	96	16.34375
+"EmbeddedVisuals (functionality)"	178	16.34375
+"FoxPresentation (functionality)"	169	16.34375
+"Interpreter (unit)"	94	16.34375
+"LocalFileStorage (functionality)"	171	16.34375
+"MarkdownInterpretation (functionality)"	216	16.34375
+"MarkdownPresentation (feature)"	182	16.34375
+"NativeShell (unit)"	95	16.34375
+"PageComposition (functionality)"	177	16.34375
+"Preview (unit)"	76	16.34375
+"PreviewPipeline (functionality)"	167	16.34375
+"PreviewTextSelection (functionality)"	197	16.34375
+"RenderLayout (functionality)"	156	16.34375
+"Renderer (unit)"	84	16.34375
+"Typography (unit)"	97	16.34375
+"TypographyAndDrawing (functionality)"	213	16.34375
+"VisualResources (unit)"	123	16.34375
+"WorkspaceControls (functionality)"	188	16.34375
+"XfmdDesktop (container)"	139	16.34375
+"allocated-to"	66	16.34375
+"contributes-to"	78	16.34375
+"owns"	29	16.34375

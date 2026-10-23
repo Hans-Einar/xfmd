@@ -1,0 +1,8 @@
+flowchart LR
+    n_Application["Application (unit)"]
+    n_Interpreter["Interpreter (unit)"]
+    n_Renderer["Renderer (unit)"]
+    n_XfmdDesktop["XfmdDesktop (container)"]
+    n_XfmdDesktop -->|contains| n_Application
+    n_XfmdDesktop -->|contains| n_Interpreter
+    n_XfmdDesktop -->|contains| n_Renderer

@@ -1,0 +1,30 @@
+{
+  "main": "5ca0e90f82c5da449d529906b4f753f39a907cb4",
+  "base": "3b3d935287ce69c5533aed8a9b1a557f217fe5a5",
+  "branch": "sdp/xfmd-vp06-overview",
+  "changedPaths": [
+    "SDL/go/documents/selection.go",
+    "SDL/go/viewpoint/activity_context.go",
+    "SDL/go/viewpoint/activity_overview.go",
+    "SDL/go/viewpoint/activity_overview_test.go",
+    "SDL/go/viewpoint/overview.go",
+    "SDL/go/viewpoint/overview_test.go",
+    "SDP/02--Requirements/SDPTool.md",
+    "SDP/05--Implementation/SDL/ViewpointNavigation/N9.md",
+    "SDP/05--Implementation/SDL/ViewpointNavigation/Plan.md",
+    "SDPTool/Contract.md",
+    "SDPTool/activity_overview_test.go",
+    "SDPTool/overview_actions_test.go",
+    "SDPTool/overview_test.go"
+  ],
+  "otherWork": {
+    "ProjectGovernance": {
+      "head": "ee16e91635c3c870abb3cc938ebc3459c5ed8758",
+      "overlap": []
+    },
+    "coordination": {
+      "head": "684b1f8952f2f5ff2dc9fb32c7592340d8aff60f",
+      "overlap": []
+    }
+  }
+}

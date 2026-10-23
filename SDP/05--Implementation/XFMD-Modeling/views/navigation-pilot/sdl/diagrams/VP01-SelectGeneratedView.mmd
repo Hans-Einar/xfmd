@@ -1,0 +1,6 @@
+flowchart LR
+    n_GeneratedDocumentNavigation["GeneratedDocumentNavigation (functionality)"]
+    n_ReaderAuthor["ReaderAuthor (actor)"]
+    n_SelectGeneratedView["SelectGeneratedView (usecase)"]
+    n_GeneratedDocumentNavigation -->|contributes-to| n_SelectGeneratedView
+    n_ReaderAuthor -->|pursues| n_SelectGeneratedView

@@ -1,0 +1,24 @@
+SDUI GUI dump | FilesClean | 160 columns | structural preview
+[ Sidebar ]       [ Open ]          [ Save ]          [ Editor ]        [ Split ]         [ Preview ]       [ Back ]          [ Forward ]       [ Light / Dark ]
+Path                                                                             Document path / filename filter: [/project/README.md]
+**Files* [ R ]   [ M↓ ]  [ ↑ ]   [ Open  ### Generated-view navigator             ### README.md
+* / Inde                         ]       Registered project: xfmd-pilot           # XFMD documentation
+x
+### Folder tree (state sample)           - Goals and contributions                Current document preview — representative content.
+- /project                               - Ownership and allocation
+  - docs                                                                          The real application retains source anchors, history and its rendering pipelin
+  - README.md                            Separate navigation document.            e.
+
+### Folders / Files / Favorites          Not a sidebar tab.
+Selected: **Favorites**
+
+- docs — folder
+
+---
+
+- README.md — file
+
+See NAV-03 for context actions.
+
+This is a static list sample.
+Static model: clean document, Files selected. Native interaction is not bound.

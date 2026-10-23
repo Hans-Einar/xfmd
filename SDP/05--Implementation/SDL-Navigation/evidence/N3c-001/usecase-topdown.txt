@@ -1,0 +1,21 @@
+Editor
+
+Reader
+
+Document viewer
+
+Independent use case
+
+include is plain text
+
+Export PDF
+
+Browse project
+
+«extend»
+
+«include»
+
+Open document
+
+

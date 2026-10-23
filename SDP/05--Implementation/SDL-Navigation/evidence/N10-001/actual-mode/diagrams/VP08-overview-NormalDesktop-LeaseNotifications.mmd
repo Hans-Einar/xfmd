@@ -1,0 +1,6 @@
+flowchart LR
+    n_ExternalViewBroker["ExternalViewBroker (unit)"]
+    n_GeneratedViews["GeneratedViews (unit)"]
+    n_LeaseNotifications["LeaseNotifications (channel)"]
+    n_LeaseNotifications -->|receiver| n_ExternalViewBroker
+    n_GeneratedViews -->|sender| n_LeaseNotifications

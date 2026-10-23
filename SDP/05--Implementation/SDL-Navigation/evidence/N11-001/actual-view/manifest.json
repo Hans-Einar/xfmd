@@ -1,0 +1,3761 @@
+{
+  "version": "sdl-viewpoints-go-1.3",
+  "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007",
+  "renderer": "",
+  "diagrams": [
+    {
+      "id": "VP09-overview-data-FrozenExportSnapshot",
+      "title": "Data origin and holder: FrozenExportSnapshot",
+      "kind": "flowchart",
+      "nodes": {
+        "n_ExportSnapshotShape": {
+          "kind": "contract",
+          "model_id": "ExportSnapshotShape",
+          "span": {
+            "column": 1,
+            "end": 2843,
+            "end_column": 30,
+            "end_line": 100,
+            "line": 100,
+            "node": "Span",
+            "start": 2814
+          }
+        },
+        "n_FrozenExportSnapshot": {
+          "kind": "dataset",
+          "model_id": "FrozenExportSnapshot",
+          "span": {
+            "column": 1,
+            "end": 3314,
+            "end_column": 30,
+            "end_line": 116,
+            "line": 116,
+            "node": "Span",
+            "start": 3285
+          }
+        },
+        "n_Publication": {
+          "kind": "unit",
+          "model_id": "Publication",
+          "span": {
+            "column": 1,
+            "end": 6315,
+            "end_column": 18,
+            "end_line": 218,
+            "line": 218,
+            "node": "Span",
+            "start": 6298
+          }
+        }
+      },
+      "edges": [
+        {
+          "source": "n_FrozenExportSnapshot",
+          "relation": "upholds",
+          "target": "n_ExportSnapshotShape",
+          "fact": "f0361"
+        },
+        {
+          "source": "n_Publication",
+          "relation": "holds",
+          "target": "n_FrozenExportSnapshot",
+          "fact": "f0746"
+        }
+      ],
+      "source_facts": [
+        "f0361",
+        "f0746"
+      ],
+      "elements": []
+    },
+    {
+      "id": "VP09-overview-data-GeneratedSelectionState",
+      "title": "Data origin and holder: GeneratedSelectionState",
+      "kind": "flowchart",
+      "nodes": {
+        "n_GeneratedSelectionState": {
+          "kind": "dataset",
+          "model_id": "GeneratedSelectionState",
+          "span": {
+            "column": 1,
+            "end": 3868,
+            "end_column": 33,
+            "end_line": 132,
+            "line": 132,
+            "node": "Span",
+            "start": 3836
+          }
+        },
+        "n_GeneratedViews": {
+          "kind": "unit",
+          "model_id": "GeneratedViews",
+          "span": {
+            "column": 1,
+            "end": 3928,
+            "end_column": 21,
+            "end_line": 134,
+            "line": 134,
+            "node": "Span",
+            "start": 3908
+          }
+        },
+        "n_GenerationStateShape": {
+          "kind": "contract",
+          "model_id": "GenerationStateShape",
+          "span": {
+            "column": 1,
+            "end": 4052,
+            "end_column": 31,
+            "end_line": 138,
+            "line": 138,
+            "node": "Span",
+            "start": 4022
+          }
+        }
+      },
+      "edges": [
+        {
+          "source": "n_GeneratedSelectionState",
+          "relation": "upholds",
+          "target": "n_GenerationStateShape",
+          "fact": "f0410"
+        },
+        {
+          "source": "n_GeneratedViews",
+          "relation": "holds",
+          "target": "n_GeneratedSelectionState",
+          "fact": "f0423"
+        }
+      ],
+      "source_facts": [
+        "f0410",
+        "f0423"
+      ],
+      "elements": []
+    },
+    {
+      "id": "VP09-overview-data-MainDocumentState",
+      "title": "Data origin and holder: MainDocumentState",
+      "kind": "flowchart",
+      "nodes": {
+        "n_DocumentStateShape": {
+          "kind": "contract",
+          "model_id": "DocumentStateShape",
+          "span": {
+            "column": 1,
+            "end": 2304,
+            "end_column": 29,
+            "end_line": 79,
+            "line": 79,
+            "node": "Span",
+            "start": 2276
+          }
+        },
+        "n_Documents": {
+          "kind": "unit",
+          "model_id": "Documents",
+          "span": {
+            "column": 1,
+            "end": 2342,
+            "end_column": 16,
+            "end_line": 81,
+            "line": 81,
+            "node": "Span",
+            "start": 2327
+          }
+        },
+        "n_MainDocumentState": {
+          "kind": "dataset",
+          "model_id": "MainDocumentState",
+          "span": {
+            "column": 1,
+            "end": 4834,
+            "end_column": 27,
+            "end_line": 166,
+            "line": 166,
+            "node": "Span",
+            "start": 4808
+          }
+        }
+      },
+      "edges": [
+        {
+          "source": "n_Documents",
+          "relation": "holds",
+          "target": "n_MainDocumentState",
+          "fact": "f0231"
+        },
+        {
+          "source": "n_MainDocumentState",
+          "relation": "upholds",
+          "target": "n_DocumentStateShape",
+          "fact": "f0526"
+        }
+      ],
+      "source_facts": [
+        "f0231",
+        "f0526"
+      ],
+      "elements": []
+    }
+  ],
+  "facts": [
+    {
+      "id": "f0109",
+      "line": 423,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 15033,
+        "end_column": 54,
+        "end_line": 423,
+        "line": 423,
+        "node": "Span",
+        "start": 14980
+      },
+      "subject": "ContextInteractionContract",
+      "text": "ContextInteractionContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0110",
+      "line": 424,
+      "node": "Relation",
+      "object": "CaptureContextTarget",
+      "span": {
+        "column": 1,
+        "end": 15090,
+        "end_column": 57,
+        "end_line": 424,
+        "line": 424,
+        "node": "Span",
+        "start": 15034
+      },
+      "subject": "ContextInteractionContract",
+      "text": "ContextInteractionContract permits CaptureContextTarget.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0111",
+      "line": 425,
+      "node": "Relation",
+      "object": "DismissContextMenu",
+      "span": {
+        "column": 1,
+        "end": 15145,
+        "end_column": 55,
+        "end_line": 425,
+        "line": 425,
+        "node": "Span",
+        "start": 15091
+      },
+      "subject": "ContextInteractionContract",
+      "text": "ContextInteractionContract permits DismissContextMenu.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0112",
+      "line": 426,
+      "node": "Relation",
+      "object": "ReleaseKeyboardGrab",
+      "span": {
+        "column": 1,
+        "end": 15201,
+        "end_column": 56,
+        "end_line": 426,
+        "line": 426,
+        "node": "Span",
+        "start": 15146
+      },
+      "subject": "ContextInteractionContract",
+      "text": "ContextInteractionContract permits ReleaseKeyboardGrab.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0127",
+      "line": 441,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 16125,
+        "end_column": 57,
+        "end_line": 441,
+        "line": 441,
+        "node": "Span",
+        "start": 16069
+      },
+      "subject": "DiagramInterpretationContract",
+      "text": "DiagramInterpretationContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0128",
+      "line": 442,
+      "node": "Relation",
+      "object": "ParseMermaidBlock",
+      "span": {
+        "column": 1,
+        "end": 16182,
+        "end_column": 57,
+        "end_line": 442,
+        "line": 442,
+        "node": "Span",
+        "start": 16126
+      },
+      "subject": "DiagramInterpretationContract",
+      "text": "DiagramInterpretationContract permits ParseMermaidBlock.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0132",
+      "line": 446,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 16399,
+        "end_column": 54,
+        "end_line": 446,
+        "line": 446,
+        "node": "Span",
+        "start": 16346
+      },
+      "subject": "DiagramLayoutCallsContract",
+      "text": "DiagramLayoutCallsContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0133",
+      "line": 447,
+      "node": "Relation",
+      "object": "LayoutTypedDiagram",
+      "span": {
+        "column": 1,
+        "end": 16454,
+        "end_column": 55,
+        "end_line": 447,
+        "line": 447,
+        "node": "Span",
+        "start": 16400
+      },
+      "subject": "DiagramLayoutCallsContract",
+      "text": "DiagramLayoutCallsContract permits LayoutTypedDiagram.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0134",
+      "line": 448,
+      "node": "Relation",
+      "object": "TypedDiagramLaidOut",
+      "span": {
+        "column": 1,
+        "end": 16510,
+        "end_column": 56,
+        "end_line": 448,
+        "line": 448,
+        "node": "Span",
+        "start": 16455
+      },
+      "subject": "DiagramLayoutCallsContract",
+      "text": "DiagramLayoutCallsContract permits TypedDiagramLaidOut.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0165",
+      "line": 479,
+      "node": "PropertyAssignment",
+      "property": "presence",
+      "span": {
+        "column": 1,
+        "end": 18933,
+        "end_column": 39,
+        "end_line": 479,
+        "line": 479,
+        "node": "Span",
+        "start": 18895
+      },
+      "subject": "DocumentBytes",
+      "text": "DocumentBytes has presence = required.",
+      "value": "required",
+      "verb": "has"
+    },
+    {
+      "id": "f0166",
+      "line": 480,
+      "node": "PropertyAssignment",
+      "property": "value-type",
+      "span": {
+        "column": 1,
+        "end": 18971,
+        "end_column": 38,
+        "end_line": 480,
+        "line": 480,
+        "node": "Span",
+        "start": 18934
+      },
+      "subject": "DocumentBytes",
+      "text": "DocumentBytes has value-type = bytes.",
+      "value": "bytes",
+      "verb": "has"
+    },
+    {
+      "id": "f0168",
+      "line": 482,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 19065,
+        "end_column": 49,
+        "end_line": 482,
+        "line": 482,
+        "node": "Span",
+        "start": 19017
+      },
+      "subject": "DocumentCallsContract",
+      "text": "DocumentCallsContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0169",
+      "line": 483,
+      "node": "Relation",
+      "object": "AdmitDocument",
+      "span": {
+        "column": 1,
+        "end": 19110,
+        "end_column": 45,
+        "end_line": 483,
+        "line": 483,
+        "node": "Span",
+        "start": 19066
+      },
+      "subject": "DocumentCallsContract",
+      "text": "DocumentCallsContract permits AdmitDocument.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0170",
+      "line": 484,
+      "node": "Relation",
+      "object": "DocumentOpened",
+      "span": {
+        "column": 1,
+        "end": 19156,
+        "end_column": 46,
+        "end_line": 484,
+        "line": 484,
+        "node": "Span",
+        "start": 19111
+      },
+      "subject": "DocumentCallsContract",
+      "text": "DocumentCallsContract permits DocumentOpened.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0171",
+      "line": 485,
+      "node": "Relation",
+      "object": "DocumentRejected",
+      "span": {
+        "column": 1,
+        "end": 19204,
+        "end_column": 48,
+        "end_line": 485,
+        "line": 485,
+        "node": "Span",
+        "start": 19157
+      },
+      "subject": "DocumentCallsContract",
+      "text": "DocumentCallsContract permits DocumentRejected.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0174",
+      "line": 488,
+      "node": "PropertyAssignment",
+      "property": "presence",
+      "span": {
+        "column": 1,
+        "end": 19341,
+        "end_column": 42,
+        "end_line": 488,
+        "line": 488,
+        "node": "Span",
+        "start": 19300
+      },
+      "subject": "DocumentIdentity",
+      "text": "DocumentIdentity has presence = required.",
+      "value": "required",
+      "verb": "has"
+    },
+    {
+      "id": "f0175",
+      "line": 489,
+      "node": "PropertyAssignment",
+      "property": "value-type",
+      "span": {
+        "column": 1,
+        "end": 19385,
+        "end_column": 44,
+        "end_line": 489,
+        "line": 489,
+        "node": "Span",
+        "start": 19342
+      },
+      "subject": "DocumentIdentity",
+      "text": "DocumentIdentity has value-type = unsigned.",
+      "value": "unsigned",
+      "verb": "has"
+    },
+    {
+      "id": "f0192",
+      "line": 506,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 20630,
+        "end_column": 57,
+        "end_line": 506,
+        "line": 506,
+        "node": "Span",
+        "start": 20574
+      },
+      "subject": "DocumentNotificationsContract",
+      "text": "DocumentNotificationsContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0193",
+      "line": 507,
+      "node": "Relation",
+      "object": "CommitVisit",
+      "span": {
+        "column": 1,
+        "end": 20681,
+        "end_column": 51,
+        "end_line": 507,
+        "line": 507,
+        "node": "Span",
+        "start": 20631
+      },
+      "subject": "DocumentNotificationsContract",
+      "text": "DocumentNotificationsContract permits CommitVisit.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0194",
+      "line": 508,
+      "node": "Relation",
+      "object": "DocumentChanged",
+      "span": {
+        "column": 1,
+        "end": 20736,
+        "end_column": 55,
+        "end_line": 508,
+        "line": 508,
+        "node": "Span",
+        "start": 20682
+      },
+      "subject": "DocumentNotificationsContract",
+      "text": "DocumentNotificationsContract permits DocumentChanged.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0195",
+      "line": 509,
+      "node": "Relation",
+      "object": "GeneratedDocumentChanged",
+      "span": {
+        "column": 1,
+        "end": 20800,
+        "end_column": 64,
+        "end_line": 509,
+        "line": 509,
+        "node": "Span",
+        "start": 20737
+      },
+      "subject": "DocumentNotificationsContract",
+      "text": "DocumentNotificationsContract permits GeneratedDocumentChanged.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0199",
+      "line": 513,
+      "node": "PropertyAssignment",
+      "property": "presence",
+      "span": {
+        "column": 1,
+        "end": 20973,
+        "end_column": 38,
+        "end_line": 513,
+        "line": 513,
+        "node": "Span",
+        "start": 20936
+      },
+      "subject": "DocumentPath",
+      "text": "DocumentPath has presence = required.",
+      "value": "required",
+      "verb": "has"
+    },
+    {
+      "id": "f0200",
+      "line": 514,
+      "node": "PropertyAssignment",
+      "property": "value-type",
+      "span": {
+        "column": 1,
+        "end": 21009,
+        "end_column": 36,
+        "end_line": 514,
+        "line": 514,
+        "node": "Span",
+        "start": 20974
+      },
+      "subject": "DocumentPath",
+      "text": "DocumentPath has value-type = text.",
+      "value": "text",
+      "verb": "has"
+    },
+    {
+      "id": "f0205",
+      "line": 519,
+      "node": "PropertyAssignment",
+      "property": "presence",
+      "span": {
+        "column": 1,
+        "end": 21239,
+        "end_column": 42,
+        "end_line": 519,
+        "line": 519,
+        "node": "Span",
+        "start": 21198
+      },
+      "subject": "DocumentRevision",
+      "text": "DocumentRevision has presence = required.",
+      "value": "required",
+      "verb": "has"
+    },
+    {
+      "id": "f0206",
+      "line": 520,
+      "node": "PropertyAssignment",
+      "property": "value-type",
+      "span": {
+        "column": 1,
+        "end": 21283,
+        "end_column": 44,
+        "end_line": 520,
+        "line": 520,
+        "node": "Span",
+        "start": 21240
+      },
+      "subject": "DocumentRevision",
+      "text": "DocumentRevision has value-type = unsigned.",
+      "value": "unsigned",
+      "verb": "has"
+    },
+    {
+      "id": "f0213",
+      "line": 527,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 21659,
+        "end_column": 56,
+        "end_line": 527,
+        "line": 527,
+        "node": "Span",
+        "start": 21604
+      },
+      "subject": "DocumentStateChangesContract",
+      "text": "DocumentStateChangesContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0214",
+      "line": 528,
+      "node": "Relation",
+      "object": "MarkCurrentSaved",
+      "span": {
+        "column": 1,
+        "end": 21714,
+        "end_column": 55,
+        "end_line": 528,
+        "line": 528,
+        "node": "Span",
+        "start": 21660
+      },
+      "subject": "DocumentStateChangesContract",
+      "text": "DocumentStateChangesContract permits MarkCurrentSaved.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0215",
+      "line": 529,
+      "node": "Relation",
+      "object": "ReplaceDocument",
+      "span": {
+        "column": 1,
+        "end": 21768,
+        "end_column": 54,
+        "end_line": 529,
+        "line": 529,
+        "node": "Span",
+        "start": 21715
+      },
+      "subject": "DocumentStateChangesContract",
+      "text": "DocumentStateChangesContract permits ReplaceDocument.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0216",
+      "line": 530,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 21814,
+        "end_column": 46,
+        "end_line": 530,
+        "line": 530,
+        "node": "Span",
+        "start": 21769
+      },
+      "subject": "DocumentStateShape",
+      "text": "DocumentStateShape has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0217",
+      "line": 531,
+      "node": "Relation",
+      "object": "DocumentBytes",
+      "span": {
+        "column": 1,
+        "end": 21858,
+        "end_column": 44,
+        "end_line": 531,
+        "line": 531,
+        "node": "Span",
+        "start": 21815
+      },
+      "subject": "DocumentStateShape",
+      "text": "DocumentStateShape has-field DocumentBytes.",
+      "verb": "has-field"
+    },
+    {
+      "id": "f0218",
+      "line": 532,
+      "node": "Relation",
+      "object": "DocumentIdentity",
+      "span": {
+        "column": 1,
+        "end": 21905,
+        "end_column": 47,
+        "end_line": 532,
+        "line": 532,
+        "node": "Span",
+        "start": 21859
+      },
+      "subject": "DocumentStateShape",
+      "text": "DocumentStateShape has-field DocumentIdentity.",
+      "verb": "has-field"
+    },
+    {
+      "id": "f0219",
+      "line": 533,
+      "node": "Relation",
+      "object": "DocumentPath",
+      "span": {
+        "column": 1,
+        "end": 21948,
+        "end_column": 43,
+        "end_line": 533,
+        "line": 533,
+        "node": "Span",
+        "start": 21906
+      },
+      "subject": "DocumentStateShape",
+      "text": "DocumentStateShape has-field DocumentPath.",
+      "verb": "has-field"
+    },
+    {
+      "id": "f0220",
+      "line": 534,
+      "node": "Relation",
+      "object": "DocumentRevision",
+      "span": {
+        "column": 1,
+        "end": 21995,
+        "end_column": 47,
+        "end_line": 534,
+        "line": 534,
+        "node": "Span",
+        "start": 21949
+      },
+      "subject": "DocumentStateShape",
+      "text": "DocumentStateShape has-field DocumentRevision.",
+      "verb": "has-field"
+    },
+    {
+      "id": "f0221",
+      "line": 535,
+      "node": "Relation",
+      "object": "SavedBaselineBytes",
+      "span": {
+        "column": 1,
+        "end": 22044,
+        "end_column": 49,
+        "end_line": 535,
+        "line": 535,
+        "node": "Span",
+        "start": 21996
+      },
+      "subject": "DocumentStateShape",
+      "text": "DocumentStateShape has-field SavedBaselineBytes.",
+      "verb": "has-field"
+    },
+    {
+      "id": "f0231",
+      "line": 545,
+      "node": "Relation",
+      "object": "MainDocumentState",
+      "span": {
+        "column": 1,
+        "end": 22760,
+        "end_column": 35,
+        "end_line": 545,
+        "line": 545,
+        "node": "Span",
+        "start": 22726
+      },
+      "subject": "Documents",
+      "text": "Documents holds MainDocumentState.",
+      "verb": "holds"
+    },
+    {
+      "id": "f0258",
+      "line": 572,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 24884,
+        "end_column": 47,
+        "end_line": 572,
+        "line": 572,
+        "node": "Span",
+        "start": 24838
+      },
+      "subject": "EditIntentsContract",
+      "text": "EditIntentsContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0259",
+      "line": 573,
+      "node": "Relation",
+      "object": "ApplyTextEdit",
+      "span": {
+        "column": 1,
+        "end": 24927,
+        "end_column": 43,
+        "end_line": 573,
+        "line": 573,
+        "node": "Span",
+        "start": 24885
+      },
+      "subject": "EditIntentsContract",
+      "text": "EditIntentsContract permits ApplyTextEdit.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0284",
+      "line": 598,
+      "node": "PropertyAssignment",
+      "property": "presence",
+      "span": {
+        "column": 1,
+        "end": 26817,
+        "end_column": 37,
+        "end_line": 598,
+        "line": 598,
+        "node": "Span",
+        "start": 26781
+      },
+      "subject": "ExportBytes",
+      "text": "ExportBytes has presence = required.",
+      "value": "required",
+      "verb": "has"
+    },
+    {
+      "id": "f0285",
+      "line": 599,
+      "node": "PropertyAssignment",
+      "property": "value-type",
+      "span": {
+        "column": 1,
+        "end": 26853,
+        "end_column": 36,
+        "end_line": 599,
+        "line": 599,
+        "node": "Span",
+        "start": 26818
+      },
+      "subject": "ExportBytes",
+      "text": "ExportBytes has value-type = bytes.",
+      "value": "bytes",
+      "verb": "has"
+    },
+    {
+      "id": "f0286",
+      "line": 600,
+      "node": "PropertyAssignment",
+      "property": "presence",
+      "span": {
+        "column": 1,
+        "end": 26893,
+        "end_column": 40,
+        "end_line": 600,
+        "line": 600,
+        "node": "Span",
+        "start": 26854
+      },
+      "subject": "ExportDocument",
+      "text": "ExportDocument has presence = required.",
+      "value": "required",
+      "verb": "has"
+    },
+    {
+      "id": "f0287",
+      "line": 601,
+      "node": "PropertyAssignment",
+      "property": "value-type",
+      "span": {
+        "column": 1,
+        "end": 26935,
+        "end_column": 42,
+        "end_line": 601,
+        "line": 601,
+        "node": "Span",
+        "start": 26894
+      },
+      "subject": "ExportDocument",
+      "text": "ExportDocument has value-type = unsigned.",
+      "value": "unsigned",
+      "verb": "has"
+    },
+    {
+      "id": "f0289",
+      "line": 603,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 27050,
+        "end_column": 56,
+        "end_line": 603,
+        "line": 603,
+        "node": "Span",
+        "start": 26995
+      },
+      "subject": "ExportInterpretationContract",
+      "text": "ExportInterpretationContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0290",
+      "line": 604,
+      "node": "Relation",
+      "object": "ExportSnapshotParsed",
+      "span": {
+        "column": 1,
+        "end": 27109,
+        "end_column": 59,
+        "end_line": 604,
+        "line": 604,
+        "node": "Span",
+        "start": 27051
+      },
+      "subject": "ExportInterpretationContract",
+      "text": "ExportInterpretationContract permits ExportSnapshotParsed.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0291",
+      "line": 605,
+      "node": "Relation",
+      "object": "ParseExportSnapshot",
+      "span": {
+        "column": 1,
+        "end": 27167,
+        "end_column": 58,
+        "end_line": 605,
+        "line": 605,
+        "node": "Span",
+        "start": 27110
+      },
+      "subject": "ExportInterpretationContract",
+      "text": "ExportInterpretationContract permits ParseExportSnapshot.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0293",
+      "line": 607,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 27258,
+        "end_column": 48,
+        "end_line": 607,
+        "line": 607,
+        "node": "Span",
+        "start": 27211
+      },
+      "subject": "ExportLayoutContract",
+      "text": "ExportLayoutContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0294",
+      "line": 608,
+      "node": "Relation",
+      "object": "ExportPagesLaidOut",
+      "span": {
+        "column": 1,
+        "end": 27307,
+        "end_column": 49,
+        "end_line": 608,
+        "line": 608,
+        "node": "Span",
+        "start": 27259
+      },
+      "subject": "ExportLayoutContract",
+      "text": "ExportLayoutContract permits ExportPagesLaidOut.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0295",
+      "line": 609,
+      "node": "Relation",
+      "object": "LayoutExportPages",
+      "span": {
+        "column": 1,
+        "end": 27355,
+        "end_column": 48,
+        "end_line": 609,
+        "line": 609,
+        "node": "Span",
+        "start": 27308
+      },
+      "subject": "ExportLayoutContract",
+      "text": "ExportLayoutContract permits LayoutExportPages.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0299",
+      "line": 613,
+      "node": "PropertyAssignment",
+      "property": "presence",
+      "span": {
+        "column": 1,
+        "end": 27542,
+        "end_column": 36,
+        "end_line": 613,
+        "line": 613,
+        "node": "Span",
+        "start": 27507
+      },
+      "subject": "ExportPath",
+      "text": "ExportPath has presence = required.",
+      "value": "required",
+      "verb": "has"
+    },
+    {
+      "id": "f0300",
+      "line": 614,
+      "node": "PropertyAssignment",
+      "property": "value-type",
+      "span": {
+        "column": 1,
+        "end": 27576,
+        "end_column": 34,
+        "end_line": 614,
+        "line": 614,
+        "node": "Span",
+        "start": 27543
+      },
+      "subject": "ExportPath",
+      "text": "ExportPath has value-type = text.",
+      "value": "text",
+      "verb": "has"
+    },
+    {
+      "id": "f0301",
+      "line": 615,
+      "node": "PropertyAssignment",
+      "property": "presence",
+      "span": {
+        "column": 1,
+        "end": 27616,
+        "end_column": 40,
+        "end_line": 615,
+        "line": 615,
+        "node": "Span",
+        "start": 27577
+      },
+      "subject": "ExportRevision",
+      "text": "ExportRevision has presence = required.",
+      "value": "required",
+      "verb": "has"
+    },
+    {
+      "id": "f0302",
+      "line": 616,
+      "node": "PropertyAssignment",
+      "property": "value-type",
+      "span": {
+        "column": 1,
+        "end": 27658,
+        "end_column": 42,
+        "end_line": 616,
+        "line": 616,
+        "node": "Span",
+        "start": 27617
+      },
+      "subject": "ExportRevision",
+      "text": "ExportRevision has value-type = unsigned.",
+      "value": "unsigned",
+      "verb": "has"
+    },
+    {
+      "id": "f0306",
+      "line": 620,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 27864,
+        "end_column": 47,
+        "end_line": 620,
+        "line": 620,
+        "node": "Span",
+        "start": 27818
+      },
+      "subject": "ExportSnapshotShape",
+      "text": "ExportSnapshotShape has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0307",
+      "line": 621,
+      "node": "Relation",
+      "object": "ExportBytes",
+      "span": {
+        "column": 1,
+        "end": 27907,
+        "end_column": 43,
+        "end_line": 621,
+        "line": 621,
+        "node": "Span",
+        "start": 27865
+      },
+      "subject": "ExportSnapshotShape",
+      "text": "ExportSnapshotShape has-field ExportBytes.",
+      "verb": "has-field"
+    },
+    {
+      "id": "f0308",
+      "line": 622,
+      "node": "Relation",
+      "object": "ExportDocument",
+      "span": {
+        "column": 1,
+        "end": 27953,
+        "end_column": 46,
+        "end_line": 622,
+        "line": 622,
+        "node": "Span",
+        "start": 27908
+      },
+      "subject": "ExportSnapshotShape",
+      "text": "ExportSnapshotShape has-field ExportDocument.",
+      "verb": "has-field"
+    },
+    {
+      "id": "f0309",
+      "line": 623,
+      "node": "Relation",
+      "object": "ExportPath",
+      "span": {
+        "column": 1,
+        "end": 27995,
+        "end_column": 42,
+        "end_line": 623,
+        "line": 623,
+        "node": "Span",
+        "start": 27954
+      },
+      "subject": "ExportSnapshotShape",
+      "text": "ExportSnapshotShape has-field ExportPath.",
+      "verb": "has-field"
+    },
+    {
+      "id": "f0310",
+      "line": 624,
+      "node": "Relation",
+      "object": "ExportRevision",
+      "span": {
+        "column": 1,
+        "end": 28041,
+        "end_column": 46,
+        "end_line": 624,
+        "line": 624,
+        "node": "Span",
+        "start": 27996
+      },
+      "subject": "ExportSnapshotShape",
+      "text": "ExportSnapshotShape has-field ExportRevision.",
+      "verb": "has-field"
+    },
+    {
+      "id": "f0313",
+      "line": 627,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 28241,
+        "end_column": 51,
+        "end_line": 627,
+        "line": 627,
+        "node": "Span",
+        "start": 28191
+      },
+      "subject": "ExternalOpeningContract",
+      "text": "ExternalOpeningContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0314",
+      "line": 628,
+      "node": "Relation",
+      "object": "LaunchConfiguredProgram",
+      "span": {
+        "column": 1,
+        "end": 28298,
+        "end_column": 57,
+        "end_line": 628,
+        "line": 628,
+        "node": "Span",
+        "start": 28242
+      },
+      "subject": "ExternalOpeningContract",
+      "text": "ExternalOpeningContract permits LaunchConfiguredProgram.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0361",
+      "line": 675,
+      "node": "Relation",
+      "object": "ExportSnapshotShape",
+      "span": {
+        "column": 1,
+        "end": 31832,
+        "end_column": 50,
+        "end_line": 675,
+        "line": 675,
+        "node": "Span",
+        "start": 31783
+      },
+      "subject": "FrozenExportSnapshot",
+      "text": "FrozenExportSnapshot upholds ExportSnapshotShape.",
+      "verb": "upholds"
+    },
+    {
+      "id": "f0368",
+      "line": 682,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 32339,
+        "end_column": 54,
+        "end_line": 682,
+        "line": 682,
+        "node": "Span",
+        "start": 32286
+      },
+      "subject": "GeneratedAdmissionContract",
+      "text": "GeneratedAdmissionContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0369",
+      "line": 683,
+      "node": "Relation",
+      "object": "AdvanceGenerationSequence",
+      "span": {
+        "column": 1,
+        "end": 32401,
+        "end_column": 62,
+        "end_line": 683,
+        "line": 683,
+        "node": "Span",
+        "start": 32340
+      },
+      "subject": "GeneratedAdmissionContract",
+      "text": "GeneratedAdmissionContract permits AdvanceGenerationSequence.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0370",
+      "line": 684,
+      "node": "Relation",
+      "object": "InspectDirtyMain",
+      "span": {
+        "column": 1,
+        "end": 32454,
+        "end_column": 53,
+        "end_line": 684,
+        "line": 684,
+        "node": "Span",
+        "start": 32402
+      },
+      "subject": "GeneratedAdmissionContract",
+      "text": "GeneratedAdmissionContract permits InspectDirtyMain.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0371",
+      "line": 685,
+      "node": "Relation",
+      "object": "RejectInvalidSelection",
+      "span": {
+        "column": 1,
+        "end": 32513,
+        "end_column": 59,
+        "end_line": 685,
+        "line": 685,
+        "node": "Span",
+        "start": 32455
+      },
+      "subject": "GeneratedAdmissionContract",
+      "text": "GeneratedAdmissionContract permits RejectInvalidSelection.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0372",
+      "line": 686,
+      "node": "Relation",
+      "object": "ValidateSelection",
+      "span": {
+        "column": 1,
+        "end": 32567,
+        "end_column": 54,
+        "end_line": 686,
+        "line": 686,
+        "node": "Span",
+        "start": 32514
+      },
+      "subject": "GeneratedAdmissionContract",
+      "text": "GeneratedAdmissionContract permits ValidateSelection.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0374",
+      "line": 688,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 32673,
+        "end_column": 53,
+        "end_line": 688,
+        "line": 688,
+        "node": "Span",
+        "start": 32621
+      },
+      "subject": "GeneratedDeliveryContract",
+      "text": "GeneratedDeliveryContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0375",
+      "line": 689,
+      "node": "Relation",
+      "object": "DeliverGeneratedMain",
+      "span": {
+        "column": 1,
+        "end": 32729,
+        "end_column": 56,
+        "end_line": 689,
+        "line": 689,
+        "node": "Span",
+        "start": 32674
+      },
+      "subject": "GeneratedDeliveryContract",
+      "text": "GeneratedDeliveryContract permits DeliverGeneratedMain.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0376",
+      "line": 690,
+      "node": "Relation",
+      "object": "GeneratedMainAccepted",
+      "span": {
+        "column": 1,
+        "end": 32786,
+        "end_column": 57,
+        "end_line": 690,
+        "line": 690,
+        "node": "Span",
+        "start": 32730
+      },
+      "subject": "GeneratedDeliveryContract",
+      "text": "GeneratedDeliveryContract permits GeneratedMainAccepted.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0377",
+      "line": 691,
+      "node": "Relation",
+      "object": "GeneratedMainRejected",
+      "span": {
+        "column": 1,
+        "end": 32843,
+        "end_column": 57,
+        "end_line": 691,
+        "line": 691,
+        "node": "Span",
+        "start": 32787
+      },
+      "subject": "GeneratedDeliveryContract",
+      "text": "GeneratedDeliveryContract permits GeneratedMainRejected.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0379",
+      "line": 693,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 32964,
+        "end_column": 58,
+        "end_line": 693,
+        "line": 693,
+        "node": "Span",
+        "start": 32907
+      },
+      "subject": "GeneratedDocumentCallsContract",
+      "text": "GeneratedDocumentCallsContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0380",
+      "line": 694,
+      "node": "Relation",
+      "object": "AdmitGeneratedDocument",
+      "span": {
+        "column": 1,
+        "end": 33027,
+        "end_column": 63,
+        "end_line": 694,
+        "line": 694,
+        "node": "Span",
+        "start": 32965
+      },
+      "subject": "GeneratedDocumentCallsContract",
+      "text": "GeneratedDocumentCallsContract permits AdmitGeneratedDocument.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0381",
+      "line": 695,
+      "node": "Relation",
+      "object": "GeneratedDocumentOpened",
+      "span": {
+        "column": 1,
+        "end": 33091,
+        "end_column": 64,
+        "end_line": 695,
+        "line": 695,
+        "node": "Span",
+        "start": 33028
+      },
+      "subject": "GeneratedDocumentCallsContract",
+      "text": "GeneratedDocumentCallsContract permits GeneratedDocumentOpened.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0390",
+      "line": 704,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 33618,
+        "end_column": 52,
+        "end_line": 704,
+        "line": 704,
+        "node": "Span",
+        "start": 33567
+      },
+      "subject": "GeneratedIntentsContract",
+      "text": "GeneratedIntentsContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0391",
+      "line": 705,
+      "node": "Relation",
+      "object": "SelectInvalidView",
+      "span": {
+        "column": 1,
+        "end": 33670,
+        "end_column": 52,
+        "end_line": 705,
+        "line": 705,
+        "node": "Span",
+        "start": 33619
+      },
+      "subject": "GeneratedIntentsContract",
+      "text": "GeneratedIntentsContract permits SelectInvalidView.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0392",
+      "line": 706,
+      "node": "Relation",
+      "object": "SelectRegisteredView",
+      "span": {
+        "column": 1,
+        "end": 33725,
+        "end_column": 55,
+        "end_line": 706,
+        "line": 706,
+        "node": "Span",
+        "start": 33671
+      },
+      "subject": "GeneratedIntentsContract",
+      "text": "GeneratedIntentsContract permits SelectRegisteredView.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0410",
+      "line": 724,
+      "node": "Relation",
+      "object": "GenerationStateShape",
+      "span": {
+        "column": 1,
+        "end": 35384,
+        "end_column": 54,
+        "end_line": 724,
+        "line": 724,
+        "node": "Span",
+        "start": 35331
+      },
+      "subject": "GeneratedSelectionState",
+      "text": "GeneratedSelectionState upholds GenerationStateShape.",
+      "verb": "upholds"
+    },
+    {
+      "id": "f0423",
+      "line": 737,
+      "node": "Relation",
+      "object": "GeneratedSelectionState",
+      "span": {
+        "column": 1,
+        "end": 36411,
+        "end_column": 46,
+        "end_line": 737,
+        "line": 737,
+        "node": "Span",
+        "start": 36366
+      },
+      "subject": "GeneratedViews",
+      "text": "GeneratedViews holds GeneratedSelectionState.",
+      "verb": "holds"
+    },
+    {
+      "id": "f0454",
+      "line": 768,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 39223,
+        "end_column": 55,
+        "end_line": 768,
+        "line": 768,
+        "node": "Span",
+        "start": 39169
+      },
+      "subject": "GenerationLifecycleContract",
+      "text": "GenerationLifecycleContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0455",
+      "line": 769,
+      "node": "Relation",
+      "object": "CancelPreviousChild",
+      "span": {
+        "column": 1,
+        "end": 39280,
+        "end_column": 57,
+        "end_line": 769,
+        "line": 769,
+        "node": "Span",
+        "start": 39224
+      },
+      "subject": "GenerationLifecycleContract",
+      "text": "GenerationLifecycleContract permits CancelPreviousChild.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0456",
+      "line": 770,
+      "node": "Relation",
+      "object": "StartGeneration",
+      "span": {
+        "column": 1,
+        "end": 39333,
+        "end_column": 53,
+        "end_line": 770,
+        "line": 770,
+        "node": "Span",
+        "start": 39281
+      },
+      "subject": "GenerationLifecycleContract",
+      "text": "GenerationLifecycleContract permits StartGeneration.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0457",
+      "line": 771,
+      "node": "PropertyAssignment",
+      "property": "presence",
+      "span": {
+        "column": 1,
+        "end": 39377,
+        "end_column": 44,
+        "end_line": 771,
+        "line": 771,
+        "node": "Span",
+        "start": 39334
+      },
+      "subject": "GenerationSequence",
+      "text": "GenerationSequence has presence = required.",
+      "value": "required",
+      "verb": "has"
+    },
+    {
+      "id": "f0458",
+      "line": 772,
+      "node": "PropertyAssignment",
+      "property": "value-type",
+      "span": {
+        "column": 1,
+        "end": 39423,
+        "end_column": 46,
+        "end_line": 772,
+        "line": 772,
+        "node": "Span",
+        "start": 39378
+      },
+      "subject": "GenerationSequence",
+      "text": "GenerationSequence has value-type = unsigned.",
+      "value": "unsigned",
+      "verb": "has"
+    },
+    {
+      "id": "f0459",
+      "line": 773,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 39471,
+        "end_column": 48,
+        "end_line": 773,
+        "line": 773,
+        "node": "Span",
+        "start": 39424
+      },
+      "subject": "GenerationStateShape",
+      "text": "GenerationStateShape has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0460",
+      "line": 774,
+      "node": "Relation",
+      "object": "GenerationSequence",
+      "span": {
+        "column": 1,
+        "end": 39522,
+        "end_column": 51,
+        "end_line": 774,
+        "line": 774,
+        "node": "Span",
+        "start": 39472
+      },
+      "subject": "GenerationStateShape",
+      "text": "GenerationStateShape has-field GenerationSequence.",
+      "verb": "has-field"
+    },
+    {
+      "id": "f0461",
+      "line": 775,
+      "node": "Relation",
+      "object": "RegisteredProject",
+      "span": {
+        "column": 1,
+        "end": 39572,
+        "end_column": 50,
+        "end_line": 775,
+        "line": 775,
+        "node": "Span",
+        "start": 39523
+      },
+      "subject": "GenerationStateShape",
+      "text": "GenerationStateShape has-field RegisteredProject.",
+      "verb": "has-field"
+    },
+    {
+      "id": "f0462",
+      "line": 776,
+      "node": "Relation",
+      "object": "TargetPane",
+      "span": {
+        "column": 1,
+        "end": 39615,
+        "end_column": 43,
+        "end_line": 776,
+        "line": 776,
+        "node": "Span",
+        "start": 39573
+      },
+      "subject": "GenerationStateShape",
+      "text": "GenerationStateShape has-field TargetPane.",
+      "verb": "has-field"
+    },
+    {
+      "id": "f0463",
+      "line": 777,
+      "node": "Relation",
+      "object": "TargetWindow",
+      "span": {
+        "column": 1,
+        "end": 39660,
+        "end_column": 45,
+        "end_line": 777,
+        "line": 777,
+        "node": "Span",
+        "start": 39616
+      },
+      "subject": "GenerationStateShape",
+      "text": "GenerationStateShape has-field TargetWindow.",
+      "verb": "has-field"
+    },
+    {
+      "id": "f0467",
+      "line": 781,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 39815,
+        "end_column": 48,
+        "end_line": 781,
+        "line": 781,
+        "node": "Span",
+        "start": 39768
+      },
+      "subject": "IndexChangesContract",
+      "text": "IndexChangesContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0468",
+      "line": 782,
+      "node": "Relation",
+      "object": "CheckReferenceGeneration",
+      "span": {
+        "column": 1,
+        "end": 39870,
+        "end_column": 55,
+        "end_line": 782,
+        "line": 782,
+        "node": "Span",
+        "start": 39816
+      },
+      "subject": "IndexChangesContract",
+      "text": "IndexChangesContract permits CheckReferenceGeneration.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0469",
+      "line": 783,
+      "node": "Relation",
+      "object": "PublishReferenceHeadings",
+      "span": {
+        "column": 1,
+        "end": 39925,
+        "end_column": 55,
+        "end_line": 783,
+        "line": 783,
+        "node": "Span",
+        "start": 39871
+      },
+      "subject": "IndexChangesContract",
+      "text": "IndexChangesContract permits PublishReferenceHeadings.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0471",
+      "line": 785,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 40016,
+        "end_column": 48,
+        "end_line": 785,
+        "line": 785,
+        "node": "Span",
+        "start": 39969
+      },
+      "subject": "IndexIntentsContract",
+      "text": "IndexIntentsContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0472",
+      "line": 786,
+      "node": "Relation",
+      "object": "ExpandReference",
+      "span": {
+        "column": 1,
+        "end": 40062,
+        "end_column": 46,
+        "end_line": 786,
+        "line": 786,
+        "node": "Span",
+        "start": 40017
+      },
+      "subject": "IndexIntentsContract",
+      "text": "IndexIntentsContract permits ExpandReference.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0477",
+      "line": 791,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 40309,
+        "end_column": 55,
+        "end_line": 791,
+        "line": 791,
+        "node": "Span",
+        "start": 40255
+      },
+      "subject": "InteractionObservationShape",
+      "text": "InteractionObservationShape has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0478",
+      "line": 792,
+      "node": "Relation",
+      "object": "ObservationContext",
+      "span": {
+        "column": 1,
+        "end": 40367,
+        "end_column": 58,
+        "end_line": 792,
+        "line": 792,
+        "node": "Span",
+        "start": 40310
+      },
+      "subject": "InteractionObservationShape",
+      "text": "InteractionObservationShape has-field ObservationContext.",
+      "verb": "has-field"
+    },
+    {
+      "id": "f0480",
+      "line": 794,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 40479,
+        "end_column": 55,
+        "end_line": 794,
+        "line": 794,
+        "node": "Span",
+        "start": 40425
+      },
+      "subject": "InterpretationCallsContract",
+      "text": "InterpretationCallsContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0481",
+      "line": 795,
+      "node": "Relation",
+      "object": "ParseSnapshot",
+      "span": {
+        "column": 1,
+        "end": 40530,
+        "end_column": 51,
+        "end_line": 795,
+        "line": 795,
+        "node": "Span",
+        "start": 40480
+      },
+      "subject": "InterpretationCallsContract",
+      "text": "InterpretationCallsContract permits ParseSnapshot.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0482",
+      "line": 796,
+      "node": "Relation",
+      "object": "ParsedSnapshot",
+      "span": {
+        "column": 1,
+        "end": 40582,
+        "end_column": 52,
+        "end_line": 796,
+        "line": 796,
+        "node": "Span",
+        "start": 40531
+      },
+      "subject": "InterpretationCallsContract",
+      "text": "InterpretationCallsContract permits ParsedSnapshot.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0504",
+      "line": 818,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 42161,
+        "end_column": 47,
+        "end_line": 818,
+        "line": 818,
+        "node": "Span",
+        "start": 42115
+      },
+      "subject": "LayoutCallsContract",
+      "text": "LayoutCallsContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0505",
+      "line": 819,
+      "node": "Relation",
+      "object": "LayoutModel",
+      "span": {
+        "column": 1,
+        "end": 42202,
+        "end_column": 41,
+        "end_line": 819,
+        "line": 819,
+        "node": "Span",
+        "start": 42162
+      },
+      "subject": "LayoutCallsContract",
+      "text": "LayoutCallsContract permits LayoutModel.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0506",
+      "line": 820,
+      "node": "Relation",
+      "object": "ModelLaidOut",
+      "span": {
+        "column": 1,
+        "end": 42244,
+        "end_column": 42,
+        "end_line": 820,
+        "line": 820,
+        "node": "Span",
+        "start": 42203
+      },
+      "subject": "LayoutCallsContract",
+      "text": "LayoutCallsContract permits ModelLaidOut.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0514",
+      "line": 828,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 42634,
+        "end_column": 50,
+        "end_line": 828,
+        "line": 828,
+        "node": "Span",
+        "start": 42585
+      },
+      "subject": "LeaseLifecycleContract",
+      "text": "LeaseLifecycleContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0515",
+      "line": 829,
+      "node": "Relation",
+      "object": "InstallNewLease",
+      "span": {
+        "column": 1,
+        "end": 42682,
+        "end_column": 48,
+        "end_line": 829,
+        "line": 829,
+        "node": "Span",
+        "start": 42635
+      },
+      "subject": "LeaseLifecycleContract",
+      "text": "LeaseLifecycleContract permits InstallNewLease.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0516",
+      "line": 830,
+      "node": "Relation",
+      "object": "KeepUnsentRelease",
+      "span": {
+        "column": 1,
+        "end": 42732,
+        "end_column": 50,
+        "end_line": 830,
+        "line": 830,
+        "node": "Span",
+        "start": 42683
+      },
+      "subject": "LeaseLifecycleContract",
+      "text": "LeaseLifecycleContract permits KeepUnsentRelease.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0517",
+      "line": 831,
+      "node": "Relation",
+      "object": "QueuePreviousLease",
+      "span": {
+        "column": 1,
+        "end": 42783,
+        "end_column": 51,
+        "end_line": 831,
+        "line": 831,
+        "node": "Span",
+        "start": 42733
+      },
+      "subject": "LeaseLifecycleContract",
+      "text": "LeaseLifecycleContract permits QueuePreviousLease.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0518",
+      "line": 832,
+      "node": "Relation",
+      "object": "RemoveSentRelease",
+      "span": {
+        "column": 1,
+        "end": 42833,
+        "end_column": 50,
+        "end_line": 832,
+        "line": 832,
+        "node": "Span",
+        "start": 42784
+      },
+      "subject": "LeaseLifecycleContract",
+      "text": "LeaseLifecycleContract permits RemoveSentRelease.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0520",
+      "line": 834,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 42942,
+        "end_column": 54,
+        "end_line": 834,
+        "line": 834,
+        "node": "Span",
+        "start": 42889
+      },
+      "subject": "LeaseNotificationsContract",
+      "text": "LeaseNotificationsContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0521",
+      "line": 835,
+      "node": "Relation",
+      "object": "AttemptRelease",
+      "span": {
+        "column": 1,
+        "end": 42993,
+        "end_column": 51,
+        "end_line": 835,
+        "line": 835,
+        "node": "Span",
+        "start": 42943
+      },
+      "subject": "LeaseNotificationsContract",
+      "text": "LeaseNotificationsContract permits AttemptRelease.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0526",
+      "line": 840,
+      "node": "Relation",
+      "object": "DocumentStateShape",
+      "span": {
+        "column": 1,
+        "end": 43246,
+        "end_column": 46,
+        "end_line": 840,
+        "line": 840,
+        "node": "Span",
+        "start": 43201
+      },
+      "subject": "MainDocumentState",
+      "text": "MainDocumentState upholds DocumentStateShape.",
+      "verb": "upholds"
+    },
+    {
+      "id": "f0584",
+      "line": 898,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 47497,
+        "end_column": 51,
+        "end_line": 898,
+        "line": 898,
+        "node": "Span",
+        "start": 47447
+      },
+      "subject": "NavigationCallsContract",
+      "text": "NavigationCallsContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0585",
+      "line": 899,
+      "node": "Relation",
+      "object": "OpenTarget",
+      "span": {
+        "column": 1,
+        "end": 47541,
+        "end_column": 44,
+        "end_line": 899,
+        "line": 899,
+        "node": "Span",
+        "start": 47498
+      },
+      "subject": "NavigationCallsContract",
+      "text": "NavigationCallsContract permits OpenTarget.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0586",
+      "line": 900,
+      "node": "Relation",
+      "object": "TargetOpened",
+      "span": {
+        "column": 1,
+        "end": 47587,
+        "end_column": 46,
+        "end_line": 900,
+        "line": 900,
+        "node": "Span",
+        "start": 47542
+      },
+      "subject": "NavigationCallsContract",
+      "text": "NavigationCallsContract permits TargetOpened.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0593",
+      "line": 907,
+      "node": "PropertyAssignment",
+      "property": "presence",
+      "span": {
+        "column": 1,
+        "end": 47964,
+        "end_column": 44,
+        "end_line": 907,
+        "line": 907,
+        "node": "Span",
+        "start": 47921
+      },
+      "subject": "ObservationContext",
+      "text": "ObservationContext has presence = required.",
+      "value": "required",
+      "verb": "has"
+    },
+    {
+      "id": "f0594",
+      "line": 908,
+      "node": "PropertyAssignment",
+      "property": "value-type",
+      "span": {
+        "column": 1,
+        "end": 48006,
+        "end_column": 42,
+        "end_line": 908,
+        "line": 908,
+        "node": "Span",
+        "start": 47965
+      },
+      "subject": "ObservationContext",
+      "text": "ObservationContext has value-type = text.",
+      "value": "text",
+      "verb": "has"
+    },
+    {
+      "id": "f0598",
+      "line": 912,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 48187,
+        "end_column": 49,
+        "end_line": 912,
+        "line": 912,
+        "node": "Span",
+        "start": 48139
+      },
+      "subject": "OpeningPolicyContract",
+      "text": "OpeningPolicyContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0599",
+      "line": 913,
+      "node": "Relation",
+      "object": "ClassifyExternalTarget",
+      "span": {
+        "column": 1,
+        "end": 48241,
+        "end_column": 54,
+        "end_line": 913,
+        "line": 913,
+        "node": "Span",
+        "start": 48188
+      },
+      "subject": "OpeningPolicyContract",
+      "text": "OpeningPolicyContract permits ClassifyExternalTarget.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0645",
+      "line": 959,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 51264,
+        "end_column": 53,
+        "end_line": 959,
+        "line": 959,
+        "node": "Span",
+        "start": 51212
+      },
+      "subject": "PreferenceChangesContract",
+      "text": "PreferenceChangesContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0646",
+      "line": 960,
+      "node": "Relation",
+      "object": "AdoptPreferencesDraft",
+      "span": {
+        "column": 1,
+        "end": 51321,
+        "end_column": 57,
+        "end_line": 960,
+        "line": 960,
+        "node": "Span",
+        "start": 51265
+      },
+      "subject": "PreferenceChangesContract",
+      "text": "PreferenceChangesContract permits AdoptPreferencesDraft.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0647",
+      "line": 961,
+      "node": "Relation",
+      "object": "BeginPreferencesDraft",
+      "span": {
+        "column": 1,
+        "end": 51378,
+        "end_column": 57,
+        "end_line": 961,
+        "line": 961,
+        "node": "Span",
+        "start": 51322
+      },
+      "subject": "PreferenceChangesContract",
+      "text": "PreferenceChangesContract permits BeginPreferencesDraft.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0648",
+      "line": 962,
+      "node": "Relation",
+      "object": "NotifyPreferenceChange",
+      "span": {
+        "column": 1,
+        "end": 51436,
+        "end_column": 58,
+        "end_line": 962,
+        "line": 962,
+        "node": "Span",
+        "start": 51379
+      },
+      "subject": "PreferenceChangesContract",
+      "text": "PreferenceChangesContract permits NotifyPreferenceChange.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0649",
+      "line": 963,
+      "node": "Relation",
+      "object": "PersistPreferencesDraft",
+      "span": {
+        "column": 1,
+        "end": 51495,
+        "end_column": 59,
+        "end_line": 963,
+        "line": 963,
+        "node": "Span",
+        "start": 51437
+      },
+      "subject": "PreferenceChangesContract",
+      "text": "PreferenceChangesContract permits PersistPreferencesDraft.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0650",
+      "line": 964,
+      "node": "Relation",
+      "object": "ValidatePreferencesDraft",
+      "span": {
+        "column": 1,
+        "end": 51555,
+        "end_column": 60,
+        "end_line": 964,
+        "line": 964,
+        "node": "Span",
+        "start": 51496
+      },
+      "subject": "PreferenceChangesContract",
+      "text": "PreferenceChangesContract permits ValidatePreferencesDraft.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0680",
+      "line": 994,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 53832,
+        "end_column": 54,
+        "end_line": 994,
+        "line": 994,
+        "node": "Span",
+        "start": 53779
+      },
+      "subject": "PresentationEventsContract",
+      "text": "PresentationEventsContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0681",
+      "line": 995,
+      "node": "Relation",
+      "object": "PresentFrame",
+      "span": {
+        "column": 1,
+        "end": 53881,
+        "end_column": 49,
+        "end_line": 995,
+        "line": 995,
+        "node": "Span",
+        "start": 53833
+      },
+      "subject": "PresentationEventsContract",
+      "text": "PresentationEventsContract permits PresentFrame.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0682",
+      "line": 996,
+      "node": "Relation",
+      "object": "ShowDirtyRejection",
+      "span": {
+        "column": 1,
+        "end": 53936,
+        "end_column": 55,
+        "end_line": 996,
+        "line": 996,
+        "node": "Span",
+        "start": 53882
+      },
+      "subject": "PresentationEventsContract",
+      "text": "PresentationEventsContract permits ShowDirtyRejection.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0711",
+      "line": 1025,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 56037,
+        "end_column": 52,
+        "end_line": 1025,
+        "line": 1025,
+        "node": "Span",
+        "start": 55986
+      },
+      "subject": "PreviewAdmissionContract",
+      "text": "PreviewAdmissionContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0712",
+      "line": 1026,
+      "node": "Relation",
+      "object": "AcceptCurrentFrame",
+      "span": {
+        "column": 1,
+        "end": 56090,
+        "end_column": 53,
+        "end_line": 1026,
+        "line": 1026,
+        "node": "Span",
+        "start": 56038
+      },
+      "subject": "PreviewAdmissionContract",
+      "text": "PreviewAdmissionContract permits AcceptCurrentFrame.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0713",
+      "line": 1027,
+      "node": "Relation",
+      "object": "AcceptCurrentModel",
+      "span": {
+        "column": 1,
+        "end": 56143,
+        "end_column": 53,
+        "end_line": 1027,
+        "line": 1027,
+        "node": "Span",
+        "start": 56091
+      },
+      "subject": "PreviewAdmissionContract",
+      "text": "PreviewAdmissionContract permits AcceptCurrentModel.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0714",
+      "line": 1028,
+      "node": "Relation",
+      "object": "AcceptWorkerTicket",
+      "span": {
+        "column": 1,
+        "end": 56196,
+        "end_column": 53,
+        "end_line": 1028,
+        "line": 1028,
+        "node": "Span",
+        "start": 56144
+      },
+      "subject": "PreviewAdmissionContract",
+      "text": "PreviewAdmissionContract permits AcceptWorkerTicket.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0715",
+      "line": 1029,
+      "node": "Relation",
+      "object": "CompleteObsoleteWorker",
+      "span": {
+        "column": 1,
+        "end": 56253,
+        "end_column": 57,
+        "end_line": 1029,
+        "line": 1029,
+        "node": "Span",
+        "start": 56197
+      },
+      "subject": "PreviewAdmissionContract",
+      "text": "PreviewAdmissionContract permits CompleteObsoleteWorker.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0716",
+      "line": 1030,
+      "node": "Relation",
+      "object": "DiscardObsoleteCompletion",
+      "span": {
+        "column": 1,
+        "end": 56313,
+        "end_column": 60,
+        "end_line": 1030,
+        "line": 1030,
+        "node": "Span",
+        "start": 56254
+      },
+      "subject": "PreviewAdmissionContract",
+      "text": "PreviewAdmissionContract permits DiscardObsoleteCompletion.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0746",
+      "line": 1060,
+      "node": "Relation",
+      "object": "FrozenExportSnapshot",
+      "span": {
+        "column": 1,
+        "end": 58529,
+        "end_column": 40,
+        "end_line": 1060,
+        "line": 1060,
+        "node": "Span",
+        "start": 58490
+      },
+      "subject": "Publication",
+      "text": "Publication holds FrozenExportSnapshot.",
+      "verb": "holds"
+    },
+    {
+      "id": "f0764",
+      "line": 1078,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 60036,
+        "end_column": 54,
+        "end_line": 1078,
+        "line": 1078,
+        "node": "Span",
+        "start": 59983
+      },
+      "subject": "PublicationDrawingContract",
+      "text": "PublicationDrawingContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0765",
+      "line": 1079,
+      "node": "Relation",
+      "object": "PaintPdfCandidate",
+      "span": {
+        "column": 1,
+        "end": 60090,
+        "end_column": 54,
+        "end_line": 1079,
+        "line": 1079,
+        "node": "Span",
+        "start": 60037
+      },
+      "subject": "PublicationDrawingContract",
+      "text": "PublicationDrawingContract permits PaintPdfCandidate.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0767",
+      "line": 1081,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 60196,
+        "end_column": 53,
+        "end_line": 1081,
+        "line": 1081,
+        "node": "Span",
+        "start": 60144
+      },
+      "subject": "PublicationInputsContract",
+      "text": "PublicationInputsContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0768",
+      "line": 1082,
+      "node": "Relation",
+      "object": "FreezeExportSnapshot",
+      "span": {
+        "column": 1,
+        "end": 60252,
+        "end_column": 56,
+        "end_line": 1082,
+        "line": 1082,
+        "node": "Span",
+        "start": 60197
+      },
+      "subject": "PublicationInputsContract",
+      "text": "PublicationInputsContract permits FreezeExportSnapshot.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0770",
+      "line": 1084,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 60361,
+        "end_column": 54,
+        "end_line": 1084,
+        "line": 1084,
+        "node": "Span",
+        "start": 60308
+      },
+      "subject": "PublicationIntentsContract",
+      "text": "PublicationIntentsContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0771",
+      "line": 1085,
+      "node": "Relation",
+      "object": "CancelPdfRequest",
+      "span": {
+        "column": 1,
+        "end": 60414,
+        "end_column": 53,
+        "end_line": 1085,
+        "line": 1085,
+        "node": "Span",
+        "start": 60362
+      },
+      "subject": "PublicationIntentsContract",
+      "text": "PublicationIntentsContract permits CancelPdfRequest.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0772",
+      "line": 1086,
+      "node": "Relation",
+      "object": "RequestPdfExport",
+      "span": {
+        "column": 1,
+        "end": 60467,
+        "end_column": 53,
+        "end_line": 1086,
+        "line": 1086,
+        "node": "Span",
+        "start": 60415
+      },
+      "subject": "PublicationIntentsContract",
+      "text": "PublicationIntentsContract permits RequestPdfExport.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0774",
+      "line": 1088,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 60570,
+        "end_column": 52,
+        "end_line": 1088,
+        "line": 1088,
+        "node": "Span",
+        "start": 60519
+      },
+      "subject": "PublicationStateContract",
+      "text": "PublicationStateContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0775",
+      "line": 1089,
+      "node": "Relation",
+      "object": "CancelUnpublishedJob",
+      "span": {
+        "column": 1,
+        "end": 60625,
+        "end_column": 55,
+        "end_line": 1089,
+        "line": 1089,
+        "node": "Span",
+        "start": 60571
+      },
+      "subject": "PublicationStateContract",
+      "text": "PublicationStateContract permits CancelUnpublishedJob.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0776",
+      "line": 1090,
+      "node": "Relation",
+      "object": "CommitPdfCandidate",
+      "span": {
+        "column": 1,
+        "end": 60678,
+        "end_column": 53,
+        "end_line": 1090,
+        "line": 1090,
+        "node": "Span",
+        "start": 60626
+      },
+      "subject": "PublicationStateContract",
+      "text": "PublicationStateContract permits CommitPdfCandidate.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0777",
+      "line": 1091,
+      "node": "Relation",
+      "object": "DiscardPdfCandidate",
+      "span": {
+        "column": 1,
+        "end": 60732,
+        "end_column": 54,
+        "end_line": 1091,
+        "line": 1091,
+        "node": "Span",
+        "start": 60679
+      },
+      "subject": "PublicationStateContract",
+      "text": "PublicationStateContract permits DiscardPdfCandidate.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0808",
+      "line": 1122,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 62691,
+        "end_column": 59,
+        "end_line": 1122,
+        "line": 1122,
+        "node": "Span",
+        "start": 62633
+      },
+      "subject": "ReferenceInterpretationContract",
+      "text": "ReferenceInterpretationContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0809",
+      "line": 1123,
+      "node": "Relation",
+      "object": "ParseReference",
+      "span": {
+        "column": 1,
+        "end": 62747,
+        "end_column": 56,
+        "end_line": 1123,
+        "line": 1123,
+        "node": "Span",
+        "start": 62692
+      },
+      "subject": "ReferenceInterpretationContract",
+      "text": "ReferenceInterpretationContract permits ParseReference.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0810",
+      "line": 1124,
+      "node": "Relation",
+      "object": "ReferenceParsed",
+      "span": {
+        "column": 1,
+        "end": 62804,
+        "end_column": 57,
+        "end_line": 1124,
+        "line": 1124,
+        "node": "Span",
+        "start": 62748
+      },
+      "subject": "ReferenceInterpretationContract",
+      "text": "ReferenceInterpretationContract permits ReferenceParsed.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0818",
+      "line": 1132,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 63178,
+        "end_column": 52,
+        "end_line": 1132,
+        "line": 1132,
+        "node": "Span",
+        "start": 63127
+      },
+      "subject": "ReferenceStorageContract",
+      "text": "ReferenceStorageContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0819",
+      "line": 1133,
+      "node": "Relation",
+      "object": "ReadReference",
+      "span": {
+        "column": 1,
+        "end": 63226,
+        "end_column": 48,
+        "end_line": 1133,
+        "line": 1133,
+        "node": "Span",
+        "start": 63179
+      },
+      "subject": "ReferenceStorageContract",
+      "text": "ReferenceStorageContract permits ReadReference.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0820",
+      "line": 1134,
+      "node": "Relation",
+      "object": "ReferenceRead",
+      "span": {
+        "column": 1,
+        "end": 63274,
+        "end_column": 48,
+        "end_line": 1134,
+        "line": 1134,
+        "node": "Span",
+        "start": 63227
+      },
+      "subject": "ReferenceStorageContract",
+      "text": "ReferenceStorageContract permits ReferenceRead.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0821",
+      "line": 1135,
+      "node": "PropertyAssignment",
+      "property": "presence",
+      "span": {
+        "column": 1,
+        "end": 63317,
+        "end_column": 43,
+        "end_line": 1135,
+        "line": 1135,
+        "node": "Span",
+        "start": 63275
+      },
+      "subject": "RegisteredProject",
+      "text": "RegisteredProject has presence = required.",
+      "value": "required",
+      "verb": "has"
+    },
+    {
+      "id": "f0822",
+      "line": 1136,
+      "node": "PropertyAssignment",
+      "property": "value-type",
+      "span": {
+        "column": 1,
+        "end": 63358,
+        "end_column": 41,
+        "end_line": 1136,
+        "line": 1136,
+        "node": "Span",
+        "start": 63318
+      },
+      "subject": "RegisteredProject",
+      "text": "RegisteredProject has value-type = text.",
+      "value": "text",
+      "verb": "has"
+    },
+    {
+      "id": "f0860",
+      "line": 1174,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 65747,
+        "end_column": 55,
+        "end_line": 1174,
+        "line": 1174,
+        "node": "Span",
+        "start": 65693
+      },
+      "subject": "ResourcePreparationContract",
+      "text": "ResourcePreparationContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0861",
+      "line": 1175,
+      "node": "Relation",
+      "object": "CacheCompatibleScene",
+      "span": {
+        "column": 1,
+        "end": 65805,
+        "end_column": 58,
+        "end_line": 1175,
+        "line": 1175,
+        "node": "Span",
+        "start": 65748
+      },
+      "subject": "ResourcePreparationContract",
+      "text": "ResourcePreparationContract permits CacheCompatibleScene.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0862",
+      "line": 1176,
+      "node": "Relation",
+      "object": "PrepareDiagramScenes",
+      "span": {
+        "column": 1,
+        "end": 65863,
+        "end_column": 58,
+        "end_line": 1176,
+        "line": 1176,
+        "node": "Span",
+        "start": 65806
+      },
+      "subject": "ResourcePreparationContract",
+      "text": "ResourcePreparationContract permits PrepareDiagramScenes.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0863",
+      "line": 1177,
+      "node": "Relation",
+      "object": "PrepareEmbeddedResources",
+      "span": {
+        "column": 1,
+        "end": 65925,
+        "end_column": 62,
+        "end_line": 1177,
+        "line": 1177,
+        "node": "Span",
+        "start": 65864
+      },
+      "subject": "ResourcePreparationContract",
+      "text": "ResourcePreparationContract permits PrepareEmbeddedResources.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0864",
+      "line": 1178,
+      "node": "Relation",
+      "object": "PrepareExportResources",
+      "span": {
+        "column": 1,
+        "end": 65985,
+        "end_column": 60,
+        "end_line": 1178,
+        "line": 1178,
+        "node": "Span",
+        "start": 65926
+      },
+      "subject": "ResourcePreparationContract",
+      "text": "ResourcePreparationContract permits PrepareExportResources.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0865",
+      "line": 1179,
+      "node": "Relation",
+      "object": "PrepareTypedDiagram",
+      "span": {
+        "column": 1,
+        "end": 66042,
+        "end_column": 57,
+        "end_line": 1179,
+        "line": 1179,
+        "node": "Span",
+        "start": 65986
+      },
+      "subject": "ResourcePreparationContract",
+      "text": "ResourcePreparationContract permits PrepareTypedDiagram.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0882",
+      "line": 1196,
+      "node": "PropertyAssignment",
+      "property": "presence",
+      "span": {
+        "column": 1,
+        "end": 67345,
+        "end_column": 44,
+        "end_line": 1196,
+        "line": 1196,
+        "node": "Span",
+        "start": 67302
+      },
+      "subject": "SavedBaselineBytes",
+      "text": "SavedBaselineBytes has presence = required.",
+      "value": "required",
+      "verb": "has"
+    },
+    {
+      "id": "f0883",
+      "line": 1197,
+      "node": "PropertyAssignment",
+      "property": "value-type",
+      "span": {
+        "column": 1,
+        "end": 67388,
+        "end_column": 43,
+        "end_line": 1197,
+        "line": 1197,
+        "node": "Span",
+        "start": 67346
+      },
+      "subject": "SavedBaselineBytes",
+      "text": "SavedBaselineBytes has value-type = bytes.",
+      "value": "bytes",
+      "verb": "has"
+    },
+    {
+      "id": "f0885",
+      "line": 1199,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 67482,
+        "end_column": 49,
+        "end_line": 1199,
+        "line": 1199,
+        "node": "Span",
+        "start": 67434
+      },
+      "subject": "ScheduledWorkContract",
+      "text": "ScheduledWorkContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0886",
+      "line": 1200,
+      "node": "Relation",
+      "object": "DebounceElapsed",
+      "span": {
+        "column": 1,
+        "end": 67529,
+        "end_column": 47,
+        "end_line": 1200,
+        "line": 1200,
+        "node": "Span",
+        "start": 67483
+      },
+      "subject": "ScheduledWorkContract",
+      "text": "ScheduledWorkContract permits DebounceElapsed.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0887",
+      "line": 1201,
+      "node": "Relation",
+      "object": "PollReleaseQueue",
+      "span": {
+        "column": 1,
+        "end": 67577,
+        "end_column": 48,
+        "end_line": 1201,
+        "line": 1201,
+        "node": "Span",
+        "start": 67530
+      },
+      "subject": "ScheduledWorkContract",
+      "text": "ScheduledWorkContract permits PollReleaseQueue.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0888",
+      "line": 1202,
+      "node": "Relation",
+      "object": "RestartDebounce",
+      "span": {
+        "column": 1,
+        "end": 67624,
+        "end_column": 47,
+        "end_line": 1202,
+        "line": 1202,
+        "node": "Span",
+        "start": 67578
+      },
+      "subject": "ScheduledWorkContract",
+      "text": "ScheduledWorkContract permits RestartDebounce.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0922",
+      "line": 1236,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 69465,
+        "end_column": 48,
+        "end_line": 1236,
+        "line": 1236,
+        "node": "Span",
+        "start": 69418
+      },
+      "subject": "StorageCallsContract",
+      "text": "StorageCallsContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0923",
+      "line": 1237,
+      "node": "Relation",
+      "object": "CandidateRead",
+      "span": {
+        "column": 1,
+        "end": 69509,
+        "end_column": 44,
+        "end_line": 1237,
+        "line": 1237,
+        "node": "Span",
+        "start": 69466
+      },
+      "subject": "StorageCallsContract",
+      "text": "StorageCallsContract permits CandidateRead.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0924",
+      "line": 1238,
+      "node": "Relation",
+      "object": "CandidateReadFailed",
+      "span": {
+        "column": 1,
+        "end": 69559,
+        "end_column": 50,
+        "end_line": 1238,
+        "line": 1238,
+        "node": "Span",
+        "start": 69510
+      },
+      "subject": "StorageCallsContract",
+      "text": "StorageCallsContract permits CandidateReadFailed.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0925",
+      "line": 1239,
+      "node": "Relation",
+      "object": "CurrentWritten",
+      "span": {
+        "column": 1,
+        "end": 69604,
+        "end_column": 45,
+        "end_line": 1239,
+        "line": 1239,
+        "node": "Span",
+        "start": 69560
+      },
+      "subject": "StorageCallsContract",
+      "text": "StorageCallsContract permits CurrentWritten.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0926",
+      "line": 1240,
+      "node": "Relation",
+      "object": "ReadCandidate",
+      "span": {
+        "column": 1,
+        "end": 69648,
+        "end_column": 44,
+        "end_line": 1240,
+        "line": 1240,
+        "node": "Span",
+        "start": 69605
+      },
+      "subject": "StorageCallsContract",
+      "text": "StorageCallsContract permits ReadCandidate.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0927",
+      "line": 1241,
+      "node": "Relation",
+      "object": "WriteCurrent",
+      "span": {
+        "column": 1,
+        "end": 69691,
+        "end_column": 43,
+        "end_line": 1241,
+        "line": 1241,
+        "node": "Span",
+        "start": 69649
+      },
+      "subject": "StorageCallsContract",
+      "text": "StorageCallsContract permits WriteCurrent.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0932",
+      "line": 1246,
+      "node": "PropertyAssignment",
+      "property": "presence",
+      "span": {
+        "column": 1,
+        "end": 69901,
+        "end_column": 36,
+        "end_line": 1246,
+        "line": 1246,
+        "node": "Span",
+        "start": 69866
+      },
+      "subject": "TargetPane",
+      "text": "TargetPane has presence = required.",
+      "value": "required",
+      "verb": "has"
+    },
+    {
+      "id": "f0933",
+      "line": 1247,
+      "node": "PropertyAssignment",
+      "property": "value-type",
+      "span": {
+        "column": 1,
+        "end": 69935,
+        "end_column": 34,
+        "end_line": 1247,
+        "line": 1247,
+        "node": "Span",
+        "start": 69902
+      },
+      "subject": "TargetPane",
+      "text": "TargetPane has value-type = text.",
+      "value": "text",
+      "verb": "has"
+    },
+    {
+      "id": "f0934",
+      "line": 1248,
+      "node": "PropertyAssignment",
+      "property": "presence",
+      "span": {
+        "column": 1,
+        "end": 69973,
+        "end_column": 38,
+        "end_line": 1248,
+        "line": 1248,
+        "node": "Span",
+        "start": 69936
+      },
+      "subject": "TargetWindow",
+      "text": "TargetWindow has presence = required.",
+      "value": "required",
+      "verb": "has"
+    },
+    {
+      "id": "f0935",
+      "line": 1249,
+      "node": "PropertyAssignment",
+      "property": "value-type",
+      "span": {
+        "column": 1,
+        "end": 70009,
+        "end_column": 36,
+        "end_line": 1249,
+        "line": 1249,
+        "node": "Span",
+        "start": 69974
+      },
+      "subject": "TargetWindow",
+      "text": "TargetWindow has value-type = text.",
+      "value": "text",
+      "verb": "has"
+    },
+    {
+      "id": "f0951",
+      "line": 1265,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 70877,
+        "end_column": 52,
+        "end_line": 1265,
+        "line": 1265,
+        "node": "Span",
+        "start": 70826
+      },
+      "subject": "UnsavedAdmissionContract",
+      "text": "UnsavedAdmissionContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0952",
+      "line": 1266,
+      "node": "Relation",
+      "object": "ChooseCancel",
+      "span": {
+        "column": 1,
+        "end": 70924,
+        "end_column": 47,
+        "end_line": 1266,
+        "line": 1266,
+        "node": "Span",
+        "start": 70878
+      },
+      "subject": "UnsavedAdmissionContract",
+      "text": "UnsavedAdmissionContract permits ChooseCancel.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0953",
+      "line": 1267,
+      "node": "Relation",
+      "object": "ChooseSave",
+      "span": {
+        "column": 1,
+        "end": 70969,
+        "end_column": 45,
+        "end_line": 1267,
+        "line": 1267,
+        "node": "Span",
+        "start": 70925
+      },
+      "subject": "UnsavedAdmissionContract",
+      "text": "UnsavedAdmissionContract permits ChooseSave.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0954",
+      "line": 1268,
+      "node": "Relation",
+      "object": "ChooseUnsaved",
+      "span": {
+        "column": 1,
+        "end": 71017,
+        "end_column": 48,
+        "end_line": 1268,
+        "line": 1268,
+        "node": "Span",
+        "start": 70970
+      },
+      "subject": "UnsavedAdmissionContract",
+      "text": "UnsavedAdmissionContract permits ChooseUnsaved.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0975",
+      "line": 1289,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 72263,
+        "end_column": 51,
+        "end_line": 1289,
+        "line": 1289,
+        "node": "Span",
+        "start": 72213
+      },
+      "subject": "ViewportChangesContract",
+      "text": "ViewportChangesContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0976",
+      "line": 1290,
+      "node": "Relation",
+      "object": "CheckCurrentMapping",
+      "span": {
+        "column": 1,
+        "end": 72316,
+        "end_column": 53,
+        "end_line": 1290,
+        "line": 1290,
+        "node": "Span",
+        "start": 72264
+      },
+      "subject": "ViewportChangesContract",
+      "text": "ViewportChangesContract permits CheckCurrentMapping.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0977",
+      "line": 1291,
+      "node": "Relation",
+      "object": "MapSourceAnchor",
+      "span": {
+        "column": 1,
+        "end": 72365,
+        "end_column": 49,
+        "end_line": 1291,
+        "line": 1291,
+        "node": "Span",
+        "start": 72317
+      },
+      "subject": "ViewportChangesContract",
+      "text": "ViewportChangesContract permits MapSourceAnchor.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0978",
+      "line": 1292,
+      "node": "Relation",
+      "object": "RetainDocumentAndAnchor",
+      "span": {
+        "column": 1,
+        "end": 72422,
+        "end_column": 57,
+        "end_line": 1292,
+        "line": 1292,
+        "node": "Span",
+        "start": 72366
+      },
+      "subject": "ViewportChangesContract",
+      "text": "ViewportChangesContract permits RetainDocumentAndAnchor.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0979",
+      "line": 1293,
+      "node": "Relation",
+      "object": "SetEditorAnchor",
+      "span": {
+        "column": 1,
+        "end": 72471,
+        "end_column": 49,
+        "end_line": 1293,
+        "line": 1293,
+        "node": "Span",
+        "start": 72423
+      },
+      "subject": "ViewportChangesContract",
+      "text": "ViewportChangesContract permits SetEditorAnchor.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0980",
+      "line": 1294,
+      "node": "Relation",
+      "object": "UserPreviewScroll",
+      "span": {
+        "column": 1,
+        "end": 72522,
+        "end_column": 51,
+        "end_line": 1294,
+        "line": 1294,
+        "node": "Span",
+        "start": 72472
+      },
+      "subject": "ViewportChangesContract",
+      "text": "ViewportChangesContract permits UserPreviewScroll.",
+      "verb": "permits"
+    },
+    {
+      "id": "f0994",
+      "line": 1308,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 73592,
+        "end_column": 54,
+        "end_line": 1308,
+        "line": 1308,
+        "node": "Span",
+        "start": 73539
+      },
+      "subject": "WindowPresentationContract",
+      "text": "WindowPresentationContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f0995",
+      "line": 1309,
+      "node": "Relation",
+      "object": "ToggleFullscreen",
+      "span": {
+        "column": 1,
+        "end": 73645,
+        "end_column": 53,
+        "end_line": 1309,
+        "line": 1309,
+        "node": "Span",
+        "start": 73593
+      },
+      "subject": "WindowPresentationContract",
+      "text": "WindowPresentationContract permits ToggleFullscreen.",
+      "verb": "permits"
+    },
+    {
+      "id": "f1008",
+      "line": 1322,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 74516,
+        "end_column": 52,
+        "end_line": 1322,
+        "line": 1322,
+        "node": "Span",
+        "start": 74465
+      },
+      "subject": "WorkspaceChangesContract",
+      "text": "WorkspaceChangesContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f1009",
+      "line": 1323,
+      "node": "Relation",
+      "object": "ActivateRootAndHistory",
+      "span": {
+        "column": 1,
+        "end": 74573,
+        "end_column": 57,
+        "end_line": 1323,
+        "line": 1323,
+        "node": "Span",
+        "start": 74517
+      },
+      "subject": "WorkspaceChangesContract",
+      "text": "WorkspaceChangesContract permits ActivateRootAndHistory.",
+      "verb": "permits"
+    },
+    {
+      "id": "f1010",
+      "line": 1324,
+      "node": "Relation",
+      "object": "RequestTreeRefresh",
+      "span": {
+        "column": 1,
+        "end": 74626,
+        "end_column": 53,
+        "end_line": 1324,
+        "line": 1324,
+        "node": "Span",
+        "start": 74574
+      },
+      "subject": "WorkspaceChangesContract",
+      "text": "WorkspaceChangesContract permits RequestTreeRefresh.",
+      "verb": "permits"
+    },
+    {
+      "id": "f1011",
+      "line": 1325,
+      "node": "Relation",
+      "object": "SetChosenParentRoot",
+      "span": {
+        "column": 1,
+        "end": 74680,
+        "end_column": 54,
+        "end_line": 1325,
+        "line": 1325,
+        "node": "Span",
+        "start": 74627
+      },
+      "subject": "WorkspaceChangesContract",
+      "text": "WorkspaceChangesContract permits SetChosenParentRoot.",
+      "verb": "permits"
+    },
+    {
+      "id": "f1012",
+      "line": 1326,
+      "node": "Relation",
+      "object": "ValidateProposedRoot",
+      "span": {
+        "column": 1,
+        "end": 74735,
+        "end_column": 55,
+        "end_line": 1326,
+        "line": 1326,
+        "node": "Span",
+        "start": 74681
+      },
+      "subject": "WorkspaceChangesContract",
+      "text": "WorkspaceChangesContract permits ValidateProposedRoot.",
+      "verb": "permits"
+    },
+    {
+      "id": "f1024",
+      "line": 1338,
+      "node": "PropertyAssignment",
+      "property": "completeness",
+      "span": {
+        "column": 1,
+        "end": 75381,
+        "end_column": 52,
+        "end_line": 1338,
+        "line": 1338,
+        "node": "Span",
+        "start": 75330
+      },
+      "subject": "WorkspaceIntentsContract",
+      "text": "WorkspaceIntentsContract has completeness = closed.",
+      "value": "closed",
+      "verb": "has"
+    },
+    {
+      "id": "f1025",
+      "line": 1339,
+      "node": "Relation",
+      "object": "ActivateExternalTarget",
+      "span": {
+        "column": 1,
+        "end": 75438,
+        "end_column": 57,
+        "end_line": 1339,
+        "line": 1339,
+        "node": "Span",
+        "start": 75382
+      },
+      "subject": "WorkspaceIntentsContract",
+      "text": "WorkspaceIntentsContract permits ActivateExternalTarget.",
+      "verb": "permits"
+    },
+    {
+      "id": "f1026",
+      "line": 1340,
+      "node": "Relation",
+      "object": "ChooseInternalFile",
+      "span": {
+        "column": 1,
+        "end": 75491,
+        "end_column": 53,
+        "end_line": 1340,
+        "line": 1340,
+        "node": "Span",
+        "start": 75439
+      },
+      "subject": "WorkspaceIntentsContract",
+      "text": "WorkspaceIntentsContract permits ChooseInternalFile.",
+      "verb": "permits"
+    },
+    {
+      "id": "f1027",
+      "line": 1341,
+      "node": "Relation",
+      "object": "FavoriteFileChosen",
+      "span": {
+        "column": 1,
+        "end": 75544,
+        "end_column": 53,
+        "end_line": 1341,
+        "line": 1341,
+        "node": "Span",
+        "start": 75492
+      },
+      "subject": "WorkspaceIntentsContract",
+      "text": "WorkspaceIntentsContract permits FavoriteFileChosen.",
+      "verb": "permits"
+    },
+    {
+      "id": "f1028",
+      "line": 1342,
+      "node": "Relation",
+      "object": "FavoriteFolderChosen",
+      "span": {
+        "column": 1,
+        "end": 75599,
+        "end_column": 55,
+        "end_line": 1342,
+        "line": 1342,
+        "node": "Span",
+        "start": 75545
+      },
+      "subject": "WorkspaceIntentsContract",
+      "text": "WorkspaceIntentsContract permits FavoriteFolderChosen.",
+      "verb": "permits"
+    }
+  ],
+  "model_gaps": [],
+  "outputs": {
+    "delivery.txt": "6403203dd5a0867eb14d104ee8a73730bd72dd9ad92e78d996a6dba0a5dcfc01",
+    "diagrams/VP09-overview-data-FrozenExportSnapshot.mmd": "db2724e2ab9f81ba73dcfcc3456cd06c26748c600c6a64307aa37ed3e5ac9db3",
+    "diagrams/VP09-overview-data-GeneratedSelectionState.mmd": "79f92b4680eb41c0712ce0f45fd84650647f473449c70a44661b894af88fbf57",
+    "diagrams/VP09-overview-data-MainDocumentState.mmd": "8dd3230186a12215b50864862c0b6066b18dc8d6e70b8a5c87683b33e437f784",
+    "entry.md": "aa919e72d9916b4902c4b7d41885288ca0743a0ffcf08d66258c04cf73703392",
+    "sdptool.json": "8ebb9289f3f2516fb52f8566db172827a4572bd0ee6ea7e3a0ac56139fcd809d",
+    "selection.json": "568e608753ffc177fa63f0296eab6de29a892291bb6e136d659ece61c65a875c",
+    "source-inputs/s0.design": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+  }
+}

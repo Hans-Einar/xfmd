@@ -1,0 +1,19 @@
+   Compiling mermaid-rs-renderer v0.3.1 (/home/warloc/git/mermaid-rs-renderer-xfmd-diagrams)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.36s
+     Running tests/xfmd_document_references.rs (/home/warloc/git/xfmd-sdl-navigation/build-diagram-fork/debug/deps/xfmd_document_references-67c1dc5caba2aea9)
+
+running 1 test
+
+thread 'xfmd_document_references_preserves_routes_and_caption_attachments' (366112) panicked at tests/xfmd_document_references.rs:62:6:
+called `Result::unwrap()` on an `Err` value: NoSpace("label attachment intrusion on edge 11")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test xfmd_document_references_preserves_routes_and_caption_attachments ... FAILED
+
+failures:
+
+failures:
+    xfmd_document_references_preserves_routes_and_caption_attachments
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.52s
+
+error: test failed, to rerun pass `--test xfmd_document_references`

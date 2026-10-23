@@ -1,0 +1,8 @@
+flowchart LR
+    n_CommitVisit["CommitVisit (message)"]
+    n_DocumentChanged["DocumentChanged (message)"]
+    n_DocumentNotificationsContract["DocumentNotificationsContract (contract)"]
+    n_GeneratedDocumentChanged["GeneratedDocumentChanged (message)"]
+    n_DocumentNotificationsContract -->|permits| n_CommitVisit
+    n_DocumentNotificationsContract -->|permits| n_DocumentChanged
+    n_DocumentNotificationsContract -->|permits| n_GeneratedDocumentChanged

@@ -1,0 +1,41 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd-sdl-navigation/build-ui
+Test project /home/warloc/git/xfmd-sdl-navigation/build-ui
+      Start 15: SdpDynamicGuiTest
+ 1/13 Test #15: SdpDynamicGuiTest ................   Passed    4.10 sec
+      Start 16: SdpPanelGuiTest
+ 2/13 Test #16: SdpPanelGuiTest ..................   Passed    1.25 sec
+      Start 61: DiagramLayoutTest
+ 3/13 Test #61: DiagramLayoutTest ................   Passed    1.66 sec
+      Start 66: MermaidPdfTest
+ 4/13 Test #66: MermaidPdfTest ...................   Passed    2.05 sec
+      Start 79: SdpProtocolTest
+ 5/13 Test #79: SdpProtocolTest ..................   Passed    2.11 sec
+      Start 80: SdpNavigationGuiTest
+ 6/13 Test #80: SdpNavigationGuiTest .............   Passed   12.14 sec
+      Start 81: SdpIntegrationTest
+ 7/13 Test #81: SdpIntegrationTest ...............   Passed    0.20 sec
+      Start 82: SdpDiscoveryTest
+ 8/13 Test #82: SdpDiscoveryTest .................   Passed    0.01 sec
+      Start 87: SdpRuntimeTest
+ 9/13 Test #87: SdpRuntimeTest ...................   Passed    0.01 sec
+      Start 88: SdpRuntimeGuiTest
+10/13 Test #88: SdpRuntimeGuiTest ................   Passed   12.94 sec
+      Start 89: SdpDisplayTest
+11/13 Test #89: SdpDisplayTest ...................   Passed    0.00 sec
+      Start 90: SduiWorkflowGuiTest
+12/13 Test #90: SduiWorkflowGuiTest ..............   Passed    5.20 sec
+      Start 91: SdpOverviewGuiTest
+13/13 Test #91: SdpOverviewGuiTest ...............***Failed   12.72 sec
+Overview timeout: overview-project — Navigation updated; views are snapshots
+
+
+92% tests passed, 1 tests failed out of 13
+
+Label Time Summary:
+GUI    =  48.34 sec*proc (6 tests)
+
+Total Test time (real) =  54.39 sec
+
+The following tests FAILED:
+	 91 - SdpOverviewGuiTest (Failed)                       GUI
+Errors while running CTest

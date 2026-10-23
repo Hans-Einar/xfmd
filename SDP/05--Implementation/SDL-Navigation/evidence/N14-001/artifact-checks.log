@@ -1,0 +1,3 @@
+PASS: adjacent 12/13 PDF glyph boxes separated by 5.55 points
+PASS: packet-narrow one A4 vector page, all labels within page. Visual inspection remains required.
+PASS: packet-split one A4 vector page, all labels within page. Visual inspection remains required.

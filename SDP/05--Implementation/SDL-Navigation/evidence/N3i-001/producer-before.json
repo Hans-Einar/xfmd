@@ -1,0 +1,25 @@
+{
+  "head": "48c919fda7cf18568df1397753fc10f0696bb6ca",
+  "files": {
+    "SDL/go/viewpoint/query.go": "1bf3c059b03f172060eb44fdc4779d93d0b99c5871bb1efd403ed6e2b4a4925c",
+    "SDL/go/viewpoint/overview.go": "134cc70b44f78d281cd0b242e4fc26d27646666c7957dc76bffe678412af3c5f",
+    "SDL/go/viewpoint/overview_test.go": "1effffae55c26314e764cc70fbfa0f35a4d40de3a6c439135499d11e94d371a7",
+    "SDL/go/viewpoint/feature_overview.go": "6444c8a862f68a71b7877da35fe2a6c2d3a62b347109e32febf9c5d345a097fc",
+    "SDL/go/viewpoint/feature_overview_test.go": "2ad233d84932e86409bfb8bc669a2cef91d8a7bf9ed3f9226f5298426af26816",
+    "SDL/go/documents/selection.go": "8ac2172726ac9dc3d7e9740f4ec89347d5d1817a3414d3b7f6537d537070e8c1",
+    "SDPTool/tree.go": "7d770dbd63b4fd5662f2cd20b1b3a22bcf7e8d2efcc34724bb023eb64840932f",
+    "SDPTool/overview_test.go": "ff93a9bc3dd9307fca573f50484d52106d6ae6e6a44cd6ea180fb996dea9f9e2",
+    "SDP/05--Implementation/SDL/ViewpointNavigation/Plan.md": "d7013a4bf6ace3888832242757ee0c69e29ded3b7f73ba5743cbdd5d5e7fb1d8",
+    "SDP/KanBan/active/#032--Study--Viewpoint-navigation-feedback.md": "ad8a3b8ecd9fc105ff02304e6002e8b77494d8e77ece8230e2607658c64daa48",
+    "SDPTool/Contract.md": "beeda6c8001f284ad38888bf46ee6bce3f2aa463dd5644bbd71b83c01b8ff2dc",
+    "SDP/ProjectManagement/Ledger.ndjson": "06789ffd4c87cd5c764bf36b847a2ba4b1de7646ae665ce22428ecc6845cf926"
+  },
+  "indexTree": "308c49949d0a3be2e208b29aac6f5d9052cfc7c1",
+  "copiedManagementEvents": [
+    "EVT-KB-SDP-000306",
+    "EVT-KB-SDP-000307",
+    "EVT-KB-SDP-000315",
+    "EVT-KB-SDP-000316",
+    "EVT-KB-SDP-000317"
+  ]
+}

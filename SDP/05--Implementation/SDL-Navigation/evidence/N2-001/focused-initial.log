@@ -1,0 +1,34 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd-sdl-navigation/build-ui
+Test project /home/warloc/git/xfmd-sdl-navigation/build-ui
+    Start 27: TreeActionsTest
+    Start 80: SdpIntegrationTest
+    Start 86: SdpRuntimeTest
+    Start 15: SdpDynamicGuiTest
+1/8 Test #86: SdpRuntimeTest ...................   Passed    0.01 sec
+    Start 16: SdpPanelGuiTest
+2/8 Test #80: SdpIntegrationTest ...............   Passed    0.27 sec
+    Start 79: SdpNavigationGuiTest
+3/8 Test #15: SdpDynamicGuiTest ................***Failed    0.77 sec
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/SdpDynamicGuiTest.cpp:116: box >= 0
+
+    Start 87: SdpRuntimeGuiTest
+4/8 Test #16: SdpPanelGuiTest ..................   Passed    1.39 sec
+    Start 88: SdpDisplayTest
+5/8 Test #88: SdpDisplayTest ...................   Passed    0.01 sec
+6/8 Test #87: SdpRuntimeGuiTest ................***Failed    0.87 sec
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/SdpRuntimeGuiTest.cpp:50: parent->isExpanded()
+
+7/8 Test #27: TreeActionsTest ..................   Passed    5.26 sec
+8/8 Test #79: SdpNavigationGuiTest .............   Passed   11.40 sec
+
+75% tests passed, 2 tests failed out of 8
+
+Label Time Summary:
+GUI    =  19.68 sec*proc (5 tests)
+
+Total Test time (real) =  11.67 sec
+
+The following tests FAILED:
+	 15 - SdpDynamicGuiTest (Failed)                        GUI
+	 87 - SdpRuntimeGuiTest (Failed)                        GUI
+Errors while running CTest

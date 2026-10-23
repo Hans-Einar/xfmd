@@ -1,0 +1,21 @@
+{
+  "base": "e8760d331933361ab631ef0d52c20e87268a22b3",
+  "commit": "ecd9dcd5cd95fb2b1f323cea96da1776659b2513",
+  "branch": "sdp/xfmd-viewpoint-overviews-main",
+  "worktree": "/home/warloc/git/SDP-xfmd-viewpoint-main",
+  "command": [
+    "git",
+    "merge-tree",
+    "--write-tree",
+    "--name-only",
+    "e8760d331933361ab631ef0d52c20e87268a22b3",
+    "ecd9dcd5cd95fb2b1f323cea96da1776659b2513"
+  ],
+  "exitCode": 0,
+  "stdout": "53cc533382e2de848be8d5d706b1122e726cf030\n",
+  "stderr": "",
+  "cleanWorktree": true,
+  "mainIsParent": true,
+  "published": false,
+  "merged": false
+}

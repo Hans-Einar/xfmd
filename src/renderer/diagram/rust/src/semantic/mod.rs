@@ -6,6 +6,7 @@ mod planning;
 mod state;
 mod structures;
 mod types;
+mod usecase;
 use mermaid_rs_renderer::ir::*;
 use xfmd_diagram_contracts::semantic::*;
 pub fn graph(d: &Diagram) -> Result<Graph, String> {
@@ -33,6 +34,7 @@ pub fn graph(d: &Diagram) -> Result<Graph, String> {
         20 => DiagramKind::Radar,
         21 => DiagramKind::Treemap,
         22 => DiagramKind::XYChart,
+        23 => DiagramKind::UseCase,
         _ => return Err("Unknown semantic family".into()),
     };
     if let Some(r) = d.records.iter().find(|r| r.tag == DIRECTION) {
@@ -52,6 +54,7 @@ pub fn graph(d: &Diagram) -> Result<Graph, String> {
         9..=12 => planning::populate(d, &mut g),
         13 | 16 | 17 | 20 | 22 => charts::populate(d, &mut g),
         14 | 15 | 18 | 19 | 21 => structures::populate(d, &mut g),
+        23 => usecase::populate(d, &mut g),
         _ => unreachable!(),
     }
     Ok(g)

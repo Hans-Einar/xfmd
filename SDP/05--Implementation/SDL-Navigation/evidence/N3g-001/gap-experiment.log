@@ -1,0 +1,19 @@
+   Compiling mermaid-rs-renderer v0.3.1 (/home/warloc/git/mermaid-rs-renderer-xfmd-diagrams)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 24.15s
+     Running tests/xfmd_chapter_navigation.rs (build-diagram-fork/debug/deps/xfmd_chapter_navigation-c72eec7fb1e05521)
+
+running 1 test
+
+thread 'xfmd_chapter_navigation_preserves_routes_and_caption_attachments' (392974) panicked at src/layout/measurements.rs:26:9:
+Diagram layout time budget exceeded
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test xfmd_chapter_navigation_preserves_routes_and_caption_attachments ... FAILED
+
+failures:
+
+failures:
+    xfmd_chapter_navigation_preserves_routes_and_caption_attachments
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.13s
+
+error: test failed, to rerun pass `--test xfmd_chapter_navigation`

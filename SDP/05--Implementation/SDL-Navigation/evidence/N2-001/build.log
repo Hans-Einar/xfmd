@@ -1,0 +1,117 @@
+[0/2] Re-checking globbed directories...
+[1/2] Re-running CMake...
+CMake Warning (dev) at /usr/share/cmake/Modules/FetchContent.cmake:1373 (message):
+  The DOWNLOAD_EXTRACT_TIMESTAMP option was not given and policy CMP0135 is
+  not set.  The policy's OLD behavior will be used.  When using a URL
+  download, the timestamps of extracted files should preferably be that of
+  the time of extraction, otherwise code that depends on the extracted
+  contents might not be rebuilt if the URL changes.  The OLD behavior
+  preserves the timestamps from the archive instead, but this is usually not
+  what you want.  Update your project to the NEW behavior or specify the
+  DOWNLOAD_EXTRACT_TIMESTAMP option with a value of true to avoid this
+  robustness issue.
+Call Stack (most recent call first):
+  cmake/MicroTeX.cmake:3 (FetchContent_Declare)
+  CMakeLists.txt:31 (include)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found Python3: /usr/bin/python3.12 (found suitable version "3.12.14", minimum required is "3.11") found components: Interpreter
+-- Found Python3: /usr/bin/python3.12 (found version "3.12.14") found components: Interpreter
+-- Configuring done (0.9s)
+-- Generating done (0.7s)
+-- Build files have been written to: /home/warloc/git/xfmd-sdl-navigation/build-ui
+[0/2] Re-checking globbed directories...
+[1/69] cd /home/warloc/git/xfmd-sdl-navigation/build-ui && /usr/bin/python3.12 /home/warloc/git/xfmd-sdl-navigation/tools/build_identity.py --source /home/warloc/git/xfmd-sdl-navigation --output /home/warloc/git/xfmd-sdl-navigation/build-ui/generated
+[2/69] Building CXX object CMakeFiles/xfmd_version.dir/src/application/build/BuildVersion.cpp.o
+[3/69] Linking CXX static library libxfmd_version.a
+[4/69] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/SdpTree.cpp.o
+[5/69] Building CXX object CMakeFiles/xfmd_sdp.dir/src/application/sdp/SdpDisplay.cpp.o
+[6/69] Linking CXX static library libxfmd_sdp.a
+[7/69] Building CXX object CMakeFiles/SdpDisplayTest.dir/tests/application/SdpDisplayTest.cpp.o
+/home/warloc/git/xfmd-sdl-navigation/tests/application/SdpDisplayTest.cpp: In function ‘void run()’:
+/home/warloc/git/xfmd-sdl-navigation/tests/application/SdpDisplayTest.cpp:30:60: warning: missing initializer for member ‘xfmd::SdpTarget::path’ [-Wmissing-field-initializers]
+   30 |   target.target = {"select", "p", "m", "generic-VP11", "r1"};
+      |                                                            ^
+/home/warloc/git/xfmd-sdl-navigation/tests/application/SdpDisplayTest.cpp:30:60: warning: missing initializer for member ‘xfmd::SdpTarget::entry’ [-Wmissing-field-initializers]
+/home/warloc/git/xfmd-sdl-navigation/tests/application/SdpDisplayTest.cpp:33:57: warning: missing initializer for member ‘xfmd::SdpTarget::path’ [-Wmissing-field-initializers]
+   33 |   ref.target = {"select", "p", "m", "focused-VP01", "r1"};
+      |                                                         ^
+/home/warloc/git/xfmd-sdl-navigation/tests/application/SdpDisplayTest.cpp:33:57: warning: missing initializer for member ‘xfmd::SdpTarget::entry’ [-Wmissing-field-initializers]
+/home/warloc/git/xfmd-sdl-navigation/tests/application/SdpDisplayTest.cpp:45:59: warning: missing initializer for member ‘xfmd::SdpTarget::entry’ [-Wmissing-field-initializers]
+   45 |   card.target = {"open", "p", "", "", "", "/board/card.md"};
+      |                                                           ^
+[8/69] Linking CXX executable SdpWatchTest
+[9/69] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/NavigationTree.cpp.o
+[10/69] Linking CXX executable SdpProtocolTest
+[11/69] Linking CXX executable SdpIntegrationTest
+[12/69] Linking CXX executable SdpDiscoveryTest
+[13/69] Linking CXX executable SdpRuntimeTest
+[14/69] Linking CXX executable SdpDisplayTest
+[15/69] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/SdpPanel.cpp.o
+[16/69] Linking CXX static library libxfmd_application.a
+[17/69] Linking CXX executable ExternalBrowserTest
+[18/69] Linking CXX executable xfmd
+[19/69] Linking CXX executable SdpPanelGuiTest
+[20/69] Linking CXX executable FavoritesGuiTest
+[21/69] Linking CXX executable DocumentZoomGuiTest
+[22/69] Building CXX object CMakeFiles/SdpDynamicGuiTest.dir/tests/gui/SdpDynamicGuiTest.cpp.o
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/SdpDynamicGuiTest.cpp: In function ‘xfmd::SdpReply graph()’:
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/SdpDynamicGuiTest.cpp:43:55: warning: missing initializer for member ‘xfmd::SdpTarget::path’ [-Wmissing-field-initializers]
+   43 |   vp.target = {"select", "TEST", "model", "bulk", "r1"};
+      |                                                       ^
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/SdpDynamicGuiTest.cpp:43:55: warning: missing initializer for member ‘xfmd::SdpTarget::entry’ [-Wmissing-field-initializers]
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/SdpDynamicGuiTest.cpp:47:67: warning: missing initializer for member ‘xfmd::SdpTarget::path’ [-Wmissing-field-initializers]
+   47 |   object.target = {"select", "TEST", "model", "VP11-generic", "r1"};
+      |                                                                   ^
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/SdpDynamicGuiTest.cpp:47:67: warning: missing initializer for member ‘xfmd::SdpTarget::entry’ [-Wmissing-field-initializers]
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/SdpDynamicGuiTest.cpp:52:68: warning: missing initializer for member ‘xfmd::SdpTarget::path’ [-Wmissing-field-initializers]
+   52 |   focused.target = {"select", "TEST", "model", "VP02-focused", "r1"};
+      |                                                                    ^
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/SdpDynamicGuiTest.cpp:52:68: warning: missing initializer for member ‘xfmd::SdpTarget::entry’ [-Wmissing-field-initializers]
+[23/69] Linking CXX executable PathWorkspaceGuiTest
+[24/69] Linking CXX executable OpenPathDialogGuiTest
+[25/69] Linking CXX executable SdpDynamicGuiTest
+[26/69] Building CXX object CMakeFiles/SdpNavigationGuiTest.dir/tests/gui/SdpNavigationGuiTest.cpp.o
+[27/69] Linking CXX executable FileRoutingGuiTest
+[28/69] Linking CXX executable MermaidGuiTest
+[29/69] Linking CXX executable RecentFilesGuiTest
+[30/69] Linking CXX executable PreviewSelectionGuiTest
+[31/69] Linking CXX executable CompactWorkspaceTest
+[32/69] Linking CXX executable ReadingColorsGuiTest
+[33/69] Linking CXX executable UiControlsTest
+[34/69] Linking CXX executable TreeActionsTest
+[35/69] Linking CXX executable AppearanceGuiTest
+[36/69] Linking CXX executable AppearancePreferencesTest
+[37/69] Linking CXX executable BrowserPreferencesTest
+[38/69] Linking CXX executable IndexGuiTest
+[39/69] Linking CXX executable WorkspaceTest
+[40/69] Linking CXX executable PresentationTest
+[41/69] Linking CXX executable ScrollingTest
+[42/69] Linking CXX executable NavigationGuiTest
+[43/69] Linking CXX executable SidebarGuiTest
+[44/69] Linking CXX executable WheelGuiTest
+[45/69] Linking CXX executable WorkPathGuiTest
+[46/69] Linking CXX executable PointerTest
+[47/69] Linking CXX executable PreferencesTest
+[48/69] Linking CXX executable TablePreviewTest
+[49/69] Linking CXX executable CapturePresentation
+[50/69] Linking CXX executable xfmd_cold_start
+[51/69] Linking CXX executable PagedPreviewTest
+[52/69] Linking CXX executable ExportGuiTest
+[53/69] Linking CXX executable FullscreenTest
+[54/69] Linking CXX executable CanvasTest
+[55/69] Linking CXX executable ThemeProfilesTest
+[56/69] Linking CXX executable IconTest
+[57/69] Linking CXX executable WindowEndpointBoundaryTest
+[58/69] Linking CXX executable CaptureAppearance
+[59/69] Linking CXX executable CapturePreferences
+[60/69] Linking CXX executable DocumentViewsGuiTest
+[61/69] Linking CXX executable DocumentLeaseGuiTest
+[62/69] Linking CXX executable ThemePopupGuiTest
+[63/69] Linking CXX executable DocumentZoomPdfFixture
+[64/69] Linking CXX executable HeadingLinkTest
+[65/69] Linking CXX executable SdpNavigationGuiTest
+[66/69] Linking CXX executable StandaloneMermaidTest
+[67/69] Linking CXX executable StandaloneMermaidGuiTest
+[68/69] Linking CXX executable SdpRuntimeGuiTest
+[69/69] Linking CXX executable HeadingLinkGuiTest

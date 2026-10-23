@@ -25,6 +25,8 @@ protected:
   XfmdWindow() = default;
 
 public:
+  FX::FXHorizontalFrame* sdpTools = nullptr;
+  UiButton* sduiLaunch = nullptr;
   DocumentPathField* documentPath = nullptr;
   ReadingColorPopup* colorPopup = nullptr;
   PreviewControls* previewControls = nullptr;

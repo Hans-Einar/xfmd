@@ -48,3 +48,9 @@ from P41 with P042. Do not recast old phase history as invented sprint deliverie
 [Working method](../docs/working-method.md), [versioning](../docs/versioning.md),
 [phase template](templates/Phase.md). Discussion and reconciliation notes live in
 [KanBan](../SDP/KanBan/README.md); they are not automatically new product sprints.
+
+## Session-led SDP integration — 2026-10-01
+
+[Sprint 010 / P058](Sprint-010--SDP-Navigation/README.md) is the current native
+SDP browsing increment under PLAN-XFMD-0006. It is an uncommitted development
+candidate with explicit native-test limitations; it is not a completed delivery.

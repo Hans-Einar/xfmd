@@ -1,0 +1,64 @@
+VP07 — Features across the
+architecture
+Revision:
+e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007.
+contributes-to, owns and explicit allocated-to per mode. Unspecified allocation is
+reported as a gap.
+Selection:
+{"viewpoint":"VP07","direction":"both","depth":2,"diagram":"VP07-Doc
+umentReferences-NormalDesktop"}.
+
+Feature: DocumentReferences — mode
+NormalDesktop
+Preferences (unit)
+
+owns
+
+owns
+
+DocumentIndexService (unit)
+
+allocated-to
+
+ApplicationPreferences (functionality)
+
+allocated-to
+
+DocumentIndex (functionality)
+
+contributes-to
+DocumentReferences (feature)
+
+contributes-to
+contributes-to
+Navigation (unit)
+
+owns
+
+NavigationHistory (functionality)
+
+allocated-to
+allocated-to
+
+Viewport (unit)
+
+owns
+
+SourceAnchorMapping (functionality)
+
+XfmdDesktop (container)
+
+contributes-to
+contributes-to
+
+NativeShell (unit)
+
+owns
+
+allocated-to
+WorkspaceControls (functionality)
+
+Source facts: f0046, f0050, f0176, f0178, f0181, f0545, f0576, f0587, f0590, f0652,
+f0907, f0911, f0966, f1013, f1017.
+
+

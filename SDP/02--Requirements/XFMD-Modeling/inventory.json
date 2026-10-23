@@ -1,0 +1,7402 @@
+{
+  "method": "Identity/metadata/file inventory, not semantic model or test coverage",
+  "head": "41fa4948c5377edd792ba3f503e6b92b0fd4717a",
+  "inputs": {
+    "xfmd_requirements.md": "704106be4db82b952387c1f65cd98615f10b00fb632d7affb7cebbbfb6b1e59b",
+    "softwareArchitecture.md": "cab6e224ac82f15ef97118e83e17cbe081c0636f93f0ab7503a61593c8a25d1d",
+    "src/blueprint/README.md": "cfa1c85dd0d950ad7cf7d922b094d74ec8ffa6c056e35143560fde91d8d2e9c5",
+    "sprints/README.md": "88b9b013975346654d3d77d10316f472b6cebcc69bb1116b696678200248cdec",
+    "docs/working-method.md": "abd3c81e13260caf1fbc4feda91b2a0a923a2f7852fabe8669dbf3415477775e",
+    "CMakeLists.txt": "d15280afc6076558975d3f65afb9ae2afe10fd845db9801d837c37eac99a3595",
+    "VERSION": "e2556a181068db2c7e3b2b127de33540448820fb1e97da29239833b6a8e09764",
+    "SDP/SDL/XFMD/README.md": "3e96f58a8a6a7f2709ebbc9d9f10ad5d8914dce6ec82cbee2a593965a52fa7a6",
+    "SDP/SDL/XFMD/XfmdDesktop.design": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007",
+    "SDP/SDL/XFMD/model-map.json": "1fcd776e2a5e5e6a4d926b356219be1c5bacc29a3a6802fd9c891c6a92bff76c",
+    "SDP/SDL/XFMD/SDUI/XfmdDesktop/Desktop.sdui": "b13ecbc642c01ceb6b7a45d8ffa5113ddb99b909e7e98396d32cc1e4732fb9a8"
+  },
+  "blueprints": [
+    {
+      "id": "FTR-001",
+      "title": "Markdown-Presentation",
+      "path": "src/blueprint/feature/Feature-001--Markdown-Presentation.md",
+      "sha256": "4e4f4ec8e93f1910c3352ae09379fd357958e4a838e559cbd1362de632edd20d",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-035",
+        "UR-036",
+        "UR-037",
+        "UR-001",
+        "UR-002",
+        "UR-009",
+        "SR-001",
+        "SR-003",
+        "SR-004",
+        "SR-005",
+        "SR-011",
+        "SR-012",
+        "SR-013",
+        "UR-017"
+      ],
+      "referencedIds": [
+        "AT-001",
+        "AT-002",
+        "AT-009",
+        "AT-011",
+        "AT-013",
+        "AT-014",
+        "AT-015",
+        "AT-021",
+        "AT-022",
+        "AT-023",
+        "AT-031",
+        "AT-055",
+        "AT-056",
+        "AT-057",
+        "FTR-001",
+        "FTR-002",
+        "FUNC-001",
+        "FUNC-002",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-007",
+        "FUNC-010",
+        "FUNC-016",
+        "FUNC-017",
+        "FUNC-021",
+        "FUNC-022",
+        "SR-001",
+        "SR-003",
+        "SR-004",
+        "SR-005",
+        "SR-011",
+        "SR-012",
+        "SR-013",
+        "UR-001",
+        "UR-002",
+        "UR-009",
+        "UR-017",
+        "UR-035",
+        "UR-036",
+        "UR-037"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "MarkdownPresentation"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FTR-002",
+      "title": "Live-Preview",
+      "path": "src/blueprint/feature/Feature-002--Live-Preview.md",
+      "sha256": "fc881e98cdfdfb7a43f501fdee6ef0bcc6ac15b01c1d51eadcb898653e4946d1",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-003",
+        "UR-004",
+        "UR-009",
+        "SR-002",
+        "SR-008",
+        "SR-010",
+        "SR-011",
+        "SR-012",
+        "SR-013",
+        "SR-019"
+      ],
+      "referencedIds": [
+        "AT-003",
+        "AT-004",
+        "AT-009",
+        "AT-012",
+        "AT-018",
+        "AT-020",
+        "AT-021",
+        "AT-022",
+        "AT-023",
+        "AT-039",
+        "FTR-001",
+        "FTR-002",
+        "FUNC-001",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-006",
+        "FUNC-007",
+        "FUNC-011",
+        "SR-002",
+        "SR-008",
+        "SR-010",
+        "SR-011",
+        "SR-012",
+        "SR-013",
+        "SR-019",
+        "UR-003",
+        "UR-004",
+        "UR-009"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "LivePreview"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FTR-003",
+      "title": "Document-Navigation",
+      "path": "src/blueprint/feature/Feature-003--Document-Navigation.md",
+      "sha256": "2658eb5746449318f21cb81196b77e2a7c19c2df88f1abe9299a5d56c5cc86d9",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-001",
+        "UR-005",
+        "UR-009",
+        "UR-024",
+        "UR-028",
+        "SR-002",
+        "SR-005",
+        "SR-008",
+        "SR-012",
+        "SR-013",
+        "SR-019"
+      ],
+      "referencedIds": [
+        "AT-001",
+        "AT-005",
+        "AT-009",
+        "AT-012",
+        "AT-015",
+        "AT-018",
+        "AT-022",
+        "AT-023",
+        "AT-039",
+        "AT-044",
+        "AT-048",
+        "FTR-003",
+        "FUNC-001",
+        "FUNC-002",
+        "FUNC-005",
+        "FUNC-008",
+        "FUNC-009",
+        "FUNC-010",
+        "FUNC-014",
+        "FUNC-031",
+        "SR-002",
+        "SR-005",
+        "SR-008",
+        "SR-012",
+        "SR-013",
+        "SR-019",
+        "UR-001",
+        "UR-005",
+        "UR-009",
+        "UR-024",
+        "UR-028"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "DocumentNavigation"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FTR-004",
+      "title": "Synchronized-Scrolling",
+      "path": "src/blueprint/feature/Feature-004--Synchronized-Scrolling.md",
+      "sha256": "33992e6c584ff57ebb37ae675d501cc25e6c1c84ba896dd86216677402ae92d6",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-008",
+        "SR-002",
+        "SR-008",
+        "SR-009",
+        "SR-012",
+        "SR-013",
+        "UR-016",
+        "SR-019"
+      ],
+      "referencedIds": [
+        "AT-008",
+        "AT-012",
+        "AT-018",
+        "AT-019",
+        "AT-022",
+        "AT-023",
+        "AT-030",
+        "AT-039",
+        "FTR-003",
+        "FTR-004",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-009",
+        "FUNC-010",
+        "FUNC-015",
+        "SR-002",
+        "SR-008",
+        "SR-009",
+        "SR-012",
+        "SR-013",
+        "SR-019",
+        "UR-008",
+        "UR-016"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "SynchronizedScrolling"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FTR-005",
+      "title": "Work-Path-Navigation",
+      "path": "src/blueprint/feature/Feature-005--Work-Path-Navigation.md",
+      "sha256": "ba4f46a7254ce6be6b4a047551e806750ce61cd3a5df564320facb105fc2b64a",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-001",
+        "UR-012",
+        "UR-013",
+        "UR-014"
+      ],
+      "referencedIds": [
+        "AT-001",
+        "AT-026",
+        "AT-027",
+        "AT-028",
+        "FTR-005",
+        "FUNC-010",
+        "FUNC-012",
+        "FUNC-013",
+        "UR-001",
+        "UR-012",
+        "UR-013",
+        "UR-014"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "WorkPathNavigation"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FTR-006",
+      "title": "Configurable-Scrolling",
+      "path": "src/blueprint/feature/Feature-006--Configurable-Scrolling.md",
+      "sha256": "9596df613da83a10c6b567b096cae178be25ea8bed61393a5cd42303ea43f912",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-011",
+        "UR-015",
+        "UR-016",
+        "SR-002",
+        "SR-015",
+        "SR-019"
+      ],
+      "referencedIds": [
+        "AT-012",
+        "AT-025",
+        "AT-029",
+        "AT-030",
+        "AT-035",
+        "AT-039",
+        "FTR-004",
+        "FTR-006",
+        "FUNC-005",
+        "FUNC-009",
+        "FUNC-010",
+        "FUNC-011",
+        "FUNC-014",
+        "FUNC-015",
+        "SR-002",
+        "SR-015",
+        "SR-019",
+        "UR-011",
+        "UR-015",
+        "UR-016"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "ConfigurableScrolling"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FTR-007",
+      "title": "Paged-Publication",
+      "path": "src/blueprint/feature/Feature-007--Paged-Publication.md",
+      "sha256": "47c7eae56cd55de8a564a0e324b04f0bbbf2ee854b123d1fe38d591315778cc3",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-017",
+        "UR-018",
+        "SR-001",
+        "SR-008",
+        "SR-016",
+        "SR-017",
+        "SR-019"
+      ],
+      "referencedIds": [
+        "AT-011",
+        "AT-018",
+        "AT-031",
+        "AT-032",
+        "AT-036",
+        "AT-037",
+        "AT-039",
+        "FTR-001",
+        "FTR-007",
+        "FUNC-001",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-007",
+        "FUNC-009",
+        "FUNC-010",
+        "FUNC-014",
+        "FUNC-016",
+        "FUNC-017",
+        "FUNC-018",
+        "SR-001",
+        "SR-008",
+        "SR-016",
+        "SR-017",
+        "SR-019",
+        "UR-017",
+        "UR-018"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "PagedPublication"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FTR-008",
+      "title": "Chapter-Navigation",
+      "path": "src/blueprint/feature/Feature-008--Chapter-Navigation.md",
+      "sha256": "861de9afcf055db4e4eb5b859f9df6a61ff465f6a4b151de899065a2bf619c13",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-021",
+        "UR-022"
+      ],
+      "referencedIds": [
+        "AT-040",
+        "AT-041",
+        "AT-042",
+        "AT-043",
+        "FTR-008",
+        "FUNC-003",
+        "FUNC-008",
+        "FUNC-009",
+        "FUNC-010",
+        "FUNC-020",
+        "UR-021",
+        "UR-022"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "ChapterNavigation"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FTR-009",
+      "title": "Document-References",
+      "path": "src/blueprint/feature/Feature-009--Document-References.md",
+      "sha256": "05fc2c35a317bb6c2c2b33dde5d63593f0c0d7b15140ab702fe026bf8ccd77cd",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-023",
+        "SR-020"
+      ],
+      "referencedIds": [
+        "AT-040",
+        "AT-041",
+        "AT-042",
+        "AT-043",
+        "FTR-008",
+        "FTR-009",
+        "FUNC-003",
+        "FUNC-008",
+        "FUNC-009",
+        "FUNC-010",
+        "FUNC-014",
+        "FUNC-020",
+        "SR-020",
+        "UR-023"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "DocumentReferences"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FTR-010",
+      "title": "Mermaid-Diagrams",
+      "path": "src/blueprint/feature/Feature-010--Mermaid-Diagrams.md",
+      "sha256": "37b1c514875aa5b50c576c9f4eacab09269916b3e4cfe84421c1e07998ce6ceb",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-039",
+        "UR-040",
+        "UR-041",
+        "SR-021",
+        "SR-022",
+        "SR-023",
+        "SR-024"
+      ],
+      "referencedIds": [
+        "AT-059",
+        "AT-060",
+        "AT-061",
+        "AT-062",
+        "AT-063",
+        "AT-064",
+        "AT-065",
+        "FTR-010",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-007",
+        "FUNC-016",
+        "FUNC-017",
+        "FUNC-018",
+        "FUNC-021",
+        "FUNC-023",
+        "FUNC-024",
+        "FUNC-025",
+        "SR-021",
+        "SR-022",
+        "SR-023",
+        "SR-024",
+        "UC-008",
+        "UC-010",
+        "UR-039",
+        "UR-040",
+        "UR-041"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "MermaidDiagrams"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-001",
+      "title": "Document-Session",
+      "path": "src/blueprint/functionality/Functionality-001--Document-Session.md",
+      "sha256": "25c79a5e1d0631969fd31316ce53517707e42317a8c3bca831d7ba8b181d57af",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-001",
+        "UR-003",
+        "UR-009",
+        "SR-002",
+        "SR-006",
+        "SR-007",
+        "SR-008",
+        "SR-013"
+      ],
+      "referencedIds": [
+        "AT-001",
+        "AT-003",
+        "AT-009",
+        "AT-012",
+        "AT-016",
+        "AT-017",
+        "AT-018",
+        "AT-023",
+        "FUNC-001",
+        "FUNC-002",
+        "FUNC-031",
+        "SR-002",
+        "SR-006",
+        "SR-007",
+        "SR-008",
+        "SR-013",
+        "UR-001",
+        "UR-003",
+        "UR-009"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "DocumentSession"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-002",
+      "title": "Local-File-Storage",
+      "path": "src/blueprint/functionality/Functionality-002--Local-File-Storage.md",
+      "sha256": "b8c24142a084ecfa86edeb7a4a2b22b87c7a9e891cf5efe5b9c09ee7955f4a4f",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-001",
+        "UR-003",
+        "UR-009",
+        "UR-028",
+        "SR-005",
+        "SR-006",
+        "SR-007",
+        "SR-011",
+        "SR-013"
+      ],
+      "referencedIds": [
+        "AT-001",
+        "AT-003",
+        "AT-009",
+        "AT-015",
+        "AT-016",
+        "AT-017",
+        "AT-021",
+        "AT-023",
+        "AT-048",
+        "FUNC-002",
+        "FUNC-031",
+        "SR-005",
+        "SR-006",
+        "SR-007",
+        "SR-011",
+        "SR-013",
+        "UR-001",
+        "UR-003",
+        "UR-009",
+        "UR-028"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "LocalFileStorage"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-003",
+      "title": "Markdown-Interpretation",
+      "path": "src/blueprint/functionality/Functionality-003--Markdown-Interpretation.md",
+      "sha256": "7889b9197c82635969d0dd03c44e52d9a1918080f5868819da302dd9c0063a56",
+      "owner": "interpreter",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-039",
+        "UR-036",
+        "UR-037",
+        "UR-005",
+        "UR-002",
+        "SR-001",
+        "SR-003",
+        "SR-004",
+        "SR-005",
+        "SR-009",
+        "SR-011",
+        "SR-013"
+      ],
+      "referencedIds": [
+        "AT-002",
+        "AT-005",
+        "AT-011",
+        "AT-013",
+        "AT-014",
+        "AT-015",
+        "AT-019",
+        "AT-021",
+        "AT-023",
+        "AT-056",
+        "AT-057",
+        "AT-059",
+        "FUNC-003",
+        "FUNC-023",
+        "SR-001",
+        "SR-003",
+        "SR-004",
+        "SR-005",
+        "SR-009",
+        "SR-011",
+        "SR-013",
+        "UR-002",
+        "UR-005",
+        "UR-036",
+        "UR-037",
+        "UR-039"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "MarkdownInterpretation"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-004",
+      "title": "Render-Layout",
+      "path": "src/blueprint/functionality/Functionality-004--Render-Layout.md",
+      "sha256": "c851acdb09e073f9a73572a58cc3013fe5b7cd6785120c81869183b463fa583a",
+      "owner": "renderer",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-040",
+        "UR-041",
+        "UR-035",
+        "UR-036",
+        "UR-037",
+        "UR-005",
+        "UR-002",
+        "UR-008",
+        "SR-001",
+        "SR-003",
+        "SR-005",
+        "SR-008",
+        "SR-009",
+        "SR-011",
+        "SR-013",
+        "UR-017",
+        "UR-018",
+        "SR-016",
+        "SR-019"
+      ],
+      "referencedIds": [
+        "AT-002",
+        "AT-005",
+        "AT-008",
+        "AT-011",
+        "AT-013",
+        "AT-015",
+        "AT-018",
+        "AT-019",
+        "AT-021",
+        "AT-023",
+        "AT-031",
+        "AT-032",
+        "AT-036",
+        "AT-039",
+        "AT-055",
+        "AT-056",
+        "AT-057",
+        "AT-060",
+        "AT-061",
+        "FUNC-004",
+        "FUNC-017",
+        "FUNC-024",
+        "SR-001",
+        "SR-003",
+        "SR-005",
+        "SR-008",
+        "SR-009",
+        "SR-011",
+        "SR-013",
+        "SR-016",
+        "SR-019",
+        "UR-002",
+        "UR-005",
+        "UR-008",
+        "UR-017",
+        "UR-018",
+        "UR-035",
+        "UR-036",
+        "UR-037",
+        "UR-040",
+        "UR-041"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "RenderLayout"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-005",
+      "title": "FOX-Presentation-Host",
+      "path": "src/blueprint/functionality/Functionality-005--FOX-Presentation-Host.md",
+      "sha256": "0f836bcfa7de449e0a4e67109c659bfd9ce1181c0fd4d2bf1005924fc356c928",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-040",
+        "UR-041",
+        "UR-035",
+        "UR-034",
+        "UR-030",
+        "UR-031",
+        "UR-011",
+        "UR-002",
+        "UR-005",
+        "UR-008",
+        "UR-028",
+        "SR-001",
+        "SR-008",
+        "SR-009",
+        "SR-010",
+        "SR-013",
+        "UR-017",
+        "SR-016",
+        "SR-019"
+      ],
+      "referencedIds": [
+        "AT-002",
+        "AT-005",
+        "AT-008",
+        "AT-011",
+        "AT-018",
+        "AT-019",
+        "AT-020",
+        "AT-023",
+        "AT-025",
+        "AT-031",
+        "AT-036",
+        "AT-039",
+        "AT-048",
+        "AT-050",
+        "AT-051",
+        "AT-054",
+        "AT-055",
+        "AT-060",
+        "AT-061",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-015",
+        "FUNC-016",
+        "FUNC-021",
+        "FUNC-031",
+        "SR-001",
+        "SR-008",
+        "SR-009",
+        "SR-010",
+        "SR-013",
+        "SR-016",
+        "SR-019",
+        "UR-002",
+        "UR-005",
+        "UR-008",
+        "UR-011",
+        "UR-017",
+        "UR-028",
+        "UR-030",
+        "UR-031",
+        "UR-032",
+        "UR-033",
+        "UR-034",
+        "UR-035",
+        "UR-040",
+        "UR-041"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "FoxPresentation"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": {
+        "path": "SDP/SDL/XFMD/SDUI/XfmdDesktop/Desktop.sdui",
+        "scope": "static state samples, not native interaction"
+      },
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-006",
+      "title": "Event-Scheduling",
+      "path": "src/blueprint/functionality/Functionality-006--Event-Scheduling.md",
+      "sha256": "2cd2dedce61189e691b95f67c0e1e51f11abd6e559dd31954a5c184b352d5bc3",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-004",
+        "SR-008",
+        "SR-010",
+        "SR-013"
+      ],
+      "referencedIds": [
+        "AT-004",
+        "AT-018",
+        "AT-020",
+        "AT-023",
+        "FUNC-006",
+        "FUNC-031",
+        "SR-008",
+        "SR-010",
+        "SR-013",
+        "UR-004"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "EventScheduling"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-007",
+      "title": "Preview-Pipeline",
+      "path": "src/blueprint/functionality/Functionality-007--Preview-Pipeline.md",
+      "sha256": "f5f9925de0e58181e09658eca31e12274d9e63ee6ee45d05dba6137deebe186d",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "SR-022",
+        "UR-036",
+        "UR-037",
+        "UR-002",
+        "UR-004",
+        "SR-001",
+        "SR-002",
+        "SR-003",
+        "SR-008",
+        "SR-010",
+        "SR-011",
+        "SR-013",
+        "UR-017",
+        "SR-019"
+      ],
+      "referencedIds": [
+        "AT-002",
+        "AT-004",
+        "AT-011",
+        "AT-012",
+        "AT-013",
+        "AT-018",
+        "AT-020",
+        "AT-021",
+        "AT-023",
+        "AT-031",
+        "AT-039",
+        "AT-056",
+        "AT-057",
+        "AT-063",
+        "FTR-001",
+        "FTR-002",
+        "FUNC-001",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-006",
+        "FUNC-007",
+        "FUNC-022",
+        "FUNC-025",
+        "FUNC-031",
+        "SR-001",
+        "SR-002",
+        "SR-003",
+        "SR-008",
+        "SR-010",
+        "SR-011",
+        "SR-013",
+        "SR-019",
+        "SR-022",
+        "UR-002",
+        "UR-004",
+        "UR-017",
+        "UR-036",
+        "UR-037"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "PreviewPipeline"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-008",
+      "title": "Navigation-History",
+      "path": "src/blueprint/functionality/Functionality-008--Navigation-History.md",
+      "sha256": "730addba45b78731f6c583e666627f5cb3b705341513e30b69fd74d77a7d3c34",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-001",
+        "UR-005",
+        "UR-009",
+        "SR-002",
+        "SR-005",
+        "SR-008",
+        "SR-013"
+      ],
+      "referencedIds": [
+        "AT-001",
+        "AT-005",
+        "AT-009",
+        "AT-012",
+        "AT-015",
+        "AT-018",
+        "AT-023",
+        "FUNC-001",
+        "FUNC-008",
+        "FUNC-009",
+        "FUNC-031",
+        "SR-002",
+        "SR-005",
+        "SR-008",
+        "SR-013",
+        "UR-001",
+        "UR-005",
+        "UR-009"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "NavigationHistory"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-009",
+      "title": "Source-Anchor-Mapping",
+      "path": "src/blueprint/functionality/Functionality-009--Source-Anchor-Mapping.md",
+      "sha256": "a77b8933c62bf4e262e9038f01daa6c58035a3a68aac46e12368767a7319d4c6",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-005",
+        "UR-008",
+        "SR-002",
+        "SR-008",
+        "SR-009",
+        "SR-013",
+        "UR-017",
+        "SR-019"
+      ],
+      "referencedIds": [
+        "AT-005",
+        "AT-008",
+        "AT-012",
+        "AT-018",
+        "AT-019",
+        "AT-023",
+        "AT-031",
+        "AT-039",
+        "FTR-004",
+        "FUNC-005",
+        "FUNC-008",
+        "FUNC-009",
+        "FUNC-031",
+        "SR-002",
+        "SR-008",
+        "SR-009",
+        "SR-013",
+        "SR-019",
+        "UR-005",
+        "UR-008",
+        "UR-017"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "SourceAnchorMapping"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-010",
+      "title": "Workspace-Controls",
+      "path": "src/blueprint/functionality/Functionality-010--Workspace-Controls.md",
+      "sha256": "515e9c93ef65f17a0dd282d627a8e0b8452301af589189197f64963bc3329074",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-045",
+        "UR-038",
+        "UR-032",
+        "UR-033",
+        "UR-028",
+        "UR-029",
+        "UR-025",
+        "UR-026",
+        "UR-021",
+        "UR-011",
+        "UR-001",
+        "UR-006",
+        "UR-007",
+        "SR-002",
+        "SR-008",
+        "SR-013",
+        "UR-015",
+        "UR-017",
+        "UR-018",
+        "UR-019",
+        "UR-020",
+        "SR-019"
+      ],
+      "referencedIds": [
+        "AT-001",
+        "AT-006",
+        "AT-007",
+        "AT-012",
+        "AT-018",
+        "AT-023",
+        "AT-025",
+        "AT-029",
+        "AT-031",
+        "AT-032",
+        "AT-033",
+        "AT-034",
+        "AT-039",
+        "AT-040",
+        "AT-045",
+        "AT-046",
+        "AT-047",
+        "AT-048",
+        "AT-049",
+        "AT-052",
+        "AT-053",
+        "AT-058",
+        "AT-073",
+        "FTR-005",
+        "FUNC-001",
+        "FUNC-002",
+        "FUNC-005",
+        "FUNC-007",
+        "FUNC-010",
+        "FUNC-012",
+        "FUNC-013",
+        "FUNC-014",
+        "FUNC-015",
+        "FUNC-018",
+        "FUNC-019",
+        "FUNC-020",
+        "FUNC-032",
+        "SR-002",
+        "SR-008",
+        "SR-013",
+        "SR-019",
+        "UC-001",
+        "UR-001",
+        "UR-006",
+        "UR-007",
+        "UR-011",
+        "UR-015",
+        "UR-017",
+        "UR-018",
+        "UR-019",
+        "UR-020",
+        "UR-021",
+        "UR-025",
+        "UR-026",
+        "UR-028",
+        "UR-029",
+        "UR-032",
+        "UR-033",
+        "UR-034",
+        "UR-038",
+        "UR-045"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "WorkspaceControls"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": {
+        "path": "SDP/SDL/XFMD/SDUI/XfmdDesktop/Desktop.sdui",
+        "scope": "static state samples, not native interaction"
+      },
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-011",
+      "title": "Text-Editing",
+      "path": "src/blueprint/functionality/Functionality-011--Text-Editing.md",
+      "sha256": "39c3cb22b8f15e0547e5d37cade0b56cff7639059aa016ed3beccf2a59fbfe61",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-032",
+        "UR-033",
+        "UR-011",
+        "UR-003",
+        "UR-004",
+        "UR-009",
+        "SR-002",
+        "SR-006",
+        "SR-008",
+        "SR-013",
+        "UR-016",
+        "SR-019"
+      ],
+      "referencedIds": [
+        "AT-003",
+        "AT-004",
+        "AT-009",
+        "AT-012",
+        "AT-016",
+        "AT-018",
+        "AT-023",
+        "AT-025",
+        "AT-030",
+        "AT-039",
+        "AT-052",
+        "AT-053",
+        "FUNC-001",
+        "FUNC-005",
+        "FUNC-007",
+        "FUNC-010",
+        "FUNC-011",
+        "FUNC-015",
+        "SR-002",
+        "SR-006",
+        "SR-008",
+        "SR-013",
+        "SR-019",
+        "UR-003",
+        "UR-004",
+        "UR-009",
+        "UR-011",
+        "UR-016",
+        "UR-032",
+        "UR-033"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "TextEditing"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": {
+        "path": "SDP/SDL/XFMD/SDUI/XfmdDesktop/Desktop.sdui",
+        "scope": "static state samples, not native interaction"
+      },
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-012",
+      "title": "Work-Path-History",
+      "path": "src/blueprint/functionality/Functionality-012--Work-Path-History.md",
+      "sha256": "c7e02f59dae0791a4c8cc78f06855d52cca95ab1f7ae38abfa17c99d6eafbac5",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-012",
+        "UR-013"
+      ],
+      "referencedIds": [
+        "AT-026",
+        "AT-027",
+        "FUNC-012",
+        "UR-012",
+        "UR-013"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "WorkPathHistory"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-013",
+      "title": "Filtered-File-Tree",
+      "path": "src/blueprint/functionality/Functionality-013--Filtered-File-Tree.md",
+      "sha256": "be7b27bb6082b1ba50e712a64e7bc7be1b0a668762a2983f60ed0c3b6abfc6c6",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-014"
+      ],
+      "referencedIds": [
+        "AT-028",
+        "FUNC-012",
+        "FUNC-013",
+        "UR-014"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "FilteredFileTree"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-014",
+      "title": "Application-Preferences",
+      "path": "src/blueprint/functionality/Functionality-014--Application-Preferences.md",
+      "sha256": "3b2de590e02e2449ebb71b169aa326ec2eec0c1fe8f77203e5d3db3d424db25c",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-032",
+        "UR-030",
+        "UR-031",
+        "UR-025",
+        "UR-027",
+        "UR-024",
+        "UR-015",
+        "UR-017",
+        "SR-002",
+        "SR-018"
+      ],
+      "referencedIds": [
+        "AT-012",
+        "AT-029",
+        "AT-031",
+        "AT-038",
+        "AT-044",
+        "AT-045",
+        "AT-046",
+        "AT-047",
+        "AT-050",
+        "AT-051",
+        "AT-052",
+        "FTR-003",
+        "FTR-006",
+        "FTR-007",
+        "FUNC-001",
+        "FUNC-010",
+        "FUNC-014",
+        "FUNC-015",
+        "SR-002",
+        "SR-018",
+        "UR-015",
+        "UR-017",
+        "UR-024",
+        "UR-025",
+        "UR-027",
+        "UR-030",
+        "UR-031",
+        "UR-032",
+        "UR-033",
+        "UR-034"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "ApplicationPreferences"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": {
+        "path": "SDP/SDL/XFMD/SDUI/XfmdDesktop/Desktop.sdui",
+        "scope": "static state samples, not native interaction"
+      },
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-015",
+      "title": "Scroll-Motion",
+      "path": "src/blueprint/functionality/Functionality-015--Scroll-Motion.md",
+      "sha256": "082dc1c14b6389101ad96e74885eee48365733fcd2506230a37a828a87697b4f",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-011",
+        "UR-015",
+        "UR-016",
+        "SR-002",
+        "SR-015",
+        "SR-019"
+      ],
+      "referencedIds": [
+        "AT-012",
+        "AT-025",
+        "AT-029",
+        "AT-030",
+        "AT-035",
+        "AT-039",
+        "FTR-004",
+        "FTR-006",
+        "FUNC-006",
+        "FUNC-009",
+        "FUNC-014",
+        "FUNC-015",
+        "SR-002",
+        "SR-015",
+        "SR-019",
+        "UR-011",
+        "UR-015",
+        "UR-016"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "ScrollMotion"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-016",
+      "title": "Typography-And-Drawing",
+      "path": "src/blueprint/functionality/Functionality-016--Typography-And-Drawing.md",
+      "sha256": "0b59ebf1587d41258f1aa79dd96dff5b56c64756d2944ed010971674f81bfbeb",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-040",
+        "UR-041",
+        "UR-036",
+        "UR-037",
+        "UR-030",
+        "UR-031",
+        "UR-002",
+        "UR-017",
+        "UR-018",
+        "SR-001",
+        "SR-010",
+        "SR-016"
+      ],
+      "referencedIds": [
+        "AT-002",
+        "AT-011",
+        "AT-020",
+        "AT-031",
+        "AT-032",
+        "AT-036",
+        "AT-050",
+        "AT-051",
+        "AT-056",
+        "AT-057",
+        "AT-060",
+        "AT-061",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-016",
+        "FUNC-018",
+        "FUNC-031",
+        "SR-001",
+        "SR-010",
+        "SR-016",
+        "UR-002",
+        "UR-017",
+        "UR-018",
+        "UR-030",
+        "UR-031",
+        "UR-036",
+        "UR-037",
+        "UR-040",
+        "UR-041"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "TypographyAndDrawing"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-017",
+      "title": "Page-Composition",
+      "path": "src/blueprint/functionality/Functionality-017--Page-Composition.md",
+      "sha256": "58d8b20a7956d473d60a4c7c463d651b3a51231e08b1801447d8ade1355f91b7",
+      "owner": "renderer",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-040",
+        "UR-017",
+        "UR-018",
+        "SR-001",
+        "SR-008",
+        "SR-009",
+        "SR-016",
+        "SR-019"
+      ],
+      "referencedIds": [
+        "AT-011",
+        "AT-018",
+        "AT-019",
+        "AT-031",
+        "AT-032",
+        "AT-036",
+        "AT-039",
+        "AT-060",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-009",
+        "FUNC-017",
+        "SR-001",
+        "SR-008",
+        "SR-009",
+        "SR-016",
+        "SR-019",
+        "UR-017",
+        "UR-018",
+        "UR-040"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "PageComposition"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-018",
+      "title": "PDF-Export",
+      "path": "src/blueprint/functionality/Functionality-018--PDF-Export.md",
+      "sha256": "cf0682c0d2704932af7f3288c624a3b0abf862684596bc0992ffa1932595997d",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-040",
+        "SR-022",
+        "UR-036",
+        "UR-037",
+        "UR-018",
+        "SR-002",
+        "SR-005",
+        "SR-007",
+        "SR-010",
+        "SR-017"
+      ],
+      "referencedIds": [
+        "AT-012",
+        "AT-015",
+        "AT-017",
+        "AT-020",
+        "AT-032",
+        "AT-037",
+        "AT-056",
+        "AT-057",
+        "AT-060",
+        "AT-063",
+        "FUNC-001",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-006",
+        "FUNC-016",
+        "FUNC-017",
+        "FUNC-018",
+        "FUNC-022",
+        "FUNC-025",
+        "SR-002",
+        "SR-005",
+        "SR-007",
+        "SR-010",
+        "SR-017",
+        "SR-022",
+        "UR-018",
+        "UR-036",
+        "UR-037",
+        "UR-040"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "PdfExport"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": {
+        "path": "SDP/SDL/XFMD/SDUI/XfmdDesktop/Desktop.sdui",
+        "scope": "static state samples, not native interaction"
+      },
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-019",
+      "title": "Application-Identity",
+      "path": "src/blueprint/functionality/Functionality-019--Application-Identity.md",
+      "sha256": "c965937245cd0ad30bacf7823fa7b08c9fe0ccf98e3aacdaf6c90a3997dcc235",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-020",
+        "SR-013"
+      ],
+      "referencedIds": [
+        "AT-023",
+        "AT-034",
+        "FUNC-010",
+        "FUNC-019",
+        "SR-013",
+        "UR-020"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "ApplicationIdentity"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-020",
+      "title": "Document-Index",
+      "path": "src/blueprint/functionality/Functionality-020--Document-Index.md",
+      "sha256": "da3a117b371d541eddc45aea8f37c250402280530d9fbb4cbd11a68565c520d6",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-021",
+        "UR-022",
+        "UR-023",
+        "SR-020"
+      ],
+      "referencedIds": [
+        "AT-040",
+        "AT-041",
+        "AT-042",
+        "AT-043",
+        "FTR-008",
+        "FUNC-002",
+        "FUNC-003",
+        "FUNC-008",
+        "FUNC-010",
+        "FUNC-020",
+        "SR-020",
+        "UR-021",
+        "UR-022",
+        "UR-023"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "DocumentIndex"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-021",
+      "title": "Preview-Text-Selection",
+      "path": "src/blueprint/functionality/Functionality-021--Preview-Text-Selection.md",
+      "sha256": "50f781d1f922c3c78b1a1f03bad36672290262a2c80945e6807e80de7b099c6c",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-041",
+        "UR-035"
+      ],
+      "referencedIds": [
+        "AT-055",
+        "AT-061",
+        "FUNC-021",
+        "UR-035",
+        "UR-041"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "PreviewTextSelection"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-022",
+      "title": "Embedded-Visuals",
+      "path": "src/blueprint/functionality/Functionality-022--Embedded-Visuals.md",
+      "sha256": "ceda65b7a28946a16faf838ae74708a09a3cdef04990737df83b6c84363093a9",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-036",
+        "UR-037"
+      ],
+      "referencedIds": [
+        "AT-056",
+        "AT-057",
+        "FUNC-008",
+        "FUNC-022",
+        "UR-036",
+        "UR-037"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "EmbeddedVisuals"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-023",
+      "title": "Mermaid-Interpretation",
+      "path": "src/blueprint/functionality/Functionality-023--Mermaid-Interpretation.md",
+      "sha256": "76ab21dde27451b8f61413df5cfb49dfb599bf4ae73e63e8477c7ef4cdd423c2",
+      "owner": "interpreter",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-039",
+        "UR-041",
+        "SR-021",
+        "SR-022",
+        "SR-023"
+      ],
+      "referencedIds": [
+        "AT-059",
+        "AT-061",
+        "AT-062",
+        "AT-063",
+        "AT-064",
+        "FUNC-003",
+        "FUNC-023",
+        "FUNC-024",
+        "SR-021",
+        "SR-022",
+        "SR-023",
+        "UR-039",
+        "UR-041"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "MermaidInterpretation"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-024",
+      "title": "Diagram-Layout",
+      "path": "src/blueprint/functionality/Functionality-024--Diagram-Layout.md",
+      "sha256": "5a3e66749136cb3957ee3f241f21824439a071b5afe169f8875c6332c30db151",
+      "owner": "renderer",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-039",
+        "UR-040",
+        "UR-041",
+        "SR-021",
+        "SR-022",
+        "SR-023",
+        "SR-024"
+      ],
+      "referencedIds": [
+        "AT-059",
+        "AT-060",
+        "AT-061",
+        "AT-062",
+        "AT-063",
+        "AT-064",
+        "AT-065",
+        "FUNC-024",
+        "FUNC-025",
+        "SR-021",
+        "SR-022",
+        "SR-023",
+        "SR-024",
+        "UR-039",
+        "UR-040",
+        "UR-041"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "DiagramLayout"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-025",
+      "title": "Diagram-Preparation",
+      "path": "src/blueprint/functionality/Functionality-025--Diagram-Preparation.md",
+      "sha256": "48a4009ce7e9160b8529f24cc2da01bf28f945a9cc5300ebc752237462821e9f",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-039",
+        "UR-040",
+        "UR-041",
+        "SR-021",
+        "SR-022",
+        "SR-023"
+      ],
+      "referencedIds": [
+        "AT-059",
+        "AT-060",
+        "AT-061",
+        "AT-062",
+        "AT-063",
+        "AT-064",
+        "FUNC-007",
+        "FUNC-016",
+        "FUNC-018",
+        "FUNC-024",
+        "FUNC-025",
+        "SR-021",
+        "SR-022",
+        "SR-023",
+        "UR-039",
+        "UR-040",
+        "UR-041"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "DiagramPreparation"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-026",
+      "title": "Build-Identity",
+      "path": "src/blueprint/functionality/Functionality-026--Build-Identity.md",
+      "sha256": "78ff5e298c9f342c8e2d54100d86f9961ffee22dd775a6dcd9ccc617d286ae37",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-042",
+        "SR-025"
+      ],
+      "referencedIds": [
+        "AT-066",
+        "AT-067",
+        "FUNC-026",
+        "SR-025",
+        "UR-042"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "BuildIdentity"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-031",
+      "title": "Generated-Document-Navigation",
+      "path": "src/blueprint/functionality/Functionality-031--Generated-Document-Navigation.md",
+      "sha256": "7cafca5279e0cc6aac5485c33d7f1a5964d256e79bb3f281ff34107c868fce5a",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-044",
+        "SR-027",
+        "SR-028"
+      ],
+      "referencedIds": [
+        "AT-070",
+        "AT-071",
+        "AT-072",
+        "FUNC-001",
+        "FUNC-002",
+        "FUNC-005",
+        "FUNC-006",
+        "FUNC-007",
+        "FUNC-008",
+        "FUNC-009",
+        "FUNC-010",
+        "FUNC-016",
+        "FUNC-031",
+        "SR-027",
+        "SR-028",
+        "UC-011",
+        "UR-044"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "GeneratedDocumentNavigation"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": null,
+      "modelStatus": "structural-model-linked"
+    },
+    {
+      "id": "FUNC-032",
+      "title": "SDP-Project-Navigation",
+      "path": "src/blueprint/functionality/Functionality-032--SDP-Project-Navigation.md",
+      "sha256": "f301f6de137f057ad585ffb79239242d292695c5da4b3e41dfe553a9439da74f",
+      "owner": "application",
+      "declaredStatus": "Implemented",
+      "requirements": [
+        "UR-046",
+        "SR-029"
+      ],
+      "referencedIds": [
+        "AT-074",
+        "AT-075",
+        "FUNC-001",
+        "FUNC-002",
+        "FUNC-005",
+        "FUNC-006",
+        "FUNC-007",
+        "FUNC-008",
+        "FUNC-010",
+        "FUNC-031",
+        "FUNC-032",
+        "SR-029",
+        "UC-012",
+        "UR-046"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "SdpProjectNavigation"
+        ],
+        "scope": "blueprint structural inventory; declared scenarios are not executable C++"
+      },
+      "sdui": {
+        "path": "SDP/SDL/XFMD/SDUI/XfmdDesktop/Desktop.sdui",
+        "scope": "static state samples, not native interaction"
+      },
+      "modelStatus": "structural-model-linked"
+    }
+  ],
+  "requirementIdentities": [
+    {
+      "id": "AT-001",
+      "sourceLines": [
+        66
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-001",
+        "FTR-003",
+        "FTR-005",
+        "FUNC-001",
+        "FUNC-002",
+        "FUNC-008",
+        "FUNC-010"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-002",
+      "sourceLines": [
+        67,
+        192
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-001",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-007",
+        "FUNC-016"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-003",
+      "sourceLines": [
+        68
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-002",
+        "FUNC-001",
+        "FUNC-002",
+        "FUNC-011"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-004",
+      "sourceLines": [
+        69
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-002",
+        "FUNC-006",
+        "FUNC-007",
+        "FUNC-011"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-005",
+      "sourceLines": [
+        70,
+        199
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-003",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-008",
+        "FUNC-009"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-006",
+      "sourceLines": [
+        71
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-010"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-007",
+      "sourceLines": [
+        72
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-010"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-008",
+      "sourceLines": [
+        73
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-004",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-009"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-009",
+      "sourceLines": [
+        74
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-001",
+        "FTR-002",
+        "FTR-003",
+        "FUNC-001",
+        "FUNC-002",
+        "FUNC-008",
+        "FUNC-011"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-010",
+      "sourceLines": [
+        75
+      ],
+      "definitionLines": [],
+      "disposition": "future-xfw-integration",
+      "blueprints": [],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-011",
+      "sourceLines": [
+        96
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-001",
+        "FTR-007",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-007",
+        "FUNC-016",
+        "FUNC-017"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-012",
+      "sourceLines": [
+        97
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-002",
+        "FTR-003",
+        "FTR-004",
+        "FTR-006",
+        "FUNC-001",
+        "FUNC-007",
+        "FUNC-008",
+        "FUNC-009",
+        "FUNC-010",
+        "FUNC-011",
+        "FUNC-014",
+        "FUNC-015",
+        "FUNC-018"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-013",
+      "sourceLines": [
+        98
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-001",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-007"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-014",
+      "sourceLines": [
+        99
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-001",
+        "FUNC-003"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-015",
+      "sourceLines": [
+        100
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-001",
+        "FTR-003",
+        "FUNC-002",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-008",
+        "FUNC-018"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-016",
+      "sourceLines": [
+        101
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-001",
+        "FUNC-002",
+        "FUNC-011"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-017",
+      "sourceLines": [
+        102
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-001",
+        "FUNC-002",
+        "FUNC-018"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-018",
+      "sourceLines": [
+        103
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-002",
+        "FTR-003",
+        "FTR-004",
+        "FTR-007",
+        "FUNC-001",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-006",
+        "FUNC-007",
+        "FUNC-008",
+        "FUNC-009",
+        "FUNC-010",
+        "FUNC-011",
+        "FUNC-017"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-019",
+      "sourceLines": [
+        104
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-004",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-009",
+        "FUNC-017"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-020",
+      "sourceLines": [
+        105
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-002",
+        "FUNC-005",
+        "FUNC-006",
+        "FUNC-007",
+        "FUNC-016",
+        "FUNC-018"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-021",
+      "sourceLines": [
+        106
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-001",
+        "FTR-002",
+        "FUNC-002",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-007"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-022",
+      "sourceLines": [
+        107
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-001",
+        "FTR-002",
+        "FTR-003",
+        "FTR-004"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-023",
+      "sourceLines": [
+        108
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-001",
+        "FTR-002",
+        "FTR-003",
+        "FTR-004",
+        "FUNC-001",
+        "FUNC-002",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-006",
+        "FUNC-007",
+        "FUNC-008",
+        "FUNC-009",
+        "FUNC-010",
+        "FUNC-011",
+        "FUNC-019"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-024",
+      "sourceLines": [
+        109
+      ],
+      "definitionLines": [],
+      "disposition": "future-xfw-integration",
+      "blueprints": [],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-025",
+      "sourceLines": [
+        76,
+        441
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-006",
+        "FUNC-005",
+        "FUNC-010",
+        "FUNC-011",
+        "FUNC-015"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-026",
+      "sourceLines": [
+        77,
+        415
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-005",
+        "FUNC-012"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-027",
+      "sourceLines": [
+        78,
+        415
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-005",
+        "FUNC-012"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-028",
+      "sourceLines": [
+        79,
+        407,
+        453
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-005",
+        "FUNC-013"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-029",
+      "sourceLines": [
+        85
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-006",
+        "FUNC-010",
+        "FUNC-014",
+        "FUNC-015"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-030",
+      "sourceLines": [
+        86
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-004",
+        "FTR-006",
+        "FUNC-011",
+        "FUNC-015"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-031",
+      "sourceLines": [
+        87
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-001",
+        "FTR-007",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-007",
+        "FUNC-009",
+        "FUNC-010",
+        "FUNC-014",
+        "FUNC-016",
+        "FUNC-017"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-032",
+      "sourceLines": [
+        88
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-007",
+        "FUNC-004",
+        "FUNC-010",
+        "FUNC-016",
+        "FUNC-017",
+        "FUNC-018"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-033",
+      "sourceLines": [
+        89
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-010"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-034",
+      "sourceLines": [
+        90
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-010",
+        "FUNC-019"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-035",
+      "sourceLines": [
+        115
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-006",
+        "FUNC-015"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-036",
+      "sourceLines": [
+        116
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-007",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-016",
+        "FUNC-017"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-037",
+      "sourceLines": [
+        117
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-007",
+        "FUNC-018"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-038",
+      "sourceLines": [
+        118
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-014"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-039",
+      "sourceLines": [
+        119
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-002",
+        "FTR-003",
+        "FTR-004",
+        "FTR-006",
+        "FTR-007",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-007",
+        "FUNC-009",
+        "FUNC-010",
+        "FUNC-011",
+        "FUNC-015",
+        "FUNC-017"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-040",
+      "sourceLines": [
+        206,
+        415
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-008",
+        "FTR-009",
+        "FUNC-010",
+        "FUNC-020"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-041",
+      "sourceLines": [
+        207
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-008",
+        "FTR-009",
+        "FUNC-020"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-042",
+      "sourceLines": [
+        208
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-008",
+        "FTR-009",
+        "FUNC-020"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-043",
+      "sourceLines": [
+        209
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-008",
+        "FTR-009",
+        "FUNC-020"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-044",
+      "sourceLines": [
+        224
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-003",
+        "FUNC-014"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-045",
+      "sourceLines": [
+        236
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-010",
+        "FUNC-014"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-046",
+      "sourceLines": [
+        237,
+        248,
+        423
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-010",
+        "FUNC-014"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-047",
+      "sourceLines": [
+        238
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-010",
+        "FUNC-014"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-048",
+      "sourceLines": [
+        245
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-003",
+        "FUNC-002",
+        "FUNC-005",
+        "FUNC-010"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-049",
+      "sourceLines": [
+        246
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-010"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-050",
+      "sourceLines": [
+        257,
+        423
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-005",
+        "FUNC-014",
+        "FUNC-016"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-051",
+      "sourceLines": [
+        258,
+        423
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-005",
+        "FUNC-014",
+        "FUNC-016"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-052",
+      "sourceLines": [
+        270,
+        407,
+        423
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-010",
+        "FUNC-011",
+        "FUNC-014"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-053",
+      "sourceLines": [
+        271
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-010",
+        "FUNC-011"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-054",
+      "sourceLines": [
+        272
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-005"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-055",
+      "sourceLines": [
+        281
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-001",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-021"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-056",
+      "sourceLines": [
+        282
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-001",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-007",
+        "FUNC-016",
+        "FUNC-018",
+        "FUNC-022"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-057",
+      "sourceLines": [
+        283
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-001",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-007",
+        "FUNC-016",
+        "FUNC-018",
+        "FUNC-022"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-058",
+      "sourceLines": [
+        295,
+        415
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-010"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-059",
+      "sourceLines": [
+        310,
+        338,
+        343
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-010",
+        "FUNC-003",
+        "FUNC-023",
+        "FUNC-024",
+        "FUNC-025"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-060",
+      "sourceLines": [
+        311
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-010",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-016",
+        "FUNC-017",
+        "FUNC-018",
+        "FUNC-024",
+        "FUNC-025"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-061",
+      "sourceLines": [
+        312
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-010",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-016",
+        "FUNC-021",
+        "FUNC-023",
+        "FUNC-024",
+        "FUNC-025"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-062",
+      "sourceLines": [
+        313
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-010",
+        "FUNC-023",
+        "FUNC-024",
+        "FUNC-025"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-063",
+      "sourceLines": [
+        314
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-010",
+        "FUNC-007",
+        "FUNC-018",
+        "FUNC-023",
+        "FUNC-024",
+        "FUNC-025"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-064",
+      "sourceLines": [
+        315
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-010",
+        "FUNC-023",
+        "FUNC-024",
+        "FUNC-025"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-065",
+      "sourceLines": [
+        317
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FTR-010",
+        "FUNC-024"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-066",
+      "sourceLines": [
+        350
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-026"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-067",
+      "sourceLines": [
+        351
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-026"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-068",
+      "sourceLines": [
+        60
+      ],
+      "definitionLines": [],
+      "disposition": "historical-boxui-reservation",
+      "blueprints": [],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-070",
+      "sourceLines": [
+        362
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-031"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-071",
+      "sourceLines": [
+        363
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-031"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-072",
+      "sourceLines": [
+        356,
+        364
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-031"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-073",
+      "sourceLines": [
+        461,
+        470
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-010"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-074",
+      "sourceLines": [
+        482
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-032"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "AT-075",
+      "sourceLines": [
+        483
+      ],
+      "definitionLines": [],
+      "disposition": "acceptance-specification-not-test-evidence",
+      "blueprints": [
+        "FUNC-032"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-001",
+      "sourceLines": [
+        34,
+        96
+      ],
+      "definitionLines": [
+        96
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-001",
+        "FTR-007",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-007",
+        "FUNC-016",
+        "FUNC-017"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-002",
+      "sourceLines": [
+        97
+      ],
+      "definitionLines": [
+        97
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-002",
+        "FTR-003",
+        "FTR-004",
+        "FTR-006",
+        "FUNC-001",
+        "FUNC-007",
+        "FUNC-008",
+        "FUNC-009",
+        "FUNC-010",
+        "FUNC-011",
+        "FUNC-014",
+        "FUNC-015",
+        "FUNC-018"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-003",
+      "sourceLines": [
+        98
+      ],
+      "definitionLines": [
+        98
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-001",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-007"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-004",
+      "sourceLines": [
+        99,
+        189,
+        285
+      ],
+      "definitionLines": [
+        99
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-001",
+        "FUNC-003"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-005",
+      "sourceLines": [
+        100,
+        211,
+        226,
+        286,
+        376
+      ],
+      "definitionLines": [
+        100
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-001",
+        "FTR-003",
+        "FUNC-002",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-008",
+        "FUNC-018"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-006",
+      "sourceLines": [
+        101
+      ],
+      "definitionLines": [
+        101
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-001",
+        "FUNC-002",
+        "FUNC-011"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-007",
+      "sourceLines": [
+        102
+      ],
+      "definitionLines": [
+        102
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-001",
+        "FUNC-002",
+        "FUNC-018"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-008",
+      "sourceLines": [
+        103,
+        182
+      ],
+      "definitionLines": [
+        103
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-002",
+        "FTR-003",
+        "FTR-004",
+        "FTR-007",
+        "FUNC-001",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-006",
+        "FUNC-007",
+        "FUNC-008",
+        "FUNC-009",
+        "FUNC-010",
+        "FUNC-011",
+        "FUNC-017"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-009",
+      "sourceLines": [
+        104
+      ],
+      "definitionLines": [
+        104
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-004",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-009",
+        "FUNC-017"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-010",
+      "sourceLines": [
+        105,
+        196
+      ],
+      "definitionLines": [
+        105
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-002",
+        "FUNC-005",
+        "FUNC-006",
+        "FUNC-007",
+        "FUNC-016",
+        "FUNC-018"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-011",
+      "sourceLines": [
+        106
+      ],
+      "definitionLines": [
+        106
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-001",
+        "FTR-002",
+        "FUNC-002",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-007"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-012",
+      "sourceLines": [
+        107
+      ],
+      "definitionLines": [
+        107
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-001",
+        "FTR-002",
+        "FTR-003",
+        "FTR-004"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-013",
+      "sourceLines": [
+        108
+      ],
+      "definitionLines": [
+        108
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-001",
+        "FTR-002",
+        "FTR-003",
+        "FTR-004",
+        "FUNC-001",
+        "FUNC-002",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-006",
+        "FUNC-007",
+        "FUNC-008",
+        "FUNC-009",
+        "FUNC-010",
+        "FUNC-011",
+        "FUNC-019"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-014",
+      "sourceLines": [
+        36,
+        109
+      ],
+      "definitionLines": [
+        109
+      ],
+      "disposition": "future-xfw-integration",
+      "blueprints": [],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-015",
+      "sourceLines": [
+        35,
+        115
+      ],
+      "definitionLines": [
+        115
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-006",
+        "FUNC-015"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-016",
+      "sourceLines": [
+        116,
+        427
+      ],
+      "definitionLines": [
+        116
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-007",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-016",
+        "FUNC-017"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-017",
+      "sourceLines": [
+        117
+      ],
+      "definitionLines": [
+        117
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-007",
+        "FUNC-018"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-018",
+      "sourceLines": [
+        118
+      ],
+      "definitionLines": [
+        118
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-014"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-019",
+      "sourceLines": [
+        119,
+        182
+      ],
+      "definitionLines": [
+        119
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-002",
+        "FTR-003",
+        "FTR-004",
+        "FTR-006",
+        "FTR-007",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-007",
+        "FUNC-009",
+        "FUNC-010",
+        "FUNC-011",
+        "FUNC-015",
+        "FUNC-017"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-020",
+      "sourceLines": [
+        209
+      ],
+      "definitionLines": [
+        209
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-009",
+        "FUNC-020"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-021",
+      "sourceLines": [
+        313,
+        334,
+        341
+      ],
+      "definitionLines": [
+        313
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-010",
+        "FUNC-023",
+        "FUNC-024",
+        "FUNC-025"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-022",
+      "sourceLines": [
+        314
+      ],
+      "definitionLines": [
+        314
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-010",
+        "FUNC-007",
+        "FUNC-018",
+        "FUNC-023",
+        "FUNC-024",
+        "FUNC-025"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-023",
+      "sourceLines": [
+        315
+      ],
+      "definitionLines": [
+        315
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-010",
+        "FUNC-023",
+        "FUNC-024",
+        "FUNC-025"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-024",
+      "sourceLines": [
+        317,
+        323
+      ],
+      "definitionLines": [
+        317
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-010",
+        "FUNC-024"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-025",
+      "sourceLines": [
+        351
+      ],
+      "definitionLines": [
+        351
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-026"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-026",
+      "sourceLines": [
+        60
+      ],
+      "definitionLines": [],
+      "disposition": "historical-boxui-reservation",
+      "blueprints": [],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-027",
+      "sourceLines": [
+        54,
+        363
+      ],
+      "definitionLines": [
+        363
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-031"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-028",
+      "sourceLines": [
+        54,
+        364
+      ],
+      "definitionLines": [
+        364
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-031"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "SR-029",
+      "sourceLines": [
+        55,
+        483
+      ],
+      "definitionLines": [
+        483
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-032"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UC-001",
+      "sourceLines": [
+        44
+      ],
+      "definitionLines": [
+        44
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-010"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "ReadDocuments"
+        ]
+      },
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UC-002",
+      "sourceLines": [
+        45
+      ],
+      "definitionLines": [
+        45
+      ],
+      "disposition": "current-definition",
+      "blueprints": [],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "NavigateDocuments"
+        ]
+      },
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UC-003",
+      "sourceLines": [
+        46
+      ],
+      "definitionLines": [
+        46
+      ],
+      "disposition": "current-definition",
+      "blueprints": [],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "BrowseWorkspace"
+        ]
+      },
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UC-004",
+      "sourceLines": [
+        47
+      ],
+      "definitionLines": [
+        47
+      ],
+      "disposition": "current-definition",
+      "blueprints": [],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "EditDocuments"
+        ]
+      },
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UC-005",
+      "sourceLines": [
+        48
+      ],
+      "definitionLines": [
+        48
+      ],
+      "disposition": "current-definition",
+      "blueprints": [],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "ScrollDocuments"
+        ]
+      },
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UC-006",
+      "sourceLines": [
+        49
+      ],
+      "definitionLines": [
+        49
+      ],
+      "disposition": "future-xfw-integration",
+      "blueprints": [],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UC-007",
+      "sourceLines": [
+        50
+      ],
+      "definitionLines": [
+        50
+      ],
+      "disposition": "current-definition",
+      "blueprints": [],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "ConfigurePreferences"
+        ]
+      },
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UC-008",
+      "sourceLines": [
+        51,
+        57
+      ],
+      "definitionLines": [
+        51
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-010"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "PublishPages"
+        ]
+      },
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UC-009",
+      "sourceLines": [
+        52
+      ],
+      "definitionLines": [
+        52
+      ],
+      "disposition": "current-definition",
+      "blueprints": [],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "UseFullscreen"
+        ]
+      },
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UC-010",
+      "sourceLines": [
+        53,
+        58,
+        299
+      ],
+      "definitionLines": [
+        53
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-010"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "ReadDiagrams"
+        ]
+      },
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UC-011",
+      "sourceLines": [
+        54,
+        59,
+        355
+      ],
+      "definitionLines": [
+        54
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-031"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "SelectGeneratedView"
+        ]
+      },
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UC-012",
+      "sourceLines": [
+        55,
+        476
+      ],
+      "definitionLines": [
+        55
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-032"
+      ],
+      "sdl": {
+        "path": "SDP/SDL/XFMD/XfmdDesktop.design",
+        "symbols": [
+          "BrowseSdpProject"
+        ]
+      },
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-001",
+      "sourceLines": [
+        34,
+        44,
+        66,
+        375
+      ],
+      "definitionLines": [
+        66
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-001",
+        "FTR-003",
+        "FTR-005",
+        "FUNC-001",
+        "FUNC-002",
+        "FUNC-008",
+        "FUNC-010"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-002",
+      "sourceLines": [
+        44,
+        67,
+        189
+      ],
+      "definitionLines": [
+        67
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-001",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-007",
+        "FUNC-016"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-003",
+      "sourceLines": [
+        47,
+        68
+      ],
+      "definitionLines": [
+        68
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-002",
+        "FUNC-001",
+        "FUNC-002",
+        "FUNC-011"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-004",
+      "sourceLines": [
+        47,
+        69
+      ],
+      "definitionLines": [
+        69
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-002",
+        "FUNC-006",
+        "FUNC-007",
+        "FUNC-011"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-005",
+      "sourceLines": [
+        45,
+        70,
+        196
+      ],
+      "definitionLines": [
+        70
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-003",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-008",
+        "FUNC-009"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-006",
+      "sourceLines": [
+        46,
+        71
+      ],
+      "definitionLines": [
+        71
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-010"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-007",
+      "sourceLines": [
+        47,
+        52,
+        72
+      ],
+      "definitionLines": [
+        72
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-010"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-008",
+      "sourceLines": [
+        48,
+        73
+      ],
+      "definitionLines": [
+        73
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-004",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-009"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-009",
+      "sourceLines": [
+        44,
+        45,
+        46,
+        47,
+        74,
+        367
+      ],
+      "definitionLines": [
+        74
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-001",
+        "FTR-002",
+        "FTR-003",
+        "FUNC-001",
+        "FUNC-002",
+        "FUNC-008",
+        "FUNC-011"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-010",
+      "sourceLines": [
+        36,
+        49,
+        75,
+        180
+      ],
+      "definitionLines": [
+        75
+      ],
+      "disposition": "future-xfw-integration",
+      "blueprints": [],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-011",
+      "sourceLines": [
+        50,
+        76,
+        427
+      ],
+      "definitionLines": [
+        76
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-006",
+        "FUNC-005",
+        "FUNC-010",
+        "FUNC-011",
+        "FUNC-015"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-012",
+      "sourceLines": [
+        77
+      ],
+      "definitionLines": [
+        77
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-005",
+        "FUNC-012"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-013",
+      "sourceLines": [
+        78,
+        409
+      ],
+      "definitionLines": [
+        78
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-005",
+        "FUNC-012"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-014",
+      "sourceLines": [
+        79,
+        392,
+        397,
+        447
+      ],
+      "definitionLines": [
+        79
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-005",
+        "FUNC-013"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-015",
+      "sourceLines": [
+        34,
+        50,
+        85
+      ],
+      "definitionLines": [
+        85
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-006",
+        "FUNC-010",
+        "FUNC-014",
+        "FUNC-015"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-016",
+      "sourceLines": [
+        50,
+        86
+      ],
+      "definitionLines": [
+        86
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-004",
+        "FTR-006",
+        "FUNC-011",
+        "FUNC-015"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-017",
+      "sourceLines": [
+        51,
+        87
+      ],
+      "definitionLines": [
+        87
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-001",
+        "FTR-007",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-007",
+        "FUNC-009",
+        "FUNC-010",
+        "FUNC-014",
+        "FUNC-016",
+        "FUNC-017"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-018",
+      "sourceLines": [
+        51,
+        88
+      ],
+      "definitionLines": [
+        88
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-007",
+        "FUNC-004",
+        "FUNC-010",
+        "FUNC-016",
+        "FUNC-017",
+        "FUNC-018"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-019",
+      "sourceLines": [
+        52,
+        89
+      ],
+      "definitionLines": [
+        89
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-010"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-020",
+      "sourceLines": [
+        90
+      ],
+      "definitionLines": [
+        90
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-010",
+        "FUNC-019"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-021",
+      "sourceLines": [
+        206,
+        392,
+        409
+      ],
+      "definitionLines": [
+        206
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-008",
+        "FUNC-010",
+        "FUNC-020"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-022",
+      "sourceLines": [
+        207
+      ],
+      "definitionLines": [
+        207
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-008",
+        "FUNC-020"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-023",
+      "sourceLines": [
+        208
+      ],
+      "definitionLines": [
+        208
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-009",
+        "FUNC-020"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-024",
+      "sourceLines": [
+        224
+      ],
+      "definitionLines": [
+        224
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-003",
+        "FUNC-014"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-025",
+      "sourceLines": [
+        236
+      ],
+      "definitionLines": [
+        236
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-010",
+        "FUNC-014"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-026",
+      "sourceLines": [
+        237,
+        248,
+        393,
+        417
+      ],
+      "definitionLines": [
+        237
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-010"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-027",
+      "sourceLines": [
+        238
+      ],
+      "definitionLines": [
+        238
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-014"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-028",
+      "sourceLines": [
+        245
+      ],
+      "definitionLines": [
+        245
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-003",
+        "FUNC-002",
+        "FUNC-005",
+        "FUNC-010"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-029",
+      "sourceLines": [
+        246
+      ],
+      "definitionLines": [
+        246
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-010"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-030",
+      "sourceLines": [
+        236,
+        257,
+        393,
+        417
+      ],
+      "definitionLines": [
+        257
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-005",
+        "FUNC-014",
+        "FUNC-016"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-031",
+      "sourceLines": [
+        258,
+        417
+      ],
+      "definitionLines": [
+        258
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-005",
+        "FUNC-014",
+        "FUNC-016"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-032",
+      "sourceLines": [
+        270,
+        393,
+        397,
+        417
+      ],
+      "definitionLines": [
+        270
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-005",
+        "FUNC-010",
+        "FUNC-011",
+        "FUNC-014"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-033",
+      "sourceLines": [
+        271
+      ],
+      "definitionLines": [
+        271
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-005",
+        "FUNC-010",
+        "FUNC-011",
+        "FUNC-014"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-034",
+      "sourceLines": [
+        272
+      ],
+      "definitionLines": [
+        272
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-005",
+        "FUNC-010",
+        "FUNC-014"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-035",
+      "sourceLines": [
+        281
+      ],
+      "definitionLines": [
+        281
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-001",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-021"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-036",
+      "sourceLines": [
+        282
+      ],
+      "definitionLines": [
+        282
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-001",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-007",
+        "FUNC-016",
+        "FUNC-018",
+        "FUNC-022"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-037",
+      "sourceLines": [
+        283
+      ],
+      "definitionLines": [
+        283
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-001",
+        "FUNC-003",
+        "FUNC-004",
+        "FUNC-007",
+        "FUNC-016",
+        "FUNC-018",
+        "FUNC-022"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-038",
+      "sourceLines": [
+        295,
+        393,
+        409
+      ],
+      "definitionLines": [
+        295
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-010"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-039",
+      "sourceLines": [
+        53,
+        310,
+        319,
+        327,
+        334,
+        341
+      ],
+      "definitionLines": [
+        310
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-010",
+        "FUNC-003",
+        "FUNC-023",
+        "FUNC-024",
+        "FUNC-025"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-040",
+      "sourceLines": [
+        53,
+        311
+      ],
+      "definitionLines": [
+        311
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-010",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-016",
+        "FUNC-017",
+        "FUNC-018",
+        "FUNC-024",
+        "FUNC-025"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-041",
+      "sourceLines": [
+        53,
+        300,
+        312
+      ],
+      "definitionLines": [
+        312
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FTR-010",
+        "FUNC-004",
+        "FUNC-005",
+        "FUNC-016",
+        "FUNC-021",
+        "FUNC-023",
+        "FUNC-024",
+        "FUNC-025"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-042",
+      "sourceLines": [
+        350
+      ],
+      "definitionLines": [
+        350
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-026"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-043",
+      "sourceLines": [
+        60
+      ],
+      "definitionLines": [],
+      "disposition": "historical-boxui-reservation",
+      "blueprints": [],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-044",
+      "sourceLines": [
+        54,
+        362
+      ],
+      "definitionLines": [
+        362
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-031"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-045",
+      "sourceLines": [
+        461,
+        465
+      ],
+      "definitionLines": [
+        461
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-010"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    },
+    {
+      "id": "UR-046",
+      "sourceLines": [
+        55,
+        482
+      ],
+      "definitionLines": [
+        482
+      ],
+      "disposition": "current-definition",
+      "blueprints": [
+        "FUNC-032"
+      ],
+      "sdl": null,
+      "sdui": null,
+      "evidenceReview": "pending"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "src/application/Application.cpp",
+      "sha256": "f3d1d23f6eede4c08255687f122ce57c8e013c4735debbef718ff4e865d02f19",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-005",
+        "FUNC-010",
+        "FUNC-011",
+        "FUNC-031",
+        "FUNC-032"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/Application.h",
+      "sha256": "a53bd097353d4c28146f9076723d4732ae939ff751531e6c7f25d59fd023f1dc",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ApplicationAppearance.cpp",
+      "sha256": "cec00f033aea10d93071ebc72485809b75ea5e7eef2e696cd9861a8627f31f62",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-005",
+        "FUNC-014"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ApplicationCommands.cpp",
+      "sha256": "c7fff1491ccf2816800aa687b9b10e1274a2376033e3b583725807610d7c929b",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ApplicationExport.cpp",
+      "sha256": "e09542bb744bec790c9b955c25d39f55c77ab072cad96407afe12f3d69a25f6e",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ApplicationIndex.cpp",
+      "sha256": "5065df63e909ad33a1f0fe262320642bbf52217704eb47b3710cf640fc686fca",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ApplicationOpening.cpp",
+      "sha256": "16a06fce76c190b51aae7ca223900e2a4f973669f6b35a93f13c160e12142354",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-003",
+        "FTR-005",
+        "FUNC-010",
+        "FUNC-031"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ApplicationWorkspace.cpp",
+      "sha256": "566b7a79fedd611a50a368bc6244d6f82735e495ead74524836bac928ac12282",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-010"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ApplicationZoom.cpp",
+      "sha256": "fa5becd6ff1384c88bd10c75defdd343e9048187d4ed0f2dba0d39ead61439c3",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/DesktopFileOpener.cpp",
+      "sha256": "79042907b7b95aafc78b7c4bcd5bcc14ef59ab5d06c7becee80bdf751d5d250b",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-010"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/DesktopFileOpener.h",
+      "sha256": "46c1555e750924b64b7ec7e0e01771c59917eae61fca904a44856ec849198e20",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/DiagramPainter.cpp",
+      "sha256": "4046cecc52aa4f3d8bd577b0f782d78b979fd897aa4ab68a451301bf76a8d532",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-010",
+        "FUNC-005",
+        "FUNC-016",
+        "FUNC-025"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/DiagramPainter.h",
+      "sha256": "1b7af50df294b10759c7a4c1b445311e876b8b13b7b70d523cfd0efc12366782",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/DisplayListPainter.cpp",
+      "sha256": "d56378a52c84ae4d113e4672373f4728a4c9108d9f57d343441abbe3950bcd76",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-005",
+        "FUNC-016"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/DisplayListPainter.h",
+      "sha256": "a14530c749e82156e51331a460955937b3588ec50965f6c4863287d0aba9137d",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/ExternalBrowser.cpp",
+      "sha256": "7644d080223465e42640ced7dc6cb3f9a1d6ca5136848747e1e14520f4605b06",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-014"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/ExternalBrowser.h",
+      "sha256": "a252b22dc7f10d6f15f0009063cacec889087bd893cf965141677bbbf0381991",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/FontCatalog.cpp",
+      "sha256": "96c6737eb22f5dc912bf9f42c0e147ec4a3b9995bf24e6637dc711b95c37bf88",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-005"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/FontCatalog.h",
+      "sha256": "9e34a0ef7d0c27410139183b09b7d87bf0ad79ba31320ac8ef5a18fd29a45413",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/FoxCairoCanvas.cpp",
+      "sha256": "4b1370e08417172ba4cbc8dd800bac88729e5421761ff5cbfea9dd0d198fe0ea",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-005"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/FoxCairoCanvas.h",
+      "sha256": "40edc35d46a3e5fd33e0ee44007505a390541f00657f9d7d9b35393e9bf86e41",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/FoxPreferencesStore.cpp",
+      "sha256": "0971228cf9d36c58983c8de190eea3bcf9a0b0d886c5f07d2d29b4ebf0ca855f",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-014"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/FoxPreferencesStore.h",
+      "sha256": "91014d96f07e7438ee37cd545cac41057930141685a157f8803c94adea9ec09d",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/FoxPreviewInput.cpp",
+      "sha256": "befe110157676b321f56038d0dcb7f5116e81c9d85bc6e2da8a664a23ad3b22a",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-005",
+        "FUNC-021"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/FoxRenderHost.cpp",
+      "sha256": "ee7a990090e3b785a9cd7a65e7be57ad5aab84472860f79344c91203dc1ee8b7",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-001",
+        "FTR-002",
+        "FTR-004",
+        "FTR-007",
+        "FUNC-005",
+        "FUNC-007",
+        "FUNC-009"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/FoxRenderHost.h",
+      "sha256": "0b565db7fa90595abeb9b7f2b3824823f71e25bf36d956d2137d7f2f5f4a533d",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/FoxScheduler.cpp",
+      "sha256": "d4d2638452f648fe73f766f5aff08f3dbb0dd3fbf11eb436f095b5e9729f7a44",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-002",
+        "FUNC-006"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/FoxScheduler.h",
+      "sha256": "8a946789a9f4ca88e604b8942cb6a1bbca02ae76d064dc875d27d771f6552d1b",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/FoxWheelScrollBar.cpp",
+      "sha256": "7be16e87b0aa24def51242fe9865df7b5552986cd4b906a42936f0c1aea8b2fb",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-005",
+        "FUNC-010",
+        "FUNC-011",
+        "FUNC-015"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/FoxWheelScrollBar.h",
+      "sha256": "4c5c676c3e494100e6eb8e7f3ffafbc18238d00cfff5b746d9c3ffc254eafbd9",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/FoxWindowMode.cpp",
+      "sha256": "f8bd3e3ae1e69e5f407062415a7312f067bf8a3793c12ccdc663c4bab3c0d716",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-010"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/FoxWindowMode.h",
+      "sha256": "078df2eb8ab117265a84fd10c2025f093b9858941583d5ccf8d5e04ca168f0da",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/IScheduler.h",
+      "sha256": "1694847282e8bcbae6d2c095fd1c9f9f13adbbe5e6757b3e60e2b729748fe920",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/PdfOutput.cpp",
+      "sha256": "3e512d1bab7c48a1561979a1f32f037ab63c6ecea4adcc569f16e02431719805",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-018"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/PdfOutput.h",
+      "sha256": "f36dbb51466e09a0876237d8ea50183c9d2993d361f53d4585f5251f1ba6d877",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/SharedTextMetrics.cpp",
+      "sha256": "9e0eb90b10cac71b9efcee4b357f1a2142f9a96d974958edd5efe93a42120005",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-005",
+        "FUNC-016"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/SharedTextMetrics.h",
+      "sha256": "09909d44f5546487bcb33b651b4ebd00e0349979efd86277fb7e9a3223be2f4b",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/SvgDiagramCache.cpp",
+      "sha256": "a3a264261ebdcedafd592599c27e23375995fab74643e52c5c92a54fd090bc77",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-025"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/SvgDiagramCache.h",
+      "sha256": "657eff701e1e64db058f849753c8afe404e3d93642896751b741a45261cf2731",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/ViewTransform.cpp",
+      "sha256": "fb9cc2142cdf5e553d5309a8ec9cedc8c008573c5f88ab8586a614b54b08b6f2",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-005"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/adapters/ViewTransform.h",
+      "sha256": "585c1aa7940fa9873ad20b1a4eeb8ea8aa2f9ba9fafbc08e99dd5192a05dcf5e",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/build/BuildVersion.cpp",
+      "sha256": "90f98bea9b7ab7bfa67c2d3aaaffec91a0634850b4433cdf94c66e3e5d732d0b",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-026"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/build/BuildVersion.h",
+      "sha256": "eb2cd11827e1ce23b40c785cb173d0136f9471f69d31d93ba647020fe5d23f72",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/commands/CommandRouter.cpp",
+      "sha256": "efd68f5a4beb7a20cc539461be21466d54b3866f4ea733e6607ed0558c5aa10e",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-010"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/commands/CommandRouter.h",
+      "sha256": "f352c4758f8f08ff37dc023f9af7e8ae4d73463a73ab23b720d2022314cdc4a2",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/composition/DiagramServices.cpp",
+      "sha256": "680c24a79557005ea3c0b355d860844839a04fff8944afaa134b9b50249bb244",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/composition/DiagramServices.h",
+      "sha256": "93643334508dd0e5f52535ee827876dd9ccb1c9c9b1714dac492cf272811e32a",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/composition/mermaid/Cargo.toml",
+      "sha256": "0bdef7d3b78d8acbe69a4b83466d4a0d93e7709e4dfbce426501f8c6947303ae",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/composition/mermaid/src/lib.rs",
+      "sha256": "144c191b4442eb1d430192b61a4d1e30853ed7dbdd867b57659ee15c58375ed7",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/diagrams/DiagramCache.cpp",
+      "sha256": "175550b64d8b3b01b688747b9b890ae1724c5b9a29e143962d959b8d2c41715a",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-025"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/diagrams/DiagramCache.h",
+      "sha256": "de414c24605ff47bd8a56e5942b6c91fd9ef0a4fa688d8bd9bff17ca61e5d978",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/diagrams/DiagramPreparation.cpp",
+      "sha256": "3bd2ae18c16bc6a2c16e41b61b0e8d3b598a0eae1df833fab23d4575c3a418c6",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-010",
+        "FUNC-007",
+        "FUNC-018",
+        "FUNC-025"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/diagrams/DiagramPreparation.h",
+      "sha256": "3e935d7a805e965d3c9808939c6d337fef243dde53e7624a9073c9e6a9c79212",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-025"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/document/DocumentCoordinator.cpp",
+      "sha256": "a1d3ecbc6fe3e88009a760d727086e6609ba1870983975dbe56204d30525d238",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-001",
+        "FTR-003",
+        "FUNC-001",
+        "FUNC-008"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/document/DocumentCoordinator.h",
+      "sha256": "5bac68aa209b98f78254c487dacc492aa9414f8efd224ce11c22a1f2d8fe3ba8",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/document/DocumentSession.cpp",
+      "sha256": "0a3efd395d2082ca8134029218e959966e578651b4a9088dce35772be2556cc0",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-001",
+        "FUNC-011"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/document/DocumentSession.h",
+      "sha256": "22511c10c215ae180546a478ba21557ebe21930ecf57ba77e44bcef54aa6f7ca",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/document/EditController.cpp",
+      "sha256": "6319ef0ab8ecf57a43bd87169d2920e9bca6030aaf640724c26c819fb8d75869",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-002",
+        "FUNC-011"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/document/EditController.h",
+      "sha256": "16a5df0bcb21d086399292f125dbf31e518361be9d505b6fa2d2a60682c2435c",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/document/TextProjection.cpp",
+      "sha256": "d620fc2dd5691687b298dbe915f916d133a096ae6e7e93ef66f6447221d91cc9",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-011"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/document/TextProjection.h",
+      "sha256": "bbf9bd5243584cff063d16ed0fcaab9a7437be4f440a80e6d27b9e50561b8fcf",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/export/ExportCoordinator.cpp",
+      "sha256": "fa45607ed3b329de0a29e8e46201ef3c2dd603e8878d0daa2be20a89810ac4a1",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-007",
+        "FUNC-010",
+        "FUNC-018"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/export/ExportCoordinator.h",
+      "sha256": "d8a9ee7c8936519fe323c66f22864666cc1cb996d4c62d624837beee380f40e4",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/export/ExportPipeline.cpp",
+      "sha256": "b7010e5315653c2ed0fd80e42a1fe10a59c9629f60ddd3df888331fd49c44a40",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/export/ExportPipeline.h",
+      "sha256": "027572f88b98929b9ea535a4c15771de3cca7661f0cb5d23b24731d55e598f7b",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/index/DocumentIndex.cpp",
+      "sha256": "7ec3e525ed4abddb0076281ca3bf8ea3a0a0caf1ceff00e935ab06574eb42983",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-008",
+        "FTR-009",
+        "FUNC-020"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/index/DocumentIndex.h",
+      "sha256": "393da8fb9dc59ecbd314338df2037851baeb5f24fd122dd1e860d6171d1410bb",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/index/ReferenceWorker.cpp",
+      "sha256": "87c51f0ba5a959ad86538fb124f6c840e518d1fedb725480ac9f08091186e2d0",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-009",
+        "FUNC-020"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/index/ReferenceWorker.h",
+      "sha256": "5e151493661b06b14b1319036b60e8b5d8379c8664a27ef8d136f94a181ed757",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/io/FileOpenPolicy.cpp",
+      "sha256": "44585b80906a3b1529cd26d66d9b5bb62c154196cd236de518257fc3a32a69a6",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-002",
+        "FUNC-010"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/io/FileOpenPolicy.h",
+      "sha256": "592bc2a68b97df0ea1fa4aac05adf7b139cb56359d885ef93bfce4ba96725f7f",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/io/InputPolicy.cpp",
+      "sha256": "6b73b3b4dd27da34bef07680cc31c638cfe17270225abc04d8ad8807413b1d92",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-002"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/io/InputPolicy.h",
+      "sha256": "df02e867618b2e0e9ab1824b65330eccaaf1af3e8e0b910a738c87f0d67228af",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/io/LocalFileStore.cpp",
+      "sha256": "92eab8e5fe919eb9132a09598d3ef305f9b3bbaedf37f15ddcc64b305d2fadd2",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-001",
+        "FUNC-002",
+        "FUNC-020"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/io/LocalFileStore.h",
+      "sha256": "49737bf720dde323793c134e8df1bf41652bcd8b5be3be06723c9e32a113221b",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/io/PdfFilePublisher.cpp",
+      "sha256": "aeb3177c5c6d2f4f0652d6ed731b7331f28b2a910e2eb9d0ab8ac9ab0db679b6",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-018"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/io/PdfFilePublisher.h",
+      "sha256": "0ce0e425846468ef82e79a37e4a5f28513c5b45e4ed1ce308edf89428ee1962c",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/main.cpp",
+      "sha256": "00503a7f77d84097d4d6d6748b8f3570886b12f9f0b956832307b6e43112ac56",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/media/CairoVisual.h",
+      "sha256": "7ffad8b8cfb94a86e044275a39f24ccaba6f6b76dc284d3a71ed009f0b814aa9",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/media/EmbeddedVisuals.cpp",
+      "sha256": "fa40d18d873392f563b19e0a3d932d58bec5674c3a2c48399ffa5e861c5bd4e9",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-007",
+        "FUNC-018",
+        "FUNC-022"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/media/EmbeddedVisuals.h",
+      "sha256": "01fd2e85df63bcc45166bc803e0a1f5eae3106888b5eb6e97cb7498418d2d1be",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/media/GifBudget.h",
+      "sha256": "6e2003d9b8bbdc98d065ba40c6e1fcceda006bae4d948025c602e073073bc15d",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/media/ImageDecoder.cpp",
+      "sha256": "d35feb6954f5e7d491ccc0a308e14c975fcbc9e5d163326b2a42ec9fac8a04c2",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-022"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/media/ImageDecoder.h",
+      "sha256": "90dd5edf1a5dc0d952157a386caff98451582caf4a91fa6af4412843cb230c46",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/media/MathTypesetter.cpp",
+      "sha256": "e1afc8e35752a0f3ae924969ea61fb2aaa3dcc5608f056e9ff21600708ed6482",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-022"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/media/MathTypesetter.h",
+      "sha256": "43b4837436b863c06a5580658d2660103412c2db5a3d446b98b51fb349775319",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/navigation/DocumentViews.cpp",
+      "sha256": "112015760c9f6fb05634e121e85429324af634b633b453994ebd4aaf49b9524b",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-031"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/navigation/DocumentViews.h",
+      "sha256": "a7fc6141acf1657161a482a780ffa491083de0cc06b8975b1b3e3e8e301e4ef3",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/navigation/HistoryStore.cpp",
+      "sha256": "b5a4534d614f767a789a2a58979508b692150a24ca252d466d5afc81aac4bcbb",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-008"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/navigation/HistoryStore.h",
+      "sha256": "91c80ca8649fed915f0b4b1d9a265363afc2c9160e8bb56aff3d9ebf49f1a15d",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/navigation/LinkResolver.cpp",
+      "sha256": "205a7df07466d0ab467616f56ccedc0ee4dd79e1a03691318d10a84931d8024a",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-008",
+        "FUNC-022"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/navigation/LinkResolver.h",
+      "sha256": "7543a44d9bca60b5113500eaf669cbdb780896bc788b668f513872b406fd6b4f",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/navigation/NavigationCoordinator.cpp",
+      "sha256": "2db63836daa75ab8731c16dd27e0c8cecc90dc4577ff8ddf3f64e6161748780c",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-003",
+        "FTR-008",
+        "FTR-009",
+        "FUNC-008",
+        "FUNC-031"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/navigation/NavigationCoordinator.h",
+      "sha256": "5150e2fdec5898079ff9ae31d0413b169148a8185d1b70c6fc10e21bb4ea147c",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/navigation/NavigationPanel.cpp",
+      "sha256": "e7a5ca3d02a22735e62d2ef915d6199138f266f28cc281deb09b03d8f9a4ee45",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-031"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/navigation/NavigationPanel.h",
+      "sha256": "51967d1bcd4cfdf2bf1330ef48eeb9820502842c2582aa152f56f70688c6d717",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/navigation/WindowEndpoint.cpp",
+      "sha256": "ee11f5c3aefb5196ff87784ca697c47fd826cf6d2bb4bfa8b00b637d53129d3c",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-031"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/navigation/WindowEndpoint.h",
+      "sha256": "caeb1fa468a1282f12fe21c2a7517a2de351d9a46262bf2412bde3b49354614d",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/preferences/Appearance.h",
+      "sha256": "6f56ce2038296eb15ae5c8455034c140c4ab36057ac816b6e31f725d630ef1cf",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/preferences/PreferencesService.cpp",
+      "sha256": "410b54909797e662e5b097fca4e13a60f98263cccf91f6ab74fa6c76db97d1f3",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-014"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/preferences/PreferencesService.h",
+      "sha256": "3a1839e0486976fe8cb66b661286a1da331581f0e9c289f95b7630eeb1f72f1c",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-006",
+        "FUNC-010",
+        "FUNC-014"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/preferences/ReadingColors.cpp",
+      "sha256": "10332ee872ef58f3693cd591cba29a7dab8d727c43de2f4ca8a315214d2ca730",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-016"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/preferences/ReadingColors.h",
+      "sha256": "d5a1dbbdfea771c6a96541e5469fc6cf4346a61ea2011565757c26d601352536",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/preview/ParserWorker.cpp",
+      "sha256": "f0bd14b3f264ac4f0544f5a7bde9d9f583293923f541d56c825140ab54b0cb49",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-002",
+        "FUNC-007"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/preview/ParserWorker.h",
+      "sha256": "e133f1c57dc5e2154b521fb9ed026ca79c38fb389a90dfd561b67e18ea232753",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/preview/PreviewCoordinator.cpp",
+      "sha256": "078950fac615c66c568e0b9390bad613cb244b87ce56e1d8993bbce3d4d3584b",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-001",
+        "FTR-002",
+        "FTR-007",
+        "FUNC-007",
+        "FUNC-020"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/preview/PreviewCoordinator.h",
+      "sha256": "cc8619c5a2141e91bce6bb4ee2512ab71b780c742f9c7b2d9bec7df5a7b54b47",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/preview/PreviewSelection.cpp",
+      "sha256": "4c4bbf72fe7941699d5142dc911bd4370d16b93052e1cc2cb8a84236d66824dc",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-021"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/preview/PreviewSelection.h",
+      "sha256": "dab91d96b71d85140bb9b9b9512fd26f9c01c2a17eb79feec03f81ecc69da548",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/scroll/AnchorMapper.cpp",
+      "sha256": "dec7857e687ec5f8725335345071c53a6e0d274e59ee3aadd52fd488e611530b",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-004",
+        "FUNC-009"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/scroll/AnchorMapper.h",
+      "sha256": "1f302c6aab2d21ad4460ce4d43665f343d2e44552641fee2631aeed19261836f",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/scroll/ScrollCoordinator.cpp",
+      "sha256": "422611be6aac4b8a9f6a3c01b6c9b535abb873b87a2efc4fe22ae8e2e9ebfbf8",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-003",
+        "FTR-004",
+        "FTR-006",
+        "FUNC-008",
+        "FUNC-009"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/scroll/ScrollCoordinator.h",
+      "sha256": "7e622404d5ed7c4c5ef06383b77d1c07f40dfd8b6a2656c162d8df758ff5455f",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/scroll/ScrollDynamics.cpp",
+      "sha256": "4cbcd3fc6a9bc0e13e7961a1ce737d6c13b822fa2d6e2d3874cee26235d87836",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-006",
+        "FUNC-011",
+        "FUNC-015"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/scroll/ScrollDynamics.h",
+      "sha256": "bc1777b446e4df7f077525e0926586d159f437f40bb4378e4d8da4bc47d52cc4",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/sdp/SdpNavigation.cpp",
+      "sha256": "629f66d7e90a44ff6d0ad3ac3d5c35a047f5b29d2c4fdcddd2f9ef04bacea442",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-032"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/sdp/SdpNavigation.h",
+      "sha256": "fde9b2f5ba64bb4057ef6e9b7cf9995c1231275b5a17dc0be3eb895b28dd6d33",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/sdp/SdpProtocol.cpp",
+      "sha256": "cb49ed7f8de808a15f3d4f3b80fc467830ef822fb5d351d3c070a4656333f517",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-032"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/sdp/SdpProtocol.h",
+      "sha256": "f7dcc1215cd3e5264d30f174d02315ca81e9eefb3cc7938f6870d078d8b87334",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/sdp/SdpToolJob.cpp",
+      "sha256": "a6a2a3ea68627f6bfd5e2c27c806dfb9547de8d681262489d858825525e478ad",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-032"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/sdp/SdpToolJob.h",
+      "sha256": "2516cea1c862afdd09102484b03c15919de9348265090f6915ad7ad1e714b922",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/sdp/SdpWatch.cpp",
+      "sha256": "a5ac4e2b0ab71bd39df2618a7c63f0b29708281355fccc6cf5bed858639122d3",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-032"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/sdp/SdpWatch.h",
+      "sha256": "a9b46a6d050d95e1ae05e5b49159ce107ffd7414b74f32a838d3190b98259394",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/sdp/rust/Cargo.toml",
+      "sha256": "0c5eca1cac942321e3c15cf4b65cbf38177ecba441c12a1595c3ed6acf5b5518",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/sdp/rust/src/lib.rs",
+      "sha256": "cfdbc2226d9d969b92cf6178f00b9687e5af0e51fe7696072c55d46d1609729c",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/DocumentZoomInput.h",
+      "sha256": "4db9b3fff399f9a1e25ebf97edb74fb8ad9a3ff7bd7734287b98b9447fc0ea39",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/EditorPresentation.cpp",
+      "sha256": "866c9b84a36322edfe56b2b9fd2777e1096f6a1535ccb1c80e5ce622ebfdf3b5",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-010",
+        "FUNC-011"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/EditorWidget.cpp",
+      "sha256": "21566ea7d3fb79236c12222105aba3ef570e888307b63ae44aa4639cd8bde7c5",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-004",
+        "FUNC-009",
+        "FUNC-011"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/EditorWidget.h",
+      "sha256": "be0bbc2e1f8479f5d9df320f11d32e3adf4c9020c4a24ec9b863bac0302f1718",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/FavoritesPanel.cpp",
+      "sha256": "2df968698b4d9073ddcb83f40e672e1496dca2af07bdbd4d97ac98efd2ebf6ab",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-010"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/FavoritesPanel.h",
+      "sha256": "e2200952aa4caf28727a13bf561f1ca1c05002d8c6956addc4e5604c901ff70a",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/IconData.h",
+      "sha256": "ad28c706721a35d5546762425de77bb3feb0ec9e0ab48d6ec466c647c5140c59",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-019"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/IconResources.cpp",
+      "sha256": "b969688cc4c351625a70197a21ec1bd450e69cc29b02ac4b6c5f32c5c4889f88",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-019"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/IconResources.h",
+      "sha256": "d1530433f0d1ec9c71163a71f267088c5d480eda20a847c2fecb54e92c8b4577",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/IndexPanel.cpp",
+      "sha256": "80082b0e3c83814bfc209a9a9141bf29f2734125d97f6aed7e246f6db864445d",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-008",
+        "FUNC-020"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/IndexPanel.h",
+      "sha256": "22c2b3bb515f66b10b40e318fbc029d996f44b946033faa56f772e50990da808",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/NavigationTree.cpp",
+      "sha256": "b91e822d8b3a920b478f31cb28a28f7a2f0286d82329525f8716286ca73d3de7",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/NavigationTree.h",
+      "sha256": "8fb72e8b47d215a5d1b1943086786bddb1cc08f8de9a327d3521f2e709aa74b6",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/OpenPathDialog.cpp",
+      "sha256": "4239a13f08f38cda75d099866f9e7f13e272b083f8153d5d7d68bdb3d2bbc42c",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-010"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/OpenPathDialog.h",
+      "sha256": "42a54d52c24f1269789a6cab050664d07b9107cd96df1c27eb1eb1284a7f5944",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/PathContextMenu.cpp",
+      "sha256": "be24a01081a122ad9953a200e9a2dcae852b573a068c7135b3e20ea91c66cb01",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-010"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/PathContextMenu.h",
+      "sha256": "13c9da3bc119844e4aca9b5698cf5c039bb674cc4f1ce7b0c42e25d6e0fec60a",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/PreferencesDialog.cpp",
+      "sha256": "0ffc8a9703bed2862ce135bcddc97d1eed44fd178a60b25ef41f0248cbc58429",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/PreferencesDialog.h",
+      "sha256": "81c92722fd37a7ab3ac7c2b7b5a607820a0cd47f9ef5c05a97eeacf124377da7",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/PreferencesPages.cpp",
+      "sha256": "c794ed0644fcfef91e8cd04d737308dcad95c368560f36da7fd395b8e27786dc",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/RecentFilesPanel.cpp",
+      "sha256": "5d8d52e48a122d7f54c6f90441eb7791dffa5bf16213b8675dcd72e3eb3021e8",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-010"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/RecentFilesPanel.h",
+      "sha256": "7527838c22331e69967c9c3ee22bc53fd851e172476c2630fa203653c7c71cd1",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/SdpPanel.cpp",
+      "sha256": "3ca097bdba77e786626d656d62e07a7ddfe964248de8a023c9699cfe2eadcb63",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-032"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/SdpPanel.h",
+      "sha256": "8e73ee78f36519402b37c1edad4de20c4fee5888b1ff1e3e9ec87024a7324184",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/SidebarPathList.cpp",
+      "sha256": "f7d3135e0baae7ee97da0cb65b8127c6e5605c5f6e5e092772a765040145c162",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-010"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/SidebarPathList.h",
+      "sha256": "33df527a94b502554c96a98d8282a3b33e5b524e60940302eab9479a8e70502c",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/SidebarWidget.cpp",
+      "sha256": "0eb3af63a18baeea6bff1685977503c36b58bc5ef305a8e82e41435eace24535",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-005",
+        "FUNC-010",
+        "FUNC-013"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/SidebarWidget.h",
+      "sha256": "a80d9db9caab1d94c9bdc75d021cf438eee41a50734f2e1797c0de6b0eb20f27",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/TreeActivation.h",
+      "sha256": "ce675f23353756b4cbdbc93dbfec6f9a60a623cabcb16051fc5edf028cae146d",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-010"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/ViewModeController.cpp",
+      "sha256": "cef1cf4a63b1ccbb017360aa15e28fccb302ceabe7e7c9250682ea23434b25b1",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-010"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/ViewModeController.h",
+      "sha256": "c47a05d05625fb6e2ad3330c076b797f8955d7c90c0ea22bf7ee27fb8039b5c4",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/WorkspacePanel.cpp",
+      "sha256": "7b27fd23b11bfc82bea0ae40d5f28ee7c1c15dfa9c7a3c803e651f8a8dfd31f0",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-005",
+        "FUNC-010",
+        "FUNC-013"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/WorkspacePanel.h",
+      "sha256": "0324030aeedf806d320e80ff6c45a16fe5ce10724042b422bd6b00cabb099349",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/XfmdToolbar.cpp",
+      "sha256": "7986aa057d15cd48be974fc4dd9533a458f136c446af5940f2b20c56065dd1fc",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/XfmdWindow.cpp",
+      "sha256": "aaf35218ac1e83477e86644a2f6f309253331c8a8ff099462bba9447f70818d4",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-010",
+        "FUNC-019"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/XfmdWindow.h",
+      "sha256": "777f0cd5d4fcd33e8318ae3ebb3821e808aa15b819cbe0a77adaace4ca42feb9",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/controls/ButtonPainter.cpp",
+      "sha256": "5b2b6bc97ce74a5c62bc994833e5862ed7ddf9f81f7e138e15fb0860498f7a4f",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/controls/ButtonPainter.h",
+      "sha256": "4d980370d8f0d63ed8aa621bae6804f7fc9bff5f2d473b358a1d01c5b293f988",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/controls/CompactToolbar.cpp",
+      "sha256": "8a044294186ef6f0453947c775b14233d488e6ecf45fc933cdeef0edd13c5455",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-010"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/controls/CompactToolbar.h",
+      "sha256": "5d6430fe587614fdc72f0837aa079f39e1de824b9b7a832c127c6befbb3d8c12",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/controls/DocumentPathField.cpp",
+      "sha256": "be152cecc997c70a6f9f25d07c8cb2bf7dce42e9ce0e0db32c35cf6359457047",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-010"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/controls/DocumentPathField.h",
+      "sha256": "7d1b8b36f854fb6a84f4d54c2a50e40d9570deaf729f8ed86a535a5059cf6b07",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/controls/PreviewColorControls.cpp",
+      "sha256": "edf80d5cae48102350a54160df6028f4345442d20d67eaa086f60587c41ffbf2",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-014"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/controls/PreviewColorControls.h",
+      "sha256": "7e4905de309bcef6fb3a70402a6dbd3305fd2e5636f8adc59d065272687461e5",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/controls/PreviewControls.cpp",
+      "sha256": "719e65864a3422b129cfabceefd6e96d44a9a582640d08e5e12be3cc53818a24",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/controls/PreviewControls.h",
+      "sha256": "fa1d0420c7aa66aa942fe60b29ac1b64b8268c9d50a026f0b279077810fc954e",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/controls/ReadingColorPopup.cpp",
+      "sha256": "65e00c2b30c498e6a76d02fa1dcddd9e0efdaa2a59b209dcaa13e2591297c460",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-010",
+        "FUNC-014"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/controls/ReadingColorPopup.h",
+      "sha256": "b5c5fc8256c0791fc9a80e328b8197c20b25b636b652910ccb9df95d68a366b4",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/controls/ThemeButton.cpp",
+      "sha256": "156107352b8eca2c18f721f33feeba07b2e32fa3c7f7f96669617b17d8de39d4",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/controls/ThemeButton.h",
+      "sha256": "8b7448c20124610871faafd2eb7d7eeab1c63e332ef42b2329d331a2c180dedd",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/controls/UiButton.cpp",
+      "sha256": "aa0d69a45260ce8e4720e716cbba29e915e0db9d9f903f1d92409894ebbfa129",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-010"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/controls/UiButton.h",
+      "sha256": "1e97377051412253dd321619ee3ff464ccc1904c7b087f5f72468132e02ec546",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/controls/UiLayout.cpp",
+      "sha256": "947e13d92af4495b7fbc704c411d463b793b118d46e7f45a99ece4066ce97a79",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/controls/UiLayout.h",
+      "sha256": "aa843193ddcb2c2fd3350b0a1bbc1b1b07193812ca5f54e1814a64729f25a7ea",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/style/IconCatalog.cpp",
+      "sha256": "878e9f4206e31b6e4d36d21c7d3cd40e2dddabd232a4fecf1232ffdc2e851b1c",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/style/IconCatalog.h",
+      "sha256": "2ea8aa08f40fc7ab0452a4732c2cb437ee4038a0489e0335b063d4c11a257290",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/style/ThemeProfiles.cpp",
+      "sha256": "451b0df6e3a96b0399107d8995116aeb9e165e4d6daa0bd125351b32c17d870a",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/style/ThemeProfiles.h",
+      "sha256": "4661a783d41b6718d7a866eb3ae8ae60e8b1a1069f433ffbbd882786362a2558",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/style/UiContext.cpp",
+      "sha256": "79168696c08527257ee80b14d8f3b2be8409ce1b57873c28f3d14c10d3b77d95",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-014"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/style/UiContext.h",
+      "sha256": "aeab9fe2cddcf4533613549eab42c0c58d8cf8b52841f193d64dc4b395e3efb4",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/ui/style/UiStyling.cpp",
+      "sha256": "bc7cd942a0af4f662d33178a18bc6232c0cf3b7a9ddce2639a247eefd0515a2a",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-010"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/workspace/DirectoryScanner.cpp",
+      "sha256": "488312185fc868a64dabad4fcb3068855dcbf920ef81d68c756a4187e5ff2be2",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-013"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/workspace/DirectoryScanner.h",
+      "sha256": "e99075e4ef243aaccf8e36878997a5e0438e0ca7fce01d8ce29c1c179b5c1d53",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/workspace/FileNameFilter.cpp",
+      "sha256": "eb461a5f49249e4fc03cd034114ad29967b7dbf32a139baf3315c39785cc2209",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FUNC-013"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/workspace/FileNameFilter.h",
+      "sha256": "5d6667eb62db66488c155de3d93c66fb0c594b14681f3e9f7e10658b8cebf53f",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/workspace/WorkPathHistory.cpp",
+      "sha256": "92cfc9f8f66aeab08ea636696d3c8d02ac6d8b82070b41a6682c20436f7a7091",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-005",
+        "FUNC-012"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/workspace/WorkPathHistory.h",
+      "sha256": "dd9e53e99fe442c10fabcaaeb3dac13f5e6c91addc19cd0100b4743c9a634dd1",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/zoom/DocumentZoom.cpp",
+      "sha256": "4430e73d77ec38dbe6e6dcb0f666ff0a33bea2d24d8090746beaf5e0679e8b63",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [
+        "FTR-007",
+        "FUNC-005",
+        "FUNC-010",
+        "FUNC-015"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/zoom/DocumentZoom.h",
+      "sha256": "4c2840ff5272387f7e4b77b2e6ab4018f572a05e19be6aef6859897c581151f2",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/application/zoom/ZoomMode.h",
+      "sha256": "1fd29ab54db5f2858f9b5cdd8309dc52db1dbf7c22befb5827c32f9384eed35f",
+      "sourceLayer": "application",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/DocumentTypes.h",
+      "sha256": "52ac49628cd7105a1ce5f0cde491d359d6128f09b2c757559f7794afce5518a6",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/IInterpreter.h",
+      "sha256": "2ea6b2b0ad1253ce353303c2c69f5a644f6d66f2732333dc15a027d2b7877c3a",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [
+        "FTR-001",
+        "FUNC-007",
+        "FUNC-020"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/IRenderer.h",
+      "sha256": "0a0df0cb0504046b6814e8261337a6099cd7389c40f20d5584e29db7cebb36f0",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [
+        "FTR-001",
+        "FTR-003",
+        "FUNC-007",
+        "FUNC-018"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/ITextMetrics.h",
+      "sha256": "68d36c9027602fc34f2d8a9a30d7a1434b58b9392acc9d0bd35d747ae75407b3",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [
+        "FUNC-004"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/ITextShaper.h",
+      "sha256": "e2077390341fcec22f444785851e89dde5ffda3669b520dadc92baaa6d599b1f",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [
+        "FUNC-016"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/LayoutProfile.h",
+      "sha256": "788720c6ed5aa5a73055714c01b04d41f2a581973bf8ff23528a90e13b6312e4",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [
+        "FUNC-017"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/PageLayout.h",
+      "sha256": "ec2e68bacf9acde24013540bad0b11dbc398009cdf412e425dec338d231ad72f",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [
+        "FUNC-017"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/RenderFrame.h",
+      "sha256": "f6c40ebc40a5ffd5889c97e5977966d603e1d8f51a0aa3e567808cf4020e66ba",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/SemanticDocument.h",
+      "sha256": "8408c3858ca3d205879b38edc1a22c5046b5c760074dbfe29408931172ca4870",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/VisualResource.h",
+      "sha256": "c966cec272e9d3134294685b1e7fd9403c7cad75656f0edc20df41f976eea4f7",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/diagram/DiagramAbi.h",
+      "sha256": "47d4beafc3b853820361a1113a69854043fb08ab20472a343d097ae8fc3cbc00",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/diagram/DiagramLimits.h",
+      "sha256": "19f7f13bc9fd76f50aadf73713c956ea8de07dcb1688717816d271e9f154df9a",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/diagram/DiagramModel.h",
+      "sha256": "61246ed55798c2f3f0362032bb9e1e5c54e8c80d2325710091d5fcd79b875958",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/diagram/DiagramScene.h",
+      "sha256": "50efec17d3c05fb77da0f344242c609c0ff3f3d6269b5cfedf579de0fe3eebca",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/diagram/DiagramWire.h",
+      "sha256": "ffa1beaf9bd659948dc440a541738cc27191ff73618e3177b53f2ec1dc8181e2",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/diagram/IDiagramInterpreter.h",
+      "sha256": "bbe6fcb2483a3097312e3cb0287ab59cf4adc051260d695843cffce7d4031df8",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [
+        "FTR-010"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/diagram/IDiagramLayout.h",
+      "sha256": "3f7e9e961353eab619702c651490694aed7d1f83097c734bac492a3a366bfa5a",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [
+        "FTR-010",
+        "FUNC-025"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/diagram/SemanticDiagram.h",
+      "sha256": "f846f090fb7e4286d43f8158e8f27e1c136e24016c6e0057e97b942636c23740",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/diagram/SequenceModel.h",
+      "sha256": "98197dce0000ee91542ba3aebb26868ad83e2a84094e50e73577108529b5b6d0",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/diagram/rust/Cargo.toml",
+      "sha256": "0189ddb976453ac0672c7e0ad072f9f438501cb551531e3e8a1f308b7a9c18dc",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/diagram/rust/src/lib.rs",
+      "sha256": "f7faf6d5906ccba31380f47b120c99044d7eab0fa5cbf6c58e7f68481fa2fbae",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/diagram/rust/src/semantic.rs",
+      "sha256": "e204f7256b858b3042bebfa80ad92aa35b3690e5c1474632a4b461758d7debe3",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [
+        "FUNC-023"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/diagram/rust/src/semantic_architecture.rs",
+      "sha256": "6697566d18445f659f53b41d1e7fdf4af62937398c939282a077369f5267fcf5",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/diagram/rust/src/semantic_charts.rs",
+      "sha256": "aafe84a2de3efe9db80dde4fa63a5954775be903d5f8aafbda20f20ba3fd43e7",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/diagram/rust/src/semantic_planning.rs",
+      "sha256": "f91b88dcc4638862e82c07cf67314a107c223df6fbf0b62bdb29362fcce342ba",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/diagram/rust/src/sequence.rs",
+      "sha256": "66afa281dd3b311f6507c0977076639c06e2b55c5f476256857656b7b32cd51a",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/contracts/diagram/rust/src/wire.rs",
+      "sha256": "294ab0f2ae4af8d4a01beefc77c94ac5d6676dfcecc0c05fdaf8e8856e3625af",
+      "sourceLayer": "contracts",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/CmarkInterpreter.cpp",
+      "sha256": "0bf554b3c4c99b1ef9386bc430a1394b40d463e41dd03956df043989f72affde",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [
+        "FUNC-003"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/CmarkInterpreter.h",
+      "sha256": "fd26270c3d4b47ce0025640ecec313dce576f5ae18b8a9a5c2ad01738ac1a12f",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/MathSyntax.cpp",
+      "sha256": "d5a3273610131f1c6ce3d6d5ad95ac7cfda647b08d3ad6a2358a8a435ad3f943",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [
+        "FUNC-003"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/MathSyntax.h",
+      "sha256": "a4fc04f88823957990f98bd0b51ddd40af6adc5533460cd42a063cef0bad9cbb",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/ModelBuilder.cpp",
+      "sha256": "b40caa5879c10d1a1834fe0decb4090ef5361d5c3c51e6587709df64993003f1",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [
+        "FUNC-003"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/ModelBuilder.h",
+      "sha256": "d17d6d422800041d3e27f6cc33c559e6c83fd461bd1e5677934a408d555688de",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/SourceMapBuilder.cpp",
+      "sha256": "db77715639c335b5a1c39fb01a347131fef1dd54631f5225779ec017e85ed519",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [
+        "FUNC-003"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/SourceMapBuilder.h",
+      "sha256": "3f9d0783f9c477e35b4b3fab1886e3f614dd53c875ff2869de89d5c686ba41aa",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/TableModelBuilder.cpp",
+      "sha256": "eb8e85573c7f6244006454cf3a31674b99f75522da23ec0c7ce57bf68a573ff9",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [
+        "FUNC-003"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/MermaidBlockBuilder.cpp",
+      "sha256": "490d66f44d2c3125b56ae4caf3b57cb0af1635eb3092102afd55377a84662d2e",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [
+        "FTR-010",
+        "FUNC-003",
+        "FUNC-023"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/MermaidBlockBuilder.h",
+      "sha256": "980d753ca11c137f9f1c3de913e7b7805e1044b89074149761646e956a12313d",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/MermaidInterpreter.cpp",
+      "sha256": "bb763904b44658ae06eb4743d526eb5413e104816de02a438432376eab223788",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [
+        "FUNC-023"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/MermaidInterpreter.h",
+      "sha256": "eaee72dd48740e12102e42ad441a9b23ccb288ec815dad28b703d9fd23c458a2",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/rust/Cargo.toml",
+      "sha256": "85a3e9859aa2998f84d88ba10a592e5c6f1296ab26ce9924f3c274a4e9417a82",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/rust/src/lib.rs",
+      "sha256": "933bd6ef2c55de9d8b394c6e1b95d59881cc69836fb45a5958c80299b6a232f7",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/rust/src/model.rs",
+      "sha256": "9bd2c7f3ddb71d5629042445777874cb967d10167567c21dff5727837f568f44",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [
+        "FUNC-023"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/rust/src/profile.rs",
+      "sha256": "b68ccc91f5453807873d32e6e4f982b199e73a5f0f6993ee0a0186f2762f01d7",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [
+        "FUNC-023"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/rust/src/semantic/architecture.rs",
+      "sha256": "e34e4c679577cc1b833c5b90bc59f379bd93bb6d320b698458b979f6512257a5",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/rust/src/semantic/architecture_tests.rs",
+      "sha256": "b5079e30b1183d4123f73c45feee3151b4a7cc2505fcb6fa8d468879fa2c7fb1",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/rust/src/semantic/block.rs",
+      "sha256": "9513cf1484976f5b7381e72912d6c2bb269173b8010fc6a535044778720a9f7b",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/rust/src/semantic/c4.rs",
+      "sha256": "85c85ea72a3589027ca453c489638cfb3e25093835043cd47c8ab0e68ccb541a",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/rust/src/semantic/chart_tests.rs",
+      "sha256": "04d6f34e1b1009976e619599cf795aaccb32ba36671a181508721166d14c74bd",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/rust/src/semantic/charts.rs",
+      "sha256": "72ab51dbb42b46f895c71ea085ef856c57de5032ee841c7e9010940e8a1cfaba",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/rust/src/semantic/git.rs",
+      "sha256": "f1a2db04b55ca21823d7925aba337110245a3cf434d33b566f03fcb28196c1ac",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [
+        "FUNC-023"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/rust/src/semantic/mod.rs",
+      "sha256": "4666ad41bd086f25e26253d7d4967cd9656fc3b951790f09dd5e83f7c91e023e",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/rust/src/semantic/planning.rs",
+      "sha256": "9b08ca6e6a976bf75d69d1f637c012e19f6d7aefe06905353656a358b0ca640b",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/rust/src/semantic/planning_tests.rs",
+      "sha256": "b291457f8a179860be516c058e538948b796c90feb1aa3353e881c8280cd1303",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/rust/src/semantic/requirements.rs",
+      "sha256": "21b7f1cf377b35c72765e994aa960bf7093eadfea98cc1cd81ae6fe6bad33318",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/rust/src/semantic/state.rs",
+      "sha256": "e9460c99dff2d1b7b0536d434e5405bf0d38799c98ded97977642ade98d57e4b",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/rust/src/semantic/trees.rs",
+      "sha256": "f1a294180d2306e5383d49bee360b8d909c0141d2f1bdeea03abd8b7e16de50e",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [
+        "FUNC-023"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/rust/src/semantic/types.rs",
+      "sha256": "d2f914924995737641097027fa8631b1e6c1b531398aff5dcb0117b54d51db01",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/rust/src/semantic/zenuml.rs",
+      "sha256": "d0c23637d8ef2c9d29cfa8ece3a0e4e103abb4fb661cc5c94497f840d3932896",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [
+        "FUNC-023"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/interpreter/mermaid/rust/src/sequence.rs",
+      "sha256": "2d8f6c00c5dec8e371bba54d080342b56eb417332b198da7eb6b8dbcc47aa654",
+      "sourceLayer": "interpreter",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/BlockLayout.cpp",
+      "sha256": "311c9dc7eda2eda043522c9cc0f661b0d04947a486df7aa746e59d249a7db5f1",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FUNC-004"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/BlockLayout.h",
+      "sha256": "165ce1af89b6d1c15a4d1068ecf73b053eb4c810347c76b948085a3a159c98fa",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/HitTester.cpp",
+      "sha256": "c49ec412e3c99dfaa06f8bfc290faea144c6fa7bd0e565ccbc0a8d55840948f9",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FUNC-004"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/HitTester.h",
+      "sha256": "fe2d11b87053191bad280b2374026909860315faff7927eeb89a103de0f29e88",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/InlineLayout.cpp",
+      "sha256": "25d97e2464789b0cfa055f06c5df244d96ebc30de68793563139a6a3d8069333",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FUNC-004"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/InlineLayout.h",
+      "sha256": "6aaa006d13320a662242b6ddc63913d0192144371da4958d39760cffea6fafee",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/LinkMarker.cpp",
+      "sha256": "3c138ed08b1f01dc02db6ef73bba0b8ae6b2bff31f7f7740553f95481c4a836c",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FUNC-004"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/LinkMarker.h",
+      "sha256": "044a9788c0b15d1d17ac278cfaa978b56509c0f27d8a1529087ef59dbb569939",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/MarkdownRenderer.cpp",
+      "sha256": "45ff4aecffcd65de36cc1ae4892e5950098c7d174d735e2963f781cb8f37ad99",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FUNC-004"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/MarkdownRenderer.h",
+      "sha256": "44b2de02e788c8a5fec9fb4a782f96eeb32c301388cf4eb7d1b95e4d8446a5de",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/PageAnchorIndex.cpp",
+      "sha256": "f601e6bbdc177d380f657d8ad6d81629fa15f2e4be587570343fdd183c88beef",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FUNC-017"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/PageAnchorIndex.h",
+      "sha256": "213c962bfe4d841027cdf2d86469632a90e665d6b93ac25f6c336221d3465000",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/PageBreaker.cpp",
+      "sha256": "ed8a744d6c266344e4d11c049918cacf75b21a889f4770c5e8fb229dcc640a52",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FUNC-017"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/PageBreaker.h",
+      "sha256": "f404d0b0541837b60050806629030c22c01ac899b06a0c3968e8d67d5c3cb0f0",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/PageComposer.cpp",
+      "sha256": "7aabd1d115fdb9ada36c1d0e93fdfea3f9f88abee771a6ca23130df997bcbe4d",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FTR-007",
+        "FUNC-004",
+        "FUNC-017"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/PageComposer.h",
+      "sha256": "0fae9ac1984c389680f9c18bbe073b8d9a4ad559606bfc69965a17d94ab78b2d",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/TableLayout.cpp",
+      "sha256": "ddc2c757e7b054bdaa202a59681374997effb45bc7f345004a8534e9caad3d03",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FUNC-004"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/TableLayout.h",
+      "sha256": "b18143f5addb3a1e98275d528def263f485b897f229b3282428f8568ba02098b",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/diagram/DiagramPlacement.cpp",
+      "sha256": "e45ca6b973cc1c5af3d58d74d4e277239389e3636dcea80ff1086479c8e837a7",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FTR-010",
+        "FUNC-004",
+        "FUNC-017",
+        "FUNC-021",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/diagram/DiagramPlacement.h",
+      "sha256": "cf3cacfdf3dd877e45eaa7c9a62357eddc9effa4f0082b08ec2067bbfbd394a7",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/diagram/DiagramTextLayout.cpp",
+      "sha256": "454d95deee5c18af364cc59b692d9cc58c55eccc286cd92d7dfd1a9b7657acc0",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/diagram/DiagramTextLayout.h",
+      "sha256": "9bc8080b2fe905cbe3c103989e9f72de5077de1def61119c522822740ca9bb8d",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/diagram/MermaidDiagramLayout.cpp",
+      "sha256": "818f3d46f0bf3a767779489faf866c1485b7105ccfc1c995d1902b3a548d42fb",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/diagram/MermaidDiagramLayout.h",
+      "sha256": "c9a14afbc7e883ade253465d7ac89445955147b6f1b3b814fd9564106349d7a5",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/diagram/rust/Cargo.toml",
+      "sha256": "4266d2b473c1fd73feffc56d3f254a80ec9c71d42bd9142c2bb81c7d0cfe3e0e",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/diagram/rust/src/lib.rs",
+      "sha256": "95507265db453038992a75ea3f15cb71c89f0b55e1ee62863308baa0c69173d0",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/diagram/rust/src/model.rs",
+      "sha256": "245f76f902cd94c26f699a15ca4f14beb30107e8e26d3aa5e91e804f01d05259",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FUNC-023"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/diagram/rust/src/semantic/architecture.rs",
+      "sha256": "9113f91578163f428e472a0d2fbb8d9e4bd100305a0e9ab80c178afd1a5b7616",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/diagram/rust/src/semantic/block.rs",
+      "sha256": "934544d27338ef96eeb6a1a7a9539814b12f45d373da8170d2d9ef3249b48390",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/diagram/rust/src/semantic/c4.rs",
+      "sha256": "969d1ca0e09ccd3390c6ae3849f42e9c85ac93c9c08f1673c3930b992d0f6445",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/diagram/rust/src/semantic/charts.rs",
+      "sha256": "e52e0947a4220506cf37893bf35c4d760a2ee938448faaadc6a6db2e58036328",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/diagram/rust/src/semantic/mod.rs",
+      "sha256": "91450d7fb9210078acaf9b00c6b18b642883051b2e0dc308fb7e98a6b7068371",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/diagram/rust/src/semantic/planning.rs",
+      "sha256": "c503e813d9f415cfddb3809af505cde91c5b2a8d52c0dbe7f6a063b9f8f024d6",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/diagram/rust/src/semantic/state.rs",
+      "sha256": "d6d38c2b7cc6c9964623e671377e6f5b422995f4b107984a535fc2c045ed5f3e",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/diagram/rust/src/semantic/structures.rs",
+      "sha256": "a3c83ab17a19c3b3359820ee0d9b241615fe3504a7a6332926abc0277e5fcbbf",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/diagram/rust/src/semantic/types.rs",
+      "sha256": "ff647bbc105d4f1dd600364a63bc054ae177ee50bcaf30b9d59b9e4462d118dd",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/diagram/rust/src/sequence.rs",
+      "sha256": "7e2204ead7d1bb320fe60464751941f7a92cb6e185b2891b89df9e9c19890dde",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [
+        "FUNC-023",
+        "FUNC-024"
+      ],
+      "semanticOwnershipReview": "pending"
+    },
+    {
+      "path": "src/renderer/diagram/rust/src/text_metrics.rs",
+      "sha256": "e72174e8dc702ba2f985c4d192e4865f805ce842eeb1943749a3f3f4bcb62470",
+      "sourceLayer": "renderer",
+      "blueprintFilenameMentions": [],
+      "semanticOwnershipReview": "pending"
+    }
+  ],
+  "reservationsAbsentFromDefinitions": [
+    "FTR-011",
+    "FUNC-027",
+    "FUNC-028",
+    "FUNC-029",
+    "FUNC-030",
+    "UR-043",
+    "SR-026",
+    "AT-069"
+  ]
+}

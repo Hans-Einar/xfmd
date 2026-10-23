@@ -1,0 +1,14 @@
+{
+  "dataset": 3,
+  "datagram": 0,
+  "database": 0,
+  "contract": 44,
+  "variant": 0,
+  "field": 14,
+  "diagrams": 3,
+  "nodes": 9,
+  "edges": 6,
+  "sourceSpansInBounds": 358,
+  "allInventoryNamesInPdf": true,
+  "pdfMethod": "layout text plus bbox first-column reconstruction of wrapped contract/field identifiers"
+}

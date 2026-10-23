@@ -1,0 +1,8 @@
+flowchart LR
+    n_DocumentStorage["DocumentStorage (unit)"]
+    n_Documents["Documents (unit)"]
+    n_StorageCalls["StorageCalls (channel)"]
+    n_StorageCalls -->|receiver| n_DocumentStorage
+    n_DocumentStorage -->|sender| n_StorageCalls
+    n_StorageCalls -->|receiver| n_Documents
+    n_Documents -->|sender| n_StorageCalls

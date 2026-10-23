@@ -1,0 +1,6 @@
+flowchart LR
+    n_InterpretationCallsContract["InterpretationCallsContract (contract)"]
+    n_ParseSnapshot["ParseSnapshot (message)"]
+    n_ParsedSnapshot["ParsedSnapshot (message)"]
+    n_InterpretationCallsContract -->|permits| n_ParseSnapshot
+    n_InterpretationCallsContract -->|permits| n_ParsedSnapshot

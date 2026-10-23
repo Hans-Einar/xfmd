@@ -1,0 +1,129 @@
+VP09 — Dataset, Datagram and
+persistent Database
+Revision:
+9fb5d8d1fc95f22386d89e6ebcd0c283be4fb59d7a6782f56a9f0ae735759f79.
+
+Explicit holders, sources, contracts, variants, fields and projections.
+
+
+Data origin and holder: MemoryData
+                                 holds                                            upholds
+
+
+    Desktop (unit)                            MemoryData (dataset)                                   DataRecord (contract)
+
+
+
+Source facts: f0027, f0045.
+
+Declarations: DataRecord, Desktop, MemoryData.
+
+
+Data origin and holder: StoredData
+                                                                      holds
+
+                          owns
+  Desktop (unit)                         PersistentStore (database)           StoredData (dataset)             DataRecord (contract)
+                           from
+                                                                                                     upholds
+                            upholds
+  WireFamily (datagram)                  WireShape (contract)
+
+
+
+
+Source facts: f0029, f0047, f0054, f0056, f0057.
+
+Declarations: DataRecord, Desktop, PersistentStore, StoredData, WireFamily,
+WireShape.
+
+
+Scope and notation
+Dataset neighborhoods retain explicit from, holds, owns and upholds relations.
+Database means a persistent data source, not SQL tables, keys, transactions, a
+storage engine or deployment. Unit-held data has no declared persistence. These are
+definitions, not runtime instances. Contract completeness is a source assertion, not
+execution evidence. Optional fields do not imply null, empty, false or zero. Projections
+do not specify executable transformations. Encoding and bit positions belong to VP10.
+
+
+Data definitions
+  • MemoryData (Dataset): holder Desktop; contract DataRecord; Unit-held;
+    persistence unspecified. Source facts: f0027, f0045.
+
+  • StoredData (Dataset): holder PersistentStore; contract DataRecord;
+    Database-backed persistence. Source facts: f0047, f0054.
+
+  • WireFamily (Datagram): logical source Dataset StoredData; contract WireShape.
+    This does not inherit the source's holder or persistence. Source facts: f0056, f0057
+    .
+
+
+Database register
+Database              Responsible owner      Held Datasets            Source facts
+
+PersistentStore       Desktop                StoredData               f0029, f0047
+
+UnusedStore           Desktop                No Datasets declared     f0030
+
+
+
+Contract register
+All Contracts are included, even unused/open definitions. Open a Contract in the
+navigation tree for its structure diagram. Counts describe explicit shape membership
+(fields / variants / permitted messages), not runtime coverage.
+
+Contract              Completeness Fields / variants / messages             Source fact
+
+ChannelBody           closed            1/0/0                               f0009
+
+ChannelEvents         closed            0/0/2                               f0011
+
+DataRecord            closed            1/0/0                               f0020
+
+UnusedShape           open              0/0/0                               f0055
+
+WireShape             closed            0/1/0                               f0059
+Variant register
+Variant                                     Contract                      Source fact
+
+WireVariant                                 WireShape                     f0058
+
+
+
+Field register
+Field             Shape owner       Value type Presence Source facts
+
+ChannelValue      ChannelBody       text         required   f0010, f0018, f0019
+
+DataValue         DataRecord        text         required   f0021, f0022, f0023
+
+WireValue         WireVariant       bytes        optional   f0060, f0061, f0062
+
+
+
+Shape membership
+Shape                            Relation Member                          Source fact
+
+ChannelBody                      has-field ChannelValue                   f0010
+
+ChannelEvents                    permits    ChannelNotice                 f0012
+
+ChannelEvents                    permits    ChannelUpdate                 f0013
+
+DataRecord                       has-field DataValue                      f0021
+
+WireShape                        defines    WireVariant                   f0058
+
+WireVariant                      has-field WireValue                      f0062
+
+
+
+Projection responsibilities
+Projects relates Functionality, Dataset and Datagram together; it does not imply a
+lossless conversion or a runtime call.
+Functionality Dataset     Datagram     Responsible   Source facts
+                                       owner
+
+Display      StoredData   WireFamily   Desktop       f0028, f0038
+

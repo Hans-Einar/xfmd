@@ -1,0 +1,12 @@
+flowchart LR
+    n_CheckCurrentMapping["CheckCurrentMapping (message)"]
+    n_MapSourceAnchor["MapSourceAnchor (message)"]
+    n_RetainDocumentAndAnchor["RetainDocumentAndAnchor (message)"]
+    n_SetEditorAnchor["SetEditorAnchor (message)"]
+    n_UserPreviewScroll["UserPreviewScroll (message)"]
+    n_ViewportChangesContract["ViewportChangesContract (contract)"]
+    n_ViewportChangesContract -->|permits| n_CheckCurrentMapping
+    n_ViewportChangesContract -->|permits| n_MapSourceAnchor
+    n_ViewportChangesContract -->|permits| n_RetainDocumentAndAnchor
+    n_ViewportChangesContract -->|permits| n_SetEditorAnchor
+    n_ViewportChangesContract -->|permits| n_UserPreviewScroll

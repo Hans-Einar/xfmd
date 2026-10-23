@@ -1,0 +1,57 @@
+sdui 0.2;
+# Static compositions of current FOX states; no native callbacks or live widgets.
+toolbar = <button("Sidebar"), button("Open"), button("Save"), button("Editor"), button("Split"), button("Preview"), button("Back"), button("Forward"), button("Light / Dark")> {gap=0.01};
+path = <"Path", documentPath=input("Document path / filename filter", value="/project/README.md") {x=1fr}> {x=fill};
+pathDirty = <"Path *", documentPath=input("Document path / filename filter", value="/project/README.md") {x=1fr}> {x=fill};
+fileHeader = <"**Files** / Index", button("R"), button("M↓"), button("↑"), button("Open")>;
+indexHeader = <"Files / **Index**", button("R")>;
+files = [header=fileHeader; body="""### Folder tree (state sample)
+- /project
+  - docs
+  - README.md
+
+### Folders / Files / Favorites
+Selected: **Favorites**
+
+- docs — folder
+
+---
+
+- README.md — file
+
+See NAV-03 for context actions.
+
+This is a static list sample.
+"""] {x=1fr, padding=0.015};
+index = [header=indexHeader; body="""### Chapters (state sample)
+- Overview
+- Usage
+
+### References (state sample)
+- Markdown
+- Hyperlinks
+"""] {x=1fr, padding=0.015};
+navigator = [header="### Generated-view navigator"; body="""Registered project: xfmd-pilot
+
+- Goals and contributions
+- Ownership and allocation
+
+Separate navigation document.
+
+Not a sidebar tab.
+"""] {x=1fr, padding=0.015};
+document = [header="### README.md"; body="""# XFMD documentation
+
+Current document preview — representative content.
+
+The real application retains source anchors, history and its rendering pipeline.
+"""] {x=2fr, padding=0.015};
+dirtyDocument = [header="### README.md — unsaved changes"; body="""# XFMD documentation
+
+Edited content remains in the main document after rejected generated delivery.
+
+The editor/preview surface is represented here; it is not a working editor.
+"""] {x=2fr, padding=0.015};
+FilesClean = [header=toolbar; path; [files, navigator, document] {x=fill, y=1fr}; footer="Static model: clean document, Files selected. Native interaction is not bound."] {x=fill, y=fill, font=14, padding=0.015, gap=0.01};
+FilesDirtyRejected = [header=toolbar; pathDirty; [files, navigator, dirtyDocument] {x=fill, y=1fr}; footer="Save or discard edits before generated navigation"] {x=fill, y=fill, font=14, padding=0.015, gap=0.01};
+IndexClean = [header=toolbar; path; [index, navigator, document] {x=fill, y=1fr}; footer="Static model: Index selected; Files-only Markdown / Up / Open controls are hidden."] {x=fill, y=fill, font=14, padding=0.015, gap=0.01};

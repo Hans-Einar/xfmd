@@ -1,0 +1,10 @@
+flowchart LR
+    n_DocumentNotifications["DocumentNotifications (channel)"]
+    n_Documents["Documents (unit)"]
+    n_GeneratedViews["GeneratedViews (unit)"]
+    n_Navigation["Navigation (unit)"]
+    n_Preview["Preview (unit)"]
+    n_Documents -->|sender| n_DocumentNotifications
+    n_DocumentNotifications -->|receiver| n_GeneratedViews
+    n_DocumentNotifications -->|receiver| n_Navigation
+    n_DocumentNotifications -->|receiver| n_Preview

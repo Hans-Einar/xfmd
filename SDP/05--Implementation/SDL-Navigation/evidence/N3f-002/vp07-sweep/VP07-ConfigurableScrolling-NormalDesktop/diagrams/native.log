@@ -1,0 +1,3 @@
+Parsed nodes=12 edges=18 groups=0
+Scene nodes=12 edges=18 groups=0
+Libavoid; one spacing retry after non-orthogonal edge 11 [(477.0104064941406, 403.30827713012695), (913.8437194824219, 211.26335525512695)]; failed routing/labels attempt 56.598558ms, included in total time; libavoid transaction 1: 10.733759ms; label leaders omitted: 1

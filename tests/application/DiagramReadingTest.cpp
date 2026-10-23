@@ -13,6 +13,40 @@ void run() {
   auto parser = DiagramServices::interpreter();
   SharedTextMetrics metrics;
   MarkdownRenderer renderer;
+  // The page-height scale roundtrip can overshoot by one ULP (2065.6 on A4).
+  auto tallScene = std::make_shared<DiagramScene>();
+  tallScene->width = 400; tallScene->height = 2065.6; tallScene->fonts = metrics.fontSetId();
+  SemanticDocument tallDocument; SemanticBlock tallBlock; tallBlock.kind = BlockKind::Diagram;
+  tallBlock.diagramScene = tallScene; tallDocument.blocks.push_back(tallBlock);
+  PaperSpec paper;
+  auto tallFrame = renderer.layout(tallDocument, {paper.width, 0, {LayoutMode::Paged, paper}}, metrics);
+  CHECK(tallFrame->pages.slices.size() == 1);
+  CHECK(tallFrame->flow.lines.front().height <= paper.height - 2 * paper.margin);
+  CHECK(tallFrame->runs.front().bounds.height <= paper.height - 2 * paper.margin);
+
+  // Explicit full-size reading preserves measured geometry and enables overflow.
+  // Pagination must still fit the exact same scene, regardless of this view flag.
+  tallScene->width = 1800;
+  const auto fitted = renderer.layout(tallDocument, {360, 1}, metrics);
+  LayoutProfile fullSize;
+  fullSize.fullSizeDiagrams = true;
+  CHECK(!(fullSize == LayoutProfile{}));
+  const auto readable = renderer.layout(tallDocument, {360, 1, fullSize}, metrics);
+  CHECK(!(readable->key == fitted->key));
+  CHECK(readable->runs.front().visual == fitted->runs.front().visual);
+  CHECK(readable->runs.front().bounds.width == tallScene->width);
+  CHECK(readable->runs.front().bounds.height == tallScene->height);
+  CHECK(readable->contentWidth >= readable->runs.front().bounds.x + tallScene->width + 24);
+  CHECK(fitted->contentWidth == 360 && fitted->runs.front().bounds.width < 360);
+  fullSize.mode = LayoutMode::Paged;
+  const auto fullPaged = renderer.layout(tallDocument, {360, 1, fullSize}, metrics);
+  fullSize.fullSizeDiagrams = false;
+  const auto fitPaged = renderer.layout(tallDocument, {360, 1, fullSize}, metrics);
+  CHECK(fullPaged->pages.slices.size() == fitPaged->pages.slices.size());
+  CHECK(fullPaged->runs.front().bounds.width == fitPaged->runs.front().bounds.width);
+  CHECK(fullPaged->runs.front().bounds.height == fitPaged->runs.front().bounds.height);
+  CHECK(fullPaged->contentWidth == fitPaged->contentWidth);
+
   SourceSnapshot source{
       {4, 1}, "```mermaid\nflowchart LR\nA[Blåbær] -->|Ready| B{Ærlig}\n```", {}, false};
   auto model =

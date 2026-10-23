@@ -1,0 +1,10 @@
+{
+  "package": "/home/warloc/git/xfmd-sdl-navigation/build-ui/release-0.6/xfmd-0.6.0-Linux.tar.gz",
+  "package_sha256": "3bb8652c75fe6b18bb5593ffb946a1b8ca6448ec6c7f55aff92586328ead72e3",
+  "binary_sha256": "ead78e401c4d28e85cf624024caa2cabee8a4f765a6cdd3904b4279037ca4c84",
+  "version": "xfmd 0.6 sprint/009/phase/057-favorites:206+dirty",
+  "head": "41fa4948c5377edd792ba3f503e6b92b0fd4717a",
+  "dirty": true,
+  "file_count": 168,
+  "publication": null
+}

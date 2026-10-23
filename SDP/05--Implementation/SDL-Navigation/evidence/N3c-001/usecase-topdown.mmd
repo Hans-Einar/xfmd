@@ -1,0 +1,17 @@
+usecase-beta
+direction TB
+actor Reader("Reader")
+actor Editor("Editor")
+systemBoundary Viewer["Document viewer"]
+  Browse("Browse project")
+  Open("Open document")
+  Export("Export PDF")
+  Isolated("Independent use case")
+end
+Reader -- Browse
+Editor --> Open
+Editor --|> Reader
+Browse ..> : include Open
+Export ..> : extend Open
+Export --|> Browse
+Reader -- "include is plain text" --> Export

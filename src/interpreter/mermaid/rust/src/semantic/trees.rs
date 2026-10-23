@@ -56,12 +56,15 @@ pub fn parse(source: &str, d: &mut Diagram) -> Result<(), String> {
                         break;
                     }
                 }
-                parsed.unwrap_or((
-                    generated.clone(),
-                    text(line)?,
-                    "default".into(),
-                    String::new(),
-                ))
+                match parsed {
+                    Some(node) => node,
+                    None => (
+                        generated.clone(),
+                        text(line)?,
+                        "default".into(),
+                        String::new(),
+                    ),
+                }
             }
             21 => {
                 let (label, value) = line.rsplit_once(':').unwrap_or((line, ""));

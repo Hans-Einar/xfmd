@@ -1,0 +1,2123 @@
+[
+  {
+    "channel": "ContextInteraction",
+    "contract": "ContextInteractionContract",
+    "message": "CaptureContextTarget",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "NativeShell"
+    ],
+    "senders": [
+      "NativeShell"
+    ],
+    "source_facts": [
+      "f0074",
+      "f0108",
+      "f0110",
+      "f0546",
+      "f0549"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ContextInteraction",
+    "contract": "ContextInteractionContract",
+    "message": "DismissContextMenu",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "NativeShell"
+    ],
+    "senders": [
+      "NativeShell"
+    ],
+    "source_facts": [
+      "f0108",
+      "f0111",
+      "f0164",
+      "f0547",
+      "f0550"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ContextInteraction",
+    "contract": "ContextInteractionContract",
+    "message": "ReleaseKeyboardGrab",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "NativeShell"
+    ],
+    "senders": [
+      "NativeShell"
+    ],
+    "source_facts": [
+      "f0108",
+      "f0112",
+      "f0548",
+      "f0551",
+      "f0826"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "DiagramInterpretation",
+    "contract": "DiagramInterpretationContract",
+    "message": "ParseMermaidBlock",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Interpreter"
+    ],
+    "senders": [
+      "Interpreter"
+    ],
+    "source_facts": [
+      "f0126",
+      "f0128",
+      "f0486",
+      "f0487",
+      "f0611"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "DiagramLayoutCalls",
+    "contract": "DiagramLayoutCallsContract",
+    "message": "LayoutTypedDiagram",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Renderer"
+    ],
+    "senders": [
+      "VisualResources"
+    ],
+    "source_facts": [
+      "f0131",
+      "f0133",
+      "f0512",
+      "f0847",
+      "f0986"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "DiagramLayoutCalls",
+    "contract": "DiagramLayoutCallsContract",
+    "message": "TypedDiagramLaidOut",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "VisualResources"
+    ],
+    "senders": [
+      "Renderer"
+    ],
+    "source_facts": [
+      "f0131",
+      "f0134",
+      "f0848",
+      "f0943",
+      "f0985"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "DocumentCalls",
+    "contract": "DocumentCallsContract",
+    "message": "AdmitDocument",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Documents"
+    ],
+    "senders": [
+      "Navigation"
+    ],
+    "source_facts": [
+      "f0011",
+      "f0167",
+      "f0169",
+      "f0234",
+      "f0579"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "DocumentCalls",
+    "contract": "DocumentCallsContract",
+    "message": "DocumentOpened",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Navigation"
+    ],
+    "senders": [
+      "Documents"
+    ],
+    "source_facts": [
+      "f0167",
+      "f0170",
+      "f0198",
+      "f0235",
+      "f0577"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "DocumentCalls",
+    "contract": "DocumentCallsContract",
+    "message": "DocumentRejected",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Navigation"
+    ],
+    "senders": [
+      "Documents"
+    ],
+    "source_facts": [
+      "f0167",
+      "f0171",
+      "f0204",
+      "f0236",
+      "f0578"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "DocumentNotifications",
+    "contract": "DocumentNotificationsContract",
+    "message": "CommitVisit",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Navigation"
+    ],
+    "senders": [
+      "Documents"
+    ],
+    "source_facts": [
+      "f0103",
+      "f0191",
+      "f0193",
+      "f0237",
+      "f0580"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "DocumentNotifications",
+    "contract": "DocumentNotificationsContract",
+    "message": "DocumentChanged",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Preview"
+    ],
+    "senders": [
+      "Documents"
+    ],
+    "source_facts": [
+      "f0173",
+      "f0191",
+      "f0194",
+      "f0238",
+      "f0689"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "DocumentNotifications",
+    "contract": "DocumentNotificationsContract",
+    "message": "GeneratedDocumentChanged",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "GeneratedViews"
+    ],
+    "senders": [
+      "Documents"
+    ],
+    "source_facts": [
+      "f0191",
+      "f0195",
+      "f0239",
+      "f0383",
+      "f0425"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "DocumentStateChanges",
+    "contract": "DocumentStateChangesContract",
+    "message": "MarkCurrentSaved",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Documents"
+    ],
+    "senders": [
+      "Documents"
+    ],
+    "source_facts": [
+      "f0212",
+      "f0214",
+      "f0240",
+      "f0242",
+      "f0530"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "DocumentStateChanges",
+    "contract": "DocumentStateChangesContract",
+    "message": "ReplaceDocument",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Documents"
+    ],
+    "senders": [
+      "Documents"
+    ],
+    "source_facts": [
+      "f0212",
+      "f0215",
+      "f0241",
+      "f0243",
+      "f0854"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "EditIntents",
+    "contract": "EditIntentsContract",
+    "message": "ApplyTextEdit",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Documents"
+    ],
+    "senders": [
+      "NativeShell"
+    ],
+    "source_facts": [
+      "f0053",
+      "f0244",
+      "f0257",
+      "f0259",
+      "f0552"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ExportInterpretation",
+    "contract": "ExportInterpretationContract",
+    "message": "ExportSnapshotParsed",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Publication"
+    ],
+    "senders": [
+      "Interpreter"
+    ],
+    "source_facts": [
+      "f0288",
+      "f0290",
+      "f0305",
+      "f0489",
+      "f0748"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ExportInterpretation",
+    "contract": "ExportInterpretationContract",
+    "message": "ParseExportSnapshot",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Interpreter"
+    ],
+    "senders": [
+      "Publication"
+    ],
+    "source_facts": [
+      "f0288",
+      "f0291",
+      "f0488",
+      "f0609",
+      "f0749"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ExportLayout",
+    "contract": "ExportLayoutContract",
+    "message": "ExportPagesLaidOut",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Publication"
+    ],
+    "senders": [
+      "Renderer"
+    ],
+    "source_facts": [
+      "f0292",
+      "f0294",
+      "f0298",
+      "f0750",
+      "f0850"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ExportLayout",
+    "contract": "ExportLayoutContract",
+    "message": "LayoutExportPages",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Renderer"
+    ],
+    "senders": [
+      "Publication"
+    ],
+    "source_facts": [
+      "f0292",
+      "f0295",
+      "f0508",
+      "f0751",
+      "f0849"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ExternalOpening",
+    "contract": "ExternalOpeningContract",
+    "message": "LaunchConfiguredProgram",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "ExternalLauncher"
+    ],
+    "senders": [
+      "Application"
+    ],
+    "source_facts": [
+      "f0035",
+      "f0311",
+      "f0312",
+      "f0314",
+      "f0502"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "GeneratedAdmission",
+    "contract": "GeneratedAdmissionContract",
+    "message": "AdvanceGenerationSequence",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "GeneratedViews"
+    ],
+    "senders": [
+      "GeneratedViews"
+    ],
+    "source_facts": [
+      "f0017",
+      "f0367",
+      "f0369",
+      "f0426",
+      "f0429"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "GeneratedAdmission",
+    "contract": "GeneratedAdmissionContract",
+    "message": "InspectDirtyMain",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Documents"
+    ],
+    "senders": [
+      "GeneratedViews"
+    ],
+    "source_facts": [
+      "f0245",
+      "f0367",
+      "f0370",
+      "f0430",
+      "f0474"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "GeneratedAdmission",
+    "contract": "GeneratedAdmissionContract",
+    "message": "RejectInvalidSelection",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "GeneratedViews"
+    ],
+    "senders": [
+      "GeneratedViews"
+    ],
+    "source_facts": [
+      "f0367",
+      "f0371",
+      "f0427",
+      "f0431",
+      "f0824"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "GeneratedAdmission",
+    "contract": "GeneratedAdmissionContract",
+    "message": "ValidateSelection",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "GeneratedViews"
+    ],
+    "senders": [
+      "GeneratedViews"
+    ],
+    "source_facts": [
+      "f0367",
+      "f0372",
+      "f0428",
+      "f0432",
+      "f0962"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "GeneratedDelivery",
+    "contract": "GeneratedDeliveryContract",
+    "message": "DeliverGeneratedMain",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "GeneratedViews"
+    ],
+    "senders": [
+      "ExternalViewGenerator"
+    ],
+    "source_facts": [
+      "f0125",
+      "f0324",
+      "f0373",
+      "f0375",
+      "f0433"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "GeneratedDelivery",
+    "contract": "GeneratedDeliveryContract",
+    "message": "GeneratedMainAccepted",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "ExternalViewGenerator"
+    ],
+    "senders": [
+      "GeneratedViews"
+    ],
+    "source_facts": [
+      "f0322",
+      "f0373",
+      "f0376",
+      "f0395",
+      "f0434"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "GeneratedDelivery",
+    "contract": "GeneratedDeliveryContract",
+    "message": "GeneratedMainRejected",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "ExternalViewGenerator"
+    ],
+    "senders": [
+      "GeneratedViews"
+    ],
+    "source_facts": [
+      "f0323",
+      "f0373",
+      "f0377",
+      "f0398",
+      "f0435"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "GeneratedDocumentCalls",
+    "contract": "GeneratedDocumentCallsContract",
+    "message": "AdmitGeneratedDocument",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Documents"
+    ],
+    "senders": [
+      "GeneratedViews"
+    ],
+    "source_facts": [
+      "f0013",
+      "f0246",
+      "f0378",
+      "f0380",
+      "f0437"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "GeneratedDocumentCalls",
+    "contract": "GeneratedDocumentCallsContract",
+    "message": "GeneratedDocumentOpened",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "GeneratedViews"
+    ],
+    "senders": [
+      "Documents"
+    ],
+    "source_facts": [
+      "f0247",
+      "f0378",
+      "f0381",
+      "f0388",
+      "f0436"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "GeneratedIntents",
+    "contract": "GeneratedIntentsContract",
+    "message": "SelectInvalidView",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "GeneratedViews"
+    ],
+    "senders": [
+      "NativeShell"
+    ],
+    "source_facts": [
+      "f0389",
+      "f0391",
+      "f0438",
+      "f0553",
+      "f0898"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "GeneratedIntents",
+    "contract": "GeneratedIntentsContract",
+    "message": "SelectRegisteredView",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "GeneratedViews"
+    ],
+    "senders": [
+      "NativeShell"
+    ],
+    "source_facts": [
+      "f0389",
+      "f0392",
+      "f0439",
+      "f0554",
+      "f0900"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "GenerationLifecycle",
+    "contract": "GenerationLifecycleContract",
+    "message": "CancelPreviousChild",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "ExternalViewGenerator"
+    ],
+    "senders": [
+      "GeneratedViews"
+    ],
+    "source_facts": [
+      "f0064",
+      "f0325",
+      "f0440",
+      "f0453",
+      "f0455"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "GenerationLifecycle",
+    "contract": "GenerationLifecycleContract",
+    "message": "StartGeneration",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "ExternalViewGenerator"
+    ],
+    "senders": [
+      "GeneratedViews"
+    ],
+    "source_facts": [
+      "f0326",
+      "f0441",
+      "f0453",
+      "f0456",
+      "f0920"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "IndexChanges",
+    "contract": "IndexChangesContract",
+    "message": "CheckReferenceGeneration",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "DocumentIndexService"
+    ],
+    "senders": [
+      "DocumentIndexService"
+    ],
+    "source_facts": [
+      "f0079",
+      "f0182",
+      "f0183",
+      "f0466",
+      "f0468"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "IndexChanges",
+    "contract": "IndexChangesContract",
+    "message": "PublishReferenceHeadings",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "NativeShell"
+    ],
+    "senders": [
+      "DocumentIndexService"
+    ],
+    "source_facts": [
+      "f0184",
+      "f0466",
+      "f0469",
+      "f0555",
+      "f0779"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "IndexIntents",
+    "contract": "IndexIntentsContract",
+    "message": "ExpandReference",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "DocumentIndexService"
+    ],
+    "senders": [
+      "NativeShell"
+    ],
+    "source_facts": [
+      "f0185",
+      "f0283",
+      "f0470",
+      "f0472",
+      "f0556"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "InterpretationCalls",
+    "contract": "InterpretationCallsContract",
+    "message": "ParseSnapshot",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Interpreter"
+    ],
+    "senders": [
+      "Preview"
+    ],
+    "source_facts": [
+      "f0479",
+      "f0481",
+      "f0490",
+      "f0615",
+      "f0691"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "InterpretationCalls",
+    "contract": "InterpretationCallsContract",
+    "message": "ParsedSnapshot",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Preview"
+    ],
+    "senders": [
+      "Interpreter"
+    ],
+    "source_facts": [
+      "f0479",
+      "f0482",
+      "f0491",
+      "f0618",
+      "f0690"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "LayoutCalls",
+    "contract": "LayoutCallsContract",
+    "message": "LayoutModel",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Renderer"
+    ],
+    "senders": [
+      "Preview"
+    ],
+    "source_facts": [
+      "f0503",
+      "f0505",
+      "f0510",
+      "f0693",
+      "f0851"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "LayoutCalls",
+    "contract": "LayoutCallsContract",
+    "message": "ModelLaidOut",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Preview"
+    ],
+    "senders": [
+      "Renderer"
+    ],
+    "source_facts": [
+      "f0503",
+      "f0506",
+      "f0543",
+      "f0692",
+      "f0852"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "LeaseLifecycle",
+    "contract": "LeaseLifecycleContract",
+    "message": "InstallNewLease",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "GeneratedViews"
+    ],
+    "senders": [
+      "GeneratedViews"
+    ],
+    "source_facts": [
+      "f0442",
+      "f0446",
+      "f0476",
+      "f0513",
+      "f0515"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "LeaseLifecycle",
+    "contract": "LeaseLifecycleContract",
+    "message": "KeepUnsentRelease",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "GeneratedViews"
+    ],
+    "senders": [
+      "GeneratedViews"
+    ],
+    "source_facts": [
+      "f0443",
+      "f0447",
+      "f0500",
+      "f0513",
+      "f0516"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "LeaseLifecycle",
+    "contract": "LeaseLifecycleContract",
+    "message": "QueuePreviousLease",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "GeneratedViews"
+    ],
+    "senders": [
+      "GeneratedViews"
+    ],
+    "source_facts": [
+      "f0444",
+      "f0448",
+      "f0513",
+      "f0517",
+      "f0781"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "LeaseLifecycle",
+    "contract": "LeaseLifecycleContract",
+    "message": "RemoveSentRelease",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "GeneratedViews"
+    ],
+    "senders": [
+      "GeneratedViews"
+    ],
+    "source_facts": [
+      "f0445",
+      "f0449",
+      "f0513",
+      "f0518",
+      "f0836"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "LeaseNotifications",
+    "contract": "LeaseNotificationsContract",
+    "message": "AttemptRelease",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "ExternalViewBroker"
+    ],
+    "senders": [
+      "GeneratedViews"
+    ],
+    "source_facts": [
+      "f0055",
+      "f0321",
+      "f0450",
+      "f0519",
+      "f0521"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "NavigationCalls",
+    "contract": "NavigationCallsContract",
+    "message": "OpenTarget",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Navigation"
+    ],
+    "senders": [
+      "Application"
+    ],
+    "source_facts": [
+      "f0037",
+      "f0581",
+      "f0583",
+      "f0585",
+      "f0596"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "NavigationCalls",
+    "contract": "NavigationCallsContract",
+    "message": "TargetOpened",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Application"
+    ],
+    "senders": [
+      "Navigation"
+    ],
+    "source_facts": [
+      "f0036",
+      "f0582",
+      "f0583",
+      "f0586",
+      "f0931"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "OpeningPolicy",
+    "contract": "OpeningPolicyContract",
+    "message": "ClassifyExternalTarget",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Application"
+    ],
+    "senders": [
+      "Application"
+    ],
+    "source_facts": [
+      "f0038",
+      "f0039",
+      "f0099",
+      "f0597",
+      "f0599"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "PreferenceChanges",
+    "contract": "PreferenceChangesContract",
+    "message": "AdoptPreferencesDraft",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Preferences"
+    ],
+    "senders": [
+      "Preferences"
+    ],
+    "source_facts": [
+      "f0015",
+      "f0644",
+      "f0646",
+      "f0653",
+      "f0657"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "PreferenceChanges",
+    "contract": "PreferenceChangesContract",
+    "message": "BeginPreferencesDraft",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Preferences"
+    ],
+    "senders": [
+      "NativeShell"
+    ],
+    "source_facts": [
+      "f0057",
+      "f0558",
+      "f0644",
+      "f0647",
+      "f0654"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "PreferenceChanges",
+    "contract": "PreferenceChangesContract",
+    "message": "NotifyPreferenceChange",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "NativeShell"
+    ],
+    "senders": [
+      "Preferences"
+    ],
+    "source_facts": [
+      "f0557",
+      "f0592",
+      "f0644",
+      "f0648",
+      "f0658"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "PreferenceChanges",
+    "contract": "PreferenceChangesContract",
+    "message": "PersistPreferencesDraft",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Preferences"
+    ],
+    "senders": [
+      "Preferences"
+    ],
+    "source_facts": [
+      "f0641",
+      "f0644",
+      "f0649",
+      "f0655",
+      "f0659"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "PreferenceChanges",
+    "contract": "PreferenceChangesContract",
+    "message": "ValidatePreferencesDraft",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Preferences"
+    ],
+    "senders": [
+      "Preferences"
+    ],
+    "source_facts": [
+      "f0644",
+      "f0650",
+      "f0656",
+      "f0660",
+      "f0958"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "PresentationEvents",
+    "contract": "PresentationEventsContract",
+    "message": "PresentFrame",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "NativeShell"
+    ],
+    "senders": [
+      "Preview"
+    ],
+    "source_facts": [
+      "f0559",
+      "f0678",
+      "f0679",
+      "f0681",
+      "f0694"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "PresentationEvents",
+    "contract": "PresentationEventsContract",
+    "message": "ShowDirtyRejection",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "NativeShell"
+    ],
+    "senders": [
+      "GeneratedViews"
+    ],
+    "source_facts": [
+      "f0451",
+      "f0560",
+      "f0679",
+      "f0682",
+      "f0906"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "PreviewAdmission",
+    "contract": "PreviewAdmissionContract",
+    "message": "AcceptCurrentFrame",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Preview"
+    ],
+    "senders": [
+      "Preview"
+    ],
+    "source_facts": [
+      "f0001",
+      "f0695",
+      "f0700",
+      "f0710",
+      "f0712"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "PreviewAdmission",
+    "contract": "PreviewAdmissionContract",
+    "message": "AcceptCurrentModel",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Preview"
+    ],
+    "senders": [
+      "Preview"
+    ],
+    "source_facts": [
+      "f0003",
+      "f0696",
+      "f0701",
+      "f0710",
+      "f0713"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "PreviewAdmission",
+    "contract": "PreviewAdmissionContract",
+    "message": "AcceptWorkerTicket",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Preview"
+    ],
+    "senders": [
+      "Preview"
+    ],
+    "source_facts": [
+      "f0005",
+      "f0697",
+      "f0702",
+      "f0710",
+      "f0714"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "PreviewAdmission",
+    "contract": "PreviewAdmissionContract",
+    "message": "CompleteObsoleteWorker",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Preview"
+    ],
+    "senders": [
+      "Preview"
+    ],
+    "source_facts": [
+      "f0105",
+      "f0698",
+      "f0703",
+      "f0710",
+      "f0715"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "PreviewAdmission",
+    "contract": "PreviewAdmissionContract",
+    "message": "DiscardObsoleteCompletion",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Preview"
+    ],
+    "senders": [
+      "Preview"
+    ],
+    "source_facts": [
+      "f0160",
+      "f0699",
+      "f0704",
+      "f0710",
+      "f0716"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "PublicationDrawing",
+    "contract": "PublicationDrawingContract",
+    "message": "PaintPdfCandidate",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Typography"
+    ],
+    "senders": [
+      "Publication"
+    ],
+    "source_facts": [
+      "f0607",
+      "f0752",
+      "f0763",
+      "f0765",
+      "f0945"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "PublicationInputs",
+    "contract": "PublicationInputsContract",
+    "message": "FreezeExportSnapshot",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Publication"
+    ],
+    "senders": [
+      "Documents"
+    ],
+    "source_facts": [
+      "f0248",
+      "f0360",
+      "f0753",
+      "f0766",
+      "f0768"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "PublicationIntents",
+    "contract": "PublicationIntentsContract",
+    "message": "CancelPdfRequest",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Publication"
+    ],
+    "senders": [
+      "NativeShell"
+    ],
+    "source_facts": [
+      "f0062",
+      "f0561",
+      "f0754",
+      "f0769",
+      "f0771"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "PublicationIntents",
+    "contract": "PublicationIntentsContract",
+    "message": "RequestPdfExport",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Publication"
+    ],
+    "senders": [
+      "NativeShell"
+    ],
+    "source_facts": [
+      "f0562",
+      "f0755",
+      "f0769",
+      "f0772",
+      "f0856"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "PublicationState",
+    "contract": "PublicationStateContract",
+    "message": "CancelUnpublishedJob",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Publication"
+    ],
+    "senders": [
+      "Publication"
+    ],
+    "source_facts": [
+      "f0066",
+      "f0756",
+      "f0759",
+      "f0773",
+      "f0775"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "PublicationState",
+    "contract": "PublicationStateContract",
+    "message": "CommitPdfCandidate",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Publication"
+    ],
+    "senders": [
+      "Publication"
+    ],
+    "source_facts": [
+      "f0101",
+      "f0757",
+      "f0760",
+      "f0773",
+      "f0776"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "PublicationState",
+    "contract": "PublicationStateContract",
+    "message": "DiscardPdfCandidate",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Publication"
+    ],
+    "senders": [
+      "Publication"
+    ],
+    "source_facts": [
+      "f0162",
+      "f0758",
+      "f0761",
+      "f0773",
+      "f0777"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ReferenceInterpretation",
+    "contract": "ReferenceInterpretationContract",
+    "message": "ParseReference",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Interpreter"
+    ],
+    "senders": [
+      "DocumentIndexService"
+    ],
+    "source_facts": [
+      "f0187",
+      "f0492",
+      "f0613",
+      "f0807",
+      "f0809"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ReferenceInterpretation",
+    "contract": "ReferenceInterpretationContract",
+    "message": "ReferenceParsed",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "DocumentIndexService"
+    ],
+    "senders": [
+      "Interpreter"
+    ],
+    "source_facts": [
+      "f0186",
+      "f0493",
+      "f0807",
+      "f0810",
+      "f0813"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ReferenceStorage",
+    "contract": "ReferenceStorageContract",
+    "message": "ReadReference",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "DocumentStorage"
+    ],
+    "senders": [
+      "DocumentIndexService"
+    ],
+    "source_facts": [
+      "f0189",
+      "f0223",
+      "f0785",
+      "f0817",
+      "f0819"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ReferenceStorage",
+    "contract": "ReferenceStorageContract",
+    "message": "ReferenceRead",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "DocumentIndexService"
+    ],
+    "senders": [
+      "DocumentStorage"
+    ],
+    "source_facts": [
+      "f0188",
+      "f0224",
+      "f0816",
+      "f0817",
+      "f0820"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ResourcePreparation",
+    "contract": "ResourcePreparationContract",
+    "message": "CacheCompatibleScene",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "VisualResources"
+    ],
+    "senders": [
+      "VisualResources"
+    ],
+    "source_facts": [
+      "f0060",
+      "f0859",
+      "f0861",
+      "f0987",
+      "f0992"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ResourcePreparation",
+    "contract": "ResourcePreparationContract",
+    "message": "PrepareDiagramScenes",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "VisualResources"
+    ],
+    "senders": [
+      "Preview"
+    ],
+    "source_facts": [
+      "f0670",
+      "f0705",
+      "f0859",
+      "f0862",
+      "f0988"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ResourcePreparation",
+    "contract": "ResourcePreparationContract",
+    "message": "PrepareEmbeddedResources",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "VisualResources"
+    ],
+    "senders": [
+      "Preview"
+    ],
+    "source_facts": [
+      "f0672",
+      "f0706",
+      "f0859",
+      "f0863",
+      "f0989"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ResourcePreparation",
+    "contract": "ResourcePreparationContract",
+    "message": "PrepareExportResources",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "VisualResources"
+    ],
+    "senders": [
+      "Publication"
+    ],
+    "source_facts": [
+      "f0674",
+      "f0762",
+      "f0859",
+      "f0864",
+      "f0990"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ResourcePreparation",
+    "contract": "ResourcePreparationContract",
+    "message": "PrepareTypedDiagram",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "VisualResources"
+    ],
+    "senders": [
+      "Preview"
+    ],
+    "source_facts": [
+      "f0676",
+      "f0707",
+      "f0859",
+      "f0865",
+      "f0991"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ScheduledWork",
+    "contract": "ScheduledWorkContract",
+    "message": "DebounceElapsed",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Preview"
+    ],
+    "senders": [
+      "EventLoop"
+    ],
+    "source_facts": [
+      "f0123",
+      "f0278",
+      "f0708",
+      "f0884",
+      "f0886"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ScheduledWork",
+    "contract": "ScheduledWorkContract",
+    "message": "PollReleaseQueue",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "GeneratedViews"
+    ],
+    "senders": [
+      "EventLoop"
+    ],
+    "source_facts": [
+      "f0279",
+      "f0452",
+      "f0643",
+      "f0884",
+      "f0887"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ScheduledWork",
+    "contract": "ScheduledWorkContract",
+    "message": "RestartDebounce",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "EventLoop"
+    ],
+    "senders": [
+      "Preview"
+    ],
+    "source_facts": [
+      "f0277",
+      "f0709",
+      "f0867",
+      "f0884",
+      "f0888"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "StorageCalls",
+    "contract": "StorageCallsContract",
+    "message": "CandidateRead",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Documents"
+    ],
+    "senders": [
+      "DocumentStorage"
+    ],
+    "source_facts": [
+      "f0069",
+      "f0227",
+      "f0249",
+      "f0921",
+      "f0923"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "StorageCalls",
+    "contract": "StorageCallsContract",
+    "message": "CandidateReadFailed",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Documents"
+    ],
+    "senders": [
+      "DocumentStorage"
+    ],
+    "source_facts": [
+      "f0072",
+      "f0228",
+      "f0250",
+      "f0921",
+      "f0924"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "StorageCalls",
+    "contract": "StorageCallsContract",
+    "message": "CurrentWritten",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Documents"
+    ],
+    "senders": [
+      "DocumentStorage"
+    ],
+    "source_facts": [
+      "f0121",
+      "f0229",
+      "f0251",
+      "f0921",
+      "f0925"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "StorageCalls",
+    "contract": "StorageCallsContract",
+    "message": "ReadCandidate",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "DocumentStorage"
+    ],
+    "senders": [
+      "Documents"
+    ],
+    "source_facts": [
+      "f0225",
+      "f0252",
+      "f0783",
+      "f0921",
+      "f0926"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "StorageCalls",
+    "contract": "StorageCallsContract",
+    "message": "WriteCurrent",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "DocumentStorage"
+    ],
+    "senders": [
+      "Documents"
+    ],
+    "source_facts": [
+      "f0226",
+      "f0253",
+      "f0921",
+      "f0927",
+      "f1030"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "UnsavedAdmission",
+    "contract": "UnsavedAdmissionContract",
+    "message": "ChooseCancel",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Documents"
+    ],
+    "senders": [
+      "NativeShell"
+    ],
+    "source_facts": [
+      "f0082",
+      "f0254",
+      "f0564",
+      "f0950",
+      "f0952"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "UnsavedAdmission",
+    "contract": "UnsavedAdmissionContract",
+    "message": "ChooseSave",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Documents"
+    ],
+    "senders": [
+      "NativeShell"
+    ],
+    "source_facts": [
+      "f0087",
+      "f0255",
+      "f0565",
+      "f0950",
+      "f0953"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "UnsavedAdmission",
+    "contract": "UnsavedAdmissionContract",
+    "message": "ChooseUnsaved",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "NativeShell"
+    ],
+    "senders": [
+      "Documents"
+    ],
+    "source_facts": [
+      "f0089",
+      "f0256",
+      "f0563",
+      "f0950",
+      "f0954"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ViewportChanges",
+    "contract": "ViewportChangesContract",
+    "message": "CheckCurrentMapping",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Viewport"
+    ],
+    "senders": [
+      "Viewport"
+    ],
+    "source_facts": [
+      "f0077",
+      "f0967",
+      "f0971",
+      "f0974",
+      "f0976"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ViewportChanges",
+    "contract": "ViewportChangesContract",
+    "message": "MapSourceAnchor",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Viewport"
+    ],
+    "senders": [
+      "Viewport"
+    ],
+    "source_facts": [
+      "f0528",
+      "f0968",
+      "f0972",
+      "f0974",
+      "f0977"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ViewportChanges",
+    "contract": "ViewportChangesContract",
+    "message": "RetainDocumentAndAnchor",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Viewport"
+    ],
+    "senders": [
+      "NativeShell"
+    ],
+    "source_facts": [
+      "f0567",
+      "f0869",
+      "f0969",
+      "f0974",
+      "f0978"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ViewportChanges",
+    "contract": "ViewportChangesContract",
+    "message": "SetEditorAnchor",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "NativeShell"
+    ],
+    "senders": [
+      "Viewport"
+    ],
+    "source_facts": [
+      "f0566",
+      "f0904",
+      "f0973",
+      "f0974",
+      "f0979"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "ViewportChanges",
+    "contract": "ViewportChangesContract",
+    "message": "UserPreviewScroll",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Viewport"
+    ],
+    "senders": [
+      "NativeShell"
+    ],
+    "source_facts": [
+      "f0568",
+      "f0956",
+      "f0970",
+      "f0974",
+      "f0980"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "WindowPresentation",
+    "contract": "WindowPresentationContract",
+    "message": "ToggleFullscreen",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "NativeShell"
+    ],
+    "senders": [
+      "NativeShell"
+    ],
+    "source_facts": [
+      "f0569",
+      "f0570",
+      "f0940",
+      "f0993",
+      "f0995"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "WorkspaceChanges",
+    "contract": "WorkspaceChangesContract",
+    "message": "ActivateRootAndHistory",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Workspace"
+    ],
+    "senders": [
+      "Workspace"
+    ],
+    "source_facts": [
+      "f0009",
+      "f1001",
+      "f1004",
+      "f1007",
+      "f1009"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "WorkspaceChanges",
+    "contract": "WorkspaceChangesContract",
+    "message": "RequestTreeRefresh",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "NativeShell"
+    ],
+    "senders": [
+      "Workspace"
+    ],
+    "source_facts": [
+      "f0571",
+      "f0858",
+      "f1005",
+      "f1007",
+      "f1010"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "WorkspaceChanges",
+    "contract": "WorkspaceChangesContract",
+    "message": "SetChosenParentRoot",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Workspace"
+    ],
+    "senders": [
+      "Application"
+    ],
+    "source_facts": [
+      "f0040",
+      "f0902",
+      "f1002",
+      "f1007",
+      "f1011"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "WorkspaceChanges",
+    "contract": "WorkspaceChangesContract",
+    "message": "ValidateProposedRoot",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Workspace"
+    ],
+    "senders": [
+      "Application"
+    ],
+    "source_facts": [
+      "f0041",
+      "f0960",
+      "f1003",
+      "f1007",
+      "f1012"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "WorkspaceIntents",
+    "contract": "WorkspaceIntentsContract",
+    "message": "ActivateExternalTarget",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Application"
+    ],
+    "senders": [
+      "NativeShell"
+    ],
+    "source_facts": [
+      "f0007",
+      "f0042",
+      "f0572",
+      "f1023",
+      "f1025"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "WorkspaceIntents",
+    "contract": "WorkspaceIntentsContract",
+    "message": "ChooseInternalFile",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Application"
+    ],
+    "senders": [
+      "NativeShell"
+    ],
+    "source_facts": [
+      "f0043",
+      "f0084",
+      "f0573",
+      "f1023",
+      "f1026"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "WorkspaceIntents",
+    "contract": "WorkspaceIntentsContract",
+    "message": "FavoriteFileChosen",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Application"
+    ],
+    "senders": [
+      "NativeShell"
+    ],
+    "source_facts": [
+      "f0044",
+      "f0328",
+      "f0574",
+      "f1023",
+      "f1027"
+    ],
+    "variants": []
+  },
+  {
+    "channel": "WorkspaceIntents",
+    "contract": "WorkspaceIntentsContract",
+    "message": "FavoriteFolderChosen",
+    "mode": "NormalDesktop",
+    "payload_contract": "InteractionObservationShape",
+    "receivers": [
+      "Workspace"
+    ],
+    "senders": [
+      "NativeShell"
+    ],
+    "source_facts": [
+      "f0348",
+      "f0575",
+      "f1006",
+      "f1023",
+      "f1028"
+    ],
+    "variants": []
+  }
+]

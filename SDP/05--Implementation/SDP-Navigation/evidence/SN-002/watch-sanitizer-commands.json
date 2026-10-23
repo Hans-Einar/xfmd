@@ -1,0 +1,24 @@
+{
+  "compileArgv": [
+    "g++",
+    "tests/application/SdpWatchTest.cpp",
+    "-std=c++17",
+    "-g",
+    "-fsanitize=address,undefined",
+    "-fno-omit-frame-pointer",
+    "-Isrc",
+    "-Itests",
+    "src/application/sdp/SdpWatch.cpp",
+    "src/application/sdp/SdpProtocol.cpp",
+    "build-acceptance/cargo/release/libxfmd_sdp_json.a",
+    "-pthread",
+    "-ldl",
+    "-lm",
+    "-o",
+    "/tmp/xfmd-sn002-asan/SdpWatchTest"
+  ],
+  "compileExit": 0,
+  "testExit": 0,
+  "asan": "detect_leaks=1:halt_on_error=1",
+  "ubsan": "halt_on_error=1:print_stacktrace=1"
+}

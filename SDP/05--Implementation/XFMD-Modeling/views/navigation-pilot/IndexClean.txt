@@ -1,0 +1,13 @@
+SDUI GUI dump | IndexClean | 160 columns | structural preview
+[ Sidebar ]       [ Open ]          [ Save ]          [ Editor ]        [ Split ]         [ Preview ]       [ Back ]          [ Forward ]       [ Light / Dark ]
+Path                                                                             Document path / filename filter: [/project/README.md]
+Files / **Index**    [ R ]               ### Generated-view navigator             ### README.md
+### Chapters (state sample)              Registered project: xfmd-pilot           # XFMD documentation
+- Overview
+- Usage                                  - Goals and contributions                Current document preview — representative content.
+                                         - Ownership and allocation
+### References (state sample)                                                     The real application retains source anchors, history and its rendering pipelin
+- Markdown                               Separate navigation document.            e.
+- Hyperlinks
+                                         Not a sidebar tab.
+Static model: Index selected; Files-only Markdown / Up / Open controls are hidden.

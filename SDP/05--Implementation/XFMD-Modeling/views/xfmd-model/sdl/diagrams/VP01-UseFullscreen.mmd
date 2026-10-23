@@ -1,0 +1,6 @@
+flowchart LR
+    n_ReaderAuthor["ReaderAuthor (actor)"]
+    n_UseFullscreen["UseFullscreen (usecase)"]
+    n_WorkspaceControls["WorkspaceControls (functionality)"]
+    n_ReaderAuthor -->|pursues| n_UseFullscreen
+    n_WorkspaceControls -->|contributes-to| n_UseFullscreen

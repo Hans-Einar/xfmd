@@ -1,0 +1,3 @@
+Parsed nodes=7 edges=9 groups=0
+Scene nodes=7 edges=9 groups=0
+Libavoid; one spacing retry after ambiguous label on edge 1: own distance 30.0, other Some((0, 1.20001220703125)); failed routing/labels attempt 23.24877ms, included in total time; libavoid transaction 1: 3.657684ms; label leaders omitted: 0

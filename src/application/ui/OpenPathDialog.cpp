@@ -10,7 +10,8 @@ FXIMPLEMENT(OpenPathDialog, FXFileDialog, openPathMap, ARRAYNUMBER(openPathMap))
 OpenPathDialog::OpenPathDialog(FXWindow* owner, const std::string& directory)
     : FXFileDialog(owner, "Open file or folder") {
   setSelectMode(SELECTFILE_MULTIPLE_ALL);
-  setPatternList("All files (*)\nMarkdown and text (*.md,*.MD,*.txt,*.TXT)");
+  setPatternList(
+      "All files (*)\nMarkdown and text (*.md,*.MD,*.txt,*.TXT)\nMermaid diagrams (*.mmd,*.MMD)");
   setDirectory(directory.c_str());
   // FXFileSelector's acceptButton is a hidden forwarding button. Keep its native
   // visible OK button and put the selector and our footer in one vertical packer.

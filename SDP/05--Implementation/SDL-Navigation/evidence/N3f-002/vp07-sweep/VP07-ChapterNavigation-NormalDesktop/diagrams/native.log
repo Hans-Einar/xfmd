@@ -1,0 +1,2 @@
+Parsed nodes=10 edges=12 groups=0
+LAYOUT: Libavoid: NoSpace("ambiguous label on edge 7: own distance 38.0, other Some((10, 14.961568832397461))")

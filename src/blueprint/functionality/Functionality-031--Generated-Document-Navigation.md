@@ -69,7 +69,7 @@ The endpoint uses private 0700 same-owner directories, same-UID peer credentials
 The CLI request helper waits up to five seconds for a window response. Wrong targets,
 stale/malformed requests and failed reads do not replace the current document.
 Addressed opens reject a dirty main buffer without a modal dialog. Navigation-panel
-heading links support the current restricted ASCII fragment profile only.
+heading links use the shared HeadingAnchor title/slug policy (Session 0002 T003).
 
 A successful main or navigator document-open callback calls documentChanged(pane).
 The old lease is moved into the release queue; successful leased OPEN then installs
@@ -109,7 +109,7 @@ it does not become an external-target launcher.
 | 11 | main documentOpened / navigator changed / destruction | `DocumentViews::documentChanged` | `src/application/navigation/DocumentViews.cpp` | pane → queue preceding lease | no lease mutation for failed opening | Implemented |
 | 12 | documentChanged / poll / open / destruction | `DocumentViews::flushReleases` | `src/application/navigation/DocumentViews.cpp` | queued lease/broker → SDLVIEW1 RELEASE | failed send retries; no durable acknowledgment | Implemented |
 | 13 | CLI addressed OPEN/INFO | `WindowEndpoint::request` | `src/application/navigation/WindowEndpoint.cpp` | exact window and packet → response | unavailable target or five-second timeout | Implemented |
-| 14 | navigator normal Markdown/heading callback | `NavigationPanel::follow` | `src/application/navigation/NavigationPanel.cpp` | local link/ASCII fragment → open/pending anchor | unsupported or missing heading reports error | Implemented |
+| 14 | navigator normal Markdown/heading callback | `NavigationPanel::follow` | `src/application/navigation/NavigationPanel.cpp` | local link/heading fragment → open/pending anchor | unsupported or missing heading reports error | Implemented |
 
 | 15 | navigator other-text/external/Ctrl callback | `Application::followLink` | `src/application/ApplicationOpening.cpp` | navigator origin/target/Ctrl → shared consumer | retain panes for external handoff; report unsupported targets | Implemented |
 

@@ -1,0 +1,19 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd-sdl-navigation/build-ui
+Test project /home/warloc/git/xfmd-sdl-navigation/build-ui
+    Start 79: SdpNavigationGuiTest
+1/5 Test #79: SdpNavigationGuiTest .............   Passed   10.92 sec
+    Start 82: StandaloneMermaidTest
+2/5 Test #82: StandaloneMermaidTest ............   Passed    0.09 sec
+    Start 83: StandaloneMermaidGuiTest
+3/5 Test #83: StandaloneMermaidGuiTest .........   Passed    1.25 sec
+    Start 84: HeadingLinkTest
+4/5 Test #84: HeadingLinkTest ..................   Passed    0.02 sec
+    Start 85: HeadingLinkGuiTest
+5/5 Test #85: HeadingLinkGuiTest ...............   Passed    0.94 sec
+
+100% tests passed, 0 tests failed out of 5
+
+Label Time Summary:
+GUI    =  13.11 sec*proc (3 tests)
+
+Total Test time (real) =  13.22 sec

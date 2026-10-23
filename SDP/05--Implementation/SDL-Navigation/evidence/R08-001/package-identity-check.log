@@ -1,0 +1,1 @@
+PASS: archive executable reports 0.8, manpage carries 0.8 and packaged build identity declares 0.8. CPack archive version is 0.8.0.

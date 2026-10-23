@@ -1,0 +1,5 @@
+OK: 38 blueprints, 73 requirements; metadata, matrix, plumbing and local file links checked.
+Not checked: external links, heading anchors, actual C++ call graph or application behavior.
+OK: 296 implemented plumbing callees found; caller semantics require review
+PASS: 22 cards, 97 card events, 12 management records; schemas, replay, CardState, placement and index
+PASS: current Session/plan/card/sprint local links; recorded source and installed binary hashes remain current.

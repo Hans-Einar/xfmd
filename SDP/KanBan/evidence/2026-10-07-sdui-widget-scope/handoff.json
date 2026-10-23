@@ -1,0 +1,12 @@
+{
+  "status": "applied",
+  "target": "/home/warloc/git/SDP-vNow/SDP/KanBan/backlog/#003--SDUI--Proposal--Capabilities-and-navigation-pilot.md",
+  "baseline_sha256": "c05faadf06ba851b8ab4df234e361dbbbe211e70078141114c88c535da8100c1",
+  "updated_sha256": "4b2c318758355abe2c1df5167495aced8bbd3238b61f9b9d9d6d50e7ef96fdbb",
+  "authority": "XFMD Session0004 T005, 2026-10-07",
+  "appliedAt": "2026-10-07T21:44:06.393995+00:00",
+  "managementEvent": "EVT-KB-SDUI-000018",
+  "applied_sha256": "d0868ea12351aa06fcba78b45efef346c2302d9eef08a7a7042fe7828e16a0df",
+  "preparation_constraint": "Session filesystem policy allows writes only to XFMD workspace and /tmp; SDP-vNow is read-only.",
+  "prepared_snapshot": "KB-SDUI-003.updated.md.txt"
+}

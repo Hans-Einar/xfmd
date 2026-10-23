@@ -1,0 +1,7 @@
+PASS: 38 blueprints / 75 requirements; metadata, plumbing, local links.
+PASS: 308 implemented plumbing callees found (not semantic review).
+PASS: 231 schema-valid ledger events, unique IDs and predecessor references.
+PASS: tested source/binary hashes match final candidate.
+PASS: producer board 66 cards / 45 records / 604 events.
+PASS: shared producer board 65 cards / 43 records / 567 events.
+PASS: git diff --check.

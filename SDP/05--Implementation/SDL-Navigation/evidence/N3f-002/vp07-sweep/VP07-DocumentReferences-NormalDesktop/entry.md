@@ -1,0 +1,44 @@
+# VP07 — Features across the architecture
+
+Revision: `e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007`.
+
+contributes-to, owns and explicit allocated-to per mode. Unspecified allocation is reported as a gap.
+
+Selection: `{"viewpoint":"VP07","direction":"both","depth":2,"diagram":"VP07-DocumentReferences-NormalDesktop"}`.
+
+## Feature: DocumentReferences — mode NormalDesktop
+
+```mermaid
+flowchart LR
+    n_ApplicationPreferences["ApplicationPreferences (functionality)"]
+    n_DocumentIndex["DocumentIndex (functionality)"]
+    n_DocumentIndexService["DocumentIndexService (unit)"]
+    n_DocumentReferences["DocumentReferences (feature)"]
+    n_NativeShell["NativeShell (unit)"]
+    n_Navigation["Navigation (unit)"]
+    n_NavigationHistory["NavigationHistory (functionality)"]
+    n_Preferences["Preferences (unit)"]
+    n_SourceAnchorMapping["SourceAnchorMapping (functionality)"]
+    n_Viewport["Viewport (unit)"]
+    n_WorkspaceControls["WorkspaceControls (functionality)"]
+    n_XfmdDesktop["XfmdDesktop (container)"]
+    n_ApplicationPreferences -->|allocated-to| n_XfmdDesktop
+    n_ApplicationPreferences -->|contributes-to| n_DocumentReferences
+    n_DocumentIndex -->|allocated-to| n_XfmdDesktop
+    n_DocumentIndex -->|contributes-to| n_DocumentReferences
+    n_DocumentIndexService -->|owns| n_DocumentIndex
+    n_NativeShell -->|owns| n_WorkspaceControls
+    n_Navigation -->|owns| n_NavigationHistory
+    n_NavigationHistory -->|allocated-to| n_XfmdDesktop
+    n_NavigationHistory -->|contributes-to| n_DocumentReferences
+    n_Preferences -->|owns| n_ApplicationPreferences
+    n_SourceAnchorMapping -->|allocated-to| n_XfmdDesktop
+    n_SourceAnchorMapping -->|contributes-to| n_DocumentReferences
+    n_Viewport -->|owns| n_SourceAnchorMapping
+    n_WorkspaceControls -->|allocated-to| n_XfmdDesktop
+    n_WorkspaceControls -->|contributes-to| n_DocumentReferences
+```
+
+Source facts: f0046, f0050, f0176, f0178, f0181, f0545, f0576, f0587, f0590, f0652, f0907, f0911, f0966, f1013, f1017.
+
+

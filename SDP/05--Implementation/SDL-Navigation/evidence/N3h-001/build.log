@@ -1,0 +1,14 @@
+[0/2] Re-checking globbed directories...
+[1/63] cd /home/warloc/git/xfmd-sdl-navigation/build-ui && /usr/bin/python3.12 /home/warloc/git/xfmd-sdl-navigation/tools/build_identity.py --source /home/warloc/git/xfmd-sdl-navigation --output /home/warloc/git/xfmd-sdl-navigation/build-ui/generated
+[2/13] Building CXX object CMakeFiles/StandaloneMermaidGuiTest.dir/tests/gui/StandaloneMermaidGuiTest.cpp.o
+[3/13] Building CXX object CMakeFiles/DiagramReadingGuiTest.dir/tests/gui/DiagramReadingGuiTest.cpp.o
+[4/13] Linking CXX executable StandaloneMermaidGuiTest
+[5/13] Linking CXX executable DiagramReadingGuiTest
+[6/13] Building CXX object CMakeFiles/HeadingLinkGuiTest.dir/tests/gui/HeadingLinkGuiTest.cpp.o
+[7/13] Building CXX object CMakeFiles/SdpRuntimeGuiTest.dir/tests/gui/SdpRuntimeGuiTest.cpp.o
+[8/13] Linking CXX executable HeadingLinkGuiTest
+[9/13] Linking CXX executable SdpRuntimeGuiTest
+[10/13] Building CXX object CMakeFiles/SdpOverviewGuiTest.dir/tests/gui/SdpOverviewGuiTest.cpp.o
+[11/13] Linking CXX executable SdpOverviewGuiTest
+[12/13] Building CXX object CMakeFiles/SduiWorkflowGuiTest.dir/tests/gui/SduiWorkflowGuiTest.cpp.o
+[13/13] Linking CXX executable SduiWorkflowGuiTest

@@ -1,0 +1,7 @@
+{
+  "ledgerPrefixPreserved": true,
+  "localLinksChecked": 216,
+  "missingLinks": [],
+  "deterministicInventory": true,
+  "note": "Initial blueprint validation ran before checks.json existed; raw initial results retained. Rerun passed after the referenced report was written."
+}

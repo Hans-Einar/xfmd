@@ -1,0 +1,16 @@
+flowchart LR
+    n_Application["Application (unit)"]
+    n_FilteredFileTree["FilteredFileTree (functionality)"]
+    n_WorkPathHistory["WorkPathHistory (functionality)"]
+    n_WorkPathNavigation["WorkPathNavigation (feature)"]
+    n_WorkspaceControls["WorkspaceControls (functionality)"]
+    n_XfmdDesktop["XfmdDesktop (container)"]
+    n_Application -->|owns| n_FilteredFileTree
+    n_Application -->|owns| n_WorkPathHistory
+    n_Application -->|owns| n_WorkspaceControls
+    n_FilteredFileTree -->|allocated-to| n_XfmdDesktop
+    n_FilteredFileTree -->|contributes-to| n_WorkPathNavigation
+    n_WorkPathHistory -->|allocated-to| n_XfmdDesktop
+    n_WorkPathHistory -->|contributes-to| n_WorkPathNavigation
+    n_WorkspaceControls -->|allocated-to| n_XfmdDesktop
+    n_WorkspaceControls -->|contributes-to| n_WorkPathNavigation

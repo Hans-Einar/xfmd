@@ -1,0 +1,8 @@
+flowchart LR
+    n_AdmitDocument["AdmitDocument (message)"]
+    n_DocumentCallsContract["DocumentCallsContract (contract)"]
+    n_DocumentOpened["DocumentOpened (message)"]
+    n_DocumentRejected["DocumentRejected (message)"]
+    n_DocumentCallsContract -->|permits| n_AdmitDocument
+    n_DocumentCallsContract -->|permits| n_DocumentOpened
+    n_DocumentCallsContract -->|permits| n_DocumentRejected

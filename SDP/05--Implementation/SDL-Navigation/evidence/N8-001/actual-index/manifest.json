@@ -1,0 +1,15 @@
+{
+  "version": "sdl-viewpoints-go-1.3",
+  "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007",
+  "renderer": "",
+  "diagrams": [],
+  "facts": [],
+  "model_gaps": [],
+  "outputs": {
+    "delivery.txt": "6403203dd5a0867eb14d104ee8a73730bd72dd9ad92e78d996a6dba0a5dcfc01",
+    "entry.md": "672aaca39c886c93f5b77d8b3a6aab6c3e4bbd8e285a6ebafd42c3906c0100fe",
+    "sdptool.json": "3a14b09e6cdbf2f032fddbfb4c069bbb3312d77767103bb63166ff75d8bb72c4",
+    "selection.json": "402c3d0155269136eb5632c306d330da94aa17b0f0dcd162c6b1b30d776501e9",
+    "source-inputs/s0.design": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+  }
+}

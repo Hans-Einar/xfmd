@@ -1,0 +1,81 @@
+language design-core version 0.5.
+unit Application.
+feature DocumentNavigation.
+functionality DocumentSession.
+usecase EditDocuments.
+functionality EventScheduling.
+functionality FilteredFileTree.
+functionality FoxPresentation.
+functionality GeneratedDocumentNavigation.
+unit Interpreter.
+feature LivePreview.
+functionality LocalFileStorage.
+functionality MarkdownInterpretation.
+functionality NavigationHistory.
+mode NormalDesktop.
+functionality PreviewPipeline.
+usecase ReadDocuments.
+actor ReaderAuthor.
+functionality RenderLayout.
+unit Renderer.
+usecase SelectGeneratedView.
+functionality SourceAnchorMapping.
+functionality TextEditing.
+functionality WorkPathHistory.
+feature WorkPathNavigation.
+functionality WorkspaceControls.
+container XfmdDesktop.
+Application owns DocumentSession.
+Application owns EventScheduling.
+Application owns FilteredFileTree.
+Application owns FoxPresentation.
+Application owns GeneratedDocumentNavigation.
+Application owns LocalFileStorage.
+Application owns NavigationHistory.
+Application owns PreviewPipeline.
+Application owns SourceAnchorMapping.
+Application owns TextEditing.
+Application owns WorkPathHistory.
+Application owns WorkspaceControls.
+DocumentNavigation supports ReadDocuments.
+DocumentSession allocated-to XfmdDesktop in mode NormalDesktop.
+DocumentSession contributes-to DocumentNavigation.
+DocumentSession contributes-to LivePreview.
+EventScheduling allocated-to XfmdDesktop in mode NormalDesktop.
+EventScheduling contributes-to LivePreview.
+FilteredFileTree allocated-to XfmdDesktop in mode NormalDesktop.
+FilteredFileTree contributes-to WorkPathNavigation.
+FoxPresentation allocated-to XfmdDesktop in mode NormalDesktop.
+FoxPresentation contributes-to DocumentNavigation.
+FoxPresentation contributes-to LivePreview.
+GeneratedDocumentNavigation allocated-to XfmdDesktop in mode NormalDesktop.
+GeneratedDocumentNavigation contributes-to SelectGeneratedView.
+Interpreter owns MarkdownInterpretation.
+LivePreview supports EditDocuments.
+LocalFileStorage allocated-to XfmdDesktop in mode NormalDesktop.
+LocalFileStorage contributes-to DocumentNavigation.
+MarkdownInterpretation allocated-to XfmdDesktop in mode NormalDesktop.
+MarkdownInterpretation contributes-to LivePreview.
+NavigationHistory allocated-to XfmdDesktop in mode NormalDesktop.
+NavigationHistory contributes-to DocumentNavigation.
+PreviewPipeline allocated-to XfmdDesktop in mode NormalDesktop.
+PreviewPipeline contributes-to LivePreview.
+ReaderAuthor pursues EditDocuments.
+ReaderAuthor pursues ReadDocuments.
+ReaderAuthor pursues SelectGeneratedView.
+RenderLayout allocated-to XfmdDesktop in mode NormalDesktop.
+RenderLayout contributes-to LivePreview.
+Renderer owns RenderLayout.
+SourceAnchorMapping allocated-to XfmdDesktop in mode NormalDesktop.
+SourceAnchorMapping contributes-to DocumentNavigation.
+TextEditing allocated-to XfmdDesktop in mode NormalDesktop.
+TextEditing contributes-to LivePreview.
+WorkPathHistory allocated-to XfmdDesktop in mode NormalDesktop.
+WorkPathHistory contributes-to WorkPathNavigation.
+WorkPathNavigation supports ReadDocuments.
+WorkspaceControls allocated-to XfmdDesktop in mode NormalDesktop.
+WorkspaceControls contributes-to DocumentNavigation.
+WorkspaceControls contributes-to WorkPathNavigation.
+XfmdDesktop contains Application.
+XfmdDesktop contains Interpreter.
+XfmdDesktop contains Renderer.

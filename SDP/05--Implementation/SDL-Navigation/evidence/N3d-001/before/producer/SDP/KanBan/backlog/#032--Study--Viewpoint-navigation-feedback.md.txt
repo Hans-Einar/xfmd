@@ -1,0 +1,116 @@
+# Evaluate SDL viewpoints through integrated XFMD navigation
+
+| Field | Value |
+| --- | --- |
+| id | KB-SDP-032 |
+| project | SDP |
+| type | Study |
+| CardState | backlog |
+| Systems | SDL, SDPTOOL |
+| created | 2026-09-25T22:20:56Z |
+| source | Owner conversation 2026-09-26: SDL context, implementation drift and post-main XFMD adoption |
+| next_review | After MAINT-SDP-0005 main consolidation |
+
+## Owner intent
+
+Current generated viewpoints are an initial proposal requiring practical design
+feedback. The owner is waiting for integrated SDP navigation in XFMD to browse
+the model and assess what the views reveal or obscure. Generated output alone
+does not establish a useful viewpoint catalog.
+
+## Scope and outcome
+
+Prepare a Study and refinement plan using real SDL source models. Inventory the
+actual generators and navigation contracts before proposing new views. Evaluate
+requirements/use cases, features/functionality, system/container structure,
+channels/contracts and cross-cutting relationships across abstraction levels.
+Capture navigation tasks, missing context, ambiguous notation, duplication and
+useful drill-down/filter behavior. Include an assignment-authoring task so results
+feed [KB-SDP-031](../completed/%23031--Study--SDL-assignment-bundles-and-blueprints.md).
+
+Keep the SDL model as source of truth. Reproduce all diagrams via the tools;
+record model revision, generation parameters and derived-versus-authored facts.
+Do not hand-author purported generated diagrams or assume all viewpoints are
+implemented. Test both overview and selected on-demand generation.
+
+## Acceptance and ownership
+
+A repeatable walkthrough records actual owner feedback, source-linked examples,
+limitations and a prioritized, bounded refinement plan. Pending owner feedback
+must remain pending rather than being inferred by an agent. Coordinate with
+[KB-SDP-017](../active/%23017--Proposal--sdptool-and-project-navigation.md): that
+card owns the navigation bridge; this card evaluates viewpoint usefulness.
+XFMD owns its native sidebar implementation and its own KanBan work. No XFMD
+application change or new broad renderer integration is authorized here.
+
+## Worklog
+
+2026-09-25T22:20:56Z: Registered in backlog before main integration; EVT-KB-SDP-000173.
+
+## MVP1 pilot follow-up — 2026-09-27
+
+The MVP1 pilot supplies separate operator/APT/simulator SDUI screens, registered for current SDPTool structural Markdown preview, plus a generated SVG review gallery. The first full SDL navigation acceptance path is BuckingUI → OperatorInteraction → InspectMachine → MachineService, then the separate simulator path. Full corpus parsing/linking remains a prerequisite; no owner GUI feedback has yet occurred.
+
+[Pilot and navigation handoff](../../../experiments/mvp1_sdl/Navigation.md).
+
+## Concrete owner feedback — XFMD Session 0003, 2026-10-06
+
+The owner has now browsed generated views. This supersedes the earlier statement
+that practical owner feedback has not yet occurred, without inventing acceptance.
+
+- Remove A0–Ax presentation nodes from the default navigation; show each viewpoint
+  once per model/System, preserving abstraction facts in the model and useful detail.
+- Viewpoint-title activation should request a real aggregate overview, while tree
+  expansion and focused child selection remain separate on-demand actions. Avoid
+  generating every detail diagram as the substitute overview or rejecting at 24.
+- Use-case overview includes all declared actors/use cases and functionality
+  realization context. Use proper Mermaid use-case notation; preserve the distinction
+  between use cases and internal functionality. The current official syntax is
+  usecase-beta; compatibility of XFMD's native Rust path is separate work (#020).
+- Focused use cases should include sequence diagrams when ordered scenario facts
+  exist, plus authored or explicitly derived pre/postconditions with provenance.
+  Static dependency edges cannot establish sequence order or missing conditions.
+- VP07 should overlay features on the complete selected architecture; selecting
+  one feature provides realization detail. Inventory overview/detail semantics,
+  source facts and missing data for every remaining viewpoint.
+- Hide non-actionable reference/depth-limit placeholder rows while preserving
+  valid cross-reference targets and cycle protection. Genuine truncation/error
+  diagnostics must remain visible through an appropriate diagnostic surface.
+- Every source ID should link to original revision-aware exact source spans;
+  carry declaration/relation provenance across composed files and SDUI normalization.
+  Agree position units, multi-span IDs and stale-source behavior with XFMD #021.
+
+The supplied VP07 ConfigurableScrolling Mermaid fails in XFMD with libavoid
+non-orthogonal edge 11. It is captured under XFMD #020 with the exact source;
+root cause is not established, and this is not evidence of invalid SDL semantics.
+Do not rewrite model facts to bypass a rendering failure.
+
+Producer responsibilities: SDL projection semantics and SDPTool tree/view/source
+contract. Consumer: XFMD #028 (navigation/views), #021 (source spans), #020
+(renderer), #029 (action groups). New KB-SDUI-005 owns SDUI combined previews;
+this existing Study remains the SDL viewpoint handoff. No implementation selected.
+
+file:///home/warloc/git/xfmd-sdl-navigation/SDP/Sessions/session-%230003--SDL-navigation-and-SDUI.md
+
+## XFMD design handoff — Session 0003 T002
+
+XFMD PLAN-XFMD-0009 separates consumer tree cleanup (N2, compatible with current
+producer) from new overview projection (N3). Its selected native design preserves
+original reference actions; canonical object resolution must not replace a
+viewpoint-specific target with generic VP11. Phase/A-level wrappers become
+transparent display groups without deleting model abstraction facts.
+
+Concrete producer proposal for review: optional viewpoint-node overviewTarget,
+using the existing typed target shape and an explicit producer-owned select URI
+for one aggregate overview. Presence advertises actual implemented overview scope;
+absence keeps older consumer fallback. Do not reinterpret current bulk selection
+as the new overview or invent identifiers in XFMD. The proposal is not yet adopted
+in Contract.md and no schema/producer implementation is claimed.
+
+VP01/VP07 aggregates are new projections; existing goals()/feature logic emits
+detail graphs. Reuse VP08 ordered scenario sequences only through explicit model
+associations; missing associations/preconditions/postconditions remain gaps.
+The XFMD design includes a complete VP01–VP11 overview/detail disposition matrix
+for coordinated review. Authored-model hold remains intact in XFMD.
+
+file:///home/warloc/git/xfmd-sdl-navigation/SDP/04--Design/SDL-Navigation/Design.md

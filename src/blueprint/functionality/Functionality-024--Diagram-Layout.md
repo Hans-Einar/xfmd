@@ -12,6 +12,15 @@ uses: none
 
 # Functionality-024: Diagramlayout og tegnedata
 
+Current dependency adoption: [N3b design](../../../SDP/04--Design/SDL-Navigation/Design.md).
+The fork classifies Libavoid's invalid two-point diagonal no-route result as
+NoSpace, enabling its existing single fresh-placement retry under the same
+deadline and engine. It still rejects invalid geometry; frozen-position calls
+do not gain a placement retry. No XFMD contract or call sequence changes.
+Bootstrap consumes an exact commit/SHA-256 source archive, never a .deps patch.
+The original VP07 regression must retain all 12 nodes and 18 edges through measured
+layout and the shared native/PDF SVG path. Nested-group overlap remains open.
+
 ## 1. Hensikt og avgrensning
 
 Renderer-tjeneste for grafplassering, rutegeometri og bibliotekgenerert SVG. Gjenbruker bibliotekets layout; har ingen dependency til interpreter og mottar aldri Mermaid-kilde.
@@ -172,3 +181,65 @@ P41 Implemented: chart/tree/git/ZenUML-profiler bruker egne records.
 `semantic_charts.rs` validerer koordinater, hierarki og referencer; parserfiler
 `charts`, `trees`, `git`, `zenuml` og rendererfiler `charts`, `structures`
 bevarer semantikk uten original kilde over layoutgrensen.
+
+### N3c — native use-case increment
+
+[Use-case profile](../../../SDP/04--Design/SDL-Navigation/UseCase-Profile.md)
+defines family23/records210–212 and acceptance. Implemented: strict usecase-beta parser
+→ independently validated domain records → native fork UseCase graph/glyphs →
+existing measured SVG/native/PDF path. No original source crosses the layout port.
+The fork owns geometry and markers; XFMD owns syntax, semantic validation and
+conversion. Producer overview selection is not delivered by this profile.
+
+Plumbing: `src/interpreter/mermaid/rust/src/semantic/usecase.rs` emits element,
+boundary and relation records; `src/contracts/diagram/rust/src/semantic_usecase.rs`
+independently checks fields, identities, membership, endpoint kinds and labels.
+`src/renderer/diagram/rust/src/semantic/usecase.rs` maps validated records to the
+fork's UseCase graph. `compute_semantic_layout` routes real element endpoints with
+Libavoid, including boundaries; actor ports attach to glyph strokes and avoid
+captions. Unsupported syntax returns a diagnostic, never a partial diagram.
+Source remains inside the interpreter; the existing SVG and native/PDF adapter
+consumes measured output. See N3c-001 for candidate-specific verification.
+
+### Paged height boundary — N3d real-model regression
+
+A height-limited diagram must not exceed the printable height after floating-point
+multiplication. Clamp the final DiagramPlacement height to that boundary and use
+the same height for drawing, flow and maximum-run accounting. Preserve uniform
+scaling within floating precision and unchanged continuous layout. Do not relax
+PageBreaker's general oversized-line rejection. A 2065.6-point synthetic scene
+reproduces the one-ULP overshoot on A4; also verify the real XFMD VP01 export.
+
+### N3f measured-caption retry — Session0005 T009
+
+[Selected repair boundary](../../../SDP/04--Design/SDL-Navigation/N3f-Routing.md)
+keeps geometry in the renderer fork. routed::compute evaluates measured caption
+space in its existing single expanded placement; route_positioned and strict
+attachment validation retain their contracts. N3f-002 verifies the exact reported
+fixture, original VP07 regression and native/PDF behavior; ChapterNavigation
+ambiguity remains open under KB020.
+
+### N3g caption-identity obstacles — Session0005 T010
+
+[Repair boundary](../../../SDP/04--Design/SDL-Navigation/N3g-Routing.md) adds a
+nearest-owner exclusion area to the fork's existing caption/attachment obstacles.
+The radius uses actual route distance and existing tolerance/clearance; chamfered
+corners preserve the Manhattan metric. Final strict validation and routing bounds
+remain authoritative. No application or contract interface changes are required.
+Candidate implementation/verification is recorded in N3g-001.
+
+### N3h — full-size diagram reading
+
+DiagramPlacement uses LayoutProfile.fullSizeDiagrams only in Continuous mode to keep scale 1 and extend contentWidth with a right gutter. Paged placement always fits. Scene identity and approximate source mapping are preserved.
+See [selected design](../../../SDP/04--Design/SDL-Navigation/N3h-Reading.md).
+
+### N14: packet readability correction
+
+[Selected design](../../../SDP/04--Design/SDL-Navigation/N14-Packet-Readability.md)
+refines UR-040 / AT-060 through the existing measured layout/SVG plumbing. The
+pinned fork owns proportional packet geometry, actual-font endpoint measurement
+and numbered overflow legends. No contract or application label renderer changes.
+[N14-001](../../../SDP/05--Implementation/SDL-Navigation/evidence/N14-001/README.md)
+verifies the adopted 49bb0ee correction with seven fork tests, 24 CTests and
+inspected native/PDF output. General large-print acceptance and other renderer
+gaps remain open.

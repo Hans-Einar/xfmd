@@ -8,11 +8,15 @@
 using namespace FX;
 namespace xfmd {
 Application::~Application() {
+  if (sdpNavigation)
+    sdpNavigation->stop();
   documentViews.reset();
   windowMode.reset();
   exporter.reset();
   references.reset();
   preview.reset();
+  sdui.reset();
+  sdpNavigation.reset();
   scheduler.reset();
   delete window;
 }
@@ -36,12 +40,16 @@ void Application::initialize(int& argc, char** argv) {
                                                window->workspacePanel, window->split);
   commands.action = [this](auto command) { execute(command); };
   commands.enabled = [this](auto command) {
+    if (command == CommandRouter::SduiLaunch) return sdui && sdui->canLaunch();
+    if (command == CommandRouter::KanbanAdd || command == CommandRouter::KanbanMove) return false;
     if (command == CommandRouter::ExportPdf)
       return !exporter || !exporter->busy();
     if (command == CommandRouter::CancelExport)
       return exporter && exporter->busy();
     if (command == CommandRouter::FitWidth || command == CommandRouter::FitHeight)
       return preview && preview->layoutProfile().mode == LayoutMode::Paged;
+    if (command == CommandRouter::FullSizeDiagrams)
+      return preview && preview->layoutProfile().mode == LayoutMode::Continuous;
     if (command == CommandRouter::Undo)
       return edits.canUndo();
     if (command == CommandRouter::Redo)
@@ -69,6 +77,8 @@ void Application::initialize(int& argc, char** argv) {
       return preview->layoutProfile().mode == LayoutMode::Paged;
     if (command == CommandRouter::WindowWrap)
       return preview->layoutProfile().mode == LayoutMode::Continuous;
+    if (command == CommandRouter::FullSizeDiagrams)
+      return preview->layoutProfile().fullSizeDiagrams;
     if (command == CommandRouter::FitWidth)
       return zoom && zoom->mode() == ZoomMode::FitWidth;
     if (command == CommandRouter::FitHeight)
@@ -119,6 +129,8 @@ void Application::initialize(int& argc, char** argv) {
   browser.failed = [this](const std::string& error) { documents.error(error); };
   host->linkHovered = [this](const std::string& target) { showLinkTarget(target); };
   wireIndex();
+  sdpNavigation = std::make_unique<SdpNavigation>(*this);
+  sdui = std::make_unique<SduiWorkflow>(*this);
   wireWorkspace();
   wireZoom();
   documentOpened = [this] {
@@ -126,11 +138,13 @@ void Application::initialize(int& argc, char** argv) {
       documentViews->documentChanged("main");
     references->cancel();
     pendingHeading.reset();
+    pendingLinkAnchor.reset();
     navigation->commitVisit();
     preview->refresh();
   };
   contentChanged = [this] {
     pendingHeading.reset();
+    pendingLinkAnchor.reset();
     references->cancel();
     preview->schedule();
   };
@@ -185,6 +199,8 @@ void Application::wireDocument() {
     FXMessageBox::error(window, MBOX_OK, "xfmd", "%s", message.c_str());
   };
   documents.opened = [this] {
+    if (session.view().standaloneMermaid)
+      views->setMode(ViewMode::Preview);
     window->workspacePanel->recentFiles->remember(session.view().path);
     edits.reset();
     updateUi();

@@ -1,0 +1,8 @@
+flowchart LR
+    n_DeliverGeneratedMain["DeliverGeneratedMain (message)"]
+    n_GeneratedDeliveryContract["GeneratedDeliveryContract (contract)"]
+    n_GeneratedMainAccepted["GeneratedMainAccepted (message)"]
+    n_GeneratedMainRejected["GeneratedMainRejected (message)"]
+    n_GeneratedDeliveryContract -->|permits| n_DeliverGeneratedMain
+    n_GeneratedDeliveryContract -->|permits| n_GeneratedMainAccepted
+    n_GeneratedDeliveryContract -->|permits| n_GeneratedMainRejected

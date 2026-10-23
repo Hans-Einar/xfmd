@@ -1,0 +1,10 @@
+{
+  "schema": "sdptool/0.2",
+  "operation": "select",
+  "source": "/tmp/xfmd-gui-home-5sq2_pd6/overview project/SDP/SDL/Overview.design",
+  "profile": "design-core/0.5",
+  "revision": "9bdf257d7dd88f39825fe82522955ed8a94df2f790add690ced1c615edf4bd30",
+  "entry": "/tmp/xfmd-gui-home-5sq2_pd6/runtime/xfmd/xfmd-sdp-deLgtx/1/entry.md",
+  "directory": "/tmp/xfmd-gui-home-5sq2_pd6/runtime/xfmd/xfmd-sdp-deLgtx/1",
+  "ownership": "caller-owned; remove directory after consumer release"
+}

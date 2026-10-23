@@ -1,0 +1,31 @@
+measurement-state 742.876x213.672 pt
+state-regions 240.212x548.933 pt
+state-choice 239.801x340.728 pt
+sdl-class 304.655x973.631 pt
+apt-requirements 404.5x492.875 pt
+provenance-er 237.675x550.411 pt
+c4-context 690x270 pt
+c4-container 738x452.25 pt
+c4-component 738x290.25 pt
+architecture-resources 348x297 pt
+block-layers 288x125.156 pt
+packet-encoding 762x253.031 pt
+timeline-decisions 495x301.044 pt
+gantt-pilot 536.12x177.887 pt
+journey-review 728x297.144 pt
+pie-evidence 392.596x270 pt
+mindmap-review 333.386x236.154 pt
+gitgraph-proposal 246.918x120.969 pt
+sankey-provenance 910.364x270 pt
+quadrant-priorities 413.8x395.831 pt
+zenuml-observation 412.5x409.125 pt
+kanban-review 709.2x138.425 pt
+radar-quality 576.5x565.188 pt
+treemap-effort 546x366 pt
+xychart-evidence 405x319.187 pt
+traceability 1557.34x1055.84 pt, 175 ms
+service-map 1129.38x222.821 pt, 24 ms
+layer-delivery 2542x219.597 pt, 64 ms
+128-node chain: 1767 ms
+128-node / 512-edge cyclic graph: 466 ms
+PASS

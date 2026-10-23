@@ -1,0 +1,10 @@
+   Compiling mermaid-rs-renderer v0.3.1 (/home/warloc/git/mermaid-rs-renderer-xfmd-diagrams)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.10s
+     Running tests/xfmd_document_references.rs (/home/warloc/git/xfmd-sdl-navigation/build-diagram-fork/debug/deps/xfmd_document_references-67c1dc5caba2aea9)
+
+running 1 test
+["one spacing retry after non-orthogonal edge 3 [(426.0184020996094, 120.30737495422363), (825.8934326171875, 160.31167030334473)]; failed routing/labels attempt 136.663429ms, included in total time", "libavoid transaction 1: 35.585809ms", "libavoid transaction 2: 18.564672ms", "constrained parallel separation: Quality { length: 5469.187942504883, bends: 22, crossings: 19, parallel_overlaps: 0, close_parallel_segments: 1, node_traversals: 0, label_collisions: 0, attachment_intrusions: 0 }"]
+test xfmd_document_references_preserves_routes_and_caption_attachments ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.56s
+

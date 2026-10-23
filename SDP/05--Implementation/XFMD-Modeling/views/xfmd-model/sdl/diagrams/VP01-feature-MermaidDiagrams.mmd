@@ -1,0 +1,24 @@
+flowchart LR
+    n_DiagramLayout["DiagramLayout (functionality)"]
+    n_DiagramPreparation["DiagramPreparation (functionality)"]
+    n_FoxPresentation["FoxPresentation (functionality)"]
+    n_MarkdownInterpretation["MarkdownInterpretation (functionality)"]
+    n_MermaidDiagrams["MermaidDiagrams (feature)"]
+    n_MermaidInterpretation["MermaidInterpretation (functionality)"]
+    n_PageComposition["PageComposition (functionality)"]
+    n_PdfExport["PdfExport (functionality)"]
+    n_PreviewPipeline["PreviewPipeline (functionality)"]
+    n_PreviewTextSelection["PreviewTextSelection (functionality)"]
+    n_RenderLayout["RenderLayout (functionality)"]
+    n_TypographyAndDrawing["TypographyAndDrawing (functionality)"]
+    n_DiagramLayout -->|contributes-to| n_MermaidDiagrams
+    n_DiagramPreparation -->|contributes-to| n_MermaidDiagrams
+    n_FoxPresentation -->|contributes-to| n_MermaidDiagrams
+    n_MarkdownInterpretation -->|contributes-to| n_MermaidDiagrams
+    n_MermaidInterpretation -->|contributes-to| n_MermaidDiagrams
+    n_PageComposition -->|contributes-to| n_MermaidDiagrams
+    n_PdfExport -->|contributes-to| n_MermaidDiagrams
+    n_PreviewPipeline -->|contributes-to| n_MermaidDiagrams
+    n_PreviewTextSelection -->|contributes-to| n_MermaidDiagrams
+    n_RenderLayout -->|contributes-to| n_MermaidDiagrams
+    n_TypographyAndDrawing -->|contributes-to| n_MermaidDiagrams

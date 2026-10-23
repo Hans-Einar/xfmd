@@ -1,0 +1,7 @@
+{
+  "toolVersion": "SDPTool 2.2.0",
+  "revision": "ef8741c433c7fde67e689f94a74e7afdf938f24f",
+  "discoverySha256": "2b69e89d52a73f7d8eeb9c0b7a9bc7b10c72aef5cb248197714368445fffa155",
+  "overviewNodes": 0,
+  "notes": "Read-only feasibility check; does not resume KB030 or verify its action API."
+}

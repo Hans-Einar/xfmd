@@ -1,0 +1,6 @@
+flowchart LR
+    n_DocumentIndexService["DocumentIndexService (unit)"]
+    n_IndexIntents["IndexIntents (channel)"]
+    n_NativeShell["NativeShell (unit)"]
+    n_IndexIntents -->|receiver| n_DocumentIndexService
+    n_NativeShell -->|sender| n_IndexIntents

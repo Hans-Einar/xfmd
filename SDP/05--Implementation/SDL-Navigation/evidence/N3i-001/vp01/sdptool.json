@@ -1,0 +1,10 @@
+{
+  "schema": "sdptool/0.2",
+  "operation": "select",
+  "source": "/home/warloc/git/xfmd-sdl-navigation/SDP/SDL/XFMD/XfmdDesktop.design",
+  "profile": "design-core/0.5",
+  "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007",
+  "entry": "/home/warloc/git/xfmd-sdl-navigation/SDP/05--Implementation/SDL-Navigation/evidence/N3i-001/vp01/entry.md",
+  "directory": "/home/warloc/git/xfmd-sdl-navigation/SDP/05--Implementation/SDL-Navigation/evidence/N3i-001/vp01",
+  "ownership": "caller-owned; remove directory after consumer release"
+}

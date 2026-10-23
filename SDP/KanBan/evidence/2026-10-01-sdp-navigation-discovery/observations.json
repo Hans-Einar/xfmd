@@ -1,0 +1,541 @@
+{
+  "observedAt": "2026-10-01T09:28:31.148284+00:00",
+  "command": [
+    "gh",
+    "sdp",
+    ".",
+    "discover",
+    "--json"
+  ],
+  "cwd": "/home/warloc/git/xfmd-sdl-navigation",
+  "environment": {
+    "SDP_OFFLINE": "true"
+  },
+  "scope": "Selected unmodified response excerpts; not the complete response or GUI evidence",
+  "responseSha256": "840f552e348eed9a0c7f8a22c7b3da8450e5deadc631fcb7b915fe56443eec75",
+  "schema": "sdptool/0.2",
+  "status": "valid",
+  "navigationRoots": [
+    "files",
+    "sdl",
+    "kanban",
+    "sdui"
+  ],
+  "rootNodes": [
+    {
+      "id": "files",
+      "kind": "directory",
+      "label": "SDP",
+      "state": "available",
+      "children": [
+        "files/01--Mandate",
+        "files/02--Requirements",
+        "files/03--Architecture",
+        "files/04--Design",
+        "files/05--Implementation",
+        "files/Agents",
+        "files/CodeReview",
+        "files/Framework",
+        "files/KanBan",
+        "files/Maintenance",
+        "files/ProjectManagement",
+        "files/README.md",
+        "files/RELEASE-NOTES.md",
+        "files/Refactors",
+        "files/SDL",
+        "files/SDP-DOCUMENT-GUIDE.md",
+        "files/SDP-project.manifest.yaml",
+        "files/Sessions",
+        "files/Sprints",
+        "files/Traceability",
+        "files/Verification"
+      ]
+    },
+    {
+      "id": "sdl",
+      "kind": "tab",
+      "label": "SDL",
+      "state": "available",
+      "children": [
+        "sdl/sdl-core-0442339cc9497720",
+        "sdl/sdl-include-5b67fbf15373f7e2",
+        "sdl/sdl-requirement-5e24377bc143435b",
+        "sdl/sdl-system-5123ce1e5bbdb60c",
+        "sdl/navigation-70f0593e03655d5c",
+        "sdl/xfmddesktop-47e40bf52e14c5d8"
+      ]
+    },
+    {
+      "id": "kanban",
+      "kind": "tab",
+      "label": "KanBan",
+      "state": "validated",
+      "children": [
+        "kanban/backlog",
+        "kanban/active",
+        "kanban/onHold",
+        "kanban/completed",
+        "kanban/canceled",
+        "kanban/superseded",
+        "kanban/irrelevant"
+      ]
+    },
+    {
+      "id": "sdui",
+      "kind": "tab",
+      "label": "SDUI",
+      "state": "available",
+      "children": [
+        "sdui/sdui-checked-631c6b8774088b62",
+        "sdui/sdui-context-event-a6904e3095964bb0",
+        "sdui/sdui-controls-e143ef96798aca54",
+        "sdui/sdui-icon-53113522f11fbc6b",
+        "sdui/sdui-missing-binding-6424cdf403635cc9",
+        "sdui/sdui-scroll-ast-2a76e92edbf104ab",
+        "sdui/sdui-scroll-svg-bbd6fd37bfd0f327",
+        "sdui/sdui-widget-checkbox-c21d0157a2defb0d",
+        "sdui/sdui-widget-dialog-0127682f97819e0d",
+        "sdui/sdui-widget-list-7dde6e8d7b38a091",
+        "sdui/sdui-widget-menu-8583fb7289a0e125",
+        "sdui/sdui-widget-select-9909c18c5b99a1ee",
+        "sdui/sdui-widget-slider-46eaa8f070d5ecd1",
+        "sdui/sdui-widget-splitter-fc158c670feeaa48",
+        "sdui/sdui-widget-tabs-e5585e585a697878",
+        "sdui/sdui-widget-textarea-b01d3c5b838b655f",
+        "sdui/sdui-widget-tree-744733ac86bcba54",
+        "sdui/desktop-d3d068302a4ec102",
+        "sdui/navigation-a8628d4ab9d7def9"
+      ]
+    }
+  ],
+  "expansionDepthLimit": 8,
+  "source": [
+    {
+      "id": "xfmddesktop-47e40bf52e14c5d8",
+      "system": "XFMD",
+      "source": "SDP/SDL/XFMD/XfmdDesktop.design",
+      "profile": "design-core/0.5",
+      "kind": "sdl",
+      "state": "validated",
+      "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+    }
+  ],
+  "sourceNode": {
+    "id": "sdl/xfmddesktop-47e40bf52e14c5d8",
+    "kind": "source",
+    "label": "SDP/SDL/XFMD/XfmdDesktop.design",
+    "state": "validated",
+    "children": [
+      "sdl/xfmddesktop-47e40bf52e14c5d8/requirements",
+      "sdl/xfmddesktop-47e40bf52e14c5d8/architecture",
+      "sdl/xfmddesktop-47e40bf52e14c5d8/design",
+      "sdl/xfmddesktop-47e40bf52e14c5d8/implementation"
+    ],
+    "target": {
+      "operation": "tree",
+      "project": "xfmd",
+      "model": "xfmddesktop-47e40bf52e14c5d8",
+      "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+    }
+  },
+  "fileNode": {
+    "id": "files/SDL/XFMD/XfmdDesktop.design",
+    "kind": "file",
+    "label": "XfmdDesktop.design",
+    "state": "validated",
+    "target": {
+      "operation": "open",
+      "project": "xfmd",
+      "path": "/home/warloc/git/xfmd-sdl-navigation/SDP/SDL/XFMD/XfmdDesktop.design",
+      "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+    }
+  },
+  "abstractions": [
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/A0",
+      "kind": "abstraction",
+      "label": "A0",
+      "state": "available",
+      "children": [
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A0/VP01",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A0/VP11"
+      ]
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/A1",
+      "kind": "abstraction",
+      "label": "A1",
+      "state": "available",
+      "children": [
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A1/VP01",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A1/VP03",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A1/VP07",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A1/VP08",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A1/VP09",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A1/VP11"
+      ]
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/A2",
+      "kind": "abstraction",
+      "label": "A2",
+      "state": "available",
+      "children": [
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A2/VP02",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A2/VP03",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A2/VP04",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A2/VP05",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A2/VP07",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A2/VP11"
+      ]
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/A3",
+      "kind": "abstraction",
+      "label": "A3",
+      "state": "available",
+      "children": [
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A3/VP02",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A3/VP03",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A3/VP04",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A3/VP05",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A3/VP07",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A3/VP11"
+      ]
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/A4",
+      "kind": "abstraction",
+      "label": "A4",
+      "state": "available",
+      "children": [
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A4/VP08",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A4/VP09",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A4/VP10",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A4/VP11"
+      ]
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/A5",
+      "kind": "abstraction",
+      "label": "A5",
+      "state": "available",
+      "children": [
+        "sdl/xfmddesktop-47e40bf52e14c5d8/A5/VP11"
+      ]
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/delivery",
+      "kind": "abstraction",
+      "label": "delivery",
+      "state": "available",
+      "children": [
+        "sdl/xfmddesktop-47e40bf52e14c5d8/delivery/VP06"
+      ]
+    }
+  ],
+  "viewpoints": [
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP01",
+      "kind": "viewpoint",
+      "label": "VP01 — Use cases and traceability",
+      "state": "available",
+      "children": [
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-BrowseSdpProject",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-BrowseWorkspace",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-ConfigurePreferences",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-EditDocuments",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-NavigateDocuments",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-PublishPages",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-ReadDiagrams",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-ReadDocuments",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-ScrollDocuments",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-SelectGeneratedView",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-UseFullscreen",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-feature-ChapterNavigation",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-feature-ConfigurableScrolling",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-feature-DocumentNavigation",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-feature-DocumentReferences",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-feature-LivePreview",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-feature-MarkdownPresentation",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-feature-MermaidDiagrams",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-feature-PagedPublication",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-feature-SynchronizedScrolling",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/diagram/VP01-feature-WorkPathNavigation",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/kind/actor",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/kind/feature",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/kind/functionality",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP01/kind/usecase"
+      ],
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP01?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP02",
+      "kind": "viewpoint",
+      "label": "VP02 — Architecture and logical decomposition",
+      "state": "available",
+      "children": [
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP02/diagram/VP02-roots",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP02/diagram/VP02-Application",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP02/diagram/VP02-XfmdDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP02/kind/container",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP02/kind/unit"
+      ],
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP02?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP03",
+      "kind": "viewpoint",
+      "label": "VP03 — Responsibilities and capabilities across the architecture",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP03?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP04",
+      "kind": "viewpoint",
+      "label": "VP04 — Interfaces and collaboration",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP04?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP05",
+      "kind": "viewpoint",
+      "label": "VP05 — Dependencies by mode",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP05?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP06",
+      "kind": "viewpoint",
+      "label": "VP06 — Activities and delivery plan",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP06?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP07",
+      "kind": "viewpoint",
+      "label": "VP07 — Features across the architecture",
+      "state": "available",
+      "children": [
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/diagram/VP07-ChapterNavigation-NormalDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/diagram/VP07-ConfigurableScrolling-NormalDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/diagram/VP07-DocumentNavigation-NormalDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/diagram/VP07-DocumentReferences-NormalDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/diagram/VP07-LivePreview-NormalDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/diagram/VP07-MarkdownPresentation-NormalDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/diagram/VP07-MermaidDiagrams-NormalDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/diagram/VP07-PagedPublication-NormalDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/diagram/VP07-SynchronizedScrolling-NormalDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/diagram/VP07-WorkPathNavigation-NormalDesktop",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/kind/container",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/kind/feature",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/kind/functionality",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/kind/mode",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP07/kind/unit"
+      ],
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP07?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP08",
+      "kind": "viewpoint",
+      "label": "VP08 — Channel contracts and sequences",
+      "state": "available",
+      "children": [
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-ChooserOpensThenChangesRoot",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-ContextMenuDismissed",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-DiagramScenePrepared",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-DirtyGeneratedDeliveryRejected",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-DirtyOpenCancelled",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-EditedPreviewPublished",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-ExternalTargetHandedOff",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-FavoriteFileOpens",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-FavoriteFolderChangesRoot",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-FullscreenChangesPresentation",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-GeneratedReplacementReleasesOldLease",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-GeneratedSelectionSupersedes",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-InvalidSelectionRetainsChild",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-PdfCancelledBeforePublication",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-PdfSnapshotPublished",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-PreferencesPersistBeforeAdoption",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-PreviewResourcesPrepared",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-PreviewScrollSynchronizesEditor",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-ReferenceHeadingsLoaded",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-ReleaseRetryAfterSendFailure",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-SaveThenReadFails",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/diagram/VP08-StalePreviewDiscarded",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/kind/channel",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/kind/contract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/kind/message",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/kind/mode",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/kind/scenario",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/kind/unit",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP08/kind/usecase"
+      ],
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP08?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP09",
+      "kind": "viewpoint",
+      "label": "VP09 — Dataset, Datagram and persistent Database",
+      "state": "available",
+      "children": [
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-data-FrozenExportSnapshot",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-data-GeneratedSelectionState",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-data-MainDocumentState",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-ContextInteractionContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-DiagramInterpretationContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-DiagramLayoutCallsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-DocumentCallsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-DocumentNotificationsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-DocumentStateChangesContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-DocumentStateShape",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-EditIntentsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-ExportInterpretationContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-ExportLayoutContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-ExportSnapshotShape",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-ExternalOpeningContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-GeneratedAdmissionContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-GeneratedDeliveryContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-GeneratedDocumentCallsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-GeneratedIntentsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-GenerationLifecycleContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-GenerationStateShape",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-IndexChangesContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-IndexIntentsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-InteractionObservationShape",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-InterpretationCallsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-LayoutCallsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-LeaseLifecycleContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-LeaseNotificationsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-NavigationCallsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-OpeningPolicyContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-PreferenceChangesContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-PresentationEventsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-PreviewAdmissionContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-PublicationDrawingContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-PublicationInputsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-PublicationIntentsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-PublicationStateContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-ReferenceInterpretationContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-ReferenceStorageContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-ResourcePreparationContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-ScheduledWorkContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-StorageCallsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-UnsavedAdmissionContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-ViewportChangesContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-WindowPresentationContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-WorkspaceChangesContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/diagram/VP09-contract-WorkspaceIntentsContract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/kind/contract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/kind/dataset",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/kind/field",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/kind/message",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP09/kind/unit"
+      ],
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP09?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP10",
+      "kind": "viewpoint",
+      "label": "VP10 — Datagram encoding and packets",
+      "state": "empty",
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP10?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    },
+    {
+      "id": "sdl/xfmddesktop-47e40bf52e14c5d8/VP11",
+      "kind": "viewpoint",
+      "label": "VP11 — Properties, traceability and model gaps",
+      "state": "available",
+      "children": [
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/actor",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/channel",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/container",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/contract",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/dataset",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/feature",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/field",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/functionality",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/interface",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/message",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/mode",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/scenario",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/unit",
+        "sdl/xfmddesktop-47e40bf52e14c5d8/VP11/kind/usecase"
+      ],
+      "target": {
+        "operation": "select",
+        "project": "xfmd",
+        "model": "xfmddesktop-47e40bf52e14c5d8",
+        "uri": "sdl-view://xfmd/VP11?consumer=xfmd&target=main",
+        "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+      }
+    }
+  ],
+  "viewpointReference": {
+    "id": "sdl/xfmddesktop-47e40bf52e14c5d8/A2/VP02",
+    "kind": "reference",
+    "label": "VP02",
+    "state": "available",
+    "reference": "sdl/xfmddesktop-47e40bf52e14c5d8/VP02"
+  }
+}

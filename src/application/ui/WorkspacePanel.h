@@ -2,6 +2,7 @@
 #include "FavoritesPanel.h"
 #include "IndexPanel.h"
 #include "RecentFilesPanel.h"
+#include "SdpPanel.h"
 #include "SidebarWidget.h"
 #include "application/workspace/WorkPathHistory.h"
 #include "controls/UiLayout.h"
@@ -11,8 +12,10 @@ class WorkspacePanel : public FX::FXVerticalFrame {
   std::string pendingPath;
   std::string namePattern;
   FX::FXSwitcher* pages = nullptr;
+  FX::FXTabItem* sdpTab = nullptr;
   bool pathError = false, filterPending = false;
   void remember();
+  void fitHeader();
 
 protected:
   WorkspacePanel() : history("/") {}
@@ -36,7 +39,9 @@ public:
   FX::FXTabBook* recentTabs = nullptr;
   UiButton *refreshButton = nullptr, *upButton = nullptr, *openButton = nullptr;
   IndexPanel* index = nullptr;
-  std::function<void()> openRequested, indexRefresh;
+  SdpPanel* sdp = nullptr;
+  void showSdp(bool);
+  std::function<void()> openRequested, indexRefresh, sdpRefresh;
   std::function<void(const std::string&)> rootChanged;
   UiButton* markdown = nullptr;
   FX::FXList* workPaths = nullptr;

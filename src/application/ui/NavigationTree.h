@@ -4,7 +4,7 @@
 #include <fx.h>
 #include <optional>
 namespace xfmd {
-enum class IndexActionKind { None, Heading, File, Hyperlink };
+enum class IndexActionKind { None, Heading, File, Hyperlink, Command };
 struct IndexAction {
   IndexActionKind kind = IndexActionKind::None;
   std::string path, target, error;

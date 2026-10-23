@@ -1,0 +1,4 @@
+# github.com/Hans-Einar/SDP/SDPTool [github.com/Hans-Einar/SDP/SDPTool.test]
+./deferred_navigation_test.go:5:2: "context" imported and not used
+FAIL	github.com/Hans-Einar/SDP/SDPTool [build failed]
+FAIL

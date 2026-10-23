@@ -19,10 +19,23 @@ keep distinct responsibilities. Phase homes do not assign A0–A5 to every objec
 The process can revisit earlier decisions; it does not require a waterfall.
 
 Bootstrap created navigation to current authorities, not a second specification.
-No .design model has been created or claimed parsed yet. The next agent starts
-with [KB-XFMD-017](KanBan/backlog/%23017--Proposal--Adopt-SDP-and-model-XFMD.md).
-Native project detection/sidebar and .design preview remain separate cards.
-The signed SDP 0.2.0 installation now supplies the discovery marker and receipt.
-Use `gh sdp discover` or `gh sdp tree` from this repository; no SDL models are
-registered yet. See [installation](Maintenance/MAINT-XFMD-0001.md) and
-[project reconciliation](Maintenance/MAINT-XFMD-0002.md).
+[KB-XFMD-017](KanBan/active/%23017--Proposal--Adopt-SDP-and-model-XFMD.md) is now
+active under [MAINT-XFMD-0004](Maintenance/MAINT-XFMD-0004.md). A
+[partial SDL/SDUI navigation pilot](SDL/XFMD/README.md) has checked structural
+sources and generated static views. It is not a complete System model or native
+SDUI runtime integration. Native SDP sidebar and direct .design preview remain
+separate cards. No complete SDL source set is registered in SDPTool yet.
+
+The latest 2026-09-29 owner refinement selects complete SDL modeling and SDUI
+composition wherever feasible. The SDL baseline now focuses on functionality, ownership and
+dependency boundaries to keep feature growth maintainable. SDUI may use labeled editor/preview regions without active file editing; see the MaintenancePlan for current acceptance.
+
+The signed Toolkit 1.0.0 installation is recorded in
+[MAINT-XFMD-0003](Maintenance/MAINT-XFMD-0003.md); the installed manifest controls
+current version claims. Earlier [installation](Maintenance/MAINT-XFMD-0001.md)
+and [reconciliation](Maintenance/MAINT-XFMD-0002.md) retain their historical scope.
+
+Current model checkpoint (2026-09-30): [XfmdDesktop model](SDL/XFMD/README.md)
+now covers all 37 existing blueprints structurally and includes 22 declared
+workflow examples plus five feasible SDUI concepts. Full semantic closure and
+independent review remain pending. The earlier pilot remains historical evidence.

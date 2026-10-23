@@ -1,0 +1,1 @@
+PASS: archive SHA256 and Git PAX commit, clean fork HEAD, 1295 regular files match fork and extracted dependency.

@@ -1,0 +1,202 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd-sdl-navigation/build-ui
+Test project /home/warloc/git/xfmd-sdl-navigation/build-ui
+      Start 64: MermaidRustTests
+      Start 39: WheelGuiTest
+      Start 78: DocumentZoomDpiTest
+      Start 15: DiagramReadingGuiTest
+ 1/93 Test #64: MermaidRustTests .................   Passed    0.98 sec
+      Start 89: SdpRuntimeGuiTest
+ 2/93 Test #15: DiagramReadingGuiTest ............   Passed    3.14 sec
+      Start 19: DocumentZoomGuiTest
+ 3/93 Test #89: SdpRuntimeGuiTest ................   Passed   13.82 sec
+      Start 75: DocumentLeaseGuiTest
+ 4/93 Test #39: WheelGuiTest .....................   Passed   23.53 sec
+      Start 20: PathWorkspaceGuiTest
+ 5/93 Test #78: DocumentZoomDpiTest ..............   Passed   24.18 sec
+      Start 22: FileRoutingGuiTest
+ 6/93 Test #19: DocumentZoomGuiTest ..............   Passed   24.14 sec
+      Start 18: FavoritesGuiTest
+ 7/93 Test #75: DocumentLeaseGuiTest .............   Passed   13.61 sec
+      Start 79: SdpWatchTest
+ 8/93 Test #79: SdpWatchTest .....................   Passed    6.77 sec
+      Start 23: MermaidGuiTest
+ 9/93 Test #18: FavoritesGuiTest .................   Passed    9.08 sec
+      Start 53: PdfFidelityTest
+10/93 Test #22: FileRoutingGuiTest ...............   Passed   14.86 sec
+      Start 40: WorkPathGuiTest
+11/93 Test #20: PathWorkspaceGuiTest .............   Passed   20.18 sec
+      Start 25: PreviewSelectionGuiTest
+12/93 Test #23: MermaidGuiTest ...................   Passed    8.93 sec
+      Start 91: SduiWorkflowGuiTest
+13/93 Test #40: WorkPathGuiTest ..................   Passed    9.94 sec
+      Start 38: SidebarGuiTest
+14/93 Test #25: PreviewSelectionGuiTest ..........   Passed    5.60 sec
+      Start 81: SdpNavigationGuiTest
+15/93 Test #91: SduiWorkflowGuiTest ..............   Passed    5.39 sec
+      Start 28: TreeActionsTest
+16/93 Test #53: PdfFidelityTest ..................   Passed   13.48 sec
+      Start 63: MermaidBootstrapTest
+17/93 Test #63: MermaidBootstrapTest .............   Passed    1.10 sec
+      Start 55: FullscreenTest
+18/93 Test #28: TreeActionsTest ..................   Passed    4.29 sec
+      Start 21: OpenPathDialogGuiTest
+19/93 Test #38: SidebarGuiTest ...................   Passed    5.52 sec
+      Start 92: SdpOverviewGuiTest
+20/93 Test #55: FullscreenTest ...................   Passed    3.81 sec
+      Start 16: SdpDynamicGuiTest
+21/93 Test #92: SdpOverviewGuiTest ...............   Passed    2.87 sec
+      Start 66: DiagramReadingTest
+22/93 Test #16: SdpDynamicGuiTest ................   Passed    3.89 sec
+      Start 26: CompactWorkspaceTest
+23/93 Test #21: OpenPathDialogGuiTest ............   Passed    6.25 sec
+      Start 30: AppearanceGuiTest
+24/93 Test #81: SdpNavigationGuiTest .............   Passed   10.89 sec
+      Start 41: PointerTest
+25/93 Test #26: CompactWorkspaceTest .............   Passed    4.57 sec
+      Start 76: ThemePopupGuiTest
+26/93 Test #41: PointerTest ......................   Passed    3.43 sec
+      Start 72: DocumentViewsGuiTest
+27/93 Test #30: AppearanceGuiTest ................   Passed    3.69 sec
+      Start 33: IndexGuiTest
+28/93 Test #66: DiagramReadingTest ...............   Passed    7.30 sec
+      Start 77: DocumentZoomPdfTest
+29/93 Test #72: DocumentViewsGuiTest .............   Passed    3.52 sec
+      Start 87: HeadingLinkGuiTest
+30/93 Test #77: DocumentZoomPdfTest ..............   Passed    2.60 sec
+      Start 37: NavigationGuiTest
+31/93 Test #33: IndexGuiTest .....................   Passed    3.65 sec
+      Start 74: WindowEndpointBoundaryTest
+32/93 Test #76: ThemePopupGuiTest ................   Passed    4.42 sec
+      Start 85: StandaloneMermaidGuiTest
+33/93 Test #87: HeadingLinkGuiTest ...............   Passed    1.39 sec
+      Start 27: ReadingColorsGuiTest
+34/93 Test #74: WindowEndpointBoundaryTest .......   Passed    2.16 sec
+      Start 35: PresentationTest
+35/93 Test #85: StandaloneMermaidGuiTest .........   Passed    1.92 sec
+      Start 80: SdpProtocolTest
+36/93 Test #37: NavigationGuiTest ................   Passed    2.98 sec
+      Start 49: PagedPreviewTest
+37/93 Test #27: ReadingColorsGuiTest .............   Passed    2.66 sec
+      Start 42: TablePreviewTest
+38/93 Test #35: PresentationTest .................   Passed    2.02 sec
+      Start 31: UiControlsTest
+39/93 Test #80: SdpProtocolTest ..................   Passed    2.96 sec
+      Start 36: ScrollingTest
+40/93 Test #49: PagedPreviewTest .................   Passed    2.26 sec
+      Start 17: SdpPanelGuiTest
+41/93 Test #42: TablePreviewTest .................   Passed    1.90 sec
+      Start 58: TableTest
+42/93 Test #31: UiControlsTest ...................   Passed    2.07 sec
+      Start 73: DocumentEndpointTest
+43/93 Test #17: SdpPanelGuiTest ..................   Passed    1.57 sec
+      Start 62: DiagramLayoutTest
+44/93 Test #36: ScrollingTest ....................   Passed    1.63 sec
+      Start 13: BlueprintStructure
+45/93 Test #73: DocumentEndpointTest .............   Passed    1.71 sec
+      Start 67: MermaidPdfTest
+46/93 Test #58: TableTest ........................   Passed    4.93 sec
+      Start 70: BuildIdentityTest
+47/93 Test #13: BlueprintStructure ...............***Failed    4.02 sec
+src/blueprint/functionality/Functionality-032--SDP-Project-Navigation.md: expected the eight fixed headings, with chapter 5 Plumbing
+FAILED: 1 error(s)
+
+      Start 29: AppearancePreferencesTest
+48/93 Test #62: DiagramLayoutTest ................   Passed    4.83 sec
+      Start 52: ExportGuiTest
+49/93 Test #29: AppearancePreferencesTest ........   Passed    1.30 sec
+      Start 24: RecentFilesGuiTest
+50/93 Test #67: MermaidPdfTest ...................   Passed    4.34 sec
+      Start 56: IconTest
+51/93 Test #52: ExportGuiTest ....................   Passed    0.78 sec
+      Start  8: WorkPathTest
+52/93 Test #56: IconTest .........................   Passed    0.86 sec
+      Start 32: BrowserPreferencesTest
+53/93 Test  #8: WorkPathTest .....................   Passed    0.90 sec
+      Start 34: WorkspaceTest
+54/93 Test #70: BuildIdentityTest ................   Passed    3.12 sec
+      Start 46: PreferencesTest
+55/93 Test #24: RecentFilesGuiTest ...............   Passed    1.72 sec
+      Start 57: CanvasTest
+56/93 Test #34: WorkspaceTest ....................   Passed    0.90 sec
+      Start 84: StandaloneMermaidTest
+57/93 Test #32: BrowserPreferencesTest ...........   Passed    1.12 sec
+      Start 47: TypographyTest
+58/93 Test #84: StandaloneMermaidTest ............   Passed    0.25 sec
+      Start 82: SdpIntegrationTest
+59/93 Test #57: CanvasTest .......................   Passed    0.78 sec
+      Start 54: PdfFlushFailure
+60/93 Test #46: PreferencesTest ..................   Passed    0.82 sec
+      Start  2: DocumentTest
+61/93 Test  #2: DocumentTest .....................   Passed    0.05 sec
+      Start 60: RichPreviewTest
+62/93 Test #82: SdpIntegrationTest ...............   Passed    0.29 sec
+      Start 44: BlueprintSymbols
+63/93 Test #47: TypographyTest ...................   Passed    0.51 sec
+      Start 69: MermaidDependencies
+64/93 Test #60: RichPreviewTest ..................   Passed    0.39 sec
+      Start 43: DiskFullFailure
+65/93 Test #54: PdfFlushFailure ..................   Passed    0.49 sec
+      Start 65: DiagramPreparationTest
+66/93 Test #44: BlueprintSymbols .................   Passed    0.46 sec
+      Start 51: PdfExportTest
+67/93 Test #69: MermaidDependencies ..............   Passed    0.49 sec
+      Start 59: ReadingColorsTest
+68/93 Test #43: DiskFullFailure ..................   Passed    0.26 sec
+      Start 86: HeadingLinkTest
+69/93 Test #51: PdfExportTest ....................   Passed    0.18 sec
+      Start 48: PageLayoutTest
+70/93 Test #65: DiagramPreparationTest ...........   Passed    0.24 sec
+      Start 71: BuildVersionTest
+71/93 Test #86: HeadingLinkTest ..................   Passed    0.05 sec
+      Start 14: LayerBoundaries
+72/93 Test #59: ReadingColorsTest ................   Passed    0.16 sec
+      Start  9: ExternalBrowserTest
+73/93 Test #48: PageLayoutTest ...................   Passed    0.15 sec
+      Start  3: FileOpenPolicyTest
+74/93 Test #14: LayerBoundaries ..................   Passed    0.17 sec
+75/93 Test  #3: FileOpenPolicyTest ...............   Passed    0.04 sec
+      Start 61: ThemeProfilesTest
+      Start 50: ExportJobTest
+76/93 Test  #9: ExternalBrowserTest ..............   Passed    0.07 sec
+      Start  4: InterpreterTest
+77/93 Test #71: BuildVersionTest .................   Passed    0.22 sec
+      Start 83: SdpDiscoveryTest
+78/93 Test  #4: InterpreterTest ..................   Passed    0.01 sec
+      Start 11: ReferenceWorkerTest
+79/93 Test #83: SdpDiscoveryTest .................   Passed    0.01 sec
+      Start 88: SdpRuntimeTest
+80/93 Test #50: ExportJobTest ....................   Passed    0.04 sec
+      Start  6: PreviewTest
+81/93 Test #11: ReferenceWorkerTest ..............   Passed    0.02 sec
+      Start 90: SdpDisplayTest
+82/93 Test #88: SdpRuntimeTest ...................   Passed    0.01 sec
+      Start 68: DiagramWorkerTest
+83/93 Test #90: SdpDisplayTest ...................   Passed    0.01 sec
+84/93 Test #61: ThemeProfilesTest ................   Passed    0.06 sec
+85/93 Test  #6: PreviewTest ......................   Passed    0.02 sec
+      Start 10: DocumentIndexTest
+      Start 45: ScrollMotionTest
+      Start  7: ScrollTest
+86/93 Test #68: DiagramWorkerTest ................   Passed    0.02 sec
+87/93 Test #10: DocumentIndexTest ................   Passed    0.02 sec
+88/93 Test #45: ScrollMotionTest .................   Passed    0.01 sec
+      Start 12: NavigationTest
+      Start  5: RendererTest
+      Start  1: PortContractTest
+89/93 Test  #7: ScrollTest .......................   Passed    0.02 sec
+90/93 Test #12: NavigationTest ...................   Passed    0.02 sec
+91/93 Test  #5: RendererTest .....................   Passed    0.01 sec
+      Start 93: SdlSourceGuiTest
+92/93 Test  #1: PortContractTest .................   Passed    0.01 sec
+93/93 Test #93: SdlSourceGuiTest .................   Passed    2.60 sec
+
+99% tests passed, 1 tests failed out of 93
+
+Label Time Summary:
+GUI    = 271.98 sec*proc (46 tests)
+
+Total Test time (real) =  85.59 sec
+
+The following tests FAILED:
+	 13 - BlueprintStructure (Failed)
+Errors while running CTest

@@ -1,0 +1,24 @@
+flowchart LR
+    n_DocumentSession["DocumentSession (functionality)"]
+    n_EmbeddedVisuals["EmbeddedVisuals (functionality)"]
+    n_FoxPresentation["FoxPresentation (functionality)"]
+    n_LocalFileStorage["LocalFileStorage (functionality)"]
+    n_MarkdownInterpretation["MarkdownInterpretation (functionality)"]
+    n_MarkdownPresentation["MarkdownPresentation (feature)"]
+    n_PageComposition["PageComposition (functionality)"]
+    n_PreviewPipeline["PreviewPipeline (functionality)"]
+    n_PreviewTextSelection["PreviewTextSelection (functionality)"]
+    n_RenderLayout["RenderLayout (functionality)"]
+    n_TypographyAndDrawing["TypographyAndDrawing (functionality)"]
+    n_WorkspaceControls["WorkspaceControls (functionality)"]
+    n_DocumentSession -->|contributes-to| n_MarkdownPresentation
+    n_EmbeddedVisuals -->|contributes-to| n_MarkdownPresentation
+    n_FoxPresentation -->|contributes-to| n_MarkdownPresentation
+    n_LocalFileStorage -->|contributes-to| n_MarkdownPresentation
+    n_MarkdownInterpretation -->|contributes-to| n_MarkdownPresentation
+    n_PageComposition -->|contributes-to| n_MarkdownPresentation
+    n_PreviewPipeline -->|contributes-to| n_MarkdownPresentation
+    n_PreviewTextSelection -->|contributes-to| n_MarkdownPresentation
+    n_RenderLayout -->|contributes-to| n_MarkdownPresentation
+    n_TypographyAndDrawing -->|contributes-to| n_MarkdownPresentation
+    n_WorkspaceControls -->|contributes-to| n_MarkdownPresentation

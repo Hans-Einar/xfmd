@@ -1,0 +1,57 @@
+VP07 — Features across the
+architecture
+Revision:
+9bdf257d7dd88f39825fe82522955ed8a94df2f790add690ced1c615edf4bd30.
+contributes-to, owns and explicit allocated-to per mode. Unspecified allocation is
+reported as a gap.
+
+Complete logical architecture and feature
+realization — mode Online
+Desktop (unit) | owns: F01
+
+Local (container)
+
+Remote (container) | allocated-to: F01
+
+Source facts: f0000, f0002, f0003.
+
+Scope and notation
+All declared Systems, containers and units form the logical architecture base,
+including isolated declarations. Rectangles show the complete structural base with
+contains edges. Feature keys annotate logical owners (owns) and selected-mode
+containers (allocated-to), derived only through explicit Functionality contribution paths.
+Rounded standalone Features have no represented placement. These annotations are
+not new direct SDL relations. This is decomposition and responsibility, not an inferred
+deployment or call graph.
+Selected mode: Online. Only this mode's explicit allocated-to facts inform placement
+annotations. Ownership does not imply allocation; missing placement is reported
+below.
+
+Feature legend
+Key
+
+Feature
+
+F01
+
+Navigation
+
+Feature contributions
+Feature
+
+Functionality Logical owner Allocation in
+
+Source facts
+
+selected scope
+Navigatio Display
+n
+
+Desktop
+
+Remote
+
+f0003, f0000,
+f0002
+
+

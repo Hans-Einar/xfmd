@@ -1,0 +1,12 @@
+SDP validation failed:
+- SDP/Framework/installed-toolkit.manifest.yaml: unsupported schemaVersion '3.0'; supported versions: 1.0, 2.0
+- SDP/Framework/installed-toolkit.manifest.yaml: Additional properties are not allowed ('descriptorDigest', 'installedAt', 'managementProfile', 'operationId', 'processProfile', 'provenance', 'release' were unexpected)
+- SDP/Framework/installed-toolkit.manifest.yaml: 'toolkitVersion' is a required property
+- SDP/Framework/installed-toolkit.manifest.yaml: 'frameworkVersion' is a required property
+- SDP/Framework/installed-toolkit.manifest.yaml: 'agentsContractVersion' is a required property
+- SDP/Framework/installed-toolkit.manifest.yaml: 'installerVersion' is a required property
+- SDP/Framework/installed-toolkit.manifest.yaml: 'toolkitInstalledAt' is a required property
+- SDP/Framework/installed-toolkit.manifest.yaml: 'skills' is a required property
+- SDP/Framework/installed-toolkit.manifest.yaml.schemaVersion: '1.0' was expected
+- SDP/RELEASE-NOTES.md: unsupported release-note category 'Scope'; allowed: Added, Changed, Deprecated, Fixed, Migration, Removed, Security
+- SDP/RELEASE-NOTES.md: unsupported release-note category 'Scope'; allowed: Added, Changed, Deprecated, Fixed, Migration, Removed, Security

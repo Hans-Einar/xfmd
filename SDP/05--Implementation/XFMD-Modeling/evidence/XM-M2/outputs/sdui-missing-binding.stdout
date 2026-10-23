@@ -1,0 +1,144 @@
+{
+  "astFormat": "sdui-ast/0.2",
+  "document": {
+    "connections": [],
+    "definitions": [
+      {
+        "name": "page",
+        "root": {
+          "arguments": [],
+          "kind": "frame",
+          "layout": [],
+          "name": null,
+          "role": null,
+          "rows": [
+            {
+              "items": [
+                {
+                  "arguments": [
+                    {
+                      "name": null,
+                      "span": {
+                        "column": 54,
+                        "end": 59,
+                        "line": 1,
+                        "start": 53,
+                        "type": "Span"
+                      },
+                      "type": "Argument",
+                      "value": {
+                        "kind": "string",
+                        "span": {
+                          "column": 54,
+                          "end": 59,
+                          "line": 1,
+                          "start": 53,
+                          "type": "Span"
+                        },
+                        "type": "Literal",
+                        "value": "Open"
+                      }
+                    },
+                    {
+                      "name": "callback",
+                      "span": {
+                        "column": 61,
+                        "end": 90,
+                        "line": 1,
+                        "start": 60,
+                        "type": "Span"
+                      },
+                      "type": "Argument",
+                      "value": {
+                        "member": "open",
+                        "module": "domain",
+                        "object": "document",
+                        "span": {
+                          "column": 70,
+                          "end": 90,
+                          "line": 1,
+                          "start": 69,
+                          "type": "Span"
+                        },
+                        "type": "Reference"
+                      }
+                    }
+                  ],
+                  "kind": "widget",
+                  "layout": [],
+                  "name": "go",
+                  "role": null,
+                  "rows": [],
+                  "span": {
+                    "column": 44,
+                    "end": 91,
+                    "line": 1,
+                    "start": 43,
+                    "type": "Span"
+                  },
+                  "target": null,
+                  "text": null,
+                  "type": "Node",
+                  "variant": null,
+                  "widget": "button"
+                }
+              ],
+              "span": {
+                "column": 44,
+                "end": 91,
+                "line": 1,
+                "start": 43,
+                "type": "Span"
+              },
+              "type": "Row"
+            }
+          ],
+          "span": {
+            "column": 43,
+            "end": 92,
+            "line": 1,
+            "start": 42,
+            "type": "Span"
+          },
+          "target": null,
+          "text": null,
+          "type": "Node",
+          "variant": null,
+          "widget": null
+        },
+        "span": {
+          "column": 38,
+          "end": 93,
+          "line": 1,
+          "start": 37,
+          "type": "Span"
+        },
+        "type": "Definition"
+      }
+    ],
+    "profile": "sdui/0.2",
+    "references": [
+      {
+        "alias": "domain",
+        "path": "missing.sdl",
+        "span": {
+          "column": 11,
+          "end": 36,
+          "line": 1,
+          "start": 10,
+          "type": "Span"
+        },
+        "type": "ModuleRef"
+      }
+    ],
+    "span": {
+      "column": 1,
+      "end": 94,
+      "line": 1,
+      "start": 0,
+      "type": "Span"
+    },
+    "type": "Document"
+  },
+  "validation": "local-profile"
+}

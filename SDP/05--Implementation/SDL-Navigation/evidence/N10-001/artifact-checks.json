@@ -1,0 +1,16 @@
+{
+  "diagrams": 40,
+  "totalNodes": 119,
+  "uniqueNodes": 60,
+  "edges": 123,
+  "maxNodes": 5,
+  "maxEdges": 5,
+  "allUniqueNodeNamesInPdf": true,
+  "scenariosInPdf": 22,
+  "sourceSpansInBounds": 850,
+  "allOriginalBindingsPreserved": 202,
+  "originalEdgesPreserved": true,
+  "nativeScenesVerified": 40,
+  "discoveryLimitAlsoReproducedOnN9": true,
+  "scenarioPdfMethod": "bbox first-column coordinates join wrapped identifiers; plain text extraction interleaves other columns"
+}

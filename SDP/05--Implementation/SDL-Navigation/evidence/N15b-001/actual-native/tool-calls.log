@@ -1,0 +1,11 @@
+/home/warloc/git/xfmd-sdl-navigation actions --json
+/home/warloc/git/xfmd-sdl-navigation discover --navigation lazy-sdl --json
+/home/warloc/git/xfmd-sdl-navigation actions --json
+/home/warloc/git/xfmd-sdl-navigation discover --navigation lazy-sdl --json
+/home/warloc/git/xfmd-sdl-navigation tree --model xfmddesktop-47e40bf52e14c5d8 --revision e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007 --model-only --json
+/home/warloc/git/xfmd-sdl-navigation actions --json
+/home/warloc/git/xfmd-sdl-navigation discover --navigation lazy-sdl --json
+/home/warloc/git/xfmd-sdl-navigation actions --json
+/home/warloc/git/xfmd-sdl-navigation discover --navigation lazy-sdl --json
+/home/warloc/git/xfmd-sdl-navigation tree --model xfmddesktop-47e40bf52e14c5d8 --revision e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007 --model-only --json
+/home/warloc/git/xfmd-sdl-navigation select --model xfmddesktop-47e40bf52e14c5d8 --revision e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007 --output /tmp/xfmd-gui-home-hi63y5s9/runtime/xfmd/xfmd-sdp-mVlVmG/1 --uri sdl-view://xfmd/VP02?consumer=xfmd&target=main&projection=overview --json

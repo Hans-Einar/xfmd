@@ -1,0 +1,6 @@
+flowchart LR
+    n_GeneratedIntentsContract["GeneratedIntentsContract (contract)"]
+    n_SelectInvalidView["SelectInvalidView (message)"]
+    n_SelectRegisteredView["SelectRegisteredView (message)"]
+    n_GeneratedIntentsContract -->|permits| n_SelectInvalidView
+    n_GeneratedIntentsContract -->|permits| n_SelectRegisteredView

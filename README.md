@@ -59,6 +59,11 @@ ctest --test-dir build --output-on-failure
 ./build/xfmd tests/fixtures/markdown/basics.md
 ```
 
+Mermaid bootstrap uses the exact checksummed fork archive declared in
+`cmake/mermaid-source.json`; see [source provenance](third_party/README.md).
+After a pin change, preserve/move the previous `.deps/mermaid-rs-renderer`
+directory before bootstrapping. Bootstrap never patches or overwrites old source.
+
 Bootstrap laster eksplisitt ned hashkontrollert cmark-gfm 0.29.0.gfm.13 til `.deps/`.
 Første configure laster også hashkontrollert MicroTeX fra commit
 `0e3707f6dafebb121d98b53c64364d16fefe481d`; ingen GTK-widgets eller nettlesermotor
@@ -298,12 +303,15 @@ beslutningsnoder, sirkler, grupper, kjeder, sykluser og solide/stiplete/tykke
 kanter. Bruk `A[Etikett] -->|Kanttekst| B{Valg}`. Begge brukerdiagrammene
 finnes i `tests/fixtures/markdown/mermaid.md`.
 
-Fargekontrollene virker direkte. Diagrametikettmerking er utsatt; diagramkilden
-kan kopieres fra editoren. A4 og PDF bruker samme SVG og vektorgeometri. Lange LR-diagrammer skaleres ned til
-visningsbredden. Sequence 2 omfatter ordnede hendelser, asynkrone piler og nestede
-fragmenter. De øvrige familiene har egne profiler og modeller. Ustøttede typer,
-konstruksjoner og init/CSS/HTML/click/ressursdirektiver vises som kilde med
-forklaring, uten å ødelegge resten av dokumentet.
+Reading colors apply immediately. Diagram labels are not separately selectable;
+copy diagram source from the editor. Diagrams fit the available width by default.
+For small labels, choose **View → Full-size diagrams (Wrap)**, then use normal
+zoom and the horizontal/vertical scrollbars. Turn it off to see the fitted overview.
+This window-local option is disabled in A4; A4 and PDF always fit the complete
+vector diagram to the page. Sequence 2 supports ordered events, asynchronous
+arrows and nested fragments. Other families have their own profiles/models.
+Unsupported constructs and init/CSS/HTML/click/resource directives display the
+source and a local explanation without blocking the rest of the document.
 
 Flowchart-grensene er 64 KiB, 128 noder, 512 kanter, 32 grupper, gruppedybde 8 og
 64 diagrammer per dokument, med 8 MiB per scene og 64 MiB samlet scenesvar. Dyr layout avbrytes kooperativt etter omtrent
@@ -394,3 +402,103 @@ screen resolution set to 144 DPI). With Poppler `pdftotext` available,
 `DocumentZoomPdfTest` compares actual exported page/word geometry across four zoom
 modes. These supplement the native workspace tests; see
 [P055 acceptance](sprints/Sprint-007--Workspace-UI/evidence/P055.md).
+
+### SDP project sidebar (development)
+
+Open a project folder with an immediate `SDP` directory, or open the SDP directory
+itself. SDP sub-tabs follow the producer's ordered `kind: "tab"` roots (currently
+SDL, KanBan and SDUI). New producer-declared tabs require no XFMD tab-name update.
+Expand branches to inspect
+models, select a card to open it, or select a diagram/frame to generate its view.
+Viewpoint references show canonical names; abstraction nodes use producer labels.
+Right-click a model or associated descendant and choose **View source** to open
+its original `.design` in the editor, with normal Save/Discard/Cancel handling.
+This is separate from generating a view or pairing source and preview.
+Project/card/source changes refresh navigation automatically, preserving surviving
+expanded branches and the selected row. Refresh retries immediately. Invalid
+sources and watch limits display diagnostics; generated documents remain snapshots
+until you select the view again.
+
+The host must provide a compatible **SDPTool 2.x, sdptool/0.2** producer. XFMD 0.9 uses the accompanying `libexec/xfmd/sdptool` when installed,
+then falls back to `gh sdp`. To use a standalone binary, set `XFMD_SDP_TOOL` to its executable
+path (one executable, not a shell command). Project files cannot configure commands.
+The producer's normal cache/offline environment applies, including `SDP_OFFLINE=true`
+when using an already verified gh-sdp cache. Older sdptool/0.1 binaries are rejected.
+
+Generated views use the existing Markdown preview. Save or discard current edits
+before choosing one; late results never replace a changed document. Generated
+resources stay available while referenced by this window or its history. Unreferenced
+bundles are cleaned up; there is no cumulative view-count cutoff. This is a document preview, not a native SDUI widget runtime.
+Standalone `.design` source/preview integration remains queued as KB-XFMD-015.
+
+Build/CLI and isolated native GUI evidence is recorded in PLAN-XFMD-0006,
+including SN-002 and SN-003. Remaining Session acceptance and independent review
+are explicit; a local build is not a release. Configure `SDP_TOOL_EXECUTABLE=/absolute/path/to/sdptool` in
+CMake to enable the real-producer tests, including SdpNavigationGuiTest.
+
+### Standalone Mermaid and heading links
+
+Open `xfmd diagram.mmd` to preview a raw Mermaid file (extension is case-insensitive).
+Editor/Split edit the original source, and Save retains raw Mermaid without added
+Markdown fences. Preview and PDF use the existing supported Mermaid profiles;
+unsupported input shows source with a diagnostic. Turn off the sidebar's `.md`
+filter to see `.mmd` files. The Open dialog includes a Mermaid file filter.
+
+Local Markdown links may include a heading: `/path/file.md#SomeLocationInTheFile`,
+`../file.md#some-heading` or `#some-heading`. Exact heading titles and lowercase
+slugs are supported; spaces become hyphens, punctuation is removed and repeated
+slugs receive `-1`, `-2`. Percent-encode spaces and literal `#` in filenames.
+Same-file jumps preserve unsaved edits. Missing headings report an error; explicit
+HTML IDs and full Unicode case folding are not implemented.
+
+### SDP generated-view storage
+
+The SDP sidebar generates a diagram/frame only when selected. Activating a
+viewpoint with diagram children expands its list without generating all diagrams.
+Generated files live under `$XDG_RUNTIME_DIR/xfmd/xfmd-sdp-*` (normally
+`/run/user/<uid>/xfmd/`); when the variable is absent XFMD uses `/run/user/<uid>`.
+The runtime directory must exist, belong to the user and have mode 0700. Failure
+is reported in the SDP status; there is no silent `/tmp` fallback for this path.
+
+Current/history-referenced snapshots remain available for Back/Forward. Idle
+cleanup releases unreachable snapshots, and window close removes its workspace.
+There is no cumulative 64-view/256-MiB admission stop. Producer/per-bundle and
+renderer profile limits still apply pending KB-XFMD-025's remaining work.
+
+### SDL navigation in 0.6
+
+The SDL tree shows each viewpoint once beneath its discovered source/System,
+without healthy phase/abstraction wrapper rows. Contextual reference actions retain
+their original viewpoint. Valid cyclic cross-links remain clickable leaves; inert
+reference/depth markers are omitted and genuine truncation is reported in status.
+Expansion boxes navigate the tree without generating a document. With the current
+producer, parent activation expands details and explains that an aggregate overview
+is unavailable. Proper aggregate use-case/architecture projections and exact source
+line highlights remain planned producer/consumer work under PLAN-XFMD-0009 N3/N4.
+
+### SDUI previews and prototypes
+
+In SDP → SDUI, select a frame to generate its composition mindmaps, source/binding
+references and static text preview. Source references open and select the original
+source only while it matches the generated revision. The SDUI **Launch** toolbar
+action opens a separate Fyne prototype window. Buttons with symbolic SDL callbacks
+remain unbound; the prototype reports this explicitly. Browsing another document
+or closing XFMD does not close the Fyne window. Close that window normally.
+
+Release 0.7 includes private `libexec/xfmd/sdui-preview` and `sdui-fyne` tools.
+Developer builds can create these with `tools/build_sdui_tools.py`; the language
+implementation lives in SDP-vNow/SDUI/go. `XFMD_SDUI_PREVIEW` and `XFMD_SDUI_FYNE`
+may specify absolute executable overrides. Missing tools disable launch with a
+reason; discovery uses the private SDPTool, gh sdp fallback or XFMD_SDP_TOOL override.
+KanBan Add/Move remain disabled pending the separate management-service workflow.
+
+### Deferred SDL navigation (0.9)
+
+The sidebar first requests the producer's action catalogue. When supported,
+discovery lists every SDL source and diagnostic; expanding a source loads its
+model graph. Other models remain unloaded until needed. Refresh reloads expanded
+models at their current revisions, without replacing the open document. Failed
+loads retain the source row; click its label or collapse/expand to retry. Older
+producers retain eager discovery when they explicitly lack the new contract.
+The matching private producer is a development candidate; installing XFMD does
+not change gh-sdp's signed release selection or upgrade a project's SDP files.

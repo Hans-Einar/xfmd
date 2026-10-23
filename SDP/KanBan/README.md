@@ -4,9 +4,10 @@
 
 | ID | Type | Status | Topic |
 | --- | --- | --- | --- |
+| KB-XFMD-030 | Proposal | onHold | [Discoverable SDPTool menu and toolbar](onHold/%23030--Proposal--Discoverable-SDPTool-menu-and-toolbar.md) |
 | KB-XFMD-001 | Proposal | completed | [Documentation audit and reconciliation](completed/%23001--Proposal--Documentation-reconciliation.md) |
 | KB-XFMD-002 | Study | completed | [BoxUI branch disposition and reusable changes](completed/%23002--Study--BoxUI-branch-disposition.md) |
-| KB-XFMD-003 | Question | backlog | [SDUI widget ownership and XFMD's boundary](backlog/%23003--Question--SDUI-widget-ownership.md) |
+| KB-XFMD-003 | Question | superseded | [SDUI widget ownership and XFMD's boundary](superseded/%23003--Question--SDUI-widget-ownership.md) |
 | KB-XFMD-004 | Change | completed | [Establish the conversation-note workflow](completed/%23004--Change--Conversation-note-workflow.md) |
 | KB-XFMD-005 | Study | completed | [Remaining SDL acceptance evidence](completed/%23005--Study--SDL-acceptance-evidence.md) |
 | KB-XFMD-006 | Change | completed | [Open documents and folders from the same dialog](completed/%23006--Change--Open-files-and-folders.md) |
@@ -17,11 +18,25 @@
 | KB-XFMD-011 | Change | completed | [Regroup toolbar actions and hide reading-color sliders in the theme popup](completed/%23011--Change--Toolbar-layout-and-color-popup.md) |
 | KB-XFMD-012 | Ref | backlog | [Synchronize XFMD cards with the shared KanBan contract](backlog/%23012--Ref--SDP--014--KanBan-format-sync.md) |
 | KB-XFMD-013 | Change | completed | [Compact Files header and single Markdown filter](completed/%23013--Change--Sidebar-header-markdown-filter.md) |
-| KB-XFMD-014 | Proposal | backlog | [SDP sidebar and on-demand generated navigation](backlog/%23014--Proposal--SDP-sidebar-and-generated-navigation.md) |
+| KB-XFMD-014 | Proposal | active | [SDP sidebar and on-demand generated navigation](active/%23014--Proposal--SDP-sidebar-and-generated-navigation.md) |
 | KB-XFMD-015 | Proposal | backlog | [SDL design-file source and diagram preview](backlog/%23015--Proposal--SDL-design-file-preview.md) |
 | KB-XFMD-016 | Change | completed | [Initialize SDP and align KanBan](completed/%23016--Change--SDP-process-bootstrap.md) |
-| KB-XFMD-017 | Proposal | backlog | [Adopt SDP and describe XFMD in SDL](backlog/%23017--Proposal--Adopt-SDP-and-model-XFMD.md) |
+| KB-XFMD-017 | Proposal | active | [Adopt SDP and model XFMD functionality in SDL](active/%23017--Proposal--Adopt-SDP-and-model-XFMD.md) |
 | KB-XFMD-018 | Change | completed | [Sidebar favorites](completed/%23018--Change--Sidebar-favorites.md) |
+| KB-XFMD-019 | Proposal | backlog | [Shared rendering and Kitty output](backlog/%23019--Proposal--Shared-rendering-and-Kitty-output.md) |
+| KB-XFMD-020 | Proposal | active | [Mermaid compatibility across interpretation and rendering](active/%23020--Proposal--Mermaid-compatibility-across-pipeline.md) |
+| KB-XFMD-021 | Change | active | [Dynamic SDP tabs, readable labels and source opening](active/%23021--Change--Dynamic-SDP-tabs-labels-and-source-opening.md) |
+| KB-XFMD-022 | Idea | backlog | [Git-based design baselines and change blueprints](backlog/%23022--Idea--Git-based-design-baselines-and-change-blueprints.md) |
+| KB-XFMD-023 | Proposal | active | [Standalone Mermaid file preview](active/%23023--Proposal--Standalone-Mermaid-file-preview.md) |
+
+| KB-XFMD-024 | Change | active | [Local file heading links](active/%23024--Change--Local-file-heading-links.md) |
+
+| KB-XFMD-025 | Change | active | [On-demand SDP without fixed content caps](active/%23025--Change--On-demand-SDP-without-fixed-content-caps.md) |
+| KB-XFMD-026 | Proposal | superseded | [SDUI navigation and source structure](superseded/%23026--Proposal--SDUI-navigation-and-source-structure-views.md) |
+
+| KB-XFMD-027 | Proposal | active | [Extend the current SDUI tab with combined previews and explicit launch](active/%23027--Proposal--SDUI-preview-and-launch-workflow.md) |
+| KB-XFMD-028 | Change | active | [SDL navigation cleanup and meaningful viewpoint overviews](active/%23028--Change--SDL-viewpoints-and-navigation.md) |
+| KB-XFMD-029 | Change | active | [Contextual SDP toolbar groups and initial actions](active/%23029--Change--Contextual-SDP-toolbar.md) |
 
 This index shows current location; [Ledger.ndjson](../ProjectManagement/Ledger.ndjson) records history.
 Read relevant notes at session start. Review backlog after a topic discussion and
@@ -243,3 +258,27 @@ Git preserves exact document revisions; ledger events explain transitions.
 For a quick text search: `rg '^\| CardState \|' backlog active`.
 The separately installed `kanban status` command may list the board; it is not
 required for this self-contained workflow. No new CLI is installed by the bootstrap.
+
+## Session 0003 review — 2026-10-06
+
+#003 and #026 are superseded by #027 (KBO-XFMD-000001). SDL navigation #028
+precedes SDUI; #029 owns shared action groups. #021 gains exact-source spans;
+#020 gains the VP07 routing reproduction and use-case compatibility requirement.
+#015 direct design-file preview, #017 modeling and #019 shared rendering remain
+separate responsibilities. #025 remains unfinished in Session 0002; the owner
+explicitly selects the new Session without declaring it complete. Earlier
+statements that #003 stays deferred describe the previous review, not this one.
+
+## Session0006 selection — 2026-10-10
+
+Owner pauses Session0005 and selects KB030 for the new action-discovery Session.
+KB030 is queued for contract/design preparation; KB020/028 return to ready as a
+paused handoff. KB029 is related context, with its existing residual scope retained.
+See [Session0006](../Sessions/session-%230006--Discoverable-SDPTool-actions.md).
+
+## Session0006 dependency hold — 2026-10-10
+
+KB030 is onHold and Session0006 is paused until the PLAN-SDP-0024 JSON API is
+implemented/verified, integrated into SDP-vNow main and included in a new release.
+XFMD will consume that JSON API. Session0005 remains paused; no other execution
+is selected. The card records restart conditions and the review checkpoint.

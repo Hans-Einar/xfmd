@@ -1,0 +1,968 @@
+{
+  "version": "sdl-viewpoints-go-1.3",
+  "revision": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007",
+  "renderer": "",
+  "diagrams": [
+    {
+      "id": "VP04-overview",
+      "title": "All declared interfaces and explicit consumers",
+      "kind": "flowchart",
+      "nodes": {
+        "n_Application": {
+          "kind": "unit",
+          "model_id": "Application",
+          "span": {
+            "column": 1,
+            "end": 320,
+            "end_column": 18,
+            "end_line": 11,
+            "line": 11,
+            "node": "Span",
+            "start": 303
+          }
+        },
+        "n_DiagramInterpreterPort": {
+          "kind": "interface",
+          "model_id": "DiagramInterpreterPort",
+          "span": {
+            "column": 1,
+            "end": 1423,
+            "end_column": 34,
+            "end_line": 49,
+            "line": 49,
+            "node": "Span",
+            "start": 1390
+          }
+        },
+        "n_DiagramLayoutPort": {
+          "kind": "interface",
+          "model_id": "DiagramLayoutPort",
+          "span": {
+            "column": 1,
+            "end": 1546,
+            "end_column": 29,
+            "end_line": 53,
+            "line": 53,
+            "node": "Span",
+            "start": 1518
+          }
+        },
+        "n_DocumentIndexService": {
+          "kind": "unit",
+          "model_id": "DocumentIndexService",
+          "span": {
+            "column": 1,
+            "end": 1954,
+            "end_column": 27,
+            "end_line": 67,
+            "line": 67,
+            "node": "Span",
+            "start": 1928
+          }
+        },
+        "n_Documents": {
+          "kind": "unit",
+          "model_id": "Documents",
+          "span": {
+            "column": 1,
+            "end": 2342,
+            "end_column": 16,
+            "end_line": 81,
+            "line": 81,
+            "node": "Span",
+            "start": 2327
+          }
+        },
+        "n_ExternalOpenProtocol": {
+          "kind": "interface",
+          "model_id": "ExternalOpenProtocol",
+          "span": {
+            "column": 1,
+            "end": 2898,
+            "end_column": 32,
+            "end_line": 102,
+            "line": 102,
+            "node": "Span",
+            "start": 2867
+          }
+        },
+        "n_FileStorePort": {
+          "kind": "interface",
+          "model_id": "FileStorePort",
+          "span": {
+            "column": 1,
+            "end": 3191,
+            "end_column": 25,
+            "end_line": 112,
+            "line": 112,
+            "node": "Span",
+            "start": 3167
+          }
+        },
+        "n_GeneratedViews": {
+          "kind": "unit",
+          "model_id": "GeneratedViews",
+          "span": {
+            "column": 1,
+            "end": 3928,
+            "end_column": 21,
+            "end_line": 134,
+            "line": 134,
+            "node": "Span",
+            "start": 3908
+          }
+        },
+        "n_Interpreter": {
+          "kind": "unit",
+          "model_id": "Interpreter",
+          "span": {
+            "column": 1,
+            "end": 4347,
+            "end_column": 18,
+            "end_line": 149,
+            "line": 149,
+            "node": "Span",
+            "start": 4330
+          }
+        },
+        "n_InterpreterPort": {
+          "kind": "interface",
+          "model_id": "InterpreterPort",
+          "span": {
+            "column": 1,
+            "end": 4374,
+            "end_column": 27,
+            "end_line": 150,
+            "line": 150,
+            "node": "Span",
+            "start": 4348
+          }
+        },
+        "n_LeaseReleaseProtocol": {
+          "kind": "interface",
+          "model_id": "LeaseReleaseProtocol",
+          "span": {
+            "column": 1,
+            "end": 4754,
+            "end_column": 32,
+            "end_line": 163,
+            "line": 163,
+            "node": "Span",
+            "start": 4723
+          }
+        },
+        "n_Preferences": {
+          "kind": "unit",
+          "model_id": "Preferences",
+          "span": {
+            "column": 1,
+            "end": 5791,
+            "end_column": 18,
+            "end_line": 201,
+            "line": 201,
+            "node": "Span",
+            "start": 5774
+          }
+        },
+        "n_PreferencesStorePort": {
+          "kind": "interface",
+          "model_id": "PreferencesStorePort",
+          "span": {
+            "column": 1,
+            "end": 5866,
+            "end_column": 32,
+            "end_line": 203,
+            "line": 203,
+            "node": "Span",
+            "start": 5835
+          }
+        },
+        "n_Preview": {
+          "kind": "unit",
+          "model_id": "Preview",
+          "span": {
+            "column": 1,
+            "end": 6092,
+            "end_column": 14,
+            "end_line": 211,
+            "line": 211,
+            "node": "Span",
+            "start": 6079
+          }
+        },
+        "n_Publication": {
+          "kind": "unit",
+          "model_id": "Publication",
+          "span": {
+            "column": 1,
+            "end": 6315,
+            "end_column": 18,
+            "end_line": 218,
+            "line": 218,
+            "node": "Span",
+            "start": 6298
+          }
+        },
+        "n_RenderHostPort": {
+          "kind": "interface",
+          "model_id": "RenderHostPort",
+          "span": {
+            "column": 1,
+            "end": 7160,
+            "end_column": 26,
+            "end_line": 247,
+            "line": 247,
+            "node": "Span",
+            "start": 7135
+          }
+        },
+        "n_Renderer": {
+          "kind": "unit",
+          "model_id": "Renderer",
+          "span": {
+            "column": 1,
+            "end": 7203,
+            "end_column": 15,
+            "end_line": 249,
+            "line": 249,
+            "node": "Span",
+            "start": 7189
+          }
+        },
+        "n_RendererPort": {
+          "kind": "interface",
+          "model_id": "RendererPort",
+          "span": {
+            "column": 1,
+            "end": 7227,
+            "end_column": 24,
+            "end_line": 250,
+            "line": 250,
+            "node": "Span",
+            "start": 7204
+          }
+        },
+        "n_SchedulerPort": {
+          "kind": "interface",
+          "model_id": "SchedulerPort",
+          "span": {
+            "column": 1,
+            "end": 7565,
+            "end_column": 25,
+            "end_line": 262,
+            "line": 262,
+            "node": "Span",
+            "start": 7541
+          }
+        },
+        "n_SdpProjects": {
+          "kind": "unit",
+          "model_id": "SdpProjects",
+          "span": {
+            "column": 1,
+            "end": 7672,
+            "end_column": 18,
+            "end_line": 266,
+            "line": 266,
+            "node": "Span",
+            "start": 7655
+          }
+        },
+        "n_SdpToolProtocol": {
+          "kind": "interface",
+          "model_id": "SdpToolProtocol",
+          "span": {
+            "column": 1,
+            "end": 7699,
+            "end_column": 27,
+            "end_line": 267,
+            "line": 267,
+            "node": "Span",
+            "start": 7673
+          }
+        },
+        "n_TextMetricsPort": {
+          "kind": "interface",
+          "model_id": "TextMetricsPort",
+          "span": {
+            "column": 1,
+            "end": 8157,
+            "end_column": 27,
+            "end_line": 284,
+            "line": 284,
+            "node": "Span",
+            "start": 8131
+          }
+        },
+        "n_ViewGenerationProtocol": {
+          "kind": "interface",
+          "model_id": "ViewGenerationProtocol",
+          "span": {
+            "column": 1,
+            "end": 8501,
+            "end_column": 34,
+            "end_line": 296,
+            "line": 296,
+            "node": "Span",
+            "start": 8468
+          }
+        },
+        "n_Viewport": {
+          "kind": "unit",
+          "model_id": "Viewport",
+          "span": {
+            "column": 1,
+            "end": 8516,
+            "end_column": 15,
+            "end_line": 297,
+            "line": 297,
+            "node": "Span",
+            "start": 8502
+          }
+        },
+        "n_VisualResources": {
+          "kind": "unit",
+          "model_id": "VisualResources",
+          "span": {
+            "column": 1,
+            "end": 8597,
+            "end_column": 22,
+            "end_line": 300,
+            "line": 300,
+            "node": "Span",
+            "start": 8576
+          }
+        },
+        "n_WindowDeliveryProtocol": {
+          "kind": "interface",
+          "model_id": "WindowDeliveryProtocol",
+          "span": {
+            "column": 1,
+            "end": 8631,
+            "end_column": 34,
+            "end_line": 301,
+            "line": 301,
+            "node": "Span",
+            "start": 8598
+          }
+        }
+      },
+      "edges": [
+        {
+          "source": "n_Application",
+          "relation": "consumes",
+          "target": "n_ExternalOpenProtocol",
+          "fact": "f0018"
+        },
+        {
+          "source": "n_DocumentIndexService",
+          "relation": "consumes",
+          "target": "n_FileStorePort",
+          "fact": "f0179"
+        },
+        {
+          "source": "n_DocumentIndexService",
+          "relation": "consumes",
+          "target": "n_InterpreterPort",
+          "fact": "f0180"
+        },
+        {
+          "source": "n_Documents",
+          "relation": "consumes",
+          "target": "n_FileStorePort",
+          "fact": "f0230"
+        },
+        {
+          "source": "n_GeneratedViews",
+          "relation": "consumes",
+          "target": "n_LeaseReleaseProtocol",
+          "fact": "f0419"
+        },
+        {
+          "source": "n_GeneratedViews",
+          "relation": "consumes",
+          "target": "n_SchedulerPort",
+          "fact": "f0420"
+        },
+        {
+          "source": "n_GeneratedViews",
+          "relation": "consumes",
+          "target": "n_ViewGenerationProtocol",
+          "fact": "f0421"
+        },
+        {
+          "source": "n_GeneratedViews",
+          "relation": "consumes",
+          "target": "n_WindowDeliveryProtocol",
+          "fact": "f0422"
+        },
+        {
+          "source": "n_Interpreter",
+          "relation": "consumes",
+          "target": "n_DiagramInterpreterPort",
+          "fact": "f0483"
+        },
+        {
+          "source": "n_Preferences",
+          "relation": "consumes",
+          "target": "n_PreferencesStorePort",
+          "fact": "f0651"
+        },
+        {
+          "source": "n_Preview",
+          "relation": "consumes",
+          "target": "n_InterpreterPort",
+          "fact": "f0683"
+        },
+        {
+          "source": "n_Preview",
+          "relation": "consumes",
+          "target": "n_RenderHostPort",
+          "fact": "f0684"
+        },
+        {
+          "source": "n_Preview",
+          "relation": "consumes",
+          "target": "n_RendererPort",
+          "fact": "f0685"
+        },
+        {
+          "source": "n_Preview",
+          "relation": "consumes",
+          "target": "n_SchedulerPort",
+          "fact": "f0686"
+        },
+        {
+          "source": "n_Publication",
+          "relation": "consumes",
+          "target": "n_InterpreterPort",
+          "fact": "f0743"
+        },
+        {
+          "source": "n_Publication",
+          "relation": "consumes",
+          "target": "n_RendererPort",
+          "fact": "f0744"
+        },
+        {
+          "source": "n_Publication",
+          "relation": "consumes",
+          "target": "n_TextMetricsPort",
+          "fact": "f0745"
+        },
+        {
+          "source": "n_Renderer",
+          "relation": "consumes",
+          "target": "n_TextMetricsPort",
+          "fact": "f0843"
+        },
+        {
+          "source": "n_SdpProjects",
+          "relation": "consumes",
+          "target": "n_SchedulerPort",
+          "fact": "f0894"
+        },
+        {
+          "source": "n_SdpProjects",
+          "relation": "consumes",
+          "target": "n_SdpToolProtocol",
+          "fact": "f0895"
+        },
+        {
+          "source": "n_Viewport",
+          "relation": "consumes",
+          "target": "n_RenderHostPort",
+          "fact": "f0963"
+        },
+        {
+          "source": "n_Viewport",
+          "relation": "consumes",
+          "target": "n_SchedulerPort",
+          "fact": "f0964"
+        },
+        {
+          "source": "n_VisualResources",
+          "relation": "consumes",
+          "target": "n_DiagramLayoutPort",
+          "fact": "f0981"
+        },
+        {
+          "source": "n_VisualResources",
+          "relation": "consumes",
+          "target": "n_TextMetricsPort",
+          "fact": "f0982"
+        }
+      ],
+      "source_facts": [
+        "f0018",
+        "f0179",
+        "f0180",
+        "f0230",
+        "f0419",
+        "f0420",
+        "f0421",
+        "f0422",
+        "f0483",
+        "f0651",
+        "f0683",
+        "f0684",
+        "f0685",
+        "f0686",
+        "f0743",
+        "f0744",
+        "f0745",
+        "f0843",
+        "f0894",
+        "f0895",
+        "f0963",
+        "f0964",
+        "f0981",
+        "f0982"
+      ],
+      "elements": []
+    }
+  ],
+  "facts": [
+    {
+      "id": "f0018",
+      "line": 332,
+      "node": "Relation",
+      "object": "ExternalOpenProtocol",
+      "span": {
+        "column": 1,
+        "end": 9961,
+        "end_column": 43,
+        "end_line": 332,
+        "line": 332,
+        "node": "Span",
+        "start": 9919
+      },
+      "subject": "Application",
+      "text": "Application consumes ExternalOpenProtocol.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0179",
+      "line": 493,
+      "node": "Relation",
+      "object": "FileStorePort",
+      "span": {
+        "column": 1,
+        "end": 19589,
+        "end_column": 45,
+        "end_line": 493,
+        "line": 493,
+        "node": "Span",
+        "start": 19545
+      },
+      "subject": "DocumentIndexService",
+      "text": "DocumentIndexService consumes FileStorePort.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0180",
+      "line": 494,
+      "node": "Relation",
+      "object": "InterpreterPort",
+      "span": {
+        "column": 1,
+        "end": 19636,
+        "end_column": 47,
+        "end_line": 494,
+        "line": 494,
+        "node": "Span",
+        "start": 19590
+      },
+      "subject": "DocumentIndexService",
+      "text": "DocumentIndexService consumes InterpreterPort.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0230",
+      "line": 544,
+      "node": "Relation",
+      "object": "FileStorePort",
+      "span": {
+        "column": 1,
+        "end": 22725,
+        "end_column": 34,
+        "end_line": 544,
+        "line": 544,
+        "node": "Span",
+        "start": 22692
+      },
+      "subject": "Documents",
+      "text": "Documents consumes FileStorePort.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0419",
+      "line": 733,
+      "node": "Relation",
+      "object": "LeaseReleaseProtocol",
+      "span": {
+        "column": 1,
+        "end": 36230,
+        "end_column": 46,
+        "end_line": 733,
+        "line": 733,
+        "node": "Span",
+        "start": 36185
+      },
+      "subject": "GeneratedViews",
+      "text": "GeneratedViews consumes LeaseReleaseProtocol.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0420",
+      "line": 734,
+      "node": "Relation",
+      "object": "SchedulerPort",
+      "span": {
+        "column": 1,
+        "end": 36269,
+        "end_column": 39,
+        "end_line": 734,
+        "line": 734,
+        "node": "Span",
+        "start": 36231
+      },
+      "subject": "GeneratedViews",
+      "text": "GeneratedViews consumes SchedulerPort.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0421",
+      "line": 735,
+      "node": "Relation",
+      "object": "ViewGenerationProtocol",
+      "span": {
+        "column": 1,
+        "end": 36317,
+        "end_column": 48,
+        "end_line": 735,
+        "line": 735,
+        "node": "Span",
+        "start": 36270
+      },
+      "subject": "GeneratedViews",
+      "text": "GeneratedViews consumes ViewGenerationProtocol.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0422",
+      "line": 736,
+      "node": "Relation",
+      "object": "WindowDeliveryProtocol",
+      "span": {
+        "column": 1,
+        "end": 36365,
+        "end_column": 48,
+        "end_line": 736,
+        "line": 736,
+        "node": "Span",
+        "start": 36318
+      },
+      "subject": "GeneratedViews",
+      "text": "GeneratedViews consumes WindowDeliveryProtocol.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0483",
+      "line": 797,
+      "node": "Relation",
+      "object": "DiagramInterpreterPort",
+      "span": {
+        "column": 1,
+        "end": 40627,
+        "end_column": 45,
+        "end_line": 797,
+        "line": 797,
+        "node": "Span",
+        "start": 40583
+      },
+      "subject": "Interpreter",
+      "text": "Interpreter consumes DiagramInterpreterPort.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0651",
+      "line": 965,
+      "node": "Relation",
+      "object": "PreferencesStorePort",
+      "span": {
+        "column": 1,
+        "end": 51598,
+        "end_column": 43,
+        "end_line": 965,
+        "line": 965,
+        "node": "Span",
+        "start": 51556
+      },
+      "subject": "Preferences",
+      "text": "Preferences consumes PreferencesStorePort.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0683",
+      "line": 997,
+      "node": "Relation",
+      "object": "InterpreterPort",
+      "span": {
+        "column": 1,
+        "end": 53970,
+        "end_column": 34,
+        "end_line": 997,
+        "line": 997,
+        "node": "Span",
+        "start": 53937
+      },
+      "subject": "Preview",
+      "text": "Preview consumes InterpreterPort.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0684",
+      "line": 998,
+      "node": "Relation",
+      "object": "RenderHostPort",
+      "span": {
+        "column": 1,
+        "end": 54003,
+        "end_column": 33,
+        "end_line": 998,
+        "line": 998,
+        "node": "Span",
+        "start": 53971
+      },
+      "subject": "Preview",
+      "text": "Preview consumes RenderHostPort.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0685",
+      "line": 999,
+      "node": "Relation",
+      "object": "RendererPort",
+      "span": {
+        "column": 1,
+        "end": 54034,
+        "end_column": 31,
+        "end_line": 999,
+        "line": 999,
+        "node": "Span",
+        "start": 54004
+      },
+      "subject": "Preview",
+      "text": "Preview consumes RendererPort.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0686",
+      "line": 1000,
+      "node": "Relation",
+      "object": "SchedulerPort",
+      "span": {
+        "column": 1,
+        "end": 54066,
+        "end_column": 32,
+        "end_line": 1000,
+        "line": 1000,
+        "node": "Span",
+        "start": 54035
+      },
+      "subject": "Preview",
+      "text": "Preview consumes SchedulerPort.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0743",
+      "line": 1057,
+      "node": "Relation",
+      "object": "InterpreterPort",
+      "span": {
+        "column": 1,
+        "end": 58416,
+        "end_column": 38,
+        "end_line": 1057,
+        "line": 1057,
+        "node": "Span",
+        "start": 58379
+      },
+      "subject": "Publication",
+      "text": "Publication consumes InterpreterPort.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0744",
+      "line": 1058,
+      "node": "Relation",
+      "object": "RendererPort",
+      "span": {
+        "column": 1,
+        "end": 58451,
+        "end_column": 35,
+        "end_line": 1058,
+        "line": 1058,
+        "node": "Span",
+        "start": 58417
+      },
+      "subject": "Publication",
+      "text": "Publication consumes RendererPort.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0745",
+      "line": 1059,
+      "node": "Relation",
+      "object": "TextMetricsPort",
+      "span": {
+        "column": 1,
+        "end": 58489,
+        "end_column": 38,
+        "end_line": 1059,
+        "line": 1059,
+        "node": "Span",
+        "start": 58452
+      },
+      "subject": "Publication",
+      "text": "Publication consumes TextMetricsPort.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0843",
+      "line": 1157,
+      "node": "Relation",
+      "object": "TextMetricsPort",
+      "span": {
+        "column": 1,
+        "end": 64759,
+        "end_column": 35,
+        "end_line": 1157,
+        "line": 1157,
+        "node": "Span",
+        "start": 64725
+      },
+      "subject": "Renderer",
+      "text": "Renderer consumes TextMetricsPort.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0894",
+      "line": 1208,
+      "node": "Relation",
+      "object": "SchedulerPort",
+      "span": {
+        "column": 1,
+        "end": 67946,
+        "end_column": 36,
+        "end_line": 1208,
+        "line": 1208,
+        "node": "Span",
+        "start": 67911
+      },
+      "subject": "SdpProjects",
+      "text": "SdpProjects consumes SchedulerPort.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0895",
+      "line": 1209,
+      "node": "Relation",
+      "object": "SdpToolProtocol",
+      "span": {
+        "column": 1,
+        "end": 67984,
+        "end_column": 38,
+        "end_line": 1209,
+        "line": 1209,
+        "node": "Span",
+        "start": 67947
+      },
+      "subject": "SdpProjects",
+      "text": "SdpProjects consumes SdpToolProtocol.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0963",
+      "line": 1277,
+      "node": "Relation",
+      "object": "RenderHostPort",
+      "span": {
+        "column": 1,
+        "end": 71467,
+        "end_column": 34,
+        "end_line": 1277,
+        "line": 1277,
+        "node": "Span",
+        "start": 71434
+      },
+      "subject": "Viewport",
+      "text": "Viewport consumes RenderHostPort.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0964",
+      "line": 1278,
+      "node": "Relation",
+      "object": "SchedulerPort",
+      "span": {
+        "column": 1,
+        "end": 71500,
+        "end_column": 33,
+        "end_line": 1278,
+        "line": 1278,
+        "node": "Span",
+        "start": 71468
+      },
+      "subject": "Viewport",
+      "text": "Viewport consumes SchedulerPort.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0981",
+      "line": 1295,
+      "node": "Relation",
+      "object": "DiagramLayoutPort",
+      "span": {
+        "column": 1,
+        "end": 72566,
+        "end_column": 44,
+        "end_line": 1295,
+        "line": 1295,
+        "node": "Span",
+        "start": 72523
+      },
+      "subject": "VisualResources",
+      "text": "VisualResources consumes DiagramLayoutPort.",
+      "verb": "consumes"
+    },
+    {
+      "id": "f0982",
+      "line": 1296,
+      "node": "Relation",
+      "object": "TextMetricsPort",
+      "span": {
+        "column": 1,
+        "end": 72608,
+        "end_column": 42,
+        "end_line": 1296,
+        "line": 1296,
+        "node": "Span",
+        "start": 72567
+      },
+      "subject": "VisualResources",
+      "text": "VisualResources consumes TextMetricsPort.",
+      "verb": "consumes"
+    }
+  ],
+  "model_gaps": [],
+  "outputs": {
+    "delivery.txt": "6403203dd5a0867eb14d104ee8a73730bd72dd9ad92e78d996a6dba0a5dcfc01",
+    "diagrams/VP04-overview.mmd": "00c70afe554b79829e6d0f6f673d5f92a96d5b6dd70365d5b4638d3d9d64bde8",
+    "entry.md": "a0fc62ed1355c99bbdbaf7e88865ec4b48b99af508d124ac5ee7f86263fb224b",
+    "sdptool.json": "5d151c65d53f10ec5142d5edc790b5df45703e6cb67de348d54eb1bd727ab010",
+    "selection.json": "31821b3764cb1e24cc719c3164ff1f36990024dd3c5d41546c8f4b307460f199",
+    "source-inputs/s0.design": "e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007"
+  }
+}

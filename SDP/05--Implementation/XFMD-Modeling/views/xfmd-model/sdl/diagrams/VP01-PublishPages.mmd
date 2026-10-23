@@ -1,0 +1,6 @@
+flowchart LR
+    n_PagedPublication["PagedPublication (feature)"]
+    n_PublishPages["PublishPages (usecase)"]
+    n_ReaderAuthor["ReaderAuthor (actor)"]
+    n_PagedPublication -->|supports| n_PublishPages
+    n_ReaderAuthor -->|pursues| n_PublishPages

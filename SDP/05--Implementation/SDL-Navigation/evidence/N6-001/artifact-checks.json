@@ -1,0 +1,16 @@
+{
+  "nodes": 23,
+  "edges": 19,
+  "responsibilities": 28,
+  "pdfLabels": "all structural names and all 28 R keys present; six long responsibility identifiers wrap across table lines, inspected separately",
+  "wrappedResponsibilityNames": [
+    "ApplicationPreferences",
+    "GeneratedDocumentNavigation",
+    "MarkdownInterpretation",
+    "MermaidInterpretation",
+    "SourceAnchorMapping",
+    "TypographyAndDrawing"
+  ],
+  "sourceLinksChecked": 154,
+  "noCapabilitiesExplicit": true
+}

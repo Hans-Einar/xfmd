@@ -1,0 +1,5 @@
+flowchart LR
+    n_Application["Application (unit)"]
+    n_OpeningPolicy["OpeningPolicy (channel)"]
+    n_OpeningPolicy -->|receiver| n_Application
+    n_Application -->|sender| n_OpeningPolicy

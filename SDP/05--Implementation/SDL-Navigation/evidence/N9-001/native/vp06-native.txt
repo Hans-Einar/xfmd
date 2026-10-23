@@ -1,0 +1,119 @@
+VP06 — Activities and delivery plan
+Revision:
+f08f981f22d579abe806b5da72052d23ea35c313d0d93ef1cb44b17782bb273c.
+refines, addresses, delivers and depends-on; status is an explicit source claim.
+
+All activities and explicit refinement
+ABuild (activity)
+
+AIsolated (activity)
+
+refines
+APlan (activity)
+refines
+
+AVerify (activity)
+
+Source facts: f0003, f0007.
+Declarations: ABuild, AIsolated, APlan, AVerify.
+
+Explicit activity prerequisites
+AVerify (activity)
+
+depends-on
+
+ABuild (activity)
+
+AIsolated (activity)
+
+APlan (activity)
+
+Source facts: f0005.
+Declarations: ABuild, AIsolated, APlan, AVerify.
+
+Scope and notation
+All declared Activities are retained, including isolated activities. Refines points from
+detailed to abstract activity; depends-on points from dependent activity to its explicit
+prerequisite. Decomposition and prerequisites are separate diagrams. Neither
+
+relation inherits status or dependencies. No dates, durations, execution order or
+calendar schedule are inferred.
+Implementation status is a source claim, not test evidence or owner acceptance.
+Addresses models Functionality coverage; delivers models a Feature contribution, not
+complete delivery; illustrates links an example Scenario, not an executed test.
+
+Activity register
+Activity
+
+Source-claimed status
+
+Refines
+
+Source facts
+
+ABuild
+
+implemented
+
+APlan
+
+f0002, f0003
+
+AIsolated
+
+Unspecified
+
+No declared parent
+
+—
+
+APlan
+
+planned
+
+No declared parent
+
+f0004
+
+AVerify
+
+verified
+
+APlan
+
+f0006, f0007
+
+Addressed responsibilities
+Activity
+
+Functionality Explicit owner Source facts
+
+ABuild
+
+Display
+
+Desktop
+
+f0000, f0011
+
+Planned Feature contributions
+Activity
+
+Feature
+
+Source fact
+
+ABuild
+
+Navigation
+
+f0001
+
+No illustrative Scenarios are linked to activities.
+
+Functionality without activity coverage
+This lists missing addresses relations in the model, not unimplemented native code.
+No unaddressed Functionality declarations in this snapshot. This is not proof of
+completed implementation.
+
+

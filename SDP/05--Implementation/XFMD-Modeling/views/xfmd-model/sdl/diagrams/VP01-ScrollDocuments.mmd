@@ -1,0 +1,8 @@
+flowchart LR
+    n_ConfigurableScrolling["ConfigurableScrolling (feature)"]
+    n_ReaderAuthor["ReaderAuthor (actor)"]
+    n_ScrollDocuments["ScrollDocuments (usecase)"]
+    n_SynchronizedScrolling["SynchronizedScrolling (feature)"]
+    n_ConfigurableScrolling -->|supports| n_ScrollDocuments
+    n_ReaderAuthor -->|pursues| n_ScrollDocuments
+    n_SynchronizedScrolling -->|supports| n_ScrollDocuments

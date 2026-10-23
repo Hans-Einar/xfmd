@@ -1,0 +1,16 @@
+Packet field readability
+One flag, a twelve-bit number and a sixteen-bit payload.
+0
+
+1
+
+[1]
+[1] Bits 0: PacketFlag
+
+12 13
+PacketNumber
+
+28
+PacketPayload
+
+

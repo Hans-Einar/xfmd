@@ -1,0 +1,31 @@
+     Locking 1 package to latest compatible version
+    Updating serde_json v1.0.149 -> v1.0.151
+   Compiling serde_core v1.0.228
+   Compiling libm v0.2.15
+   Compiling memchr v2.7.6
+   Compiling libc v0.2.180
+   Compiling zmij v1.0.16
+   Compiling serde v1.0.228
+   Compiling aho-corasick v1.1.4
+   Compiling core_maths v0.1.1
+   Compiling regex-syntax v0.8.8
+   Compiling tinyvec_macros v0.1.1
+   Compiling anyhow v1.0.103
+   Compiling tinyvec v1.10.0
+   Compiling thiserror v2.0.18
+   Compiling ttf-parser v0.25.1
+   Compiling regex-automata v0.4.13
+   Compiling memmap2 v0.9.11
+   Compiling mermaid-rs-renderer v0.3.1 (/home/warloc/git/mermaid-rs-renderer-xfmd-diagrams)
+   Compiling itoa v1.0.17
+   Compiling log v0.4.29
+   Compiling fontdb v0.23.0
+   Compiling serde_json v1.0.151
+   Compiling regex v1.12.3
+   Compiling json5 v1.3.1
+   Compiling once_cell v1.21.4
+   Compiling xfmd-diagram-contracts v0.1.0 (/tmp/xfmd-vp07-candidate/src/contracts/diagram/rust)
+   Compiling xfmd-diagram-layout v0.1.0 (/tmp/xfmd-vp07-candidate/src/renderer/diagram/rust)
+   Compiling xfmd-mermaid-interpreter v0.1.0 (/tmp/xfmd-vp07-candidate/src/interpreter/mermaid/rust)
+   Compiling xfmd-mermaid-ffi v0.1.0 (/tmp/xfmd-vp07-candidate/src/application/composition/mermaid)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1m 43s

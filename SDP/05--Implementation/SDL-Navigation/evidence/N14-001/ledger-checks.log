@@ -1,0 +1,2 @@
+PASS: 245 events: generic schema, unique IDs, previous-event subject/state lineage and management evidence references
+PASS: pre-existing ledger bytes unchanged; exactly one event appended to each ledger

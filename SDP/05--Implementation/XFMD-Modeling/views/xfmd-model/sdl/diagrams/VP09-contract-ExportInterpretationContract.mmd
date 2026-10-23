@@ -1,0 +1,6 @@
+flowchart LR
+    n_ExportInterpretationContract["ExportInterpretationContract (contract)"]
+    n_ExportSnapshotParsed["ExportSnapshotParsed (message)"]
+    n_ParseExportSnapshot["ParseExportSnapshot (message)"]
+    n_ExportInterpretationContract -->|permits| n_ExportSnapshotParsed
+    n_ExportInterpretationContract -->|permits| n_ParseExportSnapshot

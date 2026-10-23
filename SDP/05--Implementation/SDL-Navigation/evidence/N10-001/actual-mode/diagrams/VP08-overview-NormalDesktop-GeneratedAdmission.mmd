@@ -1,0 +1,7 @@
+flowchart LR
+    n_Documents["Documents (unit)"]
+    n_GeneratedAdmission["GeneratedAdmission (channel)"]
+    n_GeneratedViews["GeneratedViews (unit)"]
+    n_GeneratedAdmission -->|receiver| n_Documents
+    n_GeneratedAdmission -->|receiver| n_GeneratedViews
+    n_GeneratedViews -->|sender| n_GeneratedAdmission

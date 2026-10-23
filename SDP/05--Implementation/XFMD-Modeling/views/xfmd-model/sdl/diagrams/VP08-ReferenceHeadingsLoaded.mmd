@@ -1,0 +1,12 @@
+sequenceDiagram
+    participant n_NativeShell as Native Shell
+    participant n_DocumentIndexService as Document Index Service
+    participant n_DocumentStorage as Document Storage
+    participant n_Interpreter as Interpreter
+    n_NativeShell->>n_DocumentIndexService: 1: Expand Reference (Index Intents)
+    n_DocumentIndexService->>n_DocumentStorage: 2: Read Reference (Reference Storage)
+    n_DocumentStorage-->>n_DocumentIndexService: 3: Reference Read (Reference Storage) reply-to 2
+    n_DocumentIndexService->>n_Interpreter: 4: Parse Reference (Reference Interpretation)
+    n_Interpreter-->>n_DocumentIndexService: 5: Reference Parsed (Reference Interpretation) reply-to 4
+    n_DocumentIndexService->>n_DocumentIndexService: 6: Check Reference Generation (Index Changes)
+    n_DocumentIndexService->>n_NativeShell: 7: Publish Reference Headings (Index Changes)

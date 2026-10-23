@@ -1,0 +1,7 @@
+sequenceDiagram
+    participant n_NativeShell as Native Shell
+    participant n_Application as Application
+    participant n_ExternalLauncher as External Launcher
+    n_NativeShell->>n_Application: 1: Activate External Target (Workspace Intents)
+    n_Application->>n_Application: 2: Classify External Target (Opening Policy)
+    n_Application->>n_ExternalLauncher: 3: Launch Configured Program (External Opening)

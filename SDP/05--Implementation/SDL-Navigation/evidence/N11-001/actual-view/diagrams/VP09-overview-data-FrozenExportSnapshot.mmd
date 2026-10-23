@@ -1,0 +1,6 @@
+flowchart LR
+    n_ExportSnapshotShape["ExportSnapshotShape (contract)"]
+    n_FrozenExportSnapshot["FrozenExportSnapshot (dataset)"]
+    n_Publication["Publication (unit)"]
+    n_FrozenExportSnapshot -->|upholds| n_ExportSnapshotShape
+    n_Publication -->|holds| n_FrozenExportSnapshot

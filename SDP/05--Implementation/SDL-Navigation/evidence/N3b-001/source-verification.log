@@ -1,0 +1,1 @@
+PASS: SHA-256 selected archive; tar PAX commit e79d8f9caf649995a5db5e54b0ea5d6b7fab8221; 1287 regular files equal clean fork checkout and extracted dependency. Cargo.lock unchanged from turn baseline.

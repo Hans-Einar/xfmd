@@ -1,0 +1,32 @@
+XFMD closeout
+OK: 38 blueprints, 75 requirements; metadata, matrix, plumbing and local file links checked.
+Not checked: external links, heading anchors, actual C++ call graph or application behavior.
+OK: 307 implemented plumbing callees found; caller semantics require review
+PASS: 30 cards, 148 card events, 16 management records; schemas, replay, CardState, placement and index
+
+Shared SDP producer closeout
+PASS: 65 cards, 43 management records, 4 lineage operations, 567 events; schema/history/metadata/placement/grouping
+PASS: full/partial merge and split; historical 0.1; 15 negative cases
+
+Isolated committed candidate
+cc7b52f N3i deliver VP01 and VP07 overview targets for XFMD
+ SDL/go/documents/selection.go                      |  11 +-
+ SDL/go/viewpoint/feature_overview.go               | 155 +++++++++++++++
+ SDL/go/viewpoint/feature_overview_test.go          | 134 +++++++++++++
+ SDL/go/viewpoint/overview.go                       |  80 ++++++++
+ SDL/go/viewpoint/overview_test.go                  | 104 ++++++++++
+ SDL/go/viewpoint/query.go                          |  29 ++-
+ SDP/02--Requirements/SDPTool.md                    |  14 ++
+ .../SDL/ViewpointNavigation/Integration.md         |  62 ++++++
+ .../SDL/ViewpointNavigation/Plan.md                | 159 +++++++++++++++
+ .../SDL/ViewpointNavigation/candidate.json         |  28 +++
+ .../SDL/ViewpointNavigation/document-checks.log    |   2 +
+ .../SDL/ViewpointNavigation/live-projections.json  |  41 ++++
+ .../SDL/ViewpointNavigation/native-test.log        |   1 +
+ .../SDL/ViewpointNavigation/sdl-tests.log          |   2 +
+ .../ViewpointNavigation/sdptool-tests-composed.log |   1 +
+ SDPTool/Contract.md                                |  37 ++++
+ SDPTool/overview_test.go                           | 219 +++++++++++++++++++++
+ SDPTool/tree.go                                    |  17 ++
+ 18 files changed, 1087 insertions(+), 9 deletions(-)
+PASS: committed candidate inputs match tested hashes

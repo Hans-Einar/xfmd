@@ -1,0 +1,43 @@
+flowchart LR
+    n_Application["Application (unit)"]
+    n_DocumentIndexService["DocumentIndexService (unit)"]
+    n_DocumentStorage["DocumentStorage (unit)"]
+    n_Documents["Documents (unit)"]
+    n_EventLoop["EventLoop (unit)"]
+    n_ExternalLauncher["ExternalLauncher (unit)"]
+    n_ExternalViewBroker["ExternalViewBroker (unit)"]
+    n_ExternalViewGenerator["ExternalViewGenerator (unit)"]
+    n_GeneratedViews["GeneratedViews (unit)"]
+    n_Identity["Identity (unit)"]
+    n_Interpreter["Interpreter (unit)"]
+    n_NativeShell["NativeShell (unit)"]
+    n_Navigation["Navigation (unit)"]
+    n_Preferences["Preferences (unit)"]
+    n_Preview["Preview (unit)"]
+    n_Publication["Publication (unit)"]
+    n_Renderer["Renderer (unit)"]
+    n_SdpProjects["SdpProjects (unit)"]
+    n_Typography["Typography (unit)"]
+    n_Viewport["Viewport (unit)"]
+    n_VisualResources["VisualResources (unit)"]
+    n_Workspace["Workspace (unit)"]
+    n_XfmdDesktop["XfmdDesktop (container)"]
+    n_Application -->|contains| n_DocumentIndexService
+    n_Application -->|contains| n_DocumentStorage
+    n_Application -->|contains| n_Documents
+    n_Application -->|contains| n_EventLoop
+    n_Application -->|contains| n_GeneratedViews
+    n_Application -->|contains| n_Identity
+    n_Application -->|contains| n_NativeShell
+    n_Application -->|contains| n_Navigation
+    n_Application -->|contains| n_Preferences
+    n_Application -->|contains| n_Preview
+    n_Application -->|contains| n_Publication
+    n_Application -->|contains| n_SdpProjects
+    n_Application -->|contains| n_Typography
+    n_Application -->|contains| n_Viewport
+    n_Application -->|contains| n_VisualResources
+    n_Application -->|contains| n_Workspace
+    n_XfmdDesktop -->|contains| n_Application
+    n_XfmdDesktop -->|contains| n_Interpreter
+    n_XfmdDesktop -->|contains| n_Renderer

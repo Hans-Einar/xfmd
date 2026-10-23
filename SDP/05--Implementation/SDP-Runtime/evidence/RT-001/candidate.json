@@ -1,0 +1,9 @@
+{
+  "head": "41fa4948c5377edd792ba3f503e6b92b0fd4717a",
+  "working_tree": "dirty; source archive includes preceding work, not only RT-001 changes",
+  "binary": "build-ui/xfmd",
+  "binary_sha256": "71cf968834882e0fbb47f5b1055def437edcaab8e9b2ae7375f6a8903681be19",
+  "source_archive_sha256": "7a696116629347681af86cd60ed717367da5f4bf1a999382ee31bba34e7bc91b",
+  "build_type": "Release",
+  "installed": false
+}

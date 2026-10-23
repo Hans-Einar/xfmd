@@ -23,12 +23,7 @@ int hex(unsigned char c) {
     return c - 'A' + 10;
   return -1;
 }
-} // namespace
-std::string LinkResolver::resourcePath(const std::string& document, const std::string& target) {
-  localOnly(target);
-  if (target.find('#') != std::string::npos || target.find('?') != std::string::npos)
-    throw Error(ErrorCode::Unsupported,
-                "Fragment and query links are not supported in this version.");
+std::string decode(const std::string& target) {
   std::string decoded;
   for (std::size_t i = 0; i < target.size(); ++i) {
     if (target[i] != '%') {
@@ -40,6 +35,28 @@ std::string LinkResolver::resourcePath(const std::string& document, const std::s
     decoded += char(hex(target[i + 1]) * 16 + hex(target[i + 2]));
     i += 2;
   }
+  return decoded;
+}
+} // namespace
+DocumentLink LinkResolver::documentLink(const std::string& document, const std::string& target) {
+  const auto hash = target.find('#');
+  if (hash == std::string::npos)
+    return {resourcePath(document, target), {}};
+  auto fragment = decode(target.substr(hash + 1));
+  InputPolicy::validate(fragment);
+  for (unsigned char c : fragment)
+    if (c < 32 || c == 127)
+      throw Error(ErrorCode::InvalidInput, "Control character in heading anchor.");
+  if (hash == 0)
+    return {document, std::move(fragment)};
+  return {resourcePath(document, target.substr(0, hash)), std::move(fragment)};
+}
+std::string LinkResolver::resourcePath(const std::string& document, const std::string& target) {
+  localOnly(target);
+  if (target.find('#') != std::string::npos || target.find('?') != std::string::npos)
+    throw Error(ErrorCode::Unsupported,
+                "Fragment and query links are not supported in this version.");
+  auto decoded = decode(target);
   localOnly(decoded);
   InputPolicy::validate(decoded);
   std::filesystem::path path(decoded);

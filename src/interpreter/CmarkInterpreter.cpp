@@ -1,5 +1,6 @@
 #include "CmarkInterpreter.h"
 #include "ModelBuilder.h"
+#include "mermaid/MermaidBlockBuilder.h"
 #include <cmark-gfm-core-extensions.h>
 #include <cmark-gfm-extension_api.h>
 #include <cmark-gfm.h>
@@ -8,6 +9,20 @@ namespace xfmd {
 ParseResult CmarkInterpreter::parse(const SourceSnapshot& source, const ParseOptions& options) {
   if (source.text.size() > options.maxBytes)
     throw Error(ErrorCode::TooLarge, "Input exceeds parser size limit.");
+  if (source.standaloneMermaid) {
+    auto result = std::make_shared<SemanticDocument>();
+    result->token = source.token;
+    result->sourceSize = source.text.size();
+    const auto begin = source.text.compare(0, 3, "\xef\xbb\xbf") == 0 ? 3u : 0u;
+    SemanticBlock block;
+    block.kind = BlockKind::Code;
+    block.source = {begin, source.text.size()};
+    std::size_t count = 0;
+    MermaidBlockBuilder::build(block, "mermaid", source.text.c_str() + begin, diagrams.get(),
+                               count);
+    result->blocks.push_back(std::move(block));
+    return result;
+  }
   if (source.plainText) {
     auto result = std::make_shared<SemanticDocument>();
     result->token = source.token;

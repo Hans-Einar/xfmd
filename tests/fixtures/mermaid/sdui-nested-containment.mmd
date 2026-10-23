@@ -1,0 +1,22 @@
+flowchart TB
+subgraph page["frame page"]
+  subgraph header["header"]
+    heading["Markdown heading"]
+  end
+  subgraph row1["Row 1"]
+    subgraph left["group left"]
+      subgraph inner1["Widget row"]
+        save["button Save"]
+        input["input Name"]
+      end
+    end
+  end
+  subgraph row2["Row 2"]
+    subgraph hidden["hidden group"]
+      subgraph inner2["Widget row"]
+        save2["hidden Save"]
+        input2["hidden Name"]
+      end
+    end
+  end
+end

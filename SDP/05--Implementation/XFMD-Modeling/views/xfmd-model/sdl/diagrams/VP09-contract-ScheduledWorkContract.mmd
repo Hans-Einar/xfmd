@@ -1,0 +1,8 @@
+flowchart LR
+    n_DebounceElapsed["DebounceElapsed (message)"]
+    n_PollReleaseQueue["PollReleaseQueue (message)"]
+    n_RestartDebounce["RestartDebounce (message)"]
+    n_ScheduledWorkContract["ScheduledWorkContract (contract)"]
+    n_ScheduledWorkContract -->|permits| n_DebounceElapsed
+    n_ScheduledWorkContract -->|permits| n_PollReleaseQueue
+    n_ScheduledWorkContract -->|permits| n_RestartDebounce

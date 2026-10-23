@@ -1,0 +1,162 @@
+--- a/SDPTool/tree.go
++++ b/SDPTool/tree.go
+@@ -117,6 +117,18 @@
+ 			n.OverviewTarget = target(spec.ID, "", "")
+ 			n.OverviewTarget.URI += "&projection=overview"
+ 		}
++		if spec.ID == "VP07" {
++			for _, name := range names {
++				if v.Kinds[name] != "mode" {
++					continue
++				}
++				key := vpID + "/overview-mode/" + url.PathEscape(name)
++				action := target(spec.ID, "", "")
++				action.URI += "&projection=overview&mode=" + url.QueryEscape(name)
++				n.Children = append(n.Children, key)
++				add(Node{ID: key, Kind: "diagram", Label: "Architecture and features — mode " + name, State: "available", Target: action})
++			}
++		}
+ 		levels := spec.Levels
+ 		if len(levels) == 0 {
+ 			levels = []string{"delivery"}
+--- a/SDPTool/overview_test.go
++++ b/SDPTool/overview_test.go
+@@ -30,10 +30,12 @@
+ 	var overview *Target
+ 	for _, n := range tree.Nodes {
+ 		if n.OverviewTarget != nil {
+-			if !strings.HasSuffix(n.ID, "/VP01") || n.Target.URI == n.OverviewTarget.URI {
++			if (!strings.HasSuffix(n.ID, "/VP01") && !strings.HasSuffix(n.ID, "/VP07")) || n.Target.URI == n.OverviewTarget.URI {
+ 				t.Fatal(n)
+ 			}
+-			overview = n.OverviewTarget
++			if strings.HasSuffix(n.ID, "/VP01") {
++				overview = n.OverviewTarget
++			}
+ 		}
+ 	}
+ 	if overview == nil {
+@@ -74,3 +76,69 @@
+ 		t.Fatal("invalid request published output", e)
+ 	}
+ }
++
++func TestFeatureOverviewTargetsGenerateOnlySelectedMode(t *testing.T) {
++	root, r := projectFixture(t)
++	r.Models = []Model{{"model", "System", "model.design", "design-core/0.5"}}
++	saveInventory(t, root, r)
++	m, e := parser.Parse(`language design-core version 0.5.
++unit Owner.
++container Local.
++container Remote.
++functionality Work.
++feature Feature.
++mode Online.
++mode Offline.
++Owner owns Work.
++Work contributes-to Feature.
++Work allocated-to Local in mode Offline.
++Work allocated-to Remote in mode Online.
++`)
++	if e != nil {
++		t.Fatal(e)
++	}
++	os.WriteFile(filepath.Join(root, "model.design"), []byte(parser.FormatFile(m)), 0600)
++	p, _ := Discover(root)
++	p.Inventory = r
++	tree, e := ModelTree(p, "model")
++	if e != nil {
++		t.Fatal(e)
++	}
++	modes := 0
++	logical := false
++	for _, n := range tree.Nodes {
++		var action *Target
++		if strings.HasSuffix(n.ID, "/VP07") {
++			action = n.OverviewTarget
++			logical = action != nil
++		}
++		if strings.Contains(n.ID, "/overview-mode/") {
++			action = n.Target
++			modes++
++		}
++		if action == nil {
++			continue
++		}
++		result, e := SelectProject(context.Background(), p, "model", PreviewOptions{URI: action.URI, Revision: action.Revision, Output: filepath.Join(t.TempDir(), "view")})
++		if e != nil {
++			t.Fatal(e)
++		}
++		b, e := os.ReadFile(result.Entry)
++		if e != nil {
++			t.Fatal(e)
++		}
++		text := string(b)
++		if strings.Count(text, "```mermaid") != 1 || !strings.Contains(text, "Feature contributions") {
++			t.Fatal(text)
++		}
++		if strings.Contains(action.URI, "mode=Offline") && (!strings.Contains(text, "n_Local[\"Local (container) | allocated-to: F01") || strings.Contains(text, "n_Remote[\"Remote (container) | allocated-to: F01")) {
++			t.Fatal("mixed mode", text)
++		}
++		if strings.Contains(action.URI, "mode=Online") && (!strings.Contains(text, "n_Remote[\"Remote (container) | allocated-to: F01") || strings.Contains(text, "n_Local[\"Local (container) | allocated-to: F01")) {
++			t.Fatal("mixed mode", text)
++		}
++	}
++	if !logical || modes != 2 {
++		t.Fatal("missing lazy targets", logical, modes)
++	}
++}
+--- a/SDL/go/viewpoint/overview.go
++++ b/SDL/go/viewpoint/overview.go
+@@ -6,10 +6,13 @@
+ )
+ 
+ // HasOverview advertises implemented projections only. It never generates output.
+-func HasOverview(vp string) bool { return vp == "VP01" }
++func HasOverview(vp string) bool { return vp == "VP01" || vp == "VP07" }
+ 
+ // overview selects the complete validated inventory, not a union of detail views.
+ func (v *Views) overview(q Query) (*Views, error) {
++	if q.Viewpoint == "VP07" {
++		return v.featureOverview(q)
++	}
+ 	out := *v
+ 	out.Diagrams = []Diagram{}
+ 	out.MessageSets = []Fact{}
+--- a/SDL/go/viewpoint/query.go
++++ b/SDL/go/viewpoint/query.go
+@@ -82,7 +82,7 @@
+ 	return s, nil
+ }
+ func (q Query) Validate(v *Views) error {
+-	if q.Projection != "" && (q.Projection != "overview" || !HasOverview(q.Viewpoint) || q.Focus != "" || q.Diagram != "" || q.Mode != "" || q.Level != "" || len(q.Relations) > 0 || (q.Direction != "" && q.Direction != "both") || (q.Depth != 0 && q.Depth != 2)) {
++	if q.Projection != "" && (q.Projection != "overview" || !HasOverview(q.Viewpoint) || q.Focus != "" || q.Diagram != "" || (q.Mode != "" && q.Viewpoint != "VP07") || q.Level != "" || len(q.Relations) > 0 || (q.Direction != "" && q.Direction != "both") || (q.Depth != 0 && q.Depth != 2)) {
+ 		return fmt.Errorf("unsupported-overview-selection")
+ 	}
+ 
+--- a/SDL/go/viewpoint/overview_test.go
++++ b/SDL/go/viewpoint/overview_test.go
+@@ -48,7 +48,7 @@
+ 			t.Fatal("overview generated eagerly")
+ 		}
+ 	}
+-	for _, q := range []Query{{Viewpoint: "VP07", Projection: "overview"}, {Viewpoint: "VP01", Projection: "bad"}, {Viewpoint: "VP01", Projection: "overview", Focus: "Goal0"}, {Viewpoint: "VP01", Projection: "overview", Relations: []string{"pursues"}}, {Viewpoint: "VP01", Projection: "overview", Depth: 1}, {Viewpoint: "VP01", Projection: "overview", Direction: "out"}, {Viewpoint: "VP01", Projection: "overview", Diagram: "VP01-Goal0"}} {
++	for _, q := range []Query{{Viewpoint: "VP02", Projection: "overview"}, {Viewpoint: "VP01", Projection: "bad"}, {Viewpoint: "VP01", Projection: "overview", Focus: "Goal0"}, {Viewpoint: "VP01", Projection: "overview", Relations: []string{"pursues"}}, {Viewpoint: "VP01", Projection: "overview", Depth: 1}, {Viewpoint: "VP01", Projection: "overview", Direction: "out"}, {Viewpoint: "VP01", Projection: "overview", Diagram: "VP01-Goal0"}} {
+ 		if _, e := v.Select(q); e == nil {
+ 			t.Fatal("ignored overview filter", q)
+ 		}
+--- a/SDL/go/documents/selection.go
++++ b/SDL/go/documents/selection.go
+@@ -42,7 +42,11 @@
+ 		text += "\nSymbol profile: SDL 1. Actor/ellipse use UML shapes; labeled SDL relations retain their language semantics. consumes is a dashed dependency; realizes is a contribution.\n\n"
+ 	}
+ 	if q.Projection == "overview" {
+-		text += s.OverviewContext()
++		if q.Viewpoint == "VP07" {
++			text += s.FeatureOverviewContext(q.Mode)
++		} else {
++			text += s.OverviewContext()
++		}
+ 	}
+ 	text += s.Tables(q.Viewpoint)
+ 	b.Put("entry.md", text)

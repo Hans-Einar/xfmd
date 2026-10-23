@@ -1,0 +1,8 @@
+flowchart LR
+    n_NativeShell["NativeShell (unit)"]
+    n_PreferenceChanges["PreferenceChanges (channel)"]
+    n_Preferences["Preferences (unit)"]
+    n_PreferenceChanges -->|receiver| n_NativeShell
+    n_NativeShell -->|sender| n_PreferenceChanges
+    n_PreferenceChanges -->|receiver| n_Preferences
+    n_Preferences -->|sender| n_PreferenceChanges

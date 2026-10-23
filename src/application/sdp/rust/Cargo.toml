@@ -1,0 +1,9 @@
+[package]
+name = "xfmd-sdp-json"
+version = "0.1.0"
+edition = "2024"
+publish = false
+[lib]
+crate-type = ["staticlib"]
+[dependencies]
+serde_json = "=1.0.151"

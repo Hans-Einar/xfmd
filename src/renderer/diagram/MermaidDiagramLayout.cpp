@@ -84,14 +84,29 @@ MermaidDiagramLayout::layout(const DiagramModel& model, const DiagramLayoutReque
   const auto groups = r.count(32);
   if (groups != model.groups.size())
     throw Error(ErrorCode::Layout, "Diagram group mismatch");
+  // Layout may reorder independent clusters. Match their stable identities,
+  // retaining model order in the inspection scene and rejecting duplicates.
+  scene->groups.resize(groups);
+  std::vector<double> groupHeights(groups);
+  std::vector<bool> seen(groups, false);
   for (unsigned i = 0; i < groups; ++i) {
     auto id = r.text();
     auto box = rect();
     auto height = r.number() * .75;
-    if (id != model.groups[i].id)
-      throw Error(ErrorCode::Layout, "Diagram group order mismatch");
-    scene->groups.push_back(box);
-    label(model.groups[i].label, box.x + box.width / 2, box.y + height / 2 + 6, false);
+    auto group = std::find_if(model.groups.begin(), model.groups.end(),
+                              [&](const auto& value) { return value.id == id; });
+    if (group == model.groups.end())
+      throw Error(ErrorCode::Layout, "Unknown diagram group identity");
+    const auto index = std::size_t(group - model.groups.begin());
+    if (seen[index])
+      throw Error(ErrorCode::Layout, "Duplicate diagram group identity");
+    seen[index] = true;
+    scene->groups[index] = box;
+    groupHeights[index] = height;
+  }
+  for (unsigned i = 0; i < groups; ++i) {
+    const auto& box = scene->groups[i];
+    label(model.groups[i].label, box.x + box.width / 2, box.y + groupHeights[i] / 2 + 6, false);
   }
   for (unsigned i = 0; i < count; ++i) {
     const auto& box = scene->nodes[i].bounds;

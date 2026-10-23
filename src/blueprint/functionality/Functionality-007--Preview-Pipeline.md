@@ -89,3 +89,8 @@ P23 akseptanse: AT-056, AT-057. Tester: RichPreviewTest og PreviewSelectionGuiTe
 P25 (Proposed): Prepare-request og completion inkluderer font-/profilgenerasjon. Worker eier egne fonter; gamle svar forkastes før modelReady. Krav: SR-022; AT-063.
 Se [design](../../../docs/design/mermaid-integration.md). Eksisterende Implemented-rader
 og eldre bevis gjelder baseline; ny plumbing er ikke implementert eller testet.
+
+### N3h — full-size diagram reading
+
+LayoutProfile.fullSizeDiagrams participates in FrameKey equality. Changing it reuses the current model/scene and requests new placement; frames carrying the previous policy are rejected. No parse or diagram-layout request is needed.
+See [selected design](../../../SDP/04--Design/SDL-Navigation/N3h-Reading.md).

@@ -74,7 +74,7 @@ No runtime or visual acceptance was executed for the requested arrangement.
 
 ## Related scope review
 
-[KB-XFMD-003](../backlog/%23003--Question--SDUI-widget-ownership.md) remains an SDUI-owned
+[KB-XFMD-003](../superseded/%23003--Question--SDUI-widget-ownership.md) remains an SDUI-owned
 question. These XFMD UI requests neither answer it nor revive historical BoxUI.
 The optional wish to describe the resulting UI in SDUI is retained here for a
 later review once the FOX interaction/layout is settled; no SDUI implementation

@@ -13,6 +13,8 @@ FileOpenKind FileOpenPolicy::classify(const std::string& path) {
                  [](unsigned char c) { return char(std::tolower(c)); });
   if (extension == ".html" || extension == ".htm")
     return FileOpenKind::Browser;
+  if (InputPolicy::mermaid(path))
+    return FileOpenKind::Mermaid;
   if (InputPolicy::supportedPath(path))
     return InputPolicy::plainText(path) ? FileOpenKind::Text : FileOpenKind::Markdown;
   try {

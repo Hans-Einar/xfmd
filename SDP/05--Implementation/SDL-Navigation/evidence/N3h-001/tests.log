@@ -1,0 +1,47 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd-sdl-navigation/build-ui
+Test project /home/warloc/git/xfmd-sdl-navigation/build-ui
+      Start  1: PortContractTest
+ 1/19 Test  #1: PortContractTest .................   Passed    0.00 sec
+      Start  5: RendererTest
+ 2/19 Test  #5: RendererTest .....................   Passed    0.00 sec
+      Start  6: PreviewTest
+ 3/19 Test  #6: PreviewTest ......................   Passed    0.01 sec
+      Start  7: ScrollTest
+ 4/19 Test  #7: ScrollTest .......................   Passed    0.00 sec
+      Start 15: DiagramReadingGuiTest
+ 5/19 Test #15: DiagramReadingGuiTest ............   Passed    3.05 sec
+      Start 19: DocumentZoomGuiTest
+ 6/19 Test #19: DocumentZoomGuiTest ..............   Passed   24.22 sec
+      Start 23: MermaidGuiTest
+ 7/19 Test #23: MermaidGuiTest ...................   Passed   11.36 sec
+      Start 25: PreviewSelectionGuiTest
+ 8/19 Test #25: PreviewSelectionGuiTest ..........   Passed    7.05 sec
+      Start 49: PagedPreviewTest
+ 9/19 Test #49: PagedPreviewTest .................   Passed    1.67 sec
+      Start 51: PdfExportTest
+10/19 Test #51: PdfExportTest ....................   Passed    0.07 sec
+      Start 52: ExportGuiTest
+11/19 Test #52: ExportGuiTest ....................   Passed    0.33 sec
+      Start 62: DiagramLayoutTest
+12/19 Test #62: DiagramLayoutTest ................   Passed    1.62 sec
+      Start 66: DiagramReadingTest
+13/19 Test #66: DiagramReadingTest ...............   Passed    6.58 sec
+      Start 67: MermaidPdfTest
+14/19 Test #67: MermaidPdfTest ...................   Passed    1.38 sec
+      Start 77: DocumentZoomPdfTest
+15/19 Test #77: DocumentZoomPdfTest ..............   Passed    2.51 sec
+      Start 78: DocumentZoomDpiTest
+16/19 Test #78: DocumentZoomDpiTest ..............   Passed   24.27 sec
+      Start 81: SdpNavigationGuiTest
+17/19 Test #81: SdpNavigationGuiTest .............   Passed   11.26 sec
+      Start 91: SduiWorkflowGuiTest
+18/19 Test #91: SduiWorkflowGuiTest ..............   Passed    5.47 sec
+      Start 92: SdpOverviewGuiTest
+19/19 Test #92: SdpOverviewGuiTest ...............   Passed    2.96 sec
+
+100% tests passed, 0 tests failed out of 19
+
+Label Time Summary:
+GUI    =  94.13 sec*proc (11 tests)
+
+Total Test time (real) = 103.81 sec

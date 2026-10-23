@@ -1,0 +1,11 @@
+   Compiling mermaid-rs-renderer v0.3.1 (/home/warloc/git/mermaid-rs-renderer-xfmd-diagrams)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 35.02s
+     Running unittests src/lib.rs (/home/warloc/git/xfmd-sdl-navigation/build-diagram-fork/debug/deps/mermaid_rs_renderer-016c04e833d173a8)
+
+running 3 tests
+test layout::routed::attachment::tests::blocks_parallel_and_crossing_intruders_but_not_owner ... ok
+test layout::routed::attachment::tests::requires_projection_and_supports_both_axes_and_sides ... ok
+test layout::routed::attachment::tests::rejects_intruder_even_inside_old_distance_tolerance ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 384 filtered out; finished in 0.10s
+

@@ -1,0 +1,23 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd-sdl-navigation/build-ui
+Test project /home/warloc/git/xfmd-sdl-navigation/build-ui
+    Start 15: SdpDynamicGuiTest
+1/4 Test #15: SdpDynamicGuiTest ................   Passed    4.04 sec
+    Start 79: SdpProtocolTest
+2/4 Test #79: SdpProtocolTest ..................   Passed    1.98 sec
+    Start 81: SdpIntegrationTest
+3/4 Test #81: SdpIntegrationTest ...............   Passed    0.18 sec
+    Start 91: SdpOverviewGuiTest
+4/4 Test #91: SdpOverviewGuiTest ...............***Failed    2.97 sec
+/home/warloc/git/xfmd-sdl-navigation/tests/gui/SdpOverviewGuiTest.cpp:98: featureScenes==1
+
+
+75% tests passed, 1 tests failed out of 4
+
+Label Time Summary:
+GUI    =   7.01 sec*proc (2 tests)
+
+Total Test time (real) =   9.17 sec
+
+The following tests FAILED:
+	 91 - SdpOverviewGuiTest (Failed)                       GUI
+Errors while running CTest

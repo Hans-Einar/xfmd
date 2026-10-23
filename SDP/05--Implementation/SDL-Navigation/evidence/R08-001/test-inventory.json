@@ -1,0 +1,3993 @@
+{
+  "backtraceGraph" : 
+  {
+    "commands" : 
+    [
+      "add_test",
+      "xfmd_test",
+      "include"
+    ],
+    "files" : 
+    [
+      "/home/warloc/git/xfmd-sdl-navigation/cmake/Tests.cmake",
+      "/home/warloc/git/xfmd-sdl-navigation/CMakeLists.txt"
+    ],
+    "nodes" : 
+    [
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 0
+      },
+      {
+        "file" : 0,
+        "parent" : 1
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 11,
+        "parent" : 2
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 3
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 5
+      },
+      {
+        "file" : 0,
+        "parent" : 6
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 12,
+        "parent" : 7
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 8
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 10
+      },
+      {
+        "file" : 0,
+        "parent" : 11
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 13,
+        "parent" : 12
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 13
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 15
+      },
+      {
+        "file" : 0,
+        "parent" : 16
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 14,
+        "parent" : 17
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 18
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 20
+      },
+      {
+        "file" : 0,
+        "parent" : 21
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 15,
+        "parent" : 22
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 23
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 25
+      },
+      {
+        "file" : 0,
+        "parent" : 26
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 16,
+        "parent" : 27
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 28
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 30
+      },
+      {
+        "file" : 0,
+        "parent" : 31
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 17,
+        "parent" : 32
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 33
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 35
+      },
+      {
+        "file" : 0,
+        "parent" : 36
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 18,
+        "parent" : 37
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 38
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 40
+      },
+      {
+        "file" : 0,
+        "parent" : 41
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 19,
+        "parent" : 42
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 43
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 45
+      },
+      {
+        "file" : 0,
+        "parent" : 46
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 20,
+        "parent" : 47
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 48
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 50
+      },
+      {
+        "file" : 0,
+        "parent" : 51
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 21,
+        "parent" : 52
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 53
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 55
+      },
+      {
+        "file" : 0,
+        "parent" : 56
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 22,
+        "parent" : 57
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 58
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 60
+      },
+      {
+        "file" : 0,
+        "parent" : 61
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 23,
+        "parent" : 62
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 64
+      },
+      {
+        "file" : 0,
+        "parent" : 65
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 24,
+        "parent" : 66
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 68
+      },
+      {
+        "file" : 0,
+        "parent" : 69
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 70
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 72
+      },
+      {
+        "file" : 0,
+        "parent" : 73
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 74
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 76
+      },
+      {
+        "file" : 0,
+        "parent" : 77
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 78
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 80
+      },
+      {
+        "file" : 0,
+        "parent" : 81
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 82
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 84
+      },
+      {
+        "file" : 0,
+        "parent" : 85
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 86
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 88
+      },
+      {
+        "file" : 0,
+        "parent" : 89
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 90
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 92
+      },
+      {
+        "file" : 0,
+        "parent" : 93
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 94
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 96
+      },
+      {
+        "file" : 0,
+        "parent" : 97
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 98
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 100
+      },
+      {
+        "file" : 0,
+        "parent" : 101
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 102
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 104
+      },
+      {
+        "file" : 0,
+        "parent" : 105
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 106
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 108
+      },
+      {
+        "file" : 0,
+        "parent" : 109
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 110
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 112
+      },
+      {
+        "file" : 0,
+        "parent" : 113
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 114
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 116
+      },
+      {
+        "file" : 0,
+        "parent" : 117
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 118
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 120
+      },
+      {
+        "file" : 0,
+        "parent" : 121
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 122
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 124
+      },
+      {
+        "file" : 0,
+        "parent" : 125
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 126
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 128
+      },
+      {
+        "file" : 0,
+        "parent" : 129
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 130
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 132
+      },
+      {
+        "file" : 0,
+        "parent" : 133
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 134
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 136
+      },
+      {
+        "file" : 0,
+        "parent" : 137
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 138
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 140
+      },
+      {
+        "file" : 0,
+        "parent" : 141
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 142
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 144
+      },
+      {
+        "file" : 0,
+        "parent" : 145
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 146
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 148
+      },
+      {
+        "file" : 0,
+        "parent" : 149
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 150
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 152
+      },
+      {
+        "file" : 0,
+        "parent" : 153
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 154
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 156
+      },
+      {
+        "file" : 0,
+        "parent" : 157
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 158
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 160
+      },
+      {
+        "file" : 0,
+        "parent" : 161
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 162
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 164
+      },
+      {
+        "file" : 0,
+        "parent" : 165
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 166
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 168
+      },
+      {
+        "file" : 0,
+        "parent" : 169
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 170
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 172
+      },
+      {
+        "file" : 0,
+        "parent" : 173
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 174
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 176
+      },
+      {
+        "file" : 0,
+        "parent" : 177
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 47,
+        "parent" : 178
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 180
+      },
+      {
+        "file" : 0,
+        "parent" : 181
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 49,
+        "parent" : 182
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 184
+      },
+      {
+        "file" : 0,
+        "parent" : 185
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 62,
+        "parent" : 186
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 187
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 189
+      },
+      {
+        "file" : 0,
+        "parent" : 190
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 67,
+        "parent" : 191
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 193
+      },
+      {
+        "file" : 0,
+        "parent" : 194
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 74,
+        "parent" : 195
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 197
+      },
+      {
+        "file" : 0,
+        "parent" : 198
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 76,
+        "parent" : 199
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 200
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 202
+      },
+      {
+        "file" : 0,
+        "parent" : 203
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 80,
+        "parent" : 204
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 206
+      },
+      {
+        "file" : 0,
+        "parent" : 207
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 83,
+        "parent" : 208
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 209
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 211
+      },
+      {
+        "file" : 0,
+        "parent" : 212
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 85,
+        "parent" : 213
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 214
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 216
+      },
+      {
+        "file" : 0,
+        "parent" : 217
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 89,
+        "parent" : 218
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 220
+      },
+      {
+        "file" : 0,
+        "parent" : 221
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 97,
+        "parent" : 222
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 224
+      },
+      {
+        "file" : 0,
+        "parent" : 225
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 104,
+        "parent" : 226
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 228
+      },
+      {
+        "file" : 0,
+        "parent" : 229
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 111,
+        "parent" : 230
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 232
+      },
+      {
+        "file" : 0,
+        "parent" : 233
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 117,
+        "parent" : 234
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 236
+      },
+      {
+        "file" : 0,
+        "parent" : 237
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 123,
+        "parent" : 238
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 240
+      },
+      {
+        "file" : 0,
+        "parent" : 241
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 126,
+        "parent" : 242
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 243
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 245
+      },
+      {
+        "file" : 0,
+        "parent" : 246
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 130,
+        "parent" : 247
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 248
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 250
+      },
+      {
+        "file" : 0,
+        "parent" : 251
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 132,
+        "parent" : 252
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 253
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 255
+      },
+      {
+        "file" : 0,
+        "parent" : 256
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 143,
+        "parent" : 257
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 258
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 260
+      },
+      {
+        "file" : 0,
+        "parent" : 261
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 149,
+        "parent" : 262
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 263
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 265
+      },
+      {
+        "file" : 0,
+        "parent" : 266
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 153,
+        "parent" : 267
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 269
+      },
+      {
+        "file" : 0,
+        "parent" : 270
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 154,
+        "parent" : 271
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 273
+      },
+      {
+        "file" : 0,
+        "parent" : 274
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 156,
+        "parent" : 275
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 276
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 278
+      },
+      {
+        "file" : 0,
+        "parent" : 279
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 165,
+        "parent" : 280
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 281
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 283
+      },
+      {
+        "file" : 0,
+        "parent" : 284
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 171,
+        "parent" : 285
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 287
+      },
+      {
+        "file" : 0,
+        "parent" : 288
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 178,
+        "parent" : 289
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 290
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 292
+      },
+      {
+        "file" : 0,
+        "parent" : 293
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 179,
+        "parent" : 294
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 296
+      },
+      {
+        "file" : 0,
+        "parent" : 297
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 182,
+        "parent" : 298
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 300
+      },
+      {
+        "file" : 0,
+        "parent" : 301
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 183,
+        "parent" : 302
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 304
+      },
+      {
+        "file" : 0,
+        "parent" : 305
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 189,
+        "parent" : 306
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 308
+      },
+      {
+        "file" : 0,
+        "parent" : 309
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 192,
+        "parent" : 310
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 312
+      },
+      {
+        "file" : 0,
+        "parent" : 313
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 195,
+        "parent" : 314
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 315
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 317
+      },
+      {
+        "file" : 0,
+        "parent" : 318
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 201,
+        "parent" : 319
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 321
+      },
+      {
+        "file" : 0,
+        "parent" : 322
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 212,
+        "parent" : 323
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 325
+      },
+      {
+        "file" : 0,
+        "parent" : 326
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 223,
+        "parent" : 327
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 329
+      },
+      {
+        "file" : 0,
+        "parent" : 330
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 230,
+        "parent" : 331
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 333
+      },
+      {
+        "file" : 0,
+        "parent" : 334
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 236,
+        "parent" : 335
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 336
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 338
+      },
+      {
+        "file" : 0,
+        "parent" : 339
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 239,
+        "parent" : 340
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 341
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 343
+      },
+      {
+        "file" : 0,
+        "parent" : 344
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 247,
+        "parent" : 345
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 347
+      },
+      {
+        "file" : 0,
+        "parent" : 348
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 254,
+        "parent" : 349
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 351
+      },
+      {
+        "file" : 0,
+        "parent" : 352
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 258,
+        "parent" : 353
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 354
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 356
+      },
+      {
+        "file" : 0,
+        "parent" : 357
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 261,
+        "parent" : 358
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 359
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 361
+      },
+      {
+        "file" : 0,
+        "parent" : 362
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 267,
+        "parent" : 363
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 365
+      },
+      {
+        "file" : 0,
+        "parent" : 366
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 270,
+        "parent" : 367
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 368
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 370
+      },
+      {
+        "file" : 0,
+        "parent" : 371
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 274,
+        "parent" : 372
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 374
+      },
+      {
+        "file" : 0,
+        "parent" : 375
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 277,
+        "parent" : 376
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 377
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 379
+      },
+      {
+        "file" : 0,
+        "parent" : 380
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 282,
+        "parent" : 381
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 383
+      },
+      {
+        "file" : 0,
+        "parent" : 384
+      },
+      {
+        "command" : 1,
+        "file" : 0,
+        "line" : 285,
+        "parent" : 385
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 386
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 388
+      },
+      {
+        "file" : 0,
+        "parent" : 389
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 291,
+        "parent" : 390
+      },
+      {
+        "file" : 1
+      },
+      {
+        "command" : 2,
+        "file" : 1,
+        "line" : 124,
+        "parent" : 392
+      },
+      {
+        "file" : 0,
+        "parent" : 393
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 299,
+        "parent" : 394
+      }
+    ]
+  },
+  "kind" : "ctestInfo",
+  "tests" : 
+  [
+    {
+      "backtrace" : 4,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/PortContractTest"
+      ],
+      "name" : "PortContractTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 9,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/DocumentTest"
+      ],
+      "name" : "DocumentTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 14,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/FileOpenPolicyTest"
+      ],
+      "name" : "FileOpenPolicyTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 19,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/InterpreterTest"
+      ],
+      "name" : "InterpreterTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 24,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/RendererTest"
+      ],
+      "name" : "RendererTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 29,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/PreviewTest"
+      ],
+      "name" : "PreviewTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 34,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/ScrollTest"
+      ],
+      "name" : "ScrollTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 39,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/WorkPathTest"
+      ],
+      "name" : "WorkPathTest",
+      "properties" : 
+      [
+        {
+          "name" : "TIMEOUT",
+          "value" : 30.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 44,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/ExternalBrowserTest"
+      ],
+      "name" : "ExternalBrowserTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 49,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/DocumentIndexTest"
+      ],
+      "name" : "DocumentIndexTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 54,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/ReferenceWorkerTest"
+      ],
+      "name" : "ReferenceWorkerTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 59,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/NavigationTest"
+      ],
+      "name" : "NavigationTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 63,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/validate_blueprints.py"
+      ],
+      "name" : "BlueprintStructure",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 67,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/check_layers.py"
+      ],
+      "name" : "LayerBoundaries",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 71,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/SdpDynamicGuiTest"
+      ],
+      "name" : "SdpDynamicGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 75,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/SdpPanelGuiTest"
+      ],
+      "name" : "SdpPanelGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 79,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/FavoritesGuiTest"
+      ],
+      "name" : "FavoritesGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 83,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/DocumentZoomGuiTest"
+      ],
+      "name" : "DocumentZoomGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 87,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/PathWorkspaceGuiTest"
+      ],
+      "name" : "PathWorkspaceGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 91,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/OpenPathDialogGuiTest"
+      ],
+      "name" : "OpenPathDialogGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 95,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/FileRoutingGuiTest"
+      ],
+      "name" : "FileRoutingGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 99,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/MermaidGuiTest"
+      ],
+      "name" : "MermaidGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 103,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/RecentFilesGuiTest"
+      ],
+      "name" : "RecentFilesGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 107,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/PreviewSelectionGuiTest"
+      ],
+      "name" : "PreviewSelectionGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 111,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/CompactWorkspaceTest"
+      ],
+      "name" : "CompactWorkspaceTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 115,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/ReadingColorsGuiTest"
+      ],
+      "name" : "ReadingColorsGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 119,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/TreeActionsTest"
+      ],
+      "name" : "TreeActionsTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 123,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/AppearancePreferencesTest"
+      ],
+      "name" : "AppearancePreferencesTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 127,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/AppearanceGuiTest"
+      ],
+      "name" : "AppearanceGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 131,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/UiControlsTest"
+      ],
+      "name" : "UiControlsTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 135,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/BrowserPreferencesTest"
+      ],
+      "name" : "BrowserPreferencesTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 139,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/IndexGuiTest"
+      ],
+      "name" : "IndexGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 143,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/WorkspaceTest"
+      ],
+      "name" : "WorkspaceTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 147,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/PresentationTest"
+      ],
+      "name" : "PresentationTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 151,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/ScrollingTest"
+      ],
+      "name" : "ScrollingTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 155,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/NavigationGuiTest"
+      ],
+      "name" : "NavigationGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 159,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/SidebarGuiTest"
+      ],
+      "name" : "SidebarGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 163,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/WheelGuiTest"
+      ],
+      "name" : "WheelGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 167,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/WorkPathGuiTest"
+      ],
+      "name" : "WorkPathGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 171,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/PointerTest"
+      ],
+      "name" : "PointerTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 175,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/TablePreviewTest"
+      ],
+      "name" : "TablePreviewTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 179,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/check_disk_failure.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/AtomicWriteFailure"
+      ],
+      "name" : "DiskFullFailure",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 183,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/check_blueprint_symbols.py"
+      ],
+      "name" : "BlueprintSymbols",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 188,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/ScrollMotionTest"
+      ],
+      "name" : "ScrollMotionTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 192,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/PreferencesTest"
+      ],
+      "name" : "PreferencesTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 196,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/check_typography.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/TypographyFixture"
+      ],
+      "name" : "TypographyTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 201,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/PageLayoutTest"
+      ],
+      "name" : "PageLayoutTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 205,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/PagedPreviewTest"
+      ],
+      "name" : "PagedPreviewTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 30.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 210,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/ExportJobTest"
+      ],
+      "name" : "ExportJobTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 215,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/PdfExportTest"
+      ],
+      "name" : "PdfExportTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 219,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/ExportGuiTest"
+      ],
+      "name" : "ExportGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 30.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 223,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/check_pdf_fidelity.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/PdfFidelityFixture"
+      ],
+      "name" : "PdfFidelityTest",
+      "properties" : 
+      [
+        {
+          "name" : "TIMEOUT",
+          "value" : 60.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 227,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/check_pdf_flush_failure.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/PdfCommitFailure"
+      ],
+      "name" : "PdfFlushFailure",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 231,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_wmaker.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/FullscreenTest"
+      ],
+      "name" : "FullscreenTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 60.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 235,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/IconTest"
+      ],
+      "name" : "IconTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 30.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 239,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/CanvasTest"
+      ],
+      "name" : "CanvasTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 30.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 244,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/TableTest"
+      ],
+      "name" : "TableTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 249,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/ReadingColorsTest"
+      ],
+      "name" : "ReadingColorsTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 254,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/RichPreviewTest"
+      ],
+      "name" : "RichPreviewTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 259,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/ThemeProfilesTest"
+      ],
+      "name" : "ThemeProfilesTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 264,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/DiagramLayoutTest"
+      ],
+      "name" : "DiagramLayoutTest",
+      "properties" : 
+      [
+        {
+          "name" : "TIMEOUT",
+          "value" : 30.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 268,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tests/build/MermaidBootstrapTest.py"
+      ],
+      "name" : "MermaidBootstrapTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 272,
+      "command" : 
+      [
+        "/usr/bin/cargo",
+        "test",
+        "--workspace",
+        "--locked",
+        "--offline",
+        "--target-dir",
+        "/home/warloc/git/xfmd-sdl-navigation/build-acceptance/cargo"
+      ],
+      "name" : "MermaidRustTests",
+      "properties" : 
+      [
+        {
+          "name" : "TIMEOUT",
+          "value" : 180.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation"
+        }
+      ]
+    },
+    {
+      "backtrace" : 277,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/DiagramPreparationTest"
+      ],
+      "name" : "DiagramPreparationTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 282,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/DiagramReadingTest"
+      ],
+      "name" : "DiagramReadingTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 286,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/check_mermaid_pdf.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/MermaidPdfFixture"
+      ],
+      "name" : "MermaidPdfTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 291,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/DiagramWorkerTest"
+      ],
+      "name" : "DiagramWorkerTest",
+      "properties" : 
+      [
+        {
+          "name" : "TIMEOUT",
+          "value" : 10.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 295,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/check_mermaid_dependencies.py"
+      ],
+      "name" : "MermaidDependencies",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 299,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tests/build/BuildIdentityTest.py"
+      ],
+      "name" : "BuildIdentityTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 303,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/check_build_version.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/xfmd",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/generated/xfmd-build.json"
+      ],
+      "name" : "BuildVersionTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 307,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/DocumentViewsGuiTest"
+      ],
+      "name" : "DocumentViewsGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "ENVIRONMENT",
+          "value" : 
+          [
+            "SDL_TOOL=/home/warloc/git/xfmd-sdl-navigation/build-acceptance/bin/sdl"
+          ]
+        },
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 30.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 311,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tests/gui/DocumentEndpointTest.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/xfmd"
+      ],
+      "name" : "DocumentEndpointTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 30.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 316,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/WindowEndpointBoundaryTest"
+      ],
+      "name" : "WindowEndpointBoundaryTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 320,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/DocumentLeaseGuiTest"
+      ],
+      "name" : "DocumentLeaseGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 45.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 324,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/ThemePopupGuiTest"
+      ],
+      "name" : "ThemePopupGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 328,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/check_zoom_pdf.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/DocumentZoomPdfFixture"
+      ],
+      "name" : "DocumentZoomPdfTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 332,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/DocumentZoomGuiTest"
+      ],
+      "name" : "DocumentZoomDpiTest",
+      "properties" : 
+      [
+        {
+          "name" : "ENVIRONMENT",
+          "value" : 
+          [
+            "XFMD_ZOOM_TEST_DPI=144"
+          ]
+        },
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 337,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/SdpWatchTest"
+      ],
+      "name" : "SdpWatchTest",
+      "properties" : 
+      [
+        {
+          "name" : "TIMEOUT",
+          "value" : 20.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 342,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/SdpProtocolTest"
+      ],
+      "name" : "SdpProtocolTest",
+      "properties" : 
+      [
+        {
+          "name" : "TIMEOUT",
+          "value" : 20.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 346,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/SdpNavigationGuiTest"
+      ],
+      "name" : "SdpNavigationGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "ENVIRONMENT",
+          "value" : 
+          [
+            "XFMD_SDP_TOOL=/tmp/xfmd-n3e-sdptool"
+          ]
+        },
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 350,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/SdpIntegrationTest"
+      ],
+      "name" : "SdpIntegrationTest",
+      "properties" : 
+      [
+        {
+          "name" : "ENVIRONMENT",
+          "value" : 
+          [
+            "XFMD_SDP_TOOL=/tmp/xfmd-n3e-sdptool"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 30.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 355,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/SdpDiscoveryTest"
+      ],
+      "name" : "SdpDiscoveryTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 360,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/StandaloneMermaidTest"
+      ],
+      "name" : "StandaloneMermaidTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 364,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/StandaloneMermaidGuiTest"
+      ],
+      "name" : "StandaloneMermaidGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 369,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/HeadingLinkTest"
+      ],
+      "name" : "HeadingLinkTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 373,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/HeadingLinkGuiTest"
+      ],
+      "name" : "HeadingLinkGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 378,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/SdpRuntimeTest"
+      ],
+      "name" : "SdpRuntimeTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 382,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/SdpRuntimeGuiTest"
+      ],
+      "name" : "SdpRuntimeGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 387,
+      "command" : 
+      [
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/SdpDisplayTest"
+      ],
+      "name" : "SdpDisplayTest",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 391,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/SduiWorkflowGuiTest"
+      ],
+      "name" : "SduiWorkflowGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "ENVIRONMENT",
+          "value" : 
+          [
+            "XFMD_SDP_TOOL=/tmp/xfmd-n3e-sdptool"
+          ]
+        },
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    },
+    {
+      "backtrace" : 395,
+      "command" : 
+      [
+        "/usr/bin/python3.12",
+        "/home/warloc/git/xfmd-sdl-navigation/tools/run_with_xvfb.py",
+        "/home/warloc/git/xfmd-sdl-navigation/build-ui/SdpOverviewGuiTest"
+      ],
+      "name" : "SdpOverviewGuiTest",
+      "properties" : 
+      [
+        {
+          "name" : "ENVIRONMENT",
+          "value" : 
+          [
+            "XFMD_SDP_TOOL=/tmp/xfmd-n3e-sdptool"
+          ]
+        },
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "GUI"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 65.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/home/warloc/git/xfmd-sdl-navigation/build-ui"
+        }
+      ]
+    }
+  ],
+  "version" : 
+  {
+    "major" : 1,
+    "minor" : 0
+  }
+}

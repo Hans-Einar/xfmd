@@ -6,7 +6,8 @@
 #include "application/preview/PreviewCoordinator.h"
 namespace xfmd {
 class NavigationPanel {
-  std::string pendingFragment;
+  std::optional<std::string> pendingFragment;
+  void applyFragment(const SemanticDocument&);
   DocumentSession session;
   LocalFileStore files;
   DocumentCoordinator documents{session, files};

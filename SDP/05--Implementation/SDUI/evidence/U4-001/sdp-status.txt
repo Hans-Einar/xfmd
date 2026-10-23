@@ -1,0 +1,41 @@
+ M SDP/02--Requirements/RoutineGovernance/AppServer-Study.md
+ M SDP/02--Requirements/RoutineGovernance/StudyPlan.md
+ M SDP/04--Design/SDPTool/ProjectGovernance/Design.md
+ M SDP/05--Implementation/SDPTool/ProjectGovernance/Plan.md
+ M SDP/KanBan/README.md
+ M SDP/KanBan/backlog/#032--Study--Viewpoint-navigation-feedback.md
+ M SDP/KanBan/backlog/#037--Proposal--Observable-routine-state-machine.md
+ D SDP/KanBan/backlog/#038--Proposal--Codex-app-server-development-client.md
+ M SDP/KanBan/backlog/#042--Proposal--Goal-oriented-sessions-and-roadmaps.md
+ M SDP/KanBan/backlog/#043--Proposal--Event-derived-session-timelines.md
+ M SDP/ProjectManagement/Ledger.ndjson
+ M SDP/Sessions/session-#0007--Project_governance.md
+ M SDP/Traceability/Ledger.ndjson
+ M SDP/Traceability/Relations.yaml
+ M SDPTool/Contract.md
+ M SDPTool/README.md
+ M SDPTool/cli.go
+ M SDPTool/output_arguments.go
+ M SDPTool/presentation/presentation.go
+ M SDPTool/sdui.go
+ M SDUI/docs/architecture.md
+ M SDUI/docs/requirements.md
+ M SDUI/go/README.md
+ M SDUI/go/cmd/sdui-fyne/main.go
+ M SDUI/go/parser/normalize.go
+?? SDL/go/sourceinput/
+?? SDP/05--Implementation/SDPTool/ProjectGovernance/Evidence-PGI1.md
+?? SDP/05--Implementation/SDPTool/ProjectGovernance/candidate-PGI1.json
+?? SDP/05--Implementation/SDUI/
+?? SDP/KanBan/active/#005--SDUI--Proposal--Combined-preview-and-launch-readiness.md
+?? SDP/KanBan/active/#038--Proposal--Codex-app-server-development-client.md
+?? SDPTool/governance/
+?? SDPTool/governance_cli.go
+?? SDPTool/governance_cli_test.go
+?? SDUI/go/cmd/sdui-preview/
+?? SDUI/go/presentation/composition.go
+?? SDUI/go/presentation/composition_test.go
+?? SDUI/go/prototype/
+?? node_modules/
+?? package-lock.json
+?? package.json

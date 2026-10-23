@@ -1,0 +1,5 @@
+flowchart LR
+    n_DiagramInterpretation["DiagramInterpretation (channel)"]
+    n_Interpreter["Interpreter (unit)"]
+    n_DiagramInterpretation -->|receiver| n_Interpreter
+    n_Interpreter -->|sender| n_DiagramInterpretation

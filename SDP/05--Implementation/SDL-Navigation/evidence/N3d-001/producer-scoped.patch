@@ -1,0 +1,134 @@
+--- a/SDPTool/tree.go
++++ b/SDPTool/tree.go
+@@ -20,6 +20,7 @@
+ 	Revision  string `json:"revision,omitempty"`
+ }
+ type Node struct {
++	OverviewTarget    *Target  `json:"overviewTarget,omitempty"`
+ 	ArtifactKind      string   `json:"artifactKind,omitempty"`
+ 	ArtifactID        string   `json:"artifactId,omitempty"`
+ 	Preliminary       bool     `json:"preliminary,omitempty"`
+@@ -112,6 +113,10 @@
+ 	for _, spec := range viewpoint.Catalog {
+ 		vpID := prefix + spec.ID
+ 		n := Node{ID: vpID, Kind: "viewpoint", Label: spec.ID + " — " + spec.Title, State: "empty", Target: target(spec.ID, "", "")}
++		if viewpoint.HasOverview(spec.ID) {
++			n.OverviewTarget = target(spec.ID, "", "")
++			n.OverviewTarget.URI += "&projection=overview"
++		}
+ 		levels := spec.Levels
+ 		if len(levels) == 0 {
+ 			levels = []string{"delivery"}
+--- a/SDPTool/Contract.md
++++ b/SDPTool/Contract.md
+@@ -306,3 +306,22 @@
+ source, entry, revision and diagnostic. This is not a new gh sdp command or a
+ claim of an SDL-connected Fyne host. XFMD invokes the private adapter; gh sdp
+ continues to provide its installed discovery and view facade.
++
++## Viewpoint overview target — N3d additive contract
++
++A viewpoint node may carry `overviewTarget` with the same Target shape as `target`.
++Its presence advertises an implemented aggregate projection, not bulk detail
++selection. In N3d only VP01 advertises this, as select with a producer-owned URI
++containing `projection=overview`, plus the existing exact project/model/revision.
++Consumers pass that URI unchanged. Expansion never selects or renders it. Absence
++means overview unavailable; old consumers may ignore the field and keep their
++existing behavior. A viewpoint's existing target and detail targets are unchanged.
++
++SDL validates this new query value and rejects unsupported viewpoints or combinations
++with focus/diagram/mode/relations/level/non-default traversal filters; it does not
++silently ignore filters. VP01 generates all declared actors/use cases and modeled
++pursues associations, preserving isolated declarations. Functionality realization
++is a separate table; missing relations are gaps, not inferred behavior. Source
++snapshot, freshness, cancellation, publication and resource ownership rules apply.
++No pre/postconditions or scenario sequence is inferred by this overview. The
++complete projection is selected on demand; discovery does not generate its output.
+--- a/SDL/go/viewpoint/query.go
++++ b/SDL/go/viewpoint/query.go
+@@ -9,14 +9,15 @@
+ )
+ 
+ type Query struct {
+-	Viewpoint string   `json:"viewpoint"`
+-	Focus     string   `json:"focus,omitempty"`
+-	Relations []string `json:"relations,omitempty"`
+-	Direction string   `json:"direction,omitempty"`
+-	Depth     int      `json:"depth,omitempty"`
+-	Level     string   `json:"level,omitempty"`
+-	Mode      string   `json:"mode,omitempty"`
+-	Diagram   string   `json:"diagram,omitempty"`
++	Projection string   `json:"projection,omitempty"`
++	Viewpoint  string   `json:"viewpoint"`
++	Focus      string   `json:"focus,omitempty"`
++	Relations  []string `json:"relations,omitempty"`
++	Direction  string   `json:"direction,omitempty"`
++	Depth      int      `json:"depth,omitempty"`
++	Level      string   `json:"level,omitempty"`
++	Mode       string   `json:"mode,omitempty"`
++	Diagram    string   `json:"diagram,omitempty"`
+ }
+ type Selection struct {
+ 	Project          string
+@@ -43,6 +44,8 @@
+ 		}
+ 		value := vs[0]
+ 		switch k {
++		case "projection":
++			s.Query.Projection = value
+ 		case "focus":
+ 			s.Query.Focus = value
+ 		case "relations":
+@@ -70,12 +73,19 @@
+ 			return s, fmt.Errorf("unknown query parameter %s", k)
+ 		}
+ 	}
++	if s.Query.Projection != "" && q.Has("depth") && s.Query.Depth != 2 {
++		return s, fmt.Errorf("unsupported-overview-depth")
++	}
+ 	if (s.Target != "main" && s.Target != "navigation") || s.Consumer != "xfmd" {
+ 		return s, fmt.Errorf("unregistered target or consumer")
+ 	}
+ 	return s, nil
+ }
+ func (q Query) Validate(v *Views) error {
++	if q.Projection != "" && (q.Projection != "overview" || !HasOverview(q.Viewpoint) || q.Focus != "" || q.Diagram != "" || q.Mode != "" || q.Level != "" || len(q.Relations) > 0 || (q.Direction != "" && q.Direction != "both") || (q.Depth != 0 && q.Depth != 2)) {
++		return fmt.Errorf("unsupported-overview-selection")
++	}
++
+ 	s, ok := SpecFor(q.Viewpoint)
+ 	if !ok {
+ 		return fmt.Errorf("unknown-viewpoint: %s", q.Viewpoint)
+@@ -120,6 +130,9 @@
+ func (v *Views) Select(q Query) (*Views, error) {
+ 	if e := q.Validate(v); e != nil {
+ 		return nil, e
++	}
++	if q.Projection == "overview" {
++		return v.overview(q)
+ 	}
+ 	out := *v
+ 	out.Diagrams = []Diagram{}
+--- a/SDL/go/documents/selection.go
++++ b/SDL/go/documents/selection.go
+@@ -20,7 +20,9 @@
+ 	}
+ 	text := "# " + q.Viewpoint + " — " + spec.Title + "\n\nRevision: `" + v.Revision + "`.\n\n" + spec.Note + "\n\n"
+ 	j, _ := json.Marshal(q.Canonical())
+-	text += "Selection: `" + string(j) + "`.\n\n"
++	if q.Projection != "overview" {
++		text += "Selection: `" + string(j) + "`.\n\n"
++	}
+ 	b.Files["selection.json"] = append(j, '\n')
+ 	if len(s.Diagrams) == 0 {
+ 		text += "No diagrams match this selection. This does not imply the concept is impossible or absent from the system.\n\n"
+@@ -39,6 +41,9 @@
+ 	if r != nil {
+ 		text += "\nSymbol profile: SDL 1. Actor/ellipse use UML shapes; labeled SDL relations retain their language semantics. consumes is a dashed dependency; realizes is a contribution.\n\n"
+ 	}
++	if q.Projection == "overview" {
++		text += s.OverviewContext()
++	}
+ 	text += s.Tables(q.Viewpoint)
+ 	b.Put("entry.md", text)
+ 	b.Seal()

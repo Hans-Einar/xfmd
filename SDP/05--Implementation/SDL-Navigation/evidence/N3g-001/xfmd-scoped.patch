@@ -1,0 +1,359 @@
+diff --git a/cmake/Tests.cmake b/cmake/Tests.cmake
+index 3222f66..eefc0c6 100644
+--- a/cmake/Tests.cmake
++++ b/cmake/Tests.cmake
+@@ -22,7 +22,7 @@ xfmd_test(ReferenceWorkerTest tests/application/ReferenceWorkerTest.cpp xfmd_ind
+ xfmd_test(NavigationTest tests/application/NavigationTest.cpp xfmd_navigation)
+ add_test(NAME BlueprintStructure COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/validate_blueprints.py)
+ add_test(NAME LayerBoundaries COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/check_layers.py)
+-foreach(name FavoritesGuiTest DocumentZoomGuiTest PathWorkspaceGuiTest OpenPathDialogGuiTest FileRoutingGuiTest MermaidGuiTest RecentFilesGuiTest PreviewSelectionGuiTest CompactWorkspaceTest ReadingColorsGuiTest TreeActionsTest AppearancePreferencesTest AppearanceGuiTest UiControlsTest BrowserPreferencesTest IndexGuiTest WorkspaceTest PresentationTest ScrollingTest NavigationGuiTest SidebarGuiTest WheelGuiTest WorkPathGuiTest PointerTest TablePreviewTest)
++foreach(name SdpDynamicGuiTest SdpPanelGuiTest FavoritesGuiTest DocumentZoomGuiTest PathWorkspaceGuiTest OpenPathDialogGuiTest FileRoutingGuiTest MermaidGuiTest RecentFilesGuiTest PreviewSelectionGuiTest CompactWorkspaceTest ReadingColorsGuiTest TreeActionsTest AppearancePreferencesTest AppearanceGuiTest UiControlsTest BrowserPreferencesTest IndexGuiTest WorkspaceTest PresentationTest ScrollingTest NavigationGuiTest SidebarGuiTest WheelGuiTest WorkPathGuiTest PointerTest TablePreviewTest)
+   add_executable(${name} tests/gui/${name}.cpp)
+   target_include_directories(${name} PRIVATE tests)
+   target_link_libraries(${name} PRIVATE xfmd_application)
+@@ -148,6 +148,9 @@ target_compile_definitions(CaptureAppearance PRIVATE XFMD_FIXTURE="${CMAKE_CURRE
+ 
+ xfmd_test(DiagramLayoutTest tests/renderer/DiagramLayoutTest.cpp xfmd_interpreter xfmd_renderer xfmd_typography)
+ target_compile_definitions(DiagramLayoutTest PRIVATE XFMD_DIAGRAM_FIXTURES="${CMAKE_CURRENT_SOURCE_DIR}/docs/design/mermaid")
++target_compile_definitions(DiagramLayoutTest PRIVATE XFMD_VP07_FIXTURE="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/mermaid/vp07-configurable-scrolling.mmd")
++target_compile_definitions(DiagramLayoutTest PRIVATE XFMD_USECASE_FIXTURE="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/mermaid/usecase-native.mmd")
++add_test(NAME MermaidBootstrapTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tests/build/MermaidBootstrapTest.py)
+ add_test(NAME MermaidRustTests COMMAND ${CARGO_EXECUTABLE} test --workspace --locked --offline --target-dir ${XFMD_CARGO_TARGET})
+ set_tests_properties(MermaidRustTests PROPERTIES WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" TIMEOUT 180)
+ xfmd_test(DiagramPreparationTest tests/application/DiagramPreparationTest.cpp xfmd_diagrams)
+@@ -229,3 +232,74 @@ set_tests_properties(DocumentZoomDpiTest PROPERTIES TIMEOUT 65 LABELS GUI ENVIRO
+ if(XFMD_SANITIZERS)
+   set_property(TEST DocumentZoomDpiTest APPEND PROPERTY ENVIRONMENT "LSAN_OPTIONS=suppressions=${CMAKE_CURRENT_SOURCE_DIR}/tests/support/lsan.supp;ASAN_OPTIONS=detect_leaks=1:halt_on_error=1;UBSAN_OPTIONS=halt_on_error=1:print_stacktrace=1")
+ endif()
++
++xfmd_test(SdpWatchTest tests/application/SdpWatchTest.cpp xfmd_sdp)
++set_tests_properties(SdpWatchTest PROPERTIES TIMEOUT 20)
++target_link_libraries(SdpPanelGuiTest PRIVATE X11::X11)
++xfmd_test(SdpProtocolTest tests/application/SdpProtocolTest.cpp xfmd_sdp)
++target_compile_definitions(SdpProtocolTest PRIVATE XFMD_SDP_FAKE_TOOL="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/sdp/tool.py")
++set_tests_properties(SdpProtocolTest PROPERTIES TIMEOUT 20)
++add_executable(SdpNavigationGuiTest tests/gui/SdpNavigationGuiTest.cpp)
++target_include_directories(SdpNavigationGuiTest PRIVATE tests)
++target_link_libraries(SdpNavigationGuiTest PRIVATE xfmd_application X11::X11)
++set(SDP_TOOL_EXECUTABLE "" CACHE FILEPATH "Compatible standalone SDPTool for real producer GUI acceptance")
++if(SDP_TOOL_EXECUTABLE)
++  add_test(NAME SdpNavigationGuiTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/run_with_xvfb.py $<TARGET_FILE:SdpNavigationGuiTest>)
++  set_tests_properties(SdpNavigationGuiTest PROPERTIES ENVIRONMENT "XFMD_SDP_TOOL=${SDP_TOOL_EXECUTABLE}" TIMEOUT 65 LABELS GUI)
++endif()
++add_executable(SdpIntegrationTest tests/application/SdpIntegrationTest.cpp)
++target_include_directories(SdpIntegrationTest PRIVATE tests)
++target_link_libraries(SdpIntegrationTest PRIVATE xfmd_sdp)
++if(SDP_TOOL_EXECUTABLE)
++  add_test(NAME SdpIntegrationTest COMMAND SdpIntegrationTest)
++  set_tests_properties(SdpIntegrationTest PROPERTIES ENVIRONMENT "XFMD_SDP_TOOL=${SDP_TOOL_EXECUTABLE}" TIMEOUT 30)
++endif()
++
++xfmd_test(SdpDiscoveryTest tests/application/SdpDiscoveryTest.cpp xfmd_sdp)
++target_link_libraries(SdpDynamicGuiTest PRIVATE X11::X11)
++
++xfmd_test(StandaloneMermaidTest tests/application/StandaloneMermaidTest.cpp xfmd_application)
++target_compile_definitions(StandaloneMermaidTest PRIVATE XFMD_MMD_FIXTURE="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/mermaid/standalone.mmd")
++add_executable(StandaloneMermaidGuiTest tests/gui/StandaloneMermaidGuiTest.cpp)
++target_include_directories(StandaloneMermaidGuiTest PRIVATE tests)
++target_link_libraries(StandaloneMermaidGuiTest PRIVATE xfmd_application X11::X11)
++target_compile_definitions(StandaloneMermaidGuiTest PRIVATE XFMD_MMD_FIXTURE="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/mermaid/standalone.mmd")
++add_test(NAME StandaloneMermaidGuiTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/run_with_xvfb.py $<TARGET_FILE:StandaloneMermaidGuiTest>)
++set_tests_properties(StandaloneMermaidGuiTest PROPERTIES TIMEOUT 65 LABELS GUI)
++
++xfmd_test(HeadingLinkTest tests/application/HeadingLinkTest.cpp xfmd_application)
++add_executable(HeadingLinkGuiTest tests/gui/HeadingLinkGuiTest.cpp)
++target_include_directories(HeadingLinkGuiTest PRIVATE tests)
++target_link_libraries(HeadingLinkGuiTest PRIVATE xfmd_application X11::X11)
++add_test(NAME HeadingLinkGuiTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/run_with_xvfb.py $<TARGET_FILE:HeadingLinkGuiTest>)
++set_tests_properties(HeadingLinkGuiTest PROPERTIES TIMEOUT 65 LABELS GUI)
++
++xfmd_test(SdpRuntimeTest tests/application/SdpRuntimeTest.cpp xfmd_sdp)
++add_executable(SdpRuntimeGuiTest tests/gui/SdpRuntimeGuiTest.cpp)
++target_include_directories(SdpRuntimeGuiTest PRIVATE tests)
++target_link_libraries(SdpRuntimeGuiTest PRIVATE xfmd_application X11::X11)
++target_compile_definitions(SdpRuntimeGuiTest PRIVATE XFMD_RUNTIME_FIXTURE="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/sdp/runtime.py")
++add_test(NAME SdpRuntimeGuiTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/run_with_xvfb.py $<TARGET_FILE:SdpRuntimeGuiTest>)
++set_tests_properties(SdpRuntimeGuiTest PROPERTIES TIMEOUT 65 LABELS GUI)
++
++xfmd_test(SdpDisplayTest tests/application/SdpDisplayTest.cpp xfmd_sdp)
++
++add_executable(SduiWorkflowGuiTest tests/gui/SduiWorkflowGuiTest.cpp)
++target_include_directories(SduiWorkflowGuiTest PRIVATE tests)
++target_link_libraries(SduiWorkflowGuiTest PRIVATE xfmd_application X11::X11)
++if(SDP_TOOL_EXECUTABLE AND EXISTS "${XFMD_SDUI_TOOLS_DIR}/sdui-preview" AND EXISTS "${XFMD_SDUI_TOOLS_DIR}/sdui-fyne")
++  add_test(NAME SduiWorkflowGuiTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/run_with_xvfb.py $<TARGET_FILE:SduiWorkflowGuiTest>)
++  set_tests_properties(SduiWorkflowGuiTest PROPERTIES ENVIRONMENT "XFMD_SDP_TOOL=${SDP_TOOL_EXECUTABLE}" TIMEOUT 65 LABELS GUI)
++endif()
++
++add_executable(SdpOverviewGuiTest tests/gui/SdpOverviewGuiTest.cpp)
++target_include_directories(SdpOverviewGuiTest PRIVATE tests)
++target_link_libraries(SdpOverviewGuiTest PRIVATE xfmd_application X11::X11)
++if(SDP_TOOL_EXECUTABLE)
++  add_test(NAME SdpOverviewGuiTest COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/tools/run_with_xvfb.py $<TARGET_FILE:SdpOverviewGuiTest>)
++  set_tests_properties(SdpOverviewGuiTest PROPERTIES ENVIRONMENT "XFMD_SDP_TOOL=${SDP_TOOL_EXECUTABLE}" TIMEOUT 65 LABELS GUI)
++endif()
++
++target_compile_definitions(DiagramLayoutTest PRIVATE XFMD_VP07_REFERENCES_FIXTURE="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/mermaid/vp07-document-references.mmd")
++
++target_compile_definitions(DiagramLayoutTest PRIVATE XFMD_VP07_CHAPTER_FIXTURE="${CMAKE_CURRENT_SOURCE_DIR}/tests/fixtures/mermaid/vp07-chapter-navigation.mmd")
+diff --git a/cmake/mermaid-source.json b/cmake/mermaid-source.json
+index 75fd55d..f9d819c 100644
+--- a/cmake/mermaid-source.json
++++ b/cmake/mermaid-source.json
+@@ -1,5 +1,6 @@
+ {
+   "repository": "Hans-Einar/mermaid-rs-renderer",
+-  "commit": "589517a7107ab95ee7dfa5ae88c2f339c0a284dc",
+-  "sha256": "e081da327340e05efebef869cb97c8e90246d5dc8f04162279729907c8ff5243"
++  "commit": "55eff5da93e99420e110a1dce2568423578dbd58",
++  "sha256": "02abec08aee1943754d81ba07744f779d3db68f71afa3e25d1028d15d82606b0",
++  "archive": "third_party/mermaid-rs-renderer-55eff5da93e99420e110a1dce2568423578dbd58.tar.xz"
+ }
+diff --git a/docs/design/mermaid-label-attachment.md b/docs/design/mermaid-label-attachment.md
+index 7a5f902..32012c8 100644
+--- a/docs/design/mermaid-label-attachment.md
++++ b/docs/design/mermaid-label-attachment.md
+@@ -1,39 +1,57 @@
+-# P34: Beskyttet etikettilhørighet
+-
+-Krav: SR-024. Eier: FUNC-024 / bibliotekforkens etikettsteg. DiagramPainter
+-viser fortsatt bare ferdig SVG; ingen ny rutelogikk i XFMD eller `.deps`.
+-
+-Etiketten knyttes til nærmeste ortogonale segment med overlappende projeksjon.
+-Det åpne rektangelet mellom tekstboksen (inkludert tekstmargin) og segmentet
+-er beskyttet mot alle andre kanter. Identiteten er kantindeks, ikke kilde/mål.
+-Plassering, hindringsregistrering og sluttvalidering bruker samme geometri.
+-
+-Forkens `routed::attachment` eier sonen og hindringsutvidelsen. `labels::place`
+-prioriterer fri tilhørighet; inntil fire faste etikettordener kan prøves.
+-`labels::obstacles` utvider teksthindringen mot eiersegmentet, fratrukket
+-nøyaktig libavoids globale hindringsmargin. Dermed blokkeres mellomrommet uten
+-å blokkere eiersegmentet. `labels::validate` kontrollerer faktiske sluttruter;
+-`quality::measure` rapporterer `attachment_intrusions`. Eksisterende grense på
+-tre rutetransaksjoner og siste etikettpass beholdes. Feil gir NoSpace og vanlig
+-synlig fallback; ingen skjult motorendring. Manglende gyldig portretning
+-etter hindringsruting klassifiseres som NoSpace og kan bruke eksisterende, ene
+-omplasseringsretry. Portkontrollen slakkes ikke.
+-
+-Sammenfallende ruter på sonegrensen og minste parallellavstand er separate
+-begrensninger. Denne endringen lover ikke å løse alle parallelle overlapp.
+-Nøyaktig hindringsbuffer er viktig: et ekstra toleransegap lot libavoid legge
+-en fremmed forbindelse i åpningen; regresjonen avviser dette.
+-
+-## Mulig portsøk senere
+-
+-Libavoid mottar plasserte noder og kilde-/målforbindelser med kandidater eller
+-låste porter, og finner rutepunktene. Første pass velger porter; senere pass i
+-adapteren låser valgte koordinater i kantspesifikke pin-klasser. En annen kant
+-kan ikke velge den klassen, men ulike pin-objekter kan ligge fysisk samme sted.
+-Et portsøk må derfor føre fysisk belegg og sjekke klaring eksplisitt.
+-
+-Et mulig separat steg prøver et begrenset kandidatsett, kjører libavoid på nytt
+-og godtar bare streng samlet forbedring etter tilhørighets-/kollisjonskontroll.
+-Bruk besøkte konfigurasjoner, maksimal forsøksmengde og tidsbudsjett. Kortere
+-geometrisk portavstand alene beviser ikke kortere rute eller bedre totalresultat.
+-Stabilitet betyr et lokalt resultat, ikke globalt optimum. Ikke implementert her.
++# P34: Protected caption attachment
++
++Requirement: SR-024. Owner: FUNC-024 / the renderer fork's caption stage.
++DiagramPainter still consumes finished SVG; XFMD and `.deps` own no routing fixes.
++
++A caption attaches to the nearest orthogonal segment with overlapping projection.
++The open rectangle between the padded caption and that segment is protected
++against other edges. Identity is the edge index, not source/target identity.
++Placement, obstacle registration and final validation share this geometry.
++
++The fork's `routed::attachment` owns the zone and obstacle extension.
++`labels::place` prioritizes unambiguous attachment and tries up to four fixed
++caption orders. `labels::obstacles` extends the caption obstacle towards its
++owner, subtracting exactly Libavoid's global shape buffer so the owner's segment
++remains usable. `labels::validate` checks actual final routes, while
++`quality::measure` reports `attachment_intrusions`. Three routing transactions
++and the final caption-only pass remain the limit. Failure returns NoSpace and
++the visible diagnostic fallback; there is no hidden engine change. Invalid
++port directions after obstacle routing are classified as NoSpace and can use
++the existing single fresh-placement retry. Port validation is not relaxed.
++
++Coincident routes on zone boundaries and minimum parallel separation remain
++separate constraints. This does not promise to solve every parallel overlap.
++Exact buffer subtraction matters: an extra tolerance gap previously admitted
++a foreign connection into the protected zone; regression checks reject it.
++
++## N3g: Preserve the nearest-owner rule during rerouting
++
++Attachment exclusion alone allowed a competing route to approach the opposite
++side of a caption. The existing ambiguity guard then rejected ChapterNavigation.
++In addition to the attachment rectangle, register a caption exclusion polygon
++with radius `max(0, ownerDistance - 3 - routerClearance)`. Distance is the same
++Manhattan rectangle-to-route metric used by validation; chamfered corners avoid
++the unnecessary corner blocking of a square expansion. The two overlapping
++obstacles represent the union and have distinct IDs.
++
++The owner can move in later routing passes, so this radius is a routing aid,
++not proof of validity. Strict final validation, caption orders, transaction count,
++placement retry and deadlines remain unchanged. Geometry stays in the fork.
++See [N3g design](../../SDP/04--Design/SDL-Navigation/N3g-Routing.md) and its
++exact measured/native/PDF acceptance. The local helper and geometry unit tests
++remain together in labels.rs because they share private caption geometry; no
++unrelated file split or new public API is required.
++
++## Possible later port search
++
++Libavoid receives positioned nodes and source/target connections with candidate
++or fixed ports, then finds route points. The first pass selects ports; later
++passes lock coordinates in edge-specific pin classes. Another edge cannot select
++that class, but distinct pins can occupy the same physical point. A future port
++search must therefore track physical occupancy and clearance explicitly.
++
++A separate bounded search could try candidates, rerun Libavoid and accept only
++strict overall improvement after attachment/collision checks. It would require
++visited configurations, an attempt bound and the time budget. Shorter geometric
++port distance alone proves neither a shorter route nor a better overall result.
++Stability means a local result, not a global optimum. This is not implemented.
+diff --git a/src/blueprint/functionality/Functionality-024--Diagram-Layout.md b/src/blueprint/functionality/Functionality-024--Diagram-Layout.md
+index 6ad68bc..99fe696 100644
+--- a/src/blueprint/functionality/Functionality-024--Diagram-Layout.md
++++ b/src/blueprint/functionality/Functionality-024--Diagram-Layout.md
+@@ -12,6 +12,15 @@ uses: none
+ 
+ # Functionality-024: Diagramlayout og tegnedata
+ 
++Current dependency adoption: [N3b design](../../../SDP/04--Design/SDL-Navigation/Design.md).
++The fork classifies Libavoid's invalid two-point diagonal no-route result as
++NoSpace, enabling its existing single fresh-placement retry under the same
++deadline and engine. It still rejects invalid geometry; frozen-position calls
++do not gain a placement retry. No XFMD contract or call sequence changes.
++Bootstrap consumes an exact commit/SHA-256 source archive, never a .deps patch.
++The original VP07 regression must retain all 12 nodes and 18 edges through measured
++layout and the shared native/PDF SVG path. Nested-group overlap remains open.
++
+ ## 1. Hensikt og avgrensning
+ 
+ Renderer-tjeneste for grafplassering, rutegeometri og bibliotekgenerert SVG. Gjenbruker bibliotekets layout; har ingen dependency til interpreter og mottar aldri Mermaid-kilde.
+@@ -172,3 +181,49 @@ P41 Implemented: chart/tree/git/ZenUML-profiler bruker egne records.
+ `semantic_charts.rs` validerer koordinater, hierarki og referencer; parserfiler
+ `charts`, `trees`, `git`, `zenuml` og rendererfiler `charts`, `structures`
+ bevarer semantikk uten original kilde over layoutgrensen.
++
++### N3c — native use-case increment
++
++[Use-case profile](../../../SDP/04--Design/SDL-Navigation/UseCase-Profile.md)
++defines family23/records210–212 and acceptance. Implemented: strict usecase-beta parser
++→ independently validated domain records → native fork UseCase graph/glyphs →
++existing measured SVG/native/PDF path. No original source crosses the layout port.
++The fork owns geometry and markers; XFMD owns syntax, semantic validation and
++conversion. Producer overview selection is not delivered by this profile.
++
++Plumbing: `src/interpreter/mermaid/rust/src/semantic/usecase.rs` emits element,
++boundary and relation records; `src/contracts/diagram/rust/src/semantic_usecase.rs`
++independently checks fields, identities, membership, endpoint kinds and labels.
++`src/renderer/diagram/rust/src/semantic/usecase.rs` maps validated records to the
++fork's UseCase graph. `compute_semantic_layout` routes real element endpoints with
++Libavoid, including boundaries; actor ports attach to glyph strokes and avoid
++captions. Unsupported syntax returns a diagnostic, never a partial diagram.
++Source remains inside the interpreter; the existing SVG and native/PDF adapter
++consumes measured output. See N3c-001 for candidate-specific verification.
++
++### Paged height boundary — N3d real-model regression
++
++A height-limited diagram must not exceed the printable height after floating-point
++multiplication. Clamp the final DiagramPlacement height to that boundary and use
++the same height for drawing, flow and maximum-run accounting. Preserve uniform
++scaling within floating precision and unchanged continuous layout. Do not relax
++PageBreaker's general oversized-line rejection. A 2065.6-point synthetic scene
++reproduces the one-ULP overshoot on A4; also verify the real XFMD VP01 export.
++
++### N3f measured-caption retry — Session0005 T009
++
++[Selected repair boundary](../../../SDP/04--Design/SDL-Navigation/N3f-Routing.md)
++keeps geometry in the renderer fork. routed::compute evaluates measured caption
++space in its existing single expanded placement; route_positioned and strict
++attachment validation retain their contracts. N3f-002 verifies the exact reported
++fixture, original VP07 regression and native/PDF behavior; ChapterNavigation
++ambiguity remains open under KB020.
++
++### N3g caption-identity obstacles — Session0005 T010
++
++[Repair boundary](../../../SDP/04--Design/SDL-Navigation/N3g-Routing.md) adds a
++nearest-owner exclusion area to the fork's existing caption/attachment obstacles.
++The radius uses actual route distance and existing tolerance/clearance; chamfered
++corners preserve the Manhattan metric. Final strict validation and routing bounds
++remain authoritative. No application or contract interface changes are required.
++Candidate implementation/verification is recorded in N3g-001.
+diff --git a/tests/renderer/DiagramLayoutTest.cpp b/tests/renderer/DiagramLayoutTest.cpp
+index 259417d..5d040fa 100644
+--- a/tests/renderer/DiagramLayoutTest.cpp
++++ b/tests/renderer/DiagramLayoutTest.cpp
+@@ -15,6 +15,72 @@ void run() {
+   MermaidInterpreter parser;
+   MermaidDiagramLayout layout;
+   SharedTextMetrics metrics;
++  CHECK(!parser.parse({"usecase-beta\nA(\"---\")", {}}).model);
++  std::ifstream useCaseFile(XFMD_USECASE_FIXTURE);
++  auto useCase = parser.parse({std::string((std::istreambuf_iterator<char>(useCaseFile)), {}), {}});
++  CHECK(useCase.model && useCase.model->semantic);
++  CHECK(useCase.model->semantic->family == DiagramFamily::UseCase);
++  auto useCaseScene = layout.layout(*useCase.model, {}, metrics);
++  CHECK(useCaseScene->svg.find("usecase-actor") != std::string::npos);
++  CHECK(useCaseScene->svg.find("usecase-ellipse") != std::string::npos);
++  for (const auto* label : {"Reader", "Editor", "Independent", "Document viewer", "include", "extend"})
++    CHECK(useCaseScene->svg.find(label) != std::string::npos);
++  for (int i = 0; i < 7; ++i)
++    CHECK(useCaseScene->svg.find("id=\"edge-" + std::to_string(i) + "\"") != std::string::npos);
++  if (const char* directory = std::getenv("XFMD_DIAGRAM_EVIDENCE"))
++    std::ofstream(std::string(directory) + "/usecase.svg") << useCaseScene->svg;
++  auto separateBoundaries = parser.parse({"usecase-beta\ndirection LR\nactor A(\"Reviewer – Åse\")\n"
++      "systemBoundary First\nX(Inspect)\nend\nsystemBoundary Second\nY[Summary]\nend\nA --> X\nX --> Y", {}});
++  CHECK(separateBoundaries.model);
++  auto separateScene = layout.layout(*separateBoundaries.model, {}, metrics);
++  for (const auto* label : {"First", "Second", "Åse", "Inspect", "Summary"})
++    CHECK(separateScene->svg.find(label) != std::string::npos);
++  auto unbounded = parser.parse({"usecase-beta\nactor A\nB(Task)\nB <-- A\nB ..> : include C", {}});
++  CHECK(unbounded.model);
++  CHECK(layout.layout(*unbounded.model, {}, metrics)->diagnostics.find("libavoid transaction") != std::string::npos);
++  // The original VP07 graph needs a bounded fresh-placement retry in Libavoid.
++  std::ifstream vp07File(XFMD_VP07_FIXTURE);
++  auto vp07 = parser.parse({std::string((std::istreambuf_iterator<char>(vp07File)), {}), {}});
++  CHECK(vp07.model && vp07.model->nodes.size() == 12 && vp07.model->edges.size() == 18);
++  auto vp07Scene = layout.layout(*vp07.model, {}, metrics);
++  CHECK(vp07Scene->nodes.size() == 12 && vp07Scene->edges.size() == 18);
++  CHECK(vp07Scene->diagnostics.find("Libavoid") == 0);
++  for (std::size_t i = 0; i < vp07.model->edges.size(); ++i)
++    CHECK(vp07Scene->svg.find("id=\"edge-" + std::to_string(i) + "\"") != std::string::npos);
++  for (const auto& node : vp07.model->nodes)
++    CHECK(vp07Scene->svg.find(node.label) != std::string::npos);
++  if (const char* directory = std::getenv("XFMD_DIAGRAM_EVIDENCE"))
++    std::ofstream(std::string(directory) + "/vp07.svg") << vp07Scene->svg;
++  // The owner-reported second VP07 case must retain every edge and label.
++  std::ifstream referenceFile(XFMD_VP07_REFERENCES_FIXTURE);
++  auto reference = parser.parse({std::string((std::istreambuf_iterator<char>(referenceFile)), {}), {}});
++  CHECK(reference.model && reference.model->nodes.size() == 12 && reference.model->edges.size() == 15);
++  auto referenceScene = layout.layout(*reference.model, {}, metrics);
++  CHECK(referenceScene->nodes.size() == 12 && referenceScene->edges.size() == 15);
++  for (std::size_t i = 0; i < reference.model->edges.size(); ++i)
++    CHECK(referenceScene->svg.find("id=\"edge-" + std::to_string(i) + "\"") != std::string::npos);
++  for (const auto& node : reference.model->nodes)
++    CHECK(referenceScene->svg.find(node.label) != std::string::npos);
++  if (const char* directory = std::getenv("XFMD_DIAGRAM_EVIDENCE"))
++    std::ofstream(std::string(directory) + "/document-references.svg") << referenceScene->svg;
++  // A caption must stay associated with its owner after obstacle rerouting.
++  std::ifstream chapterFile(XFMD_VP07_CHAPTER_FIXTURE);
++  auto chapter = parser.parse({std::string((std::istreambuf_iterator<char>(chapterFile)), {}), {}});
++  CHECK(chapter.model && chapter.model->nodes.size() == 10 && chapter.model->edges.size() == 12);
++  auto chapterScene = layout.layout(*chapter.model, {}, metrics);
++  CHECK(chapterScene->nodes.size() == 10 && chapterScene->edges.size() == 12);
++  for (std::size_t i = 0; i < chapter.model->edges.size(); ++i)
++    CHECK(chapterScene->svg.find("id=\"edge-" + std::to_string(i) + "\"") != std::string::npos);
++  for (const auto& node : chapter.model->nodes)
++    CHECK(chapterScene->svg.find(node.label) != std::string::npos);
++  if (const char* directory = std::getenv("XFMD_DIAGRAM_EVIDENCE"))
++    std::ofstream(std::string(directory) + "/chapter-navigation.svg") << chapterScene->svg;
++  // Independent nested SDUI rows need not return in declaration order.
++  auto composition = parser.parse({"flowchart TB\nsubgraph root [Page]\nsubgraph row1 [First]\nsubgraph a [Inputs]\nA[Name]\nB[Save]\nend\nend\nsubgraph row2 [Second]\nsubgraph b [Hidden]\nC[Other]\nend\nend\nend", {}});
++  CHECK(composition.model);
++  auto compositionScene = layout.layout(*composition.model, {}, metrics);
++  CHECK(compositionScene->groups.size() == 5);
++  CHECK(compositionScene->labels.front().text == "Page");
+   for (const auto* name : {"apt-import", "sequence-fragments", "sequence-nested"}) {
+     std::ifstream file(std::string(XFMD_DIAGRAM_FIXTURES) + "/" + name + ".mmd");
+     std::string text((std::istreambuf_iterator<char>(file)), {});

@@ -1,0 +1,10 @@
+flowchart LR
+    n_MarkdownPresentation["MarkdownPresentation (feature)"]
+    n_MermaidDiagrams["MermaidDiagrams (feature)"]
+    n_PagedPublication["PagedPublication (feature)"]
+    n_ReadDocuments["ReadDocuments (usecase)"]
+    n_ReaderAuthor["ReaderAuthor (actor)"]
+    n_MarkdownPresentation -->|supports| n_ReadDocuments
+    n_MermaidDiagrams -->|supports| n_ReadDocuments
+    n_PagedPublication -->|supports| n_ReadDocuments
+    n_ReaderAuthor -->|pursues| n_ReadDocuments

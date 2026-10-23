@@ -1,0 +1,399 @@
+[
+  {
+    "module": "fyne.io/fyne/v2",
+    "version": "v2.8.1",
+    "licenses": [
+      "fyne.io_fyne_v2@v2.8.1/LICENSE"
+    ]
+  },
+  {
+    "module": "fyne.io/systray",
+    "version": "v1.12.3-0.20260810170012-af4e8e793ec4",
+    "licenses": [
+      "fyne.io_systray@v1.12.3-0.20260810170012-af4e8e793ec4/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/BurntSushi/toml",
+    "version": "v1.6.0",
+    "licenses": [
+      "github.com_BurntSushi_toml@v1.6.0/COPYING"
+    ]
+  },
+  {
+    "module": "github.com/FyshOS/fancyfs",
+    "version": "v0.0.1",
+    "licenses": []
+  },
+  {
+    "module": "github.com/akavel/rsrc",
+    "version": "v0.10.2",
+    "licenses": []
+  },
+  {
+    "module": "github.com/anthonynsimon/bild",
+    "version": "v0.14.0",
+    "licenses": [
+      "github.com_anthonynsimon_bild@v0.14.0/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/clipperhouse/uax29/v2",
+    "version": "v2.2.0",
+    "licenses": [
+      "github.com_clipperhouse_uax29_v2@v2.2.0/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/cpuguy83/go-md2man/v2",
+    "version": "v2.0.7",
+    "licenses": []
+  },
+  {
+    "module": "github.com/creack/pty",
+    "version": "v1.1.9",
+    "licenses": []
+  },
+  {
+    "module": "github.com/davecgh/go-spew",
+    "version": "v1.1.1",
+    "licenses": [
+      "github.com_davecgh_go-spew@v1.1.1/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/fogleman/gg",
+    "version": "v1.3.0",
+    "licenses": []
+  },
+  {
+    "module": "github.com/fsnotify/fsnotify",
+    "version": "v1.9.0",
+    "licenses": [
+      "github.com_fsnotify_fsnotify@v1.9.0/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/fyne-io/gl-js",
+    "version": "v0.2.1-0.20260315212741-029c47fd27e8",
+    "licenses": [
+      "github.com_fyne-io_gl-js@v0.2.1-0.20260315212741-029c47fd27e8/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/fyne-io/glfw-js",
+    "version": "v0.4.0",
+    "licenses": [
+      "github.com_fyne-io_glfw-js@v0.4.0/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/fyne-io/image",
+    "version": "v0.1.1",
+    "licenses": [
+      "github.com_fyne-io_image@v0.1.1/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/fyne-io/oksvg",
+    "version": "v0.2.0",
+    "licenses": [
+      "github.com_fyne-io_oksvg@v0.2.0/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/go-gl/gl",
+    "version": "v0.0.0-20260331235117-4566fea9a276",
+    "licenses": [
+      "github.com_go-gl_gl@v0.0.0-20260331235117-4566fea9a276/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/go-gl/glfw/v3.4/glfw",
+    "version": "v0.1.0-pre.1.0.20260707082822-2a407d02d01a",
+    "licenses": [
+      "github.com_go-gl_glfw_v3.4_glfw@v0.1.0-pre.1.0.20260707082822-2a407d02d01a/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/go-ole/go-ole",
+    "version": "v1.3.0",
+    "licenses": []
+  },
+  {
+    "module": "github.com/go-text/render",
+    "version": "v0.2.1",
+    "licenses": [
+      "github.com_go-text_render@v0.2.1/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/go-text/typesetting",
+    "version": "v0.3.4",
+    "licenses": [
+      "github.com_go-text_typesetting@v0.3.4/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/go-text/typesetting-utils",
+    "version": "v0.0.0-20260223113751-2d88ac90dae3",
+    "licenses": [
+      "github.com_go-text_typesetting-utils@v0.0.0-20260223113751-2d88ac90dae3/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/godbus/dbus/v5",
+    "version": "v5.2.2",
+    "licenses": [
+      "github.com_godbus_dbus_v5@v5.2.2/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/golang/freetype",
+    "version": "v0.0.0-20170609003504-e2365dfdc4a0",
+    "licenses": []
+  },
+  {
+    "module": "github.com/hack-pad/go-indexeddb",
+    "version": "v0.3.2",
+    "licenses": [
+      "github.com_hack-pad_go-indexeddb@v0.3.2/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/hack-pad/safejs",
+    "version": "v0.1.0",
+    "licenses": [
+      "github.com_hack-pad_safejs@v0.1.0/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/inconshreveable/mousetrap",
+    "version": "v1.0.0",
+    "licenses": []
+  },
+  {
+    "module": "github.com/jackmordaunt/icns/v2",
+    "version": "v2.2.7",
+    "licenses": []
+  },
+  {
+    "module": "github.com/jeandeaual/go-locale",
+    "version": "v0.0.0-20250612000132-0ef82f21eade",
+    "licenses": [
+      "github.com_jeandeaual_go-locale@v0.0.0-20250612000132-0ef82f21eade/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/josephspurrier/goversioninfo",
+    "version": "v1.7.0",
+    "licenses": []
+  },
+  {
+    "module": "github.com/jsummers/gobmp",
+    "version": "v0.0.0-20230614200233-a9de23ed2e25",
+    "licenses": [
+      "github.com_jsummers_gobmp@v0.0.0-20230614200233-a9de23ed2e25/COPYING.txt"
+    ]
+  },
+  {
+    "module": "github.com/kr/text",
+    "version": "v0.2.0",
+    "licenses": [
+      "github.com_kr_text@v0.2.0/License"
+    ]
+  },
+  {
+    "module": "github.com/lucor/goinfo",
+    "version": "v0.9.0",
+    "licenses": []
+  },
+  {
+    "module": "github.com/mattn/go-runewidth",
+    "version": "v0.0.24",
+    "licenses": [
+      "github.com_mattn_go-runewidth@v0.0.24/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/mcuadros/go-version",
+    "version": "v0.0.0-20190830083331-035f6764e8d2",
+    "licenses": []
+  },
+  {
+    "module": "github.com/natefinch/atomic",
+    "version": "v1.0.1",
+    "licenses": []
+  },
+  {
+    "module": "github.com/nfnt/resize",
+    "version": "v0.0.0-20180221191011-83c6a9932646",
+    "licenses": [
+      "github.com_nfnt_resize@v0.0.0-20180221191011-83c6a9932646/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/nicksnyder/go-i18n/v2",
+    "version": "v2.5.1",
+    "licenses": [
+      "github.com_nicksnyder_go-i18n_v2@v2.5.1/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/niemeyer/pretty",
+    "version": "v0.0.0-20200227124842-a10e7caefd8e",
+    "licenses": [
+      "github.com_niemeyer_pretty@v0.0.0-20200227124842-a10e7caefd8e/License"
+    ]
+  },
+  {
+    "module": "github.com/pmezard/go-difflib",
+    "version": "v1.0.0",
+    "licenses": [
+      "github.com_pmezard_go-difflib@v1.0.0/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/russross/blackfriday/v2",
+    "version": "v2.1.0",
+    "licenses": []
+  },
+  {
+    "module": "github.com/rymdport/portal",
+    "version": "v0.4.2",
+    "licenses": [
+      "github.com_rymdport_portal@v0.4.2/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/spf13/cobra",
+    "version": "v0.0.5",
+    "licenses": []
+  },
+  {
+    "module": "github.com/spf13/pflag",
+    "version": "v1.0.3",
+    "licenses": []
+  },
+  {
+    "module": "github.com/srwiley/oksvg",
+    "version": "v0.0.0-20221011165216-be6e8873101c",
+    "licenses": [
+      "github.com_srwiley_oksvg@v0.0.0-20221011165216-be6e8873101c/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/srwiley/rasterx",
+    "version": "v0.0.0-20220730225603-2ab79fcdd4ef",
+    "licenses": [
+      "github.com_srwiley_rasterx@v0.0.0-20220730225603-2ab79fcdd4ef/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/stretchr/objx",
+    "version": "v0.5.2",
+    "licenses": []
+  },
+  {
+    "module": "github.com/stretchr/testify",
+    "version": "v1.11.1",
+    "licenses": [
+      "github.com_stretchr_testify@v1.11.1/LICENSE"
+    ]
+  },
+  {
+    "module": "github.com/urfave/cli/v2",
+    "version": "v2.27.7",
+    "licenses": []
+  },
+  {
+    "module": "github.com/xrash/smetrics",
+    "version": "v0.0.0-20240521201337-686a1a2994c1",
+    "licenses": []
+  },
+  {
+    "module": "github.com/yuin/goldmark",
+    "version": "v1.8.2",
+    "licenses": [
+      "github.com_yuin_goldmark@v1.8.2/LICENSE"
+    ]
+  },
+  {
+    "module": "golang.org/x/crypto",
+    "version": "v0.33.0",
+    "licenses": []
+  },
+  {
+    "module": "golang.org/x/image",
+    "version": "v0.46.0",
+    "licenses": [
+      "golang.org_x_image@v0.46.0/LICENSE"
+    ]
+  },
+  {
+    "module": "golang.org/x/mobile",
+    "version": "v0.0.0-20231127183840-76ac6878050a",
+    "licenses": []
+  },
+  {
+    "module": "golang.org/x/mod",
+    "version": "v0.41.0",
+    "licenses": []
+  },
+  {
+    "module": "golang.org/x/net",
+    "version": "v0.35.0",
+    "licenses": [
+      "golang.org_x_net@v0.35.0/LICENSE"
+    ]
+  },
+  {
+    "module": "golang.org/x/sync",
+    "version": "v0.23.0",
+    "licenses": []
+  },
+  {
+    "module": "golang.org/x/sys",
+    "version": "v0.48.0",
+    "licenses": [
+      "golang.org_x_sys@v0.48.0/LICENSE"
+    ]
+  },
+  {
+    "module": "golang.org/x/term",
+    "version": "v0.29.0",
+    "licenses": []
+  },
+  {
+    "module": "golang.org/x/text",
+    "version": "v0.42.0",
+    "licenses": [
+      "golang.org_x_text@v0.42.0/LICENSE"
+    ]
+  },
+  {
+    "module": "golang.org/x/tools",
+    "version": "v0.49.0",
+    "licenses": []
+  },
+  {
+    "module": "golang.org/x/tools/go/vcs",
+    "version": "v0.1.0-deprecated",
+    "licenses": []
+  },
+  {
+    "module": "gopkg.in/check.v1",
+    "version": "v1.0.0-20200227125254-8fa46927fb4f",
+    "licenses": [
+      "gopkg.in_check.v1@v1.0.0-20200227125254-8fa46927fb4f/LICENSE"
+    ]
+  },
+  {
+    "module": "gopkg.in/yaml.v3",
+    "version": "v3.0.1",
+    "licenses": [
+      "gopkg.in_yaml.v3@v3.0.1/LICENSE",
+      "gopkg.in_yaml.v3@v3.0.1/NOTICE"
+    ]
+  }
+]

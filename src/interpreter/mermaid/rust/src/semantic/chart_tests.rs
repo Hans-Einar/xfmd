@@ -54,3 +54,30 @@ fn git_branch_switches_context() {
     assert_eq!(commit.fields[1], "proposal");
     assert_eq!(commit.fields[2], "base");
 }
+
+#[test]
+fn quoted_mindmap_shapes_preserve_labels_and_hierarchy() {
+    let source = include_str!("../../../../../../tests/fixtures/mermaid/mindmap-quoted.mmd");
+    let bytes = parse(source.as_bytes()).unwrap();
+    let model = Model::read(&mut Reader::new(&bytes)).unwrap();
+    let diagram = model.semantic.unwrap();
+    let nodes: Vec<_> = diagram.records.iter().filter(|r| r.tag == 130).collect();
+    assert_eq!(nodes.len(), 4);
+    for (node, expected) in nodes.iter().zip([
+        ["root", "SDUI oversikt", "", "circle", ""],
+        ["editor", "Åpne fil", "root", "rectangle", ""],
+        ["save", "Save draft", "editor", "rounded", ""],
+        ["tree3", "Plain sibling", "root", "default", ""],
+    ]) {
+        assert_eq!(node.fields, expected);
+    }
+    for invalid in [
+        "mindmap\n root[\"Unclosed label]",
+        "mindmap\n root[\"<script>\"]",
+        "mindmap\n root[\"Bad & text\"]",
+        "mindmap\n root[\"Label\"] trailing",
+        "mindmap\n root[\"Label\"]\n    skipped[\"Child\"]",
+    ] {
+        assert!(parse(invalid.as_bytes()).is_err(), "{invalid}");
+    }
+}

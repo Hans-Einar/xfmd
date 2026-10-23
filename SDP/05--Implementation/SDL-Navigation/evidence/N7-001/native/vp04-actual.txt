@@ -1,0 +1,419 @@
+VP04 — Interfaces and collaboration
+Revision:
+e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007.
+consumes records use; no provider, Channel or executable message flow is inferred.
+
+All declared interfaces and explicit
+consumers
+Application (unit)
+
+consumes
+ExternalOpenProtocol (interface)
+
+Interpreter (unit)
+
+consumes
+
+DiagramInterpreterPort (interface)
+
+Documents (unit)
+
+Preferences (unit)
+
+consumes
+
+consumes
+
+PreferencesStorePort (interface)
+
+FileStorePort (interface)
+
+consumes
+
+LeaseReleaseProtocol (interface)
+consumes
+consumes
+
+GeneratedViews (unit)
+
+ViewGenerationProtocol (interface)
+
+consumes
+
+consumes
+
+DocumentIndexService (unit)
+
+WindowDeliveryProtocol (interface)
+
+consumes
+InterpreterPort (interface)
+consumes
+Publication (unit)
+
+RendererPort (interface)
+
+consumes
+Preview (unit)
+
+consumes
+
+consumes
+
+consumes
+consumes
+
+Viewport (unit)
+
+consumes
+
+RenderHostPort (interface)
+consumes
+
+consumes
+SchedulerPort (interface)
+
+Renderer (unit)
+
+consumes
+TextMetricsPort (interface)
+consumes
+
+SdpProjects (unit)
+
+VisualResources (unit)
+
+consumes
+
+consumes
+
+SdpToolProtocol (interface)
+
+consumes
+DiagramLayoutPort (interface)
+
+Source facts: f0018, f0179, f0180, f0230, f0419, f0420, f0421, f0422, f0483, f0651,
+f0683, f0684, f0685, f0686, f0743, f0744, f0745, f0843, f0894, f0895, f0963, f0964,
+f0981, f0982.
+Declarations: Application, DiagramInterpreterPort, DiagramLayoutPort,
+DocumentIndexService, Documents, ExternalOpenProtocol, FileStorePort,
+GeneratedViews, InterpreterPort, Interpreter, LeaseReleaseProtocol,
+PreferencesStorePort, Preferences, Preview, Publication, RenderHostPort,
+RendererPort, Renderer, SchedulerPort, SdpProjects, SdpToolProtocol, TextMetricsPort
+, ViewGenerationProtocol, Viewport, VisualResources, WindowDeliveryProtocol.
+
+Scope and notation
+Every declared Interface is included, even without a consumer. Rectangles are explicit
+Unit/Container consumers; rounded nodes are interfaces. Dashed consumes arrows
+
+point from consumer to interface and mean designed use, not an observed call or
+mandatory availability. No provider, Channel, transport, call order or mode necessity is
+inferred. Units without consumes facts are outside this projection; VP02 shows the
+complete logical structure.
+
+Interface register
+Interface
+
+Explicit consumers
+
+Source facts
+
+DiagramInterpreter
+
+Interpreter
+
+f0483
+
+DiagramLayoutPort
+
+VisualResources
+
+f0981
+
+ExternalOpenProtoc
+
+Application
+
+f0018
+
+DocumentIndexService,
+
+f0179, f0230
+
+Port
+
+ol
+FileStorePort
+
+Documents
+InterpreterPort
+
+DocumentIndexService, Preview f0180, f0683, f0743
+, Publication
+
+LeaseReleaseProtoc
+
+GeneratedViews
+
+f0419
+
+Preferences
+
+f0651
+
+RenderHostPort
+
+Preview, Viewport
+
+f0684, f0963
+
+RendererPort
+
+Preview, Publication
+
+f0685, f0744
+
+SchedulerPort
+
+GeneratedViews, Preview,
+
+f0420, f0686, f0894, f0964
+
+ol
+PreferencesStorePo
+rt
+
+SdpProjects, Viewport
+SdpToolProtocol
+
+SdpProjects
+
+f0895
+
+TextMetricsPort
+
+Publication, Renderer,
+
+f0745, f0843, f0982
+
+VisualResources
+
+ViewGenerationProt
+
+GeneratedViews
+
+f0421
+
+GeneratedViews
+
+f0422
+
+ocol
+WindowDeliveryProt
+ocol
+No declared consumer means no consumes fact is present; it does not prove an
+unused or unnecessary interface. Provider information is not expressed by consumes.
+
+Interface use
+No Channel or provider is inferred.
+Consumer
+
+Interface
+
+Fact
+
+Line
+
+Application
+
+ExternalOpenProtocol
+
+f0018
+
+332
+
+DocumentIndexService
+
+FileStorePort
+
+f0179
+
+493
+
+DocumentIndexService
+
+InterpreterPort
+
+f0180
+
+494
+
+Documents
+
+FileStorePort
+
+f0230
+
+544
+
+GeneratedViews
+
+LeaseReleaseProtocol
+
+f0419
+
+733
+
+GeneratedViews
+
+SchedulerPort
+
+f0420
+
+734
+
+GeneratedViews
+
+ViewGenerationProtocol
+
+f0421
+
+735
+
+GeneratedViews
+
+WindowDeliveryProtocol
+
+f0422
+
+736
+
+Interpreter
+
+DiagramInterpreterPort
+
+f0483
+
+797
+
+Preferences
+
+PreferencesStorePort
+
+f0651
+
+965
+
+Preview
+
+InterpreterPort
+
+f0683
+
+997
+
+Preview
+
+RenderHostPort
+
+f0684
+
+998
+
+Preview
+
+RendererPort
+
+f0685
+
+999
+
+Preview
+
+SchedulerPort
+
+f0686
+
+1000
+
+Publication
+
+InterpreterPort
+
+f0743
+
+1057
+
+Publication
+
+RendererPort
+
+f0744
+
+1058
+
+Publication
+
+TextMetricsPort
+
+f0745
+
+1059
+
+Renderer
+
+TextMetricsPort
+
+f0843
+
+1157
+
+SdpProjects
+
+SchedulerPort
+
+f0894
+
+1208
+
+SdpProjects
+
+SdpToolProtocol
+
+f0895
+
+1209
+
+Viewport
+
+RenderHostPort
+
+f0963
+
+1277
+
+Viewport
+
+SchedulerPort
+
+f0964
+
+1278
+
+VisualResources
+
+DiagramLayoutPort
+
+f0981
+
+1295
+
+VisualResources
+
+TextMetricsPort
+
+f0982
+
+1296
+
+

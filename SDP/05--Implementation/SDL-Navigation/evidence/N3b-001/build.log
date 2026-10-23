@@ -1,0 +1,105 @@
+[0/2] Re-checking globbed directories...
+[1/2] Re-running CMake...
+CMake Warning (dev) at /usr/share/cmake/Modules/FetchContent.cmake:1373 (message):
+  The DOWNLOAD_EXTRACT_TIMESTAMP option was not given and policy CMP0135 is
+  not set.  The policy's OLD behavior will be used.  When using a URL
+  download, the timestamps of extracted files should preferably be that of
+  the time of extraction, otherwise code that depends on the extracted
+  contents might not be rebuilt if the URL changes.  The OLD behavior
+  preserves the timestamps from the archive instead, but this is usually not
+  what you want.  Update your project to the NEW behavior or specify the
+  DOWNLOAD_EXTRACT_TIMESTAMP option with a value of true to avoid this
+  robustness issue.
+Call Stack (most recent call first):
+  cmake/MicroTeX.cmake:3 (FetchContent_Declare)
+  CMakeLists.txt:31 (include)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Found Python3: /usr/bin/python3.12 (found suitable version "3.12.14", minimum required is "3.11") found components: Interpreter
+-- Found Python3: /usr/bin/python3.12 (found version "3.12.14") found components: Interpreter
+-- Configuring done (4.6s)
+-- Generating done (2.2s)
+-- Build files have been written to: /home/warloc/git/xfmd-sdl-navigation/build-ui
+[0/2] Re-checking globbed directories...
+[1/79] cd /home/warloc/git/xfmd-sdl-navigation/build-ui && /usr/bin/python3.12 /home/warloc/git/xfmd-sdl-navigation/tools/build_identity.py --source /home/warloc/git/xfmd-sdl-navigation --output /home/warloc/git/xfmd-sdl-navigation/build-ui/generated
+[2/77] Generating /home/warloc/git/xfmd-sdl-navigation/build-acceptance/cargo/release/libxfmd_mermaid_ffi.a
+   Compiling mermaid-rs-renderer v0.3.1 (/home/warloc/git/xfmd-sdl-navigation/.deps/mermaid-rs-renderer)
+   Compiling xfmd-mermaid-interpreter v0.1.0 (/home/warloc/git/xfmd-sdl-navigation/src/interpreter/mermaid/rust)
+   Compiling xfmd-diagram-layout v0.1.0 (/home/warloc/git/xfmd-sdl-navigation/src/renderer/diagram/rust)
+   Compiling xfmd-mermaid-ffi v0.1.0 (/home/warloc/git/xfmd-sdl-navigation/src/application/composition/mermaid)
+    Finished `release` profile [optimized] target(s) in 3m 08s
+[3/77] Linking CXX executable PreviewTest
+[4/77] Linking CXX executable InterpreterTest
+[5/77] Linking CXX executable RendererTest
+[6/77] Linking CXX executable ScrollTest
+[7/77] Linking CXX executable DocumentIndexTest
+[8/77] Linking CXX executable ExternalBrowserTest
+[9/77] Linking CXX executable ReferenceWorkerTest
+[10/77] Linking CXX executable xfmd
+[11/77] Linking CXX executable SdpPanelGuiTest
+[12/77] Linking CXX executable SdpDynamicGuiTest
+[13/77] Linking CXX executable FavoritesGuiTest
+[14/77] Linking CXX executable DocumentZoomGuiTest
+[15/77] Linking CXX executable PathWorkspaceGuiTest
+[16/77] Linking CXX executable OpenPathDialogGuiTest
+[17/77] Linking CXX executable FileRoutingGuiTest
+[18/77] Linking CXX executable MermaidGuiTest
+[19/77] Linking CXX executable PreviewSelectionGuiTest
+[20/77] Linking CXX executable RecentFilesGuiTest
+[21/77] Linking CXX executable CompactWorkspaceTest
+[22/77] Linking CXX executable ReadingColorsGuiTest
+[23/77] Linking CXX executable UiControlsTest
+[24/77] Linking CXX executable TreeActionsTest
+[25/77] Linking CXX executable AppearancePreferencesTest
+[26/77] Linking CXX executable AppearanceGuiTest
+[27/77] Linking CXX executable BrowserPreferencesTest
+[28/77] Linking CXX executable IndexGuiTest
+[29/77] Linking CXX executable WorkspaceTest
+[30/77] Linking CXX executable PresentationTest
+[31/77] Linking CXX executable ScrollingTest
+[32/77] Linking CXX executable NavigationGuiTest
+[33/77] Linking CXX executable SidebarGuiTest
+[34/77] Linking CXX executable WheelGuiTest
+[35/77] Linking CXX executable PointerTest
+[36/77] Linking CXX executable WorkPathGuiTest
+[37/77] Linking CXX executable xfmd_benchmark
+[38/77] Linking CXX executable TablePreviewTest
+[39/77] Linking CXX executable PreferencesTest
+[40/77] Linking CXX executable TypographyFixture
+[41/77] Linking CXX executable PageLayoutTest
+[42/77] Linking CXX executable ExportJobTest
+[43/77] Linking CXX executable CapturePresentation
+[44/77] Linking CXX executable xfmd_cold_start
+[45/77] Linking CXX executable PagedPreviewTest
+[46/77] Linking CXX executable PdfExportTest
+[47/77] Linking CXX executable ExportGuiTest
+[48/77] Linking CXX executable PdfFidelityFixture
+[49/77] Linking CXX executable CanvasTest
+[50/77] Linking CXX executable TableTest
+[51/77] Linking CXX executable ReadingColorsTest
+[52/77] Linking CXX executable PdfCommitFailure
+[53/77] Linking CXX executable IconTest
+[54/77] Linking CXX executable RichPreviewTest
+[55/77] Linking CXX executable FullscreenTest
+[56/77] Linking CXX executable ThemeProfilesTest
+[57/77] Linking CXX executable PdfBenchmark
+[58/77] Linking CXX executable CapturePreferences
+[59/77] Linking CXX executable CaptureAppearance
+[60/77] Linking CXX executable DiagramPreparationTest
+[61/77] Linking CXX executable DiagramWorkerTest
+[62/77] Linking CXX executable MermaidPdfFixture
+[63/77] Linking CXX executable DiagramReadingTest
+[64/77] Linking CXX executable WindowEndpointBoundaryTest
+[65/77] Linking CXX executable DocumentLeaseGuiTest
+[66/77] Linking CXX executable DocumentViewsGuiTest
+[67/77] Linking CXX executable ThemePopupGuiTest
+[68/77] Linking CXX executable DocumentZoomPdfFixture
+[69/77] Linking CXX executable SdpNavigationGuiTest
+[70/77] Linking CXX executable HeadingLinkTest
+[71/77] Linking CXX executable StandaloneMermaidTest
+[72/77] Linking CXX executable SdpRuntimeGuiTest
+[73/77] Linking CXX executable HeadingLinkGuiTest
+[74/77] Linking CXX executable StandaloneMermaidGuiTest
+[75/77] Linking CXX executable SduiWorkflowGuiTest
+[76/77] Building CXX object CMakeFiles/DiagramLayoutTest.dir/tests/renderer/DiagramLayoutTest.cpp.o
+[77/77] Linking CXX executable DiagramLayoutTest

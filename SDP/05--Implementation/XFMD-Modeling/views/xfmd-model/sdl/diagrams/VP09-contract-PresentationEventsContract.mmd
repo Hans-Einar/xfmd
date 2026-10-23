@@ -1,0 +1,6 @@
+flowchart LR
+    n_PresentFrame["PresentFrame (message)"]
+    n_PresentationEventsContract["PresentationEventsContract (contract)"]
+    n_ShowDirtyRejection["ShowDirtyRejection (message)"]
+    n_PresentationEventsContract -->|permits| n_PresentFrame
+    n_PresentationEventsContract -->|permits| n_ShowDirtyRejection

@@ -1,0 +1,14 @@
+sequenceDiagram
+    participant n_Navigation as Navigation
+    participant n_Documents as Documents
+    participant n_NativeShell as Native Shell
+    participant n_DocumentStorage as Document Storage
+    n_Navigation->>n_Documents: 1: Admit Document (Document Calls)
+    n_Documents->>n_NativeShell: 2: Choose Unsaved (Unsaved Admission)
+    n_NativeShell-->>n_Documents: 3: Choose Save (Unsaved Admission) reply-to 2
+    n_Documents->>n_DocumentStorage: 4: Write Current (Storage Calls)
+    n_DocumentStorage-->>n_Documents: 5: Current Written (Storage Calls) reply-to 4
+    n_Documents->>n_Documents: 6: Mark Current Saved (Document State Changes)
+    n_Documents->>n_DocumentStorage: 7: Read Candidate (Storage Calls)
+    n_DocumentStorage-->>n_Documents: 8: Candidate Read Failed (Storage Calls) reply-to 7
+    n_Documents-->>n_Navigation: 9: Document Rejected (Document Calls) reply-to 1

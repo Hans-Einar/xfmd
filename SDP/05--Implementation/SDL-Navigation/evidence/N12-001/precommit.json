@@ -1,0 +1,19 @@
+{
+  "time": "2026-10-20T22:55:10.984199+00:00",
+  "producerHead": "6b80b40fb269e29a03dc9761c4facb8473a54f3e",
+  "producerBranch": "sdp/xfmd-vp10-overview",
+  "main": "5ca0e90f82c5da449d529906b4f753f39a907cb4",
+  "worktrees": {
+    "SDP-project-governance": {
+      "head": "6dfde97f2b0f01f6735fdd6344e88e2ffb4d5362",
+      "status": "",
+      "overlap": []
+    },
+    "SDP-coordination": {
+      "head": "684b1f8952f2f5ff2dc9fb32c7592340d8aff60f",
+      "status": "",
+      "overlap": []
+    }
+  },
+  "verdict": "Green scoped producer milestone; heads/dirty work rechecked, no relevant overlaps. Shared SDP-vNow KB032 and Integration append-only handoff; no product/history import."
+}

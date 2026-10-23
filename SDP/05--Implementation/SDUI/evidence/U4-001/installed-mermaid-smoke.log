@@ -1,0 +1,2 @@
+Version: xfmd 0.7 sprint/009/phase/057-favorites:206+dirty
+PASS: packaged executable stayed running with the supplied .mmd argument for 3 seconds in isolated Xvfb/HOME.

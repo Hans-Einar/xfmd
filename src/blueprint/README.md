@@ -1,6 +1,6 @@
 # Blueprint register
 
-Current branch inventory: 10 features and 27 functionality objects (37 total).
+Current branch inventory: 10 features and 28 functionality objects (38 total).
 Main `c245fd9` contains P0–P41 and Sprints 001–002; FUNC-031 belongs to the
 separate Sprint 004 branch. FTR-011/FUNC-027–030 and UR-043/SR-026 are reserved
 by historical BoxUI work and are not missing implementations on this branch.
@@ -183,3 +183,26 @@ P22: UR-032 → FUNC-010/014; UR-033 → FUNC-010; UR-034 → FUNC-005. AT-052�
 | Requirement | Design objects | Acceptance | Scope |
 | --- | --- | --- | --- |
 | UR-045 | [FUNC-010](functionality/Functionality-010--Workspace-Controls.md) | AT-073 | FirstRelease |
+
+## SDP project navigation — 2026-10-01
+
+| ID | Owner | Status |
+| --- | --- | --- |
+| [FUNC-032](functionality/Functionality-032--SDP-Project-Navigation.md) | application | Implemented |
+
+| Requirement | Object | Acceptance | Scope |
+| --- | --- | --- | --- |
+| UR-046 | FUNC-032 | AT-074 | FirstRelease |
+| SR-029 | FUNC-032 | AT-075 | FirstRelease |
+
+The previous 37-object SDL baseline needs a FUNC-032 delta under #017; its
+historical structural evidence is preserved rather than silently regenerated.
+
+## Standalone Mermaid input — 2026-10-04
+
+| Requirement | Design objects | Acceptance | Scope |
+| --- | --- | --- | --- |
+| UR-047 | FUNC-002, FUNC-023 | AT-076 | FirstRelease |
+| UR-048 | FUNC-008 | AT-077 | FirstRelease |
+
+UR-048 / AT-077: FUNC-008 owns local heading-link resolution and transactional navigation.

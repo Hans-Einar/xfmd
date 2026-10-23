@@ -1,0 +1,109 @@
+Internal ctest changing into directory: /home/warloc/git/xfmd-sdl-navigation/build-ui
+Test project /home/warloc/git/xfmd-sdl-navigation/build-ui
+      Start 60: MermaidRustTests
+      Start 50: PdfFidelityTest
+      Start 62: DiagramReadingTest
+      Start 55: TableTest
+ 1/38 Test #60: MermaidRustTests .................   Passed    1.63 sec
+      Start 63: MermaidPdfTest
+ 2/38 Test #55: TableTest ........................   Passed    2.14 sec
+      Start 59: DiagramLayoutTest
+ 3/38 Test #63: MermaidPdfTest ...................   Passed    1.89 sec
+      Start 66: BuildIdentityTest
+ 4/38 Test #59: DiagramLayoutTest ................   Passed    1.39 sec
+      Start 75: SdpProtocolTest
+ 5/38 Test #66: BuildIdentityTest ................   Passed    1.24 sec
+      Start  8: WorkPathTest
+ 6/38 Test  #8: WorkPathTest .....................   Passed    0.35 sec
+      Start 65: MermaidDependencies
+ 7/38 Test #65: MermaidDependencies ..............   Passed    0.15 sec
+      Start 44: TypographyTest
+ 8/38 Test #44: TypographyTest ...................   Passed    0.20 sec
+      Start 51: PdfFlushFailure
+ 9/38 Test #75: SdpProtocolTest ..................   Passed    1.97 sec
+      Start 57: RichPreviewTest
+10/38 Test #51: PdfFlushFailure ..................***Failed    0.12 sec
+strace: test_ptrace_get_syscall_info: PTRACE_TRACEME: Operation not permitted
+strace: ptrace(PTRACE_TRACEME, ...): Operation not permitted
+strace: PTRACE_SETOPTIONS: Operation not permitted
+strace: cleanup: waitpid(-1, __WALL): No child processes
+Traceback (most recent call last):
+  File "/home/warloc/git/xfmd-sdl-navigation/tools/check_pdf_flush_failure.py", line 11, in <module>
+    subprocess.run(['strace','-o',str(root/'trace'),'-e','inject=fsync:error=ENOSPC:when=1',sys.argv[1],str(path)],check=True)
+  File "/usr/lib64/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['strace', '-o', '/tmp/xfmd-pdf-full-hzy_w7l4/trace', '-e', 'inject=fsync:error=ENOSPC:when=1', '/home/warloc/git/xfmd-sdl-navigation/build-ui/PdfCommitFailure', '/tmp/xfmd-pdf-full-hzy_w7l4/existing.pdf']' returned non-zero exit status 1.
+
+      Start 41: BlueprintSymbols
+11/38 Test #57: RichPreviewTest ..................   Passed    0.18 sec
+      Start 40: DiskFullFailure
+12/38 Test #41: BlueprintSymbols .................   Passed    0.14 sec
+      Start 77: SdpIntegrationTest
+13/38 Test #40: DiskFullFailure ..................***Failed    0.09 sec
+strace: test_ptrace_get_syscall_info: PTRACE_TRACEME: Operation not permitted
+strace: ptrace(PTRACE_TRACEME, ...): Operation not permitted
+strace: PTRACE_SETOPTIONS: Operation not permitted
+strace: cleanup: waitpid(-1, __WALL): No child processes
+Traceback (most recent call last):
+  File "/home/warloc/git/xfmd-sdl-navigation/tools/check_disk_failure.py", line 10, in <module>
+    subprocess.run(["strace", "-o", str(pathlib.Path(directory) / "trace"),
+  File "/usr/lib64/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['strace', '-o', '/tmp/xfmd-enospc-jbu2wq1f/trace', '-e', 'inject=write:error=ENOSPC:when=1', '/home/warloc/git/xfmd-sdl-navigation/build-ui/AtomicWriteFailure', '/tmp/xfmd-enospc-jbu2wq1f/document.md']' returned non-zero exit status 1.
+
+      Start 48: PdfExportTest
+14/38 Test #48: PdfExportTest ....................   Passed    0.09 sec
+      Start 56: ReadingColorsTest
+15/38 Test #56: ReadingColorsTest ................   Passed    0.07 sec
+      Start 13: BlueprintStructure
+16/38 Test #13: BlueprintStructure ...............   Passed    0.91 sec
+      Start 61: DiagramPreparationTest
+17/38 Test #61: DiagramPreparationTest ...........   Passed    0.11 sec
+      Start 14: LayerBoundaries
+18/38 Test #14: LayerBoundaries ..................   Passed    0.06 sec
+      Start 45: PageLayoutTest
+19/38 Test #45: PageLayoutTest ...................   Passed    0.07 sec
+      Start  3: FileOpenPolicyTest
+20/38 Test  #3: FileOpenPolicyTest ...............   Passed    0.02 sec
+      Start  9: ExternalBrowserTest
+21/38 Test  #9: ExternalBrowserTest ..............   Passed    0.03 sec
+      Start  2: DocumentTest
+22/38 Test  #2: DocumentTest .....................   Passed    0.02 sec
+      Start 47: ExportJobTest
+23/38 Test #47: ExportJobTest ....................   Passed    0.02 sec
+      Start 58: ThemeProfilesTest
+24/38 Test #58: ThemeProfilesTest ................   Passed    0.03 sec
+      Start 64: DiagramWorkerTest
+25/38 Test #64: DiagramWorkerTest ................   Passed    0.01 sec
+      Start 11: ReferenceWorkerTest
+26/38 Test #11: ReferenceWorkerTest ..............   Passed    0.01 sec
+      Start  6: PreviewTest
+27/38 Test  #6: PreviewTest ......................   Passed    0.01 sec
+      Start 12: NavigationTest
+28/38 Test #12: NavigationTest ...................   Passed    0.01 sec
+      Start  5: RendererTest
+29/38 Test  #5: RendererTest .....................   Passed    0.01 sec
+      Start  7: ScrollTest
+30/38 Test  #7: ScrollTest .......................   Passed    0.01 sec
+      Start 10: DocumentIndexTest
+31/38 Test #10: DocumentIndexTest ................   Passed    0.01 sec
+      Start  1: PortContractTest
+32/38 Test  #1: PortContractTest .................   Passed    0.00 sec
+      Start  4: InterpreterTest
+33/38 Test  #4: InterpreterTest ..................   Passed    0.00 sec
+      Start 67: BuildVersionTest
+34/38 Test #67: BuildVersionTest .................   Passed    0.10 sec
+      Start 42: ScrollMotionTest
+35/38 Test #42: ScrollMotionTest .................   Passed    0.00 sec
+36/38 Test #77: SdpIntegrationTest ...............   Passed    1.66 sec
+37/38 Test #62: DiagramReadingTest ...............   Passed    7.72 sec
+38/38 Test #50: PdfFidelityTest ..................   Passed   10.69 sec
+
+95% tests passed, 2 tests failed out of 38
+
+Total Test time (real) =  10.70 sec
+
+The following tests FAILED:
+	 40 - DiskFullFailure (Failed)
+	 51 - PdfFlushFailure (Failed)
+Errors while running CTest

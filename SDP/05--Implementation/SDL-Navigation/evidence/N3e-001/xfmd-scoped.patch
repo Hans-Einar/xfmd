@@ -1,0 +1,62 @@
+--- a/tests/gui/SdpOverviewGuiTest.cpp
++++ b/tests/gui/SdpOverviewGuiTest.cpp
+@@ -16,12 +16,12 @@
+   for (int i=0;i<1500;++i) { settleNative(app.app,5); if(done()) return; }
+   throw std::runtime_error("Overview timeout: " + std::string(app.window->workspacePanel->sdp->status->getText().text()));
+ }
+-NavigationItem* viewpoint(NavigationTree* tree, FXTreeItem* first) {
++NavigationItem* viewpoint(NavigationTree* tree, FXTreeItem* first, const std::string& suffix="/VP01") {
+   for(auto* item=first;item;item=item->getNext()) {
+     auto* row=static_cast<NavigationItem*>(item);
+-    if(row->action.target.size()>5 && row->action.target.substr(row->action.target.size()-5)=="/VP01") return row;
++    if(row->action.target.size()>suffix.size() && row->action.target.substr(row->action.target.size()-suffix.size())==suffix) return row;
+     tree->expandTree(item);
+-    if(auto* found=viewpoint(tree,item->getFirst())) return found;
++    if(auto* found=viewpoint(tree,item->getFirst(),suffix)) return found;
+   }
+   return nullptr;
+ }
+@@ -32,8 +32,8 @@
+   const auto source=root/"SDP/SDL/Overview.design";
+   // Canonical declaration and statement ordering is part of the SDL contract.
+   std::ofstream(source) << "language design-core version 0.5.\nusecase Browse.\nunit Desktop.\n"
+-    "functionality Display.\nusecase Export.\nactor Guest.\nusecase Isolated.\nfeature Navigation.\nactor Reader.\n"
+-    "Desktop owns Display.\nDisplay contributes-to Navigation.\nNavigation supports Browse.\nReader pursues Browse.\nReader pursues Export.\n";
++    "functionality Display.\nusecase Export.\nactor Guest.\nusecase Isolated.\ncontainer Local.\nfeature Navigation.\nmode Offline.\nmode Online.\nactor Reader.\ncontainer Remote.\n"
++    "Desktop owns Display.\nDisplay allocated-to Local in mode Offline.\nDisplay allocated-to Remote in mode Online.\nDisplay contributes-to Navigation.\nNavigation supports Browse.\nReader pursues Browse.\nReader pursues Export.\n";
+   int argc=1;char name[]="sdp-overview-test";char* argv[]{name,nullptr};
+   Application app;app.initialize(argc,argv);app.window->position(10,10,1250,850);
+   XSetInputFocus(static_cast<Display*>(app.app.getDisplay()),app.window->id(),RevertToParent,CurrentTime);
+@@ -78,6 +78,32 @@
+   bool clicked=false;
+   for(int y=0;y<tree->getViewportHeight();++y) if(tree->getItemAt(150,y)==row) {nativeClick(tree,150,y+5);clicked=true;break;}
+   CHECK(clicked);until(app,[&]{return activations==2;});CHECK(actual.uri.find("projection=overview")!=std::string::npos);
++  // VP07 uses the same generic target contract; mode rows stay on demand.
++  row=viewpoint(tree,tree->getFirstItem(),"/VP07");CHECK(row);
++  tree->setCurrentItem(row);tree->makeItemVisible(row);tree->setFocus();
++  nativeKey(tree,XK_Return);
++  until(app,[&]{return activations==3 && app.host->interactive() && app.session.view().text.find("Feature contributions")!=std::string::npos;});
++  CHECK(app.session.view().text.find("-->|allocated-to|")==std::string::npos);
++  for(const auto* mode:{"Offline","Online"}) {
++    const auto previous=activations;
++    row=viewpoint(tree,tree->getFirstItem(),std::string("/overview-mode/")+mode);CHECK(row);
++    tree->setCurrentItem(row);tree->makeItemVisible(row);tree->setFocus();nativeKey(tree,XK_Return);
++    until(app,[&]{return activations==previous+1 && app.host->interactive() && app.session.view().text.find(std::string("Selected mode: **")+mode)!=std::string::npos;});
++    CHECK(actual.uri.find(std::string("mode=")+mode)!=std::string::npos);
++    const auto wanted=std::string(mode)=="Offline"?"Local":"Remote";
++    const auto absent=std::string(mode)=="Offline"?"Remote":"Local";
++    CHECK(app.session.view().text.find(std::string("n_")+wanted+"[\""+wanted+" (container) | allocated-to: F01")!=std::string::npos);
++    CHECK(app.session.view().text.find(std::string("n_")+absent+"[\""+absent+" (container) | allocated-to: F01")==std::string::npos);
++    int featureScenes=0;for(const auto& run:app.host->frame()->runs) if(auto* scene=dynamic_cast<const DiagramScene*>(run.visual.get())) {++featureScenes;CHECK(scene->svg.find("F01")!=std::string::npos);}
++    CHECK(featureScenes==1);
++  }
++  if(const char* evidence=getenv("XFMD_UI_EVIDENCE")) {
++    const fs::path out=evidence;captureDesktop(app.app,(out/"vp07-native.png").c_str());
++    auto target=PdfTarget::inspect((out/"vp07-native.pdf").string());SharedTextMetrics metrics;
++    auto parser=DiagramServices::interpreter();MarkdownRenderer renderer;ExportControl control;
++    ExportRequest request{app.session.snapshot(),{},metrics.fontSetId(),target.path,{}};
++    CHECK(ExportPipeline::run(request,target,control,*parser,renderer,metrics)>0);
++  }
+   app.sdpNavigation->stop();
+ }
+ TEST_MAIN(run)

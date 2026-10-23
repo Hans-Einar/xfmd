@@ -1,0 +1,214 @@
+{
+  "version": "sdl-viewpoints-go-1.3",
+  "revision": "1da94717409fc03ce14a88a2de6245db0f15915310ae72e8fd720d276c97a730",
+  "renderer": "",
+  "diagrams": [
+    {
+      "id": "VP01-overview",
+      "title": "All declared actors and use cases",
+      "kind": "usecase",
+      "nodes": {
+        "u0": {
+          "kind": "actor",
+          "model_id": "Guest",
+          "span": {
+            "column": 1,
+            "end": 151,
+            "end_column": 13,
+            "end_line": 8,
+            "line": 8,
+            "node": "Span",
+            "start": 139
+          }
+        },
+        "u1": {
+          "kind": "actor",
+          "model_id": "Reader",
+          "span": {
+            "column": 1,
+            "end": 259,
+            "end_column": 14,
+            "end_line": 15,
+            "line": 15,
+            "node": "Span",
+            "start": 246
+          }
+        },
+        "u2": {
+          "kind": "usecase",
+          "model_id": "Browse",
+          "span": {
+            "column": 1,
+            "end": 64,
+            "end_column": 16,
+            "end_line": 3,
+            "line": 3,
+            "node": "Span",
+            "start": 49
+          }
+        },
+        "u3": {
+          "kind": "usecase",
+          "model_id": "Export",
+          "span": {
+            "column": 1,
+            "end": 138,
+            "end_column": 16,
+            "end_line": 7,
+            "line": 7,
+            "node": "Span",
+            "start": 123
+          }
+        },
+        "u4": {
+          "kind": "usecase",
+          "model_id": "Isolated",
+          "span": {
+            "column": 1,
+            "end": 169,
+            "end_column": 18,
+            "end_line": 9,
+            "line": 9,
+            "node": "Span",
+            "start": 152
+          }
+        }
+      },
+      "edges": [
+        {
+          "source": "u1",
+          "relation": "pursues",
+          "target": "u2",
+          "fact": "f0011"
+        },
+        {
+          "source": "u1",
+          "relation": "pursues",
+          "target": "u3",
+          "fact": "f0012"
+        }
+      ],
+      "source_facts": [
+        "f0011",
+        "f0012"
+      ],
+      "elements": []
+    }
+  ],
+  "facts": [
+    {
+      "id": "f0007",
+      "line": 27,
+      "node": "Relation",
+      "object": "Navigation",
+      "span": {
+        "column": 1,
+        "end": 616,
+        "end_column": 35,
+        "end_line": 27,
+        "line": 27,
+        "node": "Span",
+        "start": 582
+      },
+      "subject": "Display",
+      "text": "Display contributes-to Navigation.",
+      "verb": "contributes-to"
+    },
+    {
+      "id": "f0010",
+      "line": 30,
+      "node": "Relation",
+      "object": "Browse",
+      "span": {
+        "column": 1,
+        "end": 695,
+        "end_column": 28,
+        "end_line": 30,
+        "line": 30,
+        "node": "Span",
+        "start": 668
+      },
+      "subject": "Navigation",
+      "text": "Navigation supports Browse.",
+      "verb": "supports"
+    },
+    {
+      "id": "f0011",
+      "line": 31,
+      "node": "Relation",
+      "object": "Browse",
+      "span": {
+        "column": 1,
+        "end": 718,
+        "end_column": 23,
+        "end_line": 31,
+        "line": 31,
+        "node": "Span",
+        "start": 696
+      },
+      "subject": "Reader",
+      "text": "Reader pursues Browse.",
+      "verb": "pursues"
+    },
+    {
+      "id": "f0012",
+      "line": 32,
+      "node": "Relation",
+      "object": "Export",
+      "span": {
+        "column": 1,
+        "end": 741,
+        "end_column": 23,
+        "end_line": 32,
+        "line": 32,
+        "node": "Span",
+        "start": 719
+      },
+      "subject": "Reader",
+      "text": "Reader pursues Export.",
+      "verb": "pursues"
+    }
+  ],
+  "model_gaps": [
+    {
+      "code": "NO_CONTRIBUTION",
+      "feature": null,
+      "message": "No direct or Feature-mediated Functionality contributions.",
+      "mode": null,
+      "model_id": "Export",
+      "viewpoint": "VP01"
+    },
+    {
+      "code": "NO_ACTOR",
+      "feature": null,
+      "message": "No Actor pursues this use case.",
+      "mode": null,
+      "model_id": "Isolated",
+      "viewpoint": "VP01"
+    },
+    {
+      "code": "NO_CONTRIBUTION",
+      "feature": null,
+      "message": "No direct or Feature-mediated Functionality contributions.",
+      "mode": null,
+      "model_id": "Isolated",
+      "viewpoint": "VP01"
+    },
+    {
+      "code": "NO_GOAL",
+      "feature": null,
+      "message": "Actor has no pursues relation.",
+      "mode": null,
+      "model_id": "Guest",
+      "viewpoint": "VP01"
+    }
+  ],
+  "outputs": {
+    "delivery.txt": "6403203dd5a0867eb14d104ee8a73730bd72dd9ad92e78d996a6dba0a5dcfc01",
+    "diagrams/VP01-overview.mmd": "430f1ce023cf5b934412c7b92c060cd29981109b7f03a9f374cf7ab8b4fb17bf",
+    "entry.md": "b364d7cc6dcc15b9fbbf58a7fb29da46c167a68dc4c221dfa8ebbf6fce456519",
+    "sdptool.json": "c4073a8c764824453d6a24103804d655e8e0646d5dfb306289514eeb72810787",
+    "selection.json": "84a9de31a28a3e4eb887359d60361894f4e7f55ae434460fd05fcb8ad6db87de",
+    "source-inputs/s0.design": "1da94717409fc03ce14a88a2de6245db0f15915310ae72e8fd720d276c97a730"
+  }
+}

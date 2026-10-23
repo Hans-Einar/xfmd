@@ -1,0 +1,18 @@
+   Compiling mermaid-rs-renderer v0.3.1 (/home/warloc/git/mermaid-rs-renderer-xfmd-diagrams)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 10.60s
+     Running tests/xfmd_document_references.rs (/home/warloc/git/xfmd-sdl-navigation/build-diagram-fork/debug/deps/xfmd_document_references-67c1dc5caba2aea9)
+
+running 1 test
+["one spacing retry after non-orthogonal edge 1 [(552.6454010009766, 33.89583206176758), (995.6871032714844, 170.18555068969727)]; failed routing/labels attempt 391.938082ms, included in total time", "libavoid transaction 1: 28.368033ms", "libavoid transaction 2: 13.485522ms", "libavoid transaction 3: 23.187545ms", "final label-only placement on completed routes", "constrained parallel separation: Quality { length: 6906.22688293457, bends: 20, crossings: 19, parallel_overlaps: 0, close_parallel_segments: 6, node_traversals: 0, label_collisions: 0, attachment_intrusions: 0 }"]
+test xfmd_document_references_preserves_routes_and_caption_attachments ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.58s
+
+     Running tests/xfmd_vp07.rs (/home/warloc/git/xfmd-sdl-navigation/build-diagram-fork/debug/deps/xfmd_vp07-74b8eb28019a1829)
+
+running 1 test
+["one spacing retry after non-orthogonal edge 11 [(477.0104064941406, 403.30827713012695), (913.8437194824219, 211.26335525512695)]; failed routing/labels attempt 474.550185ms, included in total time", "libavoid transaction 1: 38.929588ms"]
+test xfmd_vp07_preserves_all_nodes_and_orthogonal_edges ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.75s
+

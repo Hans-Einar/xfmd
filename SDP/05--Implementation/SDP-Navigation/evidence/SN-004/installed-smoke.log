@@ -1,0 +1,2 @@
+PASS: installed XFMD opened the Markdown fixture and remained alive for 3 seconds in isolated Xvfb/temp HOME
+Termination targeted only the smoke-test PID

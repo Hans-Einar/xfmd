@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "interpreter/CmarkInterpreter.h"
+#include "navigation/HeadingAnchor.h"
 #include <algorithm>
 namespace xfmd {
 namespace {
@@ -29,6 +30,7 @@ void Application::wireIndex() {
       scheduler->restart(4, 20, [this] { pollReferences(); });
   };
   preview->modelReady = [this, panel](ParseResult model) {
+    applyLinkAnchor(*model);
     references->cancel();
     panel->present(DocumentIndex::build(*model, session.view().path), session.view().path);
     if (pendingHeading) {
@@ -39,6 +41,17 @@ void Application::wireIndex() {
       window->editor->setSourceAnchor(anchor);
     }
   };
+}
+void Application::applyLinkAnchor(const SemanticDocument& model) {
+  if (!pendingLinkAnchor || !(pendingLinkAnchor->token == model.token))
+    return;
+  const auto fragment = std::move(pendingLinkAnchor->fragment);
+  pendingLinkAnchor.reset();
+  if (auto anchor = HeadingAnchor::find(model, fragment)) {
+    scrolling.restoreAnchor(*anchor);
+    window->editor->setSourceAnchor(*anchor);
+  } else
+    documents.error("Heading anchor not found: " + fragment);
 }
 void Application::pollReferences() {
   while (auto result = references->take())
@@ -59,6 +72,7 @@ void Application::openBrowser(const std::string& target, bool systemDefault) {
   }
 }
 void Application::activateIndex(const IndexAction& action) {
+  pendingLinkAnchor.reset();
   if (!action.error.empty()) {
     documents.error(action.error);
     return;

@@ -1,102 +1,109 @@
-# Mermaid-dekning i XFMD
+# Mermaid coverage in XFMD
 
-XFMD støtter **23 diagramfamilier gjennom avgrensede syntaksprofiler**.
-Dette dokumentet beskriver støtten i `main`. [Eksempelgalleriet](mermaid_evicence.md)
-inneholder 29 praktiske diagrammer som kan åpnes direkte i XFMD.
+The pre-Session0005 baseline documents **23 bounded diagram profiles**. The current
+working candidate adds a 24th: native use-case notation. The installed 0.7 binary
+has not been replaced. [N3c evidence](SDP/05--Implementation/SDL-Navigation/evidence/N3c-001/README.md)
+identifies the tested candidate; [the gallery](mermaid_evicence.md) retains the
+29 earlier practical examples.
 
-Alle familiene nedenfor har støtte gjennom hele kjeden: **tolkning, bevaring av
-modellens betydning, layout, SVG-preview og vektor-PDF**. Støtten gjelder de
-oppførte konstruksjonene, ikke hele Mermaid-språket. At rendererbiblioteket
-aksepterer annen syntaks, betyr ikke at XFMD støtter den.
+Coverage means interpretation, semantic preservation, layout, SVG preview and
+vector PDF for the listed constructs. It does not imply full Mermaid-language
+compatibility. Syntax accepted by the dependency is not automatically supported
+by XFMD. This English revision preserves the earlier profiles and adds N3c.
 
-## Scenarier, tilstander og modeller
+## Scenarios, states and models
 
-| Diagram / startlinje | Støttede konstruksjoner | Viktige begrensninger | Eksempel |
+| Diagram / header | Supported constructs | Important limits | Example |
 | --- | --- | --- | --- |
-| Flowchart — `flowchart LR` / `graph TD` | LR/RL/TD/TB/BT; rektangel, avrundet rektangel, beslutning og sirkel; etiketter, grupper, kjeder, sykluser, self-loops og parallelle kanter; solide, stiplete og tykke linjer | Begrenset formutvalg; ingen vilkårlig styling eller interaktive direktiver | [Ansvar og forbindelser](docs/design/mermaid/service-map.mmd) |
-| Sequence — `sequenceDiagram` | Participants/actors, alias, sync/reply/async-piler, aktivering, notater og nestede alt/else, opt, loop og par/and | Eksplisitte deltakere; balansert aktivitet ved grengrenser; ingen inline-aktivering, create/destroy, autonumber eller box | [APT-import](docs/design/mermaid/apt-import.mmd), [nestede forløp](docs/design/mermaid/sequence-nested.mmd) |
-| State — `stateDiagram-v2` | Start/slutt, navngitte tilstander, etiketterte overganger, sammensatte tilstander, choice, fork/join og samtidige regioner | Ingen state-notater, lokal retning eller styling; sammensatte tilstander bruker enklere native ruting | [Aktualitet](docs/design/mermaid/measurement-state.mmd), [regioner](docs/design/mermaid/state-regions.mmd), [forgrening](docs/design/mermaid/state-choice.mmd) |
-| Class — `classDiagram` | Navngitte typer, attributter, operasjoner, annotations, relasjonstekst, multipliciteter, arv, komposisjon, aggregasjon, avhengighet og realisering | Ingen namespace, generics, callbacks eller styling | [Metamodell](docs/design/mermaid/sdl-class.mmd) |
-| Requirement — `requirementDiagram` | Krav-ID/tekst, kravtyper, risk/verifymethod, elementer med type/docref; contains, copies, derives, satisfies, verifies, refines og traces | Mermaid-vokabular; ingen automatisk kobling til kjørende tester eller SDL-typekontroll | [APT-krav og testbidrag](docs/design/mermaid/apt-requirements.mmd) |
-| ER — `erDiagram` | Entiteter, attributter, PK/FK/UK, kommentarer, kardinaliteter og identifiserende/ikke-identifiserende relasjoner | Ingen alias, styling eller databaseutføring | [Proveniens](docs/design/mermaid/provenance-er.mmd) |
+| Use case — `usecase-beta` | Explicit actors, ellipse/rectangle use cases, one-level system boundaries, associations, include/extend and generalization; isolated declarations and Unicode labels | Bounded syntax, no notes/styles/icons/business variants; 128 identities and 512 records; explicit semantic endpoint checks | [Native notation](tests/fixtures/mermaid/usecase-native.mmd), [profile](docs/design/mermaid-usecase-authoring.md) |
+| Flowchart — `flowchart LR` / `graph TD` | LR/RL/TD/TB/BT; rectangle, rounded rectangle, decision and circle; labels, groups, chains, cycles, self-loops and parallel edges; solid, dotted and thick lines | Limited shapes; no arbitrary styling or interactive directives | [Responsibilities](docs/design/mermaid/service-map.mmd) |
+| Sequence — `sequenceDiagram` | Participants/actors, aliases, sync/reply/async arrows, activation, notes and nested alt/else, opt, loop and par/and | Explicit participants; balanced activity at branch boundaries; no inline activation, create/destroy, autonumber or box | [APT import](docs/design/mermaid/apt-import.mmd), [nested sequences](docs/design/mermaid/sequence-nested.mmd) |
+| State — `stateDiagram-v2` | Start/end, named states, labelled transitions, composite states, choice, fork/join and concurrent regions | No state notes, local direction or styling; composites use simpler native routing | [Freshness](docs/design/mermaid/measurement-state.mmd), [regions](docs/design/mermaid/state-regions.mmd), [branching](docs/design/mermaid/state-choice.mmd) |
+| Class — `classDiagram` | Named types, attributes, operations, annotations, relation text, multiplicities, inheritance, composition, aggregation, dependency and realization | No namespace, generics, callbacks or styling | [Metamodel](docs/design/mermaid/sdl-class.mmd) |
+| Requirement — `requirementDiagram` | Requirement ID/text, types, risk/verifymethod, elements with type/docref; contains, copies, derives, satisfies, verifies, refines and traces | Mermaid vocabulary; no automatic connection to running tests or SDL type checking | [APT requirements](docs/design/mermaid/apt-requirements.mmd) |
+| ER — `erDiagram` | Entities, attributes, PK/FK/UK, comments, cardinalities and identifying/non-identifying relations | No aliases, styling or database execution | [Provenance](docs/design/mermaid/provenance-er.mmd) |
 
-Hendelsesrekkefølge og fragmentomfang bevares i sekvensdiagrammer. Deltakere er
-ikke automatisk tråder, og asynkrone piler bestemmer ikke scheduling. State-diagrammer
-viser overgangene, men evaluerer ikke guards. Klasse- og ER-diagrammer beskriver
-relasjoner uten å kreve en objektorientert implementasjon eller en bestemt database.
-En tegnet `verifies`-relasjon er ikke bevis for bestått test. SDL/SDP-eksemplene
-illustrerer kandidatbegreper; XFMD gjør dem ikke til vedtatte språkregler.
+Sequence diagrams preserve event order and fragment scope. Participants are not
+automatically threads, and asynchronous arrows do not determine scheduling. State
+diagrams show transitions without evaluating guards. Class and ER diagrams do not
+require an object-oriented implementation or a particular database. A drawn
+`verifies` relation is not evidence of a passed test. SDL/SDP examples illustrate
+candidate concepts; XFMD does not turn them into adopted language rules.
 
-## Arkitektur
+## Architecture
 
-| Diagram / startlinje | Støttede konstruksjoner | Viktige begrensninger | Eksempel |
+| Diagram / header | Supported constructs | Important limits | Example |
 | --- | --- | --- | --- |
-| C4 — `C4Context`, `C4Container`, `C4Component` | Person/System/Container/Component, Db/Queue/_Ext-varianter, grenser, relasjoner med retning, navn, teknologi og beskrivelse | Ingen Dynamic/Deployment, styles, callbacks, eksterne ressurser eller navngitte argumenter; enkel native ruting | [Kontekst](docs/design/mermaid/c4-context.mmd), [containere](docs/design/mermaid/c4-container.mmd), [komponenter](docs/design/mermaid/c4-component.mmd) |
-| Architecture — `architecture-beta` | Grupper, services, junctions, L/R/T/B-tilkoblingssider og innebygde cloud/database/disk/internet/server-ikoner | Ingen nestede grupper, `{group}`-kanter, align eller eksterne ikonpakker | [Ressurser og tilkoblinger](docs/design/mermaid/architecture-resources.mmd) |
-| Block — `block-beta` | Kolonner, rektangulære celler, spans, mellomrom og enkle forbindelser | 1–16 kolonner; én deklarasjon per linje; ingen nestede blocks eller spesialformer | [Horisontale lag](docs/design/mermaid/block-layers.mmd) |
+| C4 — `C4Context`, `C4Container`, `C4Component` | Person/System/Container/Component, Db/Queue/_Ext variants, boundaries, directed relations, names, technology and description | No Dynamic/Deployment, styles, callbacks, external resources or named arguments; simple native routing | [Context](docs/design/mermaid/c4-context.mmd), [containers](docs/design/mermaid/c4-container.mmd), [components](docs/design/mermaid/c4-component.mmd) |
+| Architecture — `architecture-beta` | Groups, services, junctions, L/R/T/B connection sides and built-in cloud/database/disk/internet/server icons | No nested groups, `{group}` edges, align or external icon packages | [Resources](docs/design/mermaid/architecture-resources.mmd) |
+| Block — `block-beta` | Columns, rectangular cells, spans, spaces and simple connections | 1–16 columns; one declaration per line; no nested blocks or special shapes | [Horizontal layers](docs/design/mermaid/block-layers.mmd) |
 
-C4 passer systemgrenser og ansvar. Architecture viser ressurser og grafiske
-portretninger; Block viser eksplisitte lag og grid. Ingen av dem gir alene en
-full semantisk modell av SDL-Containere, porter eller Channels.
+C4 represents system boundaries and responsibilities. Architecture shows resources
+and graphical port directions; Block shows explicit layers and grids. None alone
+provides the complete semantics of SDL Containers, ports or Channels.
 
-## Encoding, planlegging og visualisering
+## Encoding, planning and visualization
 
-| Diagram / startlinje | Støttede konstruksjoner | Viktige begrensninger | Eksempel |
+| Diagram / header | Supported constructs | Important limits | Example |
 | --- | --- | --- | --- |
-| Packet — `packet` / `packet-beta` | Bit, start–slutt-bit, relative feltlengder og etiketter; proporsjonale feltbredder og 32-bit-rader | Maks 4096 bits / 128 felt; ingen overlapp eller init-direktiver | [Konkret wire-format](docs/design/mermaid/packet-encoding.mmd) |
-| Timeline — `timeline` | Tittel, seksjoner, perioder og ordnede hendelser, også videreførte hendelseslinjer | Kategorisk tid, ikke proporsjonal kalender | [Beslutningsforløp](docs/design/mermaid/timeline-decisions.mmd) |
-| Gantt — `gantt` | Tittel, seksjoner, task-ID, dato eller `after`, varighet og done/active/crit | YYYY-MM-DD, 1970–2100, 1–3650 hele dager, én tidligere avhengighet; ingen excludes eller milestones | [Dokumentasjonspilot](docs/design/mermaid/gantt-pilot.mmd) |
-| Journey — `journey` | Tittel, seksjoner, ordnede oppgaver, score og aktører | Score 1–5; ingen styling | [Dokumentgjennomgang](docs/design/mermaid/journey-review.mmd) |
-| Pie — `pie` / `pie showData` | Tittel, siterte kategorier og positive verdier | Maks 12 kategorier; ingen init eller styling | [Evidenskategorier](docs/design/mermaid/pie-evidence.mmd) |
-| Mindmap — `mindmap` | Innrykket tre med plain/rectangle/rounded/circle-noder | To mellomrom per nivå, én rot, maks åtte nivåer; ingen icons/classes | [Gjennomgang](docs/design/mermaid/mindmap-review.mmd) |
-| GitGraph — `gitGraph` | Commit med ID, branch, checkout/switch og merge; commit-foreldre bevares | LR-layout, eksplisitte commit-ID-er; ingen cherry-pick, order, tag eller type | [Forslag og review](docs/design/mermaid/gitgraph-proposal.mmd) |
-| Sankey — `sankey` / `sankey-beta` | Source/target/verdi, vektede strømmer og etiketter knyttet til egne bånd | Positive verdier, asyklisk graf, enkel CSV uten siterte felt | [Fordeling av forekomster](docs/design/mermaid/sankey-provenance.mmd) |
-| Quadrant — `quadrantChart` | Tittel, akseender, fire quadrant-navn og punkter | Koordinater 0–1; ingen punktstyling | [Prioriteringer](docs/design/mermaid/quadrant-priorities.mmd) |
-| ZenUML — `zenuml` | Deltakere, alias og asynkrone meldinger med `A->B: tekst` | Ingen synkrone kall, creation, replies eller kontrollblokker | [Observasjoner](docs/design/mermaid/zenuml-observation.mmd) |
-| Kanban — `kanban` | Kolonner og innrykkede kort med ID, tekst og kolonnetilhørighet | Ingen metadata, tickets, assignments eller styling | [Dokumentarbeid](docs/design/mermaid/kanban-review.mmd) |
-| Radar — `radar-beta` | Tittel, akser/alias, kurver, min/max og graticule | 3–12 akser, komplette posisjonelle verdier; ingen named values | [Illustrerte vurderinger](docs/design/mermaid/radar-quality.mmd) |
-| Treemap — `treemap-beta` | Innrykkede grupper og siterte blader med positive vekter | Maks åtte nivåer; foreldre har ingen egenverdi | [Illustrert innsats](docs/design/mermaid/treemap-effort.mmd) |
-| XYChart — `xychart-beta` | Tittel, kategorisk X-akse, Y-navn/område, bar- og line-serier | Vertikal orientering, 1–12 kategorier og komplette endelige tallserier | [Sammenligning](docs/design/mermaid/xychart-evidence.mmd) |
+| Packet — `packet` / `packet-beta` | Bits, start–end bit ranges, relative field lengths and labels; proportional widths and 32-bit rows | 4096 bits / 128 fields; no overlap or init directives | [Wire format](docs/design/mermaid/packet-encoding.mmd) |
+| Timeline — `timeline` | Title, sections, periods and ordered events, including continuation lines | Categorical time, not a proportional calendar | [Decisions](docs/design/mermaid/timeline-decisions.mmd) |
+| Gantt — `gantt` | Title, sections, task IDs, date or `after`, duration and done/active/crit | YYYY-MM-DD, 1970–2100, 1–3650 whole days, one earlier dependency; no excludes or milestones | [Documentation pilot](docs/design/mermaid/gantt-pilot.mmd) |
+| Journey — `journey` | Title, sections, ordered tasks, scores and actors | Scores 1–5; no styling | [Document review](docs/design/mermaid/journey-review.mmd) |
+| Pie — `pie` / `pie showData` | Title, quoted categories and positive values | 12 categories; no init or styling | [Evidence categories](docs/design/mermaid/pie-evidence.mmd) |
+| Mindmap — `mindmap` | Indented tree with plain/rectangle/rounded/circle nodes | Two spaces per level, one root, eight levels; no icons/classes | [Review](docs/design/mermaid/mindmap-review.mmd) |
+| GitGraph — `gitGraph` | Commits with IDs, branch, checkout/switch and merge; commit parents preserved | LR layout, explicit commit IDs; no cherry-pick, order, tag or type | [Proposal/review](docs/design/mermaid/gitgraph-proposal.mmd) |
+| Sankey — `sankey` / `sankey-beta` | Source/target/value, weighted flows and labels attached to their bands | Positive values, acyclic graph, simple CSV without quoted fields | [Occurrence distribution](docs/design/mermaid/sankey-provenance.mmd) |
+| Quadrant — `quadrantChart` | Title, axis ends, four quadrant names and points | Coordinates 0–1; no point styling | [Priorities](docs/design/mermaid/quadrant-priorities.mmd) |
+| ZenUML — `zenuml` | Participants, aliases and asynchronous messages using `A->B: text` | No synchronous calls, creation, replies or control blocks | [Observations](docs/design/mermaid/zenuml-observation.mmd) |
+| Kanban — `kanban` | Columns and indented cards with ID, text and column membership | No metadata, tickets, assignments or styling | [Document work](docs/design/mermaid/kanban-review.mmd) |
+| Radar — `radar-beta` | Title, axes/aliases, curves, min/max and graticule | 3–12 axes, complete positional values; no named values | [Illustrated assessments](docs/design/mermaid/radar-quality.mmd) |
+| Treemap — `treemap-beta` | Indented groups and quoted leaves with positive weights | Eight levels; parents have no independent value | [Illustrated effort](docs/design/mermaid/treemap-effort.mmd) |
+| XYChart — `xychart-beta` | Title, categorical X axis, Y name/range, bar and line series | Vertical orientation, 1–12 categories, complete finite number series | [Comparison](docs/design/mermaid/xychart-evidence.mmd) |
 
-Packet beskriver en faktisk encoding, ikke en abstrakt SDL Datagram-familie.
-Planleggings- og visualiseringsdiagrammer supplerer designmodellen.
+Packet describes a concrete encoding, not an abstract SDL Datagram family.
+Planning and visualization diagrams supplement the design model.
 
-## Felles støtte og grenser
+## Shared behavior and limits
 
-- Bruk et kodegjerde med første infotoken `mermaid`. Vanlige kodeblokker og `.txt`
-  forblir tekst. Ukjent syntaks, ugyldige referanser og overskredne grenser gir
-  lokal forklaring og bevart kildeblokk; resten av Markdown-dokumentet vises.
-- Vanlig Unicode-tekst støttes. Profilene tillater ikke vilkårlig HTML, CSS,
-  script, eksterne ressurser eller init-direktiver. Kjøring fungerer offline,
-  uten Node, nettleser eller rutertjeneste.
-- Lys/mørk modus og lesefarger virker i preview. Kategorifarger beholdes der de
-  skiller dataserier eller grupper. Zoom og endret vindusbredde bevarer sideforhold.
-- PDF bruker samme SVG med vektorgeometri og tekst. Store diagrammer skaleres ned
-  til tilgjengelig sideplass og kan bli små på A4. Tekst inne i diagrammer kan
-  foreløpig ikke merkes separat i preview; kilden kan kopieres fra editoren.
-- Maks 64 KiB kilde per diagram, 64 diagrammer per dokument, 8 MiB per scene og
-  64 MiB samlet scenesvar. Flowcharts har maks 128 noder, 512 kanter, 32 grupper
-  og gruppedybde åtte. Sekvenser har maks 16 deltakere, 128 hendelser og åtte
-  fragmentnivåer. Andre familiespesifikke grenser står i profilveiledningene.
-- Layout har kooperativt tidsbudsjett; det er ikke en hard tidsgrense.
-  Plassmangel eller rutefeil gir synlig fallback. Konkurrerende Libavoid-porter
-  kan gi ulike gyldige ruter; byteidentisk SVG er ikke garantert.
-- Flowcharts bruker Libavoid for ortogonal ruting, med Legacy som eksplisitt
-  alternativ. Kryssinger er tillatt; valgfrie kryssingsbuer og etikettpekere er
-  presentasjon. Sammensatte state-diagrammer og C4 har enklere native ruting.
+- Use a code fence whose first info token is `mermaid`, or open a standalone
+  `.mmd`/`.mermaid` file. Ordinary code blocks and `.txt` remain text. Unknown
+  syntax, invalid references and exceeded limits produce a local explanation with
+  preserved source; the rest of the Markdown document remains visible.
+- Plain Unicode is supported. Profiles do not allow arbitrary HTML, CSS, scripts,
+  external resources or init directives. Rendering works offline without Node,
+  a browser or a routing service.
+- Preview supports light/dark mode and reading colors. Category colors remain
+  where they distinguish data series or groups. Zoom and window resizing preserve
+  aspect ratio.
+- PDF uses the same SVG with vector geometry and text. Large diagrams shrink to
+  available page space and may be small on A4. Diagram text cannot currently be
+  selected separately in preview; source can be copied from the editor.
+- Limits: 64 KiB source per diagram, 64 diagrams per document, 8 MiB per scene and
+  64 MiB combined scene response. Flowcharts: 128 nodes, 512 edges, 32 groups and
+  group depth eight. Sequences: 16 participants, 128 events and eight fragment
+  levels. Other family limits are in the profile guides.
+- Layout uses a cooperative time budget, not a hard deadline. Lack of space or
+  routing errors produce visible fallback. Competing Libavoid ports can produce
+  different valid routes; byte-identical SVG is not guaranteed.
+- Flowcharts use Libavoid orthogonal routing, with Legacy as an explicit option.
+  Crossings are allowed; optional crossing arcs and label leaders are presentation.
+  Composite state diagrams and C4 use simpler native routing. Use-case diagrams
+  use Libavoid with or without boundaries and preserve explicit relation kinds.
 
-## Detaljer og bruk
+## Detailed profiles
 
-Profiler: [Flowchart](docs/design/mermaid-integration.md#2-profil-xfmd-flowchart-1),
+[Flowchart](docs/design/mermaid-integration.md#2-profil-xfmd-flowchart-1),
 [Sequence](docs/design/mermaid-sequence-authoring.md),
 [State/Class/Requirement/ER](docs/design/mermaid-semantic-authoring.md),
-[arkitektur](docs/design/mermaid-architecture-authoring.md),
-[encoding og planlegging](docs/design/mermaid-planning-authoring.md),
-[øvrige visualiseringer](docs/design/mermaid-broad-authoring.md).
-Den låste bibliotekversjonen står i [avhengighetsmanifestet](cmake/mermaid-source.json).
-Typer eller konstruksjoner som ikke er oppført her, regnes ikke som støttet.
+[Use case](docs/design/mermaid-usecase-authoring.md),
+[Architecture](docs/design/mermaid-architecture-authoring.md),
+[Encoding/planning](docs/design/mermaid-planning-authoring.md),
+[Other visualizations](docs/design/mermaid-broad-authoring.md).
+The pinned dependency is in the [source manifest](cmake/mermaid-source.json).
+Unlisted types or constructs are not claimed as supported.
 
-Åpne hele galleriet fra build-mappen:
+Open the gallery from the build directory:
 
 ```sh
 ./xfmd ../mermaid_evicence.md

@@ -1,0 +1,53 @@
+VP06 — Activities and delivery plan
+Revision:
+e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007.
+refines, addresses, delivers and depends-on; status is an explicit source claim.
+
+Scope and notation
+All declared Activities are retained, including isolated activities. Refines points from
+detailed to abstract activity; depends-on points from dependent activity to its explicit
+prerequisite. Decomposition and prerequisites are separate diagrams. Neither
+relation inherits status or dependencies. No dates, durations, execution order or
+calendar schedule are inferred.
+Implementation status is a source claim, not test evidence or owner acceptance.
+Addresses models Functionality coverage; delivers models a Feature contribution, not
+complete delivery; illustrates links an example Scenario, not an executed test.
+No Activities are declared. No delivery plan is inferred from Features, files or KanBan.
+No activity prerequisites are declared. This does not prove independence.
+No activity responsibility coverage is declared.
+No activity Feature contributions are declared.
+No illustrative Scenarios are linked to activities.
+
+Functionality without activity coverage
+This lists missing addresses relations in the model, not unimplemented native code.
+• ApplicationIdentity
+• ApplicationPreferences
+• BuildIdentity
+• DiagramLayout
+• DiagramPreparation
+
+• DocumentIndex
+• DocumentSession
+• EmbeddedVisuals
+• EventScheduling
+• FilteredFileTree
+• FoxPresentation
+• GeneratedDocumentNavigation
+• LocalFileStorage
+• MarkdownInterpretation
+• MermaidInterpretation
+• NavigationHistory
+• PageComposition
+• PdfExport
+• PreviewPipeline
+• PreviewTextSelection
+• RenderLayout
+• ScrollMotion
+• SdpProjectNavigation
+• SourceAnchorMapping
+• TextEditing
+• TypographyAndDrawing
+• WorkPathHistory
+• WorkspaceControls
+
+

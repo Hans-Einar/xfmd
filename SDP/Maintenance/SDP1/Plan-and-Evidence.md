@@ -32,7 +32,7 @@ verification or build is claimed for this documentation/process delivery.
 
 ## Handoff
 
-[KB-XFMD-017](../../KanBan/backlog/%23017--Proposal--Adopt-SDP-and-model-XFMD.md)
+[KB-XFMD-017](../../KanBan/active/%23017--Proposal--Adopt-SDP-and-model-XFMD.md)
 owns full process adoption and .design models. Requirements/architecture/blueprints
 and sprint evidence stay authoritative during that work. Native sidebar/preview
 features remain separately tracked. No runtime discovery metadata is invented.

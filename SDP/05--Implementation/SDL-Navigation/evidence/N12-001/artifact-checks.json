@@ -1,0 +1,14 @@
+{
+  "actualEncodings": 0,
+  "actualVariants": 0,
+  "actualDiagrams": 0,
+  "fixturePackets": 2,
+  "fixtureBitsPerPacket": 29,
+  "fixtureFieldsPerPacket": 3,
+  "fixtureSourceSpansInBounds": 34,
+  "sixPlacementSpansExact": true,
+  "legacyDetailPacketUnchanged": true,
+  "pdfTextContainsAllFieldNames": true,
+  "visualLimitation": "KB020: narrow 1-bit PacketFlag label clipped and adjacent 12/13 boundary labels crowded in native/PDF. Full source-linked register remains readable. PDF text extraction is not proof of visible diagram-label completeness.",
+  "generalVisualAcceptance": false
+}

@@ -1,0 +1,9 @@
+ProjectManagement: 227 readable records; unique event IDs
+Traceability: 20 readable records; unique event IDs
+New management predecessor and traceability management link resolve; historical records not rewritten.
+Candidate product hashes match committed producer files.
+OK: 38 blueprints, 75 requirements; metadata, matrix, plumbing and local file links checked.
+Not checked: external links, heading anchors, actual C++ call graph or application behavior.
+
+OK: 308 implemented plumbing callees found; caller semantics require review
+

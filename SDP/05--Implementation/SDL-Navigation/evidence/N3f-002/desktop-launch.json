@@ -1,0 +1,10 @@
+{
+  "pid": 381022,
+  "display": ":0",
+  "xfmd": "/home/warloc/git/xfmd-sdl-navigation/build-ui/xfmd",
+  "producer": "/tmp/xfmd-n3e-sdptool",
+  "previous_windows_preserved": true,
+  "running_at_closeout": false,
+  "previous_development_pid": 355181,
+  "note": "Launch was attempted; the new process had exited when checked. Log was empty. Cause not established; previous development window remains and was not terminated."
+}

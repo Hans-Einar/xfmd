@@ -1,0 +1,1046 @@
+VP07 — Features across the
+architecture
+Revision:
+e2a2f39e5c78476bb1bba08e406114367eb59953f02a63e952e435c880d24007.
+contributes-to, owns and explicit allocated-to per mode. Unspecified allocation is
+reported as a gap.
+
+Complete logical architecture and feature
+realization — mode NormalDesktop
+contains
+
+DocumentIndexService (unit) | owns: F01 F04
+
+contains
+
+DocumentStorage (unit) | owns: F03 F06
+
+contains
+
+Documents (unit) | owns: F02 F03 F05 F06 F08
+
+contains
+
+EventLoop (unit) | owns: F05
+
+contains
+
+GeneratedViews (unit)
+
+contains
+
+Identity (unit)
+
+contains
+
+NativeShell (unit) | owns: F01 F02 F03 F04 F05 F06 F07 F08 F09 F10
+
+contains
+
+Navigation (unit) | owns: F01 F03 F04
+
+Application (unit)
+contains
+contains
+
+contains
+Preferences (unit) | owns: F02 F03 F04 F08
+
+XfmdDesktop (container) | allocated-to: F01 F02 F03 F04 F05 F06 F07 F08 F09 F10
+
+contains
+
+Interpreter (unit) | owns: F05 F06 F07 F08
+Preview (unit) | owns: F05 F06 F07 F08
+
+contains
+Renderer (unit) | owns: F05 F06 F07 F08 F09
+contains
+Publication (unit) | owns: F07 F08
+
+contains
+SdpProjects (unit)
+
+contains
+Typography (unit) | owns: F06 F07 F08
+
+contains
+Viewport (unit) | owns: F01 F02 F03 F04 F08 F09
+
+contains
+VisualResources (unit) | owns: F06 F07
+
+contains
+Workspace (unit) | owns: F10
+
+ExternalLauncher (unit)
+
+ExternalViewBroker (unit)
+
+ExternalViewGenerator (unit)
+
+Source facts: f0019, f0020, f0021, f0022, f0023, f0024, f0025, f0026, f0027, f0028,
+f0029, f0030, f0031, f0032, f0033, f0034, f0046, f0047, f0049, f0050, f0051, f0129,
+f0130, f0135, f0136, f0176, f0177, f0178, f0181, f0207, f0208, f0209, f0210, f0211,
+f0222, f0232, f0233, f0274, f0275, f0276, f0280, f0281, f0349, f0350, f0351, f0352,
+f0353, f0354, f0355, f0356, f0357, f0358, f0484, f0485, f0523, f0524, f0525, f0531,
+f0532, f0533, f0534, f0535, f0539, f0540, f0544, f0545, f0576, f0587, f0588, f0589,
+f0590, f0600, f0601, f0602, f0603, f0625, f0626, f0627, f0652, f0687, f0688, f0717,
+f0718, f0719, f0720, f0721, f0740, f0741, f0742, f0747, f0837, f0838, f0839, f0840,
+f0841, f0842, f0844, f0845, f0846, f0889, f0890, f0891, f0907, f0908, f0909, f0910,
+f0911, f0912, f0913, f0936, f0937, f0938, f0944, f0946, f0947, f0948, f0949, f0965,
+f0966, f0983, f0984, f0996, f0997, f0999, f1000, f1013, f1014, f1015, f1016, f1017,
+f1018, f1019, f1020, f1022, f1031, f1032, f1033.
+
+Scope and notation
+All declared Systems, containers and units form the logical architecture base,
+including isolated declarations. Rectangles show the complete structural base with
+contains edges. Feature keys annotate logical owners (owns) and selected-mode
+containers (allocated-to), derived only through explicit Functionality contribution paths.
+Rounded standalone Features have no represented placement. These annotations are
+not new direct SDL relations. This is decomposition and responsibility, not an inferred
+deployment or call graph.
+Selected mode: NormalDesktop. Only this mode's explicit allocated-to facts inform
+placement annotations. Ownership does not imply allocation; missing placement is
+reported below.
+
+Feature legend
+Key
+
+Feature
+
+F01
+
+ChapterNavigation
+
+F02
+
+ConfigurableScrolling
+
+F03
+
+DocumentNavigation
+
+F04
+
+DocumentReferences
+
+F05
+
+LivePreview
+
+F06
+
+MarkdownPresentation
+
+F07
+
+MermaidDiagrams
+
+F08
+
+PagedPublication
+
+F09
+
+SynchronizedScrolling
+
+F10
+
+WorkPathNavigation
+
+Feature contributions
+Feature
+
+Functionality
+
+Logical owner
+
+Allocation in
+
+Source facts
+
+selected scope
+ChapterNa
+
+DocumentIndex
+
+vigation
+
+DocumentIndex
+Service
+
+ChapterNa
+
+NavigationHisto
+
+vigation
+
+ry
+
+ChapterNa
+
+SourceAnchorM
+
+vigation
+
+apping
+
+ChapterNa
+
+WorkspaceCont
+
+vigation
+
+rols
+
+Navigation
+
+f0176
+XfmdDesktop
+
+Viewport
+
+XfmdDesktop
+
+NativeShell
+
+f0908, f0966,
+
+XfmdDesktop
+
+f1014, f0545,
+f1013
+
+XfmdDesktop
+
+f0047, f0652,
+f0046
+
+Configurab FoxPresentation NativeShell
+
+XfmdDesktop
+
+leScrolling
+
+leScrolling
+
+f0588, f0576,
+
+f0907
+
+rences
+
+Configurab ScrollMotion
+
+f0177, f0181,
+
+f0587
+
+Configurab ApplicationPrefe Preferences
+leScrolling
+
+XfmdDesktop
+
+f0352, f0544,
+f0351
+
+Viewport
+
+XfmdDesktop
+
+f0890, f0965,
+f0889
+
+Configurab SourceAnchorM
+leScrolling
+
+Viewport
+
+XfmdDesktop
+
+apping
+
+Configurab TextEditing
+
+f0907
+Documents
+
+XfmdDesktop
+
+leScrolling
+NativeShell
+
+leScrolling
+
+rols
+
+Document
+
+ApplicationPrefe Preferences
+
+Navigation
+
+rences
+
+Document
+
+DocumentSessi
+
+Navigation
+
+on
+
+Document
+
+FoxPresentation NativeShell
+
+XfmdDesktop
+
+XfmdDesktop
+
+f0046
+Documents
+
+XfmdDesktop
+
+f0208, f0232,
+f0207
+
+LocalFileStorage DocumentStora
+
+XfmdDesktop
+
+XfmdDesktop
+
+ge
+
+Document
+
+NavigationHisto
+
+Navigation
+
+ry
+
+Document
+
+SourceAnchorM
+
+Navigation
+
+apping
+
+Document
+
+WorkspaceCont
+
+Navigation
+
+rols
+
+Document
+
+ApplicationPrefe Preferences
+
+f0353, f0544,
+
+Navigation
+
+DocumentIndex
+
+References
+
+XfmdDesktop
+
+Viewport
+
+XfmdDesktop
+
+References apping
+
+f0910, f0966,
+f0907
+
+NativeShell
+
+XfmdDesktop
+
+f1016, f0545,
+f1013
+
+XfmdDesktop
+
+f0050, f0652,
+f0046
+
+DocumentIndex
+
+XfmdDesktop
+
+Navigation
+
+f0178, f0181,
+f0176
+
+XfmdDesktop
+
+References ry
+SourceAnchorM
+
+f0589, f0576,
+f0587
+
+Service
+NavigationHisto
+
+f0524, f0222,
+f0523
+
+References rences
+
+Document
+
+f0049, f0652,
+
+f0351
+
+Navigation
+
+Document
+
+f1015, f0545,
+f1013
+
+Navigation
+
+Document
+
+f0937, f0233,
+f0936
+
+Configurab WorkspaceCont
+
+Document
+
+f0909, f0966,
+
+f0590, f0576,
+f0587
+
+Viewport
+
+XfmdDesktop
+
+f0911, f0966,
+f0907
+
+Document
+
+WorkspaceCont
+
+NativeShell
+
+XfmdDesktop
+
+References rols
+
+f1013
+
+LivePrevie
+
+DocumentSessi
+
+w
+
+on
+
+LivePrevie
+
+EventScheduling EventLoop
+
+Documents
+
+XfmdDesktop
+
+XfmdDesktop
+
+FoxPresentation NativeShell
+
+XfmdDesktop
+
+f0354, f0544,
+f0351
+
+LivePrevie
+
+MarkdownInter
+
+w
+
+pretation
+
+LivePrevie
+
+PreviewPipeline
+
+Interpreter
+
+XfmdDesktop
+
+f0532, f0484,
+f0531
+
+Preview
+
+XfmdDesktop
+
+w
+
+f0718, f0687,
+f0717
+
+RenderLayout
+
+Renderer
+
+XfmdDesktop
+
+w
+LivePrevie
+
+f0281, f0276,
+f0280
+
+w
+
+LivePrevie
+
+f0209, f0232,
+f0207
+
+w
+LivePrevie
+
+f1017, f0545,
+
+f0838, f0846,
+f0837
+
+TextEditing
+
+Documents
+
+XfmdDesktop
+
+w
+
+f0938, f0233,
+f0936
+
+Markdown
+
+DocumentSessi
+
+Presentati
+
+on
+
+Documents
+
+XfmdDesktop
+
+f0210, f0232,
+f0207
+
+on
+Markdown
+
+EmbeddedVisua
+
+Presentati
+
+ls
+
+VisualResources
+
+XfmdDesktop
+
+f0275, f0984,
+f0274
+
+on
+Markdown
+
+FoxPresentation NativeShell
+
+XfmdDesktop
+
+Presentati
+
+f0355, f0544,
+f0351
+
+on
+Markdown
+Presentati
+on
+
+LocalFileStorage DocumentStora
+ge
+
+XfmdDesktop
+
+f0525, f0222,
+f0523
+
+Markdown
+
+MarkdownInter
+
+Presentati
+
+pretation
+
+Interpreter
+
+XfmdDesktop
+
+f0533, f0484,
+f0531
+
+on
+Markdown
+
+PageCompositio Renderer
+
+Presentati
+
+n
+
+XfmdDesktop
+
+f0601, f0845,
+f0600
+
+on
+Markdown
+
+PreviewPipeline
+
+Preview
+
+XfmdDesktop
+
+Presentati
+
+f0719, f0687,
+f0717
+
+on
+Markdown
+
+PreviewTextSele Preview
+
+Presentati
+
+ction
+
+XfmdDesktop
+
+f0741, f0688,
+f0740
+
+on
+Markdown
+
+RenderLayout
+
+Renderer
+
+XfmdDesktop
+
+Presentati
+
+f0839, f0846,
+f0837
+
+on
+Markdown
+
+TypographyAnd
+
+Presentati
+
+Drawing
+
+Typography
+
+XfmdDesktop
+
+f0947, f0944,
+f0946
+
+on
+Markdown
+
+WorkspaceCont
+
+Presentati
+
+rols
+
+NativeShell
+
+XfmdDesktop
+
+f1018, f0545,
+f1013
+
+on
+MermaidDi DiagramLayout
+
+Renderer
+
+XfmdDesktop
+
+agrams
+
+f0129
+
+MermaidDi DiagramPrepar
+agrams
+
+VisualResources
+
+XfmdDesktop
+
+ation
+
+f0136, f0983,
+f0135
+
+MermaidDi FoxPresentation NativeShell
+
+XfmdDesktop
+
+agrams
+
+f0356, f0544,
+f0351
+
+MermaidDi MarkdownInter
+agrams
+
+f0130, f0844,
+
+pretation
+
+Interpreter
+
+XfmdDesktop
+
+f0534, f0484,
+f0531
+
+MermaidDi MermaidInterpr
+agrams
+
+Interpreter
+
+etation
+XfmdDesktop
+
+n
+
+MermaidDi PdfExport
+
+Publication
+
+XfmdDesktop
+
+Preview
+
+XfmdDesktop
+
+agrams
+XfmdDesktop
+
+ction
+
+MermaidDi RenderLayout
+
+Renderer
+
+XfmdDesktop
+
+Typography
+
+XfmdDesktop
+
+Drawing
+XfmdDesktop
+
+rences
+
+PagedPubli DocumentSessi
+
+f0051, f0652,
+f0046
+
+Documents
+
+XfmdDesktop
+
+on
+
+f0211, f0232,
+f0207
+
+PagedPubli FoxPresentation NativeShell
+
+XfmdDesktop
+
+cation
+
+f0357, f0544,
+f0351
+
+PagedPubli MarkdownInter
+
+Interpreter
+
+XfmdDesktop
+
+pretation
+XfmdDesktop
+
+n
+
+PagedPubli PdfExport
+
+f0603, f0845,
+f0600
+
+Publication
+
+XfmdDesktop
+
+cation
+PagedPubli PreviewPipeline
+
+f0535, f0484,
+f0531
+
+PagedPubli PageCompositio Renderer
+
+cation
+
+f0948, f0944,
+f0946
+
+PagedPubli ApplicationPrefe Preferences
+
+cation
+
+f0840, f0846,
+f0837
+
+MermaidDi TypographyAnd
+
+cation
+
+f0742, f0688,
+f0740
+
+agrams
+
+cation
+
+f0720, f0687,
+f0717
+
+MermaidDi PreviewTextSele Preview
+
+cation
+
+f0626, f0747,
+f0625
+
+MermaidDi PreviewPipeline
+
+agrams
+
+f0602, f0845,
+f0600
+
+agrams
+
+agrams
+
+f0540, f0485,
+f0539
+
+MermaidDi PageCompositio Renderer
+agrams
+
+XfmdDesktop
+
+f0627, f0747,
+f0625
+
+Preview
+
+XfmdDesktop
+
+f0721, f0687,
+f0717
+
+PagedPubli RenderLayout
+
+Renderer
+
+XfmdDesktop
+
+cation
+
+f0837
+
+PagedPubli SourceAnchorM
+cation
+
+Viewport
+
+XfmdDesktop
+
+apping
+
+PagedPubli TypographyAnd
+cation
+
+Typography
+
+XfmdDesktop
+
+NativeShell
+
+rols
+
+Synchroniz
+
+FoxPresentation NativeShell
+
+XfmdDesktop
+
+XfmdDesktop
+
+RenderLayout
+
+Renderer
+
+XfmdDesktop
+
+ScrollMotion
+
+Viewport
+
+XfmdDesktop
+
+f0891, f0965,
+f0889
+
+SourceAnchorM
+
+Viewport
+
+XfmdDesktop
+
+edScrolling apping
+WorkspaceCont
+
+WorkPathN FilteredFileTree
+
+f0913, f0966,
+f0907
+
+NativeShell
+
+XfmdDesktop
+
+edScrolling rols
+
+f1020, f0545,
+f1013
+
+Workspace
+
+XfmdDesktop
+
+avigation
+
+f0350, f0999,
+f0349
+
+WorkPathN WorkPathHistor
+
+Workspace
+
+XfmdDesktop
+
+y
+
+WorkPathN WorkspaceCont
+avigation
+
+f0842, f0846,
+f0837
+
+edScrolling
+
+avigation
+
+f0358, f0544,
+f0351
+
+edScrolling
+
+Synchroniz
+
+f1019, f0545,
+f1013
+
+edScrolling
+
+Synchroniz
+
+f0949, f0944,
+f0946
+
+cation
+
+Synchroniz
+
+f0912, f0966,
+f0907
+
+Drawing
+
+PagedPubli WorkspaceCont
+
+Synchroniz
+
+f0841, f0846,
+
+rols
+
+f0997, f1000,
+f0996
+
+NativeShell
+
+XfmdDesktop
+
+f1022, f0545,
+f1013
+
+

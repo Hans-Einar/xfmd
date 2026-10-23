@@ -1,0 +1,8 @@
+flowchart LR
+    n_DocumentIndexService["DocumentIndexService (unit)"]
+    n_Interpreter["Interpreter (unit)"]
+    n_ReferenceInterpretation["ReferenceInterpretation (channel)"]
+    n_ReferenceInterpretation -->|receiver| n_DocumentIndexService
+    n_DocumentIndexService -->|sender| n_ReferenceInterpretation
+    n_ReferenceInterpretation -->|receiver| n_Interpreter
+    n_Interpreter -->|sender| n_ReferenceInterpretation

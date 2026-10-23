@@ -1,0 +1,10 @@
+flowchart LR
+    n_ChapterNavigation["ChapterNavigation (feature)"]
+    n_DocumentIndex["DocumentIndex (functionality)"]
+    n_NavigationHistory["NavigationHistory (functionality)"]
+    n_SourceAnchorMapping["SourceAnchorMapping (functionality)"]
+    n_WorkspaceControls["WorkspaceControls (functionality)"]
+    n_DocumentIndex -->|contributes-to| n_ChapterNavigation
+    n_NavigationHistory -->|contributes-to| n_ChapterNavigation
+    n_SourceAnchorMapping -->|contributes-to| n_ChapterNavigation
+    n_WorkspaceControls -->|contributes-to| n_ChapterNavigation

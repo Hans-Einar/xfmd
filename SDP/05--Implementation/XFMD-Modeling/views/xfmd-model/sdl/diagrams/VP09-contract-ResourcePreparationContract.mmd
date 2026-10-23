@@ -1,0 +1,12 @@
+flowchart LR
+    n_CacheCompatibleScene["CacheCompatibleScene (message)"]
+    n_PrepareDiagramScenes["PrepareDiagramScenes (message)"]
+    n_PrepareEmbeddedResources["PrepareEmbeddedResources (message)"]
+    n_PrepareExportResources["PrepareExportResources (message)"]
+    n_PrepareTypedDiagram["PrepareTypedDiagram (message)"]
+    n_ResourcePreparationContract["ResourcePreparationContract (contract)"]
+    n_ResourcePreparationContract -->|permits| n_CacheCompatibleScene
+    n_ResourcePreparationContract -->|permits| n_PrepareDiagramScenes
+    n_ResourcePreparationContract -->|permits| n_PrepareEmbeddedResources
+    n_ResourcePreparationContract -->|permits| n_PrepareExportResources
+    n_ResourcePreparationContract -->|permits| n_PrepareTypedDiagram

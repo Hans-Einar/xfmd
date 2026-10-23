@@ -1,0 +1,6 @@
+flowchart LR
+    n_GeneratedIntents["GeneratedIntents (channel)"]
+    n_GeneratedViews["GeneratedViews (unit)"]
+    n_NativeShell["NativeShell (unit)"]
+    n_GeneratedIntents -->|receiver| n_GeneratedViews
+    n_NativeShell -->|sender| n_GeneratedIntents

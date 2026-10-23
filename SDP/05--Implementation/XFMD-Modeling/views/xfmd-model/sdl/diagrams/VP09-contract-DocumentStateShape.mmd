@@ -1,0 +1,12 @@
+flowchart LR
+    n_DocumentBytes["DocumentBytes (field)"]
+    n_DocumentIdentity["DocumentIdentity (field)"]
+    n_DocumentPath["DocumentPath (field)"]
+    n_DocumentRevision["DocumentRevision (field)"]
+    n_DocumentStateShape["DocumentStateShape (contract)"]
+    n_SavedBaselineBytes["SavedBaselineBytes (field)"]
+    n_DocumentStateShape -->|has-field| n_DocumentBytes
+    n_DocumentStateShape -->|has-field| n_DocumentIdentity
+    n_DocumentStateShape -->|has-field| n_DocumentPath
+    n_DocumentStateShape -->|has-field| n_DocumentRevision
+    n_DocumentStateShape -->|has-field| n_SavedBaselineBytes

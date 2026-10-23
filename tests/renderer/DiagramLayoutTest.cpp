@@ -10,11 +10,79 @@
 #include <fstream>
 #include <iostream>
 using namespace xfmd;
+#include "PacketLayoutChecks.h"
 void run() {
   std::cout << std::unitbuf;
   MermaidInterpreter parser;
   MermaidDiagramLayout layout;
   SharedTextMetrics metrics;
+  checkPacketLayout(parser, layout, metrics);
+  CHECK(!parser.parse({"usecase-beta\nA(\"---\")", {}}).model);
+  std::ifstream useCaseFile(XFMD_USECASE_FIXTURE);
+  auto useCase = parser.parse({std::string((std::istreambuf_iterator<char>(useCaseFile)), {}), {}});
+  CHECK(useCase.model && useCase.model->semantic);
+  CHECK(useCase.model->semantic->family == DiagramFamily::UseCase);
+  auto useCaseScene = layout.layout(*useCase.model, {}, metrics);
+  CHECK(useCaseScene->svg.find("usecase-actor") != std::string::npos);
+  CHECK(useCaseScene->svg.find("usecase-ellipse") != std::string::npos);
+  for (const auto* label : {"Reader", "Editor", "Independent", "Document viewer", "include", "extend"})
+    CHECK(useCaseScene->svg.find(label) != std::string::npos);
+  for (int i = 0; i < 7; ++i)
+    CHECK(useCaseScene->svg.find("id=\"edge-" + std::to_string(i) + "\"") != std::string::npos);
+  if (const char* directory = std::getenv("XFMD_DIAGRAM_EVIDENCE"))
+    std::ofstream(std::string(directory) + "/usecase.svg") << useCaseScene->svg;
+  auto separateBoundaries = parser.parse({"usecase-beta\ndirection LR\nactor A(\"Reviewer – Åse\")\n"
+      "systemBoundary First\nX(Inspect)\nend\nsystemBoundary Second\nY[Summary]\nend\nA --> X\nX --> Y", {}});
+  CHECK(separateBoundaries.model);
+  auto separateScene = layout.layout(*separateBoundaries.model, {}, metrics);
+  for (const auto* label : {"First", "Second", "Åse", "Inspect", "Summary"})
+    CHECK(separateScene->svg.find(label) != std::string::npos);
+  auto unbounded = parser.parse({"usecase-beta\nactor A\nB(Task)\nB <-- A\nB ..> : include C", {}});
+  CHECK(unbounded.model);
+  CHECK(layout.layout(*unbounded.model, {}, metrics)->diagnostics.find("libavoid transaction") != std::string::npos);
+  // The original VP07 graph needs a bounded fresh-placement retry in Libavoid.
+  std::ifstream vp07File(XFMD_VP07_FIXTURE);
+  auto vp07 = parser.parse({std::string((std::istreambuf_iterator<char>(vp07File)), {}), {}});
+  CHECK(vp07.model && vp07.model->nodes.size() == 12 && vp07.model->edges.size() == 18);
+  auto vp07Scene = layout.layout(*vp07.model, {}, metrics);
+  CHECK(vp07Scene->nodes.size() == 12 && vp07Scene->edges.size() == 18);
+  CHECK(vp07Scene->diagnostics.find("Libavoid") == 0);
+  for (std::size_t i = 0; i < vp07.model->edges.size(); ++i)
+    CHECK(vp07Scene->svg.find("id=\"edge-" + std::to_string(i) + "\"") != std::string::npos);
+  for (const auto& node : vp07.model->nodes)
+    CHECK(vp07Scene->svg.find(node.label) != std::string::npos);
+  if (const char* directory = std::getenv("XFMD_DIAGRAM_EVIDENCE"))
+    std::ofstream(std::string(directory) + "/vp07.svg") << vp07Scene->svg;
+  // The owner-reported second VP07 case must retain every edge and label.
+  std::ifstream referenceFile(XFMD_VP07_REFERENCES_FIXTURE);
+  auto reference = parser.parse({std::string((std::istreambuf_iterator<char>(referenceFile)), {}), {}});
+  CHECK(reference.model && reference.model->nodes.size() == 12 && reference.model->edges.size() == 15);
+  auto referenceScene = layout.layout(*reference.model, {}, metrics);
+  CHECK(referenceScene->nodes.size() == 12 && referenceScene->edges.size() == 15);
+  for (std::size_t i = 0; i < reference.model->edges.size(); ++i)
+    CHECK(referenceScene->svg.find("id=\"edge-" + std::to_string(i) + "\"") != std::string::npos);
+  for (const auto& node : reference.model->nodes)
+    CHECK(referenceScene->svg.find(node.label) != std::string::npos);
+  if (const char* directory = std::getenv("XFMD_DIAGRAM_EVIDENCE"))
+    std::ofstream(std::string(directory) + "/document-references.svg") << referenceScene->svg;
+  // A caption must stay associated with its owner after obstacle rerouting.
+  std::ifstream chapterFile(XFMD_VP07_CHAPTER_FIXTURE);
+  auto chapter = parser.parse({std::string((std::istreambuf_iterator<char>(chapterFile)), {}), {}});
+  CHECK(chapter.model && chapter.model->nodes.size() == 10 && chapter.model->edges.size() == 12);
+  auto chapterScene = layout.layout(*chapter.model, {}, metrics);
+  CHECK(chapterScene->nodes.size() == 10 && chapterScene->edges.size() == 12);
+  for (std::size_t i = 0; i < chapter.model->edges.size(); ++i)
+    CHECK(chapterScene->svg.find("id=\"edge-" + std::to_string(i) + "\"") != std::string::npos);
+  for (const auto& node : chapter.model->nodes)
+    CHECK(chapterScene->svg.find(node.label) != std::string::npos);
+  if (const char* directory = std::getenv("XFMD_DIAGRAM_EVIDENCE"))
+    std::ofstream(std::string(directory) + "/chapter-navigation.svg") << chapterScene->svg;
+  // Independent nested SDUI rows need not return in declaration order.
+  auto composition = parser.parse({"flowchart TB\nsubgraph root [Page]\nsubgraph row1 [First]\nsubgraph a [Inputs]\nA[Name]\nB[Save]\nend\nend\nsubgraph row2 [Second]\nsubgraph b [Hidden]\nC[Other]\nend\nend\nend", {}});
+  CHECK(composition.model);
+  auto compositionScene = layout.layout(*composition.model, {}, metrics);
+  CHECK(compositionScene->groups.size() == 5);
+  CHECK(compositionScene->labels.front().text == "Page");
   for (const auto* name : {"apt-import", "sequence-fragments", "sequence-nested"}) {
     std::ifstream file(std::string(XFMD_DIAGRAM_FIXTURES) + "/" + name + ".mmd");
     std::string text((std::istreambuf_iterator<char>(file)), {});

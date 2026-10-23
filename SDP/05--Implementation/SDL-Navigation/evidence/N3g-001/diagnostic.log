@@ -1,0 +1,42 @@
+   Compiling mermaid-rs-renderer v0.3.1 (/home/warloc/git/mermaid-rs-renderer-xfmd-diagrams)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 9.73s
+     Running tests/xfmd_chapter_navigation.rs (build-diagram-fork/debug/deps/xfmd_chapter_navigation-c72eec7fb1e05521)
+
+running 1 test
+FINAL NoSpace("ambiguous label on edge 7: own distance 38.0, other Some((10, 14.961568832397461))")
+EDGE 0 [(816.0, 48.212498), (970.05554, 48.212498), (970.05554, 407.53543), (1116.0, 407.53543)] Some((893.0278, 69.10833)) Some(TextBlock { lines: ["allocated-to"], width: 88.0, height: 21.791666 })
+EDGE 1 [(816.0, 38.668053), (978.05554, 38.668053), (978.05554, 194.81445), (1116.0, 194.81445)] Some((1040.0555, 179.1998)) Some(TextBlock { lines: ["contributes-to"], width: 104.0, height: 21.791666 })
+EDGE 2 [(284.0, 36.983025), (291.2083, 36.983025), (291.2083, 36.983025), (438.54166, 36.983025), (438.54166, 36.983025), (532.0, 36.983025)] Some((364.875, 16.087193)) Some(TextBlock { lines: ["owns"], width: 38.666668, height: 21.791666 })
+EDGE 3 [(194.66666, 564.35803), (532.0, 564.35803)] Some((363.3333, 543.4622)) Some(TextBlock { lines: ["owns"], width: 38.666668, height: 21.791666 })
+EDGE 4 [(190.66666, 212.77469), (532.0, 212.77469)] Some((361.3333, 191.87886)) Some(TextBlock { lines: ["owns"], width: 38.666668, height: 21.791666 })
+EDGE 5 [(830.6667, 224.00417), (990.4584, 224.00417), (990.4584, 399.53543), (1116.0, 399.53543)] Some((910.5625, 244.9)) Some(TextBlock { lines: ["allocated-to"], width: 88.0, height: 21.791666 })
+EDGE 6 [(830.6667, 215.37459), (1116.0, 215.37459)] Some((902.0, 194.47876)) Some(TextBlock { lines: ["contributes-to"], width: 104.0, height: 21.791666 })
+EDGE 7 [(868.0, 391.52466), (1116.0, 391.52466)] Some((892.8, 444.4205)) Some(TextBlock { lines: ["allocated-to"], width: 88.0, height: 21.791666 })
+EDGE 8 [(868.0, 371.16248), (1149.3333, 371.16248), (1149.3333, 235.02695)] Some((1079.0, 350.26663)) Some(TextBlock { lines: ["contributes-to"], width: 104.0, height: 21.791666 })
+EDGE 9 [(176.0, 388.56635), (532.0, 388.56635)] Some((354.0, 367.6705)) Some(TextBlock { lines: ["owns"], width: 38.666668, height: 21.791666 })
+EDGE 10 [(726.62225, 535.375), (726.62225, 474.2779), (1028.4, 474.2779), (1028.4, 421.43127), (1116.0, 421.43127)] Some((780.62225, 489.5522)) Some(TextBlock { lines: ["allocated-to"], width: 88.0, height: 21.791666 })
+EDGE 11 [(842.6667, 546.95416), (1000.2084, 546.95416), (1000.2084, 223.44778), (1116.0, 223.44778)] Some((921.4375, 526.05835)) Some(TextBlock { lines: ["contributes-to"], width: 104.0, height: 21.791666 })
+NODE "n_ChapterNavigation" 1116 183.23529 269.3333 51.791664
+NODE "n_DocumentIndex" 532 8 284 51.791664
+NODE "n_DocumentIndexService" 8 9.402161 276 51.791664
+NODE "n_NativeShell" 8 536.7772 186.66666 51.791664
+NODE "n_Navigation" 8 185.19385 182.66666 51.791664
+NODE "n_NavigationHistory" 532 183.79167 298.6667 51.791664
+NODE "n_SourceAnchorMapping" 532 359.5833 336 51.791664
+NODE "n_Viewport" 8 360.9855 168 51.791664
+NODE "n_WorkspaceControls" 532 535.375 310.6667 51.791664
+NODE "n_XfmdDesktop" 1116 381.21875 245.33333 51.791664
+
+thread 'xfmd_chapter_navigation_preserves_routes_and_caption_attachments' (390736) panicked at tests/xfmd_chapter_navigation.rs:69:6:
+called `Result::unwrap()` on an `Err` value: NoSpace("ambiguous label on edge 7: own distance 38.0, other Some((10, 14.961568832397461))")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test xfmd_chapter_navigation_preserves_routes_and_caption_attachments ... FAILED
+
+failures:
+
+failures:
+    xfmd_chapter_navigation_preserves_routes_and_caption_attachments
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.64s
+
+error: test failed, to rerun pass `--test xfmd_chapter_navigation`

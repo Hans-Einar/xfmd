@@ -47,3 +47,20 @@ ZenUML arrow er asynkron; disse er ikke generiske flowchart-kanter i kontrakten.
 
 Legg til nye tags/familier i kontrakt, C++-enum, validerer, parser, adapter og
 roundtrip-tester samlet. Endret feltbetydning krever ny modellversjon.
+
+## N3c additive use-case records
+
+Family23 uses the existing model-wire3 envelope; older readers reject the unknown
+family. No original Mermaid source crosses this port. The current C++ and Rust
+readers accept the additional family/tags together.
+
+| Tag | Ordered fields |
+| --- | --- |
+| 210 element | id, label, kind(actor/usecase), shape(ellipse/rectangle), boundary ID or empty |
+| 211 boundary | id, label |
+| 212 relation | from, to, kind(association/include/extend/generalization), arrow(none/forward/reverse), label |
+
+Direction retains tag0. Contract validation enforces unique shared identities,
+nonempty boundary membership, reference kinds, legal semantic relation endpoints,
+field counts and plain-text constraints before native mapping. Full profile and
+limits: [use-case authoring](mermaid-usecase-authoring.md).

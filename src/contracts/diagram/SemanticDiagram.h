@@ -26,7 +26,8 @@ enum class DiagramFamily : std::uint32_t {
   Kanban,
   Radar,
   Treemap,
-  XyChart
+  XyChart,
+  UseCase
 };
 enum class SemanticTag : std::uint32_t {
   Direction = 0,
@@ -80,7 +81,10 @@ enum class SemanticTag : std::uint32_t {
   RadarOption,
   XyCategories = 200,
   XyAxis,
-  XySeries
+  XySeries,
+  UseCaseElement = 210,
+  UseCaseBoundary,
+  UseCaseRelation
 };
 struct SemanticRecord {
   SemanticTag tag;

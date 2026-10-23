@@ -1,0 +1,8 @@
+flowchart LR
+    n_CaptureContextTarget["CaptureContextTarget (message)"]
+    n_ContextInteractionContract["ContextInteractionContract (contract)"]
+    n_DismissContextMenu["DismissContextMenu (message)"]
+    n_ReleaseKeyboardGrab["ReleaseKeyboardGrab (message)"]
+    n_ContextInteractionContract -->|permits| n_CaptureContextTarget
+    n_ContextInteractionContract -->|permits| n_DismissContextMenu
+    n_ContextInteractionContract -->|permits| n_ReleaseKeyboardGrab

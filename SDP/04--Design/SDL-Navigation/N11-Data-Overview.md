@@ -1,0 +1,45 @@
+# N11 — data definitions, storage and contract inventory
+
+Session0007 T007 / PLAN-XFMD-0009 / KB028 / producer KB032. Owner continuation
+selects VP09. BranchPolicy: sdp/xfmd-vp09-overview stacked on d677d70;
+CommitPolicy: scoped N11 milestone. Phase push permitted; no merge/release/install.
+Existing authored models and shared product/history work remain unchanged.
+
+## Selected view and rationale
+
+Provide one complete VP09 overview with a diagram per Dataset, showing explicit
+Datagram from Dataset, holders (Unit or Database), Database ownership and the
+Dataset/Datagram contracts. Keep these neighborhoods separate rather than merge
+all contracts/fields/storage into an unreadable graph. Reuse checked dataset
+projection semantics; preserve original dataset and contract detail identities.
+The overview contains complete source-linked registers for data definitions,
+Databases (including those without held data), Contracts and their completeness,
+Variants and owners, Fields with value-type/presence, and shape membership facts
+(defines, has-field, permits). Include orphan/open contracts; missing facts remain
+explicit. Contract structure diagrams stay on-demand detail selections in the tree.
+
+Show projects as a ternary register: Functionality, Dataset, Datagram, explicit
+Functionality owner, exact proof. Do not turn it into independent binary edges or
+infer an executable transformation. Source claims of contract completeness are not
+implementation/runtime evidence. Dataset persistence requires an explicit Database
+holder; Unit-held data has no declared persistence. Database does not imply SQL,
+ER keys/cardinality, storage engine, transactions or deployment. Optional is not
+null/empty/false. Field properties remain explicit. Encoding/bit layout is VP10.
+No numeric content cap or truncation; empty inventories are explicit. Reject mode,
+focus, relation, diagram, level and traversal filters for the complete overview.
+
+## Ownership, integration and verification
+
+SDL owns selection/context; SDPTool advertises the existing overviewTarget contract.
+XFMD uses generic select/source/rendering with no product change. Keep legacy
+VP09 detail tables and diagrams unchanged; overview uses its own source-linked
+registers to avoid duplicated unlabeled tables. Preserve other viewpoints.
+
+Verify persistent versus Unit-held data, shared contracts, Datagram origin,
+projection's three endpoints and ownership proof, idle Database, open/unused
+Contracts, Variants/Fields/properties and member provenance; empty/large inventory,
+filter rejection/determinism and detail parity. Verify composed-source freshness,
+discovery/Actions, full producer suites and native overview/detail/PDF. Actual
+XFMD has three Unit-held Datasets, no Database or Datagram/projection; test this
+truth and use a valid fixture for persistent/projection behavior. Existing discovery
+and union-routing limitations remain KB025/KB020. Next proposed: VP10 encodings.

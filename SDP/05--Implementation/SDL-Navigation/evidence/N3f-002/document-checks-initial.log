@@ -1,0 +1,15 @@
+Command: python3 SDP/KanBan/verify_board.py
+PASS: 29 cards, 136 card events, 16 management records; schemas, replay, CardState, placement and index
+Exit: 0
+Command: python3 tools/validate_blueprints.py
+SDP/05--Implementation/SDL-Navigation/evidence/N3f-002/README.md: broken/outside local link: ../../../04--Design/SDL-Navigation/N3f-Routing.md
+FAILED: 1 error(s)
+Exit: 1
+Command: python3 tools/check_blueprint_symbols.py
+OK: 307 implemented plumbing callees found; caller semantics require review
+Exit: 0
+Command: python3 tools/check_layers.py
+PASS: pure-layer include boundaries
+Exit: 0
+Command: git diff --check
+Exit: 0
