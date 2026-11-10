@@ -1,0 +1,16 @@
+FROM docker.io/library/almalinux@sha256:ba31c3299856068f77bc10574cad51b0a4f6a3dafb882668656e1639bee63db6
+RUN dnf -y install epel-release dnf-plugins-core && dnf config-manager --set-enabled crb && \
+    dnf -y install gcc-c++ make cmake ninja-build pkgconf-pkg-config git python3.12 \
+    rust cargo rpm-build patch curl tar gzip bzip2 which findutils diffutils \
+    libX11-devel libXrandr-devel libXcursor-devel libXft-devel libXext-devel \
+    libpng-devel libjpeg-turbo-devel libtiff-devel zlib-devel \
+    cairo-devel pango-devel fontconfig-devel freetype-devel cairomm-devel pangomm-devel \
+    tinyxml2-devel gdk-pixbuf2-devel librsvg2-devel libXfont2 libglvnd-glx libXdmcp libxshmfence xkbcomp xkeyboard-config \
+    dejavu-sans-fonts dejavu-sans-mono-fonts dejavu-serif-fonts google-droid-sans-fonts poppler-utils strace && dnf clean all
+# Upstream 1.6.57 source, mirrored by Debian; private shared linkage avoids claiming system FOX.
+RUN curl -fL --retry 3 https://deb.debian.org/debian/pool/main/f/fox1.6/fox1.6_1.6.57.orig.tar.gz -o /opt/fox-1.6.57.tar.gz && \
+    echo '812066cd54f120eff5bacf61b5c5a1e9269bb2505e819c9d16610006a860d235  /opt/fox-1.6.57.tar.gz' | sha256sum -c - && \
+    tar -xzf /opt/fox-1.6.57.tar.gz -C /tmp && cd /tmp/fox1.6-1.6.57 && \
+    ./configure --prefix=/opt/xfmd-fox --libdir=/opt/xfmd-fox/lib --enable-shared --disable-static --without-opengl --with-xft && \
+    make -j4 && make install && cp LICENSE /opt/xfmd-fox/LICENSE && rm -rf /tmp/fox1.6-1.6.57
+ENV PKG_CONFIG_PATH=/opt/xfmd-fox/lib/pkgconfig

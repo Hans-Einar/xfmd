@@ -90,3 +90,13 @@ Se [produksjonsdesign](docs/design/fox-ui-layer.md) og
 - Lokale PNG-, JPEG-, GIF- og SVG-bilder med relative/absolutte stier og aspektbevaring.
 - Formler følger lesefargene; bilder/formler inngår også i PDF-eksport.
 - Dokumentasjon, native clipboard-tester og sanitizer-verifiserte bibliotekrettelser.
+
+## 0.9.0 RPM distribution — preparation, 2026-11-11
+
+- KB-XFMD-031: display only the product version while retaining JSON provenance.
+- KB-XFMD-032: local AlmaLinux RPM builds, clean package verification and automatic
+  main-commit publication through Beinerud's signed repository.
+- Private FOX is included. SDPTool/SDUI helpers remain optional separate tools.
+- Package revisions and actual publication evidence are recorded in
+  [local RPM release work](SDP/Maintenance/RPM/Plan.md). This entry is preparation;
+  it does not assert that a package or GitHub Release has already been published.

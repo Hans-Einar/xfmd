@@ -1,0 +1,124 @@
+#!/usr/bin/python3
+"""Root-only promotion from restricted uploader into the signed RPM repository."""
+import fcntl
+import hashlib
+import json
+import os
+import re
+import shutil
+import stat
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+
+STATE = Path('/var/lib/beinerud-repo')
+INCOMING = Path('/var/lib/xfmd-publish/incoming')
+REPO = Path('/mnt/terra/repo/AlmaLinux-10.2-apps')
+ENV = {'PATH': '/usr/sbin:/usr/bin:/sbin:/bin', 'LC_ALL': 'C', 'HOME': '/root',
+       'GNUPGHOME': str(STATE / 'gnupg')}
+
+def run(*args):
+    return subprocess.check_output(args, env=ENV, stderr=subprocess.STDOUT).decode().strip()
+
+def query(path, fmt):
+    return run('rpm', '--dbpath', str(STATE / 'rpmdb'), '-qp', '--qf', fmt, str(path))
+
+def content_identity(path):
+    # Rebuild timestamps/signatures may differ; installed contents and semantics must not.
+    parts = [run('rpm', '--dbpath', str(STATE / 'rpmdb'), '-qp', option, str(path)) for option in
+             ('--dump', '--requires', '--provides', '--conflicts', '--obsoletes', '--scripts', '--triggers')]
+    parts.append(query(path, '%{NAME}|%{EPOCHNUM}|%{VERSION}|%{RELEASE}|%{ARCH}|%{SUMMARY}|%{LICENSE}'))
+    return hashlib.sha256('\n'.join(parts).encode()).hexdigest()
+
+def copy_regular(source_dir_fd, name, destination):
+    fd = os.open(name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=source_dir_fd)
+    with os.fdopen(fd, 'rb') as source, destination.open('xb') as target:
+        info = os.fstat(source.fileno())
+        if not stat.S_ISREG(info.st_mode) or not 0 < info.st_size <= 2 * 1024**3:
+            raise ValueError('Invalid input file')
+        shutil.copyfileobj(source, target, length=1024*1024)
+        if target.tell() != info.st_size:
+            raise ValueError('Input changed while copying')
+
+def validate_identity(filename, name, epoch, version, release, arch):
+    if (name != 'xfmd' or epoch != '0' or arch != 'x86_64'
+            or not re.fullmatch(r'(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.0', version)
+            or not re.fullmatch(r'[1-9][0-9]*\.el10_2', release)
+            or filename != f'{name}-{version}-{release}.{arch}.rpm'):
+        raise ValueError('Unexpected package identity or filename')
+
+
+def main():
+    if os.geteuid() != 0 or len(sys.argv) != 3:
+        raise ValueError('Root publisher requires channel and batch ID')
+    channel, batch = sys.argv[1:]
+    if channel not in ('stable', 'development') or not re.fullmatch(r'batch-[a-z0-9_]{8}', batch):
+        raise ValueError('Invalid channel or batch ID')
+    with (STATE / 'promote.lock').open('a') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        with tempfile.TemporaryDirectory(prefix='promote-', dir=STATE) as temporary:
+            work = Path(temporary)
+            directory = os.open(INCOMING / batch, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+            try:
+                names = os.listdir(directory)
+                if len(names) != 1:
+                    raise ValueError('Expected one XFMD RPM')
+                for name in names:
+                    if not re.fullmatch(r'xfmd-[A-Za-z0-9._+^~-]+\.x86_64\.rpm', name):
+                        raise ValueError('Invalid filename')
+                    copy_regular(directory, name, work / name)
+            finally:
+                os.close(directory)
+            packages = []
+            seen = set()
+            identities = {}
+            for rpm in sorted(work.iterdir()):
+                run('rpmkeys', '--checksig', '--nosignature', str(rpm))
+                name, epoch, version, release, arch = query(rpm, '%{NAME}\n%{EPOCHNUM}\n%{VERSION}\n%{RELEASE}\n%{ARCH}').splitlines()
+                validate_identity(rpm.name, name, epoch, version, release, arch)
+                if run('rpm', '--dbpath', str(STATE / 'rpmdb'), '-qp', '--scripts', str(rpm)):
+                    raise ValueError('XFMD packages must not contain scriptlets')
+                identities[name] = (rpm, version, release)
+                seen.add(name)
+                packages.append(rpm)
+            fingerprint = (STATE / 'signing-fingerprint').read_text().strip()
+            destinations = []
+            for rpm in packages:
+                target = REPO / channel / 'x86_64' / 'Packages' / rpm.name
+                if target.exists():
+                    if target.is_symlink() or content_identity(target) != content_identity(rpm):
+                        raise ValueError('Refusing to overwrite an existing package with different contents')
+                    destinations.append((rpm, target, False))
+                    continue
+                run('rpmsign', '--define', '_signature gpg', '--define', '_gpg_name ' + fingerprint,
+                    '--define', '_gpg_path ' + str(STATE / 'gnupg'),
+                    '--define', '__gpg /usr/bin/gpg', '--addsign', str(rpm))
+                report = run('rpmkeys', '--dbpath', str(STATE / 'rpmdb'), '--checksig', '--verbose', str(rpm))
+                if not re.search(r'Signature.*: OK$', report, re.M):
+                    raise ValueError('Package signature verification failed')
+                destinations.append((rpm, target, True))
+            for rpm, target, new in destinations:
+                if new:
+                    # Copy to hidden destination on the repository filesystem, then atomically expose it.
+                    fd, temp = tempfile.mkstemp(prefix='.publish-', dir=target.parent)
+                    try:
+                        with os.fdopen(fd, 'wb') as out, rpm.open('rb') as source:
+                            shutil.copyfileobj(source, out, length=1024*1024)
+                            out.flush(); os.fsync(out.fileno())
+                        os.chmod(temp, 0o644)
+                        os.rename(temp, target)
+                    finally:
+                        if os.path.exists(temp): os.unlink(temp)
+            run('/usr/local/sbin/beinerud-repo-refresh', channel)
+            result = {'channel': channel, 'packages': [target.name for _, target, _ in destinations]}
+            with (STATE / 'publications.ndjson').open('a') as log:
+                log.write(json.dumps(result) + '\n')
+            print(json.dumps(result))
+
+if __name__ == '__main__':
+    try:
+        main()
+    except (ValueError, OSError, subprocess.CalledProcessError) as exc:
+        print('Promotion rejected: ' + str(exc), file=sys.stderr)
+        sys.exit(1)

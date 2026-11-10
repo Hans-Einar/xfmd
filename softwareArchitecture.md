@@ -692,3 +692,14 @@ SdpExpansion validates complete incoming graph identity/namespace before returni
 an atomically merged snapshot. SdpPanel retains native tab/selection state and
 requests deferred models on expansion; no SDL parsing moves into XFMD. The private
 installed SDPTool supplies this contract without modifying gh-sdp's signed cache.
+
+## RPM distribution tooling
+
+`packaging/rpm/` owns committed-source container builds, tests, RPM verification
+and the isolated local main watcher. `packaging/repository/` owns the restricted
+XFMD upload/signing adapters on Beinerud. Existing `beinerud-repo-refresh` owns
+shared signed repository metadata; other application publishers are unchanged.
+The package contains private shared FOX and notices/sources, while application
+layers retain their existing boundaries. Optional SDPTool/SDUI helpers remain
+independent integrations, not copied from unversioned workstation installations.
+[Local CI contract](packaging/rpm/README.md) defines failure/retry and installation.

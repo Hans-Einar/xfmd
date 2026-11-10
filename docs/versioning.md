@@ -129,3 +129,17 @@ version selection under the existing feature-delivery rule, not a quoted owner
 number. Preserve branch/count/+dirty and exact candidate hashes. The accompanying
 SDPTool is a development build of e194721, not a public SDP release. gh-sdp's
 signed default and the project's SDP installation receipt stay unchanged.
+
+## Automatic AlmaLinux RPM revisions — 2026-11-11
+
+The owner selects local CI and automatic publication after new main commits.
+RPM Version is VERSION plus `.0` (currently `0.9.0`). RPM Release is the full
+first-parent commit count plus `.el10_2`. A merge counts once in this packaging
+revision; this is separate from the all-reachable count retained in JSON.
+A new main commit therefore upgrades through DNF without changing the visible
+major.minor or inventing a release tag. Preserve published first-parent history.
+The watcher refuses rewinds and non-increasing package identities. Publication
+requires exact committed inputs, local tests, clean package verification and
+server signing; only a successful public DNF check records watcher success.
+See [local CI](../packaging/rpm/README.md) and
+[release work](../SDP/Maintenance/RPM/Plan.md). GitHub Release tags remain separate.
