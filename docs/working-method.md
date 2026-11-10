@@ -49,8 +49,8 @@ See the [register and template](../sprints/README.md).
 
 CI builds ready sprint PRs, main integration and explicit manual runs. Ordinary
 phase pushes and draft PRs do not start program builds. This replaces the historical
-per-phase PR practice. [Versioning](versioning.md) defines major/minor, branch/PR
-and commit number. The owner has now authorized SDP adoption; see
+per-phase PR practice. [Versioning](versioning.md) defines the visible product major/minor and the
+branch/PR, commit number and dirty state retained in build metadata. The owner has now authorized SDP adoption; see
 [the migration handoff](../SDP/KanBan/active/%23017--Proposal--Adopt-SDP-and-model-XFMD.md).
 Existing sprint/blueprint rules continue during the documented transition.
 

@@ -4,6 +4,7 @@
 
 | ID | Type | Status | Topic |
 | --- | --- | --- | --- |
+| KB-XFMD-031 | Change | completed | [Concise product version](completed/%23031--Change--Concise-product-version.md) |
 | KB-XFMD-030 | Proposal | onHold | [Discoverable SDPTool menu and toolbar](onHold/%23030--Proposal--Discoverable-SDPTool-menu-and-toolbar.md) |
 | KB-XFMD-001 | Proposal | completed | [Documentation audit and reconciliation](completed/%23001--Proposal--Documentation-reconciliation.md) |
 | KB-XFMD-002 | Study | completed | [BoxUI branch disposition and reusable changes](completed/%23002--Study--BoxUI-branch-disposition.md) |

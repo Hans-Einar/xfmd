@@ -26,7 +26,6 @@ def identity(source, environment=None):
         raise ValueError('VERSION must contain major.minor, for example 0.1')
     result = dict(version=version, branch='source', commit_number=None,
                   commit=None, pull_request=None, dirty=False)
-    label = 'source'
     if (source / '.git').exists():
         if git(source, 'rev-parse', '--is-shallow-repository') != 'false':
             raise ValueError('Full Git history is required: git fetch --unshallow')
@@ -37,18 +36,15 @@ def identity(source, environment=None):
             head = environment.get('GITHUB_HEAD_REF', '')
             branch = 'ci/' + head if environment.get('GITHUB_ACTIONS') == 'true' and head else 'detached'
         result['branch'] = branch
-        label = branch
         if branch == 'main':
             subjects = git(source, 'log', '--first-parent', '--merges', '--format=%s')
             for subject in subjects.splitlines():
                 match = re.match(r'^Merge pull request #([0-9]+)\b', subject)
                 if match:
                     result['pull_request'] = int(match[1])
-                    label = 'PR#' + match[1]
                     break
         result['dirty'] = bool(git(source, 'status', '--porcelain', '--untracked-files=normal'))
-    number = result['commit_number'] if result['commit_number'] is not None else 'unknown'
-    result['display'] = f"{version} {label}:{number}" + ('+dirty' if result['dirty'] else '')
+    result['display'] = version
     return result
 
 

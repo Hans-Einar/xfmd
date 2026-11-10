@@ -343,12 +343,15 @@ ordnet sekvensscope og ett praktisk `mermaid_evicence.md` for løpende lesing.
 AT-059/060/062/063 gjelder hver profil. Dokumentgrensen skal fortsatt være
 avgrenset, men romme minst ett eksempel per implementert diagramtype.
 
-## Byggidentitet og leveranseflyt
+## Build identity and delivery
 
-| ID | Krav | Akseptanse |
+Owner decision, 2026-11-10: remove the branch/commit/dirty suffix from the visible
+version. This supersedes the earlier display format, preserving technical provenance.
+
+| ID | Requirement | Acceptance |
 | --- | --- | --- |
-| UR-042 | CLI, vindustittel og høyrejustert tekst i nederste statuslinje viser major.minor, branch (PR-nummer på main når kjent) og numerisk commitnummer. | AT-066: samme innbakte identitet i CLI/vindu/statuslinje; dirty og ukjent kilde markeres. |
-| SR-025 | Identiteten beregnes fra full Git-historikk uten nettverk eller en konfliktskapende tellerfil. Et eksplisitt bygg oppdaterer metadata også uten ny CMake-konfigurering; samme commit gir stabil identitet. | AT-067: lineære commits, branches, merge, main etter PR, detached, dirty, shallow og kildearkiv; uendret metadata omskrives ikke. |
+| UR-042 | CLI, window title and right-aligned bottom status text show only the product major.minor version. | AT-066: identical embedded product version in CLI/window/status, without branch, PR, commit-count or dirty suffixes. |
+| SR-025 | Build metadata retains branch, PR when known, commit count, SHA and dirty state from full Git history, without network access or a mutable counter file. Explicit builds refresh metadata without reconfiguration; unchanged generated content is not rewritten. | AT-067: linear commits, branches, merges, main after PR, detached/CI, dirty, shallow and source archives retain correct provenance independently of the visible version. |
 
 ## Generated document navigation and leases (Sprint 004)
 

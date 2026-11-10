@@ -1,0 +1,25 @@
+{
+  "head": "953d09ec9bee5ef573893cfa73afed13233dfb67",
+  "candidate": "HEAD plus uncommitted concise-version change",
+  "source_sha256": {
+    "tools/build_identity.py": "a02c02f775e21ed351981922a7fb3916e8e0b48c287bb91a33521d1ac0a80895",
+    "tests/build/BuildIdentityTest.py": "676afbe62163efbf506d9c24e0b004dd26a29db25b9b67d5983b522c31df4821",
+    "VERSION": "a839ab0447b2d415fe1732387938b5e06aa9d5aba7ed0f0c927837f0e77027f2"
+  },
+  "installed_binary": "/home/warloc/.local/bin/xfmd",
+  "binary_sha256": "edefabc18a03483b7d0f9674d2a43a948ce338cc0e0b32d1da807e52006335d9",
+  "metadata": {
+    "version": "0.9",
+    "branch": "main",
+    "commit_number": 222,
+    "commit": "953d09ec9bee5ef573893cfa73afed13233dfb67",
+    "pull_request": 36,
+    "dirty": true,
+    "display": "0.9"
+  },
+  "backup": {
+    "backup": "/home/warloc/.local/state/xfmd/backups/20261110T015020Z-simple-version/xfmd",
+    "version": "xfmd 0.8 sprint/009/phase/057-favorites:206+dirty",
+    "sha256": "a0a3622b7de45b186f49f43b8651238635f4698085f330d1be0b5af8ad8c3001"
+  }
+}

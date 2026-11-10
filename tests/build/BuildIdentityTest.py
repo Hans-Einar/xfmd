@@ -40,13 +40,14 @@ class BuildIdentityTest(unittest.TestCase):
         return module.identity(self.source, {})
 
     def test_branch_and_each_commit_increment(self):
-        self.assertEqual(self.identity()['display'], '0.1 main:1')
+        self.assertEqual(self.identity()['display'], '0.1')
         self.git('switch', '-c', 'sprint/001/phase/042-build-identity')
         (self.source / 'code').write_text('one')
         self.commit('First milestone')
         a = self.identity()
         self.assertEqual(a['commit_number'], 2)
-        self.assertEqual(a['display'], '0.1 sprint/001/phase/042-build-identity:2')
+        self.assertEqual(a['display'], '0.1')
+        self.assertEqual(a['branch'], 'sprint/001/phase/042-build-identity')
         (self.source / 'code').write_text('two')
         self.commit('Second milestone')
         self.assertEqual(self.identity()['commit_number'], 3)
@@ -57,17 +58,22 @@ class BuildIdentityTest(unittest.TestCase):
         self.commit('Milestone')
         self.git('switch', 'main')
         self.git('merge', '--no-ff', 'phase', '-m', 'Merge pull request #35 from example/phase')
-        self.assertEqual(self.identity()['display'], '0.1 PR#35:3')
+        self.assertEqual(self.identity()['display'], '0.1')
+        self.assertEqual(self.identity()['pull_request'], 35)
+        self.assertEqual(self.identity()['commit_number'], 3)
         (self.source / 'notes').write_text('Documentation')
         self.commit('Document result')
-        self.assertEqual(self.identity()['display'], '0.1 PR#35:4')
+        self.assertEqual(self.identity()['display'], '0.1')
+        self.assertEqual(self.identity()['pull_request'], 35)
+        self.assertEqual(self.identity()['commit_number'], 4)
 
     def test_dirty_and_ignored_build_files(self):
         (self.source / 'build').mkdir()
         (self.source / 'build' / 'artifact').write_text('ignored')
         self.assertFalse(self.identity()['dirty'])
         (self.source / 'new').write_text('untracked')
-        self.assertTrue(self.identity()['display'].endswith('+dirty'))
+        self.assertEqual(self.identity()['display'], '0.1')
+        self.assertTrue(self.identity()['dirty'])
         self.git('add', 'new')
         self.assertTrue(self.identity()['dirty'])
         self.commit('Track file')
@@ -76,9 +82,11 @@ class BuildIdentityTest(unittest.TestCase):
 
     def test_detached_and_ci_test_checkout(self):
         self.git('checkout', '--detach')
-        self.assertEqual(self.identity()['display'], '0.1 detached:1')
+        self.assertEqual(self.identity()['display'], '0.1')
+        self.assertEqual(self.identity()['branch'], 'detached')
         ci = module.identity(self.source, {'GITHUB_ACTIONS': 'true', 'GITHUB_HEAD_REF': 'phase'})
-        self.assertEqual(ci['display'], '0.1 ci/phase:1')
+        self.assertEqual(ci['display'], '0.1')
+        self.assertEqual(ci['branch'], 'ci/phase')
 
     def test_shallow_is_rejected(self):
         target = Path(self.folder.name) / 'shallow'
@@ -92,7 +100,8 @@ class BuildIdentityTest(unittest.TestCase):
         archive.mkdir()
         (archive / 'VERSION').write_text('2.3\n')
         value = module.identity(archive, {})
-        self.assertEqual(value['display'], '2.3 source:unknown')
+        self.assertEqual(value['display'], '2.3')
+        self.assertEqual(value['branch'], 'source')
         self.assertIsNone(value['commit_number'])
         (archive / 'VERSION').write_text('2.3.4')
         with self.assertRaises(ValueError):
@@ -111,9 +120,17 @@ class BuildIdentityTest(unittest.TestCase):
         self.commit('Update')
         subprocess.run(command, check=True)
         value = json.loads((output / 'xfmd-build.json').read_text())
-        self.assertEqual(value['display'], '0.1 main:2')
-        self.assertIn('0.1 main:2', header.read_text())
+        self.assertEqual(value['display'], '0.1')
+        self.assertEqual(value['commit_number'], 2)
+        self.assertIn('"0.1"', header.read_text())
+        self.assertEqual(header.stat().st_mtime_ns, before)
         self.assertEqual(value['commit'], self.git('rev-parse', 'HEAD'))
+        (self.source / 'VERSION').write_text('0.2\n')
+        subprocess.run(command, check=True)
+        value = json.loads((output / 'xfmd-build.json').read_text())
+        self.assertEqual(value['display'], '0.2')
+        self.assertTrue(value['dirty'])
+        self.assertIn('"0.2"', header.read_text())
 
 
 if __name__ == '__main__':

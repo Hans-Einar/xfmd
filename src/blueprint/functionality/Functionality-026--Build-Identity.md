@@ -14,8 +14,9 @@ uses: none
 
 ## 1. Purpose and scope
 
-Give CLI, window title, status bar and installation one stable identity for the
-actual built code. Build tools read Git; the application uses embedded values.
+Give CLI, window title and status bar the same concise product version, with
+installed JSON identifying the actual built code. Build tools read Git; the
+application uses embedded values.
 This is a service, not a new feature.
 
 ## 2. Requirements and acceptance
@@ -31,10 +32,11 @@ Python, network or mutable counter is needed at runtime.
 
 ## 4. Behavior, state and failures
 
-Count all reachable Git commits; use main's first-parent PR identity when available,
-otherwise branch. Mark dirty state, reject shallow history and label source archives
-source:unknown. Do not rewrite identical generated content. JSON stores SHA for
-audit while the displayed commit component is numeric.
+Display only VERSION's major.minor, as requested by the owner on 2026-11-10.
+JSON retains all reachable Git commit counts, branch, main's first-parent PR when
+available, SHA and dirty state. Source archives retain branch=source and null
+commit/count. Reject shallow history. Do not rewrite identical generated content;
+metadata can change after a commit without changing the display header.
 
 ## 5. Plumbing
 
@@ -55,7 +57,10 @@ records the seven isolated Git scenarios and CLI/window checks against build 620
 [Sprint 002 / P043](../../../sprints/Sprint-002--Status-Version/Phase-043--Status-Version.md)
 records build 3bb28f5 and six focused CTests, including CompactWorkspaceTest at
 four window widths. The separate status label preserves link hover/messages.
-These are historical identified results, not new runs in this reconciliation.
+These are historical identified results, not evidence for the revised display.
+[2026-11-10 evidence](../../../SDP/KanBan/evidence/2026-11-10-product-version/README.md)
+records the concise display, preserved JSON provenance, three focused CTests and
+verified local installation under KB-XFMD-031.
 
 ## 8. Status, risks and change impact
 

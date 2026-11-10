@@ -499,13 +499,14 @@ rendererens `semantic/{charts,structures}.rs`. Hver fil har én profil-/mappingr
 `semantic.rs` er omtrent 310 linjer fordi basisskjema, referansevalidering og wire
 fortsatt hører sammen; nye familier delegeres til egne valideringsfiler.
 
-## Byggidentitet — FUNC-026
+## Build identity — FUNC-026
 
-`VERSION` eier produktets major/minor. `tools/build_identity.py` leser komplett
-Git-historikk ved eksplisitt bygg; `cmake/BuildIdentity.cmake` genererer header
-og installert JSON. `src/application/build/BuildVersion.h/.cpp` eksponerer
-`buildVersion()` for CLI og Application-vindustittel. Git/Python finnes bare
-i byggsteget, ikke i kjørende applikasjon eller interpreter/renderer.
+`VERSION` owns product major/minor. `tools/build_identity.py` reads full Git history
+at explicit build time; `cmake/BuildIdentity.cmake` generates the header and installed
+JSON. `src/application/build/BuildVersion.h/.cpp` exposes `buildVersion()` as product
+major/minor only for the CLI, Application window title and XfmdWindow status label.
+The JSON retains branch, PR, commit count, SHA and dirty state for provenance.
+Git/Python are build dependencies, with no runtime or interpreter/renderer dependency.
 
 ## Sprint 004 — generated document navigation and leases
 

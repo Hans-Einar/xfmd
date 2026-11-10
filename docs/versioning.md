@@ -1,9 +1,9 @@
 # Version and build identity
 
-XFMD displays `major.minor branch:commit-count`, for example
-`0.3 sprint/007/phase/055-document-zoom:196`. On `main`, the latest integrated
-PR number is used when available, for example `0.3 PR#39:200`; these are format
-examples, not claims that a PR has been merged.
+XFMD displays only `major.minor`, currently `0.9`, in the window title and status
+line; `xfmd --version` prints `xfmd 0.9`. The owner's 2026-11-10 request supersedes
+the earlier visible branch/PR, commit-count and `+dirty` suffixes. Technical
+provenance remains in generated and installed `xfmd-build.json`.
 
 `VERSION` is the sole source of major/minor. Major changes for a deliberate major
 product or compatibility break; minor changes for an explicitly selected feature
@@ -58,7 +58,8 @@ The commit count is `git rev-list --count HEAD`: the number of distinct commits
 reachable from the build's commit, including merge commits. An ordinary commit
 increments it by one; a merge may add several because it imports a phase's history.
 Phase branches inherit their history and continue counting. Parallel branches can
-have the same count; branch/PR and product version are also part of the identity.
+have the same count; branch/PR and product version remain part of the metadata
+identity.
 This is not a global allocator across parallel branches. No version file changes
 for each commit, and a full clean clone yields the same count.
 
@@ -66,24 +67,26 @@ Published history must not be rebased, squash-merged or amended: that would chan
 the count. Integrate sprint PRs with merge commits. On main, the latest
 `Merge pull request #N` is read along first-parent history; documentation commits
 after the merge retain the PR name and receive a new count. Without a known PR,
-`main` is displayed. The Git SHA is stored as technical provenance in build
-metadata, not used as the displayed commit count.
+`main` remains the metadata branch. The Git SHA is stored as technical provenance
+in build metadata, alongside the numeric commit count. Neither is displayed in the UI.
 
 ## Builds and special cases
 
-The version is generated during an explicit CMake build, not at commit or startup.
-It appears in `xfmd --version`, the window title and the right-aligned bottom status
-line; it adds no toolbar. The build writes `build/generated/xfmd-build.json` with
-full source identity. An existing binary does not change version when Git moves.
+The version and metadata are generated during an explicit CMake build, not at
+commit or startup. Only the product version appears in `xfmd --version`, the
+window title and the right-aligned bottom status line; it adds no toolbar. The
+build writes `build/generated/xfmd-build.json` with full source identity. An
+existing binary does not change version when Git moves.
 
-- Local branches use their actual name. Detached checkout displays `detached`;
-  GitHub Actions PR checkouts display `ci/<head-branch>`.
-- Uncommitted changes, including unignored new files, add `+dirty`. Such builds
+- Local branches use their actual name. Detached checkout records `detached`;
+  GitHub Actions PR checkouts record `ci/<head-branch>` in metadata.
+- Uncommitted changes, including unignored new files, set JSON `dirty: true`. Such builds
   are local trials, not published phase builds.
 - Shallow history is rejected with instructions to run `git fetch --unshallow`.
-  CI must fetch full history. Never display a misleadingly low count.
-- A source archive without Git displays `major.minor source:unknown`; no invented
-  commit number. Distributed binaries retain their embedded identity.
+  CI must fetch full history. Never record a misleadingly low count.
+- A source archive without Git displays the product version and records branch
+  `source`, with null commit/count; no invented provenance. Distributed binaries
+  retain their embedded product version.
 - Generated files are written only when their contents change. Rebuilding the
   same clean commit must not relink merely because the date/time changed.
 
