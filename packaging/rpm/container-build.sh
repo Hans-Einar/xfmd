@@ -4,6 +4,7 @@ version=$1 release=$2
 mkdir -p /work /cache/cargo
 cp -a /source /work/source
 cd /work/source
+export SOURCE_DATE_EPOCH=$(git show -s --format=%ct HEAD)
 export CARGO_HOME=/cache/cargo
 export PKG_CONFIG_PATH=/opt/xfmd-fox/lib/pkgconfig
 ./tools/bootstrap_dependencies.sh
@@ -24,13 +25,15 @@ cp /opt/xfmd-fox/LICENSE /work/stage/usr/share/doc/xfmd/FOX-LICENSE
 cp /opt/fox-1.6.57.tar.gz /work/stage/usr/share/doc/xfmd/sources/
 # Preserve corresponding sources for the bundled native libraries.
 git archive HEAD | gzip -n > /work/stage/usr/share/doc/xfmd/sources/xfmd-source.tar.gz
-tar -czf /work/stage/usr/share/doc/xfmd/sources/mermaid-source.tar.gz -C .deps mermaid-rs-renderer
-tar -czf /work/stage/usr/share/doc/xfmd/sources/microtex-source.tar.gz -C /work/build/_deps microtex-src
+tar --sort=name --mtime="@$SOURCE_DATE_EPOCH" --owner=0 --group=0 --numeric-owner -czf /work/stage/usr/share/doc/xfmd/sources/mermaid-source.tar.gz -C .deps mermaid-rs-renderer
+tar --sort=name --mtime="@$SOURCE_DATE_EPOCH" --owner=0 --group=0 --numeric-owner -czf /work/stage/usr/share/doc/xfmd/sources/microtex-source.tar.gz -C /work/build/_deps microtex-src
+find /work/stage -exec touch -h -d "@$SOURCE_DATE_EPOCH" {} +
 cp /work/build/generated/xfmd-build.json /output/build-metadata.json
 rpm -qa | sort > /output/build-packages.txt
 mkdir -p /work/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
 cat > /work/rpmbuild/SPECS/xfmd.spec <<SPEC
 %global debug_package %{nil}
+%global _build_id_links none
 %global __provides_exclude ^libFOX-1\\.6.*$
 %global __requires_exclude ^libFOX-1\\.6.*$
 Name: xfmd

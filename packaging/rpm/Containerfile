@@ -14,3 +14,5 @@ RUN curl -fL --retry 3 https://deb.debian.org/debian/pool/main/f/fox1.6/fox1.6_1
     ./configure --prefix=/opt/xfmd-fox --libdir=/opt/xfmd-fox/lib --enable-shared --disable-static --without-opengl --with-xft && \
     make -j4 && make install && cp LICENSE /opt/xfmd-fox/LICENSE && rm -rf /tmp/fox1.6-1.6.57
 ENV PKG_CONFIG_PATH=/opt/xfmd-fox/lib/pkgconfig
+
+RUN dnf -y install rustfmt && dnf clean all
