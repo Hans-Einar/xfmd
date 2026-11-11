@@ -47,8 +47,9 @@ See the [register and template](../sprints/README.md).
   history with merge commits, not squash/rebase. Merge and installation require
   the user's instruction; a phase build does not imply installation.
 
-CI builds ready sprint PRs, main integration and explicit manual runs. Ordinary
-phase pushes and draft PRs do not start program builds. This replaces the historical
+GitHub CI builds ready sprint PRs and explicit manual runs. The local RPM CI
+builds and verifies new main commits before signed publication. Ordinary phase
+pushes and draft PRs do not start program builds. This replaces the historical
 per-phase PR practice. [Versioning](versioning.md) defines the visible product major/minor and the
 branch/PR, commit number and dirty state retained in build metadata. The owner has now authorized SDP adoption; see
 [the migration handoff](../SDP/KanBan/active/%23017--Proposal--Adopt-SDP-and-model-XFMD.md).

@@ -2,7 +2,8 @@
 
 The owner selected automatic publication from `main` on 2026-11-11 (KB-XFMD-032).
 This follows minibrowser's local-build/server-signing workflow. GitHub Actions
-continues source verification; it does not publish XFMD RPMs.
+verifies pull requests and manual runs; main commits use the local pipeline.
+GitHub does not publish XFMD RPMs.
 
 ## Build and verify
 
