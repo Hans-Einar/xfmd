@@ -14,6 +14,7 @@ cmake -S . -B /work/build -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
 cargo fmt -p xfmd-diagram-contracts -p xfmd-mermaid-interpreter -p xfmd-diagram-layout -p xfmd-mermaid-ffi -- --check
 cmake --build /work/build --parallel "${BUILD_JOBS:-4}"
 ctest --test-dir /work/build --output-on-failure -j 2 | tee /output/ctest.log
+python3 packaging/rpm/test-local-ci.py
 python3 packaging/rpm/test-watch-main.py
 python3 packaging/repository/test-publisher.py
 python3 tools/check_blueprint_symbols.py
@@ -43,6 +44,7 @@ Summary: Native FOX Markdown viewer and editor
 License: LicenseRef-Unspecified
 URL: https://github.com/Hans-Einar/xfmd
 BuildArch: x86_64
+Requires: gdk-pixbuf2-modules
 Requires: dejavu-sans-fonts
 Requires: dejavu-sans-mono-fonts
 

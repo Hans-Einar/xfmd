@@ -502,3 +502,10 @@ loads retain the source row; click its label or collapse/expand to retry. Older
 producers retain eager discovery when they explicitly lack the new contract.
 The matching private producer is a development candidate; installing XFMD does
 not change gh-sdp's signed release selection or upgrade a project's SDP files.
+
+## AlmaLinux RPM distribution
+
+The [local RPM CI](packaging/rpm/README.md) builds exact main commits, verifies
+installation and publishes signed packages to the Beinerud AlmaLinux 10.2 app
+repository. It documents installation, automatic updates, provenance and optional
+SDPTool/SDUI integrations. The visible XFMD version remains major.minor.

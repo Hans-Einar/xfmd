@@ -66,7 +66,7 @@ def main():
         return
     if output.exists():
         parser.error('Output exists; choose a fresh output directory')
-    for command in ['podman', 'git', 'ssh', 'curl', 'rpmkeys', 'tar', 'Xvfb']:
+    for command in ['podman', 'git', 'ssh', 'curl', 'rpmkeys', 'rpm', 'tar', 'Xvfb']:
         if not shutil.which(command):
             parser.error('Missing command: ' + command)
     output.mkdir(parents=True)
@@ -85,7 +85,7 @@ def main():
         plan['xvfb_sha256'] = hashlib.sha256(Path(shutil.which('Xvfb')).read_bytes()).hexdigest()
         plan['builder_image'] = subprocess.check_output(['podman', 'image', 'inspect', image, '--format', '{{.Id}}'], text=True).strip()
         (output/'provenance.json').write_text(json.dumps(plan, indent=2)+'\n')
-        container = ['podman', 'run', '--rm', '--security-opt', 'label=disable', '--shm-size=512m',
+        container = ['podman', 'run', '--rm', '--security-opt', 'label=disable', '--shm-size=512m', '--tmpfs', '/tmp:rw,exec,mode=1777',
                      '-v', shutil.which('Xvfb')+':/usr/local/bin/Xvfb:ro']
         with (output/'build.log').open('w') as log:
             print('Building and testing; log:', log.name, flush=True)
@@ -103,7 +103,7 @@ def main():
         with (output/'verify.log').open('w') as log:
             print('Verifying clean installation; log:', log.name, flush=True)
             run([*container, '-v', str(verify_input)+':/packages:ro', '-v', str(source/'packaging/rpm')+':/probe:ro',
-                 BASE_IMAGE, 'bash', '/probe/verify-install.sh', expected, values['display']], stdout=log, stderr=subprocess.STDOUT)
+                 BASE_IMAGE, 'bash', '/probe/verify-install.sh', expected, values['display'], values['commit']], stdout=log, stderr=subprocess.STDOUT)
         verified = dict(commit=values['commit'], rpm=expected, sha256=hashlib.sha256(rpms[0].read_bytes()).hexdigest())
         (output/'verified.json').write_text(json.dumps(verified, indent=2)+'\n')
         if not args.publish:
@@ -126,6 +126,11 @@ def main():
         signed.mkdir()
         url = 'https://beinerud.ddns.net/repo/AlmaLinux-10.2-apps/stable/x86_64/Packages/'+expected
         run(['curl', '-fsSL', '--retry', '3', url, '-o', signed/expected])
+        identity_format = '%{NAME}|%{VERSION}|%{RELEASE}|%{ARCH}|%{PAYLOADDIGEST}'
+        original = subprocess.check_output(['rpm', '-qp', '--qf', identity_format, rpms[0]], stderr=subprocess.DEVNULL)
+        downloaded = subprocess.check_output(['rpm', '-qp', '--qf', identity_format, signed/expected], stderr=subprocess.DEVNULL)
+        if original != downloaded:
+            raise RuntimeError('Signed download differs from the verified RPM payload')
         with tempfile.TemporaryDirectory(prefix='xfmd-rpm-trust-') as trust:
             run(['rpmkeys', '--dbpath', trust, '--import', source/'packaging/repository/RPM-GPG-KEY-beinerud'])
             report = subprocess.check_output(['rpmkeys', '--dbpath', trust, '--checksig', '--verbose', signed/expected], text=True, env=dict(os.environ, LC_ALL='C'))
@@ -134,7 +139,7 @@ def main():
             (output/'signature.txt').write_text(report)
         with (output/'public-dnf.log').open('w') as log:
             run([*container, '-v', str(source/'packaging')+':/probe:ro', BASE_IMAGE, 'bash',
-                 '/probe/rpm/verify-public.sh', values['package_version'], values['display']], stdout=log, stderr=subprocess.STDOUT)
+                 '/probe/rpm/verify-public.sh', values['package_version'], values['display'], values['commit']], stdout=log, stderr=subprocess.STDOUT)
         (output/'published.json').write_text(json.dumps(dict(verified, url=url,
             signed_sha256=hashlib.sha256((signed/expected).read_bytes()).hexdigest()), indent=2)+'\n')
         print('Published; signature, public DNF and installed application verified:', url, flush=True)

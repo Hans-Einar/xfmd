@@ -10,7 +10,9 @@ Run on the AlmaLinux 10.2 x86_64 build host with rootless Podman, Git, Python 3.
 SSH, curl, tar, rpmkeys and the existing Xvfb test tool. The digest-pinned AlmaLinux
 image installs distribution/EPEL build dependencies and pinned private FOX 1.6.57.
 Xvfb is a read-only test-tool mount, identified by hash, because the target repos
-do not ship its server. No host application libraries enter the package.
+do not ship its server. No host application libraries enter the package. Test temporary files use tmpfs
+to avoid container-overlay SELinux attributes that cannot be copied there. Image
+format plugins are an explicit runtime dependency, not just a build dependency.
 
 ```sh
 python3 packaging/rpm/local-ci.py --ref HEAD --plan
@@ -22,7 +24,7 @@ Use a fresh output directory. Only committed inputs are included. The build
 copies full Git history, generates truthful clean metadata, runs all configured
 CTest cases and structural checks, then builds one RPM. A clean base container
 installs a synthetic older RPM, upgrades to the candidate, checks the native
-window, CLI and assets, reinstalls, removes and installs again. The fixture is
+window as an unprivileged user, CLI and assets, reinstalls, removes and installs again. The fixture is
 not a historical release and is never uploaded. Optional real-tool tests need
 separately supplied tools; no claim of bundled SDPTool/SDUI or whole-system
 acceptance follows from the default CTest suite.

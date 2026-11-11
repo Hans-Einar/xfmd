@@ -41,6 +41,7 @@ def window_titles(display):
 expected = sys.argv[1]
 metadata = json.loads(Path('/usr/share/doc/xfmd/xfmd-build.json').read_text())
 assert metadata['display'] == expected and not metadata['dirty'], metadata
+assert metadata['commit'] == sys.argv[2], metadata
 for path in ['/usr/share/applications/xfmd.desktop', '/usr/share/icons/hicolor/64x64/apps/xfmd.png',
              '/usr/share/xfmd/math/.clatexmath-res_root', '/usr/share/doc/xfmd/FOX-LICENSE']:
     assert Path(path).is_file(), path
