@@ -19,3 +19,4 @@ RUN dnf --releasever=10.2 -y install rustfmt && dnf --releasever=10.2 clean all
 # FOX 1.6.57 omits its non-system library directory from pkg-config's Libs field.
 RUN sed -i 's/^Libs: .*/Libs: -L${libdir} ${FOX_LIBS}/' /opt/xfmd-fox/lib/pkgconfig/fox.pc
 RUN dnf --releasever=10.2 -y install gdk-pixbuf2-modules && dnf --releasever=10.2 clean all
+RUN dnf --releasever=10.2 -y install python3-jsonschema && dnf --releasever=10.2 clean all
