@@ -96,9 +96,13 @@ def main():
         expected = f"xfmd-{values['package_version']}.x86_64.rpm"
         if len(rpms) != 1 or rpms[0].name != expected:
             raise RuntimeError('Unexpected RPM output')
+        verify_input = output/'verify-input'
+        verify_input.mkdir()
+        shutil.copy2(rpms[0], verify_input/expected)
+        shutil.copytree(output/'upgrade-fixture', verify_input/'upgrade-fixture')
         with (output/'verify.log').open('w') as log:
             print('Verifying clean installation; log:', log.name, flush=True)
-            run([*container, '-v', str(output)+':/packages:ro', '-v', str(source/'packaging/rpm')+':/probe:ro',
+            run([*container, '-v', str(verify_input)+':/packages:ro', '-v', str(source/'packaging/rpm')+':/probe:ro',
                  BASE_IMAGE, 'bash', '/probe/verify-install.sh', expected, values['display']], stdout=log, stderr=subprocess.STDOUT)
         verified = dict(commit=values['commit'], rpm=expected, sha256=hashlib.sha256(rpms[0].read_bytes()).hexdigest())
         (output/'verified.json').write_text(json.dumps(verified, indent=2)+'\n')

@@ -55,6 +55,11 @@ class UploadBoundary(unittest.TestCase):
         for command in ('publish stable; id', 'publish other', 'bash', 'publish stable\n'):
             with self.assertRaises(ValueError): self.upload(self.valid, command=command)
 
+    def test_oversized_member(self):
+        with patch.dict(receive['main'].__globals__, MAX_FILE=2):
+            with self.assertRaisesRegex(ValueError, 'archive member'):
+                self.upload(self.valid)
+
     def test_package_identity(self):
         good = ('xfmd-0.9.0-20.el10_2.x86_64.rpm', 'xfmd', '0', '0.9.0', '20.el10_2', 'x86_64')
         validate(*good)

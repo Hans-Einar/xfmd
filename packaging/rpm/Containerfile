@@ -16,3 +16,5 @@ RUN curl -fL --retry 3 https://deb.debian.org/debian/pool/main/f/fox1.6/fox1.6_1
 ENV PKG_CONFIG_PATH=/opt/xfmd-fox/lib/pkgconfig
 
 RUN dnf -y install rustfmt && dnf clean all
+# FOX 1.6.57 omits its non-system library directory from pkg-config's Libs field.
+RUN sed -i 's/^Libs: .*/Libs: -L${libdir} ${FOX_LIBS}/' /opt/xfmd-fox/lib/pkgconfig/fox.pc
