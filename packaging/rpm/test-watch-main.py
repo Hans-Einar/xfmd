@@ -164,7 +164,10 @@ class InstallerTests(unittest.TestCase):
     def test_install_generates_isolated_units_without_activation(self):
         with tempfile.TemporaryDirectory(prefix='builder install ') as temporary:
             root = Path(temporary)
+            known_hosts = root/'known_hosts'
+            known_hosts.write_text('# Isolated installer fixture; no SSH connection is made.\n')
             command = [str(Path(__file__).with_name('install-builder.sh')),
+                       '--known-hosts', str(known_hosts),
                        '--state-dir', str(root/'state'), '--cache', str(root/'cache'),
                        '--unit-dir', str(root/'units')]
             result = subprocess.run(command, check=True, capture_output=True, text=True)

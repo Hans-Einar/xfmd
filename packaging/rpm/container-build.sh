@@ -15,7 +15,7 @@ cargo fmt -p xfmd-diagram-contracts -p xfmd-mermaid-interpreter -p xfmd-diagram-
 cmake --build /work/build --parallel "${BUILD_JOBS:-4}"
 ctest --test-dir /work/build --output-on-failure -j 2 | tee /output/ctest.log
 python3 packaging/rpm/test-local-ci.py
-python3 packaging/rpm/test-watch-main.py
+runuser -u nobody -- python3 packaging/rpm/test-watch-main.py
 python3 packaging/repository/test-publisher.py
 python3 tools/check_blueprint_symbols.py
 python3 SDP/KanBan/verify_board.py
