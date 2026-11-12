@@ -81,3 +81,16 @@ with its nested process area and produces a visible project-root diagnostic;
 selecting `/home/warloc/git/SDP/SDP` works. This pre-existing behavior was preserved.
 Final integrated review, broader regressions, acceptance and publication remain
 separate from these targeted worker gates.
+
+## Final integrated disposition
+
+The coordinator qualified producer SDP eb11ac77b096587c9d4cbc8e7c85b634131098a3
+with consumer a558c31. Seven native regression gates and the real producer's
+fixture/manual-project workflows pass on the exact consumer code. The separate
+Activity2 reviewer approved technical qualification after correction of its
+producer findings and final delta race evidence. Complete retained qualification
+and source/evidence hashes are in the coordinating SDP repository under
+SDP/Activities/Activity-0002--Activity-Management/06-Verification/A6.
+The earlier worker snapshot above remains unchanged historical evidence; its
+remaining integrated-review item is now satisfied. Documented protocol/resource
+limits remain. Owner acceptance, live installation, merge and release are separate.

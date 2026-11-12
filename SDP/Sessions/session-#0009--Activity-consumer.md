@@ -78,3 +78,12 @@ depth limits, old-client negotiation/fallback, existing SDP-basename root ambigu
 and final integrated qualification remain explicit. No commit, merge, installation
 or publication occurred. The coordinator owns coherent product review/commit and
 final acceptance. Next S3: consume this handoff and reconcile remaining A3 limits.
+
+## Integrated qualification handoff
+
+Consumer a558c31 and producer SDP eb11ac7 passed the selected native workflow gates;
+the independent Activity2 reviewer approved technical qualification. The actual
+manual Activity history was only read in native tests. Final evidence is retained
+with Activity0002 in the SDP repository. Work remains on its isolated branch;
+primary-worktree RPM/process changes are untouched. No merge, installation or
+release is inferred from technical approval.
