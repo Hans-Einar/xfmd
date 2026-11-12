@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Check RPM ordering and provenance using real disposable Git history."""
 import importlib.util
+import hashlib
+import json
 from pathlib import Path
 import subprocess
 import tempfile
@@ -43,6 +45,48 @@ class VersionTests(unittest.TestCase):
                 (root/'VERSION').write_text('invalid\n')
                 git('add', 'VERSION'); git('commit', '-m', 'Invalid')
                 with self.assertRaises(ValueError): ci.metadata('HEAD')
+
+
+class ExistingPublicationTests(unittest.TestCase):
+    def test_exact_verified_bytes_and_clean_source_are_required(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)
+            source = output/'source'
+            (source/'cmake').mkdir(parents=True)
+            pin = dict(commit='a'*40, sha256='b'*64, version='2.2.0-dev')
+            (source/'VERSION').write_text('0.10\n')
+            (source/'cmake/sdptool-source.json').write_text(json.dumps(pin))
+            def git(*args):
+                return subprocess.check_output(['git', '-C', str(source), *args], text=True, stderr=subprocess.DEVNULL).strip()
+            git('init', '-b', 'feature')
+            git('config', 'user.name', 'Publication test')
+            git('config', 'user.email', 'publication@example.invalid')
+            git('config', 'commit.gpgsign', 'false')
+            git('add', '.'); git('commit', '-m', 'Exact candidate')
+            with patch.object(ci, 'ROOT', source): values = ci.metadata('HEAD')
+            rpm = output/f"xfmd-{values['package_version']}.x86_64.rpm"
+            payload = b'exact locally verified package bytes'
+            rpm.write_bytes(payload)
+            records = {
+                'verified.json': dict(commit=values['commit'], rpm=rpm.name, sha256=hashlib.sha256(payload).hexdigest()),
+                'provenance.json': dict(commit=values['commit'], package_version=values['package_version'], producer_pin=pin),
+                'build-metadata.json': dict(commit=values['commit'], dirty=False, display='0.10'),
+                'sdptool-build.json': pin,
+            }
+            for name, record in records.items(): (output/name).write_text(json.dumps(record))
+            self.assertEqual(ci.verified_existing(output, values, pin), records['verified.json'])
+            rpm.write_bytes(payload + b'changed')
+            with self.assertRaises(ValueError): ci.verified_existing(output, values, pin)
+            rpm.write_bytes(payload)
+            for name, field, value in [('provenance.json','commit','other'),
+                                       ('build-metadata.json','dirty',True),
+                                       ('sdptool-build.json','commit','other')]:
+                invalid = dict(records[name], **{field:value})
+                (output/name).write_text(json.dumps(invalid))
+                with self.assertRaises(ValueError): ci.verified_existing(output, values, pin)
+                (output/name).write_text(json.dumps(records[name]))
+            (source/'VERSION').write_text('0.11\n')
+            with self.assertRaises(ValueError): ci.verified_existing(output, values, pin)
 
 
 if __name__ == '__main__':

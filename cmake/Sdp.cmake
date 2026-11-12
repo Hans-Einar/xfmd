@@ -19,5 +19,5 @@ install(PROGRAMS "${XFMD_SDUI_TOOLS_DIR}/sdui-preview" "${XFMD_SDUI_TOOLS_DIR}/s
 
 install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/LICENSES/go/" DESTINATION "${CMAKE_INSTALL_DOCDIR}/licenses/go")
 
-# Optional for ordinary development; local 0.9 delivery includes its exact producer.
+# Optional for ordinary development; the 0.10 RPM supplies its exact pinned producer.
 install(PROGRAMS "${XFMD_SDUI_TOOLS_DIR}/sdptool" DESTINATION libexec/xfmd OPTIONAL)
