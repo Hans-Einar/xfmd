@@ -10,6 +10,7 @@ import signal
 import sys
 import tempfile
 import time
+import uuid
 
 def window_titles(display):
     x = C.CDLL('libX11.so.6')
@@ -111,6 +112,30 @@ with tempfile.TemporaryDirectory() as temporary:
             if native.poll() is None:
                 os.killpg(native.pid, signal.SIGTERM)
                 native.wait(timeout=10)
+
+        # Native tools are exact-candidate test artifacts, outside the RPM. They
+        # exercise the installed producer and installed private FOX/resources.
+        workflow_environment = dict(environment, XFMD_SDP_TOOL=str(producer),
+                                    LD_LIBRARY_PATH='/usr/lib64/xfmd')
+        subprocess.run(['/native-probes/SdpReadingGuiTest'], env=workflow_environment, check=True, timeout=65)
+        for folder in ['ProjectManagement', 'KanBan']:
+            (project/'SDP'/folder).mkdir(exist_ok=True)
+        (project/'SDP/KanBan/board.json').write_text(json.dumps({'projectId':'RPM'}))
+        (project/'SDP/owner.md').write_text('# Disposable package verification authority\nCreate the isolated native Activity fixture.\n')
+        def activity(*args):
+            return json.loads(subprocess.check_output([producer, str(project), 'activity', *args, '--json'], text=True))
+        catalog = activity('list')['data']
+        request = dict(operationId=str(uuid.uuid4()), expectedHistoryRevision=catalog['historyRevision'],
+                       title='RPM native workflow', owner='project-owner', mandate='Verify installed Activity rendering.',
+                       scope=['SDL'], reason='Disposable package verification fixture')
+        request_file = base/'create-activity.json'
+        request_file.write_text(json.dumps(request))
+        created = activity('create', '--request', str(request_file), '--authority-source', 'owner.md')['data']
+        assert created['activityId']
+        activity_environment = dict(workflow_environment, XFMD_ACTIVITY_REAL_PROJECT=str(project),
+                                    XFMD_ACTIVITY_REAL_GROUP='Planned')
+        subprocess.run(['/native-probes/SdpActivityGuiTest'], env=activity_environment, check=True, timeout=65)
+        print('Installed native reading/render/source/history and real Activity workflows verified:', producer_identity['revision'])
 
     finally:
         if application is not None and application.poll() is None:

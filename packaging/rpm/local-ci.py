@@ -66,6 +66,12 @@ def verified_existing(output, values, producer_pin):
             producer.get('sha256') != producer_pin['sha256'] or
             producer.get('version') != producer_pin['version']):
         raise ValueError('Existing application/producer identity differs from candidate')
+    probes = json.loads((output/'native-probes.json').read_text())
+    if set(probes) != {'SdpReadingGuiTest', 'SdpActivityGuiTest'}:
+        raise ValueError('Existing native workflow probe inventory differs')
+    for name, digest in probes.items():
+        if hashlib.sha256((output/'native-probes'/name).read_bytes()).hexdigest() != digest:
+            raise ValueError('Existing native workflow probe changed')
     return verified
 
 
@@ -100,7 +106,7 @@ def publish_verified(args, values, output, source, container, verified, producer
             raise RuntimeError('Repository signature missing or invalid')
         (output/'signature.txt').write_text(report)
     with (output/'public-dnf.log').open('w') as log:
-        run([*container, '-v', str(source/'packaging')+':/probe:ro', BASE_IMAGE, 'bash',
+        run([*container, '-v', str(source/'packaging')+':/probe:ro', '-v', str(output/'native-probes')+':/native-probes:ro', BASE_IMAGE, 'bash',
              '/probe/rpm/verify-public.sh', values['package_version'], values['display'], values['commit'], producer_pin['commit']], stdout=log, stderr=subprocess.STDOUT)
     (output/'published.json').write_text(json.dumps(dict(verified, url=url,
         signed_sha256=hashlib.sha256((signed/expected).read_bytes()).hexdigest()), indent=2)+'\n')
@@ -199,7 +205,7 @@ def main():
         shutil.copy2(source/'packaging/rpm/predecessor.json', verify_input)
         with (output/'verify.log').open('w') as log:
             print('Verifying clean installation; log:', log.name, flush=True)
-            run([*container, '-v', str(verify_input)+':/packages:ro', '-v', str(source/'packaging/rpm')+':/probe:ro',
+            run([*container, '-v', str(verify_input)+':/packages:ro', '-v', str(source/'packaging/rpm')+':/probe:ro', '-v', str(output/'native-probes')+':/native-probes:ro',
                  BASE_IMAGE, 'bash', '/probe/verify-install.sh', expected, values['display'], values['commit'], producer_pin['commit']], stdout=log, stderr=subprocess.STDOUT)
         verified = dict(commit=values['commit'], rpm=expected, sha256=hashlib.sha256(rpms[0].read_bytes()).hexdigest())
         (output/'verified.json').write_text(json.dumps(verified, indent=2)+'\n')

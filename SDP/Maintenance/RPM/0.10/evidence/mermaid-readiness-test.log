@@ -1,0 +1,11 @@
+Internal ctest changing into directory: /tmp/xfmd-activity-management/build
+Test project /tmp/xfmd-activity-management/build
+    Start 82: StandaloneMermaidGuiTest
+1/1 Test #82: StandaloneMermaidGuiTest .........   Passed    1.08 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Label Time Summary:
+GUI    =   1.08 sec*proc (1 test)
+
+Total Test time (real) =   1.08 sec

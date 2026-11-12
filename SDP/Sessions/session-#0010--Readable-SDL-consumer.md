@@ -79,3 +79,18 @@ the earlier small-font finding in inspected A4 containment/FileApi figures.
 The updated target builder image is cached. Next: commit the native milestone and
 packaging source, then run clean exact-candidate RPM verification; publication
 still waits for coordinating final independent review.
+
+
+T001 package checkpoint: candidate bdd0602/0.10.0-75 stopped at 88/89 CTests;
+StandaloneMermaidGuiTest asserted before the documented 200 ms filter debounce and
+async row refresh. Corrected the test's bounded readiness wait, preserving its
+activation assertion; targeted native check passes. Environment explains 90 host
+vs 89 container (no Window Maker/XTEST tests, plus real producer reading test).
+
+Coordinator requested a quiescent checkpoint for Activity reference reconciliation;
+no build/test/edit ran during that hold. Resumed on explicit coordinator message.
+Final producer correction c3463b7 adds canonical generic Activity folder guidance.
+The successor package pins that exact archive and adds installed real Activity and
+reading/source/history native probe tools outside the RPM. Local preflight of the
+real Activity creation/native render passes. The next clean candidate build and
+public signature/DNF gates remain pending; nothing has been published.

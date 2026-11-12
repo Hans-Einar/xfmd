@@ -17,6 +17,14 @@ cmake -S . -B /work/build -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
 cargo fmt -p xfmd-diagram-contracts -p xfmd-mermaid-interpreter -p xfmd-diagram-layout -p xfmd-mermaid-ffi -- --check
 cmake --build /work/build --parallel "${BUILD_JOBS:-4}"
 ctest --test-dir /work/build --output-on-failure -j 2 | tee /output/ctest.log
+mkdir -p /output/native-probes
+cp /work/build/SdpReadingGuiTest /work/build/SdpActivityGuiTest /output/native-probes/
+python3 - <<'PROBES'
+import hashlib, json
+from pathlib import Path
+root = Path('/output/native-probes')
+Path('/output/native-probes.json').write_text(json.dumps({p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in root.iterdir()}, indent=2)+'\n')
+PROBES
 python3 packaging/rpm/test-local-ci.py
 python3 packaging/rpm/test-producer-pin.py
 runuser -u nobody -- python3 packaging/rpm/test-watch-main.py

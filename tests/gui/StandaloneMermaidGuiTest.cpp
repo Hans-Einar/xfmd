@@ -63,6 +63,11 @@ void run() {
     nativeClick(workspace->markdown, 10, 10);
   auto* tree = app.window->sidebar;
   auto* item = tree->getPathnameItem(path.c_str());
+  // The Files filter debounces for 200 ms and then refreshes asynchronously.
+  for (int i = 0; !item && i < 100; ++i) {
+    settleNative(app.app, 10);
+    item = tree->getPathnameItem(path.c_str());
+  }
   CHECK(item);
   tree->makeItemVisible(item);
   settleNative(app.app);

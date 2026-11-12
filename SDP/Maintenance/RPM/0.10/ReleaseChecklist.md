@@ -10,7 +10,7 @@ release log is not proof of publication. The project release contract governs.
 Owner selected XFMD 0.10 and explicitly authorized feature-branch RPM publication
 under ACTIVITY-SDP-0003 / PLAN-SDP-0028. No main merge is selected. Predecessor:
 signed public xfmd-0.9.0-71.el10_2.x86_64.rpm at 8893a32. Final consumer candidate
-is pending; matching producer is 5802355a8af6a89f9ea3fc035198c32d46d35567. Development evidence is
+is pending; matching producer is c3463b78d53ebf984b0f553ebe93a556fb3ac6a8. Development evidence is
 Reading-001; none of its checks establish release-candidate publication.
 
 The SDP publisher inventory/signing section below is inherited: this package

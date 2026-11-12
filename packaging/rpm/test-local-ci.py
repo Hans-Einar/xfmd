@@ -73,6 +73,10 @@ class ExistingPublicationTests(unittest.TestCase):
                 'build-metadata.json': dict(commit=values['commit'], dirty=False, display='0.10'),
                 'sdptool-build.json': pin,
             }
+            probes = output/'native-probes'
+            probes.mkdir()
+            for name in ('SdpReadingGuiTest', 'SdpActivityGuiTest'): (probes/name).write_bytes(b'verified native probe')
+            records['native-probes.json'] = {p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in probes.iterdir()}
             for name, record in records.items(): (output/name).write_text(json.dumps(record))
             self.assertEqual(ci.verified_existing(output, values, pin), records['verified.json'])
             rpm.write_bytes(payload + b'changed')
