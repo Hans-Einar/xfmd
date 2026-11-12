@@ -42,6 +42,22 @@ void SdpPanel::buildTabs(const std::vector<std::string>& ids) {
       auto* tree = new SdpTree(page);
       trees.push_back(tree);
       tree->expanded = [this, tree](NavigationItem* item) { expand(tree, item); };
+      tree->collapsed = [this, tree](NavigationItem* value) {
+        auto* item = dynamic_cast<SdpItem*>(value);
+        if (!item) return;
+        tree->cancelActivation();
+        std::function<void(FXTreeItem*)> count = [&](FXTreeItem* first) {
+          for (auto* row=first;row;row=row->getNext()) {
+            if (dynamic_cast<SdpItem*>(row) && rows) --rows;
+            count(row->getFirst());
+          }
+        };
+        count(item->getFirst());
+        while (item->getFirst()) tree->removeItem(item->getFirst());
+        item->populated = false;
+        const auto& node = snapshot.nodes.at(item->node);
+        item->setHasItems(node.childrenDeferred || !node.children.empty() || !node.diagnostic.empty());
+      };
       tree->activated = [this, tree](const IndexAction& action) {
         auto found = snapshot.nodes.find(action.target);
         if (found == snapshot.nodes.end())
@@ -50,8 +66,8 @@ void SdpPanel::buildTabs(const std::vector<std::string>& ids) {
         if (!row)
           return;
         const auto& node = snapshot.nodes.at(row->node);
-        if (node.childrenDeferred) {
-          if (modelRequested) modelRequested(node.target);
+        if (node.childrenDeferred && (node.expansionTarget.operation.empty() || !sdpDisplayAction(row->target))) {
+          if (modelRequested) modelRequested(node.expansionTarget.operation.empty() ? node.target : node.expansionTarget);
           return;
         }
         if (node.kind == "viewpoint") {
@@ -93,7 +109,9 @@ void SdpPanel::buildTabs(const std::vector<std::string>& ids) {
   recalc();
 }
 void SdpPanel::mergeModel(const SdpReply& reply, const SdpTarget& target) {
-  present(expandSdpModel(deferred ? *deferred : snapshot, reply, target));
+  present(target.operation == "activity-tree" ?
+          expandSdpPage(deferred ? *deferred : snapshot, reply, target) :
+          expandSdpModel(deferred ? *deferred : snapshot, reply, target));
 }
 void SdpPanel::message(const std::string& text) {
   status->setText(text.substr(0, 100).c_str());
@@ -147,6 +165,12 @@ void SdpPanel::present(SdpReply value) {
   buildTabs(roots);
   for (std::size_t i = 0; i < trees.size(); ++i) {
     const auto& root = snapshot.nodes.at(roots[i]);
+    if (sdpDisplayAction(root.target)) {
+      IndexAction action;action.kind=IndexActionKind::Command;action.target=root.id;
+      auto* overview=new SdpItem(root.label + " overview",root.id,"",{root.id},std::move(action));
+      overview->node=root.id;overview->populated=true;overview->key=root.id+"/overview";
+      trees[i]->appendItem(nullptr,overview);++rows;
+    }
     for (const auto& child : root.children) {
       if (rows >= 4096) {
         trees[i]->appendItem(nullptr,
@@ -255,7 +279,7 @@ void SdpPanel::expand(NavigationTree* tree, NavigationItem* value) {
     return;
   const auto& node = snapshot.nodes.at(item->node);
   if (node.childrenDeferred) {
-    if (modelRequested) modelRequested(node.target);
+    if (modelRequested) modelRequested(node.expansionTarget.operation.empty() ? node.target : node.expansionTarget);
     return; // Keep retryable on failure; unloaded is not an empty model.
   }
   item->populated = true;
@@ -263,7 +287,7 @@ void SdpPanel::expand(NavigationTree* tree, NavigationItem* value) {
     tree->appendItem(item, new NavigationItem(item->diagnostic));
   for (const auto& child : sdpDisplayChildren(snapshot, node)) {
     if (rows >= 4096) {
-      tree->appendItem(item, new NavigationItem("Display limit — Refresh to reset"));
+      tree->appendItem(item, new NavigationItem("Display limit — collapse other branches and reopen this branch"));
       break;
     }
     add(tree, item, child, item->ancestors, item->source);

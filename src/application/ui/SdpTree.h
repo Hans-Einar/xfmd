@@ -14,6 +14,8 @@ struct SdpItem : NavigationItem {
 class SdpTree : public NavigationTree {
 public:
   std::function<void(const std::string&, const FX::FXEvent&)> contextRequested;
+  std::function<void(NavigationItem*)> collapsed;
+  FX::FXbool collapseTree(FX::FXTreeItem*, FX::FXbool notify = false) override;
   explicit SdpTree(FX::FXComposite* parent) : NavigationTree(parent) {}
   long handle(FX::FXObject*, FX::FXSelector, void*) override;
 };

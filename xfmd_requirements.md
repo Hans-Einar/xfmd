@@ -595,3 +595,11 @@ A failed/stale request must preserve the current document and prior navigation;
 refresh/project changes must invalidate pending requests. Older explicit producer
 command contracts retain eager compatibility. An unavailable/malformed producer
 must surface its diagnostic rather than silently changing discovery modes.
+
+## Activity document browsing — Activity0002 A3
+
+UR-046/SR-029 include producer-owned Activity navigation and readable generated
+Activity pages. Native clients preserve returned roots, labels, order and document
+links. Model-free `activity-view` targets use their explicit project/URI/revision;
+failed or stale generation and refresh preserve current documents and edits.
+Activity membership, lifecycle and timelines remain producer responsibilities.

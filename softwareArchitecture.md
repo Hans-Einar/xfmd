@@ -703,3 +703,12 @@ The package contains private shared FOX and notices/sources, while application
 layers retain their existing boundaries. Optional SDPTool/SDUI helpers remain
 independent integrations, not copied from unversioned workstation installations.
 [Local CI contract](packaging/rpm/README.md) defines failure/retry and installation.
+
+### Activity document consumption — Activity0002 A3
+
+FUNC-032 consumes producer-owned Activities roots through the existing generic
+SdpPanel topology. SdpNavigation supports model-free `activity-view` generation,
+using the same cancellable job and private bundle admission as SDL selections.
+SdpProtocol checks the Activity profile/source; SdpNavigation checks revision,
+selected area, output containment and document token. Activity lifecycle,
+classification, histories and timelines remain exclusively in SDPTool.

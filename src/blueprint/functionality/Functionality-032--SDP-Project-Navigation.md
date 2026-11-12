@@ -378,3 +378,32 @@ the prior snapshot and document and allow retry. Refresh discards loaded graphs.
 The installed private SDPTool provides the matching additive contract; explicit
 XFMD_SDP_TOOL overrides it and gh sdp remains the fallback. Existing byte/per-model
 and presentation guards are separate KB025 follow-up obligations.
+
+### Activity producer documents — Activity0002 A3
+
+The coordinating SDP Activity0002/PLAN-SDP-0027 selects a thin consumer extension
+under existing UR-046/SR-029 and FUNC-032. Producer roots, labels, ordering and
+membership remain authoritative. An Activities root replaces Sessions only when
+returned by the producer; XFMD contains no Activity lifecycle or phase rules.
+
+`SdpNavigation::activate` invokes an `activity-view` target with the producer URI,
+revision and a private output directory through `activity view`; no SDL model is
+required. `decodeSdpReply` admits `activity-view` results only with profile
+`activity/1` and an absolute source area. Existing token, dirty-buffer, cancellation,
+revision and bundle containment checks also apply. The result source must equal
+the selected SDP area. Ordinary documents continue through `open` targets.
+Generated Activity links retain their originating project and revision context.
+
+Model mapping remains FUNC-032 → SdpProjectNavigation in the canonical
+`SDP/SDL/XFMD/XfmdDesktop.design`; its ownership, runtime allocation and
+SdpToolProtocol consumption already cover these adapter calls. No new runtime
+service, parser or business-rule owner is introduced. The blueprint-level model
+does not prove wire validation or native behavior; targeted tests supply that evidence.
+
+Deferred producer nodes may carry an independent `expansionTarget` operation
+`activity-tree`. Native expansion requests the opaque URI and revision through
+`activity tree`. `expandSdpPage` validates project, revision, exact replacement
+parent and descendant identities before atomically merging the returned subtree.
+A readable `target` remains the click action while expansion performs no document
+selection. Continuation pages use the same producer-defined targets. SDL deferred
+model behavior retains its existing separate validation and action path.

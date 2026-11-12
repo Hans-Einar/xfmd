@@ -1,6 +1,12 @@
 #include "SdpTree.h"
 using namespace FX;
 namespace xfmd {
+FXbool SdpTree::collapseTree(FXTreeItem* item, FXbool notify) {
+  const bool wasExpanded = item && item->isExpanded();
+  auto result = NavigationTree::collapseTree(item, notify);
+  if (wasExpanded && collapsed) collapsed(static_cast<NavigationItem*>(item));
+  return result;
+}
 long SdpTree::handle(FXObject* sender, FXSelector selector, void* data) {
   if (FXSELTYPE(selector) == SEL_RIGHTBUTTONPRESS) {
     cancelActivation();

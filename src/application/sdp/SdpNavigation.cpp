@@ -91,7 +91,7 @@ void SdpNavigation::activate(const SdpTarget& target) {
     return;
   }
   if (target.operation != "open" && target.operation != "select" &&
-      target.operation != "sdui-preview") {
+      target.operation != "sdui-preview" && target.operation != "activity-view") {
     message("Unsupported SDP action: " + target.operation);
     return;
   }
@@ -107,7 +107,10 @@ void SdpNavigation::activate(const SdpTarget& target) {
     app.open(target.path);
     return;
   }
-  if (target.model.empty() || target.revision.empty() ||
+  if ((target.operation != "activity-view" && target.model.empty()) || target.revision.empty() ||
+      (target.operation == "activity-view" &&
+       (!target.model.empty() || target.uri.rfind("activity-view://" + project + "/", 0) != 0 ||
+        target.uri.size() > 8192 || target.uri.find_first_of("\t\r\n#") != std::string::npos)) ||
       (target.operation == "select" &&
        (target.uri.rfind("sdl-view://" + project + "/", 0) != 0 || target.uri.size() > 8192 ||
         target.uri.find_first_of("\t\r\n") != std::string::npos)) ||
@@ -132,7 +135,9 @@ void SdpNavigation::activate(const SdpTarget& target) {
     std::vector<std::string> args{root,         target.operation,      "--model",
                                   target.model, "--revision",          target.revision,
                                   "--output",   pendingBundle.string()};
-    if (target.operation == "select") {
+    if (target.operation == "activity-view") {
+      args = {root, "activity", "view", "--uri", target.uri, "--revision", target.revision, "--output", pendingBundle.string()};
+    } else if (target.operation == "select") {
       args.push_back("--uri");
       args.push_back(target.uri);
     } else {
@@ -166,7 +171,7 @@ bool SdpNavigation::follow(const std::string& document, const std::string& uri) 
     return followSdlSource(document, uri);
   if (uri.rfind("sdui-source://", 0) == 0)
     return followSduiSource(document, uri);
-  if (uri.rfind("sdl-view:", 0) != 0)
+  if (uri.rfind("sdl-view:", 0) != 0 && uri.rfind("activity-view:", 0) != 0)
     return false;
   auto context = contexts.find(document);
   if (context == contexts.end())
@@ -176,7 +181,7 @@ bool SdpNavigation::follow(const std::string& document, const std::string& uri) 
     return true;
   }
   auto target = context->second.target;
-  target.operation = "select";
+  target.operation = uri.rfind("activity-view:", 0) == 0 ? "activity-view" : "select";
   target.uri = uri;
   activate(target);
   return true;
@@ -186,7 +191,8 @@ bool SdpNavigation::deliver(const SdpReply& reply) {
     message("SDP result ignored: the current document changed");
     return false;
   }
-  if (reply.revision != selection.revision || !sdpContained(pendingBundle.string(), reply.entry) ||
+  if ((selection.operation == "activity-view" && (reply.source != area || reply.profile != "activity/1")) ||
+      reply.revision != selection.revision || !sdpContained(pendingBundle.string(), reply.entry) ||
       fs::canonical(reply.directory) != fs::canonical(pendingBundle)) {
     message("SDP result has the wrong revision or output location");
     return false;

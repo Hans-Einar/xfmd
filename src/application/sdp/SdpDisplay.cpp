@@ -20,7 +20,7 @@ const SdpNode* resolve(const SdpReply& r, const std::string& id) {
 }
 } // namespace
 bool sdpDisplayAction(const SdpTarget& t) {
-  return t.operation == "open" || t.operation == "select" ||
+  return t.operation == "open" || t.operation == "select" || t.operation == "activity-view" ||
          (t.operation == "sdui-preview" && !t.entry.empty());
 }
 std::vector<std::string> sdpDisplayChildren(const SdpReply& r, const SdpNode& parent) {

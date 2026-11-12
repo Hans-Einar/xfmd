@@ -10,7 +10,7 @@ struct SdpNode {
   bool childrenDeferred = false;
   std::string id, kind, label, state, diagnostic, reference, cardType;
   std::vector<std::string> children;
-  SdpTarget target, overviewTarget;
+  SdpTarget target, overviewTarget, expansionTarget;
 };
 struct SdpSource {
   std::string id, kind, path, revision;
@@ -23,7 +23,7 @@ struct SdpReply {
   std::string model, navigationMode;
   std::vector<SdpSourceLink> sourceLinks;
   std::string operation, status, root, area, project, revision, entry, directory;
-  std::string source, diagnostic;
+  std::string source, diagnostic, profile;
   std::map<std::string, SdpNode> nodes;
   std::vector<std::string> roots;
   std::map<std::string, SdpSource> sources;
@@ -31,6 +31,7 @@ struct SdpReply {
 };
 // Throws a user-visible diagnostic on malformed/unsupported/oversized replies.
 SdpReply decodeSdpReply(const std::string&);
+SdpReply expandSdpPage(const SdpReply&, const SdpReply&, const SdpTarget&);
 SdpReply expandSdpModel(const SdpReply&, const SdpReply&, const SdpTarget&);
 std::string sdpError(const std::string&);
 std::string sdpArea(const std::string& root);

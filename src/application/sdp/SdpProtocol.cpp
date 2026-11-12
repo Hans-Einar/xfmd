@@ -79,7 +79,7 @@ SdpReply decodeSdpReply(const std::string& bytes) {
   }
   if (value.get("schema").text(true) != "sdptool/0.2")
     throw std::runtime_error("Invalid SDP operation schema");
-  if (result.operation == "discover" || result.operation == "tree") {
+  if (result.operation == "discover" || result.operation == "tree" || result.operation == "activity-tree") {
     if (result.operation == "discover") {
     result.status = value.get("status").text(true);
     result.root = value.get("root").text(true);
@@ -107,9 +107,9 @@ SdpReply decodeSdpReply(const std::string& bytes) {
         value.get("operation").text(true) != "tree")
       throw std::runtime_error("Missing SDP navigation snapshot");
     } else {
-      result.model = value.get("model").text(true);
+      result.model = value.get("model").text(result.operation == "tree");
       result.revision = value.get("revision").text(true);
-      result.sources[result.model] = {result.model, "sdl", "", result.revision};
+      if (result.operation == "tree") result.sources[result.model] = {result.model, "sdl", "", result.revision};
     }
     result.project = value.get("project").text(true);
     if (auto depth = value.get("expansionDepthLimit"); depth.value) {
@@ -167,7 +167,25 @@ SdpReply decodeSdpReply(const std::string& bytes) {
             (!node.target.model.empty() && node.target.model != t.model))
           throw std::runtime_error("Invalid or stale SDP overview target; Refresh");
       }
-      if (node.childrenDeferred) {
+      if (auto expansion = item.get("expansionTarget"); expansion.value) {
+        node.expansionTarget = {expansion.get("operation").text(true), expansion.get("project").text(true),
+                               expansion.get("model").text(), expansion.get("uri").text(true),
+                               expansion.get("revision").text(true), expansion.get("path").text(),
+                               expansion.get("entry").text()};
+        const auto& t = node.expansionTarget;
+        if (!node.childrenDeferred || !node.children.empty() || !node.reference.empty() ||
+            t.operation != "activity-tree" || t.project != result.project ||
+            !t.model.empty() || !t.path.empty() || !t.entry.empty() ||
+            t.uri.rfind("activity-tree://" + result.project + "/", 0) != 0)
+          throw std::runtime_error("Invalid SDP page expansion target");
+      }
+      if (node.target.operation == "activity-view") {
+        const auto& t = node.target;
+        if (!t.model.empty() || !t.path.empty() || !t.entry.empty() || t.revision.empty() ||
+            t.uri.rfind("activity-view://" + result.project + "/", 0) != 0)
+          throw std::runtime_error("Invalid Activity view target");
+      }
+      if (node.childrenDeferred && node.expansionTarget.operation.empty()) {
         auto source = result.sources.find(node.target.model);
         if (result.navigationMode != "lazy-sdl" || node.kind != "source" ||
             node.state != "validated" || !node.children.empty() || !node.reference.empty() ||
@@ -199,10 +217,16 @@ SdpReply decodeSdpReply(const std::string& bytes) {
     result.diagnostic = value.get("diagnostic").text(true);
     if (result.status != "prototype" && result.status != "prototype-unbound")
       throw std::runtime_error("Unsupported SDUI readiness status");
-  } else if (result.operation == "select" || result.operation == "sdui-preview" ||
+  } else if (result.operation == "select" || result.operation == "activity-view" || result.operation == "sdui-preview" ||
              result.operation == "preview") {
     result.entry = value.get("entry").text(true);
     result.directory = value.get("directory").text(true);
+    if (result.operation == "activity-view") {
+      result.profile = value.get("profile").text(true);
+      result.source = value.get("source").text(true);
+      if (result.profile != "activity/1" || !std::filesystem::path(result.source).is_absolute())
+        throw std::runtime_error("Invalid Activity view source/profile");
+    }
     result.revision = value.get("revision").text(true);
     if (auto links = value.get("sourceLinks"); links.value) {
       std::set<std::string> ids, paths, snapshots;

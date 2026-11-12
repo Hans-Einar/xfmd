@@ -26,15 +26,19 @@ void SdpNavigation::readDiscovery() {
   start("discover", std::move(args));
 }
 void SdpNavigation::expandModel(const SdpTarget& target) {
+  const bool page = target.operation == "activity-tree";
   const auto source = sources.find(target.model);
-  if (!lazySdl || target.operation != "tree" || target.project != project ||
+  if (page ? (target.project != project || target.revision.empty() ||
+              target.uri.rfind("activity-tree://" + project + "/",0) != 0) : (!lazySdl || target.operation != "tree" || target.project != project ||
       source == sources.end() || source->second.kind != "sdl" ||
-      source->second.revision != target.revision) {
+      source->second.revision != target.revision)) {
     message("SDP model changed; Refresh before expanding");
     return;
   }
-  if (expanding.model == target.model || std::any_of(expansions.begin(), expansions.end(),
-      [&](const auto& t) { return t.model == target.model; })) return;
+  auto same = [&](const SdpTarget& t) { return t.operation == target.operation &&
+      (page ? t.uri == target.uri : t.model == target.model); };
+  if (same(expanding) || std::any_of(expansions.begin(), expansions.end(),
+      same)) return;
   expansions.push_back(target);
   nextExpansion();
 }
@@ -42,6 +46,11 @@ void SdpNavigation::nextExpansion() {
   if (!pendingOperation.empty() || expansions.empty() || refreshQueued) return;
   expanding = expansions.front();
   expansions.erase(expansions.begin());
+  if (expanding.operation == "activity-tree") {
+    message("Loading navigation page…");
+    start("activity-tree", {root, "activity", "tree", "--uri", expanding.uri, "--revision", expanding.revision});
+    return;
+  }
   message("Loading SDL model…");
   start("tree", {root, "tree", "--model", expanding.model, "--revision",
                  expanding.revision, "--model-only"});
@@ -82,7 +91,7 @@ void SdpNavigation::poll() {
       sources = reply.sources;
       app.window->workspacePanel->sdp->present(std::move(reply));
       app.window->status->setText(app.window->workspacePanel->sdp->status->getText());
-    } else if (reply.operation == "tree") {
+    } else if (reply.operation == "tree" || reply.operation == "activity-tree") {
       app.window->workspacePanel->sdp->mergeModel(reply, expanding);
       app.window->status->setText(app.window->workspacePanel->sdp->status->getText());
     } else {
