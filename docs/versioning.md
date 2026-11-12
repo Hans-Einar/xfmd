@@ -1,14 +1,14 @@
 # Version and build identity
 
-XFMD displays only `major.minor`, currently `0.9`, in the window title and status
-line; `xfmd --version` prints `xfmd 0.9`. The owner's 2026-11-10 request supersedes
+XFMD displays only `major.minor`, currently `0.10`, in the window title and status
+line; `xfmd --version` prints `xfmd 0.10`. The owner's 2026-11-10 request supersedes
 the earlier visible branch/PR, commit-count and `+dirty` suffixes. Technical
 provenance remains in generated and installed `xfmd-build.json`.
 
 `VERSION` is the sole source of major/minor. Major changes for a deliberate major
 product or compatibility break; minor changes for an explicitly selected feature
 delivery. A phase, milestone or build does not automatically increment major/minor.
-The current product version is `0.9`; CPack derives package version `0.9.0`.
+The current product version is `0.10`; CPack derives package version `0.10.0`.
 
 ## Product milestone decision — 2026-09-24
 
@@ -133,7 +133,7 @@ signed default and the project's SDP installation receipt stay unchanged.
 ## Automatic AlmaLinux RPM revisions — 2026-11-11
 
 The owner selects local CI and automatic publication after new main commits.
-RPM Version is VERSION plus `.0` (currently `0.9.0`). RPM Release is the full
+RPM Version is VERSION plus `.0` (currently `0.10.0`). RPM Release is the full
 first-parent commit count plus `.el10_2`. A merge counts once in this packaging
 revision; this is separate from the all-reachable count retained in JSON.
 A new main commit therefore upgrades through DNF without changing the visible
@@ -143,3 +143,14 @@ requires exact committed inputs, local tests, clean package verification and
 server signing; only a successful public DNF check records watcher success.
 See [local CI](../packaging/rpm/README.md) and
 [release work](../SDP/Maintenance/RPM/Plan.md). GitHub Release tags remain separate.
+
+
+## Product milestone decision — Activity0003
+
+The owner explicitly selects **0.10** for readable producer-owned SDL browsing,
+including generic native consumption and the exact matching private SDPTool in
+the RPM. This is a selected minor feature delivery under the existing contract.
+Protocol compatibility retains older producers and existing selection URI handling;
+producer order/actions replace native SDL display repairs only when advertised.
+Package publication from the qualified feature branch is authorized; merging main
+is a separate action. Version selection does not claim publication or acceptance.

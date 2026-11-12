@@ -20,7 +20,7 @@ struct SdpSourceLink {
 };
 struct SdpReply {
   bool lazySdl = false;
-  std::string model, navigationMode;
+  std::string model, navigationMode, presentation;
   std::vector<SdpSourceLink> sourceLinks;
   std::string operation, status, root, area, project, revision, entry, directory;
   std::string source, diagnostic, profile;

@@ -14,7 +14,7 @@ SdpReply expandSdpPage(const SdpReply& current, const SdpReply& page, const SdpT
   if (parent == current.nodes.end() || !parent->second.childrenDeferred ||
       target.operation != "activity-tree" || page.operation != "activity-tree" ||
       target.project != current.project || page.project != current.project ||
-      page.revision != target.revision || !page.model.empty() ||
+      page.revision != target.revision || page.presentation != current.presentation || !page.model.empty() ||
       page.roots != std::vector<std::string>{parent->first}) fail();
   const auto replacement = page.nodes.find(parent->first);
   if (replacement == page.nodes.end() || replacement->second.childrenDeferred ||
@@ -47,6 +47,7 @@ SdpReply expandSdpModel(const SdpReply& current, const SdpReply& model, const Sd
   if (model.operation != "tree" || target.operation != "tree" ||
       model.project != current.project || target.project != current.project ||
       model.model != target.model || model.revision != target.revision ||
+      model.presentation != current.presentation ||
       source == current.sources.end() || source->second.kind != "sdl" ||
       source->second.revision != target.revision || node == current.nodes.end() ||
       !node->second.childrenDeferred || model.roots != std::vector<std::string>{"sdl"} ||
@@ -64,12 +65,23 @@ SdpReply expandSdpModel(const SdpReply& current, const SdpReply& model, const Sd
           t->revision != target.revision || !t->path.empty() || !t->entry.empty() ||
           t->uri.rfind("sdl-view://" + target.project + "/", 0) != 0)) fail();
   }
+  if (current.presentation == "producer-reading/1") {
+    if (model.nodes.at("sdl").target.operation != "select") fail();
+    const auto& t = node->second.expansionTarget;
+    if (t.operation != target.operation || t.project != target.project ||
+        t.model != target.model || t.revision != target.revision ||
+        !t.uri.empty() || !target.uri.empty()) fail();
+  }
   auto merged = current; // Validate before replacing any visible snapshot.
   for (const auto& [key, n] : model.nodes)
     if (key != "sdl") merged.nodes.emplace(key, n);
   auto& parent = merged.nodes.at(id);
   parent.children = model.nodes.at("sdl").children;
   parent.childrenDeferred = false;
+  if (current.presentation == "producer-reading/1") {
+    parent.expansionTarget = {};
+    parent.target = model.nodes.at("sdl").target;
+  }
   return merged;
 }
 } // namespace xfmd

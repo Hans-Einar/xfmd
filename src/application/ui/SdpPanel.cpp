@@ -66,11 +66,12 @@ void SdpPanel::buildTabs(const std::vector<std::string>& ids) {
         if (!row)
           return;
         const auto& node = snapshot.nodes.at(row->node);
-        if (node.childrenDeferred && (node.expansionTarget.operation.empty() || !sdpDisplayAction(row->target))) {
+        const bool producerReading = snapshot.presentation == "producer-reading/1";
+        if (!producerReading && node.childrenDeferred && (node.expansionTarget.operation.empty() || !sdpDisplayAction(row->target))) {
           if (modelRequested) modelRequested(node.expansionTarget.operation.empty() ? node.target : node.expansionTarget);
           return;
         }
-        if (node.kind == "viewpoint") {
+        if (!producerReading && node.kind == "viewpoint") {
           if (!node.overviewTarget.operation.empty()) {
             if (activated) activated(node.overviewTarget);
             return;
@@ -167,7 +168,7 @@ void SdpPanel::present(SdpReply value) {
     const auto& root = snapshot.nodes.at(roots[i]);
     if (sdpDisplayAction(root.target)) {
       IndexAction action;action.kind=IndexActionKind::Command;action.target=root.id;
-      auto* overview=new SdpItem(root.label + " overview",root.id,"",{root.id},std::move(action));
+      auto* overview=new SdpItem(snapshot.presentation == "producer-reading/1" ? root.label : root.label + " overview",root.id,"",{root.id},std::move(action));
       overview->node=root.id;overview->populated=true;overview->key=root.id+"/overview";
       trees[i]->appendItem(nullptr,overview);++rows;
     }
@@ -268,7 +269,7 @@ void SdpPanel::add(NavigationTree* tree, NavigationItem* parent, const std::stri
               std::to_string(row->id.size()) + ":" + row->id;
   tree->appendItem(parent, item);
   item->populated = row->terminal;
-  if (row->terminal && !row->diagnostic.empty())
+  if (snapshot.presentation != "producer-reading/1" && row->terminal && !row->diagnostic.empty())
     item->setText((row->label + " — " + row->diagnostic).c_str());
   item->setHasItems(!row->terminal && (node.childrenDeferred || !node.children.empty() || !row->diagnostic.empty()));
 }

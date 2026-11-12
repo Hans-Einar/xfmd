@@ -60,6 +60,7 @@ SdpReply decodeSdpReply(const std::string& bytes) {
   auto doc = parse(bytes);
   Json value{doc.get()};
   SdpReply result;
+  std::string readingCapability;
   result.operation = value.get("operation").text(true);
   if (result.operation == "actions") {
     if (value.get("schema").text(true) != "sdptool.actions/1")
@@ -99,6 +100,9 @@ SdpReply decodeSdpReply(const std::string& bytes) {
           throw std::runtime_error("Duplicate SDP source identity");
       }
     }
+    readingCapability = value.get("capabilities").get("readingNavigation").text();
+    if (!readingCapability.empty() && readingCapability != "1")
+      throw std::runtime_error("Unsupported SDP reading navigation capability");
     result.navigationMode = value.get("navigationMode").text();
     if (!result.navigationMode.empty() && result.navigationMode != "lazy-sdl")
       throw std::runtime_error("Unsupported SDP navigation mode");
@@ -111,6 +115,12 @@ SdpReply decodeSdpReply(const std::string& bytes) {
       result.revision = value.get("revision").text(true);
       if (result.operation == "tree") result.sources[result.model] = {result.model, "sdl", "", result.revision};
     }
+    result.presentation = value.get("presentation").text();
+    if (!result.presentation.empty() && result.presentation != "producer-reading/1")
+      throw std::runtime_error("Unsupported SDP navigation presentation");
+    if (result.operation == "discover" &&
+        ((readingCapability == "1") != (result.presentation == "producer-reading/1")))
+      throw std::runtime_error("SDP reading capability does not match navigation presentation");
     result.project = value.get("project").text(true);
     if (auto depth = value.get("expansionDepthLimit"); depth.value) {
       std::uint64_t limit = 0;
@@ -169,16 +179,34 @@ SdpReply decodeSdpReply(const std::string& bytes) {
       }
       if (auto expansion = item.get("expansionTarget"); expansion.value) {
         node.expansionTarget = {expansion.get("operation").text(true), expansion.get("project").text(true),
-                               expansion.get("model").text(), expansion.get("uri").text(true),
+                               expansion.get("model").text(), expansion.get("uri").text(),
                                expansion.get("revision").text(true), expansion.get("path").text(),
                                expansion.get("entry").text()};
         const auto& t = node.expansionTarget;
+        const bool modelExpansion = result.presentation == "producer-reading/1" && t.operation == "tree";
+        auto source = result.sources.find(t.model);
         if (!node.childrenDeferred || !node.children.empty() || !node.reference.empty() ||
-            t.operation != "activity-tree" || t.project != result.project ||
-            !t.model.empty() || !t.path.empty() || !t.entry.empty() ||
-            t.uri.rfind("activity-tree://" + result.project + "/", 0) != 0)
+            t.project != result.project || !t.path.empty() || !t.entry.empty() ||
+            (modelExpansion ? (node.kind != "source" || node.state != "validated" ||
+              node.id != "sdl/" + t.model || source == result.sources.end() ||
+              source->second.kind != "sdl" || source->second.revision != t.revision ||
+              !t.uri.empty()) : (t.operation != "activity-tree" || !t.model.empty() ||
+              t.uri.rfind("activity-tree://" + result.project + "/", 0) != 0)))
           throw std::runtime_error("Invalid SDP page expansion target");
       }
+      if (result.presentation == "producer-reading/1" && node.target.operation == "select") {
+        const auto& t = node.target;
+        auto source = result.sources.find(t.model);
+        if (source == result.sources.end() || source->second.kind != "sdl" ||
+            t.revision.empty() || t.revision != source->second.revision ||
+            t.uri.rfind("sdl-view://" + result.project + "/", 0) != 0 ||
+            !t.path.empty() || !t.entry.empty())
+          throw std::runtime_error("Invalid or stale SDP reading target; Refresh");
+      }
+      if (result.presentation == "producer-reading/1" && node.childrenDeferred &&
+          node.expansionTarget.operation.empty())
+        throw std::runtime_error("SDP reading expansion requires an independent target");
+
       if (node.target.operation == "activity-view") {
         const auto& t = node.target;
         if (!t.model.empty() || !t.path.empty() || !t.entry.empty() || t.revision.empty() ||

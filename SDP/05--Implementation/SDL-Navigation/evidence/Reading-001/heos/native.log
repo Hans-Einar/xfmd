@@ -1,0 +1,28 @@
+reading: discovered native tabs
+reading: deferred entry visible
+reading: entry document delivered
+reading: structure native/PDF visuals 12
+reading: model children loaded
+reading: VP01 backend Semantic profile 23; libavoid transaction 1: 2.122515ms; cooperative deadline; label leaders omitted: 0
+reading: native VP01 landing admitted, diagrams 1, visuals 1
+reading: native VP02 landing admitted, diagrams 0, visuals 12
+reading: VP03 backend Libavoid; libavoid transaction 1: 2.865222ms; libavoid transaction 2: 1.624978ms; libavoid transaction 3: 2.049547ms; final label-only placement on completed routes; constrained parallel separation: Quality { length: 7186.255615234375, bends: 33, crossings: 19, parallel_overlaps: 0, close_parallel_segments: 4, node_traversals: 0, label_collisions: 0, attachment_intrusions: 0 }; label leaders omitted: 3
+reading: native VP03 landing admitted, diagrams 1, visuals 1
+reading: VP04 backend Libavoid; libavoid transaction 1: 1.458175ms; label leaders omitted: 0
+reading: native VP04 landing admitted, diagrams 1, visuals 1
+reading: native VP05 landing admitted, diagrams 0, visuals 0
+reading: VP06 backend Libavoid; libavoid transaction 1: 81.22µs; label leaders omitted: 0
+reading: VP06 backend Libavoid; libavoid transaction 1: 708.913µs; label leaders omitted: 1
+reading: native VP06 landing admitted, diagrams 2, visuals 2
+reading: VP07 backend Libavoid; one spacing retry after no valid selected port/direction: edge 6 [(407.33331298828125, 352.14923095703125), (838.6666564941406, 352.1458435058594)]; failed routing/labels attempt 28.882135ms, included in total time; libavoid transaction 1: 5.723304ms; label leaders omitted: 3
+reading: native VP07 landing admitted, diagrams 1, visuals 1
+reading: native VP08 landing admitted, diagrams 0, visuals 6
+reading: VP09 backend Libavoid; libavoid transaction 1: 568.31µs; label leaders omitted: 3
+reading: VP09 backend Libavoid; libavoid transaction 1: 1.419425ms; libavoid transaction 2: 1.062906ms; libavoid transaction 3: 1.27409ms; final label-only placement on completed routes; constrained parallel separation: Quality { length: 1741.8729133605957, bends: 14, crossings: 2, parallel_overlaps: 0, close_parallel_segments: 1, node_traversals: 0, label_collisions: 0, attachment_intrusions: 0 }; label leaders omitted: 2
+reading: VP09 backend Libavoid; libavoid transaction 1: 263.742µs; label leaders omitted: 2
+reading: native VP09 landing admitted, diagrams 3, visuals 3
+reading: VP10 backend Semantic profile 9; native family layout; cooperative deadline; label leaders omitted: 0
+reading: VP10 backend Semantic profile 9; native family layout; cooperative deadline; label leaders omitted: 0
+reading: native VP10 landing admitted, diagrams 2, visuals 2
+reading: native VP11 landing admitted, diagrams 0, visuals 0
+PASS

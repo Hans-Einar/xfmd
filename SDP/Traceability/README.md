@@ -83,3 +83,13 @@ interaction and real-model PDF evidence are distinct from full Session completio
 [N3f-002](../05--Implementation/SDL-Navigation/evidence/N3f-002/README.md) records
 FUNC-024 measured-caption retry, exact fork adoption and verified DocumentReferences
 repair. The ChapterNavigation baseline failure remains linked to KB020/028.
+
+
+[Reading-001](../05--Implementation/SDL-Navigation/evidence/Reading-001/README.md)
+links coordinated ACTIVITY-SDP-0003 / PLAN-SDP-0028 to UR-046/SR-029 and FUNC-032:
+generic advertised producer presentation, exact labels/order/primary actions,
+independent deferred model loading and preserved source/history guards. The
+existing SdpProjectNavigation/SdpProjects/SdpToolProtocol model mapping remains
+structurally accurate. Development native/PDF evidence covers the fixture and
+read-only HEOS Contracts walkthrough. Final integrated review, source pin and
+signed RPM/public DNF qualification remain separate pending gates.

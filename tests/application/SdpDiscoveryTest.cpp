@@ -19,6 +19,18 @@ void reject(const std::string& bytes) {
 void run() {
   const std::string deferred = R"({"schema":"sdptool/0.2","operation":"discover","navigationMode":"lazy-sdl","status":"valid","root":"/project","area":"/project/SDP","sources":[{"id":"m","kind":"sdl","source":"SDP/Test.design","revision":"r1"}],"navigation":{"schema":"sdptool/0.2","operation":"tree","project":"TEST","roots":["sdl"],"nodes":[{"id":"sdl","kind":"tab","label":"SDL","children":["sdl/m"]},{"id":"sdl/m","kind":"source","state":"validated","label":"Test","childrenDeferred":true,"target":{"operation":"tree","project":"TEST","model":"m","revision":"r1"}}]}})";
   CHECK(decodeSdpReply(deferred).nodes.at("sdl/m").childrenDeferred);
+  auto reading = discover(R"("presentation":"producer-reading/1","roots":[],"nodes":[])");
+  reject(reading); // New presentation requires the discovery capability.
+  reading.insert(reading.find("\"navigation\":"), "\"capabilities\":{\"readingNavigation\":\"1\"},");
+  CHECK(decodeSdpReply(reading).presentation == "producer-reading/1");
+  for (const auto& change : std::vector<std::pair<std::string,std::string>>{
+       {"producer-reading/1", "producer-reading/2"},
+       {"\"readingNavigation\":\"1\"", "\"readingNavigation\":\"2\""},
+       {"\"presentation\":\"producer-reading/1\",", ""}}) {
+    auto invalid = reading;
+    invalid.replace(invalid.find(change.first), change.first.size(), change.second);
+    reject(invalid);
+  }
   for (const auto& change : std::vector<std::pair<std::string,std::string>>{
        {"true", "1"}, {"true", "\"true\""}, {"lazy-sdl", "unknown"},
        {"\"kind\":\"source\"", "\"kind\":\"viewpoint\""},

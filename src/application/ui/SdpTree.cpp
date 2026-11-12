@@ -27,6 +27,8 @@ long SdpTree::handle(FXObject* sender, FXSelector selector, void* data) {
     getCursorPosition(x, y, buttons);
     if (auto* item = getItemAt(x, y)) {
       auto text = item->getText();
+      if (auto* row = dynamic_cast<SdpItem*>(item); row && !row->diagnostic.empty())
+        text += (" — " + row->diagnostic).c_str();
       sender->handle(this, FXSEL(SEL_COMMAND, ID_SETSTRINGVALUE), &text);
       return 1;
     }

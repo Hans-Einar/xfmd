@@ -1,0 +1,21 @@
+Internal ctest changing into directory: /tmp/xfmd-activity-management/build
+Test project /tmp/xfmd-activity-management/build
+    Start 16: SdpDynamicGuiTest
+1/6 Test #16: SdpDynamicGuiTest ................   Passed    3.71 sec
+    Start 17: SdpPanelGuiTest
+2/6 Test #17: SdpPanelGuiTest ..................   Passed    2.38 sec
+    Start 80: SdpDiscoveryTest
+3/6 Test #80: SdpDiscoveryTest .................   Passed    0.00 sec
+    Start 87: SdpDisplayTest
+4/6 Test #87: SdpDisplayTest ...................   Passed    0.00 sec
+    Start 89: SdpActivityGuiTest
+5/6 Test #89: SdpActivityGuiTest ...............   Passed    1.78 sec
+    Start 90: SdpReadingTest
+6/6 Test #90: SdpReadingTest ...................   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 6
+
+Label Time Summary:
+GUI    =   7.87 sec*proc (3 tests)
+
+Total Test time (real) =   7.87 sec

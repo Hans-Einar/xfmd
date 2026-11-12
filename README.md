@@ -419,7 +419,7 @@ expanded branches and the selected row. Refresh retries immediately. Invalid
 sources and watch limits display diagnostics; generated documents remain snapshots
 until you select the view again.
 
-The host must provide a compatible **SDPTool 2.x, sdptool/0.2** producer. XFMD 0.9 uses the accompanying `libexec/xfmd/sdptool` when installed,
+The host must provide a compatible **SDPTool 2.x, sdptool/0.2** producer. XFMD 0.10 uses the accompanying `libexec/xfmd/sdptool` when installed,
 then falls back to `gh sdp`. To use a standalone binary, set `XFMD_SDP_TOOL` to its executable
 path (one executable, not a shell command). Project files cannot configure commands.
 The producer's normal cache/offline environment applies, including `SDP_OFFLINE=true`
@@ -509,3 +509,13 @@ The [local RPM CI](packaging/rpm/README.md) builds exact main commits, verifies
 installation and publishes signed packages to the Beinerud AlmaLinux 10.2 app
 repository. It documents installation, automatic updates, provenance and optional
 SDPTool/SDUI integrations. The visible XFMD version remains major.minor.
+
+
+### Producer-owned readable SDL navigation (0.10)
+
+A compatible producer advertises its ready reading tree, labels and activation
+actions. XFMD displays that hierarchy and order directly. Expanding a row loads
+children; activating its label opens the supplied document, including collection
+chapters and dedicated registers. Older compatible producers retain their existing
+navigation behavior. The 0.10 RPM candidate includes its exact private SDPTool;
+source provenance and signed public publication are separate release gates.

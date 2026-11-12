@@ -1,5 +1,6 @@
 #include "application/Application.h"
 #include "support/NativeInput.h"
+#include <X11/keysym.h>
 using namespace xfmd;
 SdpReply graph() {
   SdpReply value;
@@ -71,5 +72,52 @@ void run() {
   CHECK(tab->getX() + tab->getWidth() <= workspace->tabs->getWidth());
   nativeClick(tab, 15, 8);
   CHECK(workspace->tabs->getCurrent() == 2);
+
+  // Exact producer order/labels and independent primary activation versus loading.
+  value = graph();
+  value.presentation = "producer-reading/1";
+  value.nodes["sdl"].children = {"source"};
+  auto& readingSource = value.nodes["source"];
+  readingSource.id = "source"; readingSource.label = "System entry";
+  readingSource.kind = "source"; readingSource.childrenDeferred = true;
+  readingSource.target = {"select", "test", "m", "opaque-primary", "r1"};
+  readingSource.expansionTarget = {"tree", "test", "m", "", "r1"};
+  int activated = 0, expanded = 0;
+  panel->activated = [&](const SdpTarget& t) { CHECK(t.uri == "opaque-primary"); ++activated; };
+  panel->modelRequested = [&](const SdpTarget& t) { CHECK(t.operation == "tree" && t.uri.empty()); ++expanded; };
+  panel->present(value);
+  panel->tabs->setCurrent(1);
+  settleNative(app.app);
+  XSetInputFocus(static_cast<Display*>(app.app.getDisplay()), app.window->id(), RevertToParent, CurrentTime);
+  auto* readingTree = panel->tree("sdl");
+  auto* readingRow = readingTree->getFirstItem();
+  readingTree->setCurrentItem(readingRow); readingTree->setFocus();
+  nativeKey(readingTree, XK_Right); settleNative(app.app);
+  CHECK(expanded == 1 && activated == 0);
+  nativeKey(readingTree, XK_Return); settleNative(app.app);
+  CHECK(expanded == 1 && activated == 1);
+
+  readingSource.childrenDeferred = false;
+  readingSource.expansionTarget = {};
+  readingSource.children = {"vp-late", "phase", "vp-early"};
+  for (const auto& id : readingSource.children) {
+    auto& n = value.nodes[id]; n.id = id; n.label = id;
+    n.kind = id == "phase" ? "phase" : "viewpoint";
+    n.target = readingSource.target;
+    n.overviewTarget = {"select", "test", "m", "legacy-overview-must-not-win", "r1"};
+    n.cardType = "hidden-internal-id";
+  }
+  panel->present(value);
+  readingTree = panel->tree("sdl");
+  readingRow = readingTree->getFirstItem();
+  readingTree->expandTree(readingRow);
+  auto* child = readingRow->getFirst();
+  for (const auto& id : readingSource.children) {
+    CHECK(child && child->getText() == id.c_str()); child = child->getNext();
+  }
+  CHECK(!child);
+  readingTree->setCurrentItem(readingRow->getFirst()); readingTree->setFocus();
+  nativeKey(readingTree, XK_Return); settleNative(app.app);
+  CHECK(activated == 2 && expanded == 1);
 }
 TEST_MAIN(run)

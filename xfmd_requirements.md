@@ -603,3 +603,20 @@ Activity pages. Native clients preserve returned roots, labels, order and docume
 links. Model-free `activity-view` targets use their explicit project/URI/revision;
 failed or stale generation and refresh preserve current documents and edits.
 Activity membership, lifecycle and timelines remain producer responsibilities.
+
+
+### Activity0003 producer reading presentation — selected design
+
+The coordinated readable browsing assignment adds a generic producer-owned tree
+presentation under existing UR-046/SR-029 and FUNC-032 ownership. The
+`producer-reading/1` tree marker and discovery `readingNavigation: "1"` capability
+select exact producer child order, labels and primary activation targets.
+Independent expansion targets retrieve children; selection URIs remain opaque.
+Legacy producers retain their display path. Project/model/revision validation,
+source freshness, dirty buffers, cancellation and history remain enforced.
+The canonical SdpProjectNavigation / SdpProjects / SdpToolProtocol source mapping
+already covers this adapter; no new SDL semantics or runtime owner is introduced.
+See `sprints/Sprint-010--SDP-Navigation/Activity0003-Consumer-Handoff.md` for the
+bounded implementation and exact-producer packaging handoff. The generic adapter is implemented; bounded native/protocol evidence is retained
+in SDP/05--Implementation/SDL-Navigation/evidence/Reading-001. Final integrated
+qualification and exact-producer release are separate gates.

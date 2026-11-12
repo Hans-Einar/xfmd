@@ -24,6 +24,8 @@ bool sdpDisplayAction(const SdpTarget& t) {
          (t.operation == "sdui-preview" && !t.entry.empty());
 }
 std::vector<std::string> sdpDisplayChildren(const SdpReply& r, const SdpNode& parent) {
+  if (r.presentation == "producer-reading/1")
+    return parent.children;
   // Only SDL source/System presentation wrappers are transparent. Other tabs and
   // unfamiliar producer groups retain their own topology and diagnostics.
   const auto source = r.sources.find(sdpSourceForNode(r, parent, {}));
@@ -62,6 +64,14 @@ std::optional<SdpDisplayRow> sdpDisplayRow(const SdpReply& r, const std::string&
   const auto* node = &found->second;
   SdpDisplayRow row{id, id, node->label, sdpSourceForNode(r, *node, inherited),
                     node->diagnostic, node->target, std::move(ancestors)};
+  if (r.presentation == "producer-reading/1") {
+    row.terminal = std::find(row.ancestors.begin(), row.ancestors.end(), id) != row.ancestors.end();
+    row.truncated = row.ancestors.size() >= r.depthLimit;
+    row.terminal = row.terminal || row.truncated;
+    if (!row.terminal) row.ancestors.push_back(id);
+    if (row.terminal && !sdpDisplayAction(row.target) && row.diagnostic.empty()) return {};
+    return row;
+  }
   bool reference = false, sourceConflict = false;
   std::set<std::string> chain;
   for (;;) {

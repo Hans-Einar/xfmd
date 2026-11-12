@@ -1,0 +1,20 @@
+reading: discovered native tabs
+reading: deferred entry visible
+reading: entry document delivered
+reading: structure native/PDF visuals 2
+reading: model children loaded
+reading: native VP01 landing admitted, diagrams 0, visuals 0
+reading: native VP02 landing admitted, diagrams 0, visuals 2
+reading: VP03 backend Libavoid; libavoid transaction 1: 474.055µs; label leaders omitted: 2
+reading: native VP03 landing admitted, diagrams 1, visuals 1
+reading: VP04 backend Libavoid; libavoid transaction 1: 238.071µs; label leaders omitted: 0
+reading: native VP04 landing admitted, diagrams 1, visuals 1
+reading: native VP05 landing admitted, diagrams 0, visuals 0
+reading: native VP06 landing admitted, diagrams 0, visuals 0
+reading: VP07 backend Libavoid; libavoid transaction 1: 435.854µs; label leaders omitted: 2
+reading: native VP07 landing admitted, diagrams 1, visuals 1
+reading: native VP08 landing admitted, diagrams 0, visuals 1
+reading: native VP09 landing admitted, diagrams 0, visuals 0
+reading: native VP10 landing admitted, diagrams 0, visuals 0
+reading: native VP11 landing admitted, diagrams 0, visuals 0
+PASS

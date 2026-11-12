@@ -1,5 +1,17 @@
 # Endringsnotater — WIP
 
+## XFMD0.10 candidate — readable SDL browsing
+
+Selected feature delivery under coordinated Activity0003; publication pending.
+The native reader consumes advertised producer labels, ordering and primary
+actions directly. Expansion loads children independently; older producers retain
+their supported path. Selection, source freshness and unsaved-buffer checks remain.
+The RPM packages its exact committed private SDPTool with source/digest provenance
+and verifies upgrade from the signed0.9 predecessor. Integrated qualification,
+independent review and signed public DNF evidence remain release gates.
+
+
+
 ## P9–P13: scrolling, sider og publisering
 
 - Edit → Preferences med vedvarende scrollhastighet, valgfri akselerasjon og

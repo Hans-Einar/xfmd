@@ -49,6 +49,23 @@ void run() {
   r.depthLimit = 1;
   row = sdpDisplayRow(r, "detail", {"vp"}, "m");
   CHECK(row && row->terminal && row->truncated && row->target.uri == "focused-VP01");
+  // Advertised producer presentation is exact, including unfamiliar groups and aliases.
+  r.presentation = "producer-reading/1";
+  r.depthLimit = 32;
+  source.children = {"other", "phase", "vp", "alias0"};
+  CHECK(sdpDisplayChildren(r, source) == source.children);
+  r.nodes["alias0"].label = "Readable alias";
+  r.nodes["alias0"].cardType = "internal-machine-identity";
+  r.nodes["alias0"].target = {"select", "p", "m", "opaque-reading-collection", "r1"};
+  row = sdpDisplayRow(r, "alias0", {}, "m");
+  CHECK(row && row->node == "alias0" && row->label == "Readable alias");
+  CHECK(row->target.uri == "opaque-reading-collection");
+  r.nodes["alias0"].target = {};
+  row = sdpDisplayRow(r, "alias0", {}, "m");
+  CHECK(row && row->target.operation.empty()); // No fallback to a reference's action.
+  row = sdpDisplayRow(r, "alias0", {"alias0"}, "m");
+  CHECK(!row); // Safety limits remain without reference reinterpretation.
+  r.presentation.clear();
   r.nodes["object"].target.model = "different-model";
   CHECK(sdpDisplayRow(r, "detail", {}, "m")->source.empty());
 }
