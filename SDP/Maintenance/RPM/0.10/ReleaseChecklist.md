@@ -1,86 +1,85 @@
-# ReleaseChecklist — XFMD 0.10 candidate
+# ReleaseChecklist — XFMD 0.10 published RPM
 
-Copy this checklist into the selected release's work area. Record version,
-previous release, exact commit, owner publication authority, evidence paths and
-actual outcomes. Unchecked means pending; use N/A only with a reason. A generated
-release log is not proof of publication. The project release contract governs.
-
-## Candidate and authority
-
-Owner selected XFMD 0.10 and explicitly authorized feature-branch RPM publication
-under ACTIVITY-SDP-0003 / PLAN-SDP-0028. No main merge is selected. Predecessor:
-signed public xfmd-0.9.0-71.el10_2.x86_64.rpm at 8893a32. Final consumer candidate
-is pending; matching producer is c3463b78d53ebf984b0f553ebe93a556fb3ac6a8. Development evidence is
-Reading-001; none of its checks establish release-candidate publication.
-
-The SDP publisher inventory/signing section below is inherited: this package
-ships a private standalone helper, not a new signed Toolkit installation release.
-Those items require explicit N/A dispositions at closeout; they are not passed
-Toolkit gates. Application RPM/signature/public-DNF gates below remain pending.
+Instantiated from SDP/Framework/ReleaseChecklist.md. Owner publication authority:
+ACTIVITY-SDP-0003 / PLAN-SDP-0028. Exact reviewed application source:
+8546e956d1a941ece9195d335b7196abea905289; exact private producer:
+c3463b78d53ebf984b0f553ebe93a556fb3ac6a8. Predecessor: signed public
+xfmd-0.9.0-71.el10_2.x86_64.rpm. Selected surface is the signed Beinerud stable RPM
+repository; no main merge is selected. [Receipt and evidence](evidence/published-76/publication-receipt.json).
 
 ## Scope and content
 
-- [ ] Select product version from compatibility impact. Keep language/profile,
-  process/management schema and client versions distinct.
-- [ ] Enumerate included work and remaining exclusions; validate selected model,
-  tests, review dispositions and links on the actual candidate.
-- [ ] Update canonical RELEASE-NOTES.md Unreleased entries with stable work IDs.
-  Freeze selected entries into a dated version section; preserve released bytes.
-- [ ] Run `sdptool release-log --version X.Y.Z --output Releases/X.Y.Z.md`.
-  Check with the same command plus --check. Use --all --output Releases --check
-  to check every recorded version. Generator extracts reviewed notes, not Git guesses.
+- [x] Owner-selected minor feature delivery 0.10; RPM 0.10.0-76.el10_2. Existing
+  language/profile and client schema identities remain distinct from this app version.
+- [x] Included Activity2 consumer and Activity3 producer-owned reading, exact
+  private producer and native/package plumbing. 89 configured target CTests pass;
+  native HEOS/fixture/PDF and coordinating independent review support the selected
+  behavior. Existing explicit source/graph/display bounds remain declared.
+- [x] Canonical RELEASE_NOTES.md records the actual publication with stable work IDs
+  and evidence links, preserving earlier sections.
+- [x] N/A — sdptool release-log extracts Toolkit release notes; this application RPM
+  uses the exact publication receipt and repository evidence instead.
 
 ## Installation distribution (SDP publisher)
 
-- [ ] Check Template/sdp-root and project-root guidance. Include Sessions guide and
-  blank template, never project conversations, boards or existing work records.
-- [ ] Review SDPTool/profiles/payload.json: every distributed file, destination,
-  ownership and removed/moved path. Inventory completeness tests must pass.
-- [ ] Review SDPTool/profiles/five-phase.json: capabilities, schema/profile versions
-  and exact supported predecessor descriptor digests, including current stable.
-- [ ] Reconcile SDP.manifest.yaml, Toolkit/SDP-install.manifest.json compatibility
-  metadata, package version, release record and notes. Retained legacy metadata
-  does not replace the current Go inventory or signed descriptor.
-- [ ] Build package and immutable sdp-release.json from a clean exact commit using
-  the Go profile builder. Verify file hashes, sourceCommit and executable identity.
-  Never edit the built descriptor or use a project-local manifest as authority.
-- [ ] Sign descriptor with the trusted publisher key; verify signature, binary hash
-  and SHA256SUMS. Store no private keys or secrets in evidence/repository.
-- [ ] Rehearse install and each supported upgrade from original verified descriptor
-  bytes. Check new Sessions files, existing Session/document preservation, receipt,
-  Maintenance entry/history, conflict handling and repeated no-op.
-- [ ] Test extracted-source operation, packaged signed child and normal bootstrap.
-  Development artifacts or test signers are not production signed evidence.
+- [x] N/A — Template/project-root guidance and Sessions inventory: no Toolkit
+  installation distribution is published by this application release.
+- [x] N/A — SDPTool/profiles/payload.json inventory: the private CLI is a pinned
+  executable, not a newly published Toolkit installation payload.
+- [x] N/A — five-phase profile/predecessor descriptor compatibility: no SDP project
+  install or profile upgrade is selected.
+- [x] N/A — Toolkit manifests/compatibility descriptors: no Toolkit release identity
+  is changed or asserted. Private source/binary identity is independently recorded.
+- [x] N/A — Go profile-builder sdp-release.json: application RPM provenance,
+  executable/source hashes and clean candidate metadata are checked instead.
+- [x] N/A — SDP descriptor signing: RPM/download/repository signatures are verified
+  under Beinerud's existing key; no private keys enter the evidence.
+- [x] N/A — SDP install/upgrade receipt rehearsal: actual application predecessor
+  upgrade, reinstall/removal/fresh install and preservation checks pass instead.
+- [x] N/A — Toolkit extracted-source/bootstrap/signed-child gates: this release
+  supplies the matching private executable and sources without a Toolkit upgrade.
 
 ## Publish and consumer readiness
 
-- [ ] Exact candidate CI and required independent review pass; working tree clean;
-  tag absent; merge/publication explicitly authorized.
-- [ ] Publish annotated tag and GitHub Release with generated log, signed descriptor,
-  executable and checksums; verify downloaded assets against exact release.
-- [ ] Reconcile actual tag/commit/time and append truthful release events only after
-  success. Do not rewrite a released log or silently correct released notes.
-- [ ] Verify gh-sdp selection: its compiled default is pinned. Either publish/update
-  the client default or document an explicit SDP_RELEASE selecting this release.
-- [ ] Provide preview/apply commands and expected receipt. Owner-requested manual
-  project upgrade remains manual; never confuse updating the gh extension with
-  upgrading the project's SDP directory.
-
-Consuming projects reuse the scope/content/publication checks; mark SDP publisher
-inventory/signing steps N/A if they do not distribute SDP itself. Keep their own
-application/package/installer acceptance checks alongside this list.
-
+- [x] Exact candidate CI and required independent review pass. Clone metadata is
+  dirty=false and detached at the reviewed source. Coordinator independently
+  approved the exact unsigned SHA; neither tag nor merge is inferred.
+- [x] Actual selected publication completed: signed stable RPM, matching payload
+  download, trusted-key signature and public DNF transactions. Annotated tag and
+  GitHub Release are N/A for the selected application publication surface.
+- [x] Actual source/unsigned/signed hashes, server Last-Modified and public
+  verification completion time are recorded after success. Traceability is appended.
+- [x] N/A — gh-sdp default/SDP_RELEASE changes: installed native lookup selects the
+  package's private producer; the separate gh-sdp installation is not upgraded.
+- [x] Consumer commands and expected app version are documented. This publishes an
+  application RPM, so no project SDP receipt or manual project upgrade is claimed.
 
 ## XFMD RPM acceptance
 
-- [ ] Exact committed producer Git archive pin/digest and embedded BuildRevision.
-- [ ] Clean target-native build with required matching producer and native reading CTest.
-- [ ] Source and module license inventory, binary digest and package provenance.
-- [ ] Exact signed 0.9 predecessor install followed by local candidate upgrade.
-- [ ] Unprivileged installed native startup and default private helper invocation.
-- [ ] Reinstall, remove/unrelated-file preservation and fresh install.
-- [ ] Coordinating independent review of the final integrated source candidate.
-- [ ] Server signing, public matching payload download and trusted-key signature.
-- [ ] Public signed metadata/package checks and actual DNF 0.9-to0.10 upgrade.
-- [ ] Exact app and producer identities after public upgrade and fresh public install.
-- [ ] Truthful final notes, hashes, time and publication evidence after success.
+- [x] Exact committed producer Git archive pin/digest and embedded BuildRevision.
+- [x] Clean target-native build; native reading CTest uses that matching producer.
+- [x] Source, module/Go notices, normalized binary digest and package provenance.
+- [x] Exact signed 0.9 predecessor install followed by local candidate upgrade.
+- [x] Actual /usr/bin/xfmd unprivileged startup and default private helper invocation.
+- [x] Exact-candidate native test tools outside the RPM exercise installed private
+  producer/FOX/resources: all eleven landings, render/source/history and real Activity.
+- [x] Reinstall, removal/unrelated-file preservation and fresh install pass.
+- [x] Coordinating independent review approved source, exact archive and tested bytes.
+- [x] Server signing, matching public payload download and trusted-key signature pass.
+- [x] Forced package/metadata signature checks and actual public DNF 0.9-to-0.10 upgrade.
+- [x] Exact app/producer identities and native workflows pass after public upgrade
+  and fresh authenticated public installation.
+- [x] Actual notes, hashes, times, receipt and public workflow evidence recorded.
+
+All applicable gates have observed evidence. The 89 target vs 90 host count is
+explained in README.md: two environment-dependent GUI tests are absent in the
+container and the real producer reading test is added. No omitted test is claimed
+passed. Same-context checks are distinguished from the coordinating independent
+review in Activity0003/06-Verification/B5/Review.md. Source 8546e95 remains the
+published candidate even when later evidence-only commits close records.
+
+
+Final independent agent release review also checked actual public signature,
+payload identity, signed DNF upgrade/fresh install and native workflows, approving
+with no findings. Its retained disposition is
+[evidence/published-76/coordinating-independent-review.md](evidence/published-76/coordinating-independent-review.md).

@@ -23,8 +23,12 @@ exact application/producer identities and native default helper invocation, then
 checks a fresh authenticated public install. No publication evidence is claimed
 until these checks actually pass. [ReleaseChecklist](ReleaseChecklist.md) owns gates.
 
-Current status: machinery and source pin prepared. Candidate build and independent
-review pending. Build/output identity will be recorded after the source commit.
+Current status: published and publicly verified. Exact candidate
+8546e956d1a941ece9195d335b7196abea905289 produced
+xfmd-0.10.0-76.el10_2.x86_64.rpm. The signed stable package passed authenticated
+public predecessor upgrade and fresh install, exact app/private producer identity
+and actual native workflows. [Publication receipt](evidence/published-76/publication-receipt.json)
+and [public DNF/native log](evidence/published-76/public-dnf.log) retain evidence.
 
 
 ## Candidate 75 outcome and corrected successor
@@ -48,3 +52,22 @@ actual /usr/bin/xfmd native startup/default helper lookup remains separately tra
 Only the disposable verification project is mutated. Both local and signed-public
 checks run these workflows. Publication remains on hold until successor verification
 and coordinating release review succeed.
+
+
+## Actual publication
+
+[Signed RPM](https://beinerud.ddns.net/repo/AlmaLinux-10.2-apps/stable/x86_64/Packages/xfmd-0.10.0-76.el10_2.x86_64.rpm).
+Unsigned SHA256: e7e39924edaad957355e40210f1b8a7e3989ca1d920dbf107e556588c90af563.
+Signed SHA256: 8c5f2232d87c043bbae16b49e9fbe3815237d69fdb858efb7adb2d51f3587f2d.
+Trusted fingerprint: 8E0E49A101DDF1C7C15532FCCB7BB881901AF029.
+Public verification completed 2026-11-12T23:57:27.629079Z (2026-11-13 in Europe/Oslo);
+server Last-Modified is separately recorded in the receipt. The successful package
+was published through verified-existing without rebuilding its reviewed bytes.
+
+The public log records an actual 0.9.0-71 to 0.10.0-76 upgrade with package and
+repository metadata signature checks forced on, then removal and a fresh signed
+public install. Both run exact app/producer identity, default native helper lookup,
+native reading/render/source/Back and real Planned Activity workflows. The private
+producer binary hash is d583f22669339e6a322c795e353c58cd7bd6be1ba650e066e05609b7352f036a.
+Coordinating independent review approved the exact source/archive/package before
+publication; actual public results were returned for final reconciliation.

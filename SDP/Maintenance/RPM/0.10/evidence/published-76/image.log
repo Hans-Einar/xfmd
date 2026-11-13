@@ -1,0 +1,28 @@
+STEP 1/9: FROM docker.io/library/almalinux@sha256:ba31c3299856068f77bc10574cad51b0a4f6a3dafb882668656e1639bee63db6
+STEP 2/9: RUN dnf --releasever=10.2 -y install epel-release dnf-plugins-core && dnf --releasever=10.2 config-manager --set-enabled crb &&     dnf --releasever=10.2 -y install gcc-c++ make cmake ninja-build pkgconf-pkg-config git python3.12     rust cargo rpm-build patch curl tar gzip bzip2 which findutils diffutils util-linux     libX11-devel libXrandr-devel libXcursor-devel libXft-devel libXext-devel     libpng-devel libjpeg-turbo-devel libtiff-devel zlib-devel     cairo-devel pango-devel fontconfig-devel freetype-devel cairomm-devel pangomm-devel     tinyxml2-devel gdk-pixbuf2-devel librsvg2-devel libXfont2 libglvnd-glx libXdmcp libxshmfence xkbcomp xkeyboard-config     dejavu-sans-fonts dejavu-sans-mono-fonts dejavu-serif-fonts google-droid-sans-fonts poppler-utils strace && dnf --releasever=10.2 clean all
+--> Using cache c26cba3dd3e5ad4ef57b20d7d2dda0dbef50f5db123da8c53daacab33cd9c191
+--> c26cba3dd3e5
+STEP 3/9: RUN curl -fL --retry 3 https://deb.debian.org/debian/pool/main/f/fox1.6/fox1.6_1.6.57.orig.tar.gz -o /opt/fox-1.6.57.tar.gz &&     echo '812066cd54f120eff5bacf61b5c5a1e9269bb2505e819c9d16610006a860d235  /opt/fox-1.6.57.tar.gz' | sha256sum -c - &&     tar -xzf /opt/fox-1.6.57.tar.gz -C /tmp && cd /tmp/fox1.6-1.6.57 &&     ./configure --prefix=/opt/xfmd-fox --libdir=/opt/xfmd-fox/lib --enable-shared --disable-static --without-opengl --with-xft &&     make -j4 && make install && cp LICENSE /opt/xfmd-fox/LICENSE && rm -rf /tmp/fox1.6-1.6.57
+--> Using cache bfe9868558d9cadcfda23cd259b42cc81b9a9a4591c192fd8009871bec134e18
+--> bfe9868558d9
+STEP 4/9: ENV PKG_CONFIG_PATH=/opt/xfmd-fox/lib/pkgconfig
+--> Using cache 22a9868301dad400f346a90d5ee3de91f436622e9484b62d585dff3228ad0c92
+--> 22a9868301da
+STEP 5/9: RUN dnf --releasever=10.2 -y install rustfmt && dnf --releasever=10.2 clean all
+--> Using cache bbce4fa6ee62aecd2877ff863411472ec0176af2de1ef6bbceb6cb18993bef11
+--> bbce4fa6ee62
+STEP 6/9: RUN sed -i 's/^Libs: .*/Libs: -L${libdir} ${FOX_LIBS}/' /opt/xfmd-fox/lib/pkgconfig/fox.pc
+--> Using cache e0d9ecaefdb76b10c95ded4503de7de08e4c1ff6c90fe84a1d1553e79452f0ce
+--> e0d9ecaefdb7
+STEP 7/9: RUN dnf --releasever=10.2 -y install gdk-pixbuf2-modules && dnf --releasever=10.2 clean all
+--> Using cache 04f5db9c5105299d2c3281c58b2cf760e177ff67686d01d454cfe54007a3149e
+--> 04f5db9c5105
+STEP 8/9: RUN dnf --releasever=10.2 -y install python3-jsonschema && dnf --releasever=10.2 clean all
+--> Using cache c8237d858ff86379725c4ccc2d9c9f67a3e1739d88023fca92934920e5f978ff
+--> c8237d858ff8
+STEP 9/9: RUN dnf --releasever=10.2 -y install golang && dnf --releasever=10.2 clean all
+--> Using cache a16d543cb0c68eae6d8568e5230c370b4da84f3339b31462de1f67fef5f1b378
+COMMIT localhost/xfmd-rpm-builder:18abbe7dea6031d5
+--> a16d543cb0c6
+Successfully tagged localhost/xfmd-rpm-builder:18abbe7dea6031d5
+a16d543cb0c68eae6d8568e5230c370b4da84f3339b31462de1f67fef5f1b378

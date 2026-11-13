@@ -1,0 +1,24 @@
+{
+  "commit": "8546e956d1a941ece9195d335b7196abea905289",
+  "rpm": "xfmd-0.10.0-76.el10_2.x86_64.rpm",
+  "sha256": "e7e39924edaad957355e40210f1b8a7e3989ca1d920dbf107e556588c90af563",
+  "url": "https://beinerud.ddns.net/repo/AlmaLinux-10.2-apps/stable/x86_64/Packages/xfmd-0.10.0-76.el10_2.x86_64.rpm",
+  "signed_sha256": "8c5f2232d87c043bbae16b49e9fbe3815237d69fdb858efb7adb2d51f3587f2d",
+  "producer_commit": "c3463b78d53ebf984b0f553ebe93a556fb3ac6a8",
+  "producer_binary_sha256": "d583f22669339e6a322c795e353c58cd7bd6be1ba650e066e05609b7352f036a",
+  "repository_key_fingerprint": "8E0E49A101DDF1C7C15532FCCB7BB881901AF029",
+  "server_last_modified": "Thu, 12 Nov 2026 23:54:37 GMT",
+  "public_verification_completed_at": "2026-11-12T23:57:27.629079+00:00",
+  "reviewed_candidate": "8546e956d1a941ece9195d335b7196abea905289",
+  "source_branch": "sdp/readable-browsing",
+  "publication_mode": "verified-existing; no rebuild",
+  "public_upgrade": "0.9.0-71.el10_2 -> 0.10.0-76.el10_2",
+  "public_package_gpgcheck": true,
+  "public_metadata_gpgcheck": true,
+  "public_fresh_install": true,
+  "native_installed_workflows": [
+    "default private producer lookup",
+    "VP01-VP11 reading/render/source/Back",
+    "real Planned Activity"
+  ]
+}

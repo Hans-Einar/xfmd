@@ -1,0 +1,1260 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100  2173    0  2173    0     0   5713      0 --:--:-- --:--:-- --:--:--  5703100  293k    0  293k    0     0   610k      0 --:--:-- --:--:-- --:--:--  609k
+/tmp/tmp.7l3PvMJaBb/cmark.tar.gz: OK
+CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+
+
+-- The C compiler identification is GNU 14.3.1
+-- The CXX compiler identification is GNU 14.3.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test HAVE_FLAG_ADDRESS_SANITIZER
+-- Performing Test HAVE_FLAG_ADDRESS_SANITIZER - Failed
+-- Performing Test HAVE_FLAG_SANITIZE_ADDRESS
+-- Performing Test HAVE_FLAG_SANITIZE_ADDRESS - Failed
+-- Checking _FILE_OFFSET_BITS for large files
+-- Checking _FILE_OFFSET_BITS for large files - not needed
+-- Performing Test COMPILER_HAS_HIDDEN_VISIBILITY
+-- Performing Test COMPILER_HAS_HIDDEN_VISIBILITY - Success
+-- Performing Test COMPILER_HAS_HIDDEN_INLINE_VISIBILITY
+-- Performing Test COMPILER_HAS_HIDDEN_INLINE_VISIBILITY - Success
+-- Performing Test COMPILER_HAS_DEPRECATED_ATTR
+-- Performing Test COMPILER_HAS_DEPRECATED_ATTR - Success
+-- Looking for stdbool.h
+-- Looking for stdbool.h - found
+-- Performing Test HAVE___BUILTIN_EXPECT
+-- Performing Test HAVE___BUILTIN_EXPECT - Success
+-- Performing Test HAVE___ATTRIBUTE__
+-- Performing Test HAVE___ATTRIBUTE__ - Success
+-- Configuring done (0.9s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/tmp.7l3PvMJaBb/build
+[ 10%] Building C object extensions/CMakeFiles/libcmark-gfm-extensions_static.dir/table.c.o
+[ 10%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/cmark.c.o
+[ 10%] Building C object extensions/CMakeFiles/libcmark-gfm-extensions_static.dir/core-extensions.c.o
+[ 10%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/node.c.o
+[ 13%] Building C object extensions/CMakeFiles/libcmark-gfm-extensions_static.dir/strikethrough.c.o
+[ 15%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/iterator.c.o
+[ 18%] Building C object extensions/CMakeFiles/libcmark-gfm-extensions_static.dir/autolink.c.o
+[ 21%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/blocks.c.o
+[ 23%] Building C object extensions/CMakeFiles/libcmark-gfm-extensions_static.dir/tagfilter.c.o
+[ 26%] Building C object extensions/CMakeFiles/libcmark-gfm-extensions_static.dir/ext_scanners.c.o
+[ 28%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/inlines.c.o
+[ 31%] Building C object extensions/CMakeFiles/libcmark-gfm-extensions_static.dir/tasklist.c.o
+[ 34%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/scanners.c.o
+[ 36%] Linking C static library libcmark-gfm-extensions.a
+[ 36%] Built target libcmark-gfm-extensions_static
+[ 39%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/utf8.c.o
+[ 42%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/buffer.c.o
+[ 44%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/references.c.o
+[ 47%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/footnotes.c.o
+[ 50%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/map.c.o
+[ 52%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/render.c.o
+[ 55%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/man.c.o
+[ 57%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/xml.c.o
+[ 60%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/html.c.o
+[ 63%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/commonmark.c.o
+[ 65%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/plaintext.c.o
+[ 68%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/latex.c.o
+[ 71%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/houdini_href_e.c.o
+[ 73%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/houdini_html_e.c.o
+[ 76%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/houdini_html_u.c.o
+[ 78%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/cmark_ctype.c.o
+[ 81%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/arena.c.o
+[ 84%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/linked_list.c.o
+[ 86%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/syntax_extension.c.o
+[ 89%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/registry.c.o
+[ 92%] Building C object src/CMakeFiles/libcmark-gfm_static.dir/plugin.c.o
+[ 94%] Linking C static library libcmark-gfm.a
+[ 94%] Built target libcmark-gfm_static
+[ 97%] Building C object src/CMakeFiles/cmark-gfm.dir/main.c.o
+[100%] Linking C executable cmark-gfm
+[100%] Built target cmark-gfm
+-- Install configuration: "Release"
+-- Installing: /work/source/.deps/bin/cmark-gfm
+-- Installing: /work/source/.deps/lib/libcmark-gfm.a
+-- Installing: /work/source/.deps/lib/pkgconfig/libcmark-gfm.pc
+-- Installing: /work/source/.deps/include/cmark-gfm.h
+-- Installing: /work/source/.deps/include/cmark-gfm-extension_api.h
+-- Installing: /work/source/.deps/include/cmark-gfm_export.h
+-- Installing: /work/source/.deps/include/cmark-gfm_version.h
+-- Installing: /work/source/.deps/lib64/cmake/cmark-gfm.cmake
+-- Installing: /work/source/.deps/lib64/cmake/cmark-gfm-release.cmake
+-- Installing: /work/source/.deps/lib/libcmark-gfm-extensions.a
+-- Installing: /work/source/.deps/include/cmark-gfm-core-extensions.h
+-- Installing: /work/source/.deps/lib/cmake-gfm-extensions/cmark-gfm-extensions.cmake
+-- Installing: /work/source/.deps/lib/cmake-gfm-extensions/cmark-gfm-extensions-release.cmake
+-- Installing: /work/source/.deps/share/man/man1/cmark-gfm.1
+-- Installing: /work/source/.deps/share/man/man3/cmark-gfm.3
+go: downloading gopkg.in/yaml.v3 v3.0.1
+go: downloading golang.org/x/text v0.42.0
+{
+  "repository": "Hans-Einar/SDP",
+  "commit": "c3463b78d53ebf984b0f553ebe93a556fb3ac6a8",
+  "version": "2.2.0-dev",
+  "archive": "third_party/sdptool-c3463b78d53ebf984b0f553ebe93a556fb3ac6a8.tar.gz",
+  "sha256": "2fba02c3e9ad713bc34c322c53968d8806edeac757208f2b67f8bc31fa69886d",
+  "binary_sha256": "d583f22669339e6a322c795e353c58cd7bd6be1ba650e066e05609b7352f036a",
+  "go_version": "go version go1.26.10 (Red Hat 1.26.10-1.el10_2.alma.1) linux/amd64",
+  "cgo_enabled": false,
+  "buildvcs": false,
+  "rpm_note_strip": true
+}
+-- The CXX compiler identification is GNU 14.3.1
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Found X11: /usr/include  found components: Xrandr
+-- Looking for XOpenDisplay in /usr/lib64/libX11.so;/usr/lib64/libXext.so
+-- Looking for XOpenDisplay in /usr/lib64/libX11.so;/usr/lib64/libXext.so - found
+-- Looking for gethostbyname
+-- Looking for gethostbyname - found
+-- Looking for connect
+-- Looking for connect - found
+-- Looking for remove
+-- Looking for remove - found
+-- Looking for shmat
+-- Looking for shmat - found
+-- Found PkgConfig: /usr/bin/pkg-config (found version "2.1.0")
+-- Checking for module 'fox>=1.6.57'
+--   Found fox, version 1.6.57
+-- Checking for modules 'pangocairo;pangofc'
+--   Found pangocairo, version 1.54.0
+--   Found pangofc, version 1.54.0
+-- Checking for module 'librsvg-2.0>=2.46'
+--   Found librsvg-2.0, version 2.57.1
+-- Checking for module 'libcmark-gfm=0.29.0.gfm.13'
+--   Found libcmark-gfm, version 0.29.0.gfm.13
+CMake Warning (dev) at /usr/share/cmake/Modules/FetchContent.cmake:1373 (message):
+  The DOWNLOAD_EXTRACT_TIMESTAMP option was not given and policy CMP0135 is
+  not set.  The policy's OLD behavior will be used.  When using a URL
+  download, the timestamps of extracted files should preferably be that of
+  the time of extraction, otherwise code that depends on the extracted
+  contents might not be rebuilt if the URL changes.  The OLD behavior
+  preserves the timestamps from the archive instead, but this is usually not
+  what you want.  Update your project to the NEW behavior or specify the
+  DOWNLOAD_EXTRACT_TIMESTAMP option with a value of true to avoid this
+  robustness issue.
+Call Stack (most recent call first):
+  cmake/MicroTeX.cmake:3 (FetchContent_Declare)
+  CMakeLists.txt:31 (include)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Checking for modules 'cairomm-1.0;pangomm-1.4;tinyxml2;fontconfig'
+--   Found cairomm-1.0, version 1.14.6
+--   Found pangomm-1.4, version 2.46.4
+--   Found tinyxml2, version 10.0.0
+--   Found fontconfig, version 2.15.0
+-- Found Python3: /usr/bin/python3.12 (found suitable version "3.12.15", minimum required is "3.11") found components: Interpreter
+Verified 52 files at 840ebcff20dbba36ad03a2160edf7cbaf9859984
+-- Checking for module 'gdk-pixbuf-2.0'
+--   Found gdk-pixbuf-2.0, version 2.42.12
+-- Found Python3: /usr/bin/python3.12 (found version "3.12.15") found components: Interpreter
+-- Configuring done (3.7s)
+-- Generating done (0.5s)
+-- Build files have been written to: /work/build
+[0/2] Re-checking globbed directories...
+[1/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/atom/atom_char.cpp.o
+[2/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/atom/atom_row.cpp.o
+[3/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/atom/atom_impl.cpp.o
+[4/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/atom/atom_basic.cpp.o
+[5/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/atom/atom_matrix.cpp.o
+[6/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/atom/atom_space.cpp.o
+[7/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/atom/unit_conversion.cpp.o
+[8/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/atom/colors_def.cpp.o
+[9/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/box/box.cpp.o
+[10/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/box/box_factory.cpp.o
+[11/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/box/box_single.cpp.o
+[12/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/box/box_group.cpp.o
+[13/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/core/core.cpp.o
+[14/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/core/glue.cpp.o
+[15/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/core/localized_num.cpp.o
+[16/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/core/formula_def.cpp.o
+[17/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/core/formula.cpp.o
+[18/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/core/macro.cpp.o
+[19/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/fonts/alphabet.cpp.o
+[20/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/fonts/font_basic.cpp.o
+[21/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/core/parser.cpp.o
+[22/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/core/macro_impl.cpp.o
+[23/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/fonts/font_info.cpp.o
+[24/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/builtin/symbol_mapping.res.cpp.o
+[25/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/builtin/formula_mappings.res.cpp.o
+[26/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/fonts/fonts.cpp.o
+[27/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/bi10.def.cpp.o
+[28/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/builtin/tex_param.res.cpp.o
+[29/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/bx10.def.cpp.o
+[30/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/cmbsy10.def.cpp.o
+[31/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/cmbx10.def.cpp.o
+[32/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/cmbxti10.def.cpp.o
+[33/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/core/macro_def.cpp.o
+[34/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/cmex10.def.cpp.o
+[35/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/cmmi10.def.cpp.o
+[36/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/cmmi10_unchanged.def.cpp.o
+[37/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/cmmib10.def.cpp.o
+[38/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/cmmib10_unchanged.def.cpp.o
+[39/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/cmr10.def.cpp.o
+[40/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/cmss10.def.cpp.o
+[41/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/cmssbx10.def.cpp.o
+[42/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/cmssi10.def.cpp.o
+[43/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/cmsy10.def.cpp.o
+[44/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/cmti10.def.cpp.o
+[45/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/cmti10_unchanged.def.cpp.o
+[46/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/cmtt10.def.cpp.o
+[47/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/dsrom10.def.cpp.o
+[48/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/eufb10.def.cpp.o
+[49/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/eufm10.def.cpp.o
+[50/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/i10.def.cpp.o
+[51/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/moustache.def.cpp.o
+[52/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/msam10.def.cpp.o
+[53/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/msbm10.def.cpp.o
+[54/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/r10.def.cpp.o
+[55/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/r10_unchanged.def.cpp.o
+[56/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/rsfs10.def.cpp.o
+[57/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/builtin/tex_symbols.res.cpp.o
+[58/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/sb10.def.cpp.o
+[59/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/sbi10.def.cpp.o
+[60/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/si10.def.cpp.o
+[61/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/special.def.cpp.o
+[62/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/ss10.def.cpp.o
+[63/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/stmary10.def.cpp.o
+[64/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/font/tt10.def.cpp.o
+[65/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/reg/builtin_syms_reg.cpp.o
+[66/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/reg/builtin_font_reg.cpp.o
+[67/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/sym/amsfonts.def.cpp.o
+[68/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/parser/formula_parser.cpp.o
+[69/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/sym/amssymb.def.cpp.o
+[70/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/sym/stmaryrd.def.cpp.o
+[71/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/sym/base.def.cpp.o
+[72/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/sym/symspecial.def.cpp.o
+[73/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/utils/utf.cpp.o
+[74/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/utils/utils.cpp.o
+[75/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/res/parser/font_parser.cpp.o
+[76/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/utils/string_utils.cpp.o
+[77/412] Building CXX object CMakeFiles/xfmd_document.dir/src/application/io/InputPolicy.cpp.o
+[78/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/latex.cpp.o
+[79/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/render.cpp.o
+[80/412] Building CXX object CMakeFiles/xfmd_document.dir/src/application/io/FileOpenPolicy.cpp.o
+[81/412] Building CXX object CMakeFiles/xfmd_document.dir/src/application/document/DocumentSession.cpp.o
+[82/412] Building CXX object CMakeFiles/xfmd_math_engine.dir/_deps/microtex-src/src/platform/cairo/graphic_cairo.cpp.o
+[83/412] Linking CXX static library libxfmd_math_engine.a
+[84/412] Building CXX object CMakeFiles/xfmd_document.dir/src/application/document/DocumentCoordinator.cpp.o
+[85/412] Building CXX object CMakeFiles/xfmd_document.dir/src/application/io/LocalFileStore.cpp.o
+[86/412] Building CXX object CMakeFiles/xfmd_document.dir/src/application/document/TextProjection.cpp.o
+[87/412] Building CXX object CMakeFiles/xfmd_document.dir/src/application/document/EditController.cpp.o
+[88/412] Linking CXX static library libxfmd_document.a
+[89/412] Building CXX object CMakeFiles/xfmd_preview.dir/src/application/preview/PreviewSelection.cpp.o
+[90/412] Building CXX object CMakeFiles/xfmd_preview.dir/src/application/preview/ParserWorker.cpp.o
+[91/412] Building CXX object CMakeFiles/xfmd_preview.dir/src/application/preview/PreviewCoordinator.cpp.o
+[92/412] Linking CXX static library libxfmd_preview.a
+[93/412] Building CXX object CMakeFiles/xfmd_scroll.dir/src/application/scroll/AnchorMapper.cpp.o
+[94/412] Building CXX object CMakeFiles/xfmd_scroll.dir/src/application/scroll/ScrollDynamics.cpp.o
+[95/412] Building CXX object CMakeFiles/xfmd_scroll.dir/src/application/scroll/ScrollCoordinator.cpp.o
+[96/412] Linking CXX static library libxfmd_scroll.a
+[97/412] Building CXX object CMakeFiles/xfmd_navigation.dir/src/application/navigation/HistoryStore.cpp.o
+[98/412] Building CXX object CMakeFiles/xfmd_navigation.dir/src/application/navigation/HeadingAnchor.cpp.o
+[99/412] Building CXX object CMakeFiles/xfmd_navigation.dir/src/application/navigation/LinkResolver.cpp.o
+[100/412] Building CXX object CMakeFiles/xfmd_navigation.dir/src/application/navigation/NavigationCoordinator.cpp.o
+[101/412] Linking CXX static library libxfmd_navigation.a
+[102/412] Building CXX object CMakeFiles/xfmd_workspace.dir/src/application/workspace/WorkPathHistory.cpp.o
+[103/412] Building CXX object CMakeFiles/xfmd_index.dir/src/application/index/ReferenceWorker.cpp.o
+[104/412] Building CXX object CMakeFiles/xfmd_workspace.dir/src/application/workspace/FileNameFilter.cpp.o
+[105/412] Building CXX object CMakeFiles/xfmd_index.dir/src/application/index/DocumentIndex.cpp.o
+[106/412] Linking CXX static library libxfmd_index.a
+[107/412] Building CXX object CMakeFiles/xfmd_media.dir/src/application/media/ImageDecoder.cpp.o
+[108/412] Building CXX object CMakeFiles/xfmd_media.dir/src/application/media/EmbeddedVisuals.cpp.o
+[109/412] Building CXX object CMakeFiles/xfmd_workspace.dir/src/application/workspace/DirectoryScanner.cpp.o
+[110/412] Linking CXX static library libxfmd_workspace.a
+[111/412] Building CXX object CMakeFiles/xfmd_typography.dir/src/application/adapters/SvgDiagramCache.cpp.o
+[112/412] Building CXX object CMakeFiles/xfmd_typography.dir/src/application/adapters/SharedTextMetrics.cpp.o
+[113/412] Building CXX object CMakeFiles/xfmd_media.dir/src/application/media/MathTypesetter.cpp.o
+[114/412] Linking CXX static library libxfmd_media.a
+[115/412] Building CXX object CMakeFiles/xfmd_typography.dir/src/application/adapters/FontCatalog.cpp.o
+[116/412] Building CXX object CMakeFiles/xfmd_typography.dir/src/application/preferences/ReadingColors.cpp.o
+[117/412] Building CXX object CMakeFiles/xfmd_typography.dir/src/application/adapters/DisplayListPainter.cpp.o
+[118/412] Building CXX object CMakeFiles/xfmd_typography.dir/src/application/adapters/DiagramPainter.cpp.o
+[119/412] Linking CXX static library libxfmd_typography.a
+[120/412] Building CXX object CMakeFiles/PortContractTest.dir/tests/contracts/PortContractTest.cpp.o
+[121/412] Linking CXX executable PortContractTest
+[122/412] Building CXX object CMakeFiles/FileOpenPolicyTest.dir/tests/application/FileOpenPolicyTest.cpp.o
+[123/412] Linking CXX executable FileOpenPolicyTest
+[124/412] Building CXX object CMakeFiles/AtomicWriteFailure.dir/tests/acceptance/AtomicWriteFailure.cpp.o
+[125/412] Building CXX object CMakeFiles/DocumentTest.dir/tests/application/DocumentTest.cpp.o
+[126/412] Linking CXX executable AtomicWriteFailure
+[127/412] Linking CXX executable DocumentTest
+[128/412] Building CXX object CMakeFiles/ScrollMotionTest.dir/tests/application/ScrollMotionTest.cpp.o
+[129/412] Linking CXX executable ScrollMotionTest
+[130/412] Building CXX object CMakeFiles/NavigationTest.dir/tests/application/NavigationTest.cpp.o
+[131/412] Building CXX object CMakeFiles/WorkPathTest.dir/tests/application/WorkPathTest.cpp.o
+[132/412] Linking CXX executable WorkPathTest
+[133/412] Linking CXX executable NavigationTest
+[134/412] cd /work/build && /usr/bin/python3.12 /work/source/tools/build_identity.py --source /work/source --output /work/build/generated
+[135/412] Building CXX object CMakeFiles/xfmd_version.dir/src/application/build/BuildVersion.cpp.o
+[136/412] Linking CXX static library libxfmd_version.a
+[137/412] Generating /cache/target/release/libxfmd_mermaid_ffi.a
+   Compiling xfmd-diagram-contracts v0.1.0 (/work/source/src/contracts/diagram/rust)
+   Compiling xfmd-diagram-layout v0.1.0 (/work/source/src/renderer/diagram/rust)
+   Compiling xfmd-mermaid-interpreter v0.1.0 (/work/source/src/interpreter/mermaid/rust)
+   Compiling xfmd-mermaid-ffi v0.1.0 (/work/source/src/application/composition/mermaid)
+    Finished `release` profile [optimized] target(s) in 2.67s
+[138/412] Generating /cache/target/release/libxfmd_sdp_json.a
+    Blocking waiting for file lock on build directory
+   Compiling xfmd-sdp-json v0.1.0 (/work/source/src/application/sdp/rust)
+    Finished `release` profile [optimized] target(s) in 1.89s
+[139/412] Building CXX object CMakeFiles/xfmd_interpreter.dir/src/interpreter/MathSyntax.cpp.o
+[140/412] Building CXX object CMakeFiles/xfmd_interpreter.dir/src/interpreter/mermaid/MermaidBlockBuilder.cpp.o
+[141/412] Building CXX object CMakeFiles/xfmd_interpreter.dir/src/interpreter/CmarkInterpreter.cpp.o
+[142/412] Building CXX object CMakeFiles/xfmd_interpreter.dir/src/interpreter/SourceMapBuilder.cpp.o
+[143/412] Building CXX object CMakeFiles/xfmd_interpreter.dir/src/interpreter/mermaid/MermaidInterpreter.cpp.o
+[144/412] Building CXX object CMakeFiles/xfmd_interpreter.dir/src/interpreter/ModelBuilder.cpp.o
+[145/412] Building CXX object CMakeFiles/xfmd_interpreter.dir/src/interpreter/TableModelBuilder.cpp.o
+[146/412] Linking CXX static library libxfmd_interpreter.a
+[147/412] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/diagram/DiagramPlacement.cpp.o
+[148/412] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/diagram/DiagramTextLayout.cpp.o
+[149/412] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/BlockLayout.cpp.o
+[150/412] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/PageBreaker.cpp.o
+[151/412] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/diagram/MermaidDiagramLayout.cpp.o
+[152/412] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/PageComposer.cpp.o
+[153/412] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/MarkdownRenderer.cpp.o
+[154/412] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/PageAnchorIndex.cpp.o
+[155/412] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/TableLayout.cpp.o
+[156/412] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/HitTester.cpp.o
+[157/412] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/LinkMarker.cpp.o
+[158/412] Building CXX object CMakeFiles/xfmd_diagrams.dir/src/application/diagrams/DiagramCache.cpp.o
+[159/412] Building CXX object CMakeFiles/xfmd_export.dir/src/application/export/ExportCoordinator.cpp.o
+[160/412] Building CXX object CMakeFiles/xfmd_diagrams.dir/src/application/composition/DiagramServices.cpp.o
+[161/412] Building CXX object CMakeFiles/xfmd_renderer.dir/src/renderer/InlineLayout.cpp.o
+[162/412] Linking CXX static library libxfmd_renderer.a
+[163/412] Building CXX object CMakeFiles/xfmd_export.dir/src/application/export/ExportPipeline.cpp.o
+[164/412] Building CXX object CMakeFiles/xfmd_diagrams.dir/src/application/diagrams/DiagramPreparation.cpp.o
+[165/412] Linking CXX static library libxfmd_diagrams.a
+[166/412] Building CXX object CMakeFiles/xfmd_export.dir/src/application/io/PdfFilePublisher.cpp.o
+[167/412] Building CXX object CMakeFiles/InterpreterTest.dir/tests/interpreter/InterpreterTest.cpp.o
+[168/412] Building CXX object CMakeFiles/xfmd_export.dir/src/application/adapters/PdfOutput.cpp.o
+[169/412] Linking CXX static library libxfmd_export.a
+[170/412] Linking CXX executable InterpreterTest
+[171/412] Building CXX object CMakeFiles/RendererTest.dir/tests/renderer/RendererTest.cpp.o
+[172/412] Linking CXX executable RendererTest
+[173/412] Building CXX object CMakeFiles/DocumentIndexTest.dir/tests/application/DocumentIndexTest.cpp.o
+[174/412] Linking CXX executable DocumentIndexTest
+[175/412] Building CXX object CMakeFiles/ScrollTest.dir/tests/application/ScrollTest.cpp.o
+[176/412] Linking CXX executable ScrollTest
+[177/412] Building CXX object CMakeFiles/PreviewTest.dir/tests/application/PreviewTest.cpp.o
+[178/412] Linking CXX executable PreviewTest
+[179/412] Building CXX object CMakeFiles/ReferenceWorkerTest.dir/tests/application/ReferenceWorkerTest.cpp.o
+[180/412] Linking CXX executable ReferenceWorkerTest
+[181/412] Building CXX object CMakeFiles/xfmd_benchmark.dir/tests/acceptance/Benchmark.cpp.o
+[182/412] Linking CXX executable xfmd_benchmark
+[183/412] Building CXX object CMakeFiles/TypographyFixture.dir/tests/acceptance/TypographyFixture.cpp.o
+[184/412] Linking CXX executable TypographyFixture
+[185/412] Building CXX object CMakeFiles/PageLayoutTest.dir/tests/renderer/PageLayoutTest.cpp.o
+[186/412] Linking CXX executable PageLayoutTest
+[187/412] Building CXX object CMakeFiles/ExportJobTest.dir/tests/application/ExportJobTest.cpp.o
+[188/412] Linking CXX executable ExportJobTest
+[189/412] Building CXX object CMakeFiles/PdfFidelityFixture.dir/tests/acceptance/PdfFidelityFixture.cpp.o
+[190/412] Building CXX object CMakeFiles/PdfExportTest.dir/tests/application/PdfExportTest.cpp.o
+[191/412] Building CXX object CMakeFiles/PdfCommitFailure.dir/tests/acceptance/PdfCommitFailure.cpp.o
+[192/412] Linking CXX executable PdfFidelityFixture
+[193/412] Linking CXX executable PdfExportTest
+[194/412] Linking CXX executable PdfCommitFailure
+[195/412] Building CXX object CMakeFiles/TableTest.dir/tests/renderer/TableTest.cpp.o
+[196/412] Linking CXX executable TableTest
+[197/412] Building CXX object CMakeFiles/PdfBenchmark.dir/tests/acceptance/PdfBenchmark.cpp.o
+[198/412] Building CXX object CMakeFiles/ReadingColorsTest.dir/tests/application/ReadingColorsTest.cpp.o
+[199/412] Linking CXX executable ReadingColorsTest
+[200/412] Linking CXX executable PdfBenchmark
+[201/412] Building CXX object CMakeFiles/RichPreviewTest.dir/tests/application/RichPreviewTest.cpp.o
+[202/412] Linking CXX executable RichPreviewTest
+[203/412] Building CXX object CMakeFiles/DiagramPreparationTest.dir/tests/application/DiagramPreparationTest.cpp.o
+[204/412] Linking CXX executable DiagramPreparationTest
+[205/412] Building CXX object CMakeFiles/MermaidPdfFixture.dir/tests/acceptance/MermaidPdfFixture.cpp.o
+[206/412] Building CXX object CMakeFiles/DiagramReadingTest.dir/tests/application/DiagramReadingTest.cpp.o
+[207/412] Building CXX object CMakeFiles/DiagramWorkerTest.dir/tests/application/DiagramWorkerTest.cpp.o
+[208/412] Linking CXX executable DiagramWorkerTest
+[209/412] Linking CXX executable MermaidPdfFixture
+[210/412] Linking CXX executable DiagramReadingTest
+[211/412] Building CXX object CMakeFiles/DiagramLayoutTest.dir/tests/renderer/DiagramLayoutTest.cpp.o
+[212/412] Building CXX object CMakeFiles/xfmd_sdp.dir/src/application/sdp/SduiTools.cpp.o
+[213/412] Building CXX object CMakeFiles/xfmd_sdp.dir/src/application/sdp/SdpRuntime.cpp.o
+[214/412] Building CXX object CMakeFiles/xfmd_sdp.dir/src/application/sdp/SdpDisplay.cpp.o
+[215/412] Building CXX object CMakeFiles/xfmd_sdp.dir/src/application/sdp/SdpSources.cpp.o
+[216/412] Building CXX object CMakeFiles/xfmd_sdp.dir/src/application/sdp/SdpExpansion.cpp.o
+[217/412] Building CXX object CMakeFiles/xfmd_sdp.dir/src/application/sdp/SdpWatch.cpp.o
+[218/412] Building CXX object CMakeFiles/xfmd_sdp.dir/src/application/sdp/SdpToolJob.cpp.o
+[219/412] Building CXX object CMakeFiles/xfmd_sdp.dir/src/application/sdp/SdpProtocol.cpp.o
+[220/412] Linking CXX static library libxfmd_sdp.a
+[221/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/sdp/SduiSource.cpp.o
+[222/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/sdp/SduiWorkflow.cpp.o
+[223/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/sdp/SdlSource.cpp.o
+[224/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/SdpPanelContext.cpp.o
+[225/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/sdp/SdpNavigation.cpp.o
+[226/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/SdpTree.cpp.o
+[227/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/sdp/SdpDiscovery.cpp.o
+[228/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/SdpPanel.cpp.o
+[229/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/navigation/NavigationPanel.cpp.o
+[230/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/navigation/WindowEndpoint.cpp.o
+[231/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/controls/CompactToolbar.cpp.o
+[232/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/controls/PreviewControls.cpp.o
+[233/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/controls/PreviewColorControls.cpp.o
+[234/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/style/ThemeProfiles.cpp.o
+[235/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/navigation/DocumentViews.cpp.o
+[236/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/style/UiStyling.cpp.o
+[237/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/style/IconCatalog.cpp.o
+[238/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/style/UiContext.cpp.o
+[239/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/controls/ButtonPainter.cpp.o
+[240/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/controls/UiButton.cpp.o
+[241/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/preferences/PreferencesService.cpp.o
+[242/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/controls/UiLayout.cpp.o
+[243/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/adapters/ExternalBrowser.cpp.o
+[244/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/PreferencesDialog.cpp.o
+[245/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/adapters/FoxPreferencesStore.cpp.o
+[246/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/PreferencesPages.cpp.o
+[247/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/OpenPathDialog.cpp.o
+[248/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/adapters/DesktopFileOpener.cpp.o
+[249/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ApplicationOpening.cpp.o
+[250/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ApplicationAppearance.cpp.o
+[251/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/XfmdToolbar.cpp.o
+[252/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ApplicationWorkspace.cpp.o
+[253/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/zoom/DocumentZoom.cpp.o
+[254/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ApplicationZoom.cpp.o
+[255/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/controls/DocumentPathField.cpp.o
+[256/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/controls/ReadingColorPopup.cpp.o
+[257/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/controls/ThemeButton.cpp.o
+[258/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ApplicationCommands.cpp.o
+[259/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ApplicationIndex.cpp.o
+[260/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ApplicationExport.cpp.o
+[261/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/commands/CommandRouter.cpp.o
+[262/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/Application.cpp.o
+[263/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/IconResources.cpp.o
+[264/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/XfmdWindow.cpp.o
+[265/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/EditorPresentation.cpp.o
+[266/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/EditorWidget.cpp.o
+[267/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/SidebarWidget.cpp.o
+[268/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/RecentFilesPanel.cpp.o
+[269/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/WorkspacePanel.cpp.o
+[270/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/PathContextMenu.cpp.o
+[271/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/SidebarPathList.cpp.o
+[272/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/FavoritesPanel.cpp.o
+[273/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/NavigationTree.cpp.o
+[274/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/ViewModeController.cpp.o
+[275/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/adapters/ViewTransform.cpp.o
+[276/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/adapters/FoxCairoCanvas.cpp.o
+[277/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/adapters/FoxWindowMode.cpp.o
+[278/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/ui/IndexPanel.cpp.o
+[279/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/adapters/FoxPreviewInput.cpp.o
+[280/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/adapters/FoxScheduler.cpp.o
+[281/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/adapters/FoxRenderHost.cpp.o
+[282/412] Building CXX object CMakeFiles/xfmd_application.dir/src/application/adapters/FoxWheelScrollBar.cpp.o
+[283/412] Linking CXX static library libxfmd_application.a
+[284/412] Building CXX object CMakeFiles/ExternalBrowserTest.dir/tests/application/ExternalBrowserTest.cpp.o
+[285/412] Linking CXX executable ExternalBrowserTest
+[286/412] Building CXX object CMakeFiles/xfmd.dir/src/application/main.cpp.o
+[287/412] Building CXX object CMakeFiles/DiagramReadingGuiTest.dir/tests/gui/DiagramReadingGuiTest.cpp.o
+[288/412] Linking CXX executable xfmd
+[289/412] Linking CXX executable DiagramReadingGuiTest
+[290/412] Building CXX object CMakeFiles/SdpDynamicGuiTest.dir/tests/gui/SdpDynamicGuiTest.cpp.o
+/work/source/tests/gui/SdpDynamicGuiTest.cpp: In function 'xfmd::SdpReply graph()':
+/work/source/tests/gui/SdpDynamicGuiTest.cpp:43:55: warning: missing initializer for member 'xfmd::SdpTarget::path' [-Wmissing-field-initializers]
+   43 |   vp.target = {"select", "TEST", "model", "bulk", "r1"};
+      |                                                       ^
+/work/source/tests/gui/SdpDynamicGuiTest.cpp:43:55: warning: missing initializer for member 'xfmd::SdpTarget::entry' [-Wmissing-field-initializers]
+/work/source/tests/gui/SdpDynamicGuiTest.cpp:47:67: warning: missing initializer for member 'xfmd::SdpTarget::path' [-Wmissing-field-initializers]
+   47 |   object.target = {"select", "TEST", "model", "VP11-generic", "r1"};
+      |                                                                   ^
+/work/source/tests/gui/SdpDynamicGuiTest.cpp:47:67: warning: missing initializer for member 'xfmd::SdpTarget::entry' [-Wmissing-field-initializers]
+/work/source/tests/gui/SdpDynamicGuiTest.cpp:52:68: warning: missing initializer for member 'xfmd::SdpTarget::path' [-Wmissing-field-initializers]
+   52 |   focused.target = {"select", "TEST", "model", "VP02-focused", "r1"};
+      |                                                                    ^
+/work/source/tests/gui/SdpDynamicGuiTest.cpp:52:68: warning: missing initializer for member 'xfmd::SdpTarget::entry' [-Wmissing-field-initializers]
+[291/412] Building CXX object CMakeFiles/SdpPanelGuiTest.dir/tests/gui/SdpPanelGuiTest.cpp.o
+/work/source/tests/gui/SdpPanelGuiTest.cpp: In function 'void run()':
+/work/source/tests/gui/SdpPanelGuiTest.cpp:83:72: warning: missing initializer for member 'xfmd::SdpTarget::path' [-Wmissing-field-initializers]
+   83 |   readingSource.target = {"select", "test", "m", "opaque-primary", "r1"};
+      |                                                                        ^
+/work/source/tests/gui/SdpPanelGuiTest.cpp:83:72: warning: missing initializer for member 'xfmd::SdpTarget::entry' [-Wmissing-field-initializers]
+/work/source/tests/gui/SdpPanelGuiTest.cpp:84:65: warning: missing initializer for member 'xfmd::SdpTarget::path' [-Wmissing-field-initializers]
+   84 |   readingSource.expansionTarget = {"tree", "test", "m", "", "r1"};
+      |                                                                 ^
+/work/source/tests/gui/SdpPanelGuiTest.cpp:84:65: warning: missing initializer for member 'xfmd::SdpTarget::entry' [-Wmissing-field-initializers]
+/work/source/tests/gui/SdpPanelGuiTest.cpp:107:84: warning: missing initializer for member 'xfmd::SdpTarget::path' [-Wmissing-field-initializers]
+  107 |     n.overviewTarget = {"select", "test", "m", "legacy-overview-must-not-win", "r1"};
+      |                                                                                    ^
+/work/source/tests/gui/SdpPanelGuiTest.cpp:107:84: warning: missing initializer for member 'xfmd::SdpTarget::entry' [-Wmissing-field-initializers]
+[292/412] Linking CXX executable SdpDynamicGuiTest
+[293/412] Linking CXX executable SdpPanelGuiTest
+[294/412] Building CXX object CMakeFiles/DocumentZoomGuiTest.dir/tests/gui/DocumentZoomGuiTest.cpp.o
+[295/412] Building CXX object CMakeFiles/FavoritesGuiTest.dir/tests/gui/FavoritesGuiTest.cpp.o
+[296/412] Linking CXX executable DocumentZoomGuiTest
+[297/412] Linking CXX executable FavoritesGuiTest
+[298/412] Building CXX object CMakeFiles/OpenPathDialogGuiTest.dir/tests/gui/OpenPathDialogGuiTest.cpp.o
+[299/412] Linking CXX executable OpenPathDialogGuiTest
+[300/412] Building CXX object CMakeFiles/PathWorkspaceGuiTest.dir/tests/gui/PathWorkspaceGuiTest.cpp.o
+[301/412] Building CXX object CMakeFiles/MermaidGuiTest.dir/tests/gui/MermaidGuiTest.cpp.o
+[302/412] Linking CXX executable PathWorkspaceGuiTest
+[303/412] Linking CXX executable MermaidGuiTest
+[304/412] Building CXX object CMakeFiles/FileRoutingGuiTest.dir/tests/gui/FileRoutingGuiTest.cpp.o
+[305/412] Linking CXX executable FileRoutingGuiTest
+[306/412] Building CXX object CMakeFiles/RecentFilesGuiTest.dir/tests/gui/RecentFilesGuiTest.cpp.o
+[307/412] Building CXX object CMakeFiles/PreviewSelectionGuiTest.dir/tests/gui/PreviewSelectionGuiTest.cpp.o
+[308/412] Building CXX object CMakeFiles/CompactWorkspaceTest.dir/tests/gui/CompactWorkspaceTest.cpp.o
+[309/412] Linking CXX executable RecentFilesGuiTest
+[310/412] Linking CXX executable PreviewSelectionGuiTest
+[311/412] Building CXX object CMakeFiles/ReadingColorsGuiTest.dir/tests/gui/ReadingColorsGuiTest.cpp.o
+[312/412] Linking CXX executable CompactWorkspaceTest
+[313/412] Linking CXX executable ReadingColorsGuiTest
+[314/412] Building CXX object CMakeFiles/AppearancePreferencesTest.dir/tests/gui/AppearancePreferencesTest.cpp.o
+[315/412] Building CXX object CMakeFiles/TreeActionsTest.dir/tests/gui/TreeActionsTest.cpp.o
+[316/412] Building CXX object CMakeFiles/UiControlsTest.dir/tests/gui/UiControlsTest.cpp.o
+[317/412] Linking CXX executable UiControlsTest
+[318/412] Building CXX object CMakeFiles/AppearanceGuiTest.dir/tests/gui/AppearanceGuiTest.cpp.o
+[319/412] Linking CXX executable AppearancePreferencesTest
+[320/412] Linking CXX executable TreeActionsTest
+[321/412] Linking CXX executable AppearanceGuiTest
+[322/412] Building CXX object CMakeFiles/BrowserPreferencesTest.dir/tests/gui/BrowserPreferencesTest.cpp.o
+[323/412] Building CXX object CMakeFiles/WorkspaceTest.dir/tests/gui/WorkspaceTest.cpp.o
+[324/412] Building CXX object CMakeFiles/PresentationTest.dir/tests/gui/PresentationTest.cpp.o
+[325/412] Building CXX object CMakeFiles/IndexGuiTest.dir/tests/gui/IndexGuiTest.cpp.o
+[326/412] Linking CXX executable BrowserPreferencesTest
+[327/412] Linking CXX executable WorkspaceTest
+[328/412] Linking CXX executable PresentationTest
+[329/412] Linking CXX executable IndexGuiTest
+[330/412] Building CXX object CMakeFiles/ScrollingTest.dir/tests/gui/ScrollingTest.cpp.o
+[331/412] Building CXX object CMakeFiles/NavigationGuiTest.dir/tests/gui/NavigationGuiTest.cpp.o
+[332/412] Linking CXX executable ScrollingTest
+[333/412] Building CXX object CMakeFiles/SidebarGuiTest.dir/tests/gui/SidebarGuiTest.cpp.o
+[334/412] Building CXX object CMakeFiles/WheelGuiTest.dir/tests/gui/WheelGuiTest.cpp.o
+[335/412] Linking CXX executable NavigationGuiTest
+[336/412] Linking CXX executable SidebarGuiTest
+[337/412] Linking CXX executable WheelGuiTest
+[338/412] Building CXX object CMakeFiles/PointerTest.dir/tests/gui/PointerTest.cpp.o
+[339/412] Building CXX object CMakeFiles/WorkPathGuiTest.dir/tests/gui/WorkPathGuiTest.cpp.o
+[340/412] Building CXX object CMakeFiles/TablePreviewTest.dir/tests/gui/TablePreviewTest.cpp.o
+[341/412] Building CXX object CMakeFiles/CapturePresentation.dir/tests/gui/CapturePresentation.cpp.o
+[342/412] Linking CXX executable PointerTest
+[343/412] Linking CXX executable TablePreviewTest
+[344/412] Linking CXX executable WorkPathGuiTest
+[345/412] Linking CXX executable CapturePresentation
+[346/412] Building CXX object CMakeFiles/xfmd_cold_start.dir/tests/acceptance/ColdStart.cpp.o
+[347/412] Building CXX object CMakeFiles/ExportGuiTest.dir/tests/gui/ExportGuiTest.cpp.o
+[348/412] Building CXX object CMakeFiles/PreferencesTest.dir/tests/application/PreferencesTest.cpp.o
+[349/412] Building CXX object CMakeFiles/PagedPreviewTest.dir/tests/gui/PagedPreviewTest.cpp.o
+[350/412] Linking CXX executable PreferencesTest
+[351/412] Linking CXX executable xfmd_cold_start
+[352/412] Linking CXX executable ExportGuiTest
+[353/412] Linking CXX executable PagedPreviewTest
+[354/412] Building CXX object CMakeFiles/CanvasTest.dir/tests/gui/CanvasTest.cpp.o
+[355/412] Linking CXX executable CanvasTest
+[356/412] Building CXX object CMakeFiles/IconTest.dir/tests/gui/IconTest.cpp.o
+[357/412] Building CXX object CMakeFiles/ThemeProfilesTest.dir/tests/application/ThemeProfilesTest.cpp.o
+[358/412] Linking CXX executable ThemeProfilesTest
+[359/412] Building CXX object CMakeFiles/CapturePreferences.dir/tests/gui/CapturePreferences.cpp.o
+[360/412] Linking CXX executable IconTest
+[361/412] Linking CXX executable DiagramLayoutTest
+[362/412] Building CXX object CMakeFiles/CaptureAppearance.dir/tests/gui/CaptureAppearance.cpp.o
+[363/412] Linking CXX executable CapturePreferences
+[364/412] Linking CXX executable CaptureAppearance
+[365/412] Building CXX object CMakeFiles/WindowEndpointBoundaryTest.dir/tests/application/WindowEndpointBoundaryTest.cpp.o
+[366/412] Linking CXX executable WindowEndpointBoundaryTest
+[367/412] Building CXX object CMakeFiles/DocumentViewsGuiTest.dir/tests/gui/DocumentViewsGuiTest.cpp.o
+/work/source/tests/gui/DocumentViewsGuiTest.cpp: In function 'void run()':
+/work/source/tests/gui/DocumentViewsGuiTest.cpp:54:88: warning: missing initializer for member 'xfmd::DocumentViewConfig::broker' [-Wmissing-field-initializers]
+   54 |   DocumentViewConfig c{nav, tool, source, "demo", "", "gui-" + std::to_string(getpid())};
+      |                                                                                        ^
+[368/412] Building CXX object CMakeFiles/SdpWatchTest.dir/tests/application/SdpWatchTest.cpp.o
+[369/412] Linking CXX executable SdpWatchTest
+[370/412] Linking CXX executable DocumentViewsGuiTest
+[371/412] Building CXX object CMakeFiles/DocumentZoomPdfFixture.dir/tests/gui/DocumentZoomPdfFixture.cpp.o
+[372/412] Building CXX object CMakeFiles/DocumentLeaseGuiTest.dir/tests/gui/DocumentLeaseGuiTest.cpp.o
+[373/412] Linking CXX executable DocumentZoomPdfFixture
+[374/412] Linking CXX executable DocumentLeaseGuiTest
+[375/412] Building CXX object CMakeFiles/SdpProtocolTest.dir/tests/application/SdpProtocolTest.cpp.o
+[376/412] Linking CXX executable SdpProtocolTest
+[377/412] Building CXX object CMakeFiles/StandaloneMermaidTest.dir/tests/application/StandaloneMermaidTest.cpp.o
+[378/412] Building CXX object CMakeFiles/SdpDiscoveryTest.dir/tests/application/SdpDiscoveryTest.cpp.o
+[379/412] Building CXX object CMakeFiles/SdpIntegrationTest.dir/tests/application/SdpIntegrationTest.cpp.o
+/work/source/tests/application/SdpIntegrationTest.cpp: In function 'void run()':
+/work/source/tests/application/SdpIntegrationTest.cpp:69:110: warning: missing initializer for member 'xfmd::SdpTarget::entry' [-Wmissing-field-initializers]
+   69 |     if (change == 4) invalid.nodes.at("sdl").target = {"open", deferred.project, "", "", "", "/tmp/unrelated"};
+      |                                                                                                              ^
+[380/412] Linking CXX executable SdpDiscoveryTest
+[381/412] Linking CXX executable SdpIntegrationTest
+[382/412] Linking CXX executable StandaloneMermaidTest
+[383/412] Building CXX object CMakeFiles/SdpNavigationGuiTest.dir/tests/gui/SdpNavigationGuiTest.cpp.o
+[384/412] Building CXX object CMakeFiles/HeadingLinkTest.dir/tests/application/HeadingLinkTest.cpp.o
+[385/412] Linking CXX executable HeadingLinkTest
+[386/412] Linking CXX executable SdpNavigationGuiTest
+[387/412] Building CXX object CMakeFiles/SdpRuntimeTest.dir/tests/application/SdpRuntimeTest.cpp.o
+[388/412] Linking CXX executable SdpRuntimeTest
+[389/412] Building CXX object CMakeFiles/StandaloneMermaidGuiTest.dir/tests/gui/StandaloneMermaidGuiTest.cpp.o
+[390/412] Building CXX object CMakeFiles/HeadingLinkGuiTest.dir/tests/gui/HeadingLinkGuiTest.cpp.o
+[391/412] Linking CXX executable StandaloneMermaidGuiTest
+[392/412] Building CXX object CMakeFiles/SdpDisplayTest.dir/tests/application/SdpDisplayTest.cpp.o
+/work/source/tests/application/SdpDisplayTest.cpp: In function 'void run()':
+/work/source/tests/application/SdpDisplayTest.cpp:31:60: warning: missing initializer for member 'xfmd::SdpTarget::path' [-Wmissing-field-initializers]
+   31 |   target.target = {"select", "p", "m", "generic-VP11", "r1"};
+      |                                                            ^
+/work/source/tests/application/SdpDisplayTest.cpp:31:60: warning: missing initializer for member 'xfmd::SdpTarget::entry' [-Wmissing-field-initializers]
+/work/source/tests/application/SdpDisplayTest.cpp:34:57: warning: missing initializer for member 'xfmd::SdpTarget::path' [-Wmissing-field-initializers]
+   34 |   ref.target = {"select", "p", "m", "focused-VP01", "r1"};
+      |                                                         ^
+/work/source/tests/application/SdpDisplayTest.cpp:34:57: warning: missing initializer for member 'xfmd::SdpTarget::entry' [-Wmissing-field-initializers]
+/work/source/tests/application/SdpDisplayTest.cpp:46:59: warning: missing initializer for member 'xfmd::SdpTarget::entry' [-Wmissing-field-initializers]
+   46 |   card.target = {"open", "p", "", "", "", "/board/card.md"};
+      |                                                           ^
+/work/source/tests/application/SdpDisplayTest.cpp:59:84: warning: missing initializer for member 'xfmd::SdpTarget::path' [-Wmissing-field-initializers]
+   59 |   r.nodes["alias0"].target = {"select", "p", "m", "opaque-reading-collection", "r1"};
+      |                                                                                    ^
+/work/source/tests/application/SdpDisplayTest.cpp:59:84: warning: missing initializer for member 'xfmd::SdpTarget::entry' [-Wmissing-field-initializers]
+[393/412] Linking CXX executable SdpDisplayTest
+[394/412] Linking CXX executable HeadingLinkGuiTest
+[395/412] Building CXX object CMakeFiles/SdpRuntimeGuiTest.dir/tests/gui/SdpRuntimeGuiTest.cpp.o
+[396/412] Linking CXX executable SdpRuntimeGuiTest
+[397/412] Building CXX object CMakeFiles/SdpDeferredGuiTest.dir/tests/gui/SdpDeferredGuiTest.cpp.o
+[398/412] Linking CXX executable SdpDeferredGuiTest
+[399/412] Building CXX object CMakeFiles/SduiWorkflowGuiTest.dir/tests/gui/SduiWorkflowGuiTest.cpp.o
+[400/412] Building CXX object CMakeFiles/SdpActivityTest.dir/tests/application/SdpActivityTest.cpp.o
+In file included from /work/source/tests/application/SdpActivityTest.cpp:3:
+/work/source/tests/application/SdpActivityTest.cpp: In function 'void run()':
+/work/source/tests/application/SdpActivityTest.cpp:9:25: warning: missing initializer for member 'xfmd::SdpTarget::path' [-Wmissing-field-initializers]
+    9 |   CHECK(sdpDisplayAction({"activity-view", "p", "", "activity-view://p/overview", "rev"}));
+      |         ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/work/source/tests/support/TestSupport.h:7:11: note: in definition of macro 'CHECK'
+    7 |     if (!(__VA_ARGS__))                                                                            \
+      |           ^~~~~~~~~~~
+/work/source/tests/application/SdpActivityTest.cpp:9:25: warning: missing initializer for member 'xfmd::SdpTarget::entry' [-Wmissing-field-initializers]
+    9 |   CHECK(sdpDisplayAction({"activity-view", "p", "", "activity-view://p/overview", "rev"}));
+      |         ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/work/source/tests/support/TestSupport.h:7:11: note: in definition of macro 'CHECK'
+    7 |     if (!(__VA_ARGS__))                                                                            \
+      |           ^~~~~~~~~~~
+[401/412] Building CXX object CMakeFiles/SdlSourceGuiTest.dir/tests/gui/SdlSourceGuiTest.cpp.o
+[402/412] Linking CXX executable SduiWorkflowGuiTest
+[403/412] Linking CXX executable SdpActivityTest
+[404/412] Building CXX object CMakeFiles/SdpOverviewGuiTest.dir/tests/gui/SdpOverviewGuiTest.cpp.o
+[405/412] Linking CXX executable SdlSourceGuiTest
+[406/412] Linking CXX executable SdpOverviewGuiTest
+[407/412] Building CXX object CMakeFiles/SdpReadingTest.dir/tests/application/SdpReadingTest.cpp.o
+[408/412] Linking CXX executable SdpReadingTest
+[409/412] Building CXX object CMakeFiles/SdpActivityGuiTest.dir/tests/gui/SdpActivityGuiTest.cpp.o
+[410/412] Linking CXX executable SdpActivityGuiTest
+[411/412] Building CXX object CMakeFiles/SdpReadingGuiTest.dir/tests/gui/SdpReadingGuiTest.cpp.o
+[412/412] Linking CXX executable SdpReadingGuiTest
+Internal ctest changing into directory: /work/build
+Test project /work/build
+      Start  1: PortContractTest
+      Start  2: DocumentTest
+ 1/89 Test  #1: PortContractTest .................   Passed    0.00 sec
+      Start  3: FileOpenPolicyTest
+ 2/89 Test  #3: FileOpenPolicyTest ...............   Passed    0.00 sec
+      Start  4: InterpreterTest
+ 3/89 Test  #2: DocumentTest .....................   Passed    0.00 sec
+      Start  5: RendererTest
+ 4/89 Test  #4: InterpreterTest ..................   Passed    0.00 sec
+      Start  6: PreviewTest
+ 5/89 Test  #5: RendererTest .....................   Passed    0.00 sec
+      Start  7: ScrollTest
+ 6/89 Test  #7: ScrollTest .......................   Passed    0.00 sec
+      Start  8: WorkPathTest
+ 7/89 Test  #6: PreviewTest ......................   Passed    0.00 sec
+      Start  9: ExternalBrowserTest
+ 8/89 Test  #9: ExternalBrowserTest ..............   Passed    0.02 sec
+      Start 10: DocumentIndexTest
+ 9/89 Test #10: DocumentIndexTest ................   Passed    0.00 sec
+      Start 11: ReferenceWorkerTest
+10/89 Test #11: ReferenceWorkerTest ..............   Passed    0.00 sec
+      Start 12: NavigationTest
+11/89 Test #12: NavigationTest ...................   Passed    0.00 sec
+      Start 13: BlueprintStructure
+12/89 Test  #8: WorkPathTest .....................   Passed    0.15 sec
+      Start 14: LayerBoundaries
+13/89 Test #14: LayerBoundaries ..................   Passed    0.03 sec
+      Start 15: DiagramReadingGuiTest
+14/89 Test #13: BlueprintStructure ...............   Passed    0.50 sec
+      Start 16: SdpDynamicGuiTest
+15/89 Test #15: DiagramReadingGuiTest ............   Passed    2.87 sec
+      Start 17: SdpPanelGuiTest
+16/89 Test #16: SdpDynamicGuiTest ................   Passed    3.63 sec
+      Start 18: FavoritesGuiTest
+17/89 Test #17: SdpPanelGuiTest ..................   Passed    2.32 sec
+      Start 19: DocumentZoomGuiTest
+18/89 Test #18: FavoritesGuiTest .................   Passed    8.78 sec
+      Start 20: PathWorkspaceGuiTest
+19/89 Test #19: DocumentZoomGuiTest ..............   Passed   23.80 sec
+      Start 21: OpenPathDialogGuiTest
+20/89 Test #20: PathWorkspaceGuiTest .............   Passed   19.95 sec
+      Start 22: FileRoutingGuiTest
+21/89 Test #21: OpenPathDialogGuiTest ............   Passed    5.27 sec
+      Start 23: MermaidGuiTest
+22/89 Test #23: MermaidGuiTest ...................   Passed    8.53 sec
+      Start 24: RecentFilesGuiTest
+23/89 Test #24: RecentFilesGuiTest ...............   Passed    0.21 sec
+      Start 25: PreviewSelectionGuiTest
+24/89 Test #22: FileRoutingGuiTest ...............   Passed   14.64 sec
+      Start 26: CompactWorkspaceTest
+25/89 Test #25: PreviewSelectionGuiTest ..........   Passed    4.92 sec
+      Start 27: ReadingColorsGuiTest
+26/89 Test #27: ReadingColorsGuiTest .............   Passed    1.77 sec
+      Start 28: TreeActionsTest
+27/89 Test #26: CompactWorkspaceTest .............   Passed    4.22 sec
+      Start 29: AppearancePreferencesTest
+28/89 Test #29: AppearancePreferencesTest ........   Passed    0.21 sec
+      Start 30: AppearanceGuiTest
+29/89 Test #28: TreeActionsTest ..................   Passed    4.02 sec
+      Start 31: UiControlsTest
+30/89 Test #31: UiControlsTest ...................   Passed    1.37 sec
+      Start 32: BrowserPreferencesTest
+31/89 Test #30: AppearanceGuiTest ................   Passed    3.37 sec
+      Start 33: IndexGuiTest
+32/89 Test #32: BrowserPreferencesTest ...........   Passed    0.12 sec
+      Start 34: WorkspaceTest
+33/89 Test #34: WorkspaceTest ....................   Passed    0.11 sec
+      Start 35: PresentationTest
+34/89 Test #35: PresentationTest .................   Passed    1.17 sec
+      Start 36: ScrollingTest
+35/89 Test #36: ScrollingTest ....................   Passed    0.97 sec
+      Start 37: NavigationGuiTest
+36/89 Test #33: IndexGuiTest .....................   Passed    3.12 sec
+      Start 38: SidebarGuiTest
+37/89 Test #37: NavigationGuiTest ................   Passed    2.02 sec
+      Start 39: WheelGuiTest
+38/89 Test #38: SidebarGuiTest ...................   Passed    5.32 sec
+      Start 40: WorkPathGuiTest
+39/89 Test #40: WorkPathGuiTest ..................   Passed    9.75 sec
+      Start 41: PointerTest
+40/89 Test #41: PointerTest ......................   Passed    3.22 sec
+      Start 42: TablePreviewTest
+41/89 Test #42: TablePreviewTest .................   Passed    1.27 sec
+      Start 43: DiskFullFailure
+42/89 Test #43: DiskFullFailure ..................   Passed    0.04 sec
+      Start 44: BlueprintSymbols
+43/89 Test #44: BlueprintSymbols .................   Passed    0.07 sec
+      Start 45: ScrollMotionTest
+44/89 Test #45: ScrollMotionTest .................   Passed    0.00 sec
+      Start 46: PreferencesTest
+45/89 Test #46: PreferencesTest ..................   Passed    0.09 sec
+      Start 47: TypographyTest
+46/89 Test #47: TypographyTest ...................   Passed    0.09 sec
+      Start 48: PageLayoutTest
+47/89 Test #48: PageLayoutTest ...................   Passed    0.02 sec
+      Start 49: PagedPreviewTest
+48/89 Test #49: PagedPreviewTest .................   Passed    1.52 sec
+      Start 50: ExportJobTest
+49/89 Test #50: ExportJobTest ....................   Passed    0.01 sec
+      Start 51: PdfExportTest
+50/89 Test #51: PdfExportTest ....................   Passed    0.02 sec
+      Start 52: ExportGuiTest
+51/89 Test #52: ExportGuiTest ....................   Passed    0.16 sec
+      Start 53: PdfFidelityTest
+52/89 Test #39: WheelGuiTest .....................   Passed   22.61 sec
+      Start 54: PdfFlushFailure
+53/89 Test #54: PdfFlushFailure ..................   Passed    0.07 sec
+      Start 55: IconTest
+54/89 Test #55: IconTest .........................   Passed    0.09 sec
+      Start 56: CanvasTest
+55/89 Test #56: CanvasTest .......................   Passed    0.08 sec
+      Start 57: TableTest
+56/89 Test #57: TableTest ........................   Passed    0.74 sec
+      Start 58: ReadingColorsTest
+57/89 Test #58: ReadingColorsTest ................   Passed    0.02 sec
+      Start 59: RichPreviewTest
+58/89 Test #59: RichPreviewTest ..................   Passed    0.04 sec
+      Start 60: ThemeProfilesTest
+59/89 Test #60: ThemeProfilesTest ................   Passed    0.01 sec
+      Start 61: DiagramLayoutTest
+60/89 Test #61: DiagramLayoutTest ................   Passed    0.72 sec
+      Start 62: MermaidBootstrapTest
+61/89 Test #62: MermaidBootstrapTest .............   Passed    0.54 sec
+      Start 63: MermaidRustTests
+62/89 Test #53: PdfFidelityTest ..................   Passed    4.59 sec
+      Start 64: DiagramPreparationTest
+63/89 Test #64: DiagramPreparationTest ...........   Passed    0.02 sec
+      Start 65: DiagramReadingTest
+64/89 Test #63: MermaidRustTests .................   Passed    2.44 sec
+      Start 66: MermaidPdfTest
+65/89 Test #66: MermaidPdfTest ...................   Passed    0.60 sec
+      Start 67: DiagramWorkerTest
+66/89 Test #67: DiagramWorkerTest ................   Passed    0.00 sec
+      Start 68: MermaidDependencies
+67/89 Test #68: MermaidDependencies ..............   Passed    0.10 sec
+      Start 69: BuildIdentityTest
+68/89 Test #69: BuildIdentityTest ................   Passed    0.53 sec
+      Start 70: BuildVersionTest
+69/89 Test #65: DiagramReadingTest ...............   Passed    3.63 sec
+      Start 71: DocumentEndpointTest
+70/89 Test #70: BuildVersionTest .................   Passed    0.04 sec
+      Start 72: WindowEndpointBoundaryTest
+71/89 Test #71: DocumentEndpointTest .............   Passed    0.62 sec
+      Start 73: DocumentLeaseGuiTest
+72/89 Test #72: WindowEndpointBoundaryTest .......   Passed    2.11 sec
+      Start 74: DocumentZoomPdfTest
+73/89 Test #74: DocumentZoomPdfTest ..............   Passed    1.92 sec
+      Start 75: DocumentZoomDpiTest
+74/89 Test #73: DocumentLeaseGuiTest .............   Passed   12.94 sec
+      Start 76: SdpWatchTest
+75/89 Test #76: SdpWatchTest .....................   Passed    6.76 sec
+      Start 77: SdpProtocolTest
+76/89 Test #77: SdpProtocolTest ..................   Passed    1.77 sec
+      Start 78: SdpDiscoveryTest
+77/89 Test #78: SdpDiscoveryTest .................   Passed    0.00 sec
+      Start 79: StandaloneMermaidTest
+78/89 Test #79: StandaloneMermaidTest ............   Passed    0.04 sec
+      Start 80: StandaloneMermaidGuiTest
+79/89 Test #80: StandaloneMermaidGuiTest .........   Passed    1.02 sec
+      Start 81: HeadingLinkTest
+80/89 Test #81: HeadingLinkTest ..................   Passed    0.01 sec
+      Start 82: HeadingLinkGuiTest
+81/89 Test #82: HeadingLinkGuiTest ...............   Passed    0.81 sec
+      Start 83: SdpRuntimeTest
+82/89 Test #83: SdpRuntimeTest ...................   Passed    0.00 sec
+      Start 84: SdpRuntimeGuiTest
+83/89 Test #75: DocumentZoomDpiTest ..............   Passed   23.85 sec
+      Start 85: SdpDisplayTest
+84/89 Test #85: SdpDisplayTest ...................   Passed    0.00 sec
+      Start 86: SdpActivityTest
+85/89 Test #86: SdpActivityTest ..................   Passed    0.00 sec
+      Start 87: SdpActivityGuiTest
+86/89 Test #87: SdpActivityGuiTest ...............   Passed    1.77 sec
+      Start 88: SdpReadingTest
+87/89 Test #88: SdpReadingTest ...................   Passed    0.00 sec
+      Start 89: SdpReadingGuiTest
+88/89 Test #89: SdpReadingGuiTest ................   Passed    3.67 sec
+89/89 Test #84: SdpRuntimeGuiTest ................   Passed   10.53 sec
+
+100% tests passed, 0 tests failed out of 89
+
+Label Time Summary:
+GUI    = 218.54 sec*proc (41 tests)
+
+Total Test time (real) = 122.79 sec
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.105s
+
+OK
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.019s
+
+OK
+Cloning into '/tmp/tmp9i89rae1/checkout'...
+done.
+From /tmp/tmp9i89rae1/remote
+   f0a74bb..339a423  main       -> origin/main
+..........
+----------------------------------------------------------------------
+Ran 10 tests in 0.135s
+
+OK
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.009s
+
+OK
+OK: 311 implemented plumbing callees found; caller semantics require review
+PASS: 32 cards, 151 card events, 17 management records; schemas, replay, CardState, placement and index
+-- Install configuration: "Release"
+-- Installing: /work/stage/usr/share/xfmd/math
+-- Installing: /work/stage/usr/share/xfmd/math/.clatexmath-res_root
+-- Installing: /work/stage/usr/share/xfmd/math/RES_README
+-- Installing: /work/stage/usr/share/xfmd/math/SAMPLES.tex
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic/LICENSE
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic/cyrillic.map.xml
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic/language_cyrillic.xml
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic/mappings_cyrillic.xml
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic/symbols_cyrillic.xml
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic/wnbx10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic/wnbx10.xml
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic/wnbxti10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic/wnbxti10.xml
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic/wnr10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic/wnr10.xml
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic/wnss10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic/wnss10.xml
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic/wnssbx10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic/wnssbx10.xml
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic/wnssi10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic/wnssi10.xml
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic/wnti10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic/wnti10.xml
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic/wntt10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/cyrillic/wntt10.xml
+-- Installing: /work/stage/usr/share/xfmd/math/fonts
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/base
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/base/cmex10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/base/cmmi10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/base/cmmib10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/euler
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/euler/eufb10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/euler/eufm10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/latin
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/latin/bi10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/latin/bx10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/latin/cmr10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/latin/i10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/latin/optional
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/latin/optional/cmbx10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/latin/optional/cmbxti10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/latin/optional/cmss10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/latin/optional/cmssbx10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/latin/optional/cmssi10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/latin/optional/cmti10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/latin/optional/cmtt10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/latin/r10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/latin/sb10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/latin/sbi10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/latin/si10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/latin/ss10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/latin/tt10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/licences
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/licences/Knuth_License.txt
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/licences/License_for_dsrom.txt
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/licences/OFL.txt
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/maths
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/maths/cmbsy10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/maths/cmsy10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/maths/msam10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/maths/msbm10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/maths/optional
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/maths/optional/dsrom10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/maths/rsfs10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/maths/special.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/fonts/maths/stmary10.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/greek
+-- Installing: /work/stage/usr/share/xfmd/math/greek/LICENSE
+-- Installing: /work/stage/usr/share/xfmd/math/greek/fcmbipg.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/greek/fcmbipg.xml
+-- Installing: /work/stage/usr/share/xfmd/math/greek/fcmbpg.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/greek/fcmbpg.xml
+-- Installing: /work/stage/usr/share/xfmd/math/greek/fcmripg.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/greek/fcmripg.xml
+-- Installing: /work/stage/usr/share/xfmd/math/greek/fcmrpg.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/greek/fcmrpg.xml
+-- Installing: /work/stage/usr/share/xfmd/math/greek/fcsbpg.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/greek/fcsbpg.xml
+-- Installing: /work/stage/usr/share/xfmd/math/greek/fcsropg.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/greek/fcsropg.xml
+-- Installing: /work/stage/usr/share/xfmd/math/greek/fcsrpg.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/greek/fcsrpg.xml
+-- Installing: /work/stage/usr/share/xfmd/math/greek/fctrpg.ttf
+-- Installing: /work/stage/usr/share/xfmd/math/greek/fctrpg.xml
+-- Installing: /work/stage/usr/share/xfmd/math/greek/greek.map.xml
+-- Installing: /work/stage/usr/share/xfmd/math/greek/language_greek.xml
+-- Installing: /work/stage/usr/share/xfmd/math/greek/mappings_greek.xml
+-- Installing: /work/stage/usr/share/xfmd/math/greek/symbols_greek.xml
+-- Installing: /work/stage/usr/share/doc/xfmd/MicroTeX-LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/xfmd-build.json
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_clipperhouse_uax29_v2@v2.2.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_clipperhouse_uax29_v2@v2.2.0/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_go-text_typesetting@v0.3.4
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_go-text_typesetting@v0.3.4/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_nfnt_resize@v0.0.0-20180221191011-83c6a9932646
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_nfnt_resize@v0.0.0-20180221191011-83c6a9932646/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/golang.org_x_image@v0.46.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/golang.org_x_image@v0.46.0/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_coder_websocket@v1.8.15
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_coder_websocket@v1.8.15/LICENSE.txt
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_godbus_dbus_v5@v5.2.2
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_godbus_dbus_v5@v5.2.2/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_nicksnyder_go-i18n_v2@v2.5.1
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_nicksnyder_go-i18n_v2@v2.5.1/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/golang.org_x_net@v0.35.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/golang.org_x_net@v0.35.0/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_davecgh_go-spew@v1.1.1
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_davecgh_go-spew@v1.1.1/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_golang-jwt_jwt_v5@v5.3.1
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_golang-jwt_jwt_v5@v5.3.1/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_niemeyer_pretty@v0.0.0-20200227124842-a10e7caefd8e
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_niemeyer_pretty@v0.0.0-20200227124842-a10e7caefd8e/License
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/golang.org_x_oauth2@v0.35.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/golang.org_x_oauth2@v0.35.0/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_fsnotify_fsnotify@v1.9.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_fsnotify_fsnotify@v1.9.0/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_google_go-cmp@v0.7.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_google_go-cmp@v0.7.0/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_pmezard_go-difflib@v1.0.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_pmezard_go-difflib@v1.0.0/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/golang.org_x_sync@v0.23.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/golang.org_x_sync@v0.23.0/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_fyne-io_gl-js@v0.2.1-0.20260315212741-029c47fd27e8
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_fyne-io_gl-js@v0.2.1-0.20260315212741-029c47fd27e8/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_google_jsonschema-go@v0.4.3
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_google_jsonschema-go@v0.4.3/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_rymdport_portal@v0.4.2
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_rymdport_portal@v0.4.2/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/golang.org_x_sys@v0.48.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/golang.org_x_sys@v0.48.0/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_fyne-io_glfw-js@v0.4.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_fyne-io_glfw-js@v0.4.0/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_hack-pad_go-indexeddb@v0.3.2
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_hack-pad_go-indexeddb@v0.3.2/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_segmentio_asm@v1.1.3
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_segmentio_asm@v1.1.3/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/golang.org_x_text@v0.42.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/golang.org_x_text@v0.42.0/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_fyne-io_image@v0.1.1
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_fyne-io_image@v0.1.1/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_hack-pad_safejs@v0.1.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_hack-pad_safejs@v0.1.0/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_segmentio_encoding@v0.5.4
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_segmentio_encoding@v0.5.4/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/golang.org_x_time@v0.15.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/golang.org_x_time@v0.15.0/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_fyne-io_oksvg@v0.2.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_fyne-io_oksvg@v0.2.0/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_jeandeaual_go-locale@v0.0.0-20250612000132-0ef82f21eade
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_jeandeaual_go-locale@v0.0.0-20250612000132-0ef82f21eade/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_srwiley_oksvg@v0.0.0-20221011165216-be6e8873101c
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_srwiley_oksvg@v0.0.0-20221011165216-be6e8873101c/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/golang.org_x_tools@v0.49.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/golang.org_x_tools@v0.49.0/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/modules.json
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/sdptool-modules.json
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/fyne.io_fyne_v2@v2.8.1
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/fyne.io_fyne_v2@v2.8.1/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_go-gl_gl@v0.0.0-20260331235117-4566fea9a276
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_go-gl_gl@v0.0.0-20260331235117-4566fea9a276/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_jsummers_gobmp@v0.0.0-20230614200233-a9de23ed2e25
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_jsummers_gobmp@v0.0.0-20230614200233-a9de23ed2e25/COPYING.txt
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_srwiley_rasterx@v0.0.0-20220730225603-2ab79fcdd4ef
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_srwiley_rasterx@v0.0.0-20220730225603-2ab79fcdd4ef/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/gopkg.in_check.v1@v0.0.0-20161208181325-20d25e280405
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/gopkg.in_check.v1@v0.0.0-20161208181325-20d25e280405/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/fyne.io_systray@v1.12.3-0.20260810170012-af4e8e793ec4
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/fyne.io_systray@v1.12.3-0.20260810170012-af4e8e793ec4/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_go-gl_glfw_v3.4_glfw@v0.1.0-pre.1.0.20260707082822-2a407d02d01a
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_go-gl_glfw_v3.4_glfw@v0.1.0-pre.1.0.20260707082822-2a407d02d01a/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_kr_text@v0.2.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_kr_text@v0.2.0/License
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_stretchr_testify@v1.11.1
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_stretchr_testify@v1.11.1/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/gopkg.in_check.v1@v1.0.0-20200227125254-8fa46927fb4f
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/gopkg.in_check.v1@v1.0.0-20200227125254-8fa46927fb4f/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_BurntSushi_toml@v1.6.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_BurntSushi_toml@v1.6.0/COPYING
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_go-text_render@v0.2.1
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_go-text_render@v0.2.1/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_mattn_go-runewidth@v0.0.24
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_mattn_go-runewidth@v0.0.24/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_yosida95_uritemplate_v3@v3.0.2
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_yosida95_uritemplate_v3@v3.0.2/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/gopkg.in_yaml.v3@v3.0.1
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/gopkg.in_yaml.v3@v3.0.1/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/gopkg.in_yaml.v3@v3.0.1/NOTICE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_anthonynsimon_bild@v0.14.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_anthonynsimon_bild@v0.14.0/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_go-text_typesetting-utils@v0.0.0-20260223113751-2d88ac90dae3
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_go-text_typesetting-utils@v0.0.0-20260223113751-2d88ac90dae3/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_modelcontextprotocol_go-sdk@v1.8.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_modelcontextprotocol_go-sdk@v1.8.0/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_yuin_goldmark@v1.8.2
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/go/github.com_yuin_goldmark@v1.8.2/LICENSE
+-- Installing: /work/stage/usr/libexec/xfmd/sdptool
+-- Installing: /work/stage/usr/bin/xfmd
+-- Set non-toolchain portion of runtime path of "/work/stage/usr/bin/xfmd" to "/usr/lib64/xfmd"
+-- Installing: /work/stage/usr/share/applications/xfmd.desktop
+-- Installing: /work/stage/usr/share/icons/hicolor/scalable/apps/xfmd.svg
+-- Installing: /work/stage/usr/share/man/man1/xfmd.1
+-- Installing: /work/stage/usr/share/doc/xfmd/README.md
+-- Installing: /work/stage/usr/share/doc/xfmd/appearance.ini
+-- Installing: /work/stage/usr/share/doc/xfmd/cmark-gfm.txt
+-- Installing: /work/stage/usr/share/icons/hicolor/16x16/apps/xfmd.png
+-- Installing: /work/stage/usr/share/icons/hicolor/24x24/apps/xfmd.png
+-- Installing: /work/stage/usr/share/icons/hicolor/32x32/apps/xfmd.png
+-- Installing: /work/stage/usr/share/icons/hicolor/48x48/apps/xfmd.png
+-- Installing: /work/stage/usr/share/icons/hicolor/64x64/apps/xfmd.png
+-- Installing: /work/stage/usr/share/icons/hicolor/128x128/apps/xfmd.png
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/mermaid-rs-renderer.txt
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/mermaid-dependencies.md
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/aho-corasick-1.1.5
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/aho-corasick-1.1.5/COPYING
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/aho-corasick-1.1.5/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/aho-corasick-1.1.5/UNLICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/memchr-2.8.3
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/memchr-2.8.3/COPYING
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/memchr-2.8.3/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/memchr-2.8.3/UNLICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/serde_derive-1.0.229
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/serde_derive-1.0.229/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/serde_derive-1.0.229/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/zmij-1.0.23
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/zmij-1.0.23/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/anyhow-1.0.104
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/anyhow-1.0.104/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/anyhow-1.0.104/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/memmap2-0.9.11
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/memmap2-0.9.11/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/memmap2-0.9.11/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/serde_json-1.0.151
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/serde_json-1.0.151/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/serde_json-1.0.151/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/cc-1.2.54
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/cc-1.2.54/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/cc-1.2.54/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/mermaid-rs-renderer-0.3.1
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/mermaid-rs-renderer-0.3.1/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/shlex-1.3.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/shlex-1.3.0/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/shlex-1.3.0/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/core_maths-0.1.1
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/core_maths-0.1.1/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/once_cell-1.21.4
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/once_cell-1.21.4/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/once_cell-1.21.4/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/slotmap-1.1.1
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/slotmap-1.1.1/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/find-msvc-tools-0.1.11
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/find-msvc-tools-0.1.11/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/find-msvc-tools-0.1.11/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/proc-macro2-1.0.107
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/proc-macro2-1.0.107/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/proc-macro2-1.0.107/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/syn-3.0.5
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/syn-3.0.5/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/syn-3.0.5/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/fontconfig-parser-0.5.8
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/fontconfig-parser-0.5.8/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/quote-1.0.47
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/quote-1.0.47/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/quote-1.0.47/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/thiserror-2.0.20
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/thiserror-2.0.20/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/thiserror-2.0.20/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/fontdb-0.23.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/fontdb-0.23.0/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/regex-1.13.1
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/regex-1.13.1/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/regex-1.13.1/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/thiserror-impl-2.0.20
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/thiserror-impl-2.0.20/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/thiserror-impl-2.0.20/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/itoa-1.0.18
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/itoa-1.0.18/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/itoa-1.0.18/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/regex-automata-0.4.18
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/regex-automata-0.4.18/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/regex-automata-0.4.18/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/tinyvec-1.13.3
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/tinyvec-1.13.3/LICENSE-APACHE.md
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/tinyvec-1.13.3/LICENSE-MIT.md
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/tinyvec-1.13.3/LICENSE-ZLIB.md
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/json5-1.3.1
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/json5-1.3.1/LICENSE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/regex-syntax-0.8.11
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/regex-syntax-0.8.11/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/regex-syntax-0.8.11/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/ttf-parser-0.25.1
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/ttf-parser-0.25.1/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/ttf-parser-0.25.1/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/libc-0.2.189
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/libc-0.2.189/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/libc-0.2.189/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/roxmltree-0.20.0
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/roxmltree-0.20.0/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/roxmltree-0.20.0/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/ucd-trie-0.1.7
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/ucd-trie-0.1.7/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/ucd-trie-0.1.7/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/libm-0.2.16
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/libm-0.2.16/LICENSE.txt
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/serde-1.0.229
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/serde-1.0.229/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/serde-1.0.229/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/unicode-ident-1.0.24
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/unicode-ident-1.0.24/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/unicode-ident-1.0.24/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/unicode-ident-1.0.24/LICENSE-UNICODE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/log-0.4.34
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/log-0.4.34/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/log-0.4.34/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/serde_core-1.0.229
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/serde_core-1.0.229/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/serde_core-1.0.229/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/version_check-0.9.5
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/version_check-0.9.5/LICENSE-APACHE
+-- Installing: /work/stage/usr/share/doc/xfmd/licenses/rust/version_check-0.9.5/LICENSE-MIT
+-- Installing: /work/stage/usr/share/doc/xfmd/libavoid-LGPL-2.1.txt
+-- Installing: /work/stage/usr/share/doc/xfmd/mermaid-libavoid-build.md
+-- Installing: /work/stage/usr/share/doc/xfmd/mermaid-source.json
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.bOC43n
++ umask 022
++ cd /work/rpmbuild/BUILD
++ '[' /work/rpmbuild/BUILDROOT/xfmd-0.10.0-76.el10_2.x86_64 '!=' / ']'
++ rm -rf /work/rpmbuild/BUILDROOT/xfmd-0.10.0-76.el10_2.x86_64
+++ dirname /work/rpmbuild/BUILDROOT/xfmd-0.10.0-76.el10_2.x86_64
++ mkdir -p /work/rpmbuild/BUILDROOT
++ mkdir /work/rpmbuild/BUILDROOT/xfmd-0.10.0-76.el10_2.x86_64
++ CFLAGS='-O2 -flto=auto -ffat-lto-objects -fexceptions -g -grecord-gcc-switches -pipe -Wall -Werror=format-security -Wp,-U_FORTIFY_SOURCE,-D_FORTIFY_SOURCE=3 -Wp,-D_GLIBCXX_ASSERTIONS -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -fstack-protector-strong -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1  -m64 -march=x86-64-v3 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -mtls-dialect=gnu2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer '
++ export CFLAGS
++ CXXFLAGS='-O2 -flto=auto -ffat-lto-objects -fexceptions -g -grecord-gcc-switches -pipe -Wall -Werror=format-security -Wp,-U_FORTIFY_SOURCE,-D_FORTIFY_SOURCE=3 -Wp,-D_GLIBCXX_ASSERTIONS -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -fstack-protector-strong -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1  -m64 -march=x86-64-v3 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -mtls-dialect=gnu2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer '
++ export CXXFLAGS
++ FFLAGS='-O2 -flto=auto -ffat-lto-objects -fexceptions -g -grecord-gcc-switches -pipe -Wall -Wp,-U_FORTIFY_SOURCE,-D_FORTIFY_SOURCE=3 -Wp,-D_GLIBCXX_ASSERTIONS -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -fstack-protector-strong -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1  -m64 -march=x86-64-v3 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -mtls-dialect=gnu2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -I/usr/lib64/gfortran/modules '
++ export FFLAGS
++ FCFLAGS='-O2 -flto=auto -ffat-lto-objects -fexceptions -g -grecord-gcc-switches -pipe -Wall -Wp,-U_FORTIFY_SOURCE,-D_FORTIFY_SOURCE=3 -Wp,-D_GLIBCXX_ASSERTIONS -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -fstack-protector-strong -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1  -m64 -march=x86-64-v3 -mtune=generic -fasynchronous-unwind-tables -fstack-clash-protection -fcf-protection -mtls-dialect=gnu2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -I/usr/lib64/gfortran/modules '
++ export FCFLAGS
++ VALAFLAGS=-g
++ export VALAFLAGS
++ LDFLAGS='-Wl,-z,relro -Wl,--as-needed  -Wl,-z,pack-relative-relocs -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -specs=/usr/lib/rpm/redhat/redhat-hardened-ld-errors -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1  -Wl,--build-id=sha1 -specs=/usr/lib/rpm/redhat/redhat-package-notes '
++ export LDFLAGS
++ LT_SYS_LIBRARY_PATH=/usr/lib64:
++ export LT_SYS_LIBRARY_PATH
++ CC=gcc
++ export CC
++ CXX=g++
++ export CXX
++ mkdir -p /work/rpmbuild/BUILDROOT/xfmd-0.10.0-76.el10_2.x86_64
++ cp -a /work/stage/. /work/rpmbuild/BUILDROOT/xfmd-0.10.0-76.el10_2.x86_64/
++ /usr/lib/rpm/check-buildroot
++ /usr/lib/rpm/redhat/brp-ldconfig
++ /usr/lib/rpm/brp-compress
++ /usr/lib/rpm/brp-strip /usr/bin/strip
++ /usr/lib/rpm/brp-strip-comment-note /usr/bin/strip /usr/bin/objdump
++ /usr/lib/rpm/redhat/brp-strip-lto /usr/bin/strip
++ /usr/lib/rpm/brp-strip-static-archive /usr/bin/strip
++ /usr/lib/rpm/check-rpaths
++ /usr/lib/rpm/redhat/brp-mangle-shebangs
++ /usr/lib/rpm/brp-remove-la-files
++ /usr/lib/rpm/redhat/brp-python-rpm-in-distinfo
++ env /usr/lib/rpm/redhat/brp-python-bytecompile '' 1 0 -j12
++ /usr/lib/rpm/redhat/brp-python-hardlink
+Processing files: xfmd-0.10.0-76.el10_2.x86_64
+Provides: application() application(xfmd.desktop) mimehandler(text/markdown) mimehandler(text/plain) xfmd = 0.10.0-76.el10_2 xfmd(x86-64) = 0.10.0-76.el10_2
+Requires(rpmlib): rpmlib(CompressedFileNames) <= 3.0.4-1 rpmlib(FileDigests) <= 4.6.0-1 rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+Requires: ld-linux-x86-64.so.2()(64bit) ld-linux-x86-64.so.2(GLIBC_2.3)(64bit) libX11.so.6()(64bit) libXcursor.so.1()(64bit) libXext.so.6()(64bit) libXfixes.so.3()(64bit) libXft.so.2()(64bit) libXrandr.so.2()(64bit) libXrender.so.1()(64bit) libbz2.so.1()(64bit) libc.so.6()(64bit) libc.so.6(GLIBC_2.10)(64bit) libc.so.6(GLIBC_2.14)(64bit) libc.so.6(GLIBC_2.15)(64bit) libc.so.6(GLIBC_2.16)(64bit) libc.so.6(GLIBC_2.17)(64bit) libc.so.6(GLIBC_2.18)(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.25)(64bit) libc.so.6(GLIBC_2.27)(64bit) libc.so.6(GLIBC_2.28)(64bit) libc.so.6(GLIBC_2.29)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.2)(64bit) libc.so.6(GLIBC_2.3.4)(64bit) libc.so.6(GLIBC_2.30)(64bit) libc.so.6(GLIBC_2.32)(64bit) libc.so.6(GLIBC_2.33)(64bit) libc.so.6(GLIBC_2.34)(64bit) libc.so.6(GLIBC_2.38)(64bit) libc.so.6(GLIBC_2.39)(64bit) libc.so.6(GLIBC_2.4)(64bit) libc.so.6(GLIBC_2.5)(64bit) libc.so.6(GLIBC_2.6)(64bit) libc.so.6(GLIBC_2.7)(64bit) libc.so.6(GLIBC_2.9)(64bit) libcairo.so.2()(64bit) libcairomm-1.0.so.1()(64bit) libfontconfig.so.1()(64bit) libfreetype.so.6()(64bit) libgcc_s.so.1()(64bit) libgcc_s.so.1(GCC_3.0)(64bit) libgcc_s.so.1(GCC_3.3)(64bit) libgcc_s.so.1(GCC_4.2.0)(64bit) libgdk_pixbuf-2.0.so.0()(64bit) libgio-2.0.so.0()(64bit) libglib-2.0.so.0()(64bit) libglibmm-2.4.so.1()(64bit) libgobject-2.0.so.0()(64bit) libharfbuzz.so.0()(64bit) libjpeg.so.62()(64bit) libjpeg.so.62(LIBJPEG_6.2)(64bit) libm.so.6()(64bit) libm.so.6(GLIBC_2.2.5)(64bit) libm.so.6(GLIBC_2.27)(64bit) libm.so.6(GLIBC_2.29)(64bit) libm.so.6(GLIBC_2.35)(64bit) libm.so.6(GLIBC_2.38)(64bit) libpango-1.0.so.0()(64bit) libpangocairo-1.0.so.0()(64bit) libpangoft2-1.0.so.0()(64bit) libpangomm-1.4.so.1()(64bit) libpng16.so.16()(64bit) libpng16.so.16(PNG16_0)(64bit) librsvg-2.so.2()(64bit) libsigc-2.0.so.0()(64bit) libstdc++.so.6()(64bit) libstdc++.so.6(CXXABI_1.3)(64bit) libstdc++.so.6(CXXABI_1.3.1)(64bit) libstdc++.so.6(CXXABI_1.3.15)(64bit) libstdc++.so.6(CXXABI_1.3.5)(64bit) libstdc++.so.6(CXXABI_1.3.7)(64bit) libstdc++.so.6(CXXABI_1.3.8)(64bit) libstdc++.so.6(CXXABI_1.3.9)(64bit) libstdc++.so.6(GLIBCXX_3.4)(64bit) libstdc++.so.6(GLIBCXX_3.4.11)(64bit) libstdc++.so.6(GLIBCXX_3.4.14)(64bit) libstdc++.so.6(GLIBCXX_3.4.15)(64bit) libstdc++.so.6(GLIBCXX_3.4.18)(64bit) libstdc++.so.6(GLIBCXX_3.4.19)(64bit) libstdc++.so.6(GLIBCXX_3.4.20)(64bit) libstdc++.so.6(GLIBCXX_3.4.21)(64bit) libstdc++.so.6(GLIBCXX_3.4.22)(64bit) libstdc++.so.6(GLIBCXX_3.4.26)(64bit) libstdc++.so.6(GLIBCXX_3.4.29)(64bit) libstdc++.so.6(GLIBCXX_3.4.30)(64bit) libstdc++.so.6(GLIBCXX_3.4.32)(64bit) libstdc++.so.6(GLIBCXX_3.4.9)(64bit) libtiff.so.6()(64bit) libtiff.so.6(LIBTIFF_4.0)(64bit) libtinyxml2.so.10()(64bit) libz.so.1()(64bit) rtld(GNU_HASH)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /work/rpmbuild/BUILDROOT/xfmd-0.10.0-76.el10_2.x86_64
+Wrote: /work/rpmbuild/RPMS/x86_64/xfmd-0.10.0-76.el10_2.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.WZuSXL
++ umask 022
++ cd /work/rpmbuild/BUILD
++ /usr/bin/rm -rf /work/rpmbuild/BUILDROOT/xfmd-0.10.0-76.el10_2.x86_64
++ RPM_EC=0
+++ jobs -p
++ exit 0
+Executing(rmbuild): /bin/sh -e /var/tmp/rpm-tmp.9RZ6bK
++ umask 022
++ cd /work/rpmbuild/BUILD
++ rm -rf '/work/rpmbuild/BUILD/%{buildsubdir}-SPECPARTS'
++ RPM_EC=0
+++ jobs -p
++ exit 0

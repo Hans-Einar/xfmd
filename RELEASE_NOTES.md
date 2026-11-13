@@ -1,15 +1,19 @@
 # Endringsnotater — WIP
 
-## XFMD0.10 candidate — readable SDL browsing
+## XFMD 0.10 — published 2026-11-13 (Europe/Oslo)
 
-Selected feature delivery under coordinated Activity0003; publication pending.
-The native reader consumes advertised producer labels, ordering and primary
-actions directly. Expansion loads children independently; older producers retain
-their supported path. Selection, source freshness and unsaved-buffer checks remain.
-The RPM packages its exact committed private SDPTool with source/digest provenance
-and verifies upgrade from the signed0.9 predecessor. Integrated qualification,
-independent review and signed public DNF evidence remain release gates.
+ACTIVITY-SDP-0002/0003 deliver native Activity pages and readable SDL navigation.
+The reader consumes producer labels, order and primary actions directly; expansion
+loads children independently. Collection chapters, source projections and exact
+source/history safeguards are verified in native workflows. Older compatible
+producers retain their supported path.
 
+The signed AlmaLinux 10.2 x86_64 RPM includes its exact private SDPTool and source
+provenance. 89 configured CTests pass; actual signed public 0.9-to-0.10 DNF upgrade
+and fresh install pass with exact app/producer identities and native workflows.
+[Release evidence and receipt](SDP/Maintenance/RPM/0.10/README.md) record source
+8546e95, matching producer c3463b7, signatures and hashes. Earlier release sections
+retain their historical scope.
 
 
 ## P9–P13: scrolling, sider og publisering

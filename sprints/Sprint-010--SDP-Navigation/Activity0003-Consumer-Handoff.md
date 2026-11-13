@@ -41,13 +41,13 @@ no collection/register/focus selectors are reconstructed by XFMD.
 4. Return exact candidate, test artifacts and release checklist to coordinating
    independent review; publish only after coordinating qualification.
 
-Current status: milestones 1–2 implemented and development-qualified. All 90
-configured CTests pass; six final affected checks pass after exact-label tooltip
-refinement. Actual native fixture/Micro/Base workflows cover primary activation,
-loading, collections, Kernel detail, exact source selection, retained Back and
-native/PDF export. Broader visual acceptance remains with coordinating review.
-Milestone 3 packaging machinery is prepared; final producer pin and exact package
-are pending. Milestone 4 independent review/publication is not complete.
+Current status: bounded consumer/package delivery complete. Native milestone
+d530aa7 and package candidate 8546e95 are committed. The exact c3463b7 private
+producer is included in signed public xfmd-0.10.0-76.el10_2.x86_64.rpm. 89 target
+CTests, installed native reading/source/history/Activity workflows, public signed
+predecessor upgrade and fresh install pass. Coordinating independent review
+approved the exact package; receipt is SDP/Maintenance/RPM/0.10/README.md.
+
 
 SdpProtocol.cpp is 326 lines after this additive validation. Keeping its shared
 envelope, graph and source-context admission together avoids an unrelated decoder

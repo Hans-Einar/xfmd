@@ -93,3 +93,12 @@ existing SdpProjectNavigation/SdpProjects/SdpToolProtocol model mapping remains
 structurally accurate. Development native/PDF evidence covers the fixture and
 read-only HEOS Contracts walkthrough. Final integrated review, source pin and
 signed RPM/public DNF qualification remain separate pending gates.
+
+
+[XFMD 0.10 publication](../Maintenance/RPM/0.10/README.md) completes the bounded
+consumer/package delivery for ACTIVITY-SDP-0003 / PLAN-SDP-0028. Exact application
+8546e95 and private producer c3463b7 are in the signed stable RPM 76. 89 target
+CTests, installed native reading/source/history/Activity workflows and actual signed
+public predecessor upgrade/fresh installation pass. The receipt and coordinating
+independent review distinguish verified technical delivery from personal owner
+review. Source, signed payload, key trust and actual timestamps are retained.

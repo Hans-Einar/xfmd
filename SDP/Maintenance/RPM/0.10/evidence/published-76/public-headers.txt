@@ -1,0 +1,9 @@
+HTTP/1.1 200 OK
+Date: Fri, 13 Nov 2026 00:01:51 GMT
+Server: Apache
+Last-Modified: Thu, 12 Nov 2026 23:54:37 GMT
+ETag: "abe1489-6601d08c41908"
+Accept-Ranges: bytes
+Content-Length: 180229257
+Content-Type: application/x-rpm
+

@@ -11,20 +11,20 @@ gantt
     section Coordinated Activity0003
     S1 completed - contract and model mapping :done, s1, 2000-01-01, 1d
     S2 completed - generic consumer qualification :done, s2, after s1, 1d
-    S3 on-going - exact producer package and release handoff :active, s3, after s2, 1d
+    S3 completed - exact producer package and release handoff :done, s3, after s2, 1d
 ```
 
 | State | Step | Work | Authority | Evidence |
 | --- | --- | --- | --- | --- |
 | completed | S1 | Reconcile protocol, requirements, blueprint and model responsibility | ACTIVITY-SDP-0003 / PLAN-SDP-0028 B3–B5 | Activity0003 consumer handoff |
 | completed | S2 | Generic producer presentation and native qualification | Same bounded assignment | 90 configured tests and real fixture/HEOS native workflows pass |
-| on-going | S3 | Exact producer pin, 0.10 RPM and coordinating release handoff | Owner 0.10 / feature-branch publication authorization | No package or publication yet |
+| completed | S3 | Exact producer pin, 0.10 RPM and coordinating release handoff | Owner 0.10 / feature-branch publication authorization | Reviewed signed RPM, public upgrade/fresh install and installed native workflows pass |
 
 | Field | Value |
 | --- | --- |
 | Session reference | SESSION-XFMD-0010 |
-| Status | active |
-| Current step | S3 |
+| Status | completed |
+| Current step | Complete |
 | Coordinating work | /home/warloc/git/SDP/SDP/Activities/Activity-0003--Readable-SDL-browsing |
 | Primary plan | PLAN-SDP-0028 |
 
@@ -94,3 +94,29 @@ The successor package pins that exact archive and adds installed real Activity a
 reading/source/history native probe tools outside the RPM. Local preflight of the
 real Activity creation/native render passes. The next clean candidate build and
 public signature/DNF gates remain pending; nothing has been published.
+
+
+## T001 final work summary
+
+The bounded consumer/package delivery is complete. Exact source
+8546e956d1a941ece9195d335b7196abea905289 and private producer c3463b78d53ebf984b0f553ebe93a556fb3ac6a8
+produced signed public xfmd-0.10.0-76.el10_2.x86_64.rpm. All 89 target CTests and
+policy checks pass. Clean local signed predecessor upgrade, preservation/removal
+and fresh install pass, including installed default producer lookup, native reading
+all 11 landings/render/source/Back and real Activity fixture workflows.
+
+Coordinating independent agent review approved the exact source/archive/unsigned
+package, then verified actual signed payload and public evidence with no findings.
+Verified-existing publication reused the tested bytes. Forced public package and
+metadata signatures, actual signed 0.9-to-0.10 DNF upgrade and fresh public install
+pass repeated exact app/producer/native workflow probes. The final receipt records
+unsigned/signed/producer hashes, server time and verification completion time.
+[Release evidence](../Maintenance/RPM/0.10/README.md) and checklist retain all gates.
+
+Skills/routines: SDP entry, Worker, Planning, Versioning, Release and Traceability.
+Current requirements/architecture/blueprint retain the producer-owned presentation
+boundary and existing structural source-model mapping. Historical checkpoints and
+append-only ledger bytes remain. Final records are evidence-only; source 8546e95
+continues to identify the published package. Feature branch push preserves main
+and the primary dirty worktree. Owner personal review and host installation were
+not claimed. This is a work summary, not an advance transcript of the final answer.
