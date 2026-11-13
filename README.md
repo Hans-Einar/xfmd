@@ -524,8 +524,9 @@ A compatible producer advertises its ready reading tree, labels and activation
 actions. XFMD displays that hierarchy and order directly. Expanding a row loads
 children; activating its label opens the supplied document, including collection
 chapters and dedicated registers. Older compatible producers retain their existing
-navigation behavior. The 0.10 RPM candidate includes its exact private SDPTool;
-source provenance and signed public publication are separate release gates.
+navigation behavior. The historical0.10 RPM included its exact private SDPTool. Published0.11 uses
+the registered shared runtime instead; [signed public qualification](SDP/Maintenance/RPM/0.11/README.md)
+records public upgrade/fresh install and all three offline native workflows.
 
 
 Activity0004 shared-runtime preflight: before discovery, XFMD requests

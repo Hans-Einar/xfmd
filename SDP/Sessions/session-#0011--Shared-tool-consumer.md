@@ -11,20 +11,20 @@ gantt
     section Activity0004
     C3 completed - registered runtime and helper migration :done, c3, 2000-01-01, 1d
     C4 completed - local native technical review :done, c4, after c3, 1d
-    C5 waiting - signed public successor delivery :active, c5, after c4, 1d
+    C5 completed - signed public successor delivery :done, c5, after c4, 1d
 ```
 
 | State | Step | Work | Authority | Evidence |
 | --- | --- | --- | --- | --- |
 | completed | C3 | Registered native runtime; remove package producer and preserve managed SDUI workflows | ACTIVITY-SDP-0004 / PLAN-SDP-0029 / KB-SDP-063 | This Session and RPM 0.11 work area |
-| completed (local gate) | C4 | Exact shared distribution, clean target upgrade, offline installed native tests and independent review | Same owner execution assignment | Pending shared engine/helper candidate |
-| waiting | C5 | Successor signed RPM after canonical/shared extension publication | Coordinator release gate | Publication pending; no main merge |
+| completed | C4 | Exact shared distribution, clean target upgrade, offline installed native tests and independent review | Same owner execution assignment | Exact engine774e150, all95 target CTests, reviewed native probes |
+| completed | C5 | Successor signed RPM after canonical/shared extension publication | Coordinator release gate | Signed public RPM81, public upgrade/fresh install and independent combined review approved; no main merge |
 
 | Field | Value |
 | --- | --- |
 | Session reference | SESSION-XFMD-0011 |
-| Status | active |
-| Current step | C5 — waiting for canonical CI/shared public gates and explicit publication disposition |
+| Status | completed (bounded consumer delivery) |
+| Current step | C5 completed — signed public successor verified; root owns overall Activity closeout |
 | Coordinating Session | SESSION-SDP-0021 |
 | Primary plan | PLAN-SDP-0029 |
 | BranchPolicy | phase; sdp/shared-tool-installation |
@@ -159,3 +159,27 @@ that bounded technical scope. Canonical exact-source CI and shared public
 publication/verification remain pending; C5 waits for the coordinator's explicit
 publish-existing go-ahead. No package bytes are rebuilt or requalified, and no
 overall Activity completion, publication or owner acceptance is claimed.
+
+
+## T010 — actual signed public delivery closeout
+
+Recovered after server restart; exact host turn ID unknown. The authorized
+publish-existing process continued without rebuilding or republishing. Actual
+[publication receipt](../Maintenance/RPM/0.11/evidence/published-81/published.json)
+now records source16e57a3, signed0.11.0-81 hash
+`7d1cb2a6f04064d5600409afd3725d971118fd27bb4d9ec45163847d949afd74`.
+Its reviewed payload remains63838a03. Receipt file observed2026-11-13T09:38:38Z;
+exact server publication instant is not separately recorded. Public signature/key
+and DNF package/metadata checks pass; actual signed0.10 upgrade and fresh0.11
+installation each pass Reading, SDUI and Activity probes with the exact registered
+shared engine774e150, absent gh/auth and isolated external networking.
+
+[Final independent review](../Maintenance/RPM/0.11/evidence/published-81/independent-review.md)
+approves combined technical delivery without material findings; coordinator
+confirmed its disposition. C3–C5 bounded consumer work is complete. SDP entrypoint,
+Traceability, Release and document-workflow skills guided evidence reconciliation;
+no skills/profile installation was performed. README, release notes, release
+checklist, this roadmap and system traceability now describe observed publication.
+Root owns canonical Activity/Plan/card closeout. Earlier Session residual scope,
+model completeness and owner acceptance are unchanged; no main merge or live
+workstation/project upgrade is claimed. Next: root reconciles overall Activity.

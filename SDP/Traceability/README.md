@@ -102,3 +102,14 @@ CTests, installed native reading/source/history/Activity workflows and actual si
 public predecessor upgrade/fresh installation pass. The receipt and coordinating
 independent review distinguish verified technical delivery from personal owner
 review. Source, signed payload, key trust and actual timestamps are retained.
+
+## Shared-runtime native delivery — 2026-11-13
+
+ACTIVITY-SDP-0004 / PLAN-SDP-0029 →
+[Session0011](../Sessions/session-%230011--Shared-tool-consumer.md) →
+[XFMD0.11 public evidence](../Maintenance/RPM/0.11/README.md) records exact
+source16e57a3, engine774e150 and signed public RPM81. All95 configured build
+CTests pass; public predecessor upgrade and fresh install each pass three offline
+native workflows. Final independent review approves combined technical delivery.
+No owner acceptance, main merge or complete model release is implied. Initial
+SDP project version/index defaults remain unmigrated; RPM records govern release.

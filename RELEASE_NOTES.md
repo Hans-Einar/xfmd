@@ -1,4 +1,4 @@
-# XFMD0.11 — prepared, publication pending
+# XFMD0.11 — published 2026-11-13
 
 ACTIVITY-SDP-0004 / PLAN-SDP-0029: SDP workflows use the shared SDPTool installed
 and updated through its gh extension. Run `gh sdp setup` once to register
@@ -7,7 +7,10 @@ PATH and without gh, credentials or network for local browsing. The successor RP
 removes its old private engine. Managed SDUI preview, check and prototype launch
 use the same shared engine. Explicit developer executable overrides remain.
 Compatibility follows protocol and capabilities. Qualification/review/publication
-status is recorded under SDP/Maintenance/RPM/0.11; these notes do not assert release.
+status is recorded under SDP/Maintenance/RPM/0.11. Signed stable RPM0.11.0-81
+passed public0.10 upgrade and fresh installation, each with Reading, SDUI and
+Activity offline probes; final independent combined technical review approved.
+No main merge, workstation deployment or owner acceptance is claimed.
 
 # Endringsnotater — WIP
 

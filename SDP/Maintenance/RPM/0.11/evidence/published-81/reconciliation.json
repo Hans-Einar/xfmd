@@ -1,0 +1,11 @@
+{
+  "publicationReceiptObservedAt": "2026-11-13T09:38:38.016063+00:00",
+  "exactPublicationInstant": "not independently timestamped by native receipt",
+  "source": "16e57a34d5b0dd5f9f1ba8c49d96ab2fbe60048f",
+  "rpm": "xfmd-0.11.0-81.el10_2.x86_64.rpm",
+  "signedSHA256": "7d1cb2a6f04064d5600409afd3725d971118fd27bb4d9ec45163847d949afd74",
+  "payloadSHA256": "63838a0301db38347f569e736d37395c397a467dbe560ea0bd6adc46db828803",
+  "repositoryKeyFingerprint": "8E0E49A101DDF1C7C15532FCCB7BB881901AF029",
+  "publicUpgradeAndFreshInstall": "passed; each executes Reading, SDUI and Activity offline probes",
+  "independentReview": "approved-combined-technical-delivery"
+}
