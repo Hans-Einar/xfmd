@@ -7,6 +7,8 @@ import os
 from pathlib import Path
 import subprocess
 import signal
+import shutil
+import socket
 import sys
 import tempfile
 import time
@@ -45,12 +47,18 @@ expected = sys.argv[1]
 metadata = json.loads(Path('/usr/share/doc/xfmd/xfmd-build.json').read_text())
 assert metadata['display'] == expected and not metadata['dirty'], metadata
 assert metadata['commit'] == sys.argv[2], metadata
-producer = Path('/usr/libexec/xfmd/sdptool')
-producer_metadata = json.loads(Path('/usr/share/doc/xfmd/sdptool-build.json').read_text())
+assert not Path('/usr/libexec/xfmd/sdptool').exists(), 'Upgrade retained private engine'
+assert not shutil.which('gh'), 'Qualification must run with gh absent'
+try:
+    with socket.create_connection(('1.1.1.1', 443), timeout=1):
+        raise AssertionError('Qualification network namespace permits external networking')
+except OSError:
+    pass
+producer_metadata = json.loads(Path('/shared-engine.json').read_text())
 assert producer_metadata['commit'] == sys.argv[3], producer_metadata
-assert producer.is_file() and os.access(producer, os.X_OK)
-assert hashlib.sha256(producer.read_bytes()).hexdigest() == producer_metadata['binary_sha256']
-producer_identity = json.loads(subprocess.check_output([producer, '--version', '--json'], text=True))
+engine = Path('/shared-engine/gh-sdp')
+assert hashlib.sha256(engine.read_bytes()).hexdigest() == producer_metadata['sha256']
+producer_identity = json.loads(subprocess.check_output([engine, '--version', '--json'], text=True))
 assert producer_identity['revision'] == producer_metadata['commit'], producer_identity
 assert producer_identity['version'] == producer_metadata['version'], producer_identity
 
@@ -70,6 +78,15 @@ with tempfile.TemporaryDirectory() as temporary:
             display = pipe.readline().strip()
         assert display
         environment = dict(os.environ, DISPLAY=':' + display, HOME=temporary, XDG_CONFIG_HOME=str(base/'.config'))
+        # Establish the public entrypoint through the real engine setup operation.
+        # The bundle is test input, deliberately outside the XFMD package.
+        environment.pop('XFMD_SDP_TOOL', None)
+        for key in list(environment):
+            if key.startswith(('GH_', 'GITHUB_')):
+                environment.pop(key)
+        subprocess.run([engine, 'setup'], env=environment, check=True)
+        producer = base/'.local/bin/sdptool'
+        assert producer.is_symlink() and producer.resolve() == engine.resolve()
         application = subprocess.Popen(['/usr/bin/xfmd', str(fixture)], env=environment, stderr=subprocess.PIPE)
         title = ''
         for attempt in range(40):
@@ -102,12 +119,12 @@ with tempfile.TemporaryDirectory() as temporary:
             for attempt in range(80):
                 assert native.poll() is None, native.communicate()[1]
                 observed = trace.read_text() if trace.exists() else ''
-                if 'execve("/usr/libexec/xfmd/sdptool"' in observed and '"discover"' in observed:
+                if ('execve("' + str(producer) + '"') in observed and '"discover"' in observed:
                     break
                 time.sleep(.25)
             else:
-                raise AssertionError('Installed native application did not invoke its private producer: ' + observed)
-            print('Installed native private producer:', producer_identity['revision'])
+                raise AssertionError('Installed native application did not invoke registered shared runtime: ' + observed)
+            print('Installed native registered shared runtime:', producer_identity['revision'])
         finally:
             if native.poll() is None:
                 os.killpg(native.pid, signal.SIGTERM)
@@ -115,8 +132,7 @@ with tempfile.TemporaryDirectory() as temporary:
 
         # Native tools are exact-candidate test artifacts, outside the RPM. They
         # exercise the installed producer and installed private FOX/resources.
-        workflow_environment = dict(environment, XFMD_SDP_TOOL=str(producer),
-                                    LD_LIBRARY_PATH='/usr/lib64/xfmd')
+        workflow_environment = dict(environment, LD_LIBRARY_PATH='/usr/lib64/xfmd')
         subprocess.run(['/native-probes/SdpReadingGuiTest'], env=workflow_environment, check=True, timeout=65)
         for folder in ['ProjectManagement', 'KanBan']:
             (project/'SDP'/folder).mkdir(exist_ok=True)

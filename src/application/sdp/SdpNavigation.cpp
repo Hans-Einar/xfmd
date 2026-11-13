@@ -145,8 +145,7 @@ void SdpNavigation::activate(const SdpTarget& target) {
       args.push_back(target.entry);
     }
     message("Generating selected SDP view…");
-    auto helper = sduiExecutable("sdui-preview");
-    if (target.operation == "sdui-preview" && !helper.empty()) {
+    if (target.operation == "sdui-preview") {
       const auto source = sources.find(target.model);
       if (source == sources.end() || source->second.kind != "sdui" ||
           source->second.revision != target.revision || !sdpContained(area, target.path))
@@ -155,8 +154,12 @@ void SdpNavigation::activate(const SdpTarget& target) {
       if (expected != fs::path(target.path))
         throw std::runtime_error("SDUI source path does not match catalog");
       pendingOperation = target.operation;
-      job.start({helper, "-source", target.path, "-entry", target.entry,
-                 "-revision", target.revision, "-output", pendingBundle.string()});
+      auto command = sduiCommand("preview");
+      if (command.empty())
+        throw std::runtime_error("SDUI runtime unavailable; update the gh sdp extension and run gh sdp setup");
+      command.insert(command.end(), {"-source", target.path, "-entry", target.entry,
+                     "-revision", target.revision, "-output", pendingBundle.string()});
+      job.start(std::move(command));
       app.scheduler->restart(scheduleKey, 40, [this] { poll(); });
     } else {
       start(target.operation, std::move(args));

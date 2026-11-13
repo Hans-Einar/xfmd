@@ -88,7 +88,25 @@ void run() {
     catch (const std::exception&) { rejected = true; }
     CHECK(rejected);
   }
+  const std::string previousHome = std::getenv("HOME") ? std::getenv("HOME") : "";
+  const std::string previousOverride = std::getenv("XFMD_SDP_TOOL") ? std::getenv("XFMD_SDP_TOOL") : "";
+  unsetenv("XFMD_SDP_TOOL");
+  setenv("HOME", "/tmp/registered owner", 1);
+  CHECK(sdpCommand() == std::vector<std::string>{"/tmp/registered owner/.local/bin/sdptool"});
+  setenv("XFMD_SDP_TOOL", "/tmp/explicit engine", 1);
+  CHECK(sdpCommand() == std::vector<std::string>{"/tmp/explicit engine"});
+  if (previousOverride.empty()) unsetenv("XFMD_SDP_TOOL");
+  else setenv("XFMD_SDP_TOOL", previousOverride.c_str(), 1);
+  setenv("HOME", previousHome.c_str(), 1);
   SdpToolJob job;
+  unsetenv("XFMD_SDP_TOOL");
+  setenv("HOME", "/definitely/missing/registered-home", 1);
+  job.start(sdpCommand());
+  const auto missingRegistration = wait(job);
+  CHECK(missingRegistration.error.find("/definitely/missing/registered-home/.local/bin/sdptool") != std::string::npos);
+  CHECK(missingRegistration.error.find("gh sdp setup") != std::string::npos);
+  if (!previousOverride.empty()) setenv("XFMD_SDP_TOOL", previousOverride.c_str(), 1);
+  setenv("HOME", previousHome.c_str(), 1);
   const std::string fixture = XFMD_SDP_FAKE_TOOL;
   int inherited[2];
   CHECK(pipe(inherited) == 0); // Intentionally no CLOEXEC: the spawn boundary closes it.

@@ -12,10 +12,11 @@ public_dnf=(dnf --releasever=10.2 -y --refresh --setopt=beinerud-apps.gpgcheck=1
 [[ $(rpm -q --qf '%{VERSION}-%{RELEASE}' xfmd) == "$predecessor_version" ]]
 rpm -V xfmd
 "${public_dnf[@]}" upgrade "xfmd-$package_version"
+[[ ! -e /usr/libexec/xfmd/sdptool ]]
 [[ $(rpm -q --qf '%{VERSION}-%{RELEASE}' xfmd) == "$package_version" ]]
 [[ $(/usr/bin/xfmd --version) == "xfmd $expected" ]]
 rpm -V xfmd
-runuser -u nobody -- python3.12 /probe/rpm/probe.py "$expected" "$commit" "$producer_commit"
+unshare --net runuser -u nobody -- python3.12 /probe/rpm/probe.py "$expected" "$commit" "$producer_commit"
 printf 'Verified signed public upgrade: %s -> %s; producer %s\n' "$predecessor_version" "$package_version" "$producer_commit"
 # Also prove a fresh installation from the same authenticated public repository.
 dnf --releasever=10.2 -y remove xfmd
@@ -23,5 +24,5 @@ dnf --releasever=10.2 -y remove xfmd
 "${public_dnf[@]}" install "xfmd-$package_version"
 [[ $(rpm -q --qf '%{VERSION}-%{RELEASE}' xfmd) == "$package_version" ]]
 rpm -V xfmd
-runuser -u nobody -- python3.12 /probe/rpm/probe.py "$expected" "$commit" "$producer_commit"
+unshare --net runuser -u nobody -- python3.12 /probe/rpm/probe.py "$expected" "$commit" "$producer_commit"
 printf 'Verified fresh signed public installation: %s; producer %s\n' "$package_version" "$producer_commit"

@@ -52,7 +52,7 @@ Document parse(const std::string& bytes) {
     throw std::runtime_error("Invalid SDP JSON (expected sdptool/0.2 --json)");
   if (auto schema = Json{doc.get()}.get("schema").text(true);
       schema != "sdptool/0.2" && schema != "sdptool.actions/1")
-    throw std::runtime_error("Unsupported SDP schema; install a compatible SDPTool 2.x");
+    throw std::runtime_error("Unsupported SDP schema; update the gh sdp extension and run gh sdp setup (requires sdptool/0.2)");
   return doc;
 }
 } // namespace

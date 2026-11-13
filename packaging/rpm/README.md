@@ -10,40 +10,43 @@ GitHub does not publish XFMD RPMs.
 Run on the AlmaLinux 10.2 x86_64 build host with rootless Podman, Git, Python 3.11+,
 SSH, curl, tar, rpmkeys and the existing Xvfb test tool. The digest-pinned AlmaLinux
 image installs distribution/EPEL build dependencies and pinned private FOX 1.6.57.
-The producer source archive and Git commit are pinned in cmake/sdptool-source.json;
-archive digest and Git archive identity must agree. A target-native Go build embeds
-that revision, records its binary digest/toolchain and retains source and module
-notices. No local prebuilt helper is packaged.
+The application contains no private SDP engine or SDUI helper payload. Qualification
+requires a separately established canonical one-file shared distribution, supplied
+as a directory containing `gh-sdp`, its exact source commit and binary SHA256.
+The pipeline checks embedded source/version identity and copies that test input
+into the evidence output. This does not create an XFMD engine/update owner.
 Xvfb is a read-only test-tool mount, identified by hash, because the target repos
 do not ship its server. No host application libraries enter the package. Test temporary files use tmpfs
 to avoid container-overlay SELinux attributes that cannot be copied there. Image
 format plugins are an explicit runtime dependency, not just a build dependency.
 
 ```sh
-python3 packaging/rpm/local-ci.py --ref HEAD --plan
-python3 packaging/rpm/local-ci.py --ref HEAD --output /tmp/xfmd-candidate
-python3 packaging/rpm/local-ci.py --ref HEAD --publish --host beinerud --output /tmp/xfmd-publication
+python3 packaging/rpm/local-ci.py --ref HEAD --shared-engine /absolute/shared-distribution --shared-engine-commit <engine-sha> --shared-engine-sha256 <binary-sha256> --plan
+python3 packaging/rpm/local-ci.py --ref HEAD --shared-engine /absolute/shared-distribution --shared-engine-commit <engine-sha> --shared-engine-sha256 <binary-sha256> --output /tmp/xfmd-candidate
+python3 packaging/rpm/local-ci.py --ref <reviewed-sha> --output /tmp/xfmd-candidate --publish-existing --host beinerud
 ```
 
 Use a fresh output directory. Only committed inputs are included. The disposable checkout is detached at the
 exact candidate; source_ref and source commit remain in provenance. The build
 copies full Git history, generates truthful clean metadata, runs all configured
 CTest cases and structural checks, then builds one RPM. A clean base container
-installs the exact signed 0.9.0-71.el10_2 predecessor pinned in predecessor.json,
+installs the exact signed 0.10.0-76.el10_2 predecessor pinned in predecessor.json,
 upgrades to the candidate, checks the native window as an unprivileged user,
 CLI and assets, reinstalls, removes and installs again. The predecessor is
 downloaded from the existing public repository and checked against its committed
 signed digest and repository key. The selected reading workflow runs against the
-exact built private producer; legacy optional producer tests remain separately
-configured.
+separately established shared engine. The installed probes invoke actual `setup`,
+then exercise registered default selection with gh absent, authentication removed
+and networking disabled via an isolated network namespace. The successor upgrade
+must remove the old package-owned private engine.
 
 The package installs `/usr/bin/xfmd`, desktop/icons/manpage, math resources,
 licenses and JSON provenance. Private shared FOX resides in `/usr/lib64/xfmd`
 with an application RPATH and no advertised system FOX provider. Corresponding
 bundled native-library sources accompany the package. The project license is
 still owner-unspecified (`LicenseRef-Unspecified`); no license grant is invented.
-XFMD 0.10 requires its exact matching private SDPTool under /usr/libexec/xfmd.
-SDUI helpers remain optional separate installations. The RPM
+XFMD0.11 requires registered shared SDPTool for SDP workflows; setup and updates
+are owned by its gh extension distribution. The RPM
 does not overwrite `~/.local/bin/xfmd`; that earlier local executable can shadow
 `/usr/bin/xfmd` according to PATH. Use the absolute path when verifying the RPM.
 
@@ -116,21 +119,19 @@ Install the trusted public key at the location declared by the repository file,
 `/etc/pki/rpm-gpg/RPM-GPG-KEY-beinerud`, before first use.
 
 
-## Activity0003 feature-branch publication
+## Activity0004 successor feature-branch publication
 
-Owner selected product0.10 and explicitly authorized publication from the qualified
-feature branch without merging main. Use local-ci.py --ref with the exact committed
-candidate; its disposable checkout does not change actual main. The main watcher
-retains its independent configuration. Publish after coordinating integrated
-qualification and independent review. The installed probe checks the producer's
-embedded revision and binary digest, reading capability and actual unconfigured
-native invocation of /usr/libexec/xfmd/sdptool, in addition to package lifecycle.
-This text describes selected machinery; publication evidence is recorded only
-after signature, matching public download and clean public DNF checks succeed.
+Owner selects product0.11 and Activity4 successor delivery without merging main.
+Publish only after the coordinator's integrated qualification and independent
+review gate and canonical/shared extension publication. The main watcher retains
+its independent configuration. Configure its `shared_engine`,
+`shared_engine_commit` and `shared_engine_sha256` values (or installer options with
+hyphens) before using the0.11 pipeline; an absent exact input fails qualification.
+No running watcher installation is changed by this source work.
 
 
 To publish a previously verified output after coordinating review, use
 `python3 packaging/rpm/local-ci.py --ref <exact-sha> --output <verified-directory> --publish-existing --host beinerud`.
-This verifies source/provenance/pin and package digest before uploading the same
-bytes. It never rebuilds. Public validation performs an actual signed 0.9-to-0.10
+This verifies source/provenance/shared-engine hash and package digest before uploading the same
+bytes. It never rebuilds. Public validation performs an actual signed0.10-to0.11
 DNF upgrade before checking a fresh signed public installation.

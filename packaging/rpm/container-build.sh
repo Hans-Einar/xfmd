@@ -8,12 +8,9 @@ export SOURCE_DATE_EPOCH=$(git show -s --format=%ct HEAD)
 export CARGO_HOME=/cache/cargo
 export PKG_CONFIG_PATH=/opt/xfmd-fox/lib/pkgconfig
 ./tools/bootstrap_dependencies.sh
-python3 packaging/rpm/build-producer.py --source /work/source --work /work/producer-source --output /work/producer
-mkdir -p /work/build/libexec/xfmd
-cp /work/producer/sdptool /work/build/libexec/xfmd/
 cmake -S . -B /work/build -G Ninja -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON \
   -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=lib64 -DCMAKE_INSTALL_RPATH=/usr/lib64/xfmd \
-  -DXFMD_CARGO_TARGET=/cache/target -DSDP_READING_TOOL_EXECUTABLE=/work/producer/sdptool
+  -DXFMD_CARGO_TARGET=/cache/target -DSDP_READING_TOOL_EXECUTABLE=/shared-engine/gh-sdp -DSDP_TOOL_EXECUTABLE=/shared-engine/gh-sdp
 cargo fmt -p xfmd-diagram-contracts -p xfmd-mermaid-interpreter -p xfmd-diagram-layout -p xfmd-mermaid-ffi -- --check
 cmake --build /work/build --parallel "${BUILD_JOBS:-4}"
 ctest --test-dir /work/build --output-on-failure -j 2 | tee /output/ctest.log
@@ -26,7 +23,6 @@ root = Path('/output/native-probes')
 Path('/output/native-probes.json').write_text(json.dumps({p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in root.iterdir()}, indent=2)+'\n')
 PROBES
 python3 packaging/rpm/test-local-ci.py
-python3 packaging/rpm/test-producer-pin.py
 runuser -u nobody -- python3 packaging/rpm/test-watch-main.py
 python3 packaging/repository/test-publisher.py
 python3 tools/check_blueprint_symbols.py
@@ -41,11 +37,6 @@ git archive HEAD | gzip -n > /work/stage/usr/share/doc/xfmd/sources/xfmd-source.
 tar --sort=name --mtime="@$SOURCE_DATE_EPOCH" --owner=0 --group=0 --numeric-owner -czf /work/stage/usr/share/doc/xfmd/sources/mermaid-source.tar.gz -C .deps mermaid-rs-renderer
 tar --sort=name --mtime="@$SOURCE_DATE_EPOCH" --owner=0 --group=0 --numeric-owner -czf /work/stage/usr/share/doc/xfmd/sources/microtex-source.tar.gz -C /work/build/_deps microtex-src
 cp /work/build/generated/xfmd-build.json /output/build-metadata.json
-cp /work/producer/sdptool-build.json /work/stage/usr/share/doc/xfmd/
-cp /work/producer/sdptool-build.json /output/
-cp /work/producer/modules.json /work/stage/usr/share/doc/xfmd/sdptool-modules.json
-cp -a /work/producer/licenses /work/stage/usr/share/doc/xfmd/sdptool-licenses
-cp /work/producer/sdptool-*.tar.gz /work/stage/usr/share/doc/xfmd/sources/
 find /work/stage -exec touch -h -d "@$SOURCE_DATE_EPOCH" {} +
 rpm -qa | sort > /output/build-packages.txt
 mkdir -p /work/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
@@ -68,8 +59,8 @@ Requires: dejavu-sans-mono-fonts
 %description
 Native Markdown viewer and editor. Includes private FOX 1.6.57, notices and
 corresponding bundled-library sources. The project owner has not selected a
-project license. Includes its exact matching private SDPTool; SDUI executables
-are optional separate installations.
+project license. SDP workflows use the separately installed, registered shared
+SDPTool runtime.
 
 %install
 mkdir -p %{buildroot}
@@ -77,7 +68,6 @@ cp -a /work/stage/. %{buildroot}/
 
 %files
 /usr/bin/xfmd
-/usr/libexec/xfmd/sdptool
 /usr/lib64/xfmd
 /usr/share/applications/xfmd.desktop
 /usr/share/icons/hicolor/*/apps/xfmd.*

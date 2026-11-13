@@ -53,9 +53,10 @@ class ExistingPublicationTests(unittest.TestCase):
             output = Path(directory)
             source = output/'source'
             (source/'cmake').mkdir(parents=True)
-            pin = dict(commit='a'*40, sha256='b'*64, version='2.2.0-dev')
+            pin = dict(commit='a'*40, sha256=hashlib.sha256(b'shared engine').hexdigest(), version='2.3.0')
+            (output/'shared-engine').mkdir()
+            (output/'shared-engine/gh-sdp').write_bytes(b'shared engine')
             (source/'VERSION').write_text('0.10\n')
-            (source/'cmake/sdptool-source.json').write_text(json.dumps(pin))
             def git(*args):
                 return subprocess.check_output(['git', '-C', str(source), *args], text=True, stderr=subprocess.DEVNULL).strip()
             git('init', '-b', 'feature')
@@ -69,9 +70,9 @@ class ExistingPublicationTests(unittest.TestCase):
             rpm.write_bytes(payload)
             records = {
                 'verified.json': dict(commit=values['commit'], rpm=rpm.name, sha256=hashlib.sha256(payload).hexdigest()),
-                'provenance.json': dict(commit=values['commit'], package_version=values['package_version'], producer_pin=pin),
+                'provenance.json': dict(commit=values['commit'], package_version=values['package_version'], shared_identity=pin),
                 'build-metadata.json': dict(commit=values['commit'], dirty=False, display='0.10'),
-                'sdptool-build.json': pin,
+                'shared-engine.json': pin,
             }
             probes = output/'native-probes'
             probes.mkdir()
@@ -84,11 +85,14 @@ class ExistingPublicationTests(unittest.TestCase):
             rpm.write_bytes(payload)
             for name, field, value in [('provenance.json','commit','other'),
                                        ('build-metadata.json','dirty',True),
-                                       ('sdptool-build.json','commit','other')]:
+                                       ('shared-engine.json','commit','other')]:
                 invalid = dict(records[name], **{field:value})
                 (output/name).write_text(json.dumps(invalid))
                 with self.assertRaises(ValueError): ci.verified_existing(output, values, pin)
                 (output/name).write_text(json.dumps(records[name]))
+            (output/'shared-engine/gh-sdp').write_bytes(b'tampered engine')
+            with self.assertRaises(ValueError): ci.verified_existing(output, values, pin)
+            (output/'shared-engine/gh-sdp').write_bytes(b'shared engine')
             (source/'VERSION').write_text('0.11\n')
             with self.assertRaises(ValueError): ci.verified_existing(output, values, pin)
 

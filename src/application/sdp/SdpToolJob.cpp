@@ -54,7 +54,10 @@ std::string execute(std::vector<std::string>& args, std::atomic<bool>& canceled,
   posix_spawn_file_actions_destroy(&actions);
   posix_spawnattr_destroy(&attr);
   if (failure)
-    throw std::runtime_error("Cannot start SDP tool: " + std::string(std::strerror(failure)));
+    throw std::runtime_error("SDP runtime unavailable; run gh sdp setup. Cannot start SDP tool " + args.front() + ": " +
+                             std::string(std::strerror(failure)) +
+                             ". Install/update the gh sdp extension and run gh sdp setup; "
+                             "development override: XFMD_SDP_TOOL");
   struct Child {
     pid_t pid;
     ~Child() {
@@ -148,13 +151,10 @@ std::vector<std::string> sdpCommand() {
   const char* tool = std::getenv("XFMD_SDP_TOOL");
   if (tool && *tool)
     return {tool};
-  std::error_code ec;
-  const auto parent = std::filesystem::read_symlink("/proc/self/exe", ec).parent_path();
-  for (const auto& base : {parent / "libexec/xfmd", parent.parent_path() / "libexec/xfmd"}) {
-    const auto path = base / "sdptool";
-    if (path.is_absolute() && std::filesystem::is_regular_file(path, ec) && access(path.c_str(), X_OK) == 0)
-      return {path.string()};
-  }
-  return {"gh", "sdp"};
+  const char* home = std::getenv("HOME");
+  // The registered public entrypoint is independent of desktop shell PATH.
+  // A missing HOME deliberately selects an unusable absolute path, never PATH.
+  return {(std::filesystem::path(home && *home ? home : "/nonexistent") /
+           ".local/bin/sdptool").string()};
 }
 } // namespace xfmd

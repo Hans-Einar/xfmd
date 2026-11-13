@@ -620,3 +620,21 @@ See `sprints/Sprint-010--SDP-Navigation/Activity0003-Consumer-Handoff.md` for th
 bounded implementation and exact-producer packaging handoff. The generic adapter is implemented; bounded native/protocol evidence is retained
 in SDP/05--Implementation/SDL-Navigation/evidence/Reading-001. Final integrated
 qualification and exact-producer release are separate gates.
+
+
+### Shared tool installation — Activity0004 (XFMD0.11)
+
+SR-029 now selects the registered `$HOME/.local/bin/sdptool`, independently of
+shell PATH, with explicit XFMD_SDP_TOOL development override. Missing or
+incompatible registration must give actionable extension update/setup guidance.
+The native application must browse local SDP, SDL and Activity data without gh,
+authentication or network, with existing source/Back/stale/cancellation behavior.
+XFMD must not ship or select a private SDP engine. SDPTool owns managed SDUI
+helpers and exposes their operations through its shared command surface; supported
+preview and prototype workflows must be retained. This supersedes earlier bundled
+helper installation requirements, preserving their historical evidence.
+
+AT-075 additionally covers supported registration, empty desktop PATH, missing and
+incompatible engines, exact external test input, and signed0.10-to0.11 RPM upgrade
+removal of the old package-owned private engine. Engine source/hash identity is
+qualification evidence, not runtime compatibility policy.

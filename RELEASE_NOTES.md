@@ -1,3 +1,14 @@
+# XFMD0.11 — prepared, publication pending
+
+ACTIVITY-SDP-0004 / PLAN-SDP-0029: SDP workflows use the shared SDPTool installed
+and updated through its gh extension. Run `gh sdp setup` once to register
+`$HOME/.local/bin/sdptool`; XFMD executes that path directly, independent of desktop
+PATH and without gh, credentials or network for local browsing. The successor RPM
+removes its old private engine. Managed SDUI preview, check and prototype launch
+use the same shared engine. Explicit developer executable overrides remain.
+Compatibility follows protocol and capabilities. Qualification/review/publication
+status is recorded under SDP/Maintenance/RPM/0.11; these notes do not assert release.
+
 # Endringsnotater — WIP
 
 ## XFMD 0.10 — published 2026-11-13 (Europe/Oslo)

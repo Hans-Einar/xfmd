@@ -33,7 +33,7 @@ serde_json bridge (already locked/offline dependency), not an SDL parser. The
 bridge has a separate crate; it does not add SDP semantics to Mermaid layers.
 
 Discovery returns a bounded graph with typed targets. Use returned model IDs,
-URI, revision, frame entry and absolute open paths. Host selection prefers the private accompanying SDPTool, then gh sdp;
+URI, revision, frame entry and absolute open paths. Host selection uses the registered $HOME/.local/bin/sdptool directly;
 XFMD_SDP_TOOL overrides one executable (standalone sdptool), never a shell string
 or a project manifest command. Inherit the host's SDP_OFFLINE/cache policy.
 
@@ -82,7 +82,7 @@ preview/export workers are idle. Destroy services/render workers before final cl
 
 | 16 | Source association, target construction and opening | `sdpTextSource` | `src/application/sdp/SdpSources.cpp` | catalog kind + suffix → supported original-text source | reject kind/suffix mismatches and unknown kinds | Implemented |
 
-| 17 | SDUI selected generation | `sduiExecutable` | `src/application/sdp/SduiTools.cpp` | private installed/build helper or explicit override | missing helpers preserve legacy producer preview; launch disabled | Implemented |
+| 17 | SDUI selected generation/check/launch | `sduiCommand` | `src/application/sdp/SduiTools.cpp` | registered shared engine sdui preview/check/run, or explicit helper override | unavailable runtime gives setup guidance; preserves current document | Implemented |
 | 18 | Generated-page launch context | `SdpNavigation::currentSdui` | `src/application/sdp/SduiSource.cpp` | current document/project/catalog → entry target | stale or unrelated documents have no action | Implemented |
 | 19 | SDUI source link | `SdpNavigation::followSduiSource` | `src/application/sdp/SduiSource.cpp` | snapshot + byte span → original Editor selection | reject changed source, invalid range and dirty cancel | Implemented |
 | 20 | Scheduled contextual tools | `SduiWorkflow::poll` | `src/application/sdp/SduiWorkflow.cpp` | document context + producer check → enabled action/reason | cancel obsolete checks; process failure surfaced | Implemented |
@@ -375,8 +375,8 @@ and model-only replies; SdpExpansion validates namespace, identity and every tar
 before merging a candidate snapshot. SdpPanel requests loading on source expansion
 and preserves native selection/tab state during the replacement. Failures preserve
 the prior snapshot and document and allow retry. Refresh discards loaded graphs.
-The installed private SDPTool provides the matching additive contract; explicit
-XFMD_SDP_TOOL overrides it and gh sdp remains the fallback. Existing byte/per-model
+The registered shared SDPTool provides the compatible protocol and advertised capabilities; explicit
+XFMD_SDP_TOOL overrides it for development. No private engine or gh fallback is used. Existing byte/per-model
 and presentation guards are separate KB025 follow-up obligations.
 
 ### Activity producer documents — Activity0002 A3
@@ -424,3 +424,29 @@ See `sprints/Sprint-010--SDP-Navigation/Activity0003-Consumer-Handoff.md` for th
 bounded implementation and exact-producer packaging handoff. The generic adapter is implemented; bounded native/protocol evidence is retained
 in SDP/05--Implementation/SDL-Navigation/evidence/Reading-001. Final integrated
 qualification and exact-producer release are separate gates.
+
+
+### Shared runtime migration — Activity0004 C3
+
+XFMD0.11 executes `$HOME/.local/bin/sdptool`, established by `gh sdp setup`,
+independently of desktop PATH. A missing executable names the selected path and
+explains setup; unsupported protocol directs an extension update/setup. Explicit
+XFMD_SDP_TOOL remains a developer override. XFMD neither installs nor updates an
+engine and ships no private engine/helper payload. Compatibility is determined by
+schemas and advertised operations, never an exact producer commit. Package
+qualification supplies a separately established, exact-hash shared distribution;
+that evidence identity is separate from the public compatibility contract.
+
+Historical0.7–0.10 private-helper descriptions above retain their dated scope;
+Activity0004 supersedes their installation and process-selection rules. Generated
+source revision checks, cancellation, stale delivery, document history and native
+rendering retain the existing owners and behavior.
+
+
+Current SDUI plumbing: SduiTools::sduiCommand returns the registered engine plus
+`sdui preview`, `sdui check` or `sdui run`. SdpNavigation passes validated source,
+entry, revision and output to preview; SduiWorkflow passes the same source identity
+to check, and launches run detached with entry/revision/watch/source. Explicit
+XFMD_SDUI_PREVIEW/FYNE overrides retain original helper argv. Preview/check are
+canonical shared-library operations; the engine owns local extraction/exec of its
+embedded Fyne helper. Native XFMD never selects or updates a second tool binary.

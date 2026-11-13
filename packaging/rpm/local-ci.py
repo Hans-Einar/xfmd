@@ -37,18 +37,18 @@ def metadata(ref):
 
 
 def verification_container():
-    return ['podman', 'run', '--rm', '--security-opt', 'label=disable', '--shm-size=512m',
+    return ['podman', 'run', '--rm', '--cap-add', 'SYS_ADMIN', '--security-opt', 'label=disable', '--shm-size=512m',
             '--tmpfs', '/tmp:rw,exec,mode=1777', '-v', shutil.which('Xvfb')+':/usr/local/bin/Xvfb:ro']
 
 
-def verified_existing(output, values, producer_pin):
+def verified_existing(output, values, shared_identity):
     source = output/'source'
     verified = json.loads((output/'verified.json').read_text())
     provenance = json.loads((output/'provenance.json').read_text())
     expected = f"xfmd-{values['package_version']}.x86_64.rpm"
     if (verified.get('commit') != values['commit'] or verified.get('rpm') != expected or
             provenance.get('commit') != values['commit'] or
-            provenance.get('producer_pin') != producer_pin or
+            provenance.get('shared_identity') != shared_identity or
             provenance.get('package_version') != values['package_version'] or
             hashlib.sha256((output/expected).read_bytes()).hexdigest() != verified.get('sha256')):
         raise ValueError('Existing RPM does not match exact verified candidate/provenance')
@@ -56,16 +56,16 @@ def verified_existing(output, values, producer_pin):
     dirty = subprocess.check_output(['git', '-C', source, 'status', '--porcelain'], text=True).strip()
     if actual != values['commit'] or dirty:
         raise ValueError('Existing publication source is not the clean exact candidate')
-    if json.loads((source/'cmake/sdptool-source.json').read_text()) != producer_pin:
-        raise ValueError('Existing source producer pin differs from candidate')
     metadata = json.loads((output/'build-metadata.json').read_text())
-    producer = json.loads((output/'sdptool-build.json').read_text())
+    producer = json.loads((output/'shared-engine.json').read_text())
     if (metadata.get('commit') != values['commit'] or metadata.get('dirty') is not False or
             metadata.get('display') != values['display'] or
-            producer.get('commit') != producer_pin['commit'] or
-            producer.get('sha256') != producer_pin['sha256'] or
-            producer.get('version') != producer_pin['version']):
+            producer.get('commit') != shared_identity['commit'] or
+            producer.get('sha256') != shared_identity['sha256'] or
+            producer.get('version') != shared_identity['version']):
         raise ValueError('Existing application/producer identity differs from candidate')
+    if hashlib.sha256((output/'shared-engine/gh-sdp').read_bytes()).hexdigest() != shared_identity['sha256']:
+        raise ValueError('Qualified shared engine binary changed')
     probes = json.loads((output/'native-probes.json').read_text())
     if set(probes) != {'SdpReadingGuiTest', 'SdpActivityGuiTest'}:
         raise ValueError('Existing native workflow probe inventory differs')
@@ -75,7 +75,7 @@ def verified_existing(output, values, producer_pin):
     return verified
 
 
-def publish_verified(args, values, output, source, container, verified, producer_pin):
+def publish_verified(args, values, output, source, container, verified, shared_identity):
     expected = verified['rpm']
     path = str(args.known_hosts).replace('%', '%%').replace('\\', '\\\\').replace('"', '\\"')
     ssh = ['ssh', '-o', 'BatchMode=yes', '-o', 'StrictHostKeyChecking=yes', '-o', 'UserKnownHostsFile="'+path+'"',
@@ -106,8 +106,8 @@ def publish_verified(args, values, output, source, container, verified, producer
             raise RuntimeError('Repository signature missing or invalid')
         (output/'signature.txt').write_text(report)
     with (output/'public-dnf.log').open('w') as log:
-        run([*container, '-v', str(source/'packaging')+':/probe:ro', '-v', str(output/'native-probes')+':/native-probes:ro', BASE_IMAGE, 'bash',
-             '/probe/rpm/verify-public.sh', values['package_version'], values['display'], values['commit'], producer_pin['commit']], stdout=log, stderr=subprocess.STDOUT)
+        run([*container, '-v', str(source/'packaging')+':/probe:ro', '-v', str(output/'shared-engine')+':/shared-engine:ro', '-v', str(output/'shared-engine.json')+':/shared-engine.json:ro', '-v', str(output/'native-probes')+':/native-probes:ro', BASE_IMAGE, 'bash',
+             '/probe/rpm/verify-public.sh', values['package_version'], values['display'], values['commit'], shared_identity['commit']], stdout=log, stderr=subprocess.STDOUT)
     (output/'published.json').write_text(json.dumps(dict(verified, url=url,
         signed_sha256=hashlib.sha256((signed/expected).read_bytes()).hexdigest()), indent=2)+'\n')
     print('Published; signature, public DNF and installed application verified:', url, flush=True)
@@ -116,6 +116,9 @@ def publish_verified(args, values, output, source, container, verified, producer
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--ref', default='HEAD')
+    parser.add_argument('--shared-engine', type=Path, help='Qualification-only exact one-file shared distribution directory containing gh-sdp')
+    parser.add_argument('--shared-engine-commit')
+    parser.add_argument('--shared-engine-sha256')
     parser.add_argument('--main', action='store_true', help='Use the main publication version contract')
     parser.add_argument('--publish', action='store_true')
     parser.add_argument('--publish-existing', action='store_true', help='Publish verified --output bytes without rebuilding')
@@ -139,10 +142,21 @@ def main():
         parser.error('Expected verified known_hosts file')
     args.known_hosts = known_hosts
     values = metadata(args.ref)
-    producer_pin = json.loads(git('show', values['commit'] + ':cmake/sdptool-source.json'))
+    if args.publish_existing:
+        shared_identity = json.loads((args.output/'shared-engine.json').read_text())
+    else:
+        if not args.shared_engine or not args.shared_engine_commit or not args.shared_engine_sha256:
+            parser.error('Qualification requires --shared-engine DIR, --shared-engine-commit and --shared-engine-sha256')
+        engine = args.shared_engine.resolve()/'gh-sdp'
+        digest = hashlib.sha256(engine.read_bytes()).hexdigest()
+        identity = json.loads(subprocess.check_output([engine, '--version', '--json'], text=True))
+        if digest != args.shared_engine_sha256 or identity.get('revision') != args.shared_engine_commit:
+            parser.error('Shared engine hash/source identity mismatch')
+        shared_identity = dict(commit=identity['revision'], version=identity['version'], sha256=digest)
+
     output = (args.output or ROOT/'build/local-ci'/values['commit'][:12]).resolve()
     cache = args.cache.expanduser().resolve()
-    plan = dict(values, producer_pin=producer_pin, source_ref=args.ref, output=str(output), cache=str(cache), publish=args.publish, publish_existing=args.publish_existing,
+    plan = dict(values, shared_identity=shared_identity, source_ref=args.ref, output=str(output), cache=str(cache), publish=args.publish, publish_existing=args.publish_existing,
                 base_image=BASE_IMAGE, build_host=os.uname().nodename)
     print(json.dumps(plan, indent=2), flush=True)
     if args.plan:
@@ -156,10 +170,15 @@ def main():
         cache.mkdir(parents=True, exist_ok=True)
         with (cache/'build.lock').open('a') as lock:
             fcntl.flock(lock, fcntl.LOCK_EX)
-            verified = verified_existing(output, values, producer_pin)
-            publish_verified(args, values, output, output/'source', verification_container(), verified, producer_pin)
+            verified = verified_existing(output, values, shared_identity)
+            publish_verified(args, values, output, output/'source', verification_container(), verified, shared_identity)
         return
     output.mkdir(parents=True)
+    (output/'shared-engine').mkdir()
+    shutil.copy2(args.shared_engine.resolve()/'gh-sdp', output/'shared-engine/gh-sdp')
+    if hashlib.sha256((output/'shared-engine/gh-sdp').read_bytes()).hexdigest() != shared_identity['sha256']:
+        raise ValueError('Shared engine changed while capturing qualification input')
+    (output/'shared-engine.json').write_text(json.dumps(shared_identity, indent=2)+'\n')
     cache.mkdir(parents=True, exist_ok=True)
     # Serialize shared Cargo outputs, including manual runs versus the timer.
     with (cache/'build.lock').open('a') as lock:
@@ -167,8 +186,6 @@ def main():
         source = output/'source'
         run(['git', 'clone', '--no-hardlinks', '--no-checkout', ROOT, source], stdout=subprocess.DEVNULL)
         run(['git', '-C', source, 'checkout', '--detach', values['commit']], stdout=subprocess.DEVNULL)
-        if json.loads((source/'cmake/sdptool-source.json').read_text()) != producer_pin:
-            raise ValueError('Cloned producer pin differs from selected commit')
         recipe = source/'packaging/rpm/Containerfile'
         recipe_hash = hashlib.sha256(recipe.read_bytes()).hexdigest()
         image = 'localhost/xfmd-rpm-builder:' + recipe_hash[:16]
@@ -180,7 +197,7 @@ def main():
         container = verification_container()
         with (output/'build.log').open('w') as log:
             print('Building and testing; log:', log.name, flush=True)
-            run([*container, '-v', str(source)+':/source:ro', '-v', str(output)+':/output:rw',
+            run([*container, '-v', str(source)+':/source:ro', '-v', str(output/'shared-engine')+':/shared-engine:ro', '-v', str(output)+':/output:rw',
                  '-v', str(cache)+':/cache:rw', image, 'bash', '/source/packaging/rpm/container-build.sh',
                  values['version'], values['release']], stdout=log, stderr=subprocess.STDOUT)
         rpms = list(output.glob('*.rpm'))
@@ -205,14 +222,14 @@ def main():
         shutil.copy2(source/'packaging/rpm/predecessor.json', verify_input)
         with (output/'verify.log').open('w') as log:
             print('Verifying clean installation; log:', log.name, flush=True)
-            run([*container, '-v', str(verify_input)+':/packages:ro', '-v', str(source/'packaging/rpm')+':/probe:ro', '-v', str(output/'native-probes')+':/native-probes:ro',
-                 BASE_IMAGE, 'bash', '/probe/verify-install.sh', expected, values['display'], values['commit'], producer_pin['commit']], stdout=log, stderr=subprocess.STDOUT)
+            run([*container, '-v', str(verify_input)+':/packages:ro', '-v', str(output/'shared-engine')+':/shared-engine:ro', '-v', str(output/'shared-engine.json')+':/shared-engine.json:ro', '-v', str(source/'packaging/rpm')+':/probe:ro', '-v', str(output/'native-probes')+':/native-probes:ro',
+                 BASE_IMAGE, 'bash', '/probe/verify-install.sh', expected, values['display'], values['commit'], shared_identity['commit']], stdout=log, stderr=subprocess.STDOUT)
         verified = dict(commit=values['commit'], rpm=expected, sha256=hashlib.sha256(rpms[0].read_bytes()).hexdigest())
         (output/'verified.json').write_text(json.dumps(verified, indent=2)+'\n')
         if not args.publish:
             print('Local build, tests and clean RPM verification passed.', flush=True)
             return
-        publish_verified(args, values, output, source, container, verified, producer_pin)
+        publish_verified(args, values, output, source, container, verified, shared_identity)
 
 
 if __name__ == '__main__':

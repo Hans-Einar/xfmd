@@ -729,3 +729,17 @@ See `sprints/Sprint-010--SDP-Navigation/Activity0003-Consumer-Handoff.md` for th
 bounded implementation and exact-producer packaging handoff. The generic adapter is implemented; bounded native/protocol evidence is retained
 in SDP/05--Implementation/SDL-Navigation/evidence/Reading-001. Final integrated
 qualification and exact-producer release are separate gates.
+
+
+### Shared SDPTool consumer — Activity0004 / XFMD0.11
+
+Application/sdp/SdpToolJob selects `$HOME/.local/bin/sdptool` directly, registered
+by `gh sdp setup`; XFMD_SDP_TOOL remains an explicit development override.
+It never invokes gh or searches PATH/private copies. Transport reports the selected
+executable and setup guidance on startup failure. SdpProtocol validates the wire
+schema and advertised action capabilities independently of engine source version.
+Engine, language tooling and managed SDUI helpers share SDPTool's distribution and
+update owner. XFMD owns native rendering, request cancellation, source freshness,
+document/history retention and desktop process lifetime. The package contains no
+SDP engine/helper payload or producer source pin. This supersedes the historical
+private-tool installation descriptions without changing their dated evidence.

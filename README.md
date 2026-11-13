@@ -419,11 +419,18 @@ expanded branches and the selected row. Refresh retries immediately. Invalid
 sources and watch limits display diagnostics; generated documents remain snapshots
 until you select the view again.
 
-The host must provide a compatible **SDPTool 2.x, sdptool/0.2** producer. XFMD 0.10 uses the accompanying `libexec/xfmd/sdptool` when installed,
-then falls back to `gh sdp`. To use a standalone binary, set `XFMD_SDP_TOOL` to its executable
-path (one executable, not a shell command). Project files cannot configure commands.
-The producer's normal cache/offline environment applies, including `SDP_OFFLINE=true`
-when using an already verified gh-sdp cache. Older sdptool/0.1 binaries are rejected.
+XFMD 0.11 uses the shared **SDPTool, sdptool/0.2** runtime. Install or update
+its GitHub CLI extension, then run `gh sdp setup` once to register
+`$HOME/.local/bin/sdptool`. XFMD executes that public path directly, independently
+of desktop shell PATH. Local browsing requires no gh process, credentials or
+network. Missing registration gives setup guidance; unsupported protocols are
+rejected. Engine compatibility follows the protocol and advertised capabilities,
+not an exact engine commit or version label. Update the extension to update the
+engine and its managed SDP helpers.
+
+For development, `XFMD_SDP_TOOL` explicitly selects one executable path (never a
+shell command); process errors identify the selected path. Project files cannot
+configure commands. XFMD ships no private SDP engine or helper executables.
 
 Generated views use the existing Markdown preview. Save or discard current edits
 before choosing one; late results never replace a changed document. Generated
@@ -485,11 +492,10 @@ action opens a separate Fyne prototype window. Buttons with symbolic SDL callbac
 remain unbound; the prototype reports this explicitly. Browsing another document
 or closing XFMD does not close the Fyne window. Close that window normally.
 
-Release 0.7 includes private `libexec/xfmd/sdui-preview` and `sdui-fyne` tools.
-Developer builds can create these with `tools/build_sdui_tools.py`; the language
-implementation lives in SDP-vNow/SDUI/go. `XFMD_SDUI_PREVIEW` and `XFMD_SDUI_FYNE`
-may specify absolute executable overrides. Missing tools disable launch with a
-reason; discovery uses the private SDPTool, gh sdp fallback or XFMD_SDP_TOOL override.
+SDUI preview and Fyne tooling belong to the shared SDPTool distribution.
+Explicit `XFMD_SDUI_PREVIEW` and `XFMD_SDUI_FYNE` absolute executable overrides
+remain available for development. Missing/incompatible managed tools disable
+launch with an actionable diagnostic.
 KanBan Add/Move remain disabled pending the separate management-service workflow.
 
 ### Deferred SDL navigation (0.9)

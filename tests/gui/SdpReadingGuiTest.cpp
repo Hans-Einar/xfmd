@@ -61,7 +61,7 @@ void captureStructure(Application& app) {
   app.host->setViewport(0);
 }
 void run() {
-  CHECK(getenv("XFMD_SDP_TOOL"));
+  CHECK(!sdpCommand().empty());
   auto root = fs::path(FXSystem::getHomeDirectory().text()) / "reading-project";
   const char* actualProject = getenv("XFMD_READING_REAL_PROJECT");
   if (actualProject) {

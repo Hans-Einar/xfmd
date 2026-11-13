@@ -73,19 +73,22 @@ void SduiWorkflow::poll() {
     reason = "Open a generated SDUI frame preview to launch its prototype";
     if (!key.empty()) {
       if (host.empty() || helper.empty())
-        reason = "SDUI preview/Fyne helper unavailable; install the bundled SDUI tools";
+        reason = "SDUI runtime unavailable; update the gh sdp extension and run gh sdp setup";
       else {
         reason = "Checking SDUI prototype readiness…";
         pending = true;
-        probe.start({helper, "-check", "-source", target->path, "-entry", target->entry,
-                     "-revision", target->revision});
+        auto command = sduiCommand("check");
+        command.insert(command.end(), {"-source", target->path, "-entry", target->entry,
+                       "-revision", target->revision});
+        probe.start(std::move(command));
       }
     }
   }
   if (pending) {
     if (auto result = probe.take()) {
       pending = false;
-      reason = result->error;
+      reason = result->error.empty() ? "" : result->error +
+          "; update the gh sdp extension and run gh sdp setup";
       if (result->reply) {
         const auto& r = *result->reply;
         ready = r.operation == "sdui-check" && r.revision == target->revision &&
@@ -117,8 +120,11 @@ void SduiWorkflow::launch() {
   try {
     auto directory = sdpRuntimeWorkspace();
     auto log = directory / "prototype.log";
-    std::vector<std::string> args{
-        host, "-entry", target->entry, "-revision", target->revision, "-watch=true", target->path};
+    auto args = sduiCommand("run");
+    if (args.empty())
+      throw std::runtime_error("SDUI runtime unavailable; update the gh sdp extension and run gh sdp setup");
+    args.insert(args.end(), {"-entry", target->entry, "-revision", target->revision,
+                            "-watch=true", target->path});
     std::vector<char*> argv;
     for (auto& arg : args)
       argv.push_back(arg.data());

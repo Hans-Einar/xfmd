@@ -18,6 +18,9 @@ parser.add_argument('--repository', default='https://github.com/Hans-Einar/xfmd.
 parser.add_argument('--host', default='beinerud')
 parser.add_argument('--ssh-port', type=int, default=22)
 parser.add_argument('--known-hosts', type=Path)
+parser.add_argument('--shared-engine', type=Path)
+parser.add_argument('--shared-engine-commit')
+parser.add_argument('--shared-engine-sha256')
 parser.add_argument('--enable', action='store_true', help='Reload user units and enable/start the timer after installation')
 args = parser.parse_args(sys.argv[2:])
 if os.geteuid() == 0:
@@ -53,6 +56,10 @@ with (state/'builder.lock').open('a') as lock:
     config = dict(repository=args.repository, checkout=str(state/'checkout'), cache=str(cache),
                   output=str(state/'output'), host=args.host, ssh_port=args.ssh_port,
                   known_hosts=str(trusted), engine='podman')
+    for key in ('shared_engine', 'shared_engine_commit', 'shared_engine_sha256'):
+        value = getattr(args, key)
+        if value:
+            config[key] = str(value.expanduser().resolve()) if isinstance(value, Path) else value
     config_path = state/'config.json'
     temporary = config_path.with_suffix('.tmp')
     temporary.write_text(json.dumps(config, indent=2)+'\n')

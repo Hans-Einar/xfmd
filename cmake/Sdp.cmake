@@ -13,11 +13,6 @@ add_library(xfmd_sdp src/application/sdp/SduiTools.cpp src/application/sdp/SdpDi
 target_include_directories(xfmd_sdp PUBLIC src)
 target_link_libraries(xfmd_sdp PRIVATE xfmd_sdp_json PUBLIC Threads::Threads)
 
-# Optional at development time; release 0.7 supplies both SDUI-owned binaries.
-set(XFMD_SDUI_TOOLS_DIR "${CMAKE_CURRENT_BINARY_DIR}/libexec/xfmd" CACHE PATH "Built SDUI preview and Fyne helpers")
-install(PROGRAMS "${XFMD_SDUI_TOOLS_DIR}/sdui-preview" "${XFMD_SDUI_TOOLS_DIR}/sdui-fyne" DESTINATION libexec/xfmd OPTIONAL)
-
-install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/LICENSES/go/" DESTINATION "${CMAKE_INSTALL_DOCDIR}/licenses/go")
-
-# Optional for ordinary development; the 0.10 RPM supplies its exact pinned producer.
-install(PROGRAMS "${XFMD_SDUI_TOOLS_DIR}/sdptool" DESTINATION libexec/xfmd OPTIONAL)
+# Development-only helper locations for explicit test overrides. Engine and managed
+# SDUI helpers belong to the shared SDPTool distribution, never XFMD payloads.
+set(XFMD_SDUI_TOOLS_DIR "${CMAKE_CURRENT_BINARY_DIR}/libexec/xfmd" CACHE PATH "Development SDUI test helpers")

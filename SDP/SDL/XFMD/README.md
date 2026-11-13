@@ -19,8 +19,9 @@ verification metadata, not a second language, an adopted Traceability schema or
 an alternative authority for SDL facts. Existing requirements and blueprints
 remain normative pending explicit reconciliation.
 
-One supported design-core 0.5 input is used because the pinned tool lacks linked
-System/source sets. The desktop is the actual runtime Container; Application,
+The canonical source retains its supported design-core0.5 single-input profile.
+Current shared SDPTool also supports design-core0.6 composed source sets; adopting
+that format requires a separately selected source migration. The desktop is the actual runtime Container; Application,
 Interpreter and Renderer are source responsibilities. Named units under Application
 refine existing responsibilities, not new services/classes. External tool roles
 remain outside the desktop. The System boundary is described here, not encoded
@@ -135,3 +136,14 @@ FUNC-032 ownership, allocation, protocol consumption and UC-012 are included.
 Its asynchronous lifecycle is specified in the blueprint and native tests; the
 22 historical declared scenarios do not yet cover this new coordinator.
 SdpProjectWorkspace is a sixth descriptive SDUI composition, not GUI evidence.
+
+
+## Shared runtime boundary — Activity0004
+
+SdpProjects consumes SdpToolProtocol through the registered public SDPTool.
+XFMD0.11 has no private producer or gh fallback. The shared engine owns language
+semantics and managed SDUI tooling; native request state, source freshness,
+rendering and history remain inside Application. Structural source symbols stay
+unchanged because distribution/registration does not introduce a new runtime
+container or transfer protocol ownership. Use the actual shared `sdptool` for
+validation/generation; file placement alone establishes no tool support.

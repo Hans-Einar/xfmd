@@ -27,7 +27,19 @@ void run() {
   auto project = home / "project", log = home / "producer-calls";
   fs::create_directories(project / "SDP");
   setenv("XFMD_RUNTIME_CALLS", log.c_str(), 1);
-  setenv("XFMD_SDP_TOOL", XFMD_RUNTIME_FIXTURE, 1);
+  unsetenv("XFMD_SDP_TOOL");
+  const auto entrypoint = home / ".local/bin/sdptool";
+  fs::create_directories(entrypoint.parent_path());
+  fs::remove(entrypoint);
+  const auto poison = home / "older-path-tools";
+  fs::create_directory(poison);
+  for (const auto& name : {"gh", "sdptool"}) {
+    const auto path = poison / name;
+    std::ofstream(path) << "#!/bin/sh\n: > '" << (home / "unexpected-tool").string() << "'\nexit 1\n";
+    fs::permissions(path, fs::perms::owner_all);
+  }
+  const std::string previousPath = getenv("PATH") ? getenv("PATH") : "";
+  setenv("PATH", (poison.string() + ":" + previousPath).c_str(), 1);
   fs::path workspace;
   {
     int argc = 1;
@@ -39,6 +51,19 @@ void run() {
                    RevertToParent, CurrentTime);
     CHECK(app.startPath(project.string()));
     auto* panel = app.window->workspacePanel->sdp;
+    until(app, [&] { return panel->status->getText().contains("gh sdp setup"); });
+    CHECK(!fs::exists(home / "unexpected-tool"));
+    // An incompatible registered executable gives update/setup guidance and
+    // never selects the apparently available old PATH engine or gh bootstrap.
+    std::ofstream(entrypoint) << "#!/bin/sh\nprintf '%s\\n' '{\"schema\":\"sdptool/0.1\",\"operation\":\"actions\"}'\n";
+    fs::permissions(entrypoint, fs::perms::owner_all);
+    app.window->workspacePanel->sdpRefresh();
+    until(app, [&] { return panel->status->getText().contains("Unsupported SDP schema"); });
+    CHECK(panel->status->getText().contains("gh sdp setup"));
+    CHECK(!fs::exists(home / "unexpected-tool"));
+    fs::remove(entrypoint);
+    fs::create_symlink(XFMD_RUNTIME_FIXTURE, entrypoint);
+    app.window->workspacePanel->sdpRefresh();
     until(app, [&] { return panel->tree("sdl") && panel->tree("sdl")->getFirstItem(); });
     settleNative(app.app, 1100); // Finish initial watch/discovery reconciliation before holding rows.
     CHECK(!fs::exists(runtime / "xfmd"));
@@ -90,5 +115,7 @@ void run() {
     CHECK(fs::exists(last));
   }
   CHECK(!workspace.empty() && !fs::exists(workspace));
+  CHECK(!fs::exists(home / "unexpected-tool"));
+  setenv("PATH", previousPath.c_str(), 1);
 }
 TEST_MAIN(run)

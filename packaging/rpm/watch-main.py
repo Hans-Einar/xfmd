@@ -58,6 +58,9 @@ def pipeline_command(config, commit, output):
               '--main', '--ref', commit, '--cache', config['cache'], '--output', str(output),
               '--publish', '--engine', config.get('engine', 'podman'), '--host', config['host'],
               '--ssh-port', str(config['ssh_port']), '--known-hosts', config['known_hosts']]
+    for key in ('shared_engine', 'shared_engine_commit', 'shared_engine_sha256'):
+        if config.get(key):
+            result.extend(['--' + key.replace('_', '-'), config[key]])
     return result
 
 
