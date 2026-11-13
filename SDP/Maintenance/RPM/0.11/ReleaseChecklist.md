@@ -1,75 +1,72 @@
-# ReleaseChecklist
+# ReleaseChecklist — XFMD0.11 qualified candidate
 
-Copy this checklist into the selected release's work area. Record version,
-previous release, exact commit, owner publication authority, evidence paths and
-actual outcomes. Unchecked means pending; use N/A only with a reason. A generated
-release log is not proof of publication. The project release contract governs.
+Instantiated from SDP/Framework/ReleaseChecklist.md. Authority: ACTIVITY-SDP-0004 /
+PLAN-SDP-0029. Previous actual release: signed 0.10.0-76.el10_2. Qualified source:
+16e57a34d5b0dd5f9f1ba8c49d96ab2fbe60048f; RPM 0.11.0-81.el10_2. External shared
+engine 2.3.0 source 774e150774d184d0604ae78f274586eeb2bad495. Exact identities and
+[observed evidence](README.md) are distinct from pending independent review,
+canonical/extension publication and RPM publication. No main merge is selected.
 
 ## Scope and content
 
-- [ ] Select product version from compatibility impact. Keep language/profile,
-  process/management schema and client versions distinct.
-- [ ] Enumerate included work and remaining exclusions; validate selected model,
-  tests, review dispositions and links on the actual candidate.
-- [ ] Update canonical RELEASE-NOTES.md Unreleased entries with stable work IDs.
-  Freeze selected entries into a dated version section; preserve released bytes.
-- [ ] Run `sdptool release-log --version X.Y.Z --output Releases/X.Y.Z.md`.
-  Check with the same command plus --check. Use --all --output Releases --check
-  to check every recorded version. Generator extracts reviewed notes, not Git guesses.
+- [x] Owner selected product0.11 for the changed installation contract; language,
+  protocol, process and engine versions remain distinct.
+- [x] Included registered runtime, required capability preflight, managed SDUI
+  operations, private tool/source-pin removal and OS runtime prerequisites. All 95
+  target CTests and policy checks pass; declared rendering/input bounds remain.
+- [x] RELEASE_NOTES.md contains prepared scope with stable Activity/Plan IDs;
+  released history is preserved and actual publication remains pending.
+- [x] N/A — Toolkit release-log generator; XFMD uses exact RPM receipts/evidence.
 
 ## Installation distribution (SDP publisher)
 
-- [ ] Check Template/sdp-root and project-root guidance. Include Sessions guide and
-  blank template, never project conversations, boards or existing work records.
-- [ ] Review SDPTool/profiles/payload.json: every distributed file, destination,
-  ownership and removed/moved path. Inventory completeness tests must pass.
-- [ ] Review SDPTool/profiles/five-phase.json: capabilities, schema/profile versions
-  and exact supported predecessor descriptor digests, including current stable.
-- [ ] Reconcile SDP.manifest.yaml, Toolkit/SDP-install.manifest.json compatibility
-  metadata, package version, release record and notes. Retained legacy metadata
-  does not replace the current Go inventory or signed descriptor.
-- [ ] Build package and immutable sdp-release.json from a clean exact commit using
-  the Go profile builder. Verify file hashes, sourceCommit and executable identity.
-  Never edit the built descriptor or use a project-local manifest as authority.
-- [ ] Sign descriptor with the trusted publisher key; verify signature, binary hash
-  and SHA256SUMS. Store no private keys or secrets in evidence/repository.
-- [ ] Rehearse install and each supported upgrade from original verified descriptor
-  bytes. Check new Sessions files, existing Session/document preservation, receipt,
-  Maintenance entry/history, conflict handling and repeated no-op.
-- [ ] Test extracted-source operation, packaged signed child and normal bootstrap.
-  Development artifacts or test signers are not production signed evidence.
+- [x] N/A — Template/Sessions installation inventory is canonical SDPTool's domain;
+  this RPM distributes no Toolkit installation payload.
+- [x] N/A — SDPTool profiles/payload.json review; no engine/helper is bundled.
+- [x] N/A — five-phase profile predecessor descriptors; project framework upgrades
+  remain in the canonical engine and are not performed by XFMD installation.
+- [x] N/A — Toolkit manifest/profile/package reconciliation; the coordinator owns
+  shared-engine distribution evidence. XFMD VERSION/build identity are checked.
+- [x] N/A — Go profile package/descriptor build; the external exact engine is
+  qualification input and never a private RPM producer build.
+- [x] N/A — canonical descriptor signing is the SDP publisher's gate; no claim
+  replaces that evidence. RPM server signing remains pending below.
+- [x] N/A — project install/upgrade previews, receipts and project preservation;
+  this application RPM does not mutate project SDP installations.
+- [x] N/A — old bootstrap child selection; XFMD executes the registered public
+  runtime directly and never starts gh. Root coordinates actual gh install/update.
 
 ## Publish and consumer readiness
 
-- [ ] Exact candidate CI and required independent review pass; working tree clean;
-  tag absent; merge/publication explicitly authorized.
-- [ ] Publish annotated tag and GitHub Release with generated log, signed descriptor,
-  executable and checksums; verify downloaded assets against exact release.
-- [ ] Reconcile actual tag/commit/time and append truthful release events only after
-  success. Do not rewrite a released log or silently correct released notes.
-- [ ] Verify gh-sdp selection: its compiled default is pinned. Either publish/update
-  the client default or document an explicit SDP_RELEASE selecting this release.
-- [ ] Provide preview/apply commands and expected receipt. Owner-requested manual
-  project upgrade remains manual; never confuse updating the gh extension with
-  upgrading the project's SDP directory.
+- [ ] Independent artifact review approves exact source/package/engine pair; only
+  then may the coordinator authorize publication after shared distribution gates.
+- [ ] Server signing and matching signed download, trusted RPM key verification,
+  actual forced-signature public DNF upgrade/fresh install pass.
+- [ ] Actual URL, signed digest, server/public verification times and publication
+  events are recorded after observed success.
+- [x] N/A — application GitHub release/annotated tag; selected surface is the signed
+  Beinerud stable RPM repository. Shared engine/extension publication is separate.
+- [ ] Shared canonical engine and gh extension publication/verification precede
+  successor XFMD publication; no project framework upgrade is implied.
+- [x] Consumer setup/update commands and missing/incompatible registration recovery
+  are documented. No workstation deployment or owner acceptance is claimed.
 
-Consuming projects reuse the scope/content/publication checks; mark SDP publisher
-inventory/signing steps N/A if they do not distribute SDP itself. Keep their own
-application/package/installer acceptance checks alongside this list.
+## XFMD exact-candidate package acceptance
 
+- [x] Clean AlmaLinux 10.2 x86_64 build and all 95 configured CTests pass.
+- [x] Exact external engine source/version/hash and three native probe hashes.
+- [x] Required capabilities use protocol flags rather than exact version/commit.
+- [x] RPM has no private tool files, producer pin/archive/build payload or scriptlets.
+- [x] Signed pinned0.10 predecessor upgrade removes package-owned private engine.
+- [x] Real setup registers exact engine under isolated HOME; GUI uses the public
+  path independently of shell PATH, with missing/incompatible/poison-PATH tests.
+- [x] Installed local reading/source/Back, SDUI and real Activity workflows pass
+  with gh absent, auth variables removed and external networking unreachable.
+- [x] Reinstall/removal/fresh install and unrelated file/shared engine preservation.
+- [x] Verified-existing guard checks the same source/package/engine/probe bytes.
+- [ ] Coordinating independent artifact review and authorized publication.
+- [ ] Public signatures, matching payload and public installed workflows.
 
-## XFMD0.11 applicability and current disposition
-
-- Selected: XFMD0.11 changes the runtime installation contract from published
-  signed0.10.0-76; ACTIVITY-SDP-0004 / PLAN-SDP-0029 C3–C5.
-- Candidate: pending milestone commit and exact external shared distribution.
-- Owner authority: execute Activity4 and successor distribution; coordinating gate
-  must authorize publication after independent review. No main merge.
-- SDP publisher installation inventory/descriptor/template gates: N/A to XFMD
-  product payload; canonical SDPTool coordinator owns their shared-engine evidence.
-- XFMD gates: source/model/blueprint reconciliation, clean target build/CTest,
-  exact external engine/source hash, supported setup, old private engine removal
-  on signed predecessor upgrade, preservation/reinstall/remove, offline native
-  reading/source/Back and real Activity, signatures and public DNF upgrade/fresh
-  install. All package/publication gates remain pending.
-- Historical0.10 records remain unchanged. No signature/publication pass is claimed.
+The 95 target checks include real producer tests absent from the90-check baseline
+host configuration. No environment-dependent Window Maker check omitted in the
+container is claimed passed. Same-context verification is not independent review.

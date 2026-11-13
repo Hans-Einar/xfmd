@@ -2,11 +2,59 @@
 
 Scope: ACTIVITY-SDP-0004 / PLAN-SDP-0029 C3–C5, coordinated by SESSION-SDP-0021.
 Local progress: [Session0011](../../../Sessions/session-%230011--Shared-tool-consumer.md).
-Prior public release: signed0.10.0-76.el10_2; its immutable receipt remains in0.10.
+Prior public release: signed 0.10.0-76.el10_2; its immutable receipt remains in0.10.
 [Checklist](ReleaseChecklist.md) records current gate disposition.
 
-The RPM no longer owns an SDP engine/helper or producer source pin. Build and
-installed qualification take a separately established exact-hash shared engine
-bundle. Runtime compatibility follows wire schema/capabilities. Tests establish
-registration through actual setup and prove no gh/auth/network dependency.
-No successor RPM, independent approval or publication has yet been claimed.
+## Qualified candidate — publication pending
+
+| Identity | Value |
+| --- | --- |
+| Exact application source | 16e57a34d5b0dd5f9f1ba8c49d96ab2fbe60048f |
+| Prepared RPM | xfmd-0.11.0-81.el10_2.x86_64.rpm |
+| Unsigned RPM SHA256 | 2be51524843ac67c0b64ac405b1aff918d8340b1b0a3a3781365ffb881f42aad |
+| RPM payload digest | 63838a0301db38347f569e736d37395c397a467dbe560ea0bd6adc46db828803 |
+| External engine | 2.3.0 / 774e150774d184d0604ae78f274586eeb2bad495 |
+| External engine SHA256 | 2cfcf12f8bfb0d6fa8d11391db874f68d9bc9210c85974ff3cecee50f915ced6 |
+| Exact output | /tmp/xfmd-activity4-rpm-final-81 |
+| Independent artifact review | Pending coordinating disposition |
+| Server signature/public DNF | Pending; publication not executed |
+
+The RPM contains no SDP engine/helper payload or producer source pin. It declares
+OS libraries used by the shared engine's native SDUI host. Runtime compatibility
+uses sdptool/0.2 plus runtime.setup/1 and sdui.source/1, independently of source or
+version labels. A development engine without its embedded host may browse while
+prototype launch explains the missing host; explicit development overrides remain.
+
+All 95 configured AlmaLinux 10.2 x86_64 CTests pass, including all real-engine tests.
+[Reconciliation](Test-contract-reconciliation.md) explains the five stale optional
+test assumptions corrected to the Activity0003 opaque reading contract; no product
+code was changed to satisfy them. Failed and aborted earlier outputs remain
+separate trials and are not qualified evidence.
+
+Clean target verification installs the exact signed 0.10 predecessor, upgrades to
+this candidate and proves the old private engine is absent. Actual setup registers
+an exact copy of the shared engine inside isolated HOME. With gh absent, auth
+variables removed and an isolated network namespace rejecting external sockets,
+all three exact native probes pass: reading/render/source/Back, SDUI preview/source/
+check/launch/lifetime/overrides and a real Activity fixture. Reinstall, removal,
+unrelated-file/shared-engine preservation and fresh install pass. These are
+container tests, not an owner workstation installation or physical usability claim.
+
+[Qualification receipt](evidence/qualified-81/qualification-receipt.json),
+[CTest](evidence/qualified-81/ctest.log),
+[installed verification](evidence/qualified-81/verify.log) and
+[RPM inspection](evidence/qualified-81/rpm-inspection.json) retain observed evidence.
+The verified-existing guard rechecks clean exact source, package/engine/probe hashes
+and application identity before any publication. Evidence-only commits do not
+change the qualified source/package identity above.
+
+Prepared command, requiring the coordinator's reviewed publication gate:
+
+```sh
+python3 packaging/rpm/local-ci.py --ref 16e57a34d5b0dd5f9f1ba8c49d96ab2fbe60048f --output /tmp/xfmd-activity4-rpm-final-81 --publish-existing --host beinerud
+```
+
+That path uploads existing reviewed bytes, verifies the signed matching payload,
+then forces package/metadata signature checks during actual public DNF0.10-to0.11
+upgrade and fresh install, repeating the installed native workflows. No such
+publication/signature/public verification is claimed by the local qualification.

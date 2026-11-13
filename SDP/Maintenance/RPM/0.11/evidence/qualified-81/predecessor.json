@@ -1,0 +1,6 @@
+{
+  "rpm": "xfmd-0.10.0-76.el10_2.x86_64.rpm",
+  "version": "0.10.0-76.el10_2",
+  "url": "https://beinerud.ddns.net/repo/AlmaLinux-10.2-apps/stable/x86_64/Packages/xfmd-0.10.0-76.el10_2.x86_64.rpm",
+  "signed_sha256": "8c5f2232d87c043bbae16b49e9fbe3815237d69fdb858efb7adb2d51f3587f2d"
+}

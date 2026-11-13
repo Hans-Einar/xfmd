@@ -132,3 +132,14 @@ GUI row/depth guards and demand-driven non-SDL inventories. Broader KB020/028/03
 acceptance, integration, legacy export alignment and independent review remain.
 No authored SDL/SDUI edits or unrelated shared-tree staging. Cards/plan retain
 active scope; local installation does not close those residual obligations.
+
+
+## Current distribution focus — 2026-11-13
+
+[Session0011](session-%230011--Shared-tool-consumer.md) owns Activity0004's bounded
+native consumer and XFMD0.11 successor RPM work. Registered runtime/helper migration
+is implemented and the exact source 16e57a3 / RPM 0.11.0-81 / shared engine 774e150
+pair is locally qualified. Independent artifact review and canonical/extension/RPM
+publication remain pending coordinating gates. Earlier Sessions and their residual
+acceptance retain their separate scope; no main merge or workstation deployment
+is claimed.

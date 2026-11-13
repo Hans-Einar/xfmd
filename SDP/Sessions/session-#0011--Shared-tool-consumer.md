@@ -2,17 +2,29 @@
 
 ## Session roadmap
 
+Sequence only; synthetic dates express dependency order, never elapsed time.
+
+```mermaid
+gantt
+    title Shared SDPTool consumer and RPM - sequence only
+    dateFormat YYYY-MM-DD
+    section Activity0004
+    C3 completed - registered runtime and helper migration :done, c3, 2000-01-01, 1d
+    C4 waiting - qualified pair and independent review :active, c4, after c3, 1d
+    C5 planned - signed public successor delivery :c5, after c4, 1d
+```
+
 | State | Step | Work | Authority | Evidence |
 | --- | --- | --- | --- | --- |
-| active | C3 | Registered native runtime; remove package producer and preserve managed SDUI workflows | ACTIVITY-SDP-0004 / PLAN-SDP-0029 / KB-SDP-063 | This Session and RPM0.11 work area |
-| planned | C4 | Exact shared distribution, clean target upgrade, offline installed native tests and independent review | Same owner execution assignment | Pending shared engine/helper candidate |
+| completed | C3 | Registered native runtime; remove package producer and preserve managed SDUI workflows | ACTIVITY-SDP-0004 / PLAN-SDP-0029 / KB-SDP-063 | This Session and RPM 0.11 work area |
+| waiting | C4 | Exact shared distribution, clean target upgrade, offline installed native tests and independent review | Same owner execution assignment | Pending shared engine/helper candidate |
 | planned | C5 | Successor signed RPM after canonical/shared extension publication | Coordinator release gate | Publication pending; no main merge |
 
 | Field | Value |
 | --- | --- |
 | Session reference | SESSION-XFMD-0011 |
 | Status | active |
-| Current step | C3 |
+| Current step | C4 — awaiting independent artifact review |
 | Coordinating Session | SESSION-SDP-0021 |
 | Primary plan | PLAN-SDP-0029 |
 | BranchPolicy | phase; sdp/shared-tool-installation |
@@ -74,7 +86,7 @@ bundled flag controls launch readiness, with explicit developer host override;
 source-engine browsing remains available without an embedded Fyne host. Installed
 qualification copies exact engine bytes into isolated HOME's extension directory
 before actual setup, respecting stable target registration. Exact d755c84 host
-build/all90 tests passed before this review correction; current targeted evidence
+build/all 90 tests passed before this review correction; current targeted evidence
 will supersede its runtime compatibility claim.
 
 
@@ -93,8 +105,8 @@ prototype launch/lifetime and explicit helper overrides, alongside reading and r
 Activity, all under the registered default and isolated network namespace.
 
 
-Exact3f61cde host build and all90 configured baseline tests pass. Coordinator
-supplied final canonical2.3.0 source63b7f8303f3688d135272913bb437895f11080f2,
+Exact3f61cde host build and all 90 configured baseline tests pass. Coordinator
+supplied final canonical2.3.0 source 63b7f8303f3688d135272913bb437895f11080f2,
 engine SHA2568c7c21fc616b57a4dc4b20eba0fa9cd03418ca31335a00b5d4da02f6d88d3c82.
 The exact one-file qualification input is captured separately as gh-sdp; it is
 not an XFMD package payload. Clean target qualification is next. Publication
@@ -119,10 +131,21 @@ records why the Activity0003 opaque reading contract supersedes those assertions
 and exactly which source/history/dirty/stale/cancellation checks remain.
 
 Five corrected tests plus real SDUI and reading all pass against final canonical
-engine774e150774d184d0604ae78f274586eeb2bad495 (SHA256
+engine 774e150774d184d0604ae78f274586eeb2bad495 (SHA256
 2cfcf12f8bfb0d6fa8d11391db874f68d9bc9210c85974ff3cecee50f915ced6).
 This supersedes earlier engine candidates, which remain failed/aborted trials.
 The next native milestone changes only tests/documentation; final qualification
 will use a fresh clean build/output and retain all configured tests. Coordinator
 also explicitly authorizes pushing only the selected phase branch; no main merge
 or publication before independent artifact review and shared distribution gates.
+
+
+Qualified checkpoint: exact source 16e57a34d5b0dd5f9f1ba8c49d96ab2fbe60048f and
+external engine 774e150 pass all 95 target CTests/policy checks, signed predecessor
+upgrade/removal, actual setup, offline installed reading/SDUI/Activity and
+reinstall/remove/fresh preservation. [Release handoff](../Maintenance/RPM/0.11/README.md)
+records exact hashes and copied receipts/logs. The verified-existing guard passes.
+The selected branch is pushed; main and the primary dirty worktree are untouched.
+Independent artifact review, shared engine/extension publication and successor RPM
+publication remain distinct pending gates. Evidence-only record updates preserve
+source 16e57a3 and RPM 81 as the qualified candidate.
