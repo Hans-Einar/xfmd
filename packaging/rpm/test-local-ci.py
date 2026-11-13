@@ -76,7 +76,7 @@ class ExistingPublicationTests(unittest.TestCase):
             }
             probes = output/'native-probes'
             probes.mkdir()
-            for name in ('SdpReadingGuiTest', 'SdpActivityGuiTest'): (probes/name).write_bytes(b'verified native probe')
+            for name in ('SdpReadingGuiTest', 'SdpActivityGuiTest', 'SduiWorkflowGuiTest'): (probes/name).write_bytes(b'verified native probe')
             records['native-probes.json'] = {p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in probes.iterdir()}
             for name, record in records.items(): (output/name).write_text(json.dumps(record))
             self.assertEqual(ci.verified_existing(output, values, pin), records['verified.json'])

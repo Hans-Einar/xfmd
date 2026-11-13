@@ -138,6 +138,7 @@ with tempfile.TemporaryDirectory() as temporary:
         # exercise the installed producer and installed private FOX/resources.
         workflow_environment = dict(environment, LD_LIBRARY_PATH='/usr/lib64/xfmd')
         subprocess.run(['/native-probes/SdpReadingGuiTest'], env=workflow_environment, check=True, timeout=65)
+        subprocess.run(['/native-probes/SduiWorkflowGuiTest'], env=workflow_environment, check=True, timeout=65)
         for folder in ['ProjectManagement', 'KanBan']:
             (project/'SDP'/folder).mkdir(exist_ok=True)
         (project/'SDP/KanBan/board.json').write_text(json.dumps({'projectId':'RPM'}))

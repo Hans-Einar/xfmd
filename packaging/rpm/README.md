@@ -10,7 +10,9 @@ GitHub does not publish XFMD RPMs.
 Run on the AlmaLinux 10.2 x86_64 build host with rootless Podman, Git, Python 3.11+,
 SSH, curl, tar, rpmkeys and the existing Xvfb test tool. The digest-pinned AlmaLinux
 image installs distribution/EPEL build dependencies and pinned private FOX 1.6.57.
-The application contains no private SDP engine or SDUI helper payload. Qualification
+The application contains no private SDP engine or SDUI helper payload.
+The RPM declares the OS X11/Wayland/OpenGL libraries needed by the managed
+native SDUI host; the same libraries are provisioned in qualification images. Qualification
 requires a separately established canonical one-file shared distribution, supplied
 as a directory containing `gh-sdp`, its exact source commit and binary SHA256.
 The pipeline checks embedded source/version identity and copies that test input

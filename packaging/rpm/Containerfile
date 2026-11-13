@@ -20,3 +20,6 @@ RUN dnf --releasever=10.2 -y install rustfmt && dnf --releasever=10.2 clean all
 RUN sed -i 's/^Libs: .*/Libs: -L${libdir} ${FOX_LIBS}/' /opt/xfmd-fox/lib/pkgconfig/fox.pc
 RUN dnf --releasever=10.2 -y install gdk-pixbuf2-modules && dnf --releasever=10.2 clean all
 RUN dnf --releasever=10.2 -y install python3-jsonschema && dnf --releasever=10.2 clean all
+
+# OS libraries used by the separately managed SDPTool native SDUI host.
+RUN dnf --releasever=10.2 -y install libwayland-client libwayland-cursor libwayland-egl libxkbcommon libXi libXinerama libXxf86vm libglvnd-glx mesa-dri-drivers libX11 libXrandr libXcursor libXext libXrender libXfixes && dnf --releasever=10.2 clean all

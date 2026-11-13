@@ -67,7 +67,7 @@ def verified_existing(output, values, shared_identity):
     if hashlib.sha256((output/'shared-engine/gh-sdp').read_bytes()).hexdigest() != shared_identity['sha256']:
         raise ValueError('Qualified shared engine binary changed')
     probes = json.loads((output/'native-probes.json').read_text())
-    if set(probes) != {'SdpReadingGuiTest', 'SdpActivityGuiTest'}:
+    if set(probes) != {'SdpReadingGuiTest', 'SdpActivityGuiTest', 'SduiWorkflowGuiTest'}:
         raise ValueError('Existing native workflow probe inventory differs')
     for name, digest in probes.items():
         if hashlib.sha256((output/'native-probes'/name).read_bytes()).hexdigest() != digest:

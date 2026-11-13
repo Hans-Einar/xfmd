@@ -83,3 +83,28 @@ SdpActivityGuiTest all pass; same-schema missingcaps now gives specific setup
 recovery. Blueprint/link and symbol validators plus exact-publication byte-guard
 unit tests pass. Current working diff is d755c84 plus capability/setup-target
 changes; clean target qualification waits for coordinating exact bundled engine.
+
+
+Coordinator confirmed the canonical embedded Fyne helper's actual dynamic library
+inventory. Added its OS runtime dependencies to the successor RPM and target image;
+this preserves native SDUI behavior without distributing another tool or updater.
+Installed exact-candidate native probes now include SDUI preview/source/check,
+prototype launch/lifetime and explicit helper overrides, alongside reading and real
+Activity, all under the registered default and isolated network namespace.
+
+
+Exact3f61cde host build and all90 configured baseline tests pass. Coordinator
+supplied final canonical2.3.0 source63b7f8303f3688d135272913bb437895f11080f2,
+engine SHA2568c7c21fc616b57a4dc4b20eba0fa9cd03418ca31335a00b5d4da02f6d88d3c82.
+The exact one-file qualification input is captured separately as gh-sdp; it is
+not an XFMD package payload. Clean target qualification is next. Publication
+remains prohibited pending fresh coordinating review and artifact qualification.
+
+
+Final canonical engine SDUI workflow passes locally after requesting the machine
+format explicitly with the supported global prefix `sdptool --json sdui preview`
+and `check`; interactive run and original explicit helper argv remain unchanged.
+OS-dependency image build, blueprint/link and symbol checks and publication guard
+unit tests pass. The successor source is ready to freeze for exact clean RPM
+build/upgrade/offline reading, Activity and SDUI qualification; publication remains
+pending coordinating review and root authorization.

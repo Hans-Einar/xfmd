@@ -26,6 +26,7 @@ std::vector<std::string> sduiCommand(const std::string& operation) {
     if (operation == "check") return {executable, "-check"};
     return {executable};
   }
-  return {executable, "sdui", operation};
+  if (operation == "run") return {executable, "sdui", operation};
+  return {executable, "--json", "sdui", operation};
 }
 } // namespace xfmd

@@ -15,7 +15,7 @@ cargo fmt -p xfmd-diagram-contracts -p xfmd-mermaid-interpreter -p xfmd-diagram-
 cmake --build /work/build --parallel "${BUILD_JOBS:-4}"
 ctest --test-dir /work/build --output-on-failure -j 2 | tee /output/ctest.log
 mkdir -p /output/native-probes
-cp /work/build/SdpReadingGuiTest /work/build/SdpActivityGuiTest /output/native-probes/
+cp /work/build/SdpReadingGuiTest /work/build/SdpActivityGuiTest /work/build/SduiWorkflowGuiTest /output/native-probes/
 python3 - <<'PROBES'
 import hashlib, json
 from pathlib import Path
@@ -55,6 +55,21 @@ BuildArch: x86_64
 Requires: gdk-pixbuf2-modules
 Requires: dejavu-sans-fonts
 Requires: dejavu-sans-mono-fonts
+Requires: libwayland-client
+Requires: libwayland-cursor
+Requires: libwayland-egl
+Requires: libxkbcommon
+Requires: libXi
+Requires: libXinerama
+Requires: libXxf86vm
+Requires: libglvnd-glx
+Requires: mesa-dri-drivers
+Requires: libX11
+Requires: libXrandr
+Requires: libXcursor
+Requires: libXext
+Requires: libXrender
+Requires: libXfixes
 
 %description
 Native Markdown viewer and editor. Includes private FOX 1.6.57, notices and
