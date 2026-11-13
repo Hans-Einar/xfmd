@@ -31,6 +31,14 @@ NavigationItem* find(NavigationTree* tree, FXTreeItem* first, const std::string&
   }
   return nullptr;
 }
+NavigationItem* sourceLabel(NavigationTree* tree, FXTreeItem* first, const std::string& label) {
+  for(auto* row=first;row;row=row->getNext()) {
+    if(row->getText().contains(label.c_str())) return static_cast<NavigationItem*>(row);
+    tree->expandTree(row);
+    if(auto* found=sourceLabel(tree,row->getFirst(),label)) return found;
+  }
+  return nullptr;
+}
 void keyActivate(Application& app, NavigationTree* tree, NavigationItem* item) {
   CHECK(item);
   tree->setCurrentItem(item);
@@ -78,7 +86,7 @@ void run() {
   auto wrapper = home / "delayed-sdptool";
   std::ofstream(wrapper)
       << "#!/usr/bin/python3\nimport os,sys,time\n"
-         "if 'select' in sys.argv or 'sdui-preview' in sys.argv: time.sleep(0.35)\n"
+         "if 'select' in sys.argv or 'sdui-preview' in sys.argv or 'sdui' in sys.argv: time.sleep(0.35)\n"
          "os.execv(os.environ['XFMD_TEST_REAL_SDP'],[os.environ['XFMD_TEST_REAL_SDP']]+sys.argv[1:]"
          ")\n";
   fs::permissions(wrapper, fs::perms::owner_all);
@@ -135,7 +143,7 @@ void run() {
   tab(app, panel->tabs, 0);
   NavigationItem* viewRow = nullptr;
   until(app, [&] {
-    viewRow = find(panel->tree("sdl"), panel->tree("sdl")->getFirstItem(), "/VP02/diagram/VP02-roots");
+    viewRow = find(panel->tree("sdl"), panel->tree("sdl")->getFirstItem(), "/VP02");
     return viewRow != nullptr;
   });
   CHECK(viewRow && viewRow->action.kind == IndexActionKind::Command);
@@ -145,7 +153,7 @@ void run() {
   CHECK(app.session.view().path.find("xfmd-sdp-") != std::string::npos);
   CHECK(fs::path(app.session.view().path).parent_path().parent_path().parent_path() ==
         fs::path(getenv("XDG_RUNTIME_DIR")) / "xfmd");
-  CHECK(app.session.view().text.find("```mermaid") != std::string::npos);
+  CHECK(app.session.view().text.find("Desktop") != std::string::npos);
   auto generated = app.session.view().path;
   until(app, [&] { return app.host->interactive(); });
   if (const auto* evidence = std::getenv("XFMD_UI_EVIDENCE")) {
@@ -166,7 +174,7 @@ void run() {
   app.sdpNavigation->stop();
   // Actual producer source catalog: descendant -> original .design, with native menu.
   auto* sourceTree = panel->tree("sdl");
-  viewRow = find(sourceTree, sourceTree->getFirstItem(), "/VP02/diagram/VP02-roots");
+  viewRow = find(sourceTree, sourceTree->getFirstItem(), "/VP02");
   CHECK(viewRow && !static_cast<SdpItem*>(viewRow)->source.empty());
   SdpTarget openedSource;
   auto openSource = panel->sourceRequested;
@@ -188,11 +196,11 @@ void run() {
   app.edits.applyEdit({0, 0, "keep dirty "});
   auto sourceDirty = app.session.snapshot();
   app.documents.chooseUnsaved = [] { return UnsavedChoice::Cancel; };
-  sourceMenu(find(sourceTree, sourceTree->getFirstItem(), "/VP02/diagram/VP02-roots"));
+  sourceMenu(find(sourceTree, sourceTree->getFirstItem(), "/VP02"));
   CHECK(app.session.dirty() && app.session.view().token == sourceDirty.token);
   CHECK(app.session.view().path == generated);
   app.documents.chooseUnsaved = [] { return UnsavedChoice::Discard; };
-  sourceMenu(find(sourceTree, sourceTree->getFirstItem(), "/VP02/diagram/VP02-roots"));
+  sourceMenu(find(sourceTree, sourceTree->getFirstItem(), "/VP02"));
   CHECK(app.session.view().path == area / "SDL/Example.design");
   CHECK(app.views->mode() == ViewMode::Editor && !app.session.dirty());
   CHECK(app.session.view().text.find("language design-core") == 0);
@@ -222,11 +230,8 @@ void run() {
   fs::remove(originalPath);
   fs::rename(backupPath, originalPath);
   // Invalid SDL still offers its catalog source without a generation target.
-  NavigationItem* invalidRow = nullptr;
-  for (auto* row = sourceTree->getFirstItem(); row; row = row->getNext())
-    if (row->getText().contains("Invalid.design"))
-      invalidRow = static_cast<NavigationItem*>(row);
-  CHECK(invalidRow && invalidRow->action.kind != IndexActionKind::Command);
+  auto* invalidRow = sourceLabel(sourceTree, sourceTree->getFirstItem(), "Invalid.design");
+  CHECK(invalidRow && !static_cast<SdpItem*>(invalidRow)->source.empty());
   sourceMenu(invalidRow);
   CHECK(app.session.view().path == area / "SDL/Invalid.design");
   CHECK(app.session.view().text == "not SDL\n" && app.views->mode() == ViewMode::Editor);
@@ -310,7 +315,7 @@ void run() {
   for (auto* row = sourceTree->getFirstItem(); row; row = row->getNext())
     if (row->getText().contains("Invalid.sdui"))
       invalidRow = static_cast<NavigationItem*>(row);
-  CHECK(invalidRow && invalidRow->action.kind != IndexActionKind::Command);
+  CHECK(invalidRow && !static_cast<SdpItem*>(invalidRow)->source.empty());
   sourceMenu(invalidRow);
   CHECK(app.session.view().path == area / "SDL/Invalid.sdui");
   CHECK(app.session.view().text == "not SDUI\n" && app.views->mode() == ViewMode::Editor);
@@ -355,7 +360,7 @@ void run() {
   // target until expansion finishes. Freeze the watcher to test producer refusal.
   NavigationItem* stale = nullptr;
   until(app, [&] {
-    stale = find(panel->tree("sdl"), panel->tree("sdl")->getFirstItem(), "/VP02/diagram/VP02-roots");
+    stale = find(panel->tree("sdl"), panel->tree("sdl")->getFirstItem(), "/VP02");
     return stale != nullptr;
   });
   app.sdpNavigation->stop();
@@ -371,7 +376,7 @@ void run() {
   // Unavailable producer remains an SDP diagnostic; normal Files/Index survive.
   setenv("XFMD_SDP_TOOL", "/missing/sdptool", 1);
   workspace->sdpRefresh();
-  until(app, [&] { return panel->status->getText().contains("Cannot start"); });
+  until(app, [&] { return panel->status->getText().contains("runtime unavailable"); });
   CHECK(app.session.view().path == previous);
   unsetenv("XFMD_TEST_REAL_SDP");
 }

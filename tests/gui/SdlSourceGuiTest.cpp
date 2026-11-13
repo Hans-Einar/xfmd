@@ -77,14 +77,14 @@ Value has value-type = text.
   nativeClick(app.window->workspacePanel->tabs->getLast(),15,8);
   auto* tree=panel->tree("sdl");
   NavigationItem* row=nullptr;
-  until(app,[&]{row=findRow(tree,tree->getFirstItem(),"/diagram/VP01-Browse");return row!=nullptr;});
+  until(app,[&]{row=findRow(tree,tree->getFirstItem(),"/VP01/collection/usecases/Browse");return row!=nullptr;});
   tree->setCurrentItem(row);tree->makeItemVisible(row);tree->setFocus();nativeKey(tree,XK_Return);
   until(app,[&]{return app.host->interactive() && app.session.view().text.find("Scenario: Happy")!=std::string::npos;});
   const auto generated=app.session.view().path;
   const auto text=app.session.view().text;
   CHECK(text.find("Scenario: Unrelated")==std::string::npos);
   CHECK(text.find("Use case: Isolated")==std::string::npos);
-  CHECK(text.find("Preconditions: not specified")!=std::string::npos);
+  CHECK(text.find("Preconditions and postconditions are unspecified")!=std::string::npos);
   int scenes=0;for(const auto& r:app.host->frame()->runs) if(dynamic_cast<const DiagramScene*>(r.visual.get()))++scenes;
   CHECK(scenes==2);
   if(const char* evidence=getenv("XFMD_UI_EVIDENCE")) {

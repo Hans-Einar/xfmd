@@ -108,3 +108,21 @@ OS-dependency image build, blueprint/link and symbol checks and publication guar
 unit tests pass. The successor source is ready to freeze for exact clean RPM
 build/upgrade/offline reading, Activity and SDUI qualification; publication remains
 pending coordinating review and root authorization.
+
+
+Full target e18f521/dab8a03 trial failed five previously optional legacy producer
+checks after enabling them: stale diagram/overview URI assumptions, independent
+expansion targets and preserved standalone grouping. No RPM qualified. All five
+were inspected before changing expectations; no product regression was found.
+[Test contract reconciliation](../Maintenance/RPM/0.11/Test-contract-reconciliation.md)
+records why the Activity0003 opaque reading contract supersedes those assertions
+and exactly which source/history/dirty/stale/cancellation checks remain.
+
+Five corrected tests plus real SDUI and reading all pass against final canonical
+engine774e150774d184d0604ae78f274586eeb2bad495 (SHA256
+2cfcf12f8bfb0d6fa8d11391db874f68d9bc9210c85974ff3cecee50f915ced6).
+This supersedes earlier engine candidates, which remain failed/aborted trials.
+The next native milestone changes only tests/documentation; final qualification
+will use a fresh clean build/output and retain all configured tests. Coordinator
+also explicitly authorizes pushing only the selected phase branch; no main merge
+or publication before independent artifact review and shared distribution gates.

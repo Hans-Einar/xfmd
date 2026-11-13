@@ -52,7 +52,7 @@ void run() {
   CHECK(compact.navigationMode == "lazy-sdl");
   SdpTarget deferred;
   for (const auto& [id, node] : compact.nodes)
-    if (node.childrenDeferred) deferred = node.target;
+    if (node.childrenDeferred) deferred = node.expansionTarget;
   CHECK(!deferred.model.empty());
   auto model = invoke({project.string(), "tree", "--model", deferred.model,
                        "--revision", deferred.revision, "--model-only"});
@@ -66,7 +66,7 @@ void run() {
     if (change == 1) invalid.project = "another-project";
     if (change == 2) invalid.model = "another-model";
     if (change == 3) invalid.nodes.at("sdl").children.push_back("sdl");
-    if (change == 4) invalid.nodes.at("sdl").target = {"open", deferred.project, "", "", "", "/tmp/unrelated"};
+    if (change == 4) invalid.nodes.at("sdl").target = {"open", deferred.project, "", "", "", "/tmp/unrelated", ""};
     if (change == 5) invalid.nodes.emplace("outside", invalid.nodes.at("sdl"));
     if (change == 6) invalid.roots.push_back("kanban");
     bool rejected = false;
@@ -80,7 +80,7 @@ void run() {
   for (const auto& pair : reply.nodes) {
     const auto& node = pair.second;
     if (node.target.operation == "select" &&
-        node.target.uri.find("diagram=VP02-roots") != std::string::npos)
+        node.kind == "viewpoint" && node.id.size() >= 5 && node.id.substr(node.id.size()-5) == "/VP02")
       selected = node.target;
     if (node.target.operation == "sdui-preview" && node.target.entry == "page")
       frame = node.target;
@@ -99,7 +99,7 @@ void run() {
   CHECK(sdpContained(output.string(), view.entry));
   std::ifstream input(view.entry);
   std::string text((std::istreambuf_iterator<char>(input)), {});
-  CHECK(text.find("```mermaid") != std::string::npos);
+  CHECK(text.find("Desktop") != std::string::npos);
   auto ui = invoke({project.string(), "sdui-preview", "--model", frame.model, "--entry",
                     frame.entry, "--revision", frame.revision, "--output", (base / "ui").string()});
   CHECK(ui.operation == "sdui-preview" && sdpContained((base / "ui").string(), ui.entry));

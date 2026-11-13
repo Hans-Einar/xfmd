@@ -8,15 +8,26 @@
 using namespace xfmd;
 using namespace FX;
 namespace fs = std::filesystem;
+std::string stage;
 void until(Application& app, const std::function<bool()>& done) {
+  std::cerr<<"deferred: "<<stage<<"\n";
   for (int i=0;i<12000;++i) { settleNative(app.app,5); if(done()) return; }
-  throw std::runtime_error("Deferred timeout: " + std::string(app.window->workspacePanel->sdp->status->getText().text()));
+  throw std::runtime_error("Deferred timeout at " + stage + ": " + std::string(app.window->workspacePanel->sdp->status->getText().text()));
+}
+FXTreeItem* sourceRow(NavigationTree* tree, FXTreeItem* first, const std::string& name) {
+  for(auto* row=first;row;row=row->getNext()) {
+    if(row->getText().contains(name.c_str())) return row;
+    auto* item=dynamic_cast<SdpItem*>(row);
+    // Producer-owned groups may wrap standalone entries; do not load an entry
+    // while merely locating it for the independent expansion assertion.
+    if(item && item->source.empty()) tree->expandTree(row);
+    if(auto* found=sourceRow(tree,row->getFirst(),name)) return found;
+  }
+  return nullptr;
 }
 FXTreeItem* source(SdpPanel* panel, const std::string& name) {
-  if (auto* tree=panel->tree("sdl"))
-    for(auto* row=tree->getFirstItem();row;row=row->getNext())
-      if(row->getText().contains(name.c_str())) return row;
-  return nullptr;
+  auto* tree=panel->tree("sdl");
+  return tree ? sourceRow(tree,tree->getFirstItem(),name) : nullptr;
 }
 void run() {
   const auto home=fs::path(FXSystem::getHomeDirectory().text());
@@ -57,18 +68,21 @@ os.execv(os.environ['XFMD_TEST_PRODUCER'],[os.environ['XFMD_TEST_PRODUCER']]+sys
   XSetInputFocus(static_cast<Display*>(app.app.getDisplay()),app.window->id(),RevertToParent,CurrentTime);
   CHECK(app.startPath(root.string()));CHECK(app.open(other.string()));
   auto* panel=app.window->workspacePanel->sdp;
+  stage="initial source";
   until(app,[&]{return source(panel,modelName)!=nullptr;});
   auto* tree=panel->tree("sdl");auto* first=source(panel,modelName);
   CHECK(first->hasItems() && !first->getFirst());
   app.edits.applyEdit({0,0,"keep dirty "});const auto token=app.session.view().token;
   tree->setCurrentItem(first);tree->expandTree(first);
   if(!actual) tree->expandTree(source(panel,"Second.design")); // Serialized, not canceled.
+  stage="two deferred expansions";
   until(app,[&]{return source(panel,modelName)->getFirst()!=nullptr &&
       (actual || source(panel,"Second.design")->getFirst()!=nullptr);});
   CHECK(app.session.view().token==token && app.session.dirty());
   CHECK(app.session.view().path==other);
   int viewpoints=0;
-  for(auto* n=source(panel,modelName)->getFirst();n;n=n->getNext()) ++viewpoints;
+  for(auto* n=source(panel,modelName)->getFirst();n;n=n->getNext())
+    if(n->getText().contains("VP")) ++viewpoints;
   CHECK(viewpoints==11);
   if(const char* evidence=getenv("XFMD_UI_EVIDENCE")) {
     nativeClick(app.window->workspacePanel->tabs->getLast(),15,8);
@@ -76,6 +90,7 @@ os.execv(os.environ['XFMD_TEST_PRODUCER'],[os.environ['XFMD_TEST_PRODUCER']]+sys
     captureDesktop(app.app,(fs::path(evidence)/"deferred-model.png").c_str());
     fs::copy_file(calls,fs::path(evidence)/"tool-calls.log",fs::copy_options::overwrite_existing);
   }
+  stage="refresh expanded sources";
   // Explicit refresh cancels work and reloads expanded sources at current revisions.
   app.window->workspacePanel->sdpRefresh();
   until(app,[&]{return panel->status->getText().contains("Reading SDP");});
@@ -100,21 +115,25 @@ os.execv(os.environ['XFMD_TEST_PRODUCER'],[os.environ['XFMD_TEST_PRODUCER']]+sys
     }
     return;
   }
+  stage="stale model response";
   // A failed model fetch preserves the document and remains retryable by label.
   setenv("XFMD_TEST_MODE","stale",1);
   app.sdpNavigation->refresh(root.string());
   until(app,[&]{return panel->status->getText().contains("stale:");});
   CHECK(app.session.view().token==token && !source(panel,modelName)->getFirst());
   unsetenv("XFMD_TEST_MODE");
-  auto retry=static_cast<NavigationItem*>(source(panel,modelName))->action;
-  panel->tree("sdl")->activated(retry);
+  stage="retry deferred expansion";
+  panel->tree("sdl")->collapseTree(source(panel,modelName));
+  panel->tree("sdl")->expandTree(source(panel,modelName));
   until(app,[&]{return source(panel,modelName)->getFirst()!=nullptr;});
+  stage="project switch";
   // A project switch cannot apply an outstanding model response to the new root.
   app.sdpNavigation->refresh(root.string());
   until(app,[&]{return panel->status->getText().contains("Loading SDL");});
   CHECK(app.window->workspacePanel->setWorkPath(home.string()));
   settleNative(app.app,500);CHECK(!panel->tree("sdl"));
   CHECK(app.session.view().token==token);
+  stage="explicit legacy actions fallback";
   // Legacy fallback is only for explicit unsupported-command arguments errors.
   setenv("XFMD_TEST_MODE","legacy",1);
   CHECK(app.window->workspacePanel->setWorkPath(root.string()));
