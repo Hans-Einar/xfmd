@@ -10,21 +10,21 @@ gantt
     dateFormat YYYY-MM-DD
     section Activity0004
     C3 completed - registered runtime and helper migration :done, c3, 2000-01-01, 1d
-    C4 waiting - qualified pair and independent review :active, c4, after c3, 1d
-    C5 planned - signed public successor delivery :c5, after c4, 1d
+    C4 completed - local native technical review :done, c4, after c3, 1d
+    C5 waiting - signed public successor delivery :active, c5, after c4, 1d
 ```
 
 | State | Step | Work | Authority | Evidence |
 | --- | --- | --- | --- | --- |
 | completed | C3 | Registered native runtime; remove package producer and preserve managed SDUI workflows | ACTIVITY-SDP-0004 / PLAN-SDP-0029 / KB-SDP-063 | This Session and RPM 0.11 work area |
-| waiting | C4 | Exact shared distribution, clean target upgrade, offline installed native tests and independent review | Same owner execution assignment | Pending shared engine/helper candidate |
-| planned | C5 | Successor signed RPM after canonical/shared extension publication | Coordinator release gate | Publication pending; no main merge |
+| completed (local gate) | C4 | Exact shared distribution, clean target upgrade, offline installed native tests and independent review | Same owner execution assignment | Pending shared engine/helper candidate |
+| waiting | C5 | Successor signed RPM after canonical/shared extension publication | Coordinator release gate | Publication pending; no main merge |
 
 | Field | Value |
 | --- | --- |
 | Session reference | SESSION-XFMD-0011 |
 | Status | active |
-| Current step | C4 — awaiting independent artifact review |
+| Current step | C5 — waiting for canonical CI/shared public gates and explicit publication disposition |
 | Coordinating Session | SESSION-SDP-0021 |
 | Primary plan | PLAN-SDP-0029 |
 | BranchPolicy | phase; sdp/shared-tool-installation |
@@ -149,3 +149,13 @@ The selected branch is pushed; main and the primary dirty worktree are untouched
 Independent artifact review, shared engine/extension publication and successor RPM
 publication remain distinct pending gates. Evidence-only record updates preserve
 source 16e57a3 and RPM 81 as the qualified candidate.
+
+
+Coordinator relayed independent approval of the exact local native technical gate;
+read and preserved the actual [review record and receipt](../Maintenance/RPM/0.11/evidence/qualified-81/review-receipt.json).
+The reviewer checked actual95-pass evidence, RPM/source/payload/engine/probe hashes,
+real offline Fyne/reading/Activity and package lifecycle. Local C4 is complete at
+that bounded technical scope. Canonical exact-source CI and shared public
+publication/verification remain pending; C5 waits for the coordinator's explicit
+publish-existing go-ahead. No package bytes are rebuilt or requalified, and no
+overall Activity completion, publication or owner acceptance is claimed.

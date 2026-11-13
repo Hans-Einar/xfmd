@@ -38,7 +38,7 @@ canonical/extension publication and RPM publication. No main merge is selected.
 
 ## Publish and consumer readiness
 
-- [ ] Independent artifact review approves exact source/package/engine pair; only
+- [x] Independent artifact review approves exact source/package/engine pair; only
   then may the coordinator authorize publication after shared distribution gates.
 - [ ] Server signing and matching signed download, trusted RPM key verification,
   actual forced-signature public DNF upgrade/fresh install pass.
@@ -64,7 +64,8 @@ canonical/extension publication and RPM publication. No main merge is selected.
   with gh absent, auth variables removed and external networking unreachable.
 - [x] Reinstall/removal/fresh install and unrelated file/shared engine preservation.
 - [x] Verified-existing guard checks the same source/package/engine/probe bytes.
-- [ ] Coordinating independent artifact review and authorized publication.
+- [x] Coordinating independent artifact review approves the local native technical gate.
+- [ ] Explicit coordinating publication gate after canonical CI/shared public checks.
 - [ ] Public signatures, matching payload and public installed workflows.
 
 The 95 target checks include real producer tests absent from the90-check baseline

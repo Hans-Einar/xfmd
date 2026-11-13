@@ -1,0 +1,12 @@
+{
+  "state": "approved-local-native-technical-gate",
+  "source": "16e57a34d5b0dd5f9f1ba8c49d96ab2fbe60048f",
+  "rpm": "xfmd-0.11.0-81.el10_2.x86_64.rpm",
+  "unsigned_sha256": "2be51524843ac67c0b64ac405b1aff918d8340b1b0a3a3781365ffb881f42aad",
+  "shared_engine": "774e150774d184d0604ae78f274586eeb2bad495",
+  "authority_record": "/home/warloc/git/SDP/SDP/Activities/Activity-0004--Single-SDPTool-installation/06-Verification/IndependentReview.md",
+  "authority_snapshot_sha256": "93232b2e32a533e7467867d25407aa1a98b5f54f7a6085cbe24ed3f7ecb06883",
+  "recorded_at": "2026-11-13T09:23:30.494901+00:00",
+  "scope": "Independent review of exact source, unsigned RPM, all native probe hashes, 95 target tests, signed predecessor lifecycle and installed offline reading/SDUI/Activity.",
+  "remaining": "Canonical exact CI, shared public distribution verification, explicit successor publication gate, signed RPM/public DNF verification. No owner acceptance or workstation deployment."
+}

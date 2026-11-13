@@ -5,7 +5,7 @@ Local progress: [Session0011](../../../Sessions/session-%230011--Shared-tool-con
 Prior public release: signed 0.10.0-76.el10_2; its immutable receipt remains in0.10.
 [Checklist](ReleaseChecklist.md) records current gate disposition.
 
-## Qualified candidate — publication pending
+## Qualified and independently reviewed candidate — publication pending
 
 | Identity | Value |
 | --- | --- |
@@ -16,7 +16,7 @@ Prior public release: signed 0.10.0-76.el10_2; its immutable receipt remains in0
 | External engine | 2.3.0 / 774e150774d184d0604ae78f274586eeb2bad495 |
 | External engine SHA256 | 2cfcf12f8bfb0d6fa8d11391db874f68d9bc9210c85974ff3cecee50f915ced6 |
 | Exact output | /tmp/xfmd-activity4-rpm-final-81 |
-| Independent artifact review | Pending coordinating disposition |
+| Independent artifact review | Approved local native technical gate; [receipt](evidence/qualified-81/review-receipt.json) |
 | Server signature/public DNF | Pending; publication not executed |
 
 The RPM contains no SDP engine/helper payload or producer source pin. It declares
@@ -58,3 +58,10 @@ That path uploads existing reviewed bytes, verifies the signed matching payload,
 then forces package/metadata signature checks during actual public DNF0.10-to0.11
 upgrade and fresh install, repeating the installed native workflows. No such
 publication/signature/public verification is claimed by the local qualification.
+
+
+The [coordinating independent review snapshot](evidence/qualified-81/coordinating-independent-review.md)
+approves this exact local native technical gate. Its earlier superseded candidates
+remain historical; the final native section identifies source16e57a3/RPM81 and
+engine774e150. This approval does not bypass canonical exact-source CI, shared
+public availability/install/update checks or the explicit RPM publication gate.
