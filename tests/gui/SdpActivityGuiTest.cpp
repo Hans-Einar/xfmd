@@ -89,6 +89,9 @@ void run() {
   std::ofstream(keep) << "# Retained document\n";
   std::ofstream(tool) << R"py(#!/usr/bin/python3
 import sys,os,json,pathlib
+if '--version' in sys.argv:
+ print(json.dumps(dict(schema='sdptool/0.2',operation='version',version='fixture',capabilities=['runtime.setup/1','sdui.source/1'],nativePrototypeBundled=True)))
+ sys.exit(0)
 args=sys.argv[1:]; root=args[0]; area=root+'/SDP'; rev='a'*64
 with open(root+'/calls','a') as f:f.write(' '.join(args)+'\n')
 def out(x): print(json.dumps(dict(schema='sdptool/0.2',**x)))

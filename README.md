@@ -419,7 +419,8 @@ expanded branches and the selected row. Refresh retries immediately. Invalid
 sources and watch limits display diagnostics; generated documents remain snapshots
 until you select the view again.
 
-XFMD 0.11 uses the shared **SDPTool, sdptool/0.2** runtime. Install or update
+XFMD 0.11 uses the shared **SDPTool, sdptool/0.2** runtime with
+`runtime.setup/1` and `sdui.source/1` capabilities. Install or update
 its GitHub CLI extension, then run `gh sdp setup` once to register
 `$HOME/.local/bin/sdptool`. XFMD executes that public path directly, independently
 of desktop shell PATH. Local browsing requires no gh process, credentials or
@@ -525,3 +526,12 @@ children; activating its label opens the supplied document, including collection
 chapters and dedicated registers. Older compatible producers retain their existing
 navigation behavior. The 0.10 RPM candidate includes its exact private SDPTool;
 source provenance and signed public publication are separate release gates.
+
+
+Activity0004 shared-runtime preflight: before discovery, XFMD requests
+`--version --json` and requires the `runtime.setup/1` and `sdui.source/1`
+capabilities as well as sdptool/0.2. An older same-schema engine without these
+operations is incompatible and gives extension update/setup guidance. Version and
+source labels are reported identities, never equality gates. A development build
+with `nativePrototypeBundled:false` may browse; prototype launch explains the
+missing bundled host unless XFMD_SDUI_FYNE explicitly supplies a development host.

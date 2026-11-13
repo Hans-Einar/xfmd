@@ -76,7 +76,7 @@ void SdpNavigation::openSource(const SdpTarget& target) {
     message("SDP source is missing or outside the selected area; Refresh");
     return;
   }
-  if ((pendingOperation == "discover" || pendingOperation == "actions"))
+  if ((pendingOperation == "discover" || pendingOperation == "actions" || pendingOperation == "version"))
     refreshQueued = true;
   cancelRequest();
   // Source editing uses the normal document transaction, including dirty cancel.
@@ -101,7 +101,7 @@ void SdpNavigation::activate(const SdpTarget& target) {
       message("SDP file is missing or outside the selected area; Refresh");
       return;
     }
-    if ((pendingOperation == "discover" || pendingOperation == "actions"))
+    if ((pendingOperation == "discover" || pendingOperation == "actions" || pendingOperation == "version"))
       refreshQueued = true;
     cancelRequest();
     app.open(target.path);
@@ -122,7 +122,7 @@ void SdpNavigation::activate(const SdpTarget& target) {
     message("Save or discard edits before opening a generated SDP view");
     return;
   }
-  if ((pendingOperation == "discover" || pendingOperation == "actions"))
+  if ((pendingOperation == "discover" || pendingOperation == "actions" || pendingOperation == "version"))
     refreshQueued = true;
   cancelRequest();
   try {

@@ -18,7 +18,8 @@ void SdpNavigation::discover() {
     return;
   }
   message("Reading SDP project…");
-  start("actions", {root, "actions"});
+  bundledPrototype = false;
+  start("version", {"--version"});
 }
 void SdpNavigation::readDiscovery() {
   std::vector<std::string> args{root, "discover"};
@@ -75,6 +76,11 @@ void SdpNavigation::poll() {
     auto& reply = *result->reply;
     if (reply.operation != pendingOperation)
       throw std::runtime_error("SDP response does not match the requested operation");
+    if (reply.operation == "version") {
+      bundledPrototype = reply.nativePrototypeBundled;
+      start("actions", {root, "actions"});
+      return;
+    }
     if (reply.operation == "actions") {
       lazySdl = reply.lazySdl;
       readDiscovery();

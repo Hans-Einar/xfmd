@@ -64,3 +64,22 @@ setup guidance after a long path; moved actionable setup to the start and retain
 the full selected executable in the tooltip. This is an implementation discovery
 within the existing diagnostic obligation. Builder image is cached from the
 updated no-Go recipe; network-namespace capability smoke check completed.
+
+
+C3 capability review: coordinator/reviewer identified that wire schema alone does
+not establish the selected shared runtime operations. Added version preflight
+requiring runtime.setup/1 and sdui.source/1, independent of version/commit labels;
+added same-schema2.2.1 missing-capability fixture rejection. The native prototype
+bundled flag controls launch readiness, with explicit developer host override;
+source-engine browsing remains available without an embedded Fyne host. Installed
+qualification copies exact engine bytes into isolated HOME's extension directory
+before actual setup, respecting stable target registration. Exact d755c84 host
+build/all90 tests passed before this review correction; current targeted evidence
+will supersede its runtime compatibility claim.
+
+
+Capability correction targeted results: SdpProtocolTest, SdpRuntimeGuiTest and
+SdpActivityGuiTest all pass; same-schema missingcaps now gives specific setup
+recovery. Blueprint/link and symbol validators plus exact-publication byte-guard
+unit tests pass. Current working diff is d755c84 plus capability/setup-target
+changes; clean target qualification waits for coordinating exact bundled engine.

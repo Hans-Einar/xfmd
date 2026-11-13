@@ -61,6 +61,12 @@ void run() {
     until(app, [&] { return panel->status->getText().contains("Unsupported SDP schema"); });
     CHECK(panel->status->getText().contains("gh sdp setup"));
     CHECK(!fs::exists(home / "unexpected-tool"));
+    // Same wire schema is insufficient when shared runtime operations are absent.
+    std::ofstream(entrypoint) << "#!/bin/sh\nprintf '%s\\n' '{\"schema\":\"sdptool/0.2\",\"operation\":\"version\",\"version\":\"2.2.1\"}'\n";
+    app.window->workspacePanel->sdpRefresh();
+    until(app, [&] { return panel->status->getText().contains("Incompatible SDPTool 2.2.1"); });
+    CHECK(panel->status->getText().contains("gh sdp setup"));
+    CHECK(!fs::exists(home / "unexpected-tool"));
     fs::remove(entrypoint);
     fs::create_symlink(XFMD_RUNTIME_FIXTURE, entrypoint);
     app.window->workspacePanel->sdpRefresh();

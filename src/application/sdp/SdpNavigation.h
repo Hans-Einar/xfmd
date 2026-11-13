@@ -9,7 +9,7 @@ class SdpNavigation {
   Application& app;
   SdpToolJob job;
   SdpWatch watch;
-  bool refreshQueued = false, lazySdl = false;
+  bool refreshQueued = false, lazySdl = false, bundledPrototype = false;
   std::vector<SdpTarget> expansions;
   SdpTarget expanding;
   std::string watchError;
@@ -49,6 +49,7 @@ public:
   void expandModel(const SdpTarget&);
   void openSource(const SdpTarget&);
   std::optional<SdpTarget> currentSdui() const;
+  bool nativePrototypeAvailable() const { return bundledPrototype; }
   bool follow(const std::string& document, const std::string& uri);
 };
 } // namespace xfmd

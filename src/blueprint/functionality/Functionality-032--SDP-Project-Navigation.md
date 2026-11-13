@@ -33,7 +33,7 @@ serde_json bridge (already locked/offline dependency), not an SDL parser. The
 bridge has a separate crate; it does not add SDP semantics to Mermaid layers.
 
 Discovery returns a bounded graph with typed targets. Use returned model IDs,
-URI, revision, frame entry and absolute open paths. Host selection uses the registered $HOME/.local/bin/sdptool directly;
+URI, revision, frame entry and absolute open paths. Host selection uses the registered $HOME/.local/bin/sdptool directly after required shared-runtime capability preflight;
 XFMD_SDP_TOOL overrides one executable (standalone sdptool), never a shell string
 or a project manifest command. Inherit the host's SDP_OFFLINE/cache policy.
 
@@ -450,3 +450,12 @@ to check, and launches run detached with entry/revision/watch/source. Explicit
 XFMD_SDUI_PREVIEW/FYNE overrides retain original helper argv. Preview/check are
 canonical shared-library operations; the engine owns local extraction/exec of its
 embedded Fyne helper. Native XFMD never selects or updates a second tool binary.
+
+
+Activity0004 shared-runtime preflight: before discovery, XFMD requests
+`--version --json` and requires the `runtime.setup/1` and `sdui.source/1`
+capabilities as well as sdptool/0.2. An older same-schema engine without these
+operations is incompatible and gives extension update/setup guidance. Version and
+source labels are reported identities, never equality gates. A development build
+with `nativePrototypeBundled:false` may browse; prototype launch explains the
+missing bundled host unless XFMD_SDUI_FYNE explicitly supplies a development host.

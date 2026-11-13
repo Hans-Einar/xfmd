@@ -147,3 +147,12 @@ rendering and history remain inside Application. Structural source symbols stay
 unchanged because distribution/registration does not introduce a new runtime
 container or transfer protocol ownership. Use the actual shared `sdptool` for
 validation/generation; file placement alone establishes no tool support.
+
+
+Activity0004 shared-runtime preflight: before discovery, XFMD requests
+`--version --json` and requires the `runtime.setup/1` and `sdui.source/1`
+capabilities as well as sdptool/0.2. An older same-schema engine without these
+operations is incompatible and gives extension update/setup guidance. Version and
+source labels are reported identities, never equality gates. A development build
+with `nativePrototypeBundled:false` may browse; prototype launch explains the
+missing bundled host unless XFMD_SDUI_FYNE explicitly supplies a development host.

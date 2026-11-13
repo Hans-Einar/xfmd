@@ -743,3 +743,12 @@ update owner. XFMD owns native rendering, request cancellation, source freshness
 document/history retention and desktop process lifetime. The package contains no
 SDP engine/helper payload or producer source pin. This supersedes the historical
 private-tool installation descriptions without changing their dated evidence.
+
+
+Activity0004 shared-runtime preflight: before discovery, XFMD requests
+`--version --json` and requires the `runtime.setup/1` and `sdui.source/1`
+capabilities as well as sdptool/0.2. An older same-schema engine without these
+operations is incompatible and gives extension update/setup guidance. Version and
+source labels are reported identities, never equality gates. A development build
+with `nativePrototypeBundled:false` may browse; prototype launch explains the
+missing bundled host unless XFMD_SDUI_FYNE explicitly supplies a development host.

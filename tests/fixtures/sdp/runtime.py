@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """Deterministic demand/lifetime fixture; real producer is covered separately."""
 import json, os, pathlib, sys
+if '--version' in sys.argv:
+    print(json.dumps(dict(schema='sdptool/0.2', operation='version', version='fixture',
+                          capabilities=['runtime.setup/1','sdui.source/1'], nativePrototypeBundled=True)))
+    sys.exit(0)
 root = pathlib.Path(sys.argv[1])
 op = sys.argv[2]
 log = pathlib.Path(os.environ['XFMD_RUNTIME_CALLS'])

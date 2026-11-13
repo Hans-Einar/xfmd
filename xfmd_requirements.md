@@ -638,3 +638,12 @@ AT-075 additionally covers supported registration, empty desktop PATH, missing a
 incompatible engines, exact external test input, and signed0.10-to0.11 RPM upgrade
 removal of the old package-owned private engine. Engine source/hash identity is
 qualification evidence, not runtime compatibility policy.
+
+
+Activity0004 shared-runtime preflight: before discovery, XFMD requests
+`--version --json` and requires the `runtime.setup/1` and `sdui.source/1`
+capabilities as well as sdptool/0.2. An older same-schema engine without these
+operations is incompatible and gives extension update/setup guidance. Version and
+source labels are reported identities, never equality gates. A development build
+with `nativePrototypeBundled:false` may browse; prototype launch explains the
+missing bundled host unless XFMD_SDUI_FYNE explicitly supplies a development host.

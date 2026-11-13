@@ -84,9 +84,13 @@ with tempfile.TemporaryDirectory() as temporary:
         for key in list(environment):
             if key.startswith(('GH_', 'GITHUB_')):
                 environment.pop(key)
-        subprocess.run([engine, 'setup'], env=environment, check=True)
+        installed_engine = base/'.local/share/gh/extensions/gh-sdp/gh-sdp'
+        installed_engine.parent.mkdir(parents=True)
+        shutil.copy2(engine, installed_engine)
+        assert hashlib.sha256(installed_engine.read_bytes()).hexdigest() == producer_metadata['sha256']
+        subprocess.run([installed_engine, 'setup'], env=environment, check=True)
         producer = base/'.local/bin/sdptool'
-        assert producer.is_symlink() and producer.resolve() == engine.resolve()
+        assert producer.is_symlink() and producer.resolve() == installed_engine.resolve()
         application = subprocess.Popen(['/usr/bin/xfmd', str(fixture)], env=environment, stderr=subprocess.PIPE)
         title = ''
         for attempt in range(40):

@@ -4,6 +4,7 @@
 #include "application/Application.h"
 #include <cerrno>
 #include <cstring>
+#include <cstdlib>
 #include <fcntl.h>
 #include <fstream>
 #include <spawn.h>
@@ -32,7 +33,8 @@ std::string SduiWorkflow::contextKey() const {
     return {};
   return app.session.view().path + "\n" + current->path + "\n" + current->entry + "\n" +
          current->revision + "\n" + sduiExecutable("sdui-fyne") + "\n" +
-         sduiExecutable("sdui-preview");
+         sduiExecutable("sdui-preview") + "\n" +
+         (app.sdpNavigation->nativePrototypeAvailable() ? "bundled" : "unbundled");
 }
 bool SduiWorkflow::canLaunch() const {
   return app.window->workspacePanel->tabs->getCurrent() == 2 && ready && !key.empty() &&
@@ -72,7 +74,10 @@ void SduiWorkflow::poll() {
     auto helper = sduiExecutable("sdui-preview");
     reason = "Open a generated SDUI frame preview to launch its prototype";
     if (!key.empty()) {
-      if (host.empty() || helper.empty())
+      const char* developerHost = std::getenv("XFMD_SDUI_FYNE");
+      if (!app.sdpNavigation->nativePrototypeAvailable() && !(developerHost && *developerHost))
+        reason = "SDPTool has no bundled native prototype; update the gh sdp extension";
+      else if (host.empty() || helper.empty())
         reason = "SDUI runtime unavailable; update the gh sdp extension and run gh sdp setup";
       else {
         reason = "Checking SDUI prototype readiness…";

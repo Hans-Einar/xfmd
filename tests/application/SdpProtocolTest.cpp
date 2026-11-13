@@ -32,6 +32,15 @@ void run() {
   try { decodeSdpReply(sourcePrefix + sourceLink + "," + sourceLink + "]}"); } catch (const std::exception&) { duplicateSource = true; }
   CHECK(duplicateSource);
 
+  for (const auto& capabilities : {"[]", "[\"runtime.setup/1\"]", "[\"sdui.source/1\"]"}) {
+    bool missing = false;
+    try { decodeSdpReply(std::string(R"({"schema":"sdptool/0.2","operation":"version","version":"2.2.1","capabilities":)") + capabilities + "}"); }
+    catch (const std::exception& e) { missing = std::string(e.what()).find("gh sdp setup") != std::string::npos; }
+    CHECK(missing);
+  }
+  CHECK(!decodeSdpReply(R"({"schema":"sdptool/0.2","operation":"version","version":"future","capabilities":["sdui.source/1","runtime.setup/1"],"nativePrototypeBundled":false})").nativePrototypeBundled);
+  CHECK(decodeSdpReply(R"({"schema":"sdptool/0.2","operation":"version","version":"development","capabilities":["runtime.setup/1","sdui.source/1"],"nativePrototypeBundled":true})").nativePrototypeBundled);
+
   const auto readiness = decodeSdpReply(R"({"schema":"sdptool/0.2","operation":"sdui-check","status":"prototype-unbound","source":"/project/UI.sdui","entry":"page","revision":"r1","diagnostic":"Unbound SDL callbacks"})");
   CHECK(readiness.status == "prototype-unbound" && readiness.entry == "page");
   bool rejectedReadiness = false;

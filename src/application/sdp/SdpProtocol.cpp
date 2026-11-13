@@ -62,6 +62,28 @@ SdpReply decodeSdpReply(const std::string& bytes) {
   SdpReply result;
   std::string readingCapability;
   result.operation = value.get("operation").text(true);
+  if (result.operation == "version") {
+    if (value.get("schema").text(true) != "sdptool/0.2")
+      throw std::runtime_error("Invalid SDP version protocol; update gh sdp and run gh sdp setup");
+    bool setup = false, source = false;
+    const auto version = value.get("version").text(true);
+    const auto capabilities = value.get("capabilities");
+    if (capabilities.value)
+      for (auto capability : capabilities.array(128)) {
+        const auto name = capability.text(true);
+        setup |= name == "runtime.setup/1";
+        source |= name == "sdui.source/1";
+      }
+    if (!setup || !source)
+      throw std::runtime_error("Incompatible SDPTool " + version +
+          "; update gh sdp and run gh sdp setup (requires runtime.setup/1 and sdui.source/1)");
+    bool bundled = false;
+    if (value.get("nativePrototypeBundled").value &&
+        !xfmd_sdp_json_boolean(value.get("nativePrototypeBundled").value, &bundled))
+      throw std::runtime_error("Invalid SDP native prototype capability");
+    result.nativePrototypeBundled = bundled;
+    return result;
+  }
   if (result.operation == "actions") {
     if (value.get("schema").text(true) != "sdptool.actions/1")
       throw std::runtime_error("Invalid SDP action catalogue");

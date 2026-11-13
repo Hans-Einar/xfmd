@@ -19,7 +19,7 @@ struct SdpSourceLink {
   std::string id, path, snapshot, revision;
 };
 struct SdpReply {
-  bool lazySdl = false;
+  bool lazySdl = false, nativePrototypeBundled = false;
   std::string model, navigationMode, presentation;
   std::vector<SdpSourceLink> sourceLinks;
   std::string operation, status, root, area, project, revision, entry, directory;
